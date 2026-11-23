@@ -28,6 +28,7 @@ function emptyDb() {
     posts: [],
     sessions: {},
     daily: {},
+    submissions: [],
     settings: {
       llm: {
         baseUrl: process.env.LLM_BASE_URL || 'https://api.deepseek.com/v1',
@@ -59,6 +60,18 @@ function loadDb() {
       if (!Array.isArray(db.posts)) db.posts = [];
       if (!Array.isArray(db.users)) db.users = [];
       if (!db.sessions || typeof db.sessions !== 'object') db.sessions = {};
+      if (!Array.isArray(db.submissions)) db.submissions = [];
+      db.problems.forEach((p) => {
+        if (typeof p.scoreSum !== 'number') p.scoreSum = 0;
+        if (typeof p.scoreCount !== 'number') p.scoreCount = 0;
+        if (!Array.isArray(p.tags)) p.tags = ['未分类'];
+        if (p.tags.length > 3) p.tags = p.tags.slice(0, 3);
+        if (p.difficulty > DIFF_MAX) p.difficulty = DIFF_MAX;
+      });
+      db.users.forEach((u) => {
+        if (!u.best || typeof u.best !== 'object') u.best = {};
+        if (!u.wrong || typeof u.wrong !== 'object') u.wrong = {};
+      });
       // 清理过期会话
       const now = Date.now();
       for (const k of Object.keys(db.sessions)) {
@@ -133,11 +146,13 @@ function levelOf(d) {
   return LEVELS[LEVELS.length - 1];
 }
 
-function clampScore(v, fallback) {
+function clampScore(v, fallback, max) {
   const n = Math.round(Number(v));
   if (!Number.isFinite(n)) return fallback;
-  return Math.max(1, Math.min(10, n));
+  return Math.max(1, Math.min(max || 10, n));
 }
+
+const DIFF_MAX = 15;
 
 /* 公式定界符整理：模型经常混用 $$...$$ / \[...\] / \(...\)，还可能干脆不写 */
 function mathify(src) {
@@ -182,7 +197,7 @@ function normalizeProblem(raw) {
   if (!title || !statement) return null;
   let tags = raw.tags;
   if (typeof tags === 'string') tags = tags.split(/[,，、\s]+/);
-  tags = Array.isArray(tags) ? tags.map((t) => String(t).trim()).filter(Boolean).slice(0, 6) : [];
+  tags = Array.isArray(tags) ? tags.map((t) => String(t).trim()).filter(Boolean).slice(0, 3) : [];
   let hints = raw.hints;
   if (typeof hints === 'string') hints = [hints];
   hints = Array.isArray(hints) ? hints.map((h) => String(h).trim()).filter(Boolean).slice(0, 5) : [];
@@ -192,7 +207,7 @@ function normalizeProblem(raw) {
     statement: mathify(statement),
     tags: tags.length ? tags : ['未分类'],
     thinking: clampScore(raw.thinking, 6),
-    difficulty: clampScore(raw.difficulty, 6),
+    difficulty: clampScore(raw.difficulty, 6, DIFF_MAX),
     calc: clampScore(raw.calc !== undefined ? raw.calc : raw.calculation, 5),
     source: String(raw.source || '').slice(0, 80),
     hints: hints.map(mathify),
@@ -205,7 +220,9 @@ function normalizeProblem(raw) {
     createdAt: new Date().toISOString(),
     reviewedAt: null,
     solvedCount: 0,
-    attemptCount: 0
+    attemptCount: 0,
+    scoreSum: 0,
+    scoreCount: 0
   };
 }
 
@@ -387,10 +404,14 @@ function excerptOf(statement, max) {
 }
 
 function visibleProblem(p, user) {
+  const best = user && user.best ? user.best[p.code] : null;
   return {
     code: p.code,
     title: p.title,
     excerpt: excerptOf(p.statement),
+    avgScore: p.scoreCount ? Math.round((p.scoreSum / p.scoreCount) * 10) / 10 : null,
+    scoreCount: p.scoreCount || 0,
+    myBest: best ? best.score : null,
     tags: p.tags,
     thinking: p.thinking,
     difficulty: p.difficulty,
@@ -447,14 +468,30 @@ function strHash(s) {
   return Math.abs(h);
 }
 
+function recentCodes(days) {
+  const used = {};
+  const now = new Date();
+  for (let i = 1; i <= days; i++) {
+    const d = new Date(now);
+    d.setDate(d.getDate() - i);
+    const code = db.daily[todayKey(d)];
+    if (code) used[code] = true;
+  }
+  return used;
+}
+
 function dailyProblem(dateKey) {
   const key = dateKey || todayKey();
   const approved = db.problems.filter((p) => p.status === 'approved');
   if (!approved.length) return null;
-  let code = db.daily[key];
+  const code = db.daily[key];
   let p = code ? db.problems.find((x) => x.code === code && x.status === 'approved') : null;
   if (!p) {
-    const sorted = approved.slice().sort((a, b) => a.code.localeCompare(b.code));
+    // 最近 30 天出过的题不再选，题目不够时才放宽
+    const used = recentCodes(30);
+    let pool = approved.filter((x) => !used[x.code]);
+    if (!pool.length) pool = approved;
+    const sorted = pool.slice().sort((a, b) => a.code.localeCompare(b.code));
     p = sorted[strHash(key) % sorted.length];
     db.daily[key] = p.code;
     saveDb();
@@ -613,6 +650,36 @@ const FREE_PROVIDERS = process.env.NO_FREE === '1' ? [] : [
 /* 免费网关偶尔直接回一段错误文本（HTTP 仍是 200），要识别出来继续往下降级 */
 const RESPONSE_GUARD = /^(The API key used|Too Many Requests|Rate limit|Unauthorized|Forbidden|Bad Gateway)/i;
 
+const OCR_PROMPT = [
+  '你是数学题目转写工具。请把图片里的题目原样转写成 LaTeX。',
+  '',
+  '绝对规则：',
+  '1. 不要改题目，不要改数字、符号、条件；',
+  '2. 即使你认为题目有错（如漏条件、结论可疑），也不要修改，原样转写；',
+  '3. 不要自己重新表述、不要补充题目没有的内容；',
+  '4. 图片里有解答就一并转写；没有解答就不要编造。',
+  '',
+  '严格按下面格式输出，不要用 JSON、不要代码块、不要解释：',
+  '[TITLE]',
+  '不超过 18 字的纯文字标题（不要放公式）',
+  '[STATEMENT]',
+  '完整题干，公式用 $...$ 或 $$...$$ 包住',
+  '[TAGS]',
+  '最多 3 个考点，用顿号分隔',
+  '[THINKING]',
+  '1-10 的整数',
+  '[DIFFICULTY]',
+  '1-15 的整数',
+  '[CALC]',
+  '1-10 的整数',
+  '[HINTS]',
+  '1-2 条思路提示（没有就写：无）',
+  '[ANSWER]',
+  '最终答案（图片里没有就写：未给出）',
+  '[SOLUTION]',
+  '图片里的解答；没有就写：未给出'
+].join('\n');
+
 const EXPERT_SYSTEM = [
   '你是高等数学解题专家，带过考研与竞赛，不是通用聊天助手。',
   '',
@@ -706,13 +773,16 @@ function buildGenerateMessages(spec) {
     '1. 题目必须数学上正确、可解，答案唯一（或说明多解）；',
     '2. 公式一定要有定界符，不要把 LaTeX 命令裸露在文字里；',
     '3. 不要照抄教材原题；',
-    '4. 解析写清每一步的依据。'
+    '4. 解析写清每一步的依据；',
+    '5. 先在草稿里把题目算一遍、确认答案唯一且可验证，再输出；',
+    '6. 不要出套一次公式就能做完的题，难度低于 6 的题目不要输出；',
+    '7. 考点最多写 3 个，难度允许超过 10（最高 ' + DIFF_MAX + '）。'
   ].join('\n');
 
   const user = [
     '请出一道高数题。',
     '考点范围：' + tags,
-    '目标难度：' + spec.difficulty + '/10',
+    '目标难度：' + spec.difficulty + '/' + DIFF_MAX,
     '目标思维量：' + (spec.thinking || 6) + '/10（需要多少洞察才能想到）',
     '目标计算量：' + spec.calc + '/10',
     spec.style ? ('题型偏好：' + spec.style) : '',
@@ -1218,18 +1288,22 @@ async function handleApi(req, res, pathname, query) {
     }
 
     if (sub === '/answer' && method === 'POST') {
-      if (!user) return fail(res, 401, '登录后才能提交解题过程');
-      const body = await readBody(req, 6 * 1024 * 1024);
-      const process = String(body.process || body.answer || '').trim().slice(0, 4000);
+      if (!user) return fail(res, 401, '登录后才能提交');
+      const body = await readBody(req, 8 * 1024 * 1024);
+      const process = String(body.process || '').trim().slice(0, 4000);
+      const answerOnly = body.mode === 'answer' || (!process && String(body.answer || '').trim());
+      const only = process || String(body.answer || '').trim();
       const image = typeof body.image === 'string' && body.image.indexOf('data:image/') === 0 ? body.image : '';
       user.solved = user.solved || {};
+      user.best = user.best || {};
+      user.wrong = user.wrong || {};
       const rec = user.solved[p.code];
       if (rec && rec.done) {
-        return send(res, 200, { ok: true, already: true, verdict: 'correct', comment: '这道题之前已经通过了，不用再交', errors: [], score: 100 });
+        return send(res, 200, { ok: true, already: true, verdict: 'correct', score: 100, comment: '这道题已经通过了，不用再交', errors: [] });
       }
 
-      if (!process && !image) return fail(res, 400, '把解题过程写下来，或者上传一张过程照片');
-      if (process && process.length < 20) return fail(res, 400, '过程太短了：至少写清用了什么方法、关键几步怎么来的');
+      if (!only && !image) return fail(res, 400, '写点东西再交：过程，或者至少给出最终答案');
+      if (!answerOnly && only && only.length < 20) return fail(res, 400, '过程太短了：至少写清用了什么方法、关键几步怎么来的');
 
       p.attemptCount = (p.attemptCount || 0) + 1;
 
@@ -1238,17 +1312,21 @@ async function handleApi(req, res, pathname, query) {
         saveDb();
         return send(res, 200, {
           ok: true, verdict: 'unclear', needVision: true,
-          comment: '当前通道读不了图片：请在「设置」里填支持图片的 Key（如 gpt-4o、qwen-vl、glm-4v、claude、gemini），或者把过程打成文字再提交',
+          comment: '当前通道读不了图片：在「设置」里填支持图片的 Key（gpt-4o / qwen-vl / glm-4v / claude / gemini），或者把过程打成文字再交',
           errors: []
         });
       }
+
+      const prior = db.submissions
+        .filter((x) => x.uid === user.id && x.code === p.code)
+        .slice(-3);
 
       let judged = null;
       let judgedBy = '';
       for (const cfg of llmCandidates(body)) {
         if (image && !VISION_MODEL.test(cfg.model || '')) continue;
         try {
-          let msgs = judgeMessages(p, process, !!image);
+          let msgs = judgeMessages(p, only, !!image, { history: prior, answerOnly });
           if (image) {
             msgs = [msgs[0], {
               role: 'user',
@@ -1267,31 +1345,81 @@ async function handleApi(req, res, pathname, query) {
         }
       }
 
-      // 所有通道都不可用时，退化为「只看最终答案是否出现」
       if (!judged) {
-        if (processMatchesAnswer(process, p.answer)) {
-          judged = { verdict: 'correct', score: 100, comment: '未连接到阅卷模型，只核对了最终答案，过程请自己再检查一遍。', errors: [] };
+        if (processMatchesAnswer(only, p.answer)) {
+          judged = { verdict: 'correct', score: answerOnly ? 70 : 90, comment: '暂时连不上阅卷模型，只核对了最终答案，过程请自己再检查一遍。', errors: [] };
           judgedBy = '规则比对';
         } else {
           saveDb();
           return send(res, 200, {
             ok: true, verdict: 'unclear', judgedBy: '未判定',
-            comment: '暂时连不上阅卷模型（免费通道有频率限制），稍后再交一次；想立刻判卷可以在「设置」里填自己的 Key。',
+            comment: '暂时连不上阅卷模型（免费通道有频率限制），稍后再交一次；想立刻判分可以在「设置」里填自己的 Key。',
             errors: []
           });
         }
       }
 
+      // 只交答案：分数压到 70 以内，且不能判为 correct
+      let score = Number.isFinite(judged.score) ? Math.round(judged.score) : 0;
+      score = Math.max(0, Math.min(100, score));
+      let verdict = judged.verdict;
+      if (answerOnly) {
+        score = Math.min(score, 70);
+        if (verdict === 'correct') verdict = 'partial';
+      }
+      const PASS = 80;
+      const passed = !answerOnly && score >= PASS;
+
+      // 记录这次提交
+      const submission = {
+        id: 'S' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+        code: p.code,
+        uid: user.id,
+        name: user.name,
+        at: new Date().toISOString(),
+        mode: answerOnly ? 'answer' : 'process',
+        process: only.slice(0, 2000),
+        hasImage: !!image,
+        score: score,
+        verdict: verdict,
+        comment: judged.comment || '',
+        errors: (judged.errors || []).slice(0, 6),
+        judgedBy: judgedBy
+      };
+      db.submissions.push(submission);
+      // 每人每题最多留 10 条，避免库无限膨胀
+      const same = db.submissions.filter((x) => x.uid === user.id && x.code === p.code);
+      if (same.length > 10) {
+        const drop = same.slice(0, same.length - 10).map((x) => x.id);
+        db.submissions = db.submissions.filter((x) => drop.indexOf(x.id) < 0);
+      }
+
+      // 题目统计
+      p.scoreSum = (p.scoreSum || 0) + score;
+      p.scoreCount = (p.scoreCount || 0) + 1;
+
+      // 用户最高分
+      const best = user.best[p.code];
+      const isBest = !best || score > best.score;
+      if (isBest) user.best[p.code] = { score: score, at: submission.at };
+
       const payload = {
         ok: true,
-        verdict: judged.verdict,
-        score: judged.score,
+        verdict: verdict,
+        score: score,
+        passed: passed,
+        passLine: PASS,
         comment: judged.comment || '',
         errors: judged.errors || [],
-        judgedBy
+        judgedBy: judgedBy,
+        attempt: prior.length + 1,
+        isBest: isBest,
+        myBest: user.best[p.code].score,
+        avgScore: p.scoreCount ? Math.round((p.scoreSum / p.scoreCount) * 10) / 10 : null,
+        scoreCount: p.scoreCount
       };
 
-      if (judged.verdict === 'correct') {
+      if (passed) {
         const gained = xpForProblem(p, rec);
         user.solved[p.code] = {
           at: (rec && rec.at) || Date.now(),
@@ -1299,25 +1427,45 @@ async function handleApi(req, res, pathname, query) {
           revealed: !!(rec && rec.revealed),
           askedAI: !!(rec && rec.askedAI),
           judged: judgedBy,
-          score: judged.score
+          score: score
         };
         user.exp = (user.exp || 0) + gained;
         p.solvedCount = (p.solvedCount || 0) + 1;
-        logActivity(user, '做出 ' + p.code + '，+' + gained + ' 经验', p.code);
+        if (user.wrong[p.code]) delete user.wrong[p.code];
+        logActivity(user, '做出 ' + p.code + '（' + score + ' 分），+' + gained + ' 经验', p.code);
         saveDb();
         return send(res, 200, Object.assign(payload, {
-          gained, exp: user.exp, level: levelInfo(user.exp), user: publicUser(user)
+          gained: gained, exp: user.exp, level: levelInfo(user.exp), user: publicUser(user)
         }));
       }
 
+      // 没过线：记一次尝试，进错题本
       user.solved[p.code] = {
         at: (rec && rec.at) || Date.now(),
         done: false,
         revealed: !!(rec && rec.revealed),
         askedAI: !!(rec && rec.askedAI)
       };
+      user.wrong[p.code] = {
+        at: submission.at,
+        score: score,
+        tries: (user.wrong[p.code] && user.wrong[p.code].tries ? user.wrong[p.code].tries : 0) + 1
+      };
       saveDb();
       return send(res, 200, payload);
+    }
+
+    if (sub === '/history' && method === 'GET') {
+      if (!user) return send(res, 200, { ok: true, items: [] });
+      const items = db.submissions
+        .filter((x) => x.uid === user.id && x.code === p.code)
+        .slice(-10)
+        .reverse()
+        .map((x) => ({
+          id: x.id, at: x.at, mode: x.mode, score: x.score, verdict: x.verdict,
+          comment: x.comment, errors: x.errors, process: x.process, hasImage: x.hasImage
+        }));
+      return send(res, 200, { ok: true, items, best: (user.best[p.code] || {}).score || null });
     }
 
     if (sub === '/solve' && method === 'POST') {
@@ -1362,12 +1510,61 @@ async function handleApi(req, res, pathname, query) {
     });
   }
 
+  /* ---- 顺序刷 / 随机刷 ---- */
+  if (pathname === '/api/practice' && method === 'GET') {
+    const mode = query.mode === 'random' ? 'random' : 'seq';
+    const tags = String(query.tags || '').split(',').map((x) => x.trim()).filter(Boolean);
+    const dmin = Number(query.dmin || 1);
+    const dmax = Number(query.dmax || DIFF_MAX);
+    let pool = db.problems.filter((p) => p.status === 'approved');
+    if (tags.length) pool = pool.filter((p) => p.tags.some((t) => tags.includes(t)));
+    pool = pool.filter((p) => p.difficulty >= dmin && p.difficulty <= dmax);
+    if (user) {
+      const solved = user.solved || {};
+      pool = pool.filter((p) => !(solved[p.code] && solved[p.code].done));
+    }
+    if (!pool.length) return send(res, 200, { ok: true, code: null, remaining: 0 });
+    pool.sort((a, b) => a.code.localeCompare(b.code));
+    let pick;
+    if (mode === 'random') {
+      pick = pool[Math.floor(Math.random() * pool.length)];
+    } else {
+      const after = String(query.after || '').toUpperCase();
+      const idx = after ? pool.findIndex((p) => p.code > after) : 0;
+      pick = pool[idx < 0 ? 0 : idx];
+    }
+    return send(res, 200, { ok: true, code: pick.code, remaining: pool.length, mode });
+  }
+
+  /* ---- 错题本 ---- */
+  if (pathname === '/api/wrongbook' && method === 'GET') {
+    if (!user) return fail(res, 401, '登录后才有错题本');
+    const out = [];
+    for (const [code, v] of Object.entries(user.wrong || {})) {
+      const p = db.problems.find((x) => x.code === code);
+      if (!p || p.status !== 'approved') continue;
+      out.push({
+        code: p.code, title: p.title, tags: p.tags, difficulty: p.difficulty,
+        thinking: p.thinking, calc: p.calc,
+        levelColor: levelOf(p.difficulty).color,
+        myScore: v.score, tries: v.tries, at: v.at,
+        best: (user.best[code] || {}).score || v.score,
+        solved: !!(user.solved[code] && user.solved[code].done),
+        excerpt: excerptOf(p.statement, 100)
+      });
+    }
+    out.sort((a, b) => String(b.at).localeCompare(String(a.at)));
+    return send(res, 200, { ok: true, total: out.length, items: out });
+  }
+
   /* ---- 答疑区 ---- */
   if (pathname === '/api/forum' && method === 'GET') {
     const page = Math.max(1, Number(query.page || 1));
-    const size = 12;
+    const size = Number(query.size || 12);
     const q = String(query.q || '').trim().toLowerCase();
+    const codeFilter = String(query.code || '').trim().toUpperCase();
     let list = db.posts.slice();
+    if (codeFilter) list = list.filter((p) => p.problemCode === codeFilter);
     if (q) list = list.filter((p) => (p.title + ' ' + p.body).toLowerCase().includes(q));
     list.sort((a, b) => String(b.updatedAt || b.createdAt).localeCompare(String(a.updatedAt || a.createdAt)));
     const total = list.length;
@@ -1379,6 +1576,8 @@ async function handleApi(req, res, pathname, query) {
       items: list.slice((page - 1) * size, page * size).map((p) => ({
         id: p.id, title: p.title, tags: p.tags, authorName: p.authorName,
         replyCount: p.replies.length, createdAt: p.createdAt,
+        excerpt: String(p.body || '').replace(/\s+/g, ' ').slice(0, 120),
+        image: p.image || '',
         updatedAt: p.updatedAt || p.createdAt, problemCode: p.problemCode,
         solved: !!p.solved
       })),
@@ -1391,8 +1590,9 @@ async function handleApi(req, res, pathname, query) {
     const body = await readBody(req);
     const title = String(body.title || '').trim();
     const content = String(body.body || '').trim();
+    const image = typeof body.image === 'string' && body.image.indexOf('data:image/') === 0 ? body.image : '';
     if (title.length < 4) return fail(res, 400, '标题至少 4 个字');
-    if (content.length < 10) return fail(res, 400, '正文至少 10 个字，说清楚你卡在哪');
+    if (content.length < 6 && !image) return fail(res, 400, '正文至少 6 个字（或者直接传一张图）');
     let tags = body.tags;
     if (typeof tags === 'string') tags = tags.split(/[,，、\s]+/);
     tags = Array.isArray(tags) ? tags.map((t) => String(t).trim()).filter(Boolean).slice(0, 4) : [];
@@ -1404,6 +1604,7 @@ async function handleApi(req, res, pathname, query) {
       body: content,
       tags,
       problemCode: problemCode || '',
+      image: image ? saveUpload(image) : '',
       authorId: user.id,
       authorName: user.name,
       createdAt: new Date().toISOString(),
@@ -1584,6 +1785,18 @@ async function handleApi(req, res, pathname, query) {
       return send(res, 200, { ok: true, added, skipped });
     }
 
+    if (pathname === '/api/admin/submissions' && method === 'GET') {
+      const limit = Math.min(200, Number(query.limit || 60));
+      const items = db.submissions.slice(-limit).reverse().map((x) => {
+        const pr = db.problems.find((pp) => pp.code === x.code);
+        return Object.assign({}, x, {
+          title: pr ? pr.title : '',
+          difficulty: pr ? pr.difficulty : null
+        });
+      });
+      return send(res, 200, { ok: true, total: db.submissions.length, items });
+    }
+
     if (pathname === '/api/admin/export' && method === 'GET') {
       const payload = {
         exportedAt: new Date().toISOString(),
@@ -1704,9 +1917,10 @@ function processMatchesAnswer(process, expected) {
 
 const VISION_MODEL = /gpt-4o|gpt-4\.1|o3|o4|claude|gemini|qwen.*vl|glm-4v|vision|llava|internvl/i;
 
-function judgeMessages(problem, process, hasImage) {
+function judgeMessages(problem, process, hasImage, opts) {
+  opts = opts || {};
   const sys = [
-    '你是高等数学阅卷老师，学生交的是完整解题过程，你要逐步核对。',
+    '你是高等数学阅卷老师，学生交的可能是完整过程，也可能只有最终答案，你要逐步核对并打分。',
     '',
     '严格按分段格式输出，不要用 JSON、不要代码块、不要额外解释：',
     '',
@@ -1720,24 +1934,39 @@ function judgeMessages(problem, process, hasImage) {
     '每行一条，格式：位置｜原因',
     '没有错误就写：无',
     '',
-    '判定标准：',
-    '1. 方法与结论都对 → correct；',
-    '2. 思路对但某步算错、漏写 +C、漏讨论、跳步导致不严谨 → partial，并在 [ERRORS] 指明出错的那一步；',
-    '3. 方法根本错了 → wrong，并指出错在哪一步、应该怎么想；',
-    '4. 指出错误要具体到「第几步、把什么写成了什么」，不要只说「计算有误」。',
-    '5. 公式用 $...$ 写，只评价，不要重写整份解答。'
+    '打分尺度：',
+    '1. 方法与结论都对、步骤完整 → 90-100；',
+    '2. 思路对但有计算失误、漏 +C、漏讨论、跳步不严谨 → 50-79；',
+    '3. 方法错了但有正确的一步 → 20-49；',
+    '4. 完全不着边 → 0-19；',
+    '5. 只有最终答案、没有过程：即便答案正确，最高给 70 分，并在 [COMMENT] 里说明「缺少过程」。',
+    '',
+    '其它要求：',
+    '- 错误要具体到「第几步、把什么写成了什么」，不要只说「计算有误」；',
+    '- 公式用 $...$ 写；只评价，不要重写整份解答；',
+    '- 如果给了「之前的提交记录」，要指出这次比上次好在哪、问题是否还在。'
   ].join('\n');
 
-  const user = [
+  const parts = [
     '题目：' + problem.statement,
     '标准解答：' + (problem.solution || '(未录入解析)'),
-    '标准答案：' + (problem.answer || '(未录入)'),
-    '学生提交的解题过程：' + (process ? process : '(见图片)')
-  ].join('\n\n');
+    '标准答案：' + (problem.answer || '(未录入)')
+  ];
+
+  if (Array.isArray(opts.history) && opts.history.length) {
+    parts.push('之前的提交记录（按时间从早到晚，本次是第 ' + (opts.history.length + 1) + ' 次提交）：');
+    opts.history.forEach(function (h, i) {
+      parts.push('第' + (i + 1) + '次：得分 ' + h.score + '，判定 ' + h.verdict +
+        (h.comment ? '，总评「' + String(h.comment).slice(0, 80) + '」' : '') +
+        (h.errors && h.errors.length ? '，错误「' + String(h.errors[0]).slice(0, 60) + '」' : ''));
+    });
+  }
+
+  parts.push(opts.answerOnly ? '学生只交了最终答案（没有过程）：' + (process || '(见图片)') : '学生提交的解题过程：' + (process || '(见图片)'));
 
   return [
     { role: 'system', content: sys },
-    { role: 'user', content: user }
+    { role: 'user', content: parts.join('\n\n') }
   ];
 }
 
@@ -1784,6 +2013,42 @@ function parseJudge(text) {
   return { verdict, score: verdict === 'correct' ? 100 : (verdict === 'partial' ? 60 : 20), comment: plain.replace(/\s+/g, ' ').slice(0, 220), errors: [] };
 }
 
+
+  /* ---- 识图：给别人用的固定提示词 ---- */
+  if (pathname === '/api/ai/ocr-prompt' && method === 'GET') {
+    return send(res, 200, { ok: true, prompt: OCR_PROMPT });
+  }
+
+  /* ---- 识图：用视觉模型把图片补全成完整题目 ---- */
+  if (pathname === '/api/ai/from-image' && method === 'POST') {
+    if (!user) return fail(res, 401, '登录后才能用识图补全');
+    const body = await readBody(req, 8 * 1024 * 1024);
+    const image = typeof body.image === 'string' && body.image.indexOf('data:image/') === 0 ? body.image : '';
+    if (!image) return fail(res, 400, '先上传一张题目图片');
+    const own = userLlmConfig(body);
+    if (!(own && VISION_MODEL.test(own.model))) {
+      return send(res, 200, { ok: false, needVision: true, prompt: OCR_PROMPT });
+    }
+    let out = '';
+    try {
+      out = await callLLM(own, [
+        { role: 'system', content: OCR_PROMPT },
+        {
+          role: 'user',
+          content: [
+            { type: 'text', text: '按格式转写这张图里的题目。' },
+            { type: 'image_url', image_url: { url: image } }
+          ]
+        }
+      ]);
+    } catch (e) {
+      return fail(res, 502, '识图模型调用失败：' + e.message);
+    }
+    const raw = parseGenerated(out) || extractJson(out);
+    const item = validateGenerated(raw);
+    if (!item) return send(res, 200, { ok: false, needVision: false, prompt: OCR_PROMPT, raw: String(out).slice(0, 800) });
+    return send(res, 200, { ok: true, problem: item, model: { provider: own.name, model: own.model } });
+  }
 
   /* ---- 出题提示词（给浏览器直连免费通道用） ---- */
   if (pathname === '/api/ai/prompt' && method === 'POST') {
@@ -1931,7 +2196,43 @@ const MIME = {
   '.ttf': 'font/ttf'
 };
 
+/* 上传的图片落盘到 data/uploads，URL 记在库里 */
+const UPLOAD_DIR = path.join(DATA_DIR, 'uploads');
+
+function saveUpload(dataUrl) {
+  try {
+    const m = /^data:image\/(png|jpe?g|webp|gif);base64,(.+)$/i.exec(dataUrl);
+    if (!m) return '';
+    const ext = m[1].toLowerCase() === 'jpeg' ? 'jpg' : m[1].toLowerCase();
+    const buf = Buffer.from(m[2], 'base64');
+    if (buf.length > 4 * 1024 * 1024) return '';
+    if (!fs.existsSync(UPLOAD_DIR)) fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+    const name = Date.now().toString(36) + Math.random().toString(36).slice(2, 7) + '.' + ext;
+    fs.writeFileSync(path.join(UPLOAD_DIR, name), buf);
+    return '/uploads/' + name;
+  } catch (e) {
+    console.error('[upload] 保存失败:', e.message);
+    return '';
+  }
+}
+
+function serveUpload(res, pathname) {
+  const name = path.basename(pathname);
+  if (!/^[A-Za-z0-9]+\.(png|jpg|jpeg|webp|gif)$/i.test(name)) return fail(res, 404, '图片不存在');
+  const file = path.join(UPLOAD_DIR, name);
+  fs.readFile(file, (err, data) => {
+    if (err) return fail(res, 404, '图片不存在');
+    const ext = path.extname(file).toLowerCase();
+    res.writeHead(200, {
+      'Content-Type': MIME[ext] || 'image/jpeg',
+      'Cache-Control': 'public, max-age=86400'
+    });
+    res.end(data);
+  });
+}
+
 function serveStatic(req, res, pathname) {
+  if (pathname.indexOf('/uploads/') === 0) return serveUpload(res, pathname);
   let rel = decodeURIComponent(pathname);
   if (rel === '/') rel = '/index.html';
   const filePath = path.join(PUBLIC_DIR, path.normalize(rel).replace(/^(\.\.[/\\])+/, ''));

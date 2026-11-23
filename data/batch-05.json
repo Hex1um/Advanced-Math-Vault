@@ -1,0 +1,132 @@
+[
+  {
+    "title": "先做除法，一次项系数必须归零",
+    "statement": "若\n\n$$\\lim_{x\\to+\\infty}\\left(\\frac{x^{2}+1}{x+1}-ax-b\\right)=\\frac12,$$\n\n求常数 $a,b$。",
+    "tags": ["极限", "渐近线", "多项式除法"],
+    "thinking": 5, "difficulty": 6, "calc": 4,
+    "source": "2026 期中卷 · 基本计算",
+    "hints": ["先把假分式做除法", "极限要存在且有限，一次项系数必须为 0", "剩下的常数项就是那个 $\\frac12$"],
+    "answer": "$a=1,\\ b=-\\dfrac32$",
+    "solution": "### 做除法\n\n$$\\frac{x^{2}+1}{x+1}=\\frac{(x+1)(x-1)+2}{x+1}=x-1+\\frac{2}{x+1}.$$\n\n### 代入原式\n\n$$\\frac{x^{2}+1}{x+1}-ax-b=(1-a)x-(1+b)+\\frac{2}{x+1}.$$\n\n当 $x\\to+\\infty$ 时 $\\dfrac{2}{x+1}\\to0$。要让整个式子有有限极限，必须 $1-a=0$，即\n\n$$a=1.$$\n\n### 定常数项\n\n此时原式 $-\\ (1+b)=\\dfrac12$，故\n\n$$b=-\\frac32.$$\n\n> 这题本质上是求斜渐近线：$y=x-\\frac32$ 就是曲线 $y=\\frac{x^2+1}{x+1}$ 的斜渐近线，$\\frac12$ 只是把常数项又挪了一下。"
+  },
+  {
+    "title": "三阶、五阶都抵消，主部藏在七阶",
+    "statement": "当 $x\\to0$ 时，求无穷小\n\n$$\\sin(\\tan x)-\\tan(\\sin x)$$\n\n的主部与阶数。",
+    "tags": ["极限", "等价无穷小", "泰勒展开"],
+    "thinking": 8, "difficulty": 8, "calc": 6,
+    "source": "2026 期中卷 · 基本计算",
+    "hints": ["先各展开到三阶，看看会剩什么", "会发现两项到五阶都完全相同", "一路展到七阶，首个不为零的项就是主部"],
+    "answer": "主部 $-\\dfrac{x^{7}}{30}$，阶数为 $7$",
+    "solution": "### 两个基本展开\n\n$$\\tan x=x+\\frac{x^{3}}{3}+\\frac{2x^{5}}{15}+\\frac{17x^{7}}{315}+O(x^{9}),$$\n\n$$\\sin x=x-\\frac{x^{3}}{6}+\\frac{x^{5}}{120}-\\frac{x^{7}}{5040}+O(x^{9}).$$\n\n### 复合展开\n\n用 $\\sin u=u-\\frac{u^{3}}{6}+\\frac{u^{5}}{120}-\\frac{u^{7}}{5040}$，把 $u=\\tan x$ 代入；同样用 $\\tan v=v+\\frac{v^{3}}{3}+\\frac{2v^{5}}{15}+\\frac{17v^{7}}{315}$，取 $v=\\sin x$。逐阶比较可以验证：\n\n- 一次项：两边都是 $x$；\n- 三次项：两边都是 $\\dfrac{x^{3}}{6}$；\n- 五次项：两边都是 $\\dfrac{x^{5}}{120}$（这里最容易想当然，实际要算到底）；\n- 七次项：$\\sin(\\tan x)$ 给出 $\\dfrac{17}{315}-\\dfrac{1}{6}\\cdot\\dfrac{1}{3}\\cdot\\dots$ 一类组合，与 $\\tan(\\sin x)$ 首次不同。\n\n直接作级数运算得\n\n$$\\sin(\\tan x)-\\tan(\\sin x)=-\\frac{x^{7}}{30}+O(x^{9}).$$\n\n### 结论\n\n主部为 $-\\dfrac{x^{7}}{30}$，是 $7$ 阶无穷小。\n\n> 别停在三阶：$\\sin(\\tan x)$ 与 $\\tan(\\sin x)$ 的前三个非零项完全一样，这正是本题的陷阱。"
+  },
+  {
+    "title": "极坐标先转参数方程，再除以 $dx/d\\theta$",
+    "statement": "若 $y=y(x)$ 由极坐标方程 $r(\\theta)=e^{\\theta}$ 确定，求 $\\dfrac{d^{2}y}{dx^{2}}$。",
+    "tags": ["导数", "参数方程", "极坐标"],
+    "thinking": 6, "difficulty": 7, "calc": 6,
+    "source": "2026 期中卷 · 基本计算",
+    "hints": ["极坐标先化成参数方程：$x=r\\cos\\theta,\\ y=r\\sin\\theta$", "$\\dfrac{dy}{dx}=\\dfrac{y'(\\theta)}{x'(\\theta)}$，其中 $x'=\\dfrac{dx}{d\\theta}$", "二阶导 $=\\dfrac{1}{x'(\\theta)}\\cdot\\dfrac{d}{d\\theta}\\left(\\dfrac{dy}{dx}\\right)$"],
+    "answer": "$\\dfrac{d^{2}y}{dx^{2}}=\\dfrac{\\sqrt2\\,e^{-\\theta}}{2\\cos^{3}\\left(\\theta+\\frac{\\pi}{4}\\right)}=\\dfrac{2}{e^{\\theta}(\\cos\\theta-\\sin\\theta)^{3}}$",
+    "solution": "### 参数方程\n\n$$x=e^{\\theta}\\cos\\theta,\\qquad y=e^{\\theta}\\sin\\theta.$$\n\n$$x'(\\theta)=e^{\\theta}(\\cos\\theta-\\sin\\theta),\\qquad y'(\\theta)=e^{\\theta}(\\sin\\theta+\\cos\\theta).$$\n\n### 一阶导\n\n$$\\frac{dy}{dx}=\\frac{y'(\\theta)}{x'(\\theta)}=\\frac{\\sin\\theta+\\cos\\theta}{\\cos\\theta-\\sin\\theta}=\\tan\\left(\\theta+\\frac{\\pi}{4}\\right).$$\n\n### 二阶导\n\n$$\\frac{d^{2}y}{dx^{2}}=\\frac{1}{x'(\\theta)}\\cdot\\frac{d}{d\\theta}\\tan\\left(\\theta+\\frac{\\pi}{4}\\right)=\\frac{\\sec^{2}\\left(\\theta+\\frac{\\pi}{4}\\right)}{e^{\\theta}(\\cos\\theta-\\sin\\theta)}.$$\n\n用 $\\cos\\left(\\theta+\\frac{\\pi}{4}\\right)=\\dfrac{\\cos\\theta-\\sin\\theta}{\\sqrt2}$ 化简：\n\n$$\\frac{d^{2}y}{dx^{2}}=\\frac{\\sqrt2\\,e^{-\\theta}}{2\\cos^{3}\\left(\\theta+\\frac{\\pi}{4}\\right)}=\\frac{2}{e^{\\theta}(\\cos\\theta-\\sin\\theta)^{3}}.$$\n\n> 最容易错的地方：算完 $\\dfrac{d}{d\\theta}\\left(\\dfrac{dy}{dx}\\right)$ 忘了再除以 $x'(\\theta)$。"
+  },
+  {
+    "title": "幂指函数取对数，别漏了 $f(x^2)$ 的链式",
+    "statement": "设 $y=\\left[f(x^{2})\\right]^{\\frac{1}{f(x)}}$，其中 $f(x)$ 是可微的正值函数，且 $f(1)=2,\\ f'(1)=1$，求 $\\left.\\mathrm{d}y\\right|_{x=1}$。",
+    "tags": ["导数", "对数求导", "微分"],
+    "thinking": 7, "difficulty": 7, "calc": 6,
+    "source": "2026 期中卷 · 基本计算",
+    "hints": ["幂指函数一律先取对数", "$\\ln y=\\dfrac{\\ln f(x^{2})}{f(x)}$，用商的求导法则", "注意 $\\left(\\ln f(x^{2})\\right)'=\\dfrac{2x f'(x^{2})}{f(x^{2})}$，分母别丢"],
+    "answer": "$\\mathrm{d}y=\\dfrac{\\sqrt2\\,(2-\\ln2)}{4}\\,\\mathrm{d}x$",
+    "solution": "### 先求 $y(1)$\n\n$$y(1)=\\left[f(1)\\right]^{1/f(1)}=2^{1/2}=\\sqrt2.$$\n\n### 取对数再求导\n\n$$\\ln y=\\frac{\\ln f(x^{2})}{f(x)}.$$\n\n$$\\frac{y'}{y}=\\frac{\\dfrac{2x f'(x^{2})}{f(x^{2})}\\cdot f(x)-\\ln f(x^{2})\\cdot f'(x)}{f^{2}(x)}.$$\n\n### 代入 $x=1$\n\n分子：$\\dfrac{2\\cdot1\\cdot1}{2}\\cdot2-\\ln2\\cdot1=2-\\ln2$；分母：$f^{2}(1)=4$。于是\n\n$$\\frac{y'(1)}{y(1)}=\\frac{2-\\ln2}{4}\\ \\Longrightarrow\\ y'(1)=\\frac{\\sqrt2(2-\\ln2)}{4}.$$\n\n### 结果\n\n$$\\left.\\mathrm{d}y\\right|_{x=1}=\\frac{\\sqrt2\\,(2-\\ln2)}{4}\\,\\mathrm{d}x\\approx0.462\\,\\mathrm{d}x.$$\n\n> 两个高频错点：忘掉 $\\ln f(x^2)$ 里的 $\\dfrac{1}{f(x^2)}$；以及把 $y(1)=2$ 当成 $\\sqrt2$。"
+  },
+  {
+    "title": "先由极限的阶数反推 $f$ 的展开",
+    "statement": "设函数 $f(x)$ 在 $x=0$ 处二阶可导，且\n\n$$\\lim_{x\\to0}\\frac{\\sin x+\\dfrac{f(x)}{x}}{x}=3.$$\n\n求 $f(0),\\ f'(0)$ 与 $\\lim\\limits_{x\\to0}\\dfrac{f(x)}{x^{2}}$。",
+    "tags": ["极限", "泰勒展开", "导数定义"],
+    "thinking": 8, "difficulty": 8, "calc": 6,
+    "source": "2026 期中卷 · 综合题",
+    "hints": ["把条件写成 $\\sin x+\\dfrac{f(x)}{x}=3x+o(x)$", "两边乘 $x$：$f(x)=3x^{2}-x\\sin x+o(x^{2})$", "有了展开式，$f(0)$、$f'(0)$、$\\lim f/x^2$ 都能直接读出来"],
+    "answer": "$f(0)=0,\\quad f'(0)=0,\\quad \\lim\\limits_{x\\to0}\\dfrac{f(x)}{x^{2}}=2$",
+    "solution": "### 把条件翻译成展开式\n\n由极限为 $3$：\n\n$$\\sin x+\\frac{f(x)}{x}=3x+o(x).$$\n\n两边乘 $x$：\n\n$$x\\sin x+f(x)=3x^{2}+o(x^{2})\\ \\Longrightarrow\\ f(x)=3x^{2}-x\\sin x+o(x^{2}).$$\n\n### 读 $f(0)$ 与 $f'(0)$\n\n$f$ 在 $0$ 处二阶可导，故连续：\n\n$$f(0)=\\lim_{x\\to0}f(x)=0.$$\n\n$$f'(0)=\\lim_{x\\to0}\\frac{f(x)-f(0)}{x}=\\lim_{x\\to0}\\left(3x-\\sin x+\\frac{o(x^{2})}{x}\\right)=0.$$\n\n### 第三个极限\n\n$$\\lim_{x\\to0}\\frac{f(x)}{x^{2}}=\\lim_{x\\to0}\\left(3-\\frac{\\sin x}{x}+\\frac{o(x^{2})}{x^{2}}\\right)=3-1=2.$$\n\n> 思路是「先定阶，再读系数」：条件只给到 $o(x)$，乘上 $x$ 之后 $f$ 的精度就是 $o(x^{2})$，恰好够读出三项。"
+  },
+  {
+    "title": "隐函数求导两次，再用反函数公式",
+    "statement": "若函数 $f(x)$ 严格单调递增且处处二阶可导，并满足\n\n$$f^{3}(x)+f(x)=x+2,\\qquad f(0)=1,$$\n\n求反函数 $x=g(y)$ 在 $y=1$ 处的二阶导数 $\\left.\\dfrac{\\mathrm{d}^{2}x}{\\mathrm{d}y^{2}}\\right|_{y=1}$。",
+    "tags": ["导数", "隐函数", "反函数"],
+    "thinking": 8, "difficulty": 9, "calc": 6,
+    "source": "2026 期中卷 · 综合题",
+    "hints": ["对方程两边关于 $x$ 求导，得 $(3f^{2}+1)f'=1$", "在 $y=1$ 处对应 $f(x)=1$，即 $x=0$，此时 $f'(0)=\\frac14$", "反函数二阶导：$\\dfrac{d^{2}x}{dy^{2}}=-\\dfrac{f''(x)}{[f'(x)]^{3}}$"],
+    "answer": "$6$",
+    "solution": "### 一阶：隐函数求导\n\n对 $f^{3}(x)+f(x)=x+2$ 两边关于 $x$ 求导：\n\n$$(3f^{2}(x)+1)f'(x)=1\\ \\Longrightarrow\\ f'(x)=\\frac{1}{3f^{2}(x)+1}.$$\n\n由 $y=1$ 得 $f(x)=1$，再由 $f(0)=1$ 与严格单调知 $x=0$。此时\n\n$$f'(0)=\\frac{1}{3+1}=\\frac14.$$\n\n### 二阶\n\n再对 $(3f^{2}+1)f'=1$ 求导：\n\n$$6f(f')^{2}+(3f^{2}+1)f''=0\\ \\Longrightarrow\\ f''(x)=-\\frac{6f(x)\\,[f'(x)]^{2}}{3f^{2}(x)+1}.$$\n\n在 $f=1,\\ f'=\\frac14$ 处：\n\n$$f''(0)=-\\frac{6\\cdot1\\cdot\\frac1{16}}{4}=-\\frac{3}{32}.$$\n\n### 反函数二阶导\n\n$$\\frac{\\mathrm{d}^{2}x}{\\mathrm{d}y^{2}}=-\\frac{f''(x)}{[f'(x)]^{3}}=-\\frac{-\\frac{3}{32}}{\\frac{1}{64}}=6.$$\n\n> 公式 $\\dfrac{d^{2}x}{dy^{2}}=-\\dfrac{f''}{(f')^{3}}$ 必须记牢；另一个常见错法是直接对 $\\dfrac{dx}{dy}=\\dfrac{1}{f'(x)}$ 再对 $y$ 求导却忘了链式因子。"
+  },
+  {
+    "title": "体积对时间求导，注意截面半径也在变",
+    "statement": "水自高为 $24\\,\\mathrm{cm}$、底半径为 $6\\,\\mathrm{cm}$ 的圆锥形漏斗（圆锥底部为圆面，尖朝上）流入半径为 $6\\,\\mathrm{cm}$ 的圆柱形桶内。已知漏斗水深 $16\\,\\mathrm{cm}$ 时，水面下降的速度为 $2\\,\\mathrm{cm/s}$，求此时桶中水面上升的速度。",
+    "tags": ["导数", "相关变化率", "应用题"],
+    "thinking": 5, "difficulty": 6, "calc": 6,
+    "source": "2026 期中卷 · 综合题",
+    "hints": ["水深 $h$ 处的截面半径 $r=6\\left(1-\\frac{h}{24}\\right)$（尖朝上，越往上越细）", "水的体积 $V=\\pi\\int_0^h r^2\\,\\mathrm{d}y$，对时间求导得 $V'=\\pi r^2(h)\\,h'$", "桶的截面积固定：$V'=\\pi\\cdot6^2\\cdot H'$"],
+    "answer": "$\\dfrac29\\ \\mathrm{cm/s}$",
+    "solution": "### 漏斗的几何关系\n\n尖朝上、底面朝下，故从底面往上量水深 $h$ 时，截面半径线性减小：\n\n$$r(h)=6\\left(1-\\frac{h}{24}\\right)=6-\\frac h4.$$\n\n水深 $16\\,\\mathrm{cm}$ 时\n\n$$r(16)=6-4=2\\,\\mathrm{cm}.$$\n\n### 流出速率\n\n$$V=\\pi\\int_{0}^{h}r^{2}(y)\\,\\mathrm{d}y\\ \\Longrightarrow\\ \\frac{\\mathrm{d}V}{\\mathrm{d}t}=\\pi r^{2}(h)\\frac{\\mathrm{d}h}{\\mathrm{d}t}.$$\n\n代入 $r=2$、$\\dfrac{\\mathrm{d}h}{\\mathrm{d}t}=-2$：\n\n$$\\frac{\\mathrm{d}V}{\\mathrm{d}t}=-8\\pi\\ (\\mathrm{cm^{3}/s}),$$\n\n即水以 $8\\pi\\ \\mathrm{cm^{3}/s}$ 的速度流进桶里。\n\n### 桶中水面\n\n$$\\pi\\cdot6^{2}\\cdot\\frac{\\mathrm{d}H}{\\mathrm{d}t}=8\\pi\\ \\Longrightarrow\\ \\frac{\\mathrm{d}H}{\\mathrm{d}t}=\\frac{8}{36}=\\frac29\\ (\\mathrm{cm/s}).$$\n\n> 本题的关键是「截面半径随水深变化」：$V'=\\pi r^2h'$ 里的 $r$ 必须用当时的 $2$，不能拿底半径 $6$ 去算。"
+  },
+  {
+    "title": "和一定发散，商只能靠反例",
+    "statement": "设数列 $\\{x_n\\}$ 收敛，数列 $\\{y_n\\}$ 发散。判断 $\\{x_n+y_n\\}$ 与 $\\left\\{\\dfrac{x_n}{y_n}\\right\\}$ 是否一定发散：若一定发散，证明之；若不一定，举出反例。",
+    "tags": ["数列极限", "反例", "证明"],
+    "thinking": 7, "difficulty": 8, "calc": 4,
+    "source": "2026 期中卷 · 综合题",
+    "hints": ["和：用反证法，若 $x_n+y_n$ 收敛，则 $y_n=(x_n+y_n)-x_n$ 也收敛", "商：先想 $x_n$ 是不是可以趋于 0", "$x_n=\\frac1n,\\ y_n=n$ 就是一个反例"],
+    "answer": "$\\{x_n+y_n\\}$ 一定发散；$\\left\\{\\dfrac{x_n}{y_n}\\right\\}$ 不一定，例如 $x_n=\\dfrac1n,\\ y_n=n$",
+    "solution": "### 一、$\\{x_n+y_n\\}$ 一定发散\n\n反设 $\\{x_n+y_n\\}$ 收敛，记 $x_n\\to a$。则\n\n$$y_n=(x_n+y_n)-x_n$$\n\n是两个收敛数列之差，必收敛，与 $\\{y_n\\}$ 发散矛盾。故 $\\{x_n+y_n\\}$ 一定发散。\n\n### 二、$\\left\\{\\dfrac{x_n}{y_n}\\right\\}$ 不一定发散\n\n取\n\n$$x_n=\\frac1n\\to0,\\qquad y_n=n\\ (\\text{发散}),$$\n\n则\n\n$$\\frac{x_n}{y_n}=\\frac{1}{n^{2}}\\to0,$$\n\n是收敛的。所以商的收敛性无法由前提断定。\n\n> 一般规律：$x_n$ 的极限不为 0 时 $\\dfrac{x_n}{y_n}$ 必发散（因为 $y_n=\\dfrac{x_n}{x_n/y_n}$）；一旦 $x_n\\to0$，就可能把 $y_n$ 的爆炸「压住」。"
+  },
+  {
+    "title": "两端导数同号，函数必然穿过 0",
+    "statement": "设函数 $f(x)$ 在 $[a,b]$ 上连续，且 $f(a)=f(b)=0$，$f'_{+}(a)\\,f'_{-}(b)>0$。证明：在 $(a,b)$ 内至少存在一点 $\\xi$，使得 $f(\\xi)=0$。",
+    "tags": ["证明", "零点定理", "导数定义"],
+    "thinking": 9, "difficulty": 9, "calc": 5,
+    "source": "2026 期中卷 · 证明题",
+    "hints": ["先分两种情况：$f'_+(a)>0$ 与 $f'_+(a)<0$", "$f'_+(a)>0$ 时，$a$ 右侧附近 $f>0$；而 $f'_-(b)>0$ 配 $f(b)=0$ 说明 $b$ 左侧附近 $f<0$", "一头正一头负，用介值定理收尾"],
+    "answer": "证明见解析",
+    "solution": "### 先看导数的含义\n\n由单侧导数定义，$f(a)=0$ 给出\n\n$$f'_{+}(a)=\\lim_{x\\to a^{+}}\\frac{f(x)}{x-a}.$$\n\n### 情形一：$f'_{+}(a)>0$（此时 $f'_{-}(b)>0$）\n\n因为 $x-a>0$，极限为正说明存在 $x_1\\in(a,b)$，在 $a$ 与 $x_1$ 之间（$x\\ne a$）有 $$\\frac{f(x)}{x-a}>0\\ \\Longrightarrow\\ f(x)>0,$$\n\n特别地 $f(x_1)>0$。\n\n再看 $b$ 端：$f'_{-}(b)=\\lim_{x\\to b^{-}}\\dfrac{f(x)-f(b)}{x-b}=\\lim_{x\\to b^{-}}\\dfrac{f(x)}{x-b}>0$，而 $x-b<0$，故在 $b$ 左侧附近 $f(x)<0$，取一点 $x_2\\in(a,b)$ 使 $f(x_2)<0$。\n\n于是 $f$ 在 $[x_1,x_2]$（或 $[x_2,x_1]$）上连续且两端异号，由零点定理，在 $(x_1,x_2)\\subset(a,b)$ 内存在 $\\xi$ 使\n\n$$f(\\xi)=0.$$\n\n### 情形二：$f'_{+}(a)<0$（此时 $f'_{-}(b)<0$）\n\n同理，$a$ 右侧附近 $f<0$，$b$ 左侧附近 $f>0$，同样由零点定理得证。\n\n综上，$(a,b)$ 内至少存在一点 $\\xi$ 使 $f(\\xi)=0$。\n\n> 关键是「单侧导数的符号决定单侧的取值符号」：$\\lim\\dfrac{f(x)-f(a)}{x-a}>0$ 配 $f(a)=0$，就能读出 $f$ 在那一侧跟 $x-a$ 同号。"
+  },
+  {
+    "title": "换成 $\\arctan$ 就变成 $\\sin u<u$",
+    "statement": "证明不等式\n\n$$\\frac{1}{\\sqrt{(1+x^{2})(1+y^{2})}}<\\frac{\\arctan y-\\arctan x}{y-x}<1\\qquad(0<x<y).$$",
+    "tags": ["证明", "中值定理", "不等式"],
+    "thinking": 9, "difficulty": 9, "calc": 6,
+    "source": "2026 期中卷 · 证明题",
+    "hints": ["令 $x=\\tan\\alpha,\\ y=\\tan\\beta$，其中 $0<\\alpha<\\beta<\\frac{\\pi}{2}$", "右边：$\\tan\\beta-\\tan\\alpha=\\int_\\alpha^\\beta\\sec^{2}t\\,\\mathrm{d}t>\\beta-\\alpha$", "左边：$\\tan\\beta-\\tan\\alpha=\\dfrac{\\sin(\\beta-\\alpha)}{\\cos\\alpha\\cos\\beta}$，再用 $\\sin u<u$"],
+    "answer": "证明见解析",
+    "solution": "### 换元\n\n令\n\n$$x=\\tan\\alpha,\\qquad y=\\tan\\beta,\\qquad 0<\\alpha<\\beta<\\frac{\\pi}{2},$$\n\n则 $\\arctan y-\\arctan x=\\beta-\\alpha$，且\n\n$$\\sqrt{(1+x^{2})(1+y^{2})}=\\frac{1}{\\cos\\alpha\\cos\\beta}.$$\n\n于是原不等式等价于\n\n$$\\cos\\alpha\\cos\\beta<\\frac{\\beta-\\alpha}{\\tan\\beta-\\tan\\alpha}<1.$$\n\n### 右半边\n\n因为 $\\tan' t=\\sec^{2}t\\ge1$，且 $t>0$ 时严格大于 $1$，所以\n\n$$\\tan\\beta-\\tan\\alpha=\\int_{\\alpha}^{\\beta}\\sec^{2}t\\,\\mathrm{d}t>\\int_{\\alpha}^{\\beta}1\\,\\mathrm{d}t=\\beta-\\alpha,$$\n\n即 $\\dfrac{\\beta-\\alpha}{\\tan\\beta-\\tan\\alpha}<1$。\n\n### 左半边\n\n$$\\tan\\beta-\\tan\\alpha=\\frac{\\sin\\beta\\cos\\alpha-\\cos\\beta\\sin\\alpha}{\\cos\\alpha\\cos\\beta}=\\frac{\\sin(\\beta-\\alpha)}{\\cos\\alpha\\cos\\beta},$$\n\n所以\n\n$$\\frac{\\beta-\\alpha}{\\tan\\beta-\\tan\\alpha}=\\cos\\alpha\\cos\\beta\\cdot\\frac{\\beta-\\alpha}{\\sin(\\beta-\\alpha)}.$$\n\n由 $0<\\beta-\\alpha<\\dfrac{\\pi}{2}$ 及 $\\sin u<u\\ (u>0)$，得 $\\dfrac{\\beta-\\alpha}{\\sin(\\beta-\\alpha)}>1$，故\n\n$$\\frac{\\beta-\\alpha}{\\tan\\beta-\\tan\\alpha}>\\cos\\alpha\\cos\\beta.$$\n\n两边合起来即为所证。\n\n> 这道题的核心是「三角换元把 $\\arctan$ 变成角」；直接用拉格朗日中值定理只能得到中间值 $\\dfrac{1}{1+\\xi^2}$，两端无法同时卡住。"
+  },
+  {
+    "title": "二阶三角分式，令 $t=\\tan\\frac{x}{2}$",
+    "statement": "求不定积分\n\n$$\\int\\frac{\\mathrm{d}x}{5+2\\cos x}.$$",
+    "tags": ["不定积分", "万能代换", "三角有理式"],
+    "thinking": 7, "difficulty": 7, "calc": 6,
+    "source": "三角有理式题单 · 二阶三角分式",
+    "hints": ["令 $t=\\tan\\frac x2$，则 $\\cos x=\\dfrac{1-t^{2}}{1+t^{2}},\\ \\mathrm{d}x=\\dfrac{2\\,\\mathrm{d}t}{1+t^{2}}$", "化成 $\\int\\dfrac{2\\,\\mathrm{d}t}{3t^{2}+7}$", "这是 $\\arctan$ 型：$\\int\\dfrac{\\mathrm{d}u}{u^{2}+a^{2}}=\\dfrac1a\\arctan\\dfrac ua$"],
+    "answer": "$\\dfrac{2}{\\sqrt{21}}\\arctan\\left(\\sqrt{\\dfrac37}\\tan\\dfrac x2\\right)+C$",
+    "solution": "### 万能代换\n\n令 $t=\\tan\\dfrac x2$，则\n\n$$\\cos x=\\frac{1-t^{2}}{1+t^{2}},\\qquad \\mathrm{d}x=\\frac{2\\,\\mathrm{d}t}{1+t^{2}}.$$\n\n$$\n\\int\\frac{\\mathrm{d}x}{5+2\\cos x}=\\int\\frac{\\frac{2\\,\\mathrm{d}t}{1+t^{2}}}{5+\\frac{2(1-t^{2})}{1+t^{2}}}=\\int\\frac{2\\,\\mathrm{d}t}{5(1+t^{2})+2(1-t^{2})}=\\int\\frac{2\\,\\mathrm{d}t}{3t^{2}+7}.\n$$\n\n### 标准 arctan\n\n$$\\int\\frac{2\\,\\mathrm{d}t}{3t^{2}+7}=\\frac{2}{3}\\int\\frac{\\mathrm{d}t}{t^{2}+\\frac73}=\\frac{2}{3}\\cdot\\frac{1}{\\sqrt{7/3}}\\arctan\\frac{t}{\\sqrt{7/3}}.$$\n\n$$=\\frac{2}{\\sqrt{21}}\\arctan\\left(\\sqrt{\\frac37}\\,t\\right)+C.$$\n\n### 回代\n\n$$I=\\frac{2}{\\sqrt{21}}\\arctan\\left(\\sqrt{\\frac37}\\tan\\frac x2\\right)+C.$$\n\n> 这类 $\\int\\dfrac{\\mathrm{d}x}{a+b\\cos x}$ 用 $\\tan\\frac x2$ 一定成功；若分子是 $\\sin x$ 或 $\\cos x$ 的一次式，则优先凑 $\\mathrm{d}(a+b\\cos x)$。"
+  },
+  {
+    "title": "拆成 $\\ln x$、$\\ln(x^{2}+2)$ 和 $\\arctan$ 三块",
+    "statement": "求不定积分\n\n$$\\int\\frac{3x^{2}+2x+4}{x\\left(x^{2}+2\\right)}\\,\\mathrm{d}x.$$",
+    "tags": ["不定积分", "有理函数积分", "部分分式"],
+    "thinking": 6, "difficulty": 6, "calc": 7,
+    "source": "有理分式题单 · 分母可因式分解",
+    "hints": ["设 $\\dfrac{3x^{2}+2x+4}{x(x^{2}+2)}=\\dfrac Ax+\\dfrac{Bx+C}{x^{2}+2}$", "比较系数得 $A=2,\\ B=1,\\ C=2$", "$\\dfrac{x}{x^{2}+2}$ 凑微分进对数，$\\dfrac{2}{x^{2}+2}$ 是 arctan"],
+    "answer": "$2\\ln|x|+\\dfrac12\\ln(x^{2}+2)+\\sqrt2\\arctan\\dfrac{x}{\\sqrt2}+C$",
+    "solution": "### 部分分式\n\n设\n\n$$\\frac{3x^{2}+2x+4}{x(x^{2}+2)}=\\frac{A}{x}+\\frac{Bx+C}{x^{2}+2}.$$\n\n去分母：$3x^{2}+2x+4=A(x^{2}+2)+x(Bx+C)=(A+B)x^{2}+Cx+2A$。比较系数：\n\n$$A=2,\\quad C=2,\\quad A+B=3\\Rightarrow B=1.$$\n\n### 逐项积分\n\n$$\n\\int\\frac{3x^{2}+2x+4}{x(x^{2}+2)}\\mathrm{d}x=\\int\\frac{2}{x}\\mathrm{d}x+\\int\\frac{x+2}{x^{2}+2}\\mathrm{d}x.\n$$\n\n其中\n\n$$\\int\\frac{x}{x^{2}+2}\\mathrm{d}x=\\frac12\\ln(x^{2}+2),\\qquad \\int\\frac{2}{x^{2}+2}\\mathrm{d}x=\\sqrt2\\arctan\\frac{x}{\\sqrt2}.$$\n\n### 结果\n\n$$I=2\\ln|x|+\\frac12\\ln(x^{2}+2)+\\sqrt2\\arctan\\frac{x}{\\sqrt2}+C.$$\n\n> 分母有不可约二次因子时，分子一定要设成 $Bx+C$ 的**一次式**，只设常数会解不出来。"
+  },
+  {
+    "title": "分子写成 $A\\cdot$分母 $+B\\cdot$分母的导数",
+    "statement": "求不定积分\n\n$$\\int\\frac{2\\sin x+7\\cos x}{4\\sin x-\\cos x}\\,\\mathrm{d}x.$$",
+    "tags": ["不定积分", "三角有理式", "待定系数"],
+    "thinking": 6, "difficulty": 6, "calc": 6,
+    "source": "三角有理式题单 · 一次三角分式",
+    "hints": ["设 $2\\sin x+7\\cos x=A(4\\sin x-\\cos x)+B(4\\cos x+\\sin x)$", "比较 $\\sin x$ 与 $\\cos x$ 的系数解出 $A,B$", "第一部分积出 $Ax$，第二部分是 $B\\ln|4\\sin x-\\cos x|$"],
+    "answer": "$\\dfrac{x}{17}+\\dfrac{30}{17}\\ln|4\\sin x-\\cos x|+C$",
+    "solution": "### 待定系数\n\n记分母 $D=4\\sin x-\\cos x$，则 $D'=4\\cos x+\\sin x$。设\n\n$$2\\sin x+7\\cos x=A\\,D+B\\,D'.$$\n\n比较系数：\n\n$$\\begin{cases}4A+B=2 &(\\sin x)\\\\ -A+4B=7 &(\\cos x)\\end{cases}$$\n\n解得 $A=\\dfrac1{17},\\ B=\\dfrac{30}{17}$。\n\n### 积分\n\n$$\n\\int\\frac{2\\sin x+7\\cos x}{4\\sin x-\\cos x}\\mathrm{d}x=A\\int1\\,\\mathrm{d}x+B\\int\\frac{D'}{D}\\mathrm{d}x=Ax+B\\ln|D|+C.\n$$\n\n### 结果\n\n$$I=\\frac{x}{17}+\\frac{30}{17}\\ln|4\\sin x-\\cos x|+C.$$\n\n> $\\dfrac{a\\sin x+b\\cos x}{c\\sin x+d\\cos x}$ 这一族全用同一个办法：拆成「常数倍分母 + 常数倍分母的导数」，两分钟解决。"
+  }
+]

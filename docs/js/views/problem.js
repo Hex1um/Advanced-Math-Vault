@@ -23,8 +23,12 @@
   function openAnswerModal(p, rules, onPassed) {
     const el = document.createElement('div');
     el.innerHTML =
-      '<div class="judge-tip">交的是<b>完整过程</b>，不是只写答案：写清用了什么方法、每一步的依据、最后的结果。'
-      + 'AI 会逐步核对，指出第一处错在第几步、把什么写成了什么；判对才计经验。</div>'
+      '<div class="judge-tip">AI 按 <b>0-100</b> 打分并指出错在哪一步。<b>写完整过程</b>才有机会过 80 分线；'
+      + '只交一个答案最高只能得 70 分，不会通过。</div>'
+      + '<div class="seg" id="modeSeg" style="margin-bottom:12px">'
+      + '<button type="button" data-mode="process" class="active">交完整过程</button>'
+      + '<button type="button" data-mode="answer">只交答案</button></div>'
+      + '<div id="historyBox"></div>'
       + '<div class="field"><label>解题过程</label>'
       + '<textarea id="ansProcess" rows="8" placeholder="例如：&#10;1. 令 t=√x，则 x=t²，dx=2t dt&#10;2. 原式 = 2∫t e^t dt&#10;3. 分部积分 = 2(t-1)e^t + C&#10;4. 回代得 2(√x-1)e^{√x}+C"></textarea>'
       + '<div class="tip">公式可以直接写 LaTeX（如 <code>\\frac{1}{2}</code>）或普通写法（如 <code>1/2</code>、<code>sqrt(x)</code>）。</div></div>'
@@ -40,6 +44,36 @@
     const m = window.UI.modal({ title: '提交解题过程 · ' + p.code, sub: '由 AI 逐步核对并指出错误位置', body: el, wide: true });
     const resultBox = el.querySelector('#judgeResult');
     let image = '';
+    let mode = 'process';
+
+    window.API.get('/api/problems/' + p.code + '/history').then(function (h) {
+      const box = el.querySelector('#historyBox');
+      if (!box || !h.items || !h.items.length) return;
+      box.innerHTML = '<details class="history-box"><summary>你之前交过 ' + h.items.length + ' 次'
+        + (h.best ? '（最高 ' + h.best + ' 分）' : '') + '，点开看记录</summary>'
+        + h.items.map(function (it) {
+          return '<div class="hist-item"><div class="hist-top"><span>' + window.UI.fmtDate(it.at) + '</span>'
+            + '<span class="tag">' + it.score + ' 分</span>'
+            + '<span class="small muted">' + (it.mode === 'answer' ? '只交答案' : '完整过程') + '</span></div>'
+            + (it.comment ? '<div class="hist-comment md">' + window.Md.inlineTex(String(it.comment).slice(0, 120)) + '</div>' : '')
+            + (it.process ? '<div class="hist-proc">' + window.Md.esc(String(it.process).slice(0, 140)) + '</div>' : '')
+            + '</div>';
+        }).join('') + '</details>';
+      window.Md.renderMath(box);
+    }).catch(function () {});
+
+    el.querySelectorAll('#modeSeg [data-mode]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        mode = b.dataset.mode;
+        el.querySelectorAll('#modeSeg [data-mode]').forEach(function (x) { x.classList.toggle('active', x === b); });
+        const ta = el.querySelector('#ansProcess');
+        ta.rows = mode === 'answer' ? 2 : 8;
+        ta.placeholder = mode === 'answer'
+          ? '只写最终答案，比如 $x-\\ln(3e^{x}+1)+C$（最高 70 分）'
+          : '写清每一步和依据：换元、分部积分、回代…';
+        el.querySelector('#judgeBtn').textContent = mode === 'answer' ? '提交答案评分' : '提交批改';
+      });
+    });
 
     el.querySelector('#pickImg').addEventListener('click', function () {
       el.querySelector('#ansFile').click();
@@ -70,14 +104,17 @@
     el.querySelector('#judgeBtn').addEventListener('click', async function () {
       const btn = this;
       const process = el.querySelector('#ansProcess').value.trim();
-      if (!process && !image) { window.UI.toast('把解题过程写下来，或者传张照片', 'err'); return; }
-      if (process && process.length < 20) { window.UI.toast('过程太短了，写清关键几步（至少 20 字）', 'err'); return; }
+      const answerOnly = mode === 'answer';
+      if (!process && !image) { window.UI.toast(answerOnly ? '写下答案' : '把解题过程写下来，或者传张照片', 'err'); return; }
+      if (!answerOnly && process && process.length < 20) { window.UI.toast('过程太短了，写清关键几步（至少 20 字）', 'err'); return; }
       btn.disabled = true;
       btn.textContent = '批改中…';
       resultBox.innerHTML = '<div class="judge-result pending"><span class="spinner"></span>正在逐步核对…（免费通道排队时可能要十几秒）</div>';
       try {
         const res = await window.API.post('/api/problems/' + p.code + '/answer', {
           process: process,
+          answer: answerOnly ? process : undefined,
+          mode: answerOnly ? 'answer' : 'process',
           image: image || undefined,
           llm: window.UI.llmConfig()
         });
@@ -92,47 +129,142 @@
 
     function renderJudge(res) {
       const map = {
-        correct: ['correct', '判定通过'],
+        correct: ['correct', '通过'],
         partial: ['partial', '部分正确'],
-        wrong: ['wrong', '不对'],
+        wrong: ['wrong', '不正确'],
         unclear: ['unclear', '暂时判不了']
       };
       const meta = map[res.verdict] || map.unclear;
-      let html = '<div class="judge-result ' + meta[0] + '"><b>' + meta[1] + '</b>'
-        + (typeof res.score === 'number' ? '<span class="judge-score">' + res.score + ' 分</span>' : '')
+      const scoreTxt = typeof res.score === 'number' ? res.score + ' / 100' : '';
+      let html = '<div class="judge-result ' + (res.passed ? 'correct' : meta[0]) + '"><b>' + (res.passed ? '通过' : meta[1]) + '</b>'
+        + (scoreTxt ? '<span class="judge-score">' + scoreTxt + '</span>' : '')
+        + (res.verdict !== 'unclear' ? '<span class="small muted">通过线 ' + (res.passLine || 80) + '</span>' : '')
         + (res.judgedBy ? '<span class="judged-by">阅卷：' + window.Md.esc(res.judgedBy) + '</span>' : '')
         + '</div>';
 
-      if (res.comment) {
-        html += '<div class="judge-comment md">' + window.Md.inlineTex(res.comment) + '</div>';
-      }
+      if (res.comment) html += '<div class="judge-comment md">' + window.Md.inlineTex(res.comment) + '</div>';
 
       if (Array.isArray(res.errors) && res.errors.length) {
         html += '<div class="judge-errors"><div class="je-head">问题在这儿</div><ol>'
           + res.errors.map(function (x) { return '<li>' + window.Md.inlineTex(String(x)) + '</li>'; }).join('')
           + '</ol></div>';
-      } else if (res.verdict === 'correct') {
+      } else if (res.passed) {
         html += '<div class="judge-extra">过程没挑出问题。</div>';
       }
 
-      if (res.verdict === 'correct') {
+      const bits = [];
+      if (res.attempt) bits.push('第 ' + res.attempt + ' 次提交');
+      if (res.isBest) bits.push('刷新了你的最高分');
+      if (typeof res.myBest === 'number') bits.push('我的最高 ' + res.myBest);
+      if (typeof res.avgScore === 'number') bits.push('全站平均 ' + res.avgScore);
+      if (bits.length) html += '<div class="judge-extra">' + bits.join(' · ') + '</div>';
+
+      if (res.passed) {
         if (res.already) html += '<div class="judge-extra">这道题之前已经通过了。</div>';
         else {
           html += '<div class="judge-extra">+' + res.gained + ' 经验 · 当前 Lv.' + res.level.level + '，总经验 ' + res.exp + '</div>';
           onPassed(res);
         }
       } else if (res.verdict === 'partial' || res.verdict === 'wrong') {
-        html += '<div class="judge-extra">照着上面的位置改一遍再交；实在做不出来可以点「查看答案」，经验会打折。</div>';
+        html += '<div class="judge-extra">' + (typeof res.score === 'number' && res.score < 80 ? '差一点就到 80 了，改完再交一次。' : '') + '这题已进错题本。</div>';
       } else {
         html += '<div class="judge-extra">可以再交一次，或者点「查看答案」自己对照。</div>';
       }
 
       resultBox.innerHTML = html;
       window.Md.renderMath(resultBox);
-      if (res.verdict === 'correct' && !res.already) {
-        setTimeout(function () { window.UI.toast('通过，+' + (res.gained || 0) + ' 经验', 'ok'); }, 200);
+      if (res.passed && !res.already) {
+        setTimeout(function () { window.UI.toast('通过，' + res.score + ' 分，+' + (res.gained || 0) + ' 经验', 'ok'); }, 200);
       }
     }
+  }
+
+  /* 每道题自己的讨论区：发帖可带图，AI 会自动回一条 */
+  function renderDiscussion(slot, code) {
+    if (!slot) return;
+    slot.innerHTML =
+      '<div class="card discuss-card">'
+      + '<div class="discuss-head"><h3>这道题的讨论</h3><span class="small muted" id="discussCount"></span>'
+      + '<button class="btn btn-sm right" id="discussNew">发帖</button></div>'
+      + '<div id="discussList"><div class="loading-row"><span class="spinner"></span>加载中…</div></div>'
+      + '</div>';
+
+    function load() {
+      window.API.get('/api/forum?code=' + encodeURIComponent(code) + '&size=20').then(function (d) {
+        const box = slot.querySelector('#discussList');
+        slot.querySelector('#discussCount').textContent = d.total ? d.total + ' 条' : '还没有人讨论';
+        if (!d.items.length) {
+          box.innerHTML = '<div class="empty" style="padding:22px"><b>这里还空着</b>卡在哪一步，直接问。AI 会先回一条。</div>';
+          return;
+        }
+        box.innerHTML = d.items.map(function (it) {
+          return '<a class="discuss-item" href="#/post/' + it.id + '">'
+            + '<span class="dt">' + window.Md.esc(it.title) + '</span>'
+            + (it.image ? '<span class="tag">图</span>' : '')
+            + '<span class="dmeta">' + window.Md.esc(it.authorName) + ' · ' + window.UI.timeAgo(it.createdAt)
+            + ' · ' + it.replyCount + ' 回复</span></a>';
+        }).join('');
+      }).catch(function () {
+        slot.querySelector('#discussList').innerHTML = '<div class="small muted" style="padding:12px">加载失败</div>';
+      });
+    }
+
+    slot.querySelector('#discussNew').addEventListener('click', function () {
+      if (!window.UI.requireLogin(null, '登录后才能发帖')) return;
+      const el = document.createElement('div');
+      el.innerHTML =
+        '<div class="field"><label>标题</label><input id="dTitle" maxlength="100" placeholder="比如：第 2 步换元后上限怎么定" /></div>'
+        + '<div class="field"><label>内容</label><textarea id="dBody" rows="5" placeholder="说清卡在哪一步、你试过什么"></textarea></div>'
+        + '<div class="field"><label>配图（可选）</label>'
+        + '<input type="file" id="dFile" accept="image/*" style="display:none" />'
+        + '<div class="upload-row"><button type="button" class="btn btn-sm" id="dPick">选择图片</button>'
+        + '<span class="small muted" id="dHint">手写过程拍照最直观</span></div><div id="dPreview"></div></div>'
+        + '<div style="display:flex;justify-content:flex-end;gap:9px"><button class="btn btn-primary" id="dSend">发帖</button></div>';
+
+      const m = window.UI.modal({ title: '发帖 · ' + code, body: el, wide: true });
+      let image = '';
+      el.querySelector('#dPick').addEventListener('click', function () { el.querySelector('#dFile').click(); });
+      el.querySelector('#dFile').addEventListener('change', function (ev) {
+        const file = ev.target.files && ev.target.files[0];
+        if (!file) return;
+        const rd = new FileReader();
+        rd.onload = function () {
+          const img = new Image();
+          img.onload = function () {
+            const max = 1400;
+            const sc = Math.min(1, max / Math.max(img.width, img.height));
+            const cv = document.createElement('canvas');
+            cv.width = Math.round(img.width * sc);
+            cv.height = Math.round(img.height * sc);
+            cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+            image = cv.toDataURL('image/jpeg', 0.85);
+            el.querySelector('#dPreview').innerHTML = '<img src="' + image + '" class="judge-img" alt="预览" />';
+            el.querySelector('#dHint').textContent = '已选择图片';
+          };
+          img.src = String(rd.result);
+        };
+        rd.readAsDataURL(file);
+      });
+
+      el.querySelector('#dSend').addEventListener('click', async function () {
+        const title = el.querySelector('#dTitle').value.trim();
+        const bodyText = el.querySelector('#dBody').value.trim();
+        if (title.length < 4) { window.UI.toast('标题至少 4 个字', 'err'); return; }
+        if (bodyText.length < 6 && !image) { window.UI.toast('写点内容或传张图', 'err'); return; }
+        this.disabled = true;
+        try {
+          await window.API.post('/api/forum', { title: title, body: bodyText || '见图', problemCode: code, image: image || undefined });
+          window.UI.toast('已发布，AI 正在回复', 'ok');
+          m.close();
+          load();
+        } catch (e) {
+          window.UI.toast(e.message, 'err');
+          this.disabled = false;
+        }
+      });
+    });
+
+    load();
   }
 
   Views.problem = function (el, params) {
@@ -154,13 +286,15 @@
         + '    <span class="m">收录 <b>' + window.UI.fmtDate(p.createdAt) + '</b></span>'
         + '    <span class="m">通过 <b>' + p.solvedCount + '</b></span>'
         + '    <span class="m">尝试 <b>' + p.attemptCount + '</b></span>'
+        + '    <span class="m">平均分 <b>' + (p.avgScore === null || p.avgScore === undefined ? '—' : p.avgScore) + '</b>' + (p.scoreCount ? '(' + p.scoreCount + ')' : '') + '</span>'
+        + '    <span class="m">我的最高 <b>' + (p.myBest === null || p.myBest === undefined ? '—' : p.myBest) + '</b></span>'
         + '  </div>'
         + '  <div class="statement" id="stmt"></div>'
         + '  <div class="score-panel">'
         + '    <div class="score-item"><div class="score-top"><span>思维量</span><b>' + p.thinking + '</b></div><div class="score-track"><div class="score-fill ' + (p.thinking >= 8 ? 'hi' : '') + '" style="width:' + p.thinking * 10 + '%"></div></div></div>'
-        + '    <div class="score-item"><div class="score-top"><span>难度</span><b>' + p.difficulty + '</b></div><div class="score-track"><div class="score-fill ' + (p.difficulty >= 8 ? 'hi' : 'mid') + '" style="width:' + p.difficulty * 10 + '%"></div></div></div>'
+        + '    <div class="score-item"><div class="score-top"><span>难度</span><b>' + p.difficulty + '</b></div><div class="score-track"><div class="score-fill ' + (p.difficulty >= 10 ? 'hi' : 'mid') + '" style="width:' + Math.min(100, p.difficulty / 15 * 100) + '%"></div></div></div>'
         + '    <div class="score-item"><div class="score-top"><span>计算量</span><b>' + p.calc + '</b></div><div class="score-track"><div class="score-fill" style="width:' + p.calc * 10 + '%"></div></div></div>'
-        + '    <div class="score-note"><span>三个维度均为 10 分制，由审题人标注</span><span>难度：' + window.UI.levelOf(p.difficulty).name + '</span></div>'
+        + '    <div class="score-note"><span>思维量、计算量为 10 分制；难度上限 15</span><span>难度：' + window.UI.levelOf(p.difficulty).name + '</span></div>'
         + '  </div>'
         + '  <div class="actions" id="actionBar">'
         + '    <button class="btn btn-primary" id="solveBtn">' + (solved ? '已通过（+' + data.xpRules.base + ' 经验上限）' : '提交解题过程') + '</button>'
@@ -169,6 +303,7 @@
         + '    <button class="btn btn-ok" id="askBtn">' + window.UI.icon('spark') + ' 问 AI 助教</button>'
         + '  </div>'
         + '  <div id="answerSlot"></div>'
+        + '  <div id="discussSlot" style="margin-top:18px"></div>'
         + '</div>'
         + '<aside>'
         + '  <div class="card side-card"><h3>题目信息</h3>'
@@ -199,6 +334,7 @@
 
       // 题干直接作为正文主体，原标题放进提示区
       window.Md.render(document.getElementById('stmt'), p.statement);
+      renderDiscussion(document.getElementById('discussSlot'), p.code);
 
       if (p.hintCount) {
         const hintSlot = document.createElement('div');

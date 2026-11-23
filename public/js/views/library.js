@@ -37,6 +37,24 @@
       + '<div class="stat"><div class="k">我的进度</div><div class="v">' + (me ? me.solvedCount : 0) + '<small>' + (me ? '题' : '登录后记录') + '</small></div></div>';
   }
 
+  async function startPractice(mode) {
+    if (!window.UI.requireLogin(null, '登录后才能刷题（要记录进度）')) return;
+    const q = new URLSearchParams({ mode: mode });
+    if (filters.tags.length) q.set('tags', filters.tags.join(','));
+    if (filters.level) {
+      const map = { easy: [1, 3], medium: [4, 6], hard: [7, 10], expert: [11, 15] };
+      const r = map[filters.level];
+      if (r) { q.set('dmin', r[0]); q.set('dmax', r[1]); }
+    }
+    try {
+      const d = await window.API.get('/api/practice?' + q.toString());
+      if (!d.code) { window.UI.toast('这个范围里的题都做完了', 'ok'); return; }
+      location.hash = '#/problem/' + d.code;
+    } catch (e) {
+      window.UI.toast(e.message, 'err');
+    }
+  }
+
   function renderFilters(tags) {
     const d = document.getElementById('filterBox');
     if (!d) return;
@@ -201,12 +219,21 @@
       '<div class="page-head">'
       + '<div><h1>题库</h1>'
       + '<p class="sub">每道题都经过人工审核才进入题库，配有考点标签与思维量、难度、计算量三个维度的评分。做不出来可以看答案，也可以直接问 AI。</p></div>'
-      + '<div class="head-actions"><a class="btn btn-primary" href="#/submit">' + window.UI.icon('plus') + ' 投稿好题</a></div>'
+      + '<div class="head-actions">'
+      + '<button class="btn" id="seqBtn" title="按编号刷当前筛选里还没做过的题">顺序刷</button>'
+      + '<button class="btn" id="randBtn" title="随机来一道还没做过的题">随机刷</button>'
+      + '<a class="btn btn-primary" href="#/submit">' + window.UI.icon('plus') + ' 投稿</a>'
+      + '</div>'
       + '</div>'
       + '<div class="stat-strip" id="statStrip"></div>'
       + '<div class="filters" id="filterBox"></div>'
       + '<div id="listWrap"></div>'
       + '<div id="pagerWrap"></div>';
+
+    const seqBtn = document.getElementById('seqBtn');
+    const randBtn = document.getElementById('randBtn');
+    if (seqBtn) seqBtn.addEventListener('click', function () { startPractice('seq'); });
+    if (randBtn) randBtn.addEventListener('click', function () { startPractice('random'); });
 
     load();
   };

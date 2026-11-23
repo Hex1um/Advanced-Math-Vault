@@ -22,6 +22,12 @@
 
       + '<div class="submit-grid">'
       + '<form class="card form-card" id="submitForm">'
+      + '<div class="form-section-title">从图片开始（可选）</div>'
+      + '<div class="ocr-box">'
+      + '<input type="file" id="ocrFile" accept="image/*" style="display:none" />'
+      + '<div class="upload-row"><button type="button" class="btn btn-sm" id="ocrPick">选一张题目图片</button>'
+      + '<span class="small muted" id="ocrHint">有视觉模型 Key 时自动补全题目、答案与解析；没有就走下面的提示词</span></div>'
+      + '<div id="ocrPreview"></div><div id="ocrResult"></div></div>'
       + '<div class="form-section-title">题目基本信息</div>'
       + '<div class="field"><label>标题 *</label><input name="title" maxlength="120" placeholder="给这道题起一个能记住的标题" /></div>'
       + '<div class="field"><label>题干 *</label><textarea name="statement" rows="7" placeholder="完整题干。行内公式 $...$，独立公式 $$...$$"></textarea>'
@@ -31,9 +37,9 @@
       + '<div class="field"><label>考点标签（逗号分隔）</label><input name="tags" placeholder="极限, 泰勒展开" /></div>'
       + '</div>'
 
-      + '<div class="form-section-title">三维评分（1-10）</div>'
+      + '<div class="form-section-title">三维评分（思维量/计算量 1-10，难度 1-15）</div>'
       + rangeRow('thinking', '思维量', 5, '想到解法需要多少洞察')
-      + rangeRow('difficulty', '难度', 5, '综合难度，决定题目等级')
+      + rangeRow('difficulty', '难度', 5, '综合难度，特别难题可以超过 10')
       + rangeRow('calc', '计算量', 5, '算到底需要多少工作量')
 
       + '<div class="form-section-title">解答（审核时必看）</div>'
@@ -63,6 +69,97 @@
       const out = document.getElementById('v_' + r.name);
       r.addEventListener('input', function () { out.textContent = r.value; });
     });
+
+    /* 识图补全 */
+    (function bindOcr() {
+      const pick = document.getElementById('ocrPick');
+      const file = document.getElementById('ocrFile');
+      if (!pick) return;
+      let image = '';
+      pick.addEventListener('click', function () { file.click(); });
+      file.addEventListener('change', function (ev) {
+        const f = ev.target.files && ev.target.files[0];
+        if (!f) return;
+        const rd = new FileReader();
+        rd.onload = function () {
+          const img = new Image();
+          img.onload = function () {
+            const max = 1600;
+            const sc = Math.min(1, max / Math.max(img.width, img.height));
+            const cv = document.createElement('canvas');
+            cv.width = Math.round(img.width * sc);
+            cv.height = Math.round(img.height * sc);
+            cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+            image = cv.toDataURL('image/jpeg', 0.85);
+            document.getElementById('ocrPreview').innerHTML = '<img src="' + image + '" class="judge-img" alt="题目预览" />'
+              + '<div style="margin-top:8px"><button type="button" class="btn btn-primary btn-sm" id="ocrGo">识图补全</button></div>';
+            document.getElementById('ocrGo').addEventListener('click', runOcr);
+          };
+          img.src = String(rd.result);
+        };
+        rd.readAsDataURL(f);
+      });
+
+      async function runOcr() {
+        const box = document.getElementById('ocrResult');
+        box.innerHTML = '<div class="small muted" style="padding:8px 0">识别中…</div>';
+        try {
+          const res = await window.API.post('/api/ai/from-image', { image: image, llm: window.UI.llmConfig() });
+          if (res.ok) {
+            const p = res.problem;
+            const fm = document.getElementById('submitForm');
+            fm.title.value = p.title || '';
+            fm.statement.value = p.statement || '';
+            fm.tags.value = (p.tags || []).join(', ');
+            fm.answer.value = p.answer || '';
+            fm.solution.value = p.solution || '';
+            fm.hints.value = (p.hints || []).join('\n');
+            fm.difficulty.value = p.difficulty || 5;
+            fm.thinking.value = p.thinking || 5;
+            fm.calc.value = p.calc || 5;
+            ['difficulty', 'thinking', 'calc'].forEach(function (k) {
+              const lbl = document.getElementById('v_' + k);
+              if (lbl) lbl.textContent = fm[k].value;
+            });
+            box.innerHTML = '<div class="judge-result correct"><b>已补全</b><span>核对一遍再提交，AI 转写可能漏字</span></div>';
+            return;
+          }
+          // 没有视觉模型：给提示词，让用户去别处识别后粘回来
+          box.innerHTML = '<div class="judge-errors" style="border-color:#dbe6fa;background:#f7faff">'
+            + '<div class="je-head" style="color:#1f57c9">当前通道读不了图片</div>'
+            + '<div class="small" style="line-height:1.9;color:var(--text-2)">把下面这段提示词和图片一起发给任意能看图的 AI（ChatGPT / 豆包 / Kimi 都行），'
+            + '把它的回答原样粘到「题干」里，我来解析。</div>'
+            + '<textarea readonly rows="9" id="ocrPrompt" style="width:100%;margin-top:8px;font-size:12px">' + window.Md.esc(res.prompt || '') + '</textarea>'
+            + '<div style="margin-top:8px;display:flex;gap:8px"><button type="button" class="btn btn-sm" id="copyPrompt">复制提示词</button>'
+            + '<button type="button" class="btn btn-sm" id="pasteBack">粘贴回答并解析</button></div>'
+            + '<div id="pasteResult"></div></div>';
+          document.getElementById('copyPrompt').addEventListener('click', function () {
+            const ta = document.getElementById('ocrPrompt');
+            ta.select();
+            try { document.execCommand('copy'); window.UI.toast('提示词已复制', 'ok'); } catch (e) {}
+          });
+          document.getElementById('pasteBack').addEventListener('click', async function () {
+            const text = window.prompt('把 AI 的回答整段粘进来：');
+            if (!text) return;
+            try {
+              const parsed = await window.API.post('/api/ai/parse', { text: text });
+              const p = parsed.problem;
+              const fm = document.getElementById('submitForm');
+              fm.title.value = p.title || '';
+              fm.statement.value = p.statement || '';
+              fm.tags.value = (p.tags || []).join(', ');
+              fm.answer.value = p.answer || '';
+              fm.solution.value = p.solution || '';
+              document.getElementById('pasteResult').innerHTML = '<div class="judge-result correct" style="margin-top:8px"><b>已填入表单</b></div>';
+            } catch (e) {
+              window.UI.toast(e.message, 'err');
+            }
+          });
+        } catch (e) {
+          box.innerHTML = '<div class="judge-result wrong">' + window.Md.esc(e.message) + '</div>';
+        }
+      }
+    })();
 
     const form = document.getElementById('submitForm');
     form.addEventListener('submit', async function (e) {
@@ -102,8 +199,9 @@
     });
 
     function rangeRow(name, label, val, tip) {
+      const max = name === 'difficulty' ? 15 : 10;
       return '<div class="range-row"><span class="lab">' + label + '</span>'
-        + '<input type="range" name="' + name + '" min="1" max="10" step="1" value="' + val + '" title="' + tip + '" />'
+        + '<input type="range" name="' + name + '" min="1" max="' + max + '" step="1" value="' + val + '" title="' + tip + '" />'
         + '<span class="val" id="v_' + name + '">' + val + '</span></div>';
     }
   };
