@@ -1,0 +1,52 @@
+[
+  {
+    "title": "上限是 $x^{3}$，求二阶导时要用两次链式",
+    "statement": "设\n\n$$F(x)=\\int_{0}^{x^{3}}\\sqrt{1+t^{2}}\\,\\mathrm{d}t,$$\n\n求 $F''(1)$。",
+    "tags": ["变限积分", "导数", "复合函数"],
+    "thinking": 4, "difficulty": 5, "calc": 7,
+    "source": "柳贯一题型专项 · 变限积分求导",
+    "hints": ["$F'(x)=\\sqrt{1+x^{6}}\\cdot3x^{2}$（上限是 $x^{3}$，要乘 $3x^{2}$）", "再求一次导要用乘积法则", "$F''(1)=6\\sqrt2+\\dfrac{9}{\\sqrt2}$"],
+    "answer": "$\\dfrac{21\\sqrt2}{2}$",
+    "solution": "### 一阶导\n\n上限是 $x^{3}$，由链式法则\n\n$$F'(x)=\\sqrt{1+(x^{3})^{2}}\\cdot(x^{3})'=3x^{2}\\sqrt{1+x^{6}}.$$\n\n### 二阶导\n\n$$F''(x)=6x\\sqrt{1+x^{6}}+3x^{2}\\cdot\\frac{6x^{5}}{2\\sqrt{1+x^{6}}}=6x\\sqrt{1+x^{6}}+\\frac{9x^{7}}{\\sqrt{1+x^{6}}}.$$\n\n### 代入 $x=1$\n\n$$F''(1)=6\\sqrt2+\\frac{9}{\\sqrt2}=6\\sqrt2+\\frac{9\\sqrt2}{2}=\\frac{21\\sqrt2}{2}.$$\n\n> 变限积分求导公式 $\\dfrac{\\mathrm{d}}{\\mathrm{d}x}\\int_a^{u(x)}f=f(u(x))u'(x)$ 里，$u'(x)$ 是最容易漏的一步。"
+  },
+  {
+    "title": "上下限都是 $x$ 的函数，两处都要导",
+    "statement": "设\n\n$$F(x)=\\int_{2x}^{x^{2}}\\frac{\\sin(t^{2})}{t}\\,\\mathrm{d}t,$$\n\n求 $F'(x)$（$x>0$）。",
+    "tags": ["变限积分", "导数", "复合函数"],
+    "thinking": 5, "difficulty": 6, "calc": 6,
+    "source": "柳贯一题型专项 · 变限积分求导",
+    "hints": ["上下限都含 $x$：$F'=f(x^{2})\\cdot2x-f(2x)\\cdot2$", "$f(x^{2})=\\dfrac{\\sin x^{4}}{x^{2}}$，$f(2x)=\\dfrac{\\sin 4x^{2}}{2x}$", "整理后分母统一成 $x$"],
+    "answer": "$\\dfrac{2\\sin(x^{4})-\\sin(4x^{2})}{x}$",
+    "solution": "### 上下限都要求导\n\n$$F'(x)=f(x^{2})\\cdot(x^{2})'-f(2x)\\cdot(2x)',\\qquad f(t)=\\frac{\\sin t^{2}}{t}.$$\n\n$$F'(x)=\\frac{\\sin(x^{4})}{x^{2}}\\cdot2x-\\frac{\\sin(4x^{2})}{2x}\\cdot2=\\frac{2\\sin(x^{4})}{x}-\\frac{\\sin(4x^{2})}{x}.$$\n\n### 合并\n\n$$F'(x)=\\frac{2\\sin(x^{4})-\\sin(4x^{2})}{x}.$$\n\n> 这是变限积分求导的一般式：$\\dfrac{\\mathrm{d}}{\\mathrm{d}x}\\int_{v(x)}^{u(x)}f=f(u)u'-f(v)v'$。上下限都带 $x$ 时两处都要乘各自的内层导数，符号是「上限正、下限负」。"
+  },
+  {
+    "title": "被积函数里也带 $x$，先换元把 $x$ 掏出来",
+    "statement": "设\n\n$$F(x)=\\int_{0}^{x}\\ln(1+xt)\\,\\mathrm{d}t\\qquad(x>0),$$\n\n求 $F'(x)$。",
+    "tags": ["变限积分", "换元积分", "含参积分"],
+    "thinking": 7, "difficulty": 7, "calc": 6,
+    "source": "柳贯一题型专项 · 变限积分求导",
+    "hints": ["直接套公式会错：被积函数里含 $x$，不能直接对上限求导", "令 $u=xt$，则 $\\mathrm{d}t=\\dfrac{\\mathrm{d}u}{x}$，上限变 $x^{2}$", "$F(x)=\\dfrac{1}{x}\\int_{0}^{x^{2}}\\ln(1+u)\\,\\mathrm{d}u$，再用商的求导法则"],
+    "answer": "$\\ln(1+x^{2})+1-\\dfrac{\\ln(1+x^{2})}{x^{2}}$",
+    "solution": "### 换元，把 $x$ 从被积函数里挪走\n\n令 $u=xt$，则 $t:\\ 0\\to x$ 对应 $u:\\ 0\\to x^{2}$，$\\mathrm{d}t=\\dfrac{\\mathrm{d}u}{x}$：\n\n$$F(x)=\\frac1x\\int_{0}^{x^{2}}\\ln(1+u)\\,\\mathrm{d}u.$$\n\n### 用商的求导法则\n\n$$F'(x)=-\\frac{1}{x^{2}}\\int_{0}^{x^{2}}\\ln(1+u)\\,\\mathrm{d}u+\\frac1x\\cdot\\ln(1+x^{2})\\cdot2x.$$\n\n又 $\\int_{0}^{y}\\ln(1+u)\\,\\mathrm{d}u=(1+y)\\ln(1+y)-y$，取 $y=x^{2}$：\n\n$$F'(x)=-\\frac{(1+x^{2})\\ln(1+x^{2})-x^{2}}{x^{2}}+2\\ln(1+x^{2}).$$\n\n### 整理\n\n$$F'(x)=1+\\ln(1+x^{2})\\left(2-\\frac{1+x^{2}}{x^{2}}\\right)=1+\\ln(1+x^{2})\\cdot\\frac{x^{2}-1}{x^{2}}.$$\n\n即\n\n$$F'(x)=\\ln(1+x^{2})+1-\\frac{\\ln(1+x^{2})}{x^{2}}.$$\n\n> 判断标准：被积函数里含 $x$ 就**不能**直接套变限积分求导公式，必须先换元或拆项。这题的另一条路是莱布尼茨公式（含参积分求导），但换元更快。"
+  },
+  {
+    "title": "$\\int_0^x\\sin(xt)\\,\\mathrm{d}t$：结果是 $\\dfrac{1-\\cos x^{2}}{x}$",
+    "statement": "设\n\n$$F(x)=\\int_{0}^{x}\\sin(xt)\\,\\mathrm{d}t\\qquad(x\\neq0),$$\n\n求 $F'(x)$。",
+    "tags": ["变限积分", "换元积分", "含参积分"],
+    "thinking": 6, "difficulty": 6, "calc": 7,
+    "source": "柳贯一题型专项 · 变限积分求导",
+    "hints": ["令 $u=xt$，上限变 $x^{2}$，得到 $F(x)=\\dfrac{1-\\cos x^{2}}{x}$", "再对 $x$ 用商的法则求导", "答案是 $2\\sin(x^{2})+\\dfrac{\\cos(x^{2})-1}{x^{2}}$"],
+    "answer": "$2\\sin(x^{2})+\\dfrac{\\cos(x^{2})-1}{x^{2}}$",
+    "solution": "### 换元\n\n令 $u=xt$：\n\n$$F(x)=\\frac1x\\int_{0}^{x^{2}}\\sin u\\,\\mathrm{d}u=\\frac{1-\\cos x^{2}}{x}.$$\n\n### 求导\n\n$$F'(x)=\\frac{\\sin(x^{2})\\cdot2x\\cdot x-(1-\\cos x^{2})}{x^{2}}=\\frac{2x^{2}\\sin(x^{2})+\\cos(x^{2})-1}{x^{2}}.$$\n\n### 结果\n\n$$F'(x)=2\\sin(x^{2})+\\frac{\\cos(x^{2})-1}{x^{2}}.$$\n\n> 分母仍有 $x^{2}$，但分子在 $x\\to0$ 时是 $O(x^{4})$，说明 $F'(x)\\to0$，即 $F$ 在 $0$ 处可导且 $F'(0)=0$——这类「$F'$ 在 $0$ 处的极限」经常是下一问。"
+  },
+  {
+    "title": "先积出来再求导，比套公式省事",
+    "statement": "设\n\n$$F(x)=\\int_{0}^{x}\\cos(x+t)\\,\\mathrm{d}t,$$\n\n求 $F'(x)$。",
+    "tags": ["变限积分", "导数", "三角积分"],
+    "thinking": 3, "difficulty": 4, "calc": 4,
+    "source": "柳贯一题型专项 · 变限积分求导",
+    "hints": ["对 $t$ 积分时 $x$ 当常数：$\\int\\cos(x+t)\\mathrm{d}t=\\sin(x+t)$", "代入上下限得 $F(x)=\\sin2x-\\sin x$", "再求导"],
+    "answer": "$2\\cos(2x)-\\cos x$",
+    "solution": "### 先积出来\n\n对 $t$ 积分（$x$ 视为常数）：\n\n$$F(x)=\\Big[\\sin(x+t)\\Big]_{t=0}^{t=x}=\\sin2x-\\sin x.$$\n\n### 再求导\n\n$$F'(x)=2\\cos2x-\\cos x.$$\n\n> 被积函数能直接积出来时，先积再导往往比直接套变限积分公式更稳，也不容易漏掉「含 $x$」那一项。"
+  }
+]
