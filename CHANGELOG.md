@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## v0.2.1 — 2026-11-23
+
+搬到 GitHub Pages + 重新做视觉 + 加 AI 出题。
+
+- **仓库**：github.com/Hex1um/math-vault；前端发布到 https://hex1um.github.io/math-vault/ ，`tools/build-pages.mjs` 生成 `docs/` 并把后端地址写进 `config.js`。
+- **跨域鉴权**：会话改成 token（localStorage + `X-MV-Token` 头），不依赖第三方 Cookie。托管网关会吃掉 `Authorization` 头，所以额外认 `X-MV-Token` 与 `?tk=`。
+- **视觉重做**：从深色发光卡片改成浅色学术站点——白底细边框、密集表格、蓝色主色、去掉渐变与光晕，整体向题目站而不是产品落地页靠。
+- **AI 出题**：新增页面与 `/api/ai/prompt`、`/api/ai/parse`、`/api/ai/generate`；结果可编辑，提交后仍走人工审核。加了宽容 JSON 解析（模型常把 LaTeX 反斜杠写成单转义，直接 `JSON.parse` 会失败）。
+- **免费通道改浏览器直连**：Pollinations 对同一 IP 限 45 秒一次，走服务器等于全站共用额度；改为访客浏览器直连（各自 IP），服务端只留兜底。
+- **高数专家模式**：对话系统提示固化六步解题范式，并检索题库同考点题目的题干与提示作为上下文。
+- 管理员账号 `Hex1um`（`tools/create-admin.mjs` 可建可重置）。
+- 安全：按 IP 限流（登录、改密、AI、出题、投稿、发帖）；HTTPS 下 Cookie 加 `Secure`；审核后台「导出全部数据」。
+
 ## v0.1.2 — 2026-11-23
 
 上线准备：模型通道、限流、备份。

@@ -81,8 +81,8 @@
     const p = last;
     box.innerHTML = '<div class="card result-card" id="genCard">'
       + '<div class="result-head"><b>生成结果</b>'
-      + '<span class="tag gray">' + window.Md.esc(p.modelLabel || 'AI') + '</span>'
-      + '<span class="small muted right">入库前请自己核一遍解答</span></div>'
+      + '<span class="tag gray">' + window.Md.esc(p.modelLabel || 'AI') + '</span></div>'
+      + '<div class="gen-warn">AI 写的是草稿，不是标准答案。反常积分、含参数题、分部积分的边界项最容易算错，入库前请自己验算一遍。</div>'
       + '<div class="field"><label>标题</label><input name="title" value="' + window.Md.esc(p.title) + '" maxlength="120" /></div>'
       + '<div class="field"><label>题干</label><textarea name="statement" rows="5">' + window.Md.esc(p.statement) + '</textarea></div>'
       + '<div class="preview md" id="genPreview"></div>'
