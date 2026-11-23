@@ -1,0 +1,142 @@
+[
+  {
+    "title": "变限积分在 0 处可导吗（一）",
+    "statement": "设\n\n$$f(x)=\\begin{cases}\\dfrac{1-\\cos x}{x},&x\\ne0,\\\\ 0,&x=0,\\end{cases}\\qquad F(x)=\\int_{0}^{x}f(t)\\,\\mathrm{d}t.$$\n\n则 $F(x)$ 在 $x=0$ 处（　）\n\nA. 可导且 $F'(0)=0$　B. 连续但不可导　C. 可去间断点　D. 跳跃间断点",
+    "tags": [
+      "变限积分",
+      "可导性",
+      "概念题"
+    ],
+    "thinking": 4,
+    "difficulty": 5,
+    "calc": 3,
+    "source": "柳贯一题型专项 · 变限积分可导性",
+    "hints": [
+      "先看 $f$ 在 $0$ 处是否连续：$\\dfrac{1-\\cos x}{x}\\sim\\dfrac{x}{2}\\to0=f(0)$",
+      "$f$ 连续时 $F$ 可导且 $F'=f$",
+      "所以 $F'(0)=f(0)=0$"
+    ],
+    "answer": "A",
+    "solution": "### $f$ 在 $0$ 处连续\n\n$$\\lim_{x\\to0}\\frac{1-\\cos x}{x}=\\lim_{x\\to0}\\frac{x^{2}/2}{x}=0=f(0),$$\n\n所以 $f$ 在 $0$ 处连续。\n\n### 变限积分可导\n\n$f$ 连续 $\\Rightarrow F$ 可导且 $F'(x)=f(x)$，于是\n\n$$F'(0)=f(0)=0.$$\n\n选 **A**。\n\n> 判据只有一条：$f$ 在 $x_0$ 连续 $\\Rightarrow F$ 在 $x_0$ 可导且导数为 $f(x_0)$；$f$ 不连续时再讨论 $F$ 的可导性。"
+  },
+  {
+    "title": "变限积分：连续但不可导的那种跳跃",
+    "statement": "设 $F(x)=\\int_{0}^{x}f(t)\\,\\mathrm{d}t$，则下列 $f(x)$ 中，使 $F(x)$ 在 $x=0$ 处**连续但不可导**的是（　）\n\nA. $f(x)=\\begin{cases}\\sin x,&x\\ne0\\\\0,&x=0\\end{cases}$\n\nB. $f(x)=\\begin{cases}\\cos x,&x\\ne0\\\\0,&x=0\\end{cases}$\n\nC. $f(x)=\\begin{cases}x+1,&x<0\\\\0,&x=0\\\\x-1,&x>0\\end{cases}$\n\nD. $f(x)=\\begin{cases}x,&x\\ne0\\\\1,&x=0\\end{cases}$",
+    "tags": [
+      "变限积分",
+      "可导性",
+      "概念题"
+    ],
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 3,
+    "source": "柳贯一题型专项 · 变限积分可导性",
+    "hints": [
+      "$F'(0)=\\lim\\limits_{x\\to0}\\dfrac{F(x)}{x}=\\lim\\limits_{x\\to0}\\dfrac{1}{x}\\int_{0}^{x}f(t)\\,\\mathrm{d}t$",
+      "这个极限存在 ⟺ $f$ 在 $0$ 处「平均值」有极限，跳跃会导致左右不相等",
+      "C 的左极限是 $1$、右极限是 $-1$"
+    ],
+    "answer": "C",
+    "solution": "### 关键公式\n\n$$F'(0)=\\lim_{x\\to0}\\frac{1}{x}\\int_{0}^{x}f(t)\\,\\mathrm{d}t.$$\n\n### 逐项判断\n\n- **A**：$f$ 在 $0$ 连续，$F$ 可导，$F'(0)=0$。\n- **B**：$f$ 在 $0$ 有跳跃（$\\cos x\\to1\\ne0$），但 $\\int_0^x\\cos t\\,\\mathrm{d}t=\\sin x$，$\\dfrac{\\sin x}{x}\\to1$，所以 $F'(0)=1$ 存在。\n- **C**：$x>0$ 时 $F(x)=\\int_0^x(t-1)\\mathrm{d}t=\\dfrac{x^2}{2}-x$，$\\dfrac{F(x)}{x}\\to-1$；$x<0$ 时 $F(x)=\\int_0^x(t+1)\\mathrm{d}t=\\dfrac{x^2}{2}+x$，$\\dfrac{F(x)}{x}\\to1$。左右不相等，**不可导**；而 $F(x)\\to0=F(0)$，连续。\n- **D**：$f(x)=x\\ (x\\ne0)$，$\\dfrac{1}{x}\\int_0^xt\\,\\mathrm{d}t=\\dfrac{x}{2}\\to0$，可导。\n\n选 **C**。\n\n> 结论：$f$ 有跳跃时 $F$ 仍可能可导（B），是否可导要看 $\\dfrac{1}{x}\\int_0^xf$ 的左右极限，而不是看 $f$ 本身。"
+  },
+  {
+    "title": "变限积分：$f(0)$ 被改掉也会影响可导性吗",
+    "statement": "设 $F(x)=\\int_{0}^{x}f(t)\\,\\mathrm{d}t$，则下列 $f(x)$ 中，使 $F(x)$ 在 $x=0$ 处**连续但不可导**的是（　）\n\nA. $f(x)=\\begin{cases}x^{2},&x\\ne0\\\\1,&x=0\\end{cases}$\n\nB. $f(x)=\\begin{cases}1,&x<0\\\\0,&x=0\\\\-1,&x>0\\end{cases}$\n\nC. $f(x)=\\begin{cases}x,&x\\ne0\\\\0,&x=0\\end{cases}$\n\nD. $f(x)=\\begin{cases}e^{x},&x\\ne0\\\\0,&x=0\\end{cases}$",
+    "tags": [
+      "变限积分",
+      "可导性",
+      "概念题"
+    ],
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 3,
+    "source": "柳贯一题型专项 · 变限积分可导性",
+    "hints": [
+      "还是算 $\\lim\\limits_{x\\to0}\\dfrac{1}{x}\\int_0^xf(t)\\,\\mathrm{d}t$",
+      "只改 $f(0)$ 的值（A、D）不影响积分，也不影响 $F'(0)$",
+      "B 在 $0$ 两侧分别积出 $x$ 与 $-x$"
+    ],
+    "answer": "B",
+    "solution": "### 逐项算 $F'(0)$\n\n- **A**：$\\int_0^xt^2\\mathrm{d}t=\\dfrac{x^3}{3}$，$\\dfrac{1}{x}\\cdot\\dfrac{x^3}{3}=\\dfrac{x^2}{3}\\to0$，可导。\n- **B**：$x>0$ 时 $F(x)=\\int_0^x(-1)\\mathrm{d}t=-x$，$\\dfrac{F(x)}{x}\\to-1$；$x<0$ 时 $F(x)=\\int_0^x1\\,\\mathrm{d}t=x$，$\\dfrac{F(x)}{x}\\to1$。左右不等，**不可导**；$F$ 连续（两端都趋于 $0$）。\n- **C**：$\\dfrac{1}{x}\\int_0^xt\\,\\mathrm{d}t=\\dfrac{x}{2}\\to0$，可导。\n- **D**：$\\dfrac{1}{x}\\int_0^xe^t\\mathrm{d}t=\\dfrac{e^{x}-1}{x}\\to1$，可导。\n\n选 **B**。\n\n> 单点改值（A、D）不影响定积分，也不影响 $F'$；只有「跳跃」才可能让 $F$ 不可导，而且要看跳跃两侧的平均值。"
+  },
+  {
+    "title": "参数方程 + 隐函数，一次求到二阶",
+    "statement": "已知\n\n$$\\begin{cases}x=\\arctan t,\\\\ 2y-ty^{2}+e^{t}=5,\\end{cases}$$\n\n求 $\\left.\\dfrac{\\mathrm{d}y}{\\mathrm{d}x}\\right|_{t=0}$ 与 $\\left.\\dfrac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}\\right|_{t=0}$。",
+    "tags": [
+      "导数",
+      "参数方程",
+      "隐函数"
+    ],
+    "thinking": 4,
+    "difficulty": 5,
+    "calc": 7,
+    "source": "华中科技大学 2022 年数学分析",
+    "hints": [
+      "先由 $t=0$ 定出 $y$：$2y+1=5\\Rightarrow y=2$",
+      "对 $t$ 求导：$2y'-y^{2}-2tyy'+e^{t}=0$",
+      "二阶导用 $\\dfrac{d^{2}y}{dx^{2}}=\\dfrac{y''x'-y'x''}{(x')^{3}}$"
+    ],
+    "answer": "$\\left.\\dfrac{\\mathrm{d}y}{\\mathrm{d}x}\\right|_{t=0}=\\dfrac32,\\qquad \\left.\\dfrac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}\\right|_{t=0}=\\dfrac{11}{2}$",
+    "solution": "### 定初值\n\n$t=0$ 时 $x=0$，代入第二个方程：$2y-0+1=5\\Rightarrow y=2$。\n\n又 $x'=\\dfrac{1}{1+t^{2}}$，故 $x'(0)=1$；$x''(0)=0$。\n\n### 隐函数求一、二阶导\n\n对 $2y-ty^{2}+e^{t}=5$ 关于 $t$ 求导：\n\n$$2y'-y^{2}-2tyy'+e^{t}=0.\\tag{1}$$\n\n代入 $t=0,\\ y=2$：$2y'-4+1=0\\Rightarrow y'(0)=\\dfrac32$。\n\n对 (1) 再求导：\n\n$$2y''-2yy'-2(yy'+t(y'^{2}+yy''))+e^{t}=0.$$\n\n代入 $t=0,y=2,y'=\\dfrac32$：\n\n$$2y''-6-6+1=0\\Rightarrow y''(0)=\\frac{11}{2}.$$\n\n### 转成 $\\dfrac{dy}{dx}$\n\n$$\\frac{\\mathrm{d}y}{\\mathrm{d}x}=\\frac{y'}{x'}=\\frac32,\\qquad \\frac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}=\\frac{y''x'-y'x''}{(x')^{3}}=\\frac{\\frac{11}{2}\\cdot1-0}{1}=\\frac{11}{2}.$$\n\n> 参数方程的二阶导不是 $\\dfrac{y''}{x''}$，分母是 $(x')^{3}$；这里恰好 $x''(0)=0$，所以看起来像 $y''$。"
+  },
+  {
+    "title": "含 $n^{\\alpha}$ 的数列极限，先定阶再算",
+    "statement": "设 $\\alpha>0$，求\n\n$$\\lim_{n\\to\\infty}\\frac{\\sqrt{n}\\left(1^{\\alpha}+2^{\\alpha}+\\cdots+n^{\\alpha}\\right)}{\\sqrt{1\\times3+2\\times4+\\cdots+n(n+2)}}\\sin\\frac{1}{n^{\\alpha}}.$$",
+    "tags": [
+      "极限",
+      "数列极限",
+      "等价无穷小"
+    ],
+    "thinking": 7,
+    "difficulty": 7,
+    "calc": 6,
+    "source": "华中科技大学 2022 年数学分析",
+    "hints": [
+      "$\\sum k^{\\alpha}\\sim\\dfrac{n^{\\alpha+1}}{\\alpha+1}$",
+      "$\\sum k(k+2)=\\sum k^{2}+2\\sum k=\\dfrac{n(n+1)(2n+7)}{6}\\sim\\dfrac{n^{3}}{3}$",
+      "$\\sin\\dfrac{1}{n^{\\alpha}}\\sim\\dfrac{1}{n^{\\alpha}}$"
+    ],
+    "answer": "$\\dfrac{\\sqrt3}{\\alpha+1}$",
+    "solution": "### 三段分别定阶\n\n$$1^{\\alpha}+\\cdots+n^{\\alpha}\\sim\\frac{n^{\\alpha+1}}{\\alpha+1},$$\n\n$$1\\times3+2\\times4+\\cdots+n(n+2)=\\sum_{k=1}^{n}\\left(k^{2}+2k\\right)=\\frac{n(n+1)(2n+7)}{6}\\sim\\frac{n^{3}}{3},$$\n\n于是\n\n$$\\sqrt{1\\times3+\\cdots+n(n+2)}\\sim\\frac{n^{3/2}}{\\sqrt3},$$\n\n$$\\sin\\frac1{n^{\\alpha}}\\sim\\frac1{n^{\\alpha}}.$$\n\n### 合并\n\n$$\\frac{\\sqrt n\\cdot\\dfrac{n^{\\alpha+1}}{\\alpha+1}}{\\dfrac{n^{3/2}}{\\sqrt3}}\\cdot\\frac1{n^{\\alpha}}=\\frac{\\sqrt3}{\\alpha+1}\\cdot\\frac{n^{\\alpha+3/2-3/2-\\alpha}}{1}=\\frac{\\sqrt3}{\\alpha+1}.$$\n\n极限为 $\\dfrac{\\sqrt3}{\\alpha+1}$。\n\n> 这类题的通用套路：把每个因子换成等价量，$n$ 的幂次自然会全部约掉，剩下的常数就是答案。"
+  },
+  {
+    "title": "球面半径函数的拉普拉斯方程",
+    "statement": "设 $u=\\sqrt{x^{2}+y^{2}+z^{2}}$（原点除外），证明\n\n$$\\frac{\\partial^{2}u}{\\partial x^{2}}+\\frac{\\partial^{2}u}{\\partial y^{2}}+\\frac{\\partial^{2}u}{\\partial z^{2}}=0.$$",
+    "tags": [
+      "偏导数",
+      "证明",
+      "拉普拉斯方程"
+    ],
+    "thinking": 3,
+    "difficulty": 4,
+    "calc": 6,
+    "source": "中国科学技术大学 2022 年数学分析",
+    "hints": [
+      "记 $r=u=\\sqrt{x^{2}+y^{2}+z^{2}}$，则 $\\dfrac{\\partial r}{\\partial x}=\\dfrac{x}{r}$",
+      "$\\dfrac{\\partial^{2}r}{\\partial x^{2}}=\\dfrac{1}{r}-\\dfrac{x^{2}}{r^{3}}$",
+      "三个式子相加得 $\\dfrac3r-\\dfrac{r^{2}}{r^{3}}=0$"
+    ],
+    "answer": "证明见解析",
+    "solution": "### 一阶偏导\n\n记 $r=\\sqrt{x^{2}+y^{2}+z^{2}}$，则\n\n$$\\frac{\\partial r}{\\partial x}=\\frac{x}{r}.$$\n\n### 二阶偏导\n\n$$\\frac{\\partial^{2}r}{\\partial x^{2}}=\\frac{\\partial}{\\partial x}\\left(\\frac{x}{r}\\right)=\\frac{r-x\\cdot\\frac{x}{r}}{r^{2}}=\\frac{1}{r}-\\frac{x^{2}}{r^{3}}.$$\n\n同理\n\n$$\\frac{\\partial^{2}r}{\\partial y^{2}}=\\frac1r-\\frac{y^{2}}{r^{3}},\\qquad \\frac{\\partial^{2}r}{\\partial z^{2}}=\\frac1r-\\frac{z^{2}}{r^{3}}.$$\n\n### 相加\n\n$$\\Delta r=\\frac{3}{r}-\\frac{x^{2}+y^{2}+z^{2}}{r^{3}}=\\frac3r-\\frac{r^{2}}{r^{3}}=0.$$\n\n> 一般结论：三维空间中 $\\Delta\\dfrac1r=0$，$\\Delta r=\\dfrac{2}{r}$，$\\Delta r^{2}=6$——这三个在电磁学里天天用，值得背下来。"
+  },
+  {
+    "title": "两侧曲率反向，函数在 0 处必然不可微",
+    "statement": "设函数 $f:\\mathbb{R}\\to\\mathbb{R}$ 在 $\\mathbb{R}\\setminus\\{0\\}$ 上有二阶导数，且\n\n当 $x\\in(-\\infty,0)$ 时 $f'(x)<0<f''(x)$；当 $x\\in(0,+\\infty)$ 时 $f'(x)>0>f''(x)$。\n\n证明：$f$ 在 $x=0$ 处不可微。",
+    "tags": [
+      "导数",
+      "证明",
+      "达布定理"
+    ],
+    "thinking": 8,
+    "difficulty": 8,
+    "calc": 4,
+    "source": "中国科学技术大学 2022 年数学分析",
+    "hints": [
+      "反证：设 $f$ 在 $0$ 可微",
+      "由 $f'$ 在两侧单调（$f''>0$ / $f''<0$）可得 $f'$ 在 $x<0$ 递增、$x>0$ 递减",
+      "若 $f'(0)$ 存在，达布定理要求 $f'$ 取到两侧之间的值，与单调性矛盾"
+    ],
+    "answer": "证明见解析",
+    "solution": "### 先看两侧的单调性\n\n当 $x<0$：$f''(x)>0$，所以 $f'$ 在 $(-\\infty,0)$ 上**严格递增**；又 $f'(x)<0$，故 $f'$ 在 $(-\\infty,0)$ 上有上界 $0$，于是左极限存在，记为\n$$L_{-}=\\lim_{x\\to0^{-}}f'(x)=\\sup_{x<0}f'(x)\\le0.$$\n\n当 $x>0$：$f''(x)<0$，所以 $f'$ 在 $(0,+\\infty)$ 上**严格递减**；又 $f'(x)>0$，递减函数在趋于 $0^{+}$ 时的极限是它的上确界，故\n$$L_{+}=\\lim_{x\\to0^{+}}f'(x)=\\sup_{x>0}f'(x)\\ge f'(1)>0.$$\n\n### 反证：假设 $f$ 在 $0$ 可微\n\n可微 $\\Rightarrow$ 连续，且由导数极限定理（两侧 $f'$ 的极限都存在），得\n$$f'(0)=L_{-}=L_{+}.$$\n但 $L_{-}\\le0<L_{+}$，矛盾。\n\n故 $f$ 在 $x=0$ 处不可微。\n\n> 关键是「递减函数在右端点的极限等于上确界」这一步：它保证了 $L_{+}>0$ 而不是 $0$。左端点递增、有上界 $0$，所以 $L_{-}\\le0$。两侧极限一个非正一个正，天然不可能相等。"
+  }
+]
