@@ -145,6 +145,21 @@
     d.querySelector('#sortSel').addEventListener('change', function (e) { filters.sort = e.target.value; filters.page = 1; load(); });
   }
 
+  function bindPaperAdd(root) {
+    if (!root || root.__paperBound) return;
+    root.__paperBound = true;
+    root.addEventListener('click', function (ev) {
+      const btn = ev.target.closest && ev.target.closest('.paper-add');
+      if (!btn) return;
+      ev.preventDefault();
+      ev.stopPropagation();
+      if (!window.Paper) return;
+      const added = window.Paper.toggle(btn.dataset.code);
+      btn.textContent = added ? '✓' : '+';
+      window.UI.toast(added ? '已加入试卷' : '已从试卷移除');
+    });
+  }
+
   function renderList(data) {
     const wrap = document.getElementById('listWrap');
     const pagerWrap = document.getElementById('pagerWrap');
@@ -171,7 +186,8 @@
         + window.UI.scoreBars(p, true)
         + '</div>'
         + '<div class="pdiff">' + window.UI.levelBadge(p) + '<span class="rate">通过率 ' + rate + '</span></div>'
-        + '<div class="pmeta">' + p.solvedCount + ' 通过 / ' + p.attemptCount + ' 尝试</div>'
+        + '<div class="pmeta"><button class="paper-add" data-code="' + p.code + '" title="加入试卷">' + (window.Paper && window.Paper.has(p.code) ? '✓' : '+') + '</button>'
+        + '<span>' + p.solvedCount + ' 通过</span></div>'
         + '</div>';
     }).join('');
 
@@ -206,6 +222,7 @@
       renderFilters(data.tags);
       renderList(data);
       renderStats();
+      bindPaperAdd(document.getElementById('listWrap'));
     } catch (e) {
       if (wrap) wrap.innerHTML = window.UI.empty('加载失败', e.message);
     }

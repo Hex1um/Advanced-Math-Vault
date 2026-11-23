@@ -960,6 +960,62 @@ input[type="range"]::-webkit-slider-thumb {
 .hist-comment { margin-top: 4px; font-size: 12.5px; color: var(--text-2); }
 .hist-proc { margin-top: 3px; font-size: 12px; color: var(--muted); white-space: pre-wrap; }
 
+/* 组卷 */
+.paper-add {
+  width: 20px; height: 20px;
+  margin-right: 6px;
+  border-radius: 3px;
+  border: 1px solid var(--line-2);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+}
+.paper-add:hover { border-color: var(--blue); color: var(--blue); }
+.pmeta { display: flex; align-items: center; gap: 4px; }
+
+.paper-bar {
+  position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%);
+  z-index: 90;
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 12px;
+  background: var(--surface);
+  border: 1px solid var(--line-2);
+  border-radius: 6px;
+  box-shadow: 0 6px 20px rgba(20, 28, 40, .12);
+  font-size: 12.5px;
+  color: var(--text-2);
+}
+.paper-bar b { color: var(--blue); font-family: var(--mono); }
+
+.paper-sheet { padding: 28px 34px 34px; }
+.paper-head { text-align: center; border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 18px; }
+.paper-head h2 { margin: 0 0 6px; font-size: 18px; font-weight: 600; }
+.paper-meta { font-size: 12.5px; color: var(--muted); }
+.paper-q { padding: 14px 0 6px; border-bottom: 1px dashed #eef0f3; }
+.pq-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.pq-no { font-family: var(--mono); font-weight: 600; color: var(--text); }
+.pq-points { font-size: 12px; color: var(--muted); margin-left: auto; }
+.pq-body { font-size: 14.5px; line-height: 1.9; }
+.pq-blank { height: 110px; }
+.pq-answer {
+  margin-top: 8px; padding: 9px 12px;
+  background: var(--surface-2); border: 1px solid var(--line); border-radius: 4px;
+  font-size: 13.5px;
+}
+.pq-answer b { color: var(--green); margin-right: 6px; }
+.paper-foot { text-align: center; color: var(--muted); font-size: 12px; padding-top: 16px; }
+
+@media print {
+  .topbar, .site-footer, .paper-bar, .page-head .head-actions, #toast-root, .discuss-card { display: none !important; }
+  body { background: #fff; }
+  .view { max-width: none; padding: 0; }
+  .card { border: 0; }
+  .paper-sheet { padding: 0; }
+  .pq-blank { height: 130px; }
+}
+
 /* ---------------------------------------------------------- Toast */
 
 .toast-root {

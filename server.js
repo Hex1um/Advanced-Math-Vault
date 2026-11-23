@@ -1202,6 +1202,7 @@ async function handleApi(req, res, pathname, query) {
 
   /* ---- 题库 ---- */
   if (pathname === '/api/problems' && method === 'GET') {
+    const codeList = String(query.c || '').split(',').map((x) => x.trim().toUpperCase()).filter(Boolean);
     const q = String(query.q || '').trim().toLowerCase();
     const tags = String(query.tags || '').split(',').filter(Boolean);
     const level = String(query.level || '').trim();
@@ -1219,6 +1220,7 @@ async function handleApi(req, res, pathname, query) {
         String(p.source || '').toLowerCase().includes(q)
       );
     }
+    if (codeList.length) list = list.filter((p) => codeList.includes(p.code));
     if (tags.length) list = list.filter((p) => tags.every((t) => p.tags.includes(t)));
     if (level) list = list.filter((p) => levelOf(p.difficulty).name === level);
     if (status === 'solved') list = list.filter((p) => user && user.solved && user.solved[p.code]);
@@ -1234,7 +1236,16 @@ async function handleApi(req, res, pathname, query) {
     list.sort(sorters[sort] || sorters.code);
 
     const total = list.length;
-    const items = list.slice((page - 1) * size, page * size).map((p) => visibleProblem(p, user));
+    const items = list.slice((page - 1) * size, page * size).map((p) => {
+      const v = visibleProblem(p, user);
+      if (codeList.length) {
+        v.statement = p.statement;
+        const solved = user && user.solved && user.solved[p.code];
+        v.answer = (solved && (solved.done || solved.revealed)) ? (p.answer || '') : '';
+        v.answerLocked = !v.answer;
+      }
+      return v;
+    });
     return send(res, 200, {
       ok: true, items, total, page, size,
       pages: Math.max(1, Math.ceil(total / size)),

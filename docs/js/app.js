@@ -23,6 +23,7 @@
     if (seg[0] === 'forum') return { name: 'forum', params: params, nav: 'forum' };
     if (seg[0] === 'generate') return { name: 'generate', params: params, nav: 'generate' };
     if (seg[0] === 'wrong') return { name: 'wrongbook', params: params, nav: 'wrong' };
+    if (seg[0] === 'paper') return { name: 'paper', params: params, nav: 'paper' };
     if (seg[0] === 'submit') return { name: 'submit', params: params, nav: 'submit' };
     if (seg[0] === 'my') return { name: 'my', params: params, nav: '' };
     if (seg[0] === 'admin') return { name: 'admin', params: params, nav: '' };
