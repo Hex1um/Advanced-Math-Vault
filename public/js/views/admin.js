@@ -65,6 +65,48 @@
     }
   }
 
+  /* 用户提交记录：谁在什么时候交了哪道题、AI 给了多少分 */
+  async function loadSubmissions() {
+    const wrap = document.getElementById('subList');
+    if (!wrap) return;
+    try {
+      const d = await window.API.get('/api/admin/submissions?limit=80');
+      const cnt = document.getElementById('subCount');
+      if (cnt) cnt.textContent = d.total + ' 条';
+      if (!d.items.length) {
+        wrap.innerHTML = '<div class="empty" style="padding:18px">还没有人交过题。</div>';
+        return;
+      }
+      const vTag = function (v) {
+        if (v === 'correct') return '<span class="tag gold">正确</span>';
+        if (v === 'partial') return '<span class="tag">部分对</span>';
+        if (v === 'wrong') return '<span class="tag">有错</span>';
+        return '<span class="tag">未判定</span>';
+      };
+      wrap.innerHTML = d.items.map(function (s) {
+        return '<div class="review-item" style="padding:12px 14px;margin-bottom:10px;border:1px solid var(--border,#dde);border-radius:8px">'
+          + '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'
+          + '<a class="mono" href="#/problem/' + s.code + '">' + s.code + '</a>'
+          + vTag(s.verdict)
+          + '<span class="tag">' + s.score + ' 分</span>'
+          + '<span class="tag">' + (s.mode === 'answer' ? '仅答案' : '交过程') + '</span>'
+          + (s.hasImage ? '<span class="tag">含图片</span>' : '')
+          + '<span class="small muted">' + window.Md.esc(s.name || '用户') + ' · ' + window.UI.fmtDate(s.at) + '</span>'
+          + '</div>'
+          + '<div class="small muted" style="margin:6px 0">' + window.Md.inlineTex(s.title || '') + '</div>'
+          + (s.comment ? '<div class="small" style="margin:4px 0"><b>评分意见：</b>' + window.Md.esc(s.comment) + '</div>' : '')
+          + (s.errors && s.errors.length ? '<div class="small" style="margin:4px 0"><b>扣分点：</b>' + window.Md.esc(s.errors.slice(0, 3).join('；')) + '</div>' : '')
+          + '<details style="margin-top:6px"><summary class="small muted">展开提交原文</summary>'
+          + '<pre class="small" style="white-space:pre-wrap;margin:6px 0 0;padding:10px;background:var(--bg-soft,#f7f7fa);border-radius:6px">'
+          + window.Md.esc(s.process || '（仅图片，无文字）') + '</pre></details>'
+          + (s.judgedBy ? '<div class="small muted" style="margin-top:6px">阅卷：' + window.Md.esc(s.judgedBy) + '</div>' : '')
+          + '</div>';
+      }).join('');
+    } catch (e) {
+      wrap.innerHTML = window.UI.empty('提交记录加载失败', e.message);
+    }
+  }
+
   Views.admin = function (el) {
     if (!St.me) {
       el.innerHTML = '<div class="empty"><b>需要管理员登录</b>第一个注册的账号自动成为管理员。'
@@ -115,6 +157,12 @@
       + '</div>'
 
       + '<div class="card form-card" style="margin-top:22px">'
+      + '<h3 style="margin:0 0 10px;font-size:15px">用户提交记录 <span class="tag" id="subCount">0 条</span></h3>'
+      + '<p class="small muted" style="margin:0 0 14px">谁在什么时候交了哪道题、AI 给了多少分。点开看提交原文，用来发现普遍性错误或可疑评分。</p>'
+      + '<div id="subList" class="small muted">加载中…</div>'
+      + '</div>'
+
+      + '<div class="card form-card" style="margin-top:22px">'
       + '<h3 style="margin:0 0 10px;font-size:15px">已驳回</h3><div id="rejectedList" class="small muted">加载中…</div>'
       + '</div>';
 
@@ -122,6 +170,7 @@
     loadRejected();
     loadLLM();
     loadFeedback();
+    loadSubmissions();
 
     /* 批量导入 */
     const fileInput = document.getElementById('importFile');

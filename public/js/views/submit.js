@@ -144,7 +144,7 @@
           // OCR 也不可用：给提示词，让用户去别处识别后粘回来
           box.innerHTML = '<div class="judge-errors" style="border-color:#dbe6fa;background:#f7faff">'
             + '<div class="je-head" style="color:#1f57c9">当前通道读不了图片</div>'
-            + '<div class="small" style="line-height:1.9;color:var(--text-2)">把下面这段提示词和图片一起发给任意能看图的 AI（ChatGPT / 豆包 / Kimi 都行），'
+            + '<div class="small" style="line-height:1.9;color:var(--text-2)">把下面这段提示词和图片一起发给任意能看图的 AI（豆包 / Kimi / 通义千问网页版都行），'
             + '把它的回答原样粘到「题干」里，我来解析。</div>'
             + '<textarea readonly rows="9" id="ocrPrompt" style="width:100%;margin-top:8px;font-size:12px">' + window.Md.esc(res.prompt || '') + '</textarea>'
             + '<div style="margin-top:8px;display:flex;gap:8px"><button type="button" class="btn btn-sm" id="copyPrompt">复制提示词</button>'
