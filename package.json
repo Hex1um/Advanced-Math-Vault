@@ -8,7 +8,9 @@
     "start": "node server.js",
     "dev": "node server.js",
     "smoke": "node tools/smoke.mjs",
-    "import": "node tools/import-problems.mjs"
+    "import": "node tools/import-problems.mjs",
+    "build:pages": "node tools/build-pages.mjs",
+    "admin": "node tools/create-admin.mjs"
   },
   "engines": {
     "node": ">=18"
