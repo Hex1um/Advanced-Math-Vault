@@ -675,19 +675,37 @@ function llmMessages(problem, history, opts) {
 /* ------------------------------------------------------- AI 出题 */
 
 function buildGenerateMessages(spec) {
-  const tags = (spec.tags && spec.tags.length) ? spec.tags.join('、') : '不定积分、极限、导数、中值定理等高等数学常见考点';
+  const tags = (spec.tags && spec.tags.length) ? spec.tags.join('、') : '不定积分、定积分、极限、导数、中值定理等高等数学常见考点';
   const sys = [
     '你是高等数学命题老师，负责给大学生出原创练习题。',
-    '严格只输出一个 JSON 对象，不要输出解释、不要用 Markdown 代码块包裹。',
-    'JSON 字段：',
-    '{"title":"不超过18字的纯文字标题（不要放公式）","statement":"题干，含 LaTeX","tags":["考点1","考点2"],"thinking":1-10,"difficulty":1-10,"calc":1-10,"source":"","hints":["提示1","提示2"],"answer":"最终答案","solution":"分步解析"}',
+    '',
+    '严格按下面的分段格式输出，不要用 JSON、不要用代码块、不要写任何解释：',
+    '',
+    '[TITLE]',
+    '不超过18字的纯文字标题（不要放公式）',
+    '[STATEMENT]',
+    '完整题干，公式用 $...$ 或 $$...$$ 包住，反斜杠照原样写',
+    '[TAGS]',
+    '2-3 个考点，用顿号分隔',
+    '[THINKING]',
+    '1-10 的整数',
+    '[DIFFICULTY]',
+    '1-10 的整数',
+    '[CALC]',
+    '1-10 的整数',
+    '[HINTS]',
+    '提示1',
+    '提示2',
+    '[ANSWER]',
+    '最终答案',
+    '[SOLUTION]',
+    '分步解析，600 字以内，公式同样用 $ 或 $$ 包住',
+    '',
     '要求：',
-    '1. 题目必须数学上正确、可解，答案唯一（或明确说明多解）；',
-    '2. 公式必须用定界符包住：行内 $...$，独立 $$...$$；不要把 LaTeX 命令裸露在文字里；JSON 字符串里的反斜杠要双写；',
-    '3. 解析要分步、写清依据，控制在 600 字以内；',
-    '4. 不要照抄教材原题，条件里避免无意义的数字堆砌；',
-    '5. JSON 字符串里的反斜杠要写成双反斜杠（\\\\frac）；',
-    '6. thinking 是所需洞察，calc 是计算量，difficulty 是综合难度。'
+    '1. 题目必须数学上正确、可解，答案唯一（或说明多解）；',
+    '2. 公式一定要有定界符，不要把 LaTeX 命令裸露在文字里；',
+    '3. 不要照抄教材原题；',
+    '4. 解析写清每一步的依据。'
   ].join('\n');
 
   const user = [
@@ -701,6 +719,37 @@ function buildGenerateMessages(spec) {
   ].filter(Boolean).join('\n');
 
   return [{ role: 'system', content: sys }, { role: 'user', content: user }];
+}
+
+/* 分段格式解析（LaTeX 里有 \frac \theta \right 这类，走 JSON 一定被转义吃掉） */
+const SECTION_MAP = {
+  TITLE: 'title', STATEMENT: 'statement', TAGS: 'tags',
+  THINKING: 'thinking', DIFFICULTY: 'difficulty', CALC: 'calc',
+  HINTS: 'hints', ANSWER: 'answer', SOLUTION: 'solution', SOURCE: 'source'
+};
+
+function parseGenerated(text) {
+  const t = String(text || '').replace(/\r/g, '');
+  const re = /^[ \t>*#-]*\[(TITLE|STATEMENT|TAGS|THINKING|DIFFICULTY|CALC|HINTS|ANSWER|SOLUTION|SOURCE)\][ \t:：]*$/gim;
+  const marks = [];
+  let m;
+  while ((m = re.exec(t)) !== null) marks.push({ key: SECTION_MAP[m[1].toUpperCase()], start: m.index, bodyStart: re.lastIndex });
+  if (marks.length < 2) return null;
+
+  const obj = {};
+  for (let i = 0; i < marks.length; i++) {
+    const cur = marks[i];
+    const end = i + 1 < marks.length ? marks[i + 1].start : t.length;
+    const body = t.slice(cur.bodyStart, end).replace(/^```[a-z]*\s*/i, '').replace(/```\s*$/,'').trim();
+    if (cur.key === 'tags') obj.tags = body.split(/[,，、\n]+/).map((x) => x.trim()).filter(Boolean);
+    else if (cur.key === 'hints') obj.hints = body.split('\n').map((x) => x.replace(/^[-*·•]\s*/, '').trim()).filter(Boolean);
+    else if (['thinking', 'difficulty', 'calc'].includes(cur.key)) {
+      const num = body.match(/\d+/);
+      obj[cur.key] = num ? Number(num[0]) : undefined;
+    } else obj[cur.key] = body;
+  }
+  if (!obj.statement || obj.statement.length < 10) return null;
+  return obj;
 }
 
 function repairJsonText(raw) {
@@ -1698,7 +1747,7 @@ function parseVerdict(text) {
   /* ---- 校验浏览器拿回来的生成结果 ---- */
   if (pathname === '/api/ai/parse' && method === 'POST') {
     const body = await readBody(req, 256 * 1024);
-    const parsed = validateGenerated(extractJson(body.text));
+    const parsed = validateGenerated(parseGenerated(body.text) || extractJson(body.text));
     if (!parsed) return fail(res, 422, 'AI 返回的题目不完整，换一次试试');
     return send(res, 200, { ok: true, problem: parsed });
   }
@@ -1719,7 +1768,7 @@ function parseVerdict(text) {
     for (const cfg of llmCandidates(body)) {
       try {
         const text = await callLLM(cfg, messages);
-        const parsed = validateGenerated(extractJson(text));
+        const parsed = validateGenerated(parseGenerated(text) || extractJson(text));
         if (parsed) {
           return send(res, 200, {
             ok: true,
