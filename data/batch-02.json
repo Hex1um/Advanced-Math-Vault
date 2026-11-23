@@ -1,0 +1,62 @@
+[
+  {
+    "title": "假分式先除法，再拆成对数加 arctan",
+    "statement": "求不定积分\n\n$$\\int\\frac{x^{2}+6x+5}{x^{2}+2x+2}\\,\\mathrm{d}x.$$",
+    "tags": ["不定积分", "有理函数积分", "配方"],
+    "thinking": 5, "difficulty": 5, "calc": 6,
+    "source": "第二批题单 · 手写",
+    "hints": ["分子分母同次，先做多项式除法", "余式 $4x+3$ 拆成 $2(2x+2)-1$", "$x^{2}+2x+2=(x+1)^{2}+1$，最后出来 $\\arctan(x+1)$"],
+    "answer": "$x+2\\ln(x^{2}+2x+2)-\\arctan(x+1)+C$",
+    "solution": "### 第一步：假分式做除法\n\n$$\\frac{x^{2}+6x+5}{x^{2}+2x+2}=1+\\frac{4x+3}{x^{2}+2x+2}.$$\n\n### 第二步：余式拆成「对数 + arctan」\n\n$$4x+3=2(2x+2)-1,$$\n\n所以\n\n$$\\int\\frac{4x+3}{x^{2}+2x+2}\\mathrm{d}x=2\\ln(x^{2}+2x+2)-\\int\\frac{\\mathrm{d}x}{(x+1)^{2}+1}.$$\n\n### 结果\n\n$$I=x+2\\ln(x^{2}+2x+2)-\\arctan(x+1)+C.$$\n\n> 套路：分母二次不可约时，分子一律写成 $A(2ax+b)+B$，前者进对数，后者进 arctan。"
+  },
+  {
+    "title": "根号下二次，拆成两半各自动手",
+    "statement": "求不定积分\n\n$$\\int\\frac{x+1}{\\sqrt{x^{2}+4}}\\,\\mathrm{d}x.$$",
+    "tags": ["不定积分", "凑微分", "公式积分"],
+    "thinking": 4, "difficulty": 4, "calc": 5,
+    "source": "第二批题单 · 手写",
+    "hints": ["分子拆成 $x+1$ 两项分别积", "$\\int\\frac{x\\,\\mathrm{d}x}{\\sqrt{x^{2}+4}}=\\sqrt{x^{2}+4}$", "另一项是 $\\ln\\left(x+\\sqrt{x^{2}+4}\\right)$"],
+    "answer": "$\\sqrt{x^{2}+4}+\\ln\\left(x+\\sqrt{x^{2}+4}\\right)+C$",
+    "solution": "### 拆成两个标准积分\n\n$$I=\\int\\frac{x\\,\\mathrm{d}x}{\\sqrt{x^{2}+4}}+\\int\\frac{\\mathrm{d}x}{\\sqrt{x^{2}+4}}.$$\n\n第一项凑微分：\n\n$$\\int\\frac{x\\,\\mathrm{d}x}{\\sqrt{x^{2}+4}}=\\sqrt{x^{2}+4}.$$\n\n第二项是公式：\n\n$$\\int\\frac{\\mathrm{d}x}{\\sqrt{x^{2}+4}}=\\ln\\left(x+\\sqrt{x^{2}+4}\\right).$$\n\n### 结果\n\n$$I=\\sqrt{x^{2}+4}+\\ln\\left(x+\\sqrt{x^{2}+4}\\right)+C.$$\n\n> 见到「一次式除以根号下二次」就先拆分子，把 $x$ 的项凑微分，剩下的走公式。"
+  },
+  {
+    "title": "$\\frac{1}{3e^{x}+1}$ 先化成 $1-\\frac{3e^{x}}{3e^{x}+1}$",
+    "statement": "求不定积分\n\n$$\\int\\frac{\\mathrm{d}x}{3e^{x}+1}.$$",
+    "tags": ["不定积分", "凑微分", "代数变形"],
+    "thinking": 6, "difficulty": 5, "calc": 4,
+    "source": "第二批题单 · 手写",
+    "hints": ["把分子 1 写成 $(3e^{x}+1)-3e^{x}$", "拆成 $1-\\frac{3e^{x}}{3e^{x}+1}$", "第二项正是 $\\left(\\ln(3e^{x}+1)\\right)'$"],
+    "answer": "$x-\\ln(3e^{x}+1)+C$",
+    "solution": "### 代数变形\n\n$$\\frac{1}{3e^{x}+1}=\\frac{(3e^{x}+1)-3e^{x}}{3e^{x}+1}=1-\\frac{3e^{x}}{3e^{x}+1}.$$\n\n### 逐项积分\n\n$$\\int\\mathrm{d}x=x,\\qquad \\int\\frac{3e^{x}}{3e^{x}+1}\\mathrm{d}x=\\ln(3e^{x}+1).$$\n\n### 结果\n\n$$I=x-\\ln(3e^{x}+1)+C.$$\n\n> 一般地，$\\dfrac{1}{ae^{x}+b}=\\dfrac{1}{b}-\\dfrac{ae^{x}}{b(ae^{x}+b)}$，照这个拆就不会卡住。"
+  },
+  {
+    "title": "根号里是 $e^{2x}-1$，用 $e^{-x}$ 换掉",
+    "statement": "求不定积分（$x>0$）\n\n$$\\int\\frac{\\mathrm{d}x}{\\sqrt{e^{2x}-1}}.$$",
+    "tags": ["不定积分", "倒代换", "反三角"],
+    "thinking": 6, "difficulty": 6, "calc": 4,
+    "source": "第二批题单 · 手写",
+    "hints": ["令 $u=e^{-x}$，把指数搬进分母", "$\\mathrm{d}x=-\\dfrac{\\mathrm{d}u}{u}$，$\\sqrt{e^{2x}-1}=\\dfrac{\\sqrt{1-u^{2}}}{u}$", "最后化成 $-\\int\\frac{\\mathrm{d}u}{\\sqrt{1-u^{2}}}$"],
+    "answer": "$-\\arcsin(e^{-x})+C$",
+    "solution": "### 换元\n\n令 $u=e^{-x}$（$x>0$ 时 $0<u<1$），则 $\\mathrm{d}u=-e^{-x}\\mathrm{d}x=-u\\,\\mathrm{d}x$，即 $\\mathrm{d}x=-\\dfrac{\\mathrm{d}u}{u}$。又\n\n$$\\sqrt{e^{2x}-1}=\\sqrt{\\frac{1-u^{2}}{u^{2}}}=\\frac{\\sqrt{1-u^{2}}}{u}.$$\n\n### 化简\n\n$$I=\\int\\frac{-\\mathrm{d}u/u}{\\sqrt{1-u^{2}}/u}=-\\int\\frac{\\mathrm{d}u}{\\sqrt{1-u^{2}}}=-\\arcsin u.$$\n\n### 回代\n\n$$I=-\\arcsin(e^{-x})+C.$$\n\n> 验算：$\\left(-\\arcsin e^{-x}\\right)'=\\dfrac{e^{-x}}{\\sqrt{1-e^{-2x}}}=\\dfrac{1}{\\sqrt{e^{2x}-1}}$。"
+  },
+  {
+    "title": "根号里的分式，先有理化",
+    "statement": "求不定积分（$|x|<1$）\n\n$$\\int\\sqrt{\\frac{1-x}{1+x}}\\,\\mathrm{d}x.$$",
+    "tags": ["不定积分", "有理化", "公式积分"],
+    "thinking": 7, "difficulty": 6, "calc": 5,
+    "source": "第二批题单 · 手写",
+    "hints": ["先有理化：$\\sqrt{\\frac{1-x}{1+x}}=\\frac{1-x}{\\sqrt{1-x^{2}}}$", "拆成 $\\int\\frac{\\mathrm{d}x}{\\sqrt{1-x^{2}}}$ 与 $\\int\\frac{x\\,\\mathrm{d}x}{\\sqrt{1-x^{2}}}$", "后者凑微分，结果是 $\\sqrt{1-x^{2}}$"],
+    "answer": "$\\arcsin x+\\sqrt{1-x^{2}}+C$",
+    "solution": "### 有理化\n\n因为 $|x|<1$，\n\n$$\\sqrt{\\frac{1-x}{1+x}}=\\frac{\\sqrt{1-x}}{\\sqrt{1+x}}=\\frac{1-x}{\\sqrt{1-x^{2}}}.$$\n\n### 拆项\n\n$$I=\\int\\frac{\\mathrm{d}x}{\\sqrt{1-x^{2}}}-\\int\\frac{x\\,\\mathrm{d}x}{\\sqrt{1-x^{2}}}.$$\n\n第一项是 $\\arcsin x$；第二项\n\n$$\\int\\frac{x\\,\\mathrm{d}x}{\\sqrt{1-x^{2}}}=-\\sqrt{1-x^{2}}.$$\n\n### 结果\n\n$$I=\\arcsin x+\\sqrt{1-x^{2}}+C.$$\n\n> 别一上来就令 $x=\\cos t$——那个代换能做但会长一倍，先看能不能有理化。"
+  },
+  {
+    "title": "分母带 $x\\sqrt{1+x}$，令根号整体为 $t$",
+    "statement": "求不定积分（$x>0$）\n\n$$\\int\\frac{\\mathrm{d}x}{x\\sqrt{1+x}}.$$",
+    "tags": ["不定积分", "换元积分", "有理函数积分"],
+    "thinking": 5, "difficulty": 5, "calc": 4,
+    "source": "第二批题单 · 手写",
+    "hints": ["令 $t=\\sqrt{1+x}$，则 $x=t^{2}-1$，$\\mathrm{d}x=2t\\,\\mathrm{d}t$", "化简后是 $2\\int\\frac{\\mathrm{d}t}{t^{2}-1}$", "$\\int\\frac{\\mathrm{d}t}{t^{2}-1}=\\frac{1}{2}\\ln\\left|\\frac{t-1}{t+1}\\right|$"],
+    "answer": "$\\ln\\left|\\dfrac{\\sqrt{1+x}-1}{\\sqrt{1+x}+1}\\right|+C$",
+    "solution": "### 换元\n\n令 $t=\\sqrt{1+x}$，则 $x=t^{2}-1$，$\\mathrm{d}x=2t\\,\\mathrm{d}t$：\n\n$$I=\\int\\frac{2t\\,\\mathrm{d}t}{(t^{2}-1)t}=2\\int\\frac{\\mathrm{d}t}{t^{2}-1}.$$\n\n### 部分分式\n\n$$\\frac{2}{t^{2}-1}=\\frac{1}{t-1}-\\frac{1}{t+1},$$\n\n所以\n\n$$I=\\ln\\left|\\frac{t-1}{t+1}\\right|+C=\\ln\\left|\\frac{\\sqrt{1+x}-1}{\\sqrt{1+x}+1}\\right|+C.$$\n\n> 等价的常见写法：$2\\ln\\left(\\sqrt{1+x}-1\\right)-\\ln x+C$（把分母乘开即可，差一个常数）。"
+  }
+]

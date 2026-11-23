@@ -39,6 +39,7 @@
         + '<div class="card daily-hero">'
         + '<div class="daily-date"><span class="d">' + data.date + '</span><span class="w">' + weekdayOf(data.date) + ' · 今日题</span></div>'
         + '<h1 id="dailyTitle"></h1>'
+        + '<div class="daily-sub" id="dailyAlias"></div>'
         + '<div class="tags" style="margin-bottom:6px">' + p.tags.map(function (t) { return '<span class="tag">' + window.Md.esc(t) + '</span>'; }).join('')
         + '<span class="problem-code-badge" style="margin-left:4px">' + p.code + '</span>' + window.UI.levelBadge(p) + '</div>'
         + '<div class="statement" id="dailyStmt"></div>'
@@ -84,7 +85,8 @@
         + '</aside>'
         + '</div>';
 
-      document.getElementById('dailyTitle').innerHTML = window.Md.inlineTex(p.title);
+      document.getElementById('dailyTitle').innerHTML = window.Md.inlineTex(p.excerpt || p.title);
+      document.getElementById('dailyAlias').textContent = '思路提示：' + p.title;
       window.Md.render(document.getElementById('dailyStmt'), p.statement);
 
       document.getElementById('dailyAnswer').addEventListener('click', function () {

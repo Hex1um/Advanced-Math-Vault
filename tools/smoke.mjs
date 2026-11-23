@@ -53,7 +53,9 @@ const child = spawn(process.execPath, ['server.js'], {
     PORT: String(PORT),
     DB_FILE: DB,
     SEED_FILE: path.join(ROOT, 'data', 'problems.seed.sample.json'),
-    LLM_API_KEY: ''
+    LLM_API_KEY: '',
+    DEEPSEEK_API_KEY: '',
+    NO_FREE: '1'
   }),
   stdio: ['ignore', 'pipe', 'pipe']
 });
@@ -101,11 +103,17 @@ try {
   ok('详情不泄露答案', !('solution' in detail.json.problem));
   const reveal = await req('/api/problems/HS1001/reveal', { method: 'POST', body: '{}' });
   ok('查看答案返回解析', reveal.json.ok && reveal.json.solution.length > 50);
-  const solve = await req('/api/problems/HS1001/solve', { method: 'POST', body: '{}' });
-  ok('标记完成获得经验', solve.json.ok && solve.json.gained > 0, JSON.stringify(solve.json));
-  ok('看答案后经验有折扣', solve.json.gained < 60);
-  const solve2 = await req('/api/problems/HS1001/solve', { method: 'POST', body: '{}' });
-  ok('同一题不重复给经验', solve2.json.already === true);
+  const wrong = await req('/api/problems/HS1001/answer', { method: 'POST', body: JSON.stringify({ answer: '$x+1+C$' }) });
+  ok('答错不计经验', wrong.json.ok && wrong.json.verdict !== 'correct' && !wrong.json.gained, JSON.stringify(wrong.json).slice(0, 120));
+
+  const right = await req('/api/problems/HS1001/answer', {
+    method: 'POST',
+    body: JSON.stringify({ answer: '$1/2$' })
+  });
+  ok('答案正确判定通过', right.json.verdict === 'correct' && right.json.gained > 0, JSON.stringify(right.json).slice(0, 120));
+  ok('看答案后经验有折扣', right.json.gained < 60);
+  const right2 = await req('/api/problems/HS1001/answer', { method: 'POST', body: JSON.stringify({ answer: '$1/2$' }) });
+  ok('同题不重复给经验', right2.json.already === true);
 
   console.log('\n[5] 投稿 → 审核 → 入库');
   const submit = await req('/api/submit', {

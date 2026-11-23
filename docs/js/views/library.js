@@ -148,7 +148,7 @@
         + '<div class="pstate">' + (p.solved ? '<span class="ok">✓</span>' : '<span class="none"></span>') + '</div>'
         + '<div class="pcode">' + p.code + '</div>'
         + '<div class="pmain">'
-        + '<div class="ptitle"><a href="#/problem/' + p.code + '">' + titleHTML(p.title) + '</a></div>'
+        + '<div class="pexcerpt"><a href="#/problem/' + p.code + '">' + titleHTML(p.excerpt || p.title) + '</a></div>'
         + '<div class="tags">' + p.tags.map(function (t) { return '<span class="tag">' + window.Md.esc(t) + '</span>'; }).join('') + '</div>'
         + window.UI.scoreBars(p, true)
         + '</div>'

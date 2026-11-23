@@ -339,10 +339,21 @@ function fail(res, status, msg) { send(res, status, { ok: false, error: msg }); 
 
 /* ------------------------------------------------------------- 业务逻辑 */
 
+function excerptOf(statement, max) {
+  const t = String(statement || '')
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+    .replace(/^#{1,6}\s*/gm, '')
+    .replace(/\$\$/g, '$')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return t.length > (max || 130) ? t.slice(0, max || 130) + '…' : t;
+}
+
 function visibleProblem(p, user) {
   return {
     code: p.code,
     title: p.title,
+    excerpt: excerptOf(p.statement),
     tags: p.tags,
     thinking: p.thinking,
     difficulty: p.difficulty,
@@ -557,7 +568,7 @@ function llmConfigured() {
 }
 
 /* 免费公共通道：不需要 Key，站点没配 Key 时自动兜底 */
-const FREE_PROVIDERS = [
+const FREE_PROVIDERS = process.env.NO_FREE === '1' ? [] : [
   { name: 'Pollinations', baseUrl: 'https://text.pollinations.ai/openai', model: 'openai-fast' },
   { name: 'Pollinations', baseUrl: 'https://text.pollinations.ai/openai', model: 'openai' }
 ];
@@ -647,6 +658,7 @@ function buildGenerateMessages(spec) {
     '请出一道高数题。',
     '考点范围：' + tags,
     '目标难度：' + spec.difficulty + '/10',
+    '目标思维量：' + (spec.thinking || 6) + '/10（需要多少洞察才能想到）',
     '目标计算量：' + spec.calc + '/10',
     spec.style ? ('题型偏好：' + spec.style) : '',
     spec.note ? ('额外要求：' + spec.note) : ''
@@ -919,7 +931,8 @@ const RATE_RULES = [
   [/^\/api\/ai\/chat$/, 40, 10 * 60 * 1000, '今天的提问有点多，歇一会儿再来'],
   [/^\/api\/submit$/, 20, 10 * 60 * 1000, '投稿太频繁了，先等等'],
   [/^\/api\/forum$/, 30, 10 * 60 * 1000, '发帖太频繁了，先等等'],
-  [/^\/api\/ai\/generate$/, 12, 60 * 60 * 1000, 'AI 出题每小时最多 12 次']
+  [/^\/api\/ai\/generate$/, 12, 60 * 60 * 1000, 'AI 出题每小时最多 12 次'],
+  [/\/answer$/, 40, 60 * 60 * 1000, '判题刷得太快了，歇一会儿']
 ];
 
 async function handleApi(req, res, pathname, query) {
@@ -1115,6 +1128,110 @@ async function handleApi(req, res, pathname, query) {
         solution: p.solution || '',
         hints: p.hints || []
       });
+    }
+
+    if (sub === '/answer' && method === 'POST') {
+      if (!user) return fail(res, 401, '登录后才能提交答案');
+      const body = await readBody(req, 6 * 1024 * 1024);
+      const submitted = String(body.answer || '').trim().slice(0, 2000);
+      const image = typeof body.image === 'string' && body.image.indexOf('data:image/') === 0 ? body.image : '';
+      if (!submitted && !image) return fail(res, 400, '写一下答案，或者上传一张答案照片');
+
+      user.solved = user.solved || {};
+      const rec = user.solved[p.code];
+      if (rec && rec.done) {
+        return send(res, 200, { ok: true, already: true, verdict: 'correct', reason: '这道题之前已经通过了' });
+      }
+
+      p.attemptCount = (p.attemptCount || 0) + 1;
+
+      // 1) 先做规则比对：写法完全一致或数值相等就直接放行，不浪费模型额度
+      let verdict = null;
+      let reason = '';
+      if (submitted && p.answer && answersEquiv(submitted, p.answer)) {
+        verdict = 'correct';
+        reason = '与标准答案一致';
+      }
+
+      // 2) 规则判不了再请模型
+      let judgedBy = verdict ? '规则比对' : '';
+      if (!verdict) {
+        const own = userLlmConfig(body);
+        if (image && !(own && VISION_MODEL.test(own.model))) {
+          saveDb();
+          return send(res, 200, {
+            ok: true, verdict: 'unclear', needVision: true,
+            reason: image
+              ? '当前通道读不了图片：请在「模型」里填支持图片的 Key（如 gpt-4o、qwen-vl、glm-4v、claude、gemini），或把答案打成文字再提交'
+              : '请补充答案'
+          });
+        }
+
+        let usedProvider = '';
+        for (const cfg of llmCandidates(body)) {
+          if (image && !VISION_MODEL.test(cfg.model || '')) continue;
+          try {
+            let msgs = judgeMessages(p, submitted, !!image);
+            if (image) {
+              msgs = [msgs[0], {
+                role: 'user',
+                content: [
+                  { type: 'text', text: msgs[1].content },
+                  { type: 'image_url', image_url: { url: image } }
+                ]
+              }];
+            }
+            const out = await callLLM(cfg, msgs);
+            const parsed = parseVerdict(out);
+            usedProvider = cfg.name;
+            if (parsed.verdict !== 'unclear') { verdict = parsed.verdict; reason = parsed.reason; break; }
+            verdict = 'unclear';
+            reason = parsed.reason || '没看懂你的答案，换个写法再提交一次';
+          } catch (e) {
+            console.error('[judge] ' + cfg.name + ' 失败:', e.message);
+          }
+        }
+        judgedBy = usedProvider || '未判定';
+      }
+
+      if (!verdict || verdict === 'unclear') {
+        saveDb();
+        return send(res, 200, {
+          ok: true,
+          verdict: 'unclear',
+          reason: reason || '暂时无法自动判定，可以换个写法再提交，或先看答案对照',
+          judgedBy
+        });
+      }
+
+      if (verdict === 'correct') {
+        const gained = xpForProblem(p, rec);
+        user.solved[p.code] = {
+          at: (rec && rec.at) || Date.now(),
+          done: true,
+          revealed: !!(rec && rec.revealed),
+          askedAI: !!(rec && rec.askedAI),
+          judged: judgedBy
+        };
+        user.exp = (user.exp || 0) + gained;
+        p.solvedCount = (p.solvedCount || 0) + 1;
+        logActivity(user, '做出 ' + p.code + '，+' + gained + ' 经验', p.code);
+        saveDb();
+        return send(res, 200, {
+          ok: true, verdict, reason, judgedBy, gained,
+          exp: user.exp, level: levelInfo(user.exp), user: publicUser(user)
+        });
+      }
+
+      // partial / wrong：不计经验，记录这次尝试
+      user.solved[p.code] = {
+        at: (rec && rec.at) || Date.now(),
+        done: false,
+        revealed: !!(rec && rec.revealed),
+        askedAI: !!(rec && rec.askedAI)
+      };
+      saveDb();
+      return send(res, 200, { ok: true, verdict, reason, judgedBy });
     }
 
     if (sub === '/solve' && method === 'POST') {
@@ -1444,11 +1561,95 @@ async function handleApi(req, res, pathname, query) {
     return send(res, 200, { ok: true, system: msgs[0].content });
   }
 
+/* ------------------------------------------------------- 答案判题 */
+
+function canonAnswer(src) {
+  let t = String(src || '').toLowerCase();
+  t = t.replace(/\$\$?/g, ' ');
+  t = t.replace(/\\left|\\right/g, '');
+  t = t.replace(/\\[dt]frac/g, '\\frac');
+  t = t.replace(/\\displaystyle|\\textstyle|\\limits/g, '');
+  t = t.replace(/\\[,;:! ]/g, '');
+  t = t.replace(/\\mathrm\{d\}|\\text\{d\}/g, 'd');
+  t = t.replace(/\\mathrm|\\text|\\operatorname/g, '');
+  t = t.replace(/\\arcsin|\\asin/g, 'arcsin');
+  t = t.replace(/\\arctan|\\atan/g, 'arctan');
+  t = t.replace(/\\ln/g, 'ln');
+  t = t.replace(/\\pi/g, 'π');
+  t = t.replace(/\s+/g, '');
+  t = t.replace(/\+c\.?$/, '');
+  t = t.replace(/[。.,]$/, '');
+  return t;
+}
+
+function numericValue(s) {
+  const t = String(s || '').replace(/\s+/g, '').replace(/^=|=$/g, '');
+  let m = /^\\?[dt]?frac\{(-?[\d.]+)\}\{(-?[\d.]+)\}$/.exec(t);
+  if (m) return Number(m[1]) / Number(m[2]);
+  m = /^(-?[\d.]+)\/(-?[\d.]+)$/.exec(t);
+  if (m) return Number(m[1]) / Number(m[2]);
+  if (/^-?[\d.]+$/.test(t)) return Number(t);
+  return null;
+}
+
+function answersEquiv(student, expected) {
+  if (!student) return false;
+  const a = canonAnswer(student);
+  const b = canonAnswer(expected);
+  if (!a || !b) return false;
+  if (a === b) return true;
+  const na = numericValue(a);
+  const nb = numericValue(b);
+  if (na !== null && nb !== null) return Math.abs(na - nb) < 1e-9;
+  return false;
+}
+
+const VISION_MODEL = /gpt-4o|gpt-4\.1|o3|o4|claude|gemini|qwen.*vl|glm-4v|vision|llava|internvl/i;
+
+function judgeMessages(problem, studentAnswer, hasImage) {
+  const sys = [
+    '你是高数阅卷老师，只判对错，不给解法。',
+    '严格输出一行 JSON：{"verdict":"correct|partial|wrong|unclear","reason":"不超过40字的中文理由"}',
+    '判定标准：',
+    '1. 数学上等价就算 correct（不同写法、合并同类项、等价变形都算对）；',
+    '2. 不定积分必须带任意常数，漏写 +C 判 partial；',
+    '3. 符号错、系数错、漏项判 wrong；',
+    '4. 学生只写了过程没有最终结果、或你无法确认，判 unclear。'
+  ].join('\n');
+
+  const user = [
+    '题目：' + problem.statement,
+    '标准答案：' + (problem.answer || '(未录入)'),
+    '学生答案：' + (studentAnswer ? studentAnswer : '(见图片)')
+  ].join('\n\n');
+
+  return [
+    { role: 'system', content: sys },
+    { role: 'user', content: user }
+  ];
+}
+
+function parseVerdict(text) {
+  const obj = extractJson(text);
+  let verdict = obj && String(obj.verdict || '').toLowerCase();
+  let reason = obj && String(obj.reason || '').slice(0, 120);
+  if (!['correct', 'partial', 'wrong', 'unclear'].includes(verdict)) {
+    const t = String(text || '');
+    if (/correct|完全正确|答案正确/i.test(t)) verdict = 'correct';
+    else if (/partial|部分正确|漏写|缺少.*常数/i.test(t)) verdict = 'partial';
+    else if (/wrong|错误|不对/i.test(t)) verdict = 'wrong';
+    else verdict = 'unclear';
+    if (!reason) reason = t.replace(/\s+/g, ' ').slice(0, 80);
+  }
+  return { verdict, reason: reason || '' };
+}
+
   /* ---- 出题提示词（给浏览器直连免费通道用） ---- */
   if (pathname === '/api/ai/prompt' && method === 'POST') {
     const body = await readBody(req, 64 * 1024);
     const spec = {
       tags: Array.isArray(body.tags) ? body.tags.map(String).slice(0, 4) : [],
+      thinking: clampScore(body.thinking, 6),
       difficulty: clampScore(body.difficulty, 6),
       calc: clampScore(body.calc, 5),
       style: String(body.style || '').slice(0, 40),
@@ -1470,6 +1671,7 @@ async function handleApi(req, res, pathname, query) {
     const body = await readBody(req, 256 * 1024);
     const spec = {
       tags: Array.isArray(body.tags) ? body.tags.map(String).slice(0, 4) : [],
+      thinking: clampScore(body.thinking, 6),
       difficulty: clampScore(body.difficulty, 6),
       calc: clampScore(body.calc, 5),
       style: String(body.style || '').slice(0, 40),

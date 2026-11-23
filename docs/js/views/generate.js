@@ -5,7 +5,7 @@
   const Views = window.Views = window.Views || {};
   const St = window.API.State;
 
-  let spec = { tags: [], difficulty: 6, calc: 5, style: '', note: '' };
+  let spec = { tags: [], thinking: 6, difficulty: 6, calc: 5, style: '', note: '' };
   let last = null;
   let busy = false;
 
@@ -43,7 +43,8 @@
     return '<form class="card form-card" id="genForm">'
       + '<div class="form-section-title">知识点</div>'
       + '<div class="chip-scroll" id="genTags">' + tagChips() + '</div>'
-      + '<div class="form-section-title">难度与计算量</div>'
+      + '<div class="form-section-title">三个维度</div>'
+      + row('思维量', 'gThink', spec.thinking)
       + row('难度', 'gDiff', spec.difficulty)
       + row('计算量', 'gCalc', spec.calc)
       + '<div class="form-section-title">题型与附加要求</div>'
@@ -178,7 +179,7 @@
       let p;
       if (own || siteReady || !window.FreeLLM) {
         const res = await window.API.post('/api/ai/generate', {
-          tags: spec.tags, difficulty: spec.difficulty, calc: spec.calc,
+          tags: spec.tags, thinking: spec.thinking, difficulty: spec.difficulty, calc: spec.calc,
           style: spec.style, note: spec.note, llm: own || undefined
         });
         p = res.problem;
@@ -188,7 +189,7 @@
       } else {
         // 浏览器直连免费通道，用访客自己的 IP 额度
         const prompt = await window.API.post('/api/ai/prompt', {
-          tags: spec.tags, difficulty: spec.difficulty, calc: spec.calc,
+          tags: spec.tags, thinking: spec.thinking, difficulty: spec.difficulty, calc: spec.calc,
           style: spec.style, note: spec.note
         });
         const text = await window.FreeLLM.complete(prompt.messages);
@@ -218,7 +219,7 @@
   }
 
   Views.generate = function (el) {
-    spec = { tags: [], difficulty: 6, calc: 5, style: '', note: '' };
+    spec = { tags: [], thinking: 6, difficulty: 6, calc: 5, style: '', note: '' };
     last = null;
     busy = false;
 
@@ -245,6 +246,7 @@
 
     el.querySelector('#genForm').addEventListener('submit', function (e) {
       e.preventDefault();
+      spec.thinking = Number(document.getElementById('gThink').value);
       spec.difficulty = Number(document.getElementById('gDiff').value);
       spec.calc = Number(document.getElementById('gCalc').value);
       spec.style = document.getElementById('gStyle').value;
@@ -265,7 +267,7 @@
       }).catch(function () {});
     }
 
-    [['gDiff', '难度'], ['gCalc', '计算量']].forEach(function (pair) {
+    [['gThink', '思维量'], ['gDiff', '难度'], ['gCalc', '计算量']].forEach(function (pair) {
       const input = document.getElementById(pair[0]);
       input.addEventListener('input', function () {
         document.getElementById(pair[0] + 'Val').textContent = input.value;
