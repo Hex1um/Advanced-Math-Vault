@@ -278,6 +278,16 @@
         + '</div>'
 
         + '<aside>'
+        + '<div class="card side-card"><h3>账号状态</h3>'
+        + (me.emailVerified
+          ? '<div class="xp-rule">已绑定邮箱 <b>' + window.Md.esc(me.email) + '</b><br/>发帖与回复不受每小时 1 条的限制。</div>'
+          : '<div class="xp-rule" style="margin-bottom:10px">未绑定邮箱：<b>每小时只能发 1 条帖、1 条回复</b>。绑定后解除。</div>'
+            + '<div class="field"><label>邮箱</label><input id="bindEmail" type="email" placeholder="you@example.com" /></div>'
+            + '<button class="btn btn-sm btn-primary" id="bindSend">发送验证码</button>'
+            + '<div class="field" style="margin-top:10px"><label>验证码</label><input id="bindCode" inputmode="numeric" maxlength="6" placeholder="6 位数字" /></div>'
+            + '<button class="btn btn-sm" id="bindVerify">完成绑定</button>'
+            + '<div class="small muted" id="bindMsg" style="margin-top:8px"></div>')
+        + '</div>'
         + '<div class="card side-card"><h3>等级进度</h3>'
         + '<div class="xp-rule">当前 Lv.' + me.level + '，进度 ' + Math.round((me.levelProgress || 0) * 100) + '%<br/>'
         + '<div class="score-track" style="margin:8px 0"><div class="score-fill" style="width:' + Math.round((me.levelProgress || 0) * 100) + '%"></div></div>'
@@ -314,6 +324,34 @@
           pwdBtn.disabled = false;
         }
       });
+      // 邮箱绑定
+      const bindSend = document.getElementById('bindSend');
+      if (bindSend) {
+        const msg = document.getElementById('bindMsg');
+        bindSend.addEventListener('click', async function () {
+          const email = document.getElementById('bindEmail').value.trim();
+          if (!email) { window.UI.toast('先填邮箱', 'err'); return; }
+          bindSend.disabled = true;
+          try {
+            const r = await window.API.post('/api/me/email/send', { email: email });
+            msg.textContent = r.code ? ('站点未接邮件服务，验证码：' + r.code) : (r.message || '验证码已发送');
+            if (r.code) document.getElementById('bindCode').value = r.code;
+          } catch (e) { msg.textContent = e.message; }
+          finally { bindSend.disabled = false; }
+        });
+
+        document.getElementById('bindVerify').addEventListener('click', async function () {
+          const code = document.getElementById('bindCode').value.trim();
+          if (!code) { window.UI.toast('填验证码', 'err'); return; }
+          try {
+            const r = await window.API.post('/api/me/email/verify', { code: code });
+            window.UI.applyUser(r.user);
+            window.UI.toast('邮箱绑定成功，发帖限制已解除', 'ok');
+            window.App.render();
+          } catch (e) { msg.textContent = e.message; }
+        });
+      }
+
     }).catch(function (e) {
       el.innerHTML = window.UI.empty('加载失败', e.message);
     });

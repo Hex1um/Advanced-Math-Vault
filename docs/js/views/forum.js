@@ -13,7 +13,12 @@
     const el = document.createElement('div');
     el.innerHTML =
       '<form id="postForm">'
-      + '<div class="field"><label>标题</label><input name="title" maxlength="100" placeholder="一句话说清楚卡在哪，例如：这一步为什么能用等价无穷小？" /></div>'
+      + '<div class="field"><label>标题</label>'
+      + '<div style="display:flex;gap:8px">'
+      + '<input name="title" maxlength="100" placeholder="一句话说清楚卡在哪，例如：这一步为什么能用等价无穷小？" style="flex:1" />'
+      + '<button type="button" class="btn btn-sm" id="aiTitle" title="让 AI 读正文后自动起标题">AI 起标题</button>'
+      + '</div>'
+      + '<div class="tip">正文写好后点「AI 起标题」，会根据内容自动补一版，可再改。</div></div>'
       + '<div class="field"><label>正文</label><textarea name="body" rows="7" placeholder="写出你的思路和卡点。公式用 $...$ 包住，独立公式用 $$...$$。"></textarea>'
       + '<div class="tip">正文越具体，AI 助教和同学越能直接帮到你。</div></div>'
       + '<div class="field-row">'
@@ -28,6 +33,25 @@
 
     const m = window.UI.modal({ title: '发一个新帖', sub: '登录后可以发帖，发布后 AI 助教会先给一版思路', body: el, wide: true });
     const form = el.querySelector('#postForm');
+
+    const aiTitleBtn = el.querySelector('#aiTitle');
+    if (aiTitleBtn) {
+      aiTitleBtn.addEventListener('click', async function () {
+        const bodyText = (form.body.value || '').trim();
+        if (bodyText.length < 10) { window.UI.toast('先写几句正文，AI 才有内容可读', 'err'); return; }
+        aiTitleBtn.disabled = true;
+        aiTitleBtn.textContent = '生成中…';
+        try {
+          const r = await window.API.post('/api/forum/suggest-title', { body: bodyText, llm: window.UI.llmConfig() });
+          if (r.title) { form.title.value = r.title; window.UI.toast('已填入标题，可再修改', 'ok'); }
+        } catch (e) {
+          window.UI.toast(e.message, 'err');
+        } finally {
+          aiTitleBtn.disabled = false;
+          aiTitleBtn.textContent = 'AI 起标题';
+        }
+      });
+    }
     const err = el.querySelector('#postErr');
     el.querySelector('#cancelPost').addEventListener('click', m.close);
 
@@ -160,6 +184,7 @@
             + '<div><div class="who">' + window.Md.esc(post.authorName) + (post.solved ? ' <span class="badge-solved">已解决</span>' : '') + '</div>'
             + '<div class="when">' + window.UI.fmtDate(post.createdAt) + ' · ' + post.views + ' 次浏览</div></div>'
             + (canMark && !post.solved ? '<button class="btn btn-sm right" id="markSolved">标记已解决</button>' : '')
+            + '<button class="btn btn-sm right" id="delPost" style="margin-left:8px;color:var(--red);border-color:var(--red)" title="' + (St.me && St.me.role === 'admin' && St.me.id !== post.authorId ? '管理员删除他人帖子' : '删除我的帖子') + '">删除</button>'
             + '</div>'
             + '<div class="post-content md" id="postBody"></div>'
             + '<div class="tags" style="margin-top:10px">'
@@ -189,6 +214,18 @@
             mark.addEventListener('click', async function () {
               try { await window.API.post('/api/forum/' + id + '/solve'); window.UI.toast('已标记为解决', 'ok'); load(); }
               catch (e2) { window.UI.toast(e2.message, 'err'); }
+            });
+          }
+
+          const delBtn = document.getElementById('delPost');
+          if (delBtn) {
+            delBtn.addEventListener('click', function () {
+              const isOther = St.me && St.me.id !== post.authorId;
+              if (!window.confirm((isOther ? '以管理员身份删除 ' + post.authorName + ' 的帖子？' : '删除这条帖子？') + '删除后不可恢复。')) return;
+              window.API.post('/api/forum/' + id + '/delete').then(function () {
+                window.UI.toast('已删除', 'ok');
+                location.hash = '#/forum';
+              }).catch(function (e2) { window.UI.toast(e2.message, 'err'); });
             });
           }
 

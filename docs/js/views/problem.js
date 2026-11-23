@@ -118,15 +118,20 @@
         btn.textContent = '识别图片中…';
         resultBox.innerHTML = '<div class="judge-result pending"><span class="spinner"></span>没有视觉模型，先用 OCR 把图片转成文字（首次需下载识别组件）…</div>';
         try {
-          const text = window.OCR.tidy(await window.OCR.imageToText(image, function (pct) {
+          let text = window.OCR.tidy(await window.OCR.imageToText(image, function (pct) {
             btn.textContent = '识别中 ' + pct + '%';
           }));
           if (!text) throw new Error('图片里没识别到文字，请改用文字输入或配置视觉模型');
+          // OCR 只认字形，公式结构要靠 AI 补回来
+          btn.textContent = '规范化公式…';
+          try {
+            text = await window.OCR.polishWithAI(text, { problem: p.title, llm: window.UI.llmConfig() });
+          } catch (e2) { /* 规范化失败就用原始识别结果 */ }
           process = process ? (process + '\n\n【图片识别】\n' + text) : text;
           el.querySelector('#ansProcess').value = process;
-          el.querySelector('#imgHint').textContent = '已 OCR 转成文字（公式请核对）；下面文字会交给 AI 批改';
+          el.querySelector('#imgHint').textContent = '已 OCR 并规范化（公式请再核对一遍）；下面文字会交给 AI 批改';
           sendImage = ''; // 识别成了文字，不再把图片发给不支持视觉的模型
-          window.UI.toast('OCR 完成，已填入过程框，请核对公式后提交', 'ok');
+          window.UI.toast('OCR 完成，请核对公式后提交', 'ok');
         } catch (e) {
           resultBox.innerHTML = '<div class="judge-result wrong">OCR 失败：' + window.Md.esc(e.message)
             + '<br/>可以配置支持视觉的模型（gpt-4o / qwen-vl 等），或把过程手打成文字。</div>';

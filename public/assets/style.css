@@ -21,7 +21,34 @@
   --radius: 6px;
   --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  color-scheme: light;
 }
+
+/* 暗色：只覆盖变量，其余样式自动跟随 */
+html[data-theme="dark"] {
+  --bg: #14171c;
+  --surface: #1b1f26;
+  --surface-2: #22272f;
+  --line: #2c333d;
+  --line-2: #3a424e;
+  --text: #e6e9ef;
+  --text-2: #b9c1cd;
+  --muted: #8b95a3;
+  --blue: #5b90f6;
+  --blue-dark: #7aa6f8;
+  --blue-weak: #1e2a42;
+  --green: #51cf66;
+  --orange: #ff922b;
+  --red: #ff6b6b;
+  --purple: #9775fa;
+  color-scheme: dark;
+}
+html[data-theme="dark"] img:not([src*=".svg"]) { opacity: .92; }
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .modal,
+html[data-theme="dark"] .dropdown { box-shadow: none; }
+html[data-theme="dark"] pre,
+html[data-theme="dark"] code { background: #10141a; }
 
 * { box-sizing: border-box; }
 

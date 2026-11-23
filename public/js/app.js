@@ -79,14 +79,51 @@
     window.addEventListener('hashchange', render);
   }
 
+  /* ---------------------------------------------------------- 暗色模式
+     存在 localStorage；默认跟随系统（prefers-color-scheme）。 */
+  const THEME_KEY = 'mv_theme';
+
+  function readTheme() {
+    try {
+      const v = localStorage.getItem(THEME_KEY);
+      if (v === 'dark' || v === 'light') return v;
+    } catch (e) {}
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function applyTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    const btn = document.getElementById('themeBtn');
+    if (btn) {
+      btn.textContent = t === 'dark' ? '浅色' : '暗色';
+      btn.title = t === 'dark' ? '切换到浅色' : '切换到暗色';
+    }
+  }
+
+  function initTheme() {
+    applyTheme(readTheme());
+    const btn = document.getElementById('themeBtn');
+    if (btn && !btn.dataset.bound) {
+      btn.dataset.bound = '1';
+      btn.addEventListener('click', function () {
+        const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
+        applyTheme(next);
+      });
+    }
+  }
+
   window.App = {
     refresh: async function () {
       await refreshMeta();
       render();
     },
     render: render,
-    route: () => St.route
+    route: () => St.route,
+    theme: { get: readTheme, set: function (t) { try { localStorage.setItem(THEME_KEY, t); } catch (e) {} applyTheme(t); } }
   };
+
+  initTheme();
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', boot);

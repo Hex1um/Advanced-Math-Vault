@@ -63,13 +63,59 @@
   window.addEventListener('paper:change', mountBar);
   document.addEventListener('DOMContentLoaded', mountBar);
 
+  /* 一次性组卷：按题型抽题后写进本地区列表，再走原来的排卷流程 */
+  function bindGen(el) {
+    const btn = el.querySelector('#genPaper');
+    if (!btn) return;
+    btn.addEventListener('click', async function () {
+      const hint = el.querySelector('#genHint');
+      btn.disabled = true;
+      hint.textContent = '正在抽题…';
+      try {
+        const r = await window.API.post('/api/paper/generate', {
+          choice: Number(el.querySelector('#genChoice').value || 0),
+          fill: Number(el.querySelector('#genFill').value || 0),
+          solution: Number(el.querySelector('#genSolution').value || 0)
+        });
+        const codes = [];
+        r.parts.forEach(function (part) { part.items.forEach(function (it) { codes.push(it.code); }); });
+        if (!codes.length) { hint.textContent = '没抽到题，试试放宽条件'; return; }
+        save({ items: codes, title: '高等数学自测卷（' + codes.length + ' 题）', points: {} });
+        hint.textContent = '已抽到 ' + codes.length + ' 题';
+        Views.paper(el);
+      } catch (e) {
+        hint.textContent = e.message;
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  }
+
   /* 试卷页 */
   Views.paper = function (el) {
     const p = load();
+
+    /* 一键组卷面板：按考研数学一的题型结构随机抽题 */
+    const genPanel =
+      '<div class="card form-card" style="margin-bottom:18px">'
+      + '<h3 style="margin:0 0 6px;font-size:15px">一键组卷（按考研题型结构随机抽题）</h3>'
+      + '<p class="small muted" style="margin:0 0 12px">默认按数学一的 10 选择 + 6 填空 + 6 解答抽题；优先用题库里的考研真题，不够再用其它题补足。</p>'
+      + '<div class="field-row three">'
+      + '<div class="field"><label>选择题</label><input id="genChoice" type="number" min="0" max="20" value="10" /></div>'
+      + '<div class="field"><label>填空题</label><input id="genFill" type="number" min="0" max="20" value="6" /></div>'
+      + '<div class="field"><label>解答题</label><input id="genSolution" type="number" min="0" max="20" value="6" /></div>'
+      + '</div>'
+      + '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">'
+      + '<button class="btn btn-primary" id="genPaper">生成试卷</button>'
+      + '<span class="small muted" id="genHint"></span></div>'
+      + '</div>';
+
     if (!p.items.length) {
       el.innerHTML = '<div class="page-head"><div><h1>组卷</h1>'
-        + '<p class="sub">在题库点题目右侧的「+」，选够题就能在这里生成试卷。</p></div></div>'
+        + '<p class="sub">一键随机组卷，或者在题库点题目右侧的「+」自己挑。</p></div></div>'
+        + genPanel
         + '<div class="empty"><b>还没有选题</b><a href="#/problems">去题库挑题</a></div>';
+      bindGen(el);
       mountBar();
       return;
     }
@@ -81,7 +127,9 @@
       + '<button class="btn btn-primary" id="printPaper">打印试卷</button>'
       + '<button class="btn" id="clearPaper">清空</button>'
       + '</div></div>'
+      + genPanel
       + '<div class="card paper-sheet" id="paperSheet"><div class="loading-row"><span class="spinner"></span>正在排卷…</div></div>';
+    bindGen(el);
 
     window.API.get('/api/problems?c=' + encodeURIComponent(p.items.join(',')) + '&size=100')
       .then(function (d) { render(d.items || []); })

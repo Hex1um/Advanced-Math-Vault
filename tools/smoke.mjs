@@ -34,6 +34,22 @@ async function req(pathname, opts = {}) {
   return { status: res.status, json, text, res };
 }
 
+/* 独立的会话客户端（测多角色时不互相污染 cookie） */
+function client() {
+  let ck = '';
+  return async function (pathname, opts = {}) {
+    const headers = Object.assign({ 'Content-Type': 'application/json' }, opts.headers || {});
+    if (ck) headers.cookie = ck;
+    const res = await fetch(BASE + pathname, Object.assign({}, opts, { headers }));
+    const set = res.headers.get('set-cookie');
+    if (set) ck = set.split(';')[0];
+    const text = await res.text();
+    let json = null;
+    try { json = JSON.parse(text); } catch (e) {}
+    return { status: res.status, json, text };
+  };
+}
+
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function waitServer() {
@@ -233,7 +249,40 @@ try {
   const reexport = await req('/api/admin/export');
   ok('导出包含反馈数据', /"feedbacks"/.test(reexport.text));
 
-  console.log('\n[11] 静态资源与防缓存头');
+  console.log('\n[11] 社区权限 / 邮箱绑定 / 组卷');
+  // 新注册一个普通用户（第一个已是管理员）
+  const u2 = client();
+  const reg2 = await u2('/api/auth/register', { method: 'POST', body: JSON.stringify({ name: '普通用户' + Date.now() % 1000, password: 'smoke12345' }) });
+  ok('第二个账号是普通用户', reg2.json.user && reg2.json.user.role === 'user');
+  ok('默认未绑定邮箱', reg2.json.user && reg2.json.user.emailVerified === false);
+
+  const up1 = await u2('/api/forum', { method: 'POST', body: JSON.stringify({ title: '未绑邮箱第一帖', body: '这是第一条测试正文，长度足够发帖了' }) });
+  ok('未绑邮箱可以发第 1 帖', up1.json.ok);
+  const up2 = await u2('/api/forum', { method: 'POST', body: JSON.stringify({ title: '未绑邮箱第二帖', body: '这是第二条测试正文，应该被限流' }) });
+  ok('未绑邮箱第 2 帖被限流(429)', up2.status === 429, 'status ' + up2.status);
+
+  const codeSend = await u2('/api/me/email/send', { method: 'POST', body: JSON.stringify({ email: 'smoke@example.com' }) });
+  ok('可以发送邮箱验证码', codeSend.json.ok && !!codeSend.json.code);
+  const codeBad = await u2('/api/me/email/verify', { method: 'POST', body: JSON.stringify({ code: '000000' }) });
+  ok('错误验证码被拒', codeBad.status === 400);
+  const codeOk = await u2('/api/me/email/verify', { method: 'POST', body: JSON.stringify({ code: codeSend.json.code }) });
+  ok('正确验证码绑定成功', codeOk.json.ok && codeOk.json.user.emailVerified === true);
+  const up3 = await u2('/api/forum', { method: 'POST', body: JSON.stringify({ title: '绑定邮箱后发帖', body: '绑定之后应该不再受每小时限制' }) });
+  ok('绑定后可以继续发帖', up3.json.ok);
+
+  const delOther = await u2('/api/forum/1/delete', { method: 'POST', body: '{}' });
+  ok('普通用户不能删别人的帖子', delOther.status === 403);
+  const delOwn = await u2('/api/forum/' + up1.json.id + '/delete', { method: 'POST', body: '{}' });
+  ok('可以删自己的帖子', delOwn.json.ok);
+
+  const paperGen = await req('/api/paper/generate', { method: 'POST', body: JSON.stringify({ choice: 3, fill: 2, solution: 2 }) });
+  ok('组卷接口返回题目', paperGen.json.ok && paperGen.json.total > 0, JSON.stringify(paperGen.json).slice(0, 100));
+  ok('组卷按题型分组', Array.isArray(paperGen.json.parts) && paperGen.json.parts.length === 3);
+
+  const sug = await u2('/api/forum/suggest-title', { method: 'POST', body: JSON.stringify({ body: '我算 lim x->0 (e^x-1)/x 得到 1，但答案写的是 2，不知道哪步错了' }) });
+  ok('AI 起标题有返回', sug.json.ok && typeof sug.json.title === 'string', JSON.stringify(sug.json).slice(0, 100));
+
+  console.log('\n[12] 静态资源与防缓存头');
   const html = await fetch(BASE + '/');
   ok('首页 200', html.status === 200);
   ok('首页 no-store', /no-store/.test(html.headers.get('cache-control') || ''));

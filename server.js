@@ -30,6 +30,7 @@ function emptyDb() {
     daily: {},
     submissions: [],
     feedbacks: [],
+    emailCodes: {},
     settings: {
       llm: {
         baseUrl: process.env.LLM_BASE_URL || 'https://api.deepseek.com/v1',
@@ -63,6 +64,7 @@ function loadDb() {
       if (!db.sessions || typeof db.sessions !== 'object') db.sessions = {};
       if (!Array.isArray(db.submissions)) db.submissions = [];
       if (!Array.isArray(db.feedbacks)) db.feedbacks = [];
+      if (!db.emailCodes || typeof db.emailCodes !== 'object') db.emailCodes = {};
       if (!db.meta.feedbackSeq) db.meta.feedbackSeq = 1;
       db.problems.forEach((p) => {
         if (typeof p.scoreSum !== 'number') p.scoreSum = 0;
@@ -264,7 +266,9 @@ function publicUser(u) {
     id: u.id, name: u.name, role: u.role || 'user',
     exp: u.exp || 0, level: li.level, levelProgress: li.progress,
     solvedCount: Object.keys(u.solved || {}).length,
-    createdAt: u.createdAt
+    createdAt: u.createdAt,
+    email: u.email || '',
+    emailVerified: !!u.emailVerified
   };
 }
 
@@ -1133,7 +1137,54 @@ function scheduleForumReply(postId) {
   }, 900);
 }
 
-/* --------------------------------------------------- 题目反馈：AI 先审阅 */
+/* --------------------------------------------------- 发帖配额 / 邮箱绑定
+   未绑定邮箱的账号：每小时只能发 1 条帖子、1 条回复。
+   绑定了邮箱（验证码通过）就没有这个限制。管理员不受限。 */
+const HOUR = 60 * 60 * 1000;
+
+function recentCount(list, uid, since) {
+  return list.filter((x) => x.uid === uid && x.at >= since).length;
+}
+
+function postQuota(user, isReply) {
+  if (!user) return { blocked: true, message: '请先登录' };
+  if (user.role === 'admin') return { blocked: false };
+  if (user.emailVerified) return { blocked: false };
+  const log = user.quotaLog || { posts: [], replies: [] };
+  const since = Date.now() - HOUR;
+  const n = recentCount(isReply ? log.replies : log.posts, user.id, since);
+  if (n >= 1) {
+    return {
+      blocked: true,
+      message: (isReply ? '回复' : '发帖') + '配额已用完（未绑定邮箱每小时 1 条）。绑定邮箱后可解除限制。'
+    };
+  }
+  return { blocked: false };
+}
+
+function noteQuota(user, isReply) {
+  if (!user || user.role === 'admin' || user.emailVerified) return;
+  user.quotaLog = user.quotaLog || { posts: [], replies: [] };
+  const bucket = isReply ? user.quotaLog.replies : user.quotaLog.posts;
+  bucket.push({ uid: user.id, at: Date.now() });
+  // 只留最近两小时的记录，避免无限增长
+  const cut = Date.now() - 2 * HOUR;
+  user.quotaLog.posts = user.quotaLog.posts.filter((x) => x.at >= cut);
+  user.quotaLog.replies = user.quotaLog.replies.filter((x) => x.at >= cut);
+}
+
+/* 邮箱验证码：本地库存储，5 分钟有效。
+   站点没有配 SMTP，验证码会直接回给前端（面板上显示），
+   这对个人站够用；将来接真实邮件服务只需替换 sendMailCode。 */
+function genCode() {
+  return String(Math.floor(100000 + Math.random() * 900000));
+}
+
+function sendMailCode(email, code) {
+  // 没有 SMTP 时：记录到日志，返回给前端展示
+  console.log('[mail] 验证码 ' + code + ' -> ' + email);
+  return { delivered: false, code };
+}
 
 const FEEDBACK_TYPES = {
   wrong_answer: '答案/解析有误',
@@ -1245,6 +1296,7 @@ const RATE_RULES = [
   [/^\/api\/submit$/, 20, 10 * 60 * 1000, '投稿太频繁了，先等等'],
   [/^\/api\/forum$/, 30, 10 * 60 * 1000, '发帖太频繁了，先等等'],
   [/^\/api\/problems\/[^/]+\/feedback$/, 12, 10 * 60 * 1000, '反馈提交太频繁了，先等等'],
+  [/^\/api\/ai\/ocr-fix$/, 30, 10 * 60 * 1000, 'OCR 规范化请求太多，先等等'],
   [/^\/api\/ai\/generate$/, 12, 60 * 60 * 1000, 'AI 出题每小时最多 12 次'],
   [/\/answer$/, 40, 60 * 60 * 1000, '判题刷得太快了，歇一会儿']
 ];
@@ -1356,6 +1408,47 @@ async function handleApi(req, res, pathname, query) {
 
   if (pathname === '/api/me' && method === 'GET') {
     return send(res, 200, { ok: true, user: publicUser(user), activity: (user && user.activity) || [] });
+  }
+
+  /* ---- 邮箱绑定：发验证码 ---- */
+  if (pathname === '/api/me/email/send' && method === 'POST') {
+    if (!user) return fail(res, 401, '请先登录');
+    const body = await readBody(req);
+    const email = String(body.email || '').trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return fail(res, 400, '邮箱格式不对');
+    if (db.users.some((u) => u.id !== user.id && (u.email || '').toLowerCase() === email && u.emailVerified)) {
+      return fail(res, 409, '这个邮箱已经被其他账号绑定了');
+    }
+    const code = genCode();
+    db.emailCodes[user.id] = { email, code, exp: Date.now() + 5 * 60 * 1000, tries: 0 };
+    saveDb();
+    const r = sendMailCode(email, code);
+    return send(res, 200, {
+      ok: true,
+      delivered: r.delivered,
+      // 未接邮件服务时把验证码直接回给前端，页面会提示「验证码：xxxxxx」
+      code: r.delivered ? undefined : code,
+      message: r.delivered ? '验证码已发送到邮箱' : '站点未接入邮件服务，验证码直接显示在这里'
+    });
+  }
+
+  /* ---- 邮箱绑定：校验 ---- */
+  if (pathname === '/api/me/email/verify' && method === 'POST') {
+    if (!user) return fail(res, 401, '请先登录');
+    const body = await readBody(req);
+    const code = String(body.code || '').trim();
+    const rec = db.emailCodes[user.id];
+    if (!rec) return fail(res, 400, '请先发送验证码');
+    if (Date.now() > rec.exp) { delete db.emailCodes[user.id]; return fail(res, 400, '验证码已过期，请重新发送'); }
+    if (rec.tries >= 5) { delete db.emailCodes[user.id]; return fail(res, 429, '尝试次数过多，请重新发送'); }
+    rec.tries++;
+    if (code !== rec.code) return fail(res, 400, '验证码不对');
+    user.email = rec.email;
+    user.emailVerified = true;
+    user.emailVerifiedAt = new Date().toISOString();
+    delete db.emailCodes[user.id];
+    saveDb(true);
+    return send(res, 200, { ok: true, user: publicUser(user) });
   }
 
   /* ---- 题库 ---- */
@@ -1790,8 +1883,95 @@ async function handleApi(req, res, pathname, query) {
     });
   }
 
+  /* ---- AI 补全帖子标题 ---- */
+  if (pathname === '/api/forum/suggest-title' && method === 'POST') {
+    if (!user) return fail(res, 401, '请先登录');
+    const body = await readBody(req);
+    const text = String(body.body || '').trim();
+    if (text.length < 10) return fail(res, 400, '正文太短，先写几句再让 AI 起标题');
+
+    const sys = {
+      role: 'system',
+      content: [
+        '你是数学答疑区的标题助手。根据帖子正文起一个标题。',
+        '要求：6-20 个字；点出卡在哪一步或核心疑问；不要加书名号引号；',
+        '不要用「求助」「请问」这类空话开头；只输出标题本身，不要解释、不要句末标点。'
+      ].join('\n')
+    };
+    const userMsg = { role: 'user', content: '正文：\n' + text.slice(0, 1200) };
+    let title = '';
+    for (const cfg of llmCandidates(body.llm || null)) {
+      try {
+        const t = await callLLM(cfg, [sys, userMsg]);
+        if (t && t.trim()) {
+          title = t.trim().split('\n')[0].replace(/^[「『"'《]+|[」』"'》]+$/g, '').replace(/[。.]$/, '');
+          break;
+        }
+      } catch (e) { console.error('[title-ai] ' + cfg.name + ' 失败:', e.message); }
+    }
+    if (!title) title = text.replace(/\s+/g, ' ').slice(0, 20);
+    return send(res, 200, { ok: true, title: title.slice(0, 40) });
+  }
+
+  /* ---- 组卷：按考研题型结构随机抽题 ---- */
+  if (pathname === '/api/paper/generate' && method === 'POST') {
+    const body = await readBody(req);
+    const spec = {
+      choice: Math.max(0, Math.min(20, Number(body.choice !== undefined ? body.choice : 10))),
+      fill: Math.max(0, Math.min(20, Number(body.fill !== undefined ? body.fill : 6))),
+      solution: Math.max(0, Math.min(20, Number(body.solution !== undefined ? body.solution : 6))),
+      tags: Array.isArray(body.tags) ? body.tags.map(String).slice(0, 5) : [],
+      difficulty: String(body.difficulty || '')
+    };
+
+    let pool = db.problems.filter((p) => p.status === 'approved');
+    if (spec.tags.length) pool = pool.filter((p) => p.tags.some((t) => spec.tags.includes(t)));
+    if (spec.difficulty) pool = pool.filter((p) => levelOf(p.difficulty).name === spec.difficulty);
+
+    const isExam = (p) => /^\d{4}\s*数学一/.test(p.title || '');
+    const kindOfTitle = (p) => (/选择题/.test(p.title) ? 'choice' : /填空题/.test(p.title) ? 'fill' : 'solution');
+    const picked = new Set();
+    const pickKind = (kind, n) => {
+      let cand = pool.filter((p) => !picked.has(p.code));
+      const typed = cand.filter((p) => isExam(p) && kindOfTitle(p) === kind);
+      // 优先用考研真题里对应题型的题，不够再用普通题补足
+      cand = typed.length >= n ? typed : typed.concat(cand.filter((p) => !isExam(p)));
+      for (let i = cand.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cand[i], cand[j]] = [cand[j], cand[i]];
+      }
+      const out = cand.slice(0, n);
+      out.forEach((p) => picked.add(p.code));
+      return out;
+    };
+
+    const parts = [
+      { kind: 'choice', name: '一、选择题', items: pickKind('choice', spec.choice) },
+      { kind: 'fill', name: '二、填空题', items: pickKind('fill', spec.fill) },
+      { kind: 'solution', name: '三、解答题', items: pickKind('solution', spec.solution) }
+    ];
+
+    return send(res, 200, {
+      ok: true,
+      title: '高等数学自测卷',
+      generatedAt: new Date().toISOString(),
+      total: parts.reduce((s, x) => s + x.items.length, 0),
+      parts: parts.map((x) => ({
+        kind: x.kind,
+        name: x.name,
+        items: x.items.map((p) => ({
+          code: p.code, title: p.title, statement: p.statement,
+          tags: p.tags, thinking: p.thinking, difficulty: p.difficulty, calc: p.calc, source: p.source
+        }))
+      }))
+    });
+  }
+
   if (pathname === '/api/forum' && method === 'POST') {
     if (!user) return fail(res, 401, '请先登录再发帖');
+    // 防恶意注册：没绑定邮箱的账号，每小时只能发 1 条帖
+    const quota = postQuota(user);
+    if (quota.blocked) return fail(res, 429, quota.message);
     const body = await readBody(req);
     const title = String(body.title || '').trim();
     const content = String(body.body || '').trim();
@@ -1818,12 +1998,13 @@ async function handleApi(req, res, pathname, query) {
       replies: []
     };
     db.posts.push(post);
+    noteQuota(user, false);
     saveDb();
     scheduleForumReply(post.id);
     return send(res, 200, { ok: true, id: post.id });
   }
 
-  const postMatch = pathname.match(/^\/api\/forum\/(\d+)(\/reply|\/solve)?$/);
+  const postMatch = pathname.match(/^\/api\/forum\/(\d+)(\/reply|\/solve|\/delete)?$/);
   if (postMatch) {
     const id = Number(postMatch[1]);
     const sub = postMatch[2];
@@ -1850,6 +2031,9 @@ async function handleApi(req, res, pathname, query) {
 
     if (sub === '/reply' && method === 'POST') {
       if (!user) return fail(res, 401, '请先登录再回复');
+      // 防恶意注册：未绑定邮箱每小时只能回 1 条
+      const q = postQuota(user, true);
+      if (q.blocked) return fail(res, 429, q.message);
       const body = await readBody(req);
       const content = String(body.body || '').trim();
       if (content.length < 2) return fail(res, 400, '回复不能为空');
@@ -1862,8 +2046,20 @@ async function handleApi(req, res, pathname, query) {
         createdAt: new Date().toISOString()
       });
       post.updatedAt = new Date().toISOString();
+      noteQuota(user, true);
       logActivity(user, '在答疑区回复了 #' + post.id, '');
       saveDb();
+      return send(res, 200, { ok: true });
+    }
+
+    if (sub === '/delete' && method === 'POST') {
+      if (!user) return fail(res, 401, '请先登录');
+      const isOwner = post.authorId === user.id;
+      const isAdmin = user.role === 'admin';
+      if (!isOwner && !isAdmin) return fail(res, 403, '只能删除自己的帖子');
+      db.posts = db.posts.filter((p) => p.id !== post.id);
+      saveDb();
+      if (isAdmin && !isOwner) logActivity(user, '管理员删除了帖子 #' + post.id, '');
       return send(res, 200, { ok: true });
     }
 
@@ -2267,6 +2463,64 @@ function parseJudge(text) {
   /* ---- 识图：给别人用的固定提示词 ---- */
   if (pathname === '/api/ai/ocr-prompt' && method === 'GET') {
     return send(res, 200, { ok: true, prompt: OCR_PROMPT });
+  }
+
+  /* ---- OCR 后处理：把 OCR 认出来的乱串规范成合法 LaTeX ----
+     传统 OCR（tesseract 之类）只认字形、不懂二维公式结构，`\frac` 会变成
+     `a/b` 或干脆散架。这一步让 AI 结合上下文补回结构，是准确率的关键。 */
+  if (pathname === '/api/ai/ocr-fix' && method === 'POST') {
+    const body = await readBody(req, 256 * 1024);
+    const raw = String(body.text || '').trim();
+    if (!raw) return fail(res, 400, '没有可规范化的文本');
+    if (raw.length > 4000) return fail(res, 400, '文本太长，请分段识别');
+
+    const sys = {
+      role: 'system',
+      content: [
+        '你是数学公式转写器。用户给你一段 OCR 识别出来的数学内容，字形可能错，结构可能散。',
+        '任务：还原成正确、可编译的 LaTeX。',
+        '',
+        '规则：',
+        '1. 只修正识别错误与公式结构，不要改题目意思、不要补充题目没出现的内容；',
+        '2. 分式写成 $\\frac{}{}$，根式 $\\sqrt{}$，上下标用 ^{} _{}，积分 $\\int_{a}^{b}$，极限 $\\lim_{x\\to 0}$；',
+        '3. 中文说明保持中文，数学部分用 $...$ 包住；',
+        '4. 认不出来的地方用 $\\square$ 占位，不要瞎猜数字；',
+        '5. 直接输出转写结果，不要解释、不要代码块、不要「以下是」。',
+        '',
+        '输出用两段：',
+        '[STATEMENT]',
+        '规范化后的题干（含中文）',
+        '[NOTE]',
+        '一句话说明哪些地方你没把握（没有就写：无）'
+      ].join('\n')
+    };
+    const userMsg = {
+      role: 'user',
+      content: 'OCR 原文：\n' + raw + (body.problem ? '\n\n（这是题目「' + String(body.problem).slice(0, 60) + '」的解题过程识别结果）' : '')
+    };
+
+    let out = '';
+    for (const cfg of llmCandidates(body.llm || null)) {
+      try {
+        const t = await callLLM(cfg, [sys, userMsg]);
+        if (t && t.trim()) { out = t.trim(); break; }
+      } catch (e) {
+        console.error('[ocr-fix] ' + cfg.name + ' 失败:', e.message);
+      }
+    }
+    if (!out) {
+      // 没有可用模型：原样返回，前端会提示「未规范化」
+      return send(res, 200, { ok: true, text: raw, polished: false });
+    }
+    const m = out.match(/\[STATEMENT\]([\s\S]*?)(?=\[NOTE\]|$)/);
+    const text = (m ? m[1] : out).trim();
+    const noteM = out.match(/\[NOTE\]([\s\S]*)$/);
+    return send(res, 200, {
+      ok: true,
+      text: text || raw,
+      note: noteM ? noteM[1].trim() : '',
+      polished: true
+    });
   }
 
   /* ---- 识图：用视觉模型把图片补全成完整题目 ---- */
