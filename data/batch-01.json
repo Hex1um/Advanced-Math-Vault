@@ -1,0 +1,202 @@
+[
+  {
+    "title": "arcsin 单独出现，就该分部",
+    "statement": "求不定积分\n\n$$\\int x\\arcsin x\\,\\mathrm{d}x.$$",
+    "tags": ["不定积分", "分部积分", "三角换元"],
+    "thinking": 5, "difficulty": 5, "calc": 6,
+    "source": "第一批题单 · 手写",
+    "hints": ["先分部积分，把 $\\arcsin$ 的求导变成代数式", "剩下的 $\\int\\frac{x^{2}}{\\sqrt{1-x^{2}}}\\mathrm{d}x$ 用 $x=\\sin t$", "最后把两个 $\\arcsin$ 项合并同类项"],
+    "answer": "$\\dfrac{2x^{2}-1}{4}\\arcsin x+\\dfrac{x}{4}\\sqrt{1-x^{2}}+C$",
+    "solution": "### 分部积分\n\n取 $u=\\arcsin x,\\ \\mathrm{d}v=x\\,\\mathrm{d}x$，则 $v=\\dfrac{x^{2}}{2}$：\n\n$$I=\\frac{x^{2}}{2}\\arcsin x-\\frac12\\int\\frac{x^{2}}{\\sqrt{1-x^{2}}}\\,\\mathrm{d}x.$$\n\n### 三角换元\n\n令 $x=\\sin t$，则\n\n$$\\int\\frac{x^{2}}{\\sqrt{1-x^{2}}}\\mathrm{d}x=\\int\\sin^{2}t\\,\\mathrm{d}t=\\frac{t}{2}-\\frac{\\sin 2t}{4}=\\frac12\\arcsin x-\\frac12x\\sqrt{1-x^{2}}.$$\n\n### 合并\n\n$$I=\\frac{x^{2}}{2}\\arcsin x-\\frac14\\arcsin x+\\frac{x}{4}\\sqrt{1-x^{2}}+C\n=\\frac{2x^{2}-1}{4}\\arcsin x+\\frac{x}{4}\\sqrt{1-x^{2}}+C.$$\n\n> 分部之后出现 $\\arcsin$ 的一次项是正常现象，不要以为算错了。"
+  },
+  {
+    "title": "指数上带根号，先把根号换掉",
+    "statement": "求不定积分\n\n$$\\int e^{\\sqrt{x}}\\,\\mathrm{d}x.$$",
+    "tags": ["不定积分", "换元积分", "分部积分"],
+    "thinking": 5, "difficulty": 4, "calc": 5,
+    "source": "第一批题单 · 手写",
+    "hints": ["先令 $t=\\sqrt{x}$，把指数上的根号消掉", "$x=t^{2}$，$\\mathrm{d}x=2t\\,\\mathrm{d}t$，剩下 $2\\int t e^{t}\\mathrm{d}t$", "$\\int t e^{t}\\mathrm{d}t=(t-1)e^{t}$"],
+    "answer": "$2(\\sqrt{x}-1)e^{\\sqrt{x}}+C$",
+    "solution": "### 换元去根号\n\n令 $t=\\sqrt{x}$，则 $x=t^{2}$，$\\mathrm{d}x=2t\\,\\mathrm{d}t$：\n\n$$I=2\\int t e^{t}\\,\\mathrm{d}t.$$\n\n### 分部积分\n\n$$\\int t e^{t}\\mathrm{d}t=(t-1)e^{t}.$$\n\n### 回代\n\n$$I=2(\\sqrt{x}-1)e^{\\sqrt{x}}+C.$$"
+  },
+  {
+    "title": "六次根一次消掉两个根号",
+    "statement": "求不定积分\n\n$$\\int\\frac{\\mathrm{d}x}{\\sqrt{x}\\,\\left(1+\\sqrt[3]{x}\\right)}.$$",
+    "tags": ["不定积分", "换元积分", "有理函数积分"],
+    "thinking": 6, "difficulty": 6, "calc": 5,
+    "source": "第一批题单 · 手写",
+    "hints": ["分母里同时有 $x^{1/2}$ 和 $x^{1/3}$，取 6 次幂一次解决", "令 $x=t^{6}$，$\\mathrm{d}x=6t^{5}\\mathrm{d}t$", "化简后是 $6\\int\\frac{t^{2}}{1+t^{2}}\\mathrm{d}t$，拆成 $1-\\frac{1}{1+t^{2}}$"],
+    "answer": "$6\\left(\\sqrt[6]{x}-\\arctan\\sqrt[6]{x}\\right)+C$",
+    "solution": "### 取公倍数次幂\n\n分母里同时出现 $\\sqrt x=x^{1/2}$ 与 $\\sqrt[3]{x}=x^{1/3}$，令 $x=t^{6}$（6 是 2、3 的最小公倍数），则\n\n$$\\mathrm{d}x=6t^{5}\\mathrm{d}t,\\quad \\sqrt{x}=t^{3},\\quad \\sqrt[3]{x}=t^{2}.$$\n\n### 化简\n\n$$I=\\int\\frac{6t^{5}}{t^{3}(1+t^{2})}\\mathrm{d}t=6\\int\\frac{t^{2}}{1+t^{2}}\\mathrm{d}t=6\\int\\left(1-\\frac{1}{1+t^{2}}\\right)\\mathrm{d}t.$$\n\n### 回代\n\n$$I=6\\left(t-\\arctan t\\right)+C=6\\left(\\sqrt[6]{x}-\\arctan\\sqrt[6]{x}\\right)+C.$$\n\n> 经验：根号指数不统一时，用它们的最小公倍数做代换，一步就能把根号全消掉。"
+  },
+  {
+    "title": "根号里是 $e^{x}$，就把它换出去",
+    "statement": "求不定积分\n\n$$\\int\\frac{x e^{x}}{\\sqrt{e^{x}-1}}\\,\\mathrm{d}x.$$",
+    "tags": ["不定积分", "换元积分", "分部积分"],
+    "thinking": 7, "difficulty": 7, "calc": 6,
+    "source": "第一批题单 · 手写",
+    "hints": ["令 $u=\\sqrt{e^{x}-1}$，则 $e^{x}\\mathrm{d}x=2u\\,\\mathrm{d}u$", "注意 $x=\\ln(u^{2}+1)$，积分变成 $2\\int\\ln(u^{2}+1)\\mathrm{d}u$", "$\\int\\ln(u^{2}+1)\\mathrm{d}u$ 分部后拆 $\\frac{u^{2}}{u^{2}+1}=1-\\frac{1}{u^{2}+1}$"],
+    "answer": "$2x\\sqrt{e^{x}-1}-4\\sqrt{e^{x}-1}+4\\arctan\\sqrt{e^{x}-1}+C$",
+    "solution": "### 换元\n\n令 $u=\\sqrt{e^{x}-1}$，则 $e^{x}=u^{2}+1$，$e^{x}\\mathrm{d}x=2u\\,\\mathrm{d}u$，即 $\\mathrm{d}x=\\dfrac{2u}{u^{2}+1}\\mathrm{d}u$，且\n\n$$x=\\ln(u^{2}+1).$$\n\n### 化简\n\n$$I=\\int x\\cdot\\frac{2u\\,\\mathrm{d}u}{u}=2\\int\\ln(u^{2}+1)\\,\\mathrm{d}u.$$\n\n### 分部积分\n\n$$\\int\\ln(u^{2}+1)\\mathrm{d}u=u\\ln(u^{2}+1)-\\int\\frac{2u^{2}}{u^{2}+1}\\mathrm{d}u\n=u\\ln(u^{2}+1)-2u+2\\arctan u.$$\n\n### 回代\n\n$$I=2u\\ln(u^{2}+1)-4u+4\\arctan u+C\n=2x\\sqrt{e^{x}-1}-4\\sqrt{e^{x}-1}+4\\arctan\\sqrt{e^{x}-1}+C.$$\n\n> 关键点：$\\ln(u^{2}+1)$ 正好等于原来的 $x$，回代时可以少写很多。"
+  },
+  {
+    "title": "$\\arcsin(e^{x})$ 配上 $e^{-x}$",
+    "statement": "求不定积分\n\n$$\\int\\frac{\\arcsin(e^{x})}{e^{x}}\\,\\mathrm{d}x.$$",
+    "tags": ["不定积分", "分部积分", "反三角"],
+    "thinking": 7, "difficulty": 7, "calc": 5,
+    "source": "第一批题单 · 手写",
+    "hints": ["把 $\\frac{1}{e^{x}}$ 看成 $e^{-x}$，直接分部", "剩下 $\\int\\frac{\\mathrm{d}x}{\\sqrt{1-e^{2x}}}$，令 $s=e^{-x}$", "注意定义域：$e^{x}\\le 1$，即 $x<0$"],
+    "answer": "$-e^{-x}\\arcsin(e^{x})-\\ln\\left(e^{-x}+\\sqrt{e^{-2x}-1}\\right)+C$",
+    "solution": "### 分部积分\n\n把 $\\dfrac{1}{e^{x}}$ 看成 $e^{-x}$，取 $u=\\arcsin(e^{x}),\\ \\mathrm{d}v=e^{-x}\\mathrm{d}x$：\n\n$$I=-e^{-x}\\arcsin(e^{x})+\\int\\frac{\\mathrm{d}x}{\\sqrt{1-e^{2x}}}.$$\n\n### 计算剩余积分\n\n令 $s=e^{-x}$（$x<0$ 时 $s>1$），$\\mathrm{d}x=-\\dfrac{\\mathrm{d}s}{s}$，$\\sqrt{1-e^{2x}}=\\dfrac{\\sqrt{s^{2}-1}}{s}$：\n\n$$\\int\\frac{\\mathrm{d}x}{\\sqrt{1-e^{2x}}}=-\\int\\frac{\\mathrm{d}s}{\\sqrt{s^{2}-1}}=-\\ln\\left(s+\\sqrt{s^{2}-1}\\right).$$\n\n### 结果\n\n$$I=-e^{-x}\\arcsin(e^{x})-\\ln\\left(e^{-x}+\\sqrt{e^{-2x}-1}\\right)+C.$$\n\n> 等价写法：$+\\ln\\left(e^{-x}-\\sqrt{e^{-2x}-1}\\right)$，两者只差常数。做题时别忘写定义域 $x<0$。"
+  },
+  {
+    "title": "分母 $(1+x^{2})^{3/2}$ 是准备好的导数",
+    "statement": "求不定积分\n\n$$\\int\\frac{\\arcsin x}{(1+x^{2})^{3/2}}\\,\\mathrm{d}x.$$",
+    "tags": ["不定积分", "分部积分", "组合积分"],
+    "thinking": 8, "difficulty": 7, "calc": 5,
+    "source": "第一批题单 · 手写",
+    "hints": ["先算 $\\left(\\frac{x}{\\sqrt{1+x^{2}}}\\right)'$，你会发现它等于 $\\frac{1}{(1+x^{2})^{3/2}}$", "分部后剩 $\\int\\frac{x\\,\\mathrm{d}x}{\\sqrt{1+x^{2}}\\sqrt{1-x^{2}}}$", "把 $x\\,\\mathrm{d}x$ 看成 $\\frac12\\mathrm{d}(x^{2})$，凑成 $\\arcsin$ 的导数"],
+    "answer": "$\\dfrac{x\\arcsin x}{\\sqrt{1+x^{2}}}-\\dfrac12\\arcsin(x^{2})+C$",
+    "solution": "### 关键观察\n\n$$\\frac{\\mathrm{d}}{\\mathrm{d}x}\\frac{x}{\\sqrt{1+x^{2}}}=\\frac{1}{(1+x^{2})^{3/2}},$$\n\n所以分母正好是准备好的导数。取 $u=\\arcsin x,\\ \\mathrm{d}v=\\dfrac{\\mathrm{d}x}{(1+x^{2})^{3/2}}$：\n\n$$I=\\frac{x\\arcsin x}{\\sqrt{1+x^{2}}}-\\int\\frac{x\\,\\mathrm{d}x}{\\sqrt{1+x^{2}}\\sqrt{1-x^{2}}}.$$\n\n### 剩余积分\n\n$$\\int\\frac{x\\,\\mathrm{d}x}{\\sqrt{1+x^{2}}\\sqrt{1-x^{2}}}=\\int\\frac{x\\,\\mathrm{d}x}{\\sqrt{1-x^{4}}}.$$\n\n令 $s=x^{2}$，$\\mathrm{d}s=2x\\,\\mathrm{d}x$：\n\n$$=\\frac12\\int\\frac{\\mathrm{d}s}{\\sqrt{1-s^{2}}}=\\frac12\\arcsin(x^{2}).$$\n\n### 结果\n\n$$I=\\frac{x\\arcsin x}{\\sqrt{1+x^{2}}}-\\frac12\\arcsin(x^{2})+C.$$\n\n> 两个 $\\arcsin$ 的自变量不同，这是本题最容易看错的地方。"
+  },
+  {
+    "title": "带参数 $m$ 的积分要分类",
+    "statement": "设 $m\\in\\mathbb{N}^{*}$，求\n\n$$\\int\\frac{\\mathrm{d}x}{x^{m}+x}.$$",
+    "tags": ["不定积分", "有理函数积分", "分类讨论"],
+    "thinking": 6, "difficulty": 6, "calc": 4,
+    "source": "第一批题单 · 手写",
+    "hints": ["分母提一个 $x$：$x(x^{m-1}+1)$", "拆项 $\\frac{1}{x^{m}+x}=\\frac1x-\\frac{x^{m-2}}{x^{m-1}+1}$", "$m=1$ 时拆项失效，要单独算"],
+    "answer": "$m=1$ 时 $\\dfrac12\\ln|x|+C$；$m\\ge2$ 时 $\\ln|x|-\\dfrac{1}{m-1}\\ln|x^{m-1}+1|+C$",
+    "solution": "### 拆项\n\n对 $m\\ge 2$，\n\n$$\\frac{1}{x^{m}+x}=\\frac{1}{x(x^{m-1}+1)}=\\frac1x-\\frac{x^{m-2}}{x^{m-1}+1}.$$\n\n验证：右边通分得 $\\dfrac{(x^{m-1}+1)-x^{m-1}}{x(x^{m-1}+1)}$，正是原式。\n\n### 逐项积分\n\n$$\\int\\frac{\\mathrm{d}x}{x}=\\ln|x|,\\qquad \\int\\frac{x^{m-2}}{x^{m-1}+1}\\mathrm{d}x=\\frac{1}{m-1}\\ln|x^{m-1}+1|,$$\n\n于是\n\n$$I=\\ln|x|-\\frac{1}{m-1}\\ln|x^{m-1}+1|+C\\quad(m\\ge2).$$\n\n### $m=1$ 单独讨论\n\n$$\\int\\frac{\\mathrm{d}x}{2x}=\\frac12\\ln|x|+C.$$\n\n> 参数题的第一件事永远是：哪些取值会让你的变形失效。"
+  },
+  {
+    "title": "凑出 $\\ln(xe^{x})$ 的导数",
+    "statement": "求不定积分\n\n$$\\int\\frac{1+x}{x\\left(1+xe^{x}\\right)}\\,\\mathrm{d}x.$$",
+    "tags": ["不定积分", "凑微分", "对数求导"],
+    "thinking": 7, "difficulty": 6, "calc": 4,
+    "source": "第一批题单 · 手写",
+    "hints": ["分子 $1+x$ 很像 $(xe^{x})'$ 的一半，先算两个对数求导", "$\\left(\\ln(xe^{x})\\right)'=\\frac{1+x}{x}$", "$\\left(\\ln(1+xe^{x})\\right)'=\\frac{e^{x}(1+x)}{1+xe^{x}}$，两式相减恰好通分"],
+    "answer": "$x+\\ln|x|-\\ln|1+xe^{x}|+C$",
+    "solution": "### 试算两个对数\n\n$$\\frac{\\mathrm{d}}{\\mathrm{d}x}\\ln(xe^{x})=\\frac{1+x}{x},\\qquad\n\\frac{\\mathrm{d}}{\\mathrm{d}x}\\ln(1+xe^{x})=\\frac{e^{x}(1+x)}{1+xe^{x}}.$$\n\n两者相减：\n\n$$\\frac{1+x}{x}-\\frac{e^{x}(1+x)}{1+xe^{x}}=(1+x)\\cdot\\frac{(1+xe^{x})-xe^{x}}{x(1+xe^{x})}=\\frac{1+x}{x(1+xe^{x})}.$$\n\n### 结果\n\n$$I=\\ln(xe^{x})-\\ln(1+xe^{x})+C=x+\\ln|x|-\\ln|1+xe^{x}|+C.$$\n\n> 分子出现 $1+x$（即 $(xe^{x})'$ 的一部分）时，优先考虑「整体取对数再求导」。"
+  },
+  {
+    "title": "分母 $x+x^{4}$ 的部分分式",
+    "statement": "求不定积分\n\n$$\\int\\frac{x^{2}+4}{x+x^{4}}\\,\\mathrm{d}x.$$",
+    "tags": ["不定积分", "有理函数积分", "部分分式"],
+    "thinking": 7, "difficulty": 8, "calc": 9,
+    "source": "第一批题单 · 手写",
+    "hints": ["分母 $x+x^{4}=x(1+x^{3})$，先把 $\\frac4x$ 的主项拆出来", "剩下 $\\frac{x}{1+x^{3}}$，对 $1+x^{3}=(1+x)(x^{2}-x+1)$ 做部分分式", "含 $x^{2}-x+1$ 的项要配方成 $\\arctan\\frac{2x-1}{\\sqrt3}$"],
+    "answer": "$4\\ln|x|-\\dfrac43\\ln|1+x^{3}|-\\dfrac13\\ln|1+x|+\\dfrac16\\ln(x^{2}-x+1)+\\dfrac{1}{\\sqrt3}\\arctan\\dfrac{2x-1}{\\sqrt3}+C$",
+    "solution": "### 第一步：拆出 $\\frac4x$\n\n分母 $x+x^{4}=x(1+x^{3})$，先做一次代数拆分：\n\n$$\\frac{x^{2}+4}{x(1+x^{3})}=\\frac4x+\\frac{-4x^{2}+x}{1+x^{3}}.$$\n\n验证：右边通分后分子为 $4+4x^{3}-4x^{3}+x^{2}=x^{2}+4$。\n\n### 第二步：处理 $\\dfrac{x}{1+x^{3}}$\n\n由 $1+x^{3}=(1+x)(x^{2}-x+1)$，设\n\n$$\\frac{x}{1+x^{3}}=\\frac{A}{1+x}+\\frac{Bx+C}{x^{2}-x+1},$$\n\n解得 $A=-\\dfrac13,\\ B=C=\\dfrac13$。于是\n\n$$\\int\\frac{x}{1+x^{3}}\\mathrm{d}x=-\\frac13\\ln|1+x|+\\frac16\\ln(x^{2}-x+1)+\\frac{1}{\\sqrt3}\\arctan\\frac{2x-1}{\\sqrt3}.$$\n\n（最后一项来自 $\\dfrac{x+1}{3}=\\dfrac16(2x-1)+\\dfrac12$ 以及 $\\int\\dfrac{\\mathrm{d}x}{x^{2}-x+1}=\\dfrac{2}{\\sqrt3}\\arctan\\dfrac{2x-1}{\\sqrt3}$。）\n\n### 第三步：合并\n\n$$I=4\\ln|x|-\\frac43\\ln|1+x^{3}|-\\frac13\\ln|1+x|+\\frac16\\ln(x^{2}-x+1)+\\frac{1}{\\sqrt3}\\arctan\\frac{2x-1}{\\sqrt3}+C.$$\n\n> 计算量主要花在「拆」上，拆对了每题都是标准流程。"
+  },
+  {
+    "title": "三次根号下的 $1+x^{3}$（换元够狠才做得出来）",
+    "statement": "求不定积分\n\n$$\\int\\frac{\\mathrm{d}x}{\\sqrt[3]{1+x^{3}}}.$$",
+    "tags": ["不定积分", "换元积分", "有理函数积分"],
+    "thinking": 9, "difficulty": 9, "calc": 8,
+    "source": "第一批题单 · 手写",
+    "hints": ["根号在分母且是三次，尝试 $u=\\frac{x}{\\sqrt[3]{1+x^{3}}}$", "这个代换会把 $\\frac{\\mathrm{d}x}{(1+x^{3})^{1/3}}$ 变成 $\\frac{\\mathrm{d}u}{1-u^{3}}$", "然后对 $\\frac{1}{1-u^{3}}$ 做部分分式"],
+    "answer": "令 $u=\\dfrac{x}{\\sqrt[3]{1+x^{3}}}$，则 $-\\dfrac13\\ln|1-u|+\\dfrac16\\ln(u^{2}+u+1)+\\dfrac{1}{\\sqrt3}\\arctan\\dfrac{2u+1}{\\sqrt3}+C$",
+    "solution": "### 关键换元\n\n令\n\n$$u=\\frac{x}{\\sqrt[3]{1+x^{3}}}\\ \\Longrightarrow\\ u^{3}=\\frac{x^{3}}{1+x^{3}},$$\n\n则 $1-u^{3}=\\dfrac{1}{1+x^{3}}$，且\n\n$$\\mathrm{d}x=\\frac{\\mathrm{d}u}{(1-u^{3})^{4/3}},\\qquad \\sqrt[3]{1+x^{3}}=(1-u^{3})^{-1/3}.$$\n\n### 化为有理函数\n\n$$\\frac{\\mathrm{d}x}{\\sqrt[3]{1+x^{3}}}=\\frac{\\mathrm{d}u}{1-u^{3}}.$$\n\n### 部分分式\n\n$$\\frac{1}{1-u^{3}}=\\frac{1/3}{1-u}+\\frac{u/3+2/3}{u^{2}+u+1},$$\n\n积分得\n\n$$\\int\\frac{\\mathrm{d}u}{1-u^{3}}=-\\frac13\\ln|1-u|+\\frac16\\ln(u^{2}+u+1)+\\frac{1}{\\sqrt3}\\arctan\\frac{2u+1}{\\sqrt3}.$$\n\n### 回代\n\n把 $u=\\dfrac{x}{\\sqrt[3]{1+x^{3}}}$ 代回即可。\n\n> 这类「根号在分母」的题，硬套三角换元会越算越乱；先想办法把根号整体变成一个变量，剩下的都是有理函数套路。"
+  },
+  {
+    "title": "两根式之积，配方就完事",
+    "statement": "设 $b>a$，求\n\n$$\\int\\frac{\\mathrm{d}x}{\\sqrt{(x+a)(x+b)}}.$$",
+    "tags": ["不定积分", "配方", "公式积分"],
+    "thinking": 5, "difficulty": 5, "calc": 5,
+    "source": "第一批题单 · 手写",
+    "hints": ["先展开成 $x^{2}+(a+b)x+ab$ 再配方", "化成 $\\int\\frac{\\mathrm{d}u}{\\sqrt{u^{2}-h^{2}}}$ 的标准形", "标准结果是 $\\ln\\left|u+\\sqrt{u^{2}-h^{2}}\\right|$"],
+    "answer": "$\\ln\\left|x+\\dfrac{a+b}{2}+\\sqrt{(x+a)(x+b)}\\right|+C$",
+    "solution": "### 配方\n\n$$(x+a)(x+b)=x^{2}+(a+b)x+ab=\\left(x+\\frac{a+b}{2}\\right)^{2}-\\left(\\frac{b-a}{2}\\right)^{2}.$$\n\n### 套标准积分\n\n记 $u=x+\\dfrac{a+b}{2}$，$h=\\dfrac{b-a}{2}>0$，则\n\n$$\\int\\frac{\\mathrm{d}x}{\\sqrt{u^{2}-h^{2}}}=\\ln\\left|u+\\sqrt{u^{2}-h^{2}}\\right|.$$\n\n### 结果\n\n$$I=\\ln\\left|x+\\frac{a+b}{2}+\\sqrt{(x+a)(x+b)}\\right|+C\n=\\ln\\left|2x+a+b+2\\sqrt{(x+a)(x+b)}\\right|+C'.$$\n\n> 两种写法只差常数 $\\ln 2$，答题时都对。"
+  },
+  {
+    "title": "倒代换收拾 $\\frac{1}{x\\sqrt{\\text{二次}}}$",
+    "statement": "求不定积分\n\n$$\\int\\frac{\\mathrm{d}x}{x\\sqrt{x^{2}-2x-3}}.$$",
+    "tags": ["不定积分", "倒代换", "配方"],
+    "thinking": 7, "difficulty": 7, "calc": 5,
+    "source": "第一批题单 · 手写",
+    "hints": ["形如 $\\frac{1}{x\\sqrt{\\text{二次}}}$ 时优先倒代换 $t=\\frac1x$", "代换后变成 $-\\int\\frac{\\mathrm{d}t}{\\sqrt{1-2t-3t^{2}}}$", "根号内配方：$1-2t-3t^{2}=\\frac43-3\\left(t+\\frac13\\right)^{2}$"],
+    "answer": "$-\\dfrac{1}{\\sqrt3}\\arcsin\\dfrac{x+3}{2x}+C$",
+    "solution": "### 倒代换\n\n令 $t=\\dfrac1x$，$\\mathrm{d}x=-\\dfrac{\\mathrm{d}t}{t^{2}}$；设 $x>3$，则 $t>0$，且\n\n$$\\sqrt{x^{2}-2x-3}=\\frac{\\sqrt{1-2t-3t^{2}}}{t}.$$\n\n于是\n\n$$I=\\int\\frac{-\\mathrm{d}t/t^{2}}{(1/t)\\cdot\\sqrt{1-2t-3t^{2}}/t}=-\\int\\frac{\\mathrm{d}t}{\\sqrt{1-2t-3t^{2}}}.$$\n\n### 根号内配方\n\n$$1-2t-3t^{2}=\\frac43-3\\left(t+\\frac13\\right)^{2},$$\n\n故\n\n$$I=-\\frac{1}{\\sqrt3}\\arcsin\\frac{3t+1}{2}=-\\frac{1}{\\sqrt3}\\arcsin\\frac{x+3}{2x}+C.$$\n\n> 倒代换的作用是把「$x$ 在根号外」这种结构翻到分母上，变成标准根式积分。"
+  },
+  {
+    "title": "分母有根号相加，先有理化",
+    "statement": "求不定积分\n\n$$\\int\\frac{\\mathrm{d}x}{x+\\sqrt{x^{2}+2x+2}}.$$",
+    "tags": ["不定积分", "有理化", "换元积分"],
+    "thinking": 8, "difficulty": 8, "calc": 6,
+    "source": "第一批题单 · 手写",
+    "hints": ["分子分母同乘 $x-\\sqrt{x^{2}+2x+2}$，分母变成 $-2(x+1)$", "拆成 $\\frac12\\int\\frac{\\sqrt{x^{2}+2x+2}}{x+1}\\mathrm{d}x-\\frac x2+\\frac12\\ln|x+1|$", "对 $\\int\\frac{\\sqrt{u^{2}+1}}{u}\\mathrm{d}u$ 令 $s=\\sqrt{u^{2}+1}$"],
+    "answer": "$\\dfrac{\\sqrt{x^{2}+2x+2}}{2}-\\dfrac{x}{2}+\\dfrac12\\ln|x+1|+\\dfrac14\\ln\\left|\\dfrac{\\sqrt{x^{2}+2x+2}-1}{\\sqrt{x^{2}+2x+2}+1}\\right|+C$",
+    "solution": "### 有理化\n\n$$\\frac{1}{x+\\sqrt{x^{2}+2x+2}}=\\frac{x-\\sqrt{x^{2}+2x+2}}{x^{2}-(x^{2}+2x+2)}=\\frac{\\sqrt{x^{2}+2x+2}-x}{2(x+1)}.$$\n\n所以\n\n$$I=\\frac12\\int\\frac{\\sqrt{x^{2}+2x+2}}{x+1}\\mathrm{d}x-\\frac{x}{2}+\\frac12\\ln|x+1|.$$\n\n### 计算 $\\int\\frac{\\sqrt{u^{2}+1}}{u}\\mathrm{d}u$\n\n令 $u=x+1$，再令 $s=\\sqrt{u^{2}+1}$，则 $\\dfrac{\\mathrm{d}u}{u}=\\dfrac{s\\,\\mathrm{d}s}{s^{2}-1}$：\n\n$$\\int\\frac{\\sqrt{u^{2}+1}}{u}\\mathrm{d}u=\\int\\frac{s^{2}}{s^{2}-1}\\mathrm{d}s=s+\\frac12\\ln\\left|\\frac{s-1}{s+1}\\right|.$$\n\n### 结果\n\n$$I=\\frac{\\sqrt{x^{2}+2x+2}}{2}-\\frac{x}{2}+\\frac12\\ln|x+1|+\\frac14\\ln\\left|\\frac{\\sqrt{x^{2}+2x+2}-1}{\\sqrt{x^{2}+2x+2}+1}\\right|+C.$$\n\n> 最容易漏的是 $\\dfrac12\\ln|x+1|$：它来自 $\\int\\dfrac{x\\,\\mathrm{d}x}{x+1}$ 的拆分，而不是来自根式部分。"
+  },
+  {
+    "title": "根号配方的标准两步",
+    "statement": "求不定积分\n\n$$\\int x\\sqrt{x^{2}+2x+2}\\,\\mathrm{d}x.$$",
+    "tags": ["不定积分", "配方", "公式积分"],
+    "thinking": 6, "difficulty": 6, "calc": 7,
+    "source": "第一批题单 · 手写",
+    "hints": ["先令 $u=x+1$，根号变成 $\\sqrt{u^{2}+1}$", "拆成 $\\int u\\sqrt{u^{2}+1}\\mathrm{d}u-\\int\\sqrt{u^{2}+1}\\mathrm{d}u$", "第二项用 $\\int\\sqrt{u^{2}+1}\\mathrm{d}u=\\frac u2\\sqrt{u^{2}+1}+\\frac12\\ln(u+\\sqrt{u^{2}+1})$"],
+    "answer": "$\\dfrac{(x^{2}+2x+2)^{3/2}}{3}-\\dfrac{x+1}{2}\\sqrt{x^{2}+2x+2}-\\dfrac12\\ln\\left(x+1+\\sqrt{x^{2}+2x+2}\\right)+C$",
+    "solution": "### 配方\n\n$$x^{2}+2x+2=(x+1)^{2}+1.$$\n\n令 $u=x+1$，则 $x=u-1$，$\\mathrm{d}x=\\mathrm{d}u$：\n\n$$I=\\int(u-1)\\sqrt{u^{2}+1}\\,\\mathrm{d}u=\\int u\\sqrt{u^{2}+1}\\mathrm{d}u-\\int\\sqrt{u^{2}+1}\\mathrm{d}u.$$\n\n### 两个标准积分\n\n$$\\int u\\sqrt{u^{2}+1}\\mathrm{d}u=\\frac13(u^{2}+1)^{3/2},$$\n\n$$\\int\\sqrt{u^{2}+1}\\mathrm{d}u=\\frac u2\\sqrt{u^{2}+1}+\\frac12\\ln\\left(u+\\sqrt{u^{2}+1}\\right).$$\n\n### 结果\n\n$$I=\\frac{(x^{2}+2x+2)^{3/2}}{3}-\\frac{x+1}{2}\\sqrt{x^{2}+2x+2}-\\frac12\\ln\\left(x+1+\\sqrt{x^{2}+2x+2}\\right)+C.$$"
+  },
+  {
+    "title": "$\\sin^{3}x\\cos^{3}x$ 化成一个 $\\csc^{3}$",
+    "statement": "求不定积分\n\n$$\\int\\frac{\\mathrm{d}x}{\\sin^{3}x\\cos^{3}x}.$$",
+    "tags": ["不定积分", "三角变形", "递推积分"],
+    "thinking": 7, "difficulty": 7, "calc": 6,
+    "source": "第一批题单 · 手写",
+    "hints": ["先合并：$\\sin^{3}x\\cos^{3}x=\\frac{\\sin^{3}2x}{8}$", "于是 $I=8\\int\\csc^{3}(2x)\\mathrm{d}x$", "$\\int\\csc^{3}u\\,\\mathrm{d}u=-\\frac12\\csc u\\cot u+\\frac12\\ln\\left|\\tan\\frac u2\\right|$"],
+    "answer": "$2\\ln|\\tan x|-\\dfrac{2\\cos 2x}{\\sin^{2}2x}+C$",
+    "solution": "### 化成二倍角\n\n$$\\sin^{3}x\\cos^{3}x=(\\sin x\\cos x)^{3}=\\left(\\frac{\\sin 2x}{2}\\right)^{3}=\\frac{\\sin^{3}2x}{8},$$\n\n所以\n\n$$I=8\\int\\frac{\\mathrm{d}x}{\\sin^{3}2x}=4\\int\\csc^{3}u\\,\\mathrm{d}u\\quad(u=2x).$$\n\n### 三次方的余割用分部\n\n$$\\int\\csc^{3}u\\,\\mathrm{d}u=-\\frac12\\csc u\\cot u+\\frac12\\ln\\left|\\tan\\frac u2\\right|,$$\n\n它由 $\\int\\csc u\\,\\mathrm{d}u=\\ln\\left|\\tan\\dfrac u2\\right|$ 分部一次「自循环」得到。\n\n### 结果\n\n$$I=2\\ln\\left|\\tan x\\right|-\\frac{2\\cos 2x}{\\sin^{2}2x}+C.$$\n\n> 分母是 $\\sin^{m}x\\cos^{n}x$ 且 $m,n$ 都是奇数时，一律先化成 $\\sin 2x$ 的幂。"
+  },
+  {
+    "title": "对数里套根号，导数反而干净",
+    "statement": "求不定积分\n\n$$\\int x^{2}\\ln\\left(x+\\sqrt{1+x^{2}}\\right)\\mathrm{d}x.$$",
+    "tags": ["不定积分", "分部积分", "换元积分"],
+    "thinking": 7, "difficulty": 7, "calc": 7,
+    "source": "第一批题单 · 印刷",
+    "hints": ["关键：$\\left(\\ln\\left(x+\\sqrt{1+x^{2}}\\right)\\right)'=\\frac{1}{\\sqrt{1+x^{2}}}$", "分部后要算 $\\int\\frac{x^{3}}{\\sqrt{1+x^{2}}}\\mathrm{d}x$，令 $t=\\sqrt{1+x^{2}}$", "$x^{2}=t^{2}-1$，积分变成 $\\int(t^{2}-1)\\mathrm{d}t$"],
+    "answer": "$\\dfrac{x^{3}}{3}\\ln\\left(x+\\sqrt{1+x^{2}}\\right)-\\dfrac{(1+x^{2})^{3/2}}{9}+\\dfrac{\\sqrt{1+x^{2}}}{3}+C$",
+    "solution": "### 先看清对数的导数\n\n$$\\frac{\\mathrm{d}}{\\mathrm{d}x}\\ln\\left(x+\\sqrt{1+x^{2}}\\right)=\\frac{1}{\\sqrt{1+x^{2}}}.$$\n\n取 $u=\\ln\\left(x+\\sqrt{1+x^{2}}\\right),\\ \\mathrm{d}v=x^{2}\\mathrm{d}x$：\n\n$$I=\\frac{x^{3}}{3}\\ln\\left(x+\\sqrt{1+x^{2}}\\right)-\\frac13\\int\\frac{x^{3}}{\\sqrt{1+x^{2}}}\\mathrm{d}x.$$\n\n### 剩下的积分\n\n令 $t=\\sqrt{1+x^{2}}$，则 $t\\,\\mathrm{d}t=x\\,\\mathrm{d}x$，$x^{2}=t^{2}-1$：\n\n$$\\int\\frac{x^{3}}{\\sqrt{1+x^{2}}}\\mathrm{d}x=\\int(t^{2}-1)\\mathrm{d}t=\\frac{(1+x^{2})^{3/2}}{3}-\\sqrt{1+x^{2}}.$$\n\n### 结果\n\n$$I=\\frac{x^{3}}{3}\\ln\\left(x+\\sqrt{1+x^{2}}\\right)-\\frac{(1+x^{2})^{3/2}}{9}+\\frac{\\sqrt{1+x^{2}}}{3}+C.$$"
+  },
+  {
+    "title": "分母是二次式的平方",
+    "statement": "求不定积分\n\n$$\\int\\frac{x^{2}+2}{\\left(x^{2}+x+1\\right)^{2}}\\,\\mathrm{d}x.$$",
+    "tags": ["不定积分", "有理函数积分", "配方"],
+    "thinking": 7, "difficulty": 7, "calc": 8,
+    "source": "第一批题单 · 印刷",
+    "hints": ["把分子写成 $\\alpha(x^{2}+x+1)+\\beta(2x+1)+\\gamma$，拆成三项", "$(2x+1)/(x^{2}+x+1)^{2}$ 直接凑微分", "只剩 $\\int\\frac{\\mathrm{d}x}{(x^{2}+x+1)^{2}}$，配方用递推公式"],
+    "answer": "$\\dfrac{4}{\\sqrt3}\\arctan\\dfrac{2x+1}{\\sqrt3}+\\dfrac{x+1}{x^{2}+x+1}+C$",
+    "solution": "### 拆分子\n\n设 $x^{2}+2=\\alpha(x^{2}+x+1)+\\beta(2x+1)+\\gamma$，比较系数得 $\\alpha=1,\\ \\beta=-\\dfrac12,\\ \\gamma=\\dfrac32$。于是\n\n$$I=\\int\\frac{\\mathrm{d}x}{x^{2}+x+1}-\\frac12\\int\\frac{2x+1}{(x^{2}+x+1)^{2}}\\mathrm{d}x+\\frac32\\int\\frac{\\mathrm{d}x}{(x^{2}+x+1)^{2}}.$$\n\n### 逐项\n\n$$\\int\\frac{\\mathrm{d}x}{x^{2}+x+1}=\\frac{2}{\\sqrt3}\\arctan\\frac{2x+1}{\\sqrt3},$$\n\n$$\\int\\frac{2x+1}{(x^{2}+x+1)^{2}}\\mathrm{d}x=-\\frac{1}{x^{2}+x+1},$$\n\n$$\\int\\frac{\\mathrm{d}x}{(x^{2}+x+1)^{2}}=\\frac{2x+1}{3(x^{2}+x+1)}+\\frac{4}{3\\sqrt3}\\arctan\\frac{2x+1}{\\sqrt3}.$$\n\n（最后一项由 $u=x+\\dfrac12$、$c=\\dfrac{\\sqrt3}{2}$ 的公式 $\\int\\dfrac{\\mathrm{d}u}{(u^{2}+c^{2})^{2}}=\\dfrac{u}{2c^{2}(u^{2}+c^{2})}+\\dfrac{1}{2c^{3}}\\arctan\\dfrac uc$ 得到。）\n\n### 合并\n\n$$I=\\frac{4}{\\sqrt3}\\arctan\\frac{2x+1}{\\sqrt3}+\\frac{x+1}{x^{2}+x+1}+C.$$\n\n> 结果里没有对数项，说明拆分时二次因式恰好被完全吸收——这是可以自检的信号。"
+  },
+  {
+    "title": "万能代换对付三角有理式",
+    "statement": "求不定积分\n\n$$\\int\\frac{\\sin x}{\\sin x-2\\cos x+2}\\,\\mathrm{d}x.$$",
+    "tags": ["不定积分", "万能代换", "有理函数积分"],
+    "thinking": 8, "difficulty": 8, "calc": 7,
+    "source": "第一批题单 · 印刷",
+    "hints": ["三角有理式，先试万能代换 $t=\\tan\\frac x2$", "代换后分母化简成 $\\frac{2t(2t+1)}{1+t^{2}}$，很干净", "剩下 $2\\int\\frac{\\mathrm{d}t}{(2t+1)(1+t^{2})}$ 做部分分式"],
+    "answer": "$\\dfrac45\\ln\\left|2\\sin\\dfrac x2+\\cos\\dfrac x2\\right|+\\dfrac x5+C$",
+    "solution": "### 万能代换\n\n令 $t=\\tan\\dfrac x2$，则\n\n$$\\sin x=\\frac{2t}{1+t^{2}},\\quad \\cos x=\\frac{1-t^{2}}{1+t^{2}},\\quad \\mathrm{d}x=\\frac{2\\,\\mathrm{d}t}{1+t^{2}}.$$\n\n### 化简\n\n分母\n\n$$\\sin x-2\\cos x+2=\\frac{2t-2(1-t^{2})+2(1+t^{2})}{1+t^{2}}=\\frac{4t^{2}+2t}{1+t^{2}}=\\frac{2t(2t+1)}{1+t^{2}}.$$\n\n于是\n\n$$I=\\int\\frac{2t/(1+t^{2})}{2t(2t+1)/(1+t^{2})}\\cdot\\frac{2\\,\\mathrm{d}t}{1+t^{2}}=2\\int\\frac{\\mathrm{d}t}{(2t+1)(1+t^{2})}.$$\n\n### 部分分式\n\n$$\\frac{2}{(2t+1)(1+t^{2})}=\\frac{8/5}{2t+1}+\\frac{-4t/5+2/5}{1+t^{2}},$$\n\n积分得\n\n$$I=\\frac45\\ln|2t+1|-\\frac25\\ln(1+t^{2})+\\frac25\\arctan t.$$\n\n### 化回 $x$\n\n用 $\\ln|2t+1|+\\ln\\left|\\cos\\dfrac x2\\right|=\\ln\\left|2\\sin\\dfrac x2+\\cos\\dfrac x2\\right|$ 与 $\\arctan\\left(\\tan\\dfrac x2\\right)=\\dfrac x2$：\n\n$$I=\\frac45\\ln\\left|2\\sin\\frac x2+\\cos\\frac x2\\right|+\\frac x5+C.$$\n\n> 万能代换后如果分母能整体约掉 $1+t^{2}$，说明这条路选对了。"
+  },
+  {
+    "title": "分部之后剩下 $\\frac{1}{x(1+x^{2})}$",
+    "statement": "求不定积分\n\n$$\\int\\frac{x\\ln x}{\\left(1+x^{2}\\right)^{2}}\\,\\mathrm{d}x.$$",
+    "tags": ["不定积分", "分部积分", "有理函数积分"],
+    "thinking": 6, "difficulty": 6, "calc": 7,
+    "source": "第一批题单 · 印刷",
+    "hints": ["先算 $\\int\\frac{x\\,\\mathrm{d}x}{(1+x^{2})^{2}}=-\\frac{1}{2(1+x^{2})}$", "分部后剩 $\\frac12\\int\\frac{\\mathrm{d}x}{x(1+x^{2})}$", "把它拆成 $\\frac1x-\\frac{x}{1+x^{2}}$"],
+    "answer": "$-\\dfrac{\\ln x}{2(1+x^{2})}+\\dfrac12\\ln x-\\dfrac14\\ln(1+x^{2})+C$",
+    "solution": "### 先把 $\\dfrac{x}{(1+x^{2})^{2}}$ 积出来\n\n$$\\int\\frac{x\\,\\mathrm{d}x}{(1+x^{2})^{2}}=-\\frac{1}{2(1+x^{2})}.$$\n\n分部积分（取 $u=\\ln x$）：\n\n$$I=-\\frac{\\ln x}{2(1+x^{2})}+\\frac12\\int\\frac{\\mathrm{d}x}{x(1+x^{2})}.$$\n\n### 拆最后一项\n\n$$\\frac{1}{x(1+x^{2})}=\\frac1x-\\frac{x}{1+x^{2}},$$\n\n$$\\int\\frac{\\mathrm{d}x}{x(1+x^{2})}=\\ln x-\\frac12\\ln(1+x^{2}).$$\n\n### 结果\n\n$$I=-\\frac{\\ln x}{2(1+x^{2})}+\\frac12\\ln x-\\frac14\\ln(1+x^{2})+C.$$"
+  },
+  {
+    "title": "$e^{x}$ 乘上去，就去找 $f+f'$",
+    "statement": "求不定积分\n\n$$\\int e^{x}\\frac{x^{2}+1}{(x+1)^{2}}\\,\\mathrm{d}x.$$",
+    "tags": ["不定积分", "分部积分", "凑微分"],
+    "thinking": 7, "difficulty": 7, "calc": 5,
+    "source": "第一批题单 · 印刷",
+    "hints": ["关键恒等式：$\\int e^{x}(f+f')\\mathrm{d}x=e^{x}f$", "试 $f=\\frac{x-1}{x+1}$，则 $f'=\\frac{2}{(x+1)^{2}}$", "验证 $f+f'=\\frac{x^{2}+1}{(x+1)^{2}}$"],
+    "answer": "$\\dfrac{x-1}{x+1}e^{x}+C$",
+    "solution": "### 找 $f$ 使 $f+f'$ 等于被积的代数部分\n\n设\n\n$$\\frac{x^{2}+1}{(x+1)^{2}}=f+f'.$$\n\n试 $f=\\dfrac{x-1}{x+1}$，则 $f'=\\dfrac{2}{(x+1)^{2}}$，而\n\n$$f+f'=\\frac{(x-1)(x+1)+2}{(x+1)^{2}}=\\frac{x^{2}+1}{(x+1)^{2}}.$$\n\n### 用 $\\int e^{x}(f+f')\\mathrm{d}x=e^{x}f$\n\n$$I=\\int e^{x}(f+f')\\mathrm{d}x=e^{x}f+C=\\frac{x-1}{x+1}e^{x}+C.$$\n\n> 这类题不需要分部积分。看到 $e^{x}$ 乘一个有理式，先想「它是某个 $e^{x}f$ 的导数」，比硬算快得多。"
+  }
+]

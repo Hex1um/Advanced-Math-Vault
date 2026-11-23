@@ -1,0 +1,8 @@
+node_modules/
+data/db.json
+data/.ui-db.json
+data/.smoke-db.json
+data/*.tmp
+data/*.broken-*
+shots/
+.DS_Store

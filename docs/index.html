@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>高数好题收藏室</title>
+<meta name="description" content="高等数学好题收藏室：每道题经人工审核入库，标注考点与思维量/难度/计算量，含每日一题、答疑区与 AI 答疑。" />
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%232f6fed'/%3E%3Ctext x='32' y='44' font-size='34' font-family='Georgia,serif' fill='white' text-anchor='middle'%3E%E2%88%AB%3C/text%3E%3C/svg%3E" />
+<link rel="stylesheet" href="./vendor/katex/katex.min.css" />
+<link rel="stylesheet" href="./assets/style.css?v=0.2.0" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#/problems">
+      <span class="brand-mark">
+        <svg viewBox="0 0 32 32" width="18" height="18" aria-hidden="true">
+          <path d="M6 22c4 0 6-14 10-14s5 10 10 10" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+          <circle cx="26" cy="18" r="2.2" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="brand-text"><b>好题收藏室</b><i>高等数学</i></span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#/problems" data-nav="problems">题库</a>
+      <a href="#/daily" data-nav="daily">每日一题</a>
+      <a href="#/forum" data-nav="forum">答疑区</a>
+      <a href="#/generate" data-nav="generate">AI 出题</a>
+      <a href="#/submit" data-nav="submit">投稿</a>
+    </nav>
+    <div class="topbar-right" id="userArea"></div>
+  </div>
+</header>
+
+<main id="view" class="view"></main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>高数好题收藏室</span>
+    <span class="sep">|</span>
+    <span>所有题目经人工审核后入库</span>
+    <span class="sep">|</span>
+    <span id="footerStats">—</span>
+    <span class="sep">|</span>
+    <span>公式由 KaTeX 渲染</span>
+  </div>
+</footer>
+
+<div id="modal-root"></div>
+<div id="overlay-root"></div>
+<div id="toast-root" class="toast-root" aria-live="polite"></div>
+
+<script src="./vendor/katex/katex.min.js"></script>
+<script src="./vendor/katex/auto-render.min.js"></script>
+<script src="./js/config.js"></script>
+<script src="./js/api.js?v=0.2.0"></script>
+<script src="./js/md.js?v=0.2.0"></script>
+<script src="./js/ui.js?v=0.2.0"></script>
+<script src="./js/views/library.js?v=0.2.0"></script>
+<script src="./js/views/problem.js?v=0.2.0"></script>
+<script src="./js/views/daily.js?v=0.2.0"></script>
+<script src="./js/views/forum.js?v=0.2.0"></script>
+<script src="./js/views/generate.js?v=0.2.0"></script>
+<script src="./js/views/submit.js?v=0.2.0"></script>
+<script src="./js/views/admin.js?v=0.2.0"></script>
+<script src="./js/free-llm.js?v=0.2.0"></script>
+<script src="./js/views/chat.js?v=0.2.0"></script>
+<script src="./js/app.js?v=0.2.0"></script>
+</body>
+</html>
