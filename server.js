@@ -29,6 +29,7 @@ function emptyDb() {
     sessions: {},
     daily: {},
     submissions: [],
+    feedbacks: [],
     settings: {
       llm: {
         baseUrl: process.env.LLM_BASE_URL || 'https://api.deepseek.com/v1',
@@ -37,7 +38,7 @@ function emptyDb() {
       },
       site: SITE_NAME
     },
-    meta: { seq: 1001, postSeq: 1, replySeq: 1 }
+    meta: { seq: 1001, postSeq: 1, replySeq: 1, feedbackSeq: 1 }
   };
 }
 
@@ -61,6 +62,8 @@ function loadDb() {
       if (!Array.isArray(db.users)) db.users = [];
       if (!db.sessions || typeof db.sessions !== 'object') db.sessions = {};
       if (!Array.isArray(db.submissions)) db.submissions = [];
+      if (!Array.isArray(db.feedbacks)) db.feedbacks = [];
+      if (!db.meta.feedbackSeq) db.meta.feedbackSeq = 1;
       db.problems.forEach((p) => {
         if (typeof p.scoreSum !== 'number') p.scoreSum = 0;
         if (typeof p.scoreCount !== 'number') p.scoreCount = 0;
@@ -1081,6 +1084,109 @@ function scheduleForumReply(postId) {
   }, 900);
 }
 
+/* --------------------------------------------------- 题目反馈：AI 先审阅 */
+
+const FEEDBACK_TYPES = {
+  wrong_answer: '答案/解析有误',
+  wrong_statement: '题干有误或不完整',
+  score: '三维评分不合理',
+  tags: '标签不准确',
+  other: '其他问题'
+};
+
+/* AI 审阅反馈：判断有效性、归类、给管理员一句摘要。
+   输出用 [SECTION] 分段（避开 JSON 里 LaTeX 反斜杠被吃掉的老坑）。 */
+async function generateFeedbackReview(problem, feedback) {
+  const typeName = FEEDBACK_TYPES[feedback.type] || '其他问题';
+  const sys = {
+    role: 'system',
+    content: [
+      '你是 Advanced-Math-Vault 题库的审题助理。用户提交了一条对题目的反馈，你要先替管理员审阅一遍。',
+      '步骤：1) 判断这条反馈是否有实质内容（有没有指出具体问题）；2) 归类；3) 用一句话给管理员摘要；4) 给一条处理建议。',
+      '输出严格用下面分段格式，不要 JSON、不要代码块、不要多余解释：',
+      '[VALID]', 'yes 或 no',
+      '[CATEGORY]', '一个词：答案错误 / 题干错误 / 评分不当 / 标签不当 / 有效建议 / 无效反馈',
+      '[SUMMARY]', '一句话（≤60字），说清用户指出了什么问题',
+      '[ADVICE]', '一句话（≤80字），给管理员的处理建议',
+      '',
+      '注意：你只审阅反馈本身，不要重新解这道题，不要因为自己算的结果和用户不同而直接否定用户；',
+      '遇到你也不确定的数学结论，VALID 仍填 yes，并在 ADVICE 里写「建议人工复核」。'
+    ].join('\n')
+  };
+  const parts = [
+    '## 题目 ' + problem.code + '：' + problem.title,
+    '题干：' + String(problem.statement || '').slice(0, 600),
+    '题库答案：' + String(problem.answer || '').slice(0, 300),
+    '用户反馈类型：' + typeName,
+    '用户反馈内容：' + feedback.content
+  ];
+  if (feedback.imageDesc) parts.push('用户附图说明：' + feedback.imageDesc);
+  const userMsg = { role: 'user', content: parts.join('\n\n') };
+
+  const candidates = llmCandidates(null);
+  for (const cfg of candidates) {
+    try {
+      const text = await callLLM(cfg, [sys, userMsg]);
+      const parsed = parseFeedbackReview(text);
+      if (parsed) return Object.assign(parsed, { model: cfg.name, reviewedAt: new Date().toISOString() });
+    } catch (e) {
+      console.error('[feedback-ai] ' + cfg.name + ' 失败:', e.message);
+    }
+  }
+  // 本地兜底：保证反馈仍能转给管理员，只是标注为未做 AI 审阅
+  return {
+    valid: 'unknown', category: '待人工复核',
+    summary: String(feedback.content || '').replace(/\s+/g, ' ').slice(0, 80),
+    advice: 'AI 通道不可用，请管理员直接阅读原文判断。',
+    model: '本地兜底', reviewedAt: new Date().toISOString()
+  };
+}
+
+function parseFeedbackReview(text) {
+  const s = String(text || '');
+  const pick = (name, next) => {
+    const re = new RegExp('\\[' + name + '\\]\\s*([\\s\\S]*?)(?=\\[' + next + '\\]|$)');
+    const m = s.match(re);
+    return m ? m[1].trim() : '';
+  };
+  const validRaw = pick('VALID', 'CATEGORY').toLowerCase();
+  const valid = /^(yes|true|1|是|有效)/.test(validRaw) ? 'yes' : (/^(no|false|0|否|无效)/.test(validRaw) ? 'no' : 'unknown');
+  const category = pick('CATEGORY', 'SUMMARY').slice(0, 40);
+  const summary = pick('SUMMARY', 'ADVICE').slice(0, 240);
+  const advice = pick('ADVICE', 'END').slice(0, 300);
+  if (!summary && !category) return null;
+  return { valid, category, summary, advice };
+}
+
+function scheduleFeedbackReview(feedbackId) {
+  setTimeout(async () => {
+    const fb = db.feedbacks.find((f) => f.id === feedbackId);
+    if (!fb || fb.ai && fb.ai.reviewedAt) return;
+    const problem = db.problems.find((p) => p.code === fb.code);
+    if (!problem) return;
+    let review;
+    try {
+      review = await generateFeedbackReview(problem, fb);
+    } catch (e) {
+      review = { valid: 'unknown', category: '待人工复核', summary: fb.content.slice(0, 80), advice: 'AI 审阅异常，请人工判断。', model: '异常兜底', reviewedAt: new Date().toISOString() };
+    }
+    const target = db.feedbacks.find((f) => f.id === feedbackId);
+    if (!target) return;
+    target.ai = review;
+    saveDb();
+  }, 700);
+}
+
+function publicFeedback(f, user) {
+  return {
+    id: f.id, code: f.code, type: f.type, typeName: FEEDBACK_TYPES[f.type] || '其他问题',
+    content: f.content, createdAt: f.createdAt,
+    ai: f.ai || null,
+    status: f.status || 'open',
+    isMine: !!(user && f.userId === user.id)
+  };
+}
+
 /* --------------------------------------------------------------- 路由表 */
 
 const RATE_RULES = [
@@ -1089,6 +1195,7 @@ const RATE_RULES = [
   [/^\/api\/ai\/chat$/, 40, 10 * 60 * 1000, '今天的提问有点多，歇一会儿再来'],
   [/^\/api\/submit$/, 20, 10 * 60 * 1000, '投稿太频繁了，先等等'],
   [/^\/api\/forum$/, 30, 10 * 60 * 1000, '发帖太频繁了，先等等'],
+  [/^\/api\/problems\/[^/]+\/feedback$/, 12, 10 * 60 * 1000, '反馈提交太频繁了，先等等'],
   [/^\/api\/ai\/generate$/, 12, 60 * 60 * 1000, 'AI 出题每小时最多 12 次'],
   [/\/answer$/, 40, 60 * 60 * 1000, '判题刷得太快了，歇一会儿']
 ];
@@ -1119,6 +1226,7 @@ async function handleApi(req, res, pathname, query) {
         posts: db.posts.length,
         solves: solvedTotal,
         pending: db.problems.filter((p) => p.status === 'pending').length,
+        feedback: db.feedbacks.filter((f) => (f.status || 'open') === 'open').length,
         tags: allTags().length
       },
       llm: {
@@ -1263,6 +1371,42 @@ async function handleApi(req, res, pathname, query) {
     if (!p) return fail(res, 404, '题目不存在');
     if (p.status !== 'approved' && !(user && (user.role === 'admin' || user.id === p.authorId))) {
       return fail(res, 404, '题目不存在');
+    }
+
+    /* 题目反馈：用户提交 → AI 先审阅 → 再转管理员 */
+    if (sub === '/feedback' && method === 'POST') {
+      if (!user) return fail(res, 401, '请先登录再提交反馈');
+      const body = await readBody(req);
+      const content = String(body.content || '').trim();
+      const type = FEEDBACK_TYPES[body.type] ? String(body.type) : 'other';
+      if (content.length < 6) return fail(res, 400, '反馈内容至少 6 个字，请说清是哪一步有问题');
+      const imageDesc = String(body.imageDesc || '').slice(0, 200);
+      const fb = {
+        id: db.meta.feedbackSeq++,
+        code: p.code,
+        type,
+        content: content.slice(0, 2000),
+        imageDesc,
+        userId: user.id,
+        userName: user.name,
+        createdAt: new Date().toISOString(),
+        status: 'open',
+        ai: null,
+        adminNote: '',
+        handledAt: null,
+        handlerName: ''
+      };
+      db.feedbacks.push(fb);
+      saveDb();
+      logActivity(user, '反馈了题目 ' + p.code, p.code);
+      scheduleFeedbackReview(fb.id);
+      return send(res, 200, { ok: true, id: fb.id, message: '反馈已提交，AI 审阅后会转给管理员' });
+    }
+
+    if (sub === '/feedback' && method === 'GET') {
+      if (!user) return fail(res, 401, '请先登录');
+      const mine = db.feedbacks.filter((f) => f.code === p.code && f.userId === user.id);
+      return send(res, 200, { ok: true, items: mine.map((f) => publicFeedback(f, user)) });
     }
 
     if (!sub && method === 'GET') {
@@ -1814,7 +1958,8 @@ async function handleApi(req, res, pathname, query) {
         exportedAt: new Date().toISOString(),
         problems: db.problems,
         posts: db.posts,
-        daily: db.daily
+        daily: db.daily,
+        feedbacks: db.feedbacks
       };
       const body = JSON.stringify(payload, null, 2);
       res.writeHead(200, {
@@ -1852,6 +1997,50 @@ async function handleApi(req, res, pathname, query) {
         ok: true,
         items: db.problems.filter((p) => p.status === 'rejected').map((p) => ({ code: p.code, title: p.title, rejectReason: p.rejectReason }))
       });
+    }
+
+    /* 题目反馈：只把 AI 审阅过的转给管理员；未审阅的单独计数 */
+    if (pathname === '/api/admin/feedbacks' && method === 'GET') {
+      const status = String(query.status || 'all');
+      let list = db.feedbacks.slice();
+      if (status !== 'all') list = list.filter((f) => (f.status || 'open') === status);
+      list.sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
+      const reviewed = list.filter((f) => f.ai && f.ai.reviewedAt);
+      const pending = list.filter((f) => !f.ai || !f.ai.reviewedAt);
+      const withTitle = (f) => {
+        const pr = db.problems.find((p) => p.code === f.code);
+        return Object.assign(publicFeedback(f, user), { title: pr ? pr.title : '', tags: pr ? pr.tags : [] });
+      };
+      return send(res, 200, {
+        ok: true,
+        items: reviewed.map(withTitle),
+        pending: pending.map(withTitle),
+        stats: {
+          total: db.feedbacks.length,
+          open: db.feedbacks.filter((f) => (f.status || 'open') === 'open').length,
+          reviewing: pending.length
+        }
+      });
+    }
+
+    const fbMatch = pathname.match(/^\/api\/admin\/feedback\/(\d+)$/);
+    if (fbMatch && method === 'POST') {
+      const fb = db.feedbacks.find((f) => f.id === Number(fbMatch[1]));
+      if (!fb) return fail(res, 404, '反馈不存在');
+      const body = await readBody(req);
+      const action = String(body.action || '');
+      if (action === 'resolve' || action === 'ignore') {
+        fb.status = action === 'resolve' ? 'resolved' : 'ignored';
+        fb.adminNote = String(body.note || '').slice(0, 500);
+        fb.handledAt = new Date().toISOString();
+        fb.handlerName = user.name;
+      } else if (action === 'reopen') {
+        fb.status = 'open'; fb.adminNote = ''; fb.handledAt = null; fb.handlerName = '';
+      } else {
+        return fail(res, 400, '未知操作');
+      }
+      saveDb();
+      return send(res, 200, { ok: true });
     }
   }
 

@@ -9,6 +9,62 @@
     return '<div class="field"><label>' + name + '</label><input type="number" min="1" max="10" value="' + value + '" data-f="' + name + '" /></div>';
   }
 
+  async function loadFeedback() {
+    const wrap = document.getElementById('feedbackList');
+    if (!wrap) return;
+    try {
+      const d = await window.API.get('/api/admin/feedbacks');
+      const cnt = document.getElementById('fbCount');
+      if (cnt) cnt.textContent = d.stats.open + ' 条待处理';
+      const reviewing = document.getElementById('fbReviewing');
+      if (reviewing) reviewing.textContent = d.stats.reviewing ? ('AI 正在审阅 ' + d.stats.reviewing + ' 条，稍后刷新即可看到') : '';
+
+      const Item = function (f) {
+        const ai = f.ai || {};
+        const validTag = ai.valid === 'no' ? '<span class="tag">疑似无效</span>'
+          : ai.valid === 'yes' ? '<span class="tag gold">有效反馈</span>' : '<span class="tag">待复核</span>';
+        return '<div class="review-item" data-fid="' + f.id + '" style="padding:14px;margin-bottom:12px;border:1px solid var(--border,#dde);border-radius:8px">'
+          + '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'
+          + '<a class="mono" href="#/problem/' + f.code + '">' + f.code + '</a>'
+          + '<span class="tag">' + window.Md.esc(f.typeName || '其他') + '</span>' + validTag
+          + '<span class="tag">' + window.Md.esc(ai.category || '未分类') + '</span>'
+          + '<span class="small muted">' + window.Md.esc(f.userName || '用户') + ' · ' + window.UI.fmtDate(f.createdAt) + '</span>'
+          + (f.status !== 'open' ? '<span class="tag">' + (f.status === 'resolved' ? '已处理' : '已忽略') + '</span>' : '')
+          + '</div>'
+          + '<div class="small muted" style="margin:8px 0 4px">题目：' + window.Md.inlineTex(f.title || '') + '</div>'
+          + '<div style="margin:8px 0"><b>用户原文：</b>' + window.Md.esc(f.content) + '</div>'
+          + (ai.summary ? '<div class="small" style="margin:6px 0"><b>AI 摘要：</b>' + window.Md.esc(ai.summary) + '</div>' : '')
+          + (ai.advice ? '<div class="small" style="margin:6px 0"><b>AI 建议：</b>' + window.Md.esc(ai.advice) + '</div>' : '')
+          + '<div class="small muted" style="margin:6px 0">审阅模型：' + window.Md.esc(ai.model || '—') + '</div>'
+          + '<div class="field" style="margin-top:8px"><input class="fb-note" placeholder="处理备注（选填）" value="' + window.Md.esc(f.adminNote || '') + '" /></div>'
+          + '<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">'
+          + '<button class="btn btn-sm btn-ok" data-fact="resolve">标记已处理</button>'
+          + '<button class="btn btn-sm" data-fact="ignore">忽略</button>'
+          + (f.status !== 'open' ? '<button class="btn btn-sm" data-fact="reopen">重新打开</button>' : '')
+          + '</div></div>';
+      };
+
+      wrap.innerHTML = d.items.length
+        ? d.items.map(Item).join('')
+        : '<div class="empty" style="padding:18px">暂无 AI 已审阅的反馈。</div>';
+
+      wrap.querySelectorAll('.review-item').forEach(function (node) {
+        node.querySelectorAll('[data-fact]').forEach(function (btn) {
+          btn.addEventListener('click', async function () {
+            const note = (node.querySelector('.fb-note') || {}).value || '';
+            try {
+              await window.API.post('/api/admin/feedback/' + node.dataset.fid, { action: btn.dataset.fact, note: note });
+              window.UI.toast('已更新', 'ok');
+              loadFeedback();
+            } catch (e) { window.UI.toast(e.message, 'err'); }
+          });
+        });
+      });
+    } catch (e) {
+      wrap.innerHTML = window.UI.empty('反馈加载失败', e.message);
+    }
+  }
+
   Views.admin = function (el) {
     if (!St.me) {
       el.innerHTML = '<div class="empty"><b>需要管理员登录</b>第一个注册的账号自动成为管理员。'
@@ -52,12 +108,20 @@
       + '</div>'
 
       + '<div class="card form-card" style="margin-top:22px">'
+      + '<h3 style="margin:0 0 10px;font-size:15px">题目反馈 <span class="tag gold" id="fbCount">0 条待处理</span></h3>'
+      + '<p class="small muted" style="margin:0 0 14px">用户反馈先由 AI 审阅归类，结论与建议随原文一并转到这里。只有 AI 审阅完成的反馈才会出现。</p>'
+      + '<div id="fbReviewing" class="small muted" style="margin-bottom:10px"></div>'
+      + '<div id="feedbackList" class="small muted">加载中…</div>'
+      + '</div>'
+
+      + '<div class="card form-card" style="margin-top:22px">'
       + '<h3 style="margin:0 0 10px;font-size:15px">已驳回</h3><div id="rejectedList" class="small muted">加载中…</div>'
       + '</div>';
 
     loadPending();
     loadRejected();
     loadLLM();
+    loadFeedback();
 
     /* 批量导入 */
     const fileInput = document.getElementById('importFile');

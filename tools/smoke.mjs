@@ -200,7 +200,40 @@ try {
   const denied = await req('/api/admin/pending');
   ok('未登录访问管理接口被拒', denied.status === 403);
 
-  console.log('\n[10] 静态资源与防缓存头');
+  console.log('\n[10] 题目反馈：AI 审阅后转管理员');
+  await req('/api/auth/login', { method: 'POST', body: JSON.stringify({ name: '测试管理员', password: 'smoke456789' }) });
+  const fbShort = await req('/api/problems/HS1001/feedback', { method: 'POST', body: JSON.stringify({ type: 'wrong_answer', content: '错了' }) });
+  ok('反馈内容过短被拒绝', fbShort.status === 400);
+  const fbNoLogin = await fetch(BASE + '/api/problems/HS1001/feedback', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content: '没有登录也要能挡住' })
+  });
+  ok('未登录提交反馈被拒', fbNoLogin.status === 401);
+  const fb = await req('/api/problems/HS1001/feedback', {
+    method: 'POST',
+    body: JSON.stringify({ type: 'wrong_answer', content: '解析第二步的泰勒展开系数似乎不对，建议核对 x³ 项的符号。' })
+  });
+  ok('反馈提交成功', fb.json.ok && fb.json.id > 0);
+  const myFb = await req('/api/problems/HS1001/feedback');
+  ok('用户可查看自己的反馈', myFb.json.ok && myFb.json.items.length === 1);
+  // AI 审阅是异步的（NO_FREE=1 时走本地兜底），等它完成
+  let adminFb = null;
+  for (let i = 0; i < 20; i++) {
+    adminFb = await req('/api/admin/feedbacks');
+    if (adminFb.json.items && adminFb.json.items.length) break;
+    await sleep(200);
+  }
+  ok('管理员收到 AI 审阅后的反馈', adminFb.json.items && adminFb.json.items.length === 1, JSON.stringify(adminFb.json).slice(0, 160));
+  ok('反馈带 AI 分类摘要', !!(adminFb.json.items && adminFb.json.items[0].ai && adminFb.json.items[0].ai.summary));
+  ok('AI 审阅完成前不出现在管理员列表', adminFb.json.pending !== undefined);
+  const fbId = adminFb.json.items[0].id;
+  const handled = await req('/api/admin/feedback/' + fbId, { method: 'POST', body: JSON.stringify({ action: 'resolve', note: '已核对并修正' }) });
+  ok('管理员可标记已处理', handled.json.ok);
+  const fbAfter = await req('/api/admin/feedbacks');
+  ok('处理后统计更新', fbAfter.json.stats.open === 0, JSON.stringify(fbAfter.json.stats));
+  const reexport = await req('/api/admin/export');
+  ok('导出包含反馈数据', /"feedbacks"/.test(reexport.text));
+
+  console.log('\n[11] 静态资源与防缓存头');
   const html = await fetch(BASE + '/');
   ok('首页 200', html.status === 200);
   ok('首页 no-store', /no-store/.test(html.headers.get('cache-control') || ''));

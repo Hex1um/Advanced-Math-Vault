@@ -180,6 +180,70 @@
   }
 
   /* 每道题自己的讨论区：发帖可带图，AI 会自动回一条 */
+  /* 题目反馈：先经 AI 审阅，再转管理员 */
+  function openFeedbackModal(p) {
+    if (!window.UI.requireLogin(null, '登录后才能提交题目反馈')) return;
+    const el = document.createElement('div');
+    const types = [
+      ['wrong_answer', '答案/解析有误'], ['wrong_statement', '题干有误'],
+      ['score', '评分不合理'], ['tags', '标签不准确'], ['other', '其他问题']
+    ];
+    el.innerHTML =
+      '<p class="small muted" style="margin:0 0 12px">反馈会先由 AI 审阅归类，再转交管理员。请写清具体是哪一步、哪一处有问题。</p>'
+      + '<div class="field"><label>反馈类型</label><select id="fbType">'
+      + types.map(function (t) { return '<option value="' + t[0] + '">' + t[1] + '</option>'; }).join('')
+      + '</select></div>'
+      + '<div class="field"><label>反馈内容（至少 6 字）</label><textarea id="fbContent" rows="6" placeholder="例如：解析第二步把 $\\sqrt{x^2+1}$ 写成了 $x+1$，这里应该有条件限制……"></textarea></div>'
+      + '<div class="field"><label>附图中说明（选填，直接传图请使用答疑区）</label><input id="fbImageDesc" placeholder="例如：截图第 3 行公式与题库不一致" maxlength="200" /></div>'
+      + '<div id="fbMsg" class="form-error"></div>'
+      + '<div style="display:flex;gap:10px;margin-top:12px"><button class="btn btn-primary" id="fbSend">提交反馈</button>'
+      + '<button class="btn" id="fbMine">查看我的反馈</button></div>'
+      + '<div id="fbMineList" style="margin-top:14px"></div>';
+    const m = window.UI.modal({ title: '反馈题目 · ' + p.code, sub: 'AI 先审阅，再转管理员', body: el, wide: true });
+
+    function loadMine() {
+      window.API.get('/api/problems/' + p.code + '/feedback').then(function (d) {
+        const box = el.querySelector('#fbMineList');
+        if (!d.items.length) { box.innerHTML = '<div class="small muted">你还没有反馈过这道题。</div>'; return; }
+        box.innerHTML = '<div class="small muted" style="margin-bottom:6px">我的反馈</div>' + d.items.map(function (f) {
+          const ai = f.ai;
+          const badge = !ai ? '<span class="tag">AI 审阅中</span>'
+            : '<span class="tag ' + (ai.valid === 'no' ? '' : 'gold') + '">' + window.Md.esc(ai.category || '已审阅') + '</span>';
+          return '<div class="review-item" style="padding:10px 12px;margin-bottom:8px">'
+            + badge + ' <span class="small muted">' + window.UI.fmtDate(f.createdAt) + '</span>'
+            + '<div style="margin:6px 0">' + window.Md.esc(f.content) + '</div>'
+            + (ai ? '<div class="small muted">AI 摘要：' + window.Md.esc(ai.summary) + '</div>' : '')
+            + '</div>';
+        }).join('');
+      }).catch(function () {});
+    }
+    el.querySelector('#fbMine').addEventListener('click', loadMine);
+    loadMine();
+
+    el.querySelector('#fbSend').addEventListener('click', async function () {
+      const btn = this;
+      const content = el.querySelector('#fbContent').value.trim();
+      const msg = el.querySelector('#fbMsg');
+      if (content.length < 6) { msg.textContent = '反馈内容至少 6 个字'; return; }
+      msg.textContent = '';
+      btn.disabled = true;
+      try {
+        await window.API.post('/api/problems/' + p.code + '/feedback', {
+          type: el.querySelector('#fbType').value,
+          content: content,
+          imageDesc: el.querySelector('#fbImageDesc').value.trim()
+        });
+        window.UI.toast('已提交，AI 审阅后会转给管理员', 'ok');
+        el.querySelector('#fbContent').value = '';
+        loadMine();
+      } catch (e) {
+        msg.textContent = e.message;
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  }
+
   function renderDiscussion(slot, code) {
     if (!slot) return;
     slot.innerHTML =
@@ -301,6 +365,7 @@
         + '    <button class="btn" id="hintBtn">' + window.UI.icon('spark') + ' 先给点提示</button>'
         + '    <button class="btn" id="answerBtn">查看答案</button>'
         + '    <button class="btn btn-ok" id="askBtn">' + window.UI.icon('spark') + ' 问 AI 助教</button>'
+        + '    <button class="btn" id="feedbackBtn" title="反馈题目错误，AI 审阅后转管理员">反馈题目</button>'
         + '  </div>'
         + '  <div id="answerSlot"></div>'
         + '  <div id="discussSlot" style="margin-top:18px"></div>'
@@ -410,6 +475,11 @@
       /* AI 问答 */
       document.getElementById('askBtn').addEventListener('click', function () {
         window.Chat.open({ problemCode: code, title: p.title, statement: p.statement });
+      });
+
+      /* 题目反馈 */
+      document.getElementById('feedbackBtn').addEventListener('click', function () {
+        openFeedbackModal(p);
       });
 
       // 支持 #/problem/HS1001?ask=1 直接进入答疑（可带 q= 预置问题）
