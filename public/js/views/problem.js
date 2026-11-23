@@ -163,7 +163,7 @@
         + '    <div class="score-note"><span>三个维度均为 10 分制，由审题人标注</span><span>难度：' + window.UI.levelOf(p.difficulty).name + '</span></div>'
         + '  </div>'
         + '  <div class="actions" id="actionBar">'
-        + '    <button class="btn btn-primary" id="solveBtn">' + (solved ? '已通过（+' + data.xpRules.base + ' 经验上限）' : '提交答案') + '</button>'
+        + '    <button class="btn btn-primary" id="solveBtn">' + (solved ? '已通过（+' + data.xpRules.base + ' 经验上限）' : '提交解题过程') + '</button>'
         + '    <button class="btn" id="hintBtn">' + window.UI.icon('spark') + ' 先给点提示</button>'
         + '    <button class="btn" id="answerBtn">查看答案</button>'
         + '    <button class="btn btn-ok" id="askBtn">' + window.UI.icon('spark') + ' 问 AI 助教</button>'
@@ -228,12 +228,12 @@
         document.getElementById('hintBtn').disabled = true;
       }
 
-      /* 提交答案 → AI 判题 */
+      /* 提交解题过程 → AI 批改 */
       const solveBtn = document.getElementById('solveBtn');
       solveBtn.disabled = solved;
       if (solved) solveBtn.classList.add('btn-ok');
       solveBtn.addEventListener('click', function () {
-        if (!window.UI.requireLogin(null, '登录后才能提交答案')) return;
+        if (!window.UI.requireLogin(null, '登录后才能提交解题过程')) return;
         openAnswerModal(p, data.xpRules, function (res) {
           solveBtn.textContent = '已通过（+' + res.gained + ' 经验）';
           solveBtn.disabled = true;
