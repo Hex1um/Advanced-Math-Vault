@@ -38,7 +38,7 @@
       + '</div>'
 
       + '<div class="form-section-title">三维评分（思维量/计算量 1-10，难度 1-15）</div>'
-      + rangeRow('thinking', '思维量', 5, '想到解法需要多少洞察')
+      + rangeRow('thinking', '思维量', 5, '只算「想到方法」有多难：套公式的纯计算题给 2-4 分')
       + rangeRow('difficulty', '难度', 5, '综合难度，特别难题可以超过 10')
       + rangeRow('calc', '计算量', 5, '算到底需要多少工作量')
 

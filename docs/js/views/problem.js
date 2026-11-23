@@ -294,7 +294,7 @@
         + '    <div class="score-item"><div class="score-top"><span>思维量</span><b>' + p.thinking + '</b></div><div class="score-track"><div class="score-fill ' + (p.thinking >= 8 ? 'hi' : '') + '" style="width:' + p.thinking * 10 + '%"></div></div></div>'
         + '    <div class="score-item"><div class="score-top"><span>难度</span><b>' + p.difficulty + '</b></div><div class="score-track"><div class="score-fill ' + (p.difficulty >= 10 ? 'hi' : 'mid') + '" style="width:' + Math.min(100, p.difficulty / 15 * 100) + '%"></div></div></div>'
         + '    <div class="score-item"><div class="score-top"><span>计算量</span><b>' + p.calc + '</b></div><div class="score-track"><div class="score-fill" style="width:' + p.calc * 10 + '%"></div></div></div>'
-        + '    <div class="score-note"><span>思维量、计算量为 10 分制；难度上限 15</span><span>难度：' + window.UI.levelOf(p.difficulty).name + '</span></div>'
+        + '    <div class="score-note"><span>思维量 = 想到方法的难度（纯计算题通常 ≤4）；计算量 = 算到底的工作量；难度上限 15</span><span>难度：' + window.UI.levelOf(p.difficulty).name + '</span></div>'
         + '  </div>'
         + '  <div class="actions" id="actionBar">'
         + '    <button class="btn btn-primary" id="solveBtn">' + (solved ? '已通过（+' + data.xpRules.base + ' 经验上限）' : '提交解题过程') + '</button>'
