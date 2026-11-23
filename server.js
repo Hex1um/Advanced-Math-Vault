@@ -34,7 +34,7 @@ function emptyDb() {
         model: process.env.LLM_MODEL || 'deepseek-chat',
         apiKey: process.env.LLM_API_KEY || process.env.DEEPSEEK_API_KEY || ''
       },
-      siteName: SITE_NAME
+      site: SITE_NAME
     },
     meta: { seq: 1001, postSeq: 1, replySeq: 1 }
   };
