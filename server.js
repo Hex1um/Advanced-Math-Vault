@@ -1,5 +1,5 @@
 /**
- * 高数好题收藏室 · 零依赖后端
+ * Advanced-Math-Vault · 零依赖后端
  * 单进程 Node HTTP 服务：账号 / 题库 / 审核 / 答疑区 / 每日一题 / 经验 / LLM 代理
  * 数据落盘：data/db.json（原子写），首次启动自动导入 data/problems.seed.json
  */
@@ -16,6 +16,7 @@ const DATA_DIR = path.join(ROOT, 'data');
 const DB_FILE = process.env.DB_FILE || path.join(DATA_DIR, 'db.json');
 const SEED_FILE = process.env.SEED_FILE || path.join(DATA_DIR, 'problems.seed.json');
 const PORT = Number(process.env.PORT || 8787);
+const SITE_NAME = process.env.SITE_NAME || 'Advanced-Math-Vault';
 const HOST = process.env.HOST || '0.0.0.0';
 
 /* ---------------------------------------------------------------- 数据层 */
@@ -33,7 +34,7 @@ function emptyDb() {
         model: process.env.LLM_MODEL || 'deepseek-chat',
         apiKey: process.env.LLM_API_KEY || process.env.DEEPSEEK_API_KEY || ''
       },
-      siteName: '高数好题收藏室'
+      siteName: SITE_NAME
     },
     meta: { seq: 1001, postSeq: 1, replySeq: 1 }
   };
@@ -947,7 +948,7 @@ async function streamLLM(cfg, messages, onDelta) {
 async function generateForumReply(post, problem) {
   const sys = {
     role: 'system',
-    content: '你是「高数好题收藏室」答疑区的 AI 助教。回答要短（150-300 字）、直接、有可执行的第一步，公式用 $...$。'
+    content: '你是「Advanced-Math-Vault」答疑区的 AI 助教。回答要短（150-300 字）、直接、有可执行的第一步，公式用 $...$。'
       + '不要空泛鼓励，不要重复帖子里已有的内容。如果帖子信息不足，就指出还缺什么。'
   };
   const parts = ['## 帖子：' + post.title, post.body];
@@ -1217,99 +1218,98 @@ async function handleApi(req, res, pathname, query) {
     }
 
     if (sub === '/answer' && method === 'POST') {
-      if (!user) return fail(res, 401, '登录后才能提交答案');
+      if (!user) return fail(res, 401, '登录后才能提交解题过程');
       const body = await readBody(req, 6 * 1024 * 1024);
-      const submitted = String(body.answer || '').trim().slice(0, 2000);
+      const process = String(body.process || body.answer || '').trim().slice(0, 4000);
       const image = typeof body.image === 'string' && body.image.indexOf('data:image/') === 0 ? body.image : '';
-      if (!submitted && !image) return fail(res, 400, '写一下答案，或者上传一张答案照片');
-
       user.solved = user.solved || {};
       const rec = user.solved[p.code];
       if (rec && rec.done) {
-        return send(res, 200, { ok: true, already: true, verdict: 'correct', reason: '这道题之前已经通过了' });
+        return send(res, 200, { ok: true, already: true, verdict: 'correct', comment: '这道题之前已经通过了，不用再交', errors: [], score: 100 });
       }
+
+      if (!process && !image) return fail(res, 400, '把解题过程写下来，或者上传一张过程照片');
+      if (process && process.length < 20) return fail(res, 400, '过程太短了：至少写清用了什么方法、关键几步怎么来的');
 
       p.attemptCount = (p.attemptCount || 0) + 1;
 
-      // 1) 先做规则比对：写法完全一致或数值相等就直接放行，不浪费模型额度
-      let verdict = null;
-      let reason = '';
-      if (submitted && p.answer && answersEquiv(submitted, p.answer)) {
-        verdict = 'correct';
-        reason = '与标准答案一致';
-      }
-
-      // 2) 规则判不了再请模型
-      let judgedBy = verdict ? '规则比对' : '';
-      if (!verdict) {
-        const own = userLlmConfig(body);
-        if (image && !(own && VISION_MODEL.test(own.model))) {
-          saveDb();
-          return send(res, 200, {
-            ok: true, verdict: 'unclear', needVision: true,
-            reason: image
-              ? '当前通道读不了图片：请在「模型」里填支持图片的 Key（如 gpt-4o、qwen-vl、glm-4v、claude、gemini），或把答案打成文字再提交'
-              : '请补充答案'
-          });
-        }
-
-        let usedProvider = '';
-        for (const cfg of llmCandidates(body)) {
-          if (image && !VISION_MODEL.test(cfg.model || '')) continue;
-          try {
-            let msgs = judgeMessages(p, submitted, !!image);
-            if (image) {
-              msgs = [msgs[0], {
-                role: 'user',
-                content: [
-                  { type: 'text', text: msgs[1].content },
-                  { type: 'image_url', image_url: { url: image } }
-                ]
-              }];
-            }
-            const out = await callLLM(cfg, msgs);
-            const parsed = parseVerdict(out);
-            usedProvider = cfg.name;
-            if (parsed.verdict !== 'unclear') { verdict = parsed.verdict; reason = parsed.reason; break; }
-            verdict = 'unclear';
-            reason = parsed.reason || '没看懂你的答案，换个写法再提交一次';
-          } catch (e) {
-            console.error('[judge] ' + cfg.name + ' 失败:', e.message);
-          }
-        }
-        judgedBy = usedProvider || '未判定';
-      }
-
-      if (!verdict || verdict === 'unclear') {
+      const own = userLlmConfig(body);
+      if (image && !(own && VISION_MODEL.test(own.model))) {
         saveDb();
         return send(res, 200, {
-          ok: true,
-          verdict: 'unclear',
-          reason: reason || '暂时无法自动判定，可以换个写法再提交，或先看答案对照',
-          judgedBy
+          ok: true, verdict: 'unclear', needVision: true,
+          comment: '当前通道读不了图片：请在「设置」里填支持图片的 Key（如 gpt-4o、qwen-vl、glm-4v、claude、gemini），或者把过程打成文字再提交',
+          errors: []
         });
       }
 
-      if (verdict === 'correct') {
+      let judged = null;
+      let judgedBy = '';
+      for (const cfg of llmCandidates(body)) {
+        if (image && !VISION_MODEL.test(cfg.model || '')) continue;
+        try {
+          let msgs = judgeMessages(p, process, !!image);
+          if (image) {
+            msgs = [msgs[0], {
+              role: 'user',
+              content: [
+                { type: 'text', text: msgs[1].content },
+                { type: 'image_url', image_url: { url: image } }
+              ]
+            }];
+          }
+          const out = await callLLM(cfg, msgs);
+          const parsed = parseJudge(out);
+          judgedBy = cfg.name;
+          if (parsed.verdict && parsed.verdict !== 'unclear') { judged = parsed; break; }
+        } catch (e) {
+          console.error('[judge] ' + cfg.name + ' 失败:', e.message);
+        }
+      }
+
+      // 所有通道都不可用时，退化为「只看最终答案是否出现」
+      if (!judged) {
+        if (processMatchesAnswer(process, p.answer)) {
+          judged = { verdict: 'correct', score: 100, comment: '未连接到阅卷模型，只核对了最终答案，过程请自己再检查一遍。', errors: [] };
+          judgedBy = '规则比对';
+        } else {
+          saveDb();
+          return send(res, 200, {
+            ok: true, verdict: 'unclear', judgedBy: '未判定',
+            comment: '暂时连不上阅卷模型（免费通道有频率限制），稍后再交一次；想立刻判卷可以在「设置」里填自己的 Key。',
+            errors: []
+          });
+        }
+      }
+
+      const payload = {
+        ok: true,
+        verdict: judged.verdict,
+        score: judged.score,
+        comment: judged.comment || '',
+        errors: judged.errors || [],
+        judgedBy
+      };
+
+      if (judged.verdict === 'correct') {
         const gained = xpForProblem(p, rec);
         user.solved[p.code] = {
           at: (rec && rec.at) || Date.now(),
           done: true,
           revealed: !!(rec && rec.revealed),
           askedAI: !!(rec && rec.askedAI),
-          judged: judgedBy
+          judged: judgedBy,
+          score: judged.score
         };
         user.exp = (user.exp || 0) + gained;
         p.solvedCount = (p.solvedCount || 0) + 1;
         logActivity(user, '做出 ' + p.code + '，+' + gained + ' 经验', p.code);
         saveDb();
-        return send(res, 200, {
-          ok: true, verdict, reason, judgedBy, gained,
-          exp: user.exp, level: levelInfo(user.exp), user: publicUser(user)
-        });
+        return send(res, 200, Object.assign(payload, {
+          gained, exp: user.exp, level: levelInfo(user.exp), user: publicUser(user)
+        }));
       }
 
-      // partial / wrong：不计经验，记录这次尝试
       user.solved[p.code] = {
         at: (rec && rec.at) || Date.now(),
         done: false,
@@ -1317,7 +1317,7 @@ async function handleApi(req, res, pathname, query) {
         askedAI: !!(rec && rec.askedAI)
       };
       saveDb();
-      return send(res, 200, { ok: true, verdict, reason, judgedBy });
+      return send(res, 200, payload);
     }
 
     if (sub === '/solve' && method === 'POST') {
@@ -1690,23 +1690,49 @@ function answersEquiv(student, expected) {
   return false;
 }
 
+function processMatchesAnswer(process, expected) {
+  if (!process || !expected) return false;
+  if (answersEquiv(process, expected)) return true;
+  const target = numericValue(canonAnswer(expected));
+  if (target === null) return canonAnswer(process).indexOf(canonAnswer(expected)) >= 0;
+  const tokens = String(process).match(/-?\d+(?:\.\d+)?(?:\/\d+)?|\\[dt]?frac\{\d+\}\{\d+\}/g) || [];
+  return tokens.some(function (tk) {
+    const v = numericValue(tk);
+    return v !== null && Math.abs(v - target) < 1e-9;
+  });
+}
+
 const VISION_MODEL = /gpt-4o|gpt-4\.1|o3|o4|claude|gemini|qwen.*vl|glm-4v|vision|llava|internvl/i;
 
-function judgeMessages(problem, studentAnswer, hasImage) {
+function judgeMessages(problem, process, hasImage) {
   const sys = [
-    '你是高数阅卷老师，只判对错，不给解法。',
-    '严格输出一行 JSON：{"verdict":"correct|partial|wrong|unclear","reason":"不超过40字的中文理由"}',
+    '你是高等数学阅卷老师，学生交的是完整解题过程，你要逐步核对。',
+    '',
+    '严格按分段格式输出，不要用 JSON、不要代码块、不要额外解释：',
+    '',
+    '[VERDICT]',
+    'correct / partial / wrong 三选一',
+    '[SCORE]',
+    '0-100 的整数',
+    '[COMMENT]',
+    '2-4 句总评：思路对不对、方法是否最优、哪一步是决定性的',
+    '[ERRORS]',
+    '每行一条，格式：位置｜原因',
+    '没有错误就写：无',
+    '',
     '判定标准：',
-    '1. 数学上等价就算 correct（不同写法、合并同类项、等价变形都算对）；',
-    '2. 不定积分必须带任意常数，漏写 +C 判 partial；',
-    '3. 符号错、系数错、漏项判 wrong；',
-    '4. 学生只写了过程没有最终结果、或你无法确认，判 unclear。'
+    '1. 方法与结论都对 → correct；',
+    '2. 思路对但某步算错、漏写 +C、漏讨论、跳步导致不严谨 → partial，并在 [ERRORS] 指明出错的那一步；',
+    '3. 方法根本错了 → wrong，并指出错在哪一步、应该怎么想；',
+    '4. 指出错误要具体到「第几步、把什么写成了什么」，不要只说「计算有误」。',
+    '5. 公式用 $...$ 写，只评价，不要重写整份解答。'
   ].join('\n');
 
   const user = [
     '题目：' + problem.statement,
+    '标准解答：' + (problem.solution || '(未录入解析)'),
     '标准答案：' + (problem.answer || '(未录入)'),
-    '学生答案：' + (studentAnswer ? studentAnswer : '(见图片)')
+    '学生提交的解题过程：' + (process ? process : '(见图片)')
   ].join('\n\n');
 
   return [
@@ -1715,20 +1741,49 @@ function judgeMessages(problem, studentAnswer, hasImage) {
   ];
 }
 
-function parseVerdict(text) {
-  const obj = extractJson(text);
-  let verdict = obj && String(obj.verdict || '').toLowerCase();
-  let reason = obj && String(obj.reason || '').slice(0, 120);
-  if (!['correct', 'partial', 'wrong', 'unclear'].includes(verdict)) {
-    const t = String(text || '');
-    if (/correct|完全正确|答案正确/i.test(t)) verdict = 'correct';
-    else if (/partial|部分正确|漏写|缺少.*常数/i.test(t)) verdict = 'partial';
-    else if (/wrong|错误|不对/i.test(t)) verdict = 'wrong';
-    else verdict = 'unclear';
-    if (!reason) reason = t.replace(/\s+/g, ' ').slice(0, 80);
+function parseJudge(text) {
+  const KEYMAP = { VERDICT: 'verdict', SCORE: 'score', COMMENT: 'comment', ERRORS: 'errors' };
+  const t = String(text || '').replace(/\r/g, '');
+  const re = /^[ \t>*#-]*\[(VERDICT|SCORE|COMMENT|ERRORS)\][ \t:：]*$/gim;
+  const marks = [];
+  let m;
+  while ((m = re.exec(t)) !== null) marks.push({ key: KEYMAP[m[1].toUpperCase()], start: m.index, bodyStart: re.lastIndex });
+
+  if (marks.length) {
+    const obj = { errors: [] };
+    for (let i = 0; i < marks.length; i++) {
+      const cur = marks[i];
+      const stop = i + 1 < marks.length ? marks[i + 1].start : t.length;
+      const body = t.slice(cur.bodyStart, stop).trim();
+      if (cur.key === 'verdict') {
+        const v = body.toLowerCase();
+        obj.verdict = /correct|完全正确/.test(v) ? 'correct' : (/partial|部分/.test(v) ? 'partial' : (/wrong|错误|不对/.test(v) ? 'wrong' : 'unclear'));
+      } else if (cur.key === 'score') {
+        const n = body.match(/\d+/);
+        obj.score = n ? Math.max(0, Math.min(100, Number(n[0]))) : undefined;
+      } else if (cur.key === 'comment') {
+        obj.comment = body;
+      } else {
+        obj.errors = body.split('\n')
+          .map((x) => x.replace(/^\s*(\d+[.、)]|[-*·•])\s*/, '').trim())
+          .filter((x) => x && !/^(无|none|没有|没有错误)[。.]?$/i.test(x));
+      }
+    }
+    if (obj.verdict) {
+      if (obj.score === undefined) obj.score = obj.verdict === 'correct' ? 100 : (obj.verdict === 'partial' ? 60 : 20);
+      return obj;
+    }
   }
-  return { verdict, reason: reason || '' };
+
+  // 兜底：没有分段结构就按关键词粗判
+  const plain = String(text || '');
+  let verdict = 'unclear';
+  if (/完全正确|答案正确|\bcorrect\b/i.test(plain)) verdict = 'correct';
+  else if (/部分正确|\bpartial\b/i.test(plain)) verdict = 'partial';
+  else if (/不正确|错误|\bwrong\b/i.test(plain)) verdict = 'wrong';
+  return { verdict, score: verdict === 'correct' ? 100 : (verdict === 'partial' ? 60 : 20), comment: plain.replace(/\s+/g, ' ').slice(0, 220), errors: [] };
 }
+
 
   /* ---- 出题提示词（给浏览器直连免费通道用） ---- */
   if (pathname === '/api/ai/prompt' && method === 'POST') {
@@ -1937,7 +1992,7 @@ const server = http.createServer(async (req, res) => {
 loadDb();
 
 server.listen(PORT, HOST, () => {
-  console.log('高数好题收藏室 running at http://localhost:' + PORT);
+  console.log(SITE_NAME + ' running at http://localhost:' + PORT);
   console.log('题目数:', db.problems.filter((p) => p.status === 'approved').length, '| 用户数:', db.users.length, '| LLM:', llmConfigured() ? db.settings.llm.model : '本地讲解模式');
 });
 

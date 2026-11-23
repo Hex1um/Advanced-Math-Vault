@@ -19,22 +19,25 @@
   }
 
 
-  /* 提交答案弹窗：文字或图片，交给 AI 判 */
+  /* 提交解题过程：AI 逐步核对，指出出错的位置 */
   function openAnswerModal(p, rules, onPassed) {
     const el = document.createElement('div');
     el.innerHTML =
-      '<div class="judge-tip">写下你的最终答案（LaTeX 或普通算式都行，如 <code>1/2</code>、<code>\\frac{1}{2}</code>），也可以传一张手写照片。不定积分记得带 <code>+C</code>。</div>'
-      + '<div class="field"><label>答案</label><textarea id="ansText" rows="3" placeholder="例如：$x-\\ln(3e^{x}+1)+C$"></textarea></div>'
-      + '<div class="field"><label>或者上传答案照片（可选）</label>'
+      '<div class="judge-tip">交的是<b>完整过程</b>，不是只写答案：写清用了什么方法、每一步的依据、最后的结果。'
+      + 'AI 会逐步核对，指出第一处错在第几步、把什么写成了什么；判对才计经验。</div>'
+      + '<div class="field"><label>解题过程</label>'
+      + '<textarea id="ansProcess" rows="8" placeholder="例如：&#10;1. 令 t=√x，则 x=t²，dx=2t dt&#10;2. 原式 = 2∫t e^t dt&#10;3. 分部积分 = 2(t-1)e^t + C&#10;4. 回代得 2(√x-1)e^{√x}+C"></textarea>'
+      + '<div class="tip">公式可以直接写 LaTeX（如 <code>\\frac{1}{2}</code>）或普通写法（如 <code>1/2</code>、<code>sqrt(x)</code>）。</div></div>'
+      + '<div class="field"><label>或者上传过程照片（可选）</label>'
       + '<input type="file" id="ansFile" accept="image/*" style="display:none" />'
       + '<div class="upload-row"><button type="button" class="btn btn-sm" id="pickImg">选择图片</button>'
-      + '<span class="small muted" id="imgHint">图片判题需要支持视觉的模型（在对话「模型」里配置）</span></div>'
+      + '<span class="small muted" id="imgHint">读图片需要支持视觉的模型（在右上「设置」里配置）</span></div>'
       + '<div id="imgPreview"></div></div>'
-      + '<div class="judge-actions"><button class="btn btn-primary" id="judgeBtn">提交判题</button>'
-      + '<span class="small muted">判对才计入经验，答错可以再交一次</span></div>'
+      + '<div class="judge-actions"><button class="btn btn-primary" id="judgeBtn">提交批改</button>'
+      + '<span class="small muted">答错可以改完再交，不限次数</span></div>'
       + '<div id="judgeResult"></div>';
 
-    const m = window.UI.modal({ title: '提交答案 · ' + p.code, sub: '由 AI 判定正误，规则比对优先', body: el, wide: true });
+    const m = window.UI.modal({ title: '提交解题过程 · ' + p.code, sub: '由 AI 逐步核对并指出错误位置', body: el, wide: true });
     const resultBox = el.querySelector('#judgeResult');
     let image = '';
 
@@ -49,15 +52,15 @@
       reader.onload = function () {
         const img = new Image();
         img.onload = function () {
-          const max = 1280;
+          const max = 1400;
           const scale = Math.min(1, max / Math.max(img.width, img.height));
           const cv = document.createElement('canvas');
           cv.width = Math.round(img.width * scale);
           cv.height = Math.round(img.height * scale);
           cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
-          image = cv.toDataURL('image/jpeg', 0.82);
-          el.querySelector('#imgPreview').innerHTML = '<img src="' + image + '" class="judge-img" alt="答案预览" />';
-          el.querySelector('#imgHint').textContent = '已选择图片，提交后会交给视觉模型';
+          image = cv.toDataURL('image/jpeg', 0.85);
+          el.querySelector('#imgPreview').innerHTML = '<img src="' + image + '" class="judge-img" alt="过程预览" />';
+          el.querySelector('#imgHint').textContent = '已选择图片，提交后交给视觉模型批改';
         };
         img.src = String(reader.result);
       };
@@ -66,23 +69,24 @@
 
     el.querySelector('#judgeBtn').addEventListener('click', async function () {
       const btn = this;
-      const answer = el.querySelector('#ansText').value.trim();
-      if (!answer && !image) { window.UI.toast('写一下答案或传张图片', 'err'); return; }
+      const process = el.querySelector('#ansProcess').value.trim();
+      if (!process && !image) { window.UI.toast('把解题过程写下来，或者传张照片', 'err'); return; }
+      if (process && process.length < 20) { window.UI.toast('过程太短了，写清关键几步（至少 20 字）', 'err'); return; }
       btn.disabled = true;
-      btn.textContent = '判题中…';
-      resultBox.innerHTML = '<div class="judge-result pending"><span class="spinner"></span>正在核对…（免费通道排队时可能十几秒）</div>';
+      btn.textContent = '批改中…';
+      resultBox.innerHTML = '<div class="judge-result pending"><span class="spinner"></span>正在逐步核对…（免费通道排队时可能要十几秒）</div>';
       try {
         const res = await window.API.post('/api/problems/' + p.code + '/answer', {
-          answer: answer,
+          process: process,
           image: image || undefined,
-          llm: window.Chat && window.Chat.llmConfig ? window.Chat.llmConfig() : undefined
+          llm: window.UI.llmConfig()
         });
         renderJudge(res);
       } catch (e) {
         resultBox.innerHTML = '<div class="judge-result wrong">提交失败：' + window.Md.esc(e.message) + '</div>';
       } finally {
         btn.disabled = false;
-        btn.textContent = '提交判题';
+        btn.textContent = '提交批改';
       }
     });
 
@@ -90,28 +94,42 @@
       const map = {
         correct: ['correct', '判定通过'],
         partial: ['partial', '部分正确'],
-        wrong: ['wrong', '不正确'],
+        wrong: ['wrong', '不对'],
         unclear: ['unclear', '暂时判不了']
       };
       const meta = map[res.verdict] || map.unclear;
       let html = '<div class="judge-result ' + meta[0] + '"><b>' + meta[1] + '</b>'
-        + (res.reason ? '<span>' + window.Md.esc(res.reason) + '</span>' : '')
-        + (res.judgedBy ? '<span class="judged-by">判定来源：' + window.Md.esc(res.judgedBy) + '</span>' : '')
+        + (typeof res.score === 'number' ? '<span class="judge-score">' + res.score + ' 分</span>' : '')
+        + (res.judgedBy ? '<span class="judged-by">阅卷：' + window.Md.esc(res.judgedBy) + '</span>' : '')
         + '</div>';
+
+      if (res.comment) {
+        html += '<div class="judge-comment md">' + window.Md.inlineTex(res.comment) + '</div>';
+      }
+
+      if (Array.isArray(res.errors) && res.errors.length) {
+        html += '<div class="judge-errors"><div class="je-head">问题在这儿</div><ol>'
+          + res.errors.map(function (x) { return '<li>' + window.Md.inlineTex(String(x)) + '</li>'; }).join('')
+          + '</ol></div>';
+      } else if (res.verdict === 'correct') {
+        html += '<div class="judge-extra">过程没挑出问题。</div>';
+      }
+
       if (res.verdict === 'correct') {
-        if (res.already) {
-          html += '<div class="judge-extra">这道题之前已经通过了。</div>';
-        } else {
+        if (res.already) html += '<div class="judge-extra">这道题之前已经通过了。</div>';
+        else {
           html += '<div class="judge-extra">+' + res.gained + ' 经验 · 当前 Lv.' + res.level.level + '，总经验 ' + res.exp + '</div>';
           onPassed(res);
         }
-      } else if (res.verdict === 'wrong' || res.verdict === 'partial') {
-        html += '<div class="judge-extra">改一改再交一次；实在做不出来可以点「查看答案」，经验会打折。</div>';
+      } else if (res.verdict === 'partial' || res.verdict === 'wrong') {
+        html += '<div class="judge-extra">照着上面的位置改一遍再交；实在做不出来可以点「查看答案」，经验会打折。</div>';
       } else {
-        html += '<div class="judge-extra">可以换个写法重交，或者点「查看答案」自己对照。</div>';
+        html += '<div class="judge-extra">可以再交一次，或者点「查看答案」自己对照。</div>';
       }
+
       resultBox.innerHTML = html;
-      if (res.verdict === 'correct') {
+      window.Md.renderMath(resultBox);
+      if (res.verdict === 'correct' && !res.already) {
         setTimeout(function () { window.UI.toast('通过，+' + (res.gained || 0) + ' 经验', 'ok'); }, 200);
       }
     }

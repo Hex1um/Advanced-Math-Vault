@@ -322,9 +322,82 @@
     return '<div class="empty"><b>' + ESC(title) + '</b>' + (sub ? ESC(sub) : '') + '</div>';
   }
 
+
+  /* ---------------------------------------------------- 模型通道设置 */
+
+  const LLM_KEY = 'mv_llm_v1';
+
+  function llmConfig() {
+    try {
+      const v = JSON.parse(localStorage.getItem(LLM_KEY) || 'null');
+      return v && v.apiKey ? v : null;
+    } catch (e) { return null; }
+  }
+
+  function saveLlmConfig(cfg) {
+    try {
+      if (cfg) localStorage.setItem(LLM_KEY, JSON.stringify(cfg));
+      else localStorage.removeItem(LLM_KEY);
+    } catch (e) {}
+  }
+
+  function llmSettings() {
+    const cur = llmConfig() || {};
+    const siteReady = !!(window.API.State.llm && window.API.State.llm.configured);
+    const el = document.createElement('div');
+    el.innerHTML =
+      '<div class="small muted" style="margin-bottom:12px">当前通道：<b>'
+      + (cur.apiKey ? '我的 Key · ' + ESC(cur.model || '') : (siteReady ? '站点模型' : '免费通道 · Pollinations'))
+      + '</b></div>'
+      + '<div class="field"><label>接口地址（OpenAI 兼容）</label>'
+      + '<input id="llmBase" value="' + ESC(cur.baseUrl || 'https://api.deepseek.com/v1') + '" placeholder="https://api.deepseek.com/v1" /></div>'
+      + '<div class="field"><label>模型名</label>'
+      + '<input id="llmModel" value="' + ESC(cur.model || 'deepseek-chat') + '" placeholder="deepseek-chat" /></div>'
+      + '<div class="field"><label>API Key</label>'
+      + '<input id="llmKey" type="password" value="' + ESC(cur.apiKey || '') + '" placeholder="sk-..." autocomplete="off" />'
+      + '<div class="tip">只保存在这台设备的浏览器（localStorage），不写进站点数据库，别人看不到。换了设备要重新填。</div></div>'
+      + '<div class="small muted" style="margin:4px 0 14px;line-height:1.8">不填也能用：问答与判卷会走免费公共通道（Pollinations，同一网络 45 秒一次），再不行用内置讲解。<br/>'
+      + '判卷要读手写照片时，模型名需要支持图片，例如 <code>gpt-4o</code>、<code>qwen-vl-max</code>、<code>glm-4v</code>、<code>claude-3-5-sonnet</code>、<code>gemini-1.5-pro</code>。</div>'
+      + '<div style="display:flex;gap:9px;justify-content:flex-end">'
+      + '<button class="btn" id="clearLlm">清除</button>'
+      + '<button class="btn btn-primary" id="saveLlm">保存</button></div>';
+
+    const m = modal({ title: '设置 · 模型通道', sub: '用自己的 Key 可以不受免费通道限速', body: el, wide: true });
+
+    el.querySelector('#saveLlm').addEventListener('click', function () {
+      const baseUrl = el.querySelector('#llmBase').value.trim();
+      const model = el.querySelector('#llmModel').value.trim();
+      const apiKey = el.querySelector('#llmKey').value.trim();
+      if (!apiKey) {
+        saveLlmConfig(null);
+        toast('没填 Key，继续用免费通道', 'ok');
+        m.close();
+        if (window.Chat && window.Chat.refreshModeLabel) window.Chat.refreshModeLabel();
+        return;
+      }
+      saveLlmConfig({ baseUrl: baseUrl || 'https://api.deepseek.com/v1', model: model || 'deepseek-chat', apiKey: apiKey });
+      toast('已保存到本机，问答与判卷都会优先用你的模型', 'ok');
+      m.close();
+      if (window.Chat && window.Chat.refreshModeLabel) window.Chat.refreshModeLabel();
+    });
+
+    el.querySelector('#clearLlm').addEventListener('click', function () {
+      saveLlmConfig(null);
+      toast('已清除，回到免费通道', 'ok');
+      m.close();
+      if (window.Chat && window.Chat.refreshModeLabel) window.Chat.refreshModeLabel();
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const btn = document.getElementById('settingsBtn');
+    if (btn) btn.addEventListener('click', llmSettings);
+  });
+
   window.UI = {
     LEVELS, levelOf, levelBadge, toast, avatar, timeAgo, fmtDate,
     scoreBars, modal, authModal, requireLogin, applyUser, renderHeader,
-    setActiveNav, pagination, icon, empty, ESC
+    setActiveNav, pagination, icon, empty, ESC,
+    llmConfig, saveLlmConfig, llmSettings
   };
 })();

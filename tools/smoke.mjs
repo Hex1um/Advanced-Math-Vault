@@ -103,17 +103,23 @@ try {
   ok('详情不泄露答案', !('solution' in detail.json.problem));
   const reveal = await req('/api/problems/HS1001/reveal', { method: 'POST', body: '{}' });
   ok('查看答案返回解析', reveal.json.ok && reveal.json.solution.length > 50);
-  const wrong = await req('/api/problems/HS1001/answer', { method: 'POST', body: JSON.stringify({ answer: '$x+1+C$' }) });
-  ok('答错不计经验', wrong.json.ok && wrong.json.verdict !== 'correct' && !wrong.json.gained, JSON.stringify(wrong.json).slice(0, 120));
+  const short = await req('/api/problems/HS1001/answer', { method: 'POST', body: JSON.stringify({ process: '1/2' }) });
+  ok('过程太短被拒绝', short.status === 400, JSON.stringify(short.json).slice(0, 100));
+
+  const wrong = await req('/api/problems/HS1001/answer', {
+    method: 'POST',
+    body: JSON.stringify({ process: '我先通分再用洛必达，算了两遍觉得结果应该是 x+1 这个形式，不太确定。' })
+  });
+  ok('过程不对不计经验', wrong.json.ok && wrong.json.verdict !== 'correct' && !wrong.json.gained, JSON.stringify(wrong.json).slice(0, 120));
 
   const right = await req('/api/problems/HS1001/answer', {
     method: 'POST',
-    body: JSON.stringify({ answer: '$1/2$' })
+    body: JSON.stringify({ process: '先通分，再用泰勒展开：tanx-sinx 的主部是 x³/2，所以原极限等于 1/2。' })
   });
-  ok('答案正确判定通过', right.json.verdict === 'correct' && right.json.gained > 0, JSON.stringify(right.json).slice(0, 120));
+  ok('过程正确判定通过', right.json.verdict === 'correct' && right.json.gained > 0, JSON.stringify(right.json).slice(0, 120));
   ok('看答案后经验有折扣', right.json.gained < 60);
-  const right2 = await req('/api/problems/HS1001/answer', { method: 'POST', body: JSON.stringify({ answer: '$1/2$' }) });
-  ok('同题不重复给经验', right2.json.already === true);
+  const right2 = await req('/api/problems/HS1001/answer', { method: 'POST', body: JSON.stringify({ process: '再交一次看看，答案还是 1/2。' }) });
+  ok('同题不重复给经验', right2.json.already === true, JSON.stringify(right2.json).slice(0, 160));
 
   console.log('\n[5] 投稿 → 审核 → 入库');
   const submit = await req('/api/submit', {
