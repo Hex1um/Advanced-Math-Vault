@@ -298,7 +298,7 @@
       const resp = await fetch(window.API.url('/api/ai/chat'), {
         method: 'POST',
         headers: Object.assign({ 'Content-Type': 'application/json' }, window.API.authHeaders()),
-        credentials: 'include',
+        credentials: window.API.sameOrigin() ? 'include' : 'omit',
         cache: 'no-store',
         body: JSON.stringify(body)
       });

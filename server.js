@@ -253,14 +253,23 @@ function applyCors(req, res) {
     res.setHeader('Vary', 'Origin');
   }
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-MV-Token');
   res.setHeader('Access-Control-Max-Age', '86400');
 }
 
 function bearerToken(req) {
   const h = req.headers.authorization || '';
   const m = /^Bearer\s+([A-Za-z0-9]+)$/.exec(h);
-  return m ? m[1] : '';
+  if (m) return m[1];
+  // 有些托管网关会吃掉 Authorization 头，这里再认一个自定义头
+  const alt = req.headers['x-mv-token'];
+  if (alt && /^[A-Za-z0-9]+$/.test(String(alt))) return String(alt);
+  // 最后兜底：托管网关可能把自定义头也过滤掉，允许用 query 传
+  try {
+    const tk = new URL(req.url, 'http://localhost').searchParams.get('tk');
+    if (tk && /^[A-Za-z0-9]+$/.test(tk)) return tk;
+  } catch (e) {}
+  return '';
 }
 
 function clientIp(req) {

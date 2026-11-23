@@ -36,11 +36,16 @@
 
   function authHeaders() {
     const t = token();
-    return t ? { Authorization: 'Bearer ' + t } : {};
+    // 同时带两种头：个别托管网关会过滤 Authorization
+    return t ? { Authorization: 'Bearer ' + t, 'X-MV-Token': t } : {};
+  }
+
+  function sameOrigin() {
+    return !String(cfg().apiBase || '').trim();
   }
 
   async function request(path, options) {
-    const opts = Object.assign({ method: 'GET', credentials: 'include', cache: 'no-store' }, options || {});
+    const opts = Object.assign({ method: 'GET', credentials: sameOrigin() ? 'include' : 'omit', cache: 'no-store' }, options || {});
     opts.headers = Object.assign({}, authHeaders(), opts.headers || {});
     if (opts.body && typeof opts.body !== 'string') {
       opts.body = JSON.stringify(opts.body);
@@ -68,7 +73,7 @@
   }
 
   async function download(path, filename) {
-    const res = await fetch(apiUrl(path), { headers: authHeaders(), credentials: 'include', cache: 'no-store' });
+    const res = await fetch(apiUrl(path), { headers: authHeaders(), credentials: sameOrigin() ? 'include' : 'omit', cache: 'no-store' });
     if (!res.ok) throw new Error('导出失败 ' + res.status);
     const blob = await res.blob();
     const a = document.createElement('a');
@@ -85,6 +90,7 @@
     get: (p) => request(p),
     post: (p, body) => request(p, { method: 'POST', body: body || {} }),
     url: apiUrl,
+    sameOrigin,
     token,
     setToken,
     authHeaders,
