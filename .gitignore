@@ -6,3 +6,5 @@ data/*.tmp
 data/*.broken-*
 shots/
 .DS_Store
+.audit/
+kaoyan-exams/
