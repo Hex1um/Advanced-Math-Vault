@@ -37,7 +37,7 @@
 
     const el = document.getElementById('view');
     el.innerHTML = '';
-    document.title = '高数好题收藏室';
+    document.title = (window.MV_CONFIG && window.MV_CONFIG.siteName) || 'Advanced-Math-Vault';
 
     const view = window.Views[route.name];
     if (!view) {

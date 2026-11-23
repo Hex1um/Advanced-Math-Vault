@@ -59,7 +59,7 @@ fs.writeFileSync(path.join(OUT, 'js', 'config.js'), `/* 由 tools/build-pages.mj
 window.MV_CONFIG = {
   apiBase: ${JSON.stringify(API_BASE)},
   sharecode: ${JSON.stringify(SHARECODE)},
-  siteName: '高数好题收藏室'
+  siteName: 'Advanced-Math-Vault'
 };
 `, 'utf8');
 

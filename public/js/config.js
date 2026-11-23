@@ -2,5 +2,5 @@
 window.MV_CONFIG = {
   apiBase: '',
   sharecode: '',
-  siteName: '高数好题收藏室'
+  siteName: 'Advanced-Math-Vault'
 };

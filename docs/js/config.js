@@ -2,5 +2,5 @@
 window.MV_CONFIG = {
   apiBase: "https://math-vault-10141.app.workbuddy.host",
   sharecode: "Q6CZHVVW3K",
-  siteName: '高数好题收藏室'
+  siteName: 'Advanced-Math-Vault'
 };
