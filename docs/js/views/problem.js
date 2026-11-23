@@ -94,7 +94,9 @@
           cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
           image = cv.toDataURL('image/jpeg', 0.85);
           el.querySelector('#imgPreview').innerHTML = '<img src="' + image + '" class="judge-img" alt="过程预览" />';
-          el.querySelector('#imgHint').textContent = '已选择图片，提交后交给视觉模型批改';
+          el.querySelector('#imgHint').textContent = window.OCR && window.OCR.hasVisionModel()
+            ? '已选择图片，提交后交给视觉模型批改'
+            : '已选择图片，提交时先用 OCR 转成文字，再交给 AI 批改（公式建议手动核对）';
         };
         img.src = String(reader.result);
       };
@@ -103,10 +105,38 @@
 
     el.querySelector('#judgeBtn').addEventListener('click', async function () {
       const btn = this;
-      const process = el.querySelector('#ansProcess').value.trim();
+      let process = el.querySelector('#ansProcess').value.trim();
       const answerOnly = mode === 'answer';
       if (!process && !image) { window.UI.toast(answerOnly ? '写下答案' : '把解题过程写下来，或者传张照片', 'err'); return; }
       if (!answerOnly && process && process.length < 20) { window.UI.toast('过程太短了，写清关键几步（至少 20 字）', 'err'); return; }
+
+      // 图片 + 没有视觉模型：先在浏览器里 OCR，把识别文字作为过程交给 AI
+      const hasVision = window.OCR ? window.OCR.hasVisionModel() : false;
+      let sendImage = image;
+      if (image && !hasVision) {
+        btn.disabled = true;
+        btn.textContent = '识别图片中…';
+        resultBox.innerHTML = '<div class="judge-result pending"><span class="spinner"></span>没有视觉模型，先用 OCR 把图片转成文字（首次需下载识别组件）…</div>';
+        try {
+          const text = window.OCR.tidy(await window.OCR.imageToText(image, function (pct) {
+            btn.textContent = '识别中 ' + pct + '%';
+          }));
+          if (!text) throw new Error('图片里没识别到文字，请改用文字输入或配置视觉模型');
+          process = process ? (process + '\n\n【图片识别】\n' + text) : text;
+          el.querySelector('#ansProcess').value = process;
+          el.querySelector('#imgHint').textContent = '已 OCR 转成文字（公式请核对）；下面文字会交给 AI 批改';
+          sendImage = ''; // 识别成了文字，不再把图片发给不支持视觉的模型
+          window.UI.toast('OCR 完成，已填入过程框，请核对公式后提交', 'ok');
+        } catch (e) {
+          resultBox.innerHTML = '<div class="judge-result wrong">OCR 失败：' + window.Md.esc(e.message)
+            + '<br/>可以配置支持视觉的模型（gpt-4o / qwen-vl 等），或把过程手打成文字。</div>';
+          btn.disabled = false;
+          btn.textContent = '提交批改';
+          return;
+        }
+      }
+
+      if (!answerOnly && process && process.length < 20) { window.UI.toast('识别出的文字太短，请补充过程', 'err'); btn.disabled = false; btn.textContent = '提交批改'; return; }
       btn.disabled = true;
       btn.textContent = '批改中…';
       resultBox.innerHTML = '<div class="judge-result pending"><span class="spinner"></span>正在逐步核对…（免费通道排队时可能要十几秒）</div>';
@@ -115,7 +145,7 @@
           process: process,
           answer: answerOnly ? process : undefined,
           mode: answerOnly ? 'answer' : 'process',
-          image: image || undefined,
+          image: sendImage || undefined,
           llm: window.UI.llmConfig()
         });
         renderJudge(res);

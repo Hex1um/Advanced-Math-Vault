@@ -124,7 +124,24 @@
             box.innerHTML = '<div class="judge-result correct"><b>已补全</b><span>核对一遍再提交，AI 转写可能漏字</span></div>';
             return;
           }
-          // 没有视觉模型：给提示词，让用户去别处识别后粘回来
+          // 没有视觉模型：先用浏览器 OCR 把图片转成文字，填进题干框让用户核对
+          if (window.OCR) {
+            try {
+              const text = window.OCR.tidy(await window.OCR.imageToText(image, function (pct) {
+                box.innerHTML = '<div class="small muted" style="padding:8px 0">本地 OCR 识别中 ' + pct + '%…</div>';
+              }));
+              if (text) {
+                const fm = document.getElementById('submitForm');
+                fm.statement.value = text;
+                box.innerHTML = '<div class="judge-result correct"><b>已 OCR 识别</b>'
+                  + '<span>文字已填入「题干」，请核对公式后手动补全答案与解析</span></div>';
+                return;
+              }
+            } catch (e) {
+              box.innerHTML = '<div class="small muted" style="padding:8px 0">本地 OCR 不可用：' + window.Md.esc(e.message) + '，可改用下面的提示词。</div>';
+            }
+          }
+          // OCR 也不可用：给提示词，让用户去别处识别后粘回来
           box.innerHTML = '<div class="judge-errors" style="border-color:#dbe6fa;background:#f7faff">'
             + '<div class="je-head" style="color:#1f57c9">当前通道读不了图片</div>'
             + '<div class="small" style="line-height:1.9;color:var(--text-2)">把下面这段提示词和图片一起发给任意能看图的 AI（ChatGPT / 豆包 / Kimi 都行），'

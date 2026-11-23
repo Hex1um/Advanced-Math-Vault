@@ -396,14 +396,63 @@ function fail(res, status, msg) { send(res, status, { ok: false, error: msg }); 
 
 /* ------------------------------------------------------------- 业务逻辑 */
 
+/* 题干摘要：按「文本 / 完整公式」原子切分后再截断。
+   直接按字符 slice 会把 $...$ 切成两半，KaTeX 拿不到成对定界符，列表里就显示裸源码。 */
 function excerptOf(statement, max) {
+  const limit = max || 130;
   const t = String(statement || '')
     .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
     .replace(/^#{1,6}\s*/gm, '')
-    .replace(/\$\$/g, '$')
     .replace(/\s+/g, ' ')
     .trim();
-  return t.length > (max || 130) ? t.slice(0, max || 130) + '…' : t;
+
+  // 把 $$...$$ 与 $...$ 保护成原子块，块内不允许被截断
+  const atoms = [];
+  let rest = t;
+  const re = /\$\$([\s\S]+?)\$\$|\$([^$\n]+?)\$/g;
+  let m;
+  while ((m = re.exec(rest)) !== null) {
+    if (m.index > 0) atoms.push({ text: rest.slice(0, m.index), math: false });
+    const body = (m[1] || m[2] || '').trim();
+    atoms.push({ text: '$' + body + '$', math: true });
+    rest = rest.slice(m.index + m[0].length);
+    re.lastIndex = 0;
+  }
+  if (rest) atoms.push({ text: rest, math: false });
+
+  // 未闭合的 $ 之后的内容不再输出（否则列表里出现裸 $ 源码）
+  // limit 是软限制：公式不可切开，允许整块越过；hardLimit 兜住极端长题干
+  const hardLimit = limit * 2;
+  const out = [];
+  let len = 0;
+  let truncated = false;
+  for (const a of atoms) {
+    let piece = a.text;
+    if (!a.math) {
+      const cut = piece.indexOf('$');
+      if (cut >= 0) { piece = piece.slice(0, cut); truncated = true; }
+      if (!piece) continue;
+    }
+    if (len + piece.length > hardLimit) { truncated = true; break; }
+    if (a.math) {
+      out.push(piece);
+      len += piece.length;
+      if (len >= limit) { truncated = true; break; }
+      continue;
+    }
+    const room = limit - len;
+    if (room <= 0) { truncated = true; break; }
+    if (piece.length > room) {
+      out.push(piece.slice(0, room));
+      truncated = true;
+      break;
+    }
+    out.push(piece);
+    len += piece.length;
+  }
+  let result = out.join('').trim();
+  if (truncated || result.length < t.length) result += '…';
+  return result;
 }
 
 function visibleProblem(p, user) {
