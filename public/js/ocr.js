@@ -8,12 +8,15 @@
   const VISION_MODEL = /gpt-4o|gpt-4\.1|o3|o4|claude|gemini|qwen.*vl|glm-4v|vision|llava|internvl/i;
   let loading = null;
 
-  /* 以 ocr.js 自身的地址推 vendor 目录，兼容 file:// 与 Pages 子路径 */
+  /* 以 ocr.js 自身的地址推站点根，再拼 vendor 目录，兼容 file:// 与 Pages 子路径 */
   function scriptBase() {
     const s = document.querySelector('script[src*="ocr.js"]');
     if (s) {
       const src = s.getAttribute('src') || '';
-      return src.replace(/[^/]*$/, '') + BASE;
+      // ocr.js 在 <root>/js/ 下，vendor 在 <root>/vendor/ 下，所以先退掉 js/ 这一层
+      const jsDir = src.replace(/[^/]*$/, '');            // './js/' 或 '/repo/js/'
+      const root = jsDir.replace(/js\/$/, '');            // './' 或 '/repo/'
+      return root + BASE;
     }
     return BASE;
   }
