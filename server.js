@@ -138,6 +138,42 @@ function clampScore(v, fallback) {
   return Math.max(1, Math.min(10, n));
 }
 
+/* 公式定界符整理：模型经常混用 $$...$$ / \[...\] / \(...\)，还可能干脆不写 */
+function mathify(src) {
+  let t = String(src || '');
+  if (!t) return t;
+
+  // 1) 先处理已经成对的 $...$ / $$...$$，把里面多套的一层 \[ \] \( \) 剥掉
+  t = t.replace(/(\${1,2})([\s\S]*?)\1/g, function (m, mark, body) {
+    let b = body.trim();
+    b = b.replace(/^\\\[/, '').replace(/\\\]$/, '');
+    b = b.replace(/^\\\(/, '').replace(/\\\)$/, '');
+    return mark + b.trim() + mark;
+  });
+
+  // 2) 剩下裸露的 \[...\] / \(...\) 直接换成长定界符
+  t = t.replace(/\\\[([\s\S]*?)\\\]/g, function (m, body) { return '$$' + body.trim() + '$$'; });
+  t = t.replace(/\\\(([\s\S]*?)\\\)/g, function (m, body) { return '$' + body.trim() + '$'; });
+
+  // 3) 完全没有 $ 的，把含 LaTeX 命令的 ASCII 片段整体包起来
+  if (t.indexOf('$') < 0) {
+    t = t.replace(/[\t\x20-\x7E]{3,}/g, function (run) {
+      if (!/\\[a-zA-Z]|[\^_]/.test(run)) return run;
+      const lead = (run.match(/^\s+/) || [''])[0];
+      const trail = (run.match(/\s+$/) || [''])[0];
+      const core = run.trim().replace(/\t/g, ' ');
+      if (core.length < 3) return run;
+      const open = (core.match(/\{/g) || []).length;
+      const close = (core.match(/\}/g) || []).length;
+      if (open !== close) return run;
+      const display = /\\int|\\iint|\\iiint|\\sum|\\prod|\\lim/.test(core);
+      const mark = display ? '$$' : '$';
+      return lead + mark + core + mark + trail;
+    });
+  }
+  return t;
+}
+
 function normalizeProblem(raw) {
   if (!raw || typeof raw !== 'object') return null;
   const title = String(raw.title || '').trim();
@@ -152,15 +188,15 @@ function normalizeProblem(raw) {
   return {
     code: '',
     title: title.slice(0, 120),
-    statement,
+    statement: mathify(statement),
     tags: tags.length ? tags : ['未分类'],
     thinking: clampScore(raw.thinking, 6),
     difficulty: clampScore(raw.difficulty, 6),
     calc: clampScore(raw.calc !== undefined ? raw.calc : raw.calculation, 5),
     source: String(raw.source || '').slice(0, 80),
-    hints,
-    answer: String(raw.answer || '').trim(),
-    solution: String(raw.solution || '').trim(),
+    hints: hints.map(mathify),
+    answer: mathify(String(raw.answer || '').trim()),
+    solution: mathify(String(raw.solution || '').trim()),
     status: 'pending',
     authorId: null,
     authorName: '',
@@ -647,7 +683,7 @@ function buildGenerateMessages(spec) {
     '{"title":"不超过18字的纯文字标题（不要放公式）","statement":"题干，含 LaTeX","tags":["考点1","考点2"],"thinking":1-10,"difficulty":1-10,"calc":1-10,"source":"","hints":["提示1","提示2"],"answer":"最终答案","solution":"分步解析"}',
     '要求：',
     '1. 题目必须数学上正确、可解，答案唯一（或明确说明多解）；',
-    '2. 公式用 LaTeX，行内 $...$，独立 $$...$$，写在 JSON 字符串里要正确转义反斜杠；',
+    '2. 公式必须用定界符包住：行内 $...$，独立 $$...$$；不要把 LaTeX 命令裸露在文字里；JSON 字符串里的反斜杠要双写；',
     '3. 解析要分步、写清依据，控制在 600 字以内；',
     '4. 不要照抄教材原题，条件里避免无意义的数字堆砌；',
     '5. JSON 字符串里的反斜杠要写成双反斜杠（\\\\frac）；',
@@ -729,6 +765,7 @@ function validateGenerated(raw) {
   let title = String(item.title || '').replace(/\$\$?/g, '').replace(/\s+/g, ' ').trim();
   if (/\\[a-zA-Z]/.test(title) || title.length < 4) title = '待命名 · ' + (item.tags || []).slice(0, 2).join(' / ');
   item.title = title.slice(0, 40);
+
   if (item.statement.length < 20 || (item.solution || '').length < 40) return null;
   item.source = String(raw.source || 'AI 出题 · 待人工审核').slice(0, 80);
   return item;

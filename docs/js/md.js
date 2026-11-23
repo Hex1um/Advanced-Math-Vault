@@ -10,6 +10,14 @@
       .replace(/"/g, '&quot;');
   }
 
+  function cleanBody(body) {
+    let b = String(body || '');
+    b = b.trim();
+    b = b.replace(/^\\\[|\\\]$/g, '').replace(/^\\\(|\\\)$/g, '');
+    b = b.replace(/^\$\$|\$\$$/g, '');
+    return b.trim();
+  }
+
   function extract(src) {
     const math = [];
     const codes = [];
@@ -21,7 +29,7 @@
     });
 
     out = out.replace(/\$\$([\s\S]+?)\$\$/g, function (m, body) {
-      math.push({ display: true, body: body });
+      math.push({ display: true, body: cleanBody(body) });
       return '\u0000M' + (math.length - 1) + '\u0000';
     });
 
@@ -31,7 +39,7 @@
     });
 
     out = out.replace(/(^|[^\\$])\$([^\n$]+?)\$/g, function (m, pre, body) {
-      math.push({ display: false, body: body });
+      math.push({ display: false, body: cleanBody(body) });
       return pre + '\u0000M' + (math.length - 1) + '\u0000';
     });
 
