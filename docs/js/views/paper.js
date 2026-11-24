@@ -80,7 +80,7 @@
         const codes = [];
         r.parts.forEach(function (part) { part.items.forEach(function (it) { codes.push(it.code); }); });
         if (!codes.length) { hint.textContent = '没抽到题，试试放宽条件'; return; }
-        save({ items: codes, title: '高等数学自测卷（' + codes.length + ' 题）', points: {} });
+        save({ items: codes, title: '2026 年全国硕士研究生招生考试', points: {} });
         hint.textContent = '已抽到 ' + codes.length + ' 题';
         Views.paper(el);
       } catch (e) {
@@ -141,24 +141,93 @@
 
     let showAns = false;
 
+    /* 题型判定：优先看标题（考研真题标题带「选择题/填空题/解答题」），再看题干有没有 ABCD 选项 */
+    function kindOf(p) {
+      const t = p.title || '';
+      if (/选择题/.test(t)) return 'choice';
+      if (/填空题/.test(t)) return 'fill';
+      if (/解答题|证明题|计算题/.test(t)) return 'solution';
+      if (/[（(]\s*[A-D]\s*[)）]|^[A-D][.．、]/m.test(p.statement || '')) return 'choice';
+      return 'solution';
+    }
+
+    /* 分值：选择题、填空各 5 分；解答题共 70 分，均分后余数给前面几题 */
+    function assignPoints(list) {
+      const choice = list.filter(function (p) { return kindOf(p) === 'choice'; });
+      const fill = list.filter(function (p) { return kindOf(p) === 'fill'; });
+      const sol = list.filter(function (p) { return kindOf(p) === 'solution'; });
+      const map = {};
+      choice.forEach(function (p) { map[p.code] = 5; });
+      fill.forEach(function (p) { map[p.code] = 5; });
+      if (sol.length) {
+        // 贴近真题：第一道稍轻，其余等分（数学一 6 道解答是 10+12×5=70）
+        const w = sol.map(function (_, i) { return i === 0 ? 0.85 : 1; });
+        const unit = 70 / w.reduce(function (a, b) { return a + b; }, 0);
+        const vals = w.map(function (x) { return Math.round(x * unit); });
+        let diff = 70 - vals.reduce(function (a, b) { return a + b; }, 0);
+        let idx = 0;
+        while (diff !== 0) { vals[idx % vals.length] += diff > 0 ? 1 : -1; diff += diff > 0 ? -1 : 1; idx++; }
+        sol.forEach(function (p, i) { map[p.code] = vals[i]; });
+      }
+      return { choice: choice, fill: fill, solution: sol, map: map };
+    }
+
     function render(list) {
       const sheet = document.getElementById('paperSheet');
       if (!list.length) { sheet.innerHTML = '<div class="empty"><b>选题已失效</b>可能是题目被下架了，重新挑一次。</div>'; return; }
-      sheet.innerHTML =
-        '<div class="paper-head"><h2>' + window.Md.esc(p.title || '高等数学练习卷') + '</h2>'
-        + '<div class="paper-meta">共 ' + list.length + ' 题 · 姓名 __________ 学号 __________ 得分 ______</div></div>'
-        + list.map(function (p, i) {
-          return '<div class="paper-q">'
-            + '<div class="pq-head"><span class="pq-no">' + (i + 1) + '.</span>'
-            + '<span class="tag">' + p.tags.slice(0, 2).map(function (t) { return window.Md.esc(t); }).join(' / ') + '</span>'
-            + '<span class="pq-points">（' + (p.difficulty >= 8 ? 12 : p.difficulty >= 6 ? 10 : 8) + ' 分）</span></div>'
-            + '<div class="pq-body">' + window.Md.toHtml(p.statement) + '</div>'
-            + '<div class="pq-blank"></div>'
+
+      // 保持抽取顺序：先选择题，再填空，最后解答
+      const order = { choice: 0, fill: 1, solution: 2 };
+      const sorted = list.slice().sort(function (a, b) { return order[kindOf(a)] - order[kindOf(b)]; });
+      const g = assignPoints(sorted);
+      const total = sorted.reduce(function (s, p) { return s + (g.map[p.code] || 5); }, 0);
+
+      let no = 0;
+      const CN = ['一', '二', '三', '四'];
+      let secIdx = 0;
+      function section(label, rule, items, withBlank) {
+        if (!items.length) return '';
+        const from = no + 1;
+        const to = no + items.length;
+        const numbered = CN[secIdx++] + '、' + label;
+        const rows = items.map(function (p) {
+          no++;
+          const pts = g.map[p.code] || 5;
+          const blankH = withBlank ? Math.max(150, Math.min(300, 60 + pts * 13)) : 0;
+          return '<div class="exam-q">'
+            + '<div class="exam-q-body">'
+            + '<span class="exam-q-no">' + no + '.</span>'
+            + (withBlank ? '<span class="exam-q-points">（本题满分 ' + pts + ' 分）</span>' : '')
+            + '<span class="exam-q-text">' + window.Md.toHtml(p.statement) + '</span>'
+            + '</div>'
+            + (withBlank ? '<div class="exam-blank" style="height:' + blankH + 'px"></div>' : '<div class="exam-gap"></div>')
             + '<div class="pq-answer" style="display:none"><b>答案</b>'
-            + (p.answer ? window.Md.toHtml(p.answer) : '<span class="muted">（做过的题才显示答案，避免提前剧透）</span>')
+            + (p.answer ? window.Md.toHtml(p.answer) : '<span class="muted">（暂无答案）</span>')
+            + (p.solution ? '<div class="ans-sol">' + window.Md.toHtml(p.solution) + '</div>' : '')
             + '</div>'
             + '</div>';
-        }).join('')
+        }).join('');
+        return '<div class="exam-section">'
+          + '<div class="exam-sec-title">' + numbered + '：' + from + '～' + to + ' 小题，' + rule + '</div>'
+          + rows + '</div>';
+      }
+
+      sheet.innerHTML =
+        '<div class="exam-head">'
+        + '<div class="exam-title">' + window.Md.esc(p.title || '全国硕士研究生招生考试') + '</div>'
+        + '<div class="exam-sub">' + (/全国硕士|考研|数学一/.test(p.title || '') ? '数学（一）模拟试卷' : '模拟试卷') + '</div>'
+        + '<div class="exam-note">（满分 ' + total + ' 分　考试时间 180 分钟）</div>'
+        + '</div>'
+        + '<div class="exam-tips"><b>考生注意事项</b>'
+        + '<ol>'
+        + '<li>答题前，考生须在试卷指定位置填写姓名、考生编号。</li>'
+        + '<li>选择题和填空题只写答案，解答题须写出文字说明、证明过程或演算步骤。</li>'
+        + '<li>试卷共 ' + [g.choice, g.fill, g.solution].filter(function (x) { return x.length; }).length + ' 大题，满分 ' + total + ' 分，考试时间 180 分钟。</li>'
+        + '</ol></div>'
+        + '<div class="exam-meta"><span>姓名 ____________</span><span>考生编号 ____________</span><span>得分 ____________</span></div>'
+        + section('选择题', '每小题 5 分，共 ' + g.choice.length * 5 + ' 分。下列每题给出的四个选项中，只有一个选项符合题目要求。', g.choice, false)
+        + section('填空题', '每小题 5 分，共 ' + g.fill.length * 5 + ' 分。', g.fill, false)
+        + section('解答题', '共 70 分。解答应写出文字说明、证明过程或演算步骤。', g.solution, true)
         + '<div class="paper-foot">— 试卷结束 —</div>';
       window.Md.renderMath(sheet);
     }

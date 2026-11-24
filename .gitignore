@@ -9,3 +9,7 @@ shots/
 .audit/
 kaoyan-exams/
 AUDIT-*.md
+data/backups/
+data/db.json.before-*
+data/db.json.broken-*
+data/*.before-*

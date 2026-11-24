@@ -50,8 +50,30 @@ function ensureDirs() {
   if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
 }
 
+/* 启动时给现有库留一份快照（保留最近 12 份）。
+   目的是：万一某次部署用本地库覆盖了线上，还能从 data/backups 里捞回用户与帖子。 */
+function snapshotDb() {
+  if (!fs.existsSync(DB_FILE)) return;
+  try {
+    const dir = path.join(DATA_DIR, 'backups');
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    const stat = fs.statSync(DB_FILE);
+    const stamp = new Date(stat.mtime).toISOString().replace(/[:.]/g, '-').slice(0, 19);
+    const dest = path.join(dir, 'db-' + stamp + '.json');
+    if (!fs.existsSync(dest)) fs.copyFileSync(DB_FILE, dest);
+    const old = fs.readdirSync(dir).filter((f) => /^db-.*\.json$/.test(f)).sort();
+    while (old.length > 12) {
+      const f = old.shift();
+      try { fs.unlinkSync(path.join(dir, f)); } catch (_) {}
+    }
+  } catch (e) {
+    console.error('[db] 快照失败:', e.message);
+  }
+}
+
 function loadDb() {
   ensureDirs();
+  snapshotDb();
   if (fs.existsSync(DB_FILE)) {
     try {
       const raw = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
@@ -2206,6 +2228,8 @@ async function handleApi(req, res, pathname, query) {
         daily: db.daily,
         feedbacks: db.feedbacks
       };
+      // 带上用户（含密码哈希）：只给管理员，用于部署前把线上账号/经验合并回本地，避免覆盖
+      if (/[?&]withUsers=1/.test(req.url || '')) payload.users = db.users;
       const body = JSON.stringify(payload, null, 2);
       res.writeHead(200, {
         'Content-Type': 'application/json; charset=utf-8',
@@ -2242,6 +2266,25 @@ async function handleApi(req, res, pathname, query) {
         ok: true,
         items: db.problems.filter((p) => p.status === 'rejected').map((p) => ({ code: p.code, title: p.title, rejectReason: p.rejectReason }))
       });
+    }
+
+    /* 删除账号（清理测试号/恶意注册）。只允许管理员，且不能删自己 */
+    if (pathname === '/api/admin/users/delete' && method === 'POST') {
+      const body = await readBody(req);
+      const names = (Array.isArray(body.names) ? body.names : [body.name]).map(String).filter(Boolean);
+      if (!names.length) return fail(res, 400, '没有指定要删的账号');
+      if (names.includes(user.name)) return fail(res, 400, '不能删除自己');
+      const victims = db.users.filter((u) => names.includes(u.name));
+      if (!victims.length) return fail(res, 404, '没有找到这些账号');
+      const ids = new Set(victims.map((u) => u.id));
+      db.users = db.users.filter((u) => !ids.has(u.id));
+      db.posts = (db.posts || []).filter((p) => !ids.has(p.authorId));
+      db.feedbacks = (db.feedbacks || []).filter((f) => !ids.has(f.authorId));
+      for (const k of Object.keys(db.sessions || {})) {
+        if (db.sessions[k] && ids.has(db.sessions[k].userId)) delete db.sessions[k];
+      }
+      saveDb(true);
+      return send(res, 200, { ok: true, removed: victims.map((u) => u.name) });
     }
 
     /* 题目反馈：只把 AI 审阅过的转给管理员；未审阅的单独计数 */
