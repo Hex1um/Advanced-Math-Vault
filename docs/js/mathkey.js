@@ -151,11 +151,11 @@
     panel.appendChild(grid);
     wrap.appendChild(panel);
 
-    /* 预览区：和正文同样的 markdown + KaTeX 渲染 */
+    /* 预览区：放在输入框上方，写公式时抬眼就能看到渲染结果 */
     const preview = document.createElement('div');
     preview.className = 'mk-preview md';
     preview.style.display = 'none';
-    wrap.appendChild(preview);
+    ta.parentNode.insertBefore(preview, ta);
 
     let previewOpen = false;
     let timer = null;
