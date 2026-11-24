@@ -6,10 +6,13 @@
  * 如果本地库是干净的（比如刚导入完题库），一部署就把线上用户的帖子和经验冲掉了。
  * 所以每次部署前必须先跑这个脚本，把线上用户数据并进本地，再部署。
  *
+ * 凭据：SHARECODE 与 ADMIN_PASS 必须从环境变量传入，脚本不再内置任何默认值。
+ * 部署前请先轮换线上管理员密码，并清理 git 历史里的旧明文凭据。
+ *
  * 用法：
- *   node tools/sync-live.mjs                     # 合并到本地 data/db.json
- *   node tools/sync-live.mjs --dry               # 只看差异，不写盘
- *   BASE=... SHARECODE=... ADMIN_USER=... ADMIN_PASS=... node tools/sync-live.mjs
+ *   SHARECODE=... ADMIN_PASS=... node tools/sync-live.mjs
+ *   SHARECODE=... ADMIN_PASS=... node tools/sync-live.mjs --dry   # 只看差异，不写盘
+ *   BASE=... ADMIN_USER=... SHARECODE=... ADMIN_PASS=... node tools/deploy.mjs
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -18,9 +21,17 @@ import process from 'node:process';
 const ROOT = path.resolve(new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
 const DB_FILE = process.env.DB_FILE || path.join(ROOT, 'data', 'db.json');
 const BASE = (process.env.BASE || 'https://math-vault-10141.app.workbuddy.host').replace(/\/$/, '');
-const SHARECODE = process.env.SHARECODE || 'Q6CZHVVW3K';
+function requiredEnv(name) {
+  const v = process.env[name];
+  if (v === undefined || !String(v).trim()) {
+    console.error('缺少环境变量 ' + name + '：本脚本已移除内置凭据，请从环境变量传入后再运行。');
+    process.exit(2);
+  }
+  return String(v).trim();
+}
+const SHARECODE = requiredEnv('SHARECODE');
 const USER = process.env.ADMIN_USER || 'Hex1um';
-const PASS = process.env.ADMIN_PASS || 'REPLACE_WITH_ADMIN_PASS';
+const PASS = requiredEnv('ADMIN_PASS');
 const DRY = process.argv.includes('--dry');
 
 function log(...a) { console.log(...a); }

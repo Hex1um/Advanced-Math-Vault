@@ -91,6 +91,8 @@ PORT=9000 node server.js  # 换端口
 界面左下角实时显示当前通道（`我的 Key` / `站点模型` / `免费通道 · 本机直连` / `本地讲解`）。
 免费通道限流或超时（服务端 22 秒、浏览器直连同步降级），已输出的内容不会重复。
 
+所有 `/api/ai/*` 接口都要登录。服务端只向 `https` 的域名白名单发请求：默认允许 DeepSeek、OpenAI、智谱、通义、Gemini、Anthropic、Groq、OpenRouter、Moonshot、MiniMax、Pollinations 等公开服务；裸 IP、`localhost`、`.local` / `.internal` 域名与非 443 端口一律拒绝，query/hash 会被丢弃。需要接自建域名时用环境变量 `LLM_ALLOWED_HOSTS=host1,host2` 扩展（只填域名，不带协议）。
+
 ### 高数专家模式
 
 对话默认开启，system prompt 固化了一套解题范式：**审题 → 定位考点 → 选策略（说明为什么不用另一条路）→ 分步执行 → 验算 → 易错点**，
@@ -126,25 +128,49 @@ public/js/app.js          路由
 public/js/views/*.js      题库 / 题目 / 每日一题 / 答疑区 / 投稿 / 我的 / 审核 / AI 对话
 public/vendor/katex/      本地 KaTeX（离线可用）
 tools/import-problems.mjs 批量导入
-tools/smoke.mjs           全链路冒烟测试（46 项断言）
-tools/verify_integrals.py 用 sympy 对不定积分答案求导校验（符号 + 数值）
+tools/smoke.mjs           全链路冒烟测试（82 项断言）
+tools/sync-live.mjs       部署前把线上用户数据合并回本地（凭据走环境变量）
+tools/deploy.mjs          安全发布：先同步再上传
+tools/verify_integrals.py 用 sympy 对不定积分答案求导校验（多定义域点数值）
+tools/verify_limits.py    极限题数值验证（mpmath 50 位精度）
+tools/verify_batch5.py    第五批答案的符号校验
+tools/check-katex.mjs     用仓库自带 KaTeX 校验题库公式
 tools/cdp-eval.mjs        用 Edge 无头 + CDP 跑页面 JS / 截图（调试用）
 ```
 
 ## 测试
 
 ```bash
-node tools/smoke.mjs                 # 46 项断言，覆盖注册/改密/审核/做题/AI/论坛/权限
-python tools/verify_integrals.py     # 逐题对答案求导，验证解析正确
+node tools/smoke.mjs                 # 82 项断言，覆盖注册/改密/审核/做题/AI/论坛/权限与安全债
+python tools/verify_integrals.py     # 逐题对答案求导，数值双点验证
+python tools/verify_limits.py        # 极限题数值验证（高精度）
+python tools/verify_batch5.py        # 第五批答案校验
+node tools/check-katex.mjs           # 题库公式可渲染性检查
 ```
 
 > 录题纪律：每道积分的答案都先用 sympy 求导验证再入库，`verify_integrals.py` 里保留了对应用例，新增题目时追加即可。
+
+## 数据同步与发布
+
+发布一律用 `node tools/deploy.mjs`：它先把线上用户、帖子、反馈、每日记录合并回本地库，再上传，避免本地 `data/db.json` 覆盖线上数据。
+
+脚本已移除内置的生产凭据，运行前必须显式提供：
+
+```bash
+SHARECODE=... ADMIN_PASS=... node tools/deploy.mjs
+# 只看差异、不写盘：
+SHARECODE=... ADMIN_PASS=... node tools/sync-live.mjs --dry
+```
+
+- `SHARECODE` 或 `ADMIN_PASS` 缺失时，`tools/sync-live.mjs` 直接报错退出（退出码 2），不再回退到任何默认值。
+- 历史版本曾把管理员明文密码与 sharecode 写进源码。**请先轮换线上管理员密码**，再用 `git filter-repo` / BFG 清理 git 历史中的明文凭据，并让协作者重新克隆。
+- 凭据只通过当前命令的环境变量传入，不要写进仓库、截图或日志。
 
 ## 设计说明
 
 - **为什么不用 WebRTC**：需求是「每个用户看到的都一样」。P2P 只有在房间内有人在线时才能同步，论坛帖子和审核结果会随节点离线而丢失；改成服务端单一数据源后，任何设备、任何时间打开都是同一份内容。P2P 适合实时对战（如 BORDER OPS），不适合作为论坛的持久化真相。
 - 所有响应 `Cache-Control: no-store`，静态资源引用带版本号，避免移动端缓存旧代码。
 - 密码 scrypt 加盐哈希，会话为 HttpOnly Cookie（30 天）；HTTPS 下自动加 `Secure`。
-- 限流：登录/注册 12 次/分、改密 6 次/分、AI 问答 40 次/10 分、投稿与发帖 20~30 次/10 分（按 IP）。
+- 限流：登录/注册 12 次/分、改密 6 次/分、AI 问答 40 次/10 分、投稿与发帖 20~30 次/10 分（按 IP）。默认忽略 `X-Forwarded-For`（客户端可伪造它绕过限流）；只有部署在可信反向代理后并设置 `TRUST_PROXY=1` 时才按 XFF 首段分桶。
 - 审核后台可「导出全部数据」（题库 + 帖子 + 每日一题记录，不含账号密码），用于重新部署前备份线上数据。
-- **注意**：重新发布会用本地 `data/db.json` 覆盖线上数据，上线后的新增内容请先导出备份。
+- **注意**：不要用本地 `data/db.json` 手工覆盖线上数据；发布走 `node tools/deploy.mjs`（见「数据同步与发布」）。

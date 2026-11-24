@@ -8,13 +8,21 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { createRequire } from 'node:module';
 
 const ROOT = path.resolve(new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
 const DB_FILE = process.env.DB_FILE || path.join(ROOT, 'data', 'db.json');
 const DETAIL = process.argv.includes('--detail');
 
-const katexPath = process.env.KATEX_DIR || 'C:/Users/11603/WorkBuddy/2026-11-23-21-11-27/node_modules/katex';
-const katex = (await import('file://' + katexPath.replace(/\\/g, '/') + '/dist/katex.mjs')).default;
+// 用仓库自带的本地 KaTeX（docs/vendor/katex/katex.min.js），不再依赖某台机器的 node_modules 绝对路径。
+const katexDir = process.env.KATEX_DIR || path.join(ROOT, 'docs', 'vendor', 'katex');
+const katexFile = path.join(katexDir, 'katex.min.js');
+if (!fs.existsSync(katexFile)) {
+  console.error('找不到本地 KaTeX: ' + katexFile);
+  process.exit(2);
+}
+const require = createRequire(import.meta.url);
+const katex = require(katexFile);
 
 function segments(s) {
   const out = [];

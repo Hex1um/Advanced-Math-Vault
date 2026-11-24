@@ -37,7 +37,8 @@ print('  lim (3x^2 - x sin x)/x^2 =', sp.limit((3*x**2 - x*sp.sin(x))/x**2, x, 0
 print('\nE12 隐函数 f^3+f=x+2, f(0)=1, 求 d2x/dy2|y=1')
 fv = sp.Function('fv')
 eq = sp.Eq(fv(x)**3 + fv(x), x + 2)
-fp = sp.idiff(eq, fv(x), x)          # f'
+# sympy 的 idiff 在新版本里不接受 Eq 对象，要传 lhs-rhs 表达式
+fp = sp.idiff(eq.lhs - eq.rhs, fv(x), x)          # f'
 fpp = sp.diff(fp, x).subs(sp.Derivative(fv(x), x), fp)
 val1 = {fv(x): 1}
 fp1 = sp.simplify(fp.subs(val1))

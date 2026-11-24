@@ -100,26 +100,39 @@ cases.append(('P5 ∫e^x(x²+1)/(x+1)² dx',
     sp.exp(x)*(x**2+1)/(x+1)**2,
     sp.exp(x)*(x-1)/(x+1)))
 
+def numeric_zero(diff):
+    """在多个定义域点上验证；Abs/atan2 的符号化简会按分支误报，以数值为准。
+
+    不同题目的定义域不同（有的要求 x>0，有的要求 x<0），因此先跳过 nan/inf，
+    再要求至少两个互异的有效点残差都接近零。
+    """
+    vals = []
+    for p in (sp.Integer(-4), sp.Integer(-2), sp.Rational(4, 3),
+              sp.Rational(5, 2), sp.Rational(7, 2), sp.Integer(5)):
+        try:
+            v = complex(sp.N(diff.subs(x, p), 30))
+        except Exception:
+            continue
+        r = abs(v)
+        if r != r or r == float('inf'):
+            continue
+        vals.append(r)
+    return len([r for r in vals if r < 1e-8]) >= 2
+
+
 ok = 0
 bad = []
 for name, f, F in cases:
-    diff = sp.simplify(sp.diff(F, x) - f)
-    sym_ok = diff == 0
-    # 数值兜底
-    num_ok = False
-    if not sym_ok:
-        pts = [sp.Rational(7,2), sp.Rational(5,2), sp.Rational(12,5), sp.Rational(4,3)]
-        try:
-            vals = [(abs(complex(sp.N(diff.subs(x, p)))) if diff.has(x) else abs(complex(sp.N(diff)))) for p in pts]
-            num_ok = all(v < 1e-8 for v in vals)
-        except Exception as e:
-            num_ok = False
-    if sym_ok or num_ok:
+    diff = sp.diff(F, x) - f
+    sym_ok = sp.simplify(diff) == 0
+    num_ok = numeric_zero(diff)
+    # 符号化简对 Abs/atan2 不稳：只有数值两点都为零才算通过
+    if num_ok:
         ok += 1
-        print(f'  ✓ {name}' + ('' if sym_ok else '  (数值校验通过)'))
+        print(f'  ✓ {name}' + ('' if sym_ok else '  (符号化简未归零，数值双点通过)'))
     else:
         bad.append(name)
-        print(f'  ✗ {name}   residual={sp.simplify(diff)}')
+        print(f'  ✗ {name}   residual={sp.simplify(diff)}   sym_ok={sym_ok}')
 
 print(f'\n{ok}/{len(cases)} 通过')
 if bad:

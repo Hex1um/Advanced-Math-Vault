@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /** 全链路冒烟测试：起一个独立端口的临时库，跑完删掉 */
 import { spawn } from 'node:child_process';
+import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -172,6 +173,11 @@ try {
   ok('入库后总数变 11', afterApprove.json.total === 11, '实际 ' + afterApprove.json.total);
   const approved = await req('/api/problems/' + submit.json.code);
   ok('审核时修改的评分已生效', approved.json.problem.calc === 2);
+  const bareNum = await req('/api/problems/' + submit.json.code + '/answer', {
+    method: 'POST',
+    body: JSON.stringify({ process: '我先把 1/2 当作中间量代进去，最后发现原式根本不成立。' })
+  });
+  ok('结论行的裸数字不算答案', bareNum.json.ok && bareNum.json.verdict !== 'correct', JSON.stringify(bareNum.json).slice(0, 120));
 
   console.log('\n[6] 每日一题（全站一致）');
   const d1 = await req('/api/daily');
@@ -302,6 +308,89 @@ try {
   ok('首页 no-store', /no-store/.test(html.headers.get('cache-control') || ''));
   ok('KaTeX 本地可用', (await fetch(BASE + '/vendor/katex/katex.min.js')).status === 200);
   ok('样式表 200', (await fetch(BASE + '/assets/style.css')).status === 200);
+
+  console.log('\n[13] P0 安全：AI 接口鉴权与 SSRF');
+  const anon = client();
+  const aiAnon = await anon('/api/ai/prompt', { method: 'POST', body: JSON.stringify({ tags: ['极限'] }) });
+  ok('未登录访问 AI 接口被拒', aiAnon.status === 401, aiAnon.text.slice(0, 100));
+
+  let ssrfHits = 0;
+  const ssrfServer = http.createServer((req2, res2) => {
+    ssrfHits++;
+    res2.writeHead(200, { 'Content-Type': 'application/json' });
+    res2.end('{}');
+  });
+  await new Promise((r) => ssrfServer.listen(0, '127.0.0.1', r));
+  const ssrfPort = ssrfServer.address().port;
+  const attack = await req('/api/ai/chat', {
+    method: 'POST',
+    body: JSON.stringify({
+      messages: [{ role: 'user', content: '你好' }],
+      llm: { baseUrl: 'http://127.0.0.1:' + ssrfPort + '/v1', apiKey: 'x' }
+    })
+  });
+  await sleep(150);
+  ssrfServer.close();
+  ok('内网 baseUrl 未触发服务端请求', ssrfHits === 0, 'hits=' + ssrfHits);
+  ok('非法 baseUrl 回退本地讲解', /"mode":"local"/.test(attack.text), attack.text.slice(0, 120));
+
+  console.log('\n[14] P0 安全：X-Forwarded-For 限流绕过');
+  const xffClient = client();
+  let spoofBlocked = false;
+  for (let i = 0; i < 12; i++) {
+    const r = await xffClient('/api/auth/login', {
+      method: 'POST',
+      headers: { 'X-Forwarded-For': '10.77.0.' + (i + 1) },
+      body: JSON.stringify({ name: 'no-such-user', password: 'wrong-password' })
+    });
+    if (r.status === 429) { spoofBlocked = true; break; }
+  }
+  ok('伪造 XFF 不能绕过限流', spoofBlocked);
+
+  // TRUST_PROXY=1 时才会按 XFF 分桶；用第二个端口验证开关生效
+  const proxyPort = PORT + 1;
+  const proxyChild = spawn(process.execPath, ['server.js'], {
+    cwd: ROOT,
+    env: Object.assign({}, process.env, {
+      PORT: String(proxyPort), DB_FILE: DB + '.proxy', LLM_API_KEY: '', DEEPSEEK_API_KEY: '',
+      NO_FREE: '1', TRUST_PROXY: '1'
+    }),
+    stdio: ['ignore', 'pipe', 'pipe']
+  });
+  try {
+    let ready = false;
+    for (let i = 0; i < 60; i++) {
+      try { if ((await fetch('http://127.0.0.1:' + proxyPort + '/api/meta')).ok) { ready = true; break; } } catch (e) {}
+      await sleep(200);
+    }
+    ok('TRUST_PROXY 服务可启动', ready);
+    let bypassUnderProxy = false;
+    for (let i = 0; i < 13; i++) {
+      const r = await fetch('http://127.0.0.1:' + proxyPort + '/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Forwarded-For': '10.88.0.' + (i + 1) },
+        body: JSON.stringify({ name: 'no-such-user', password: 'wrong-password' })
+      });
+      if (r.status === 429) { bypassUnderProxy = true; break; }
+    }
+    ok('TRUST_PROXY=1 时按 XFF 分桶', !bypassUnderProxy);
+  } finally {
+    proxyChild.kill('SIGTERM');
+    await sleep(300);
+    try { if (fs.existsSync(DB + '.proxy')) fs.unlinkSync(DB + '.proxy'); } catch (e) {}
+  }
+
+  console.log('\n[15] 部署凭据不内置');
+  const syncEnv = Object.assign({}, process.env);
+  delete syncEnv.SHARECODE;
+  delete syncEnv.ADMIN_PASS;
+  const syncChild = spawn(process.execPath, ['tools/sync-live.mjs', '--dry'], {
+    cwd: ROOT, env: syncEnv, stdio: ['ignore', 'pipe', 'pipe']
+  });
+  let syncErr = '';
+  syncChild.stderr.on('data', (d) => { syncErr += d.toString(); });
+  const syncCode = await new Promise((r) => syncChild.on('close', r));
+  ok('sync-live 缺凭据时退出而非用默认值', syncCode === 2 && /SHARECODE|ADMIN_PASS/.test(syncErr), syncErr.slice(0, 120));
 } catch (e) {
   fail++;
   console.error('\n✗ 测试异常:', e.message);
@@ -311,6 +400,7 @@ try {
   await sleep(400);
   try { if (fs.existsSync(DB)) fs.unlinkSync(DB); } catch (e) {}
   try { if (fs.existsSync(DB + '.tmp')) fs.unlinkSync(DB + '.tmp'); } catch (e) {}
+  try { if (fs.existsSync(DB + '.proxy.tmp')) fs.unlinkSync(DB + '.proxy.tmp'); } catch (e) {}
 }
 
 console.log('\n结果: ' + pass + ' 通过 / ' + fail + ' 失败');

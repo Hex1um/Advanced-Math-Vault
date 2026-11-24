@@ -373,9 +373,17 @@ function bearerToken(req) {
   return '';
 }
 
+// 默认不信任 X-Forwarded-For：客户端伪造它就能换一个限流桶。
+// 只有部署在可信反向代理后、显式设置 TRUST_PROXY=1 时才解析 XFF。
+const TRUST_PROXY = /^(1|true|yes|on)$/i.test(process.env.TRUST_PROXY || '');
 function clientIp(req) {
-  const fwd = req.headers['x-forwarded-for'];
-  if (fwd) return String(fwd).split(',')[0].trim();
+  if (TRUST_PROXY) {
+    const fwd = req.headers['x-forwarded-for'];
+    if (fwd) {
+      const first = String(fwd).split(',')[0].trim();
+      if (/^[0-9a-fA-F:.]+$/.test(first)) return first;
+    }
+  }
   return (req.socket && req.socket.remoteAddress) || 'unknown';
 }
 
@@ -988,15 +996,52 @@ function validateGenerated(raw) {
   return item;
 }
 
-/* 模型链：用户自带 Key → 站点 Key → 免费通道 → 本地讲解 */
+/* 模型链：用户自带 Key → 站点 Key → 免费通道 → 本地讲解
+   baseUrl 由客户端提供，必须先白名单校验再交给服务端 fetch，否则就是 SSRF。 */
+const LLM_HOSTS = new Set([
+  'api.deepseek.com', 'api.openai.com', 'open.bigmodel.cn', 'dashscope.aliyuncs.com',
+  'generativelanguage.googleapis.com', 'api.anthropic.com', 'api.groq.com', 'openrouter.ai',
+  'api.moonshot.cn', 'api.minimax.chat', 'text.pollinations.ai', 'pollinations.ai',
+  'api.x.ai', 'api.cohere.com', 'api.together.xyz', 'api.fireworks.ai'
+]);
+for (const h of String(process.env.LLM_ALLOWED_HOSTS || '').split(',')) {
+  const v = h.trim().toLowerCase().replace(/^https?:\/\//, '').split('/')[0];
+  if (v) LLM_HOSTS.add(v);
+}
+
+function safeLlmBaseUrl(raw) {
+  const s = String(raw || '').trim();
+  if (!s) return null;
+  let u;
+  try { u = new URL(s); } catch (e) { return null; }
+  if (u.protocol !== 'https:') return null;
+  if (u.username || u.password) return null;
+  if (u.port && u.port !== '443') return null;
+  const host = u.hostname.toLowerCase().replace(/\.$/, '');
+  if (!host) return null;
+  // 裸 IP（IPv4/IPv6）、本机与内网域名一律拒绝；再要求命中域名白名单
+  if (/^\d+\.\d+\.\d+\.\d+$/.test(host) || host.indexOf(':') >= 0) return null;
+  if (host === 'localhost' || /\.localhost$/.test(host) || /\.local$/.test(host) || /\.internal$/.test(host)) return null;
+  let allowed = false;
+  for (const d of LLM_HOSTS) {
+    if (host === d || host.endsWith('.' + d)) { allowed = true; break; }
+  }
+  if (!allowed) return null;
+  // 只保留 path，丢掉 query/hash，避免把密钥拼进 URL 后被日志/代理记录
+  const path = u.pathname.replace(/\/+$/, '').slice(0, 120);
+  return 'https://' + host + path;
+}
+
 function userLlmConfig(body) {
   const l = body && body.llm;
   if (!l || !l.apiKey) return null;
+  const baseUrl = safeLlmBaseUrl(l.baseUrl || 'https://api.deepseek.com/v1');
+  if (!baseUrl) return null;
   return {
     name: '我的 Key',
     mode: 'user-key',
-    baseUrl: String(l.baseUrl || 'https://api.deepseek.com/v1').trim(),
-    model: String(l.model || 'deepseek-chat').trim(),
+    baseUrl: baseUrl,
+    model: String(l.model || 'deepseek-chat').trim().slice(0, 80),
     apiKey: String(l.apiKey).trim()
   };
 }
@@ -1005,10 +1050,11 @@ function llmCandidates(body) {
   const list = [];
   const own = userLlmConfig(body);
   if (own) list.push(own);
-  if (llmConfigured()) {
+  const siteBase = safeLlmBaseUrl(db.settings.llm.baseUrl);
+  if (llmConfigured() && siteBase) {
     list.push({
       name: '站点模型', mode: 'site',
-      baseUrl: db.settings.llm.baseUrl,
+      baseUrl: siteBase,
       model: db.settings.llm.model,
       apiKey: db.settings.llm.apiKey
     });
@@ -1022,7 +1068,8 @@ function llmCandidates(body) {
 }
 
 async function openChat(cfg, messages, stream) {
-  const base = String(cfg.baseUrl || '').replace(/\/+$/, '');
+  const base = safeLlmBaseUrl(cfg.baseUrl || '');
+  if (!base) throw new Error(cfg.name + ' 的接口地址不合法或不在域名白名单内');
   const headers = { 'Content-Type': 'application/json' };
   if (cfg.apiKey) headers.Authorization = 'Bearer ' + cfg.apiKey;
   const controller = new AbortController();
@@ -2335,7 +2382,11 @@ async function handleApi(req, res, pathname, query) {
 
     if (pathname === '/api/admin/llm' && method === 'POST') {
       const body = await readBody(req);
-      if (body.baseUrl !== undefined) db.settings.llm.baseUrl = String(body.baseUrl).trim();
+      if (body.baseUrl !== undefined) {
+        const normalized = safeLlmBaseUrl(body.baseUrl);
+        if (!normalized) return fail(res, 400, '接口地址必须是 https，且域名在白名单内（可用 LLM_ALLOWED_HOSTS 扩展）');
+        db.settings.llm.baseUrl = normalized;
+      }
       if (body.model !== undefined) db.settings.llm.model = String(body.model).trim();
       if (body.apiKey !== undefined && String(body.apiKey).trim()) db.settings.llm.apiKey = String(body.apiKey).trim();
       if (body.clearKey) db.settings.llm.apiKey = '';
@@ -2426,6 +2477,7 @@ async function handleApi(req, res, pathname, query) {
 
   /* ---- 对话系统提示词（给浏览器直连免费通道用） ---- */
   if (pathname === '/api/ai/prompt/chat' && method === 'POST') {
+    if (!user) return fail(res, 401, '登录后才能使用 AI 接口');
     const body = await readBody(req, 64 * 1024);
     const problem = body.problemCode ? db.problems.find((p) => p.code === String(body.problemCode).toUpperCase()) : null;
     const msgs = llmMessages(problem, [], { expert: body.expert !== false });
@@ -2492,14 +2544,16 @@ function processMatchesAnswer(process, expected) {
   const targetText = canonAnswer(expected);
   if (!targetText) return false;
   const targetNum = numericValue(targetText);
+  const marker = /综上|故|所以|因此|答案(?:是)?[:：]?|最终(?:结果)?(?:是)?[:：]?|结果(?:是)?[:：]?|答[:：]|结论[:：]?|=>/;
   for (const line of conclusionSegments(process)) {
     if (answersEquiv(line, expected)) return true;
     const candidates = [];
+    // 只认显式答案形态：$...$、= 数值、等于/答案是/结果为 数值；不再扫全文裸数字
     (line.match(/\$[^$]+\$/g) || []).forEach(function (x) { candidates.push(x); });
-    (line.match(/=\s*[^=，。；;,]+/g) || []).forEach(function (x) { candidates.push(x.replace(/^=\s*/, '')); });
-    (line.match(/\\?[dt]?frac\{-?[\d.]+\}\{-?[\d.]+\}|-?[\d.]+\/-?[\d.]+|-?[\d.]+/g) || []).forEach(function (x) { candidates.push(x); });
-    const tail = line.split(/综上|故|所以|因此|答案(?:是)?[:：]?|最终(?:结果)?(?:是)?[:：]?|结果(?:是)?[:：]?|答[:：]|结论[:：]?|=>/).pop();
-    if (tail) candidates.push(tail);
+    const lead = /(?:[=＝≈]|等于|答案是|结果是|结果为|最终(?:结果)?(?:是|为)?|得到|得)\s*([^，。；;,]+)/g;
+    let m;
+    while ((m = lead.exec(line)) !== null) candidates.push(m[1]);
+    if (marker.test(line)) candidates.push(line.split(marker).pop());
     for (const cand of candidates) {
       const c = canonAnswer(cand);
       if (!c) continue;
@@ -2614,6 +2668,7 @@ function parseJudge(text) {
 
   /* ---- 识图：给别人用的固定提示词 ---- */
   if (pathname === '/api/ai/ocr-prompt' && method === 'GET') {
+    if (!user) return fail(res, 401, '登录后才能使用 AI 接口');
     return send(res, 200, { ok: true, prompt: OCR_PROMPT });
   }
 
@@ -2621,6 +2676,7 @@ function parseJudge(text) {
      传统 OCR（tesseract 之类）只认字形、不懂二维公式结构，`\frac` 会变成
      `a/b` 或干脆散架。这一步让 AI 结合上下文补回结构，是准确率的关键。 */
   if (pathname === '/api/ai/ocr-fix' && method === 'POST') {
+    if (!user) return fail(res, 401, '登录后才能使用 AI 接口');
     const body = await readBody(req, 256 * 1024);
     const raw = String(body.text || '').trim();
     if (!raw) return fail(res, 400, '没有可规范化的文本');
@@ -2724,6 +2780,7 @@ function parseJudge(text) {
 
   /* ---- 出题提示词（给浏览器直连免费通道用） ---- */
   if (pathname === '/api/ai/prompt' && method === 'POST') {
+    if (!user) return fail(res, 401, '登录后才能使用 AI 接口');
     const body = await readBody(req, 64 * 1024);
     const spec = {
       tags: Array.isArray(body.tags) ? body.tags.map(String).slice(0, 4) : [],
@@ -2738,6 +2795,7 @@ function parseJudge(text) {
 
   /* ---- 校验浏览器拿回来的生成结果 ---- */
   if (pathname === '/api/ai/parse' && method === 'POST') {
+    if (!user) return fail(res, 401, '登录后才能使用 AI 接口');
     const body = await readBody(req, 256 * 1024);
     const parsed = validateGenerated(parseGenerated(body.text) || extractJson(body.text));
     if (!parsed) return fail(res, 422, 'AI 返回的题目不完整，换一次试试');
@@ -2746,6 +2804,7 @@ function parseJudge(text) {
 
   /* ---- AI 出题 ---- */
   if (pathname === '/api/ai/generate' && method === 'POST') {
+    if (!user) return fail(res, 401, '登录后才能使用 AI 接口');
     const body = await readBody(req, 256 * 1024);
     const spec = {
       tags: Array.isArray(body.tags) ? body.tags.map(String).slice(0, 4) : [],
@@ -2779,6 +2838,7 @@ function parseJudge(text) {
 
   /* ---- AI 对话（SSE） ---- */
   if (pathname === '/api/ai/chat' && method === 'POST') {
+    if (!user) return fail(res, 401, '登录后才能使用 AI 接口');
     const body = await readBody(req, 512 * 1024);
     const history = Array.isArray(body.messages) ? body.messages : [];
     if (!history.length) return fail(res, 400, '缺少消息');
