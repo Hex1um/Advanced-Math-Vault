@@ -142,8 +142,8 @@
             }
           }
           // OCR 也不可用：给提示词，让用户去别处识别后粘回来
-          box.innerHTML = '<div class="judge-errors" style="border-color:#dbe6fa;background:#f7faff">'
-            + '<div class="je-head" style="color:#1f57c9">当前通道读不了图片</div>'
+          box.innerHTML = '<div class="judge-errors" style="border-color:'+window.UI.tone('panelLine')+';background:'+window.UI.tone('panel')+'">'
+            + '<div class="je-head" style="color:'+window.UI.tone('info')+'">当前通道读不了图片</div>'
             + '<div class="small" style="line-height:1.9;color:var(--text-2)">把下面这段提示词和图片一起发给任意能看图的 AI（豆包 / Kimi / 通义千问网页版都行），'
             + '把它的回答原样粘到「题干」里，我来解析。</div>'
             + '<textarea readonly rows="9" id="ocrPrompt" style="width:100%;margin-top:8px;font-size:12px">' + window.Md.esc(res.prompt || '') + '</textarea>'
@@ -269,7 +269,7 @@
             return '<div class="related-item" style="align-items:flex-start">'
               + '<span class="code">' + s.code + '</span>'
               + '<span class="t" style="white-space:normal">' + window.Md.inlineTex(s.title)
-              + (s.status === 'rejected' && s.rejectReason ? '<div class="small" style="color:#ff9b9b;margin-top:2px">驳回：' + window.Md.esc(s.rejectReason) + '</div>' : '')
+              + (s.status === 'rejected' && s.rejectReason ? '<div class="small" style="color:'+window.UI.tone('err')+';margin-top:2px">驳回：' + window.Md.esc(s.rejectReason) + '</div>' : '')
               + '</span>'
               + '<span class="tag ' + (s.status === 'pending' ? 'gold' : 'gray') + '">' + (s.status === 'pending' ? '待审核' : '已驳回') + '</span></div>';
           }).join('')

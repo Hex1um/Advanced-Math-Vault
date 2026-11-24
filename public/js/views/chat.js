@@ -100,7 +100,7 @@
     const chip = document.getElementById('ctxChip');
     if (s.problemCode) {
       chip.style.display = '';
-      chip.innerHTML = '<span class="mono" style="font-size:11px;color:#9dc0ff">' + window.Md.esc(s.problemCode) + '</span>'
+      chip.innerHTML = '<span class="mono" style="font-size:11px;color:'+window.UI.tone('info')+'">' + window.Md.esc(s.problemCode) + '</span>'
         + '<span style="color:var(--muted)">已带入题干</span>';
     } else {
       chip.style.display = 'none';

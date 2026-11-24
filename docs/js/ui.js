@@ -394,10 +394,25 @@
     if (btn) btn.addEventListener('click', llmSettings);
   });
 
+  /* 语义色：暗色和浅色要不同的亮度，不要在模板里写死 hex */
+  function tone(name) {
+    const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const map = {
+      ok: dark ? '#8ee6a8' : '#2f7a41',
+      warn: dark ? '#ffd9a3' : '#8a5a12',
+      err: dark ? '#ff9b9b' : '#b93a3a',
+      info: dark ? '#9dc0ff' : '#1f57c9',
+      teal: dark ? '#9df0e0' : '#1f7a68',
+      panel: dark ? '#1e2a42' : '#f7faff',
+      panelLine: dark ? '#2c3c5c' : '#dbe6fa'
+    };
+    return map[name] || 'var(--text)';
+  }
+
   window.UI = {
     LEVELS, levelOf, levelBadge, toast, avatar, timeAgo, fmtDate,
     scoreBars, modal, authModal, requireLogin, applyUser, renderHeader,
-    setActiveNav, pagination, icon, empty, ESC,
+    setActiveNav, pagination, icon, empty, ESC, tone,
     llmConfig, saveLlmConfig, llmSettings
   };
 })();

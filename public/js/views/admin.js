@@ -244,8 +244,8 @@
         document.getElementById('llmBase').value = data.llm.baseUrl || '';
         document.getElementById('llmModel').value = data.llm.model || '';
         document.getElementById('llmStatus').innerHTML = data.llm.configured
-          ? '<span style="color:#9df0e0">已配置 · ' + window.Md.esc(data.llm.model) + ' · key ' + window.Md.esc(data.llm.keyHint) + '</span>'
-          : '<span style="color:#ffd9a3">未配置，使用本地讲解模式</span>';
+          ? '<span style="color:'+window.UI.tone('teal')+'">已配置 · ' + window.Md.esc(data.llm.model) + ' · key ' + window.Md.esc(data.llm.keyHint) + '</span>'
+          : '<span style="color:'+window.UI.tone('warn')+'">未配置，使用本地讲解模式</span>';
       } catch (e) {}
     }
 
@@ -256,7 +256,7 @@
         box.innerHTML = data.items.length
           ? data.items.map(function (p) {
             return '<div class="related-item"><span class="code">' + p.code + '</span><span class="t">' + window.Md.esc(p.title) + '</span>'
-              + '<span class="small" style="color:#ff9b9b">' + window.Md.esc(p.rejectReason || '') + '</span></div>';
+              + '<span class="small" style="color:'+window.UI.tone('err')+'">' + window.Md.esc(p.rejectReason || '') + '</span></div>';
           }).join('')
           : '没有驳回记录';
       } catch (e) {}
@@ -282,7 +282,7 @@
             + '<div class="field"><label>考点标签（逗号分隔）</label><input data-f="tags" value="' + window.Md.esc((p.tags || []).join(', ')) + '" /></div>'
             + '</div>'
             + '<div class="review-statement md" data-md="stmt">' + window.Md.toHtml(p.statement) + '</div>'
-            + (p.solution ? '<details style="margin:8px 0"><summary class="small muted" style="cursor:pointer">展开解析</summary><div class="review-statement md" data-md="sol">' + window.Md.toHtml(p.solution) + '</div></details>' : '<div class="small" style="color:#ff9b9b">没填解析</div>')
+            + (p.solution ? '<details style="margin:8px 0"><summary class="small muted" style="cursor:pointer">展开解析</summary><div class="review-statement md" data-md="sol">' + window.Md.toHtml(p.solution) + '</div></details>' : '<div class="small" style="color:'+window.UI.tone('err')+'">没填解析</div>')
             + '<div class="review-actions">'
             + '<button class="btn btn-ok btn-sm" data-act="approve">通过入库</button>'
             + '<input class="input" style="min-width:220px;flex:1" placeholder="驳回原因（驳回时填）" data-f="reason" />'
