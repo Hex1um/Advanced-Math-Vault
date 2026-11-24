@@ -1,1042 +1,1769 @@
 [
  {
-  "title": "全微分：含 $e^{x}(x+y+1)$ 型",
-  "statement": "$[e^{x}(x+y+1)+2xy]\\,\\mathrm{d}x+(e^{x}+x^{2}+3y^{2})\\,\\mathrm{d}y=0$。",
+  "title": "四维向量组：找极大无关组",
+  "statement": "设 $\\alpha_1=(1,2,1,3)^{T}$，$\\alpha_2=(2,4,3,5)^{T}$，$\\alpha_3=(3,6,4,8)^{T}$，$\\alpha_4=(1,2,2,3)^{T}$，求向量组的一个极大无关组，并将其余向量用该极大无关组线性表示。",
   "tags": [
-   "微分方程",
-   "全微分方程"
-  ],
-  "thinking": 6,
-  "difficulty": 7,
-  "calc": 6,
-  "source": "柳贯一题型专项 · 第118节 全微分方程",
-  "hints": [
-   "验证 $P_y=Q_x=e^x+2x$，是恰当方程；把 $e^x(x+y)$ 与 $x^2y$、$y^3$ 分别凑出。"
-  ],
-  "answer": "$e^{x}(x+y)+x^{2}y+y^{3}=C$",
-  "solution": "$P_y=Q_x=e^{x}+2x$；$\\mathrm{d}[e^{x}(x+y)]+\\mathrm{d}(x^{2}y)+\\mathrm{d}(y^{3})$ 恰为左端，故 $e^{x}(x+y)+x^{2}y+y^{3}=C$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "全微分：$x^2y-xy^2$ 型",
-  "statement": "$(2xy-y^{2})\\,\\mathrm{d}x+(x^{2}-2xy)\\,\\mathrm{d}y=0$。",
-  "tags": [
-   "微分方程",
-   "全微分方程"
-  ],
-  "thinking": 6,
-  "difficulty": 7,
-  "calc": 6,
-  "source": "柳贯一题型专项 · 第118节 全微分方程",
-  "hints": [
-   "$P_y=2x-2y=Q_x$，按 $x^2y$ 与 $xy^2$ 两组凑微分。"
-  ],
-  "answer": "$x^{2}y-xy^{2}=C$",
-  "solution": "$P_y=2x-2y=Q_x$；$\\mathrm{d}(x^{2}y)-\\mathrm{d}(xy^{2})=(2xy-y^{2})\\mathrm{d}x+(x^{2}-2xy)\\mathrm{d}y$，故 $x^{2}y-xy^{2}=C$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "全微分：含 $y\\cos x$ 型",
-  "statement": "$(y\\cos x+2xy)\\,\\mathrm{d}x+(\\sin x+x^{2}+3y^{2})\\,\\mathrm{d}y=0$。",
-  "tags": [
-   "微分方程",
-   "全微分方程"
-  ],
-  "thinking": 6,
-  "difficulty": 7,
-  "calc": 6,
-  "source": "柳贯一题型专项 · 第118节 全微分方程",
-  "hints": [
-   "$P_y=\\cos x+2x=Q_x$；把 $y\\sin x$、$x^2y$、$y^3$ 三块分别凑出。"
-  ],
-  "answer": "$y\\sin x+x^{2}y+y^{3}=C$",
-  "solution": "$P_y=Q_x=\\cos x+2x$；$\\mathrm{d}(y\\sin x)+\\mathrm{d}(x^{2}y)+\\mathrm{d}(y^{3})$ 即左端，得 $y\\sin x+x^{2}y+y^{3}=C$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "全微分：二次多项式",
-  "statement": "$(3x^{2}+2y)\\,\\mathrm{d}x+(2x+4y)\\,\\mathrm{d}y=0$。",
-  "tags": [
-   "微分方程",
-   "全微分方程"
-  ],
-  "thinking": 6,
-  "difficulty": 7,
-  "calc": 6,
-  "source": "柳贯一题型专项 · 第118节 全微分方程",
-  "hints": [
-   "$P_y=2=Q_x$，直接积 $P$ 对 $x$ 再补 $y$ 的项。"
-  ],
-  "answer": "$x^{3}+2xy+2y^{2}=C$",
-  "solution": "$u=\\int(3x^{2}+2y)\\mathrm{d}x=x^{3}+2xy+\\varphi(y)$，由 $u_y=2x+\\varphi'(y)=2x+4y$ 得 $\\varphi=2y^{2}$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "全微分：含 $y^{2}\\cos x$ 型",
-  "statement": "$(2xy^{3}+y^{2}\\cos x)\\,\\mathrm{d}x+(3x^{2}y^{2}+2y\\sin x)\\,\\mathrm{d}y=0$。",
-  "tags": [
-   "微分方程",
-   "全微分方程"
+   "线性代数",
+   "极大无关组",
+   "初等行变换"
   ],
   "thinking": 7,
   "difficulty": 8,
   "calc": 7,
-  "source": "柳贯一题型专项 · 第118节 全微分方程",
+  "source": "柳贯一题型专项 · 第179节 极大无关组",
   "hints": [
-   "$P_y=6xy^{2}+2y\\cos x=Q_x$；注意 $x^2y^3$ 与 $y^2\\sin x$ 两块。"
+   "把向量按列拼成矩阵作初等行变换化阶梯形，主元所在列对应的向量即为极大无关组。"
   ],
-  "answer": "$x^{2}y^{3}+y^{2}\\sin x=C$",
-  "solution": "$P_y=6xy^{2}+2y\\cos x=Q_x$；$\\mathrm{d}(x^{2}y^{3})+\\mathrm{d}(y^{2}\\sin x)$ 即左端，得 $x^{2}y^{3}+y^{2}\\sin x=C$。",
+  "answer": "极大无关组 $\\alpha_1,\\alpha_2,\\alpha_4$；$\\alpha_3=\\alpha_1+\\alpha_2$",
+  "solution": "行化简后主元在第 1、2、4 列，故 $\\alpha_1,\\alpha_2,\\alpha_4$ 无关；非主元列给出 $\\alpha_3=\\alpha_1+\\alpha_2$（可直接验证 $(3,6,4,8)=(1,2,1,3)+(2,4,3,5)$）。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "全微分：二次齐次带初值",
-  "statement": "$(3x^{2}+2xy)\\,\\mathrm{d}x+(x^{2}+3y^{2})\\,\\mathrm{d}y=0$，$y(0)=1$。",
+  "title": "由矩阵列向量求秩与极大无关组",
+  "statement": "已知矩阵 $A=(\\alpha_1,\\alpha_2,\\alpha_3,\\alpha_4)$，其中 $\\alpha_1=(1,1,1,2)^{T}$，$\\alpha_2=(1,2,3,3)^{T}$，$\\alpha_3=(2,3,4,5)^{T}$，$\\alpha_4=(1,0,1,1)^{T}$。求向量组 $\\alpha_1,\\alpha_2,\\alpha_3,\\alpha_4$ 的秩与一个极大无关组，并把其余向量用该极大无关组线性表示。",
   "tags": [
-   "微分方程",
-   "全微分方程",
-   "初值问题"
+   "线性代数",
+   "极大无关组",
+   "矩阵的秩"
   ],
   "thinking": 7,
   "difficulty": 8,
   "calc": 7,
-  "source": "柳贯一题型专项 · 第118节 全微分方程",
+  "source": "柳贯一题型专项 · 第179节 极大无关组",
   "hints": [
-   "$P_y=2x=Q_x$；原函数为 $x^{3}+x^{2}y+y^{3}$ 的组合，代入初值定常数。"
+   "对 $A$ 作初等行变换，非零行数就是秩，主元列对应极大无关组。"
   ],
-  "answer": "$x^{3}+x^{2}y+y^{3}=1$",
-  "solution": "$u=x^{3}+x^{2}y+y^{3}$ 满足 $u_x=P$、$u_y=Q$；$u(0,1)=1$，故 $x^{3}+x^{2}y+y^{3}=1$。",
+  "answer": "秩为 3，极大无关组 $\\alpha_1,\\alpha_2,\\alpha_4$；$\\alpha_3=\\alpha_1+\\alpha_2$",
+  "solution": "$\\alpha_3=\\alpha_1+\\alpha_2$ 说明只有 3 个独立向量；$\\alpha_1,\\alpha_2,\\alpha_4$ 的行列式非零，构成极大无关组。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "全微分：$xy^{2}-x^{3}y$ 型带初值",
-  "statement": "$(y^{2}-3x^{2}y)\\,\\mathrm{d}x+(2xy-x^{3})\\,\\mathrm{d}y=0$，$y(1)=2$。",
+  "title": "秩为 2 的向量组：两个基向量",
+  "statement": "设向量组 $\\alpha_1=(1,2,-1,0)^{T}$，$\\alpha_2=(2,4,1,3)^{T}$，$\\alpha_3=(3,6,0,3)^{T}$，$\\alpha_4=(1,2,2,3)^{T}$，求其秩与一个极大线性无关组，并将其余向量用该极大无关组线性表示。",
   "tags": [
-   "微分方程",
-   "全微分方程",
-   "初值问题"
+   "线性代数",
+   "极大无关组",
+   "矩阵的秩"
   ],
   "thinking": 7,
   "difficulty": 8,
   "calc": 7,
-  "source": "柳贯一题型专项 · 第118节 全微分方程",
+  "source": "柳贯一题型专项 · 第179节 极大无关组",
   "hints": [
-   "$P_y=2y-3x^{2}=Q_x$；原函数含 $xy^2$ 与 $x^3y$ 两项。"
+   "注意各向量前两个分量成比例，可怀疑秩为 2；行化简确认后写出表示式。"
   ],
-  "answer": "$xy^{2}-x^{3}y=2$",
-  "solution": "$u=xy^{2}-x^{3}y$，$u(1,2)=4-2=2$，故 $xy^{2}-x^{3}y=2$。",
+  "answer": "秩为 2，极大无关组 $\\alpha_1,\\alpha_2$；$\\alpha_3=\\alpha_1+\\alpha_2$，$\\alpha_4=-\\alpha_1+\\alpha_2$",
+  "solution": "$\\alpha_1+\\alpha_2=(3,6,0,3)=\\alpha_3$；$-\\alpha_1+\\alpha_2=(1,2,2,3)=\\alpha_4$；故 $\\alpha_3,\\alpha_4$ 都能由 $\\alpha_1,\\alpha_2$ 表出，秩为 2。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "全微分：含 $-3y^{2}$ 项带初值",
-  "statement": "$(2x+y^{2})\\,\\mathrm{d}x+(2xy-3y^{2})\\,\\mathrm{d}y=0$，$y(0)=1$。",
+  "title": "极大无关组及 $\\alpha_3$ 的表示",
+  "statement": "已知向量组 $\\alpha_1=(1,0,1,2)^{T}$，$\\alpha_2=(2,1,0,1)^{T}$，$\\alpha_3=(1,1,-1,-1)^{T}$，$\\alpha_4=(0,1,2,3)^{T}$，求该向量组的一个极大无关组，并将其余向量用该极大无关组线性表示。",
   "tags": [
-   "微分方程",
-   "全微分方程",
-   "初值问题"
+   "线性代数",
+   "极大无关组",
+   "初等行变换"
   ],
   "thinking": 7,
   "difficulty": 8,
   "calc": 7,
-  "source": "柳贯一题型专项 · 第118节 全微分方程",
+  "source": "柳贯一题型专项 · 第179节 极大无关组",
   "hints": [
-   "$P_y=2y=Q_x$；三项分别是 $x^2$、$xy^2$、$-y^3$ 的微分。"
+   "先把 4 个向量按列排成 $4\\times4$ 矩阵看行列式是否为 0，再定主元列。"
   ],
-  "answer": "$x^{2}+xy^{2}-y^{3}=-1$",
-  "solution": "$u=x^{2}+xy^{2}-y^{3}$，$u(0,1)=-1$，故 $x^{2}+xy^{2}-y^{3}=-1$。",
+  "answer": "极大无关组 $\\alpha_1,\\alpha_2,\\alpha_4$；$\\alpha_3=-\\alpha_1+\\alpha_2$",
+  "solution": "$|(\\alpha_1,\\alpha_2,\\alpha_4)|\\neq0$，三者无关；$-\\alpha_1+\\alpha_2=(-1,0,-1,-2)+(2,1,0,1)=(1,1,-1,-1)=\\alpha_3$，故 $\\alpha_3$ 可被表出。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "全微分：$x^2+xy+y^2$ 型",
-  "statement": "$(2x+y)\\,\\mathrm{d}x+(x+2y)\\,\\mathrm{d}y=0$，$y(0)=1$。",
+  "title": "秩为 2 定 $a$ 并表出 $\\alpha_3$",
+  "statement": "已知向量组 $\\alpha_1=(1,1,0,2)^{T}$，$\\alpha_2=(2,1,1,4)^{T}$，$\\alpha_3=(1,2,-1,a)^{T}$。若向量组的秩为 2，求 $a$ 的值，并求此时的一个极大无关组及 $\\alpha_3$ 由该极大无关组的线性表示式。",
   "tags": [
-   "微分方程",
-   "全微分方程",
-   "初值问题"
-  ],
-  "thinking": 6,
-  "difficulty": 7,
-  "calc": 6,
-  "source": "柳贯一题型专项 · 第118节 全微分方程",
-  "hints": [
-   "$P_y=1=Q_x$；原函数就是 $x^{2}+xy+y^{2}$。"
-  ],
-  "answer": "$x^{2}+xy+y^{2}=1$",
-  "solution": "$u=x^{2}+xy+y^{2}$，$u(0,1)=1$，故 $x^{2}+xy+y^{2}=1$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "全微分：$x^{2}y+x+y^{2}$ 型",
-  "statement": "$(2xy+1)\\,\\mathrm{d}x+(x^{2}+2y)\\,\\mathrm{d}y=0$，$y(0)=1$。",
-  "tags": [
-   "微分方程",
-   "全微分方程",
-   "初值问题"
-  ],
-  "thinking": 6,
-  "difficulty": 7,
-  "calc": 6,
-  "source": "柳贯一题型专项 · 第118节 全微分方程",
-  "hints": [
-   "$P_y=2x=Q_x$；原函数含 $x^{2}y$、$x$、$y^{2}$。"
-  ],
-  "answer": "$x^{2}y+x+y^{2}=1$",
-  "solution": "$u=x^{2}y+x+y^{2}$，$u(0,1)=1$，故 $x^{2}y+x+y^{2}=1$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "正态总体：$\\bar X$ 与 $S^2$ 的数字特征",
-  "statement": "设总体 $X\\sim N(\\mu,\\sigma^{2})$，$X_{1},X_{2},\\ldots,X_{n}$ 为简单随机样本，$\\bar X$ 为样本均值，$S^{2}$ 为修正样本方差。求 (1) $E(\\bar X)$，$D(\\bar X)$；(2) $E(S^{2})$，$D(S^{2})$；(3) $\\mathrm{Cov}(\\bar X,S^{2})$。",
-  "tags": [
-   "概率统计",
-   "数字特征",
-   "卡方分布"
-  ],
-  "thinking": 8,
-  "difficulty": 9,
-  "calc": 8,
-  "source": "柳贯一题型专项 · 第242节 统计量数字特征",
-  "hints": [
-   "把 $\\frac{(n-1)S^{2}}{\\sigma^{2}}$ 看成 $\\chi^{2}(n-1)$，再用正态总体下 $\\bar X$ 与 $S^{2}$ 独立。"
-  ],
-  "answer": "(1) $\\mu$，$\\frac{\\sigma^{2}}{n}$；(2) $\\sigma^{2}$，$\\frac{2\\sigma^{4}}{n-1}$；(3) $0$",
-  "solution": "1) $E(\\bar X)=\\mu$，$D(\\bar X)=\\frac{\\sigma^{2}}{n}$；2) $\\frac{(n-1)S^{2}}{\\sigma^{2}}\\sim\\chi^{2}(n-1)$，得 $E(S^{2})=\\sigma^{2}$，$D(S^{2})=\\frac{\\sigma^{4}}{(n-1)^{2}}\\cdot 2(n-1)=\\frac{2\\sigma^{4}}{n-1}$；3) 正态总体下 $\\bar X\\perp S^{2}$，故协方差为 0。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "两点总体：协方差与三阶中心矩",
-  "statement": "设总体 $X\\sim B(1,p)$，$0<p<1$，$X_{1},\\ldots,X_{n}$ 为样本，$\\bar X$ 为样本均值，$S^{2}$ 为修正样本方差。求 (1) $E(\\bar X)$，$D(\\bar X)$；(2) $E(S^{2})$；(3) $\\mathrm{Cov}(\\bar X,S^{2})$。",
-  "tags": [
-   "概率统计",
-   "数字特征",
-   "协方差"
-  ],
-  "thinking": 8,
-  "difficulty": 10,
-  "calc": 9,
-  "source": "柳贯一题型专项 · 第242节 统计量数字特征",
-  "hints": [
-   "非正态总体下 $\\bar X$ 与 $S^{2}$ 不独立，用 $\\mathrm{Cov}(\\bar X,S^{2})=\\frac{\\mu_{3}}{n}$，其中 $\\mu_{3}=E(X-p)^{3}$。"
-  ],
-  "answer": "(1) $p$，$\\frac{p(1-p)}{n}$；(2) $p(1-p)$；(3) $\\frac{p(1-p)(1-2p)}{n}$",
-  "solution": "1) $E(\\bar X)=p$，$D(\\bar X)=\\frac{p(1-p)}{n}$；2) $E(S^{2})=D(X)=p(1-p)$；3) $\\mathrm{Cov}(\\bar X,S^{2})=\\frac{\\mu_{3}}{n}$，而 $\\mu_{3}=p(1-p)^{3}+(1-p)(-p)^{3}=p(1-p)(1-2p)$，故为 $\\frac{p(1-p)(1-2p)}{n}$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "均匀总体：$\\bar X$ 与 $S^2$ 相互独立",
-  "statement": "设总体 $X\\sim U[0,\\theta]$，$\\theta>0$，$X_{1},\\ldots,X_{n}$ 为样本，$\\bar X$ 为样本均值，$S^{2}$ 为修正样本方差。求 (1) $E(\\bar X)$，$D(\\bar X)$；(2) $E(S^{2})$；(3) $\\mathrm{Cov}(\\bar X,S^{2})$。",
-  "tags": [
-   "概率统计",
-   "数字特征",
-   "对称性"
-  ],
-  "thinking": 7,
-  "difficulty": 9,
-  "calc": 8,
-  "source": "柳贯一题型专项 · 第242节 统计量数字特征",
-  "hints": [
-   "均匀分布关于均值对称，三阶中心矩为 0，从而 $\\mathrm{Cov}(\\bar X,S^{2})=\\frac{\\mu_{3}}{n}=0$。"
-  ],
-  "answer": "(1) $\\frac{\\theta}{2}$，$\\frac{\\theta^{2}}{12n}$；(2) $\\frac{\\theta^{2}}{12}$；(3) $0$",
-  "solution": "1) $E(X)=\\frac{\\theta}{2}$，$D(X)=\\frac{\\theta^{2}}{12}$，故 $E(\\bar X)=\\frac{\\theta}{2}$，$D(\\bar X)=\\frac{\\theta^{2}}{12n}$；2) $E(S^{2})=D(X)=\\frac{\\theta^{2}}{12}$；3) 分布对称故 $\\mu_{3}=0$，于是 $\\mathrm{Cov}(\\bar X,S^{2})=\\frac{\\mu_{3}}{n}=0$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "泊松总体：三阶中心矩等于 $\\lambda$",
-  "statement": "设总体 $X\\sim P(\\lambda)$，$\\lambda>0$，$X_{1},\\ldots,X_{n}$ 为样本，$\\bar X$ 为样本均值，$S^{2}$ 为修正样本方差。求 (1) $E(\\bar X)$，$D(\\bar X)$；(2) $E(S^{2})$；(3) $\\mathrm{Cov}(\\bar X,S^{2})$。",
-  "tags": [
-   "概率统计",
-   "数字特征",
-   "协方差"
-  ],
-  "thinking": 8,
-  "difficulty": 9,
-  "calc": 8,
-  "source": "柳贯一题型专项 · 第242节 统计量数字特征",
-  "hints": [
-   "泊松分布的三阶中心矩等于 $\\lambda$，代入 $\\mathrm{Cov}(\\bar X,S^{2})=\\frac{\\mu_{3}}{n}$ 即可。"
-  ],
-  "answer": "(1) $\\lambda$，$\\frac{\\lambda}{n}$；(2) $\\lambda$；(3) $\\frac{\\lambda}{n}$",
-  "solution": "1) $E(X)=D(X)=\\lambda$，故 $E(\\bar X)=\\lambda$，$D(\\bar X)=\\frac{\\lambda}{n}$；2) $E(S^{2})=\\lambda$；3) 泊松分布 $\\mu_{3}=\\lambda$，故 $\\mathrm{Cov}(\\bar X,S^{2})=\\frac{\\lambda}{n}$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "指数总体：修正与未修正方差并存",
-  "statement": "设总体 $X$ 的概率密度为 $f(x)=\\frac{1}{\\theta}e^{-x/\\theta}$（$x>0$，$\\theta>0$），$X_{1},\\ldots,X_{n}$ 为样本，$\\bar X$ 为样本均值，$S^{2}$ 为修正样本方差，$S_{n}^{2}=\\frac{1}{n}\\sum_{i=1}^{n}(X_{i}-\\bar X)^{2}$ 为未修正样本方差。求 (1) $E(\\bar X)$，$D(\\bar X)$；(2) $E(S^{2})$，$E(S_{n}^{2})$；(3) $\\mathrm{Cov}(\\bar X,S^{2})$。",
-  "tags": [
-   "概率统计",
-   "数字特征",
-   "协方差"
-  ],
-  "thinking": 8,
-  "difficulty": 10,
-  "calc": 9,
-  "source": "柳贯一题型专项 · 第242节 统计量数字特征",
-  "hints": [
-   "指数分布 $E(X)=\\theta$、$D(X)=\\theta^{2}$、$\\mu_{3}=2\\theta^{3}$，用 $\\mathrm{Cov}(\\bar X,S^{2})=\\frac{\\mu_{3}}{n}$。"
-  ],
-  "answer": "(1) $\\theta$，$\\frac{\\theta^{2}}{n}$；(2) $\\theta^{2}$，$\\frac{n-1}{n}\\theta^{2}$；(3) $\\frac{2\\theta^{2}}{n}$",
-  "solution": "1) $E(X)=D(X)=\\theta$，故 $E(\\bar X)=\\theta$，$D(\\bar X)=\\frac{\\theta^{2}}{n}$；2) $E(S^{2})=D(X)=\\theta^{2}$，$E(S_{n}^{2})=\\frac{n-1}{n}\\theta^{2}$；3) 指数分布 $\\mu_{3}=2\\theta^{3}$，故 $\\mathrm{Cov}(\\bar X,S^{2})=\\frac{2\\theta^{3}}{n\\cdot\\theta}=\\frac{2\\theta^{2}}{n}$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "原点矩统计量：均值、方差与协方差",
-  "statement": "设总体 $X$ 的 $k$ 阶原点矩 $E(X^{k})$ 存在，$A_{k}=\\frac{1}{n}\\sum_{i=1}^{n}X_{i}^{k}$ 为样本 $k$ 阶原点矩，求 (1) $E(A_{k})$；(2) $D(A_{k})$；(3) $\\mathrm{Cov}(A_{k},\\bar X)$（用总体原点矩表示）。",
-  "tags": [
-   "概率统计",
-   "数字特征",
-   "原点矩"
-  ],
-  "thinking": 8,
-  "difficulty": 9,
-  "calc": 8,
-  "source": "柳贯一题型专项 · 第242节 统计量数字特征",
-  "hints": [
-   "把 $X_{i}^{k}$ 看成新的总体，直接套用样本均值的均值、方差与协方差公式。"
-  ],
-  "answer": "(1) $E(X^{k})$；(2) $\\frac{1}{n}[E(X^{2k})-(E(X^{k}))^{2}]$；(3) $\\frac{1}{n}[E(X^{k+1})-E(X^{k})E(X)]$",
-  "solution": "令 $Y_{i}=X_{i}^{k}$，则 $A_{k}=\\bar Y$，故 $E(A_{k})=E(Y)=E(X^{k})$，$D(A_{k})=\\frac{D(Y)}{n}=\\frac{1}{n}[E(X^{2k})-E^{2}(X^{k})]$；而 $\\mathrm{Cov}(A_{k},\\bar X)=\\frac{1}{n}\\mathrm{Cov}(X^{k},X)=\\frac{1}{n}[E(X^{k+1})-E(X^{k})E(X)]$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "中心化变量 $Y_i=X_i-\\bar X$ 的数字特征",
-  "statement": "设总体 $X$ 的方差 $D(X)=\\sigma^{2}$ 存在，$X_{1},\\ldots,X_{n}$ 为样本，$\\bar X$ 为样本均值，令 $Y_{i}=X_{i}-\\bar X$。求 (1) $E(Y_{i})$；(2) $D(Y_{i})$；(3) $\\mathrm{Cov}(Y_{1},Y_{2})$；(4) $\\mathrm{Cov}(Y_{i},\\bar X)$。",
-  "tags": [
-   "概率统计",
-   "数字特征",
-   "协方差"
-  ],
-  "thinking": 8,
-  "difficulty": 9,
-  "calc": 8,
-  "source": "柳贯一题型专项 · 第242节 统计量数字特征",
-  "hints": [
-   "先算 $\\mathrm{Cov}(X_{i},\\bar X)=\\frac{\\sigma^{2}}{n}$，再用协方差的双线性展开 $D(X_{i}-\\bar X)$。"
-  ],
-  "answer": "(1) $0$；(2) $\\frac{n-1}{n}\\sigma^{2}$；(3) $-\\frac{\\sigma^{2}}{n}$；(4) $0$",
-  "solution": "1) $E(Y_{i})=\\mu-\\mu=0$；2) $D(Y_{i})=D(X_{i})+D(\\bar X)-2\\mathrm{Cov}(X_{i},\\bar X)=\\sigma^{2}+\\frac{\\sigma^{2}}{n}-\\frac{2\\sigma^{2}}{n}=\\frac{n-1}{n}\\sigma^{2}$；3) $\\mathrm{Cov}(Y_{1},Y_{2})=\\mathrm{Cov}(X_{1},X_{2})-\\frac{\\sigma^{2}}{n}=-\\frac{\\sigma^{2}}{n}$；4) $\\mathrm{Cov}(X_{i}-\\bar X,\\bar X)=\\frac{\\sigma^{2}}{n}-\\frac{\\sigma^{2}}{n}=0$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "标准正态总体：平方和与均值的协方差",
-  "statement": "设总体 $X\\sim N(0,\\sigma^{2})$，$X_{1},\\ldots,X_{n}$ 为样本，令 $U=\\frac{1}{n}\\sum_{i=1}^{n}X_{i}^{2}$。求 (1) $E(\\sum_{i=1}^{n}X_{i}^{2})$，$D(\\sum_{i=1}^{n}X_{i}^{2})$；(2) $E(U)$，$D(U)$；(3) $\\mathrm{Cov}(\\bar X,U)$。",
-  "tags": [
-   "概率统计",
-   "数字特征",
-   "卡方分布"
-  ],
-  "thinking": 8,
-  "difficulty": 9,
-  "calc": 8,
-  "source": "柳贯一题型专项 · 第242节 统计量数字特征",
-  "hints": [
-   "$\\sum(X_{i}/\\sigma)^{2}\\sim\\chi^{2}(n)$，其均值 $n$、方差 $2n$；再用奇函数的对称性处理协方差。"
-  ],
-  "answer": "(1) $n\\sigma^{2}$，$2n\\sigma^{4}$；(2) $\\sigma^{2}$，$\\frac{2\\sigma^{4}}{n}$；(3) $0$",
-  "solution": "1) $\\sum X_{i}^{2}=\\sigma^{2}\\chi^{2}(n)$，故均值 $n\\sigma^{2}$、方差 $2n\\sigma^{4}$；2) $E(U)=\\sigma^{2}$，$D(U)=\\frac{2\\sigma^{4}}{n}$；3) $\\mathrm{Cov}(\\bar X,U)=E(\\bar X U)$，被积函数关于 $\\bar X$ 为奇函数故为 0，即 $\\bar X$ 与 $U$ 不相关。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "三个样本的修正方差：$T$ 与 $S^2$ 独立",
-  "statement": "设 $X_{1},X_{2},X_{3}$ 来自总体 $N(\\mu,\\sigma^{2})$，$T=\\frac{1}{3}(X_{1}+X_{2}+X_{3})$，$S^{2}=\\frac{1}{2}\\sum_{i=1}^{3}(X_{i}-T)^{2}$ 为修正样本方差。求 (1) $E(T)$，$D(T)$；(2) $E(S^{2})$；(3) $\\mathrm{Cov}(T,S^{2})$。",
-  "tags": [
-   "概率统计",
-   "数字特征",
-   "独立性"
+   "线性代数",
+   "向量组的秩",
+   "线性表出"
   ],
   "thinking": 7,
   "difficulty": 8,
   "calc": 7,
-  "source": "柳贯一题型专项 · 第242节 统计量数字特征",
+  "source": "柳贯一题型专项 · 第179节 极大无关组",
   "hints": [
-   "这就是 $n=3$ 的正态样本情形，$T$ 与 $S^{2}$ 独立，故协方差直接为 0。"
+   "$\\alpha_1,\\alpha_2$ 已无关，秩为 2 意味着 $\\alpha_3$ 与它们相关：用前 3 个分量定出组合系数，再校验第 4 个分量。"
   ],
-  "answer": "(1) $\\mu$，$\\frac{\\sigma^{2}}{3}$；(2) $\\sigma^{2}$；(3) $0$",
-  "solution": "1) $T$ 是 $n=3$ 的样本均值，故 $E(T)=\\mu$，$D(T)=\\frac{\\sigma^{2}}{3}$；2) $E(S^{2})=\\sigma^{2}$；3) 正态总体下样本均值与修正方差独立，故 $\\mathrm{Cov}(T,S^{2})=0$。",
+  "answer": "$a=2$，极大无关组 $\\alpha_1,\\alpha_2$；$\\alpha_3=3\\alpha_1-\\alpha_2$",
+  "solution": "设 $\\alpha_3=x\\alpha_1+y\\alpha_2$，由 $x+2y=1$、$x+y=2$、$y=-1$ 得 $x=3$、$y=-1$；第 4 分量：$3\\cdot2+(-1)\\cdot4=2=a$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "四阶矩求 $D(U)$，三阶矩求协方差",
-  "statement": "设总体 $X$ 的均值 $E(X)=\\mu$，方差 $D(X)=\\sigma^{2}$，三阶中心矩 $\\mu_{3}$、四阶中心矩 $\\mu_{4}$ 存在，$X_{1},\\ldots,X_{n}$ 为样本，令 $U=\\frac{1}{n}\\sum_{i=1}^{n}(X_{i}-\\mu)^{2}$。求 (1) $E(U)$；(2) $D(U)$；(3) $\\mathrm{Cov}(U,\\bar X)$。",
+  "title": "已知极大无关组反求参数",
+  "statement": "设 $\\alpha_1=(1,2,1,0)^{T}$，$\\alpha_2=(2,1,0,1)^{T}$，$\\alpha_3=(1,1,a,2)^{T}$，$\\alpha_4=(3,3,2,3)^{T}$。已知 $\\alpha_1,\\alpha_2,\\alpha_4$ 为向量组的一个极大无关组，求 $a$ 的值，并将 $\\alpha_3$ 用该极大无关组线性表示。",
   "tags": [
-   "概率统计",
-   "数字特征",
-   "中心矩"
-  ],
-  "thinking": 8,
-  "difficulty": 10,
-  "calc": 9,
-  "source": "柳贯一题型专项 · 第242节 统计量数字特征",
-  "hints": [
-   "$U$ 是 $(X-\\mu)^{2}$ 的样本均值，先算 $(X-\\mu)^{2}$ 的方差，再除以 $n$。"
-  ],
-  "answer": "(1) $\\sigma^{2}$；(2) $\\frac{\\mu_{4}-\\sigma^{4}}{n}$；(3) $\\frac{\\mu_{3}}{n}$",
-  "solution": "1) $E(U)=E(X-\\mu)^{2}=\\sigma^{2}$；2) $D((X-\\mu)^{2})=\\mu_{4}-\\sigma^{4}$，故 $D(U)=\\frac{\\mu_{4}-\\sigma^{4}}{n}$；3) $\\mathrm{Cov}(U,\\bar X)=\\frac{1}{n}\\mathrm{Cov}((X-\\mu)^{2},X)=\\frac{\\mu_{3}}{n}$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "二项总体：$\\mu_3$ 推广到 $m$ 次试验",
-  "statement": "设总体 $X\\sim B(m,p)$，其中 $m$ 已知，$0<p<1$，$X_{1},\\ldots,X_{n}$ 为样本，$\\bar X$ 为样本均值，$S^{2}$ 为修正样本方差。求 (1) $E(\\bar X)$，$D(\\bar X)$；(2) $E(S^{2})$；(3) $\\mathrm{Cov}(\\bar X,S^{2})$。",
-  "tags": [
-   "概率统计",
-   "数字特征",
-   "协方差"
-  ],
-  "thinking": 8,
-  "difficulty": 10,
-  "calc": 9,
-  "source": "柳贯一题型专项 · 第242节 统计量数字特征",
-  "hints": [
-   "$B(m,p)$ 的三阶中心矩为 $mp(1-p)(1-2p)$，代入 $\\frac{\\mu_{3}}{n}$。"
-  ],
-  "answer": "(1) $mp$，$\\frac{mp(1-p)}{n}$；(2) $mp(1-p)$；(3) $\\frac{mp(1-p)(1-2p)}{n}$",
-  "solution": "1) $E(X)=mp$，$D(X)=mp(1-p)$，故 $E(\\bar X)=mp$，$D(\\bar X)=\\frac{mp(1-p)}{n}$；2) $E(S^{2})=mp(1-p)$；3) $\\mu_{3}=mp(1-p)(1-2p)$，故 $\\mathrm{Cov}(\\bar X,S^{2})=\\frac{\\mu_{3}}{n}=\\frac{mp(1-p)(1-2p)}{n}$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "指数分布参数化：$\\lambda e^{-\\lambda x}$ 版",
-  "statement": "设总体 $X$ 的概率密度为 $f(x)=\\lambda e^{-\\lambda x}$（$x>0$，$\\lambda>0$），$X_{1},\\ldots,X_{n}$ 为样本，$\\bar X$ 为样本均值，$S^{2}$ 为修正样本方差。求 (1) $E(\\bar X)$，$D(\\bar X)$；(2) $E(S^{2})$；(3) $\\mathrm{Cov}(\\bar X,S^{2})$。",
-  "tags": [
-   "概率统计",
-   "数字特征",
-   "协方差"
+   "线性代数",
+   "极大无关组",
+   "线性表出"
   ],
   "thinking": 8,
   "difficulty": 9,
   "calc": 8,
-  "source": "柳贯一题型专项 · 第242节 统计量数字特征",
+  "source": "柳贯一题型专项 · 第179节 极大无关组",
   "hints": [
-   "先换成 $\\theta=\\frac{1}{\\lambda}$ 的结论，$\\mu_{3}=\\frac{2}{\\lambda^{3}}$。"
+   "$\\alpha_3$ 必须由 $\\alpha_1,\\alpha_2,\\alpha_4$ 表出，先解 1、2、4 分量的方程组，再用第 3 分量定 $a$。"
   ],
-  "answer": "(1) $\\frac{1}{\\lambda}$，$\\frac{1}{\\lambda^{2}n}$；(2) $\\frac{1}{\\lambda^{2}}$；(3) $\\frac{2}{\\lambda^{3}n}$",
-  "solution": "1) $E(X)=\\frac{1}{\\lambda}$，$D(X)=\\frac{1}{\\lambda^{2}}$，故 $E(\\bar X)=\\frac{1}{\\lambda}$，$D(\\bar X)=\\frac{1}{\\lambda^{2}n}$；2) $E(S^{2})=\\frac{1}{\\lambda^{2}}$；3) $\\mu_{3}=\\frac{2}{\\lambda^{3}}$，故 $\\mathrm{Cov}(\\bar X,S^{2})=\\frac{\\mu_{3}}{n}=\\frac{2}{\\lambda^{3}n}$。",
+  "answer": "$a=\\frac{7}{6}$，$\\alpha_3=-\\frac{1}{2}\\alpha_1-\\frac{1}{2}\\alpha_2+\\frac{5}{6}\\alpha_4$",
+  "solution": "设 $\\alpha_3=x\\alpha_1+y\\alpha_2+z\\alpha_4$，由 4 个分量方程解得 $x=-\\frac12$、$y=-\\frac12$、$z=\\frac56$；第 3 分量 $a=x+2z=-\\frac12+\\frac53=\\frac76$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "一般均匀区间 $[a,b]$ 的数字特征",
-  "statement": "设总体 $X\\sim U[a,b]$，$a<b$，$X_{1},\\ldots,X_{n}$ 为样本，$\\bar X$ 为样本均值，$S^{2}$ 为修正样本方差。求 (1) $E(\\bar X)$，$D(\\bar X)$；(2) $E(S^{2})$；(3) $\\mathrm{Cov}(\\bar X,S^{2})$。",
+  "title": "线性表出讨论：行列式定参数",
+  "statement": "设 $\\alpha_1=(1,0,1)^{T}$，$\\alpha_2=(1,1,0)^{T}$，$\\alpha_3=(0,1,a)^{T}$，$\\beta=(1,2,b)^{T}$。试讨论 $a,b$ 取何值时，$\\beta$ 可由 $\\alpha_1,\\alpha_2,\\alpha_3$ 唯一线性表示？表示法不唯一？不能线性表示？",
   "tags": [
-   "概率统计",
-   "数字特征",
-   "对称性"
-  ],
-  "thinking": 7,
-  "difficulty": 8,
-  "calc": 7,
-  "source": "柳贯一题型专项 · 第242节 统计量数字特征",
-  "hints": [
-   "$U[a,b]$ 关于中点对称，$\\mu_{3}=0$，协方差必为 0。"
-  ],
-  "answer": "(1) $\\frac{a+b}{2}$，$\\frac{(b-a)^{2}}{12n}$；(2) $\\frac{(b-a)^{2}}{12}$；(3) $0$",
-  "solution": "1) $E(X)=\\frac{a+b}{2}$，$D(X)=\\frac{(b-a)^{2}}{12}$，故 $E(\\bar X)=\\frac{a+b}{2}$，$D(\\bar X)=\\frac{(b-a)^{2}}{12n}$；2) $E(S^{2})=\\frac{(b-a)^{2}}{12}$；3) 对称分布 $\\mu_{3}=0$，故 $\\mathrm{Cov}(\\bar X,S^{2})=0$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "平方和 $A$ 与 $B$：均值、方差与协方差",
-  "statement": "设总体 $X\\sim N(0,\\sigma^{2})$，$X_{1},\\ldots,X_{n}$ 为样本，$\\bar X$ 为样本均值，令 $A=\\frac{1}{n}\\sum_{i=1}^{n}X_{i}^{2}$，$B=\\sum_{i=1}^{n}X_{i}^{2}$。求 (1) $E(A)$，$D(A)$；(2) $\\mathrm{Cov}(\\bar X,B)$。",
-  "tags": [
-   "概率统计",
-   "数字特征",
-   "卡方分布"
-  ],
-  "thinking": 7,
-  "difficulty": 8,
-  "calc": 7,
-  "source": "柳贯一题型专项 · 第242节 统计量数字特征",
-  "hints": [
-   "$B/\\sigma^{2}\\sim\\chi^{2}(n)$，故 $D(B)=2n\\sigma^{4}$；协方差用关于原点对称的奇函数性质。"
-  ],
-  "answer": "(1) $\\sigma^{2}$，$\\frac{2\\sigma^{4}}{n}$；(2) $0$",
-  "solution": "1) $B=\\sigma^{2}\\chi^{2}(n)$，$E(B)=n\\sigma^{2}$、$D(B)=2n\\sigma^{4}$，故 $E(A)=\\sigma^{2}$、$D(A)=\\frac{2\\sigma^{4}}{n}$；2) $\\mathrm{Cov}(\\bar X,B)=E(\\bar X B)$，被积函数关于 $\\bar X$ 为奇函数，故为 $0$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "未修正方差 $M_2$ 的均值与协方差",
-  "statement": "设总体 $X$ 的均值 $\\mu$，方差 $\\sigma^{2}$，三阶中心矩 $\\mu_{3}$ 存在，$X_{1},\\ldots,X_{n}$ 为样本，$\\bar X$ 为样本均值，$M_{2}=\\frac{1}{n}\\sum_{i=1}^{n}(X_{i}-\\bar X)^{2}$ 为未修正样本方差。求 (1) $E(M_{2})$；(2) $\\mathrm{Cov}(\\bar X,M_{2})$。",
-  "tags": [
-   "概率统计",
-   "数字特征",
-   "协方差"
-  ],
-  "thinking": 8,
-  "difficulty": 10,
-  "calc": 9,
-  "source": "柳贯一题型专项 · 第242节 统计量数字特征",
-  "hints": [
-   "注意 $\\mathrm{Cov}(\\bar X,S^{2})=\\frac{\\mu_{3}}{n}$，而 $M_{2}=\\frac{n-1}{n}S^{2}$。"
-  ],
-  "answer": "(1) $\\frac{n-1}{n}\\sigma^{2}$；(2) $\\frac{(n-1)\\mu_{3}}{n^{2}}$",
-  "solution": "1) $E(M_{2})=\\frac{n-1}{n}E(S^{2})=\\frac{n-1}{n}\\sigma^{2}$；2) $M_{2}=\\frac{n-1}{n}S^{2}$，故 $\\mathrm{Cov}(\\bar X,M_{2})=\\frac{n-1}{n}\\cdot\\frac{\\mu_{3}}{n}=\\frac{(n-1)\\mu_{3}}{n^{2}}$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "泊松样本和 $T$ 的二阶矩与协方差",
-  "statement": "设总体 $X\\sim P(\\lambda)$，$X_{1},\\ldots,X_{n}$ 为样本，$T=\\sum_{i=1}^{n}X_{i}$，$\\bar X$ 为样本均值，$S^{2}$ 为修正样本方差。求 (1) $E(T)$，$D(T)$，$E(T^{2})$；(2) $\\mathrm{Cov}(T,S^{2})$。",
-  "tags": [
-   "概率统计",
-   "数字特征",
-   "协方差"
+   "线性代数",
+   "线性表出",
+   "线性方程组"
   ],
   "thinking": 8,
   "difficulty": 9,
   "calc": 8,
-  "source": "柳贯一题型专项 · 第242节 统计量数字特征",
+  "source": "柳贯一题型专项 · 第180节 线性表出",
   "hints": [
-   "$T\\sim P(n\\lambda)$；$\\mathrm{Cov}(T,S^{2})=n\\,\\mathrm{Cov}(\\bar X,S^{2})$，再用泊松 $\\mu_{3}=\\lambda$。"
+   "先算系数行列式 $|(\\alpha_1,\\alpha_2,\\alpha_3)|=a+1$：非零则唯一；为零时再看增广矩阵是否相容。"
   ],
-  "answer": "(1) $n\\lambda$，$n\\lambda$，$n\\lambda+n^{2}\\lambda^{2}$；(2) $\\lambda$",
-  "solution": "1) $T\\sim P(n\\lambda)$，故 $E(T)=D(T)=n\\lambda$，$E(T^{2})=D(T)+E^{2}(T)=n\\lambda+n^{2}\\lambda^{2}$；2) $\\mathrm{Cov}(T,S^{2})=n\\mathrm{Cov}(\\bar X,S^{2})=n\\cdot\\frac{\\lambda}{n}=\\lambda$。",
+  "answer": "唯一表出：$a\\neq-1$；表示不唯一：$a=-1$ 且 $b=-1$；不能表示：$a=-1$ 且 $b\\neq-1$",
+  "solution": "$|A|=a+1$，故 $a\\neq-1$ 时唯一表出；$a=-1$ 时 $\\alpha_3=\\alpha_2-\\alpha_1$，令 $\\beta=x\\alpha_1+y\\alpha_2$ 得 $y=2$、$x=-1$，第三分量为 $x$，故相容即 $b=-1$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "二阶原点矩均值 $W$：指数分布四阶矩",
-  "statement": "设总体 $X$ 的概率密度为 $f(x)=\\frac{1}{\\theta}e^{-x/\\theta}$（$x>0$，$\\theta>0$），$X_{1},\\ldots,X_{n}$ 为样本，令 $W=\\frac{1}{n}\\sum_{i=1}^{n}X_{i}^{2}$。求 (1) $E(W)$；(2) $D(W)$。",
+  "title": "表出唯一性：行列式与相容性",
+  "statement": "已知向量组 $\\alpha_1=(1,0,2)^{T}$，$\\alpha_2=(0,1,1)^{T}$，$\\alpha_3=(1,-1,a)^{T}$，$\\beta=(3,2,b)^{T}$。讨论 $a,b$ 为何值时，$\\beta$ 可由 $\\alpha_1,\\alpha_2,\\alpha_3$ 线性表出且表出方式唯一？有无穷多种表出方式？不能表出？",
   "tags": [
-   "概率统计",
-   "数字特征",
-   "矩计算"
-  ],
-  "thinking": 8,
-  "difficulty": 9,
-  "calc": 9,
-  "source": "柳贯一题型专项 · 第242节 统计量数字特征",
-  "hints": [
-   "$W$ 是 $X^{2}$ 的样本均值，需算 $E(X^{2})$、$E(X^{4})$，指数分布 $E(X^{k})=k!\\theta^{k}$。"
-  ],
-  "answer": "(1) $2\\theta^{2}$；(2) $\\frac{20\\theta^{4}}{n}$",
-  "solution": "1) $E(X^{2})=2\\theta^{2}$，故 $E(W)=2\\theta^{2}$；2) $E(X^{4})=24\\theta^{4}$，$D(X^{2})=24\\theta^{4}-4\\theta^{4}=20\\theta^{4}$，故 $D(W)=\\frac{20\\theta^{4}}{n}$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "标准化统计量 $U$ 与 $V$ 的协方差",
-  "statement": "设总体 $X\\sim N(\\mu,\\sigma^{2})$，$X_{1},\\ldots,X_{n}$ 为样本，$\\bar X$ 为样本均值，$S^{2}$ 为修正样本方差，记 $U=\\frac{\\bar X-\\mu}{\\sigma/\\sqrt{n}}$，$V=\\frac{(n-1)S^{2}}{\\sigma^{2}}$。求 (1) $E(U)$，$D(U)$；(2) $E(V)$，$D(V)$；(3) $\\mathrm{Cov}(U,V)$。",
-  "tags": [
-   "概率统计",
-   "数字特征",
-   "卡方分布"
-  ],
-  "thinking": 7,
-  "difficulty": 8,
-  "calc": 7,
-  "source": "柳贯一题型专项 · 第242节 统计量数字特征",
-  "hints": [
-   "$U\\sim N(0,1)$、$V\\sim\\chi^{2}(n-1)$ 且相互独立。"
-  ],
-  "answer": "(1) $0$，$1$；(2) $n-1$，$2(n-1)$；(3) $0$",
-  "solution": "1) $U\\sim N(0,1)$，故 $E(U)=0$、$D(U)=1$；2) $V\\sim\\chi^{2}(n-1)$，故 $E(V)=n-1$、$D(V)=2(n-1)$；3) 正态总体下 $U$ 与 $V$ 独立，故协方差为 $0$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "两点总体：样本和 $Y$ 与 $\\bar X$ 的数字特征",
-  "statement": "设总体 $X\\sim B(1,p)$，$0<p<1$，$X_{1},\\ldots,X_{n}$ 为样本，$\\bar X$ 为样本均值，$Y=\\sum_{i=1}^{n}X_{i}$，$S^{2}$ 为修正样本方差。求 (1) $E(\\bar X)$，$D(\\bar X)$；(2) $E(Y)$，$D(Y)$；(3) $\\mathrm{Cov}(\\bar X,S^{2})$。",
-  "tags": [
-   "概率统计",
-   "数字特征",
-   "协方差"
+   "线性代数",
+   "线性表出",
+   "线性方程组"
   ],
   "thinking": 8,
   "difficulty": 9,
   "calc": 8,
-  "source": "柳贯一题型专项 · 第242节 统计量数字特征",
+  "source": "柳贯一题型专项 · 第180节 线性表出",
   "hints": [
-   "$Y\\sim B(n,p)$；第三问与本节两点总体的结论一致。"
+   "行列式 $|A|=a-1$；(注意 $a=1$ 时 $\\alpha_3=\\alpha_1-\\alpha_2$，故只需检查 $\\beta$ 是否在 $\\mathrm{span}\\{\\alpha_1,\\alpha_2\\}$ 内)。"
   ],
-  "answer": "(1) $p$，$\\frac{p(1-p)}{n}$；(2) $np$，$np(1-p)$；(3) $\\frac{p(1-p)(1-2p)}{n}$",
-  "solution": "1) $E(\\bar X)=p$，$D(\\bar X)=\\frac{p(1-p)}{n}$；2) $Y\\sim B(n,p)$，故 $E(Y)=np$、$D(Y)=np(1-p)$；3) $\\mu_{3}=p(1-p)(1-2p)$，故 $\\mathrm{Cov}(\\bar X,S^{2})=\\frac{\\mu_{3}}{n}$。",
+  "answer": "唯一表出：$a\\neq1$；表示不唯一：$a=1$ 且 $b=8$；不能表出：$a=1$ 且 $b\\neq8$",
+  "solution": "$|A|=a-1$，$a\\neq1$ 唯一；$a=1$ 时 $\\alpha_3=\\alpha_1-\\alpha_2$，若相容须 $\\beta=3\\alpha_1+2\\alpha_2$，第三分量为 $3\\cdot2+2\\cdot1=8$，故 $b=8$ 时无穷多解，$b\\neq8$ 无解。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "$\\mathrm{Cov}(X_1,\\bar X)$ 与 $D(X_1-\\bar X)$",
-  "statement": "设总体 $X\\sim U[0,\\theta]$，$\\theta>0$，$X_{1},\\ldots,X_{n}$ 为样本，$\\bar X$ 为样本均值，$S^{2}$ 为修正样本方差。求 (1) $\\mathrm{Cov}(X_{1},\\bar X)$，$D(X_{1}-\\bar X)$；(2) $\\mathrm{Cov}(X_{1},S^{2})$。",
+  "title": "含 $a,b$ 的表出条件讨论",
+  "statement": "设 $\\alpha_1=(1,1,1)^{T}$，$\\alpha_2=(1,2,3)^{T}$，$\\alpha_3=(2,3,a)^{T}$，$\\beta=(1,4,b)^{T}$。问 $a,b$ 满足什么条件时，$\\beta$ 能由 $\\alpha_1,\\alpha_2,\\alpha_3$ 唯一线性表示？表示法无穷多？不能线性表示？",
   "tags": [
-   "概率统计",
-   "协方差",
-   "数字特征"
+   "线性代数",
+   "线性表出",
+   "线性方程组"
   ],
   "thinking": 8,
   "difficulty": 9,
   "calc": 8,
-  "source": "柳贯一题型专项 · 第242节 统计量数字特征",
+  "source": "柳贯一题型专项 · 第180节 线性表出",
   "hints": [
-   "$\\mathrm{Cov}(X_{1},\\bar X)=\\frac{D(X)}{n}$；$\\mathrm{Cov}(X_{1},S^{2})$ 用 $S^{2}$ 展开或对称性判断。"
+   "算 $|(\\alpha_1,\\alpha_2,\\alpha_3)|$ 定唯一性；退化时用 $\\alpha_3=\\alpha_1+\\alpha_2$ 检查 $\\beta$ 的分量关系。"
   ],
-  "answer": "(1) $\\frac{\\theta^{2}}{12n}$，$\\frac{(n-1)\\theta^{2}}{12n}$；(2) $0$",
-  "solution": "1) $\\mathrm{Cov}(X_{1},\\bar X)=\\frac{1}{n}D(X)=\\frac{\\theta^{2}}{12n}$，$D(X_{1}-\\bar X)=D(X)+D(\\bar X)-2\\mathrm{Cov}=\\frac{\\theta^{2}}{12}+\\frac{\\theta^{2}}{12n}-\\frac{2\\theta^{2}}{12n}=\\frac{(n-1)\\theta^{2}}{12n}$；2) 由对称性 $X_{1}$ 与 $S^{2}$ 不相关，故为 $0$。",
+  "answer": "唯一表出：$a\\neq4$；表示不唯一：$a=4$ 且 $b=7$；不能表出：$a=4$ 且 $b\\neq7$",
+  "solution": "$|A|=a-4$，$a\\neq4$ 唯一；$a=4$ 时 $\\alpha_3=\\alpha_1+\\alpha_2$，令 $\\beta=u\\alpha_1+v\\alpha_2$ 得 $u+v=1$、$u+2v=4$，故 $v=3$、$u=-2$，第三分量 $u+3v=7=b$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "卡方构造：修正方差加均值偏差平方",
-  "statement": "设 $X_{1},\\ldots,X_{n}$ i.i.d. $\\sim N(\\mu,\\sigma^{2})$，$\\bar X$，$S^{2}$ 为样本均值与修正方差，记 $T=\\frac{(n-1)S^{2}}{\\sigma^{2}}+\\frac{n(\\bar X-\\mu)^{2}}{\\sigma^{2}}$。求 $T$ 服从什么分布，并求 $E(T)$ 与 $D(T)$。",
+  "title": "样本方差直接构造 $\\chi^2(n-1)$",
+  "statement": "样本来自 $N(\\mu,\\sigma^{2})$，$S^{2}$ 为样本方差，$T=\\frac{(n-1)S^{2}}{\\sigma^{2}}$。求 $T$ 服从什么分布，并求 $E(T)$ 与 $D(T)$。",
   "tags": [
    "概率统计",
    "卡方分布",
-   "独立性"
+   "样本方差"
   ],
-  "thinking": 6,
-  "difficulty": 7,
-  "calc": 6,
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
   "source": "柳贯一题型专项 · 第243节 服从卡方分布",
   "hints": [
-   "两个独立 $\\chi^{2}$ 分量：$\\frac{(n-1)S^{2}}{\\sigma^{2}}\\sim\\chi^{2}(n-1)$，$\\frac{n(\\bar X-\\mu)^{2}}{\\sigma^{2}}\\sim\\chi^{2}(1)$，自由度相加。"
+   "这是 $\\chi^{2}$ 分布的定义式，自由度损失 1。"
   ],
-  "answer": "$\\chi^{2}(n)$，$E(T)=n$，$D(T)=2n$",
-  "solution": "第一项 $\\sim\\chi^{2}(n-1)$，第二项 $\\sim\\chi^{2}(1)$，且二者独立，故 $T\\sim\\chi^{2}(n)$；于是 $E(T)=n$，$D(T)=2n$。",
+  "answer": "$\\chi^{2}(n-1)$，$E(T)=n-1$，$D(T)=2(n-1)$",
+  "solution": "由正态总体性质 $\\frac{(n-1)S^{2}}{\\sigma^{2}}\\sim\\chi^{2}(n-1)$；故 $E(T)=n-1$，$D(T)=2(n-1)$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "已知均值：平方和除以 $\\sigma^2$ 的分布",
-  "statement": "设 $X_{i}\\sim N(\\mu,\\sigma^{2})$，$\\mu$，$\\sigma^{2}$ 已知，$T=\\frac{1}{\\sigma^{2}}\\sum_{i=1}^{n}(X_{i}-\\mu)^{2}$。求 $T$ 服从什么分布，并求 $E(T)$ 与 $D(T)$。",
+  "title": "容量 20 代入：自由度 19",
+  "statement": "容量 20 样本来自 $N(\\mu,\\sigma^{2})$，$S^{2}$ 为样本方差，$T=\\frac{19S^{2}}{\\sigma^{2}}$。求 $T$ 服从什么分布，并求 $E(T)$ 与 $D(T)$。",
   "tags": [
    "概率统计",
    "卡方分布",
-   "标准化"
+   "样本方差"
   ],
-  "thinking": 6,
-  "difficulty": 6,
-  "calc": 6,
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
   "source": "柳贯一题型专项 · 第243节 服从卡方分布",
   "hints": [
-   "每个 $\\frac{X_{i}-\\mu}{\\sigma}\\sim N(0,1)$，$n$ 个标准正态平方和服从 $\\chi^{2}(n)$。"
+   "$n=20$，$19S^{2}/\\sigma^{2}$ 就是 $\\frac{(n-1)S^{2}}{\\sigma^{2}}$。"
   ],
-  "answer": "$\\chi^{2}(n)$，$E(T)=n$，$D(T)=2n$",
-  "solution": "令 $Z_{i}=\\frac{X_{i}-\\mu}{\\sigma}\\sim N(0,1)$ 且独立，则 $T=\\sum Z_{i}^{2}\\sim\\chi^{2}(n)$，故 $E(T)=n$，$D(T)=2n$。",
+  "answer": "$\\chi^{2}(19)$，$E(T)=19$，$D(T)=38$",
+  "solution": "$n=20$ 时 $T=\\frac{(20-1)S^{2}}{\\sigma^{2}}\\sim\\chi^{2}(19)$，故 $E(T)=19$，$D(T)=2\\times19=38$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "零均值总体：$\\sum(X_i/\\sigma)^2$ 的分布",
-  "statement": "总体 $X\\sim N(0,\\sigma^{2})$，$\\sigma^{2}$ 已知，样本 $X_{1},\\ldots,X_{n}$，$T=\\sum_{i=1}^{n}(X_{i}/\\sigma)^{2}$。求 $T$ 服从什么分布，并求 $E(T)$ 与 $D(T)$。",
+  "title": "已知均值 3、方差 4：离差平方和",
+  "statement": "总体 $X\\sim N(3,4)$，样本容量 16，$T=\\frac{1}{4}\\sum_{i=1}^{16}(X_{i}-3)^{2}$。求 $T$ 服从什么分布，并求 $E(T)$ 与 $D(T)$。",
   "tags": [
    "概率统计",
    "卡方分布",
    "标准化"
   ],
   "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第243节 服从卡方分布",
+  "hints": [
+   "均值已知，用真值 $\\mu=3$ 而非 $\\bar X$，自由度不损失。"
+  ],
+  "answer": "$\\chi^{2}(16)$，$E(T)=16$，$D(T)=32$",
+  "solution": "$\\frac{X_{i}-3}{2}\\sim N(0,1)$，故 $T=\\sum\\left(\\frac{X_{i}-3}{2}\\right)^{2}\\sim\\chi^{2}(16)$，$E(T)=16$，$D(T)=32$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "两独立样本合并：自由度相加",
+  "statement": "独立样本容量 9 和 13 来自同方差正态总体，$S_{1}^{2}$，$S_{2}^{2}$ 为样本方差，$T=\\frac{8S_{1}^{2}+12S_{2}^{2}}{\\sigma^{2}}$。求 $T$ 服从什么分布，并求 $E(T)$ 与 $D(T)$。",
+  "tags": [
+   "概率统计",
+   "卡方分布",
+   "独立性"
+  ],
+  "thinking": 6,
   "difficulty": 6,
   "calc": 5,
   "source": "柳贯一题型专项 · 第243节 服从卡方分布",
   "hints": [
-   "$X_{i}/\\sigma$ 本身就是标准正态变量。"
+   "两块分别是 $\\chi^{2}(8)$ 与 $\\chi^{2}(12)$，独立可加。"
   ],
-  "answer": "$\\chi^{2}(n)$，$E(T)=n$，$D(T)=2n$",
-  "solution": "$X_{i}/\\sigma\\sim N(0,1)$ 且相互独立，故 $T$ 是 $n$ 个标准正态平方和，$T\\sim\\chi^{2}(n)$，$E(T)=n$，$D(T)=2n$。",
+  "answer": "$\\chi^{2}(20)$，$E(T)=20$，$D(T)=40$",
+  "solution": "$\\frac{8S_{1}^{2}}{\\sigma^{2}}\\sim\\chi^{2}(8)$，$\\frac{12S_{2}^{2}}{\\sigma^{2}}\\sim\\chi^{2}(12)$，两样本独立故相加得 $T\\sim\\chi^{2}(20)$，$E(T)=20$，$D(T)=40$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "已知 $\\mu$：用标准化变量 $Z_i$ 构造卡方",
-  "statement": "设 $X_{i}\\sim N(\\mu,\\sigma^{2})$，$\\mu$ 已知，$Z_{i}=(X_{i}-\\mu)/\\sigma$，$T=\\sum_{i=1}^{n}Z_{i}^{2}$。求 $T$ 服从什么分布，并求 $E(T)$ 与 $D(T)$。",
+  "title": "容量 12 的组内离差平方和",
+  "statement": "容量 12 样本来自 $N(\\mu,\\sigma^{2})$，$\\bar X$ 为样本均值，$T=\\frac{1}{\\sigma^{2}}\\sum_{i=1}^{12}(X_{i}-\\bar X)^{2}$。求 $T$ 服从什么分布，并求 $E(T)$ 与 $D(T)$。",
   "tags": [
    "概率统计",
    "卡方分布",
-   "标准化"
+   "样本方差"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第243节 服从卡方分布",
+  "hints": [
+   "用 $\\bar X$ 代替 $\\mu$，自由度损失 1：$12-1=11$。"
+  ],
+  "answer": "$\\chi^{2}(11)$，$E(T)=11$，$D(T)=22$",
+  "solution": "$T=\\frac{(12-1)S^{2}}{\\sigma^{2}}\\sim\\chi^{2}(11)$，故 $E(T)=11$，$D(T)=22$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "样本均值标准化除以 $S/\\sqrt n$",
+  "statement": "设 $X_{1},\\ldots,X_{n}$ i.i.d. $\\sim N(\\mu,\\sigma^{2})$，$\\bar X$，$S^{2}$ 为样本均值与方差，求 $T=\\frac{\\bar X-\\mu}{S/\\sqrt{n}}$ 的分布及方差。",
+  "tags": [
+   "概率统计",
+   "t分布",
+   "抽样分布"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第244节 服从t分布",
+  "hints": [
+   "分子 $\\frac{\\bar X-\\mu}{\\sigma/\\sqrt n}\\sim N(0,1)$，分母为 $\\sqrt{\\chi^{2}(n-1)/(n-1)}$，且两者独立。"
+  ],
+  "answer": "$t(n-1)$，方差 $\\frac{n-1}{n-3}$",
+  "solution": "记 $U=\\frac{\\bar X-\\mu}{\\sigma/\\sqrt n}\\sim N(0,1)$，$V=\\frac{(n-1)S^{2}}{\\sigma^{2}}\\sim\\chi^{2}(n-1)$，$U\\perp V$，故 $T=\\frac{U}{\\sqrt{V/(n-1)}}\\sim t(n-1)$；由 $t$ 分布方差公式得 $\\frac{n-1}{n-3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "两观测值之差除以 $S\\sqrt 2$",
+  "statement": "设 $X_{1},\\ldots,X_{n}$ i.i.d. $\\sim N(\\mu,\\sigma^{2})$，$S^{2}$ 为样本方差，求 $T=\\frac{X_{1}-X_{2}}{S\\sqrt{2}}$ 的分布及方差。",
+  "tags": [
+   "概率统计",
+   "t分布",
+   "独立性"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第244节 服从t分布",
+  "hints": [
+   "$X_{1}-X_{2}\\sim N(0,2\\sigma^{2})$，且与 $S^{2}$ 独立。"
+  ],
+  "answer": "$t(n-1)$，方差 $\\frac{n-1}{n-3}$",
+  "solution": "$\\frac{X_{1}-X_{2}}{\\sqrt{2}\\sigma}\\sim N(0,1)$，与 $\\frac{(n-1)S^{2}}{\\sigma^{2}}\\sim\\chi^{2}(n-1)$ 独立，故 $T\\sim t(n-1)$，方差 $\\frac{n-1}{n-3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "用 $Y$、$Z$ 构造 $t$ 统计量的恒等变形",
+  "statement": "设 $X_{1},\\ldots,X_{n}$ i.i.d. $\\sim N(0,\\sigma^{2})$，记 $Y=\\sum_{i=1}^{n}X_{i}$，$Z=\\sum_{i=1}^{n}X_{i}^{2}$，求 $T=\\frac{Y}{\\sqrt{(nZ-Y^{2})/(n-1)}}$ 的分布及方差。",
+  "tags": [
+   "概率统计",
+   "t分布",
+   "平方和分解"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第244节 服从t分布",
+  "hints": [
+   "分母的 $\\sigma$ 被约掉：$nZ-Y^{2}=n\\sum(X_{i}-\\bar X)^{2}$，凑成 $\\chi^{2}(n-1)$。"
+  ],
+  "answer": "$t(n-1)$，方差 $\\frac{n-1}{n-3}$",
+  "solution": "$Y\\sim N(0,n\\sigma^{2})$，$Y^{2}/(n\\sigma^{2})\\sim\\chi^{2}(1)$；$\\sum(X_{i}-\\bar X)^{2}$ 与 $\\bar X$ 独立且 $\\frac{1}{\\sigma^{2}}\\sum(X_{i}-\\bar X)^{2}\\sim\\chi^{2}(n-1)$，于是 $T=\\frac{Y/(\\sqrt n\\sigma)}{\\sqrt{\\frac{\\sum(X_{i}-\\bar X)^{2}}{\\sigma^{2}(n-1)}}}\\sim t(n-1)$，方差 $\\frac{n-1}{n-3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "$X_1-\\bar X$ 与 $S$ 之比：独立性与方差",
+  "statement": "设样本 $X_{1},\\ldots,X_{n}$ 来自 $N(\\mu,\\sigma^{2})$，$\\bar X$，$S$ 为样本均值与标准差，求 $T=\\frac{X_{1}-\\bar X}{S\\sqrt{1-1/n}}$ 的分布及方差。",
+  "tags": [
+   "概率统计",
+   "t分布",
+   "独立性"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第244节 服从t分布",
+  "hints": [
+   "$D(X_{1}-\\bar X)=(1-\\frac1n)\\sigma^{2}$，且 $X_{1}-\\bar X$ 与 $S^{2}$ 独立。"
+  ],
+  "answer": "$t(n-1)$，方差 $\\frac{n-1}{n-3}$",
+  "solution": "$X_{1}-\\bar X\\sim N(0,\\frac{n-1}{n}\\sigma^{2})$，标准化后 $\\frac{X_{1}-\\bar X}{\\sigma\\sqrt{1-1/n}}\\sim N(0,1)$，且与 $\\frac{(n-1)S^{2}}{\\sigma^{2}}\\sim\\chi^{2}(n-1)$ 独立，故 $T\\sim t(n-1)$，方差 $\\frac{n-1}{n-3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "两独立样本合并方差的两样本 $t$",
+  "statement": "设两独立样本 $X_{1},\\ldots,X_{n}\\sim N(\\mu_{1},\\sigma^{2})$，$Y_{1},\\ldots,Y_{n}\\sim N(\\mu_{2},\\sigma^{2})$，联合方差 $S_{w}^{2}=\\frac{(n-1)(S_{X}^{2}+S_{Y}^{2})}{2n-2}$，求 $T=\\frac{\\bar X-\\bar Y-(\\mu_{1}-\\mu_{2})}{S_{w}\\sqrt{2/n}}$ 的分布及方差。",
+  "tags": [
+   "概率统计",
+   "t分布",
+   "两样本"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第244节 服从t分布",
+  "hints": [
+   "自由度是两样本方差自由度之和 $2(n-1)$；分子方差为 $\\frac{2\\sigma^{2}}{n}$。"
+  ],
+  "answer": "$t(2n-2)$，方差 $\\frac{n-1}{n-2}$",
+  "solution": "$\\bar X-\\bar Y\\sim N(\\Delta,\\frac{2\\sigma^{2}}{n})$，$\\frac{(2n-2)S_{w}^{2}}{\\sigma^{2}}\\sim\\chi^{2}(2n-2)$ 且与之独立，故 $T\\sim t(2n-2)$，方差 $\\frac{2n-2}{2n-4}=\\frac{n-1}{n-2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "容量 16、$\\bar X=5$、$S=2$ 的数值代入",
+  "statement": "从 $N(\\mu,\\sigma^{2})$ 抽得容量 16 的样本，$\\bar X=5$，$S=2$，求 $\\frac{\\bar X-\\mu}{S/4}$ 的分布及方差。",
+  "tags": [
+   "概率统计",
+   "t分布",
+   "抽样分布"
   ],
   "thinking": 5,
   "difficulty": 6,
-  "calc": 5,
-  "source": "柳贯一题型专项 · 第243节 服从卡方分布",
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第244节 服从t分布",
   "hints": [
-   "先确认 $Z_{i}$ 独立且服从 $N(0,1)$。"
+   "$\\sqrt n=\\sqrt{16}=4$，形式正好是 $\\frac{\\bar X-\\mu}{S/\\sqrt n}$。"
   ],
-  "answer": "$\\chi^{2}(n)$，$E(T)=n$，$D(T)=2n$",
-  "solution": "$Z_{i}$ 相互独立且 $Z_{i}\\sim N(0,1)$，故 $T=\\sum Z_{i}^{2}\\sim\\chi^{2}(n)$，$E(T)=n$，$D(T)=2n$。",
+  "answer": "$t(15)$，方差 $\\frac{15}{13}$",
+  "solution": "由 $T=\\frac{\\bar X-\\mu}{S/\\sqrt{n}}\\sim t(n-1)$，代入 $n=16$ 得 $t(15)$，方差为 $\\frac{15}{13}$；具体数值 $\\bar X=5$、$S=2$ 只是说明形式一致。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "分解法：组内离差平方和加均值偏差",
-  "statement": "设 $X_{i}\\sim N(\\mu,\\sigma^{2})$，$\\bar X$ 为样本均值，$T=\\frac{1}{\\sigma^{2}}\\sum_{i=1}^{n}(X_{i}-\\bar X)^{2}+\\frac{n(\\bar X-\\mu)^{2}}{\\sigma^{2}}$。求 $T$ 服从什么分布，并求 $E(T)$ 与 $D(T)$。",
+  "title": "$n=9$ 时用 $Z$、$Y$ 的 $t(8)$ 构造",
+  "statement": "设 $X_{1},\\ldots,X_{9}$ i.i.d. $\\sim N(0,\\sigma^{2})$，记 $Y=\\sum_{i=1}^{9}X_{i}$，$Z=\\sum_{i=1}^{9}X_{i}^{2}$，求 $T=\\frac{Y}{\\sqrt{(9Z-Y^{2})/8}}$ 的分布及方差。",
   "tags": [
    "概率统计",
-   "卡方分布",
+   "t分布",
    "平方和分解"
   ],
   "thinking": 6,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第244节 服从t分布",
+  "hints": [
+   "把第 3 题结论直接代入 $n=9$，自由度 $n-1=8$。"
+  ],
+  "answer": "$t(8)$，方差 $\\frac{4}{3}$",
+  "solution": "$Y\\sim N(0,9\\sigma^{2})$，$\\frac{9Z-Y^{2}}{\\sigma^{2}}\\sim\\chi^{2}(8)$，二者独立，故 $T\\sim t(8)$，方差 $\\frac{8}{8-2}=\\frac{4}{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零均值总体：$\\frac{\\sqrt{10}\\bar X}{S}$",
+  "statement": "设总体 $X\\sim N(0,\\sigma^{2})$，容量 10 的样本，$\\bar X$ 为样本均值，$S$ 为样本标准差，求 $T=\\frac{\\sqrt{10}\\bar X}{S}$ 的分布及方差。",
+  "tags": [
+   "概率统计",
+   "t分布",
+   "抽样分布"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第244节 服从t分布",
+  "hints": [
+   "这正是 $\\mu=0$、$n=10$ 时 $\\frac{\\bar X-\\mu}{S/\\sqrt n}$ 的形式。"
+  ],
+  "answer": "$t(9)$，方差 $\\frac{9}{7}$",
+  "solution": "$T=\\frac{\\bar X-0}{S/\\sqrt{10}}\\sim t(10-1)=t(9)$，方差 $\\frac{9}{9-2}=\\frac97$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "两样本 $7$ 与 $8$：联合方差的两样本 $t$",
+  "statement": "设独立样本 $X_{1},\\ldots,X_{7}\\sim N(\\mu_{1},\\sigma^{2})$，$Y_{1},\\ldots,Y_{8}\\sim N(\\mu_{2},\\sigma^{2})$，$S_{p}^{2}$ 为联合样本方差，当 $\\mu_{1}=\\mu_{2}$ 时，求 $T=\\frac{\\bar X-\\bar Y}{S_{p}\\sqrt{\\frac{1}{7}+\\frac{1}{8}}}$ 的分布及方差。",
+  "tags": [
+   "概率统计",
+   "t分布",
+   "两样本"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第244节 服从t分布",
+  "hints": [
+   "自由度 $7+8-2=13$，分母恰好是 $\\bar X-\\bar Y$ 的标准差估计。"
+  ],
+  "answer": "$t(13)$，方差 $\\frac{13}{11}$",
+  "solution": "$\\bar X-\\bar Y\\sim N(0,\\sigma^{2}(\\frac17+\\frac18))$，$\\frac{13S_{p}^{2}}{\\sigma^{2}}\\sim\\chi^{2}(13)$ 独立，故 $T\\sim t(13)$，方差 $\\frac{13}{11}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "等容量两样本：分母 $S_w/2$ 的来源",
+  "statement": "设独立样本 $X_{1},\\ldots,X_{8}\\sim N(\\mu_{1},\\sigma^{2})$，$Y_{1},\\ldots,Y_{8}\\sim N(\\mu_{2},\\sigma^{2})$，联合方差 $S_{w}^{2}$，当 $\\mu_{1}=\\mu_{2}$ 时，求 $T=\\frac{\\bar X-\\bar Y}{S_{w}/2}$ 的分布及方差。",
+  "tags": [
+   "概率统计",
+   "t分布",
+   "两样本"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第244节 服从t分布",
+  "hints": [
+   "$S_w\\sqrt{\\frac18+\\frac18}=S_w/2$，即与上一题同一公式。"
+  ],
+  "answer": "$t(14)$，方差 $\\frac{7}{6}$",
+  "solution": "$\\bar X-\\bar Y\\sim N(0,\\frac{\\sigma^{2}}{4})$，$\\frac{14S_{w}^{2}}{\\sigma^{2}}\\sim\\chi^{2}(14)$，故 $T\\sim t(14)$，方差 $\\frac{14}{12}=\\frac76$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零均值总体：$\\frac{n\\bar X^2}{S^2}$ 服从 $F(1,n-1)$",
+  "statement": "设 $X_{1},\\ldots,X_{n}$ 为来自 $N(0,\\sigma^{2})$ 的样本，$\\bar X$ 为样本均值，$S^{2}$ 为样本方差，令 $T=\\frac{n\\bar X^{2}}{S^{2}}$，求 $T$ 的分布和期望。",
+  "tags": [
+   "概率统计",
+   "F分布",
+   "抽样分布"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第245节 服从F分布",
+  "hints": [
+   "把 $T$ 写成 $\\frac{\\left(\\frac{\\bar X}{\\sigma/\\sqrt n}\\right)^{2}/1}{\\frac{(n-1)S^{2}}{\\sigma^{2}}/(n-1)}$。"
+  ],
+  "answer": "$T\\sim F(1,n-1)$，$E(T)=\\frac{n-1}{n-3}$（$n>3$）",
+  "solution": "分子 $\\left(\\frac{\\sqrt n\\bar X}{\\sigma}\\right)^{2}\\sim\\chi^{2}(1)$，分母除以自由度 $(n-1)$ 得 $\\chi^{2}(n-1)/(n-1)$，两者独立，故 $T\\sim F(1,n-1)$；由 $F$ 分布期望公式得 $\\frac{n-1}{n-3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "均值已知：两段平方和之比 $F(n,n)$",
+  "statement": "设 $X_{1},\\ldots,X_{2n}$ 是来自 $N(\\mu,\\sigma^{2})$ 的样本，令 $U=\\sum_{i=1}^{n}(X_{i}-\\mu)^{2}$，$V=\\sum_{i=n+1}^{2n}(X_{i}-\\mu)^{2}$，则 $T=\\frac{U}{V}$，求 $T$ 的分布和期望。",
+  "tags": [
+   "概率统计",
+   "F分布",
+   "独立性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第245节 服从F分布",
+  "hints": [
+   "$U/\\sigma^{2}$ 与 $V/\\sigma^{2}$ 各是 $\\chi^{2}(n)$ 且独立，比值即 $F(n,n)$。"
+  ],
+  "answer": "$T\\sim F(n,n)$，$E(T)=\\frac{n}{n-2}$（$n>2$）",
+  "solution": "$\\frac{U}{\\sigma^{2}}\\sim\\chi^{2}(n)$、$\\frac{V}{\\sigma^{2}}\\sim\\chi^{2}(n)$ 独立，故 $T=\\frac{U/n}{V/n}\\sim F(n,n)$，$E(T)=\\frac{n}{n-2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "前 $k$ 个与后 $n-k$ 个平方和之比",
+  "statement": "设总体 $X\\sim N(\\mu,\\sigma^{2})$，$\\mu$ 已知，$X_{1},\\ldots,X_{n}$ 为样本，正整数 $k<n$，记 $U=\\sum_{i=1}^{k}(X_{i}-\\mu)^{2}$，$V=\\sum_{i=k+1}^{n}(X_{i}-\\mu)^{2}$，令 $T=\\frac{U/k}{V/(n-k)}$，求 $T$ 的分布和期望。",
+  "tags": [
+   "概率统计",
+   "F分布",
+   "卡方分布"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第245节 服从F分布",
+  "hints": [
+   "两个 $\\chi^{2}$ 除以各自自由度再作商，自由度分别是 $k$ 与 $n-k$。"
+  ],
+  "answer": "$T\\sim F(k,n-k)$，$E(T)=\\frac{n-k}{n-k-2}$（$n-k>2$）",
+  "solution": "$\\frac{U}{\\sigma^{2}}\\sim\\chi^{2}(k)$，$\\frac{V}{\\sigma^{2}}\\sim\\chi^{2}(n-k)$ 且独立，故 $T\\sim F(k,n-k)$，$E(T)=\\frac{n-k}{n-k-2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "两独立样本、均值已知：$F(n,m)$",
+  "statement": "设 $X_{1},\\ldots,X_{n}$ 来自 $N(\\mu_{1},\\sigma^{2})$，$Y_{1},\\ldots,Y_{m}$ 来自 $N(\\mu_{2},\\sigma^{2})$，$\\mu_{1}$，$\\mu_{2}$ 已知且两样本独立。记 $U=\\sum_{i=1}^{n}(X_{i}-\\mu_{1})^{2}$，$V=\\sum_{j=1}^{m}(Y_{j}-\\mu_{2})^{2}$，则 $T=\\frac{U/n}{V/m}$，求 $T$ 的分布和期望。",
+  "tags": [
+   "概率统计",
+   "F分布",
+   "两样本"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第245节 服从F分布",
+  "hints": [
+   "同方差使 $\\sigma^{2}$ 约掉，分子自由度 $n$、分母自由度 $m$。"
+  ],
+  "answer": "$T\\sim F(n,m)$，$E(T)=\\frac{m}{m-2}$（$m>2$）",
+  "solution": "$\\frac{U}{\\sigma^{2}}\\sim\\chi^{2}(n)$，$\\frac{V}{\\sigma^{2}}\\sim\\chi^{2}(m)$，独立，故 $T\\sim F(n,m)$，$E(T)=\\frac{m}{m-2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "两样本方差之比 $\\frac{S_X^2}{S_Y^2}$ 的分布",
+  "statement": "设 $X_{1},\\ldots,X_{n}$ 与 $Y_{1},\\ldots,Y_{m}$ 分别来自 $N(\\mu_{1},\\sigma^{2})$ 和 $N(\\mu_{2},\\sigma^{2})$，且两样本独立，样本方差记为 $S_{X}^{2}$，$S_{Y}^{2}$，则 $T=\\frac{S_{X}^{2}}{S_{Y}^{2}}$，求 $T$ 的分布和期望。",
+  "tags": [
+   "概率统计",
+   "F分布",
+   "样本方差"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第245节 服从F分布",
+  "hints": [
+   "两个修正方差各自除以 $\\sigma^{2}$ 后是 $\\chi^{2}$，自由度分别为 $n-1$、$m-1$。"
+  ],
+  "answer": "$T\\sim F(n-1,m-1)$，$E(T)=\\frac{m-1}{m-3}$（$m>3$）",
+  "solution": "$\\frac{(n-1)S_{X}^{2}}{\\sigma^{2}}\\sim\\chi^{2}(n-1)$，$\\frac{(m-1)S_{Y}^{2}}{\\sigma^{2}}\\sim\\chi^{2}(m-1)$，独立，故 $T\\sim F(n-1,m-1)$，$E(T)=\\frac{m-1}{m-3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "方差不等（4 与 9）：先标准化再作比",
+  "statement": "设 $X_{1},\\ldots,X_{9}$ 来自 $N(\\mu,4)$，$Y_{1},\\ldots,Y_{16}$ 来自 $N(\\mu,9)$，独立，样本方差 $S_{X}^{2}$，$S_{Y}^{2}$，令 $T=\\frac{9S_{X}^{2}}{4S_{Y}^{2}}$，求 $T$ 的分布和期望。",
+  "tags": [
+   "概率统计",
+   "F分布",
+   "标准化"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第245节 服从F分布",
+  "hints": [
+   "系数 $9$、$4$ 正是为了把 $S_X^2/4$ 与 $S_Y^2/9$ 化成同方差卡方的比。"
+  ],
+  "answer": "$T\\sim F(8,15)$，$E(T)=\\frac{15}{13}$",
+  "solution": "$\\frac{8S_{X}^{2}}{4}\\sim\\chi^{2}(8)$，$\\frac{15S_{Y}^{2}}{9}\\sim\\chi^{2}(15)$ 且独立，作商 $\\frac{(2S_X^{2})/8}{(5S_Y^{2}/3)/15}=\\frac{9S_X^{2}}{4S_Y^{2}}\\sim F(8,15)$，$E(T)=\\frac{15}{13}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "拆成前 6 个与后 4 个平方和",
+  "statement": "设 $X_{1},\\ldots,X_{10}$ 来自 $N(0,\\sigma^{2})$，记 $U=\\sum_{i=1}^{6}X_{i}^{2}$，$V=\\sum_{i=7}^{10}X_{i}^{2}$，则 $T=\\frac{U/6}{V/4}$，求 $T$ 的分布和期望。",
+  "tags": [
+   "概率统计",
+   "F分布",
+   "卡方分布"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第245节 服从F分布",
+  "hints": [
+   "$U/\\sigma^{2}\\sim\\chi^{2}(6)$，$V/\\sigma^{2}\\sim\\chi^{2}(4)$，除自由度后作商。"
+  ],
+  "answer": "$T\\sim F(6,4)$，$E(T)=2$",
+  "solution": "$T=\\frac{(U/\\sigma^{2})/6}{(V/\\sigma^{2})/4}\\sim F(6,4)$，$E(T)=\\frac{4}{4-2}=2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "方差相差 2 倍：系数 $\\frac{14}{5}$ 的配凑",
+  "statement": "设 $X_{1},\\ldots,X_{5}$ 来自 $N(0,\\sigma^{2})$，$Y_{1},\\ldots,Y_{7}$ 来自 $N(0,2\\sigma^{2})$，且独立。记 $Q_{X}=\\sum_{i=1}^{5}X_{i}^{2}$，$Q_{Y}=\\sum_{j=1}^{7}Y_{j}^{2}$，则 $T=\\frac{14Q_{X}}{5Q_{Y}}$，求 $T$ 的分布和期望。",
+  "tags": [
+   "概率统计",
+   "F分布",
+   "标准化"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第245节 服从F分布",
+  "hints": [
+   "$Q_X/\\sigma^{2}\\sim\\chi^{2}(5)$，$Q_Y/(2\\sigma^{2})\\sim\\chi^{2}(7)$，按自由度 $5$、$7$ 作商。"
+  ],
+  "answer": "$T\\sim F(5,7)$，$E(T)=\\frac{7}{5}$",
+  "solution": "$\\frac{Q_{X}}{\\sigma^{2}}\\sim\\chi^{2}(5)$，$\\frac{Q_{Y}}{2\\sigma^{2}}\\sim\\chi^{2}(7)$，独立，故 $T=\\frac{Q_X/\\sigma^{2}\\cdot\\frac{1}{5}}{Q_Y/(2\\sigma^{2})\\cdot\\frac{1}{7}}=\\frac{14Q_X}{5Q_Y}\\sim F(5,7)$，$E(T)=\\frac75$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "容量 20：$\\frac{20(\\bar X-\\mu)^2}{S^2}$",
+  "statement": "从 $N(\\mu,\\sigma^{2})$ 中抽取容量为 20 的样本，样本均值为 $\\bar X$，样本方差为 $S^{2}$，则 $T=\\frac{20(\\bar X-\\mu)^{2}}{S^{2}}$，求 $T$ 的分布和期望。",
+  "tags": [
+   "概率统计",
+   "F分布",
+   "抽样分布"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第245节 服从F分布",
+  "hints": [
+   "就是第 1 题 $n=20$ 的情形，$\\frac{n\\bar X^2}{S^2}$ 中把 $\\bar X$ 换成 $\\bar X-\\mu$。"
+  ],
+  "answer": "$T\\sim F(1,19)$，$E(T)=\\frac{19}{17}$",
+  "solution": "$\\frac{\\left(\\frac{\\sqrt{20}(\\bar X-\\mu)}{\\sigma}\\right)^{2}}{1}\\sim\\chi^{2}(1)$，$\\frac{19S^{2}}{\\sigma^{2}}\\sim\\chi^{2}(19)$，独立，故 $T\\sim F(1,19)$，$E(T)=\\frac{19}{17}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "容量 12 与 9：样本方差比 $F(11,8)$",
+  "statement": "设 $X_{1},\\ldots,X_{12}$ 来自 $N(\\mu_{1},\\sigma^{2})$，$Y_{1},\\ldots,Y_{9}$ 来自 $N(\\mu_{2},\\sigma^{2})$，独立，样本方差 $S_{X}^{2}$，$S_{Y}^{2}$，则 $T=\\frac{S_{X}^{2}}{S_{Y}^{2}}$，求 $T$ 的分布和期望。",
+  "tags": [
+   "概率统计",
+   "F分布",
+   "样本方差"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第245节 服从F分布",
+  "hints": [
+   "自由度分别是 $12-1$ 与 $9-1$。"
+  ],
+  "answer": "$T\\sim F(11,8)$，$E(T)=\\frac{4}{3}$",
+  "solution": "$\\frac{11S_{X}^{2}}{\\sigma^{2}}\\sim\\chi^{2}(11)$，$\\frac{8S_{Y}^{2}}{\\sigma^{2}}\\sim\\chi^{2}(8)$，独立，故 $T\\sim F(11,8)$，$E(T)=\\frac{8}{8-2}=\\frac43$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反求参数：对数展开逐项配零",
+  "statement": "设 $\\lim\\limits_{x\\to 0}\\dfrac{\\ln(1+x)+ax+bx^{2}}{x^{2}}=0$，求 $a,b$。",
+  "tags": [
+   "极限",
+   "反求参数",
+   "泰勒展开"
+  ],
+  "thinking": 6,
   "difficulty": 7,
   "calc": 6,
-  "source": "柳贯一题型专项 · 第243节 服从卡方分布",
+  "source": "柳贯一题型专项 · 第6节 未定式反求参数",
   "hints": [
-   "平方和分解 $\\sum(X_{i}-\\mu)^{2}=\\sum(X_{i}-\\bar X)^{2}+n(\\bar X-\\mu)^{2}$，本题即 $\\frac{1}{\\sigma^{2}}\\sum(X_{i}-\\mu)^{2}$。"
+   "把 $\\ln(1+x)$ 展开，令一次项系数为零（否则极限发散），再令二次项系数为零（因极限为 $0$）。"
   ],
-  "answer": "$\\chi^{2}(n)$，$E(T)=n$，$D(T)=2n$",
-  "solution": "由平方和分解，$T=\\frac{1}{\\sigma^{2}}\\sum_{i=1}^{n}(X_{i}-\\mu)^{2}=\\sum Z_{i}^{2}$，其中 $Z_{i}\\sim N(0,1)$ 独立，故 $T\\sim\\chi^{2}(n)$，$E(T)=n$，$D(T)=2n$。",
+  "answer": "$a=-1$，$b=\\frac{1}{2}$",
+  "solution": "$\\ln(1+x)=x-\\frac{x^{2}}{2}+o(x^{2})$，分子 $=(1+a)x+\\left(b-\\frac{1}{2}\\right)x^{2}+o(x^{2})$。由 $1+a=0$、$b-\\frac{1}{2}=0$ 得 $a=-1,b=\\frac{1}{2}$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "幂指未定式：$1^{\\infty}$ 型三次无穷小之比",
-  "statement": "求极限 $\\lim\\limits_{x\\to 0}\\left(\\dfrac{1+\\tan x}{1+\\sin x}\\right)^{\\frac{1}{x^{3}}}$。",
+  "title": "反求参数：指数与二次多项式匹配",
+  "statement": "设 $\\lim\\limits_{x\\to 0}\\dfrac{e^{x}-(1+ax+bx^{2})}{x^{3}}=c$，求 $a,b,c$。",
   "tags": [
    "极限",
-   "幂指函数",
+   "反求参数",
    "泰勒展开"
   ],
-  "thinking": 8,
-  "difficulty": 9,
-  "calc": 8,
-  "source": "柳贯一题型专项 · 第3节 幂指未定式",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第6节 未定式反求参数",
   "hints": [
-   "取对数后 $\\ln(1+\\tan x)-\\ln(1+\\sin x)$ 的三次主部决定结果。"
+   "令分子 $x$、$x^{2}$ 项系数为零，剩下的 $x^{3}$ 系数就是 $c$。"
   ],
-  "answer": "$e^{\\frac{1}{2}}$",
-  "solution": "$\\ln$ 后得 $(\\tan x-\\sin x)-\\frac{\\tan^{2}x-\\sin^{2}x}{2}+\\cdots$，三次主部为 $\\frac{x^{3}}{2}$，除以 $x^{3}$ 得 $\\frac{1}{2}$，故为 $e^{1/2}$。",
+  "answer": "$a=1$，$b=\\frac{1}{2}$，$c=\\frac{1}{6}$",
+  "solution": "$e^{x}=1+x+\\frac{x^{2}}{2}+\\frac{x^{3}}{6}+o(x^{3})$，比对得 $a=1$、$b=\\frac{1}{2}$，余下系数 $c=\\frac{1}{6}$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "幂指未定式：$\\frac{\\arcsin x}{x}$ 的二阶型",
-  "statement": "求极限 $\\lim\\limits_{x\\to 0}\\left(\\dfrac{\\arcsin x}{x}\\right)^{\\frac{1}{x^{2}}}$。",
+  "title": "反求参数：余弦与常数加二次项",
+  "statement": "设 $\\lim\\limits_{x\\to 0}\\dfrac{\\cos x-(a+bx^{2})}{x^{4}}=c$，求 $a,b,c$。",
   "tags": [
    "极限",
-   "幂指函数",
+   "反求参数",
    "泰勒展开"
   ],
-  "thinking": 8,
-  "difficulty": 8,
-  "calc": 7,
-  "source": "柳贯一题型专项 · 第3节 幂指未定式",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第6节 未定式反求参数",
   "hints": [
-   "用 $\\ln\\frac{\\arcsin x}{x}\\approx\\frac{\\arcsin x-x}{x}$，再展开 $\\arcsin x$。"
+   "常数项与二次项都要配平，$x^{4}$ 项系数即 $c$。"
   ],
-  "answer": "$e^{\\frac{1}{6}}$",
-  "solution": "$\\frac{\\arcsin x}{x}=1+\\frac{x^{2}}{6}+o(x^{2})$，取对数乘 $\\frac{1}{x^{2}}$ 得 $\\frac{1}{6}$，故极限 $e^{1/6}$。",
+  "answer": "$a=1$，$b=-\\frac{1}{2}$，$c=\\frac{1}{24}$",
+  "solution": "$\\cos x=1-\\frac{x^{2}}{2}+\\frac{x^{4}}{24}+o(x^{4})$，故 $a=1$、$b=-\\frac{1}{2}$、$c=\\frac{1}{24}$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "幂指未定式：$\\frac{\\arctan x}{x}$ 的二阶型",
-  "statement": "求极限 $\\lim\\limits_{x\\to 0}\\left(\\dfrac{\\arctan x}{x}\\right)^{\\frac{1}{x^{2}}}$。",
+  "title": "反求参数：正弦与三次多项式匹配",
+  "statement": "设 $\\lim\\limits_{x\\to 0}\\dfrac{\\sin x-(ax+bx^{3})}{x^{5}}=c$，求 $a,b,c$。",
   "tags": [
    "极限",
-   "幂指函数",
+   "反求参数",
    "泰勒展开"
   ],
-  "thinking": 8,
-  "difficulty": 8,
-  "calc": 7,
-  "source": "柳贯一题型专项 · 第3节 幂指未定式",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第6节 未定式反求参数",
   "hints": [
-   "$\\arctan x=x-\\frac{x^{3}}{3}+\\cdots$，比值的对数二阶系数为 $-\\frac{1}{3}$。"
+   "依次消去一次、三次项，剩下 $x^{5}$ 系数。"
   ],
-  "answer": "$e^{-\\frac{1}{3}}$",
-  "solution": "$\\frac{\\arctan x}{x}=1-\\frac{x^{2}}{3}+o(x^{2})$，乘 $\\frac{1}{x^{2}}$ 后取指数得 $e^{-1/3}$。",
+  "answer": "$a=1$，$b=-\\frac{1}{6}$，$c=\\frac{1}{120}$",
+  "solution": "$\\sin x=x-\\frac{x^{3}}{6}+\\frac{x^{5}}{120}+o(x^{5})$，得 $a=1$、$b=-\\frac{1}{6}$、$c=\\frac{1}{120}$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "幂指未定式：$\\frac{\\ln(1+x)}{x}$ 的一次型",
-  "statement": "求极限 $\\lim\\limits_{x\\to 0}\\left(\\dfrac{\\ln(1+x)}{x}\\right)^{\\frac{1}{x}}$。",
+  "title": "反求参数：变限积分与三次项抵消",
+  "statement": "设 $\\lim\\limits_{x\\to 0}\\dfrac{\\int_{0}^{x}\\sin(t^{2})\\,\\mathrm{d}t-ax^{3}}{x^{7}}=b$，求 $a,b$。",
   "tags": [
    "极限",
-   "幂指函数",
-   "等价无穷小"
+   "反求参数",
+   "变限积分"
   ],
-  "thinking": 8,
+  "thinking": 7,
   "difficulty": 8,
   "calc": 7,
-  "source": "柳贯一题型专项 · 第3节 幂指未定式",
+  "source": "柳贯一题型专项 · 第6节 未定式反求参数",
   "hints": [
-   "底数趋于 $1$，指数 $\\frac{1}{x}\\to\\infty$，属于 $1^{\\infty}$，先算 $\\frac{1}{x}\\ln\\frac{\\ln(1+x)}{x}$。"
+   "先算 $\\int_{0}^{x}\\sin t^{2}\\mathrm{d}t=\\frac{x^{3}}{3}-\\frac{x^{7}}{42}+\\cdots$，令三次项系数为零。"
   ],
-  "answer": "$e^{-\\frac{1}{2}}$",
-  "solution": "$\\frac{\\ln(1+x)}{x}-1=-\\frac{x}{2}+o(x)$，故 $\\frac{1}{x}\\ln\\frac{\\ln(1+x)}{x}\\to-\\frac{1}{2}$，极限为 $e^{-1/2}$。",
+  "answer": "$a=\\frac{1}{3}$，$b=-\\frac{1}{42}$",
+  "solution": "积分为 $\\frac{x^{3}}{3}-\\frac{x^{7}}{42}+o(x^{7})$，故 $a=\\frac{1}{3}$，剩余系数 $b=-\\frac{1}{42}$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "幂指未定式：$\\frac{\\sin x}{x}$ 的二阶型",
-  "statement": "求极限 $\\lim\\limits_{x\\to 0}\\left(\\dfrac{\\sin x}{x}\\right)^{\\frac{1}{x^{2}}}$。",
+  "title": "反求参数：幂指极限为 $e$ 的条件",
+  "statement": "设 $\\lim\\limits_{x\\to 0}\\left(1+ax+bx^{2}\\right)^{\\frac{1}{x^{2}}}=e$，求 $a,b$。",
   "tags": [
    "极限",
-   "幂指函数",
-   "泰勒展开"
+   "反求参数",
+   "幂指函数"
   ],
-  "thinking": 8,
+  "thinking": 7,
   "difficulty": 8,
   "calc": 7,
-  "source": "柳贯一题型专项 · 第3节 幂指未定式",
+  "source": "柳贯一题型专项 · 第6节 未定式反求参数",
   "hints": [
-   "$\\frac{\\sin x}{x}=1-\\frac{x^{2}}{6}+\\cdots$，取对数后除以 $x^{2}$。"
+   "取对数：$\\frac{\\ln(1+ax+bx^{2})}{x^{2}}$ 必须收敛，故一次项系数须为零。"
   ],
-  "answer": "$e^{-\\frac{1}{6}}$",
-  "solution": "$\\ln\\frac{\\sin x}{x}\\sim-\\frac{x^{2}}{6}$，乘 $\\frac{1}{x^{2}}$ 得 $-\\frac{1}{6}$，故极限 $e^{-1/6}$。",
+  "answer": "$a=0$，$b=1$",
+  "solution": "$\\ln(1+ax+bx^{2})=ax+\\left(b-\\frac{a^{2}}{2}\\right)x^{2}+o(x^{2})$；收敛要求 $a=0$，此时指数极限 $=b=1$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "幂指未定式：$x^{\\sin x}$ 的 $0^{0}$ 型",
-  "statement": "求极限 $\\lim\\limits_{x\\to 0^{+}}x^{\\sin x}$。",
+  "title": "反求参数：$x\\to1$ 的有理式极限",
+  "statement": "设 $\\lim\\limits_{x\\to 1}\\dfrac{x^{2}+ax+b}{x-1}=3$，求 $a,b$。",
   "tags": [
    "极限",
-   "幂指函数",
+   "反求参数",
    "洛必达"
   ],
-  "thinking": 7,
+  "thinking": 6,
   "difficulty": 7,
   "calc": 6,
-  "source": "柳贯一题型专项 · 第3节 幂指未定式",
+  "source": "柳贯一题型专项 · 第6节 未定式反求参数",
   "hints": [
-   "$0^{0}$ 型，取对数得 $\\sin x\\ln x$，用 $x\\ln x\\to 0$。"
+   "分母趋于 $0$ 而极限存在，故分子在 $x=1$ 处必须为 $0$；再用洛必达。"
   ],
-  "answer": "$1$",
-  "solution": "$\\sin x\\ln x\\sim x\\ln x\\to 0$，指数部分趋于 $0$，故原极限为 $e^{0}=1$。",
+  "answer": "$a=1$，$b=-2$",
+  "solution": "由 $1+a+b=0$；洛必达得 $\\frac{2x+a}{1}\\Big|_{x=1}=2+a=3$，故 $a=1$，$b=-2$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "幂指未定式：$\\infty^{0}$ 型取对数",
-  "statement": "求极限 $\\lim\\limits_{x\\to 0^{+}}\\left(\\ln\\dfrac{1}{x}\\right)^{x}$。",
+  "title": "反求参数：根式含参展开",
+  "statement": "设 $\\lim\\limits_{x\\to 0}\\dfrac{\\sqrt{1+ax+bx^{2}}-1}{x^{2}}=2$，求 $a,b$。",
   "tags": [
    "极限",
-   "幂指函数",
+   "反求参数",
+   "泰勒展开"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第6节 未定式反求参数",
+  "hints": [
+   "$\\sqrt{1+u}=1+\\frac{u}{2}-\\frac{u^{2}}{8}+\\cdots$，$u=ax+bx^{2}$；一次项必须消掉。"
+  ],
+  "answer": "$a=0$，$b=4$",
+  "solution": "展开得 $\\frac{a}{2}x+\\left(\\frac{b}{2}-\\frac{a^{2}}{8}\\right)x^{2}$，由 $\\frac{a}{2}=0$ 得 $a=0$，$\\frac{b}{2}=2$ 得 $b=4$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反求参数：指数与对数混合配平",
+  "statement": "设 $\\lim\\limits_{x\\to 0}\\dfrac{e^{x}-\\ln(1+x)-1-ax-bx^{2}}{x^{3}}=c$，求 $a,b,c$。",
+  "tags": [
+   "极限",
+   "反求参数",
+   "泰勒展开"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第6节 未定式反求参数",
+  "hints": [
+   "先算 $e^{x}-\\ln(1+x)-1$ 的展开式，再与 $ax+bx^{2}$ 逐项对齐。"
+  ],
+  "answer": "$a=0$，$b=1$，$c=-\\frac{1}{6}$",
+  "solution": "$e^{x}-\\ln(1+x)-1=x^{2}-\\frac{x^{3}}{6}+o(x^{3})$，故 $a=0$、$b=1$、$c=-\\frac{1}{6}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含极限函数方程：设极限为常数求解",
+  "statement": "设函数 $f(x)$ 满足 $f(x)=\\dfrac{x-\\sin x}{x^{2}}+\\dfrac{x}{2}\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x}$，求 $\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x}$。",
+  "tags": [
+   "极限",
+   "函数方程",
+   "等价无穷小"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第7节 含极限函数方程",
+  "hints": [
+   "把所求极限记为 $L$，等式两边同除 $x$ 后取极限，得到关于 $L$ 的一次方程。"
+  ],
+  "answer": "$\\frac{1}{3}$",
+  "solution": "令 $L=\\lim\\frac{f(x)}{x}$，则 $\\frac{f(x)}{x}=\\frac{x-\\sin x}{x^{3}}+\\frac{L}{2}\\to\\frac{1}{6}+\\frac{L}{2}$，解得 $L=\\frac{1}{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含极限函数方程：指数型自洽方程",
+  "statement": "设函数 $f(x)$ 满足 $f(x)=\\dfrac{e^{x}-1-x}{x}+\\dfrac{x}{3}\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x}$，求 $\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x}$。",
+  "tags": [
+   "极限",
+   "函数方程",
+   "泰勒展开"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第7节 含极限函数方程",
+  "hints": [
+   "同除 $x$ 后，$\\frac{e^{x}-1-x}{x^{2}}\\to\\frac{1}{2}$，解 $L=\\frac{1}{2}+\\frac{L}{3}$。"
+  ],
+  "answer": "$\\frac{3}{4}$",
+  "solution": "$L=\\frac{1}{2}+\\frac{L}{3}$，解得 $L=\\frac{3}{4}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含极限函数方程：对数型自洽方程",
+  "statement": "设函数 $f(x)$ 满足 $f(x)=\\dfrac{\\ln(1+x)-x}{x}+\\dfrac{x}{2}\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x}$，求 $\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x}$。",
+  "tags": [
+   "极限",
+   "函数方程",
+   "泰勒展开"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第7节 含极限函数方程",
+  "hints": [
+   "$\\frac{\\ln(1+x)-x}{x^{2}}\\to-\\frac{1}{2}$，代回方程解 $L$。"
+  ],
+  "answer": "$-1$",
+  "solution": "$L=-\\frac{1}{2}+\\frac{L}{2}$，解得 $L=-1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含极限函数方程：正切型自洽方程",
+  "statement": "设函数 $f(x)$ 满足 $f(x)=\\dfrac{\\tan x-x}{x^{2}}+\\dfrac{x}{4}\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x}$，求 $\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x}$。",
+  "tags": [
+   "极限",
+   "函数方程",
+   "泰勒展开"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第7节 含极限函数方程",
+  "hints": [
+   "$\\tan x-x\\sim\\frac{x^{3}}{3}$，故第一项贡献 $\\frac{1}{3}$，解 $L=\\frac{1}{3}+\\frac{L}{4}$。"
+  ],
+  "answer": "$\\frac{4}{9}$",
+  "solution": "$L=\\frac{1}{3}+\\frac{L}{4}$，解得 $L=\\frac{4}{9}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含极限函数方程：反正弦型自洽方程",
+  "statement": "设函数 $f(x)$ 满足 $f(x)=\\dfrac{\\arcsin x-x}{x^{2}}+\\dfrac{x}{5}\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x}$，求 $\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x}$。",
+  "tags": [
+   "极限",
+   "函数方程",
+   "泰勒展开"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第7节 含极限函数方程",
+  "hints": [
+   "$\\arcsin x-x\\sim\\frac{x^{3}}{6}$，解 $L=\\frac{1}{6}+\\frac{L}{5}$。"
+  ],
+  "answer": "$\\frac{5}{24}$",
+  "solution": "$L=\\frac{1}{6}+\\frac{L}{5}$，解得 $L=\\frac{5}{24}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含极限函数方程：反正切型自洽方程",
+  "statement": "设函数 $f(x)$ 满足 $f(x)=\\dfrac{\\arctan x-x}{x^{2}}+\\dfrac{x}{3}\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x}$，求 $\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x}$。",
+  "tags": [
+   "极限",
+   "函数方程",
+   "泰勒展开"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第7节 含极限函数方程",
+  "hints": [
+   "$\\arctan x-x\\sim-\\frac{x^{3}}{3}$，解 $L=-\\frac{1}{3}+\\frac{L}{3}$。"
+  ],
+  "answer": "$-\\frac{1}{2}$",
+  "solution": "$L=-\\frac{1}{3}+\\frac{L}{3}$，解得 $L=-\\frac{1}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含极限函数方程：二阶极限的方程",
+  "statement": "设函数 $f(x)$ 满足 $f(x)=\\dfrac{x-\\sin x}{x}+\\dfrac{x^{2}}{3}\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x^{2}}$，求 $\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x^{2}}$。",
+  "tags": [
+   "极限",
+   "函数方程",
+   "等价无穷小"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第7节 含极限函数方程",
+  "hints": [
+   "这次设 $M=\\lim\\frac{f(x)}{x^{2}}$，等式两边同除 $x^{2}$：$\\frac{x-\\sin x}{x^{3}}\\to\\frac{1}{6}$。"
+  ],
+  "answer": "$\\frac{1}{4}$",
+  "solution": "$M=\\frac{1}{6}+\\frac{M}{3}$，解得 $M=\\frac{1}{4}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含极限函数方程：指数与正弦组合",
+  "statement": "设函数 $f(x)$ 满足 $f(x)=e^{x}-1-\\sin x+\\dfrac{x^{2}}{4}\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x^{2}}$，求 $\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x^{2}}$。",
+  "tags": [
+   "极限",
+   "函数方程",
+   "泰勒展开"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第7节 含极限函数方程",
+  "hints": [
+   "$e^{x}-1-\\sin x=\\frac{x^{2}}{2}+\\cdots$，故 $M=\\frac{1}{2}+\\frac{M}{4}$。"
+  ],
+  "answer": "$\\frac{2}{3}$",
+  "solution": "$M=\\frac{1}{2}+\\frac{M}{4}$，解得 $M=\\frac{2}{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含极限函数方程：对数型二阶方程",
+  "statement": "设函数 $f(x)$ 满足 $f(x)=\\ln(1+x)-x+\\dfrac{x^{2}}{2}\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x^{2}}$，求 $\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x^{2}}$。",
+  "tags": [
+   "极限",
+   "函数方程",
+   "泰勒展开"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第7节 含极限函数方程",
+  "hints": [
+   "$\\frac{\\ln(1+x)-x}{x^{2}}\\to-\\frac{1}{2}$，故 $M=-\\frac{1}{2}+\\frac{M}{2}$。"
+  ],
+  "answer": "$-1$",
+  "solution": "$M=-\\frac{1}{2}+\\frac{M}{2}$，解得 $M=-1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含极限函数方程：$\\tan x-\\sin x$ 型方程",
+  "statement": "设函数 $f(x)$ 满足 $f(x)=\\dfrac{\\tan x-\\sin x}{x}+\\dfrac{x^{2}}{5}\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x^{2}}$，求 $\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x^{2}}$。",
+  "tags": [
+   "极限",
+   "函数方程",
+   "泰勒展开"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第7节 含极限函数方程",
+  "hints": [
+   "$\\tan x-\\sin x\\sim\\frac{x^{3}}{2}$，同除 $x^{3}$ 得 $\\frac{1}{2}$，故 $M=\\frac{1}{2}+\\frac{M}{5}$。"
+  ],
+  "answer": "$\\frac{5}{8}$",
+  "solution": "$M=\\frac{1}{2}+\\frac{M}{5}$，解得 $M=\\frac{5}{8}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "间断点：约分后看跳跃与无穷",
+  "statement": "设 $f(x)=\\dfrac{x(x-2)}{|x|(x-2)}e^{\\frac{1}{x-1}}$，求 $f(x)$ 的全部间断点，并指出其类型。",
+  "tags": [
+   "极限",
+   "间断点",
+   "单侧极限"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第8节 间断点",
+  "hints": [
+   "先找无定义点 $x=0,1,2$，再分别算左右极限：$\\frac{x}{|x|}$ 给 $\\pm 1$，$e^{\\frac{1}{x-1}}$ 在 $x=1$ 处爆炸。"
+  ],
+  "answer": "一类间断点：$0$，$2$；二类间断点：$1$",
+  "solution": "$x=0$：左极限 $-e^{-1}$、右极限 $e^{-1}$，跳跃；$x=2$：约去 $x-2$ 后极限 $e^{1}$，可去；$x=1$：$e^{\\frac{1}{x-1}}\\to\\infty$，第二类。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "间断点：对数因子造成无穷型",
+  "statement": "设 $f(x)=\\dfrac{(x^{2}-1)\\ln|x|}{x(x-2)}$，求 $f(x)$ 的全部间断点，并指出其类型。",
+  "tags": [
+   "极限",
+   "间断点",
+   "单侧极限"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第8节 间断点",
+  "hints": [
+   "$\\ln|x|$ 在 $x=0$ 处趋于 $-\\infty$；$x=2$ 处分母为零而分子非零。"
+  ],
+  "answer": "一类间断点：无；二类间断点：$0$，$2$",
+  "solution": "$x=0$：$\\ln|x|\\to-\\infty$，故为无穷间断（第二类）；$x=2$：$\\frac{\\cdot}{x-2}\\to\\infty$，第二类。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "间断点：指数爆炸配跳跃因子",
+  "statement": "设 $f(x)=\\dfrac{e^{\\frac{1}{x-1}}|x|}{x(x-2)}$，求 $f(x)$ 的全部间断点，并指出其类型。",
+  "tags": [
+   "极限",
+   "间断点",
+   "单侧极限"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第8节 间断点",
+  "hints": [
+   "$x=0$ 只剩 $\\frac{|x|}{x}$，左右极限相反；$x=1$ 与 $x=2$ 都是一侧趋于无穷。"
+  ],
+  "answer": "一类间断点：$0$；二类间断点：$1$，$2$",
+  "solution": "$x=0$：左右极限为 $-\\frac{e^{-1}}{2}$ 与 $\\frac{e^{-1}}{2}$，跳跃（一类）；$x=1$：$e^{\\frac{1}{x-1}}\\to+\\infty$；$x=2$：$\\frac{1}{x-2}\\to\\infty$，均为第二类。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "间断点：分段符号因子与指数因子并存",
+  "statement": "设 $f(x)=\\dfrac{x-3}{|x-3|}\\cdot\\dfrac{1}{x-1}\\cdot e^{\\frac{1}{x}}$，求 $f(x)$ 的全部间断点，并指出其类型。",
+  "tags": [
+   "极限",
+   "间断点",
+   "单侧极限"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第8节 间断点",
+  "hints": [
+   "三个可疑点 $0,1,3$：$x=0$ 看 $e^{1/x}$ 的单侧极限，$x=3$ 只看 $\\frac{x-3}{|x-3|}$ 的符号。"
+  ],
+  "answer": "一类间断点：$3$；二类间断点：$0$，$1$",
+  "solution": "$x=0$：$e^{1/x}$ 右极限 $+\\infty$，第二类；$x=1$：$\\frac{1}{x-1}\\to\\infty$，第二类；$x=3$：左右极限为 $\\pm\\frac{e^{1/3}}{2}$，跳跃（一类）。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "间断点：振荡因子造成第二类",
+  "statement": "设 $f(x)=\\dfrac{\\sin(1/x)}{x-1}\\cdot\\dfrac{x}{|x|}$，求 $f(x)$ 的全部间断点，并指出其类型。",
+  "tags": [
+   "极限",
+   "间断点",
+   "单侧极限"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第8节 间断点",
+  "hints": [
+   "$x\\to 0$ 时 $\\sin\\frac{1}{x}$ 无限振荡，极限不存在；$x=1$ 处另需单独核对。"
+  ],
+  "answer": "一类间断点：无；二类间断点：$0$，$1$",
+  "solution": "$x=0$：振荡无极限，第二类；$x=1$：按题给函数在 $x=1$ 处极限不存在（振荡/发散），故也属第二类。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "间断点：分母带 $|x|$ 的无穷型",
+  "statement": "设 $f(x)=\\dfrac{(x-1)e^{\\frac{1}{x-2}}}{(x-2)|x|}$，求 $f(x)$ 的全部间断点，并指出其类型。",
+  "tags": [
+   "极限",
+   "间断点",
+   "单侧极限"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第8节 间断点",
+  "hints": [
+   "$x=0$ 时分子趋于 $-e^{-1/2}\\ne 0$ 而分母趋于 $0$；$x=2$ 时 $e^{\\frac{1}{x-2}}$ 单侧爆炸。"
+  ],
+  "answer": "一类间断点：无；二类间断点：$0$，$2$",
+  "solution": "$x=0$：$\\frac{1}{|x|}\\to+\\infty$，第二类；$x=2$：右极限 $+\\infty$、左极限 $0$，第二类（无穷）。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "间断点：符号因子与指数因子复合",
+  "statement": "设 $f(x)=\\dfrac{|x-1|}{x-1}\\cdot\\dfrac{1}{x-2}\\cdot e^{\\frac{1}{x-3}}$，求 $f(x)$ 的全部间断点，并指出其类型。",
+  "tags": [
+   "极限",
+   "间断点",
+   "单侧极限"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第8节 间断点",
+  "hints": [
+   "$x=1$：左右极限为 $\\mp\\frac{1}{e^{1/2}}$；$x=2,3$ 都是一侧发散。"
+  ],
+  "answer": "一类间断点：$1$；二类间断点：$2$，$3$",
+  "solution": "$x=1$：$\\frac{|x-1|}{x-1}$ 左右为 $\\pm 1$，跳跃（一类）；$x=2$：$\\frac{1}{x-2}\\to\\infty$；$x=3$：$e^{\\frac{1}{x-3}}\\to+\\infty$，均第二类。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "间断点：振荡与符号因子叠加",
+  "statement": "设 $f(x)=\\dfrac{(x^{2}-1)\\sin(1/x)|x|}{(x-2)x}$，求 $f(x)$ 的全部间断点，并指出其类型。",
+  "tags": [
+   "极限",
+   "间断点",
+   "单侧极限"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第8节 间断点",
+  "hints": [
+   "$x=0$ 处 $\\sin\\frac{1}{x}$ 振荡且带 $\\frac{|x|}{x}$；$x=2$ 处为无穷。"
+  ],
+  "answer": "一类间断点：无；二类间断点：$0$，$2$",
+  "solution": "$x=0$：$\\sin\\frac{1}{x}$ 振荡无极限，第二类；$x=2$：$\\frac{1}{x-2}\\to\\infty$，第二类。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "间断点：三个分母因子逐一排查",
+  "statement": "设 $f(x)=\\dfrac{e^{\\frac{1}{x+1}}|x|}{x(x+1)(x-1)}$，求 $f(x)$ 的全部间断点，并指出其类型。",
+  "tags": [
+   "极限",
+   "间断点",
+   "单侧极限"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第8节 间断点",
+  "hints": [
+   "$x=0$：只剩 $\\frac{|x|}{x}$ 的符号差；$x=-1$：$e^{\\frac{1}{x+1}}$ 爆炸；$x=1$：分母因子为零。"
+  ],
+  "answer": "一类间断点：$0$；二类间断点：$-1$，$1$",
+  "solution": "$x=0$：左右极限 $\\pm\\frac{e}{2}$，跳跃（一类）；$x=-1$：$e^{\\frac{1}{x+1}}\\to+\\infty$，第二类；$x=1$：$\\frac{1}{x-1}\\to\\infty$，第二类。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "间断点：对数零点与无穷点混合",
+  "statement": "设 $f(x)=\\dfrac{(x-2)\\ln|x|}{(x-1)(x+2)}e^{\\frac{1}{x-3}}$，求 $f(x)$ 的全部间断点，并指出其类型。",
+  "tags": [
+   "极限",
+   "间断点",
+   "单侧极限"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第8节 间断点",
+  "hints": [
+   "四个可疑点 $-2,0,1,3$：只有 $x=1$ 时分子有限且分母只一阶为零，其余都是无穷或指数爆炸。"
+  ],
+  "answer": "一类间断点：$1$；二类间断点：$-2$，$0$，$3$",
+  "solution": "$x=1$：$\\ln 1=0$、分子有限，极限存在，可去（一类）；$x=-2$ 与 $x=0$（$\\ln|x|\\to-\\infty$）、$x=3$（$e^{\\frac{1}{x-3}}\\to\\infty$）均为第二类。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "连续反求参数：分段函数左右极限对齐",
+  "statement": "设 $f(x)=\\begin{cases}\\dfrac{\\sin ax}{x},&x>0\\\\ b,&x=0\\\\ \\dfrac{e^{2x}-1}{x},&x<0\\end{cases}$，在 $x=0$ 处连续，求 $a,b$。",
+  "tags": [
+   "极限",
+   "连续性",
+   "左右极限"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第9节 连续反求参数",
+  "hints": [
+   "连续要求左极限 $=$ 右极限 $=f(0)$，两个单侧极限分别用 $\\frac{\\sin u}{u}\\to1$、$\\frac{e^{u}-1}{u}\\to1$。"
+  ],
+  "answer": "$a=2$，$b=2$",
+  "solution": "右极限 $\\frac{\\sin ax}{x}\\to a$，左极限 $\\frac{e^{2x}-1}{x}\\to 2$；由 $a=b=2$ 得 $a=2,b=2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "连续反求参数：$1^{\\infty}$ 型底数定参",
+  "statement": "设 $f(x)=\\begin{cases}(1+ax)^{\\frac{1}{x}},&x>0\\\\ 2,&x=0\\\\ \\dfrac{\\sin 2x}{x},&x<0\\end{cases}$，在 $x=0$ 处连续，求 $a$。",
+  "tags": [
+   "极限",
+   "连续性",
+   "幂指函数"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第9节 连续反求参数",
+  "hints": [
+   "右极限是 $1^{\\infty}$ 型，等于 $e^{a}$；左极限为 $2$。"
+  ],
+  "answer": "$a=\\ln 2$",
+  "solution": "左极限 $=\\frac{\\sin 2x}{x}\\to 2$，右极限 $=(1+ax)^{1/x}\\to e^{a}$；由 $e^{a}=2$ 得 $a=\\ln 2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "连续反求参数：有理分式可去型",
+  "statement": "设 $f(x)=\\begin{cases}\\dfrac{x^{2}+ax+b}{x-1},&x\\ne 1\\\\ 3,&x=1\\end{cases}$，在 $x=1$ 处连续，求 $a,b$。",
+  "tags": [
+   "极限",
+   "连续性",
    "洛必达"
   ],
-  "thinking": 7,
+  "thinking": 6,
   "difficulty": 7,
   "calc": 6,
-  "source": "柳贯一题型专项 · 第3节 幂指未定式",
+  "source": "柳贯一题型专项 · 第9节 连续反求参数",
   "hints": [
-   "$\\ln\\frac{1}{x}\\to+\\infty$，指数 $x\\to 0$，取对数化为 $\\frac{\\ln\\ln\\frac{1}{x}}{1/x}$。"
+   "分子在 $x=1$ 处必须为零（否则极限发散），再用洛必达令极限为 $3$。"
+  ],
+  "answer": "$a=1$，$b=-2$",
+  "solution": "由 $1+a+b=0$；$\\lim\\frac{2x+a}{1}=2+a=3$，得 $a=1$，$b=-2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "连续反求参数：$\\frac{\\tan x-x}{x^{3}}$ 定值",
+  "statement": "设 $f(x)=\\begin{cases}\\dfrac{\\tan x-x}{x^{3}},&x\\ne 0\\\\ a,&x=0\\end{cases}$，在 $x=0$ 处连续，求 $a$。",
+  "tags": [
+   "极限",
+   "连续性",
+   "泰勒展开"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第9节 连续反求参数",
+  "hints": [
+   "只需算 $\\lim\\frac{\\tan x-x}{x^{3}}$，用三阶展开。"
+  ],
+  "answer": "$\\frac{1}{3}$",
+  "solution": "$\\tan x=x+\\frac{x^{3}}{3}+o(x^{3})$，故极限 $=\\frac{1}{3}$，即 $a=\\frac{1}{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "连续反求参数：一次项与三次项同时定",
+  "statement": "设 $f(x)=\\begin{cases}\\dfrac{\\sin x-ax}{x^{3}},&x\\ne 0\\\\ b,&x=0\\end{cases}$，在 $x=0$ 处连续，求 $a,b$。",
+  "tags": [
+   "极限",
+   "连续性",
+   "泰勒展开"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第9节 连续反求参数",
+  "hints": [
+   "极限存在要求一次项系数为零；再取三次项系数作为 $b$。"
+  ],
+  "answer": "$a=1$，$b=-\\frac{1}{6}$",
+  "solution": "$\\sin x-ax=(1-a)x-\\frac{x^{3}}{6}+o(x^{3})$，由 $1-a=0$ 得 $a=1$，$b=-\\frac{1}{6}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "连续反求参数：数列极限定义的函数连续",
+  "statement": "设 $f(x)=\\lim\\limits_{n\\to\\infty}\\dfrac{x^{2n+1}+ax^{2}+bx}{x^{2n}+1}$ 在 $(-\\infty,+\\infty)$ 上连续，求 $a,b$。",
+  "tags": [
+   "极限",
+   "连续性",
+   "数列极限"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第9节 连续反求参数",
+  "hints": [
+   "先按 $|x|<1$、$|x|>1$、$x=\\pm 1$ 写出分段表达式，再在 $x=\\pm1$ 处用连续性接缝。"
+  ],
+  "answer": "$a=0$，$b=1$",
+  "solution": "$|x|<1$ 时 $f=bx$；$|x|>1$ 时 $f=x$；$x=1$ 时 $\\frac{1+a+b}{2}$，$x=-1$ 时 $\\frac{-1+a-b}{2}$。由 $x=\\pm1$ 连续得 $b=1$、$a=0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "连续反求参数：变限积分除以 $x^{3}$",
+  "statement": "设 $f(x)=\\begin{cases}\\dfrac{1}{x^{3}}\\int_{0}^{x}(e^{t^{2}}-1)\\,\\mathrm{d}t,&x\\ne 0\\\\ a,&x=0\\end{cases}$，在 $x=0$ 处连续，求 $a$。",
+  "tags": [
+   "极限",
+   "连续性",
+   "变限积分"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第9节 连续反求参数",
+  "hints": [
+   "$e^{t^{2}}-1\\sim t^{2}$，积分后为 $\\frac{x^{3}}{3}$。"
+  ],
+  "answer": "$\\frac{1}{3}$",
+  "solution": "$\\int_{0}^{x}(e^{t^{2}}-1)\\mathrm{d}t=\\frac{x^{3}}{3}+o(x^{3})$，故极限 $\\frac{1}{3}$，即 $a=\\frac{1}{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "连续反求参数：左右单侧对数与三角",
+  "statement": "设 $f(x)=\\begin{cases}\\dfrac{\\ln(1+ax)}{x},&x>0\\\\ 3,&x=0\\\\ \\dfrac{\\sin 3x}{x},&x<0\\end{cases}$，在 $x=0$ 处连续，求 $a$。",
+  "tags": [
+   "极限",
+   "连续性",
+   "等价无穷小"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第9节 连续反求参数",
+  "hints": [
+   "左极限 $\\frac{\\sin 3x}{x}\\to 3$，右极限 $\\frac{\\ln(1+ax)}{x}\\to a$。"
+  ],
+  "answer": "$a=3$",
+  "solution": "由 $a=3$ 时两侧极限都等于 $3=f(0)$，故 $a=3$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "连续反求参数：根式差分之一阶",
+  "statement": "设 $f(x)=\\begin{cases}\\dfrac{\\sqrt{1+ax}-1}{x},&x\\ne 0\\\\ 2,&x=0\\end{cases}$，在 $x=0$ 处连续，求 $a$。",
+  "tags": [
+   "极限",
+   "连续性",
+   "有理化"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第9节 连续反求参数",
+  "hints": [
+   "分子有理化或直接用 $\\sqrt{1+u}-1\\sim\\frac{u}{2}$，极限为 $\\frac{a}{2}$。"
+  ],
+  "answer": "$a=4$",
+  "solution": "极限 $=\\frac{a}{2}=2$，解得 $a=4$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "连续反求参数：二元函数在原点连续",
+  "statement": "设 $f(x,y)=\\begin{cases}\\dfrac{\\sin(x^{2}+y^{2})}{x^{2}+y^{2}},&(x,y)\\ne(0,0)\\\\ a,&(x,y)=(0,0)\\end{cases}$，在 $(0,0)$ 处连续，求 $a$。",
+  "tags": [
+   "极限",
+   "连续性",
+   "等价无穷小"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第9节 连续反求参数",
+  "hints": [
+   "令 $u=x^{2}+y^{2}\\to 0^{+}$，化为 $\\frac{\\sin u}{u}$。"
+  ],
+  "answer": "$a=1$",
+  "solution": "沿任意路径 $x^{2}+y^{2}\\to 0$，$\\frac{\\sin u}{u}\\to 1$，故 $a=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "压缩映射：$\\frac{x}{2}+\\frac{1}{x}$ 型迭代",
+  "statement": "设 $x_{1}=2$，$x_{n+1}=\\dfrac{1}{2}x_{n}+\\dfrac{1}{x_{n}}$。证明数列 $\\{x_{n}\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_{n}$。",
+  "tags": [
+   "极限",
+   "数列极限",
+   "单调有界"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第10节 等式数列极限压缩映射",
+  "hints": [
+   "先用均值不等式说明 $x_{n}\\ge\\sqrt{2}$，再证单调递减；最后令极限为 $a$ 解方程。"
+  ],
+  "answer": "$\\sqrt{2}$",
+  "solution": "由 $x_{n+1}\\ge\\sqrt{2}$ 且 $x_{n+1}-x_{n}=\\frac{1}{x_n}-\\frac{x_n}{2}\\le 0$，故单调递减有下界，收敛；令 $a=\\frac{a}{2}+\\frac{1}{a}$ 得 $a^{2}=2$，即 $\\sqrt{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "压缩映射：$\\frac{1}{2}\\left(x+\\frac{4}{x}\\right)$ 型",
+  "statement": "设 $x_{1}=3$，$x_{n+1}=\\dfrac{1}{2}\\left(x_{n}+\\dfrac{4}{x_{n}}\\right)$。证明数列 $\\{x_{n}\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_{n}$。",
+  "tags": [
+   "极限",
+   "数列极限",
+   "单调有界"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第10节 等式数列极限压缩映射",
+  "hints": [
+   "经典形式：$x_{n}\\ge 2$ 且单调递减，极限满足 $a=\\frac{1}{2}\\left(a+\\frac{4}{a}\\right)$。"
+  ],
+  "answer": "$2$",
+  "solution": "均值不等式得 $x_{n+1}\\ge 2$ 且 $x_{n+1}\\le x_{n}$，单调有界收敛；由 $a^{2}=4$ 得极限 $2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "压缩映射：$\\frac{x}{2}+\\frac{5}{2x}$ 型",
+  "statement": "设 $x_{1}=2$，$x_{n+1}=\\dfrac{1}{2}x_{n}+\\dfrac{5}{2x_{n}}$。证明数列 $\\{x_{n}\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_{n}$。",
+  "tags": [
+   "极限",
+   "数列极限",
+   "单调有界"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第10节 等式数列极限压缩映射",
+  "hints": [
+   "与 $\\frac{1}{2}\\left(x+\\frac{5}{x}\\right)$ 同型，下界是 $\\sqrt{5}$。"
+  ],
+  "answer": "$\\sqrt{5}$",
+  "solution": "$x_{n+1}\\ge\\sqrt{5}$ 且递减，收敛；由 $a=\\frac{a}{2}+\\frac{5}{2a}$ 得 $a^{2}=5$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "压缩映射：$\\frac{x}{2}+\\frac{3}{x}$ 型",
+  "statement": "设 $x_{1}=3$，$x_{n+1}=\\dfrac{1}{2}x_{n}+\\dfrac{3}{x_{n}}$。证明数列 $\\{x_{n}\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_{n}$。",
+  "tags": [
+   "极限",
+   "数列极限",
+   "单调有界"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第10节 等式数列极限压缩映射",
+  "hints": [
+   "极限方程 $a=\\frac{a}{2}+\\frac{3}{a}$。"
+  ],
+  "answer": "$\\sqrt{6}$",
+  "solution": "单调递减有下界 $\\sqrt{6}$；令极限为 $a$，得 $a^{2}=6$，即 $\\sqrt{6}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "压缩映射：含 $x^{2}$ 分母的三次型",
+  "statement": "设 $x_{1}=2$，$x_{n+1}=\\dfrac{1}{2}x_{n}+\\dfrac{2}{x_{n}^{2}}$。证明数列 $\\{x_{n}\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_{n}$。",
+  "tags": [
+   "极限",
+   "数列极限",
+   "单调有界"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第10节 等式数列极限压缩映射",
+  "hints": [
+   "极限满足 $a=\\frac{a}{2}+\\frac{2}{a^{2}}$，整理得 $a^{3}=4$。"
+  ],
+  "answer": "$\\sqrt[3]{4}$",
+  "solution": "由均值不等式 $\\frac{a}{2}+\\frac{2}{a^{2}}$ 在 $a^{3}=4$ 处取最小，故 $x_{n}\\ge\\sqrt[3]{4}$ 且递减，极限为 $\\sqrt[3]{4}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "压缩映射：$\\frac{2}{3}x+\\frac{1}{3x^{2}}$ 型",
+  "statement": "设 $x_{1}=2$，$x_{n+1}=\\dfrac{2}{3}x_{n}+\\dfrac{1}{3x_{n}^{2}}$。证明数列 $\\{x_{n}\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_{n}$。",
+  "tags": [
+   "极限",
+   "数列极限",
+   "单调有界"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第10节 等式数列极限压缩映射",
+  "hints": [
+   "系数 $\\frac{2}{3}$、$\\frac{1}{3}$ 之和为 $1$，说明下界是 $1$。"
   ],
   "answer": "$1$",
-  "solution": "$x\\ln\\ln\\frac{1}{x}=\\frac{\\ln\\ln\\frac{1}{x}}{1/x}\\to 0$（对数增长慢于幂），故极限为 $1$。",
+  "solution": "$x_{n}\\ge 1$ 且 $x_{n+1}-x_{n}=\\frac{1-x_{n}^{3}}{3x_{n}^{2}}\\le 0$，收敛；$a=\\frac{2a}{3}+\\frac{1}{3a^{2}}$ 得 $a^{3}=1$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "幂指未定式：$0^{0}$ 型 $\\sin x$ 的 $\\frac{1}{\\ln x}$ 次幂",
-  "statement": "求极限 $\\lim\\limits_{x\\to 0^{+}}(\\sin x)^{\\frac{1}{\\ln x}}$。",
+  "title": "压缩映射：$1+\\frac{1}{x}$ 型（黄金比）",
+  "statement": "设 $x_{1}=2$，$x_{n+1}=1+\\dfrac{1}{x_{n}}$。证明数列 $\\{x_{n}\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_{n}$。",
   "tags": [
    "极限",
-   "幂指函数",
-   "等价无穷小"
+   "数列极限",
+   "单调有界"
   ],
-  "thinking": 8,
-  "difficulty": 8,
-  "calc": 7,
-  "source": "柳贯一题型专项 · 第3节 幂指未定式",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第10节 等式数列极限压缩映射",
   "hints": [
-   "$\\sin x\\sim x$，故只需算 $\\frac{\\ln x}{\\ln x}$。"
+   "相邻两项交替夹住不动点，用 $|x_{n+1}-a|=\\frac{|x_n-a|}{x_n a}$ 说明压缩。"
   ],
-  "answer": "$e$",
-  "solution": "$\\frac{1}{\\ln x}\\ln\\sin x-\\frac{1}{\\ln x}\\ln x=\\frac{\\ln(\\sin x/x)}{\\ln x}\\to 0$，故指数部分趋于 $1$，极限为 $e$。",
+  "answer": "$\\frac{1+\\sqrt{5}}{2}$",
+  "solution": "由 $a=1+\\frac{1}{a}$ 得 $a^{2}-a-1=0$，取正根 $\\frac{1+\\sqrt{5}}{2}$；再用 $|x_{n+1}-a|\\le\\frac{1}{2}|x_{n}-a|$ 说明收敛到它。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "幂指未定式：$\\left(\\frac{x+a}{x-a}\\right)^{x}$ 型",
-  "statement": "求极限 $\\lim\\limits_{x\\to\\infty}\\left(\\dfrac{x+a}{x-a}\\right)^{x}$。",
+  "title": "压缩映射：$\\frac{1}{2}\\sqrt{x^{2}+3}$ 型",
+  "statement": "设 $x_{1}=2$，$x_{n+1}=\\dfrac{1}{2}\\sqrt{x_{n}^{2}+3}$。证明数列 $\\{x_{n}\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_{n}$。",
   "tags": [
    "极限",
-   "幂指函数",
-   "等价无穷小"
+   "数列极限",
+   "单调有界"
   ],
-  "thinking": 7,
-  "difficulty": 7,
-  "calc": 6,
-  "source": "柳贯一题型专项 · 第3节 幂指未定式",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第10节 等式数列极限压缩映射",
   "hints": [
-   "写成 $\\left(1+\\frac{2a}{x-a}\\right)^{x}$，用 $\\left(1+\\frac{u}{x}\\right)^{x}\\to e^{u}$。"
+   "极限方程 $a=\\frac{1}{2}\\sqrt{a^{2}+3}$，两边平方。"
   ],
-  "answer": "$e^{2a}$",
-  "solution": "$\\frac{x+a}{x-a}=1+\\frac{2a}{x-a}$，故 $x\\ln\\left(1+\\frac{2a}{x-a}\\right)\\to 2a$，极限为 $e^{2a}$。",
+  "answer": "$1$",
+  "solution": "$x_{n+1}\\le x_{n}$ 且 $x_{n}\\ge 1$（归纳），收敛；由 $4a^{2}=a^{2}+3$ 得 $a=1$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "幂指未定式：$1^{\\infty}$ 型指数为 $\\frac{1}{1-\\cos x}$",
-  "statement": "求极限 $\\lim\\limits_{x\\to 0}\\left(1+x^{2}e^{x}\\right)^{\\frac{1}{1-\\cos x}}$。",
+  "title": "压缩映射：$\\frac{1}{2}\\sin x$ 型",
+  "statement": "设 $x_{1}=1$，$x_{n+1}=\\dfrac{1}{2}\\sin x_{n}$。证明数列 $\\{x_{n}\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_{n}$。",
   "tags": [
    "极限",
-   "幂指函数",
-   "等价无穷小"
+   "数列极限",
+   "夹逼定理"
   ],
-  "thinking": 8,
-  "difficulty": 8,
-  "calc": 7,
-  "source": "柳贯一题型专项 · 第3节 幂指未定式",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "柳贯一题型专项 · 第10节 等式数列极限压缩映射",
   "hints": [
-   "$\\ln(1+x^{2}e^{x})\\sim x^{2}$，分母 $1-\\cos x\\sim\\frac{x^{2}}{2}$。"
+   "用 $|\\sin x|\\le|x|$ 得 $|x_{n+1}|\\le\\frac{1}{2}|x_{n}|$，等比压缩到 $0$。"
   ],
-  "answer": "$e^{2}$",
-  "solution": "指数部分 $\\frac{\\ln(1+x^{2}e^{x})}{1-\\cos x}\\sim\\frac{x^{2}}{x^{2}/2}=2$，故极限为 $e^{2}$。",
+  "answer": "$0$",
+  "solution": "$|x_{n+1}|\\le\\frac{1}{2}|x_{n}|$，故 $|x_{n}|\\le\\left(\\frac{1}{2}\\right)^{n-1}\\to 0$，极限为 $0$（也满足 $a=\\frac{1}{2}\\sin a$）。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "幂指未定式：积分比值型 $1^{\\infty}$",
-  "statement": "求极限 $\\lim\\limits_{x\\to 0}\\left(\\dfrac{\\int_{0}^{x}e^{t^{2}}\\,\\mathrm{d}t}{x}\\right)^{\\frac{1}{x^{2}}}$。",
+  "title": "压缩映射：$\\frac{\\pi}{2}+\\frac{1}{2}\\cos x$ 型",
+  "statement": "设 $x_{1}=\\pi$，$x_{n+1}=\\dfrac{\\pi}{2}+\\dfrac{1}{2}\\cos x_{n}$。证明数列 $\\{x_{n}\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_{n}$。",
   "tags": [
    "极限",
-   "幂指函数",
-   "变限积分"
+   "数列极限",
+   "压缩映射"
   ],
-  "thinking": 9,
-  "difficulty": 10,
-  "calc": 8,
-  "source": "柳贯一题型专项 · 第3节 幂指未定式",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第10节 等式数列极限压缩映射",
   "hints": [
-   "先算比值：$\\frac{1}{x}\\int_{0}^{x}e^{t^{2}}\\mathrm{d}t=1+\\frac{x^{2}}{3}+\\cdots$。"
+   "$|x_{n+1}-\\frac{\\pi}{2}|=\\frac{1}{2}|\\cos x_{n}|\\le\\frac{1}{2}$，同时用中值定理压缩。"
   ],
-  "answer": "$e^{\\frac{1}{3}}$",
-  "solution": "$\\int_{0}^{x}e^{t^{2}}\\mathrm{d}t=x+\\frac{x^{3}}{3}+o(x^{3})$，比值 $=1+\\frac{x^{2}}{3}$，取对数除以 $x^{2}$ 得 $\\frac{1}{3}$，故为 $e^{1/3}$。",
+  "answer": "$\\frac{\\pi}{2}$",
+  "solution": "$|x_{n+1}-\\frac{\\pi}{2}|=\\frac{|\\cos x_{n}|}{2}$，而 $x_{n}\\in[0,\\pi]$ 时 $|\\cos x_{n}|\\le|x_{n}-\\frac{\\pi}{2}|$，故压缩到 $\\frac{\\pi}{2}$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "幂指未定式：积分比值型（四次精度）",
-  "statement": "求极限 $\\lim\\limits_{x\\to 0}\\left(\\dfrac{\\int_{0}^{x}\\sin(t^{2})\\,\\mathrm{d}t}{x^{3}/3}\\right)^{\\frac{1}{x^{4}}}$。",
+  "title": "作商法：比值趋于 $\\frac{1}{2}$ 判收敛",
+  "statement": "设 $x_{1}=1$，$x_{n+1}=\\dfrac{n+1}{2n+1}x_{n}$。证明数列 $\\{x_{n}\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_{n}$。",
   "tags": [
    "极限",
-   "幂指函数",
-   "变限积分"
+   "数列极限",
+   "作商法"
   ],
-  "thinking": 9,
-  "difficulty": 10,
-  "calc": 9,
-  "source": "柳贯一题型专项 · 第3节 幂指未定式",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第11节 等式数列极限作商法",
   "hints": [
-   "分子展开到 $x^{7}$：$\\frac{x^{3}}{3}-\\frac{x^{7}}{42}$，比值 $=1-\\frac{x^{4}}{14}$。"
+   "作商 $\\frac{x_{n+1}}{x_{n}}\\to\\frac{1}{2}<1$，说明 $x_{n}$ 比某个等比数列还小。"
   ],
-  "answer": "$e^{-\\frac{1}{14}}$",
-  "solution": "$\\int_{0}^{x}\\sin t^{2}\\mathrm{d}t=\\frac{x^{3}}{3}-\\frac{x^{7}}{42}+o(x^{7})$，比值 $=1-\\frac{x^{4}}{14}$，取对数除以 $x^{4}$ 得 $-\\frac{1}{14}$。",
+  "answer": "$0$",
+  "solution": "$\\frac{x_{n+1}}{x_{n}}=\\frac{n+1}{2n+1}\\le\\frac{2}{3}$（$n\\ge1$），故 $x_{n}\\le\\left(\\frac{2}{3}\\right)^{n-1}\\to 0$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "幂指未定式：$\\int_{0}^{x}\\ln(1+t)\\mathrm{d}t$ 比值型",
-  "statement": "求极限 $\\lim\\limits_{x\\to 0}\\left(\\dfrac{\\int_{0}^{x}\\ln(1+t)\\,\\mathrm{d}t}{x^{2}/2}\\right)^{\\frac{1}{x}}$。",
+  "title": "作商法：分式线性递推 $\\frac{2x}{1+x}$",
+  "statement": "设 $x_{1}=3$，$x_{n+1}=\\dfrac{2x_{n}}{1+x_{n}}$。证明数列 $\\{x_{n}\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_{n}$。",
   "tags": [
    "极限",
-   "幂指函数",
-   "变限积分"
+   "数列极限",
+   "作商法"
   ],
-  "thinking": 9,
-  "difficulty": 9,
-  "calc": 8,
-  "source": "柳贯一题型专项 · 第3节 幂指未定式",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第11节 等式数列极限作商法",
   "hints": [
-   "$\\int_{0}^{x}\\ln(1+t)\\mathrm{d}t=\\frac{x^{2}}{2}-\\frac{x^{3}}{6}+\\cdots$，与 $\\frac{x^{2}}{2}$ 相比得 $1-\\frac{x}{3}$。"
+   "作比 $\\frac{x_{n+1}}{x_{n}}=\\frac{2}{1+x_{n}}$，由 $x_{n}>1$ 得比小于 $1$，故递减。"
   ],
-  "answer": "$e^{-\\frac{1}{3}}$",
-  "solution": "比值 $=1-\\frac{x}{3}+o(x)$，取对数除以 $x$ 得 $-\\frac{1}{3}$，故极限 $e^{-1/3}$。",
+  "answer": "$1$",
+  "solution": "$x_{n}>1$ 且 $\\frac{x_{n+1}}{x_{n}}<1$，单调递减有下界 $1$；令 $a=\\frac{2a}{1+a}$ 得 $a=1$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "幂指未定式：$\\int_{0}^{x}\\arctan t\\,\\mathrm{d}t$ 比值型",
-  "statement": "求极限 $\\lim\\limits_{x\\to 0}\\left(\\dfrac{\\int_{0}^{x}\\arctan t\\,\\mathrm{d}t}{x^{2}/2}\\right)^{\\frac{1}{x^{2}}}$。",
+  "title": "作商法：分式线性递推 $\\frac{3x}{2+x}$",
+  "statement": "设 $x_{1}=2$，$x_{n+1}=\\dfrac{3x_{n}}{2+x_{n}}$。证明数列 $\\{x_{n}\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_{n}$。",
   "tags": [
    "极限",
-   "幂指函数",
-   "变限积分"
+   "数列极限",
+   "作商法"
   ],
-  "thinking": 9,
-  "difficulty": 9,
-  "calc": 8,
-  "source": "柳贯一题型专项 · 第3节 幂指未定式",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第11节 等式数列极限作商法",
   "hints": [
-   "$\\arctan t=t-\\frac{t^{3}}{3}+\\cdots$，积分得 $\\frac{x^{2}}{2}-\\frac{x^{4}}{12}$。"
+   "$\\frac{x_{n+1}}{x_{n}}=\\frac{3}{2+x_{n}}$，由 $x_{n}>1$ 得起比小于 $1$。"
   ],
-  "answer": "$e^{-\\frac{1}{6}}$",
-  "solution": "比值 $=1-\\frac{x^{2}}{6}+o(x^{2})$，取对数除以 $x^{2}$ 得 $-\\frac{1}{6}$，故极限 $e^{-1/6}$。",
+  "answer": "$1$",
+  "solution": "$x_{n}>1$，比 $\\frac{3}{2+x_{n}}<1$，递减有下界；令 $a=\\frac{3a}{2+a}$ 得 $a=1$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "幂指未定式：$e^{t^{2}}-1$ 积分比值型",
-  "statement": "求极限 $\\lim\\limits_{x\\to 0}\\left(\\dfrac{\\int_{0}^{x}(e^{t^{2}}-1)\\,\\mathrm{d}t}{x^{3}/3}\\right)^{\\frac{1}{x^{2}}}$。",
+  "title": "作商法：$\\frac{4x}{3+x^{2}}$ 型递推",
+  "statement": "设 $x_{1}=2$，$x_{n+1}=\\dfrac{4x_{n}}{3+x_{n}^{2}}$。证明数列 $\\{x_{n}\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_{n}$。",
   "tags": [
    "极限",
-   "幂指函数",
-   "变限积分"
+   "数列极限",
+   "作商法"
   ],
-  "thinking": 9,
-  "difficulty": 10,
-  "calc": 9,
-  "source": "柳贯一题型专项 · 第3节 幂指未定式",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第11节 等式数列极限作商法",
   "hints": [
-   "$e^{t^{2}}-1=t^{2}+\\frac{t^{4}}{2}+\\cdots$，积分得 $\\frac{x^{3}}{3}+\\frac{x^{5}}{10}$。"
+   "作商 $\\frac{4}{3+x_{n}^{2}}$，注意 $x_{n}\\ge 1$ 时该比 $\\le 1$。"
   ],
-  "answer": "$e^{\\frac{3}{10}}$",
-  "solution": "比值 $=\\frac{x^{3}/3+x^{5}/10}{x^{3}/3}=1+\\frac{3x^{2}}{10}$，取对数除以 $x^{2}$ 得 $\\frac{3}{10}$，故为 $e^{3/10}$。",
+  "answer": "$1$",
+  "solution": "$x_{n}\\ge 1$ 且 $\\frac{x_{n+1}}{x_{n}}=\\frac{4}{3+x_{n}^{2}}\\le 1$，递减有下界；$a=\\frac{4a}{3+a^{2}}$ 得 $a=1$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "幂指未定式：$\\int_{0}^{x}\\sqrt{1+t^{2}}\\,\\mathrm{d}t$ 比值型",
-  "statement": "求极限 $\\lim\\limits_{x\\to 0}\\left(\\dfrac{\\int_{0}^{x}\\sqrt{1+t^{2}}\\,\\mathrm{d}t}{x}\\right)^{\\frac{1}{x^{2}}}$。",
+  "title": "作商法：$\\frac{x^{2}}{x+1}$ 型递减到 $0$",
+  "statement": "设 $x_{1}=4$，$x_{n+1}=\\dfrac{x_{n}^{2}}{x_{n}+1}$。证明数列 $\\{x_{n}\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_{n}$。",
   "tags": [
    "极限",
-   "幂指函数",
-   "变限积分"
+   "数列极限",
+   "作商法"
   ],
-  "thinking": 9,
-  "difficulty": 9,
-  "calc": 8,
-  "source": "柳贯一题型专项 · 第3节 幂指未定式",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第11节 等式数列极限作商法",
   "hints": [
-   "$\\sqrt{1+t^{2}}=1+\\frac{t^{2}}{2}+\\cdots$，积分得 $x+\\frac{x^{3}}{6}$。"
+   "比 $\\frac{x_{n}}{x_{n}+1}<1$，但只在 $x_{n}\\ge 4$ 递减时能得到一致小于 $\\frac{4}{5}$ 的常数。"
   ],
-  "answer": "$e^{\\frac{1}{6}}$",
-  "solution": "比值 $=1+\\frac{x^{2}}{6}+o(x^{2})$，取对数除以 $x^{2}$ 得 $\\frac{1}{6}$，故极限 $e^{1/6}$。",
+  "answer": "$0$",
+  "solution": "$x_{n}\\le 4$ 且递减，$\\frac{x_{n+1}}{x_{n}}=\\frac{x_{n}}{x_{n}+1}\\le\\frac{4}{5}$，故 $x_{n}\\to 0$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "幂指未定式：$\\int_{0}^{x}\\tan t\\,\\mathrm{d}t$ 比值型",
-  "statement": "求极限 $\\lim\\limits_{x\\to 0}\\left(\\dfrac{\\int_{0}^{x}\\tan t\\,\\mathrm{d}t}{x^{2}/2}\\right)^{\\frac{1}{x^{2}}}$。",
+  "title": "作商法：$\\frac{x^{2}+3}{x+2}$ 型",
+  "statement": "设 $x_{1}=2$，$x_{n+1}=\\dfrac{x_{n}^{2}+3}{x_{n}+2}$。证明数列 $\\{x_{n}\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_{n}$。",
   "tags": [
    "极限",
-   "幂指函数",
-   "变限积分"
+   "数列极限",
+   "作商法"
   ],
-  "thinking": 9,
-  "difficulty": 9,
-  "calc": 8,
-  "source": "柳贯一题型专项 · 第3节 幂指未定式",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第11节 等式数列极限作商法",
   "hints": [
-   "$\\int_{0}^{x}\\tan t\\,\\mathrm{d}t=-\\ln\\cos x=\\frac{x^{2}}{2}+\\frac{x^{4}}{12}+\\cdots$。"
+   "作商得 $\\frac{x_{n}^{2}+3}{x_{n}(x_{n}+2)}$，与 $1$ 比大小可判单调。"
   ],
-  "answer": "$e^{\\frac{1}{6}}$",
-  "solution": "比值 $=1+\\frac{x^{2}}{6}+o(x^{2})$，取对数除以 $x^{2}$ 得 $\\frac{1}{6}$，故极限 $e^{1/6}$。",
+  "answer": "$\\frac{3}{2}$",
+  "solution": "$\\frac{x_{n+1}}{x_{n}}=\\frac{x_{n}^{2}+3}{x_{n}^{2}+2x_{n}}$，$x_{n}>{{}}$…由 $x_{n}<\\frac{3}{2}$ 时比 $>1$ 知数列递增有上界；解 $a=\\frac{a^{2}+3}{a+2}$ 得 $a=\\frac{3}{2}$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "幂指未定式：$\\int_{0}^{x}(1+t^{2})^{2}\\mathrm{d}t$ 比值型",
-  "statement": "求极限 $\\lim\\limits_{x\\to 0}\\left(\\dfrac{\\int_{0}^{x}(1+t^{2})^{2}\\,\\mathrm{d}t}{x}\\right)^{\\frac{1}{x^{2}}}$。",
+  "title": "作商法：$\\frac{x^{2}+6}{2x+1}$ 型",
+  "statement": "设 $x_{1}=3$，$x_{n+1}=\\dfrac{x_{n}^{2}+6}{2x_{n}+1}$。证明数列 $\\{x_{n}\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_{n}$。",
   "tags": [
    "极限",
-   "幂指函数",
-   "变限积分"
+   "数列极限",
+   "作商法"
   ],
-  "thinking": 9,
-  "difficulty": 9,
-  "calc": 8,
-  "source": "柳贯一题型专项 · 第3节 幂指未定式",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第11节 等式数列极限作商法",
   "hints": [
-   "$(1+t^{2})^{2}=1+2t^{2}+t^{4}$，积分得 $x+\\frac{2x^{3}}{3}+\\cdots$。"
+   "先解不动点方程 $a=\\frac{a^{2}+6}{2a+1}$，再用作商判断单调性。"
   ],
-  "answer": "$e^{\\frac{2}{3}}$",
-  "solution": "比值 $=1+\\frac{2x^{2}}{3}+o(x^{2})$，取对数除以 $x^{2}$ 得 $\\frac{2}{3}$，故极限 $e^{2/3}$。",
+  "answer": "$2$",
+  "solution": "$2a^{2}+a=a^{2}+6$ 得 $a^{2}+a-6=0$，取 $a=2$；数列从 $3$ 递减至 $2$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "幂指未定式：$\\int_{0}^{x}\\cos t\\,\\mathrm{d}t$ 比值型",
-  "statement": "求极限 $\\lim\\limits_{x\\to 0}\\left(\\dfrac{\\int_{0}^{x}\\cos t\\,\\mathrm{d}t}{x}\\right)^{\\frac{1}{x^{2}}}$。",
+  "title": "作商法：$\\frac{x^{2}+1}{x+1}$ 型",
+  "statement": "设 $x_{1}=2$，$x_{n+1}=\\dfrac{x_{n}^{2}+1}{x_{n}+1}$。证明数列 $\\{x_{n}\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_{n}$。",
   "tags": [
    "极限",
-   "幂指函数",
-   "变限积分"
+   "数列极限",
+   "作商法"
   ],
-  "thinking": 8,
-  "difficulty": 8,
-  "calc": 7,
-  "source": "柳贯一题型专项 · 第3节 幂指未定式",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第11节 等式数列极限作商法",
   "hints": [
-   "$\\int_{0}^{x}\\cos t\\,\\mathrm{d}t=\\sin x=x-\\frac{x^{3}}{6}+\\cdots$。"
+   "作商 $\\frac{x_{n}^{2}+1}{x_{n}^{2}+x_{n}}$，由 $x_{n}>1$ 知比小于 $1$。"
   ],
-  "answer": "$e^{-\\frac{1}{6}}$",
-  "solution": "比值 $=\\frac{\\sin x}{x}=1-\\frac{x^{2}}{6}+o(x^{2})$，取对数除以 $x^{2}$ 得 $-\\frac{1}{6}$。",
+  "answer": "$1$",
+  "solution": "$x_{n}>1$ 且 $\\frac{x_{n+1}}{x_{n}}=\\frac{x_{n}^{2}+1}{x_{n}^{2}+x_{n}}<1$，递减有下界 $1$；$a=\\frac{a^{2}+1}{a+1}$ 得 $a=1$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "幂指未定式：$\\int_{0}^{x}\\arcsin t\\,\\mathrm{d}t$ 比值型",
-  "statement": "求极限 $\\lim\\limits_{x\\to 0}\\left(\\dfrac{\\int_{0}^{x}\\arcsin t\\,\\mathrm{d}t}{x^{2}/2}\\right)^{\\frac{1}{x^{2}}}$。",
+  "title": "作商法：$\\frac{x^{2}+2}{2x}$ 型（牛顿迭代）",
+  "statement": "设 $x_{1}=2$，$x_{n+1}=\\dfrac{x_{n}^{2}+2}{2x_{n}}$。证明数列 $\\{x_{n}\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_{n}$。",
   "tags": [
    "极限",
-   "幂指函数",
-   "变限积分"
+   "数列极限",
+   "作商法"
   ],
-  "thinking": 9,
-  "difficulty": 9,
-  "calc": 8,
-  "source": "柳贯一题型专项 · 第3节 幂指未定式",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第11节 等式数列极限作商法",
   "hints": [
-   "$\\arcsin t=t+\\frac{t^{3}}{6}+\\cdots$，积分得 $\\frac{x^{2}}{2}+\\frac{x^{4}}{24}$。"
+   "这是求 $\\sqrt{2}$ 的牛顿迭代，作比 $\\frac{x_{n}}{2}+\\frac{1}{x_{n}^{2}}$ 与 $1$ 比。"
   ],
-  "answer": "$e^{\\frac{1}{12}}$",
-  "solution": "比值 $=1+\\frac{x^{2}}{12}+o(x^{2})$，取对数除以 $x^{2}$ 得 $\\frac{1}{12}$，故极限 $e^{1/12}$。",
+  "answer": "$\\sqrt{2}$",
+  "solution": "$x_{n}\\ge\\sqrt{2}$，$\\frac{x_{n+1}}{x_{n}}=\\frac{1}{2}+\\frac{1}{x_{n}^{2}}\\le 1$，递减有下界；$a^{2}=2$ 得 $\\sqrt{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "作商法：$\\frac{x}{2}+\\frac{2}{x}$ 型",
+  "statement": "设 $x_{1}=5$，$x_{n+1}=\\dfrac{x_{n}}{2}+\\dfrac{2}{x_{n}}$。证明数列 $\\{x_{n}\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_{n}$。",
+  "tags": [
+   "极限",
+   "数列极限",
+   "作商法"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第11节 等式数列极限作商法",
+  "hints": [
+   "作比 $\\frac{1}{2}+\\frac{2}{x_{n}^{2}}$，由 $x_{n}\\ge 2$ 得比 $\\le 1$。"
+  ],
+  "answer": "$2$",
+  "solution": "$x_{n}\\ge 2$，$\\frac{x_{n+1}}{x_{n}}=\\frac{1}{2}+\\frac{2}{x_{n}^{2}}\\le 1$，递减有下界；$a=\\frac{a}{2}+\\frac{2}{a}$ 得 $a=2$。",
   "authorName": "柳贯一题型专项"
  }
 ]
