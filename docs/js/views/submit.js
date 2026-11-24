@@ -65,6 +65,11 @@
       + '换行直接回车即可</div></div>'
       + '</aside></div>';
 
+    if (window.MathKey) {
+      window.MathKey.attach(document.querySelector('textarea[name="statement"]'));
+      window.MathKey.attach(document.querySelector('textarea[name="solution"]'));
+    }
+
     document.querySelectorAll('input[type="range"]').forEach(function (r) {
       const out = document.getElementById('v_' + r.name);
       r.addEventListener('input', function () { out.textContent = r.value; });

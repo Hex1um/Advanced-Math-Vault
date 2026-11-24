@@ -60,6 +60,7 @@
       + '</div></form>';
 
     const m = window.UI.modal({ title: '发一个新帖', sub: '发帖后 AI 助教会先给一版思路；帖子里 @AI助教 可以再追问', body: el, wide: true });
+    if (window.MathKey) window.MathKey.attachAll(el);
     const form = el.querySelector('#postForm');
     const picked = [];   // 已选图片的 dataURL
 
@@ -299,6 +300,7 @@
               if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') sendReply();
             });
           }
+          const rk = window.MathKey && window.MathKey.attach(document.getElementById('replyInput'));
           const mentionBtn = document.getElementById('mentionAI');
           if (mentionBtn) {
             mentionBtn.addEventListener('click', function () {

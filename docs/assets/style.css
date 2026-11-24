@@ -1328,3 +1328,47 @@ input[type="range"]::-webkit-slider-thumb {
 
 /* 排行榜：人多时侧栏内滚动，不把整页拉长 */
 .leader-list { max-height: 420px; overflow-y: auto; }
+
+/* ------------------------------------------------ 数学公式键盘（GeoGebra 风格） */
+.mk { margin-top: 8px; }
+.mk-toggle {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12.5px; padding: 5px 12px; cursor: pointer;
+  border: 1px solid var(--line); border-radius: 6px;
+  background: var(--surface); color: var(--text-2);
+}
+.mk-toggle span { font-size: 15px; line-height: 1; color: var(--blue); font-weight: 700; }
+.mk-toggle:hover { border-color: var(--line-2); background: var(--blue-weak); color: var(--blue-dark); }
+.mk-toggle.on { border-color: var(--line-2); background: var(--blue-weak); color: var(--blue-dark); }
+
+.mk-panel {
+  margin-top: 6px; padding: 8px 8px 10px;
+  border: 1px solid var(--line); border-radius: 8px;
+  background: var(--surface-2);
+}
+.mk-tabs { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+.mk-tab {
+  font-size: 12px; padding: 4px 11px; cursor: pointer;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: var(--surface); color: var(--text-2);
+}
+.mk-tab:hover { border-color: var(--line-2); }
+.mk-tab.on { background: var(--blue); border-color: var(--blue); color: #fff; }
+html[data-theme="dark"] .mk-tab.on { background: #2f5fd0; border-color: #2f5fd0; }
+
+.mk-grid { display: grid; gap: 5px; }
+.mk-key {
+  font-family: var(--mono); font-size: 14px; line-height: 1.2;
+  padding: 7px 2px; min-height: 34px; cursor: pointer;
+  border: 1px solid var(--line); border-radius: 6px;
+  background: var(--surface); color: var(--text);
+  user-select: none; -webkit-tap-highlight-color: transparent;
+}
+.mk-key:hover { background: var(--blue-weak); border-color: var(--line-2); }
+.mk-key:active { transform: translateY(1px); }
+
+@media (max-width: 560px) {
+  .mk-key { font-size: 12.5px; min-height: 38px; padding: 6px 1px; }
+  .mk-grid { gap: 4px; }
+  .mk-panel { padding: 6px; }
+}

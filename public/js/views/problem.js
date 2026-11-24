@@ -42,6 +42,7 @@
       + '<div id="judgeResult"></div>';
 
     const m = window.UI.modal({ title: '提交解题过程 · ' + p.code, sub: '由 AI 逐步核对并指出错误位置', body: el, wide: true });
+    if (window.MathKey) window.MathKey.attachAll(el);
     const resultBox = el.querySelector('#judgeResult');
     let image = '';
     let mode = 'process';
@@ -235,6 +236,7 @@
       + '<button class="btn" id="fbMine">查看我的反馈</button></div>'
       + '<div id="fbMineList" style="margin-top:14px"></div>';
     const m = window.UI.modal({ title: '反馈题目 · ' + p.code, sub: 'AI 先审阅，再转管理员', body: el, wide: true });
+    if (window.MathKey) window.MathKey.attachAll(el);
 
     function loadMine() {
       window.API.get('/api/problems/' + p.code + '/feedback').then(function (d) {
@@ -321,6 +323,7 @@
         + '<div style="display:flex;justify-content:flex-end;gap:9px"><button class="btn btn-primary" id="dSend">发帖</button></div>';
 
       const m = window.UI.modal({ title: '发帖 · ' + code, body: el, wide: true });
+      if (window.MathKey) window.MathKey.attachAll(el);
       let image = '';
       el.querySelector('#dPick').addEventListener('click', function () { el.querySelector('#dFile').click(); });
       el.querySelector('#dFile').addEventListener('change', function (ev) {
