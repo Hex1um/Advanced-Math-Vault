@@ -1,0 +1,1066 @@
+[
+ {
+  "title": "分位点对称：区间概率等于置信水平",
+  "statement": "设随机变量 $X\\sim\\chi^{2}(12)$，已知 $\\chi^{2}_{0.025}(12)=a$，$\\chi^{2}_{0.975}(12)=b$，求 $P(a\\le X\\le b)$。",
+  "tags": [
+   "概率统计",
+   "分位点",
+   "卡方分布"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "柳贯一题型专项 · 第246节 统计量分布概率",
+  "hints": [
+   "两个分位点之间的概率就是两个尾部概率之差。"
+  ],
+  "answer": "0.95",
+  "solution": "$P(a\\le X\\le b)=P(X\\le b)-P(X<a)=0.975-0.025=0.95$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "$t$ 分布的双侧尾部概率",
+  "statement": "设随机变量 $T\\sim t(9)$，已知 $t_{0.025}(9)=a$，求 $P(|T|\\ge a)$。",
+  "tags": [
+   "概率统计",
+   "分位点",
+   "t分布"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "柳贯一题型专项 · 第246节 统计量分布概率",
+  "hints": [
+   "$t$ 分布关于 0 对称，两侧各占一半。"
+  ],
+  "answer": "0.05",
+  "solution": "$P(|T|\\ge a)=2P(T\\ge a)=2\\times0.025=0.05$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "$F$ 分布上分位点与左侧概率",
+  "statement": "设 $X\\sim F(6,8)$，已知 $F_{0.05}(6,8)=a$，求 $P(X\\le a)$。",
+  "tags": [
+   "概率统计",
+   "分位点",
+   "F分布"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "柳贯一题型专项 · 第246节 统计量分布概率",
+  "hints": [
+   "上侧概率 0.05 与左侧概率互补。"
+  ],
+  "answer": "0.95",
+  "solution": "$P(X\\le a)=1-P(X>a)=1-0.05=0.95$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "$\\chi^2(2)$ 显式密度算概率",
+  "statement": "设 $X\\sim\\chi^{2}(2)$，其概率密度为 $f(x)=\\frac{1}{2}e^{-x/2}$（$x>0$），求 $P(X>2\\ln 2)$。",
+  "tags": [
+   "概率统计",
+   "卡方分布",
+   "定积分"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第246节 统计量分布概率",
+  "hints": [
+   "指数分布尾概率 $P(X>x)=e^{-x/2}$。"
+  ],
+  "answer": "0.5",
+  "solution": "$P(X>2\\ln2)=\\int_{2\\ln2}^{+\\infty}\\frac12e^{-x/2}\\mathrm{d}x=e^{-\\ln2}=\\frac12$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "标准化后 $\\sum(X_i/2)^2$ 的卡方化",
+  "statement": "设 $X_{1},X_{2},\\ldots,X_{10}$ 是来自总体 $N(0,4)$ 的简单随机样本，令 $Y=\\frac{1}{4}\\sum_{i=1}^{10}X_{i}^{2}$。已知 $\\chi^{2}_{0.05}(10)=a$，求 $P(Y>a)$。",
+  "tags": [
+   "概率统计",
+   "卡方分布",
+   "标准化"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "柳贯一题型专项 · 第246节 统计量分布概率",
+  "hints": [
+   "$X_i/2\\sim N(0,1)$，故 $Y=\\sum(X_i/2)^2\\sim\\chi^2(10)$。"
+  ],
+  "answer": "0.05",
+  "solution": "$Y=\\sum_{i=1}^{10}\\left(\\frac{X_i}{2}\\right)^{2}\\sim\\chi^{2}(10)$，故 $P(Y>a)=P(\\chi^{2}(10)>\\chi^{2}_{0.05}(10))=0.05$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "倒数变换：$F$ 分布的对称性",
+  "statement": "设 $X\\sim F(3,3)$，且 $P(X>a)=0.05$，求 $P\\left(X<\\frac{1}{a}\\right)$。",
+  "tags": [
+   "概率统计",
+   "F分布",
+   "对称性"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第246节 统计量分布概率",
+  "hints": [
+   "$\\frac{1}{X}\\sim F(3,3)$，且 $X>a\\Leftrightarrow\\frac1X<\\frac1a$。"
+  ],
+  "answer": "0.05",
+  "solution": "$\\frac1X\\sim F(3,3)$，故 $P\\left(X<\\frac1a\\right)=P\\left(\\frac1X>a\\right)=P(X>a)=0.05$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "$t^2$ 化为 $F(1,12)$ 的尾部概率",
+  "statement": "设 $T\\sim t(12)$，若 $P(|T|>a)=0.05$，求 $P(T^{2}>a^{2})$。",
+  "tags": [
+   "概率统计",
+   "t分布",
+   "F分布"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "柳贯一题型专项 · 第246节 统计量分布概率",
+  "hints": [
+   "$|T|>a$ 与 $T^{2}>a^{2}$ 是同一个事件。"
+  ],
+  "answer": "0.05",
+  "solution": "$\\{T^{2}>a^{2}\\}=\\{|T|>a\\}$，故概率仍为 $0.05$；又 $T^{2}\\sim F(1,12)$，可验证 $a^{2}=F_{0.05}(1,12)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "用 $\\chi^2_{0.95}$ 求左侧概率",
+  "statement": "设总体 $X\\sim N(\\mu,\\sigma^{2})$，$X_{1},X_{2},\\ldots,X_{15}$ 为来自该总体的简单随机样本，样本方差为 $S^{2}$。已知 $\\chi^{2}_{0.95}(14)=a$，求 $P\\left(\\frac{14S^{2}}{\\sigma^{2}}\\le a\\right)$。",
+  "tags": [
+   "概率统计",
+   "卡方分布",
+   "分位点"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第246节 统计量分布概率",
+  "hints": [
+   "$\\frac{14S^{2}}{\\sigma^{2}}\\sim\\chi^{2}(14)$，而 $\\chi^{2}_{0.95}(14)$ 是使左侧概率为 0.05 的点。"
+  ],
+  "answer": "0.05",
+  "solution": "$\\frac{(15-1)S^{2}}{\\sigma^{2}}\\sim\\chi^{2}(14)$，故 $P\\left(\\frac{14S^{2}}{\\sigma^{2}}\\le\\chi^{2}_{0.95}(14)\\right)=0.05$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "双侧分位点夹住的 $F$ 概率",
+  "statement": "设 $X\\sim F(5,5)$，已知 $F_{0.05}(5,5)=a$，求 $P\\left(\\frac{1}{a}<X<a\\right)$。",
+  "tags": [
+   "概率统计",
+   "F分布",
+   "对称性"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第246节 统计量分布概率",
+  "hints": [
+   "两侧各去掉 0.05，$\\frac1a=F_{0.95}(5,5)$。"
+  ],
+  "answer": "0.90",
+  "solution": "由于 $\\frac1a=F_{0.95}(5,5)$，$P\\left(\\frac1a<X<a\\right)=1-0.05-0.05=0.90$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "$t$ 分布左尾：利用对称性换侧",
+  "statement": "设 $T\\sim t(25)$，已知 $t_{0.05}(25)=a$，求 $P(T<-a)$。",
+  "tags": [
+   "概率统计",
+   "t分布",
+   "对称性"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "柳贯一题型专项 · 第246节 统计量分布概率",
+  "hints": [
+   "$t$ 分布关于 0 对称，左尾与右尾等概率。"
+  ],
+  "answer": "0.05",
+  "solution": "$P(T<-a)=P(T>a)=0.05$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "指数分布矩估计：一阶矩反解",
+  "statement": "设总体 $X$ 服从指数分布，其概率密度为 $f(x;\\lambda)=\\lambda e^{-\\lambda x}$（$x>0$），$\\lambda>0$ 未知。$X_{1},X_{2},\\ldots,X_{n}$ 是来自总体 $X$ 的简单随机样本，求 $\\lambda$ 的矩估计量。",
+  "tags": [
+   "概率统计",
+   "矩估计",
+   "参数估计"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第247节 矩估计",
+  "hints": [
+   "写出 $E(X)$ 关于 $\\lambda$ 的表达式，令其等于 $\\bar X$ 后反解。"
+  ],
+  "answer": "$\\hat\\lambda=\\frac{1}{\\bar X}$",
+  "solution": "$E(X)=\\frac{1}{\\lambda}$，令 $\\frac{1}{\\lambda}=\\bar X$，解得 $\\hat\\lambda=\\frac{1}{\\bar X}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "泊松分布矩估计：均值即参数",
+  "statement": "设总体 $X$ 服从参数为 $\\lambda$ 的泊松分布，$\\lambda>0$ 未知，$X_{1},X_{2},\\ldots,X_{n}$ 是来自总体 $X$ 的简单随机样本，求 $\\lambda$ 的矩估计量。",
+  "tags": [
+   "概率统计",
+   "矩估计",
+   "参数估计"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第247节 矩估计",
+  "hints": [
+   "$E(X)=\\lambda$，一阶矩方程直接给出答案。"
+  ],
+  "answer": "$\\hat\\lambda=\\bar X$",
+  "solution": "$E(X)=\\lambda$，令 $\\lambda=\\bar X$，得 $\\hat\\lambda=\\bar X$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "二项分布：已知 $m$ 估 $p$",
+  "statement": "设总体 $X\\sim b(m,p)$，其中 $m$ 已知，$p$ 未知（$0<p<1$），$X_{1},X_{2},\\ldots,X_{n}$ 为来自总体 $X$ 的简单随机样本，求 $p$ 的矩估计量。",
+  "tags": [
+   "概率统计",
+   "矩估计",
+   "二项分布"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第247节 矩估计",
+  "hints": [
+   "$E(X)=mp$，把 $m$ 当常数移到分母。"
+  ],
+  "answer": "$\\hat p=\\frac{\\bar X}{m}$",
+  "solution": "$E(X)=mp$，令 $mp=\\bar X$，得 $\\hat p=\\frac{\\bar X}{m}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "几何分布：$E(X)=\\frac{1}{p}$ 反解",
+  "statement": "设总体 $X$ 服从几何分布 $P\\{X=k\\}=p(1-p)^{k-1}$，$k=1,2,\\ldots$，$0<p<1$ 未知。$X_{1},X_{2},\\ldots,X_{n}$ 是来自 $X$ 的简单随机样本，求 $p$ 的矩估计量。",
+  "tags": [
+   "概率统计",
+   "矩估计",
+   "几何分布"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第247节 矩估计",
+  "hints": [
+   "几何分布的期望是成功概率的倒数。"
+  ],
+  "answer": "$\\hat p=\\frac{1}{\\bar X}$",
+  "solution": "$E(X)=\\frac{1}{p}$，令 $\\frac{1}{p}=\\bar X$，得 $\\hat p=\\frac{1}{\\bar X}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "均匀分布 $[0,\\theta]$：上限为两倍均值",
+  "statement": "设总体 $X$ 在区间 $[0,\\theta]$ 上服从均匀分布，$\\theta>0$ 未知，$X_{1},X_{2},\\ldots,X_{n}$ 是来自总体 $X$ 的简单随机样本，求 $\\theta$ 的矩估计量。",
+  "tags": [
+   "概率统计",
+   "矩估计",
+   "均匀分布"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第247节 矩估计",
+  "hints": [
+   "$E(X)=\\frac{\\theta}{2}$。"
+  ],
+  "answer": "$\\hat\\theta=2\\bar X$",
+  "solution": "$E(X)=\\frac{\\theta}{2}$，令 $\\frac{\\theta}{2}=\\bar X$，得 $\\hat\\theta=2\\bar X$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "均匀分布 $[\\theta,2\\theta]$：均值为 $\\frac{3\\theta}{2}$",
+  "statement": "设总体 $X$ 在区间 $[\\theta,2\\theta]$ 上服从均匀分布，$\\theta>0$ 未知，$X_{1},X_{2},\\ldots,X_{n}$ 是来自总体 $X$ 的简单随机样本，求 $\\theta$ 的矩估计量。",
+  "tags": [
+   "概率统计",
+   "矩估计",
+   "均匀分布"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第247节 矩估计",
+  "hints": [
+   "区间端点为 $\\theta$ 与 $2\\theta$，均值是两端点平均。"
+  ],
+  "answer": "$\\hat\\theta=\\frac{2}{3}\\bar X$",
+  "solution": "$E(X)=\\frac{\\theta+2\\theta}{2}=\\frac{3\\theta}{2}$，令其等于 $\\bar X$，得 $\\hat\\theta=\\frac23\\bar X$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "幂型密度 $(\\theta+1)x^{\\theta}$：解出 $\\theta$",
+  "statement": "设总体 $X$ 的概率密度为 $f(x;\\theta)=(\\theta+1)x^{\\theta}$，$0<x<1$，其中 $\\theta>-1$ 未知，$X_{1},X_{2},\\ldots,X_{n}$ 为简单随机样本，求 $\\theta$ 的矩估计量。",
+  "tags": [
+   "概率统计",
+   "矩估计",
+   "参数估计"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第247节 矩估计",
+  "hints": [
+   "先算 $E(X)=\\int_0^1 x(\\theta+1)x^{\\theta}\\mathrm{d}x$，再反解 $\\theta$。"
+  ],
+  "answer": "$\\hat\\theta=\\frac{2\\bar X-1}{1-\\bar X}$",
+  "solution": "$E(X)=\\frac{\\theta+1}{\\theta+2}$，令 $\\frac{\\theta+1}{\\theta+2}=\\bar X$，解得 $\\theta=\\frac{2\\bar X-1}{1-\\bar X}$，故 $\\hat\\theta=\\frac{2\\bar X-1}{1-\\bar X}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "正态分布两参数：一、二阶矩联立",
+  "statement": "设总体 $X\\sim N(\\mu,\\sigma^{2})$，$\\mu$ 与 $\\sigma^{2}$ 均未知，$X_{1},X_{2},\\ldots,X_{n}$ 是来自总体 $X$ 的简单随机样本，求 $\\mu$ 和 $\\sigma^{2}$ 的矩估计量。",
+  "tags": [
+   "概率统计",
+   "矩估计",
+   "正态分布"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第247节 矩估计",
+  "hints": [
+   "两个参数用两个方程：$E(X)=\\mu$，$E(X^{2})=\\mu^{2}+\\sigma^{2}$。"
+  ],
+  "answer": "$\\hat\\mu=\\bar X$，$\\hat\\sigma^{2}=\\frac{1}{n}\\sum_{i=1}^{n}(X_{i}-\\bar X)^{2}$",
+  "solution": "$E(X)=\\mu\\Rightarrow\\hat\\mu=\\bar X$；$E(X^{2})=\\mu^{2}+\\sigma^{2}\\Rightarrow\\hat\\sigma^{2}=\\frac1n\\sum X_i^{2}-\\bar X^{2}=\\frac1n\\sum(X_i-\\bar X)^{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "指数分布 $\\frac1\\theta e^{-x/\\theta}$：$\\hat\\theta=\\bar X$",
+  "statement": "设总体 $X$ 的概率密度为 $f(x;\\theta)=\\frac{1}{\\theta}e^{-x/\\theta}$（$x>0$），$\\theta>0$ 未知，$X_{1},X_{2},\\ldots,X_{n}$ 为简单随机样本，求 $\\theta$ 的矩估计量。",
+  "tags": [
+   "概率统计",
+   "矩估计",
+   "指数分布"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第247节 矩估计",
+  "hints": [
+   "$E(X)=\\theta$，一阶矩方程即为答案。"
+  ],
+  "answer": "$\\hat\\theta=\\bar X$",
+  "solution": "$E(X)=\\theta$，令 $\\theta=\\bar X$，得 $\\hat\\theta=\\bar X$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "一般区间 $[a,b]$：用二阶中心矩反解端点",
+  "statement": "设总体 $X$ 在区间 $[a,b]$ 上服从均匀分布，$a<b$ 且均未知，$X_{1},X_{2},\\ldots,X_{n}$ 是来自总体 $X$ 的简单随机样本，求 $a$ 和 $b$ 的矩估计量。",
+  "tags": [
+   "概率统计",
+   "矩估计",
+   "均匀分布"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第247节 矩估计",
+  "hints": [
+   "$E(X)=\\frac{a+b}{2}$，$D(X)=\\frac{(b-a)^{2}}{12}$，两式联立解 $a$、$b$。"
+  ],
+  "answer": "$\\hat a=\\bar X-\\sqrt{3B_{2}}$，$\\hat b=\\bar X+\\sqrt{3B_{2}}$，其中 $B_{2}=\\frac{1}{n}\\sum_{i=1}^{n}(X_{i}-\\bar X)^{2}$",
+  "solution": "令 $\\frac{a+b}{2}=\\bar X$，$\\frac{(b-a)^{2}}{12}=B_{2}$，则 $b-a=2\\sqrt{3B_2}$，解得 $\\hat a=\\bar X-\\sqrt{3B_2}$，$\\hat b=\\bar X+\\sqrt{3B_2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "两点分布 MLE：对数似然求导",
+  "statement": "设总体 $X\\sim b(1,p)$，$X_{1},\\ldots,X_{n}$ 为样本，求 $p$ 的最大似然估计量。",
+  "tags": [
+   "概率统计",
+   "最大似然估计",
+   "对数似然"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "hints": [
+   "写出 $L(p)=p^{\\sum x_i}(1-p)^{n-\\sum x_i}$，取对数后对 $p$ 求导置零。"
+  ],
+  "answer": "$\\hat p=\\frac{1}{n}\\sum_{i=1}^{n}X_{i}$",
+  "solution": "$\\ln L=\\sum x_i\\ln p+(n-\\sum x_i)\\ln(1-p)$，令导数为零得 $\\frac{\\sum x_i}{p}=\\frac{n-\\sum x_i}{1-p}$，解出 $\\hat p=\\bar X$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "泊松分布 MLE：$\\hat\\lambda=\\bar X$",
+  "statement": "设总体 $X\\sim P(\\lambda)$，$X_{1},\\ldots,X_{n}$ 为样本，求 $\\lambda$ 的最大似然估计量。",
+  "tags": [
+   "概率统计",
+   "最大似然估计",
+   "对数似然"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "hints": [
+   "$\\ln L=\\sum x_i\\ln\\lambda-n\\lambda-\\sum\\ln x_i!$，求导最简单。"
+  ],
+  "answer": "$\\hat\\lambda=\\frac{1}{n}\\sum_{i=1}^{n}X_{i}$",
+  "solution": "$\\ln L=\\sum x_i\\ln\\lambda-n\\lambda-\\sum\\ln(x_i!)$，$\\frac{\\mathrm{d}\\ln L}{\\mathrm{d}\\lambda}=\\frac{\\sum x_i}{\\lambda}-n=0$，得 $\\hat\\lambda=\\bar X$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "几何分布 MLE：$\\hat\\theta=\\frac{1}{\\bar X}$",
+  "statement": "设总体 $X$ 的分布律为 $P\\{X=k\\}=\\theta(1-\\theta)^{k-1}$，$k=1,2,\\ldots$，$0<\\theta<1$，求 $\\theta$ 的最大似然估计量。",
+  "tags": [
+   "概率统计",
+   "最大似然估计",
+   "几何分布"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "hints": [
+   "$\\ln L=n\\ln\\theta+(\\sum x_i-n)\\ln(1-\\theta)$。"
+  ],
+  "answer": "$\\hat\\theta=\\frac{1}{\\bar X}$",
+  "solution": "$\\ln L=n\\ln\\theta+(\\sum x_i-n)\\ln(1-\\theta)$，令 $\\frac{n}{\\theta}-\\frac{\\sum x_i-n}{1-\\theta}=0$，得 $\\hat\\theta=\\frac{1}{\\bar X}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "二项分布 MLE：已知 $m$ 估 $p$",
+  "statement": "设总体 $X\\sim b(m,p)$，$m$ 已知，$X_{1},\\ldots,X_{n}$ 为样本，求 $p$ 的最大似然估计量。",
+  "tags": [
+   "概率统计",
+   "最大似然估计",
+   "二项分布"
+  ],
+  "thinking": 8,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "hints": [
+   "$\\ln L$ 中 $p$ 的幂次是 $\\sum x_i$，$(1-p)$ 的幂次是 $nm-\\sum x_i$。"
+  ],
+  "answer": "$\\hat p=\\frac{\\sum_{i=1}^{n}X_{i}}{nm}$",
+  "solution": "$\\ln L=\\sum x_i\\ln p+(nm-\\sum x_i)\\ln(1-p)+C$，令导数为零得 $\\frac{\\sum x_i}{p}=\\frac{nm-\\sum x_i}{1-p}$，即 $\\hat p=\\frac{\\bar X}{m}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "三段分布律：用频数写似然",
+  "statement": "总体 $X$ 的分布律：$P\\{X=1\\}=\\theta$，$P\\{X=2\\}=\\theta$，$P\\{X=3\\}=1-2\\theta$，$0<\\theta<\\frac{1}{2}$，$n_{1},n_{2},n_{3}$ 为各取值频数，求 $\\theta$ 的最大似然估计量。",
+  "tags": [
+   "概率统计",
+   "最大似然估计",
+   "离散分布"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "hints": [
+   "$L=\\theta^{n_1}\\cdot\\theta^{n_2}\\cdot(1-2\\theta)^{n_3}=\\theta^{n_1+n_2}(1-2\\theta)^{n_3}$。"
+  ],
+  "answer": "$\\hat\\theta=\\frac{n_{1}+n_{2}}{2n}$",
+  "solution": "$\\ln L=(n_1+n_2)\\ln\\theta+n_3\\ln(1-2\\theta)$，求导得 $\\frac{n_1+n_2}{\\theta}=\\frac{2n_3}{1-2\\theta}$，解得 $\\hat\\theta=\\frac{n_1+n_2}{2n}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "离散均匀分布：MLE 取最大次序统计量",
+  "statement": "设总体 $X\\sim U\\{1,N\\}$，即 $P\\{X=k\\}=\\frac{1}{N}$，$k=1,\\ldots,N$，求 $N$ 的最大似然估计量。",
+  "tags": [
+   "概率统计",
+   "最大似然估计",
+   "次序统计量"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "hints": [
+   "似然是 $N^{-n}$，在满足 $N\\ge\\max x_i$ 的约束下关于 $N$ 递减，故取最小可行值。"
+  ],
+  "answer": "$\\hat N=\\max\\limits_{1\\le i\\le n}X_{i}$",
+  "solution": "$L=N^{-n}$（当 $N\\ge\\max x_i$），$L$ 关于 $N$ 单调递减，故在 $N=\\max x_i$ 处取最大，即 $\\hat N=\\max\\limits_{1\\le i\\le n}X_i$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "从 0 起的几何型分布：$\\hat p=\\frac{1}{1+\\bar X}$",
+  "statement": "设总体 $X$ 的分布律为 $P\\{X=k\\}=p(1-p)^{k}$，$k=0,1,2,\\ldots$，求 $p$ 的最大似然估计量。",
+  "tags": [
+   "概率统计",
+   "最大似然估计",
+   "对数似然"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "hints": [
+   "$\\ln L=n\\ln p+\\sum x_i\\ln(1-p)$，解出 $p$ 后取倒数形式。"
+  ],
+  "answer": "$\\hat p=\\frac{1}{1+\\bar X}$",
+  "solution": "$\\ln L=n\\ln p+(\\sum x_i)\\ln(1-p)$，令 $\\frac{n}{p}=\\frac{\\sum x_i}{1-p}$，得 $\\hat p=\\frac{n}{n+\\sum x_i}=\\frac{1}{1+\\bar X}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "负二项分布：$\\hat p=\\frac{r}{\\bar X}$",
+  "statement": "设总体 $X$ 服从负二项分布，$r$ 已知，$P\\{X=k\\}=\\binom{k-1}{r-1}p^{r}(1-p)^{k-r}$，$k=r,r+1,\\ldots$，求 $p$ 的最大似然估计量。",
+  "tags": [
+   "概率统计",
+   "最大似然估计",
+   "负二项分布"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "hints": [
+   "$\\ln L=nr\\ln p+(\\sum x_i-nr)\\ln(1-p)+C$。"
+  ],
+  "answer": "$\\hat p=\\frac{r}{\\bar X}$",
+  "solution": "$\\ln L=nr\\ln p+(\\sum x_i-nr)\\ln(1-p)+C$，令 $\\frac{nr}{p}=\\frac{\\sum x_i-nr}{1-p}$，得 $\\hat p=\\frac{nr}{\\sum x_i}=\\frac{r}{\\bar X}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "三项分布律：二次型的似然最大化",
+  "statement": "总体分布律：$P\\{X=1\\}=\\theta^{2}$，$P\\{X=2\\}=2\\theta(1-\\theta)$，$P\\{X=3\\}=(1-\\theta)^{2}$，$n_{1},n_{2}$ 为取 1，2 的频数，求 $\\theta$ 的最大似然估计量。",
+  "tags": [
+   "概率统计",
+   "最大似然估计",
+   "离散分布"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "hints": [
+   "$\\ln L=(2n_1+n_2)\\ln\\theta+(n_2+2n_3)\\ln(1-\\theta)+C$。"
+  ],
+  "answer": "$\\hat\\theta=\\frac{2n_{1}+n_{2}}{2n}$",
+  "solution": "$\\ln L=(2n_1+n_2)\\ln\\theta+(n_2+2n_3)\\ln(1-\\theta)+C$，令导数为零得 $\\frac{2n_1+n_2}{\\theta}=\\frac{n_2+2n_3}{1-\\theta}$，解得 $\\hat\\theta=\\frac{2n_1+n_2}{2n}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数 $\\theta>1$ 的几何型：$\\hat\\theta=\\bar X$",
+  "statement": "设总体 $X$ 分布律为 $P\\{X=k\\}=\\frac{1}{\\theta}\\left(1-\\frac{1}{\\theta}\\right)^{k-1}$，$k=1,2,\\ldots$，$\\theta>1$，求 $\\theta$ 的最大似然估计量。",
+  "tags": [
+   "概率统计",
+   "最大似然估计",
+   "几何分布"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "hints": [
+   "令 $q=1-\\frac{1}{\\theta}$，先估 $q$ 再回代。"
+  ],
+  "answer": "$\\hat\\theta=\\bar X$",
+  "solution": "$\\ln L=-n\\ln\\theta+(\\sum x_i-n)\\ln\\left(1-\\frac1\\theta\\right)$，求导置零得 $\\theta=\\bar X$，即 $\\hat\\theta=\\bar X$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "正态分布两参数的 MLE",
+  "statement": "设总体 $X\\sim N(\\mu,\\sigma^{2})$，$\\mu,\\sigma^{2}$ 未知，$X_{1},\\ldots,X_{n}$ 为样本，求 $\\mu,\\sigma^{2}$ 的最大似然估计量。",
+  "tags": [
+   "概率统计",
+   "最大似然估计",
+   "正态分布"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "hints": [
+   "分别对 $\\mu$ 与 $\\sigma^{2}$ 求偏导置零；注意方差估计分母是 $n$ 而不是 $n-1$。"
+  ],
+  "answer": "$\\hat\\mu=\\frac{1}{n}\\sum_{i=1}^{n}X_{i}$，$\\hat\\sigma^{2}=\\frac{1}{n}\\sum_{i=1}^{n}(X_{i}-\\bar X)^{2}$",
+  "solution": "$\\ln L=-\\frac{n}{2}\\ln(2\\pi)-\\frac{n}{2}\\ln\\sigma^{2}-\\frac{1}{2\\sigma^{2}}\\sum(x_i-\\mu)^{2}$，对 $\\mu$ 求偏导得 $\\hat\\mu=\\bar X$；回代后对 $\\sigma^{2}$ 求偏导得 $\\hat\\sigma^{2}=\\frac1n\\sum(x_i-\\bar x)^{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "指数型密度 $\\theta e^{-\\theta x}$ 的 MLE",
+  "statement": "设总体 $X$ 的概率密度为 $f(x;\\theta)=\\theta e^{-\\theta x}$（$x>0$，$\\theta>0$），$X_{1},\\ldots,X_{n}$ 为样本，求 $\\theta$ 的最大似然估计量。",
+  "tags": [
+   "概率统计",
+   "最大似然估计",
+   "指数分布"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "hints": [
+   "$\\ln L=n\\ln\\theta-\\theta\\sum x_i$，求导置零一步到位。"
+  ],
+  "answer": "$\\hat\\theta=\\frac{1}{\\bar X}$",
+  "solution": "$\\ln L=n\\ln\\theta-\\theta\\sum x_i$，$\\frac{\\mathrm{d}\\ln L}{\\mathrm{d}\\theta}=\\frac{n}{\\theta}-\\sum x_i=0$，得 $\\hat\\theta=\\frac{1}{\\bar X}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "均匀分布 $U(0,\\theta)$：似然单调取端点",
+  "statement": "设总体 $X\\sim U(0,\\theta)$，$\\theta>0$，$X_{1},\\ldots,X_{n}$ 为样本，求 $\\theta$ 的最大似然估计量。",
+  "tags": [
+   "概率统计",
+   "最大似然估计",
+   "次序统计量"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "hints": [
+   "密度在 $0<x<\\theta$ 时为 $\\frac1\\theta$，似然 $\\theta^{-n}$ 随 $\\theta$ 递减，受 $\\theta\\ge\\max x_i$ 约束。"
+  ],
+  "answer": "$\\hat\\theta=\\max\\limits_{1\\le i\\le n}X_{i}$",
+  "solution": "$L(\\theta)=\\theta^{-n}$（当 $\\theta\\ge\\max x_i$），关于 $\\theta$ 单调递减，故在 $\\theta=\\max x_i$ 处最大，$\\hat\\theta=\\max\\limits_{1\\le i\\le n}X_i$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "拉普拉斯型密度：$\\hat\\theta=\\frac1n\\sum|X_i|$",
+  "statement": "设总体 $X$ 的概率密度为 $f(x;\\theta)=\\frac{1}{2\\theta}e^{-\\frac{|x|}{\\theta}}$，$x\\in R$，$\\theta>0$，求 $\\theta$ 的最大似然估计量。",
+  "tags": [
+   "概率统计",
+   "最大似然估计",
+   "对数似然"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "hints": [
+   "$\\ln L=-n\\ln(2\\theta)-\\frac{1}{\\theta}\\sum|x_i|$，把 $\\sum|x_i|$ 看作整体。"
+  ],
+  "answer": "$\\hat\\theta=\\frac{1}{n}\\sum_{i=1}^{n}|X_{i}|$",
+  "solution": "$\\ln L=-n\\ln2-n\\ln\\theta-\\frac{1}{\\theta}\\sum|x_i|$，求导得 $-\\frac{n}{\\theta}+\\frac{\\sum|x_i|}{\\theta^{2}}=0$，故 $\\hat\\theta=\\frac1n\\sum|X_i|$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "均匀分布 $U(\\theta,2\\theta)$：取半倍最大次序统计量",
+  "statement": "设总体 $X\\sim U(\\theta,2\\theta)$，$\\theta>0$，$X_{1},\\ldots,X_{n}$ 为样本，求 $\\theta$ 的最大似然估计量。",
+  "tags": [
+   "概率统计",
+   "最大似然估计",
+   "次序统计量"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "hints": [
+   "样本必须落在 $[\\theta,2\\theta]$，即 $\\theta\\le\\min x_i$ 且 $\\theta\\ge\\frac{\\max x_i}{2}$，似然 $\\theta^{-n}$ 递减。"
+  ],
+  "answer": "$\\hat\\theta=\\frac{1}{2}\\max\\limits_{1\\le i\\le n}X_{i}$",
+  "solution": "$L=\\theta^{-n}$（当 $\\frac{\\max x_i}{2}\\le\\theta\\le\\min x_i$），单调递减，故取 $\\hat\\theta=\\frac{\\max x_i}{2}=\\frac12\\max\\limits_{1\\le i\\le n}X_i$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "线性型密度 $\\frac{2x}{\\theta^2}$：似然单调取端点",
+  "statement": "设总体 $X$ 的概率密度为 $f(x;\\theta)=\\frac{2x}{\\theta^{2}}$，$0<x<\\theta$，求 $\\theta$ 的最大似然估计量。",
+  "tags": [
+   "概率统计",
+   "最大似然估计",
+   "次序统计量"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "hints": [
+   "似然 $L=2^{n}\\prod x_i\\cdot\\theta^{-2n}$ 关于 $\\theta$ 递减，受 $\\theta\\ge\\max x_i$ 限制。"
+  ],
+  "answer": "$\\hat\\theta=\\max\\limits_{1\\le i\\le n}X_{i}$",
+  "solution": "$L(\\theta)=\\frac{2^{n}\\prod x_i}{\\theta^{2n}}$（$\\theta\\ge\\max x_i$），关于 $\\theta$ 单调递减，故在 $\\theta=\\max x_i$ 处取最大，即 $\\hat\\theta=\\max\\limits_{1\\le i\\le n}X_i$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "标准差 $\\sigma$ 的 MLE：对方差开方",
+  "statement": "设总体 $X\\sim N(\\mu,\\sigma^{2})$，求标准差 $\\sigma$ 的最大似然估计量。",
+  "tags": [
+   "概率统计",
+   "最大似然估计",
+   "正态分布"
+  ],
+  "thinking": 8,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "hints": [
+   "先求 $\\sigma^{2}$ 的 MLE，再由 MLE 的不变性取平方根。"
+  ],
+  "answer": "$\\hat\\sigma=\\sqrt{\\frac{1}{n}\\sum_{i=1}^{n}(X_{i}-\\bar X)^{2}}$",
+  "solution": "$\\hat\\sigma^{2}=\\frac1n\\sum(X_i-\\bar X)^{2}$，由最大似然估计的不变性（$g(\\theta)$ 的 MLE 为 $g(\\hat\\theta)$），得 $\\hat\\sigma=\\sqrt{\\frac1n\\sum(X_i-\\bar X)^{2}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "二维独立指数型：$\\hat\\theta=\\frac{\\bar X+\\bar Y}{2}$",
+  "statement": "二维总体 $(X,Y)$ 联合密度 $f(x,y;\\theta)=\\frac{1}{\\theta^{2}}e^{-\\frac{x+y}{\\theta}}$，$x,y>0$，$\\theta>0$，$(X_{1},Y_{1}),\\ldots,(X_{n},Y_{n})$ 为样本，求 $\\theta$ 的最大似然估计量。",
+  "tags": [
+   "概率统计",
+   "最大似然估计",
+   "二维总体"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "hints": [
+   "$\\ln L=-2n\\ln\\theta-\\frac{1}{\\theta}\\sum(x_i+y_i)$，把 $\\sum(x_i+y_i)$ 看成整体。"
+  ],
+  "answer": "$\\hat\\theta=\\frac{\\bar X+\\bar Y}{2}$",
+  "solution": "$\\ln L=-2n\\ln\\theta-\\frac{1}{\\theta}\\sum(x_i+y_i)$，令导数为零得 $\\theta=\\frac{\\sum(x_i+y_i)}{2n}=\\frac{\\bar X+\\bar Y}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "二维均匀：取两方向最大值的较大者",
+  "statement": "二维总体 $(X,Y)$ 在 $0<x<\\theta$，$0<y<\\theta$ 上服从均匀分布，$\\theta>0$ 未知，求 $\\theta$ 的最大似然估计量。",
+  "tags": [
+   "概率统计",
+   "最大似然估计",
+   "次序统计量"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "hints": [
+   "似然为 $\\theta^{-2n}$，要求 $\\theta$ 同时不小于所有 $x_i$ 与 $y_i$。"
+  ],
+  "answer": "$\\hat\\theta=\\max\\left\\{\\max\\limits_{1\\le i\\le n}X_{i},\\max\\limits_{1\\le i\\le n}Y_{i}\\right\\}$",
+  "solution": "$L=\\theta^{-2n}$（$\\theta\\ge\\max\\{x_i,y_i\\}$）单调递减，故 $\\hat\\theta=\\max\\left\\{\\max_i X_i,\\max_i Y_i\\right\\}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "带 $x$ 因子的指数型：$\\hat\\theta=\\frac{\\bar X}{2}$",
+  "statement": "设总体 $X$ 的概率密度为 $f(x;\\theta)=\\frac{1}{\\theta^{2}}xe^{-x/\\theta}$，$x>0$，$\\theta>0$，求 $\\theta$ 的最大似然估计量。",
+  "tags": [
+   "概率统计",
+   "最大似然估计",
+   "对数似然"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "hints": [
+   "$\\ln L=-2n\\ln\\theta+\\sum\\ln x_i-\\frac{1}{\\theta}\\sum x_i$。"
+  ],
+  "answer": "$\\hat\\theta=\\frac{\\bar X}{2}$",
+  "solution": "$\\ln L=-2n\\ln\\theta-\\frac{1}{\\theta}\\sum x_i+\\sum\\ln x_i$，令导数为零得 $\\frac{2n}{\\theta}=\\frac{\\sum x_i}{\\theta^{2}}$，故 $\\hat\\theta=\\frac{\\bar X}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "正态均值平方和：定无偏常数 $c=\\frac1n$",
+  "statement": "设总体 $X\\sim N(\\mu,\\sigma^{2})$，$X_{1},X_{2},\\ldots,X_{n}$ 为简单随机样本，$\\bar X$ 为样本均值。统计量 $T=c\\sum_{i=1}^{n}(X_{i}-\\mu)^{2}$，若 $T$ 是 $\\sigma^{2}$ 的无偏估计，求常数 $c$。",
+  "tags": [
+   "概率统计",
+   "无偏估计",
+   "数字特征"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第249节 【数一】无偏估计量",
+  "hints": [
+   "每项 $E(X_i-\\mu)^{2}=\\sigma^{2}$，共 $n$ 项。"
+  ],
+  "answer": "$\\frac{1}{n}$",
+  "solution": "$E(T)=c\\sum E(X_i-\\mu)^{2}=cn\\sigma^{2}$，令 $cn\\sigma^{2}=\\sigma^{2}$，得 $c=\\frac1n$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "均匀总体 $[0,\\theta]$：三个样本定系数",
+  "statement": "设总体 $X\\sim U(0,\\theta)$（$\\theta>0$），$X_{1},X_{2},X_{3}$ 为样本。令 $\\hat\\theta=k(X_{1}+X_{2}+X_{3})$，若 $\\hat\\theta$ 是 $\\theta$ 的无偏估计，求常数 $k$。",
+  "tags": [
+   "概率统计",
+   "无偏估计",
+   "均匀分布"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第249节 【数一】无偏估计量",
+  "hints": [
+   "$E(X)=\\frac{\\theta}{2}$，三个样本和为 $\\frac{3\\theta}{2}$。"
+  ],
+  "answer": "$\\frac{2}{3}$",
+  "solution": "$E(\\hat\\theta)=k\\cdot3\\cdot\\frac{\\theta}{2}=\\frac{3k\\theta}{2}$，令其等于 $\\theta$，得 $k=\\frac23$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "组合估计量：用均值为 1 定 $k$",
+  "statement": "设总体 $X$ 的均值 $\\mu$ 未知，$X_{1},X_{2},X_{3}$ 为样本。设 $\\hat\\mu=\\frac{X_{1}+X_{2}}{4}+kX_{3}$，若 $\\hat\\mu$ 是 $\\mu$ 的无偏估计，求 $k$。",
+  "tags": [
+   "概率统计",
+   "无偏估计",
+   "线性估计"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第249节 【数一】无偏估计量",
+  "hints": [
+   "无偏即系数之和等于 1。"
+  ],
+  "answer": "$\\frac{1}{2}$",
+  "solution": "$E(\\hat\\mu)=\\frac{1}{4}\\mu\\times2+k\\mu=\\left(\\frac12+k\\right)\\mu$，令系数为 1，得 $k=\\frac12$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "指数分布：两样本之和的系数",
+  "statement": "设总体 $X\\sim \\mathrm{Exp}(\\theta)$，密度 $f(x;\\theta)=\\frac{1}{\\theta}e^{-x/\\theta}$（$x>0$，$\\theta>0$），$E(X)=\\theta$。$X_{1},X_{2}$ 为样本。令 $\\hat\\theta=c(X_{1}+X_{2})$，若 $\\hat\\theta$ 是 $\\theta$ 的无偏估计，求 $c$。",
+  "tags": [
+   "概率统计",
+   "无偏估计",
+   "指数分布"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "柳贯一题型专项 · 第249节 【数一】无偏估计量",
+  "hints": [
+   "$E(X_1+X_2)=2\\theta$。"
+  ],
+  "answer": "$\\frac{1}{2}$",
+  "solution": "$E(\\hat\\theta)=2c\\theta$，令 $2c\\theta=\\theta$，得 $c=\\frac12$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "两点分布：凑系数使期望为 $p$",
+  "statement": "设总体 $X\\sim B(1,p)$（$0<p<1$），$X_{1},X_{2}$ 为样本。统计量 $\\hat p=0.4X_{1}+kX_{2}$，若 $\\hat p$ 是 $p$ 的无偏估计，求常数 $k$。",
+  "tags": [
+   "概率统计",
+   "无偏估计",
+   "两点分布"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "柳贯一题型专项 · 第249节 【数一】无偏估计量",
+  "hints": [
+   "系数相加等于 1。"
+  ],
+  "answer": "0.6",
+  "solution": "$E(\\hat p)=(0.4+k)p$，令 $0.4+k=1$，得 $k=0.6$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "均匀 $[\\theta,2\\theta]$：均值为 $\\frac{3\\theta}{2}$",
+  "statement": "设总体 $X\\sim U(\\theta,2\\theta)$（$\\theta>0$），$X_{1},X_{2},X_{3}$ 为样本。令 $\\hat\\theta=c(X_{1}+X_{2}+X_{3})$，若 $\\hat\\theta$ 是 $\\theta$ 的无偏估计，求常数 $c$。",
+  "tags": [
+   "概率统计",
+   "无偏估计",
+   "均匀分布"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第249节 【数一】无偏估计量",
+  "hints": [
+   "$E(X)=\\frac{3\\theta}{2}$，再乘 3 个样本。"
+  ],
+  "answer": "$\\frac{2}{9}$",
+  "solution": "$E(\\hat\\theta)=c\\cdot3\\cdot\\frac{3\\theta}{2}=\\frac{9c\\theta}{2}=\\theta$，得 $c=\\frac29$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "差值平方和：$a=2b$ 与无偏性联立",
+  "statement": "设总体 $X$ 的方差 $\\sigma^{2}$ 存在，$X_{1},X_{2},X_{3},X_{4}$ 为样本。统计量 $T=a(X_{1}-X_{2})^{2}+b(X_{3}-X_{4})^{2}$，若 $T$ 是 $\\sigma^{2}$ 的无偏估计，且 $a=2b$，求常数 $a,b$。",
+  "tags": [
+   "概率统计",
+   "无偏估计",
+   "方差"
+  ],
+  "thinking": 5,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第249节 【数一】无偏估计量",
+  "hints": [
+   "$E(X_1-X_2)^{2}=2\\sigma^{2}$，两个差平方各贡献 $2\\sigma^{2}$。"
+  ],
+  "answer": "$a=\\frac{1}{3}$，$b=\\frac{1}{6}$",
+  "solution": "$E(T)=(a+b)\\cdot2\\sigma^{2}=2(a+b)\\sigma^{2}=\\sigma^{2}$，即 $2a+2b=1$；又 $a=2b$，解得 $b=\\frac16$，$a=\\frac13$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零均值正态：平方和系数 $\\frac1n$",
+  "statement": "设总体 $X\\sim N(0,\\sigma^{2})$，$X_{1},X_{2},\\ldots,X_{n}$ 为样本。令 $\\hat\\sigma^{2}=c\\sum_{i=1}^{n}X_{i}^{2}$，若 $\\hat\\sigma^{2}$ 是 $\\sigma^{2}$ 的无偏估计，求常数 $c$。",
+  "tags": [
+   "概率统计",
+   "无偏估计",
+   "正态分布"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "柳贯一题型专项 · 第249节 【数一】无偏估计量",
+  "hints": [
+   "$E(X_i^{2})=\\sigma^{2}$，共 $n$ 项。"
+  ],
+  "answer": "$\\frac{1}{n}$",
+  "solution": "$E(\\hat\\sigma^{2})=c\\cdot n\\sigma^{2}=\\sigma^{2}$，得 $c=\\frac1n$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "区间长度 2：减常数使估计无偏",
+  "statement": "设总体 $X\\sim U(\\theta,\\theta+2)$（$\\theta>0$），$X_{1},X_{2},\\ldots,X_{n}$ 为样本，$\\bar X$ 为样本均值。令 $\\hat\\theta=\\bar X-k$，若 $\\hat\\theta$ 是 $\\theta$ 的无偏估计，求常数 $k$。",
+  "tags": [
+   "概率统计",
+   "无偏估计",
+   "均匀分布"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第249节 【数一】无偏估计量",
+  "hints": [
+   "$E(X)=\\theta+1$，与 $\\theta$ 差 1。"
+  ],
+  "answer": "1",
+  "solution": "$E(\\bar X)=\\theta+1$，故 $E(\\hat\\theta)=\\theta+1-k=\\theta$，得 $k=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "泊松分布：$b=2a$ 联立定系数",
+  "statement": "设总体 $X\\sim P(\\lambda)$（$\\lambda>0$），$X_{1},X_{2},X_{3}$ 为样本。统计量 $\\hat\\lambda=a(X_{1}+X_{2})+bX_{3}$，若 $\\hat\\lambda$ 是 $\\lambda$ 的无偏估计，且 $b=2a$，求常数 $a,b$。",
+  "tags": [
+   "概率统计",
+   "无偏估计",
+   "泊松分布"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第249节 【数一】无偏估计量",
+  "hints": [
+   "$E(X)=\\lambda$，故系数和 $2a+b=1$。"
+  ],
+  "answer": "$a=\\frac{1}{4}$，$b=\\frac{1}{2}$",
+  "solution": "$E(\\hat\\lambda)=(2a+b)\\lambda$，令 $2a+b=1$，与 $b=2a$ 联立得 $4a=1$，即 $a=\\frac14$，$b=\\frac12$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "比较 $\\hat\\mu_1$ 与加权组合的方差",
+  "statement": "设总体 $X\\sim N(\\mu,1)$，样本 $X_{1},X_{2},X_{3}$。比较无偏估计 $\\hat\\mu_{1}=\\frac{1}{3}\\sum X_{i}$ 与 $\\hat\\mu_{2}=\\frac{1}{2}X_{1}+\\frac{1}{4}X_{2}+\\frac{1}{4}X_{3}$ 的有效性。",
+  "tags": [
+   "概率统计",
+   "有效估计",
+   "方差比较"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第250节 有效估计量",
+  "hints": [
+   "方差越小越有效，系数平方和越小方差越小。"
+  ],
+  "answer": "$\\hat\\mu_{1}$ 更有效",
+  "solution": "$D(\\hat\\mu_1)=\\frac{1}{9}\\cdot3=\\frac13$，$D(\\hat\\mu_2)=\\frac14+\\frac1{16}+\\frac1{16}=\\frac38$，因 $\\frac13<\\frac38$，故 $\\hat\\mu_1$ 更有效。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "四样本：$\\frac14\\sum X_i$ 优于不等权组合",
+  "statement": "设总体 $X\\sim N(\\mu,\\sigma^{2})$，样本 $X_{1},X_{2},X_{3},X_{4}$。比较 $\\mu$ 的无偏估计 $\\hat\\mu_{1}=\\frac{1}{4}\\sum X_{i}$ 与 $\\hat\\mu_{2}=\\frac{1}{2}X_{1}+\\frac{1}{6}(X_{2}+X_{3}+X_{4})$ 的有效性。",
+  "tags": [
+   "概率统计",
+   "有效估计",
+   "方差比较"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第250节 有效估计量",
+  "hints": [
+   "等权平均的方差最小（Cauchy 不等式）。"
+  ],
+  "answer": "$\\hat\\mu_{1}$ 更有效",
+  "solution": "$D(\\hat\\mu_1)=\\frac{\\sigma^{2}}{4}$，$D(\\hat\\mu_2)=\\sigma^{2}\\left(\\frac14+3\\cdot\\frac1{36}\\right)=\\frac{\\sigma^{2}}{3}$，故 $\\hat\\mu_1$ 更有效。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "均匀总体：$2\\bar X$ 与 $\\frac32\\max$ 的方差",
+  "statement": "设总体 $X\\sim U[0,\\theta]$，样本 $X_{1},X_{2}$。比较无偏估计 $\\hat\\theta_{1}=2\\bar X$ 与 $\\hat\\theta_{2}=\\frac{3}{2}\\max(X_{1},X_{2})$ 的方差，并判断有效性。",
+  "tags": [
+   "概率统计",
+   "有效估计",
+   "次序统计量"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第250节 有效估计量",
+  "hints": [
+   "$D(X)=\\frac{\\theta^{2}}{12}$；对最大值要先求其分布（密度 $\\frac{2x}{\\theta^{2}}$）。"
+  ],
+  "answer": "$D(\\hat\\theta_{1})=\\frac{\\theta^{2}}{6}$，$D(\\hat\\theta_{2})=\\frac{\\theta^{2}}{8}$，$\\hat\\theta_{2}$ 更有效",
+  "solution": "$D(\\hat\\theta_1)=4\\cdot\\frac{\\theta^{2}/12}{2}=\\frac{\\theta^{2}}{6}$；$M=\\max$ 的密度为 $\\frac{2x}{\\theta^{2}}$，$E(M)=\\frac{2\\theta}{3}$，$D(M)=\\frac{\\theta^{2}}{18}$，故 $D(\\hat\\theta_2)=\\frac94\\cdot\\frac{\\theta^{2}}{18}=\\frac{\\theta^{2}}{8}$，更有效。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "两点总体：等权与加权估计的方差",
+  "statement": "设总体 $X\\sim B(1,p)$，样本 $X_{1},X_{2},X_{3}$。比较无偏估计 $\\hat p_{1}=\\bar X$ 与 $\\hat p_{2}=\\frac{1}{2}X_{1}+\\frac{1}{4}X_{2}+\\frac{1}{4}X_{3}$ 的有效性。",
+  "tags": [
+   "概率统计",
+   "有效估计",
+   "方差比较"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第250节 有效估计量",
+  "hints": [
+   "比较系数平方和：$\\frac13$ 与 $\\frac38$。"
+  ],
+  "answer": "$\\hat p_{1}$ 更有效",
+  "solution": "$D(\\hat p_1)=\\frac{p(1-p)}{3}$，$D(\\hat p_2)=p(1-p)\\left(\\frac14+\\frac1{16}+\\frac1{16}\\right)=\\frac{3}{8}p(1-p)$，故 $\\hat p_1$ 更有效。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "三个无偏估计按方差排序",
+  "statement": "设总体 $X$ 有 $E(X)=\\mu$，$D(X)=\\sigma^{2}$，样本 $X_{1},X_{2},X_{3}$。将无偏估计 $\\hat\\mu_{1}=\\frac{1}{3}\\sum X_{i}$，$\\hat\\mu_{2}=\\frac{1}{2}X_{1}+\\frac{1}{3}X_{2}+\\frac{1}{6}X_{3}$，$\\hat\\mu_{3}=0.4X_{1}+0.3X_{2}+0.3X_{3}$ 按有效性从高到低排序。",
+  "tags": [
+   "概率统计",
+   "有效估计",
+   "方差比较"
+  ],
+  "thinking": 5,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第250节 有效估计量",
+  "hints": [
+   "只比较系数平方和：$\\frac13$、$\\frac{14}{36}$、$0.34$。"
+  ],
+  "answer": "$\\hat\\mu_{1}>\\hat\\mu_{3}>\\hat\\mu_{2}$",
+  "solution": "$D_1=\\frac{\\sigma^{2}}{3}\\approx0.333\\sigma^{2}$，$D_2=\\sigma^{2}\\left(\\frac14+\\frac19+\\frac1{36}\\right)=\\frac{14}{36}\\sigma^{2}\\approx0.389\\sigma^{2}$，$D_3=0.34\\sigma^{2}$，方差小者更有效，故 $\\hat\\mu_1>\\hat\\mu_3>\\hat\\mu_2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零均值正态：平方和型估计的方差比较",
+  "statement": "设总体 $X\\sim N(0,\\sigma^{2})$，样本 $X_{1},X_{2},X_{3},X_{4}$。比较 $\\sigma^{2}$ 的无偏估计 $\\hat\\sigma_{1}^{2}=\\frac{1}{4}\\sum_{i=1}^{4}X_{i}^{2}$ 与 $\\hat\\sigma_{2}^{2}=\\frac{1}{2}(X_{1}^{2}+X_{2}^{2})$ 的有效性。",
+  "tags": [
+   "概率统计",
+   "有效估计",
+   "无偏估计"
+  ],
+  "thinking": 5,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第250节 有效估计量",
+  "hints": [
+   "$D(X_i^{2})=2\\sigma^{4}$，算两个估计量的方差再比较大小。"
+  ],
+  "answer": "",
+  "solution": "$D(\\hat\\sigma_1^{2})=\\frac{1}{16}\\cdot4\\cdot2\\sigma^{4}=\\frac{\\sigma^{4}}{2}$，$D(\\hat\\sigma_2^{2})=\\frac14\\cdot2\\cdot2\\sigma^{4}=\\sigma^{4}$，故 $\\hat\\sigma_1^{2}$ 更有效。",
+  "authorName": "柳贯一题型专项"
+ }
+]
