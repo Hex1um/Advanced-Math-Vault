@@ -35,7 +35,7 @@
         B('括号', '\\left($0\\right)'),
         B('大括号', '\\left\\{$0\\right\\}'),
         B('≤', '\\le'), B('≥', '\\ge'), B('≠', '\\neq'),
-        B('·', '\\cdot'), B('±', '\\pm'), B('…', '\\cdots'), B('≈', '\\approx'), B('°', '^{\\circ}'), B('百分', '\\%'), B('⌊⌋', '\\lfloor$0\\rfloor'), B('⌈⌉', '\\lceil$0\\rceil')
+        B('·', '\\cdot'), B('±', '\\pm'), B('…', '\\cdots'), B('≈', '\\approx'), B('°', '^{\\circ}'), B('百分', '\\%'), B('floor', '\\lfloor $0 \\rfloor', '向下取整'), B('ceil', '\\lceil $0 \\rceil', '向上取整')
       ]
     },
     {
@@ -46,7 +46,7 @@
         B('σ', '\\sigma'), B('φ', '\\varphi'), B('ω', '\\omega'), B('ρ', '\\rho'), B('τ', '\\tau'), B('Δ', '\\Delta'), B('Σ', '\\Sigma'), B('Ω', '\\Omega'),
         B('∈', '\\in'), B('∉', '\\notin'), B('⊂', '\\subset'), B('⊆', '\\subseteq'), B('∪', '\\cup'), B('∩', '\\cap'), B('∅', '\\varnothing'), B('∀', '\\forall'),
         B('∃', '\\exists'), B('→', '\\to'), B('⇒', '\\Rightarrow'), B('⇔', '\\Leftrightarrow'), B('∵', '\\because'), B('∴', '\\therefore'), B('∝', '\\propto'), B('⊥', '\\perp'),
-        B('∥', '\\parallel'), B('∠', '\\angle'), B('△', '\\triangle'), B('°', '^{\\circ}'), B('′', "'"), B('⌊⌋', '\\lfloor$0\\rfloor'), B('⌈⌉', '\\lceil$0\\rceil'), B('宋体', '\\text{$0}')
+        B('∥', '\\parallel'), B('∠', '\\angle'), B('△', '\\triangle'), B('°', '^{\\circ}'), B('′', "'"), B('floor', '\\lfloor $0 \\rfloor', '向下取整'), B('ceil', '\\lceil $0 \\rceil', '向上取整'), B('宋体', '\\text{$0}')
       ]
     },
     {
@@ -121,11 +121,23 @@
     const wrap = document.createElement('div');
     wrap.className = 'mk';
 
+    const bar = document.createElement('div');
+    bar.className = 'mk-bar';
+
     const toggle = document.createElement('button');
     toggle.type = 'button';
     toggle.className = 'mk-toggle';
     toggle.innerHTML = '<span>∑</span> 公式键盘';
-    wrap.appendChild(toggle);
+    bar.appendChild(toggle);
+
+    const previewBtn = document.createElement('button');
+    previewBtn.type = 'button';
+    previewBtn.className = 'mk-toggle';
+    previewBtn.innerHTML = '预览';
+    previewBtn.title = '用 KaTeX 渲染当前输入的内容';
+    bar.appendChild(previewBtn);
+
+    wrap.appendChild(bar);
 
     const panel = document.createElement('div');
     panel.className = 'mk-panel';
@@ -138,6 +150,42 @@
     panel.appendChild(tabs);
     panel.appendChild(grid);
     wrap.appendChild(panel);
+
+    /* 预览区：和正文同样的 markdown + KaTeX 渲染 */
+    const preview = document.createElement('div');
+    preview.className = 'mk-preview md';
+    preview.style.display = 'none';
+    wrap.appendChild(preview);
+
+    let previewOpen = false;
+    let timer = null;
+
+    function paintPreview() {
+      if (!previewOpen) return;
+      const text = ta.value;
+      if (!text.trim()) {
+        preview.innerHTML = '<span class="muted small">（输入内容后这里会显示渲染效果）</span>';
+        return;
+      }
+      if (window.Md && window.Md.render) window.Md.render(preview, text);
+      else preview.textContent = text;
+    }
+
+    function schedulePreview() {
+      if (!previewOpen) return;
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(paintPreview, 220);
+    }
+
+    ta.addEventListener('input', schedulePreview);
+    ta.addEventListener('change', schedulePreview);
+
+    previewBtn.addEventListener('click', function () {
+      previewOpen = !previewOpen;
+      preview.style.display = previewOpen ? 'block' : 'none';
+      previewBtn.classList.toggle('on', previewOpen);
+      if (previewOpen) { paintPreview(); preview.scrollIntoView({ block: 'nearest' }); }
+    });
 
     function renderTab(i) {
       TABS.forEach(function (t, k) {

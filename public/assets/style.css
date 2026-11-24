@@ -1372,3 +1372,16 @@ html[data-theme="dark"] .mk-tab.on { background: #2f5fd0; border-color: #2f5fd0;
   .mk-grid { gap: 4px; }
   .mk-panel { padding: 6px; }
 }
+
+.mk-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.mk-preview {
+  margin-top: 8px; padding: 10px 13px; min-height: 44px;
+  border: 1px dashed var(--line-2); border-radius: 8px;
+  background: var(--surface); font-size: 14px; line-height: 1.95; color: var(--text);
+}
+.mk-preview::before {
+  content: "预览";
+  display: block; margin-bottom: 4px;
+  font-size: 11px; letter-spacing: .08em; color: var(--muted);
+  font-family: var(--mono);
+}
