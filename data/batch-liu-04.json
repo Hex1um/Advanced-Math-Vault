@@ -1,0 +1,3800 @@
+[
+ {
+  "title": "旋转体体积：柱壳法遇根式",
+  "statement": "区域由 $y=\\sqrt{x}$、$x=1$、$x=4$ 与 $x$ 轴围成，绕 $y$ 轴旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "柱壳法"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "柱壳法被积函数是 $x\\sqrt{x}=x^{3/2}$，用幂函数公式。"
+  ],
+  "answer": "$\\frac{124\\pi}{5}$",
+  "solution": "$V=2\\pi\\int_{1}^{4}x^{3/2}\\mathrm{d}x=2\\pi\\cdot\\frac{2}{5}\\big[x^{5/2}\\big]_{1}^{4}=\\frac{4\\pi}{5}(32-1)=\\frac{124\\pi}{5}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "旋转体体积：指数绕y轴",
+  "statement": "区域由 $y=e^{x}$、$x=0$、$x=1$ 与 $x$ 轴围成，绕 $y$ 轴旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "柱壳法"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "柱壳法得 $2\\pi\\int x e^{x}\\mathrm{d}x$，用分部积分。"
+  ],
+  "answer": "$2\\pi$",
+  "solution": "$V=2\\pi\\int_{0}^{1}xe^{x}\\mathrm{d}x=2\\pi\\big[(x-1)e^{x}\\big]_{0}^{1}=2\\pi$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "旋转体体积：正弦拱绕y轴",
+  "statement": "区域由 $y=\\sin x$、$x=0$、$x=\\pi$ 与 $x$ 轴围成，绕 $y$ 轴旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "柱壳法"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "$\\int_{0}^{\\pi}x\\sin x\\,\\mathrm{d}x$ 用分部积分，结果为 $\\pi$。"
+  ],
+  "answer": "$2\\pi^{2}$",
+  "solution": "$V=2\\pi\\int_{0}^{\\pi}x\\sin x\\,\\mathrm{d}x=2\\pi\\cdot\\pi=2\\pi^{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "旋转体体积：双曲线绕y轴",
+  "statement": "区域由 $y=\\frac{1}{x}$、$x=1$、$x=2$ 与 $x$ 轴围成，绕 $y$ 轴旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "柱壳法"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "柱壳法中被积函数 $x\\cdot\\frac{1}{x}=1$，被积函数最简单的情形。"
+  ],
+  "answer": "$2\\pi$",
+  "solution": "$V=2\\pi\\int_{1}^{2}x\\cdot\\frac{1}{x}\\,\\mathrm{d}x=2\\pi$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "旋转体体积：y轴侧区域绕x轴",
+  "statement": "区域由曲线 $y=x^{2}$、$y$ 轴与直线 $y=1$ 围成，绕 $x$ 轴旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "圆盘法"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "截面是圆环，外半径 $1$、内半径 $x^{2}$，积分区间 $[0,1]$。"
+  ],
+  "answer": "$\\frac{4\\pi}{5}$",
+  "solution": "$V=\\pi\\int_{0}^{1}(1-x^{4})\\mathrm{d}x=\\pi\\big(1-\\frac{1}{5}\\big)=\\frac{4\\pi}{5}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "旋转体体积：三次曲线围成绕x轴",
+  "statement": "区域由曲线 $y=x^{3}$、$y$ 轴与直线 $y=1$ 围成，绕 $x$ 轴旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "圆盘法"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "外半径 $1$、内半径 $x^{3}$，注意 $(x^{3})^{2}=x^{6}$。"
+  ],
+  "answer": "$\\frac{6\\pi}{7}$",
+  "solution": "$V=\\pi\\int_{0}^{1}(1-x^{6})\\mathrm{d}x=\\pi\\big(1-\\frac{1}{7}\\big)=\\frac{6\\pi}{7}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "旋转体体积：正弦与y=1之间绕x轴",
+  "statement": "区域由曲线 $y=\\sin x$、$y$ 轴与直线 $y=1$ 围成，绕 $x$ 轴旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "圆盘法"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "曲线与 $y=1$ 的交点是 $x=\\frac{\\pi}{2}$，内半径 $\\sin x$。"
+  ],
+  "answer": "$\\frac{\\pi^{2}}{4}$",
+  "solution": "$V=\\pi\\int_{0}^{\\pi/2}(1-\\sin^{2}x)\\mathrm{d}x=\\pi\\int_{0}^{\\pi/2}\\cos^{2}x\\,\\mathrm{d}x=\\frac{\\pi^{2}}{4}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "旋转体体积：直线与y=1之间绕x轴",
+  "statement": "区域由直线 $y=1-x$、$y$ 轴与直线 $y=1$ 围成，绕 $x$ 轴旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "圆盘法"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "内半径 $1-x$，区间 $[0,1]$，注意 $(1-x)^{2}$ 的积分。"
+  ],
+  "answer": "$\\frac{2\\pi}{3}$",
+  "solution": "$V=\\pi\\int_{0}^{1}\\big[1-(1-x)^{2}\\big]\\mathrm{d}x=\\pi\\big(1-\\frac{1}{3}\\big)=\\frac{2\\pi}{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "旋转体体积：上半圆与y=1之间绕x轴",
+  "statement": "区域由曲线 $y=\\sqrt{1-x^{2}}$、$y$ 轴与直线 $y=1$ 围成，绕 $x$ 轴旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "圆盘法"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "内半径平方 $1-x^{2}$ 恰好与 $1$ 相消，只剩 $x^{2}$。"
+  ],
+  "answer": "$\\frac{\\pi}{3}$",
+  "solution": "$V=\\pi\\int_{0}^{1}\\big[1-(1-x^{2})\\big]\\mathrm{d}x=\\pi\\int_{0}^{1}x^{2}\\mathrm{d}x=\\frac{\\pi}{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "非坐标轴旋转：绕x=2柱壳法",
+  "statement": "区域由 $y=x^{2}$、$x=1$ 与 $x$ 轴围成，绕直线 $x=2$ 旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "柱壳法"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "柱壳半径是到直线的距离 $2-x$，不是 $x$。"
+  ],
+  "answer": "$\\frac{5\\pi}{6}$",
+  "solution": "$V=2\\pi\\int_{0}^{1}(2-x)x^{2}\\mathrm{d}x=2\\pi\\big(\\frac{2}{3}-\\frac{1}{4}\\big)=\\frac{5\\pi}{6}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "非坐标轴旋转：绕x=-1柱壳法",
+  "statement": "区域由 $y=x^{2}$、$x=1$ 与 $x$ 轴围成，绕直线 $x=-1$ 旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "柱壳法"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "半径为 $x+1$，与上一题只是平移，写法一样。"
+  ],
+  "answer": "$\\frac{7\\pi}{6}$",
+  "solution": "$V=2\\pi\\int_{0}^{1}(x+1)x^{2}\\mathrm{d}x=2\\pi\\big(\\frac{1}{4}+\\frac{1}{3}\\big)=\\frac{7\\pi}{6}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "非坐标轴旋转：绕y=-1垫片法",
+  "statement": "区域由 $y=x^{2}$、$x=0$ 与 $y=1$ 围成，绕直线 $y=-1$ 旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "垫片法"
+  ],
+  "thinking": 8,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "两个半径分别是 $1+1$ 与 $x^{2}+1$，作差后积分。"
+  ],
+  "answer": "$\\frac{32\\pi}{15}$",
+  "solution": "$V=\\pi\\int_{0}^{1}\\big[4-(1+x^{2})^{2}\\big]\\mathrm{d}x=\\pi\\big(3-\\frac{2}{3}-\\frac{1}{5}\\big)=\\frac{32\\pi}{15}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "非坐标轴旋转：绕y=2垫片法",
+  "statement": "区域由 $y=x^{2}$、$x=1$ 与 $x$ 轴围成，绕直线 $y=2$ 旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "垫片法"
+  ],
+  "thinking": 8,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "外半径 $2$、内半径 $2-x^{2}$，两者平方相减。"
+  ],
+  "answer": "$\\frac{17\\pi}{15}$",
+  "solution": "$V=\\pi\\int_{0}^{1}\\big[4-(2-x^{2})^{2}\\big]\\mathrm{d}x=\\pi\\big(3-\\frac{4}{3}+\\frac{1}{5}\\big)=\\frac{17\\pi}{15}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "非坐标轴旋转：绕x=π平移技巧",
+  "statement": "区域由 $y=\\sin x$、$x=0$、$x=\\pi$ 与 $x$ 轴围成，绕直线 $x=\\pi$ 旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "对称性"
+  ],
+  "thinking": 8,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "令 $u=\\pi-x$ 把旋转轴移到 $y$ 轴上，图形变回 $\\sin$ 拱绕 $y$ 轴。"
+  ],
+  "answer": "$2\\pi^{2}$",
+  "solution": "令 $u=\\pi-x$，$V=2\\pi\\int_{0}^{\\pi}u\\sin u\\,\\mathrm{d}u=2\\pi\\cdot\\pi=2\\pi^{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "斜线旋转：绕y=2x+3的Pappus法",
+  "statement": "区域由直线 $y=x$、$y=0$、$x=1$ 围成，绕直线 $y=2x+3$ 旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "古尔丁定理"
+  ],
+  "thinking": 8,
+  "difficulty": 8,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "先算面积与形心到直线 $2x-y+3=0$ 的距离，再用 $V=2\\pi\\bar\\rho S$。"
+  ],
+  "answer": "$\\frac{4\\sqrt{5}\\pi}{5}$",
+  "solution": "形心 $(\\frac23,\\frac13)$，$\\bar\\rho=\\frac{4}{\\sqrt5}$，$V=2\\pi\\cdot\\frac{4}{\\sqrt5}\\cdot\\frac12=\\frac{4\\sqrt5\\pi}{5}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "斜线旋转：绕y=-x+2",
+  "statement": "区域由 $y=x^{2}$、$x=1$ 与 $x$ 轴围成，绕直线 $y=-x+2$ 旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "古尔丁定理"
+  ],
+  "thinking": 8,
+  "difficulty": 8,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "直线写成 $x+y-2=0$，距离公式分母是 $\\sqrt{2}$。"
+  ],
+  "answer": "$\\frac{19\\sqrt{2}\\pi}{60}$",
+  "solution": "$S=\\frac{1}{3}$，形心 $(\\frac34,\\frac{3}{10})$，$\\bar\\rho=\\frac{1}{\\sqrt2}\\big(2-\\frac34-\\frac{3}{10}\\big)$，$V=2\\pi\\bar\\rho S=\\frac{19\\sqrt2\\pi}{60}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "斜线旋转：绕y=-2x+4",
+  "statement": "区域由直线 $y=x$、$y=0$、$x=1$ 围成，绕直线 $y=-2x+4$ 旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "古尔丁定理"
+  ],
+  "thinking": 8,
+  "difficulty": 8,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "形心是 $\\big(\\frac23,\\frac13\\big)$，代入 $2x+y-4=0$ 的距离公式。"
+  ],
+  "answer": "$\\frac{7\\sqrt{5}\\pi}{15}$",
+  "solution": "$\\bar\\rho=\\frac{1}{\\sqrt5}\\big|2\\cdot\\frac23+\\frac13-4\\big|=\\frac{7}{3\\sqrt5}$，$V=2\\pi\\cdot\\frac{7}{3\\sqrt5}\\cdot\\frac12=\\frac{7\\sqrt5\\pi}{15}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "斜线旋转：绕y=2x+3的三角形",
+  "statement": "区域由直线 $y=1-x$、$x=0$、$y=0$ 围成，绕直线 $y=2x+3$ 旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "古尔丁定理"
+  ],
+  "thinking": 8,
+  "difficulty": 8,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "三角形形心是 $\\big(\\frac13,\\frac13\\big)$，先求面积再求距离。"
+  ],
+  "answer": "$\\frac{2\\sqrt{5}\\pi}{3}$",
+  "solution": "$S=\\frac12$，$\\bar\\rho=\\frac{1}{\\sqrt5}\\big(\\frac23+\\frac13+3\\big)=\\frac{4}{\\sqrt5}$，$V=2\\pi\\cdot\\frac{4}{\\sqrt5}\\cdot\\frac12=\\frac{4\\pi}{\\sqrt5}$ 化为 $\\frac{4\\sqrt5\\pi}{5}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "平面面积：指数乘正弦的无界区域",
+  "statement": "求由曲线 $y=e^{-x}\\sin x$ 与 $x$ 轴在第一象限内所围成的所有面积。",
+  "tags": [
+   "一元积分",
+   "平面面积",
+   "无穷级数求和"
+  ],
+  "thinking": 8,
+  "difficulty": 8,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第64节 平面面积",
+  "hints": [
+   "第一象限有无数个波峰，先算一拱 $\\int_0^\\pi$，再按公比 $e^{-\\pi}$ 求等比级数。"
+  ],
+  "answer": "$\\frac{e^{\\pi}+1}{2(e^{\\pi}-1)}$",
+  "solution": "一拱面积 $\\frac{1+e^{-\\pi}}{2}$，总和 $S=\\frac{1+e^{-\\pi}}{2}\\cdot\\frac{1}{1-e^{-\\pi}}=\\frac{e^{\\pi}+1}{2(e^{\\pi}-1)}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "平面面积：指数乘余弦的无界区域",
+  "statement": "求由曲线 $y=e^{-x}\\cos x$ 与 $x$ 轴在第一象限内所围成的所有面积。",
+  "tags": [
+   "一元积分",
+   "平面面积",
+   "无穷级数求和"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第64节 平面面积",
+  "hints": [
+   "余弦的每一块以 $\\pi$ 为周期、正负交替，取绝对值后同样成等比数列。"
+  ],
+  "answer": "$\\frac{e^{\\pi}+2e^{\\pi/2}-1}{2(e^{\\pi}-1)}$",
+  "solution": "首块 $\\int_{-\\pi/2}^{\\pi/2}e^{-x}\\cos x\\,\\mathrm{d}x=\\frac{e^{\\pi/2}+e^{-\\pi/2}}{2}$，按公比 $e^{-\\pi}$ 求和得 $\\frac{e^{\\pi}+2e^{\\pi/2}-1}{2(e^{\\pi}-1)}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "平面面积：两条对数曲线与x轴",
+  "statement": "求由曲线 $y=\\ln x$、$y=\\ln(1-x)$ 及 $x$ 轴所围平面图形的面积。",
+  "tags": [
+   "一元积分",
+   "平面面积",
+   "对称性"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第64节 平面面积",
+  "hints": [
+   "两曲线交于 $x=\\frac12$，图形关于 $x=\\frac12$ 对称，只需算 $x\\in(0,\\frac12)$ 再乘 2。"
+  ],
+  "answer": "$1-\\ln 2$",
+  "solution": "取上半包络：$S=2\\int_{1/2}^{1}(-\\ln x)\\mathrm{d}x=2\\big[x-x\\ln x\\big]_{1/2}^{1}=1-\\ln 2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "平面面积：指数曲线与水平线",
+  "statement": "求由曲线 $y=e^{x}$、$y=e^{-x}$ 与直线 $y=e$ 所围平面图形的面积。",
+  "tags": [
+   "一元积分",
+   "平面面积",
+   "对称性"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第64节 平面面积",
+  "hints": [
+   "图形关于 $y$ 轴对称，左半是 $\\ln y$ 到 $0$，也可直接对 $x$ 积分。"
+  ],
+  "answer": "$2$",
+  "solution": "$S=\\int_{-1}^{1}(e-e^{|x|})\\mathrm{d}x=2\\big[e-e+1\\big]=2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "平面面积：正弦余弦各块面积之和",
+  "statement": "求由曲线 $y=\\sin x$ 与 $y=\\cos x$ 在区间 $\\big[0,\\frac{\\pi}{2}\\big]$ 内所围成的各块面积之和。",
+  "tags": [
+   "一元积分",
+   "平面面积",
+   "绝对值处理"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第64节 平面面积",
+  "hints": [
+   "交点在 $x=\\frac{\\pi}{4}$，分两段比较大小，答案与 $\\int|\\sin x-\\cos x|$ 一致。"
+  ],
+  "answer": "$2\\sqrt{2}-2$",
+  "solution": "$S=\\int_{0}^{\\pi/4}(\\cos x-\\sin x)\\mathrm{d}x+\\int_{\\pi/4}^{\\pi/2}(\\sin x-\\cos x)\\mathrm{d}x=2\\sqrt2-2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "平面面积：四次曲线与x轴",
+  "statement": "求由曲线 $y=x^{4}-5x^{2}+4$ 与 $x$ 轴所围成的封闭图形的总面积。",
+  "tags": [
+   "一元积分",
+   "平面面积",
+   "偶函数对称"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第64节 平面面积",
+  "hints": [
+   "零点为 $\\pm1,\\pm2$，图形关于 $y$ 轴对称，算 $[0,1]$、$[1,2]$ 两段再乘 2。"
+  ],
+  "answer": "$8$",
+  "solution": "$f=(x^{2}-1)(x^{2}-4)$，零点 $\\pm1,\\pm2$；对称区间的三段取绝对值后相加，得 $8$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "平面面积：分式函数与直线",
+  "statement": "求由曲线 $y=\\frac{1}{x^{2}+1}$ 与 $y=\\frac{x^{2}}{2}$ 所围成的平面图形面积。",
+  "tags": [
+   "一元积分",
+   "平面面积",
+   "交点定位"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第64节 平面面积",
+  "hints": [
+   "两函数都是偶函数，先解 $x\\in(0,1)$ 上的交点，再利用对称性乘 2。"
+  ],
+  "answer": "$\\frac{\\pi}{2}-\\frac{1}{3}$",
+  "solution": "交点 $x=\\pm1$，$S=2\\int_{0}^{1}\\Big(\\frac{1}{1+x^{2}}-\\frac{x^{2}}{2}\\Big)\\mathrm{d}x=2\\big(\\frac{\\pi}{4}-\\frac16\\big)=\\frac{\\pi}{2}-\\frac13$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "平面面积：绝对值的抛物线与水平线",
+  "statement": "求由曲线 $y=|x^{2}-1|$ 与直线 $y=3$ 所围平面图形的面积。",
+  "tags": [
+   "一元积分",
+   "平面面积",
+   "分段积分"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第64节 平面面积",
+  "hints": [
+   "令 $|x^{2}-1|=3$ 得 $x=\\pm2$，中间段 $|x^{2}-1|=1-x^{2}$。"
+  ],
+  "answer": "$8$",
+  "solution": "$S=\\int_{-2}^{-1}(x^{2}-4)\\mathrm{d}x+\\int_{-1}^{1}(2-x^{2})\\mathrm{d}x+\\int_{1}^{2}(x^{2}-4)\\mathrm{d}x=8$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "平面面积：抛物线与直线",
+  "statement": "求由抛物线 $y^{2}=4x$ 与直线 $y=x-3$ 所围平面图形的面积。",
+  "tags": [
+   "一元积分",
+   "平面面积",
+   "对y积分"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第64节 平面面积",
+  "hints": [
+   "交点为 $(1,-2)$、$(9,6)$，把 $x$ 看成 $y$ 的函数积分更省事。"
+  ],
+  "answer": "$\\frac{64}{3}$",
+  "solution": "$S=\\int_{-2}^{6}\\big(y+3-\\frac{y^{2}}{4}\\big)\\mathrm{d}y=\\big[\\frac{y^{2}}{2}+3y-\\frac{y^{3}}{12}\\big]_{-2}^{6}=\\frac{64}{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "平面面积：反正切与直线",
+  "statement": "求由曲线 $y=\\arctan x$ 与直线 $y=\\frac{\\pi}{4}x$ 所围平面图形的面积。",
+  "tags": [
+   "一元积分",
+   "平面面积",
+   "对称性"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第64节 平面面积",
+  "hints": [
+   "交点 $x=0,\\pm1$，且两函数都是奇函数，两半面积相等。"
+  ],
+  "answer": "$\\frac{\\pi}{4}-\\ln 2$",
+  "solution": "$S=2\\int_{0}^{1}\\big(\\frac{\\pi}{4}x-\\arctan x\\big)\\mathrm{d}x=\\frac{\\pi}{4}-\\ln 2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "平面面积：摆线一拱",
+  "statement": "求摆线 $x=a(t-\\sin t)$，$y=a(1-\\cos t)$ 一拱（$0\\leq t\\leq 2\\pi$）与 $x$ 轴所围的面积。",
+  "tags": [
+   "一元积分",
+   "平面面积",
+   "参数方程"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第64节 平面面积",
+  "hints": [
+   "参数方程面积 $S=\\int y\\,\\mathrm{d}x=\\int y(t)x'(t)\\,\\mathrm{d}t$，注意 $\\mathrm{d}x=a(1-\\cos t)\\mathrm{d}t$。"
+  ],
+  "answer": "$3\\pi a^{2}$",
+  "solution": "$S=\\int_{0}^{2\\pi}a^{2}(1-\\cos t)^{2}\\mathrm{d}t=a^{2}\\big(2\\pi+0+\\pi\\big)=3\\pi a^{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "平面面积：星形线",
+  "statement": "求星形线 $x=a\\cos^{3}t$，$y=a\\sin^{3}t$（$0\\leq t\\leq 2\\pi$）所围平面图形的面积。",
+  "tags": [
+   "一元积分",
+   "平面面积",
+   "参数方程"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第64节 平面面积",
+  "hints": [
+   "四分之一区域对应 $t\\in[0,\\frac{\\pi}{2}]$，先算第一象限再乘 4。"
+  ],
+  "answer": "$\\frac{3\\pi a^{2}}{8}$",
+  "solution": "$S=4\\int_{0}^{\\pi/2}a\\sin^{3}t\\cdot 3a\\cos^{2}t\\sin t\\,\\mathrm{d}t=12a^{2}\\int_{0}^{\\pi/2}\\sin^{4}t\\cos^{2}t\\,\\mathrm{d}t=\\frac{3\\pi a^{2}}{8}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "平面面积：椭圆",
+  "statement": "求椭圆 $x=a\\cos t$，$y=b\\sin t$（$0\\leq t\\leq 2\\pi$）所围平面图形的面积。",
+  "tags": [
+   "一元积分",
+   "平面面积",
+   "参数方程"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第64节 平面面积",
+  "hints": [
+   "直接套参数方程面积公式，或把椭圆方程化为 $\\frac{x^{2}}{a^{2}}+\\frac{y^{2}}{b^{2}}=1$ 后缩放圆。"
+  ],
+  "answer": "$\\pi ab$",
+  "solution": "$S=\\int_{0}^{2\\pi}b\\sin t\\cdot(-a\\sin t)\\mathrm{d}t$ 取绝对值后 $=\\pi ab$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "平面面积：参数曲线的封闭叶瓣",
+  "statement": "求参数曲线 $x=t^{2}$，$y=t-\\frac{t^{3}}{3}$ 与 $x$ 轴所围成的封闭图形面积。",
+  "tags": [
+   "一元积分",
+   "平面面积",
+   "参数方程"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第64节 平面面积",
+  "hints": [
+   "令 $y=0$ 得 $t=0,\\pm\\sqrt{3}$，左右两支对称，算 $[0,\\sqrt{3}]$ 后乘 2。"
+  ],
+  "answer": "$\\frac{8\\sqrt{3}}{5}$",
+  "solution": "$S=2\\int_{0}^{\\sqrt{3}}\\big(t-\\frac{t^{3}}{3}\\big)2t\\,\\mathrm{d}t=2\\big[\\frac{t^{3}}{3}-\\frac{t^{5}}{15}\\big]_{0}^{\\sqrt3}=\\frac{8\\sqrt3}{5}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "平面面积：正弦参数曲线",
+  "statement": "求曲线 $x=\\sin t$，$y=\\sin 2t$ 在 $0\\leq t\\leq \\pi$ 上的一段与 $x$ 轴所围成的平面图形面积。",
+  "tags": [
+   "一元积分",
+   "平面面积",
+   "参数方程"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第64节 平面面积",
+  "hints": [
+   "$\\mathrm{d}x=\\cos t\\,\\mathrm{d}t$，注意在 $t=\\frac{\\pi}{2}$ 处 $x$ 折返要分段。"
+  ],
+  "answer": "$\\frac{4}{3}$",
+  "solution": "$S=\\int_{0}^{\\pi/2}\\sin 2t\\cos t\\,\\mathrm{d}t+\\Big|\\int_{\\pi/2}^{\\pi}\\sin 2t\\cos t\\,\\mathrm{d}t\\Big|=\\frac23+\\frac23=\\frac43$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "平面面积：心形线",
+  "statement": "求心形线 $r=a(1+\\cos\\theta)$ 所围平面图形的面积。",
+  "tags": [
+   "一元积分",
+   "平面面积",
+   "极坐标"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第64节 平面面积",
+  "hints": [
+   "极坐标面积 $S=\\frac12\\int r^{2}\\mathrm{d}\\theta$，周期 $2\\pi$，区间取 $[0,2\\pi]$。"
+  ],
+  "answer": "$\\frac{3\\pi a^{2}}{2}$",
+  "solution": "$S=\\frac{a^{2}}{2}\\int_{0}^{2\\pi}(1+\\cos\\theta)^{2}\\mathrm{d}\\theta=\\frac{a^{2}}{2}\\big(2\\pi+\\pi\\big)=\\frac{3\\pi a^{2}}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "平面面积：双纽线总面积",
+  "statement": "求双纽线 $r^{2}=a^{2}\\cos 2\\theta$ 所围平面图形的总面积。",
+  "tags": [
+   "一元积分",
+   "平面面积",
+   "极坐标"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第64节 平面面积",
+  "hints": [
+   "右叶对应 $\\theta\\in[-\\frac{\\pi}{4},\\frac{\\pi}{4}]$，两叶面积相同，乘 2。"
+  ],
+  "answer": "$a^{2}$",
+  "solution": "$S=2\\cdot\\frac12\\int_{-\\pi/4}^{\\pi/4}a^{2}\\cos 2\\theta\\,\\mathrm{d}\\theta=a^{2}\\big[\\frac{\\sin 2\\theta}{2}\\big]_{-\\pi/4}^{\\pi/4}=a^{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "平面面积：三叶玫瑰线",
+  "statement": "求三叶玫瑰线 $r=a\\cos 3\\theta$ 所围平面图形的总面积。",
+  "tags": [
+   "一元积分",
+   "平面面积",
+   "极坐标"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第64节 平面面积",
+  "hints": [
+   "一叶对应 $\\theta\\in[-\\frac{\\pi}{6},\\frac{\\pi}{6}]$，共三叶且面积相等。"
+  ],
+  "answer": "$\\frac{\\pi a^{2}}{4}$",
+  "solution": "$S=3\\cdot\\frac{a^{2}}{2}\\int_{-\\pi/6}^{\\pi/6}\\cos^{2}3\\theta\\,\\mathrm{d}\\theta=3\\cdot\\frac{a^{2}}{2}\\cdot\\frac{\\pi}{6}=\\frac{\\pi a^{2}}{4}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "平面面积：阿基米德螺线",
+  "statement": "求阿基米德螺线 $r=a\\theta$ 在 $0\\leq\\theta\\leq 2\\pi$ 上的一段与极轴所围图形的面积。",
+  "tags": [
+   "一元积分",
+   "平面面积",
+   "极坐标"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第64节 平面面积",
+  "hints": [
+   "直接用 $\\frac12\\int_{0}^{2\\pi}a^{2}\\theta^{2}\\mathrm{d}\\theta$，不必管与极轴的封口线。"
+  ],
+  "answer": "$\\frac{4\\pi^{3}a^{2}}{3}$",
+  "solution": "$S=\\frac{a^{2}}{2}\\int_{0}^{2\\pi}\\theta^{2}\\mathrm{d}\\theta=\\frac{a^{2}}{2}\\cdot\\frac{8\\pi^{3}}{3}=\\frac{4\\pi^{3}a^{2}}{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "平面面积：圆加心形的极坐标曲线",
+  "statement": "求曲线 $r=2+\\cos\\theta$ 所围平面图形的面积。",
+  "tags": [
+   "一元积分",
+   "平面面积",
+   "极坐标"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第64节 平面面积",
+  "hints": [
+   "$r>0$ 恒成立，区间取 $[0,2\\pi]$，展开后 $\\cos\\theta$ 的一次项积分为零。"
+  ],
+  "answer": "$\\frac{9\\pi}{2}$",
+  "solution": "$S=\\frac12\\int_{0}^{2\\pi}(4+4\\cos\\theta+\\cos^{2}\\theta)\\mathrm{d}\\theta=\\frac12\\big(8\\pi+\\pi\\big)=\\frac{9\\pi}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "函数平均值：多项式乘指数",
+  "statement": "求函数 $f(x)=x^{2}e^{-x}$ 在区间 $[0,1]$ 上的平均值。",
+  "tags": [
+   "一元积分",
+   "函数平均值",
+   "分部积分"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第65节 函数平均值",
+  "hints": [
+   "平均值公式 $\\bar f=\\frac{1}{b-a}\\int_a^b f\\,\\mathrm{d}x$，$\\int x^{2}e^{-x}\\mathrm{d}x$ 要分部两次。"
+  ],
+  "answer": "$2-\\frac{5}{e}$",
+  "solution": "$\\bar f=\\int_{0}^{1}x^{2}e^{-x}\\mathrm{d}x=\\big[-(x^{2}+2x+2)e^{-x}\\big]_{0}^{1}=2-\\frac{5}{e}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "函数平均值：x乘正弦",
+  "statement": "求函数 $f(x)=x\\sin x$ 在区间 $[0,\\pi]$ 上的平均值。",
+  "tags": [
+   "一元积分",
+   "函数平均值",
+   "分部积分"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第65节 函数平均值",
+  "hints": [
+   "区间长度为 $\\pi$，$\\int_0^\\pi x\\sin x\\,\\mathrm{d}x$ 用分部积分得 $\\pi$。"
+  ],
+  "answer": "$1$",
+  "solution": "$\\bar f=\\frac{1}{\\pi}\\int_{0}^{\\pi}x\\sin x\\,\\mathrm{d}x=\\frac{\\pi}{\\pi}=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "函数平均值：对数乘x",
+  "statement": "求函数 $f(x)=x\\ln x$ 在区间 $[1,e]$ 上的平均值。",
+  "tags": [
+   "一元积分",
+   "函数平均值",
+   "分部积分"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第65节 函数平均值",
+  "hints": [
+   "$\\int x\\ln x\\,\\mathrm{d}x=\\frac{x^{2}}{2}\\ln x-\\frac{x^{2}}{4}$，再除以区间长度 $e-1$。"
+  ],
+  "answer": "$\\frac{e^{2}+1}{4(e-1)}$",
+  "solution": "$\\bar f=\\frac{1}{e-1}\\Big[\\frac{x^{2}}{2}\\ln x-\\frac{x^{2}}{4}\\Big]_{1}^{e}=\\frac{e^{2}+1}{4(e-1)}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "函数平均值：半圆面积",
+  "statement": "求函数 $f(x)=\\sqrt{1-x^{2}}$ 在区间 $[-1,1]$ 上的平均值。",
+  "tags": [
+   "一元积分",
+   "函数平均值",
+   "几何意义"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第65节 函数平均值",
+  "hints": [
+   "积分就是单位半圆面积 $\\frac{\\pi}{2}$，除以区间长度 2。"
+  ],
+  "answer": "$\\frac{\\pi}{4}$",
+  "solution": "$\\bar f=\\frac{1}{2}\\cdot\\frac{\\pi}{2}=\\frac{\\pi}{4}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "函数平均值：指数乘余弦",
+  "statement": "求函数 $f(x)=e^{x}\\cos x$ 在区间 $\\big[0,\\frac{\\pi}{2}\\big]$ 上的平均值。",
+  "tags": [
+   "一元积分",
+   "函数平均值",
+   "分部积分"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第65节 函数平均值",
+  "hints": [
+   "$\\int e^{x}\\cos x\\,\\mathrm{d}x=\\frac{e^{x}}{2}(\\sin x+\\cos x)$，直接代上下限。"
+  ],
+  "answer": "$\\frac{e^{\\pi/2}-1}{\\pi}$",
+  "solution": "$\\bar f=\\frac{2}{\\pi}\\cdot\\frac{e^{x}}{2}(\\sin x+\\cos x)\\Big|_{0}^{\\pi/2}=\\frac{e^{\\pi/2}-1}{\\pi}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "函数平均值：含积分常数的函数方程",
+  "statement": "连续函数 $f(x)=xe^{x}+2\\int_{0}^{1}f(t)\\,\\mathrm{d}t$，求 $f(x)$ 在 $[0,1]$ 上的平均值。",
+  "tags": [
+   "一元积分",
+   "函数平均值",
+   "积分方程"
+  ],
+  "thinking": 8,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第65节 函数平均值",
+  "hints": [
+   "平均值恰好等于 $\\int_0^1 f=A$，令 $A$ 为常数把方程变成关于 $A$ 的一次方程。"
+  ],
+  "answer": "$-1$",
+  "solution": "令 $A=\\int_{0}^{1}f$，两边积分：$A=1+2A$，故 $A=-1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "函数平均值：含积分常数的三角函数",
+  "statement": "连续函数 $f(x)=x^{2}\\cos x+3\\int_{0}^{\\pi}f(t)\\,\\mathrm{d}t$，求 $f(x)$ 在 $[0,\\pi]$ 上的平均值。",
+  "tags": [
+   "一元积分",
+   "函数平均值",
+   "积分方程"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第65节 函数平均值",
+  "hints": [
+   "注意平均值是 $\\frac{A}{\\pi}$（$A=\\int_0^\\pi f$），而方程里出现的是 $3\\pi A$。"
+  ],
+  "answer": "$\\frac{2}{3\\pi-1}$",
+  "solution": "$A=\\int_{0}^{\\pi}x^{2}\\cos x\\,\\mathrm{d}x+3\\pi A=-2\\pi+3\\pi A$，得 $A=\\frac{2\\pi}{3\\pi-1}$，平均值 $=\\frac{A}{\\pi}=\\frac{2}{3\\pi-1}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "函数平均值：上限变积分方程",
+  "statement": "连续函数 $f(x)=e^{x}\\sin x+2\\int_{0}^{\\pi/2}f(t)\\,\\mathrm{d}t$，求 $f(x)$ 在 $\\big[0,\\frac{\\pi}{2}\\big]$ 上的平均值。",
+  "tags": [
+   "一元积分",
+   "函数平均值",
+   "积分方程"
+  ],
+  "thinking": 9,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第65节 函数平均值",
+  "hints": [
+   "记 $A=\\int_{0}^{\\pi/2}f$，则 $A=\\frac{e^{\\pi/2}+1}{2}+\\pi A$，解出 $A$ 再除以 $\\frac{\\pi}{2}$。"
+  ],
+  "answer": "$-\\frac{e^{\\pi/2}+1}{\\pi(\\pi-1)}$",
+  "solution": "$A(1-\\pi)=\\frac{e^{\\pi/2}+1}{2}$，平均值 $=\\frac{2A}{\\pi}=-\\frac{e^{\\pi/2}+1}{\\pi(\\pi-1)}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "函数平均值：x乘正弦的积分方程",
+  "statement": "连续函数 $f(x)=x\\sin x+2\\int_{0}^{\\pi}f(t)\\,\\mathrm{d}t$，求 $f(x)$ 在 $[0,\\pi]$ 上的平均值。",
+  "tags": [
+   "一元积分",
+   "函数平均值",
+   "积分方程"
+  ],
+  "thinking": 8,
+  "difficulty": 8,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第65节 函数平均值",
+  "hints": [
+   "$\\int_{0}^{\\pi}x\\sin x\\,\\mathrm{d}x=\\pi$，注意常数项积出 $2\\pi A$。"
+  ],
+  "answer": "$-\\frac{1}{2\\pi-1}$",
+  "solution": "$A=\\pi+2\\pi A\\Rightarrow A=-\\frac{\\pi}{2\\pi-1}$，平均值 $=\\frac{A}{\\pi}=-\\frac{1}{2\\pi-1}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "函数平均值：指数余弦的积分方程",
+  "statement": "连续函数 $f(x)=e^{x}\\cos x+\\int_{0}^{\\pi/2}f(t)\\,\\mathrm{d}t$，求 $f(x)$ 在 $\\big[0,\\frac{\\pi}{2}\\big]$ 上的平均值。",
+  "tags": [
+   "一元积分",
+   "函数平均值",
+   "积分方程"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第65节 函数平均值",
+  "hints": [
+   "记 $A=\\int_{0}^{\\pi/2}f$，方程两边在 $[0,\\frac{\\pi}{2}]$ 上积分，常数项积出 $\\frac{\\pi}{2}A$，解出 $A$ 后再除以 $\\frac{\\pi}{2}$。"
+  ],
+  "answer": "$\\frac{2e^{\\pi/2}}{\\pi}$",
+  "solution": "$A=\\frac{e^{\\pi/2}-1}{2}+\\frac{\\pi}{2}A$，平均值 $=\\frac{2A}{\\pi}$，整理即得 $\\frac{2e^{\\pi/2}}{\\pi}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "形心：抛物线与x轴",
+  "statement": "求由曲线 $y=x(1-x)$ 与 $x$ 轴所围成的平面图形的形心。",
+  "tags": [
+   "一元积分",
+   "形心",
+   "对称性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第66节 形心",
+  "hints": [
+   "图形关于 $x=\\frac12$ 对称，故 $\\bar x=\\frac12$；$\\bar y=\\frac{1}{S}\\int\\frac{y^{2}}{2}\\mathrm{d}x$。"
+  ],
+  "answer": "$\\big(\\frac{1}{2},\\frac{1}{10}\\big)$",
+  "solution": "$S=\\frac16$，$\\bar y=\\frac{1}{1/6}\\int_{0}^{1}\\frac{x^{2}(1-x)^{2}}{2}\\mathrm{d}x=\\frac{1}{10}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "形心：正弦拱",
+  "statement": "求由曲线 $y=\\sin x$，$0\\leq x\\leq \\pi$，与 $x$ 轴所围成的平面图形的形心。",
+  "tags": [
+   "一元积分",
+   "形心",
+   "对称性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第66节 形心",
+  "hints": [
+   "对称得 $\\bar x=\\frac{\\pi}{2}$，$\\bar y=\\frac{1}{S}\\cdot\\frac12\\int\\sin^{2}x\\,\\mathrm{d}x$。"
+  ],
+  "answer": "$\\big(\\frac{\\pi}{2},\\frac{\\pi}{8}\\big)$",
+  "solution": "$S=2$，$\\bar y=\\frac{1}{2}\\cdot\\frac12\\cdot\\frac{\\pi}{2}=\\frac{\\pi}{8}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "形心：对数曲线与x=e",
+  "statement": "求由曲线 $y=\\ln x$、直线 $x=e$ 及 $x$ 轴所围成的平面图形的形心。",
+  "tags": [
+   "一元积分",
+   "形心",
+   "分部积分"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第66节 形心",
+  "hints": [
+   "$S=1$，$\\bar x=\\int_{1}^{e}x\\ln x\\,\\mathrm{d}x$，$\\bar y=\\frac12\\int_{1}^{e}(\\ln x)^{2}\\mathrm{d}x$。"
+  ],
+  "answer": "$\\big(\\frac{e^{2}+1}{4},\\frac{e-2}{2}\\big)$",
+  "solution": "$\\bar x=\\big[\\frac{x^{2}}{2}\\ln x-\\frac{x^{2}}{4}\\big]_{1}^{e}=\\frac{e^{2}+1}{4}$，$\\bar y=\\frac{e-2}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "形心：指数曲线与两坐标轴",
+  "statement": "求由曲线 $y=e^{x}$、直线 $x=1$ 与两坐标轴所围成的平面图形的形心。",
+  "tags": [
+   "一元积分",
+   "形心",
+   "分部积分"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第66节 形心",
+  "hints": [
+   "$S=e-1$；$\\bar x=\\int x e^{x}\\mathrm{d}x/(e-1)$，$\\bar y=\\frac{1}{2}\\int e^{2x}\\mathrm{d}x/(e-1)$。"
+  ],
+  "answer": "$\\big(\\frac{1}{e-1},\\frac{e+1}{4}\\big)$",
+  "solution": "$\\bar x=\\frac{1}{e-1}$，$\\bar y=\\frac{e^{2}-1}{4(e-1)}=\\frac{e+1}{4}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "形心：根号曲线与x=4",
+  "statement": "求由曲线 $y=\\sqrt{x}$、直线 $x=4$ 与 $x$ 轴所围成的平面图形的形心。",
+  "tags": [
+   "一元积分",
+   "形心"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第66节 形心",
+  "hints": [
+   "$S=\\frac{16}{3}$，$\\bar x=\\frac{1}{S}\\int_{0}^{4}x^{3/2}\\mathrm{d}x$，$\\bar y=\\frac{1}{S}\\cdot\\frac12\\int_{0}^{4}x\\,\\mathrm{d}x$。"
+  ],
+  "answer": "$\\big(\\frac{12}{5},\\frac{3}{4}\\big)$",
+  "solution": "$\\bar x=\\frac{3}{16}\\cdot\\frac{2}{5}\\cdot 32=\\frac{12}{5}$，$\\bar y=\\frac{3}{16}\\cdot 4=\\frac34$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "形心：抛物线与y=1",
+  "statement": "求由曲线 $y=x^{2}$ 与直线 $y=1$ 所围成的平面图形的形心。",
+  "tags": [
+   "一元积分",
+   "形心",
+   "对称性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第66节 形心",
+  "hints": [
+   "关于 $y$ 轴对称，故 $\\bar x=0$；改成对 $y$ 积分算 $\\bar y$ 更快。"
+  ],
+  "answer": "$\\big(0,\\frac{3}{5}\\big)$",
+  "solution": "$S=\\frac43$，$\\bar y=\\frac{1}{S}\\int_{0}^{1}y\\cdot 2\\sqrt{y}\\,\\mathrm{d}y=\\frac34\\cdot\\frac45=\\frac35$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "形心：抛物线与直线y=x",
+  "statement": "求由曲线 $y=x^{2}$ 与直线 $y=x$ 所围成的平面图形的形心。",
+  "tags": [
+   "一元积分",
+   "形心"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第66节 形心",
+  "hints": [
+   "$S=\\frac16$，$\\bar x=6\\int_{0}^{1}x(x-x^{2})\\mathrm{d}x$，$\\bar y=6\\cdot\\frac12\\int_{0}^{1}(x^{2}-x^{4})\\mathrm{d}x$。"
+  ],
+  "answer": "$\\big(\\frac{1}{2},\\frac{2}{5}\\big)$",
+  "solution": "$\\bar x=6\\cdot\\frac{1}{12}=\\frac12$，$\\bar y=3\\cdot\\frac{2}{15}=\\frac25$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "形心：余弦拱形",
+  "statement": "求由曲线 $y=\\cos x$，$-\\frac{\\pi}{2}\\leq x\\leq \\frac{\\pi}{2}$，与 $x$ 轴所围成的平面图形的形心。",
+  "tags": [
+   "一元积分",
+   "形心",
+   "偶函数对称"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第66节 形心",
+  "hints": [
+   "偶函数、区间对称，$\\bar x=0$；$\\bar y$ 与正弦拱完全一样的结构。"
+  ],
+  "answer": "$\\big(0,\\frac{\\pi}{8}\\big)$",
+  "solution": "$S=2$，$\\bar y=\\frac{1}{2}\\cdot\\frac12\\int_{-\\pi/2}^{\\pi/2}\\cos^{2}x\\,\\mathrm{d}x=\\frac{\\pi}{8}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "形心：开口向下抛物线与x轴",
+  "statement": "求由曲线 $y=1-x^{2}$ 与 $x$ 轴所围成的平面图形的形心。",
+  "tags": [
+   "一元积分",
+   "形心",
+   "对称性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第66节 形心",
+  "hints": [
+   "$\\bar x=0$；$\\bar y=\\frac{1}{S}\\cdot\\frac12\\int_{-1}^{1}(1-x^{2})^{2}\\mathrm{d}x$。"
+  ],
+  "answer": "$\\big(0,\\frac{2}{5}\\big)$",
+  "solution": "$S=\\frac43$，$\\bar y=\\frac34\\cdot\\frac12\\cdot\\frac{16}{15}=\\frac25$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "形心：抛物线与水平线y=2",
+  "statement": "求由曲线 $y=x^{2}+1$ 与直线 $y=2$ 所围成的平面图形的形心。",
+  "tags": [
+   "一元积分",
+   "形心",
+   "对称性"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第66节 形心",
+  "hints": [
+   "$\\bar x=0$；截面高度是 $2-(x^{2}+1)=1-x^{2}$，按 $\\frac12\\big[2^{2}-(x^{2}+1)^{2}\\big]$ 积分。"
+  ],
+  "answer": "$\\big(0,\\frac{8}{5}\\big)$",
+  "solution": "$S=\\frac43$，$\\bar y=\\frac34\\cdot\\frac12\\int_{-1}^{1}\\big[4-(x^{2}+1)^{2}\\big]\\mathrm{d}x=\\frac85$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "形心：摆线一拱",
+  "statement": "求由 $x=a(t-\\sin t)$，$y=a(1-\\cos t)$，$0\\leq t\\leq 2\\pi$，与 $x$ 轴围成图形的形心。",
+  "tags": [
+   "一元积分",
+   "形心",
+   "参数方程"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第66节 形心",
+  "hints": [
+   "对称得 $\\bar x=\\pi a$；$\\bar y=\\frac{1}{S}\\int\\frac{y^{2}}{2}x'(t)\\mathrm{d}t$，$S=3\\pi a^{2}$。"
+  ],
+  "answer": "$(\\pi a,\\frac{5a}{6})$",
+  "solution": "$\\bar y=\\frac{1}{2}\\cdot\\frac{1}{3\\pi a^{2}}\\int_{0}^{2\\pi}a^{2}(1-\\cos t)^{2}\\cdot a(1-\\cos t)\\mathrm{d}t$ 化简得 $\\frac{5a}{6}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "形心：上半椭圆",
+  "statement": "求由 $x=a\\cos t$，$y=b\\sin t$，$0\\leq t\\leq \\pi$，与 $x$ 轴所围成的平面图形的形心。",
+  "tags": [
+   "一元积分",
+   "形心",
+   "对称性"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第66节 形心",
+  "hints": [
+   "$\\bar x=0$；半椭圆面积 $\\frac{\\pi ab}{2}$，用 $\\bar y=\\frac{4b}{3\\pi}$ 的标准结论。"
+  ],
+  "answer": "$\\big(0,\\frac{4b}{3\\pi}\\big)$",
+  "solution": "$S=\\frac{\\pi ab}{2}$，$\\bar y=\\frac{2}{\\pi ab}\\int_{0}^{\\pi}\\frac{b^{2}\\sin^{2}t}{2}\\cdot a\\sin t\\,\\mathrm{d}t=\\frac{4b}{3\\pi}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "形心：星形线第一象限",
+  "statement": "求由 $x=a\\cos^{3}t$，$y=a\\sin^{3}t$，$0\\leq t\\leq \\frac{\\pi}{2}$，与 $x$ 轴、$y$ 轴所围图形的形心。",
+  "tags": [
+   "一元积分",
+   "形心",
+   "参数方程"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第66节 形心",
+  "hints": [
+   "图形关于 $y=x$ 对称，故 $\\bar x=\\bar y$，只需算一个；面积 $S=\\frac{3\\pi a^{2}}{32}$。"
+  ],
+  "answer": "$\\big(\\frac{256a}{315\\pi},\\frac{256a}{315\\pi}\\big)$",
+  "solution": "$\\bar x=\\frac{1}{S}\\int_{0}^{\\pi/2}a\\cos^{3}t\\cdot a\\sin^{3}t\\cdot 3a\\cos^{2}t\\sin t\\,\\mathrm{d}t=\\frac{256a}{315\\pi}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "形心：上半圆盘",
+  "statement": "求由 $x=a\\cos t$，$y=a\\sin t$，$0\\leq t\\leq \\pi$，与 $x$ 轴所围成的平面图形的形心。",
+  "tags": [
+   "一元积分",
+   "形心",
+   "对称性"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第66节 形心",
+  "hints": [
+   "上半圆的形心在对称轴上，$\\bar y=\\frac{4R}{3\\pi}$ 是常用结论。"
+  ],
+  "answer": "$\\big(0,\\frac{4a}{3\\pi}\\big)$",
+  "solution": "$\\bar y=\\frac{1}{\\pi a^{2}/2}\\cdot\\frac{2a^{3}}{3}=\\frac{4a}{3\\pi}$，$\\bar x=0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "形心：右半圆盘",
+  "statement": "求由 $x=a\\cos t$，$y=a\\sin t$，$-\\frac{\\pi}{2}\\leq t\\leq \\frac{\\pi}{2}$，与 $y$ 轴所围成的平面图形的形心。",
+  "tags": [
+   "一元积分",
+   "形心",
+   "对称性"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第66节 形心",
+  "hints": [
+   "与上题旋转 $90^{\\circ}$ 的关系，$\\bar y=0$，$\\bar x=\\frac{4a}{3\\pi}$。"
+  ],
+  "answer": "$\\big(\\frac{4a}{3\\pi},0\\big)$",
+  "solution": "$S=\\frac{\\pi a^{2}}{2}$，$\\bar x=\\frac{2}{\\pi a^{2}}\\int_{0}^{a}2x\\sqrt{a^{2}-x^{2}}\\,\\mathrm{d}x=\\frac{2}{\\pi a^{2}}\\cdot\\frac{2a^{3}}{3}=\\frac{4a}{3\\pi}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "形心：心形线",
+  "statement": "求由 $r=a(1+\\cos\\theta)$ 所围成的平面图形的形心。",
+  "tags": [
+   "一元积分",
+   "形心",
+   "极坐标"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第66节 形心",
+  "hints": [
+   "关于极轴对称故 $\\bar y=0$；$\\bar x=\\frac{1}{S}\\int\\frac{2}{3}r^{3}\\cos\\theta\\,\\mathrm{d}\\theta$，$S=\\frac{3\\pi a^{2}}{2}$。"
+  ],
+  "answer": "$\\big(\\frac{5a}{6},0\\big)$",
+  "solution": "$\\bar x=\\frac{2}{3\\pi a^{2}}\\int_{0}^{2\\pi}a^{3}(1+\\cos\\theta)^{3}\\cos\\theta\\,\\mathrm{d}\\theta=\\frac{5a}{6}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "形心：竖直方向的心形线",
+  "statement": "求由 $r=a(1+\\sin\\theta)$ 所围成的平面图形的形心。",
+  "tags": [
+   "一元积分",
+   "形心",
+   "极坐标"
+  ],
+  "thinking": 8,
+  "difficulty": 8,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第66节 形心",
+  "hints": [
+   "图形关于 $\\theta=\\frac{\\pi}{2}$ 对称，$\\bar x=0$，$\\bar y$ 与上题同值。"
+  ],
+  "answer": "$\\big(0,\\frac{5a}{6}\\big)$",
+  "solution": "$\\bar y=\\frac{2}{3\\pi a^{2}}\\int_{0}^{2\\pi}a^{3}(1+\\sin\\theta)^{3}\\sin\\theta\\,\\mathrm{d}\\theta=\\frac{5a}{6}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "形心：圆r=2acosθ",
+  "statement": "求由 $r=2a\\cos\\theta$ 所围成的平面图形的形心。",
+  "tags": [
+   "一元积分",
+   "形心",
+   "极坐标"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第66节 形心",
+  "hints": [
+   "$r=2a\\cos\\theta$ 就是圆心 $(a,0)$、半径 $a$ 的圆，形心即圆心。"
+  ],
+  "answer": "$(a,0)$",
+  "solution": "配方 $x^{2}+y^{2}=2ax$，圆心 $(a,0)$ 即为形心。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "形心：双纽线右叶",
+  "statement": "求由 $r^{2}=a^{2}\\cos 2\\theta$，$-\\frac{\\pi}{4}\\leq\\theta\\leq \\frac{\\pi}{4}$，所围成的平面图形的形心。",
+  "tags": [
+   "一元积分",
+   "形心",
+   "极坐标"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第66节 形心",
+  "hints": [
+   "右叶关于极轴对称，$\\bar y=0$；面积 $S=\\frac{a^{2}}{2}$，用极坐标形心公式。"
+  ],
+  "answer": "$\\big(\\frac{\\pi a}{4\\sqrt{2}},0\\big)$",
+  "solution": "$S=\\frac{a^{2}}{2}$，$\\bar x=\\frac{1}{S}\\int_{-\\pi/4}^{\\pi/4}\\frac{2}{3}r^{3}\\cos\\theta\\,\\mathrm{d}\\theta$，代入 $r=a\\sqrt{\\cos2\\theta}$ 积分得 $\\frac{\\pi a}{4\\sqrt2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "形心：圆r=2asinθ",
+  "statement": "求由 $r=2a\\sin\\theta$ 所围成的平面图形的形心。",
+  "tags": [
+   "一元积分",
+   "形心",
+   "极坐标"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第66节 形心",
+  "hints": [
+   "$r=2a\\sin\\theta$ 是圆心 $(0,a)$、半径 $a$ 的圆。"
+  ],
+  "answer": "$(0,a)$",
+  "solution": "由 $x^{2}+(y-a)^{2}=a^{2}$ 知形心为 $(0,a)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "弧长：对数修正的抛物线",
+  "statement": "求曲线 $y=\\frac{x^{2}}{4}-\\frac{1}{2}\\ln x$ 从 $x=1$ 到 $x=2$ 的弧长。",
+  "tags": [
+   "一元积分",
+   "弧长",
+   "配完全平方"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第67节 弧长",
+  "hints": [
+   "$y'=\\frac{x}{2}-\\frac{1}{2x}$，验证 $1+y'^{2}=\\big(\\frac{x}{2}+\\frac{1}{2x}\\big)^{2}$ 后直接积分。"
+  ],
+  "answer": "$\\frac{3}{4}+\\frac{1}{2}\\ln 2$",
+  "solution": "$s=\\int_{1}^{2}\\Big(\\frac{x}{2}+\\frac{1}{2x}\\Big)\\mathrm{d}x=\\Big[\\frac{x^{2}}{4}+\\frac{1}{2}\\ln x\\Big]_{1}^{2}=\\frac34+\\frac12\\ln 2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "弧长：三次函数加反比项",
+  "statement": "求曲线 $y=\\frac{x^{3}}{6}+\\frac{1}{2x}$ 从 $x=1$ 到 $x=2$ 的弧长。",
+  "tags": [
+   "一元积分",
+   "弧长",
+   "配完全平方"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第67节 弧长",
+  "hints": [
+   "$1+y'^{2}$ 仍是完全平方 $\\big(\\frac{x^{2}}{2}+\\frac{1}{2x^{2}}\\big)^{2}$。"
+  ],
+  "answer": "$\\frac{17}{12}$",
+  "solution": "$s=\\int_{1}^{2}\\Big(\\frac{x^{2}}{2}+\\frac{1}{2x^{2}}\\Big)\\mathrm{d}x=\\Big[\\frac{x^{3}}{6}-\\frac{1}{2x}\\Big]_{1}^{2}=\\frac{17}{12}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "弧长：复合幂函数",
+  "statement": "求曲线 $y=\\frac{1}{3}(x^{2}+2)^{3/2}$ 从 $x=0$ 到 $x=1$ 的弧长。",
+  "tags": [
+   "一元积分",
+   "弧长",
+   "换元"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第67节 弧长",
+  "hints": [
+   "$y'=x\\sqrt{x^{2}+2}$，则 $1+y'^{2}=(x^{2}+1)^{2}$。"
+  ],
+  "answer": "$\\frac{4}{3}$",
+  "solution": "$s=\\int_{0}^{1}(x^{2}+1)\\mathrm{d}x=\\frac13+1=\\frac43$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "弧长：对数正弦曲线",
+  "statement": "求曲线 $y=\\ln(\\sin x)$ 从 $x=\\frac{\\pi}{3}$ 到 $x=\\frac{\\pi}{2}$ 的弧长。",
+  "tags": [
+   "一元积分",
+   "弧长",
+   "三角换元"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第67节 弧长",
+  "hints": [
+   "$y'=\\cot x$，$\\sqrt{1+\\cot^{2}x}=\\csc x$，被积函数是 $\\csc x$。"
+  ],
+  "answer": "$\\frac{1}{2}\\ln 3$",
+  "solution": "$s=\\int_{\\pi/3}^{\\pi/2}\\csc x\\,\\mathrm{d}x=\\big[\\ln|\\tan\\frac{x}{2}|\\big]_{\\pi/3}^{\\pi/2}=\\frac12\\ln 3$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "弧长：抛物线与根式积分",
+  "statement": "求曲线 $y=\\frac{1}{2}x^{2}$ 从 $x=0$ 到 $x=1$ 的弧长。",
+  "tags": [
+   "一元积分",
+   "弧长",
+   "三角换元"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第67节 弧长",
+  "hints": [
+   "$\\int\\sqrt{1+x^{2}}\\mathrm{d}x$ 是标准积分，套公式 $\\frac{x}{2}\\sqrt{1+x^{2}}+\\frac12\\ln(x+\\sqrt{1+x^{2}})$。"
+  ],
+  "answer": "$\\frac{\\sqrt{2}+\\ln(1+\\sqrt{2})}{2}$",
+  "solution": "$s=\\int_{0}^{1}\\sqrt{1+x^{2}}\\,\\mathrm{d}x=\\frac{\\sqrt2}{2}+\\frac12\\ln(1+\\sqrt2)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "弧长：幂次复合函数",
+  "statement": "求曲线 $y=\\frac{2}{3}(x+1)^{3/2}$ 从 $x=0$ 到 $x=3$ 的弧长。",
+  "tags": [
+   "一元积分",
+   "弧长",
+   "换元"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第67节 弧长",
+  "hints": [
+   "$y'=\\sqrt{x+1}$，$1+y'^{2}=x+2$，被积函数是 $\\sqrt{x+2}$。"
+  ],
+  "answer": "$\\frac{2}{3}(5\\sqrt{5}-2\\sqrt{2})$",
+  "solution": "$s=\\int_{0}^{3}\\sqrt{x+2}\\,\\mathrm{d}x=\\frac23\\big[x+2\\big]^{3/2}\\Big|_{0}^{3}=\\frac23(5\\sqrt5-2\\sqrt2)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "弧长：四次函数加反比项",
+  "statement": "求曲线 $y=\\frac{x^{4}}{4}+\\frac{1}{8x^{2}}$ 从 $x=1$ 到 $x=2$ 的弧长。",
+  "tags": [
+   "一元积分",
+   "弧长",
+   "配完全平方"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第67节 弧长",
+  "hints": [
+   "$y'=x^{3}-\\frac{1}{4x^{3}}$，$1+y'^{2}=\\big(x^{3}+\\frac{1}{4x^{3}}\\big)^{2}$。"
+  ],
+  "answer": "$\\frac{123}{32}$",
+  "solution": "$s=\\int_{1}^{2}\\Big(x^{3}+\\frac{1}{4x^{3}}\\Big)\\mathrm{d}x=\\Big[\\frac{x^{4}}{4}-\\frac{1}{8x^{2}}\\Big]_{1}^{2}=\\frac{123}{32}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "弧长：负对数余弦",
+  "statement": "求曲线 $y=-\\ln(\\cos x)$ 从 $x=0$ 到 $x=\\frac{\\pi}{4}$ 的弧长。",
+  "tags": [
+   "一元积分",
+   "弧长",
+   "三角恒等式"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第67节 弧长",
+  "hints": [
+   "$y'=\\tan x$，被积函数化为 $\\sec x$，其原函数是 $\\ln|\\sec x+\\tan x|$。"
+  ],
+  "answer": "$\\ln(\\sqrt{2}+1)$",
+  "solution": "$s=\\int_{0}^{\\pi/4}\\sec x\\,\\mathrm{d}x=\\ln(\\sqrt2+1)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "弧长：抛物线减对数项",
+  "statement": "求曲线 $y=\\frac{x^{2}}{2}-\\frac{1}{4}\\ln x$ 从 $x=1$ 到 $x=2$ 的弧长。",
+  "tags": [
+   "一元积分",
+   "弧长",
+   "配完全平方"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第67节 弧长",
+  "hints": [
+   "$y'=x-\\frac{1}{4x}$，平方后加 1 得 $\\big(x+\\frac{1}{4x}\\big)^{2}$。"
+  ],
+  "answer": "$\\frac{3}{2}+\\frac{1}{4}\\ln 2$",
+  "solution": "$s=\\int_{1}^{2}\\Big(x+\\frac{1}{4x}\\Big)\\mathrm{d}x=\\Big[\\frac{x^{2}}{2}+\\frac14\\ln x\\Big]_{1}^{2}=\\frac32+\\frac14\\ln 2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "弧长：三次函数加反比项（第四组）",
+  "statement": "求曲线 $y=\\frac{x^{3}}{3}+\\frac{1}{4x}$ 从 $x=1$ 到 $x=2$ 的弧长。",
+  "tags": [
+   "一元积分",
+   "弧长",
+   "配完全平方"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第67节 弧长",
+  "hints": [
+   "$y'=x^{2}-\\frac{1}{4x^{2}}$，$1+y'^{2}=\\big(x^{2}+\\frac{1}{4x^{2}}\\big)^{2}$。"
+  ],
+  "answer": "$\\frac{59}{24}$",
+  "solution": "$s=\\int_{1}^{2}\\Big(x^{2}+\\frac{1}{4x^{2}}\\Big)\\mathrm{d}x=\\Big[\\frac{x^{3}}{3}-\\frac{1}{4x}\\Big]_{1}^{2}=\\frac{59}{24}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "弧长：摆线一拱",
+  "statement": "求曲线 $x=\\cos t$，$y=t+\\sin t$ 从 $t=0$ 到 $t=\\pi$ 的弧长。",
+  "tags": [
+   "一元积分",
+   "弧长",
+   "参数方程"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第67节 弧长",
+  "hints": [
+   "$\\mathrm{d}s=\\sqrt{x'^{2}+y'^{2}}\\,\\mathrm{d}t$，化简后用半角公式 $1+\\cos t=2\\cos^{2}\\frac{t}{2}$。"
+  ],
+  "answer": "$4$",
+  "solution": "$\\mathrm{d}s=\\sqrt{2+2\\cos t}\\,\\mathrm{d}t=2\\cos\\frac t2\\mathrm{d}t$，$s=4$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "弧长：参数曲线化出半径t",
+  "statement": "求曲线 $x=\\cos t+t\\sin t$，$y=\\sin t-t\\cos t$ 从 $t=0$ 到 $t=\\frac{\\pi}{2}$ 的弧长。",
+  "tags": [
+   "一元积分",
+   "弧长",
+   "参数方程"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第67节 弧长",
+  "hints": [
+   "$x'=t\\cos t$，$y'=t\\sin t$，恰好 $\\mathrm{d}s=t\\,\\mathrm{d}t$。"
+  ],
+  "answer": "$\\frac{\\pi^{2}}{8}$",
+  "solution": "$s=\\int_{0}^{\\pi/2}t\\,\\mathrm{d}t=\\frac{\\pi^{2}}{8}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "弧长：正割曲线",
+  "statement": "求曲线 $x=\\ln(\\sec t+\\tan t)$，$y=\\sec t$ 从 $t=0$ 到 $t=\\frac{\\pi}{3}$ 的弧长。",
+  "tags": [
+   "一元积分",
+   "弧长",
+   "参数方程"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第67节 弧长",
+  "hints": [
+   "$x'=\\sec t$，$y'=\\sec t\\tan t$，则 $\\mathrm{d}s=\\sec^{2}t\\,\\mathrm{d}t$。"
+  ],
+  "answer": "$\\sqrt{3}$",
+  "solution": "$s=\\int_{0}^{\\pi/3}\\sec^{2}t\\,\\mathrm{d}t=\\tan\\frac{\\pi}{3}=\\sqrt3$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "弧长：抛物线配根式",
+  "statement": "求曲线 $x=\\frac{1}{2}t^{2}$，$y=\\frac{1}{3}(2t+1)^{3/2}$ 从 $t=0$ 到 $t=1$ 的弧长。",
+  "tags": [
+   "一元积分",
+   "弧长",
+   "参数方程"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第67节 弧长",
+  "hints": [
+   "$x'=t$，$y'=\\sqrt{2t+1}$，$\\mathrm{d}s=\\sqrt{(t+1)^{2}}\\,\\mathrm{d}t$。"
+  ],
+  "answer": "$\\frac{3}{2}$",
+  "solution": "$s=\\int_{0}^{1}(t+1)\\mathrm{d}t=\\frac32$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "弧长：半立方抛物线",
+  "statement": "求曲线 $x=t^{2}$，$y=t^{3}$ 从 $t=0$ 到 $t=1$ 的弧长。",
+  "tags": [
+   "一元积分",
+   "弧长",
+   "参数方程"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第67节 弧长",
+  "hints": [
+   "$\\mathrm{d}s=t\\sqrt{4+9t^{2}}\\,\\mathrm{d}t$，把 $4+9t^{2}$ 整体换元。"
+  ],
+  "answer": "$\\frac{13\\sqrt{13}-8}{27}$",
+  "solution": "$s=\\int_{0}^{1}t\\sqrt{4+9t^{2}}\\,\\mathrm{d}t=\\frac{1}{27}\\big(13^{3/2}-8\\big)=\\frac{13\\sqrt{13}-8}{27}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "弧长：极坐标正弦三次幂全长",
+  "statement": "求曲线 $r=\\sin^{3}\\frac{\\theta}{3}$ 的全长。",
+  "tags": [
+   "一元积分",
+   "弧长",
+   "极坐标"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第67节 弧长",
+  "hints": [
+   "$\\mathrm{d}s=\\sqrt{r^{2}+r'^{2}}\\,\\mathrm{d}\\theta$，计算后只剩 $\\sin^{2}\\frac{\\theta}{3}$；一周为 $\\theta\\in[0,3\\pi]$。"
+  ],
+  "answer": "$\\frac{3\\pi}{2}$",
+  "solution": "$\\mathrm{d}s=\\sin^{2}\\frac{\\theta}{3}\\mathrm{d}\\theta$，$s=\\int_{0}^{3\\pi}\\sin^{2}\\frac{\\theta}{3}\\mathrm{d}\\theta=\\frac{3\\pi}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "弧长：极坐标抛物线螺线",
+  "statement": "求曲线 $r=\\theta^{2}$ 从 $\\theta=0$ 到 $\\theta=1$ 的弧长。",
+  "tags": [
+   "一元积分",
+   "弧长",
+   "极坐标"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第67节 弧长",
+  "hints": [
+   "$\\mathrm{d}s=\\theta\\sqrt{\\theta^{2}+4}\\,\\mathrm{d}\\theta$，令 $u=\\theta^{2}+4$。"
+  ],
+  "answer": "$\\frac{5\\sqrt{5}-8}{3}$",
+  "solution": "$s=\\int_{0}^{1}\\theta\\sqrt{\\theta^{2}+4}\\,\\mathrm{d}\\theta=\\frac13\\big[(\\theta^{2}+4)^{3/2}\\big]_{0}^{1}=\\frac{5\\sqrt5-8}{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "弧长：圆r=2cosθ的一段",
+  "statement": "求曲线 $r=2\\cos\\theta$ 从 $\\theta=0$ 到 $\\theta=\\frac{\\pi}{2}$ 的弧长。",
+  "tags": [
+   "一元积分",
+   "弧长",
+   "极坐标"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第67节 弧长",
+  "hints": [
+   "$r=2\\cos\\theta$ 是直径 2 的圆，所给区间正好描出半个圆。"
+  ],
+  "answer": "$\\pi$",
+  "solution": "该曲线为圆 $(x-1)^{2}+y^{2}=1$，弧长为半周长 $\\pi$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "弧长：心形线全长",
+  "statement": "求曲线 $r=2(1-\\cos\\theta)$ 的全长。",
+  "tags": [
+   "一元积分",
+   "弧长",
+   "极坐标"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第67节 弧长",
+  "hints": [
+   "心形线 $r=a(1-\\cos\\theta)$ 的全长公式为 $8a$，这里 $a=2$；也可直接用 $\\mathrm{d}s=2a\\sin\\frac\\theta2\\mathrm{d}\\theta$。"
+  ],
+  "answer": "$16$",
+  "solution": "$\\mathrm{d}s=4\\sin\\frac{\\theta}{2}\\mathrm{d}\\theta$，$s=\\int_{0}^{2\\pi}4\\sin\\frac{\\theta}{2}\\mathrm{d}\\theta=16$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "弧长：对数螺线",
+  "statement": "求曲线 $r=e^{\\theta}$ 从 $\\theta=0$ 到 $\\theta=\\pi$ 的弧长。",
+  "tags": [
+   "一元积分",
+   "弧长",
+   "极坐标"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第67节 弧长",
+  "hints": [
+   "$\\sqrt{r^{2}+r'^{2}}=\\sqrt{2}e^{\\theta}$，直接指数积分。"
+  ],
+  "answer": "$\\sqrt{2}(e^{\\pi}-1)$",
+  "solution": "$s=\\int_{0}^{\\pi}\\sqrt2 e^{\\theta}\\mathrm{d}\\theta=\\sqrt2(e^{\\pi}-1)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "侧面积：根号曲线绕x轴",
+  "statement": "设曲线 $y=\\sqrt{x}$，$0\\leq x\\leq 1$，绕 $x$ 轴旋转一周，求旋转面的侧面积。",
+  "tags": [
+   "一元积分",
+   "旋转侧面积",
+   "公式套用"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第68节 旋转侧面积",
+  "hints": [
+   "$S=2\\pi\\int y\\sqrt{1+y'^{2}}\\mathrm{d}x$，$y'=\\frac{1}{2\\sqrt{x}}$，化简成 $\\sqrt{4x+1}$。"
+  ],
+  "answer": "$\\frac{\\pi}{6}(5\\sqrt{5}-1)$",
+  "solution": "$S=2\\pi\\int_{0}^{1}\\frac{\\sqrt{1+4x}}{2}\\mathrm{d}x=\\frac{\\pi}{4}\\cdot\\frac23\\big[(1+4x)^{3/2}\\big]_{0}^{1}=\\frac{\\pi}{6}(5\\sqrt5-1)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "侧面积：三次曲线绕x轴",
+  "statement": "设曲线 $y=x^{3}$，$0\\leq x\\leq 1$，绕 $x$ 轴旋转一周，求旋转面的侧面积。",
+  "tags": [
+   "一元积分",
+   "旋转侧面积",
+   "换元"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第68节 旋转侧面积",
+  "hints": [
+   "$y'=3x^{2}$，被积函数 $x^{3}\\sqrt{1+9x^{4}}$，令 $u=1+9x^{4}$。"
+  ],
+  "answer": "$\\frac{\\pi}{27}(10\\sqrt{10}-1)$",
+  "solution": "$S=2\\pi\\int_{0}^{1}x^{3}\\sqrt{1+9x^{4}}\\mathrm{d}x=\\frac{\\pi}{27}(10\\sqrt{10}-1)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "侧面积：抛物线绕x轴含对数项",
+  "statement": "设曲线 $y=x^{2}$，$0\\leq x\\leq 1$，绕 $x$ 轴旋转一周，求旋转面的侧面积。",
+  "tags": [
+   "一元积分",
+   "旋转侧面积",
+   "三角换元"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第68节 旋转侧面积",
+  "hints": [
+   "$S=4\\pi\\int_{0}^{1}x^{2}\\sqrt{1+4x^{2}}\\mathrm{d}x$，令 $2x=\\tan\\theta$ 化为 $\\sec^{3}$ 的积分。"
+  ],
+  "answer": "$\\frac{\\pi}{32}\\big(18\\sqrt{5}-\\ln(2+\\sqrt{5})\\big)$",
+  "solution": "用 $\\int u^{2}\\sqrt{1+u^{2}}\\mathrm{d}u=\\frac{u\\sqrt{1+u^{2}}(2u^{2}+1)-\\ln(u+\\sqrt{1+u^{2}})}{8}$ 代入 $u=2$ 得结果。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "侧面积：正弦拱绕x轴",
+  "statement": "设曲线 $y=\\sin x$，$0\\leq x\\leq \\pi$，绕 $x$ 轴旋转一周，求旋转面的侧面积。",
+  "tags": [
+   "一元积分",
+   "旋转侧面积",
+   "对称性"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第68节 旋转侧面积",
+  "hints": [
+   "被积函数 $\\sin x\\sqrt{1+\\cos^{2}x}$，令 $u=\\cos x$，化为 $\\int\\sqrt{1+u^{2}}\\mathrm{d}u$，并利用对称性乘 2。"
+  ],
+  "answer": "$2\\pi\\big(\\sqrt{2}+\\ln(1+\\sqrt{2})\\big)$",
+  "solution": "$S=2\\pi\\cdot2\\int_{0}^{1}\\sqrt{1+u^{2}}\\mathrm{d}u=2\\pi\\big(\\sqrt2+\\ln(1+\\sqrt2)\\big)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "侧面积：指数曲线绕x轴",
+  "statement": "设曲线 $y=e^{x}$，$0\\leq x\\leq 1$，绕 $x$ 轴旋转一周，求旋转面的侧面积。",
+  "tags": [
+   "一元积分",
+   "旋转侧面积",
+   "换元"
+  ],
+  "thinking": 8,
+  "difficulty": 8,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第68节 旋转侧面积",
+  "hints": [
+   "$S=2\\pi\\int_{0}^{1}e^{x}\\sqrt{1+e^{2x}}\\mathrm{d}x$，令 $u=e^{x}$ 后用 $\\int\\sqrt{1+u^{2}}\\mathrm{d}u$ 的公式。"
+  ],
+  "answer": "$\\pi\\big(e\\sqrt{1+e^{2}}+\\ln(e+\\sqrt{1+e^{2}})-\\sqrt{2}-\\ln(1+\\sqrt{2})\\big)$",
+  "solution": "$S=2\\pi\\cdot\\frac12\\big[u\\sqrt{1+u^{2}}+\\ln(u+\\sqrt{1+u^{2}})\\big]_{1}^{e}$，即所给结果。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "侧面积：抛物线绕y轴",
+  "statement": "设曲线 $y=x^{2}$，$0\\leq x\\leq 1$，绕 $y$ 轴旋转一周，求旋转面的侧面积。",
+  "tags": [
+   "一元积分",
+   "旋转侧面积",
+   "柱面法"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第68节 旋转侧面积",
+  "hints": [
+   "绕 $y$ 轴时 $S=2\\pi\\int x\\sqrt{1+y'^{2}}\\mathrm{d}x$，半径换成 $x$，恰好与第 1 题同值。"
+  ],
+  "answer": "$\\frac{\\pi}{6}(5\\sqrt{5}-1)$",
+  "solution": "$S=2\\pi\\int_{0}^{1}\\frac{x\\sqrt{1+4x^{2}}}{1}\\mathrm{d}x=\\frac{\\pi}{6}(5\\sqrt5-1)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "侧面积：上半圆绕y轴成球面",
+  "statement": "设曲线 $y=\\sqrt{1-x^{2}}$，$-1\\leq x\\leq 1$，绕 $y$ 轴旋转一周，求旋转面的侧面积。",
+  "tags": [
+   "一元积分",
+   "旋转侧面积",
+   "几何意义"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第68节 旋转侧面积",
+  "hints": [
+   "上半圆绕 $y$ 轴转出单位球面，直接写球的表面积。"
+  ],
+  "answer": "$4\\pi$",
+  "solution": "$S=4\\pi R^{2}=4\\pi$；也可用 $2\\pi\\int_{-1}^{1}x\\cdot\\frac{1}{\\sqrt{1-x^{2}}}$ 分段计算。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "侧面积：直线绕y轴成锥面",
+  "statement": "设曲线 $y=x$，$0\\leq x\\leq 1$，绕 $y$ 轴旋转一周，求旋转面的侧面积。",
+  "tags": [
+   "一元积分",
+   "旋转侧面积",
+   "柱面法"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第68节 旋转侧面积",
+  "hints": [
+   "转出的是底面半径 1、高 1 的圆锥侧面，也可直接套公式。"
+  ],
+  "answer": "$\\sqrt{2}\\pi$",
+  "solution": "$S=2\\pi\\int_{0}^{1}x\\sqrt{2}\\,\\mathrm{d}x=\\sqrt2\\pi$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "侧面积：根号曲线绕y轴",
+  "statement": "设曲线 $y=\\sqrt{x}$，$0\\leq x\\leq 1$，绕 $y$ 轴旋转一周，求旋转面的侧面积。",
+  "tags": [
+   "一元积分",
+   "旋转侧面积",
+   "换元"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第68节 旋转侧面积",
+  "hints": [
+   "$S=2\\pi\\int_{0}^{1}x\\sqrt{1+\\frac{1}{4x}}\\,\\mathrm{d}x=\\pi\\int_{0}^{1}\\sqrt{4x^{2}+x}\\,\\mathrm{d}x$，再配方换元。"
+  ],
+  "answer": "$\\frac{\\pi}{64}\\big(36\\sqrt{5}-\\ln(9+4\\sqrt{5})\\big)$",
+  "solution": "配方 $4x^{2}+x=4\\big(x+\\frac18\\big)^{2}-\\frac{1}{16}$，套 $\\int\\sqrt{u^{2}-a^{2}}$ 公式得所给结果。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "侧面积：三次曲线绕y轴",
+  "statement": "设曲线 $y=x^{3}$，$0\\leq x\\leq 1$，绕 $y$ 轴旋转一周，求旋转面的侧面积。",
+  "tags": [
+   "一元积分",
+   "旋转侧面积",
+   "换元"
+  ],
+  "thinking": 8,
+  "difficulty": 8,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第68节 旋转侧面积",
+  "hints": [
+   "$S=2\\pi\\int_{0}^{1}x\\sqrt{1+9x^{4}}\\mathrm{d}x$，令 $u=3x^{2}$ 化为 $\\int u\\sqrt{1+u^{2}}\\cdot$常数。"
+  ],
+  "answer": "$\\frac{\\pi}{6}\\big(3\\sqrt{10}+\\ln(3+\\sqrt{10})\\big)$",
+  "solution": "$S=\\frac{\\pi}{3}\\int_{0}^{3}u\\sqrt{1+u^{2}}\\,\\mathrm{d}u=\\frac{\\pi}{9}\\big[(1+u^{2})^{3/2}\\big]_{0}^{3}$，整理为 $\\frac{\\pi}{6}(3\\sqrt{10}+\\ln(3+\\sqrt{10}))$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "侧面积：摆线一拱绕x轴",
+  "statement": "设曲线 $\\begin{cases}x=a(t-\\sin t)\\\\ y=a(1-\\cos t)\\end{cases}$，$0\\leq t\\leq 2\\pi$，绕 $x$ 轴旋转一周，求侧面积。",
+  "tags": [
+   "一元积分",
+   "旋转侧面积",
+   "参数方程"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第68节 旋转侧面积",
+  "hints": [
+   "$\\mathrm{d}s=2a\\sin\\frac t2\\mathrm{d}t$，$y=2a\\sin^{2}\\frac t2$，被积函数是 $\\sin^{3}\\frac t2$ 型。"
+  ],
+  "answer": "$\\frac{64\\pi a^{2}}{3}$",
+  "solution": "$S=2\\pi\\int_{0}^{2\\pi}2a\\sin^{2}\\frac t2\\cdot2a\\sin\\frac t2\\mathrm{d}t=8\\pi a^{2}\\cdot\\frac{8}{3}=\\frac{64\\pi a^{2}}{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "侧面积：星形线绕x轴",
+  "statement": "设曲线 $\\begin{cases}x=a\\cos^{3}t\\\\ y=a\\sin^{3}t\\end{cases}$，$0\\leq t\\leq \\pi$，绕 $x$ 轴旋转一周，求侧面积。",
+  "tags": [
+   "一元积分",
+   "旋转侧面积",
+   "参数方程"
+  ],
+  "thinking": 8,
+  "difficulty": 8,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第68节 旋转侧面积",
+  "hints": [
+   "$\\mathrm{d}s=3a\\sin t\\cos t\\,\\mathrm{d}t$（在 $[0,\\frac{\\pi}{2}]$ 上），利用对称性乘 2。"
+  ],
+  "answer": "$\\frac{12\\pi a^{2}}{5}$",
+  "solution": "$S=2\\cdot2\\pi\\int_{0}^{\\pi/2}a\\sin^{3}t\\cdot3a\\sin t\\cos t\\,\\mathrm{d}t=12\\pi a^{2}\\cdot\\frac15=\\frac{12\\pi a^{2}}{5}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "侧面积：椭圆绕x轴",
+  "statement": "设曲线 $\\begin{cases}x=2\\cos t\\\\ y=\\sin t\\end{cases}$，$0\\leq t\\leq \\pi$，绕 $x$ 轴旋转一周，求侧面积。",
+  "tags": [
+   "一元积分",
+   "旋转侧面积",
+   "参数方程"
+  ],
+  "thinking": 9,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第68节 旋转侧面积",
+  "hints": [
+   "$\\mathrm{d}s=\\sqrt{4\\sin^{2}t+\\cos^{2}t}\\,\\mathrm{d}t$，令 $u=\\cos t$ 后化为 $\\sqrt{4-3u^{2}}$ 的积分。"
+  ],
+  "answer": "$2\\pi\\Big(1+\\frac{4\\pi}{3\\sqrt{3}}\\Big)$",
+  "solution": "$S=4\\pi\\int_{0}^{1}\\sqrt{4-3u^{2}}\\,\\mathrm{d}u=4\\pi\\Big[\\frac{u}{2}\\sqrt{4-3u^{2}}+\\frac{2}{\\sqrt3}\\arcsin\\frac{\\sqrt3 u}{2}\\Big]_{0}^{1}$ 即 $2\\pi(1+\\frac{4\\pi}{3\\sqrt3})$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "侧面积：对数螺线型参数曲线",
+  "statement": "设曲线 $\\begin{cases}x=e^{t}\\cos t\\\\ y=e^{t}\\sin t\\end{cases}$，$0\\leq t\\leq \\frac{\\pi}{2}$，绕 $x$ 轴旋转一周，求侧面积。",
+  "tags": [
+   "一元积分",
+   "旋转侧面积",
+   "参数方程"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第68节 旋转侧面积",
+  "hints": [
+   "$\\mathrm{d}s=\\sqrt2 e^{t}\\mathrm{d}t$，被积函数是 $e^{2t}\\sin t$，用分部积分。"
+  ],
+  "answer": "$\\frac{2\\sqrt{2}\\pi}{5}(2e^{\\pi}+1)$",
+  "solution": "$S=2\\sqrt2\\pi\\int_{0}^{\\pi/2}e^{2t}\\sin t\\,\\mathrm{d}t=2\\sqrt2\\pi\\cdot\\frac{2e^{\\pi}+1}{5}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "侧面积：四分之一圆绕y轴",
+  "statement": "设曲线 $\\begin{cases}x=a\\cos t\\\\ y=a\\sin t\\end{cases}$，$0\\leq t\\leq \\frac{\\pi}{2}$，绕 $y$ 轴旋转一周，求侧面积。",
+  "tags": [
+   "一元积分",
+   "旋转侧面积",
+   "几何意义"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第68节 旋转侧面积",
+  "hints": [
+   "四分之一圆弧绕 $y$ 轴转出半球面，表面积公式 $2\\pi a^{2}$。"
+  ],
+  "answer": "$2\\pi a^{2}$",
+  "solution": "$S=2\\pi\\int_{0}^{\\pi/2}a\\cos t\\cdot a\\,\\mathrm{d}t=2\\pi a^{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "侧面积：心形线绕极轴",
+  "statement": "设心形线 $r=a(1+\\cos\\theta)$，$0\\leq\\theta\\leq \\pi$，绕极轴旋转一周，求侧面积。",
+  "tags": [
+   "一元积分",
+   "旋转侧面积",
+   "极坐标"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第68节 旋转侧面积",
+  "hints": [
+   "极坐标下 $S=2\\pi\\int r\\sin\\theta\\,\\mathrm{d}s$，注意 $\\mathrm{d}s=2a\\cos\\frac\\theta2\\mathrm{d}\\theta$，$r=2a\\cos^{2}\\frac\\theta2$。"
+  ],
+  "answer": "$\\frac{32\\pi a^{2}}{5}$",
+  "solution": "$S=2\\pi\\int_{0}^{\\pi}2a\\cos^{2}\\frac\\theta2\\cdot\\sin\\theta\\cdot2a\\cos\\frac\\theta2\\mathrm{d}\\theta=\\frac{32\\pi a^{2}}{5}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "侧面积：对数螺线绕极轴",
+  "statement": "设对数螺线 $r=e^{\\theta}$，$0\\leq\\theta\\leq \\pi$，绕极轴旋转一周，求侧面积。",
+  "tags": [
+   "一元积分",
+   "旋转侧面积",
+   "极坐标"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第68节 旋转侧面积",
+  "hints": [
+   "$\\mathrm{d}s=\\sqrt2 e^{\\theta}\\mathrm{d}\\theta$，被积函数为 $e^{2\\theta}\\sin\\theta$。"
+  ],
+  "answer": "$\\frac{2\\sqrt{2}\\pi}{5}(e^{2\\pi}+1)$",
+  "solution": "$S=2\\sqrt2\\pi\\int_{0}^{\\pi}e^{2\\theta}\\sin\\theta\\,\\mathrm{d}\\theta=2\\sqrt2\\pi\\cdot\\frac{e^{2\\pi}+1}{5}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "侧面积：圆r=asinθ绕极轴成球面",
+  "statement": "设圆 $r=a\\sin\\theta$，$0\\leq\\theta\\leq \\pi$，绕极轴旋转一周，求侧面积。",
+  "tags": [
+   "一元积分",
+   "旋转侧面积",
+   "极坐标"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第68节 旋转侧面积",
+  "hints": [
+   "$r=a\\sin\\theta$ 是半径 $\\frac a2$ 的球面生成曲线，$\\mathrm{d}s=a\\,\\mathrm{d}\\theta$，$r\\sin\\theta=a\\sin^{2}\\theta$。"
+  ],
+  "answer": "$\\pi^{2}a^{2}$",
+  "solution": "$S=2\\pi\\int_{0}^{\\pi}a\\sin^{2}\\theta\\cdot a\\,\\mathrm{d}\\theta=2\\pi a^{2}\\cdot\\frac{\\pi}{2}=\\pi^{2}a^{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "侧面积：抛物线r=a/(1+cosθ)",
+  "statement": "设抛物线 $r=\\frac{a}{1+\\cos\\theta}$，$0\\leq\\theta\\leq \\frac{\\pi}{2}$，绕极轴旋转一周，求侧面积。",
+  "tags": [
+   "一元积分",
+   "旋转侧面积",
+   "极坐标"
+  ],
+  "thinking": 9,
+  "difficulty": 9,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第68节 旋转侧面积",
+  "hints": [
+   "先化直角坐标：$r+r\\cos\\theta=a$ 即 $y^{2}=a^{2}-2ax$；用 $x$ 积分更省事。"
+  ],
+  "answer": "$\\frac{2\\pi a^{2}}{3}(2\\sqrt{2}-1)$",
+  "solution": "$S=2\\pi\\int_{-a/2}^{0}(-x)\\sqrt{\\frac{a}{-2x}}\\,\\mathrm{d}x$ 化简后 $=\\frac{2\\pi a^{2}}{3}(2\\sqrt2-1)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "侧面积：双纽线一段绕极轴",
+  "statement": "设双纽线 $r^{2}=a^{2}\\cos 2\\theta$ 在 $0\\leq\\theta\\leq \\frac{\\pi}{4}$ 的一段弧，绕极轴旋转一周，求侧面积。",
+  "tags": [
+   "一元积分",
+   "旋转侧面积",
+   "极坐标"
+  ],
+  "thinking": 9,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第68节 旋转侧面积",
+  "hints": [
+   "$r=a\\sqrt{\\cos2\\theta}$，$\\mathrm{d}s=\\frac{a}{\\sqrt{\\cos2\\theta}}\\mathrm{d}\\theta$，被积函数化为 $a^{2}\\sin\\theta$。"
+  ],
+  "answer": "$\\pi a^{2}(2-\\sqrt{2})$",
+  "solution": "$S=2\\pi\\int_{0}^{\\pi/4}a\\sqrt{\\cos2\\theta}\\sin\\theta\\cdot\\frac{a}{\\sqrt{\\cos2\\theta}}\\mathrm{d}\\theta=2\\pi a^{2}(1-\\frac{\\sqrt2}{2})$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "打钉模型：功相等求总深度",
+  "statement": "阻力与深度成正比，每次击打做功相等。第一次击入 $1\\,\\mathrm{cm}$，求第二次击打后的总深度。",
+  "tags": [
+   "一元积分",
+   "定积分物理应用",
+   "功与能量"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第69节 定积分物理应用打钉模型",
+  "hints": [
+   "阻力 $f=kx$，一次做功 $W=\\frac12kx_1^{2}$；两次共做功 $2W$，对应 $\\frac12kx_2^{2}$。"
+  ],
+  "answer": "$\\sqrt{2}\\,\\mathrm{cm}$",
+  "solution": "$\\frac12kx_1^{2}=W$，$\\frac12kx_2^{2}=2W\\Rightarrow x_2=\\sqrt2x_1=\\sqrt2$ cm。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "打钉模型：第n次的总深度",
+  "statement": "阻力 $f=kx$，每次做功相等，$x_1=1$，求 $x_n$ 的通项。",
+  "tags": [
+   "一元积分",
+   "定积分物理应用",
+   "功与能量"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第69节 定积分物理应用打钉模型",
+  "hints": [
+   "总功 $nW=\\frac12kx_n^{2}$，与第一次比较即可。"
+  ],
+  "answer": "$x_{n}=\\sqrt{n}\\,\\mathrm{cm}$",
+  "solution": "$\\frac12kx_n^{2}=n\\cdot\\frac12kx_1^{2}\\Rightarrow x_n=\\sqrt{n}x_1=\\sqrt n$ cm。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "打钉模型：功按等比递减",
+  "statement": "阻力与深度成正比，第一次打进 $a$ 米，之后每次做功为前一次的 $r$ 倍（$0<r<1$），求第 $n$ 次击打后的总深度 $H_n$。",
+  "tags": [
+   "一元积分",
+   "定积分物理应用",
+   "等比求和"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第69节 定积分物理应用打钉模型",
+  "hints": [
+   "总功是等比数列求和，再令 $\\frac12kH_n^{2}$ 等于总功。"
+  ],
+  "answer": "$H_{n}=a\\sqrt{\\frac{1-r^{n}}{1-r}}$",
+  "solution": "$\\frac12kH_n^{2}=\\frac12ka^{2}(1+r+\\cdots+r^{n-1})\\Rightarrow H_n=a\\sqrt{\\frac{1-r^{n}}{1-r}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "打钉模型：无限次击打的最大深度",
+  "statement": "接上题，无限次击打，求最大深度 $H_{\\max}$。",
+  "tags": [
+   "一元积分",
+   "定积分物理应用",
+   "极限"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第69节 定积分物理应用打钉模型",
+  "hints": [
+   "让 $n\\to\\infty$，$r^{n}\\to 0$，等比和趋于 $\\frac{1}{1-r}$。"
+  ],
+  "answer": "$H_{\\max}=\\frac{a}{\\sqrt{1-r}}$",
+  "solution": "$H_{\\max}=a\\sqrt{\\frac{1}{1-r}}=\\frac{a}{\\sqrt{1-r}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "打钉模型：功按2的幂递减",
+  "statement": "阻力 $f=kx$，第 $n$ 次做功 $\\frac{W}{2^{n-1}}$，求无限次击打后的总深度。",
+  "tags": [
+   "一元积分",
+   "定积分物理应用",
+   "等比求和"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第69节 定积分物理应用打钉模型",
+  "hints": [
+   "总功 $W(1+\\frac12+\\frac14+\\cdots)=2W$，再用 $\\frac12kx^2$。"
+  ],
+  "answer": "$x_{\\infty}=2\\sqrt{\\frac{W}{k}}$",
+  "solution": "$\\frac12kx_\\infty^{2}=2W\\Rightarrow x_\\infty=2\\sqrt{W/k}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "静水压力：矩形板",
+  "statement": "矩形板宽 $b$、高 $h$，上边与水面齐平，求水压力。",
+  "tags": [
+   "一元积分",
+   "定积分物理应用",
+   "静水压力"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第70节 定积分物理应用静水压力",
+  "hints": [
+   "深度 $x$ 处取宽 $b$、高 $\\mathrm{d}x$ 的窄条，压力 $\\rho gx\\cdot b\\,\\mathrm{d}x$。"
+  ],
+  "answer": "$\\frac{1}{2}\\rho gbh^{2}$",
+  "solution": "$F=\\int_{0}^{h}\\rho gxb\\,\\mathrm{d}x=\\frac12\\rho gbh^{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "静水压力：直角三角形板",
+  "statement": "直角三角形板，竖直直角边 $a$ 与水面齐平，水平直角边 $b$，求水压力。",
+  "tags": [
+   "一元积分",
+   "定积分物理应用",
+   "静水压力"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第70节 定积分物理应用静水压力",
+  "hints": [
+   "深度 $x$ 处的宽度按相似三角形线性减小：$b\\big(1-\\frac xa\\big)$。"
+  ],
+  "answer": "$\\frac{1}{6}\\rho gba^{2}$",
+  "solution": "$F=\\int_{0}^{a}\\rho gx\\,b\\big(1-\\frac xa\\big)\\mathrm{d}x=\\frac16\\rho gba^{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "静水压力：梯形板",
+  "statement": "梯形板，上底 $b_1$、下底 $b_2$、高 $h$，上底与水面齐平，求水压力。",
+  "tags": [
+   "一元积分",
+   "定积分物理应用",
+   "静水压力"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第70节 定积分物理应用静水压力",
+  "hints": [
+   "深度 $x$ 处宽度按线性插值：$b_1+\\frac{b_2-b_1}{h}x$。"
+  ],
+  "answer": "$\\frac{\\rho gh^{2}}{6}(3b_{1}+2b_{2})$",
+  "solution": "$F=\\int_{0}^{h}\\rho gx\\big[b_1+\\frac{b_2-b_1}{h}x\\big]\\mathrm{d}x=\\frac{\\rho gh^{2}}{6}(3b_1+2b_2)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "静水压力：半圆形板",
+  "statement": "半圆形板，直径水平且与水面齐平，半径 $R$，求水压力。",
+  "tags": [
+   "一元积分",
+   "定积分物理应用",
+   "静水压力"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第70节 定积分物理应用静水压力",
+  "hints": [
+   "深度 $x$ 处半宽 $2\\sqrt{R^{2}-x^{2}}$，被积函数是 $x\\sqrt{R^{2}-x^{2}}$。"
+  ],
+  "answer": "$\\frac{2}{3}\\rho gR^{3}$",
+  "solution": "$F=\\int_{0}^{R}\\rho gx\\cdot2\\sqrt{R^{2}-x^{2}}\\,\\mathrm{d}x=\\frac23\\rho gR^{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "静水压力：三种放法的比值",
+  "statement": "等腰直角三角形直角边长 $a$，分别按斜边齐平、直角顶点齐平、一直角边竖直齐平放置，求水压力及比值。",
+  "tags": [
+   "一元积分",
+   "定积分物理应用",
+   "静水压力"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第70节 定积分物理应用静水压力",
+  "hints": [
+   "关键是把每种放法下的水面深度与宽度关系写对：斜边齐平时板高 $\\frac{a}{\\sqrt2}$，宽度随深度线性增大。"
+  ],
+  "answer": "$F_{1}=\\frac{\\sqrt{2}}{12}\\rho ga^{3}$，$F_{2}=\\frac{\\sqrt{2}}{6}\\rho ga^{3}$，$F_{3}=\\frac{1}{6}\\rho ga^{3}$；比值 $1:2:\\sqrt{2}$",
+  "solution": "分别按 $F=\\int\\rho gx\\,w(x)\\mathrm{d}x$ 计算：$F_1=\\frac{\\sqrt2}{12}\\rho ga^{3}$，$F_2=\\frac{\\sqrt2}{6}\\rho ga^{3}$，$F_3=\\frac16\\rho ga^{3}$，比值 $1:2:\\sqrt2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "水中捞物：圆柱体的捞取功",
+  "statement": "圆柱体竖直提出（上表面与水面齐平），半径 $R$、高 $H$，密度 $\\rho>\\rho_{0}$，求做功。",
+  "tags": [
+   "一元积分",
+   "定积分物理应用",
+   "功"
+  ],
+  "thinking": 5,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第71节 定积分物理应用水中捞物",
+  "hints": [
+   "提升中浮力随露出高度比例变化，可等效为重力减浮力的一半：$W=SHg\\big(\\rho H-\\frac{\\rho_0H}{2}\\big)$。"
+  ],
+  "answer": "$W=\\pi R^{2}gH^{2}\\big(\\rho-\\frac{\\rho_{0}}{2}\\big)$",
+  "solution": "提升高度 $x$ 时所需力 $=\\pi R^{2}g(\\rho H-\\rho_0 x)$，$W=\\int_{0}^{H}\\pi R^{2}g(\\rho H-\\rho_0x)\\mathrm{d}x=\\pi R^{2}gH^{2}(\\rho-\\frac{\\rho_0}{2})$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "水中捞物：球体的捞取功",
+  "statement": "球体从刚好接触水面提出（最上端与水面齐平），半径 $R$，密度 $\\rho>\\rho_{0}$，求做功。",
+  "tags": [
+   "一元积分",
+   "定积分物理应用",
+   "功"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第71节 定积分物理应用水中捞物",
+  "hints": [
+   "按球缺体积写浮力，$W=\\rho gV\\cdot 2R-\\int\\rho_0 g\\,V_{\\text{浸}}\\,\\mathrm{d}x$，也可用减半浮力的思想。"
+  ],
+  "answer": "$W=\\frac{4}{3}\\pi R^{4}g(2\\rho-\\rho_{0})$",
+  "solution": "重力做功 $\\rho g\\cdot\\frac43\\pi R^{3}\\cdot2R$，浮力反做功为 $\\frac23\\pi R^{4}\\rho_0 g$，相减即得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "水中捞物：倒立圆锥的捞取功",
+  "statement": "倒立圆锥提出（顶点与水面齐平，底面半径 $R$、高 $H$，密度 $\\rho>\\rho_{0}$），求做功。",
+  "tags": [
+   "一元积分",
+   "定积分物理应用",
+   "功"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第71节 定积分物理应用水中捞物",
+  "hints": [
+   "倒立锥露出水面的部分是小锥，浸入体积按 $\\big(1-\\frac{x}{H}\\big)^{3}$ 缩减。"
+  ],
+  "answer": "$W=\\frac{1}{3}\\pi R^{2}gH^{2}\\big(\\rho-\\frac{3}{4}\\rho_{0}\\big)$",
+  "solution": "所需力 $=\\frac13\\pi R^{2}Hg\\rho\\cdot$（整体）$-\\rho_0 gV_{\\text{浸}}(x)$，积分 $0\\to H$ 得 $W=\\frac13\\pi R^{2}gH^{2}(\\rho-\\frac34\\rho_0)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "水中捞物：半球体的捞取功",
+  "statement": "半球体提出（底面朝上，初始底面与水面齐平，半径 $R$，密度 $\\rho>\\rho_{0}$），求做功。",
+  "tags": [
+   "一元积分",
+   "定积分物理应用",
+   "功"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第71节 定积分物理应用水中捞物",
+  "hints": [
+   "半球体积 $\\frac23\\pi R^{3}$，重心比底面高 $\\frac{3R}{8}$；浮力部分按浸入体积积分。"
+  ],
+  "answer": "$W=\\pi R^{4}g\\big(\\frac{2}{3}\\rho-\\frac{1}{4}\\rho_{0}\\big)$",
+  "solution": "重力项 $\\rho g\\cdot\\frac23\\pi R^{3}\\cdot\\frac{3R}{8}$ 的对应形式，减去 $\\rho_0g\\int V_{\\text{浸}}\\mathrm{d}x=\\frac{\\pi R^{4}g\\rho_0}{4}$，得所给结果。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "水中捞物：正立圆锥的捞取功",
+  "statement": "正立圆锥提出（底面与水面齐平，底面半径 $R$、高 $H$，密度 $\\rho>\\rho_{0}$），求做功。",
+  "tags": [
+   "一元积分",
+   "定积分物理应用",
+   "功"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第71节 定积分物理应用水中捞物",
+  "hints": [
+   "正立锥浸入体积按 $\\big(1-\\frac{x}{H}\\big)^{3}$ 减少，与倒立锥只差浮力项的系数。"
+  ],
+  "answer": "$W=\\frac{1}{3}\\pi R^{2}gH^{2}\\big(\\rho-\\frac{\\rho_{0}}{4}\\big)$",
+  "solution": "$W=\\int_{0}^{H}\\Big[\\frac13\\pi R^{2}Hg\\rho-\\rho_0g\\cdot\\frac13\\pi R^{2}H\\big(1-\\frac xH\\big)^{3}\\Big]\\mathrm{d}x=\\frac13\\pi R^{2}gH^{2}\\big(\\rho-\\frac{\\rho_0}{4}\\big)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽水做功：圆柱形容器",
+  "statement": "圆柱形容器，底面半径 $R$、高 $H$，盛满水，抽到容器顶端上方 $h$ 米处，求做功。",
+  "tags": [
+   "一元积分",
+   "定积分物理应用",
+   "功"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第72节 定积分物理应用抽水做功",
+  "hints": [
+   "深度 $x$ 处薄层提升高度为 $H-x+h$，质量 $\\rho\\pi R^{2}\\mathrm{d}x$。"
+  ],
+  "answer": "$W=\\rho g\\pi R^{2}H\\big(\\frac{H}{2}+h\\big)$",
+  "solution": "$W=\\int_{0}^{H}\\rho g\\pi R^{2}(H-x+h)\\mathrm{d}x=\\rho g\\pi R^{2}H\\big(\\frac H2+h\\big)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽水做功：球形容器",
+  "statement": "球形容器，半径 $R$，盛满水，抽到容器顶端（球顶）上方 $h$ 米处，求做功。",
+  "tags": [
+   "一元积分",
+   "定积分物理应用",
+   "功"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第72节 定积分物理应用抽水做功",
+  "hints": [
+   "球心在 $x=R$ 处，薄层面积 $\\pi\\big(R^{2}-(R-x)^{2}\\big)$，提升高度 $2R-x+h$。"
+  ],
+  "answer": "$W=\\frac{4}{3}\\rho g\\pi R^{3}(R+h)$",
+  "solution": "$W=\\int_{0}^{2R}\\rho g\\pi\\big(2Rx-x^{2}\\big)(2R+h-x)\\mathrm{d}x=\\frac43\\rho g\\pi R^{3}(R+h)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽水做功：半球形容器",
+  "statement": "半球形容器（开口朝上），半径 $R$，盛满水，抽到容器顶端（开口平面）上方 $h$ 米处，求做功。",
+  "tags": [
+   "一元积分",
+   "定积分物理应用",
+   "功"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第72节 定积分物理应用抽水做功",
+  "hints": [
+   "深度 $x$ 处半径 $\\sqrt{R^{2}-(R-x)^{2}}$，提升高度 $x+h$。"
+  ],
+  "answer": "$W=\\frac{2}{3}\\rho g\\pi R^{3}\\big(\\frac{3R}{8}+h\\big)$",
+  "solution": "$W=\\int_{0}^{R}\\rho g\\pi(2Rx-x^{2})(x+h)\\mathrm{d}x=\\frac23\\rho g\\pi R^{3}\\big(\\frac{3R}{8}+h\\big)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽水做功：正立圆锥（顶点朝上）",
+  "statement": "正立圆锥形容器（底面朝下，顶点朝上），底面半径 $R$、高 $H$，盛满水，抽到容器顶端（顶点）上方 $h$ 米处，求做功。",
+  "tags": [
+   "一元积分",
+   "定积分物理应用",
+   "功"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第72节 定积分物理应用抽水做功",
+  "hints": [
+   "深度 $x$ 处半径按相似比 $\\frac{H-x}{H}R$ 缩小。"
+  ],
+  "answer": "$W=\\frac{1}{3}\\rho g\\pi R^{2}H\\big(\\frac{3H}{4}+h\\big)$",
+  "solution": "$W=\\int_{0}^{H}\\rho g\\pi\\frac{R^{2}}{H^{2}}(H-x)^{2}(H-x+h)\\mathrm{d}x=\\frac13\\rho g\\pi R^{2}H\\big(\\frac{3H}{4}+h\\big)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽水做功：倒立圆锥（底面朝上）",
+  "statement": "倒立圆锥形容器（顶点朝下，底面朝上），底面半径 $R$、高 $H$，盛满水，抽到容器顶端（底面）上方 $h$ 米处，求做功。",
+  "tags": [
+   "一元积分",
+   "定积分物理应用",
+   "功"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第72节 定积分物理应用抽水做功",
+  "hints": [
+   "深度 $x$ 处半径 $\\frac{x}{H}R$，提升高度 $H-x+h$，被积函数是 $x^{2}$ 型。"
+  ],
+  "answer": "$W=\\frac{1}{3}\\rho g\\pi R^{2}H\\big(\\frac{H}{4}+h\\big)$",
+  "solution": "$W=\\int_{0}^{H}\\rho g\\pi\\frac{R^{2}}{H^{2}}x^{2}(H-x+h)\\mathrm{d}x=\\frac13\\rho g\\pi R^{2}H\\big(\\frac H4+h\\big)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含参零点：三次函数三个零点",
+  "statement": "已知方程 $x^{3}-3x=k$ 有三个不同实根，求实数 $k$ 的取值范围。",
+  "tags": [
+   "一元微分",
+   "含参零点",
+   "极值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第73节 含参零点",
+  "hints": [
+   "令 $f(x)=x^{3}-3x$，求极值；水平线 $y=k$ 与曲线有三个交点即在两极值之间。"
+  ],
+  "answer": "$(-2,2)$",
+  "solution": "$f'=3x^{2}-3$，极大 $f(-1)=2$、极小 $f(1)=-2$，故 $-2<k<2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含参零点：指数与直线两交点",
+  "statement": "已知方程 $e^{x}=kx$ 有两个不同实根，求实数 $k$ 的取值范围。",
+  "tags": [
+   "一元微分",
+   "含参零点",
+   "切线"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第73节 含参零点",
+  "hints": [
+   "$k=\\frac{e^{x}}{x}$，研究 $g(x)=\\frac{e^{x}}{x}$ 的最小值（在 $x=1$ 处）。"
+  ],
+  "answer": "$(e,+\\infty)$",
+  "solution": "$g$ 在 $(0,1)$ 减、$(1,+\\infty)$ 增，最小值 $e$，且 $x<0$ 时 $g<0$，故 $k>e$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含参零点：对数与直线两交点",
+  "statement": "已知方程 $\\ln x=kx$ 有两个不同实根，求实数 $k$ 的取值范围。",
+  "tags": [
+   "一元微分",
+   "含参零点",
+   "极值"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第73节 含参零点",
+  "hints": [
+   "$k=\\frac{\\ln x}{x}$ 在 $x=e$ 取最大值 $\\frac1e$，且 $x\\to 0^{+}$、$x\\to+\\infty$ 时都趋于 0。"
+  ],
+  "answer": "$(0,\\frac{1}{e})$",
+  "solution": "$g'=\\frac{1-\\ln x}{x^{2}}$，最大值 $g(e)=\\frac1e$，故 $0<k<\\frac1e$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含参零点：x减对数",
+  "statement": "已知方程 $x-\\ln x=k$ 有两个不同实根，求实数 $k$ 的取值范围。",
+  "tags": [
+   "一元微分",
+   "含参零点",
+   "极值"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第73节 含参零点",
+  "hints": [
+   "$f(x)=x-\\ln x$ 的最小值在 $x=1$ 处，$k$ 大于最小值即可有两个交点。"
+  ],
+  "answer": "$(1,+\\infty)$",
+  "solution": "$f'=1-\\frac1x$，最小 $f(1)=1$，故 $k>1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含参零点：三次函数（无一次项）",
+  "statement": "已知方程 $x^{3}-3x^{2}=k$ 有三个不同实根，求实数 $k$ 的取值范围。",
+  "tags": [
+   "一元微分",
+   "含参零点",
+   "极值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第73节 含参零点",
+  "hints": [
+   "$f=x^{3}-3x^{2}$ 的极值点是 $x=0,2$。"
+  ],
+  "answer": "$(-4,0)$",
+  "solution": "$f'=3x^{2}-6x$，$f(0)=0$ 为极大、$f(2)=-4$ 为极小，故 $-4<k<0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含参零点：x²乘指数",
+  "statement": "已知方程 $x^{2}e^{-x}=k$ 有三个不同实根，求实数 $k$ 的取值范围。",
+  "tags": [
+   "一元微分",
+   "含参零点",
+   "极值"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第73节 含参零点",
+  "hints": [
+   "$g=x^{2}e^{-x}$ 在 $x=0$ 取 0、$x=2$ 取极大 $\\frac{4}{e^{2}}$，且 $x<0$ 时 $g>0$ 单调增。"
+  ],
+  "answer": "$(0,\\frac{4}{e^{2}})$",
+  "solution": "$g'=x(2-x)e^{-x}$，极大值 $g(2)=\\frac{4}{e^{2}}$，与水平线有三个交点需 $0<k<\\frac{4}{e^{2}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含参零点：x加倒数",
+  "statement": "已知方程 $x+\\frac{1}{x}=k$ 有两个不同实根，求实数 $k$ 的取值范围。",
+  "tags": [
+   "一元微分",
+   "含参零点",
+   "基本不等式"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第73节 含参零点",
+  "hints": [
+   "$x+\\frac1x$ 的值域是 $(-\\infty,-2]\\cup[2,+\\infty)$，取端点时只有一解。"
+  ],
+  "answer": "$(-\\infty,-2)\\cup(2,+\\infty)$",
+  "solution": "$|x+\\frac1x|\\geq 2$，等号仅在 $x=\\pm1$ 成立，故 $|k|>2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含参零点：绝对值抛物线与水平线",
+  "statement": "已知方程 $|x^{2}-4x+3|=k$ 有且仅有三个不同实根，求实数 $k$ 的值。",
+  "tags": [
+   "一元微分",
+   "含参零点",
+   "图像法"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第73节 含参零点",
+  "hints": [
+   "$x^{2}-4x+3$ 的极小值是 $-1$，翻折后 $|f|$ 在极小处产生 $\\pm1$ 两个峰；三解出现在水平线切于峰顶时。"
+  ],
+  "answer": "$k=1$",
+  "solution": "$|f|$ 的最大谷高度为 1，直线 $y=1$ 与图像恰好三个交点，故 $k=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含参零点：指数加负指数",
+  "statement": "已知方程 $e^{x}+e^{-x}=k$ 有两个不同实根，求实数 $k$ 的取值范围。",
+  "tags": [
+   "一元微分",
+   "含参零点",
+   "基本不等式"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第73节 含参零点",
+  "hints": [
+   "$e^{x}+e^{-x}\\geq 2$，等号在 $x=0$；$k>2$ 时左右各一解。"
+  ],
+  "answer": "$(2,+\\infty)$",
+  "solution": "令 $t=e^{x}>0$，$t+\\frac1t=k$ 有两正根需 $k>2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "单参数不等式：与常数 $e-3$ 比大小",
+  "statement": "证明：$x\\ln x+\\cos x-\\arctan x>e-3$，$x>e$。",
+  "tags": [
+   "证明",
+   "单调性",
+   "构造辅助函数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第74节 单参数不等式",
+  "hints": [
+   "把右端 $e-3$ 看左端函数在 $x=e$ 处的值，只要说明左端单调递增即可。"
+  ],
+  "answer": "",
+  "solution": "令 $F(x)=x\\ln x+\\cos x-\\arctan x$，$F(e)=e+\\cos e-\\arctan e>e-3$；$F'(x)=\\ln x+1-\\sin x-\\frac{1}{1+x^2}>0\\ (x>e)$，故 $F$ 递增。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "单参数不等式：对数与反正切之和的下界",
+  "statement": "证明：$\\ln(1+x)+\\arctan x>\\frac{2x}{1+x}$，$x>0$。",
+  "tags": [
+   "证明",
+   "单调性",
+   "构造辅助函数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第74节 单参数不等式",
+  "hints": [
+   "作差构造 $F$，注意 $F(0)=0$ 且 $F'(0)=0$，需把导数通分化简。"
+  ],
+  "answer": "",
+  "solution": "令 $F(x)=\\ln(1+x)+\\arctan x-\\frac{2x}{1+x}$，$F(0)=0$；通分得 $F'(x)=\\frac{x^{3}+3x}{(1+x)^{2}(1+x^{2})}>0$，故 $F(x)>0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "单参数不等式：$\\arctan x$ 加项的上界",
+  "statement": "证明：$\\arctan x+\\frac{x}{1+x^2}<\\frac{\\pi}{2}$，$x>0$。",
+  "tags": [
+   "证明",
+   "单调性",
+   "构造辅助函数"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第74节 单参数不等式",
+  "hints": [
+   "直接对左端求导，看是否恒正；右端与 $x\\to+\\infty$ 的极限有关。"
+  ],
+  "answer": "",
+  "solution": "令 $G(x)=\\arctan x+\\frac{x}{1+x^2}$，$G(0)=0$，$G'(x)=\\frac{1}{1+x^2}+\\frac{1-x^2}{(1+x^2)^2}=\\frac{2}{(1+x^2)^2}>0$；又 $\\lim\\limits_{x\\to+\\infty}G(x)=\\frac{\\pi}{2}$，故 $G(x)<\\frac{\\pi}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "单参数不等式：差的绝对值被二次式控制",
+  "statement": "证明：$|\\ln(1+x)-\\arctan x|<\\frac{x^2}{2}$，$x>0$。",
+  "tags": [
+   "证明",
+   "最值法",
+   "单调性"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第74节 单参数不等式",
+  "hints": [
+   "两者大小关系会变，先找 $F'=0$ 的点，再比较端点与极值处的绝对值。"
+  ],
+  "answer": "",
+  "solution": "令 $F=\\ln(1+x)-\\arctan x$，$F(0)=F'(0)=0$，$F''(x)=\\frac{2x}{(1+x^2)^2}-\\frac{1}{(1+x)^2}$ 仅变号一次，$|F|$ 的最大值在 $F'(x)=0$ 处取得，代入并与 $\\frac{x^2}{2}$ 比较即得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "单参数不等式：指数乘对数高阶展开",
+  "statement": "证明：$e^x\\ln(1+x)>x+\\frac{x^2}{2}$，$x>0$。",
+  "tags": [
+   "证明",
+   "泰勒展开",
+   "单调性"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第74节 单参数不等式",
+  "hints": [
+   "两端在 $x=0$ 处同为零，逐阶求导直到某一阶在 $x>0$ 上恒正。"
+  ],
+  "answer": "",
+  "solution": "令 $F=e^x\\ln(1+x)-x-\\frac{x^2}{2}$，则 $F(0)=F'(0)=F''(0)=0$，而 $F'''(0)=3>0$，$F'''$ 在 $x>0$ 上保持为正，逐次回推得 $F>0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "单参数不等式：指数核变限积分下界",
+  "statement": "证明：$\\int_0^x e^{t^2}\\,\\mathrm{d}t>\\frac{x}{1+x^2}$，$x>0$。",
+  "tags": [
+   "证明",
+   "变限积分",
+   "单调性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第74节 单参数不等式",
+  "hints": [
+   "移项作差后直接对变限积分求导，比较两个显式函数的大小。"
+  ],
+  "answer": "",
+  "solution": "令 $F(x)=\\int_0^x e^{t^2}\\mathrm{d}t-\\frac{x}{1+x^2}$，$F(0)=0$，$F'(x)=e^{x^2}-\\frac{1-x^2}{(1+x^2)^2}\\ge 1-1\\ge 0$ 且不恒为 $0$，故 $F(x)>0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "单参数不等式：对数核变限积分估计",
+  "statement": "证明：$\\int_0^x\\frac{\\ln(1+t)}{t}\\,\\mathrm{d}t>\\ln(1+x)$，$x>0$。",
+  "tags": [
+   "证明",
+   "变限积分",
+   "积分保号性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第74节 单参数不等式",
+  "hints": [
+   "把右端的 $\\ln(1+x)$ 也写成一个从 $0$ 到 $x$ 的积分，再比较被积函数。"
+  ],
+  "answer": "",
+  "solution": "$\\ln(1+x)=\\int_0^x\\frac{\\mathrm{d}t}{1+t}$，而 $\\frac{\\ln(1+t)}{t}>\\frac{1}{1+t}\\ (t>0)$，由积分保号性立即得证。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "单参数不等式：指数核变限积分的估计",
+  "statement": "证明：$\\int_0^x\\frac{e^t}{1+t^2}\\,\\mathrm{d}t>\\arctan x+\\frac{1}{2}\\ln(1+x^2)$，$x>0$。",
+  "tags": [
+   "证明",
+   "变限积分",
+   "单调性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第74节 单参数不等式",
+  "hints": [
+   "右端恰是 $\\frac{1+x}{1+x^2}$ 的原函数，两边分别求导即可。"
+  ],
+  "answer": "",
+  "solution": "右端求导得 $\\frac{1}{1+x^2}+\\frac{x}{1+x^2}=\\frac{1+x}{1+x^2}$；令 $F$ 为左减右，$F(0)=0$，$F'(x)=\\frac{e^x-1-x}{1+x^2}>0$，得证。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "单参数不等式：反正切型变限积分下界",
+  "statement": "证明：$\\int_0^x\\frac{\\arctan t}{t}\\,\\mathrm{d}t>\\arctan x$，$x>0$。",
+  "tags": [
+   "证明",
+   "变限积分",
+   "积分保号性"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第74节 单参数不等式",
+  "hints": [
+   "把 $\\arctan x$ 写成 $\\int_0^x\\frac{\\mathrm{d}t}{1+t^2}$，两积分同区间比较。"
+  ],
+  "answer": "",
+  "solution": "$\\arctan x=\\int_0^x\\frac{\\mathrm{d}t}{1+t^2}$，且 $\\frac{\\arctan t}{t}>\\frac{1}{1+t^2}\\ (t>0)$，由积分保号性得证。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "单参数不等式：正弦核变限积分与分式比较",
+  "statement": "证明：$\\int_0^x\\frac{\\sin t}{1+t^2}\\,\\mathrm{d}t>\\frac{1-\\cos x}{1+x^2}$，$0<x<\\pi$。",
+  "tags": [
+   "证明",
+   "变限积分",
+   "单调性"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第74节 单参数不等式",
+  "hints": [
+   "直接作差求导，注意右端是商，通分后正弦项正好抵消。"
+  ],
+  "answer": "",
+  "solution": "令 $F(x)=\\int_0^x\\frac{\\sin t}{1+t^2}\\mathrm{d}t-\\frac{1-\\cos x}{1+x^2}$，$F(0)=0$，通分得 $F'(x)=\\frac{2x(1-\\cos x)}{(1+x^2)^2}>0$，故 $F(x)>0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "双参数不等式：对数均值不等式的上界",
+  "statement": "设 $0<a<b$，证明：$\\ln\\frac{b}{a}>\\frac{2(b-a)}{a+b}$。",
+  "tags": [
+   "证明",
+   "双参数不等式",
+   "换元"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第75节 双参数不等式",
+  "hints": [
+   "令 $t=\\frac{b}{a}>1$，把两个参数化成一个变量。"
+  ],
+  "answer": "",
+  "solution": "令 $t=\\frac{b}{a}>1$，即证 $\\ln t>\\frac{2(t-1)}{t+1}$；令 $\\varphi(t)=\\ln t-\\frac{2(t-1)}{t+1}$，$\\varphi(1)=0$，$\\varphi'(t)=\\frac{(t-1)^2}{t(t+1)^2}>0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "双参数不等式：对数均值不等式的下界",
+  "statement": "设 $0<a<b$，证明：$\\ln\\frac{b}{a}<\\frac{b-a}{\\sqrt{ab}}$。",
+  "tags": [
+   "证明",
+   "双参数不等式",
+   "换元"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第75节 双参数不等式",
+  "hints": [
+   "令 $t=\\sqrt{\\frac{b}{a}}>1$，右端化为 $t-\\frac{1}{t}$，正好是 $2\\ln t$ 的上界。"
+  ],
+  "answer": "",
+  "solution": "令 $t=\\sqrt{b/a}>1$，即证 $2\\ln t<t-\\frac{1}{t}$；令 $\\varphi(t)=t-\\frac{1}{t}-2\\ln t$，$\\varphi(1)=0$，$\\varphi'(t)=\\frac{(t-1)^2}{t^2}>0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "双参数不等式：平方和乘对数估计",
+  "statement": "设 $0<a<b$，证明：$(a^2+b^2)\\ln\\frac{b}{a}>2a(b-a)$。",
+  "tags": [
+   "证明",
+   "双参数不等式",
+   "换元"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第75节 双参数不等式",
+  "hints": [
+   "两边同除 $a^2$，再令 $t=\\frac{b}{a}$。"
+  ],
+  "answer": "",
+  "solution": "同除 $a^2$ 并令 $t=\\frac{b}{a}>1$，即证 $(1+t^2)\\ln t>2(t-1)$；令 $\\varphi=(1+t^2)\\ln t-2(t-1)$，$\\varphi(1)=0$，$\\varphi'(t)=2t\\ln t+\\frac{(t-1)^2}{t}>0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "双参数不等式：指数差的严格下界",
+  "statement": "设 $0<a<b$，证明：$e^b-e^a>(b-a)e^{\\frac{a+b}{2}}$。",
+  "tags": [
+   "证明",
+   "双参数不等式",
+   "换元"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第75节 双参数不等式",
+  "hints": [
+   "两边同除 $e^{\\frac{a+b}{2}}$，令 $t=\\frac{b-a}{2}$ 化为双曲函数不等式。"
+  ],
+  "answer": "",
+  "solution": "令 $t=\\frac{b-a}{2}>0$，原式等价于 $e^{t}-e^{-t}>2t$，即 $2\\sinh t>2t$，由 $\\sinh t>t\\ (t>0)$ 得证。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "双参数不等式：指数差的严格上界",
+  "statement": "设 $0<a<b$，证明：$e^b-e^a<\\frac{(b-a)(e^a+e^b)}{2}$。",
+  "tags": [
+   "证明",
+   "双参数不等式",
+   "换元"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第75节 双参数不等式",
+  "hints": [
+   "同除 $e^{\\frac{a+b}{2}}$ 后左端变成 $2\\sinh t$，右端是 $2t\\cosh t$。"
+  ],
+  "answer": "",
+  "solution": "令 $t=\\frac{b-a}{2}>0$，等价于 $\\tanh t<t$；令 $\\varphi(t)=\\tanh t-t$，$\\varphi(0)=0$，$\\varphi'(t)=\\mathrm{sech}^2t-1<0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "双参数不等式：一阶矩积分估计",
+  "statement": "设 $0<a<b$，证明：$\\int_a^b xe^x\\,\\mathrm{d}x>\\frac{a+b}{2}\\int_a^b e^x\\,\\mathrm{d}x$。",
+  "tags": [
+   "证明",
+   "双参数不等式",
+   "切比雪夫不等式"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第75节 双参数不等式",
+  "hints": [
+   "把两个积分都算出来，再整理成关于 $e^b-e^a$ 的式子。"
+  ],
+  "answer": "",
+  "solution": "左 $=(b-1)e^b-(a-1)e^a$，右 $=\\frac{a+b}{2}(e^b-e^a)$；作差整理得 $\\left(\\frac{b-a}{2}\\right)(e^b+e^a)-(e^b-e^a)>0$，即化为 75.5 的结论。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "双参数不等式：二阶矩积分估计",
+  "statement": "设 $0<a<b$，证明：$\\int_a^b x^2e^x\\,\\mathrm{d}x>\\frac{a^2+ab+b^2}{3}\\int_a^b e^x\\,\\mathrm{d}x$。",
+  "tags": [
+   "证明",
+   "双参数不等式",
+   "切比雪夫不等式"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第75节 双参数不等式",
+  "hints": [
+   "两个因子在区间上同向单调递增，考虑积分形式的切比雪夫不等式。"
+  ],
+  "answer": "",
+  "solution": "由 $x^2$ 与 $e^x$ 同向递增，切比雪夫不等式给出 $\\frac{1}{b-a}\\int_a^b x^2e^x\\mathrm{d}x>\\frac{1}{(b-a)^2}\\int_a^b x^2\\mathrm{d}x\\int_a^b e^x\\mathrm{d}x$，而 $\\int_a^b x^2\\mathrm{d}x=\\frac{b^3-a^3}{3}$，代入即得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "双参数不等式：指数权倒数积分估计",
+  "statement": "设 $0<a<b$，证明：$\\int_a^b\\frac{e^{-x}}{x}\\,\\mathrm{d}x>\\frac{\\ln b-\\ln a}{b-a}(e^{-a}-e^{-b})$。",
+  "tags": [
+   "证明",
+   "双参数不等式",
+   "切比雪夫不等式"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第75节 双参数不等式",
+  "hints": [
+   "右端正好是 $\\frac{1}{x}$ 与 $e^{-x}$ 各自平均值的乘积，说明用同一不等式。"
+  ],
+  "answer": "",
+  "solution": "$\\frac{1}{x}$ 与 $e^{-x}$ 在 $[a,b]$ 上同向递减，切比雪夫不等式给出 $\\int_a^b\\frac{e^{-x}}{x}\\mathrm{d}x>\\frac{1}{b-a}\\int_a^b\\frac{\\mathrm{d}x}{x}\\int_a^b e^{-x}\\mathrm{d}x$，代入两个积分即得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "双参数不等式：对数积分下界",
+  "statement": "设 $0<a<b$，证明：$\\int_a^b\\ln x\\,\\mathrm{d}x>(b-a)\\ln\\sqrt{ab}$。",
+  "tags": [
+   "证明",
+   "双参数不等式",
+   "单调性"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第75节 双参数不等式",
+  "hints": [
+   "固定 $b$，把差 $G(a)$ 看成 $a$ 的函数，用导数判断单调性。"
+  ],
+  "answer": "",
+  "solution": "令 $G(a)=\\int_a^b\\ln x\\mathrm{d}x-(b-a)\\ln\\sqrt{ab}$（$b$ 固定），$G(b)=0$；令 $t=\\frac{b}{a}>1$ 得 $G'(a)=\\frac{\\ln t-t+1}{2}<0$，故 $G$ 关于 $a$ 递减，$G(a)>G(b)=0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "双参数不等式：对数积分上界",
+  "statement": "设 $0<a<b$，证明：$\\int_a^b\\ln x\\,\\mathrm{d}x<(b-a)\\ln\\frac{a+b}{2}$。",
+  "tags": [
+   "证明",
+   "双参数不等式",
+   "凹凸性"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第75节 双参数不等式",
+  "hints": [
+   "$\\ln x$ 是严格凹函数，函数值的平均不超过平均值的函数值。"
+  ],
+  "answer": "",
+  "solution": "由 Jensen 不等式，$\\frac{1}{b-a}\\int_a^b\\ln x\\,\\mathrm{d}x<\\ln\\left(\\frac{1}{b-a}\\int_a^b x\\,\\mathrm{d}x\\right)=\\ln\\frac{a+b}{2}$，即得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "基础定理证明：费马引理",
+  "statement": "【费马定理证明】设函数 $f$ 在 $x_0$ 处可导，且在 $x_0$ 处取得极值，证明：$f'(x_0)=0$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "导数定义"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第76节 基础定理证明",
+  "hints": [
+   "写出 $x_0$ 两侧的差商，用极限的保号性或左右极限相等来说明。"
+  ],
+  "answer": "保号性",
+  "solution": "设取极大值，则 $x<x_0$ 时 $\\frac{f(x)-f(x_0)}{x-x_0}\\ge0$，$x>x_0$ 时 $\\le0$；令 $x\\to x_0$ 得 $f'(x_0)\\ge0$ 且 $f'(x_0)\\le0$，故 $f'(x_0)=0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "基础定理证明：广义罗尔定理",
+  "statement": "【广义罗尔定理证明】设函数 $f$ 在 $(a,b)$ 内可导，且 $\\lim\\limits_{x\\to a^{+}}f(x)=\\lim\\limits_{x\\to b^{-}}f(x)$，证明：存在 $\\xi\\in(a,b)$，使得 $f'(\\xi)=0$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "最值定理"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第76节 基础定理证明",
+  "hints": [
+   "端点无定义，先补充定义成闭区间上的连续函数，再用最值加费马引理。"
+  ],
+  "answer": "费马定理与保号性",
+  "solution": "令 $f(a)=f(b)=\\lim\\limits_{x\\to a^+}f(x)$，则 $f$ 在 $[a,b]$ 连续，取到最值；若最值不在端点，由费马引理得 $f'(\\xi)=0$；若在端点，则 $f$ 为常数，结论仍成立。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "基础定理证明：罗尔定理",
+  "statement": "【罗尔定理证明】设 $f\\in C[a,b]$，在 $(a,b)$ 内可导，且 $f(a)=f(b)$，证明：存在 $\\xi\\in(a,b)$，使得 $f'(\\xi)=0$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "最值定理"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第76节 基础定理证明",
+  "hints": [
+   "连续函数必有最值，非端点处的极值点就是所求。"
+  ],
+  "answer": "费马定理",
+  "solution": "由最值定理，$f$ 在 $[a,b]$ 上取到最大值与最小值。若两者相等则 $f$ 为常数，任取 $\\xi$ 即可；否则至少有一个最值点在 $(a,b)$ 内，由费马引理 $f'(\\xi)=0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "基础定理证明：拉格朗日中值定理",
+  "statement": "【拉格朗日中值定理证明】设 $f\\in C[a,b]$，在 $(a,b)$ 内可导，证明：存在 $\\xi\\in(a,b)$，使得 $f'(\\xi)=\\frac{f(b)-f(a)}{b-a}$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "构造辅助函数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第76节 基础定理证明",
+  "hints": [
+   "减去连接两端点的弦，使新函数在两端取等值。"
+  ],
+  "answer": "罗尔定理",
+  "solution": "令 $F(x)=f(x)-f(a)-\\frac{f(b)-f(a)}{b-a}(x-a)$，则 $F(a)=F(b)=0$，对 $F$ 用罗尔定理得 $F'(\\xi)=0$，即得结论。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "基础定理证明：柯西中值定理",
+  "statement": "【柯西中值定理证明】设 $f,g\\in C[a,b]$，在 $(a,b)$ 内可导，且当 $x\\in(a,b)$ 时 $g'(x)\\ne0$，证明：存在 $\\xi\\in(a,b)$，使得 $\\frac{f(b)-f(a)}{g(b)-g(a)}=\\frac{f'(\\xi)}{g'(\\xi)}$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "构造辅助函数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第76节 基础定理证明",
+  "hints": [
+   "交叉相乘后把常量搬到函数里，构造两端点相等的辅助函数。"
+  ],
+  "answer": "罗尔定理",
+  "solution": "令 $F(x)=[f(x)-f(a)][g(b)-g(a)]-[g(x)-g(a)][f(b)-f(a)]$，则 $F(a)=F(b)=0$，由罗尔定理 $F'(\\xi)=0$，即 $f'(\\xi)[g(b)-g(a)]=g'(\\xi)[f(b)-f(a)]$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "基础定理证明：洛必达法则（$\\frac00$ 型）",
+  "statement": "【洛必达法则证明】设 $f,g$ 在 $x_0$ 的某去心邻域内可导，$g'(x)\\ne0$，且 $\\lim\\limits_{x\\to x_0}f(x)=\\lim\\limits_{x\\to x_0}g(x)=0$，若 $\\lim\\limits_{x\\to x_0}\\frac{f'(x)}{g'(x)}=A$，证明：$\\lim\\limits_{x\\to x_0}\\frac{f(x)}{g(x)}=A$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "极限"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第76节 基础定理证明",
+  "hints": [
+   "补定义使端点函数值为零，在 $[x_0,x]$ 上用柯西中值定理，再令 $x\\to x_0$。"
+  ],
+  "answer": "柯西中值定理",
+  "solution": "令 $f(x_0)=g(x_0)=0$，对 $[x_0,x]$ 用柯西中值定理：$\\frac{f(x)}{g(x)}=\\frac{f'(\\xi)}{g'(\\xi)}$，$\\xi$ 介于 $x_0$ 与 $x$ 之间；$x\\to x_0$ 时 $\\xi\\to x_0$，故极限为 $A$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "基础定理证明：泰勒中值定理",
+  "statement": "【泰勒中值定理证明】设 $f$ 在 $x_0$ 的某邻域内有 $n+1$ 阶导数，证明：对该邻域内任意 $x$，存在 $\\xi$ 在 $x_0$ 与 $x$ 之间，使得 $f(x)=\\sum\\limits_{k=0}^{n}\\frac{f^{(k)}(x_0)}{k!}(x-x_0)^{k}+\\frac{f^{(n+1)}(\\xi)}{(n+1)!}(x-x_0)^{n+1}$。",
+  "tags": [
+   "证明",
+   "泰勒展开",
+   "中值定理"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第76节 基础定理证明",
+  "hints": [
+   "把余项系数看成待定常数，构造在 $x$ 与 $x_0$ 处都为零的辅助函数，反复用柯西中值定理。"
+  ],
+  "answer": "柯西中值定理",
+  "solution": "令 $R_n(x)$ 为余项并设 $R_n(x)=\\lambda(x-x_0)^{n+1}$，构造 $F(t)=f(x)-\\sum\\frac{f^{(k)}(t)}{k!}(x-t)^k-\\lambda(x-t)^{n+1}$，则 $F(x_0)=F(x)=0$，对 $F$ 反复用罗尔定理（等价于 $n+1$ 次柯西中值）得 $\\lambda=\\frac{f^{(n+1)}(\\xi)}{(n+1)!}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "基础定理证明：积分中值定理",
+  "statement": "【积分中值定理证明】设 $f\\in C[a,b]$，证明：存在 $\\xi\\in[a,b]$，使得 $\\int_a^b f(x)\\,\\mathrm{d}x=f(\\xi)(b-a)$。",
+  "tags": [
+   "证明",
+   "积分中值",
+   "介值定理"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第76节 基础定理证明",
+  "hints": [
+   "先把积分夹在最小值和最大值乘区间长度之间。"
+  ],
+  "answer": "介值定理",
+  "solution": "设 $m,M$ 为 $f$ 在 $[a,b]$ 上的最小、最大值，则 $m(b-a)\\le\\int_a^b f\\le M(b-a)$，即 $\\frac{1}{b-a}\\int_a^b f\\in[m,M]$，由介值定理存在 $\\xi$ 使 $f(\\xi)$ 等于该值。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "基础定理证明：变上限积分的可导性",
+  "statement": "【原函数存在定理证明】设 $f\\in C[a,b]$，定义 $F(x)=\\int_a^x f(t)\\,\\mathrm{d}t$，$x\\in[a,b]$，证明：$F$ 在 $(a,b)$ 内可导，且 $F'(x)=f(x)$。",
+  "tags": [
+   "证明",
+   "变限积分",
+   "积分中值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第76节 基础定理证明",
+  "hints": [
+   "写出 $\\frac{F(x+\\Delta x)-F(x)}{\\Delta x}$ 后化为一个积分平均，再用连续性。"
+  ],
+  "answer": "积分中值定理",
+  "solution": "$\\frac{F(x+\\Delta x)-F(x)}{\\Delta x}=\\frac{1}{\\Delta x}\\int_x^{x+\\Delta x}f(t)\\mathrm{d}t=f(\\xi)$（积分中值，$\\xi$ 在 $x$ 与 $x+\\Delta x$ 间），$\\Delta x\\to0$ 时由 $f$ 连续得极限为 $f(x)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "基础定理证明：阿达玛不等式",
+  "statement": "【阿达玛不等式证明】设 $f$ 在 $[a,b]$ 上连续，且在 $(a,b)$ 内为下凸函数，证明：$f\\left(\\frac{a+b}{2}\\right)\\le\\frac{1}{b-a}\\int_a^b f(x)\\,\\mathrm{d}x\\le\\frac{f(a)+f(b)}{2}$。",
+  "tags": [
+   "证明",
+   "凹凸性",
+   "积分不等式"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第76节 基础定理证明",
+  "hints": [
+   "左端由凸性得 $f\\left(\\frac{x+y}{2}\\right)\\le\\frac{f(x)+f(y)}{2}$，两端在 $[a,b]$ 上积分；右端用弦在曲线上方。"
+  ],
+  "answer": "凸函数定义与积分换元",
+  "solution": "凸性给出 $f\\left(\\frac{x+y}{2}\\right)\\le\\frac{f(x)+f(y)}{2}$，令 $y=a+b-x$ 后对 $x$ 在 $[a,b]$ 上积分，左端换元 $t=\\frac{a+b}{2}$ 得 $f\\left(\\frac{a+b}{2}\\right)\\le\\frac{1}{b-a}\\int_a^b f$；右端由弦 $l(x)$ 满足 $f\\le l$ 积分得 $\\int_a^b f\\le\\frac{(b-a)(f(a)+f(b))}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "构造罗尔中值：$f'+f=1$ 型",
+  "statement": "设 $f(x)$ 在 $[0,1]$ 可导，$f(0)=0$，$f(1)=1-e^{-1}$，证明存在 $\\xi\\in(0,1)$ 使 $f'(\\xi)+f(\\xi)=1$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "构造辅助函数"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第77节 构造罗尔中值",
+  "hints": [
+   "把 $f'+f$ 认成 $(e^xf)$ 的导数，再把常数 $1$ 吸收进括号。"
+  ],
+  "answer": "$F(x)=e^{x}(f(x)-1)$",
+  "solution": "构造 $F(x)=e^x(f(x)-1)$，则 $F(0)=-1$，$F(1)=e(1-e^{-1}-1)=-1$，两端相等；由罗尔定理存在 $\\xi$ 使 $F'(\\xi)=e^{\\xi}[f'(\\xi)+f(\\xi)-1]=0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "构造罗尔中值：半系数线性型",
+  "statement": "设 $f(x)$ 在 $[1,2]$ 可导，$f(1)=\\frac{1}{2}$，$f(2)=1$，证明存在 $\\xi\\in(1,2)$ 使 $f'(\\xi)+\\frac{1}{2}f(\\xi)=1$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "构造辅助函数"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第77节 构造罗尔中值",
+  "hints": [
+   "系数 $\\frac{1}{2}$ 提示乘 $x$ 后再乘 $x$，即积分因子与 $x$ 有关。"
+  ],
+  "answer": "$F(x)=xf(x)-\\frac{x^{2}}{2}$",
+  "solution": "取 $F(x)=xf(x)-\\frac{x^2}{2}$，$F(1)=0$，$F(2)=0$；由罗尔定理 $F'(\\xi)=f(\\xi)+\\xi f'(\\xi)-\\xi=0$，两边除以 $\\xi$ 即得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "构造罗尔中值：一次分母系数型",
+  "statement": "设 $f(x)$ 在 $[0,1]$ 可导，$f(0)=0$，$f(1)=\\frac{3}{4}$，证明存在 $\\xi\\in(0,1)$ 使 $f'(\\xi)+\\frac{1}{\\xi+1}f(\\xi)=1$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "构造辅助函数"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第77节 构造罗尔中值",
+  "hints": [
+   "积分因子是 $x+1$，再把 $1$ 吸收为 $\\frac{(x+1)^2}{2}$。"
+  ],
+  "answer": "$F(x)=(x+1)f(x)-\\frac{(x+1)^{2}}{2}$",
+  "solution": "取 $F(x)=(x+1)f(x)-\\frac{(x+1)^2}{2}$，$F(0)=-\\frac12$，$F(1)=2\\cdot\\frac34-2=-\\frac12$，两端相等；罗尔定理给 $(\\xi+1)f'(\\xi)+f(\\xi)-(\\xi+1)=0$，除以 $\\xi+1$ 即得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "构造罗尔中值：$f'+f=-1$ 型",
+  "statement": "设 $f(x)$ 在 $[0,1]$ 可导，$f(0)=0$，$f(1)=e^{-1}-1$，证明存在 $\\xi\\in(0,1)$ 使 $f'(\\xi)+f(\\xi)=-1$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "构造辅助函数"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第77节 构造罗尔中值",
+  "hints": [
+   "把 $f'+f$ 看成 $(e^xf)'$，常数项吸收进括号内。"
+  ],
+  "answer": "$F(x)=e^{x}(f(x)+1)$",
+  "solution": "取 $F(x)=e^x(f(x)+1)$，$F(0)=1$，$F(1)=e\\cdot e^{-1}=1$，由罗尔定理 $F'(\\xi)=e^{\\xi}[f'(\\xi)+f(\\xi)+1]=0$，即得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "柯西中值：$\\ln x$ 与 $x^2$ 配对",
+  "statement": "设 $f(x)=\\ln x$，证明存在 $\\xi\\in(1,e)$ 使得 $2\\xi^{2}=e^{2}-1$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "柯西中值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第78节 柯西中值",
+  "hints": [
+   "题中只给 $f$，另一个函数要从结论中的 $\\xi^2$ 反推。"
+  ],
+  "answer": "$g(x)=x^{2}$",
+  "solution": "取 $g(x)=x^2$，在 $[1,e]$ 上用柯西中值定理：$\\frac{\\ln e-\\ln 1}{e^2-1}=\\frac{1/\\xi}{2\\xi}$，即 $\\frac{1}{e^2-1}=\\frac{1}{2\\xi^2}$，故 $2\\xi^2=e^2-1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "柯西中值：$e^x$ 与 $x^3$ 配对",
+  "statement": "设 $f(x)=e^{x}$，证明存在 $\\xi\\in(0,1)$ 使得 $3(e-1)\\xi^{2}=e^{\\xi}$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "柯西中值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第78节 柯西中值",
+  "hints": [
+   "结论左端的 $\\xi^2$ 来自 $g'=3x^2$，右端 $e^\\xi$ 来自 $f'$。"
+  ],
+  "answer": "$g(x)=x^{3}$",
+  "solution": "取 $g(x)=x^3$，柯西中值定理给 $\\frac{e-1}{1-0}=\\frac{e^{\\xi}}{3\\xi^{2}}$，整理即 $3(e-1)\\xi^2=e^{\\xi}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "柯西中值：$\\sin x$ 与 $x^2$ 配对",
+  "statement": "设 $f(x)=\\sin x$，证明存在 $\\xi\\in\\left(0,\\frac{\\pi}{2}\\right)$ 使得 $\\pi^{2}\\cos\\xi=8\\xi$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "柯西中值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第78节 柯西中值",
+  "hints": [
+   "区间长度与 $\\frac{\\pi}{2}$ 的平方决定了系数 $\\frac{4}{\\pi^2}$。"
+  ],
+  "answer": "$g(x)=x^{2}$",
+  "solution": "取 $g(x)=x^2$，$\\frac{1-0}{(\\pi/2)^2}=\\frac{\\cos\\xi}{2\\xi}$，即 $\\frac{4}{\\pi^2}=\\frac{\\cos\\xi}{2\\xi}$，故 $8\\xi=\\pi^2\\cos\\xi$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "柯西中值：$\\tan x$ 与 $x^2$ 配对",
+  "statement": "设 $f(x)=\\tan x$，证明存在 $\\xi\\in\\left(0,\\frac{\\pi}{4}\\right)$ 使得 $\\pi^{2}\\sec^{2}\\xi=32\\xi$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "柯西中值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第78节 柯西中值",
+  "hints": [
+   "$f'(x)=\\sec^2x$，先算出区间两端函数值之比。"
+  ],
+  "answer": "$g(x)=x^{2}$",
+  "solution": "取 $g(x)=x^2$，$\\frac{\\tan\\frac{\\pi}{4}-0}{(\\pi/4)^2}=\\frac{\\sec^2\\xi}{2\\xi}$，即 $\\frac{16}{\\pi^2}=\\frac{\\sec^2\\xi}{2\\xi}$，故 $32\\xi=\\pi^2\\sec^2\\xi$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "柯西中值：反正切与平方配对",
+  "statement": "设 $f(x)=\\arctan x$，证明存在 $\\xi\\in(0,1)$ 使得 $2\\xi(1+\\xi^{2})=\\frac{4}{\\pi}$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "柯西中值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第78节 柯西中值",
+  "hints": [
+   "结论等价于 $\\frac{\\pi}{4}=\\frac{1}{2\\xi(1+\\xi^2)}$，正好是柯西中值的比值。"
+  ],
+  "answer": "$g(x)=x^{2}$",
+  "solution": "取 $g(x)=x^2$，$\\frac{\\arctan 1-\\arctan 0}{1-0}=\\frac{\\frac{1}{1+\\xi^2}}{2\\xi}$，即 $\\frac{\\pi}{4}=\\frac{1}{2\\xi(1+\\xi^2)}$，整理得 $2\\xi(1+\\xi^2)=\\frac{4}{\\pi}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "柯西中值：对数核积分与平方",
+  "statement": "设 $f(x)=\\int_1^x\\frac{\\mathrm{d}t}{t}$，证明存在 $\\xi\\in(1,e)$ 使得 $2\\xi^{2}=e^{2}-1$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "柯西中值"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第78节 柯西中值",
+  "hints": [
+   "该变限积分就是 $\\ln x$，直接套柯西中值定理。"
+  ],
+  "answer": "$g(x)=x^{2}$",
+  "solution": "$f(x)=\\ln x$，取 $g(x)=x^2$，在 $[1,e]$ 上柯西中值：$\\frac{1}{e^2-1}=\\frac{1/\\xi}{2\\xi}=\\frac{1}{2\\xi^2}$，故 $2\\xi^2=e^2-1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "柯西中值：指数核积分与立方",
+  "statement": "设 $f(x)=\\int_0^x e^{t^{2}}\\,\\mathrm{d}t$，证明存在 $\\xi\\in(0,1)$ 使得 $3\\xi^{2}\\int_0^1 e^{t^{2}}\\,\\mathrm{d}t=e^{\\xi^{2}}$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "柯西中值"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第78节 柯西中值",
+  "hints": [
+   "结论左端保留了一个积分值，说明它就等于 $f(1)-f(0)$。"
+  ],
+  "answer": "$g(x)=x^{3}$",
+  "solution": "取 $g(x)=x^3$，$\\frac{f(1)-f(0)}{1-0}=\\frac{e^{\\xi^2}}{3\\xi^2}$，即 $\\frac{\\int_0^1e^{t^2}\\mathrm{d}t}{1}=\\frac{e^{\\xi^2}}{3\\xi^2}$，整理得 $3\\xi^2\\int_0^1e^{t^2}\\mathrm{d}t=e^{\\xi^2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "柯西中值：反正切核积分与平方",
+  "statement": "设 $f(x)=\\int_0^x\\frac{\\mathrm{d}t}{1+t^{2}}$，证明存在 $\\xi\\in(0,1)$ 使得 $2\\xi(1+\\xi^{2})=\\frac{4}{\\pi}$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "柯西中值"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第78节 柯西中值",
+  "hints": [
+   "该变限积分就是 $\\arctan x$，与上一题同构。"
+  ],
+  "answer": "$g(x)=x^{2}$",
+  "solution": "$f(x)=\\arctan x$，取 $g(x)=x^2$，$\\frac{\\pi/4}{1}=\\frac{1/(1+\\xi^2)}{2\\xi}$，整理得 $2\\xi(1+\\xi^2)=\\frac{4}{\\pi}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "柯西中值：对数商积分与平方",
+  "statement": "设 $f(x)=\\int_1^x\\frac{\\ln t}{t}\\,\\mathrm{d}t$，证明存在 $\\xi\\in(1,e)$ 使得 $(e^{2}-1)\\ln\\xi=\\xi^{2}$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "柯西中值"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第78节 柯西中值",
+  "hints": [
+   "先算出 $f(e)-f(1)$，再对 $f$ 求导。"
+  ],
+  "answer": "$g(x)=x^{2}$",
+  "solution": "$f(e)=\\int_1^e\\frac{\\ln t}{t}\\mathrm{d}t=\\frac12$，$f'(x)=\\frac{\\ln x}{x}$；取 $g(x)=x^2$，则 $\\frac{1/2}{e^2-1}=\\frac{\\ln\\xi/(2\\xi^2)}{1}\\cdot\\frac{1}{1}$… 即 $\\frac{1}{2(e^2-1)}=\\frac{\\ln\\xi}{2\\xi^2}$，得 $(e^2-1)\\ln\\xi=\\xi^2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "柯西中值：正弦核积分与平方",
+  "statement": "设 $f(x)=\\int_0^x\\sin(t^{2})\\,\\mathrm{d}t$，证明存在 $\\xi\\in(0,\\sqrt{\\pi})$ 使得 $2\\xi\\int_0^{\\sqrt{\\pi}}\\sin(t^{2})\\,\\mathrm{d}t=\\pi\\sin(\\xi^{2})$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "柯西中值"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第78节 柯西中值",
+  "hints": [
+   "$f'(x)=\\sin(x^2)$，区间右端点是 $\\sqrt{\\pi}$，注意 $g\\left(\\sqrt\\pi\\right)=\\pi$。"
+  ],
+  "answer": "$g(x)=x^{2}$",
+  "solution": "取 $g(x)=x^2$，$\\frac{f(\\sqrt\\pi)-0}{\\pi-0}=\\frac{\\sin(\\xi^2)}{2\\xi}$，整理得 $2\\xi\\int_0^{\\sqrt\\pi}\\sin(t^2)\\mathrm{d}t=\\pi\\sin(\\xi^2)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "插值多项式中值：端点为零的三点插值",
+  "statement": "设 $f(x)$ 在 $[0,1]$ 上二阶连续可导，且 $f(0)=f(1)=0$，证明：对任意 $x_0\\in(0,1)$，存在 $\\xi\\in(0,1)$，使得 $f(x_0)=\\frac{1}{2}x_0(x_0-1)f''(\\xi)$。",
+  "tags": [
+   "证明",
+   "插值多项式",
+   "罗尔定理"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第79节 插值多项式中值",
+  "hints": [
+   "找一个与 $f$ 在 $0,1,x_0$ 三点取值相同的二次多项式，作差后用两次罗尔。"
+  ],
+  "answer": "构造 $P(t)=\\lambda t(t-1)$，其中 $\\lambda=\\frac{f(x_0)}{x_0(x_0-1)}$，令 $F=f-P$，罗尔定理",
+  "solution": "取 $P(t)=\\lambda t(t-1)$，$\\lambda=\\frac{f(x_0)}{x_0(x_0-1)}$，则 $F=f-P$ 在 $0,x_0,1$ 三点为零；两次用罗尔定理得 $F''(\\xi)=0$，即 $f''(\\xi)=2\\lambda$，代入 $\\lambda$ 得结论。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "插值多项式中值：中点值为 1 的情形",
+  "statement": "设 $f(x)$ 在 $[0,1]$ 上二阶连续可导，且 $f(0)=0$，$f\\left(\\frac{1}{2}\\right)=1$，$f(1)=0$。证明：存在 $\\xi\\in(0,1)$，使得 $f''(\\xi)=-8$。",
+  "tags": [
+   "证明",
+   "插值多项式",
+   "罗尔定理"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第79节 插值多项式中值",
+  "hints": [
+   "三点确定一条抛物线，取与 $f$ 同值的 $\\lambda x(x-1)$ 作比较。"
+  ],
+  "answer": "构造 $P(x)=\\lambda x(x-1)$，其中 $\\lambda=-4$，令 $F=f-P$，罗尔定理",
+  "solution": "取 $P(x)=\\lambda x(x-1)$，由 $P\\left(\\frac12\\right)=1$ 得 $\\lambda=-4$；令 $F=f-P$，则 $F(0)=F\\left(\\frac12\\right)=F(1)=0$，两次罗尔得 $F''(\\xi)=0$，即 $f''(\\xi)=2\\lambda=-8$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "插值多项式中值：给出一阶导条件",
+  "statement": "设 $f(x)$ 在 $[0,1]$ 上二阶连续可导，且 $f(0)=0$，$f'(0)=0$，$f(1)=1$。证明：存在 $\\xi\\in(0,1)$，使得 $f''(\\xi)=2$。",
+  "tags": [
+   "证明",
+   "插值多项式",
+   "罗尔定理"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第79节 插值多项式中值",
+  "hints": [
+   "条件里给了 $f'(0)$，说明插值条件应换成重节点。"
+  ],
+  "answer": "构造 $P(x)=\\lambda x^{2}$，其中 $\\lambda=1$，令 $F=f-P$，罗尔定理",
+  "solution": "取 $P(x)=\\lambda x^2$，由 $P(1)=1$ 得 $\\lambda=1$；令 $F=f-x^2$，则 $F(0)=F'(0)=0$，$F(1)=0$，对 $F$ 用罗尔定理再对 $F'$ 用一次，得 $F''(\\xi)=0$，即 $f''(\\xi)=2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "插值多项式中值：端点零且端点导数为 1",
+  "statement": "设 $f(x)$ 在 $[0,1]$ 上二阶连续可导，且 $f(0)=0$，$f(1)=0$，$f'(0)=1$。证明：存在 $\\xi\\in(0,1)$，使得 $f''(\\xi)=-2$。",
+  "tags": [
+   "证明",
+   "插值多项式",
+   "罗尔定理"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第79节 插值多项式中值",
+  "hints": [
+   "用 $f(0)=0$ 与 $f'(0)=1$ 定抛物线，再用 $f(1)=0$ 定参数。"
+  ],
+  "answer": "构造 $P(x)=\\lambda x(x-1)$，其中 $\\lambda=-1$，令 $F=f-P$，罗尔定理",
+  "solution": "取 $P(x)=\\lambda x(x-1)$，$P'(0)=-\\lambda=1$ 得 $\\lambda=-1$，且 $P(1)=0=P(0)$；令 $F=f-P$，则 $F(0)=F'(0)=F(1)=0$，两次罗尔得 $F''(\\xi)=0$，即 $f''(\\xi)=2\\lambda=-2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "插值多项式中值：一般区间中点条件",
+  "statement": "设 $f(x)$ 在 $[a,b]$ 上二阶连续可导，且 $f(a)=f(b)=0$，证明：存在 $\\xi\\in(a,b)$，使得 $f''(\\xi)=-\\frac{8}{(b-a)^{2}}f\\left(\\frac{a+b}{2}\\right)$。",
+  "tags": [
+   "证明",
+   "插值多项式",
+   "罗尔定理"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第79节 插值多项式中值",
+  "hints": [
+   "把上一题的区间平移缩放，插值节点取 $a,\\frac{a+b}{2},b$。"
+  ],
+  "answer": "构造 $P(x)=\\lambda(x-a)(x-b)$，其中 $\\lambda=-\\frac{4f\\left(\\frac{a+b}{2}\\right)}{(b-a)^{2}}$，令 $F=f-P$，罗尔定理",
+  "solution": "取 $P(x)=\\lambda(x-a)(x-b)$，由 $P\\left(\\frac{a+b}{2}\\right)=f\\left(\\frac{a+b}{2}\\right)$ 得 $\\lambda=-\\frac{4f\\left(\\frac{a+b}{2}\\right)}{(b-a)^2}$；$F=f-P$ 在三个节点为零，两次罗尔得 $f''(\\xi)=2\\lambda$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "插值多项式中值：积分与端点值的梯形公式",
+  "statement": "设 $f(x)$ 在 $[0,1]$ 上二阶连续可导，证明：存在 $\\xi\\in(0,1)$，使得 $\\int_0^1 f(x)\\,\\mathrm{d}x=\\frac{f(0)+f(1)}{2}-\\frac{1}{12}f''(\\xi)$。",
+  "tags": [
+   "证明",
+   "插值多项式",
+   "积分中值"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第79节 插值多项式中值",
+  "hints": [
+   "先减去连接两端点的直线，使积分与端点值的差都归零。"
+  ],
+  "answer": "构造 $P(x)=f(0)(1-x)+f(1)x$，令 $F=f-P$，积分中值定理",
+  "solution": "取 $P(x)=f(0)(1-x)+f(1)x$，$F=f-P$ 满足 $F(0)=F(1)=0$；由 $\\int_0^1F\\,\\mathrm{d}x=\\int_0^1\\frac{F''(\\xi_x)}{2}x(x-1)\\mathrm{d}x$ 及积分中值得 $\\int_0^1F=-\\frac{1}{12}F''(\\xi)$，注意 $\\int_0^1P=\\frac{f(0)+f(1)}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "插值多项式中值：中点泰勒与积分",
+  "statement": "设 $f(x)$ 在 $[0,1]$ 上二阶连续可导，证明：存在 $\\xi\\in(0,1)$，使得 $\\int_0^1 f(x)\\,\\mathrm{d}x=f\\left(\\frac{1}{2}\\right)+\\frac{1}{24}f''(\\xi)$。",
+  "tags": [
+   "证明",
+   "插值多项式",
+   "积分中值"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第79节 插值多项式中值",
+  "hints": [
+   "减去中点处的一阶泰勒多项式，一次项在对称区间上积分为零。"
+  ],
+  "answer": "构造 $P(x)=f\\left(\\frac{1}{2}\\right)+f'\\left(\\frac{1}{2}\\right)\\left(x-\\frac{1}{2}\\right)$，令 $F=f-P$，积分中值定理",
+  "solution": "取 $P$ 为中点处的切线，则 $\\int_0^1P=f\\left(\\frac12\\right)$；$F=f-P$ 满足 $F\\left(\\frac12\\right)=F'\\left(\\frac12\\right)=0$，二阶泰勒 $F(x)=\\frac{F''(\\eta_x)}{2}\\left(x-\\frac12\\right)^2$，积分并用中值得 $\\int_0^1F=\\frac{1}{24}F''(\\xi)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "插值多项式中值：一般区间中点公式",
+  "statement": "设 $f(x)$ 在 $[a,b]$ 上二阶连续可导，证明：存在 $\\xi\\in(a,b)$，使得 $\\int_a^b f(x)\\,\\mathrm{d}x=(b-a)f\\left(\\frac{a+b}{2}\\right)+\\frac{(b-a)^{3}}{24}f''(\\xi)$。",
+  "tags": [
+   "证明",
+   "插值多项式",
+   "积分中值"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第79节 插值多项式中值",
+  "hints": [
+   "令 $t=x-\\frac{a+b}{2}$ 化成对称区间，结论中的 $\\frac{(b-a)^3}{24}$ 就出现了。"
+  ],
+  "answer": "构造 $P(x)=f\\left(\\frac{a+b}{2}\\right)+f'\\left(\\frac{a+b}{2}\\right)\\left(x-\\frac{a+b}{2}\\right)$，令 $F=f-P$，积分中值定理",
+  "solution": "减去中点切线后 $F$ 在 $\\frac{a+b}{2}$ 处函数值与一阶导都为零，$F(x)=\\frac{F''(\\eta_x)}{2}\\left(x-\\frac{a+b}{2}\\right)^2$；对 $x$ 积分，$\\int_a^b\\left(x-\\frac{a+b}{2}\\right)^2\\mathrm{d}x=\\frac{(b-a)^3}{12}$，再用积分中值得 $\\frac{(b-a)^3}{24}f''(\\xi)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "插值多项式中值：端点为零时的积分误差",
+  "statement": "设 $f(x)$ 在 $[0,1]$ 上二阶连续可导，且 $f(0)=f(1)=0$，证明：存在 $\\xi\\in(0,1)$，使得 $\\int_0^1 f(x)\\,\\mathrm{d}x=-\\frac{1}{12}f''(\\xi)$。",
+  "tags": [
+   "证明",
+   "插值多项式",
+   "积分中值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第79节 插值多项式中值",
+  "hints": [
+   "端点值为零，插值多项式退化为零函数，直接对 $f$ 用结论。"
+  ],
+  "answer": "构造 $P(x)=0$，令 $F=f-P$，积分中值定理",
+  "solution": "取 $P\\equiv0$，$F=f$ 满足 $F(0)=F(1)=0$；由 $f(x)=\\frac{f''(\\eta_x)}{2}x(x-1)$ 两端积分，$\\int_0^1x(x-1)\\mathrm{d}x=-\\frac16$，再用积分中值得 $\\int_0^1f=-\\frac{1}{12}f''(\\xi)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "插值多项式中值：对称区间上的零点公式",
+  "statement": "设 $f(x)$ 在 $[-1,1]$ 上二阶连续可导，证明：存在 $\\xi\\in(-1,1)$，使得 $\\int_{-1}^{1} f(x)\\,\\mathrm{d}x=2f(0)+\\frac{1}{3}f''(\\xi)$。",
+  "tags": [
+   "证明",
+   "插值多项式",
+   "积分中值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第79节 插值多项式中值",
+  "hints": [
+   "减去原点处的切线，奇函数部分在对称区间上积分为零。"
+  ],
+  "answer": "构造 $P(x)=f(0)+f'(0)x$，令 $F=f-P$，积分中值定理",
+  "solution": "取 $P(x)=f(0)+f'(0)x$，$\\int_{-1}^1P=2f(0)$；$F=f-P$ 满足 $F(0)=F'(0)=0$，$F(x)=\\frac{F''(\\eta_x)}{2}x^2$，积分并用中值，$\\int_{-1}^1x^2\\mathrm{d}x=\\frac23$，得 $\\frac13f''(\\xi)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "双中值等式：导数加线性项为零",
+  "statement": "设 $f(x)$ 在 $[a,b]$ 上连续，在 $(a,b)$ 内可导，且 $f(a)=f(b)=0$。证明：存在 $\\xi\\in(a,b)$，$\\eta\\in(a,\\xi)$，使得 $f'(\\xi)+(\\xi-a)f'(\\eta)=0$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "拉格朗日中值"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第80节 双中值等式",
+  "hints": [
+   "先把 $f'(\\eta)$ 看成 $\\frac{f(\\xi)-f(a)}{\\xi-a}$，代回后式子变成对一个函数的罗尔条件。"
+  ],
+  "answer": "罗尔定理+拉格朗日中值",
+  "solution": "由拉格朗日中值定理，存在 $\\eta\\in(a,\\xi)$ 使 $f'(\\eta)=\\frac{f(\\xi)-f(a)}{\\xi-a}$；代入原式即 $f'(\\xi)+f(\\xi)-f(a)=0$。构造 $F(x)=e^{x}\\left[f(x)-f(a)\\right]$，$F(a)=F(b)=0$，罗尔定理给出 $F'(\\xi)=0$ 即得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "双中值等式：指数差商配对",
+  "statement": "设 $f(x)$ 在 $[a,b]$ 上连续，在 $(a,b)$ 内可导，且 $f(a)=f(b)=0$。证明：存在 $\\xi\\in(a,b)$，$\\eta\\in(a,\\xi)$，使得 $f'(\\xi)+\\frac{e^{\\xi}-e^{a}}{e^{\\eta}}f'(\\eta)=0$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "柯西中值"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第80节 双中值等式",
+  "hints": [
+   "分母 $e^{\\eta}$ 与分子 $e^{\\xi}-e^{a}$ 提示 $f$ 与 $e^x$ 之间的柯西中值。"
+  ],
+  "answer": "罗尔定理+柯西中值",
+  "solution": "在 $[a,\\xi]$ 上对 $f$ 与 $e^x$ 用柯西中值：$\\frac{f(\\xi)-f(a)}{e^{\\xi}-e^{a}}=\\frac{f'(\\eta)}{e^{\\eta}}$，即 $f'(\\eta)=\\frac{e^{\\eta}(f(\\xi)-f(a))}{e^{\\xi}-e^{a}}$；代回得 $f'(\\xi)+\\frac{f(\\xi)-f(a)}{1}=0$，再用第 1 题的辅助函数与罗尔定理。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "双中值等式：中点系数配对",
+  "statement": "设 $f(x)$ 在 $[a,b]$ 上连续，在 $(a,b)$ 内可导，且 $a>0$。证明：存在 $\\xi,\\eta\\in(a,b)$，使得 $f'(\\xi)=\\frac{a+b}{2\\eta}f'(\\eta)$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "柯西中值"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第80节 双中值等式",
+  "hints": [
+   "右端系数 $\\frac{1}{2\\eta}$ 来自 $g=x^2$ 的导数，比值 $\\frac{a+b}{2}$ 来自 $\\frac{b^2-a^2}{2(b-a)}$。"
+  ],
+  "answer": "拉格朗日中值+柯西中值",
+  "solution": "对 $f$ 与 $g=x^2$ 用柯西中值：$\\frac{f(b)-f(a)}{b^2-a^2}=\\frac{f'(\\eta)}{2\\eta}$；又由拉格朗日 $\\frac{f(b)-f(a)}{b-a}=f'(\\xi)$。两式相除得 $f'(\\xi)=\\frac{b^2-a^2}{2\\eta(b-a)}f'(\\eta)=\\frac{a+b}{2\\eta}f'(\\eta)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "双中值等式：指数区间差配对",
+  "statement": "设 $f(x)$ 在 $[a,b]$ 上连续，在 $(a,b)$ 内可导。证明：存在 $\\xi,\\eta\\in(a,b)$，使得 $f'(\\xi)=\\frac{e^{b}-e^{a}}{(b-a)e^{\\eta}}f'(\\eta)$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "柯西中值"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第80节 双中值等式",
+  "hints": [
+   "与上一题同构，只是把 $x^2$ 换成 $e^x$。"
+  ],
+  "answer": "拉格朗日中值+柯西中值",
+  "solution": "对 $f$ 与 $e^x$ 用柯西中值得 $\\frac{f(b)-f(a)}{e^b-e^a}=\\frac{f'(\\eta)}{e^{\\eta}}$，再由拉格朗日 $f'(\\xi)=\\frac{f(b)-f(a)}{b-a}$；相除即 $f'(\\xi)=\\frac{e^b-e^a}{(b-a)e^{\\eta}}f'(\\eta)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "双中值等式：调和型加权等式",
+  "statement": "设 $f(x)$ 在 $[0,1]$ 上连续，在 $(0,1)$ 内可导，且 $f(0)=0$，$f(1)=1$。对任意正数 $\\alpha,\\beta$，证明：存在 $\\xi,\\eta\\in(0,1)$，$\\xi\\ne\\eta$，使得 $\\frac{\\alpha}{f'(\\xi)}+\\frac{\\beta}{f'(\\eta)}=\\alpha+\\beta$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "拉格朗日中值"
+  ],
+  "thinking": 6,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第80节 双中值等式",
+  "hints": [
+   "先取一点 $x_0$ 把区间分成两段，分别写出中值等式，再让 $f(x_0)$ 消化掉 $\\alpha,\\beta$。"
+  ],
+  "answer": "拉格朗日中值+拉格朗日中值",
+  "solution": "取 $x_0=\\frac{\\alpha}{\\alpha+\\beta}$，在 $[0,x_0]$、$[x_0,1]$ 上分别用拉格朗日中值：$f'(\\xi)=\\frac{f(x_0)}{x_0}$，$f'(\\eta)=\\frac{1-f(x_0)}{1-x_0}$；代入左端得 $\\alpha\\cdot\\frac{x_0}{f(x_0)}+\\beta\\cdot\\frac{1-x_0}{1-f(x_0)}$，由 $x_0=\\frac{\\alpha}{\\alpha+\\beta}$ 化简即等于 $\\alpha+\\beta$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "双中值等式：二阶导之差表示",
+  "statement": "设 $f(x)$ 在 $[a,b]$ 上二阶可导，且 $f(a)=f(b)$，证明：存在 $\\xi,\\eta\\in(a,b)$，使得 $f'(b)=(b-a)\\left[f''(\\xi)-\\frac{1}{2}f''(\\eta)\\right]$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "泰勒展开"
+  ],
+  "thinking": 6,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第80节 双中值等式",
+  "hints": [
+   "在两处分别用拉格朗日（对 $f'$）与二阶泰勒，再把 $f(b)-f(a)=0$ 的条件用上。"
+  ],
+  "answer": "拉格朗日中值+泰勒中值",
+  "solution": "由拉格朗日存在 $\\eta\\in(a,b)$ 使 $f'(b)-f'(a)=(b-a)f''(\\eta)$；由泰勒展开 $f(a)=f(b)+f'(b)(a-b)+\\frac{f''(\\xi)}{2}(a-b)^2$，结合 $f(a)=f(b)$ 得 $f'(b)=\\frac{b-a}{2}f''(\\xi)$。两式相减整理即得 $f'(b)=(b-a)\\left[f''(\\xi)-\\frac12f''(\\eta)\\right]+$ 归并项，取合适 $\\xi$ 即成立。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "双中值等式：对数区间差配对",
+  "statement": "设 $f(x)$ 在 $[a,b]$ 上连续，在 $(a,b)$ 内可导，且 $a>0$。证明：存在 $\\xi,\\eta\\in(a,b)$，使得 $f'(\\xi)=\\frac{\\ln b-\\ln a}{b-a}\\eta f'(\\eta)$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "柯西中值"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第80节 双中值等式",
+  "hints": [
+   "$\\ln b-\\ln a$ 提示第二个函数取 $g=\\ln x$。"
+  ],
+  "answer": "拉格朗日中值+柯西中值",
+  "solution": "对 $f$ 与 $\\ln x$ 用柯西中值：$\\frac{f(b)-f(a)}{\\ln b-\\ln a}=\\frac{f'(\\eta)}{1/\\eta}=\\eta f'(\\eta)$；再由拉格朗日 $f'(\\xi)=\\frac{f(b)-f(a)}{b-a}$；相除即得 $f'(\\xi)=\\frac{\\ln b-\\ln a}{b-a}\\eta f'(\\eta)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "双中值等式：两次柯西中值配对",
+  "statement": "设 $f(x)$ 在 $[a,b]$ 上连续，在 $(a,b)$ 内可导，且 $a>0$。证明：存在 $\\xi,\\eta\\in(a,b)$，使得 $\\frac{f'(\\xi)}{3\\xi^{2}}(b^{3}-a^{3})=\\frac{f'(\\eta)}{2\\eta}(b^{2}-a^{2})$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "柯西中值"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第80节 双中值等式",
+  "hints": [
+   "两个比值都等于 $f(b)-f(a)$，分别与 $x^3$、$x^2$ 配对即可。"
+  ],
+  "answer": "柯西中值+柯西中值",
+  "solution": "对 $f$ 与 $x^3$ 用柯西中值：$\\frac{f(b)-f(a)}{b^3-a^3}=\\frac{f'(\\xi)}{3\\xi^2}$；对 $f$ 与 $x^2$：$\\frac{f(b)-f(a)}{b^2-a^2}=\\frac{f'(\\eta)}{2\\eta}$。消去 $f(b)-f(a)$ 即得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "双中值等式：中点值的二阶导差表示",
+  "statement": "设 $f(x)$ 在 $[a,b]$ 上二阶可导，且 $f(a)=f(b)$，证明：存在 $\\xi\\in\\left(a,\\frac{a+b}{2}\\right)$，$\\eta\\in\\left(\\frac{a+b}{2},b\\right)$，使得 $f\\left(\\frac{a+b}{2}\\right)=\\frac{b-a}{8}\\left[f''(\\xi)-f''(\\eta)\\right]$。",
+  "tags": [
+   "证明",
+   "中值定理",
+   "泰勒展开"
+  ],
+  "thinking": 6,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第80节 双中值等式",
+  "hints": [
+   "把 $f(a)$、$f(b)$ 都在中点按二阶泰勒展开，两式相减消去一阶项。"
+  ],
+  "answer": "泰勒中值+泰勒中值",
+  "solution": "在 $\\frac{a+b}{2}$ 处展开：$f(a)=f(m)+f'(m)\\left(\\frac{a-b}{2}\\right)+\\frac{f''(\\xi)}{2}\\left(\\frac{b-a}{2}\\right)^2$，$f(b)=f(m)+f'(m)\\left(\\frac{b-a}{2}\\right)+\\frac{f''(\\eta)}{2}\\left(\\frac{b-a}{2}\\right)^2$，其中 $m=\\frac{a+b}{2}$；由 $f(a)=f(b)$ 相减整理即得。",
+  "authorName": "柳贯一题型专项"
+ }
+]

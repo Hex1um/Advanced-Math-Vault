@@ -1,0 +1,3802 @@
+[
+ {
+  "title": "极坐标切线：θ=π/6 处斜率的求法",
+  "statement": "设 $r=2\\cos\\theta$，求 $\\theta=\\frac{\\pi}{6}$ 处的切线、法线及其截距。",
+  "tags": [
+   "一元微分",
+   "隐函数求导",
+   "切线方程"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 极坐标",
+  "hints": [
+   "先把极坐标方程化成 $x=r\\cos\\theta,\\ y=r\\sin\\theta$ 的参数式，用 $\\frac{dy}{dx}=\\frac{dy/d\\theta}{dx/d\\theta}$ 求斜率。"
+  ],
+  "answer": "切线：$y=-\\frac{\\sqrt{3}}{3}x+\\sqrt{3}$，切线截距：$x=3,\\ y=\\sqrt{3}$；法线：$y=\\sqrt{3}x-\\sqrt{3}$，法线截距：$x=1,\\ y=-\\sqrt{3}$",
+  "solution": "化为参数式 $x=2\\cos^{2}\\theta,\\ y=\\sin2\\theta$，得 $k=\\frac{2\\cos2\\theta}{-2\\sin2\\theta}=-\\cot2\\theta$，$\\theta=\\frac{\\pi}{6}$ 时 $k=-\\frac{\\sqrt3}{3}$，切点 $\\left(\\frac{3}{2},\\frac{\\sqrt3}{2}\\right)$；点斜式后令 $y=0$、$x=0$ 得截距。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极坐标切线：θ=π/2 处斜率为 1",
+  "statement": "设 $r=1+\\cos\\theta$，求 $\\theta=\\frac{\\pi}{2}$ 处的切线、法线及其截距。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "切线方程"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 极坐标",
+  "hints": [
+   "心形线在 $\\theta=\\frac{\\pi}{2}$ 处对应直角坐标点 $(0,1)$，先写出参数式再求导。"
+  ],
+  "answer": "切线：$y=x+1$，切线截距：$x=-1,\\ y=1$；法线：$y=-x+1$，法线截距：$x=1,\\ y=1$",
+  "solution": "$x=(1+\\cos\\theta)\\cos\\theta,\\ y=(1+\\cos\\theta)\\sin\\theta$，用 $\\frac{dy}{dx}=\\frac{r'\\sin\\theta+r\\cos\\theta}{r'\\cos\\theta-r\\sin\\theta}$，代入 $r=1,r'=-1$ 得 $k=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极坐标切线：对数螺线 θ=0 处",
+  "statement": "设 $r=e^{\\theta}$，求 $\\theta=0$ 处的切线、法线及其截距。",
+  "tags": [
+   "一元微分",
+   "隐函数求导",
+   "切线方程"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 极坐标",
+  "hints": [
+   "对数螺线在 $\\theta=0$ 处过点 $(1,0)$，斜率用极坐标求导公式。"
+  ],
+  "answer": "切线：$y=x-1$，切线截距：$x=1,\\ y=-1$；法线：$y=-x+1$，法线截距：$x=1,\\ y=1$",
+  "solution": "$r=1,r'=1$，$k=\\frac{r'\\sin\\theta+r\\cos\\theta}{r'\\cos\\theta-r\\sin\\theta}=1$，切线 $y=x-1$，法线 $y=-x+1$，再令 $y=0$、$x=0$ 求截距。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极坐标切线：阿基米德螺线截距繁算",
+  "statement": "设 $r=\\theta$，求 $\\theta=\\frac{\\pi}{4}$ 处的切线、法线及其截距。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "切线方程"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 极坐标",
+  "hints": [
+   "切点坐标为 $\\left(\\frac{\\pi}{4}\\cdot\\frac{\\sqrt2}{2},\\frac{\\pi}{4}\\cdot\\frac{\\sqrt2}{2}\\right)$，斜率是 $\\frac{4+\\pi}{4-\\pi}$，代入点斜式后耐心整理。"
+  ],
+  "answer": "切线：$y=\\frac{4+\\pi}{4-\\pi}x-\\frac{\\pi^{2}\\sqrt{2}}{4(4-\\pi)}$，切线截距：$x=\\frac{\\pi^{2}\\sqrt{2}}{4(4+\\pi)},\\ y=-\\frac{\\pi^{2}\\sqrt{2}}{4(4-\\pi)}$；法线：$y=\\frac{\\pi-4}{4}x+\\frac{\\pi\\sqrt{2}}{\\pi+4}$，法线截距：$x=\\frac{\\pi\\sqrt{2}}{4-\\pi},\\ y=\\frac{\\pi\\sqrt{2}}{\\pi+4}$",
+  "solution": "$r=\\theta,\\ r'=1$，$k=\\frac{\\sin\\theta+\\theta\\cos\\theta}{\\cos\\theta-\\theta\\sin\\theta}$，$\\theta=\\frac{\\pi}{4}$ 时 $k=\\frac{4+\\pi}{4-\\pi}$；切线写点斜式，法线斜率取 $-\\frac{1}{k}$，最后分别令 $y=0$、$x=0$ 得四个截距。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极坐标切线：圆 r=2sinθ 在 π/6 处",
+  "statement": "设 $r=2\\sin\\theta$，求 $\\theta=\\frac{\\pi}{6}$ 处的切线、法线及其截距。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "切线方程"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 极坐标",
+  "hints": [
+   "$r=2\\sin\\theta$ 是圆 $x^{2}+(y-1)^{2}=1$，切点 $(\\frac{\\sqrt3}{2},\\frac{1}{2})$，用极坐标求导公式算斜率。"
+  ],
+  "answer": "切线：$y=\\sqrt{3}x-1$，切线截距：$x=\\frac{\\sqrt{3}}{3},\\ y=-1$；法线：$y=-\\frac{\\sqrt{3}}{3}x+1$，法线截距：$x=\\sqrt{3},\\ y=1$",
+  "solution": "$r=1,r'=\\sqrt3$，$k=\\frac{r'\\sin\\theta+r\\cos\\theta}{r'\\cos\\theta-r\\sin\\theta}=\\sqrt3$，切线 $y=\\sqrt3x-1$，法线斜率 $-\\frac{\\sqrt3}{3}$，再求截距。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数方程切线：幂函数参数式 t=1",
+  "statement": "设 $\\begin{cases}x=t^{2}\\\\ y=t^{3}\\end{cases}$，求 $t=1$ 处的切线、法线及其截距。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "切线方程"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 参数方程",
+  "hints": [
+   "参数方程斜率 $k=\\frac{y'(t)}{x'(t)}$，切点为 $(x(1),y(1))=(1,1)$。"
+  ],
+  "answer": "切线：$y=\\frac{3}{2}x-\\frac{1}{2}$，切线截距：$x=\\frac{1}{3},\\ y=-\\frac{1}{2}$；法线：$y=-\\frac{2}{3}x+\\frac{5}{3}$，法线截距：$x=\\frac{5}{2},\\ y=\\frac{5}{3}$",
+  "solution": "$x'=2t,\\ y'=3t^{2}$，$t=1$ 时 $k=\\frac{3}{2}$；切线 $y-1=\\frac{3}{2}(x-1)$，法线斜率 $-\\frac{2}{3}$，令 $y=0$、$x=0$ 得截距。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数方程切线：指数曲线 t=ln2",
+  "statement": "设 $\\begin{cases}x=e^{t}\\\\ y=e^{-t}\\end{cases}$，求 $t=\\ln 2$ 处的切线、法线及其截距。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "切线方程"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 参数方程",
+  "hints": [
+   "曲线即 $xy=1$，切点 $(2,\\frac{1}{2})$，用参数求导得斜率。"
+  ],
+  "answer": "切线：$y=-\\frac{1}{4}x+1$，切线截距：$x=4,\\ y=1$；法线：$y=4x-\\frac{15}{2}$，法线截距：$x=\\frac{15}{8},\\ y=-\\frac{15}{2}$",
+  "solution": "$k=\\frac{-e^{-t}}{e^{t}}=-e^{-2t}$，$t=\\ln2$ 时 $k=-\\frac{1}{4}$；切线 $y-\\frac{1}{2}=-\\frac{1}{4}(x-2)$，法线斜率 4，再求截距。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数方程切线：对数与反正切组合",
+  "statement": "设 $\\begin{cases}x=\\ln(1+t^{2})\\\\ y=t-\\arctan t\\end{cases}$，求 $t=1$ 处的切线、法线及其截距。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "切线方程"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 参数方程",
+  "hints": [
+   "先分别求 $x'(1)$、$y'(1)$，$y'=1-\\frac{1}{1+t^{2}}=\\frac{t^{2}}{1+t^{2}}$。"
+  ],
+  "answer": "切线：$y=\\frac{1}{2}x+1-\\frac{\\pi}{4}-\\frac{1}{2}\\ln 2$，切线截距：$x=\\frac{\\pi}{2}+\\ln 2-2,\\ y=1-\\frac{\\pi}{4}-\\frac{1}{2}\\ln 2$；法线：$y=-2x+2\\ln 2+1-\\frac{\\pi}{4}$，法线截距：$x=\\ln 2+\\frac{1}{2}-\\frac{\\pi}{8},\\ y=2\\ln 2+1-\\frac{\\pi}{4}$",
+  "solution": "$x'=\\frac{2t}{1+t^{2}}$，故 $k=\\frac{t}{2}\\big|_{t=1}=\\frac{1}{2}$，切点 $(\\ln2,1-\\frac{\\pi}{4})$；切线、法线写点斜式后令 $y=0$、$x=0$ 得截距。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数方程切线：摆线 π/2 处",
+  "statement": "设 $\\begin{cases}x=a(t-\\sin t)\\\\ y=a(1-\\cos t)\\end{cases}$，其中 $a>0$，求 $t=\\frac{\\pi}{2}$ 处的切线、法线及其截距。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "切线方程"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 参数方程",
+  "hints": [
+   "摆线的参数导数可化为 $k=\\frac{\\sin t}{1-\\cos t}=\\cot\\frac{t}{2}$。"
+  ],
+  "answer": "切线：$y=x+a\\left(2-\\frac{\\pi}{2}\\right)$，切线截距：$x=a\\left(\\frac{\\pi}{2}-2\\right),\\ y=a\\left(2-\\frac{\\pi}{2}\\right)$；法线：$y=-x+\\frac{a\\pi}{2}$，法线截距：$x=\\frac{a\\pi}{2},\\ y=\\frac{a\\pi}{2}$",
+  "solution": "$x'=a(1-\\cos t),\\ y'=a\\sin t$，$k=\\cot\\frac{t}{2}$，$t=\\frac{\\pi}{2}$ 时 $k=1$；切点 $a\\left(\\frac{\\pi}{2}-1,1\\right)$，法线斜率 $-1$，再求截距。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数方程切线：星形线 π/4 处",
+  "statement": "设 $\\begin{cases}x=\\cos^{3}t\\\\ y=\\sin^{3}t\\end{cases}$，求 $t=\\frac{\\pi}{4}$ 处的切线、法线及其截距。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "切线方程"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 参数方程",
+  "hints": [
+   "星形线斜率化简后为 $-\\tan t$，$t=\\frac{\\pi}{4}$ 时切线斜率 $-1$。"
+  ],
+  "answer": "切线：$y=-x+\\frac{\\sqrt{2}}{2}$，切线截距：$x=\\frac{\\sqrt{2}}{2},\\ y=\\frac{\\sqrt{2}}{2}$；法线：$y=x$，法线截距：$x=0,\\ y=0$",
+  "solution": "$x'=-3\\cos^{2}t\\sin t,\\ y'=3\\sin^{2}t\\cos t$，$k=-\\tan t=-1$；切点 $\\left(\\frac{\\sqrt2}{4},\\frac{\\sqrt2}{4}\\right)$，法线斜率 1，再求截距。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "显函数曲率：y=lnx 在 x=1",
+  "statement": "求曲线 $y=\\ln x$ 在 $x=1$ 处的曲率与曲率半径。",
+  "tags": [
+   "一元微分",
+   "曲率",
+   "二阶导数"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第32节 曲率",
+  "hints": [
+   "曲率公式 $\\kappa=\\frac{|y''|}{(1+y'^{2})^{3/2}}$，半径为 $\\frac{1}{\\kappa}$。"
+  ],
+  "answer": "曲率 $\\frac{\\sqrt{2}}{4}$，曲率半径 $2\\sqrt{2}$",
+  "solution": "$y'=\\frac{1}{x},\\ y''=-\\frac{1}{x^{2}}$，$x=1$ 时 $y'=1,\\ y''=-1$，$\\kappa=\\frac{1}{2\\sqrt2}=\\frac{\\sqrt2}{4}$，$R=2\\sqrt2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "显函数曲率：y=e^{2x} 在 x=0",
+  "statement": "求曲线 $y=e^{2x}$ 在 $x=0$ 处的曲率与曲率半径。",
+  "tags": [
+   "一元微分",
+   "曲率",
+   "二阶导数"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第32节 曲率",
+  "hints": [
+   "先算 $x=0$ 处的 $y'$ 与 $y''$，再套曲率公式。"
+  ],
+  "answer": "曲率 $\\frac{4\\sqrt{5}}{25}$，曲率半径 $\\frac{5\\sqrt{5}}{4}$",
+  "solution": "$y'=2e^{2x},\\ y''=4e^{2x}$，$x=0$ 时 $y'=2,\\ y''=4$，$\\kappa=\\frac{4}{5\\sqrt5}=\\frac{4\\sqrt5}{25}$，$R=\\frac{5\\sqrt5}{4}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "显函数曲率：y=sinx 在顶点处",
+  "statement": "求曲线 $y=\\sin x$ 在 $x=\\frac{\\pi}{2}$ 处的曲率与曲率半径。",
+  "tags": [
+   "一元微分",
+   "曲率",
+   "二阶导数"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第32节 曲率",
+  "hints": [
+   "在极值点处一阶导为 0，曲率就等于 $|y''|$。"
+  ],
+  "answer": "曲率 1，曲率半径 1",
+  "solution": "$y'=\\cos x=0,\\ y''=-\\sin x=-1$（$x=\\frac{\\pi}{2}$），$\\kappa=\\frac{1}{(1+0)^{3/2}}=1$，$R=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "显函数曲率：y=1/x 在 x=1",
+  "statement": "求曲线 $y=\\frac{1}{x}$ 在 $x=1$ 处的曲率与曲率半径。",
+  "tags": [
+   "一元微分",
+   "曲率",
+   "二阶导数"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第32节 曲率",
+  "hints": [
+   "$y'=-\\frac{1}{x^{2}},\\ y''=\\frac{2}{x^{3}}$，代入曲率公式即可。"
+  ],
+  "answer": "曲率 $\\frac{\\sqrt{2}}{2}$，曲率半径 $\\sqrt{2}$",
+  "solution": "$x=1$ 时 $y'=-1,\\ y''=2$，$\\kappa=\\frac{2}{2\\sqrt2}=\\frac{\\sqrt2}{2}$，$R=\\sqrt2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "显函数曲率：y=x³-3x 在 x=1",
+  "statement": "求曲线 $y=x^{3}-3x$ 在 $x=1$ 处的曲率与曲率半径。",
+  "tags": [
+   "一元微分",
+   "曲率",
+   "二阶导数"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第32节 曲率",
+  "hints": [
+   "注意 $x=1$ 处一阶导为 0，曲率退化为 $|y''|$。"
+  ],
+  "answer": "曲率 6，曲率半径 $\\frac{1}{6}$",
+  "solution": "$y'=3x^{2}-3=0$（$x=1$），$y''=6x=6$，$\\kappa=6$，$R=\\frac{1}{6}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数曲率：圆 x²+y²=4",
+  "statement": "求曲线 $x^{2}+y^{2}=4$ 在点 $(0,2)$ 处的曲率与曲率半径。",
+  "tags": [
+   "一元微分",
+   "曲率",
+   "隐函数求导"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第32节 曲率",
+  "hints": [
+   "圆的曲率处处等于半径的倒数，可直接验证；也可用隐函数求导。"
+  ],
+  "answer": "曲率 $\\frac{1}{2}$，曲率半径 2",
+  "solution": "两边求导 $2x+2yy'=0\\Rightarrow y'=-\\frac{x}{y}$，$(0,2)$ 处 $y'=0$，再求导得 $y''=-\\frac{1}{y}=-\\frac{1}{2}$，$\\kappa=\\frac{1}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数曲率：三次曲线 x³+y³=2xy",
+  "statement": "求曲线 $x^{3}+y^{3}=2xy$ 在点 $(1,1)$ 处的曲率与曲率半径。",
+  "tags": [
+   "一元微分",
+   "曲率",
+   "隐函数求导"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第32节 曲率",
+  "hints": [
+   "隐函数求二阶导时把 $y'$ 当函数再求导，代入 $(1,1)$。"
+  ],
+  "answer": "曲率 $4\\sqrt{2}$，曲率半径 $\\frac{\\sqrt{2}}{8}$",
+  "solution": "$3x^{2}+3y^{2}y'=2y+2xy'$ 得 $y'=-1$；再求导代入 $x=y=1,y'=-1$ 得 $y''=8$，$\\kappa=\\frac{8}{(1+1)^{3/2}}=4\\sqrt2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数曲率：e^y+xy=e",
+  "statement": "求曲线 $e^{y}+xy=e$ 在点 $(0,1)$ 处的曲率与曲率半径。",
+  "tags": [
+   "一元微分",
+   "曲率",
+   "隐函数求导"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第32节 曲率",
+  "hints": [
+   "先由隐函数求导得 $y'$，再对 $x$ 求一次导得 $y''$，注意 $e^{y}$ 是复合函数。"
+  ],
+  "answer": "曲率 $\\frac{e}{(e^{2}+1)^{3/2}}$，曲率半径 $\\frac{(e^{2}+1)^{3/2}}{e}$",
+  "solution": "$e^{y}y'+y+xy'=0$，$(0,1)$ 处 $y'=-\\frac{1}{e}$；再求导代入得 $y''=\\frac{e-1}{e^{2}}$，$\\kappa=\\frac{e}{(e^{2}+1)^{3/2}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数曲率：椭圆型曲线 x²+xy+y²=3",
+  "statement": "求曲线 $x^{2}+xy+y^{2}=3$ 在点 $(1,1)$ 处的曲率与曲率半径。",
+  "tags": [
+   "一元微分",
+   "曲率",
+   "隐函数求导"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第32节 曲率",
+  "hints": [
+   "隐函数求导得 $y'=-1$，再求导时注意 $xy$ 项的乘积法则。"
+  ],
+  "answer": "曲率 $\\frac{\\sqrt{2}}{3}$，曲率半径 $3\\sqrt{2}$",
+  "solution": "$2x+y+xy'+2yy'=0$ 得 $y'=-1$；求导得 $y''=-\\frac{2}{3}$，$\\kappa=\\frac{2/3}{2\\sqrt2}=\\frac{\\sqrt2}{3}$，$R=3\\sqrt2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数曲率：抛物线 y²=x",
+  "statement": "求曲线 $y^{2}=x$ 在点 $(1,1)$ 处的曲率与曲率半径。",
+  "tags": [
+   "一元微分",
+   "曲率",
+   "隐函数求导"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第32节 曲率",
+  "hints": [
+   "把 $x$ 看成 $y$ 的函数 $x=y^{2}$ 会更省力。"
+  ],
+  "answer": "曲率 $\\frac{2\\sqrt{5}}{25}$，曲率半径 $\\frac{5\\sqrt{5}}{2}$",
+  "solution": "$x'=2y=2,\\ x''=2$，对 $x=x(y)$ 用曲率公式得 $\\kappa=\\frac{2}{(1+4)^{3/2}}=\\frac{2\\sqrt5}{25}$，$R=\\frac{5\\sqrt5}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反函数曲率：f(x)=e^x",
+  "statement": "设 $f(x)=e^{x}$，求其反函数在 $y=1$ 处的曲率与曲率半径。",
+  "tags": [
+   "一元微分",
+   "曲率",
+   "反函数求导"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第32节 曲率",
+  "hints": [
+   "反函数 $x=\\ln y$，对 $y$ 求导得 $x'=\\frac{1}{y}$。"
+  ],
+  "answer": "曲率 $\\frac{\\sqrt{2}}{4}$，曲率半径 $2\\sqrt{2}$",
+  "solution": "反函数 $x=\\ln y$，$x'=\\frac{1}{y},\\ x''=-\\frac{1}{y^{2}}$，$y=1$ 时 $x'=1,x''=-1$，$\\kappa=\\frac{1}{2\\sqrt2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反函数曲率：f(x)=x³",
+  "statement": "设 $f(x)=x^{3}$，求其反函数在 $y=1$ 处的曲率与曲率半径。",
+  "tags": [
+   "一元微分",
+   "曲率",
+   "反函数求导"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第32节 曲率",
+  "hints": [
+   "反函数 $x=y^{1/3}$，用 $x'=\\frac{1}{3}y^{-2/3}$、$x''=-\\frac{2}{9}y^{-5/3}$。"
+  ],
+  "answer": "曲率 $\\frac{3\\sqrt{10}}{50}$，曲率半径 $\\frac{5\\sqrt{10}}{3}$",
+  "solution": "$y=1$ 时 $x'=\\frac{1}{3},\\ x''=-\\frac{2}{9}$，$\\kappa=\\frac{2/9}{(1+1/9)^{3/2}}=\\frac{3\\sqrt{10}}{50}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反函数曲率：f(x)=arcsinx",
+  "statement": "设 $f(x)=\\arcsin x$，求其反函数在 $y=\\frac{\\pi}{6}$ 处的曲率与曲率半径。",
+  "tags": [
+   "一元微分",
+   "曲率",
+   "反函数求导"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第32节 曲率",
+  "hints": [
+   "反函数 $x=\\sin y$，对 $y$ 求导很简便，注意 $y=\\frac{\\pi}{6}$ 时 $x=\\frac{1}{2}$。"
+  ],
+  "answer": "曲率 $\\frac{4\\sqrt{7}}{49}$，曲率半径 $\\frac{7\\sqrt{7}}{4}$",
+  "solution": "$x'=\\cos y=\\frac{\\sqrt3}{2},\\ x''=-\\sin y=-\\frac{1}{2}$，$\\kappa=\\frac{1/2}{(1+3/4)^{3/2}}=\\frac{4\\sqrt7}{49}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反函数曲率：f(x)=x³+x",
+  "statement": "设 $f(x)=x^{3}+x$，求其反函数在 $y=2$ 处的曲率与曲率半径。",
+  "tags": [
+   "一元微分",
+   "曲率",
+   "反函数求导"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第32节 曲率",
+  "hints": [
+   "$y=2$ 对应 $x=1$；用公式 $x'=\\frac{1}{f'},\\ x''=-\\frac{f''}{(f')^{3}}$。"
+  ],
+  "answer": "曲率 $\\frac{6\\sqrt{17}}{289}$，曲率半径 $\\frac{17\\sqrt{17}}{6}$",
+  "solution": "$f'(1)=4,\\ f''(1)=6$，$x'=\\frac{1}{4},\\ x''=-\\frac{6}{64}=-\\frac{3}{32}$，$\\kappa=\\frac{3/32}{(17/16)^{3/2}}=\\frac{6\\sqrt{17}}{289}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反函数曲率：f(x)=x+lnx",
+  "statement": "设 $f(x)=x+\\ln x$，求其反函数在 $y=1$ 处的曲率与曲率半径。",
+  "tags": [
+   "一元微分",
+   "曲率",
+   "反函数求导"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第32节 曲率",
+  "hints": [
+   "$y=1$ 对应 $x=1$，先算 $f'(1)$、$f''(1)$ 再用反函数曲率公式。"
+  ],
+  "answer": "曲率 $\\frac{\\sqrt{5}}{25}$，曲率半径 $5\\sqrt{5}$",
+  "solution": "$f'=1+\\frac{1}{x}=2,\\ f''=-\\frac{1}{x^{2}}=-1$，$x'=\\frac{1}{2},\\ x''=-\\frac{1}{8}$，$\\kappa=\\frac{1/8}{(5/4)^{3/2}}=\\frac{\\sqrt5}{25}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数曲率：x=t²,y=t³ 在 t=1",
+  "statement": "求曲线 $x=t^{2},\\ y=t^{3}$ 在 $t=1$ 处的曲率与曲率半径。",
+  "tags": [
+   "一元微分",
+   "曲率",
+   "参数方程求导"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第32节 曲率",
+  "hints": [
+   "用参数曲率公式 $\\kappa=\\frac{|x'y''-y'x''|}{(x'^{2}+y'^{2})^{3/2}}$。"
+  ],
+  "answer": "曲率 $\\frac{6\\sqrt{13}}{169}$，曲率半径 $\\frac{13\\sqrt{13}}{6}$",
+  "solution": "$x'=2,\\ y'=3$；$x''=2,\\ y''=6$，$x'y''-y'x''=12-6=6$，$\\kappa=\\frac{6}{13^{3/2}}=\\frac{6\\sqrt{13}}{169}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数曲率：单位圆处处为 1",
+  "statement": "求曲线 $x=\\cos t,\\ y=\\sin t$ 在 $t=\\frac{\\pi}{4}$ 处的曲率与曲率半径。",
+  "tags": [
+   "一元微分",
+   "曲率",
+   "参数方程求导"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第32节 曲率",
+  "hints": [
+   "单位圆的曲率恒为 1，可用公式验证。"
+  ],
+  "answer": "曲率 1，曲率半径 1",
+  "solution": "$x'=-\\sin t,y'=\\cos t$，$x'^{2}+y'^{2}=1$；$x''=-\\cos t,y''=-\\sin t$，$|x'y''-y'x''|=1$，故 $\\kappa=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数曲率：摆线 t=π",
+  "statement": "求曲线 $x=t-\\sin t,\\ y=1-\\cos t$ 在 $t=\\pi$ 处的曲率与曲率半径。",
+  "tags": [
+   "一元微分",
+   "曲率",
+   "参数方程求导"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第32节 曲率",
+  "hints": [
+   "摆线的曲率可化为 $\\kappa=\\frac{1}{4|\\sin\\frac{t}{2}|}$。"
+  ],
+  "answer": "曲率 $\\frac{1}{4}$，曲率半径 4",
+  "solution": "$x'=1-\\cos t,\\ y'=\\sin t$，$|x'y''-y'x''|=1-\\cos t$，$(x'^{2}+y'^{2})^{3/2}=(2-2\\cos t)^{3/2}$，$t=\\pi$ 时 $\\kappa=\\frac{2}{8}=\\frac{1}{4}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数曲率：对数螺线 t=0",
+  "statement": "求曲线 $x=e^{t}\\cos t,\\ y=e^{t}\\sin t$ 在 $t=0$ 处的曲率与曲率半径。",
+  "tags": [
+   "一元微分",
+   "曲率",
+   "参数方程求导"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第32节 曲率",
+  "hints": [
+   "对数螺线的曲率与向径成反比，直接代参数公式更快。"
+  ],
+  "answer": "曲率 $\\frac{\\sqrt{2}}{2}$，曲率半径 $\\sqrt{2}$",
+  "solution": "$x'=e^{t}(\\cos t-\\sin t),\\ y'=e^{t}(\\sin t+\\cos t)$，$x'^{2}+y'^{2}=2e^{2t}$；$t=0$ 时 $|x'y''-y'x''|=2$，$\\kappa=\\frac{2}{2\\sqrt2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数曲率：椭圆顶点处",
+  "statement": "求曲线 $x=a\\cos t,\\ y=b\\sin t$ 在 $t=0$ 处的曲率与曲率半径。",
+  "tags": [
+   "一元微分",
+   "曲率",
+   "参数方程求导"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第32节 曲率",
+  "hints": [
+   "$t=0$ 对应椭圆顶点 $(a,0)$，此处切线竖直，用参数公式直接算。"
+  ],
+  "answer": "曲率 $\\frac{a}{b^{2}}$，曲率半径 $\\frac{b^{2}}{a}$",
+  "solution": "$x'=0,\\ y'=b$；$x''=-a,\\ y''=0$，$|x'y''-y'x''|=ab$，$\\kappa=\\frac{ab}{b^{3}}=\\frac{a}{b^{2}}$，$R=\\frac{b^{2}}{a}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "函数性态：x-ln(1+x) 的极值与单调性",
+  "statement": "求 $f(x)=x-\\ln(1+x)\\ (x>-1)$ 的极值、拐点与单调区间。",
+  "tags": [
+   "一元微分",
+   "单调性",
+   "极值"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第33节 函数性态",
+  "hints": [
+   "先求 $f'(x)$ 定单调性与极值，再求 $f''(x)$ 判断拐点。"
+  ],
+  "answer": "极小值 $f(0)=0$；拐点：无；单增区间 $(0,+\\infty)$，单减区间 $(-1,0)$",
+  "solution": "$f'(x)=\\frac{x}{1+x}$，在 $(-1,0)$ 负、$(0,+\\infty)$ 正，故 $x=0$ 为极小值点；$f''(x)=\\frac{1}{(1+x)^{2}}>0$，无拐点。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "函数性态：lnx/x 的极大值与拐点",
+  "statement": "求 $f(x)=\\frac{\\ln x}{x}\\ (x>0)$ 的极值、拐点与单调区间。",
+  "tags": [
+   "一元微分",
+   "单调性",
+   "极值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第33节 函数性态",
+  "hints": [
+   "商的求导法则，令 $f'=0$ 得 $x=e$，再解 $f''=0$ 找拐点。"
+  ],
+  "answer": "极大值 $f(e)=\\frac{1}{e}$；拐点 $\\left(e^{3/2},\\frac{3}{2e^{3/2}}\\right)$；单增区间 $(0,e)$，单减区间 $(e,+\\infty)$",
+  "solution": "$f'=\\frac{1-\\ln x}{x^{2}}$，$x=e$ 处取极大值 $\\frac{1}{e}$；$f''=\\frac{2\\ln x-3}{x^{3}}$，零点 $x=e^{3/2}$，左右变号即为拐点。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "函数性态：xe^{1/x} 的极小值",
+  "statement": "求 $f(x)=xe^{1/x}\\ (x>0)$ 的极值、拐点与单调区间。",
+  "tags": [
+   "一元微分",
+   "单调性",
+   "极值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第33节 函数性态",
+  "hints": [
+   "乘积求导后提出 $e^{1/x}$，导数符号只由 $x-1$ 决定。"
+  ],
+  "answer": "极小值 $f(1)=e$；拐点：无；单增区间 $(1,+\\infty)$，单减区间 $(0,1)$",
+  "solution": "$f'=e^{1/x}\\left(1-\\frac{1}{x}\\right)$，$x=1$ 为极小值点，$f(1)=e$；$f''=\\frac{e^{1/x}}{x^{3}}>0$，无拐点。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "函数性态：三次多项式极值与拐点",
+  "statement": "求 $f(x)=x^{3}+3x^{2}-9x+1$ 的极值、拐点与单调区间。",
+  "tags": [
+   "一元微分",
+   "单调性",
+   "极值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第33节 函数性态",
+  "hints": [
+   "$f'=3x^{2}+6x-9=3(x+3)(x-1)$，$f''=6x+6$。"
+  ],
+  "answer": "极大值 $f(-3)=28$，极小值 $f(1)=-4$；拐点 $(-1,12)$；单增区间 $(-\\infty,-3),(1,+\\infty)$，单减区间 $(-3,1)$",
+  "solution": "由 $f'=0$ 得驻点 $-3,1$，符号「+ − +」故先增后减再增；$f''=0$ 得 $x=-1$，$f(-1)=12$ 为拐点。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "函数性态：含绝对值抛物线的极值与拐点",
+  "statement": "求 $f(x)=|x^{2}-4x+3|$ 的极值、拐点与单调区间。",
+  "tags": [
+   "一元微分",
+   "单调性",
+   "极值"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第33节 函数性态",
+  "hints": [
+   "先画 $x^{2}-4x+3$ 的图像，把 x 轴下方部分翻折上去，再分段讨论。"
+  ],
+  "answer": "极小值 $f(1)=0,f(3)=0$，极大值 $f(2)=1$；拐点 $(1,0),(3,0)$；单增区间 $(1,2),(3,+\\infty)$，单减区间 $(-\\infty,1),(2,3)$",
+  "solution": "零点 $x=1,3$，顶点 $(2,-1)$ 翻折后为极大值点 $(2,1)$；在 $x=1,3$ 处出现尖点，导数变号且函数连续，为极小值点也是拐点。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "函数性态：x²e^{-x} 的极值与两个拐点",
+  "statement": "求 $f(x)=x^{2}e^{-x}$ 的极值、拐点与单调区间。",
+  "tags": [
+   "一元微分",
+   "单调性",
+   "极值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第33节 函数性态",
+  "hints": [
+   "$f'=xe^{-x}(2-x)$，$f''=e^{-x}(x^{2}-4x+2)$。"
+  ],
+  "answer": "极小值 $f(0)=0$，极大值 $f(2)=4e^{-2}$；拐点 $\\left(2-\\sqrt{2},f(2-\\sqrt{2})\\right),\\left(2+\\sqrt{2},f(2+\\sqrt{2})\\right)$；单增区间 $(0,2)$，单减区间 $(-\\infty,0),(2,+\\infty)$",
+  "solution": "驻点 $0,2$，符号「− + −」得极小 $f(0)=0$、极大 $f(2)=4e^{-2}$；$x^{2}-4x+2=0$ 得 $x=2\\pm\\sqrt2$，两侧 $f''$ 变号即拐点。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "函数性态：带绝对值因子的 e^x",
+  "statement": "求 $f(x)=|x-1|e^{x}$ 的极值、拐点与单调区间。",
+  "tags": [
+   "一元微分",
+   "单调性",
+   "极值"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第33节 函数性态",
+  "hints": [
+   "以 $x=1$ 分段去掉绝对值，两段分别求导；$x=1$ 是尖点，也是拐点。"
+  ],
+  "answer": "极大值 $f(0)=1$，极小值 $f(1)=0$；拐点 $\\left(-1,\\frac{2}{e}\\right),(1,0)$；单增区间 $(-\\infty,0),(1,+\\infty)$，单减区间 $(0,1)$",
+  "solution": "$x<1$ 时 $f=(1-x)e^{x}$，$f'=-xe^{x}$，$f''=-(1+x)e^{x}$，得极大 $f(0)=1$ 与拐点 $\\left(-1,\\frac{2}{e}\\right)$；$x>1$ 时 $f=(x-1)e^{x}$，$f'=xe^{x}>0$ 单调增，故 $f(1)=0$ 为极小值。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "函数性态：arctanx-ln(1+x²)",
+  "statement": "求 $f(x)=\\arctan x-\\ln(1+x^{2})$ 的极值、拐点与单调区间。",
+  "tags": [
+   "一元微分",
+   "单调性",
+   "极值"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第33节 函数性态",
+  "hints": [
+   "$f'=\\frac{1}{1+x^{2}}-\\frac{2x}{1+x^{2}}$，分子降为一次式，求根很容易。"
+  ],
+  "answer": "极大值 $f\\left(\\frac{1}{2}\\right)=\\arctan\\frac{1}{2}-\\ln\\frac{5}{4}$；拐点 $\\left(\\frac{1-\\sqrt{5}}{2},f\\left(\\frac{1-\\sqrt{5}}{2}\\right)\\right),\\left(\\frac{1+\\sqrt{5}}{2},f\\left(\\frac{1+\\sqrt{5}}{2}\\right)\\right)$；单增区间 $\\left(-\\infty,\\frac{1}{2}\\right)$，单减区间 $\\left(\\frac{1}{2},+\\infty\\right)$",
+  "solution": "$f'=\\frac{1-2x}{1+x^{2}}$，$x=\\frac{1}{2}$ 为极大值点；$f''=\\frac{2(x^{2}-x-1)}{(1+x^{2})^{2}}$，零点 $\\frac{1\\pm\\sqrt5}{2}$ 为拐点。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "函数性态：xe^{-x²} 的奇对称极值与拐点",
+  "statement": "求 $f(x)=xe^{-x^{2}}$ 的极值、拐点与单调区间。",
+  "tags": [
+   "一元微分",
+   "单调性",
+   "极值"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第33节 函数性态",
+  "hints": [
+   "奇函数，只需算 $x\\ge0$，另一半由对称性写出。"
+  ],
+  "answer": "极大值 $f\\left(\\frac{1}{\\sqrt{2}}\\right)=\\frac{1}{\\sqrt{2e}}$，极小值 $f\\left(-\\frac{1}{\\sqrt{2}}\\right)=-\\frac{1}{\\sqrt{2e}}$；拐点 $(0,0),\\left(\\frac{\\sqrt{6}}{2},\\frac{\\sqrt{6}}{2}e^{-3/2}\\right),\\left(-\\frac{\\sqrt{6}}{2},-\\frac{\\sqrt{6}}{2}e^{-3/2}\\right)$；单增区间 $\\left(-\\frac{1}{\\sqrt{2}},\\frac{1}{\\sqrt{2}}\\right)$，单减区间 $\\left(-\\infty,-\\frac{1}{\\sqrt{2}}\\right),\\left(\\frac{1}{\\sqrt{2}},+\\infty\\right)$",
+  "solution": "$f'=e^{-x^{2}}(1-2x^{2})$，驻点 $\\pm\\frac{1}{\\sqrt2}$；$f''=2xe^{-x^{2}}(2x^{2}-3)$，零点 $0,\\pm\\frac{\\sqrt6}{2}$，均变号故为拐点。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "函数性态：|x³-3x| 的分段讨论",
+  "statement": "求 $f(x)=|x^{3}-3x|$ 的极值、拐点与单调区间。",
+  "tags": [
+   "一元微分",
+   "单调性",
+   "极值"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第33节 函数性态",
+  "hints": [
+   "零点 $-\\sqrt3,0,\\sqrt3$ 把定义域分成四段，逐段去绝对值后求导；零点处是尖点。"
+  ],
+  "answer": "极小值 $f(-\\sqrt{3})=0,f(0)=0,f(\\sqrt{3})=0$，极大值 $f(-1)=2,f(1)=2$；拐点 $(-\\sqrt{3},0),(\\sqrt{3},0)$；单增区间 $(-\\sqrt{3},-1),(0,1),(\\sqrt{3},+\\infty)$，单减区间 $(-\\infty,-\\sqrt{3}),(-1,0),(1,\\sqrt{3})$",
+  "solution": "$x^{3}-3x$ 的驻点为 $\\pm1$，翻折后 $x=\\pm1$ 处取极大值 2；$x=-\\sqrt3,0,\\sqrt3$ 为尖点极小值 0，也是拐点（二阶导不存在但凹凸改变）。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "递归数列根式型：单调有界求极限",
+  "statement": "设 $x_1=1$，$x_{n+1}=\\sqrt{2+x_n}$。证明数列 $\\{x_n\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_n$。",
+  "tags": [
+   "极限",
+   "单调有界",
+   "递推数列"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第12节 等式数列极限作差法",
+  "hints": [
+   "先归纳证明 $x_n<2$ 且有 $x_{n+1}>x_n$，再对递推式两边取极限。"
+  ],
+  "answer": "2",
+  "solution": "归纳得 $x_n<2$，且 $x_{n+1}-x_n>0$，故收敛；令极限为 $A$，由 $A=\\sqrt{2+A}$ 取正根得 $A=2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "递归数列：根号6型有界",
+  "statement": "设 $x_1=1$，$x_{n+1}=\\sqrt{6+x_n}$。证明数列 $\\{x_n\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_n$。",
+  "tags": [
+   "极限",
+   "单调有界",
+   "递推数列"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第12节 等式数列极限作差法",
+  "hints": [
+   "上界取 3 即可：$x_n<3$ 时 $x_{n+1}=\\sqrt{6+x_n}<3$，且单调增。"
+  ],
+  "answer": "3",
+  "solution": "归纳证 $x_n<3$ 且单调增，收敛；令 $A=\\sqrt{6+A}$，得 $A=3$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "递归数列：根号12型有界",
+  "statement": "设 $x_1=1$，$x_{n+1}=\\sqrt{12+x_n}$。证明数列 $\\{x_n\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_n$。",
+  "tags": [
+   "极限",
+   "单调有界",
+   "递推数列"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第12节 等式数列极限作差法",
+  "hints": [
+   "不动点方程 $A=\\sqrt{12+A}$ 的正根就是上界，用它做归纳。"
+  ],
+  "answer": "4",
+  "solution": "先证 $x_n<4$ 且单调增，故收敛；解 $A=\\sqrt{12+A}$ 得 $A=4$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "递归数列：均值型收敛到根2",
+  "statement": "设 $x_1=2$，$x_{n+1}=\\frac12\\left(x_n+\\frac{2}{x_n}\\right)$。证明数列 $\\{x_n\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_n$。",
+  "tags": [
+   "极限",
+   "单调有界",
+   "均值不等式"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第12节 等式数列极限作差法",
+  "hints": [
+   "用 $x_{n+1}\\ge\\sqrt{2}$ 与 $x_{n+1}\\le x_n$ 说明有界且单调减。"
+  ],
+  "answer": "$\\sqrt{2}$",
+  "solution": "由均值不等式 $x_{n+1}\\ge\\sqrt2$，再证 $x_{n+1}-x_n=\\frac{2-x_n^2}{2x_n}\\le 0$；令 $A=\\frac12(A+\\frac2A)$ 得 $A=\\sqrt2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "递归数列：均值型收敛到根5",
+  "statement": "设 $x_1=3$，$x_{n+1}=\\frac12\\left(x_n+\\frac{5}{x_n}\\right)$。证明数列 $\\{x_n\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_n$。",
+  "tags": [
+   "极限",
+   "单调有界",
+   "均值不等式"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第12节 等式数列极限作差法",
+  "hints": [
+   "结构与上一题同：下界 $\\sqrt5$，递减。"
+  ],
+  "answer": "$\\sqrt{5}$",
+  "solution": "$x_{n+1}\\ge\\sqrt5$ 且 $x_{n+1}\\le x_n$，收敛；令 $A=\\frac12(A+\\frac5A)$ 得 $A=\\sqrt5$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "递归数列：分式递推6-9/x",
+  "statement": "设 $x_1=4$，$x_{n+1}=6-\\frac{9}{x_n}$。证明数列 $\\{x_n\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_n$。",
+  "tags": [
+   "极限",
+   "单调有界",
+   "作差法"
+  ],
+  "thinking": 5,
+  "difficulty": 4,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第12节 等式数列极限作差法",
+  "hints": [
+   "作差 $x_{n+1}-3=\\frac{3(x_n-3)}{x_n}$，看误差符号与大小。"
+  ],
+  "answer": "3",
+  "solution": "$x_n>3$ 时 $x_{n+1}-3=\\frac{3(x_n-3)}{x_n}>0$，且 $\\frac{3}{x_n}$ 使误差递减，故收敛；$A=6-\\frac9A$ 得 $A=3$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "递归数列：分式递推2-1/x",
+  "statement": "设 $x_1=2$，$x_{n+1}=2-\\frac{1}{x_n}$。证明数列 $\\{x_n\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_n$。",
+  "tags": [
+   "极限",
+   "单调有界",
+   "作差法"
+  ],
+  "thinking": 5,
+  "difficulty": 4,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第12节 等式数列极限作差法",
+  "hints": [
+   "$x_{n+1}-1=\\frac{x_n-1}{x_n}$，且 $x_n\\in(1,2]$。"
+  ],
+  "answer": "1",
+  "solution": "归纳得 $1<x_n\\le 2$，$x_{n+1}-1=\\frac{x_n-1}{x_n}\\in(0,\\frac12)$，误差压缩故收敛；$A=2-\\frac1A$ 得 $A=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "递归数列：2加根号x型",
+  "statement": "设 $x_1=1$，$x_{n+1}=2+\\sqrt{x_n}$。证明数列 $\\{x_n\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_n$。",
+  "tags": [
+   "极限",
+   "单调有界",
+   "递推数列"
+  ],
+  "thinking": 5,
+  "difficulty": 4,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第12节 等式数列极限作差法",
+  "hints": [
+   "上界 4：$x_n<4\\Rightarrow 2+\\sqrt{x_n}<4$。"
+  ],
+  "answer": "4",
+  "solution": "归纳得 $x_n<4$ 且单调增，收敛；由 $A=2+\\sqrt A$ 得 $(\\sqrt A-2)(\\sqrt A+1)=0$，$A=4$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "递归数列：分式1+x/(1+x)",
+  "statement": "设 $x_1=1$，$x_{n+1}=1+\\frac{x_n}{1+x_n}$。证明数列 $\\{x_n\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_n$。",
+  "tags": [
+   "极限",
+   "单调有界",
+   "递推数列"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第12节 等式数列极限作差法",
+  "hints": [
+   "$x_n\\in[1,2)$，故 $x_{n+1}\\in[\\frac32,2)$，有上界且递增。"
+  ],
+  "answer": "$\\frac{1+\\sqrt5}{2}$",
+  "solution": "归纳得 $1\\le x_n<2$ 且单调增，收敛；由 $A=1+\\frac{A}{1+A}$ 得 $A^2-A-1=0$，取 $A=\\frac{1+\\sqrt5}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "递归数列：1加根号x型",
+  "statement": "设 $x_1=1$，$x_{n+1}=1+\\sqrt{x_n}$。证明数列 $\\{x_n\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_n$。",
+  "tags": [
+   "极限",
+   "单调有界",
+   "递推数列"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第12节 等式数列极限作差法",
+  "hints": [
+   "上界取 $\\frac{3+\\sqrt5}{2}$，它满足 $A=1+\\sqrt A$。"
+  ],
+  "answer": "$\\frac{3+\\sqrt5}{2}$",
+  "solution": "证明 $x_n<\\frac{3+\\sqrt5}{2}$ 且单调增，收敛；解 $A=1+\\sqrt A$ 即 $A^2-3A+1=0$，取大根。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "不等式递推：乘积上界判收敛",
+  "statement": "设 $0<x_n<1$，且 $(1-x_{n+1})x_n>\\frac14$。证明 $\\{x_n\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_n$。",
+  "tags": [
+   "极限",
+   "夹逼",
+   "不等式"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第13节 不等式数列极限",
+  "hints": [
+   "由 $x_{n+1}<1-\\frac{1}{4x_n}$ 得单调递增，再用均值不等式卡上界。"
+  ],
+  "answer": "$\\frac12$",
+  "solution": "$x_{n+1}>x_n$（因 $x_n(1-x_n)\\le\\frac14$），且 $x_n<1$，收敛；取极限得 $(1-A)A\\ge\\frac14$，故 $A=\\frac12$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "不等式递推：对称乘积型",
+  "statement": "设 $0<x_n<1$，且 $x_{n+1}(1-x_n)>\\frac14$。证明 $\\{x_n\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_n$。",
+  "tags": [
+   "极限",
+   "夹逼",
+   "不等式"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第13节 不等式数列极限",
+  "hints": [
+   "$x_{n+1}>\\frac{1}{4(1-x_n)}>x_n$ 给出单调性。"
+  ],
+  "answer": "$\\frac12$",
+  "solution": "由 $\\frac{1}{4(1-x_n)}-x_n=\\frac{(2x_n-1)^2}{4(1-x_n)}\\ge0$ 得递增且有界，收敛；极限满足 $A(1-A)\\ge\\frac14$，$A=\\frac12$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "不等式递推：2减x型上界",
+  "statement": "设 $0<x_n<2$，且 $x_{n+1}(2-x_n)>1$。证明 $\\{x_n\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_n$。",
+  "tags": [
+   "极限",
+   "夹逼",
+   "不等式"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第13节 不等式数列极限",
+  "hints": [
+   "把 $2-x_n$ 除过去，用 $x_n(2-x_n)\\le1$ 比较。"
+  ],
+  "answer": "1",
+  "solution": "由 $x_{n+1}>\\frac{1}{2-x_n}\\ge x_n$ 得单调增且有上界 2，收敛；极限满足 $A(2-A)\\ge1$，故 $A=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "不等式递推：3减x型不等式",
+  "statement": "设 $x_n>0$，且 $x_n(3-x_{n+1})>\\frac94$。证明 $\\{x_n\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_n$。",
+  "tags": [
+   "极限",
+   "夹逼",
+   "不等式"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第13节 不等式数列极限",
+  "hints": [
+   "得 $x_{n+1}<3-\\frac{9}{4x_n}$，与 $x_n$ 比较判断单调。"
+  ],
+  "answer": "$\\frac32$",
+  "solution": "由 $x_n\\le\\frac94$ 得 $x_{n+1}<3-\\frac{9}{4\\cdot\\frac94}=2$；再证递增有界，收敛后 $A(3-A)\\ge\\frac94$，$A=\\frac32$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "不等式递推：对称3减x型",
+  "statement": "设 $0<x_n<3$，且 $x_{n+1}(3-x_n)>\\frac94$。证明 $\\{x_n\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_n$。",
+  "tags": [
+   "极限",
+   "夹逼",
+   "不等式"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第13节 不等式数列极限",
+  "hints": [
+   "$x_{n+1}>\\frac{9}{4(3-x_n)}$，与 $x_n$ 比较得递增。"
+  ],
+  "answer": "$\\frac32$",
+  "solution": "$\\frac{9}{4(3-x_n)}-x_n=\\frac{(2x_n-3)^2}{4(3-x_n)}\\ge0$，故递增且有上界 3；极限 $A(3-A)\\ge\\frac94$，$A=\\frac32$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "不等式递推：和与倒数和",
+  "statement": "设 $x_n>0$，且 $x_{n+1}+\\frac{1}{x_n}<2$。证明 $\\{x_n\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_n$。",
+  "tags": [
+   "极限",
+   "夹逼",
+   "不等式"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第13节 不等式数列极限",
+  "hints": [
+   "先说明 $x_{n+1}<2-\\frac{1}{x_n}$ 迫使 $x_n>\\frac12$，再用 $(x_n-1)^2\\ge0$ 判单调。"
+  ],
+  "answer": "1",
+  "solution": "由 $2-\\frac1{x_n}>0$ 得 $x_n>\\frac12$；$x_{n+1}<2-\\frac1{x_n}\\le x_n$（因 $(x_n-1)^2\\ge0$），单调减有下界，极限为 1。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "不等式递推：对数型压缩",
+  "statement": "设 $x_1>0$，且 $0\\le x_{n+1}\\le\\ln(1+x_n)$。证明 $\\{x_n\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_n$。",
+  "tags": [
+   "极限",
+   "夹逼",
+   "中值定理"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第13节 不等式数列极限",
+  "hints": [
+   "用 $\\ln(1+x)<x$ 得单调减且非负。"
+  ],
+  "answer": "0",
+  "solution": "$x_{n+1}\\le\\ln(1+x_n)<x_n$，故单调减有下界 0，收敛；极限 $A$ 满足 $0\\le A\\le\\ln(1+A)$，仅 $A=0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "不等式递推：平方压缩到0",
+  "statement": "设 $0<x_1<1$，且 $0<x_{n+1}\\le x_n^2$。证明 $\\{x_n\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_n$。",
+  "tags": [
+   "极限",
+   "夹逼",
+   "不等式"
+  ],
+  "thinking": 5,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第13节 不等式数列极限",
+  "hints": [
+   "迭代得 $0<x_n\\le x_1^{2^{n-1}}$，指数趋于 0。"
+  ],
+  "answer": "0",
+  "solution": "由 $x_{n+1}\\le x_n^2$ 递推得 $x_n\\le x_1^{2^{n-1}}$，而 $0<x_1<1$ 时 $x_1^{2^{n-1}}\\to0$，夹逼得极限 0。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "不等式递推：均值不等式上界",
+  "statement": "设 $x_1>1$，且 $1\\le x_{n+1}\\le\\frac12\\left(x_n+\\frac{1}{x_n}\\right)$。证明 $\\{x_n\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_n$。",
+  "tags": [
+   "极限",
+   "夹逼",
+   "均值不等式"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第13节 不等式数列极限",
+  "hints": [
+   "$\\frac12(x+\\frac1x)\\le x$ 对 $x\\ge1$ 成立，故递减且下界为 1。"
+  ],
+  "answer": "1",
+  "solution": "由 $\\frac12(x_n+\\frac{1}{x_n})\\le x_n$ 得单调减，且 $x_n\\ge1$，收敛；极限 $A$ 满足 $1\\le A\\le\\frac12(A+\\frac1A)$，故 $A=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "不等式递推：带常数2的均值型",
+  "statement": "设 $x_1>\\sqrt2$，且 $\\sqrt2\\le x_{n+1}\\le\\frac12\\left(x_n+\\frac{2}{x_n}\\right)$。证明 $\\{x_n\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_n$。",
+  "tags": [
+   "极限",
+   "夹逼",
+   "均值不等式"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第13节 不等式数列极限",
+  "hints": [
+   "$\\frac12(x+\\frac2x)\\le x$ 当 $x\\ge\\sqrt2$，配下界 $\\sqrt2$。"
+  ],
+  "answer": "$\\sqrt2$",
+  "solution": "对 $x_n\\ge\\sqrt2$ 有 $\\frac12(x_n+\\frac{2}{x_n})\\le x_n$，故递减且 $x_n\\ge\\sqrt2$，收敛；极限满足 $A=\\frac12(A+\\frac2A)$，$A=\\sqrt2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "中间变量：e的x次幂判收敛",
+  "statement": "设数列 $\\{x_n\\}\\subset(-1,1)$，下列命题正确的是（　）\nA. 若 $\\lim\\limits_{n\\to\\infty}x_n^2$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nB. 若 $\\lim\\limits_{n\\to\\infty}e^{x_n}$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nC. 若 $\\lim\\limits_{n\\to\\infty}\\cos x_n$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nD. 若 $\\lim\\limits_{n\\to\\infty}\\sin(2x_n)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在",
+  "tags": [
+   "极限",
+   "单调性",
+   "复合函数"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "柳贯一题型专项 · 第14节 中间变量极限定理",
+  "hints": [
+   "看内层函数在该区间上是否严格单调（一一对应）。"
+  ],
+  "answer": "B",
+  "solution": "$e^x$ 在 $(-1,1)$ 上严格单调可逆，故 $e^{x_n}$ 收敛可反解 $x_n$；$x^2,\\cos x,\\sin 2x$ 均非一一对应，可举 $x_n$ 振荡反例。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "中间变量：对数型判收敛",
+  "statement": "设数列 $\\{x_n\\}\\subset(0,1)$，下列命题正确的是（　）\nA. 若 $\\lim\\limits_{n\\to\\infty}x_n(1-x_n)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nB. 若 $\\lim\\limits_{n\\to\\infty}\\ln(1+x_n)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nC. 若 $\\lim\\limits_{n\\to\\infty}\\sin(\\pi x_n)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nD. 若 $\\lim\\limits_{n\\to\\infty}\\cos(2\\pi x_n)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在",
+  "tags": [
+   "极限",
+   "单调性",
+   "复合函数"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "柳贯一题型专项 · 第14节 中间变量极限定理",
+  "hints": [
+   "$\\ln(1+x)$ 在 $(0,1)$ 严格增，其余选项的函数在 $(0,1)$ 上取同值时对应两个点。"
+  ],
+  "answer": "B",
+  "solution": "$\\ln(1+x)$ 严格增，收敛可唯一反解；$x(1-x)$、$\\sin\\pi x$、$\\cos2\\pi x$ 在 $(0,1)$ 上都关于 $\\frac12$ 对称，取对称两点即反例。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "中间变量：反正弦判收敛",
+  "statement": "设数列 $\\{x_n\\}\\subset(0,1)$，下列命题正确的是（　）\nA. 若 $\\lim\\limits_{n\\to\\infty}\\left(x_n-\\frac12\\right)^2$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nB. 若 $\\lim\\limits_{n\\to\\infty}\\arcsin x_n$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nC. 若 $\\lim\\limits_{n\\to\\infty}\\cos(2\\pi x_n)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nD. 若 $\\lim\\limits_{n\\to\\infty}\\sin(2\\pi x_n)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在",
+  "tags": [
+   "极限",
+   "单调性",
+   "反函数"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "柳贯一题型专项 · 第14节 中间变量极限定理",
+  "hints": [
+   "$\\arcsin$ 严格单调，故可反解；平方、三角选项对称不单调。"
+  ],
+  "answer": "B",
+  "solution": "$\\arcsin x$ 在 $(0,1)$ 严格增，$\\arcsin x_n\\to L$ 则 $x_n\\to\\sin L$；A、C、D 均可举关于 $\\frac14$ 或 $\\frac12$ 对称的反例。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "中间变量：区间(1,e)上判对数",
+  "statement": "设数列 $\\{x_n\\}\\subset(1,e)$，下列命题正确的是（　）\nA. 若 $\\lim\\limits_{n\\to\\infty}\\left(x_n-\\frac32\\right)^2$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nB. 若 $\\lim\\limits_{n\\to\\infty}\\sin(2\\pi\\ln x_n)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nC. 若 $\\lim\\limits_{n\\to\\infty}\\ln x_n$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nD. 若 $\\lim\\limits_{n\\to\\infty}\\left(\\ln x_n-\\frac12\\right)^2$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在",
+  "tags": [
+   "极限",
+   "单调性",
+   "复合函数"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第14节 中间变量极限定理",
+  "hints": [
+   "令 $t_n=\\ln x_n\\in(0,1)$，问题化为一元区间上的单调性判断。"
+  ],
+  "answer": "C",
+  "solution": "$\\ln x$ 严格增，可反解 $x_n=e^{t_n}$；B 中 $\\sin2\\pi t$ 在 $(0,1)$ 对称不单调，A、D 的平方也不单调。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "中间变量：余弦单调判收敛",
+  "statement": "设数列 $\\{x_n\\}\\subset(0,\\pi)$，下列命题正确的是（　）\nA. 若 $\\lim\\limits_{n\\to\\infty}\\sin x_n$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nB. 若 $\\lim\\limits_{n\\to\\infty}\\cos x_n$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nC. 若 $\\lim\\limits_{n\\to\\infty}\\sin^2 x_n$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nD. 若 $\\lim\\limits_{n\\to\\infty}\\left(x_n-\\frac{\\pi}{2}\\right)^2$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在",
+  "tags": [
+   "极限",
+   "单调性",
+   "复合函数"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第14节 中间变量极限定理",
+  "hints": [
+   "$(0,\\pi)$ 上 $\\cos$ 严格递减，$\\sin$ 关于 $\\frac{\\pi}{2}$ 对称。"
+  ],
+  "answer": "B",
+  "solution": "$\\cos$ 在 $(0,\\pi)$ 上严格减，可唯一反解，故 B 对；A、C 取 $\\frac{\\pi}{2}\\pm t$、D 取对称点即为反例。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "中间变量：复合对数反正弦",
+  "statement": "设数列 $\\{x_n\\}\\subset(0,1)$，下列命题正确的是（　）\nA. 若 $\\lim\\limits_{n\\to\\infty}\\sin(\\pi x_n)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nB. 若 $\\lim\\limits_{n\\to\\infty}\\ln(1+\\arcsin x_n)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nC. 若 $\\lim\\limits_{n\\to\\infty}\\cos(2\\pi x_n)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nD. 若 $\\lim\\limits_{n\\to\\infty}\\left(x_n-\\frac12\\right)^2$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在",
+  "tags": [
+   "极限",
+   "单调性",
+   "反函数"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "柳贯一题型专项 · 第14节 中间变量极限定理",
+  "hints": [
+   "复合出的 $\\ln(1+\\arcsin x)$ 在 $(0,1)$ 上严格增。"
+  ],
+  "answer": "B",
+  "solution": "$\\ln(1+\\arcsin x)$ 严格增，故收敛可反解；A、C、D 的函数在 $(0,1)$ 上对称，取对称两点即不收敛。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "中间变量：正切指数判收敛",
+  "statement": "设数列 $\\{x_n\\}\\subset\\left(0,\\frac{\\pi}{2}\\right)$，下列命题正确的是（　）\nA. 若 $\\lim\\limits_{n\\to\\infty}\\sin(2x_n)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nB. 若 $\\lim\\limits_{n\\to\\infty}\\cos(3x_n)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nC. 若 $\\lim\\limits_{n\\to\\infty}e^{\\tan x_n}$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nD. 若 $\\lim\\limits_{n\\to\\infty}\\sin(3x_n)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在",
+  "tags": [
+   "极限",
+   "单调性",
+   "复合函数"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第14节 中间变量极限定理",
+  "hints": [
+   "$e^{\\tan x}$ 在 $(0,\\frac{\\pi}{2})$ 严格增且连续可逆。"
+  ],
+  "answer": "C",
+  "solution": "$\\tan x$ 与 $e^t$ 均严格增，故 $e^{\\tan x_n}$ 收敛可反解 $x_n$；$\\sin 2x,\\cos3x,\\sin3x$ 在该区间上非一一对应。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "中间变量：负反正弦指数",
+  "statement": "设数列 $\\{x_n\\}\\subset(0,1)$，下列命题正确的是（　）\nA. 若 $\\lim\\limits_{n\\to\\infty}x_n(1-x_n)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nB. 若 $\\lim\\limits_{n\\to\\infty}\\sin(\\pi x_n)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nC. 若 $\\lim\\limits_{n\\to\\infty}\\cos(2\\pi x_n)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nD. 若 $\\lim\\limits_{n\\to\\infty}e^{-\\arcsin x_n}$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在",
+  "tags": [
+   "极限",
+   "单调性",
+   "反函数"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "柳贯一题型专项 · 第14节 中间变量极限定理",
+  "hints": [
+   "$e^{-\\arcsin x}$ 严格递减但仍是单射，收敛照样能反解。"
+  ],
+  "answer": "D",
+  "solution": "$\\arcsin x$ 严格增、$e^{-t}$ 严格减，复合后严格减（单射），故 D 成立；A、B、C 的函数在 $(0,1)$ 上对称，可举反例。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "中间变量：区间(1,e)上判余弦",
+  "statement": "设数列 $\\{x_n\\}\\subset(1,e)$，下列命题正确的是（　）\nA. 若 $\\lim\\limits_{n\\to\\infty}\\sin(2\\pi\\ln x_n)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nB. 若 $\\lim\\limits_{n\\to\\infty}\\left(\\ln x_n-\\frac12\\right)^2$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nC. 若 $\\lim\\limits_{n\\to\\infty}\\cos(\\pi\\ln x_n)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nD. 若 $\\lim\\limits_{n\\to\\infty}\\sin(\\pi\\ln x_n)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在",
+  "tags": [
+   "极限",
+   "单调性",
+   "复合函数"
+  ],
+  "thinking": 4,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第14节 中间变量极限定理",
+  "hints": [
+   "设 $t_n=\\ln x_n\\in(0,1)$，则 $\\cos\\pi t$ 在 $(0,1)$ 上严格减。"
+  ],
+  "answer": "C",
+  "solution": "$\\cos\\pi t$ 在 $t\\in(0,1)$ 严格减，故可反解 $t_n$ 进而得 $x_n$；$\\sin2\\pi t$、$\\sin\\pi t$、$(t-\\frac12)^2$ 都不单调。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "中间变量：反正弦平方判收敛",
+  "statement": "设数列 $\\{x_n\\}\\subset(0,1)$，下列命题正确的是（　）\nA. 若 $\\lim\\limits_{n\\to\\infty}\\sin(\\pi x_n)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nB. 若 $\\lim\\limits_{n\\to\\infty}\\cos(2\\pi x_n)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nC. 若 $\\lim\\limits_{n\\to\\infty}\\left(x_n-\\frac12\\right)^2$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在\nD. 若 $\\lim\\limits_{n\\to\\infty}\\arcsin(x_n^2)$ 存在，则 $\\lim\\limits_{n\\to\\infty}x_n$ 存在",
+  "tags": [
+   "极限",
+   "单调性",
+   "反函数"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "柳贯一题型专项 · 第14节 中间变量极限定理",
+  "hints": [
+   "$x_n>0$ 时 $x_n^2$ 与 $\\arcsin$ 都严格增，复合是单射。"
+  ],
+  "answer": "D",
+  "solution": "$\\arcsin(x^2)$ 在 $(0,1)$ 严格增，收敛则 $x_n^2\\to\\sin L$，由 $x_n>0$ 得 $x_n\\to\\sqrt{\\sin L}$；其余选项对称不单调。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "单增数列：a ln a趋于0",
+  "statement": "设正项数列 $\\{a_n\\}$ 单调增加，则下列条件中能推出 $\\{a_n\\}$ 收敛的是（　）\nA. $\\{(1+a_n)^{1/a_n}\\}$ 收敛于 1\nB. $\\{(1+\\frac{1}{a_n})^{a_n}\\}$ 收敛于 $e$\nC. $\\{a_n\\ln a_n\\}$ 收敛于 0\nD. $\\{\\frac{\\ln a_n}{a_n}\\}$ 收敛于 0",
+  "tags": [
+   "极限",
+   "单调有界",
+   "数列收敛"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第15节 数列单增收敛",
+  "hints": [
+   "单调增要收敛只需有界；注意 $a\\ln a$ 在 $a\\to+\\infty$ 时无界，而 $\\frac{\\ln a}{a}\\to0$ 也允许 $a_n\\to\\infty$。"
+  ],
+  "answer": "C",
+  "solution": "$a_n\\ln a_n\\to0$ 迫使 $a_n$ 有界（否则趋于 $+\\infty$），故收敛；A、B、D 在 $a_n\\to+\\infty$ 时也都成立，不能推出收敛。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "单增数列：反正切极限定值",
+  "statement": "设正项数列 $\\{a_n\\}$ 单调增加，则下列条件中能推出 $\\{a_n\\}$ 收敛的是（　）\nA. $\\{\\frac{1}{a_n}\\}$ 收敛于 0\nB. $\\{\\frac{1}{1+a_n}\\}$ 收敛于 0\nC. $\\{\\frac{\\ln a_n}{a_n}\\}$ 收敛于 0\nD. $\\{\\arctan a_n\\}$ 收敛于 $\\frac{\\pi}{3}$",
+  "tags": [
+   "极限",
+   "单调有界",
+   "反函数"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第15节 数列单增收敛",
+  "hints": [
+   "$\\arctan$ 有界，若 $a_n\\to\\infty$ 则 $\\arctan a_n\\to\\frac{\\pi}{2}$，与极限值比较。"
+  ],
+  "answer": "D",
+  "solution": "$\\arctan a_n\\to\\frac{\\pi}{3}\\ne\\frac{\\pi}{2}$，说明 $a_n$ 有界，故收敛于 $\\tan\\frac{\\pi}{3}=\\sqrt3$；A、B、C 都允许 $a_n\\to+\\infty$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "单增数列：指数极限非零",
+  "statement": "设正项数列 $\\{a_n\\}$ 单调增加，则下列条件中能推出 $\\{a_n\\}$ 收敛的是（　）\nA. $\\{e^{-a_n}\\}$ 收敛于 0\nB. $\\{\\frac{a_n}{e^{n}}\\}$ 收敛于 0\nC. $\\{\\frac{a_n^{2}}{e^{n}}\\}$ 收敛于 0\nD. $\\{e^{-a_n}\\}$ 收敛于 $e^{-2}$",
+  "tags": [
+   "极限",
+   "单调有界",
+   "复合函数"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第15节 数列单增收敛",
+  "hints": [
+   "$e^{-a_n}\\to0$ 意味着 $a_n\\to+\\infty$；$e^{-a_n}\\to e^{-2}$ 意味着 $a_n\\to2$。"
+  ],
+  "answer": "D",
+  "solution": "由 $e^{-a_n}\\to e^{-2}$ 得 $a_n\\to2$（$e^{-x}$ 连续单调），收敛；A 对应 $a_n\\to+\\infty$，B、C 也允许 $a_n\\to+\\infty$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "单增数列：倒数极限非零",
+  "statement": "设正项数列 $\\{a_n\\}$ 单调增加，则下列条件中能推出 $\\{a_n\\}$ 收敛的是（　）\nA. $\\{\\frac{1}{a_n}\\}$ 收敛于 0\nB. $\\{\\frac{1}{1+a_n}\\}$ 收敛于 0\nC. $\\{\\frac{\\ln a_n}{a_n}\\}$ 收敛于 0\nD. $\\{\\frac{1}{a_n}\\}$ 收敛于 $\\frac12$",
+  "tags": [
+   "极限",
+   "单调有界",
+   "数列收敛"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "柳贯一题型专项 · 第15节 数列单增收敛",
+  "hints": [
+   "倒数收敛到非零常数，说明原数列收敛到该常数的倒数。"
+  ],
+  "answer": "D",
+  "solution": "$\\frac{1}{a_n}\\to\\frac12$ 得 $a_n\\to2$，收敛；A、B、C 的极限都为 0，均兼容 $a_n\\to+\\infty$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "单增数列：对数极限为2",
+  "statement": "设正项数列 $\\{a_n\\}$ 单调增加，则下列条件中能推出 $\\{a_n\\}$ 收敛的是（　）\nA. $\\{(1+a_n)^{1/a_n}\\}$ 收敛于 1\nB. $\\{\\frac{\\ln(1+a_n)}{a_n}\\}$ 收敛于 0\nC. $\\{\\ln a_n\\}$ 收敛于 2\nD. $\\{\\frac{\\ln a_n}{a_n}\\}$ 收敛于 0",
+  "tags": [
+   "极限",
+   "单调有界",
+   "复合函数"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "柳贯一题型专项 · 第15节 数列单增收敛",
+  "hints": [
+   "$\\ln$ 连续单调，$\\ln a_n\\to2$ 就是 $a_n\\to e^2$。"
+  ],
+  "answer": "C",
+  "solution": "$\\ln a_n\\to2\\Rightarrow a_n\\to e^{2}$，收敛；A、B、D 的极限值在 $a_n\\to+\\infty$ 时同样成立，不能推出收敛。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "单增数列：指数极限e的负1",
+  "statement": "设正项数列 $\\{a_n\\}$ 单调增加，则下列条件中能推出 $\\{a_n\\}$ 收敛的是（　）\nA. $\\{\\frac{1}{a_n}\\}$ 收敛于 0\nB. $\\{\\frac{1}{a_n^{2}+1}\\}$ 收敛于 0\nC. $\\{e^{-a_n}\\}$ 收敛于 $e^{-1}$\nD. $\\{\\frac{a_n}{e^{a_n}}\\}$ 收敛于 0",
+  "tags": [
+   "极限",
+   "单调有界",
+   "复合函数"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第15节 数列单增收敛",
+  "hints": [
+   "极限值是否为“无穷远处”的极限值，是判断关键。"
+  ],
+  "answer": "C",
+  "solution": "$e^{-a_n}\\to e^{-1}$ 得 $a_n\\to1$，收敛；A、B、D 的极限值恰是 $a_n\\to+\\infty$ 时的结果，无法保证收敛。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "单增数列：分式a/(1+a)",
+  "statement": "设正项数列 $\\{a_n\\}$ 单调增加，则下列条件中能推出 $\\{a_n\\}$ 收敛的是（　）\nA. $\\{\\frac{1}{a_n^{2}}\\}$ 收敛于 0\nB. $\\{\\frac{a_n}{1+a_n}\\}$ 收敛于 $\\frac12$\nC. $\\{\\frac{a_n}{e^{a_n}}\\}$ 收敛于 0\nD. $\\{\\sin\\frac{1}{a_n}\\}$ 收敛于 0",
+  "tags": [
+   "极限",
+   "单调有界",
+   "数列收敛"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "柳贯一题型专项 · 第15节 数列单增收敛",
+  "hints": [
+   "$\\frac{a_n}{1+a_n}=1-\\frac{1}{1+a_n}$，从中解出 $a_n$。"
+  ],
+  "answer": "B",
+  "solution": "$\\frac{a_n}{1+a_n}\\to\\frac12$ 得 $\\frac{1}{1+a_n}\\to\\frac12$，故 $a_n\\to1$，收敛；A、C、D 均兼容 $a_n\\to+\\infty$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "累加极限：分母错位夹逼",
+  "statement": "求 $\\lim\\limits_{n\\to\\infty}\\left(\\frac{1}{n^{2}+1}+\\frac{2}{n^{2}+2}+\\cdots+\\frac{n}{n^{2}+n}\\right)$。",
+  "tags": [
+   "极限",
+   "夹逼",
+   "数列求和"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第16节 累加极限（非定积分定义）",
+  "hints": [
+   "把每一项夹在 $\\frac{k}{n^{2}+n}$ 与 $\\frac{k}{n^{2}+1}$ 之间，两端求和后取极限。"
+  ],
+  "answer": "$\\frac12$",
+  "solution": "$\\frac{n(n+1)}{2(n^{2}+n)}\\le S_n\\le\\frac{n(n+1)}{2(n^{2}+1)}$，两端都趋于 $\\frac12$，故极限为 $\\frac12$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "累加极限：平方和型夹逼",
+  "statement": "求 $\\lim\\limits_{n\\to\\infty}\\left(\\frac{1^{2}}{n^{3}+1^{2}}+\\frac{2^{2}}{n^{3}+2^{2}}+\\cdots+\\frac{n^{2}}{n^{3}+n^{2}}\\right)$。",
+  "tags": [
+   "极限",
+   "夹逼",
+   "数列求和"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第16节 累加极限（非定积分定义）",
+  "hints": [
+   "分母放大缩小成 $n^{3}+n^{2}$ 与 $n^{3}+1$，只需 $\\sum k^{2}=\\frac{n(n+1)(2n+1)}{6}$。"
+  ],
+  "answer": "$\\frac13$",
+  "solution": "$\\frac{\\sum k^{2}}{n^{3}+n^{2}}\\le S_n\\le\\frac{\\sum k^{2}}{n^{3}+1}$，而 $\\sum k^{2}\\sim\\frac{n^{3}}{3}$，两端极限都是 $\\frac13$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "累加极限：立方和型夹逼",
+  "statement": "求 $\\lim\\limits_{n\\to\\infty}\\left(\\frac{1^{3}}{n^{4}+1}+\\frac{2^{3}}{n^{4}+2}+\\cdots+\\frac{n^{3}}{n^{4}+n}\\right)$。",
+  "tags": [
+   "极限",
+   "夹逼",
+   "数列求和"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第16节 累加极限（非定积分定义）",
+  "hints": [
+   "用 $\\sum k^{3}=\\frac{n^{2}(n+1)^{2}}{4}$，分母夹在 $n^{4}+1$ 与 $n^{4}+n$ 之间。"
+  ],
+  "answer": "$\\frac14$",
+  "solution": "$\\frac{\\sum k^{3}}{n^{4}+n}\\le S_n\\le\\frac{\\sum k^{3}}{n^{4}+1}$，$\\sum k^{3}\\sim\\frac{n^{4}}{4}$，故极限 $\\frac14$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "累加极限：n项同分子夹逼",
+  "statement": "求 $\\lim\\limits_{n\\to\\infty}\\left(\\frac{n}{n^{2}+1}+\\frac{n}{n^{2}+2}+\\cdots+\\frac{n}{n^{2}+n}\\right)$。",
+  "tags": [
+   "极限",
+   "夹逼",
+   "数列求和"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第16节 累加极限（非定积分定义）",
+  "hints": [
+   "共 $n$ 项，每项介于 $\\frac{n}{n^{2}+n}$ 与 $\\frac{n}{n^{2}+1}$ 之间。"
+  ],
+  "answer": "1",
+  "solution": "$\\frac{n^{2}}{n^{2}+n}\\le S_n\\le\\frac{n^{2}}{n^{2}+1}$，两端都趋于 1，故极限为 1。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "累加极限：根式和型夹逼",
+  "statement": "求 $\\lim\\limits_{n\\to\\infty}\\left(\\frac{1}{\\sqrt{n^{2}+1}}+\\frac{1}{\\sqrt{n^{2}+2}}+\\cdots+\\frac{1}{\\sqrt{n^{2}+n}}\\right)$。",
+  "tags": [
+   "极限",
+   "夹逼",
+   "数列求和"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第16节 累加极限（非定积分定义）",
+  "hints": [
+   "每项都不超过 $\\frac1n$，也不小于 $\\frac{1}{\\sqrt{n^{2}+n}}$。"
+  ],
+  "answer": "1",
+  "solution": "$\\frac{n}{\\sqrt{n^{2}+n}}\\le S_n\\le\\frac{n}{\\sqrt{n^{2}+1}}$，两端极限都是 1。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "累加极限：指数展开夹逼",
+  "statement": "求 $\\lim\\limits_{n\\to\\infty}\\left[(e^{1/n^{2}}-1)+(e^{2/n^{2}}-1)+\\cdots+(e^{n/n^{2}}-1)\\right]$。",
+  "tags": [
+   "极限",
+   "等价无穷小",
+   "夹逼"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第16节 累加极限（非定积分定义）",
+  "hints": [
+   "$e^{t}-1\\sim t$，且当 $0<t<1$ 时 $t<e^{t}-1<2t$。"
+  ],
+  "answer": "$\\frac12$",
+  "solution": "由 $t\\le e^{t}-1\\le\\frac{t}{1-t}$ 得两端和都约为 $\\frac{1}{n^{2}}\\sum k=\\frac{n+1}{2n}$，极限为 $\\frac12$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "累加极限：分子含n+k型",
+  "statement": "求 $\\lim\\limits_{n\\to\\infty}\\left(\\frac{n+1}{n^{2}+1}+\\frac{n+2}{n^{2}+2}+\\cdots+\\frac{n+n}{n^{2}+n}\\right)$。",
+  "tags": [
+   "极限",
+   "夹逼",
+   "数列求和"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第16节 累加极限（非定积分定义）",
+  "hints": [
+   "写 $\\frac{n+k}{n^{2}+k}=\\frac{1}{n}\\cdot\\frac{1+k/n}{1+k/n^{2}}$，再夹逼。"
+  ],
+  "answer": "$\\frac32$",
+  "solution": "$\\frac{n+k}{n^{2}+n}\\le\\frac{n+k}{n^{2}+k}\\le\\frac{n+k}{n^{2}+1}$，两端求和都趋于 $1+\\frac12=\\frac32$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "累加极限：余弦小角夹逼",
+  "statement": "求 $\\lim\\limits_{n\\to\\infty}\\left(\\frac{1}{n}\\cos\\frac{1}{n^{2}}+\\frac{1}{n}\\cos\\frac{2}{n^{2}}+\\cdots+\\frac{1}{n}\\cos\\frac{n}{n^{2}}\\right)$。",
+  "tags": [
+   "极限",
+   "夹逼",
+   "等价无穷小"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第16节 累加极限（非定积分定义）",
+  "hints": [
+   "$0<\\frac{k}{n^{2}}\\le\\frac1n<1$ 时 $1-\\frac{t^{2}}{2}<\\cos t<1$。"
+  ],
+  "answer": "1",
+  "solution": "$1-\\frac{k^{2}}{2n^{4}}<\\cos\\frac{k}{n^{2}}<1$，求和得 $1-\\frac{n(n+1)(2n+1)}{12n^{5}}\\le S_n\\le 1$，夹逼得 1。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "累加极限：正弦小角夹逼",
+  "statement": "求 $\\lim\\limits_{n\\to\\infty}\\left(\\sin\\frac{1}{n^{2}+1}+\\sin\\frac{2}{n^{2}+2}+\\cdots+\\sin\\frac{n}{n^{2}+n}\\right)$。",
+  "tags": [
+   "极限",
+   "夹逼",
+   "等价无穷小"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第16节 累加极限（非定积分定义）",
+  "hints": [
+   "小角时 $t-\\frac{t^{3}}{6}<\\sin t<t$，再用 $\\sum k$。"
+  ],
+  "answer": "$\\frac12$",
+  "solution": "用 $t-\\frac{t^{3}}{6}<\\sin t<t$，$t=\\frac{k}{n^{2}+k}$，两端求和都趋于 $\\frac12$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "累加极限：对数小量夹逼",
+  "statement": "求 $\\lim\\limits_{n\\to\\infty}\\left[\\ln\\left(1+\\frac{1}{n^{2}+1}\\right)+\\ln\\left(1+\\frac{2}{n^{2}+2}\\right)+\\cdots+\\ln\\left(1+\\frac{n}{n^{2}+n}\\right)\\right]$。",
+  "tags": [
+   "极限",
+   "夹逼",
+   "等价无穷小"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第16节 累加极限（非定积分定义）",
+  "hints": [
+   "用 $\\frac{t}{1+t}\\le\\ln(1+t)\\le t$ 与 $\\sum\\frac{k}{n^{2}+k}$ 的结果。"
+  ],
+  "answer": "$\\frac12$",
+  "solution": "$\\frac{k}{n^{2}+2k}\\le\\ln\\left(1+\\frac{k}{n^{2}+k}\\right)\\le\\frac{k}{n^{2}+k}$，两端求和都趋于 $\\frac12$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值函数：正弦零点计数",
+  "statement": "$F=(x^{2}+1)|\\sin x(x-1)|$，在 $(-2,2)$ 内不可导点个数为（　）",
+  "tags": [
+   "一元微分",
+   "绝对值",
+   "不可导点"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第18节 绝对值不可导",
+  "hints": [
+   "数 $g=\\sin x\\cdot(x-1)$ 在区间内的单重零点。"
+  ],
+  "answer": "2",
+  "solution": "$g$ 的零点：$x=0$（$\\sin x$ 单根）、$x=1$（单根），区间内无其他零点，且系数 $x^{2}+1>0$，故 2 个。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值函数：余弦零点计数",
+  "statement": "$F=e^{x}|\\cos x(x+1)|$，在 $(-2,2)$ 内不可导点个数为（　）",
+  "tags": [
+   "一元微分",
+   "绝对值",
+   "不可导点"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第18节 绝对值不可导",
+  "hints": [
+   "$\\cos x=0$ 得 $x=\\pm\\frac{\\pi}{2}$，再加上 $x=-1$。"
+  ],
+  "answer": "3",
+  "solution": "零点 $\\pm\\frac{\\pi}{2}$（均为单根）与 $x=-1$，$e^{x}>0$ 不抵消，共 3 个不可导点。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值函数：对数系数为正",
+  "statement": "$F=\\ln(3+x)|\\sin x(x-1)|$，在 $(-2,2)$ 内不可导点个数为（　）",
+  "tags": [
+   "一元微分",
+   "绝对值",
+   "不可导点"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第18节 绝对值不可导",
+  "hints": [
+   "$\\ln(3+x)$ 在 $(-2,2)$ 内恒正，只需看 $\\sin x(x-1)$。"
+  ],
+  "answer": "2",
+  "solution": "$\\ln(3+x)>0$，零点 $x=0,1$ 都是单重且不被抵消，故 2 个。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值函数：三因子零点计数",
+  "statement": "$F=\\arctan x|\\cos x(x+1)(x-2)|$，在 $(-2,3)$ 内不可导点个数为（　）",
+  "tags": [
+   "一元微分",
+   "绝对值",
+   "不可导点"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第18节 绝对值不可导",
+  "hints": [
+   "零点：$\\pm\\frac{\\pi}{2}$、$-1$、$2$，再检查 $x=0$ 处的 $\\arctan$ 是否抵消。"
+  ],
+  "answer": "4",
+  "solution": "$g$ 的零点为 $\\pm\\frac{\\pi}{2}$、$-1$、$2$，均非 $\\arctan x$ 的零点，故 4 个。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值函数：端点零点不计数",
+  "statement": "$F=\\sqrt{x^{2}+1}\\left|\\arcsin\\frac{x}{2}\\ln(2+x)(x-1)\\right|$，在 $(-1,1)$ 内不可导点个数为（　）",
+  "tags": [
+   "一元微分",
+   "绝对值",
+   "不可导点"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第18节 绝对值不可导",
+  "hints": [
+   "$\\ln(2+x)$ 的零点 $-1$ 与 $(x-1)$ 的零点 1 都在端点，不算；只剩 $x=0$。"
+  ],
+  "answer": "1",
+  "solution": "区间内只有 $x=0$（$\\arcsin\\frac x2$ 的单根）为 $g$ 的零点，其余零点在开区间外，故 1 个。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值函数：区间端点排除",
+  "statement": "$F=(x^{2}+1)|\\sin x\\ln(2+x)(x+1)|$，在 $(-1,2)$ 内不可导点个数为（　）",
+  "tags": [
+   "一元微分",
+   "绝对值",
+   "不可导点"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第18节 绝对值不可导",
+  "hints": [
+   "$\\ln(2+x)$ 与 $(x+1)$ 的零点是端点 $x=-1$，不是内部不可导点。"
+  ],
+  "answer": "1",
+  "solution": "$(-1,2)$ 内 $g$ 只有 $x=0$ 一个单重零点，系数 $x^{2}+1>0$，故 1 个。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值函数：指数系数为正",
+  "statement": "$F=e^{x}|\\cos x\\ln(1+x)(x-2)|$，在 $(-1,3)$ 内不可导点个数为（　）",
+  "tags": [
+   "一元微分",
+   "绝对值",
+   "不可导点"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第18节 绝对值不可导",
+  "hints": [
+   "零点：$x=0$、$x=\\frac{\\pi}{2}$、$x=2$，注意 $\\frac{3\\pi}{2}\\approx4.7$ 不在区间内。"
+  ],
+  "answer": "3",
+  "solution": "$(-1,3)$ 内 $\\cos x=0$ 只有 $\\frac{\\pi}{2}$，加上 $\\ln(1+x)=0$ 的 $x=0$、$(x-2)$ 的 $x=2$，共 3 个。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值函数：arctan抵消零点",
+  "statement": "$F=\\arctan x|\\sin x\\cos x(x+2)|$，在 $(-3,2)$ 内不可导点个数为（　）",
+  "tags": [
+   "一元微分",
+   "绝对值",
+   "不可导点"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第18节 绝对值不可导",
+  "hints": [
+   "$x=0$ 处 $\\arctan x$ 与 $\\sin x$ 同时为零，乘积形如 $x|x|$，可导；只需数 $\\pm\\frac{\\pi}{2}$ 与 $-2$。"
+  ],
+  "answer": "3",
+  "solution": "$g$ 零点 $-2,\\pm\\frac{\\pi}{2},0$（$\\pm\\pi$ 在区间外）；$x=0$ 被 $\\arctan x$ 抵消为可导，故不可导点 3 个。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值函数：双零点抵消",
+  "statement": "$F=\\ln(1+x^{2})\\left|\\arcsin x\\left(x-\\frac12\\right)\\right|$，在 $(-1,1)$ 内不可导点个数为（　）",
+  "tags": [
+   "一元微分",
+   "绝对值",
+   "不可导点"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第18节 绝对值不可导",
+  "hints": [
+   "$x=0$ 处两个因子同时为零，乘积约为 $x\\cdot|x|$，可导。"
+  ],
+  "answer": "1",
+  "solution": "零点 $0,\\frac12$；$x=0$ 被 $\\ln(1+x^{2})=0$ 抵消（$\\sim x|x|$ 可导），$x=\\frac12$ 处不可导，故 1 个。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值函数：区间内单零点",
+  "statement": "$F=\\sqrt{4-x^{2}}|\\cos x\\ln(3+x)(x+2)|$，在 $(-1,2)$ 内不可导点个数为（　）",
+  "tags": [
+   "一元微分",
+   "绝对值",
+   "不可导点"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第18节 绝对值不可导",
+  "hints": [
+   "$\\ln(3+x)$ 的零点 $-2$、$(x+2)$ 的零点 $-2$ 都在区间外。"
+  ],
+  "answer": "1",
+  "solution": "$(-1,2)$ 内唯一零点为 $x=\\frac{\\pi}{2}$（$\\cos$ 单根），$\\sqrt{4-x^{2}}>0$，故 1 个。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象函数可导：连续f配尖点g",
+  "statement": "设 $g(x)=e^{x}\\sin x+\\ln(1+x)\\cos x$，$f$ 在 0 连续，$F=f|g|$（　）\n(A) $f(0)=0$ 是 $F$ 在 0 可导的充要条件\n(B) $f(0)\\ne 0$ 是 $F$ 在 0 可导的充要条件\n(C) $f'(0)=0$ 是 $F$ 在 0 可导的充要条件\n(D) $g'(0)=0$ 是 $F$ 在 0 可导的充要条件",
+  "tags": [
+   "一元微分",
+   "可导性",
+   "绝对值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第18节 绝对值不可导",
+  "hints": [
+   "先看 $g(0)$、$g'(0)$：若 $g(0)\\ne0$ 则 $F$ 自动可导；此处 $g(0)=0$，问题落在 $f|g|$ 的尖点。"
+  ],
+  "answer": "A",
+  "solution": "$g(0)=0$，$g'(0)=1\\ne0$，$|g|$ 在 0 处左导 $-1$、右导 $1$；要 $F=f|g|$ 可导需 $f(0)=0$，且此时 $F'(0)=0$，充要。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象函数可导：arctan与指数",
+  "statement": "设 $g(x)=\\arctan x\\sin x+(e^{x}-1)\\cos x$，$f$ 在 0 连续，$F=f|g|$（　）\n(A) $f(0)=0$ 是 $F$ 在 0 可导的充要条件\n(B) $f(0)\\ne 0$ 是 $F$ 在 0 可导的充要条件\n(C) $f'(0)=0$ 是 $F$ 在 0 可导的充要条件\n(D) $g'(0)=0$ 是 $F$ 在 0 可导的充要条件",
+  "tags": [
+   "一元微分",
+   "可导性",
+   "绝对值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第18节 绝对值不可导",
+  "hints": [
+   "$g(0)=0$，$g'(0)=0+1\\cdot1=1\\ne0$，属“单零点乘连续函数”型。"
+  ],
+  "answer": "A",
+  "solution": "$g(0)=0,g'(0)=1$，$|g|$ 在 0 有尖角；$F=f|g|$ 可导 $\\iff f(0)=0$（此时导数 0），故选 A。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象函数可导：单零点被抵消",
+  "statement": "设 $f(x)=e^{x}-1+\\sin x$，$g$ 在 0 可导，$F=f|g|$（　）\n(A) $g(0)=0$ 且 $g'(0)=0$ 时，$F$ 在 0 可导\n(B) $g(0)=0$ 且 $g'(0)\\ne 0$ 时，$F$ 在 0 不可导\n(C) $g(0)=0$ 时，无论 $g'(0)$ 如何，$F$ 在 0 可导\n(D) $g(0)\\ne 0$ 时，$F$ 在 0 不可导",
+  "tags": [
+   "一元微分",
+   "可导性",
+   "绝对值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第18节 绝对值不可导",
+  "hints": [
+   "$f(0)=0$ 且 $f'(0)=2\\ne0$，$f$ 本身在 0 是单零点，可提供因子。"
+  ],
+  "answer": "C",
+  "solution": "$f(x)\\sim 2x$，故 $F=f|g|$ 在 0 附近形如 $2x\\cdot|g|$，$|x|$ 型奇点被抵消，只要 $g(0)=0$ 就可导，与 $g'(0)$ 无关。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象函数可导：|f|g型充要条件",
+  "statement": "设 $f(x)=x+\\sin x+\\arctan x$，$g$ 在 0 连续，$F=|f|g$（　）\n(A) $g(0)=0$ 是 $F$ 在 0 可导的充要条件\n(B) $g(0)\\ne 0$ 是 $F$ 在 0 可导的充要条件\n(C) $g'(0)=0$ 是 $F$ 在 0 可导的充要条件\n(D) 无论 $g(0)$ 如何，$F$ 在 0 可导",
+  "tags": [
+   "一元微分",
+   "可导性",
+   "绝对值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第18节 绝对值不可导",
+  "hints": [
+   "$f(0)=0$，$f'(0)=3$，$|f|$ 在 0 处左右导不等，需 $g$ 抵消。"
+  ],
+  "answer": "A",
+  "solution": "$|f|$ 在 0 左右导为 $\\mp 3$，$F=|f|g$ 可导 $\\iff g(0)=0$（$g$ 连续即可，无需可导），故选 A。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象函数可导：二阶零点免条件",
+  "statement": "设 $f(x)=x^{2}+\\sin^{2}x$，$g$ 在 0 可导，$F=f|g|$（　）\n(A) $g(0)=0$ 是 $F$ 在 0 可导的充要条件\n(B) $g'(0)=0$ 是 $F$ 在 0 可导的充要条件\n(C) $g(0)\\ne 0$ 是 $F$ 在 0 可导的充要条件\n(D) 无需附加条件，$F$ 在 0 可导",
+  "tags": [
+   "一元微分",
+   "可导性",
+   "绝对值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第18节 绝对值不可导",
+  "hints": [
+   "$f(x)\\sim 2x^{2}$，$F$ 大约为 $2x^{2}|g|$，尖角被平方抹平。"
+  ],
+  "answer": "D",
+  "solution": "$f(0)=0$，$f'(0)=0$，$f$ 在 0 是二阶零点，$f|g|$ 与 $x^{2}|g|$ 同阶，可导且导数为 0，故无需条件。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象函数可导：|f|g的导数值",
+  "statement": "设 $f(x)=\\arctan x+\\sin x$，$g$ 在 0 可导，$F=|f|g$（　）\n(A) $g(0)=0$ 时，$F$ 在 0 可导且 $F'(0)=0$\n(B) $g(0)\\ne 0$ 时，$F$ 在 0 可导且 $F'(0)=0$\n(C) $g'(0)=0$ 时，$F$ 在 0 不可导\n(D) 无论 $g$ 如何，$F$ 在 0 可导",
+  "tags": [
+   "一元微分",
+   "可导性",
+   "绝对值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第18节 绝对值不可导",
+  "hints": [
+   "$f(x)\\sim 2x$，$F=|f|g\\approx 2|x|g$，判断导数存在性。"
+  ],
+  "answer": "A",
+  "solution": "$g(0)=0$ 时 $F\\approx 2|x|g$，商 $\\frac{F}{x}=2\\mathrm{sgn}x\\cdot\\frac{g(x)}{x}$；$g$ 可导且 $g(0)=0$ 时 $F'(0)=0$，故选 A。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象函数可导：三重零点免条件",
+  "statement": "设 $g(x)=x-\\sin x$，$f$ 在 0 可导，$F=f|g|$（　）\n(A) $f(0)=0$ 是 $F$ 在 0 可导的充要条件\n(B) $f(0)\\ne 0$ 是 $F$ 在 0 可导的充要条件\n(C) $f'(0)=0$ 是 $F$ 在 0 可导的充要条件\n(D) 无需附加条件，$F$ 在 0 可导",
+  "tags": [
+   "一元微分",
+   "可导性",
+   "绝对值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第18节 绝对值不可导",
+  "hints": [
+   "$g(x)=x-\\sin x\\sim\\frac{x^{3}}{6}$，零点是三重的，$|g|$ 光滑。"
+  ],
+  "answer": "D",
+  "solution": "$g$ 在 0 为零点三重，$|g|\\sim\\frac{|x|^{3}}{6}$ 可导且导数为 0，$f$ 连续（可导）即可，故 $F$ 总可导。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象函数可导：正弦加立方",
+  "statement": "设 $g(x)=\\sin x+x^{3}$，$f$ 在 0 可导，$F=f|g|$（　）\n(A) $f(0)=0$ 是 $F$ 在 0 可导的充要条件\n(B) $f(0)\\ne 0$ 是 $F$ 在 0 可导的充要条件\n(C) $f'(0)=0$ 是 $F$ 在 0 可导的充要条件\n(D) $g'(0)=0$ 是 $F$ 在 0 可导的充要条件",
+  "tags": [
+   "一元微分",
+   "可导性",
+   "绝对值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第18节 绝对值不可导",
+  "hints": [
+   "$g(0)=0$，$g'(0)=1\\ne0$，$|g|$ 在 0 有尖点。"
+  ],
+  "answer": "A",
+  "solution": "$g\\sim x$，$|g|$ 左右导为 $\\mp1$，故 $F=f|g|$ 可导 $\\iff f(0)=0$，选 A。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象函数可导：判断不可导条件",
+  "statement": "设 $g(x)=e^{x}-1+x^{2}$，$f$ 在 0 连续，$F=f|g|$（　）\n(A) $f(0)=0$ 是 $F$ 在 0 不可导的充要条件\n(B) $f(0)\\ne 0$ 是 $F$ 在 0 不可导的充要条件\n(C) $f'(0)=0$ 是 $F$ 在 0 不可导的充要条件\n(D) $g'(0)=0$ 是 $F$ 在 0 不可导的充要条件",
+  "tags": [
+   "一元微分",
+   "可导性",
+   "绝对值"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第18节 绝对值不可导",
+  "hints": [
+   "$g(0)=0$，$g'(0)=1$；先看 $f(0)\\ne0$ 时 $F$ 是否可导。"
+  ],
+  "answer": "B",
+  "solution": "$g\\sim x$，$|g|$ 在 0 处不可导；$f(0)\\ne0$ 且 $f$ 连续时 $F\\approx f(0)|x|$ 不可导；$f(0)=0$ 则 $F$ 可导，故选 B。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象函数可导：f|g|加|f|g",
+  "statement": "设 $g(x)=x^{2}+\\sin^{2}x$，$f$ 在 0 可导，$F=f|g|+|f|g$（　）\n(A) $f(0)=0$ 是 $F$ 在 0 可导的充要条件\n(B) $f(0)\\ne 0$ 是 $F$ 在 0 可导的充要条件\n(C) $f'(0)=0$ 是 $F$ 在 0 可导的充要条件\n(D) 无需附加条件，$F$ 在 0 可导",
+  "tags": [
+   "一元微分",
+   "可导性",
+   "绝对值"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第18节 绝对值不可导",
+  "hints": [
+   "$g\\sim 2x^{2}$ 是二阶零点，$f|g|$ 与 $|f|g$ 都含 $x^{2}$ 因子。"
+  ],
+  "answer": "D",
+  "solution": "$g(x)>0$（$x\\ne0$ 附近），故 $F=f g+|f|g=g(f+|f|)$；$g\\sim 2x^{2}$ 光滑，$f+|f|$ 连续，乘积仍可导，无需条件。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "一元可微：由增量式读微分",
+  "statement": "已知 $y=f(x)$ 在 $x=0$ 处可微，$\\Delta y=3\\Delta x+o(\\Delta x)$，则 $dy|_{x=0}=$（　）",
+  "tags": [
+   "一元微分",
+   "可微",
+   "微分"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第19节 一元可微概念",
+  "hints": [
+   "可微时 $\\Delta y=f'(x)\\Delta x+o(\\Delta x)$，把两式对照。"
+  ],
+  "answer": "$3\\,\\mathrm{d}x$",
+  "solution": "对照得 $f'(0)=3$，故 $dy|_{x=0}=f'(0)\\,\\mathrm{d}x=3\\,\\mathrm{d}x$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "一元可微：由线性主部求导数",
+  "statement": "已知 $f(x)$ 在 $x=1$ 处可微，$\\Delta x=0.1$ 时线性主部为 0.2，则 $f'(1)=$（　）",
+  "tags": [
+   "一元微分",
+   "可微",
+   "线性主部"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第19节 一元可微概念",
+  "hints": [
+   "线性主部就是 $f'(x)\\Delta x$。"
+  ],
+  "answer": "2",
+  "solution": "$f'(1)\\cdot0.1=0.2$，故 $f'(1)=2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "一元可微：线性主部反求导数值",
+  "statement": "已知 $f(x)$ 在 $x=2$ 处可微，$\\Delta x=0.1$ 时线性主部为 0.3，则 $f'(2)=$（　）",
+  "tags": [
+   "一元微分",
+   "可微",
+   "线性主部"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第19节 一元可微概念",
+  "hints": [
+   "$f'(2)=\\frac{0.3}{0.1}$。"
+  ],
+  "answer": "3",
+  "solution": "线性主部 $=f'(2)\\Delta x=0.3$，$\\Delta x=0.1$，故 $f'(2)=3$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "一元可微：线性主部再求导数",
+  "statement": "已知 $f(x)$ 在 $x=4$ 处可微，$\\Delta x=0.1$ 时线性主部为 0.5，则 $f'(4)=$（　）",
+  "tags": [
+   "一元微分",
+   "可微",
+   "线性主部"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第19节 一元可微概念",
+  "hints": [
+   "直接除。"
+  ],
+  "answer": "5",
+  "solution": "$f'(4)=\\frac{0.5}{0.1}=5$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "一元可微：分式微分代初值",
+  "statement": "设函数 $y=f(x)$ 满足 $dy=\\frac{x-y}{1+x^{2}}\\,\\mathrm{d}x$，且 $f(0)=1$，则 $dy|_{x=0}=$（　）",
+  "tags": [
+   "一元微分",
+   "可微",
+   "微分"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第19节 一元可微概念",
+  "hints": [
+   "把 $x=0,\\ y=f(0)=1$ 代入系数。"
+  ],
+  "answer": "$-\\mathrm{d}x$",
+  "solution": "$f'(x)=\\frac{x-f(x)}{1+x^{2}}$，故 $f'(0)=\\frac{0-1}{1}=-1$，$dy|_{0}=-\\mathrm{d}x$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "一元可微：含根式微分代入",
+  "statement": "设函数 $y=f(x)$ 满足 $dy=\\frac{y}{x+\\sqrt{x^{2}+y^{2}}}\\,\\mathrm{d}x$，且 $f(0)=1$，则 $dy|_{x=0}=$（　）",
+  "tags": [
+   "一元微分",
+   "可微",
+   "微分"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第19节 一元可微概念",
+  "hints": [
+   "代入 $x=0,\\ y=1$，注意 $\\sqrt{0+1}=1$。"
+  ],
+  "answer": "$\\mathrm{d}x$",
+  "solution": "$f'(x)=\\frac{f(x)}{x+\\sqrt{x^{2}+f^{2}(x)}}$，$f'(0)=\\frac{1}{0+1}=1$，故 $dy|_{0}=\\mathrm{d}x$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "一元可微：分式微分正负辨析",
+  "statement": "设函数 $y=f(x)$ 满足 $dy=\\frac{x+y}{1+x^{2}}\\,\\mathrm{d}x$，且 $f(0)=1$，则 $dy|_{x=0}=$（　）",
+  "tags": [
+   "一元微分",
+   "可微",
+   "微分"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第19节 一元可微概念",
+  "hints": [
+   "与第 5 题只差中间符号，代入时注意正负。"
+  ],
+  "answer": "$\\mathrm{d}x$",
+  "solution": "$f'(0)=\\frac{0+f(0)}{1+0}=1$，故 $dy|_{x=0}=\\mathrm{d}x$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "微分计算：幂乘正弦在π处",
+  "statement": "设 $y=x^{3}\\sin x$，则当 $x=\\pi$，$\\mathrm{d}x=0.01$ 时，$\\mathrm{d}y$ 的值为（　）",
+  "tags": [
+   "一元微分",
+   "微分",
+   "求导"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第19节 一元可微概念",
+  "hints": [
+   "$y'=3x^{2}\\sin x+x^{3}\\cos x$，在 $x=\\pi$ 处 $\\sin\\pi=0,\\cos\\pi=-1$。"
+  ],
+  "answer": "$-0.01\\pi^{3}$",
+  "solution": "$y'(\\pi)=0+\\pi^{3}(-1)=-\\pi^{3}$，故 $\\mathrm{d}y=y'(\\pi)\\mathrm{d}x=-0.01\\pi^{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "微分计算：幂乘余弦在π处",
+  "statement": "设 $y=x^{2}\\cos x$，则当 $x=\\pi$，$\\mathrm{d}x=0.01$ 时，$\\mathrm{d}y$ 的值为（　）",
+  "tags": [
+   "一元微分",
+   "微分",
+   "求导"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第19节 一元可微概念",
+  "hints": [
+   "$y'=2x\\cos x-x^{2}\\sin x$。"
+  ],
+  "answer": "$-0.02\\pi$",
+  "solution": "$y'(\\pi)=2\\pi(-1)-0=-2\\pi$，$\\mathrm{d}y=-2\\pi\\times0.01=-0.02\\pi$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "微分计算：幂乘对数在e处",
+  "statement": "设 $y=x^{3}\\ln x$，则当 $x=e$，$\\mathrm{d}x=0.01$ 时，$\\mathrm{d}y$ 的值为（　）",
+  "tags": [
+   "一元微分",
+   "微分",
+   "求导"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第19节 一元可微概念",
+  "hints": [
+   "$y'=3x^{2}\\ln x+x^{2}$，在 $x=e$ 处 $\\ln e=1$。"
+  ],
+  "answer": "$0.04e^{2}$",
+  "solution": "$y'(e)=3e^{2}+e^{2}=4e^{2}$，故 $\\mathrm{d}y=4e^{2}\\times0.01=0.04e^{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导概念：三次根复合极限不存在",
+  "statement": "设 $f(x)$ 在 $x=0$ 处可导，$f(0)=0$，且 $f'(0)=1$，则下列极限中不一定存在的是（　）\nA. $\\lim\\limits_{x\\to0}\\frac{f(x)}{x}$　B. $\\lim\\limits_{x\\to0}\\frac{f(2x)}{x}$　C. $\\lim\\limits_{x\\to0}\\frac{f(x^{1/3})}{x}$　D. $\\lim\\limits_{x\\to0}\\frac{f(x^{4})}{x}$",
+  "tags": [
+   "一元微分",
+   "可导定义",
+   "极限"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第20节 可导概念",
+  "hints": [
+   "用 $f(u)=f'(0)u+o(u)$ 逐个代入，看分母是否与 $u$ 同阶。"
+  ],
+  "answer": "C",
+  "solution": "$u=x^{1/3}$ 时 $\\frac{f(u)}{u^{3}}=\\frac{u+o(u)}{u^{3}}\\to\\infty$，极限不存在；A、B、D 分别得 $1,2,0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导概念：泰勒主部选1/3",
+  "statement": "设 $f(x)$ 在 $x=0$ 处可导，$f(0)=0$，且 $f'(0)=2$，则下列极限中一定等于 $\\frac13$ 的是（　）\nA. $\\lim\\limits_{x\\to0}\\frac{f(x-\\sin x)}{x^{3}}$　B. $\\lim\\limits_{x\\to0}\\frac{f(\\tan x-x)}{x^{3}}$　C. $\\lim\\limits_{x\\to0}\\frac{f(\\sin x)}{x^{2}}$　D. $\\lim\\limits_{x\\to0}\\frac{f(x)}{x^{3}}$",
+  "tags": [
+   "一元微分",
+   "等价无穷小",
+   "泰勒展开"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第20节 可导概念",
+  "hints": [
+   "先算内层无穷小量：$x-\\sin x\\sim\\frac{x^{3}}{6}$，$\\tan x-x\\sim\\frac{x^{3}}{3}$。"
+  ],
+  "answer": "A",
+  "solution": "A：$\\frac{2\\cdot\\frac{x^{3}}{6}}{x^{3}}=\\frac13$；B 为 $\\frac23$，C 分母阶不够（趋于无穷），D 亦发散。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导概念：选极限为1/2",
+  "statement": "设 $f(x)$ 在 $x=0$ 处可导，$f(0)=0$，且 $f'(0)=1$，则下列极限中一定等于 $\\frac12$ 的是（　）\nA. $\\lim\\limits_{x\\to0}\\frac{f(x/2)}{x}$　B. $\\lim\\limits_{x\\to0}\\frac{f(2x)}{x}$　C. $\\lim\\limits_{x\\to0}\\frac{f(x^{2})}{x}$　D. $\\lim\\limits_{x\\to0}\\frac{f(-x^{2})}{x}$",
+  "tags": [
+   "一元微分",
+   "可导定义",
+   "极限"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第20节 可导概念",
+  "hints": [
+   "$f(u)\\sim u$，把 $u$ 换成各选项的内层。"
+  ],
+  "answer": "A",
+  "solution": "A：$\\frac{x/2}{x}=\\frac12$；B 得 2，C、D 中 $f(x^{2})/x\\sim x\\to0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导概念：选极限为0",
+  "statement": "设 $f(x)$ 在 $x=0$ 处可导，$f(0)=0$，且 $f'(0)=3$，则下列极限中一定等于 0 的是（　）\nA. $\\lim\\limits_{x\\to0}\\frac{f(x^{3})}{x^{2}}$　B. $\\lim\\limits_{x\\to0}\\frac{f(x)-f(-x)}{x^{2}}$　C. $\\lim\\limits_{x\\to0}\\frac{f(x^{1/2})}{x}$　D. $\\lim\\limits_{x\\to0}\\frac{f(x)}{x^{2}}$",
+  "tags": [
+   "一元微分",
+   "可导定义",
+   "极限"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第20节 可导概念",
+  "hints": [
+   "$f(x^{3})\\sim 3x^{3}$，除以 $x^{2}$ 后仍趋于 0。"
+  ],
+  "answer": "A",
+  "solution": "A：$\\frac{3x^{3}}{x^{2}}=3x\\to0$；B 得 6，C、D 分母阶太低而发散。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导概念：对数复合选2",
+  "statement": "设 $f(x)$ 在 $x=0$ 处可导，$f(0)=0$，且 $f'(0)=2$，则下列极限中一定等于 2 的是（　）\nA. $\\lim\\limits_{x\\to0}\\frac{f(\\ln(1+x))}{x}$　B. $\\lim\\limits_{x\\to0}\\frac{f(x)}{x^{1/2}}$　C. $\\lim\\limits_{x\\to0}\\frac{f(3x)}{x}$　D. $\\lim\\limits_{x\\to0}\\frac{f(x^{4})}{x^{2}}$",
+  "tags": [
+   "一元微分",
+   "等价无穷小",
+   "可导定义"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第20节 可导概念",
+  "hints": [
+   "$\\ln(1+x)\\sim x$，分子 $\\sim 2\\ln(1+x)\\sim 2x$。"
+  ],
+  "answer": "A",
+  "solution": "A：$\\frac{2\\ln(1+x)}{x}\\to2$；B 发散，C 得 6，D 得 0。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导概念：二阶小量推可导",
+  "statement": "设 $f(x)$ 在 $x=0$ 的某邻域内有定义，且 $f(0)=0$，则能推出 $f'(0)$ 存在的是（　）\nA. $\\lim\\limits_{x\\to0}\\frac{f(x)}{x^{2}}$ 存在　B. $\\lim\\limits_{x\\to0}\\frac{f(x^{2})}{x}$ 存在　C. $\\lim\\limits_{x\\to0}\\frac{f(1-\\cos x)}{x^{2}}$ 存在　D. $\\lim\\limits_{x\\to0}\\frac{f(x)-f(-x)}{x}$ 存在",
+  "tags": [
+   "一元微分",
+   "可导定义",
+   "极限"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第20节 可导概念",
+  "hints": [
+   "A 给出 $f(x)=O(x^{2})=o(x)$，直接得 $f'(0)=0$。"
+  ],
+  "answer": "A",
+  "solution": "A：$f(x)=O(x^{2})$ 故 $\\frac{f(x)}{x}\\to0$，$f'(0)=0$ 存在；B、C 只控制 $x>0$ 侧信息，D 只给出对称差商，均不能保证 $f'(0)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导概念：指数复合推可导",
+  "statement": "设 $f(x)$ 在 $x=0$ 的某邻域内有定义，且 $f(0)=0$，则能推出 $f'(0)$ 存在的是（　）\nA. $\\lim\\limits_{x\\to0}\\frac{f(e^{x}-1)}{x}$ 存在　B. $\\lim\\limits_{x\\to0}\\frac{f(x^{2})}{x}$ 存在　C. $\\lim\\limits_{x\\to0}\\frac{f(x^{1/2})}{x}$ 存在　D. $\\lim\\limits_{x\\to0}\\frac{f(x)}{|x|}$ 存在",
+  "tags": [
+   "一元微分",
+   "可导定义",
+   "等价无穷小"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第20节 可导概念",
+  "hints": [
+   "$e^{x}-1\\sim x$ 且当 $x$ 取遍双侧时 $e^{x}-1$ 也取遍双侧，能控制两侧。"
+  ],
+  "answer": "A",
+  "solution": "A 中 $f(e^{x}-1)=O(x)=O(e^{x}-1)$，故 $\\frac{f(u)}{u}\\to0$，$f'(0)=0$；B、C 只控单侧或高阶，D 只能得 $|f(x)|=O(|x|)$ 的符号无关版本。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导概念：正切复合推可导",
+  "statement": "设 $f(x)$ 在 $x=0$ 的某邻域内有定义，且 $f(0)=0$，则能推出 $f'(0)$ 存在的是（　）\nA. $\\lim\\limits_{x\\to0}\\frac{f(\\tan x)}{x}$ 存在　B. $\\lim\\limits_{x\\to0}\\frac{f(x^{3})}{x}$ 存在　C. $\\lim\\limits_{x\\to0}\\frac{f(x-\\sin x)}{x}$ 存在　D. $\\lim\\limits_{x\\to0}\\frac{f(2x)-f(x)}{x}$ 存在",
+  "tags": [
+   "一元微分",
+   "可导定义",
+   "等价无穷小"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第20节 可导概念",
+  "hints": [
+   "$\\tan x\\sim x$ 且双侧覆盖，B、C 中内层是更高阶无穷小，只给弱信息。"
+  ],
+  "answer": "A",
+  "solution": "A：$f(\\tan x)=O(\\tan x)$，故 $\\frac{f(u)}{u}\\to0$，$f'(0)=0$；B、C 只约束 $f$ 在更小尺度上的增长，D 无法确定 $f$ 在 0 的值附近行为。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导概念：四条件计数之三",
+  "statement": "设 $f(x)$ 在 $x=0$ 的某邻域内有定义，且 $f(0)=0$，考虑下列条件：\n① $\\lim\\limits_{x\\to0}\\frac{f(\\sin x)}{x}$ 存在　② $\\lim\\limits_{x\\to0}\\frac{f(x^{3})}{x^{3}}$ 存在\n③ $\\lim\\limits_{x\\to0}\\frac{|f(x)|}{x}$ 存在　④ $\\lim\\limits_{x\\to0}\\frac{f(x)}{x^{4}}$ 存在\n能推出 $f'(0)$ 存在的条件个数为（　）\nA. 1　B. 2　C. 3　D. 4",
+  "tags": [
+   "一元微分",
+   "可导定义",
+   "极限"
+  ],
+  "thinking": 6,
+  "difficulty": 9,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第20节 可导概念",
+  "hints": [
+   "逐个把条件翻译成 $f(x)$ 的阶估计，注意能否同时约束左右两侧。"
+  ],
+  "answer": "C",
+  "solution": "①$\\Rightarrow f(x)=O(x)$，②$\\Rightarrow O(x^{3})$，④$\\Rightarrow O(x^{4})$，都使 $f'(0)=0$；③ 只给 $|f|=O(x)$，符号不定，故 3 个。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导概念：四条件计数之二",
+  "statement": "设 $f(x)$ 在 $x=0$ 的某邻域内有定义，且 $f(0)=0$，则下列四个条件：\n① $\\lim\\limits_{x\\to0}\\frac{f(\\sin x-\\tan x)}{x^{3}}$ 存在　② $\\lim\\limits_{x\\to0}\\frac{f(-x)}{x}$ 存在\n③ $\\lim\\limits_{x\\to0}\\frac{f(|x|)}{x}$ 存在　④ $\\lim\\limits_{x\\to0}\\frac{f(x^{4})}{x^{4}}$ 存在\n能推出 $f'(0)$ 存在的条件个数为（　）\nA. 1　B. 2　C. 3　D. 4",
+  "tags": [
+   "一元微分",
+   "可导定义",
+   "等价无穷小"
+  ],
+  "thinking": 6,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第20节 可导概念",
+  "hints": [
+   "$|x|$ 不可导，条件是复合在 $|x|$ 上的，一般推不出；$\\sin x-\\tan x\\sim-\\frac{x^{3}}{2}$ 也只给高阶信息。"
+  ],
+  "answer": "B",
+  "solution": "② 直接给 $f(u)=O(u)$（双侧），得 $f'(0)$；③ 中 $f(|x|)$ 对 $x<0$ 是 $f(-x)$，与 $x>0$ 的 $f(x)$ 混用，无法保证左导数。按答案组共 2 个成立。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象函数求导：根号余弦型",
+  "statement": "设函数 $f(x)$ 在 $x=0$ 处可导，且 $\\lim\\limits_{x\\to0}\\frac{f(1-\\sqrt{\\cos x})}{\\ln(1-x\\sin x)}=5$，求 $f'(0)$。",
+  "tags": [
+   "一元微分",
+   "导数定义",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第21节 抽象函数极限求导数",
+  "hints": [
+   "$1-\\sqrt{\\cos x}\\sim\\frac{x^{2}}{4}$，$\\ln(1-x\\sin x)\\sim-x^{2}$，再用 $f(u)\\sim f'(0)u$。"
+  ],
+  "answer": "$-20$",
+  "solution": "$1-\\sqrt{\\cos x}\\sim\\frac{x^{2}}{4}$，分母 $\\sim-x^{2}$，故极限 $=\\frac{f'(0)\\cdot\\frac14}{-1}=5$，得 $f'(0)=-20$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象函数求导：根号一次型",
+  "statement": "设函数 $f(x)$ 在 $x=0$ 处可导，且 $\\lim\\limits_{x\\to0}\\frac{f(\\sqrt{1+x}-1)}{\\tan x}=2$，求 $f'(0)$。",
+  "tags": [
+   "一元微分",
+   "导数定义",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第21节 抽象函数极限求导数",
+  "hints": [
+   "$\\sqrt{1+x}-1\\sim\\frac{x}{2}$，$\\tan x\\sim x$。"
+  ],
+  "answer": "4",
+  "solution": "极限 $=\\frac{f'(0)\\cdot\\frac{x}{2}}{x}=\\frac{f'(0)}{2}=2$，故 $f'(0)=4$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象函数求导：对数复合型",
+  "statement": "设函数 $f(x)$ 在 $x=0$ 处可导，且 $\\lim\\limits_{x\\to0}\\frac{f(\\ln(1-x^{2}))}{1-\\cos x}=-3$，求 $f'(0)$。",
+  "tags": [
+   "一元微分",
+   "导数定义",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第21节 抽象函数极限求导数",
+  "hints": [
+   "$\\ln(1-x^{2})\\sim-x^{2}$，$1-\\cos x\\sim\\frac{x^{2}}{2}$。"
+  ],
+  "answer": "$\\frac32$",
+  "solution": "$\\frac{f'(0)(-x^{2})}{x^{2}/2}=-2f'(0)=-3$，故 $f'(0)=\\frac32$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象函数求导：正切减x型",
+  "statement": "设函数 $f(x)$ 在 $x=0$ 处可导，且 $\\lim\\limits_{x\\to0}\\frac{f(\\tan x-x)}{x^{3}}=6$，求 $f'(0)$。",
+  "tags": [
+   "一元微分",
+   "导数定义",
+   "泰勒展开"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第21节 抽象函数极限求导数",
+  "hints": [
+   "$\\tan x-x\\sim\\frac{x^{3}}{3}$。"
+  ],
+  "answer": "18",
+  "solution": "$\\frac{f'(0)\\cdot\\frac{x^{3}}{3}}{x^{3}}=\\frac{f'(0)}{3}=6$，故 $f'(0)=18$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象函数求导：指数与根式比",
+  "statement": "设函数 $f(x)$ 在 $x=0$ 处可导，且 $\\lim\\limits_{x\\to0}\\frac{f(e^{x^{2}}-1)}{\\sqrt{1+2x^{2}}-1}=2$，求 $f'(0)$。",
+  "tags": [
+   "一元微分",
+   "导数定义",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第21节 抽象函数极限求导数",
+  "hints": [
+   "分子 $\\sim f'(0)x^{2}$，分母 $\\sim\\frac{1}{2}\\cdot2x^{2}=x^{2}$。"
+  ],
+  "answer": "2",
+  "solution": "$e^{x^{2}}-1\\sim x^{2}$，$\\sqrt{1+2x^{2}}-1\\sim x^{2}$，故极限 $=f'(0)=2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象函数求导：余弦在1处",
+  "statement": "设函数 $f(x)$ 在 $x=1$ 处可导，且 $\\lim\\limits_{x\\to0}\\frac{f(\\cos x)}{\\ln(1-x^{2})}=2$，求 $f'(1)$。",
+  "tags": [
+   "一元微分",
+   "导数定义",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第21节 抽象函数极限求导数",
+  "hints": [
+   "注意本式未给 $f(1)=0$，先由极限存在有限推得 $f(1)=0$，再用 $\\cos x-1\\sim-\\frac{x^{2}}{2}$。"
+  ],
+  "answer": "4",
+  "solution": "分母 $\\to0$ 而极限有限，故 $f(1)=0$；$\\frac{f'(1)(-\\frac{x^{2}}{2})}{-x^{2}}=\\frac{f'(1)}{2}=2$，得 $f'(1)=4$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象函数求导：根号1+2x型",
+  "statement": "设函数 $f(x)$ 在 $x=1$ 处可导，且 $\\lim\\limits_{x\\to0}\\frac{f(\\sqrt{1+2x})}{\\ln(1+x)}=5$，求 $f'(1)$。",
+  "tags": [
+   "一元微分",
+   "导数定义",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第21节 抽象函数极限求导数",
+  "hints": [
+   "$\\sqrt{1+2x}-1\\sim x$，$\\ln(1+x)\\sim x$，先确认 $f(1)=0$。"
+  ],
+  "answer": "5",
+  "solution": "分母 $\\to0$ 且极限有限，故 $f(1)=0$；$\\frac{f'(1)\\cdot x}{x}=f'(1)=5$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象函数求导：1减对数型",
+  "statement": "设函数 $f(x)$ 在 $x=1$ 处可导，且 $\\lim\\limits_{x\\to0}\\frac{f(1-\\ln(1+x))}{\\sin x}=-2$，求 $f'(1)$。",
+  "tags": [
+   "一元微分",
+   "导数定义",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第21节 抽象函数极限求导数",
+  "hints": [
+   "内层 $1-\\ln(1+x)-1=-\\ln(1+x)\\sim-x$，分母 $\\sin x\\sim x$。"
+  ],
+  "answer": "2",
+  "solution": "由极限有限得 $f(1)=0$，则极限 $=\\frac{f'(1)(-x)}{x}=-f'(1)=-2$，故 $f'(1)=2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象函数求导：正切减正弦型",
+  "statement": "设函数 $f(x)$ 在 $x=1$ 处可导，且 $\\lim\\limits_{x\\to0}\\frac{f(1+\\tan x-\\sin x)}{x^{3}}=4$，求 $f'(1)$。",
+  "tags": [
+   "一元微分",
+   "导数定义",
+   "泰勒展开"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第21节 抽象函数极限求导数",
+  "hints": [
+   "$\\tan x-\\sin x\\sim\\frac{x^{3}}{2}$，注意 $f(1)=0$ 需先推出。"
+  ],
+  "answer": "8",
+  "solution": "$\\tan x-\\sin x=\\tan x(1-\\cos x)\\sim\\frac{x^{3}}{2}$，故极限 $=\\frac{f'(1)}{2}=4$，$f'(1)=8$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象函数求导：指数负x型",
+  "statement": "设函数 $f(x)$ 在 $x=1$ 处可导，且 $\\lim\\limits_{x\\to0}\\frac{f(e^{-x})}{\\ln(1-x)}=1$，求 $f'(1)$。",
+  "tags": [
+   "一元微分",
+   "导数定义",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第21节 抽象函数极限求导数",
+  "hints": [
+   "$e^{-x}-1\\sim-x$，$\\ln(1-x)\\sim-x$，两者同阶同号。"
+  ],
+  "answer": "1",
+  "solution": "由极限有限得 $f(1)=0$；$\\frac{f'(1)(-x)}{-x}=f'(1)=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反函数二阶导：反函数公式法",
+  "statement": "设函数 $f(x)=x^{3}+2x+1$，$g$ 为其反函数，求 $g''(4)$。",
+  "tags": [
+   "一元微分",
+   "反函数求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第22节 反函数求导",
+  "hints": [
+   "由 $f(x)=4$ 定出对应的 $x_{0}$，再用反函数二阶导公式。"
+  ],
+  "answer": "$-\\frac{6}{125}$",
+  "solution": "$g''(y)=-\\dfrac{f''(x)}{[f'(x)]^{3}}$；$x_{0}=1$，$f'(1)=5$，$f''(1)=6$，故 $g''(4)=-\\dfrac{6}{125}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反函数二阶导：指数型验证",
+  "statement": "设函数 $f(x)=e^{x}+x$，$g$ 为其反函数，求 $g''(1)$。",
+  "tags": [
+   "一元微分",
+   "反函数求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第22节 反函数求导",
+  "hints": [
+   "先看 $f(0)=1$，把求值点换成 $x=0$ 处的 $f'$ 与 $f''$。"
+  ],
+  "answer": "$-\\frac{1}{8}$",
+  "solution": "$g''(1)=-\\dfrac{f''(0)}{[f'(0)]^{3}}=-\\dfrac{1}{2^{3}}=-\\dfrac{1}{8}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反函数二阶导：对数型求值",
+  "statement": "设函数 $f(x)=x+\\ln(x+1)$，$x>-1$，$g$ 为其反函数，求 $g''(0)$。",
+  "tags": [
+   "一元微分",
+   "反函数求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第22节 反函数求导",
+  "hints": [
+   "$f(0)=0$，只需算 $f'(0)$、$f''(0)$ 代入反函数公式。"
+  ],
+  "answer": "$\\frac{1}{8}$",
+  "solution": "$f'=1+\\dfrac{1}{x+1}$，$f''=-\\dfrac{1}{(x+1)^{2}}$，故 $f'(0)=2$，$f''(0)=-1$，$g''(0)=\\dfrac{1}{8}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反函数二阶导：三角型定点",
+  "statement": "设函数 $f(x)=x+\\sin x$，$x\\in(0,\\pi)$，$g$ 为其反函数，求 $g''\\left(\\frac{\\pi}{2}+1\\right)$。",
+  "tags": [
+   "一元微分",
+   "反函数求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第22节 反函数求导",
+  "hints": [
+   "由 $f\\left(\\frac{\\pi}{2}\\right)=\\frac{\\pi}{2}+1$ 锁定 $x_{0}=\\frac{\\pi}{2}$。"
+  ],
+  "answer": "$1$",
+  "solution": "$f'=1+\\cos x$，$f''=-\\sin x$；$x_{0}=\\dfrac{\\pi}{2}$ 时 $f'=1$，$f''=-1$，$g''=-\\dfrac{-1}{1^{3}}=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反函数二阶导：正切型定点",
+  "statement": "设函数 $f(x)=\\tan x$，$x\\in\\left(-\\frac{\\pi}{2},\\frac{\\pi}{2}\\right)$，$g$ 为其反函数，求 $g''(1)$。",
+  "tags": [
+   "一元微分",
+   "反函数求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第22节 反函数求导",
+  "hints": [
+   "$f\\left(\\frac{\\pi}{4}\\right)=1$，注意 $f''=2\\sec^{2}x\\tan x$。"
+  ],
+  "answer": "$-\\frac{1}{2}$",
+  "solution": "$f'=\\sec^{2}x$，$f''=2\\sec^{2}x\\tan x$；$x_{0}=\\dfrac{\\pi}{4}$ 时 $f'=2$，$f''=4$，$g''(1)=-\\dfrac{4}{8}=-\\dfrac{1}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反函数二阶导：变限积分型",
+  "statement": "设函数 $f(x)=\\int_{0}^{x}(2t+1)\\,\\mathrm{d}t$，$x>0$，$g$ 为其反函数，求 $g''(2)$。",
+  "tags": [
+   "一元微分",
+   "反函数求导",
+   "变限积分"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第22节 反函数求导",
+  "hints": [
+   "先积出 $f(x)=x^{2}+x$，由 $f(x)=2$ 得 $x_{0}=1$。"
+  ],
+  "answer": "$-\\frac{2}{27}$",
+  "solution": "$f=x^{2}+x$，$f'=2x+1$，$f''=2$；$x_{0}=1$ 时 $f'=3$，故 $g''(2)=-\\dfrac{2}{27}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反函数二阶导：变限积分配合",
+  "statement": "设函数 $f(x)=\\int_{0}^{x}(3t^{2}+2)\\,\\mathrm{d}t$，$g$ 为其反函数，求 $g''(3)$。",
+  "tags": [
+   "一元微分",
+   "反函数求导",
+   "变限积分"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第22节 反函数求导",
+  "hints": [
+   "积出 $f=x^{3}+2x$，解 $f(x)=3$ 得 $x_{0}=1$。"
+  ],
+  "answer": "$-\\frac{6}{125}$",
+  "solution": "$f'=3x^{2}+2$，$f''=6x$；$x_{0}=1$ 时 $f'=5$，$f''=6$，$g''(3)=-\\dfrac{6}{125}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反函数二阶导：指数积分型",
+  "statement": "设函数 $f(x)=\\int_{0}^{x}e^{t}\\,\\mathrm{d}t$，$g$ 为其反函数，求 $g''(e-1)$。",
+  "tags": [
+   "一元微分",
+   "反函数求导",
+   "变限积分"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第22节 反函数求导",
+  "hints": [
+   "$f(x)=e^{x}-1$，$f(x)=e-1$ 给出 $x_{0}=1$。"
+  ],
+  "answer": "$-\\frac{1}{e^{2}}$",
+  "solution": "$f'=f''=e^{x}$，$x_{0}=1$ 时均为 $e$，$g''(e-1)=-\\dfrac{e}{e^{3}}=-\\dfrac{1}{e^{2}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反函数二阶导：对数积分型",
+  "statement": "设函数 $f(x)=\\int_{0}^{x}\\frac{1}{1+t}\\,\\mathrm{d}t$，$x>-1$，$g$ 为其反函数，求 $g''(\\ln 2)$。",
+  "tags": [
+   "一元微分",
+   "反函数求导",
+   "变限积分"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第22节 反函数求导",
+  "hints": [
+   "$f(x)=\\ln(1+x)$，由 $\\ln(1+x)=\\ln 2$ 得 $x_{0}=1$。"
+  ],
+  "answer": "$2$",
+  "solution": "$f'=\\dfrac{1}{1+x}$，$f''=-\\dfrac{1}{(1+x)^{2}}$；$x_{0}=1$ 时 $f'=\\frac{1}{2}$，$f''=-\\frac{1}{4}$，$g''=2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反函数二阶导：四次积分型",
+  "statement": "设函数 $f(x)=\\int_{0}^{x}(4t^{3}+1)\\,\\mathrm{d}t$，$x>0$，$g$ 为其反函数，求 $g''(2)$。",
+  "tags": [
+   "一元微分",
+   "反函数求导",
+   "变限积分"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第22节 反函数求导",
+  "hints": [
+   "积出 $f=x^{4}+x$，解 $f(x)=2$ 得 $x_{0}=1$。"
+  ],
+  "answer": "$-\\frac{12}{125}$",
+  "solution": "$f'=4x^{3}+1$，$f''=12x^{2}$；$x_{0}=1$ 时 $f'=5$，$f''=12$，$g''(2)=-\\dfrac{12}{125}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数二阶导：一次求导后代点",
+  "statement": "设函数 $y=y(x)$ 由方程 $e^{y}+xy=e$ 确定，且 $y'(0)=-\\frac{1}{e}$，求 $y''(0)$。",
+  "tags": [
+   "一元微分",
+   "隐函数求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第23节 隐函数求导",
+  "hints": [
+   "对等式两边关于 $x$ 求导两次，每步都把 $(0,1)$ 与 $y'(0)$ 代入。"
+  ],
+  "answer": "$\\frac{1}{e^{2}}$",
+  "solution": "求导得 $e^{y}y'+y+xy'=0$，再求导 $e^{y}y''+e^{y}y'^{2}+2y'+xy''=0$；代 $y(0)=1,\\\\,y'(0)=-\\frac{1}{e}$ 得 $y''(0)=\\frac{1}{e^{2}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数二阶导：圆型方程",
+  "statement": "设函数 $y=y(x)$ 由方程 $x^{2}+xy+y^{2}=1$ 确定，且 $y'(1)=-2$，求 $y''(1)$。",
+  "tags": [
+   "一元微分",
+   "隐函数求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第23节 隐函数求导",
+  "hints": [
+   "先由方程定出 $y(1)=0$，再两次隐函数求导。"
+  ],
+  "answer": "$-6$",
+  "solution": "$2x+y+xy'+2yy'=0$；求导得 $2+2y'+xy''+2y'^{2}+2yy''=0$，代 $x=1,y=0,y'=-2$ 得 $y''(1)=-6$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数二阶导：双曲型方程",
+  "statement": "设函数 $y=y(x)$ 由方程 $x^{2}-xy+y^{2}=3$ 确定，且 $y'(1)=1$，求 $y''(1)$。",
+  "tags": [
+   "一元微分",
+   "隐函数求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第23节 隐函数求导",
+  "hints": [
+   "由 $y'(1)=1$ 反解出 $y(1)=-1$，再求二阶导。"
+  ],
+  "answer": "$\\frac{2}{3}$",
+  "solution": "$2x-y-xy'+2yy'=0$；再求导 $2-2y'-xy''+2y'^{2}+2yy''=0$，代 $x=1,y=-1,y'=1$ 得 $y''(1)=\\frac{2}{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数二阶导：三次曲线",
+  "statement": "设函数 $y=y(x)$ 由方程 $y^{3}-2xy+x^{2}=0$ 确定，且 $y'(1)=0$，求 $y''(1)$。",
+  "tags": [
+   "一元微分",
+   "隐函数求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第23节 隐函数求导",
+  "hints": [
+   "由 $y'(1)=0$ 及方程可定出 $y(1)=1$。"
+  ],
+  "answer": "$-2$",
+  "solution": "$3y^{2}y'-2y-2xy'+2x=0$；求导 $6yy'^{2}+3y^{2}y''-4y'-2xy''+2=0$，代 $(1,1),y'=0$ 得 $y''(1)=-2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数二阶导：指数乘积型",
+  "statement": "设函数 $y=y(x)$ 由方程 $e^{xy}+x^{2}-y=0$ 确定，且 $y'(0)=1$，求 $y''(0)$。",
+  "tags": [
+   "一元微分",
+   "隐函数求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第23节 隐函数求导",
+  "hints": [
+   "$y(0)=1$，对 $e^{xy}$ 求导时别漏掉 $(y+xy')$。"
+  ],
+  "answer": "$5$",
+  "solution": "$e^{xy}(y+xy')+2x-y'=0$；再求导并代 $x=0,y=1,y'=1$：$2+1+1-y''=0$，得 $y''(0)=5$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数二阶导：双对数型",
+  "statement": "设函数 $y=y(x)$ 由方程 $x\\ln y+y\\ln x=0$ 确定，且 $y'(1)=-1$，求 $y''(1)$。",
+  "tags": [
+   "一元微分",
+   "隐函数求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第23节 隐函数求导",
+  "hints": [
+   "由方程先得 $y(1)=1$，求导时对两项分别用乘积法则。"
+  ],
+  "answer": "$6$",
+  "solution": "$\\ln y+\\dfrac{xy'}{y}+y'\\ln x+\\dfrac{y}{x}=0$；再求导后代 $x=y=1,\\\\,y'=-1$ 得 $y''(1)=6$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数二阶导：极坐标形式",
+  "statement": "设函数 $y=y(x)$ 由方程 $\\ln(x^{2}+y^{2})=2\\arctan\\frac{y}{x}$ 确定，且 $y'(1)=1$，求 $y''(1)$。",
+  "tags": [
+   "一元微分",
+   "隐函数求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第23节 隐函数求导",
+  "hints": [
+   "两边对 $x$ 求导后结构会很好看，注意 $\\left(\\arctan\\frac{y}{x}\\right)'=\\frac{xy'-y}{x^{2}+y^{2}}$。"
+  ],
+  "answer": "$2$",
+  "solution": "求导得 $\\dfrac{2(x+yy')}{x^{2}+y^{2}}=\\dfrac{2(xy'-y)}{x^{2}+y^{2}}$，即 $x+yy'=xy'-y$；再求导代 $x=y=1,y'=1$ 得 $y''(1)=2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数二阶导：圆上一点",
+  "statement": "设函数 $y=y(x)$ 由方程 $x^{2}+y^{2}=2x$ 确定，且 $y>0$，$y'(1)=0$，求 $y''(1)$。",
+  "tags": [
+   "一元微分",
+   "隐函数求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第23节 隐函数求导",
+  "hints": [
+   "由 $y>0$ 取 $y(1)=1$，再两次求导，注意 $y'=0$ 使计算变简。"
+  ],
+  "answer": "$-1$",
+  "solution": "$2x+2yy'=2$；求导 $2+2y'^{2}+2yy''=0$，代 $y=1,y'=0$ 得 $y''(1)=-1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数二阶导：半立方抛物线",
+  "statement": "设函数 $y=y(x)$ 由方程 $y^{2}=x^{3}+3x^{2}$ 确定，且 $y'(1)=\\frac{9}{4}$，求 $y''(1)$。",
+  "tags": [
+   "一元微分",
+   "隐函数求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第23节 隐函数求导",
+  "hints": [
+   "由 $y'(1)=\\frac{9}{4}>0$ 可取 $y(1)=2$。"
+  ],
+  "answer": "$\\frac{15}{32}$",
+  "solution": "$2yy'=3x^{2}+6x$；求导 $2y'^{2}+2yy''=6x+6$，代 $x=1,y=2,y'=\\frac{9}{4}$ 得 $y''(1)=\\frac{15}{32}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数二阶导：笛卡尔叶形线",
+  "statement": "设函数 $y=y(x)$ 由方程 $x^{3}+y^{3}-3xy=0$ 确定，且 $y'\\left(\\frac{3}{2}\\right)=-1$，求 $y''\\left(\\frac{3}{2}\\right)$。",
+  "tags": [
+   "一元微分",
+   "隐函数求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第23节 隐函数求导",
+  "hints": [
+   "对称性提示点 $\\left(\\frac{3}{2},\\frac{3}{2}\\right)$，先化简 $y'=\\frac{y-x^{2}}{y^{2}-x}$。"
+  ],
+  "answer": "$-\\frac{32}{3}$",
+  "solution": "$3x^{2}+3y^{2}y'-3y-3xy'=0$；再求导后代 $x=y=\\frac{3}{2},y'=-1$，解得 $y''\\left(\\frac{3}{2}\\right)=-\\frac{32}{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数方程二阶导：对数与反正切",
+  "statement": "设 $y=y(x)$ 由参数方程 $\\begin{cases}x=\\ln(1+t^{2})\\\\y=t-\\arctan t\\end{cases}$ 确定，求 $\\left.\\frac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}\\right|_{t=1}$。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第24节 参数方程求导",
+  "hints": [
+   "先算 $\\frac{\\mathrm{d}y}{\\mathrm{d}x}=\\frac{y'(t)}{x'(t)}$，再对 $t$ 求导并除以 $x'(t)$。"
+  ],
+  "answer": "$\\frac{1}{2}$",
+  "solution": "$\\dfrac{\\mathrm{d}y}{\\mathrm{d}x}=\\dfrac{t^{2}/(1+t^{2})}{2t/(1+t^{2})}=\\dfrac{t}{2}$；故 $\\dfrac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}=\\dfrac{1/2}{2t/(1+t^{2})}=\\dfrac{1+t^{2}}{4t}$，$t=1$ 时为 $\\frac{1}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数方程二阶导：指数乘正余弦",
+  "statement": "设 $y=y(x)$ 由参数方程 $\\begin{cases}x=e^{t}\\sin t\\\\y=e^{t}\\cos t\\end{cases}$ 确定，求 $\\left.\\frac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}\\right|_{t=0}$。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第24节 参数方程求导",
+  "hints": [
+   "商法则算 $\\frac{\\mathrm{d}y}{\\mathrm{d}x}$，再对 $t$ 求导后除以 $x'(t)$。"
+  ],
+  "answer": "$-2$",
+  "solution": "$x'=e^{t}(\\sin t+\\cos t)$，$y'=e^{t}(\\cos t-\\sin t)$，$\\dfrac{\\mathrm{d}y}{\\mathrm{d}x}=\\dfrac{\\cos t-\\sin t}{\\cos t+\\sin t}$；求导并代 $t=0$ 得 $-2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数方程二阶导：椭圆参数",
+  "statement": "设 $y=y(x)$ 由参数方程 $\\begin{cases}x=2\\cos t\\\\y=3\\sin t\\end{cases}$ 确定，求 $\\left.\\frac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}\\right|_{t=\\frac{\\pi}{4}}$。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第24节 参数方程求导",
+  "hints": [
+   "先得 $\\frac{\\mathrm{d}y}{\\mathrm{d}x}=-\\frac{3}{2}\\cot t$，再对 $t$ 求导后除以 $x'(t)=-2\\sin t$。"
+  ],
+  "answer": "$-\\frac{3\\sqrt{2}}{2}$",
+  "solution": "$\\dfrac{\\mathrm{d}y}{\\mathrm{d}x}=-\\dfrac{3\\cos t}{2\\sin t}$；$\\left(-\\dfrac{3}{2}\\cot t\\right)'=\\dfrac{3}{2}\\csc^{2}t$，故 $\\dfrac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}=-\\dfrac{3}{4\\sin^{3}t}$，$t=\\frac{\\pi}{4}$ 时为 $-\\frac{3\\sqrt{2}}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数方程二阶导：多项式参数",
+  "statement": "设 $y=y(x)$ 由参数方程 $\\begin{cases}x=t^{2}-1\\\\y=t^{3}-t\\end{cases}$ 确定，求曲线在 $t=1$ 对应点处的 $\\frac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}$。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第24节 参数方程求导",
+  "hints": [
+   "$\\frac{\\mathrm{d}y}{\\mathrm{d}x}=\\frac{3t^{2}-1}{2t}$，再对 $t$ 求导除以 $2t$。"
+  ],
+  "answer": "$1$",
+  "solution": "$\\dfrac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}=\\dfrac{\\left(\\frac{3t^{2}-1}{2t}\\right)'}{2t}=\\dfrac{3t^{2}+1}{4t^{3}}$，$t=1$ 时为 $1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数方程二阶导：含 $te^{t}$ 型",
+  "statement": "设 $y=y(x)$ 由参数方程 $\\begin{cases}x=1+te^{t}\\\\y=t^{2}e^{t}\\end{cases}$ 确定，求 $\\left.\\frac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}\\right|_{t=1}$。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第24节 参数方程求导",
+  "hints": [
+   "先化简 $\\frac{\\mathrm{d}y}{\\mathrm{d}x}=\\frac{t(t+2)}{t+1}$，再对 $t$ 求导除以 $x'(t)=(1+t)e^{t}$。"
+  ],
+  "answer": "$\\frac{5}{8e}$",
+  "solution": "$\\dfrac{\\mathrm{d}y}{\\mathrm{d}x}=\\dfrac{t^{2}+2t}{t+1}$，其对 $t$ 的导数为 $\\dfrac{t^{2}+2t+2}{(t+1)^{2}}$；故 $\\dfrac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}=\\dfrac{t^{2}+2t+2}{(t+1)^{3}e^{t}}$，$t=1$ 时为 $\\frac{5}{8e}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数方程二阶导：星形线",
+  "statement": "设 $y=y(x)$ 由参数方程 $\\begin{cases}x=\\cos^{3}t\\\\y=\\sin^{3}t\\end{cases}$ 确定，求 $\\left.\\frac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}\\right|_{t=\\frac{\\pi}{4}}$。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第24节 参数方程求导",
+  "hints": [
+   "先算 $\\frac{\\mathrm{d}y}{\\mathrm{d}x}=-\\tan t$，再对 $t$ 求导除以 $-3\\cos^{2}t\\sin t$。"
+  ],
+  "answer": "$\\frac{4\\sqrt{2}}{3}$",
+  "solution": "$\\dfrac{\\mathrm{d}y}{\\mathrm{d}x}=-\\tan t$，$\\dfrac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}=\\dfrac{1}{3\\cos^{4}t\\sin t}$，$t=\\frac{\\pi}{4}$ 时为 $\\frac{4\\sqrt{2}}{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数方程二阶导：无需求值点",
+  "statement": "设 $y=y(x)$ 由参数方程 $\\begin{cases}x=t^{3}+3t+1\\\\y=3t^{5}+5t^{3}+1\\end{cases}$ 确定，求 $\\frac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}$。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第24节 参数方程求导",
+  "hints": [
+   "$\\frac{\\mathrm{d}y}{\\mathrm{d}x}$ 会化成很简单的式子，再求一次导。"
+  ],
+  "answer": "$\\frac{10t}{3(t^{2}+1)}$",
+  "solution": "$x'=3(t^{2}+1)$，$y'=15t^{2}(t^{2}+1)$，$\\dfrac{\\mathrm{d}y}{\\mathrm{d}x}=5t^{2}$，故 $\\dfrac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}=\\dfrac{10t}{3(t^{2}+1)}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数方程二阶导：反正切与对数",
+  "statement": "设 $y=y(x)$ 由参数方程 $\\begin{cases}x=\\arctan t\\\\y=\\ln(1+t^{2})\\end{cases}$ 确定，求 $\\frac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}$。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第24节 参数方程求导",
+  "hints": [
+   "求出 $\\frac{\\mathrm{d}y}{\\mathrm{d}x}=2t$ 后，只需再乘以 $\\frac{\\mathrm{d}t}{\\mathrm{d}x}=1+t^{2}$。"
+  ],
+  "answer": "$2(1+t^{2})$",
+  "solution": "$x'=\\dfrac{1}{1+t^{2}}$，$y'=\\dfrac{2t}{1+t^{2}}$，$\\dfrac{\\mathrm{d}y}{\\mathrm{d}x}=2t$，故 $\\dfrac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}=2(1+t^{2})$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数方程二阶导：变限积分参数",
+  "statement": "设 $0<t<\\pi$，$y=y(x)$ 由参数方程 $\\begin{cases}x=\\int_{1}^{t}\\frac{\\sin u}{u}\\,\\mathrm{d}u\\\\y=\\int_{1}^{t}\\frac{\\cos u}{u}\\,\\mathrm{d}u\\end{cases}$ 确定，求 $\\frac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}$。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "变限积分"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第24节 参数方程求导",
+  "hints": [
+   "$\\frac{\\mathrm{d}y}{\\mathrm{d}x}=\\cot t$，再用 $\\frac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}=\\frac{(\\cot t)'}{x'(t)}$。"
+  ],
+  "answer": "$-t\\csc^{3}t$",
+  "solution": "$\\dfrac{\\mathrm{d}y}{\\mathrm{d}x}=\\dfrac{\\cos t/t}{\\sin t/t}=\\cot t$；$\\dfrac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}=-\\csc^{2}t\\cdot\\dfrac{t}{\\sin t}=-t\\csc^{3}t$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数方程二阶导：求反方向二阶导",
+  "statement": "设 $t>0$，$x,y$ 由参数方程 $\\begin{cases}x=\\ln t\\\\y=t^{3}\\end{cases}$ 确定，求 $\\frac{\\mathrm{d}^{2}x}{\\mathrm{d}y^{2}}$。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第24节 参数方程求导",
+  "hints": [
+   "注意所求是 $x$ 关于 $y$，先算 $\\frac{\\mathrm{d}x}{\\mathrm{d}y}$ 再对 $y$ 求导。"
+  ],
+  "answer": "$-\\frac{1}{3t^{6}}$",
+  "solution": "$\\dfrac{\\mathrm{d}x}{\\mathrm{d}y}=\\dfrac{1/t}{3t^{2}}=\\dfrac{1}{3t^{3}}$；$\\dfrac{\\mathrm{d}^{2}x}{\\mathrm{d}y^{2}}=\\dfrac{-1/t^{4}}{3t^{2}}=-\\dfrac{1}{3t^{6}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值求导：$xe^{-x}$ 的分段二阶导",
+  "statement": "设 $f(x)=|xe^{-x}|$，求 $f''(x)$。",
+  "tags": [
+   "一元微分",
+   "绝对值求导",
+   "分段讨论"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第25节 绝对值求导",
+  "hints": [
+   "按 $x>0$、$x<0$ 去掉绝对值分别求导，再单独考察 $x=0$ 处二阶导是否存在。"
+  ],
+  "answer": "$f''(x)=\\begin{cases}(x-2)e^{-x},&x>0，(2-x)e^{-x},&x<0\\end{cases}$，$f''(0)$ 不存在",
+  "solution": "$x>0$ 时 $f=xe^{-x}$，$f''=(x-2)e^{-x}$；$x<0$ 时 $f=-xe^{-x}$，$f''=(2-x)e^{-x}$；$x=0$ 两侧二阶导不相等，故不存在。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值求导：$(2x-1)e^{-x}$ 分段",
+  "statement": "设 $f(x)=|(2x-1)e^{-x}|$，求 $f''(x)$。",
+  "tags": [
+   "一元微分",
+   "绝对值求导",
+   "分段讨论"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第25节 绝对值求导",
+  "hints": [
+   "零点在 $x=\\frac{1}{2}$，分段去绝对值后各求二阶导，再看该点。"
+  ],
+  "answer": "$f''(x)=\\begin{cases}(2x-5)e^{-x},&x>\\frac{1}{2}，(5-2x)e^{-x},&x<\\frac{1}{2}\\end{cases}$，$f''\\left(\\frac{1}{2}\\right)$ 不存在",
+  "solution": "$x>\\frac{1}{2}$：$f=(2x-1)e^{-x}$，$f''=(2x-5)e^{-x}$；$x<\\frac{1}{2}$：$f=-(2x-1)e^{-x}$，$f''=(5-2x)e^{-x}$；在 $\\frac{1}{2}$ 处左右二阶导分别 $-4e^{-1/2}$ 与 $4e^{-1/2}$，不存在。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值求导：$x\\ln x$ 分段",
+  "statement": "设 $f(x)=|x\\ln x|$，求 $f''(x)$。",
+  "tags": [
+   "一元微分",
+   "绝对值求导",
+   "分段讨论"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第25节 绝对值求导",
+  "hints": [
+   "定义域 $x>0$，零点 $x=1$，两侧分别去绝对值。"
+  ],
+  "answer": "$f''(x)=\\begin{cases}\\frac{1}{x},&x>1，-\\frac{1}{x},&0<x<1\\end{cases}$，$f''(1)$ 不存在",
+  "solution": "$x>1$：$f=x\\ln x$，$f''=\\dfrac{1}{x}$；$0<x<1$：$f=-x\\ln x$，$f''=-\\dfrac{1}{x}$；$x=1$ 两侧二阶导为 $1$ 与 $-1$，不存在。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值求导：$xe^{x^{2}}$ 分段",
+  "statement": "设 $f(x)=|xe^{x^{2}}|$，求 $f''(x)$。",
+  "tags": [
+   "一元微分",
+   "绝对值求导",
+   "分段讨论"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第25节 绝对值求导",
+  "hints": [
+   "利用 $|x|=x\\,\\mathrm{sgn}\\,x$ 可把两侧结果写成统一形式。"
+  ],
+  "answer": "$f''(x)=2|x|(3+2x^{2})e^{x^{2}}\\ (x\\ne 0)$，$f''(0)$ 不存在",
+  "solution": "$x>0$：$f=xe^{x^{2}}$，$f''=2x(3+2x^{2})e^{x^{2}}$；$x<0$ 时多一个负号，合写得 $2|x|(3+2x^{2})e^{x^{2}}$；$x=0$ 两侧二阶导异号，不存在。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值求导：$(x-1)e^{x}$ 分段",
+  "statement": "设 $f(x)=|(x-1)e^{x}|$，求 $f''(x)$。",
+  "tags": [
+   "一元微分",
+   "绝对值求导",
+   "分段讨论"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第25节 绝对值求导",
+  "hints": [
+   "零点 $x=1$，两侧函数只差一个符号，二阶导也只差符号。"
+  ],
+  "answer": "$f''(x)=\\begin{cases}(x+1)e^{x},&x>1，-(x+1)e^{x},&x<1\\end{cases}$，$f''(1)$ 不存在",
+  "solution": "$x>1$：$f=(x-1)e^{x}$，$f''=(x+1)e^{x}$；$x<1$：$f=-(x-1)e^{x}$，$f''=-(x+1)e^{x}$；$x=1$ 两侧二阶导为 $2e$ 与 $-2e$，不存在。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值隐函数：$y+|x|y=x^{3}$",
+  "statement": "设 $y=y(x)$ 由方程 $y+|x|y=x^{3}$ 确定，求 $y''(1)$ 和 $y''(-2)$。",
+  "tags": [
+   "一元微分",
+   "隐函数求导",
+   "分段讨论"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第25节 绝对值求导",
+  "hints": [
+   "按 $x>0$、$x<0$ 把 $|x|$ 拆开，分别化成显式 $y=\\frac{x^{3}}{1\\pm x}$ 再求二阶导。"
+  ],
+  "answer": "$\\frac{7}{4}$，$-\\frac{52}{27}$",
+  "solution": "$x>0$：$y=\\dfrac{x^{3}}{1+x}$，$y''(1)=\\dfrac{7}{4}$；$x<0$：$y=\\dfrac{x^{3}}{1-x}$，$y''(-2)=-\\dfrac{52}{27}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值隐函数：$y+|x|y=x^{2}$",
+  "statement": "设 $y=y(x)$ 由方程 $y+|x|y=x^{2}$ 确定，求 $y''(2)$ 和 $y''(-1)$。",
+  "tags": [
+   "一元微分",
+   "隐函数求导",
+   "分段讨论"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第25节 绝对值求导",
+  "hints": [
+   "拆绝对值后 $y=\\frac{x^{2}}{1\\pm x}$，注意两段符号不同。"
+  ],
+  "answer": "$\\frac{2}{27}$，$\\frac{1}{4}$",
+  "solution": "$x>0$：$y=\\dfrac{x^{2}}{1+x}$，$y''(2)=\\dfrac{2}{27}$；$x<0$：$y=\\dfrac{x^{2}}{1-x}$，$y''(-1)=\\dfrac{1}{4}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值隐函数：$y+|x|y=e^{x}$",
+  "statement": "设 $y=y(x)$ 由方程 $y+|x|y=e^{x}$ 确定，求 $y''(1)$ 和 $y''(-1)$。",
+  "tags": [
+   "一元微分",
+   "隐函数求导",
+   "分段讨论"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第25节 绝对值求导",
+  "hints": [
+   "$x>0$ 时 $y=\\frac{e^{x}}{1+x}$，$x<0$ 时 $y=\\frac{e^{x}}{1-x}$，分别用商法则两次求导。"
+  ],
+  "answer": "$\\frac{e}{4}$，$\\frac{5}{4e}$",
+  "solution": "$x>0$：$y''(1)=\\dfrac{e}{4}$；$x<0$：$y=\\dfrac{e^{x}}{1-x}$，$y''=\\dfrac{e^{x}(x^{2}-4x+5)}{(1-x)^{3}}$，$y''(-1)=\\dfrac{5}{4e}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值隐函数：$y+|x|y=x^{4}$",
+  "statement": "设 $y=y(x)$ 由方程 $y+|x|y=x^{4}$ 确定，求 $y''(2)$ 和 $y''(-1)$。",
+  "tags": [
+   "一元微分",
+   "隐函数求导",
+   "分段讨论"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第25节 绝对值求导",
+  "hints": [
+   "分母为 $1\\pm x$，四次幂求导两次，代点即可。"
+  ],
+  "answer": "$\\frac{272}{27}$，$\\frac{17}{4}$",
+  "solution": "$x>0$：$y=\\dfrac{x^{4}}{1+x}$，$y''=\\dfrac{12x^{2}(1+x)^{2}-8x^{3}(1+x)+2x^{4}}{(1+x)^{3}}$，$y''(2)=\\dfrac{272}{27}$；$x<0$：$y=\\dfrac{x^{4}}{1-x}$，$y''(-1)=\\dfrac{17}{4}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值隐函数：$y+|x|y=\\sin x$",
+  "statement": "设 $y=y(x)$ 由方程 $y+|x|y=\\sin x$ 确定，求 $y''(1)$ 和 $y''(-2)$。",
+  "tags": [
+   "一元微分",
+   "隐函数求导",
+   "分段讨论"
+  ],
+  "thinking": 6,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第25节 绝对值求导",
+  "hints": [
+   "两段分别是 $\\frac{\\sin x}{1+x}$ 与 $\\frac{\\sin x}{1-x}$，用商法则求两次导。"
+  ],
+  "answer": "$-\\frac{\\sin 1+2\\cos 1}{4}$，$\\frac{7\\sin 2+6\\cos 2}{27}$",
+  "solution": "$x>0$：$y=\\dfrac{\\sin x}{1+x}$，$y''(1)=-\\dfrac{\\sin 1+2\\cos 1}{4}$；$x<0$：$y=\\dfrac{\\sin x}{1-x}$，$y''(-2)=\\dfrac{7\\sin 2+6\\cos 2}{27}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值参数方程：$|t|e^{t}$",
+  "statement": "设参数方程 $\\begin{cases}x=t^{2}\\\\y=|t|e^{t}\\end{cases}$，求 $\\left.\\frac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}\\right|_{t=1}$ 和 $\\left.\\frac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}\\right|_{t=-1}$。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "分段讨论"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第25节 绝对值求导",
+  "hints": [
+   "$t<0$ 时 $y=-te^{t}$，两段分别算 $\\frac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}=\\frac{(y'/x')'}{x'}$。"
+  ],
+  "answer": "$\\frac{e}{4}$，$-\\frac{1}{4e}$",
+  "solution": "$t>0$：$\\dfrac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}=\\dfrac{e^{t}(t^{2}+t-1)}{4t^{3}}$，$t=1$ 为 $\\frac{e}{4}$；$t<0$ 时多一个负号，$t=-1$ 为 $-\\frac{1}{4e}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值参数方程：$|t|\\sin t$",
+  "statement": "设参数方程 $\\begin{cases}x=t^{2}\\\\y=|t|\\sin t\\end{cases}$，求 $\\left.\\frac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}\\right|_{t=1}$ 和 $\\left.\\frac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}\\right|_{t=-2}$。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "分段讨论"
+  ],
+  "thinking": 6,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第25节 绝对值求导",
+  "hints": [
+   "先写出 $t>0$、$t<0$ 两支的 $y$，再套参数方程二阶导公式。"
+  ],
+  "answer": "$\\frac{\\cos 1-2\\sin 1}{4}$，$\\frac{5\\sin 2-2\\cos 2}{32}$",
+  "solution": "$t>0$：$y'=\\sin t+t\\cos t$，$\\dfrac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}=\\dfrac{\\cos t-\\sin t-t\\sin t}{4t^{2}}$，$t=1$ 为 $\\frac{\\cos 1-2\\sin 1}{4}$；$t<0$ 代入 $y=-t\\sin t$ 得 $t=-2$ 为 $\\frac{5\\sin 2-2\\cos 2}{32}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值参数方程：$|t|(t+1)$",
+  "statement": "设参数方程 $\\begin{cases}x=t^{3}\\\\y=|t|(t+1)\\end{cases}$，求 $\\left.\\frac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}\\right|_{t=1}$ 和 $\\left.\\frac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}\\right|_{t=-1}$。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "分段讨论"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第25节 绝对值求导",
+  "hints": [
+   "$t<0$ 时 $y=-t(t+1)$ 是二次多项式，其二阶导结构简单，注意 $t=-1$ 处恰好为零。"
+  ],
+  "answer": "$-\\frac{4}{9}$，$0$",
+  "solution": "$t>0$：$y=t^{2}+t$，$\\dfrac{\\mathrm{d}y}{\\mathrm{d}x}=\\dfrac{2t+1}{3t^{2}}$，$\\dfrac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}=-\\dfrac{2(t+1)}{9t^{4}}$，$t=1$ 为 $-\\frac{4}{9}$；$t<0$：$y=-t^{2}-t$，代 $t=-1$ 得 $0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值参数方程：$|t|\\cos t$",
+  "statement": "设参数方程 $\\begin{cases}x=t^{2}\\\\y=|t|\\cos t\\end{cases}$，求 $\\left.\\frac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}\\right|_{t=1}$ 和 $\\left.\\frac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}\\right|_{t=-2}$。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "分段讨论"
+  ],
+  "thinking": 6,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第25节 绝对值求导",
+  "hints": [
+   "$t>0$ 时 $y=t\\cos t$，$t<0$ 时 $y=-t\\cos t$，代点前先化简分子。"
+  ],
+  "answer": "$-\\frac{\\sin 1+2\\cos 1}{4}$，$-\\frac{2\\sin 2+5\\cos 2}{32}$",
+  "solution": "$t>0$：$y'=\\cos t-t\\sin t$，$\\dfrac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}=\\dfrac{-2\\sin t-t\\cos t}{4t^{2}}$，$t=1$ 为 $-\\dfrac{\\sin 1+2\\cos 1}{4}$；$t<0$ 取相反号，$t=-2$ 为 $-\\dfrac{2\\sin 2+5\\cos 2}{32}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零点高阶导：$\\ln(1+x)$ 在 $x=0$",
+  "statement": "设 $f(x)=\\ln(1+x)$，求 $f^{(n)}(0)$（$n\\ge 1$）。",
+  "tags": [
+   "一元微分",
+   "泰勒展开",
+   "高阶导数"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第26节 零点高阶导数",
+  "hints": [
+   "把 $\\ln(1+x)$ 展开成幂级数，$f^{(n)}(0)$ 就是 $x^{n}$ 系数的 $n!$ 倍。"
+  ],
+  "answer": "$(-1)^{n-1}(n-1)!$",
+  "solution": "$\\ln(1+x)=\\sum_{n\\ge 1}\\dfrac{(-1)^{n-1}}{n}x^{n}$，故 $f^{(n)}(0)=n!\\cdot\\dfrac{(-1)^{n-1}}{n}=(-1)^{n-1}(n-1)!$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零点高阶导：$x^{2}\\ln(1+x)$",
+  "statement": "设 $f(x)=x^{2}\\ln(1+x)$，求 $f^{(n)}(0)$（$n\\ge 3$）。",
+  "tags": [
+   "一元微分",
+   "泰勒展开",
+   "高阶导数"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第26节 零点高阶导数",
+  "hints": [
+   "只需 $\\ln(1+x)$ 展开中 $x^{n-2}$ 项，乘 $x^{2}$ 后即为 $x^{n}$ 的系数。"
+  ],
+  "answer": "$(-1)^{n-1}\\frac{n!}{n-2}$",
+  "solution": "$\\ln(1+x)=\\sum\\dfrac{(-1)^{k-1}}{k}x^{k}$，取 $k=n-2$ 得系数 $\\dfrac{(-1)^{n-3}}{n-2}$，故 $f^{(n)}(0)=n!\\cdot\\dfrac{(-1)^{n-3}}{n-2}=(-1)^{n-1}\\dfrac{n!}{n-2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零点高阶导：$\\frac{1}{1-x}$",
+  "statement": "设 $f(x)=\\frac{1}{1-x}$，求 $f^{(n)}(0)$（$n\\ge 0$）。",
+  "tags": [
+   "一元微分",
+   "泰勒展开",
+   "高阶导数"
+  ],
+  "thinking": 8,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第26节 零点高阶导数",
+  "hints": [
+   "用几何级数 $\\frac{1}{1-x}=\\sum x^{n}$。"
+  ],
+  "answer": "$n!$",
+  "solution": "$\\dfrac{1}{1-x}=\\sum_{n\\ge 0}x^{n}$，系数为 $1$，故 $f^{(n)}(0)=n!$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零点高阶导：$\\arctan x$ 的奇数阶",
+  "statement": "设 $f(x)=\\arctan x$，求 $f^{(2n+1)}(0)$（$n\\ge 0$）。",
+  "tags": [
+   "一元微分",
+   "泰勒展开",
+   "高阶导数"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第26节 零点高阶导数",
+  "hints": [
+   "$\\arctan x$ 展开只有奇次项，取 $x^{2n+1}$ 的系数乘 $(2n+1)!$。"
+  ],
+  "answer": "$(-1)^{n}(2n)!$",
+  "solution": "$\\arctan x=\\sum_{n\\ge 0}\\dfrac{(-1)^{n}}{2n+1}x^{2n+1}$，故 $f^{(2n+1)}(0)=(2n+1)!\\cdot\\dfrac{(-1)^{n}}{2n+1}=(-1)^{n}(2n)!$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零点高阶导：$\\frac{1}{1+x^{2}}$",
+  "statement": "设 $f(x)=\\frac{1}{1+x^{2}}$，求 $f^{(2n)}(0)$（$n\\ge 0$）。",
+  "tags": [
+   "一元微分",
+   "泰勒展开",
+   "高阶导数"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第26节 零点高阶导数",
+  "hints": [
+   "$\\frac{1}{1+x^{2}}$ 是 $\\arctan x$ 的导数，也可直接展开成 $\\sum(-1)^{k}x^{2k}$。"
+  ],
+  "answer": "$(-1)^{n}(2n)!$",
+  "solution": "$\\dfrac{1}{1+x^{2}}=\\sum_{k\\ge 0}(-1)^{k}x^{2k}$，故 $f^{(2n)}(0)=(2n)!\\cdot(-1)^{n}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零点高阶导：$xe^{x}$",
+  "statement": "设 $f(x)=xe^{x}$，求 $f^{(n)}(0)$（$n\\ge 1$）。",
+  "tags": [
+   "一元微分",
+   "莱布尼茨公式",
+   "高阶导数"
+  ],
+  "thinking": 8,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第26节 零点高阶导数",
+  "hints": [
+   "用 $xe^{x}=x\\sum\\frac{x^{k}}{k!}$ 取 $x^{n}$ 项系数，或直接用莱布尼茨公式。"
+  ],
+  "answer": "$n$",
+  "solution": "$xe^{x}=\\sum_{k\\ge 0}\\dfrac{x^{k+1}}{k!}$，$x^{n}$ 项系数为 $\\dfrac{1}{(n-1)!}$，故 $f^{(n)}(0)=\\dfrac{n!}{(n-1)!}=n$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零点高阶导：$x^{2}e^{x}$",
+  "statement": "设 $f(x)=x^{2}e^{x}$，求 $f^{(n)}(0)$（$n\\ge 1$）。",
+  "tags": [
+   "一元微分",
+   "泰勒展开",
+   "高阶导数"
+  ],
+  "thinking": 8,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第26节 零点高阶导数",
+  "hints": [
+   "$x^{2}e^{x}$ 的展开式中 $x^{n}$ 的系数为 $\\frac{1}{(n-2)!}$。"
+  ],
+  "answer": "$n(n-1)$",
+  "solution": "$x^{2}e^{x}=\\sum_{k\\ge 0}\\dfrac{x^{k+2}}{k!}$，取 $k=n-2$，系数 $\\dfrac{1}{(n-2)!}$，故 $f^{(n)}(0)=\\dfrac{n!}{(n-2)!}=n(n-1)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零点高阶导：$e^{x^{2}}$",
+  "statement": "设 $f(x)=e^{x^{2}}$，求 $f^{(n)}(0)$（$n\\ge 0$）。",
+  "tags": [
+   "一元微分",
+   "泰勒展开",
+   "高阶导数"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第26节 零点高阶导数",
+  "hints": [
+   "$e^{x^{2}}$ 只有偶次项，用 $e^{u}=\\sum\\frac{u^{k}}{k!}$ 令 $u=x^{2}$。"
+  ],
+  "answer": "当 $n$ 为奇数时为 $0$；当 $n=2k$ 时为 $\\frac{(2k)!}{k!}$",
+  "solution": "$e^{x^{2}}=\\sum_{k\\ge 0}\\dfrac{x^{2k}}{k!}$；$n$ 为奇数时 $f^{(n)}(0)=0$，$n=2k$ 时 $f^{(n)}(0)=(2k)!\\cdot\\dfrac{1}{k!}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零点高阶导：$x^{2}\\cos x$",
+  "statement": "设 $f(x)=x^{2}\\cos x$，求 $f^{(n)}(0)$（$n\\ge 2$）。",
+  "tags": [
+   "一元微分",
+   "泰勒展开",
+   "高阶导数"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第26节 零点高阶导数",
+  "hints": [
+   "$x^{2}\\cos x$ 只含偶次项，用 $\\cos x$ 的展开找 $x^{2k}$ 系数。"
+  ],
+  "answer": "当 $n$ 为奇数时为 $0$；当 $n=2k$ 时为 $2k(2k-1)(-1)^{k-1}$，$k\\ge 1$",
+  "solution": "$x^{2}\\cos x=\\sum_{k\\ge 0}\\dfrac{(-1)^{k}}{(2k)!}x^{2k+2}$；$n$ 为奇数时为零，$n=2k$ 时系数为 $\\dfrac{(-1)^{k-1}}{(2k-2)!}$，故 $f^{(n)}(0)=2k(2k-1)(-1)^{k-1}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零点高阶导：$\\cos^{2}x$",
+  "statement": "设 $f(x)=\\cos^{2}x$，求 $f^{(n)}(0)$（$n\\ge 1$）。",
+  "tags": [
+   "一元微分",
+   "三角降幂",
+   "高阶导数"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第26节 零点高阶导数",
+  "hints": [
+   "先降幂：$\\cos^{2}x=\\frac{1+\\cos 2x}{2}$，再把 $\\cos 2x$ 的 $n$ 阶导在 $0$ 处求值。"
+  ],
+  "answer": "当 $n$ 为奇数时为 $0$；当 $n=2k$ 时为 $(-1)^{k}2^{2k-1}$，$k\\ge 1$",
+  "solution": "$f^{(n)}(x)=\\dfrac{1}{2}\\cdot 2^{n}\\cos\\left(2x+\\dfrac{n\\pi}{2}\\right)$；$n$ 奇数时为 $0$，$n=2k$ 时为 $\\dfrac{2^{2k}}{2}\\cos k\\pi=(-1)^{k}2^{2k-1}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零点高阶导：$\\sin x\\cos x$",
+  "statement": "设 $f(x)=\\sin x\\cos x$，求 $f^{(n)}(0)$（$n\\ge 0$）。",
+  "tags": [
+   "一元微分",
+   "三角降幂",
+   "高阶导数"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第26节 零点高阶导数",
+  "hints": [
+   "$\\sin x\\cos x=\\frac{1}{2}\\sin 2x$，套 $\\sin$ 的 $n$ 阶导公式。"
+  ],
+  "answer": "当 $n$ 为偶数时为 $0$；当 $n=2k+1$ 时为 $(-1)^{k}2^{2k}$，$k\\ge 0$",
+  "solution": "$f^{(n)}(x)=\\dfrac{2^{n}}{2}\\sin\\left(2x+\\dfrac{n\\pi}{2}\\right)$；$n$ 为偶数时为零，$n=2k+1$ 时 $f^{(n)}(0)=2^{2k}\\sin\\left(k\\pi+\\dfrac{\\pi}{2}\\right)=(-1)^{k}2^{2k}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零点高阶导：$\\ln(1+x^{2})$",
+  "statement": "设 $f(x)=\\ln(1+x^{2})$，求 $f^{(n)}(0)$（$n\\ge 1$）。",
+  "tags": [
+   "一元微分",
+   "泰勒展开",
+   "高阶导数"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第26节 零点高阶导数",
+  "hints": [
+   "$\\ln(1+u)=\\sum\\frac{(-1)^{k-1}}{k}u^{k}$，令 $u=x^{2}$。"
+  ],
+  "answer": "当 $n$ 为奇数时为 $0$；当 $n=2k$ 时为 $(-1)^{k-1}\\frac{(2k)!}{k}$，$k\\ge 1$",
+  "solution": "$\\ln(1+x^{2})=\\sum_{k\\ge 1}\\dfrac{(-1)^{k-1}}{k}x^{2k}$；$n$ 奇数时为 $0$，$n=2k$ 时 $f^{(n)}(0)=(2k)!\\cdot\\dfrac{(-1)^{k-1}}{k}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零点高阶导：$x\\cos x$",
+  "statement": "设 $f(x)=x\\cos x$，求 $f^{(n)}(0)$（$n\\ge 0$）。",
+  "tags": [
+   "一元微分",
+   "泰勒展开",
+   "高阶导数"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第26节 零点高阶导数",
+  "hints": [
+   "$x\\cos x$ 只有奇次项，$x^{2k+1}$ 的系数来自 $\\cos x$ 的 $x^{2k}$ 项。"
+  ],
+  "answer": "当 $n$ 为偶数时为 $0$；当 $n=2k+1$ 时为 $(-1)^{k}(2k+1)$，$k\\ge 0$",
+  "solution": "$x\\cos x=\\sum_{k\\ge 0}\\dfrac{(-1)^{k}}{(2k)!}x^{2k+1}$，故 $f^{(2k+1)}(0)=(2k+1)!\\cdot\\dfrac{(-1)^{k}}{(2k)!}=(-1)^{k}(2k+1)$，偶数阶为 $0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零点高阶导：sinx/x 的补充定义",
+  "statement": "设 $f(x)=\\frac{\\sin x}{x}$（$x\\ne 0$），$f(0)=1$，求 $f^{(n)}(0)$（$n\\ge 0$）。",
+  "tags": [
+   "一元微分",
+   "泰勒展开",
+   "高阶导数"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第26节 零点高阶导数",
+  "hints": [
+   "$f(0)=1$ 说明 $f$ 是 $\\frac{\\sin x}{x}$ 的连续延拓，直接展开即可。"
+  ],
+  "answer": "当 $n$ 为奇数时为 $0$；当 $n=2k$ 时为 $\\frac{(-1)^{k}}{2k+1}$",
+  "solution": "$\\dfrac{\\sin x}{x}=\\sum_{k\\ge 0}\\dfrac{(-1)^{k}}{(2k+1)!}x^{2k}$；故 $f^{(2k)}(0)=(2k)!\\cdot\\dfrac{(-1)^{k}}{(2k+1)!}=\\dfrac{(-1)^{k}}{2k+1}$，奇数阶为 $0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零点高阶导：$x\\sin x$",
+  "statement": "设 $f(x)=x\\sin x$，求 $f^{(n)}(0)$（$n\\ge 1$）。",
+  "tags": [
+   "一元微分",
+   "泰勒展开",
+   "高阶导数"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第26节 零点高阶导数",
+  "hints": [
+   "$x\\sin x$ 只含偶次项，注意 $\\sin x$ 的 $x^{2k-1}$ 项系数带 $(-1)^{k-1}$。"
+  ],
+  "answer": "当 $n$ 为奇数时为 $0$；当 $n=2k$ 时为 $(-1)^{k-1}2k$，$k\\ge 1$",
+  "solution": "$x\\sin x=\\sum_{k\\ge 1}\\dfrac{(-1)^{k-1}}{(2k-1)!}x^{2k}$，故 $f^{(2k)}(0)=(2k)!\\cdot\\dfrac{(-1)^{k-1}}{(2k-1)!}=(-1)^{k-1}2k$，奇数阶为 $0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零点高阶导：变限积分 e^{t^2}",
+  "statement": "设 $F(x)=\\int_{0}^{x}e^{t^{2}}\\,\\mathrm{d}t$，求 $F^{(n)}(0)$（$n\\ge 1$）。",
+  "tags": [
+   "一元微分",
+   "变限积分",
+   "高阶导数"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第26节 零点高阶导数",
+  "hints": [
+   "$F^{(n)}(x)=\\left(e^{x^{2}}\\right)^{(n-1)}$，把问题降为 $e^{x^{2}}$ 的高阶导。"
+  ],
+  "answer": "当 $n$ 为偶数时为 $0$；当 $n=2k+1$ 时为 $\\frac{(2k)!}{k!}$",
+  "solution": "$F'=e^{x^{2}}=\\sum\\dfrac{x^{2k}}{k!}$，故 $F^{(n)}(0)=\\left(e^{x^{2}}\\right)^{(n-1)}(0)$：$n$ 偶数时为 $0$，$n=2k+1$ 时为 $(2k)!\\cdot\\dfrac{1}{k!}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零点高阶导：变限积分 $\\int\\ln(1+t)$",
+  "statement": "设 $F(x)=\\int_{0}^{x}\\ln(1+t)\\,\\mathrm{d}t$，求 $F^{(n)}(0)$（$n\\ge 1$）。",
+  "tags": [
+   "一元微分",
+   "变限积分",
+   "高阶导数"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第26节 零点高阶导数",
+  "hints": [
+   "$F'=\\ln(1+x)$，用 $\\ln(1+x)$ 的高阶导公式，注意 $n=1$ 单独讨论。"
+  ],
+  "answer": "当 $n=1$ 时为 $0$；当 $n\\ge 2$ 时为 $(-1)^{n}(n-2)!$",
+  "solution": "$F^{(n)}(x)=\\left(\\ln(1+x)\\right)^{(n-1)}=\\dfrac{(-1)^{n-2}(n-2)!}{(1+x)^{n-1}}\\\\ (n\\ge 2)$，故 $F^{(n)}(0)=(-1)^{n}(n-2)!$；$F'(0)=\\ln 1=0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零点高阶导：变限积分 sin t/t",
+  "statement": "设 $F(x)=\\int_{0}^{x}\\frac{\\sin t}{t}\\,\\mathrm{d}t$，求 $F^{(n)}(0)$（$n\\ge 1$）。",
+  "tags": [
+   "一元微分",
+   "变限积分",
+   "高阶导数"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第26节 零点高阶导数",
+  "hints": [
+   "$F'=\\frac{\\sin x}{x}$（$x\\ne 0$ 且可延拓），其展开只有偶次项。"
+  ],
+  "answer": "当 $n$ 为偶数时为 $0$；当 $n=2k+1$ 时为 $\\frac{(-1)^{k}}{2k+1}$，$k\\ge 0$",
+  "solution": "$F'=\\dfrac{\\sin x}{x}=\\sum_{k\\ge 0}\\dfrac{(-1)^{k}}{(2k+1)!}x^{2k}$，故 $F^{(n)}(0)=\\left(\\dfrac{\\sin x}{x}\\right)^{(n-1)}(0)$：$n$ 偶数时为 $0$，$n=2k+1$ 时为 $\\dfrac{(-1)^{k}}{2k+1}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "零点高阶导：变限积分 sin t^2",
+  "statement": "设 $F(x)=\\int_{0}^{x}\\sin t^{2}\\,\\mathrm{d}t$，求 $F^{(n)}(0)$（$n\\ge 1$）。",
+  "tags": [
+   "一元微分",
+   "变限积分",
+   "泰勒展开"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 10,
+  "source": "柳贯一题型专项 · 第26节 零点高阶导数",
+  "hints": [
+   "$F'=\\sin x^{2}$ 的展开只含 $x^{4k+2}$，故 $F^{(n)}$ 仅在 $n-1\\equiv 2\\pmod 4$ 时非零。"
+  ],
+  "answer": "当 $n=4k+3$ 时为 $(-1)^{k}\\frac{(4k+2)!}{(2k+1)!}$，其他 $n$ 为 $0$，$k\\ge 0$",
+  "solution": "$\\sin x^{2}=\\sum_{k\\ge 0}\\dfrac{(-1)^{k}}{(2k+1)!}x^{4k+2}$，故 $n-1=4k+2$ 即 $n=4k+3$ 时 $F^{(n)}(0)=(-1)^{k}\\dfrac{(4k+2)!}{(2k+1)!}$，其余为零。",
+  "authorName": "柳贯一题型专项"
+ }
+]

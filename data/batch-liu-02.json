@@ -1,0 +1,3802 @@
+[
+ {
+  "title": "零点高阶导：变限积分 cos t^2",
+  "statement": "设 $F(x)=\\int_{0}^{x}\\cos t^{2}\\,\\mathrm{d}t$，求 $F^{(n)}(0)$（$n\\ge 1$）。",
+  "tags": [
+   "一元微分",
+   "变限积分",
+   "泰勒展开"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 10,
+  "source": "柳贯一题型专项 · 第26节 零点高阶导数",
+  "hints": [
+   "$F'=\\cos x^{2}$ 只含 $x^{4k}$，故仅 $n=4k+1$ 时不为零。"
+  ],
+  "answer": "当 $n=4k+1$ 时为 $(-1)^{k}\\frac{(4k)!}{(2k)!}$，其他 $n$ 为 $0$，$k\\ge 0$",
+  "solution": "$\\cos x^{2}=\\sum_{k\\ge 0}\\dfrac{(-1)^{k}}{(2k)!}x^{4k}$，故 $n-1=4k$ 即 $n=4k+1$ 时 $F^{(n)}(0)=(-1)^{k}\\dfrac{(4k)!}{(2k)!}$，其余为零。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "非零点高阶导：x^2e^x 在 x=1",
+  "statement": "设 $f(x)=x^{2}e^{x}$，求 $f^{(n)}(1)$。",
+  "tags": [
+   "一元微分",
+   "莱布尼茨公式",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第27节 非零点高阶导数",
+  "hints": [
+   "令 $t=x-1$，把 $x^{2}e^{x}$ 写成 $(t+1)^{2}e^{t+1}$，再用 $e^{t}$ 的泰勒展开。"
+  ],
+  "answer": "$e(n^{2}+n+1)$",
+  "solution": "$f=e\\cdot(t^{2}+2t+1)e^{t}$，$e^{t}=\\sum\\frac{t^{k}}{k!}$；$t^{n}$ 系数为 $\\frac{1}{n!}+\\frac{2}{(n-1)!}+\\frac{1}{(n-2)!}$，乘 $n!e$ 得 $e(n^{2}+n+1)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "非零点高阶导：(x+1)^2e^{2x}",
+  "statement": "设 $f(x)=(x+1)^{2}e^{2x}$，求 $f^{(n)}(-1)$。",
+  "tags": [
+   "一元微分",
+   "泰勒展开",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第27节 非零点高阶导数",
+  "hints": [
+   "令 $t=x+1$，则 $f=t^{2}e^{2t-2}=e^{-2}t^{2}e^{2t}$，只取 $e^{2t}$ 展开中 $t^{n-2}$ 项。"
+  ],
+  "answer": "$n(n-1)2^{n-2}e^{-2}$",
+  "solution": "$f=e^{-2}t^{2}\\sum\\dfrac{2^{k}}{k!}t^{k}$，取 $k=n-2$ 得系数 $e^{-2}\\dfrac{2^{n-2}}{(n-2)!}$，故 $f^{(n)}(-1)=n!\\cdot e^{-2}\\dfrac{2^{n-2}}{(n-2)!}=n(n-1)2^{n-2}e^{-2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "非零点高阶导：$x\\cos x$ 用莱布尼茨",
+  "statement": "设 $f(x)=x\\cos x$，求 $f^{(n)}(1)$。",
+  "tags": [
+   "一元微分",
+   "莱布尼茨公式",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第27节 非零点高阶导数",
+  "hints": [
+   "$x$ 只求导一两次就为零，莱布尼茨公式只剩两项。"
+  ],
+  "answer": "$\\cos\\left(1+\\frac{n\\pi}{2}\\right)+n\\cos\\left(1+\\frac{(n-1)\\pi}{2}\\right)$",
+  "solution": "$(x\\cos x)^{(n)}=x(\\cos x)^{(n)}+n(\\cos x)^{(n-1)}$，其中 $(\\cos x)^{(m)}=\\cos\\left(x+\\frac{m\\pi}{2}\\right)$，代 $x=1$ 即得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "非零点高阶导：$xe^{2x}$ 在 $x=1$",
+  "statement": "设 $f(x)=xe^{2x}$，求 $f^{(n)}(1)$。",
+  "tags": [
+   "一元微分",
+   "莱布尼茨公式",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第27节 非零点高阶导数",
+  "hints": [
+   "$f^{(n)}=x\\cdot 2^{n}e^{2x}+n\\cdot 2^{n-1}e^{2x}$，代 $x=1$。"
+  ],
+  "answer": "$2^{n-1}(n+2)e^{2}$",
+  "solution": "$f^{(n)}(x)=2^{n}xe^{2x}+n2^{n-1}e^{2x}=2^{n-1}(2x+n)e^{2x}$，$x=1$ 时为 $2^{n-1}(n+2)e^{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "非零点高阶导：(x-1)^3e^x 在 1",
+  "statement": "设 $f(x)=(x-1)^{3}e^{x}$，求 $f^{(n)}(1)$。",
+  "tags": [
+   "一元微分",
+   "泰勒展开",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第27节 非零点高阶导数",
+  "hints": [
+   "令 $t=x-1$，$f=t^{3}e^{t+1}$，$e^{t}$ 展开中取 $t^{n-3}$ 项。"
+  ],
+  "answer": "$n(n-1)(n-2)e$",
+  "solution": "$f=e\\\\,t^{3}\\sum\\dfrac{t^{k}}{k!}$，取 $k=n-3$ 得系数 $\\dfrac{e}{(n-3)!}$，故 $f^{(n)}(1)=n!\\cdot\\dfrac{e}{(n-3)!}=n(n-1)(n-2)e$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "非零点高阶导：$\\ln(1+x)$ 在 $x=1$",
+  "statement": "设 $f(x)=\\ln(1+x)$，求 $f^{(n)}(1)$。",
+  "tags": [
+   "一元微分",
+   "高阶导数",
+   "泰勒展开"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第27节 非零点高阶导数",
+  "hints": [
+   "令 $t=x-1$，$\\ln(1+x)=\\ln 2+\\ln\\left(1+\\frac{t}{2}\\right)$ 后用 $\\ln(1+u)$ 展开。"
+  ],
+  "answer": "$(-1)^{n-1}\\frac{(n-1)!}{2^{n}}$",
+  "solution": "$\\ln(1+x)=\\ln 2+\\sum_{n\\ge 1}\\dfrac{(-1)^{n-1}}{n}\\left(\\dfrac{t}{2}\\right)^{n}$，故 $f^{(n)}(1)=n!\\cdot\\dfrac{(-1)^{n-1}}{n2^{n}}=(-1)^{n-1}\\dfrac{(n-1)!}{2^{n}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "非零点高阶导：有理分式在 $x=-1$",
+  "statement": "设 $f(x)=\\frac{1}{(x+2)(x+3)}$，求 $f^{(n)}(-1)$。",
+  "tags": [
+   "一元微分",
+   "部分分式",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第27节 非零点高阶导数",
+  "hints": [
+   "先拆成 $\\frac{1}{x+2}-\\frac{1}{x+3}$，再用 $\\left(\\frac{1}{x+a}\\right)^{(n)}=\\frac{(-1)^{n}n!}{(x+a)^{n+1}}$。"
+  ],
+  "answer": "$(-1)^{n}n!\\left(1-2^{-n-1}\\right)$",
+  "solution": "$f=\\dfrac{1}{x+2}-\\dfrac{1}{x+3}$，$f^{(n)}(-1)=(-1)^{n}n!\\left[\\dfrac{1}{1^{n+1}}-\\dfrac{1}{2^{n+1}}\\right]=(-1)^{n}n!(1-2^{-n-1})$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "非零点高阶导：分式拆项再求导",
+  "statement": "设 $f(x)=\\frac{x}{(x+1)(x+2)}$，求 $f^{(n)}(1)$。",
+  "tags": [
+   "一元微分",
+   "部分分式",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第27节 非零点高阶导数",
+  "hints": [
+   "拆项 $\\frac{x}{(x+1)(x+2)}=-\\frac{1}{x+1}+\\frac{2}{x+2}$。"
+  ],
+  "answer": "$(-1)^{n}n!\\left(2\\cdot 3^{-n-1}-2^{-n-1}\\right)$",
+  "solution": "$f=-\\dfrac{1}{x+1}+\\dfrac{2}{x+2}$，$f^{(n)}(1)=(-1)^{n}n!\\left[-\\dfrac{1}{2^{n+1}}+\\dfrac{2}{3^{n+1}}\\right]$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "非零点高阶导：配方型二次分母",
+  "statement": "设 $f(x)=\\frac{1}{x^{2}-2x+2}$，求 $f^{(n)}(1)$。",
+  "tags": [
+   "一元微分",
+   "泰勒展开",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第27节 非零点高阶导数",
+  "hints": [
+   "配方 $x^{2}-2x+2=(x-1)^{2}+1$，令 $t=x-1$ 后用 $\\frac{1}{1+t^{2}}$ 的展开。"
+  ],
+  "answer": "当 $n$ 为奇数时为 $0$；当 $n=2k$ 时为 $(-1)^{k}(2k)!$",
+  "solution": "令 $t=x-1$，$f=\\dfrac{1}{1+t^{2}}=\\sum_{k\\ge 0}(-1)^{k}t^{2k}$；故 $n$ 奇数时为 $0$，$n=2k$ 时 $f^{(n)}(1)=(2k)!(-1)^{k}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "非零点高阶导：配方型二次分母（分母 4）",
+  "statement": "设 $f(x)=\\frac{1}{x^{2}+2x+5}$，求 $f^{(n)}(-1)$。",
+  "tags": [
+   "一元微分",
+   "泰勒展开",
+   "高阶导数"
+  ],
+  "thinking": 6,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第27节 非零点高阶导数",
+  "hints": [
+   "配方 $(x+1)^{2}+4$，令 $t=x+1$，把 $\\frac{1}{4+t^{2}}$ 写成 $\\frac{1}{4}\\cdot\\frac{1}{1+(t/2)^{2}}$。"
+  ],
+  "answer": "当 $n$ 为奇数时为 $0$；当 $n=2k$ 时为 $\\frac{(-1)^{k}(2k)!}{4^{k+1}}$",
+  "solution": "$f=\\dfrac{1}{4}\\cdot\\dfrac{1}{1+(t/2)^{2}}=\\dfrac{1}{4}\\sum_{k\\ge 0}(-1)^{k}\\left(\\dfrac{t}{2}\\right)^{2k}$，故 $n=2k$ 时 $f^{(n)}(-1)=\\dfrac{(-1)^{k}(2k)!}{4^{k+1}}$，奇数阶为 $0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "多项式零点计数：一重二重三重",
+  "statement": "求 $f(x)=(x-1)(x-2)^{2}(x-3)^{3}$ 驻点、极值点、拐点个数。",
+  "tags": [
+   "一元微分",
+   "驻点计数",
+   "拐点"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第28节 多项式驻点、极值点、拐点",
+  "hints": [
+   "按各零点的重数判定：一重零点必为极值点且不是拐点，偶数重零点为驻点但不变号。"
+  ],
+  "answer": "驻点 $4$、极值点 $3$、拐点 $4$",
+  "solution": "$f'$ 的零点由 $x=1,2,3$ 与一个内部零点构成，共 $4$ 个驻点；变号的驻点为极值点 $3$ 个；用重数奇偶判拐点得 $4$ 个。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "多项式零点计数：二重三重五重",
+  "statement": "求 $f(x)=(x-1)^{2}(x-2)^{3}(x-3)^{5}$ 驻点、极值点、拐点个数。",
+  "tags": [
+   "一元微分",
+   "驻点计数",
+   "拐点"
+  ],
+  "thinking": 6,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第28节 多项式驻点、极值点、拐点",
+  "hints": [
+   "先数 $f'$ 的零点个数（含重数影响），再由变号判极值，由凹凸性改变判拐点。"
+  ],
+  "answer": "驻点 $5$、极值点 $3$、拐点 $6$",
+  "solution": "$f'=f\\left[\\frac{2}{x-1}+\\frac{3}{x-2}+\\frac{5}{x-3}\\right]$，括号内分子为二次式，共 $5$ 个驻点；变号者 $3$ 个；凹凸改变点共 $6$ 个。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "多项式零点计数：二重四重五重",
+  "statement": "求 $f(x)=(x-1)^{2}(x-2)^{4}(x-3)^{5}$ 驻点、极值点、拐点个数。",
+  "tags": [
+   "一元微分",
+   "驻点计数",
+   "拐点"
+  ],
+  "thinking": 6,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第28节 多项式驻点、极值点、拐点",
+  "hints": [
+   "偶数重零点处函数不变号，是极值点；重数为偶数时二阶导也为零，要用更高阶判拐点。"
+  ],
+  "answer": "驻点 $5$、极值点 $4$、拐点 $5$",
+  "solution": "$f'$ 有 $5$ 个零点；其中 $x=2$（四重）使 $f$ 不变号但仍为极值，合计极值点 $4$；凹凸改变点 $5$ 个。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "多项式零点计数：二重四重六重",
+  "statement": "求 $f(x)=(x-1)^{2}(x-2)^{4}(x-3)^{6}$ 驻点、极值点、拐点个数。",
+  "tags": [
+   "一元微分",
+   "驻点计数",
+   "拐点"
+  ],
+  "thinking": 6,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第28节 多项式驻点、极值点、拐点",
+  "hints": [
+   "全为偶数重零点时，$f$ 在三个零点处都取极值，拐点只在零点之间出现。"
+  ],
+  "answer": "驻点 $5$、极值点 $5$、拐点 $4$",
+  "solution": "$f'$ 有 $5$ 个零点；三个零点均为偶重、均为极值点，故 $5$ 个；拐点集中在相邻零点之间，共 $4$ 个。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "多项式零点计数：一重三重五重",
+  "statement": "求 $f(x)=(x-1)(x-2)^{3}(x-3)^{5}$ 驻点、极值点、拐点个数。",
+  "tags": [
+   "一元微分",
+   "驻点计数",
+   "拐点"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第28节 多项式驻点、极值点、拐点",
+  "hints": [
+   "奇重零点必为极值点，但两重奇数的零点处二阶导为零，需看三阶。"
+  ],
+  "answer": "驻点 $4$、极值点 $2$、拐点 $5$",
+  "solution": "$f'$ 的零点 $4$ 个；三重与五重零点处 $f$ 变号故为极值，加上单调性判断共 $2$ 个极值点；凹凸改变点 $5$ 个。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值多项式：三个一重零点",
+  "statement": "求 $f(x)=|(x-1)(x-2)(x-3)|$ 驻点、极值点、拐点个数。",
+  "tags": [
+   "一元微分",
+   "绝对值函数",
+   "驻点计数"
+  ],
+  "thinking": 6,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第28节 多项式驻点、极值点、拐点",
+  "hints": [
+   "零点处 $f$ 取极小值且导数不存在（不是驻点）；驻点只在两个区间内部出现。"
+  ],
+  "answer": "驻点 $2$、极值点 $5$、拐点 $2$",
+  "solution": "$x=1,2,3$ 为不可导的极小点；在两段区间内各有一个驻点，共 $2$；极值点 $3+2=5$；拐点 $2$ 个。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值多项式：重数 1-2-1",
+  "statement": "求 $f(x)=|(x-1)^{2}(x-2)(x-3)|$ 驻点、极值点、拐点个数。",
+  "tags": [
+   "一元微分",
+   "绝对值函数",
+   "驻点计数"
+  ],
+  "thinking": 6,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第28节 多项式驻点、极值点、拐点",
+  "hints": [
+   "$x=1$ 处内部因子为平方，去绝对值后可导，是驻点；$x=2,3$ 为尖点。"
+  ],
+  "answer": "驻点 $3$、极值点 $5$、拐点 $4$",
+  "solution": "$x=1$（偶重）处 $f$ 光滑且有水平切线，计为驻点；$x=2,3$ 为极小尖点；驻点合计 $3$，极值点 $5$，拐点 $4$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值多项式：重数 1-2-3",
+  "statement": "求 $f(x)=|(x-1)(x-2)^{2}(x-3)^{3}|$ 驻点、极值点、拐点个数。",
+  "tags": [
+   "一元微分",
+   "绝对值函数",
+   "驻点计数"
+  ],
+  "thinking": 6,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第28节 多项式驻点、极值点、拐点",
+  "hints": [
+   "只有偶重零点 $x=2$ 处可导，另两个零点为尖点。"
+  ],
+  "answer": "驻点 $3$、极值点 $5$、拐点 $4$",
+  "solution": "$x=2$ 处光滑，是驻点；$x=1,3$ 为极小尖点；连同区间内部驻点共 $3$ 个驻点，极值点 $5$，拐点 $4$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值多项式：重数 2-3-5",
+  "statement": "求 $f(x)=|(x-1)^{2}(x-2)^{3}(x-3)^{5}|$ 驻点、极值点、拐点个数。",
+  "tags": [
+   "一元微分",
+   "绝对值函数",
+   "驻点计数"
+  ],
+  "thinking": 6,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第28节 多项式驻点、极值点、拐点",
+  "hints": [
+   "偶重零点 $x=1$ 光滑；$x=2,3$ 为尖点，注意 $x=3$ 附近单调性由 $|x-3|^{5}$ 决定。"
+  ],
+  "answer": "驻点 $3$、极值点 $5$、拐点 $5$",
+  "solution": "$x=1$ 为驻点，$x=2,3$ 为极小尖点；驻点共 $3$ 个，极值点 $5$ 个，凹凸改变点 $5$ 个。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "绝对值多项式：重数 3-4-5",
+  "statement": "求 $f(x)=|(x-1)^{3}(x-2)^{4}(x-3)^{5}|$ 驻点、极值点、拐点个数。",
+  "tags": [
+   "一元微分",
+   "绝对值函数",
+   "驻点计数"
+  ],
+  "thinking": 6,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第28节 多项式驻点、极值点、拐点",
+  "hints": [
+   "仅 $x=2$（四重）处可导，它给出一个驻点；其余两零点为尖点。"
+  ],
+  "answer": "驻点 $3$、极值点 $5$、拐点 $4$",
+  "solution": "$x=2$ 光滑且为驻点；$x=1,3$ 为极小尖点；驻点 $3$ 个、极值点 $5$ 个、拐点 $4$ 个。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极限定极值：f'(x)/x→2",
+  "statement": "设函数 $f(x)$ 在 $x=0$ 的某邻域内二阶连续可导，且 $\\lim\\limits_{x\\to 0}\\frac{f'(x)}{x}=2$。（A）$f(0)$ 是 $f(x)$ 的极小值　（B）$f(0)$ 是 $f(x)$ 的极大值　（C）点 $(0,f(0))$ 是曲线 $y=f(x)$ 的拐点　（D）$f'(0)=2$",
+  "tags": [
+   "一元微分",
+   "极值判别",
+   "极限保号"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第29节 一元极限等式函数性态",
+  "hints": [
+   "由 $\\frac{f'(x)}{x}\\to 2>0$ 得 $f'(0)=0$ 且 $f''(0)=2$，再看二阶导符号。"
+  ],
+  "answer": "$A$",
+  "solution": "极限存在且分母趋于 $0$ 迫使 $f'(0)=0$，且 $f''(0)=2>0$，故 $x=0$ 为极小值点，选 A。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极限定性态：f''/(e^x-1)→-3",
+  "statement": "设函数 $f(x)$ 在 $x=0$ 的某邻域内二阶连续可导，且 $\\lim\\limits_{x\\to 0}\\frac{f''(x)}{e^{x}-1}=-3$。（A）$f(0)$ 是 $f(x)$ 的极大值　（B）点 $(0,f(0))$ 是曲线 $y=f(x)$ 的拐点　（C）$f(0)$ 是 $f(x)$ 的极小值　（D）$f'(0)=0$",
+  "tags": [
+   "一元微分",
+   "拐点判别",
+   "极限保号"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第29节 一元极限等式函数性态",
+  "hints": [
+   "$f''(0)=0$ 而 $f''$ 在 $0$ 两侧异号，说明是拐点。"
+  ],
+  "answer": "$B$",
+  "solution": "由极限得 $f''(0)=0$，且 $x\\to 0^{+}$ 时 $f''<0$、$x\\to 0^{-}$ 时 $f''>0$，凹凸性改变，选 B。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极限定凹凸：f''/(1-cos x)→1",
+  "statement": "设函数 $f(x)$ 在 $x=0$ 的某邻域内二阶连续可导，且 $\\lim\\limits_{x\\to 0}\\frac{f''(x)}{1-\\cos x}=1$。（A）$f(0)$ 是 $f(x)$ 的极大值　（B）$f(0)$ 是 $f(x)$ 的极小值　（C）在 $x=0$ 的某去心邻域内 $f''(x)>0$　（D）点 $(0,f(0))$ 是曲线 $y=f(x)$ 的拐点",
+  "tags": [
+   "一元微分",
+   "凹凸性",
+   "极限保号"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第29节 一元极限等式函数性态",
+  "hints": [
+   "分母非负且只在 $0$ 处为零，极限为 $1>0$，用保号性。"
+  ],
+  "answer": "$C$",
+  "solution": "$1-\\cos x>0\\\\ (x\\ne 0)$，极限为 $1$，故去心邻域内 $f''(x)>0$；又 $f''(0)=0$，不能断言极值或拐点，选 C。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极限定性态：f''/ln(1+x)→2",
+  "statement": "设函数 $f(x)$ 在 $x=0$ 的某邻域内二阶连续可导，且 $\\lim\\limits_{x\\to 0}\\frac{f''(x)}{\\ln(1+x)}=2$。（A）$f(0)$ 是 $f(x)$ 的极大值　（B）$f(0)$ 是 $f(x)$ 的极小值　（C）$f''(0)=2$　（D）点 $(0,f(0))$ 是曲线 $y=f(x)$ 的拐点",
+  "tags": [
+   "一元微分",
+   "拐点判别",
+   "极限保号"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第29节 一元极限等式函数性态",
+  "hints": [
+   "$\\ln(1+x)$ 在 $0$ 两侧异号，$f''$ 也随之异号，是拐点的特征。"
+  ],
+  "answer": "$D$",
+  "solution": "$f''(0)=0$；$x>0$ 时 $\\ln(1+x)>0$ 故 $f''>0$，$x<0$ 时 $f''<0$，凹凸改变，选 D。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极限定性态：f''/tan x→-1",
+  "statement": "设函数 $f(x)$ 在 $x=0$ 的某邻域内二阶连续可导，$f'(0)=0$，且 $\\lim\\limits_{x\\to 0}\\frac{f''(x)}{\\tan x}=-1$。（A）点 $(0,f(0))$ 是曲线 $y=f(x)$ 的拐点　（B）$f(0)$ 是 $f(x)$ 的极大值　（C）$f(0)$ 是 $f(x)$ 的极小值　（D）$f'(0)$ 不存在",
+  "tags": [
+   "一元微分",
+   "拐点判别",
+   "极限保号"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第29节 一元极限等式函数性态",
+  "hints": [
+   "$\\frac{f''(x)}{\\tan x}\\to-1$ 说明 $f''(0)=0$ 且两侧异号，$f'$ 在 $0$ 取极值而非 $f$。"
+  ],
+  "answer": "$A$",
+  "solution": "$f''(0)=0$，且 $x>0$ 时 $f''<0$、$x<0$ 时 $f''>0$，凹凸性在 $0$ 处改变，故选 A。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极限定极值：Δf/(1-cos x)→1",
+  "statement": "设函数 $f(x)$ 在 $x=0$ 的某邻域内二阶连续可导，且 $\\lim\\limits_{x\\to 0}\\frac{f(x)-f(0)}{1-\\cos x}=1$。（A）$f(0)$ 是 $f(x)$ 的极大值　（B）$f(0)$ 是 $f(x)$ 的极小值　（C）点 $(0,f(0))$ 是曲线 $y=f(x)$ 的拐点　（D）$f'(0)=1$",
+  "tags": [
+   "一元微分",
+   "极值判别",
+   "极限保号"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第29节 一元极限等式函数性态",
+  "hints": [
+   "分母恒正，$f(x)-f(0)$ 在去心邻域内为正，直接看出极小值。"
+  ],
+  "answer": "$B$",
+  "solution": "$1-\\cos x>0$，极限为 $1>0$，故去心邻域内 $f(x)>f(0)$，$f(0)$ 为极小值，选 B。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极限定极值：Δf/(1-cos x²)→-1",
+  "statement": "设函数 $f(x)$ 在 $x=0$ 的某邻域内二阶连续可导，且 $\\lim\\limits_{x\\to 0}\\frac{f(x)-f(0)}{1-\\cos x^{2}}=-1$。（A）$f(0)$ 是 $f(x)$ 的极小值　（B）点 $(0,f(0))$ 是曲线 $y=f(x)$ 的拐点　（C）$f(0)$ 是 $f(x)$ 的极大值　（D）$f'(0)=-1$",
+  "tags": [
+   "一元微分",
+   "极值判别",
+   "极限保号"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第29节 一元极限等式函数性态",
+  "hints": [
+   "分母 $1-\\cos x^{2}\\ge 0$，极限为负，说明去心邻域内 $f(x)<f(0)$。"
+  ],
+  "answer": "$C$",
+  "solution": "分母非负且极限为 $-1<0$，故去心邻域内 $f(x)-f(0)<0$，$f(0)$ 为极大值，选 C。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极限定性态：Δf/(x-arctan x)",
+  "statement": "设函数 $f(x)$ 在 $x=0$ 的某邻域内二阶连续可导，且 $\\lim\\limits_{x\\to 0}\\frac{f(x)-f(0)}{x-\\arctan x}=1$。（A）$f(0)$ 是 $f(x)$ 的极大值　（B）$f(0)$ 是 $f(x)$ 的极小值　（C）$f'(0)=1$　（D）点 $(0,f(0))$ 是曲线 $y=f(x)$ 的拐点",
+  "tags": [
+   "一元微分",
+   "拐点判别",
+   "等价无穷小"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第29节 一元极限等式函数性态",
+  "hints": [
+   "$x-\\arctan x\\sim\\frac{x^{3}}{3}$ 是奇函数，故 $f$ 的增量与之同阶，属三阶接触，是拐点。"
+  ],
+  "answer": "$D$",
+  "solution": "由 $x-\\arctan x=\\frac{x^{3}}{3}+o(x^{3})$ 且比值为 $1$，得 $f(x)-f(0)\\sim\\frac{x^{3}}{3}$，在 $0$ 两侧异号，$f'(0)=f''(0)=0$，为拐点，选 D。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极限定性态：f''/(x-sin x)→1",
+  "statement": "设函数 $f(x)$ 在 $x=0$ 的某邻域内二阶连续可导，且 $\\lim\\limits_{x\\to 0}\\frac{f''(x)}{x-\\sin x}=1$。（A）点 $(0,f(0))$ 是曲线 $y=f(x)$ 的拐点　（B）$f(0)$ 是 $f(x)$ 的极大值　（C）$f(0)$ 是 $f(x)$ 的极小值　（D）$f''(0)=1$",
+  "tags": [
+   "一元微分",
+   "拐点判别",
+   "极限保号"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第29节 一元极限等式函数性态",
+  "hints": [
+   "$x-\\sin x$ 在 $0$ 两侧异号，$f''$ 也异号，故为拐点。"
+  ],
+  "answer": "$A$",
+  "solution": "由极限得 $f''(0)=0$，且 $x>0$ 时 $f''>0$、$x<0$ 时 $f''<0$，凹凸性改变，选 A。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极限定性态：f''/(e^x-1-x)→1",
+  "statement": "设函数 $f(x)$ 在 $x=0$ 的某邻域内二阶连续可导，且 $\\lim\\limits_{x\\to 0}\\frac{f''(x)}{e^{x}-1-x}=1$。（A）$f(0)$ 是 $f(x)$ 的极大值　（B）$f(0)$ 是 $f(x)$ 的极小值　（C）在 $x=0$ 的某去心邻域内 $f''(x)>0$　（D）点 $(0,f(0))$ 是曲线 $y=f(x)$ 的拐点",
+  "tags": [
+   "一元微分",
+   "凹凸性",
+   "等价无穷小"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第29节 一元极限等式函数性态",
+  "hints": [
+   "$e^{x}-1-x\\sim\\frac{x^{2}}{2}>0$（$x\\ne 0$），故 $f''$ 在去心邻域内为正。"
+  ],
+  "answer": "$C$",
+  "solution": "$e^{x}-1-x>0\\\\ (x\\ne 0)$ 且极限为 $1$，由保号性得去心邻域内 $f''(x)>0$；又 $f''(0)=0$，选 C。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "渐近线：有理函数求铅直与斜",
+  "statement": "求曲线 $y=\\frac{x^{2}+2x+3}{x-1}$ 的所有渐近线。",
+  "tags": [
+   "一元微分",
+   "渐近线",
+   "极限"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第30节 渐近线",
+  "hints": [
+   "分母零点给铅直渐近线；分子次数比分母高一次，做多项式除法得斜渐近线。"
+  ],
+  "answer": "$x=1$，$y=x+3$",
+  "solution": "$x\\to 1$ 时 $y\\to\\infty$，得 $x=1$；除法 $y=x+3+\\dfrac{6}{x-1}$，$\\dfrac{6}{x-1}\\to 0$，得 $y=x+3$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "渐近线：含 ln(e+1/x) 型",
+  "statement": "求曲线 $y=x\\ln\\left(e+\\frac{1}{x}\\right)$ 的所有渐近线。",
+  "tags": [
+   "一元微分",
+   "渐近线",
+   "泰勒展开"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第30节 渐近线",
+  "hints": [
+   "括号内为零处是铅直渐近线；$x\\to\\infty$ 时把 $\\ln$ 展开到 $\\frac{1}{x}$ 项。"
+  ],
+  "answer": "$x=-\\frac{1}{e}$，$y=x+\\frac{1}{e}$",
+  "solution": "$e+\\frac{1}{x}=0$ 即 $x=-\\frac{1}{e}$ 时 $y\\to\\infty$；又 $y=x\\left(1+\\ln\\left(1+\\frac{1}{ex}\\right)\\right)\\to x+\\frac{1}{e}$，故 $y=x+\\frac{1}{e}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "渐近线：$x\\arctan x$ 的两条斜线",
+  "statement": "求曲线 $y=x\\arctan x$ 的所有渐近线。",
+  "tags": [
+   "一元微分",
+   "渐近线",
+   "极限"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第30节 渐近线",
+  "hints": [
+   "分 $x\\to+\\infty$、$x\\to-\\infty$ 两侧，用 $\\arctan x\\to\\pm\\frac{\\pi}{2}$。"
+  ],
+  "answer": "$y=\\frac{\\pi}{2}x-1$，$y=-\\frac{\\pi}{2}x-1$",
+  "solution": "$x\\to+\\infty$：$\\frac{y}{x}\\to\\frac{\\pi}{2}$，$y-\\frac{\\pi}{2}x=x\\left(\\arctan x-\\frac{\\pi}{2}\\right)\\to-1$，得 $y=\\frac{\\pi}{2}x-1$；另一侧对称得 $y=-\\frac{\\pi}{2}x-1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "渐近线：$(2x+1)e^{1/x}$ 型",
+  "statement": "求曲线 $y=(2x+1)e^{1/x}$ 的所有渐近线。",
+  "tags": [
+   "一元微分",
+   "渐近线",
+   "泰勒展开"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第30节 渐近线",
+  "hints": [
+   "$x\\to 0$ 时指数爆炸给铅直渐近线；$x\\to\\infty$ 时把 $e^{1/x}$ 展开到 $\\frac{1}{x}$ 项。"
+  ],
+  "answer": "$x=0$，$y=2x+3$",
+  "solution": "$x\\to 0^{+}$ 时 $y\\to+\\infty$，得 $x=0$；$y=2x\\left(1+\\frac{1}{x}+\\cdots\\right)+\\left(1+\\cdots\\right)=2x+3+o(1)$，得 $y=2x+3$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "渐近线：根号二次式的双斜线",
+  "statement": "求曲线 $y=\\sqrt{x^{2}+x+1}$ 的所有渐近线。",
+  "tags": [
+   "一元微分",
+   "渐近线",
+   "有理化"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第30节 渐近线",
+  "hints": [
+   "两侧各算一次 $k=\\lim\\frac{y}{x}$，再用 $y-kx$ 的有理化求 $b$。"
+  ],
+  "answer": "$y=x+\\frac{1}{2}$，$y=-x-\\frac{1}{2}$",
+  "solution": "$x\\to+\\infty$：$y-x=\\dfrac{x+1}{y+x}\\to\\dfrac{1}{2}$，得 $y=x+\\frac{1}{2}$；$x\\to-\\infty$：$y+x$ 同理得 $y=-x-\\frac{1}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数渐近线：双曲线",
+  "statement": "求曲线 $y^{2}-x^{2}=1$ 的所有渐近线。",
+  "tags": [
+   "一元微分",
+   "渐近线",
+   "隐函数"
+  ],
+  "thinking": 8,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第30节 渐近线",
+  "hints": [
+   "隐函数可解出 $y=\\pm\\sqrt{x^{2}+1}$，分别在两侧看 $y\\mp x$ 的极限。"
+  ],
+  "answer": "$y=x$，$y=-x$",
+  "solution": "$y=\\pm\\sqrt{x^{2}+1}$，$x\\to\\pm\\infty$ 时 $y\\mp x=\\dfrac{1}{y\\pm x}\\to 0$，故渐近线为 $y=x$ 与 $y=-x$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数渐近线：笛卡尔叶形线",
+  "statement": "求曲线 $x^{3}+y^{3}-3xy=0$ 的所有渐近线。",
+  "tags": [
+   "一元微分",
+   "渐近线",
+   "隐函数"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第30节 渐近线",
+  "hints": [
+   "设渐近线 $y=kx+b$ 代入方程，比较 $x^{3}$ 的最高次项定 $k$，再定 $b$。"
+  ],
+  "answer": "$x+y+1=0$",
+  "solution": "令 $y=-x+b$ 代入：$x^{2}(3b+3)-3x(b^{2}+b)+b^{3}=0$，最高次系数为零得 $b=-1$，故渐近线 $x+y+1=0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数渐近线：$y^{3}-x^{3}=x$",
+  "statement": "求曲线 $y^{3}-x^{3}=x$ 的所有渐近线。",
+  "tags": [
+   "一元微分",
+   "渐近线",
+   "隐函数"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第30节 渐近线",
+  "hints": [
+   "由 $y=x\\sqrt[3]{1+\\frac{1}{x^{3}}}$ 直接展开。"
+  ],
+  "answer": "$y=x$",
+  "solution": "$y=x\\left(1+\\dfrac{1}{x^{3}}\\right)^{1/3}=x+\\dfrac{1}{3x^{2}}+o\\left(\\dfrac{1}{x^{2}}\\right)$，故仅有斜渐近线 $y=x$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数渐近线：$x^{2}y-xy^{2}=1$",
+  "statement": "求曲线 $x^{2}y-xy^{2}=1$ 的所有渐近线。",
+  "tags": [
+   "一元微分",
+   "渐近线",
+   "隐函数"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第30节 渐近线",
+  "hints": [
+   "先看 $x\\to 0$、$y\\to 0$ 是否给出铅直/水平线，再看 $y\\approx x$ 方向。"
+  ],
+  "answer": "$x=0$，$y=0$，$y=x$",
+  "solution": "$x\\to 0$ 时 $y\\to\\infty$ 得 $x=0$；对称地 $y\\to 0$ 时 $x\\to\\infty$ 得 $y=0$；令 $y=x+\\delta$ 代入比较得 $\\delta\\to 0$，另有 $y=x$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数渐近线：两族共四条",
+  "statement": "求曲线 $x^{2}y^{2}=x^{2}+y^{2}$ 的所有渐近线。",
+  "tags": [
+   "一元微分",
+   "渐近线",
+   "隐函数"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第30节 渐近线",
+  "hints": [
+   "方程对称，先解出 $y^{2}=\\frac{x^{2}}{x^{2}-1}$，再由 $x\\to\\pm 1$、$x\\to\\infty$ 分别判断。"
+  ],
+  "answer": "$x=1$，$x=-1$，$y=1$，$y=-1$",
+  "solution": "$y^{2}=\\dfrac{x^{2}}{x^{2}-1}$：$x\\to\\pm 1$ 时 $|y|\\to\\infty$ 得 $x=\\pm 1$；$x\\to\\infty$ 时 $y^{2}\\to 1$ 得 $y=\\pm 1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极坐标渐近线：r=1/θ",
+  "statement": "求曲线 $r=\\frac{1}{\\theta}$（$\\theta>0$）的渐近线。",
+  "tags": [
+   "一元微分",
+   "渐近线",
+   "极坐标"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第30节 渐近线",
+  "hints": [
+   "极坐标下先写 $y=r\\sin\\theta$，令 $\\theta\\to 0^{+}$ 看极限；或按 $x\\to\\infty$ 求水平渐近线。"
+  ],
+  "answer": "$y=1$",
+  "solution": "$x=\\frac{\\cos\\theta}{\\theta}\\to\\infty$，$y=\\frac{\\sin\\theta}{\\theta}\\to 1$（$\\theta\\to 0^{+}$），故水平渐近线 $y=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极坐标渐近线：θ→π/2 处",
+  "statement": "求曲线 $r=\\frac{1}{\\theta-\\frac{\\pi}{2}}$（$\\theta>\\frac{\\pi}{2}$）的渐近线。",
+  "tags": [
+   "一元微分",
+   "渐近线",
+   "极坐标"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第30节 渐近线",
+  "hints": [
+   "令 $\\theta\\to\\frac{\\pi}{2}^{+}$，此时 $r\\to+\\infty$，方向角为 $\\frac{\\pi}{2}$，对应竖直渐近线。"
+  ],
+  "answer": "$x=-1$",
+  "solution": "$\\theta\\to\\frac{\\pi}{2}^{+}$ 时 $r\\to+\\infty$，$x=r\\cos\\theta\\to-1$（用 $\\cos\\theta\\approx-(\\theta-\\frac{\\pi}{2})$），故 $x=-1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极坐标渐近线：θ→π/4 处",
+  "statement": "求曲线 $r=\\frac{1}{\\theta-\\frac{\\pi}{4}}$（$\\theta>\\frac{\\pi}{4}$）的渐近线。",
+  "tags": [
+   "一元微分",
+   "渐近线",
+   "极坐标"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第30节 渐近线",
+  "hints": [
+   "方向角 $\\frac{\\pi}{4}$ 对应斜率 $1$ 的斜渐近线，截距由 $r\\cos(\\theta-\\frac{\\pi}{4})$ 的极限给出。"
+  ],
+  "answer": "$y=x+\\sqrt{2}$",
+  "solution": "$y-x=r(\\sin\\theta-\\cos\\theta)=\\sqrt{2}\\cdot\\dfrac{\\sin(\\theta-\\frac{\\pi}{4})}{\\theta-\\frac{\\pi}{4}}\\to\\sqrt{2}$，故 $y=x+\\sqrt{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极坐标渐近线：θ→π/3 处",
+  "statement": "求曲线 $r=\\frac{2}{\\theta-\\frac{\\pi}{3}}$（$\\theta>\\frac{\\pi}{3}$）的渐近线。",
+  "tags": [
+   "一元微分",
+   "渐近线",
+   "极坐标"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第30节 渐近线",
+  "hints": [
+   "方向角 $\\frac{\\pi}{3}$ 给斜率 $\\tan\\frac{\\pi}{3}=\\sqrt{3}$，截距用 $r\\sin(\\frac{\\pi}{3}-\\theta)$ 的极限。"
+  ],
+  "answer": "$y=\\sqrt{3}x+4$",
+  "solution": "$y-\\sqrt{3}x=2r\\sin\\left(\\theta-\\dfrac{\\pi}{3}\\right)=\\dfrac{4\\sin(\\theta-\\frac{\\pi}{3})}{\\theta-\\frac{\\pi}{3}}\\to 4$，故 $y=\\sqrt{3}x+4$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极坐标渐近线：θ→π 处",
+  "statement": "求曲线 $r=\\frac{1}{\\theta-\\pi}$（$\\theta>\\pi$）的渐近线。",
+  "tags": [
+   "一元微分",
+   "渐近线",
+   "极坐标"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第30节 渐近线",
+  "hints": [
+   "$\\theta\\to\\pi^{+}$ 时 $r\\to+\\infty$，方向接近 $\\pi$，是水平渐近线。"
+  ],
+  "answer": "$y=-1$",
+  "solution": "$\\theta\\to\\pi^{+}$：$y=r\\sin\\theta\\to\\dfrac{-\\sin(\\theta-\\pi)}{\\theta-\\pi}\\to-1$，故 $y=-1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数方程渐近线：$t+\\frac{1}{t}$ 型",
+  "statement": "求曲线 $x=t+\\frac{1}{t}$，$y=t-\\frac{1}{t}$（$t>0$）的所有渐近线。",
+  "tags": [
+   "一元微分",
+   "渐近线",
+   "参数方程"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第30节 渐近线",
+  "hints": [
+   "考察 $t\\to 0^{+}$（$x\\to\\infty$）与 $t\\to+\\infty$（$x\\to\\infty$）两个方向。"
+  ],
+  "answer": "$y=x$，$y=-x$",
+  "solution": "$t\\to+\\infty$：$\\frac{y}{x}\\to 1$，$y-x=-\\frac{2}{t}\\to 0$，得 $y=x$；$t\\to 0^{+}$：$\\frac{y}{x}\\to-1$，$y+x\\to 0$，得 $y=-x$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数方程渐近线：一次分式型",
+  "statement": "求曲线 $x=\\frac{t}{t-1}$，$y=\\frac{t^{2}}{t-1}$ 的所有渐近线。",
+  "tags": [
+   "一元微分",
+   "渐近线",
+   "参数方程"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第30节 渐近线",
+  "hints": [
+   "$t\\to 1$ 给出竖直渐近线；$t\\to\\infty$ 时用 $y=x+t$ 的关系。"
+  ],
+  "answer": "$x=1$，$y=x+1$",
+  "solution": "由 $x=1+\\dfrac{1}{t-1}$ 得 $\\dfrac{1}{t-1}=x-1$，又 $y=t+1+\\dfrac{1}{t-1}$，故 $y=x+1+\\dfrac{1}{x-1}$，斜渐近线 $y=x+1$；$t\\to 1$ 给 $x=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数方程渐近线：二次分母型",
+  "statement": "求曲线 $x=\\frac{t}{t^{2}-1}$，$y=\\frac{t^{2}}{t^{2}-1}$ 的所有渐近线。",
+  "tags": [
+   "一元微分",
+   "渐近线",
+   "参数方程"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第30节 渐近线",
+  "hints": [
+   "$t\\to\\pm 1$ 给两条斜渐近线，$t\\to\\infty$ 给水平线；注意水平线已含在斜线中。"
+  ],
+  "answer": "$y=x+\\frac{1}{2}$，$y=-x+\\frac{1}{2}$",
+  "solution": "$y-x=\\dfrac{t^{2}-t}{t^{2}-1}=\\dfrac{t}{t+1}\\to\\dfrac{1}{2}\\ (t\\to 1)$，得 $y=x+\\frac{1}{2}$；$y+x=\\dfrac{t}{t-1}\\to\\dfrac{1}{2}\\ (t\\to-1)$，得 $y=-x+\\frac{1}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数方程渐近线：$x=\\frac{1}{t}$ 型",
+  "statement": "求曲线 $x=\\frac{1}{t}$，$y=t+\\frac{1}{t}$（$t>0$）的所有渐近线。",
+  "tags": [
+   "一元微分",
+   "渐近线",
+   "参数方程"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第30节 渐近线",
+  "hints": [
+   "$t\\to+\\infty$ 给出竖直渐近线，$t\\to 0^{+}$ 给出斜渐近线。"
+  ],
+  "answer": "$x=0$，$y=x$",
+  "solution": "$t\\to+\\infty$：$x\\to 0$，$y\\to\\infty$，得 $x=0$；$t\\to 0^{+}$：$y-x=t\\to 0$ 且 $\\frac{y}{x}\\to 1$，得 $y=x$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "参数方程渐近线：含 1/t 型",
+  "statement": "求曲线 $x=t+\\frac{1}{t}$，$y=\\frac{1}{t}$（$t>0$）的所有渐近线。",
+  "tags": [
+   "一元微分",
+   "渐近线",
+   "参数方程"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第30节 渐近线",
+  "hints": [
+   "$t\\to+\\infty$ 时 $y\\to 0$；$t\\to 0^{+}$ 时 $y-x=-t\\to 0$，且 $\\frac{y}{x}\\to 1$。"
+  ],
+  "answer": "$y=0$，$y=x$",
+  "solution": "$t\\to+\\infty$：$y\\to 0$，$x\\to\\infty$，得 $y=0$；$t\\to 0^{+}$：$x,y\\to\\infty$，$\\frac{y}{x}=\\frac{1}{t^{2}+1}\\to 1$，$y-x=-t\\to 0$，得 $y=x$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "切线法线：三次多项式在 $x=1$",
+  "statement": "设 $y=x^{3}-2x^{2}+1$，求 $x=1$ 处的切线、法线及其截距。",
+  "tags": [
+   "一元微分",
+   "切线方程",
+   "法线方程"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第31节 切线法线",
+  "hints": [
+   "先求 $y'(1)$ 作斜率，法线斜率取负倒数；截距即令 $y=0$ 或 $x=0$ 求解。"
+  ],
+  "answer": "切线 $y=-x+1$，切线截距 $x=1，y=1$；法线 $y=x-1$，法线截距 $x=1，y=-1$",
+  "solution": "$y(1)=0$，$y'=3x^{2}-4x$，$y'(1)=-1$；切线 $y=-(x-1)$，法线 $y=x-1$；再分别令 $y=0$、$x=0$ 得截距。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "切线法线：指数函数在 $x=0$",
+  "statement": "设 $y=e^{2x}$，求 $x=0$ 处的切线、法线及其截距。",
+  "tags": [
+   "一元微分",
+   "切线方程",
+   "法线方程"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第31节 切线法线",
+  "hints": [
+   "斜率 $y'(0)=2$，法线斜率 $-\\frac{1}{2}$，再求两轴截距。"
+  ],
+  "answer": "切线 $y=2x+1$，切线截距 $x=-\\frac{1}{2}，y=1$；法线 $y=-\\frac{1}{2}x+1$，法线截距 $x=2，y=1$",
+  "solution": "$y(0)=1$，$y'(0)=2$；切线 $y=2x+1$（截距 $-\\frac{1}{2}$ 与 $1$）；法线 $y=-\\frac{1}{2}x+1$（截距 $2$ 与 $1$）。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "切线法线：对数函数在 $x=2$",
+  "statement": "设 $y=\\ln(1+x)$，求 $x=2$ 处的切线、法线及其截距。",
+  "tags": [
+   "一元微分",
+   "切线方程",
+   "法线方程"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第31节 切线法线",
+  "hints": [
+   "斜率 $\\frac{1}{3}$，法线斜率 $-3$；截距计算注意保留 $\\ln 3$。"
+  ],
+  "answer": "切线 $y=\\frac{x}{3}+\\ln 3-\\frac{2}{3}$，切线截距 $x=2-3\\ln 3，y=\\ln 3-\\frac{2}{3}$；法线 $y=-3x+6+\\ln 3$，法线截距 $x=2+\\frac{\\ln 3}{3}，y=6+\\ln 3$",
+  "solution": "$y(2)=\\ln 3$，$y'=\\frac{1}{1+x}$，$y'(2)=\\frac{1}{3}$；切线 $y-\\ln 3=\\frac{1}{3}(x-2)$，法线 $y-\\ln 3=-3(x-2)$，再求截距。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "切线法线：正弦在 π/6 处",
+  "statement": "设 $y=\\sin x$，求 $x=\\frac{\\pi}{6}$ 处的切线、法线及其截距。",
+  "tags": [
+   "一元微分",
+   "切线方程",
+   "法线方程"
+  ],
+  "thinking": 6,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第31节 切线法线",
+  "hints": [
+   "斜率 $\\cos\\frac{\\pi}{6}=\\frac{\\sqrt{3}}{2}$，法线斜率为其负倒数；截距公式 $x_{0}-\\frac{y_{0}}{k}$ 可省力。"
+  ],
+  "answer": "切线 $y=\\frac{\\sqrt{3}}{2}x+\\frac{1}{2}-\\frac{\\pi\\sqrt{3}}{12}$，切线截距 $x=\\frac{\\pi}{6}-\\frac{\\sqrt{3}}{3}，y=\\frac{1}{2}-\\frac{\\pi\\sqrt{3}}{12}$；法线 $y=-\\frac{2\\sqrt{3}}{3}x+\\frac{1}{2}+\\frac{\\pi\\sqrt{3}}{9}$，法线截距 $x=\\frac{\\pi}{6}+\\frac{\\sqrt{3}}{4}，y=\\frac{1}{2}+\\frac{\\pi\\sqrt{3}}{9}$",
+  "solution": "$y\\left(\\frac{\\pi}{6}\\right)=\\frac{1}{2}$，$k=\\frac{\\sqrt{3}}{2}$；切线 $y=\\frac{\\sqrt{3}}{2}\\left(x-\\frac{\\pi}{6}\\right)+\\frac{1}{2}$，法线斜率 $-\\frac{2\\sqrt{3}}{3}$，再求截距。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "切线法线：根式在 $x=4$",
+  "statement": "设 $y=\\sqrt{x}$，求 $x=4$ 处的切线、法线及其截距。",
+  "tags": [
+   "一元微分",
+   "切线方程",
+   "法线方程"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第31节 切线法线",
+  "hints": [
+   "$y'=\\frac{1}{2\\sqrt{x}}$，在 $x=4$ 处斜率为 $\\frac{1}{4}$，法线斜率 $-4$。"
+  ],
+  "answer": "切线 $y=\\frac{x}{4}+1$，切线截距 $x=-4，y=1$；法线 $y=-4x+18$，法线截距 $x=\\frac{9}{2}，y=18$",
+  "solution": "$y(4)=2$，$y'(4)=\\frac{1}{4}$；切线 $y=\\frac{1}{4}(x-4)+2$，法线 $y=-4(x-4)+2$，再求两轴截距。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "切线法线：圆上点 $(3,4)$",
+  "statement": "设 $x^{2}+y^{2}=25$，求点 $(3,4)$ 处的切线、法线及其截距。",
+  "tags": [
+   "一元微分",
+   "隐函数求导",
+   "切线方程"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第31节 切线法线",
+  "hints": [
+   "圆上点的法线过圆心，可直接写出法线，切线再由垂直关系得。"
+  ],
+  "answer": "切线 $y=-\\frac{3}{4}x+\\frac{25}{4}$，切线截距 $x=\\frac{25}{3}，y=\\frac{25}{4}$；法线 $y=\\frac{4}{3}x$，法线截距 $x=0，y=0$",
+  "solution": "$2x+2yy'=0$ 得 $y'\\left(3,4\\right)=-\\frac{3}{4}$；切线 $y-4=-\\frac{3}{4}(x-3)$；法线过原点 $y=\\frac{4}{3}x$，截距均为 $0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "切线法线：$e^{xy}+x+y=1$ 在原点",
+  "statement": "设 $e^{xy}+x+y=1$，求点 $(0,0)$ 处的切线、法线及其截距。",
+  "tags": [
+   "一元微分",
+   "隐函数求导",
+   "切线方程"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第31节 切线法线",
+  "hints": [
+   "对 $e^{xy}$ 求导得 $e^{xy}(y+xy')$，代 $(0,0)$ 求 $y'$。"
+  ],
+  "answer": "切线 $y=-x$，切线截距 $x=0，y=0$；法线 $y=x$，法线截距 $x=0，y=0$",
+  "solution": "$e^{xy}(y+xy')+1+y'=0$，代 $(0,0)$ 得 $1+y'=0$，$y'=-1$；切线 $y=-x$，法线 $y=x$，截距均为 $0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "切线法线：叶形线在对称点",
+  "statement": "设 $x^{3}+y^{3}-3xy=0$，求点 $\\left(\\frac{3}{2},\\frac{3}{2}\\right)$ 处的切线、法线及其截距。",
+  "tags": [
+   "一元微分",
+   "隐函数求导",
+   "切线方程"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第31节 切线法线",
+  "hints": [
+   "由对称性该点处切线斜率为 $-1$，法线斜率为 $1$ 且过原点。"
+  ],
+  "answer": "切线 $y=-x+3$，切线截距 $x=3，y=3$；法线 $y=x$，法线截距 $x=0，y=0$",
+  "solution": "$3x^{2}+3y^{2}y'-3y-3xy'=0$，代 $x=y=\\frac{3}{2}$ 得 $y'=-1$；切线 $y=-x+3$，法线 $y=x$，截距分别为 $(3,3)$ 与 $(0,0)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "切线法线：椭圆型二次曲线在 $(1,2)$",
+  "statement": "设 $x^{2}+xy+y^{2}=7$，求点 $(1,2)$ 处的切线、法线及其截距。",
+  "tags": [
+   "一元微分",
+   "隐函数求导",
+   "切线方程"
+  ],
+  "thinking": 6,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第31节 切线法线",
+  "hints": [
+   "$2x+y+xy'+2yy'=0$，代 $(1,2)$ 得 $y'=-\\frac{4}{5}$，法线斜率为 $\\frac{5}{4}$。"
+  ],
+  "answer": "切线 $y=-\\frac{4}{5}x+\\frac{14}{5}$，切线截距 $x=\\frac{7}{2}，y=\\frac{14}{5}$；法线 $y=\\frac{5}{4}x+\\frac{3}{4}$，法线截距 $x=-\\frac{3}{5}，y=\\frac{3}{4}$",
+  "solution": "$y'\\left(1,2\\right)=-\\frac{4}{5}$；切线 $y-2=-\\frac{4}{5}(x-1)$，法线 $y-2=\\frac{5}{4}(x-1)$，再求截距。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "切线法线：抛物线在 $(1,2)$",
+  "statement": "设 $y^{2}=4x$，求点 $(1,2)$ 处的切线、法线及其截距。",
+  "tags": [
+   "一元微分",
+   "隐函数求导",
+   "切线方程"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第31节 切线法线",
+  "hints": [
+   "$2yy'=4$ 得 $y'=\\frac{2}{y}$，在 $(1,2)$ 处为 $1$，法线斜率 $-1$。"
+  ],
+  "answer": "切线 $y=x+1$，切线截距 $x=-1，y=1$；法线 $y=-x+3$，法线截距 $x=3，y=3$",
+  "solution": "$y'\\left(1,2\\right)=1$；切线 $y=x+1$（截距 $-1$ 与 $1$），法线 $y=-x+3$（截距 $3$ 与 $3$）。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "相关变化率：球形气球半径增速",
+  "statement": "气球以恒定速率 $Q$ 充气，保持球形，求半径为 $r$ 时半径增大速率。",
+  "tags": [
+   "一元微分",
+   "相关变化率",
+   "链式法则"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第34节 微分物理应用",
+  "hints": [
+   "体积 $V=\\frac{4}{3}\\pi r^{3}$ 对 $t$ 求导，把 $\\frac{dV}{dt}$ 与 $\\frac{dr}{dt}$ 联系起来。"
+  ],
+  "answer": "$\\frac{Q}{4\\pi r^{2}}$",
+  "solution": "$V=\\frac{4}{3}\\pi r^{3}\\Rightarrow\\frac{dV}{dt}=4\\pi r^{2}\\frac{dr}{dt}=Q$，故 $\\frac{dr}{dt}=\\frac{Q}{4\\pi r^{2}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "相关变化率：圆柱水槽水面上升",
+  "statement": "圆柱形水槽底面半径 $R$，以恒定速率 $Q$ 注水，求水深 $h$ 时水面上升速率。",
+  "tags": [
+   "一元微分",
+   "相关变化率",
+   "链式法则"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第34节 微分物理应用",
+  "hints": [
+   "圆柱体积 $V=\\pi R^{2}h$，底面积不变，直接对 $t$ 求导。"
+  ],
+  "answer": "$\\frac{Q}{\\pi R^{2}}$",
+  "solution": "$\\frac{dV}{dt}=\\pi R^{2}\\frac{dh}{dt}=Q\\Rightarrow\\frac{dh}{dt}=\\frac{Q}{\\pi R^{2}}$，与 $h$ 无关。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "相关变化率：圆锥水槽水位上升",
+  "statement": "圆锥形水槽高 $H$、顶面半径 $R$，以恒定速率 $Q$ 注水，求水深 $h$ 时水面上升速率。",
+  "tags": [
+   "一元微分",
+   "相关变化率",
+   "相似三角形"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第34节 微分物理应用",
+  "hints": [
+   "先用相似三角形把水面半径表成 $\\frac{R}{H}h$，再写体积。"
+  ],
+  "answer": "$\\frac{QH^{2}}{\\pi R^{2}h^{2}}$",
+  "solution": "水面半径 $r=\\frac{R}{H}h$，$V=\\frac{\\pi R^{2}h^{3}}{3H^{2}}$，$\\frac{dV}{dt}=\\frac{\\pi R^{2}h^{2}}{H^{2}}\\frac{dh}{dt}=Q$，故 $\\frac{dh}{dt}=\\frac{QH^{2}}{\\pi R^{2}h^{2}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "运动学：位移函数求速度与加速度",
+  "statement": "质点沿直线运动，位移 $s=t^{3}-6t^{2}+9t$，求 $t=2$ 时的速度、加速度。",
+  "tags": [
+   "一元微分",
+   "导数应用",
+   "运动学"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第34节 微分物理应用",
+  "hints": [
+   "速度是位移的一阶导，加速度是二阶导。"
+  ],
+  "answer": "$v=-3,\\ a=0$",
+  "solution": "$v=3t^{2}-12t+9$，$t=2$ 时 $v=12-24+9=-3$；$a=6t-12$，$t=2$ 时 $a=0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "运动学：速度函数求加速度",
+  "statement": "物体沿直线运动，速度 $v=3t^{2}+2t$，求 $t=3$ 时的加速度。",
+  "tags": [
+   "一元微分",
+   "导数应用",
+   "运动学"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第34节 微分物理应用",
+  "hints": [
+   "加速度就是速度对时间的一阶导。"
+  ],
+  "answer": "$a=20$",
+  "solution": "$a=\\frac{dv}{dt}=6t+2$，$t=3$ 时 $a=20$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "运动学：参数式轨迹的速度与加速度大小",
+  "statement": "质点运动方程 $x=t^{2},\\ y=t^{3}$，求 $t=1$ 时速度、加速度。",
+  "tags": [
+   "一元微分",
+   "参数方程求导",
+   "运动学"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第34节 微分物理应用",
+  "hints": [
+   "分别对 $x,y$ 求一二阶导，再求向量的模。"
+  ],
+  "answer": "$v=\\sqrt{13},\\ a=2\\sqrt{10}$",
+  "solution": "$\\vec v=(2t,3t^{2})|_{t=1}=(2,3)$，$|v|=\\sqrt{13}$；$\\vec a=(2,6t)|_{t=1}=(2,6)$，$|a|=2\\sqrt{10}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "运动学：沿抛物线运动的速度与加速度",
+  "statement": "质点沿曲线 $y=x^{2}$ 运动，横坐标速度为 1，求点 $(1,1)$ 处速度、加速度。",
+  "tags": [
+   "一元微分",
+   "相关变化率",
+   "运动学"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第34节 微分物理应用",
+  "hints": [
+   "由 $\\frac{dy}{dt}=2x\\frac{dx}{dt}$ 求纵坐标速度，再求导一次得加速度。"
+  ],
+  "answer": "$v=\\sqrt{5},\\ a=2$",
+  "solution": "$\\dot x=1$，$\\dot y=2x\\dot x=2$，$v=\\sqrt{1+4}=\\sqrt5$；$\\ddot x=0$，$\\ddot y=2\\dot x^{2}+2x\\ddot x=2$，故 $a=2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "相关变化率：人影顶端移动速度",
+  "statement": "路灯高 $H$，人身高 $h$，人以速度 $v_0$ 远离路灯直线行走，求人影顶端移动速度。",
+  "tags": [
+   "一元微分",
+   "相关变化率",
+   "相似三角形"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第34节 微分物理应用",
+  "hints": [
+   "设人距灯 $x$、影长 $L$，用相似三角形得 $\\frac{L}{h}=\\frac{x+L}{H}$。"
+  ],
+  "answer": "$\\frac{H}{H-h}v_0$",
+  "solution": "由 $\\frac{L}{h}=\\frac{x+L}{H}$ 得 $L=\\frac{hx}{H-h}$，影顶位移 $x+L=\\frac{Hx}{H-h}$，求导得 $\\frac{H}{H-h}v_0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "相关变化率：梯子上端下滑速度",
+  "statement": "长 $L$ 的梯子上端靠墙，下端以速度 $v_0$ 离墙滑动，求下端距墙 $x$ 时上端下滑速度。",
+  "tags": [
+   "一元微分",
+   "相关变化率",
+   "隐函数求导"
+  ],
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第34节 微分物理应用",
+  "hints": [
+   "约束 $x^{2}+y^{2}=L^{2}$ 两边对 $t$ 求导，$\\frac{dx}{dt}=v_0$。"
+  ],
+  "answer": "$-\\frac{xv_0}{\\sqrt{L^{2}-x^{2}}}$",
+  "solution": "$2x\\dot x+2y\\dot y=0\\Rightarrow\\dot y=-\\frac{x}{y}v_0$，又 $y=\\sqrt{L^{2}-x^{2}}$，故 $\\dot y=-\\frac{xv_0}{\\sqrt{L^{2}-x^{2}}}$（负号表示下滑）。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "相关变化率：等温过程压强变化率",
+  "statement": "一定质量理想气体等温变化，压强 $P$ 与体积 $V$ 满足 $PV=C$（$C$ 为常数），体积以速率 $a$ 增大，求压强为 $P_0$、体积为 $V_0$ 时压强变化率。",
+  "tags": [
+   "一元微分",
+   "相关变化率",
+   "隐函数求导"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第34节 微分物理应用",
+  "hints": [
+   "$PV=C$ 两边对 $t$ 求导，注意 $C=P_0V_0$。"
+  ],
+  "answer": "$-\\frac{aP_0}{V_0}$",
+  "solution": "$\\dot P V+P\\dot V=0\\Rightarrow\\dot P=-\\frac{P}{V}a$，代入 $(P_0,V_0)$ 得 $\\dot P=-\\frac{aP_0}{V_0}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可积与原函数：#1：xsin(1/x)",
+  "statement": "设函数 $f(x)=\\begin{cases}x\\sin\\frac{1}{x},&x\\ne0\\\\0,&x=0\\end{cases}$，$x\\in[-1,1]$，则在 $[-1,1]$ 上（　）\n\n  A. 可积，原函数存在　B. 不可积，原函数存在　C. 可积，原函数不存在　D. 不可积，原函数不存在",
+  "tags": [
+   "一元积分",
+   "可积性",
+   "原函数存在性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第35节 原函数与可积",
+  "hints": [
+   "函数在 $[-1,1]$ 上有界且只有 $x=0$ 一个间断点，先判断可积性，再看原函数是否存在。"
+  ],
+  "answer": "A",
+  "solution": "$|f(x)|\\le|x|\\to0$，故 $f$ 在 $[-1,1]$ 上有界且仅一个间断点，可积；连续函数必有原函数，答案为 A。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可积与原函数：#2：取整函数",
+  "statement": "设函数 $f(x)=[x]\\ (\\text{取整函数})$，$x\\in[-1,1]$，则在 $[-1,1]$ 上（　）\n\n  A. 可积，原函数存在　B. 不可积，原函数存在　C. 可积，原函数不存在　D. 不可积，原函数不存在",
+  "tags": [
+   "一元积分",
+   "可积性",
+   "原函数存在性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第35节 原函数与可积",
+  "hints": [
+   "取整函数是阶梯函数，只有有限个跳跃间断点。"
+  ],
+  "answer": "C",
+  "solution": "$[x]$ 在 $[-1,1]$ 上有界、只有有限个第一类间断点，故可积；但第一类间断点不可能成为导函数的间断点，原函数不存在，答案 C。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可积与原函数：#3：1/x² 无界",
+  "statement": "设函数 $f(x)=\\begin{cases}\\frac{1}{x^{2}},&x\\ne0\\\\0,&x=0\\end{cases}$，$x\\in[-1,1]$，则在 $[-1,1]$ 上（　）\n\n  A. 可积，原函数存在　B. 不可积，原函数存在　C. 可积，原函数不存在　D. 不可积，原函数不存在",
+  "tags": [
+   "一元积分",
+   "可积性",
+   "原函数存在性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第35节 原函数与可积",
+  "hints": [
+   "看函数在 $[-1,1]$ 上是否有界。"
+  ],
+  "answer": "D",
+  "solution": "$f$ 在 $0$ 附近无界，是瑕点且 $\\int_{-1}^{1}\\frac{dx}{x^{2}}$ 发散，故不可积，原函数也不存在，答案 D。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可积与原函数：#4：x²sin(1/x²) 的导数",
+  "statement": "设函数 $f(x)=\\begin{cases}2x\\sin\\frac{1}{x^{2}}-\\frac{2}{x}\\cos\\frac{1}{x^{2}},&x\\ne0\\\\0,&x=0\\end{cases}$，$x\\in[-1,1]$，则在 $[-1,1]$ 上（　）\n\n  A. 可积，原函数存在　B. 不可积，原函数存在　C. 可积，原函数不存在　D. 不可积，原函数不存在",
+  "tags": [
+   "一元积分",
+   "可积性",
+   "原函数存在性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第35节 原函数与可积",
+  "hints": [
+   "注意这是 $x^{2}\\sin\\frac{1}{x^{2}}$ 的导数，原函数存在但导数无界。"
+  ],
+  "answer": "B",
+  "solution": "$f=\\left(x^{2}\\sin\\frac{1}{x^{2}}\\right)'$，故原函数存在；但 $x\\to0$ 时 $f$ 无界，黎曼不可积，答案 B。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可积与原函数：#5：1/x 无界",
+  "statement": "设函数 $f(x)=\\begin{cases}\\frac{1}{x},&x\\ne0\\\\0,&x=0\\end{cases}$，$x\\in[-1,1]$，则在 $[-1,1]$ 上（　）\n\n  A. 可积，原函数存在　B. 不可积，原函数存在　C. 可积，原函数不存在　D. 不可积，原函数不存在",
+  "tags": [
+   "一元积分",
+   "可积性",
+   "原函数存在性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第35节 原函数与可积",
+  "hints": [
+   "$\\frac{1}{x}$ 在 $0$ 附近无界且积分发散。"
+  ],
+  "answer": "D",
+  "solution": "$f$ 无界，$\\int_{-1}^{1}\\frac{dx}{x}$ 发散，不可积；且在含 $0$ 的区间上不存在原函数（$\\ln|x|$ 在 0 无定义），答案 D。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可积与原函数：#6：sin(1/x)",
+  "statement": "设函数 $f(x)=\\begin{cases}\\sin\\frac{1}{x},&x\\ne0\\\\0,&x=0\\end{cases}$，$x\\in[-1,1]$，则在 $[-1,1]$ 上（　）\n\n  A. 可积，原函数存在　B. 不可积，原函数存在　C. 可积，原函数不存在　D. 不可积，原函数不存在",
+  "tags": [
+   "一元积分",
+   "可积性",
+   "原函数存在性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第35节 原函数与可积",
+  "hints": [
+   "有界 + 一个间断点即可积；振荡间断点仍可能成为导函数的间断点。"
+  ],
+  "answer": "A",
+  "solution": "$|f|\\le1$ 有界且仅一个间断点，故可积；$\\sin\\frac{1}{x}$ 的间断点为振荡型（第二类），不违背 Darboux 定理，原函数存在，答案 A。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可积与原函数：#7：cos(1/x)",
+  "statement": "设函数 $f(x)=\\begin{cases}\\cos\\frac{1}{x},&x\\ne0\\\\0,&x=0\\end{cases}$，$x\\in[-1,1]$，则在 $[-1,1]$ 上（　）\n\n  A. 可积，原函数存在　B. 不可积，原函数存在　C. 可积，原函数不存在　D. 不可积，原函数不存在",
+  "tags": [
+   "一元积分",
+   "可积性",
+   "原函数存在性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第35节 原函数与可积",
+  "hints": [
+   "与上题同理，有界振荡间断点。"
+  ],
+  "answer": "A",
+  "solution": "$f$ 有界且只有一个振荡间断点，可积；振荡间断点不属于第一类，导函数允许，故原函数存在，答案 A。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可积与原函数：#8：arctan(1/x) 跳跃",
+  "statement": "设函数 $f(x)=\\begin{cases}\\arctan\\frac{1}{x},&x\\ne0\\\\0,&x=0\\end{cases}$，$x\\in[-1,1]$，则在 $[-1,1]$ 上（　）\n\n  A. 可积，原函数存在　B. 不可积，原函数存在　C. 可积，原函数不存在　D. 不可积，原函数不存在",
+  "tags": [
+   "一元积分",
+   "可积性",
+   "原函数存在性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第35节 原函数与可积",
+  "hints": [
+   "考察 $x\\to0^{\\pm}$ 时的左右极限，判断间断点类型。"
+  ],
+  "answer": "C",
+  "solution": "$x\\to0^{+}$ 时 $\\to\\frac{\\pi}{2}$，$x\\to0^{-}$ 时 $\\to-\\frac{\\pi}{2}$，是跳跃间断点；有界故可积，但第一类间断点不能是导函数的间断点，原函数不存在，答案 C。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可积与原函数：#9：x²cos(1/x²) 的导数",
+  "statement": "设函数 $f(x)=\\begin{cases}2x\\cos\\frac{1}{x^{2}}+\\frac{2}{x}\\sin\\frac{1}{x^{2}},&x\\ne0\\\\0,&x=0\\end{cases}$，$x\\in[-1,1]$，则在 $[-1,1]$ 上（　）\n\n  A. 可积，原函数存在　B. 不可积，原函数存在　C. 可积，原函数不存在　D. 不可积，原函数不存在",
+  "tags": [
+   "一元积分",
+   "可积性",
+   "原函数存在性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第35节 原函数与可积",
+  "hints": [
+   "识别它是 $x^{2}\\cos\\frac{1}{x^{2}}$ 的导数，再判断是否有界。"
+  ],
+  "answer": "B",
+  "solution": "$f=\\left(x^{2}\\cos\\frac{1}{x^{2}}\\right)'$，原函数存在；$x\\to0$ 时含 $\\frac{2}{x}\\sin\\frac{1}{x^{2}}$ 项无界，不可积，答案 B。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可积与原函数：#10：x²sin(1/x) 的导数",
+  "statement": "设函数 $f(x)=\\begin{cases}2x\\sin\\frac{1}{x}-\\cos\\frac{1}{x},&x\\ne0\\\\0,&x=0\\end{cases}$，$x\\in[-1,1]$，则在 $[-1,1]$ 上（　）\n\n  A. 可积，原函数存在　B. 不可积，原函数存在　C. 可积，原函数不存在　D. 不可积，原函数不存在",
+  "tags": [
+   "一元积分",
+   "可积性",
+   "原函数存在性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第35节 原函数与可积",
+  "hints": [
+   "它是 $x^{2}\\sin\\frac{1}{x}$ 的导数，且本身有界。"
+  ],
+  "answer": "A",
+  "solution": "$f=\\left(x^{2}\\sin\\frac{1}{x}\\right)'$，原函数存在；$|f|\\le2+1=3$ 有界且只一个振荡间断点，可积，答案 A。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "换元积分：分子恰为分母的导数",
+  "statement": "求 $\\int\\frac{e^{x}+1}{e^{x}+x}\\,dx$。",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "凑微分"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第36节 常规换元不定积分",
+  "hints": [
+   "观察分母 $e^{x}+x$ 的导数正是分子。"
+  ],
+  "answer": "$\\ln|e^{x}+x|+C$",
+  "solution": "令 $u=e^{x}+x$，$du=(e^{x}+1)dx$，原式 $=\\int\\frac{du}{u}=\\ln|u|+C$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "换元积分：双曲型分子分母配对",
+  "statement": "求 $\\int\\frac{e^{x}+e^{-x}}{e^{x}-e^{-x}}\\,dx$。",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "凑微分"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第36节 常规换元不定积分",
+  "hints": [
+   "分母求导得 $e^{x}+e^{-x}$，与分子相同。"
+  ],
+  "answer": "$\\ln|e^{x}-e^{-x}|+C$",
+  "solution": "令 $u=e^{x}-e^{-x}$，$du=(e^{x}+e^{-x})dx$，原式 $=\\int\\frac{du}{u}=\\ln|e^{x}-e^{-x}|+C$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "换元积分：部分分式拆分",
+  "statement": "求 $\\int\\frac{1}{x^{2}(1+x^{2})}\\,dx$。",
+  "tags": [
+   "一元积分",
+   "部分分式",
+   "换元积分"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第36节 常规换元不定积分",
+  "hints": [
+   "用 $\\frac{1}{x^{2}(1+x^{2})}=\\frac{1}{x^{2}}-\\frac{1}{1+x^{2}}$ 拆开。"
+  ],
+  "answer": "$-\\frac{1}{x}-\\arctan x+C$",
+  "solution": "拆项后逐项积分：$\\int\\frac{dx}{x^{2}}=-\\frac{1}{x}$，$\\int\\frac{dx}{1+x^{2}}=\\arctan x$，合并加 $C$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "换元积分：x=tan t 去根号",
+  "statement": "求 $\\int\\frac{1}{x\\sqrt{x^{2}+1}}\\,dx$。",
+  "tags": [
+   "一元积分",
+   "三角换元",
+   "换元积分"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第36节 常规换元不定积分",
+  "hints": [
+   "令 $x=\\tan t$，化为 $\\int\\csc t\\,dt$。"
+  ],
+  "answer": "$\\ln|x|-\\ln(1+\\sqrt{1+x^{2}})+C$",
+  "solution": "$x=\\tan t$ 时 $dx=\\sec^{2}t\\,dt$，原式 $=\\int\\csc t\\,dt=\\ln|\\csc t-\\cot t|+C$，回代 $\\csc t=\\frac{\\sqrt{1+x^{2}}}{x}$ 即得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "换元积分：x=tan t 得负一次幂",
+  "statement": "求 $\\int\\frac{1}{x^{2}\\sqrt{1+x^{2}}}\\,dx$。",
+  "tags": [
+   "一元积分",
+   "三角换元",
+   "换元积分"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第36节 常规换元不定积分",
+  "hints": [
+   "令 $x=\\tan t$，被积式化为 $\\frac{\\cos t}{\\sin^{2}t}$。"
+  ],
+  "answer": "$-\\frac{\\sqrt{1+x^{2}}}{x}+C$",
+  "solution": "$x=\\tan t$ 得 $\\int\\frac{\\cos t}{\\sin^{2}t}dt=-\\frac{1}{\\sin t}+C$，而 $\\sin t=\\frac{x}{\\sqrt{1+x^{2}}}$，故结果为 $-\\frac{\\sqrt{1+x^{2}}}{x}+C$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "换元积分：分母含 x(1+x³)",
+  "statement": "求 $\\int\\frac{1}{x(1+x^{3})}\\,dx$。",
+  "tags": [
+   "一元积分",
+   "部分分式",
+   "换元积分"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第36节 常规换元不定积分",
+  "hints": [
+   "令 $u=x^{3}$，$\\frac{dx}{x}=\\frac{du}{3u}$。"
+  ],
+  "answer": "$\\ln|x|-\\frac{1}{3}\\ln|1+x^{3}|+C$",
+  "solution": "令 $u=x^{3}$，原式 $=\\frac{1}{3}\\int\\frac{du}{u(1+u)}=\\frac{1}{3}\\left(\\ln|u|-\\ln|1+u|\\right)+C$，回代即可。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "换元积分：分子凑成 x=(1+x)-1",
+  "statement": "求 $\\int\\frac{x}{(1+x)^{2}}\\,dx$。",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "凑微分"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第36节 常规换元不定积分",
+  "hints": [
+   "令 $u=1+x$，则 $x=u-1$，被积式变成 $\\frac{1}{u}-\\frac{1}{u^{2}}$。"
+  ],
+  "answer": "$\\ln|1+x|+\\frac{1}{1+x}+C$",
+  "solution": "$u=1+x$ 后 $\\int\\left(\\frac{1}{u}-\\frac{1}{u^{2}}\\right)du=\\ln|u|+\\frac{1}{u}+C$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "换元积分：令 u=x² 化反正切",
+  "statement": "求 $\\int\\frac{x}{1+x^{4}}\\,dx$。",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "凑微分"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第36节 常规换元不定积分",
+  "hints": [
+   "令 $u=x^{2}$，$du=2x\\,dx$。"
+  ],
+  "answer": "$\\frac{1}{2}\\arctan(x^{2})+C$",
+  "solution": "原式 $=\\frac{1}{2}\\int\\frac{du}{1+u^{2}}=\\frac{1}{2}\\arctan u+C=\\frac{1}{2}\\arctan(x^{2})+C$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "换元积分：令 u=x³ 化反正切",
+  "statement": "求 $\\int\\frac{x^{2}}{1+x^{6}}\\,dx$。",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "凑微分"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第36节 常规换元不定积分",
+  "hints": [
+   "令 $u=x^{3}$，$du=3x^{2}dx$，分母为 $1+u^{2}$。"
+  ],
+  "answer": "$\\frac{1}{3}\\arctan(x^{3})+C$",
+  "solution": "原式 $=\\frac{1}{3}\\int\\frac{du}{1+u^{2}}=\\frac{1}{3}\\arctan(x^{3})+C$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "换元积分：令 u=e^x 配方",
+  "statement": "求 $\\int\\frac{e^{x}}{e^{2x}+2e^{x}+2}\\,dx$。",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "配方"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第36节 常规换元不定积分",
+  "hints": [
+   "令 $u=e^{x}$，分母配方为 $(u+1)^{2}+1$。"
+  ],
+  "answer": "$\\arctan(e^{x}+1)+C$",
+  "solution": "原式 $=\\int\\frac{du}{(u+1)^{2}+1}=\\arctan(u+1)+C=\\arctan(e^{x}+1)+C$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "换元积分：e^x 型反正切",
+  "statement": "求 $\\int\\frac{e^{x}}{1+e^{2x}}\\,dx$。",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "凑微分"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第36节 常规换元不定积分",
+  "hints": [
+   "令 $u=e^{x}$，分母为 $1+u^{2}$。"
+  ],
+  "answer": "$\\arctan(e^{x})+C$",
+  "solution": "原式 $=\\int\\frac{du}{1+u^{2}}=\\arctan u+C=\\arctan(e^{x})+C$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "换元积分：先做多项式除法",
+  "statement": "求 $\\int\\frac{e^{2x}}{1+e^{x}}\\,dx$。",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "凑微分"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第36节 常规换元不定积分",
+  "hints": [
+   "令 $u=e^{x}$，则 $\\frac{u}{1+u}=1-\\frac{1}{1+u}$。"
+  ],
+  "answer": "$e^{x}-\\ln(1+e^{x})+C$",
+  "solution": "令 $u=e^{x}$，$du=e^{x}dx$，原式 $=\\int\\frac{u\\,du}{1+u}=\\int\\left(1-\\frac{1}{1+u}\\right)du=u-\\ln(1+u)+C$，回代 $u=e^{x}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "换元积分：令 t=√x",
+  "statement": "求 $\\int\\frac{1}{\\sqrt{x}(1+x)}\\,dx$。",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "凑微分"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第36节 常规换元不定积分",
+  "hints": [
+   "令 $t=\\sqrt{x}$，则 $\\frac{dx}{\\sqrt{x}}=2dt$。"
+  ],
+  "answer": "$2\\arctan\\sqrt{x}+C$",
+  "solution": "原式 $=2\\int\\frac{dt}{1+t^{2}}=2\\arctan t+C=2\\arctan\\sqrt{x}+C$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "换元积分：√x 换元后做除法",
+  "statement": "求 $\\int\\frac{\\sqrt{x}}{1+x}\\,dx$。",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "部分分式"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第36节 常规换元不定积分",
+  "hints": [
+   "令 $t=\\sqrt{x}$，则 $dx=2t\\,dt$，被积式为 $\\frac{2t^{2}}{1+t^{2}}$。"
+  ],
+  "answer": "$2\\sqrt{x}-2\\arctan\\sqrt{x}+C$",
+  "solution": "$2\\int\\frac{t^{2}}{1+t^{2}}dt=2\\int\\left(1-\\frac{1}{1+t^{2}}\\right)dt=2t-2\\arctan t+C$，回代 $t=\\sqrt{x}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "换元积分：√x 与 ∛x 的最小公倍换元",
+  "statement": "求 $\\int\\frac{1}{\\sqrt{x}+\\sqrt[3]{x}}\\,dx$。",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "部分分式"
+  ],
+  "thinking": 9,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第36节 常规换元不定积分",
+  "hints": [
+   "令 $x=t^{6}$（2 与 3 的最小公倍数），根式全化为整数幂。"
+  ],
+  "answer": "$2\\sqrt{x}-3\\sqrt[3]{x}+6\\sqrt[6]{x}-6\\ln(1+\\sqrt[6]{x})+C$",
+  "solution": "$x=t^{6},dx=6t^{5}dt$，原式 $=\\int\\frac{6t^{5}}{t^{3}+t^{2}}dt=6\\int\\frac{t^{3}}{t+1}dt$，做除法得 $6\\int\\left(t^{2}-t+1-\\frac{1}{t+1}\\right)dt$，回代。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "换元积分：对数在分子上凑微分",
+  "statement": "求 $\\int\\frac{\\ln x}{x\\sqrt{1+\\ln x}}\\,dx$。",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "凑微分"
+  ],
+  "thinking": 9,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第36节 常规换元不定积分",
+  "hints": [
+   "令 $u=1+\\ln x$，则 $\\ln x=u-1$，$\\frac{dx}{x}=du$。"
+  ],
+  "answer": "$\\frac{2}{3}(1+\\ln x)^{3/2}-2(1+\\ln x)^{1/2}+C$",
+  "solution": "原式 $=\\int\\frac{u-1}{\\sqrt u}du=\\int\\left(u^{1/2}-u^{-1/2}\\right)du=\\frac{2}{3}u^{3/2}-2u^{1/2}+C$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "换元积分：1/(1+√x) 型",
+  "statement": "求 $\\int\\frac{1}{x(1+\\sqrt{x})}\\,dx$。",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "部分分式"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第36节 常规换元不定积分",
+  "hints": [
+   "令 $t=\\sqrt{x}$，$dx=2t\\,dt$，分母含 $t^{2}(1+t)$。"
+  ],
+  "answer": "$\\ln x-2\\ln(1+\\sqrt{x})+C$",
+  "solution": "原式 $=2\\int\\frac{dt}{t(1+t)}=2\\left(\\ln t-\\ln(1+t)\\right)+C=\\ln x-2\\ln(1+\\sqrt x)+C$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "换元积分：1/(1+√(x+1)) 型",
+  "statement": "求 $\\int\\frac{1}{1+\\sqrt{x+1}}\\,dx$。",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "凑微分"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第36节 常规换元不定积分",
+  "hints": [
+   "令 $t=\\sqrt{x+1}$，则 $x=t^{2}-1,\\ dx=2t\\,dt$。"
+  ],
+  "answer": "$2\\sqrt{x+1}-2\\ln(1+\\sqrt{x+1})+C$",
+  "solution": "原式 $=\\int\\frac{2t}{1+t}dt=2\\int\\left(1-\\frac{1}{1+t}\\right)dt=2t-2\\ln(1+t)+C$，回代。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "换元积分：x³√(1+x²) 型",
+  "statement": "求 $\\int x^{3}\\sqrt{1+x^{2}}\\,dx$。",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "分部积分"
+  ],
+  "thinking": 9,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第36节 常规换元不定积分",
+  "hints": [
+   "令 $u=\\sqrt{1+x^{2}}$，则 $x^{2}=u^{2}-1$，$x\\,dx=u\\,du$。"
+  ],
+  "answer": "$\\frac{1}{15}(3x^{2}-2)(1+x^{2})^{3/2}+C$",
+  "solution": "原式 $=\\int(u^{2}-1)u^{2}du=\\frac{u^{5}}{5}-\\frac{u^{3}}{3}+C=\\frac{u^{3}}{15}(3u^{2}-5)+C$，回代 $u^{2}=1+x^{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "换元积分：x⁵(1+x²)^{3/2} 型",
+  "statement": "求 $\\int x^{5}(1+x^{2})^{3/2}\\,dx$。",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "分部积分"
+  ],
+  "thinking": 9,
+  "difficulty": 10,
+  "calc": 10,
+  "source": "柳贯一题型专项 · 第36节 常规换元不定积分",
+  "hints": [
+   "令 $u=\\sqrt{1+x^{2}}$，则 $x^{5}dx=x^{4}\\cdot x\\,dx=(u^{2}-1)^{2}u\\,du$。"
+  ],
+  "answer": "$\\frac{1}{315}(35x^{4}-20x^{2}+8)(1+x^{2})^{5/2}+C$",
+  "solution": "原式 $=\\int(u^{2}-1)^{2}u^{4}du=\\int(u^{8}-2u^{6}+u^{4})du=\\frac{u^{9}}{9}-\\frac{2u^{7}}{7}+\\frac{u^{5}}{5}+C$，回代并通分。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "循环积分：$e^{-x}\\cos 2x$ 移项求解",
+  "statement": "求不定积分 $\\int e^{-x}\\cos 2x\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "分部积分",
+   "循环积分"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第41节 循环迭代不定积分",
+  "hints": [
+   "先对三角函数分部两次，注意每次 $e^{-x}$ 都带出负号。"
+  ],
+  "answer": "$\\frac{e^{-x}}{5}(2\\sin 2x-\\cos 2x)+C$",
+  "solution": "两次分部回到 $I$，得 $5I=e^{-x}(2\\sin 2x-\\cos 2x)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "循环积分：$e^{x}\\sin 2x$ 基础型",
+  "statement": "求不定积分 $\\int e^{x}\\sin 2x\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "分部积分",
+   "循环积分"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第41节 循环迭代不定积分",
+  "hints": [
+   "取 $u=\\sin 2x$、$\\mathrm{d}v=e^{x}\\mathrm{d}x$ 分部两次。"
+  ],
+  "answer": "$\\frac{e^{x}}{5}(\\sin 2x-2\\cos 2x)+C$",
+  "solution": "两次分部后 $5I=e^{x}(\\sin 2x-2\\cos 2x)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "对数嵌套：$\\sin(2\\ln x)$ 频率加倍",
+  "statement": "求不定积分 $\\int \\sin(2\\ln x)\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "分部积分",
+   "循环积分"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第41节 循环迭代不定积分",
+  "hints": [
+   "令 $t=\\ln x$ 后用 $\\int e^{t}\\sin 2t\\,\\mathrm{d}t$ 的结论，分母为 $1+4$。"
+  ],
+  "answer": "$\\frac{x}{5}[\\sin(2\\ln x)-2\\cos(2\\ln x)]+C$",
+  "solution": "$\\int e^{t}\\sin 2t\\,\\mathrm{d}t=\\frac{e^{t}}{5}(\\sin 2t-2\\cos 2t)+C$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "对数嵌套：$\\cos(3\\ln x)$ 频率为 3",
+  "statement": "求不定积分 $\\int \\cos(3\\ln x)\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "分部积分",
+   "循环积分"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第41节 循环迭代不定积分",
+  "hints": [
+   "换元 $t=\\ln x$ 后套用 $\\int e^{t}\\cos 3t\\,\\mathrm{d}t$ 的公式，分母 $1+9$。"
+  ],
+  "answer": "$\\frac{x}{10}[\\cos(3\\ln x)+3\\sin(3\\ln x)]+C$",
+  "solution": "$\\int e^{t}\\cos 3t\\,\\mathrm{d}t=\\frac{e^{t}}{10}(\\cos 3t+3\\sin 3t)+C$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "对数嵌套：$\\sin(3\\ln x)$ 频率为 3",
+  "statement": "求不定积分 $\\int \\sin(3\\ln x)\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "分部积分",
+   "循环积分"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第41节 循环迭代不定积分",
+  "hints": [
+   "令 $t=\\ln x$，结果中 $\\cos$ 项系数为 $-\\frac{3}{10}$。"
+  ],
+  "answer": "$\\frac{x}{10}[\\sin(3\\ln x)-3\\cos(3\\ln x)]+C$",
+  "solution": "$\\int e^{t}\\sin 3t\\,\\mathrm{d}t=\\frac{e^{t}}{10}(\\sin 3t-3\\cos 3t)+C$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "三角高次：$\\sin^{4}x$ 降幂递推",
+  "statement": "求不定积分 $\\int \\sin^{4}x\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "三角恒等变形",
+   "降幂"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第41节 循环迭代不定积分",
+  "hints": [
+   "先用 $\\sin^{4}x=\\left(\\frac{1-\\cos 2x}{2}\\right)^{2}$ 降幂，或直接用 $n=4$ 的递推式。"
+  ],
+  "answer": "$-\\frac{1}{4}\\sin^{3}x\\cos x+\\frac{3}{8}x-\\frac{3}{8}\\sin x\\cos x+C$",
+  "solution": "$I_{4}=-\\frac{1}{4}\\sin^{3}x\\cos x+\\frac{3}{4}I_{2}$，而 $I_{2}=\\frac{x}{2}-\\frac{\\sin 2x}{4}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "三角高次：$\\cot^{5}x$ 拆分",
+  "statement": "求不定积分 $\\int \\cot^{5}x\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "凑微分"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第41节 循环迭代不定积分",
+  "hints": [
+   "用 $\\cot^{5}x=\\cot^{3}x(\\csc^{2}x-1)$，含 $\\csc^{2}x$ 的部分凑 $-\\mathrm{d}(\\cot x)$。"
+  ],
+  "answer": "$-\\frac{1}{4}\\cot^{4}x+\\frac{1}{2}\\cot^{2}x+\\ln|\\sin x|+C$",
+  "solution": "$\\int\\cot^{5}x\\,\\mathrm{d}x=\\int\\cot^{3}x\\,\\mathrm{d}(-\\cot x)-\\int\\cot^{3}x\\,\\mathrm{d}x$，再用 $\\cot^{2}=\\csc^{2}-1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "三角高次：$\\csc^{3}x$ 分部循环",
+  "statement": "求不定积分 $\\int \\csc^{3}x\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "分部积分",
+   "循环积分"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第41节 循环迭代不定积分",
+  "hints": [
+   "与 $\\sec^{3}x$ 完全类似，注意 $\\csc$ 的符号与原函数的负号。"
+  ],
+  "answer": "$-\\frac{1}{2}\\csc x\\cot x+\\frac{1}{2}\\ln|\\csc x-\\cot x|+C$",
+  "solution": "$I=-\\csc x\\cot x-\\int\\csc x\\cot^{2}x\\,\\mathrm{d}x=-\\csc x\\cot x-I+\\int\\csc x\\,\\mathrm{d}x$，移项。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "递推：$\\tan^{n}x$ 的递推与初值",
+  "statement": "设 $I_{n}=\\int \\tan^{n}x\\,\\mathrm{d}x\\ (n\\ge 2)$，推导递推公式，并给出 $I_{0}$、$I_{1}$。",
+  "tags": [
+   "一元积分",
+   "递推公式",
+   "凑微分"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第41节 循环迭代不定积分",
+  "hints": [
+   "把 $\\tan^{n}x$ 拆成 $\\tan^{n-2}x(\\sec^{2}x-1)$，前者可直接凑微分。"
+  ],
+  "answer": "$I_{n}=\\frac{\\tan^{n-1}x}{n-1}-I_{n-2},\\ I_{0}=x+C,\\ I_{1}=-\\ln|\\cos x|+C$",
+  "solution": "$I_{n}=\\int\\tan^{n-2}x\\,\\mathrm{d}(\\tan x)-I_{n-2}=\\frac{\\tan^{n-1}x}{n-1}-I_{n-2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "递推：$\\sec^{n}x$ 分部降次",
+  "statement": "设 $I_{n}=\\int \\sec^{n}x\\,\\mathrm{d}x\\ (n\\ge 2)$，推导递推公式，并给出 $I_{1}$、$I_{2}$。",
+  "tags": [
+   "一元积分",
+   "递推公式",
+   "分部积分"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第41节 循环迭代不定积分",
+  "hints": [
+   "拆 $\\sec^{n}x=\\sec^{n-2}x\\cdot\\sec^{2}x$，分部后用 $\\tan^{2}x=\\sec^{2}x-1$ 化回 $I_{n}$ 与 $I_{n-2}$。"
+  ],
+  "answer": "$I_{n}=\\frac{\\sec^{n-2}x\\tan x}{n-1}+\\frac{n-2}{n-1}I_{n-2},\\ I_{1}=\\ln|\\sec x+\\tan x|+C,\\ I_{2}=\\tan x+C$",
+  "solution": "分部得 $I_{n}=\\sec^{n-2}x\\tan x-(n-2)\\int\\sec^{n-2}x\\tan^{2}x\\,\\mathrm{d}x$，整理即得递推式。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "递推：$\\cos^{n}x$ 华里士型",
+  "statement": "设 $I_{n}=\\int \\cos^{n}x\\,\\mathrm{d}x\\ (n\\ge 2)$，推导递推公式，并给出 $I_{0}$、$I_{1}$。",
+  "tags": [
+   "一元积分",
+   "递推公式",
+   "分部积分"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第41节 循环迭代不定积分",
+  "hints": [
+   "与 $\\sin^{n}x$ 对称，分部时取 $\\mathrm{d}v=\\cos x\\,\\mathrm{d}x$，符号随之改变。"
+  ],
+  "answer": "$I_{n}=\\frac{1}{n}\\cos^{n-1}x\\sin x+\\frac{n-1}{n}I_{n-2},\\ I_{0}=x+C,\\ I_{1}=\\sin x+C$",
+  "solution": "$I_{n}=\\cos^{n-1}x\\sin x+(n-1)\\int\\cos^{n-2}x\\sin^{2}x\\,\\mathrm{d}x$，整理即得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "递推：$\\cot^{n}x$ 的递推与初值",
+  "statement": "设 $I_{n}=\\int \\cot^{n}x\\,\\mathrm{d}x\\ (n\\ge 2)$，推导递推公式，并给出 $I_{0}$、$I_{1}$。",
+  "tags": [
+   "一元积分",
+   "递推公式",
+   "凑微分"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第41节 循环迭代不定积分",
+  "hints": [
+   "拆 $\\cot^{n}x=\\cot^{n-2}x(\\csc^{2}x-1)$，注意 $\\mathrm{d}(\\cot x)=-\\csc^{2}x\\,\\mathrm{d}x$。"
+  ],
+  "answer": "$I_{n}=-\\frac{\\cot^{n-1}x}{n-1}-I_{n-2},\\ I_{0}=x+C,\\ I_{1}=\\ln|\\sin x|+C$",
+  "solution": "$I_{n}=-\\frac{\\cot^{n-1}x}{n-1}-I_{n-2}$，$I_{1}=\\int\\frac{\\cos x}{\\sin x}\\mathrm{d}x=\\ln|\\sin x|+C$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "周期性：变限积分减线性修正项",
+  "statement": "设 $f(x)$ 连续，周期为 $T$，证明 $F(x)=\\int_{0}^{x}f(t)\\,\\mathrm{d}t-\\frac{x}{T}\\int_{0}^{T}f(t)\\,\\mathrm{d}t+\\int_{x}^{x+T}f(t)\\,\\mathrm{d}t$ 的周期为 $T$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "周期性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第42节 变限积分周期性",
+  "hints": [
+   "证 $F(x+T)-F(x)=0$：分别对三段用换元与周期函数的平移不变性。"
+  ],
+  "answer": "",
+  "solution": "把 $F(x+T)$ 的各项积分换元搬回 $[x,x+T]$ 上，由 $f$ 的周期性逐项相消，得 $F(x+T)-F(x)=0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "周期性：上限含 $2T$ 的修正",
+  "statement": "设 $f(x)$ 连续，周期为 $T$，证明 $F(x)=\\int_{0}^{x+2T}f(t)\\,\\mathrm{d}t-\\frac{x}{T}\\int_{0}^{T}f(t)\\,\\mathrm{d}t$ 的周期为 $T$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "周期性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第42节 变限积分周期性",
+  "hints": [
+   "先证 $\\int_{0}^{x+2T}f=\\int_{0}^{x}f+2\\int_{0}^{T}f$，再验证 $F(x+T)=F(x)$。"
+  ],
+  "answer": "",
+  "solution": "$F(x+T)-F(x)=\\int_{x+2T}^{x+3T}f-\\int_{0}^{T}f=0$，由周期函数的区间平移不变性得到。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "周期性：$(t-x)f(t)$ 型变限积分",
+  "statement": "设 $f(x)$ 连续，周期为 $T$，证明 $F(x)=\\int_{x}^{x+T}(t-x)f(t)\\,\\mathrm{d}t$ 的周期为 $T$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "周期性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第42节 变限积分周期性",
+  "hints": [
+   "把 $F(x)$ 写成 $x$ 的一次式：$\\int_{x}^{x+T}tf(t)\\mathrm{d}t-x\\int_{x}^{x+T}f(t)\\mathrm{d}t$，再比较 $F(x+T)$。"
+  ],
+  "answer": "",
+  "solution": "令 $u=t-x$，$F(x)=\\int_{0}^{T}uf(u+x)\\,\\mathrm{d}u$，再由 $f$ 的周期性知被积函数对 $x$ 以 $T$ 为周期。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "周期性：减去均值实现周期",
+  "statement": "设 $f(x)$ 连续，周期为 $T$，证明 $F(x)=\\int_{0}^{x}f(t)\\,\\mathrm{d}t-\\frac{x}{T}\\int_{0}^{T}f(t)\\,\\mathrm{d}t$ 的周期为 $T$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "周期性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第42节 变限积分周期性",
+  "hints": [
+   "这是最标准的构造：$F$ 的增量在一个周期内为零。"
+  ],
+  "answer": "",
+  "solution": "$F(x+T)-F(x)=\\int_{x}^{x+T}f-\\int_{0}^{T}f=0$，故 $F$ 以 $T$ 为周期。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "周期性：$nT$ 均值修正",
+  "statement": "设 $f(x)$ 连续，周期为 $T$，$n$ 为正整数，证明 $F(x)=\\int_{0}^{x}f(t)\\,\\mathrm{d}t-\\frac{x}{nT}\\int_{0}^{nT}f(t)\\,\\mathrm{d}t$ 的周期为 $T$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "周期性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第42节 变限积分周期性",
+  "hints": [
+   "先用周期性把 $nT$ 上的积分写成 $n\\int_{0}^{T}f$，再算一个周期内的增量。"
+  ],
+  "answer": "",
+  "solution": "$F(x+T)-F(x)=\\int_{x}^{x+T}f-\\frac{T}{nT}\\cdot n\\int_{0}^{T}f=0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "周期性：$tf(t)$ 型积分",
+  "statement": "设 $f(x)$ 连续，周期为 $T$，证明 $F(x)=\\int_{x}^{x+T}tf(t)\\,\\mathrm{d}t-x\\int_{0}^{T}f(t)\\,\\mathrm{d}t$ 的周期为 $T$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "周期性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第42节 变限积分周期性",
+  "hints": [
+   "第二项是 $x$ 的一次项，用来抵消第一项随 $x$ 平移产生的增量。"
+  ],
+  "answer": "",
+  "solution": "$F(x+T)-F(x)=\\int_{x+T}^{x+2T}tf\\,\\mathrm{d}t-\\int_{x}^{x+T}tf\\,\\mathrm{d}t-T\\int_{0}^{T}f$，令 $t=u+T$ 后与后两项相消。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "周期性：上限 $x+T$ 的差值形式",
+  "statement": "设 $f(x)$ 连续，周期为 $T$，证明 $F(x)=\\int_{0}^{x+T}f(t)\\,\\mathrm{d}t-\\frac{x}{T}\\int_{0}^{T}f(t)\\,\\mathrm{d}t$ 的周期为 $T$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "周期性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第42节 变限积分周期性",
+  "hints": [
+   "注意 $\\int_{0}^{x+T}f=\\int_{0}^{x}f+\\int_{0}^{T}f$，化归为上一类结构。"
+  ],
+  "answer": "",
+  "solution": "$F(x)=\\int_{0}^{x}f+\\left(1-\\frac{x}{T}\\right)\\int_{0}^{T}f$，再验证 $F(x+T)-F(x)=0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "周期性：减去均值 $m$ 的构造",
+  "statement": "设 $f(x)$ 连续，周期为 $T$，令 $m=\\frac{1}{T}\\int_{0}^{T}f(t)\\,\\mathrm{d}t$，证明 $F(x)=\\int_{0}^{x}[f(t)-m]\\,\\mathrm{d}t$ 的周期为 $T$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "周期性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第42节 变限积分周期性",
+  "hints": [
+   "$f-m$ 仍以 $T$ 为周期，且一个周期上的积分为零。"
+  ],
+  "answer": "",
+  "solution": "$F(x+T)-F(x)=\\int_{x}^{x+T}[f(t)-m]\\mathrm{d}t=\\int_{0}^{T}f-nmT\\cdot\\frac{1}{n}$，即 $\\int_{0}^{T}f-Tm=0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "周期性：下限含常数 $a$",
+  "statement": "设 $f(x)$ 连续，周期为 $T$，$a$ 为常数，证明 $F(x)=\\int_{a}^{a+x}f(t)\\,\\mathrm{d}t-\\frac{x}{T}\\int_{0}^{T}f(t)\\,\\mathrm{d}t$ 的周期为 $T$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "周期性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第42节 变限积分周期性",
+  "hints": [
+   "常数下限只差一个常数，不影响周期，按增量法验证。"
+  ],
+  "answer": "",
+  "solution": "$F(x+T)-F(x)=\\int_{a+x}^{a+x+T}f-\\int_{0}^{T}f=0$，由周期函数的区间平移不变性得证。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "周期性：系数含 $x+T$ 的修正",
+  "statement": "设 $f(x)$ 连续，周期为 $T$，证明 $F(x)=\\int_{0}^{x+T}f(t)\\,\\mathrm{d}t-\\frac{x+T}{T}\\int_{0}^{T}f(t)\\,\\mathrm{d}t$ 的周期为 $T$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "周期性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第42节 变限积分周期性",
+  "hints": [
+   "把 $F$ 改写成 $\\int_{0}^{x}f+\\int_{0}^{T}f-\\frac{x}{T}\\int_{0}^{T}f-\\int_{0}^{T}f$，常数项自动抵消。"
+  ],
+  "answer": "",
+  "solution": "$F(x)=\\int_{0}^{x}f-\\frac{x}{T}\\int_{0}^{T}f$，故 $F(x+T)-F(x)=\\int_{x}^{x+T}f-\\int_{0}^{T}f=0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "奇偶性：奇函数积分得偶函数",
+  "statement": "设 $f(x)$ 是连续奇函数，则下列函数中必为偶函数的是（　）\nA. $\\int_{0}^{x}[f(t)+tf(t)]\\,\\mathrm{d}t$\nB. $\\int_{0}^{x}[f(t)+\\sin f(t)]\\,\\mathrm{d}t$\nC. $\\int_{0}^{x}[tf(t)+(x-t)f(t)]\\,\\mathrm{d}t$\nD. $\\int_{0}^{x}[\\cos f(t)+\\sin t\\cdot f(t)]\\,\\mathrm{d}t$",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第43节 变限积分奇偶性",
+  "hints": [
+   "把被积函数拆成各项判断奇偶：奇函数的变限积分是偶函数，偶函数的是奇函数。"
+  ],
+  "answer": "B",
+  "solution": "$f$ 奇 $\\Rightarrow$ $f+\\sin f$ 仍为奇函数（$\\sin$ 为奇），其变限积分必为偶函数，故 B 正确。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "奇偶性：奇函数积分得奇函数",
+  "statement": "设 $f(x)$ 是连续奇函数，则下列函数中必为奇函数的是（　）\nA. $\\int_{0}^{x}[f(t)+\\cos t\\cdot f(t)]\\,\\mathrm{d}t$\nB. $\\int_{0}^{x}[tf(t)+\\sin t\\cdot f(t)]\\,\\mathrm{d}t$\nC. $\\int_{0}^{x}[\\sin f(t)+t^{2}f(t)]\\,\\mathrm{d}t$\nD. $\\int_{0}^{x}[(x-t)f(t)+f(t)]\\,\\mathrm{d}t$",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第43节 变限积分奇偶性",
+  "hints": [
+   "要得到奇函数，被积函数必须是偶函数；$t f(t)$ 与 $\\sin t\\,f(t)$ 都是偶函数。"
+  ],
+  "answer": "B",
+  "solution": "$tf(t)$：奇×奇为偶；$\\sin t\\cdot f(t)$：奇×奇为偶，两项之和为偶函数，变限积分为奇函数，选 B。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "奇偶性：偶被积函数对应奇积分",
+  "statement": "设 $f(x)$ 是连续奇函数，则下列函数中必为偶函数的是（　）\nA. $\\int_{0}^{x}[\\cos t\\cdot f(t)+t^{2}f(t)]\\,\\mathrm{d}t$\nB. $\\int_{0}^{x}[tf(t)+\\cos f(t)]\\,\\mathrm{d}t$\nC. $\\int_{0}^{x}[f(t)+\\sin t\\cdot f(t)]\\,\\mathrm{d}t$\nD. $\\int_{0}^{x}[(x-t)f(t)+\\sin f(t)]\\,\\mathrm{d}t$",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第43节 变限积分奇偶性",
+  "hints": [
+   "只需被积函数为奇函数：$\\cos t\\cdot f(t)$ 与 $t^{2}f(t)$ 都是奇函数。"
+  ],
+  "answer": "A",
+  "solution": "偶×奇=奇，偶×奇=奇，两项之和为奇函数，其变限积分为偶函数，选 A。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "奇偶性：选被积函数为偶的一项",
+  "statement": "设 $f(x)$ 是连续奇函数，则下列函数中必为奇函数的是（　）\nA. $\\int_{0}^{x}[t^{2}f(t)+\\sin f(t)]\\,\\mathrm{d}t$\nB. $\\int_{0}^{x}[\\cos t\\cdot f(t)+\\sin f(t)]\\,\\mathrm{d}t$\nC. $\\int_{0}^{x}[\\sin t\\cdot f(t)+(x-t)f(t)]\\,\\mathrm{d}t$\nD. $\\int_{0}^{x}[t^{2}f(t)+\\cos f(t)]\\,\\mathrm{d}t$",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第43节 变限积分奇偶性",
+  "hints": [
+   "要把含 $x$ 的项拆开：$(x-t)f(t)$ 关于 $t$ 的奇偶性与 $x$ 的取值有关，需先拆。"
+  ],
+  "answer": "C",
+  "solution": "$\\sin t\\cdot f(t)$ 为偶函数，$(x-t)f(t)=xf(t)-tf(t)$ 中 $xf$ 为奇、$tf$ 为偶，合成为偶函数，故变限积分为奇函数，选 C。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "奇偶性：奇函数配 $t^{2}f(t)$",
+  "statement": "设 $f(x)$ 是连续奇函数，则下列函数中必为偶函数的是（　）\nA. $\\int_{0}^{x}[f(t)+t^{2}f(t)]\\,\\mathrm{d}t$\nB. $\\int_{0}^{x}[tf(t)+t^{3}f(t)]\\,\\mathrm{d}t$\nC. $\\int_{0}^{x}[\\sin f(t)+t^{3}f(t)]\\,\\mathrm{d}t$\nD. $\\int_{0}^{x}[(x-t)f(t)+\\cos f(t)]\\,\\mathrm{d}t$",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第43节 变限积分奇偶性",
+  "hints": [
+   "$f(t)$ 与 $t^{2}f(t)$ 都是奇函数，和仍为奇函数，积分后为偶函数。"
+  ],
+  "answer": "A",
+  "solution": "$f$ 奇、$t^{2}f$ 奇 $\\Rightarrow$ 被积函数奇 $\\Rightarrow$ 变限积分偶，选 A。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "奇偶性：偶函数情形，偶被积得奇积分",
+  "statement": "设 $f(x)$ 是连续偶函数，则下列函数中必为偶函数的是（　）\nA. $\\int_{0}^{x}[tf(t)+\\sin f(t)]\\,\\mathrm{d}t$\nB. $\\int_{0}^{x}[\\sin f(t)+\\cos f(t)]\\,\\mathrm{d}t$\nC. $\\int_{0}^{x}[\\sin t\\cdot f(t)+t^{3}f(t)]\\,\\mathrm{d}t$\nD. $\\int_{0}^{x}[\\cos t\\cdot f(t)+f(t^{2})]\\,\\mathrm{d}t$",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第43节 变限积分奇偶性",
+  "hints": [
+   "$f$ 为偶时 $tf(t)$ 为奇、$t^{3}f(t)$ 为奇；注意 $\\sin f(t)$、$\\cos f(t)$ 的奇偶由 $f$ 决定。"
+  ],
+  "answer": "C",
+  "solution": "$\\sin t\\cdot f(t)$ 为奇（奇×偶），$t^{3}f(t)$ 为奇，被积函数为奇，积分为偶，选 C。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "奇偶性：$f(t^{2})$ 型干扰项",
+  "statement": "设 $f(x)$ 是连续偶函数，则下列函数中必为奇函数的是（　）\nA. $\\int_{0}^{x}[t^{3}f(t)+f(t)]\\,\\mathrm{d}t$\nB. $\\int_{0}^{x}[f(t)+f(t^{2})]\\,\\mathrm{d}t$\nC. $\\int_{0}^{x}[\\sin t\\cdot f(t)+tf(t)]\\,\\mathrm{d}t$\nD. $\\int_{0}^{x}[\\cos t\\cdot f(t)+\\sin t\\cdot f(t)]\\,\\mathrm{d}t$",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第43节 变限积分奇偶性",
+  "hints": [
+   "$f(t)$ 与 $f(t^{2})$ 都是偶函数（复合后仍偶），偶被积函数的变限积分为奇函数。"
+  ],
+  "answer": "B",
+  "solution": "$f$ 偶且 $t^{2}$ 偶 $\\Rightarrow$ $f(t^{2})$ 偶，故被积函数为偶，积分为奇，选 B。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "奇偶性：偶函数配 $t^{3}f(t)$",
+  "statement": "设 $f(x)$ 是连续偶函数，则下列函数中必为偶函数的是（　）\nA. $\\int_{0}^{x}[t^{3}f(t)+\\cos t\\cdot f(t)]\\,\\mathrm{d}t$\nB. $\\int_{0}^{x}[t^{3}f(t)+\\sin t\\cdot f(t)]\\,\\mathrm{d}t$\nC. $\\int_{0}^{x}[f(t^{2})+\\cos t\\cdot f(t)]\\,\\mathrm{d}t$\nD. $\\int_{0}^{x}[tf(t)+f(t)]\\,\\mathrm{d}t$",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第43节 变限积分奇偶性",
+  "hints": [
+   "$t^{3}f(t)$ 与 $\\sin t\\,f(t)$ 均为奇函数，其和为奇，积分得偶。"
+  ],
+  "answer": "B",
+  "solution": "奇+奇=奇，被积函数为奇函数，变限积分必为偶函数，选 B。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "奇偶性：偶函数情形，选偶被积项",
+  "statement": "设 $f(x)$ 是连续偶函数，则下列函数中必为奇函数的是（　）\nA. $\\int_{0}^{x}[\\sin t\\cdot f(t)+\\cos f(t)]\\,\\mathrm{d}t$\nB. $\\int_{0}^{x}[\\sin f(t)+t^{2}f(t)]\\,\\mathrm{d}t$\nC. $\\int_{0}^{x}[\\cos f(t)+\\sin t\\cdot f(t)]\\,\\mathrm{d}t$\nD. $\\int_{0}^{x}[tf(t)+\\cos t\\cdot f(t)]\\,\\mathrm{d}t$",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第43节 变限积分奇偶性",
+  "hints": [
+   "$f$ 偶 $\\Rightarrow$ $\\sin f(t)$ 为偶；$t^{2}f(t)$ 也为偶，故被积函数为偶。"
+  ],
+  "answer": "B",
+  "solution": "偶+偶=偶，偶函数的变限积分为奇函数，选 B。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "奇偶性：$t^{3}f+tf$ 型",
+  "statement": "设 $f(x)$ 是连续偶函数，则下列函数中必为偶函数的是（　）\nA. $\\int_{0}^{x}[f(t)+(x-t)f(t)]\\,\\mathrm{d}t$\nB. $\\int_{0}^{x}[t^{3}f(t)+tf(t)]\\,\\mathrm{d}t$\nC. $\\int_{0}^{x}[t^{3}f(t)+\\cos f(t)]\\,\\mathrm{d}t$\nD. $\\int_{0}^{x}[\\cos f(t)+t^{3}f(t)]\\,\\mathrm{d}t$",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第43节 变限积分奇偶性",
+  "hints": [
+   "$t^{3}f(t)$ 与 $tf(t)$ 都是奇函数，和为奇，积分得偶函数。"
+  ],
+  "answer": "B",
+  "solution": "奇+奇=奇，故变限积分为偶函数，选 B。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导性：$\\sin x/x$ 型",
+  "statement": "设 $f(x)=\\begin{cases}\\dfrac{\\sin x}{x},&x\\ne 0\\\\ 0,&x=0\\end{cases}$，$F(x)=\\int_{0}^{x}f(t)\\,\\mathrm{d}t$。则在 $x=0$ 处，$F(x)$（　）\nA. 可导且 $F'(0)=1$\nB. 连续但不可导\nC. 可去间断点\nD. 跳跃间断点",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "可导性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第44节 变限积分可导性",
+  "hints": [
+   "$F$ 是 $f$ 的变限积分，$f$ 连续则 $F$ 可导且 $F'=f$；这里 $f$ 在 0 处补定义为 0，需看极限。"
+  ],
+  "answer": "A",
+  "solution": "$F$ 连续；$F'(0)=\\lim\\limits_{x\\to 0}\\frac{F(x)-F(0)}{x}=f(0^{+})=1$，故可导且 $F'(0)=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导性：$(e^{2x}-1)/x$ 型",
+  "statement": "设 $f(x)=\\begin{cases}\\dfrac{e^{2x}-1}{x},&x\\ne 0\\\\ 0,&x=0\\end{cases}$，$F(x)=\\int_{0}^{x}f(t)\\,\\mathrm{d}t$。则在 $x=0$ 处，$F(x)$（　）\nA. 可导且 $F'(0)=2$\nB. 连续但不可导\nC. 可去间断点\nD. 跳跃间断点",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "可导性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第44节 变限积分可导性",
+  "hints": [
+   "$F'(0)$ 就是 $f$ 在 0 处的连续延拓值，用等价无穷小 $e^{2x}-1\\sim 2x$。"
+  ],
+  "answer": "A",
+  "solution": "$\\lim\\limits_{x\\to 0}\\frac{e^{2x}-1}{x}=2$，$F'(0)=2$，故可导且 $F'(0)=2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导性：$(1-\\cos x)/x$ 型",
+  "statement": "设 $f(x)=\\begin{cases}\\dfrac{1-\\cos x}{x},&x\\ne 0\\\\ 0,&x=0\\end{cases}$，$F(x)=\\int_{0}^{x}f(t)\\,\\mathrm{d}t$。则在 $x=0$ 处，$F(x)$（　）\nA. 可导且 $F'(0)=0$\nB. 连续但不可导\nC. 可去间断点\nD. 跳跃间断点",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "可导性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第44节 变限积分可导性",
+  "hints": [
+   "用 $1-\\cos x\\sim\\frac{x^{2}}{2}$ 求 $f$ 在 0 处的极限。"
+  ],
+  "answer": "A",
+  "solution": "$\\lim\\limits_{x\\to 0}\\frac{1-\\cos x}{x}=0$，$F'(0)=0$，可导。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导性：挑选使 $F$ 连续不可导的 $f$",
+  "statement": "设 $F(x)=\\int_{0}^{x}f(t)\\,\\mathrm{d}t$，则下列 $f(x)$ 中，使 $F(x)$ 在 $x=0$ 处连续但不可导的是（　）\nA. $f(x)=\\begin{cases}\\sin x,&x\\ne 0\\\\ 0,&x=0\\end{cases}$\nB. $f(x)=\\begin{cases}\\cos x,&x\\ne 0\\\\ 0,&x=0\\end{cases}$\nC. $f(x)=\\begin{cases}x+1,&x<0\\\\ 0,&x=0\\\\ x-1,&x>0\\end{cases}$\nD. $f(x)=\\begin{cases}x,&x\\ne 0\\\\ 1,&x=0\\end{cases}$",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "可导性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第44节 变限积分可导性",
+  "hints": [
+   "$F$ 可导当且仅当 $f$ 在 0 处连续；逐项检查 $f(0^{-})=f(0^{+})=f(0)$ 是否成立。"
+  ],
+  "answer": "C",
+  "solution": "C 中 $f(0^{-})=1$，$f(0^{+})=-1$，$f$ 跳跃，故 $F$ 连续但不可导。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导性：$f$ 在 0 处跳跃",
+  "statement": "设 $F(x)=\\int_{0}^{x}f(t)\\,\\mathrm{d}t$，则下列 $f(x)$ 中，使 $F(x)$ 在 $x=0$ 处连续但不可导的是（　）\nA. $f(x)=\\begin{cases}x^{2},&x\\ne 0\\\\ 1,&x=0\\end{cases}$\nB. $f(x)=\\begin{cases}1,&x<0\\\\ 0,&x=0\\\\ -1,&x>0\\end{cases}$\nC. $f(x)=\\begin{cases}x,&x\\ne 0\\\\ 0,&x=0\\end{cases}$\nD. $f(x)=\\begin{cases}e^{x},&x\\ne 0\\\\ 0,&x=0\\end{cases}$",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "可导性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第44节 变限积分可导性",
+  "hints": [
+   "看左右极限：只有跳跃型间断才能让 $F$ 连续但不可导。"
+  ],
+  "answer": "B",
+  "solution": "B 中 $f(0^{-})=1\\ne -1=f(0^{+})$，$f$ 跳跃，$F$ 连续不可导。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导性：左右极限异号的分段函数",
+  "statement": "设 $F(x)=\\int_{0}^{x}f(t)\\,\\mathrm{d}t$，则下列 $f(x)$ 中，使 $F(x)$ 在 $x=0$ 处连续但不可导的是（　）\nA. $f(x)=\\begin{cases}2,&x<0\\\\ 1,&x=0\\\\ 0,&x>0\\end{cases}$\nB. $f(x)=\\begin{cases}1+x,&x\\ne 0\\\\ 0,&x=0\\end{cases}$\nC. $f(x)=\\begin{cases}x,&x<0\\\\ 0,&x=0\\\\ x,&x>0\\end{cases}$\nD. $f(x)=\\begin{cases}x^{2},&x<0\\\\ 0,&x=0\\\\ x,&x>0\\end{cases}$",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "可导性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第44节 变限积分可导性",
+  "hints": [
+   "A 中 $f(0^{-})=2\\ne 0=f(0^{+})$，$F$ 出现尖点；其余各项在两段上取值相同或可连续延拓。"
+  ],
+  "answer": "A",
+  "solution": "$f(0^{-})=2$，$f(0^{+})=0$，左右导数分别为 2 与 0，故 $F$ 连续但不可导。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导性：跳跃型间断判断",
+  "statement": "设 $F(x)=\\int_{0}^{x}f(t)\\,\\mathrm{d}t$，则下列 $f(x)$ 中，使 $F(x)$ 在 $x=0$ 处连续但不可导的是（　）\nA. $f(x)=\\begin{cases}x+1,&x\\ne 0\\\\ 0,&x=0\\end{cases}$\nB. $f(x)=\\begin{cases}-1,&x<0\\\\ 0,&x=0\\\\ 2,&x>0\\end{cases}$\nC. $f(x)=\\begin{cases}\\ln(1+x),&x\\ne 0\\\\ 0,&x=0\\end{cases}$\nD. $f(x)=\\begin{cases}x,&x<0\\\\ 0,&x=0\\\\ x,&x>0\\end{cases}$",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "可导性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第44节 变限积分可导性",
+  "hints": [
+   "只有 B 两侧极限不相等（-1 与 2），其余 $f$ 在 0 处连续或可连续延拓。"
+  ],
+  "answer": "B",
+  "solution": "B 中 $f(0^{-})=-1$，$f(0^{+})=2$，$F$ 连续但不可导，选 B。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导性：$\\sin x/x$ 与常数对比",
+  "statement": "设 $F(x)=\\int_{0}^{x}f(t)\\,\\mathrm{d}t$，则下列 $f(x)$ 中，使 $F(x)$ 在 $x=0$ 处连续但不可导的是（　）\nA. $f(x)=\\begin{cases}\\dfrac{\\sin x}{x},&x\\ne 0\\\\ 1,&x=0\\end{cases}$\nB. $f(x)=\\begin{cases}1,&x<0\\\\ 0,&x=0\\\\ 2,&x>0\\end{cases}$\nC. $f(x)=\\begin{cases}x^{2},&x\\ne 0\\\\ 0,&x=0\\end{cases}$\nD. $f(x)=\\begin{cases}\\cos x,&x\\ne 0\\\\ 0,&x=0\\end{cases}$",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "可导性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第44节 变限积分可导性",
+  "hints": [
+   "A、C、D 都在 0 处连续，$F$ 可导；只有 B 跳跃。"
+  ],
+  "answer": "B",
+  "solution": "B 中 $f(0^{-})=1\\ne 2=f(0^{+})$，故 $F$ 连续但不可导。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导性：由 $F$ 可导反求参数 $a$",
+  "statement": "设 $f(x)=\\begin{cases}3x^{2}+a,&x<1\\\\ 2x+3,&x\\ge 1\\end{cases}$，$F(x)=\\int_{0}^{x}f(t)\\,\\mathrm{d}t$。若 $F$ 在 $x=1$ 处可导，求 $a$（　）\nA. 0\nB. 1\nC. 2\nD. 3",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "可导性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第44节 变限积分可导性",
+  "hints": [
+   "$F$ 可导要求 $f$ 在 $x=1$ 处连续，即左右极限相等。"
+  ],
+  "answer": "C",
+  "solution": "$f(1^{-})=3+a$，$f(1^{+})=5$，令 $3+a=5$ 得 $a=2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导性：$x^{2}+1$ 与 $x+a$ 衔接",
+  "statement": "设 $f(x)=\\begin{cases}x+a,&x<0\\\\ 2,&x=0\\\\ x^{2}+1,&x>0\\end{cases}$，$F(x)=\\int_{0}^{x}f(t)\\,\\mathrm{d}t$。若 $F$ 在 $x=0$ 处可导，求 $a$（　）\nA. 0\nB. 1\nC. 2\nD. 3",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "可导性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第44节 变限积分可导性",
+  "hints": [
+   "$F$ 可导需 $f$ 在 0 处连续：左极限 $a$、右极限 1、函数值 2 三者相等。"
+  ],
+  "answer": "B",
+  "solution": "$f(0^{-})=a$，$f(0^{+})=1$，$F$ 可导只要求左右导数相等，故 $a=1$；$f(0)=2$ 只影响 $f$ 自身的连续性。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导性：$ae^{x}$ 与 $x+1$ 衔接",
+  "statement": "设 $f(x)=\\begin{cases}ae^{x},&x<0\\\\ a,&x=0\\\\ x+1,&x>0\\end{cases}$，$F(x)=\\int_{0}^{x}f(t)\\,\\mathrm{d}t$。若 $F$ 在 $x=0$ 处可导，求 $a$（　）\nA. 0\nB. 1\nC. 2\nD. 3",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "可导性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第44节 变限积分可导性",
+  "hints": [
+   "$F$ 可导等价于 $f$ 在 0 处左右极限相等。"
+  ],
+  "answer": "B",
+  "solution": "$f(0^{-})=a$，$f(0^{+})=1$，故 $a=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导性：含 $a^{2}$ 的分段衔接",
+  "statement": "设 $f(x)=\\begin{cases}2x+a,&x<1\\\\ a^{2},&x=1\\\\ x^{2}+1,&x>1\\end{cases}$，$F(x)=\\int_{0}^{x}f(t)\\,\\mathrm{d}t$。若 $F$ 在 $x=1$ 处可导，求 $a$（　）\nA. $-1$\nB. 0\nC. 1\nD. 2",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "可导性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第44节 变限积分可导性",
+  "hints": [
+   "$F$ 可导只需左右极限相等：$2+a=2$。"
+  ],
+  "answer": "B",
+  "solution": "$f(1^{-})=2+a$，$f(1^{+})=2$，得 $a=0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "可导性：$\\sin x+a$ 的衔接",
+  "statement": "设 $f(x)=\\begin{cases}\\sin x+a,&x<0\\\\ a,&x=0\\\\ \\cos x+1,&x>0\\end{cases}$，$F(x)=\\int_{0}^{x}f(t)\\,\\mathrm{d}t$。若 $F$ 在 $x=0$ 处可导，求 $a$（　）\nA. 0\nB. 1\nC. 2\nD. 3",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "可导性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第44节 变限积分可导性",
+  "hints": [
+   "左右极限分别为 $a$ 与 2，令其相等。"
+  ],
+  "answer": "C",
+  "solution": "$f(0^{-})=a$，$f(0^{+})=2$，故 $a=2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含参变限：$e^{xt}$ 型",
+  "statement": "设 $F(x)=\\int_{0}^{x}e^{xt}\\,\\mathrm{d}t\\ (x\\ne 0)$，求 $F'(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分求导",
+   "复合函数求导"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第45节 变限积分求导",
+  "hints": [
+   "先积出 $F=\\frac{e^{x^{2}}-1}{x}$，再对 $x$ 求导（商的法则）。"
+  ],
+  "answer": "$2e^{x^{2}}-\\frac{e^{x^{2}}-1}{x^{2}}$",
+  "solution": "$F'=\\frac{2xe^{x^{2}}\\cdot x-(e^{x^{2}}-1)}{x^{2}}=2e^{x^{2}}-\\frac{e^{x^{2}}-1}{x^{2}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含参变限：$\\sin(xt)/t$ 型",
+  "statement": "设 $F(x)=\\int_{0}^{x}\\frac{\\sin(xt)}{t}\\,\\mathrm{d}t\\ (x\\ne 0)$，求 $F'(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分求导",
+   "复合函数求导"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第45节 变限积分求导",
+  "hints": [
+   "换元 $u=xt$ 得 $F=\\int_{0}^{x^{2}}\\frac{\\sin u}{u}\\mathrm{d}u$，再用变限求导。"
+  ],
+  "answer": "$\\frac{2\\sin(x^{2})}{x}$",
+  "solution": "$F'(x)=\\frac{\\sin(x^{2})}{x^{2}}\\cdot 2x=\\frac{2\\sin(x^{2})}{x}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含参变限：$\\sin(xt)$ 型",
+  "statement": "设 $F(x)=\\int_{0}^{x}\\sin(xt)\\,\\mathrm{d}t\\ (x\\ne 0)$，求 $F'(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分求导",
+   "复合函数求导"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第45节 变限积分求导",
+  "hints": [
+   "先积出 $F=\\frac{1-\\cos(x^{2})}{x}$，再用商的法则求导。"
+  ],
+  "answer": "$2\\sin(x^{2})+\\frac{\\cos(x^{2})-1}{x^{2}}$",
+  "solution": "$F'=\\frac{2x\\sin(x^{2})\\cdot x-(1-\\cos(x^{2}))}{x^{2}}=2\\sin(x^{2})+\\frac{\\cos(x^{2})-1}{x^{2}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象变限：$x$ 在积分号内",
+  "statement": "设 $f$ 连续，$F(x)=\\int_{0}^{x}xf(t)\\,\\mathrm{d}t$，求 $F'(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分求导",
+   "抽象函数"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第45节 变限积分求导",
+  "hints": [
+   "先把 $x$ 提到积分号外：$F=x\\int_{0}^{x}f(t)\\mathrm{d}t$，再用乘积法则。"
+  ],
+  "answer": "$\\int_{0}^{x}f(t)\\,\\mathrm{d}t+xf(x)$",
+  "solution": "$F'(x)=\\int_{0}^{x}f(t)\\mathrm{d}t+xf(x)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象变限：上限 $x^{2}$ 且被积含 $x$",
+  "statement": "设 $f$ 连续，$F(x)=\\int_{0}^{x^{2}}(x-t)f(t)\\,\\mathrm{d}t$，求 $F'(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分求导",
+   "抽象函数"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第45节 变限积分求导",
+  "hints": [
+   "拆成 $x\\int f-t\\int f$，上限 $x^{2}$ 求导时两处都要乘 $2x$。"
+  ],
+  "answer": "$\\int_{0}^{x^{2}}f(t)\\,\\mathrm{d}t+2x^{2}(1-x)f(x^{2})$",
+  "solution": "$F'=\\int_{0}^{x^{2}}f+2x^{2}f(x^{2})-2x^{3}f(x^{2})=\\int_{0}^{x^{2}}f+2x^{2}(1-x)f(x^{2})$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象变限：$x^{2}\\int f$ 型",
+  "statement": "设 $f$ 连续，$F(x)=x^{2}\\int_{0}^{x}f(t)\\,\\mathrm{d}t$，求 $F'(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分求导",
+   "抽象函数"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第45节 变限积分求导",
+  "hints": [
+   "乘积法则：$(x^{2})'\\cdot\\int f+x^{2}\\cdot f(x)$。"
+  ],
+  "answer": "$2x\\int_{0}^{x}f(t)\\,\\mathrm{d}t+x^{2}f(x)$",
+  "solution": "$F'(x)=2x\\int_{0}^{x}f(t)\\mathrm{d}t+x^{2}f(x)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象变限：$(x^{2}-t^{2})f(t)$",
+  "statement": "设 $f$ 连续，$F(x)=\\int_{0}^{x}(x^{2}-t^{2})f(t)\\,\\mathrm{d}t$，求 $F'(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分求导",
+   "抽象函数"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第45节 变限积分求导",
+  "hints": [
+   "拆 $x^{2}\\int f-\\int t^{2}f$，后一项上限代入被减掉。"
+  ],
+  "answer": "$2x\\int_{0}^{x}f(t)\\,\\mathrm{d}t$",
+  "solution": "$F'=2x\\int_{0}^{x}f+x^{2}f(x)-x^{2}f(x)=2x\\int_{0}^{x}f(t)\\mathrm{d}t$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象变限：$(x-t)^{2}f(t)$",
+  "statement": "设 $f$ 连续，$F(x)=\\int_{0}^{x}(x-t)^{2}f(t)\\,\\mathrm{d}t$，求 $F'(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分求导",
+   "抽象函数"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第45节 变限积分求导",
+  "hints": [
+   "被积函数是 $(x-t)^{2}$，求导后可直接用换元 $u=x-t$ 验证。"
+  ],
+  "answer": "$2\\int_{0}^{x}(x-t)f(t)\\,\\mathrm{d}t$",
+  "solution": "$F(x)=\\int_{0}^{x}u^{2}f(x-u)\\mathrm{d}u$，求导得 $2\\int_{0}^{x}(x-t)f(t)\\mathrm{d}t$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象变限：$(x+t)f(t)$",
+  "statement": "设 $f$ 连续，$F(x)=\\int_{0}^{x}(x+t)f(t)\\,\\mathrm{d}t$，求 $F'(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分求导",
+   "抽象函数"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第45节 变限积分求导",
+  "hints": [
+   "拆 $x\\int f+\\int tf$，求导后两项的 $xf(x)$ 项相加。"
+  ],
+  "answer": "$\\int_{0}^{x}f(t)\\,\\mathrm{d}t+2xf(x)$",
+  "solution": "$F'=\\int_{0}^{x}f+xf(x)+xf(x)=\\int_{0}^{x}f(t)\\mathrm{d}t+2xf(x)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象变限：$\\sin(x-t)f(t)$ 卷积型",
+  "statement": "设 $f$ 连续，$F(x)=\\int_{0}^{x}\\sin(x-t)f(t)\\,\\mathrm{d}t$，求 $F'(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分求导",
+   "抽象函数"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第45节 变限积分求导",
+  "hints": [
+   "对含参积分用莱布尼茨公式，端点处被积函数为 0 自动消掉。"
+  ],
+  "answer": "$\\int_{0}^{x}\\cos(x-t)f(t)\\,\\mathrm{d}t$",
+  "solution": "$F'(x)=\\sin 0\\cdot f(x)+\\int_{0}^{x}\\cos(x-t)f(t)\\mathrm{d}t$，首项为 0。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象变限：$e^{x-t}f(t)$ 卷积型",
+  "statement": "设 $f$ 连续，$F(x)=\\int_{0}^{x}e^{x-t}f(t)\\,\\mathrm{d}t$，求 $F'(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分求导",
+   "抽象函数"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第45节 变限积分求导",
+  "hints": [
+   "端点项 $e^{0}f(x)=f(x)$ 加上对参数求导的 $F(x)$。"
+  ],
+  "answer": "$f(x)+F(x)$",
+  "solution": "$F'(x)=f(x)+\\int_{0}^{x}e^{x-t}f(t)\\mathrm{d}t=f(x)+F(x)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象变限：$x\\int_{0}^{x^{2}}f$",
+  "statement": "设 $f$ 连续，$F(x)=\\int_{0}^{x^{2}}xf(t)\\,\\mathrm{d}t$，求 $F'(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分求导",
+   "抽象函数"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第45节 变限积分求导",
+  "hints": [
+   "$F=x\\int_{0}^{x^{2}}f$，乘积法则配合上限 $x^{2}$ 的 $2x$。"
+  ],
+  "answer": "$\\int_{0}^{x^{2}}f(t)\\,\\mathrm{d}t+2x^{2}f(x^{2})$",
+  "solution": "$F'=\\int_{0}^{x^{2}}f+x\\cdot 2xf(x^{2})=\\int_{0}^{x^{2}}f(t)\\mathrm{d}t+2x^{2}f(x^{2})$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象变限：上下限均变且被积含 $x$",
+  "statement": "设 $f$ 连续，$F(x)=\\int_{x}^{x^{2}}(x-t)f(t)\\,\\mathrm{d}t$，求 $F'(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分求导",
+   "抽象函数"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第45节 变限积分求导",
+  "hints": [
+   "拆 $x\\int f-\\int tf$，积分限求导时上限、下限各产生一项，端点项正好相消。"
+  ],
+  "answer": "$\\int_{x}^{x^{2}}f(t)\\,\\mathrm{d}t+2x^{2}(1-x)f(x^{2})$",
+  "solution": "$F'=\\int_{x}^{x^{2}}f+xf(x^{2})\\cdot 2x-xf(x)-[x^{2}f(x^{2})\\cdot 2x-xf(x)]=\\int_{x}^{x^{2}}f+2x^{2}(1-x)f(x^{2})$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "无穷小阶数：四种变限积分比较",
+  "statement": "当 $x\\to 0$ 时，下列无穷小中阶数最大的是（　）\nA. $\\int_{0}^{x}(1-\\cos t)\\,\\mathrm{d}t$\nB. $\\int_{0}^{1-\\cos x}t\\sin t\\,\\mathrm{d}t$\nC. $\\int_{0}^{\\ln(1+x)}(e^{t}-1)\\,\\mathrm{d}t$\nD. $\\int_{0}^{x^{2}}\\sin t\\,\\mathrm{d}t$",
+  "tags": [
+   "极限",
+   "变限积分",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第46节 变限积分无穷小阶数",
+  "hints": [
+   "把每个变限积分换成等价阶：$\\int_{0}^{\\varphi(x)}g(t)\\mathrm{d}t\\sim G(\\varphi(x))$，再看 $\\varphi$ 的阶。"
+  ],
+  "answer": "B",
+  "solution": "A 为 3 阶；B 的上限 $\\sim\\frac{x^{2}}{2}$、被积 $t^{2}$，为 6 阶；C 为 2 阶；D 为 4 阶，故选 B。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "无穷小阶数：$e^{t^{2}}-1$ 型",
+  "statement": "当 $x\\to 0$ 时，下列无穷小中阶数最大的是（　）\nA. $\\int_{0}^{x^{3}}(e^{t^{2}}-1)\\,\\mathrm{d}t$\nB. $\\int_{0}^{\\sin x}(1-\\cos t)\\,\\mathrm{d}t$\nC. $\\int_{0}^{1-\\cos x}\\ln(1+t^{2})\\,\\mathrm{d}t$\nD. $\\int_{0}^{x^{2}}\\arctan t\\,\\mathrm{d}t$",
+  "tags": [
+   "极限",
+   "变限积分",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第46节 变限积分无穷小阶数",
+  "hints": [
+   "被积函数最低阶与积分上限阶数相加，才是整个积分的阶。"
+  ],
+  "answer": "A",
+  "solution": "A：被积 $\\sim t^{2}$、上限 $x^{3}$，得 9 阶；B：$\\frac{x^{3}}{6}$；C：$\\frac{x^{6}}{12}$；D：$\\frac{x^{4}}{2}$，选 A。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "无穷小阶数：$\\sqrt{1+t}-1$ 型",
+  "statement": "当 $x\\to 0$ 时，下列无穷小中阶数最大的是（　）\nA. $\\int_{0}^{x}\\sin(t^{2})\\,\\mathrm{d}t$\nB. $\\int_{0}^{\\ln(1+x)}\\sin t\\,\\mathrm{d}t$\nC. $\\int_{0}^{x^{4}}\\left(\\sqrt{1+t}-1\\right)\\mathrm{d}t$\nD. $\\int_{0}^{1-\\cos x}\\arctan t\\,\\mathrm{d}t$",
+  "tags": [
+   "极限",
+   "变限积分",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第46节 变限积分无穷小阶数",
+  "hints": [
+   "$\\sqrt{1+t}-1\\sim\\frac{t}{2}$，与上限 $x^{4}$ 相乘给出 5 阶。"
+  ],
+  "answer": "C",
+  "solution": "A: $\\frac{x^{3}}{3}$；B: $\\frac{x^{2}}{2}$；C: $\\frac{x^{8}}{16}$（8 阶）；D: $\\frac{x^{4}}{8}$。C 最大。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "无穷小阶数：$x^{4}$ 配 $\\sin t$",
+  "statement": "当 $x\\to 0$ 时，下列无穷小中阶数最大的是（　）\nA. $\\int_{0}^{\\sin x}(e^{t}-1)\\,\\mathrm{d}t$\nB. $\\int_{0}^{x^{2}}(1-\\cos t)\\,\\mathrm{d}t$\nC. $\\int_{0}^{\\ln(1+x)}\\sin(t^{2})\\,\\mathrm{d}t$\nD. $\\int_{0}^{x^{4}}\\sin t\\,\\mathrm{d}t$",
+  "tags": [
+   "极限",
+   "变限积分",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第46节 变限积分无穷小阶数",
+  "hints": [
+   "分别估计每个积分的阶：$\\int\\sin t\\sim\\frac{\\varphi^{2}}{2}$，$\\int(1-\\cos t)\\sim\\frac{\\varphi^{3}}{6}$。"
+  ],
+  "answer": "D",
+  "solution": "A: $\\frac{x^{2}}{2}$；B: $\\frac{x^{6}}{6}$；C: $\\frac{x^{3}}{3}$；D: $\\frac{x^{8}}{2}$。D 为 8 阶。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "无穷小阶数：$\\ln(1+t^{2})$ 型",
+  "statement": "当 $x\\to 0$ 时，下列无穷小中阶数最大的是（　）\nA. $\\int_{0}^{x^{3}}\\ln(1+t^{2})\\,\\mathrm{d}t$\nB. $\\int_{0}^{\\sin x}\\sin(t^{2})\\,\\mathrm{d}t$\nC. $\\int_{0}^{1-\\cos x}(e^{t}-1)\\,\\mathrm{d}t$\nD. $\\int_{0}^{x^{2}}\\tan t\\,\\mathrm{d}t$",
+  "tags": [
+   "极限",
+   "变限积分",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第46节 变限积分无穷小阶数",
+  "hints": [
+   "被积 $\\sim t^{2}$、上限 $x^{3}$，积分阶为 9 阶，最大。"
+  ],
+  "answer": "A",
+  "solution": "A: $\\frac{x^{9}}{3}$；B: $\\frac{x^{3}}{3}$；C: $\\frac{x^{4}}{8}$；D: $\\frac{x^{4}}{2}$。A 最大。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "变限积分无穷小：比较各选项阶数",
+  "statement": "当 $x\\to 0$ 时，下列无穷小量中阶数最大的是（ ）\n(A) $\\int_0^{x}(e^{t}-1)\\,\\mathrm{d}t$\n(B) $\\int_0^{x}(1-\\cos t)\\,\\mathrm{d}t$\n(C) $\\int_0^{1-\\cos x}\\sin(t^{3})\\,\\mathrm{d}t$\n(D) $\\int_0^{\\sin x}\\ln(1+t^{2})\\,\\mathrm{d}t$",
+  "tags": [
+   "极限",
+   "变限积分",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第46节 变限积分无穷小阶数",
+  "hints": [
+   "上限越小阶越高：$1-\\cos x$ 已是 $x^{2}$ 级，再代入被积函数又降一档。"
+  ],
+  "answer": "B",
+  "solution": "由 $\\left(\\int_0^{u(x)}f(t)\\mathrm{d}t\\right)'=f(u)u'$ 估阶，四项阶数依次定出，取最大者。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "变限积分无穷小：比较各选项阶数",
+  "statement": "当 $x\\to 0$ 时，下列无穷小量中阶数最大的是（ ）\n(A) $\\int_0^{\\sin x}\\sin(t^{2})\\,\\mathrm{d}t$\n(B) $\\int_0^{x^{2}}\\ln(1+t)\\,\\mathrm{d}t$\n(C) $\\int_0^{1-\\cos x}\\sin(t^{2})\\,\\mathrm{d}t$\n(D) $\\int_0^{\\tan x}(1-\\cos t)\\,\\mathrm{d}t$",
+  "tags": [
+   "极限",
+   "变限积分",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第46节 变限积分无穷小阶数",
+  "hints": [
+   "先把变限积分对上限求导化为被积函数，套 $u^{p+1}$ 估出阶数，再比大小。"
+  ],
+  "answer": "C",
+  "solution": "由 $\\left(\\int_0^{u(x)}f(t)\\mathrm{d}t\\right)'=f(u)u'$ 估阶，四项阶数依次定出，取最大者。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "变限积分无穷小：比较各选项阶数",
+  "statement": "当 $x\\to 0$ 时，下列无穷小量中阶数最大的是（ ）\n(A) $\\int_0^{x^{2}}(e^{t^{2}}-1)\\,\\mathrm{d}t$\n(B) $\\int_0^{1-\\cos x}\\tan t\\,\\mathrm{d}t$\n(C) $\\int_0^{\\ln(1+x)}\\sin(t^{2})\\,\\mathrm{d}t$\n(D) $\\int_0^{x^{2}}(1-\\cos t)\\,\\mathrm{d}t$",
+  "tags": [
+   "极限",
+   "变限积分",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第46节 变限积分无穷小阶数",
+  "hints": [
+   "先把变限积分对上限求导化为被积函数，套 $u^{p+1}$ 估出阶数，再比大小。"
+  ],
+  "answer": "A",
+  "solution": "由 $\\left(\\int_0^{u(x)}f(t)\\mathrm{d}t\\right)'=f(u)u'$ 估阶，四项阶数依次定出，取最大者。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "变限积分无穷小：比较各选项阶数",
+  "statement": "当 $x\\to 0$ 时，下列无穷小量中阶数最大的是（ ）\n(A) $\\int_0^{x^{2}}\\ln(1+t^{2})\\,\\mathrm{d}t$\n(B) $\\int_0^{x^{2}}\\sin t\\,\\mathrm{d}t$\n(C) $\\int_0^{\\sin x}(e^{t^{2}}-1)\\,\\mathrm{d}t$\n(D) $\\int_0^{x^{3}}(\\sqrt{1+t}-1)\\,\\mathrm{d}t$",
+  "tags": [
+   "极限",
+   "变限积分",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第46节 变限积分无穷小阶数",
+  "hints": [
+   "先把变限积分对上限求导化为被积函数，套 $u^{p+1}$ 估出阶数，再比大小。"
+  ],
+  "answer": "D",
+  "solution": "由 $\\left(\\int_0^{u(x)}f(t)\\mathrm{d}t\\right)'=f(u)u'$ 估阶，四项阶数依次定出，取最大者。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "变限积分无穷小：比较各选项阶数",
+  "statement": "当 $x\\to 0$ 时，下列无穷小量中阶数最大的是（ ）\n(A) $\\int_0^{\\tan x}\\sin(t^{2})\\,\\mathrm{d}t$\n(B) $\\int_0^{1-\\cos x}(e^{t^{2}}-1)\\,\\mathrm{d}t$\n(C) $\\int_0^{x^{2}}(e^{t}-1)\\,\\mathrm{d}t$\n(D) $\\int_0^{x}\\sin(t^{2})\\,\\mathrm{d}t$",
+  "tags": [
+   "极限",
+   "变限积分",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第46节 变限积分无穷小阶数",
+  "hints": [
+   "先把变限积分对上限求导化为被积函数，套 $u^{p+1}$ 估出阶数，再比大小。"
+  ],
+  "answer": "B",
+  "solution": "由 $\\left(\\int_0^{u(x)}f(t)\\mathrm{d}t\\right)'=f(u)u'$ 估阶，四项阶数依次定出，取最大者。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "变限积分无穷小：比较各选项阶数",
+  "statement": "【含参变限积分】当 $x\\to 0$ 时，下列无穷小量中阶数最大的是（ ）\n(A) $\\int_{x^{2}/2}^{x^{2}}t\\sqrt{x^{2}-t^{2}}\\,\\mathrm{d}t$\n(B) $\\int_{\\sin x}^{\\tan x}t\\sin(xt)\\,\\mathrm{d}t$\n(C) $\\int_{x}^{x^{2}}\\frac{\\sin(xt)}{t}\\,\\mathrm{d}t$\n(D) $\\int_{x}^{x^{3}}\\sqrt{t}\\,e^{-xt}\\,\\mathrm{d}t$",
+  "tags": [
+   "极限",
+   "变限积分",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第46节 变限积分无穷小阶数",
+  "hints": [
+   "含参时令 $t=xu$ 换元，把 $x$ 提到积分号外再比阶。"
+  ],
+  "answer": "B",
+  "solution": "令 $t=xu$ 化为 $x^{k}\\int g(u)\\mathrm{d}u$ 的形式，比较幂次 $k$ 与积分区间长度的阶数。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "变限积分无穷小：比较各选项阶数",
+  "statement": "当 $x\\to 0$ 时，下列无穷小量中阶数最大的是（ ）\n(A) $\\int_{x}^{x+x^{3}}xt^{2}\\,\\mathrm{d}t$\n(B) $\\int_{x}^{2x}\\ln(1+x\\sqrt{t})\\,\\mathrm{d}t$\n(C) $\\int_{x}^{x^{2}}\\frac{t}{1+x^{2}t}\\,\\mathrm{d}t$\n(D) $\\int_{x}^{x^{3}}e^{xt}\\sin(t^{2})\\,\\mathrm{d}t$",
+  "tags": [
+   "极限",
+   "变限积分",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第46节 变限积分无穷小阶数",
+  "hints": [
+   "先把变限积分对上限求导化为被积函数，套 $u^{p+1}$ 估出阶数，再比大小。"
+  ],
+  "answer": "A",
+  "solution": "由 $\\left(\\int_0^{u(x)}f(t)\\mathrm{d}t\\right)'=f(u)u'$ 估阶，四项阶数依次定出，取最大者。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "变限积分无穷小：比较各选项阶数",
+  "statement": "当 $x\\to 0$ 时，下列无穷小量中阶数最大的是（ ）\n(A) $\\int_{x}^{x^{3}}\\ln(1+xt)\\,\\mathrm{d}t$\n(B) $\\int_{x}^{x^{3}}x\\sin t\\,\\mathrm{d}t$\n(C) $\\int_{\\sin x}^{x^{2}}t\\ln(1+t^{2})\\,\\mathrm{d}t$\n(D) $\\int_{x}^{x^{2}}t^{2}e^{xt}\\,\\mathrm{d}t$",
+  "tags": [
+   "极限",
+   "变限积分",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第46节 变限积分无穷小阶数",
+  "hints": [
+   "先把变限积分对上限求导化为被积函数，套 $u^{p+1}$ 估出阶数，再比大小。"
+  ],
+  "answer": "C",
+  "solution": "由 $\\left(\\int_0^{u(x)}f(t)\\mathrm{d}t\\right)'=f(u)u'$ 估阶，四项阶数依次定出，取最大者。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "变限积分无穷小：比较各选项阶数",
+  "statement": "当 $x\\to 0$ 时，下列无穷小量中阶数最大的是（ ）\n(A) $\\int_{x}^{x^{2}}xt\\cos t\\,\\mathrm{d}t$\n(B) $\\int_{x}^{x^{3}}\\frac{xt}{1+t}\\,\\mathrm{d}t$\n(C) $\\int_{x}^{x^{3}}t\\sqrt{1+t}\\sin x\\,\\mathrm{d}t$\n(D) $\\int_{x}^{x^{2}}xt^{2}\\sin(x^{2}t)\\,\\mathrm{d}t$",
+  "tags": [
+   "极限",
+   "变限积分",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第46节 变限积分无穷小阶数",
+  "hints": [
+   "先把变限积分对上限求导化为被积函数，套 $u^{p+1}$ 估出阶数，再比大小。"
+  ],
+  "answer": "D",
+  "solution": "由 $\\left(\\int_0^{u(x)}f(t)\\mathrm{d}t\\right)'=f(u)u'$ 估阶，四项阶数依次定出，取最大者。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "变限积分无穷小：比较各选项阶数",
+  "statement": "当 $x\\to 0$ 时，下列无穷小量中阶数最大的是（ ）\n(A) $\\int_{x}^{x^{3}}t\\ln(1+x^{2}t)\\,\\mathrm{d}t$\n(B) $\\int_{x}^{x^{2}}e^{xt}\\ln(1+t^{3})\\,\\mathrm{d}t$\n(C) $\\int_{x}^{x^{2}}t\\sin(xt)\\,\\mathrm{d}t$\n(D) $\\int_{x}^{x^{3}}t\\cos(xt)\\tan(x^{2})\\,\\mathrm{d}t$",
+  "tags": [
+   "极限",
+   "变限积分",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第46节 变限积分无穷小阶数",
+  "hints": [
+   "先把变限积分对上限求导化为被积函数，套 $u^{p+1}$ 估出阶数，再比大小。"
+  ],
+  "answer": "A",
+  "solution": "由 $\\left(\\int_0^{u(x)}f(t)\\mathrm{d}t\\right)'=f(u)u'$ 估阶，四项阶数依次定出，取最大者。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "变限积分无穷小：比较各选项阶数",
+  "statement": "当 $x\\to 0$ 时，下列无穷小量中阶数最大的是（ ）\n(A) $\\int_{\\arcsin x}^{\\tan x}t^{2}\\sin(xt)\\,\\mathrm{d}t$\n(B) $\\int_{\\ln(1+x)}^{e^{x}-1}t^{2}e^{xt}\\,\\mathrm{d}t$\n(C) $\\int_{1-\\cos x}^{\\sin x}\\ln(1+xt)\\,\\mathrm{d}t$\n(D) $\\int_{x-\\sin x}^{\\tan x}\\sqrt{t}\\sin(xt)\\,\\mathrm{d}t$",
+  "tags": [
+   "极限",
+   "变限积分",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第46节 变限积分无穷小阶数",
+  "hints": [
+   "先把变限积分对上限求导化为被积函数，套 $u^{p+1}$ 估出阶数，再比大小。"
+  ],
+  "answer": "A",
+  "solution": "由 $\\left(\\int_0^{u(x)}f(t)\\mathrm{d}t\\right)'=f(u)u'$ 估阶，四项阶数依次定出，取最大者。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "变限积分无穷小：比较各选项阶数",
+  "statement": "当 $x\\to 0$ 时，下列无穷小量中阶数最大的是（ ）\n(A) $\\int_{\\sin x}^{\\tan x}t\\ln(1+x^{2}t)\\,\\mathrm{d}t$\n(B) $\\int_{\\ln(1+x)}^{x+\\frac{x^{2}}{2}}t^{2}\\sin(xt)\\,\\mathrm{d}t$\n(C) $\\int_{e^{x}-1}^{\\tan x}e^{xt}\\ln(1+t^{2})\\,\\mathrm{d}t$\n(D) $\\int_{1-\\cos x}^{\\sin x}t\\sqrt{1-\\cos t}\\,\\mathrm{d}t$",
+  "tags": [
+   "极限",
+   "变限积分",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第46节 变限积分无穷小阶数",
+  "hints": [
+   "先把变限积分对上限求导化为被积函数，套 $u^{p+1}$ 估出阶数，再比大小。"
+  ],
+  "answer": "A",
+  "solution": "由 $\\left(\\int_0^{u(x)}f(t)\\mathrm{d}t\\right)'=f(u)u'$ 估阶，四项阶数依次定出，取最大者。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "变限积分无穷小：比较各选项阶数",
+  "statement": "当 $x\\to 0$ 时，下列无穷小量中阶数最大的是（ ）\n(A) $\\int_{\\sin x}^{x+\\frac{x^{3}}{3}}t\\cos(xt)\\tan(x^{2})\\,\\mathrm{d}t$\n(B) $\\int_{1-\\cos x}^{\\ln(1+x)}t\\sin(xt)\\,\\mathrm{d}t$\n(C) $\\int_{\\arctan x}^{\\tan x}t^{2}\\sqrt{1-\\cos(xt)}\\,\\mathrm{d}t$\n(D) $\\int_{x-\\sin x}^{\\tan x}\\ln(1+xt)\\,\\mathrm{d}t$",
+  "tags": [
+   "极限",
+   "变限积分",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第46节 变限积分无穷小阶数",
+  "hints": [
+   "先把变限积分对上限求导化为被积函数，套 $u^{p+1}$ 估出阶数，再比大小。"
+  ],
+  "answer": "C",
+  "solution": "由 $\\left(\\int_0^{u(x)}f(t)\\mathrm{d}t\\right)'=f(u)u'$ 估阶，四项阶数依次定出，取最大者。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "变限积分无穷小：比较各选项阶数",
+  "statement": "当 $x\\to 0$ 时，下列无穷小量中阶数最大的是（ ）\n(A) $\\int_{\\sqrt{1+x}-1}^{\\sin x}t^{2}\\cos(xt)\\,\\mathrm{d}t$\n(B) $\\int_{\\sin x}^{\\tan x}t^{2}e^{xt}\\,\\mathrm{d}t$\n(C) $\\int_{\\ln(1+x)}^{e^{x}-1}t\\sin(xt)\\,\\mathrm{d}t$\n(D) $\\int_{x-\\sin x}^{\\tan x}t^{3}\\sin(xt)\\,\\mathrm{d}t$",
+  "tags": [
+   "极限",
+   "变限积分",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第46节 变限积分无穷小阶数",
+  "hints": [
+   "先把变限积分对上限求导化为被积函数，套 $u^{p+1}$ 估出阶数，再比大小。"
+  ],
+  "answer": "D",
+  "solution": "由 $\\left(\\int_0^{u(x)}f(t)\\mathrm{d}t\\right)'=f(u)u'$ 估阶，四项阶数依次定出，取最大者。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "变限积分无穷小：比较各选项阶数",
+  "statement": "当 $x\\to 0$ 时，下列无穷小量中阶数最大的是（ ）\n(A) $\\int_{\\sin x}^{\\tan x}t^{2}\\sqrt{1-\\cos(xt)}\\,\\mathrm{d}t$\n(B) $\\int_{\\ln(1+x)}^{e^{x}-1}t\\ln(1+x^{2}t)\\,\\mathrm{d}t$\n(C) $\\int_{1-\\cos x}^{\\sin x}t^{2}e^{xt}\\,\\mathrm{d}t$\n(D) $\\int_{\\arctan x}^{\\sin x}t\\sin(xt)\\,\\mathrm{d}t$",
+  "tags": [
+   "极限",
+   "变限积分",
+   "等价无穷小"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第46节 变限积分无穷小阶数",
+  "hints": [
+   "先把变限积分对上限求导化为被积函数，套 $u^{p+1}$ 估出阶数，再比大小。"
+  ],
+  "answer": "A",
+  "solution": "由 $\\left(\\int_0^{u(x)}f(t)\\mathrm{d}t\\right)'=f(u)u'$ 估阶，四项阶数依次定出，取最大者。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含变限积分等式：求导化微分方程",
+  "statement": "设连续函数 $f(x)$ 满足 $f(x)=x+\\int_0^{x}f(t)\\,\\mathrm{d}t$，求 $f(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "微分方程"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第47节 含变限积分表达式",
+  "hints": [
+   "两边对 $x$ 求导，把积分方程变成 $f'$ 与 $f$ 的关系，再用 $f(0)$ 定常数。"
+  ],
+  "answer": "$e^{x}-1$",
+  "solution": "求导得 $f'=1+f$，$f(0)=0$，故 $f=Ce^{x}-1$，$C=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含变限积分等式：求导化微分方程",
+  "statement": "设连续函数 $f(x)$ 满足 $f(x)=e^{2x}+\\int_0^{x}f(t)\\,\\mathrm{d}t$，求 $f(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "微分方程"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第47节 含变限积分表达式",
+  "hints": [
+   "两边对 $x$ 求导，把积分方程变成 $f'$ 与 $f$ 的关系，再用 $f(0)$ 定常数。"
+  ],
+  "answer": "$2e^{2x}-e^{x}$",
+  "solution": "求导得 $f'=f+2e^{2x}$，$f(0)=1$，解得 $f=2e^{2x}-e^{x}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含变限积分等式：求导化微分方程",
+  "statement": "设连续函数 $f(x)$ 满足 $f(x)=\\cos x+\\int_0^{x}f(t)\\,\\mathrm{d}t$，求 $f(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "微分方程"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第47节 含变限积分表达式",
+  "hints": [
+   "两边对 $x$ 求导，把积分方程变成 $f'$ 与 $f$ 的关系，再用 $f(0)$ 定常数。"
+  ],
+  "answer": "$\\frac{e^{x}+\\cos x+\\sin x}{2}$",
+  "solution": "求导得 $f'=f-\\sin x$，$f(0)=1$，故 $f=Ce^{x}+\\frac{\\cos x+\\sin x}{2}$，$C=\\frac{1}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含变限积分等式：求导化微分方程",
+  "statement": "设连续函数 $f(x)$ 满足 $f(x)=\\sin x+\\int_0^{x}f(t)\\,\\mathrm{d}t$，求 $f(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "微分方程"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第47节 含变限积分表达式",
+  "hints": [
+   "两边对 $x$ 求导，把积分方程变成 $f'$ 与 $f$ 的关系，再用 $f(0)$ 定常数。"
+  ],
+  "answer": "$\\frac{e^{x}-\\cos x+\\sin x}{2}$",
+  "solution": "求导得 $f'=f+\\cos x$，$f(0)=0$，故 $f=Ce^{x}+\\frac{\\sin x-\\cos x}{2}$，$C=\\frac{1}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含变限积分等式：求导化微分方程",
+  "statement": "设连续函数 $f(x)$ 满足 $f(x)=1+\\int_0^{x}tf(t)\\,\\mathrm{d}t$，求 $f(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "微分方程"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第47节 含变限积分表达式",
+  "hints": [
+   "两边对 $x$ 求导，把积分方程变成 $f'$ 与 $f$ 的关系，再用 $f(0)$ 定常数。"
+  ],
+  "answer": "$e^{x^{2}/2}$",
+  "solution": "求导得 $f'=xf$，$f(0)=1$，分离变量解得 $f=e^{x^{2}/2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含变限积分等式：求导化微分方程",
+  "statement": "设连续函数 $f(x)$ 满足 $f(x)=x^{2}+\\int_0^{x}tf(t)\\,\\mathrm{d}t$，求 $f(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "微分方程"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第47节 含变限积分表达式",
+  "hints": [
+   "两边对 $x$ 求导，把积分方程变成 $f'$ 与 $f$ 的关系，再用 $f(0)$ 定常数。"
+  ],
+  "answer": "$2(e^{x^{2}/2}-1)$",
+  "solution": "求导得 $f'=xf+2x$，$f(0)=0$，用一阶线性公式得 $f=2(e^{x^{2}/2}-1)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含变限积分等式：求导化微分方程",
+  "statement": "设连续函数 $f(x)$ 满足 $f(x)=x+\\int_0^{x}e^{x-t}f(t)\\,\\mathrm{d}t$，求 $f(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "微分方程"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第47节 含变限积分表达式",
+  "hints": [
+   "两边对 $x$ 求导，把积分方程变成 $f'$ 与 $f$ 的关系，再用 $f(0)$ 定常数。"
+  ],
+  "answer": "$\\frac{e^{2x}}{4}-1+\\frac{x}{2}$",
+  "solution": "记 $F=\\int_0^{x}e^{-t}f(t)\\mathrm{d}t$，则 $f=x+e^{x}F$；求导整理成一阶线性方程，由 $f(0)=0$ 定常数。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含变限积分等式：求导化微分方程",
+  "statement": "设连续函数 $f(x)$ 满足 $f(x)=\\ln(1+x)+\\int_0^{x}\\frac{f(t)}{1+t}\\,\\mathrm{d}t$，求 $f(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "微分方程"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第47节 含变限积分表达式",
+  "hints": [
+   "两边对 $x$ 求导，把积分方程变成 $f'$ 与 $f$ 的关系，再用 $f(0)$ 定常数。"
+  ],
+  "answer": "$x$",
+  "solution": "求导得 $f'=\\frac{1+f}{1+x}$，即 $\\left(\\frac{f}{1+x}\\right)'=\\frac{1}{(1+x)^{2}}$，由 $f(0)=0$ 得 $f=x$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含变限积分等式：求导化微分方程",
+  "statement": "设连续函数 $f(x)$ 满足 $f(x)=\\arctan x+\\int_0^{x}\\frac{f(t)}{1+t^{2}}\\,\\mathrm{d}t$，求 $f(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "微分方程"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第47节 含变限积分表达式",
+  "hints": [
+   "两边对 $x$ 求导，把积分方程变成 $f'$ 与 $f$ 的关系，再用 $f(0)$ 定常数。"
+  ],
+  "answer": "$e^{\\arctan x}-1$",
+  "solution": "求导得 $f'=\\frac{1+f}{1+x^{2}}$，即 $\\left(fe^{-\\arctan x}\\right)'=\\frac{e^{-\\arctan x}}{1+x^{2}}$，得 $f=e^{\\arctan x}-1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含变限积分等式：求导化微分方程",
+  "statement": "设连续函数 $f(x)$ 满足 $f(x)=1+x+\\int_0^{x}(x-t)f(t)\\,\\mathrm{d}t$，求 $f(x)$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "微分方程"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第47节 含变限积分表达式",
+  "hints": [
+   "两边对 $x$ 求导，把积分方程变成 $f'$ 与 $f$ 的关系，再用 $f(0)$ 定常数。"
+  ],
+  "answer": "$e^{x}$",
+  "solution": "拆开 $\\int_0^{x}xf(t)\\mathrm{d}t-\\int_0^{x}tf(t)\\mathrm{d}t$ 后连求两阶导得 $f''=f$，由 $f(0)=1,f'(0)=1$ 得 $f=e^{x}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象定积分定义：和式转定积分",
+  "statement": "设 $f$ 为连续函数，则 $\\lim\\limits_{n\\to\\infty}\\sum_{i=1}^{n}f\\left(\\frac{i}{n}\\right)\\frac{1}{n}=$\n(A) $\\int_0^1 f(x)\\,\\mathrm{d}x$\n(B) $\\int_0^2 f(x)\\,\\mathrm{d}x$\n(C) $\\int_0^1 f(2x)\\,\\mathrm{d}x$\n(D) $\\frac{1}{2}\\int_0^1 f(x)\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "数列极限"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第48节 抽象定积分定义",
+  "hints": [
+   "把和式写成 $\\frac{1}{n}\\sum f(\\xi_i)$，看清 $\\xi_i$ 从哪走到哪，即得积分上下限。"
+  ],
+  "answer": "$A$",
+  "solution": "对照 $\\frac{1}{n}\\sum_{i=1}^{n}f\\left(a+\\frac{b-a}{n}i\\right)\\to\\int_a^{b}f$，由 $\\xi_i$ 的起点、终点读出上下限。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象定积分定义：和式转定积分",
+  "statement": "设 $f$ 为连续函数，则 $\\lim\\limits_{n\\to\\infty}\\sum_{i=1}^{n}f\\left(a+\\frac{b-a}{n}i\\right)\\frac{b-a}{n}=$\n(A) $\\int_0^1 f(x)\\,\\mathrm{d}x$\n(B) $\\int_a^{b}f(x)\\,\\mathrm{d}x$\n(C) $\\int_0^{b-a}f(x)\\,\\mathrm{d}x$\n(D) $\\int_a^{b}f(a+x)\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "数列极限"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第48节 抽象定积分定义",
+  "hints": [
+   "把和式写成 $\\frac{1}{n}\\sum f(\\xi_i)$，看清 $\\xi_i$ 从哪走到哪，即得积分上下限。"
+  ],
+  "answer": "$B$",
+  "solution": "对照 $\\frac{1}{n}\\sum_{i=1}^{n}f\\left(a+\\frac{b-a}{n}i\\right)\\to\\int_a^{b}f$，由 $\\xi_i$ 的起点、终点读出上下限。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象定积分定义：和式转定积分",
+  "statement": "设 $f$ 为连续函数，则 $\\lim\\limits_{n\\to\\infty}\\sum_{i=1}^{n}f\\left(1+\\frac{2i}{n}\\right)\\frac{2}{n}=$\n(A) $\\int_0^1 f(x)\\,\\mathrm{d}x$\n(B) $\\int_1^3 f(x)\\,\\mathrm{d}x$\n(C) $\\int_0^2 f(x+2)\\,\\mathrm{d}x$\n(D) $2\\int_1^3 f(x)\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "数列极限"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第48节 抽象定积分定义",
+  "hints": [
+   "把和式写成 $\\frac{1}{n}\\sum f(\\xi_i)$，看清 $\\xi_i$ 从哪走到哪，即得积分上下限。"
+  ],
+  "answer": "$B$",
+  "solution": "对照 $\\frac{1}{n}\\sum_{i=1}^{n}f\\left(a+\\frac{b-a}{n}i\\right)\\to\\int_a^{b}f$，由 $\\xi_i$ 的起点、终点读出上下限。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象定积分定义：和式转定积分",
+  "statement": "设 $f$ 为连续函数，则 $\\lim\\limits_{n\\to\\infty}\\sum_{i=1}^{n}f\\left(\\frac{2i}{n+1}\\right)\\frac{2}{n}=$\n(A) $\\int_0^1 f(x)\\,\\mathrm{d}x$\n(B) $\\int_0^2 f(x)\\,\\mathrm{d}x$\n(C) $2\\int_0^1 f(x)\\,\\mathrm{d}x$\n(D) $\\int_0^1 f(2x)\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "数列极限"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第48节 抽象定积分定义",
+  "hints": [
+   "把和式写成 $\\frac{1}{n}\\sum f(\\xi_i)$，看清 $\\xi_i$ 从哪走到哪，即得积分上下限。"
+  ],
+  "answer": "$B$",
+  "solution": "对照 $\\frac{1}{n}\\sum_{i=1}^{n}f\\left(a+\\frac{b-a}{n}i\\right)\\to\\int_a^{b}f$，由 $\\xi_i$ 的起点、终点读出上下限。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象定积分定义：和式转定积分",
+  "statement": "设 $f$ 为连续函数，则 $\\lim\\limits_{n\\to\\infty}\\sum_{i=1}^{n}f\\left(2+\\frac{3i}{n}\\right)\\frac{3}{n}=$\n(A) $\\int_0^1 f(x)\\,\\mathrm{d}x$\n(B) $\\int_2^5 f(x)\\,\\mathrm{d}x$\n(C) $\\int_0^3 f(x+2)\\,\\mathrm{d}x$\n(D) $\\int_0^1 f(2+3x)\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "数列极限"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第48节 抽象定积分定义",
+  "hints": [
+   "把和式写成 $\\frac{1}{n}\\sum f(\\xi_i)$，看清 $\\xi_i$ 从哪走到哪，即得积分上下限。"
+  ],
+  "answer": "$B$",
+  "solution": "对照 $\\frac{1}{n}\\sum_{i=1}^{n}f\\left(a+\\frac{b-a}{n}i\\right)\\to\\int_a^{b}f$，由 $\\xi_i$ 的起点、终点读出上下限。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象定积分定义：和式转定积分",
+  "statement": "设 $f$ 为连续函数，则 $\\lim\\limits_{n\\to\\infty}\\sum_{i=1}^{n}f\\left(-1+\\frac{2i}{n}\\right)\\frac{2}{n}=$\n(A) $\\int_0^1 f(x)\\,\\mathrm{d}x$\n(B) $\\int_{-1}^{1}f(x)\\,\\mathrm{d}x$\n(C) $\\int_0^2 f(x-1)\\,\\mathrm{d}x$\n(D) $\\int_0^1 f(-1+2x)\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "数列极限"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第48节 抽象定积分定义",
+  "hints": [
+   "把和式写成 $\\frac{1}{n}\\sum f(\\xi_i)$，看清 $\\xi_i$ 从哪走到哪，即得积分上下限。"
+  ],
+  "answer": "$B$",
+  "solution": "对照 $\\frac{1}{n}\\sum_{i=1}^{n}f\\left(a+\\frac{b-a}{n}i\\right)\\to\\int_a^{b}f$，由 $\\xi_i$ 的起点、终点读出上下限。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象定积分定义：和式转定积分",
+  "statement": "设 $f$ 为连续函数，则 $\\lim\\limits_{n\\to\\infty}\\sum_{i=1}^{n}f\\left(\\frac{2i-1}{2n}\\right)\\frac{1}{n}=$\n(A) $\\int_0^1 f(x)\\,\\mathrm{d}x$\n(B) $2\\int_0^{\\frac{1}{2}}f(x)\\,\\mathrm{d}x$\n(C) $\\int_0^{\\frac{1}{2}}f(2x)\\,\\mathrm{d}x$\n(D) $\\int_0^1 f(1-x)\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "数列极限"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第48节 抽象定积分定义",
+  "hints": [
+   "把和式写成 $\\frac{1}{n}\\sum f(\\xi_i)$，看清 $\\xi_i$ 从哪走到哪，即得积分上下限。"
+  ],
+  "answer": "$A$",
+  "solution": "对照 $\\frac{1}{n}\\sum_{i=1}^{n}f\\left(a+\\frac{b-a}{n}i\\right)\\to\\int_a^{b}f$，由 $\\xi_i$ 的起点、终点读出上下限。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象定积分定义：和式转定积分",
+  "statement": "设 $f$ 为连续函数，则 $\\lim\\limits_{n\\to\\infty}\\sum_{i=1}^{n}f\\left(\\frac{i\\pi}{n}\\right)\\frac{\\pi}{n}=$\n(A) $\\int_0^{\\pi}f(x)\\,\\mathrm{d}x$\n(B) $\\int_0^1 f(x)\\,\\mathrm{d}x$\n(C) $\\pi\\int_0^1 f(x)\\,\\mathrm{d}x$\n(D) $\\int_0^{\\pi}xf(x)\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "数列极限"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第48节 抽象定积分定义",
+  "hints": [
+   "把和式写成 $\\frac{1}{n}\\sum f(\\xi_i)$，看清 $\\xi_i$ 从哪走到哪，即得积分上下限。"
+  ],
+  "answer": "$A$",
+  "solution": "对照 $\\frac{1}{n}\\sum_{i=1}^{n}f\\left(a+\\frac{b-a}{n}i\\right)\\to\\int_a^{b}f$，由 $\\xi_i$ 的起点、终点读出上下限。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象定积分定义：和式转定积分",
+  "statement": "设 $f$ 为连续函数，则 $\\lim\\limits_{n\\to\\infty}\\sum_{i=1}^{n}f\\left(\\frac{2i-1}{2n}\\right)\\frac{2}{n}=$\n(A) $\\int_0^2 f(x)\\,\\mathrm{d}x$\n(B) $\\int_0^1 f(x)\\,\\mathrm{d}x$\n(C) $2\\int_0^1 f(2x)\\,\\mathrm{d}x$\n(D) $\\int_0^2 f\\left(\\frac{x}{2}\\right)\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "数列极限"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第48节 抽象定积分定义",
+  "hints": [
+   "把和式写成 $\\frac{1}{n}\\sum f(\\xi_i)$，看清 $\\xi_i$ 从哪走到哪，即得积分上下限。"
+  ],
+  "answer": "$A$",
+  "solution": "对照 $\\frac{1}{n}\\sum_{i=1}^{n}f\\left(a+\\frac{b-a}{n}i\\right)\\to\\int_a^{b}f$，由 $\\xi_i$ 的起点、终点读出上下限。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象定积分定义：和式转定积分",
+  "statement": "设 $f$ 为连续函数，则 $\\lim\\limits_{n\\to\\infty}\\sum_{i=1}^{n}f\\left(\\frac{i}{n+1}\\right)\\frac{1}{n}=$\n(A) $\\int_0^1 f(x)\\,\\mathrm{d}x$\n(B) $\\int_0^1 f\\left(\\frac{x}{1+x}\\right)\\mathrm{d}x$\n(C) $\\int_0^1 \\frac{f(x)}{1+x}\\,\\mathrm{d}x$\n(D) $\\int_0^1 f(2x)\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "数列极限"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第48节 抽象定积分定义",
+  "hints": [
+   "把和式写成 $\\frac{1}{n}\\sum f(\\xi_i)$，看清 $\\xi_i$ 从哪走到哪，即得积分上下限。"
+  ],
+  "answer": "$A$",
+  "solution": "对照 $\\frac{1}{n}\\sum_{i=1}^{n}f\\left(a+\\frac{b-a}{n}i\\right)\\to\\int_a^{b}f$，由 $\\xi_i$ 的起点、终点读出上下限。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "累加极限：凑成黎曼和",
+  "statement": "$\\lim\\limits_{n\\to\\infty}\\left(\\frac{n}{n^{2}+1^{2}}+\\frac{n}{n^{2}+2^{2}}+\\cdots+\\frac{n}{n^{2}+n^{2}}\\right)$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "黎曼和"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第49节 具体定积分定义",
+  "hints": [
+   "提出公因子 $\\frac{1}{n}$，把通项整理成 $f\\left(\\frac{i}{n}\\right)$ 的形状。"
+  ],
+  "answer": "$\\frac{\\pi}{4}$",
+  "solution": "原式 $=\\frac{1}{n}\\sum_{i=1}^{n}\\frac{1}{1+\\left(\\frac{i}{n}\\right)^{2}}\\to\\int_0^1\\frac{\\mathrm{d}x}{1+x^{2}}=\\frac{\\pi}{4}$。",
+  "authorName": "柳贯一题型专项"
+ }
+]

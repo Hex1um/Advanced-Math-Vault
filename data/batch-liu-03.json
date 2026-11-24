@@ -1,0 +1,3802 @@
+[
+ {
+  "title": "累加极限：凑成黎曼和",
+  "statement": "$\\lim\\limits_{n\\to\\infty}\\left(\\frac{1}{n^{2}+1^{2}}+\\frac{2}{n^{2}+2^{2}}+\\cdots+\\frac{n}{n^{2}+n^{2}}\\right)$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "黎曼和"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第49节 具体定积分定义",
+  "hints": [
+   "提出公因子 $\\frac{1}{n}$，把通项整理成 $f\\left(\\frac{i}{n}\\right)$ 的形状。"
+  ],
+  "answer": "$\\frac{1}{2}\\ln 2$",
+  "solution": "原式 $=\\frac{1}{n}\\sum_{i=1}^{n}\\frac{\\frac{i}{n}}{1+\\left(\\frac{i}{n}\\right)^{2}}\\to\\int_0^1\\frac{x\\,\\mathrm{d}x}{1+x^{2}}=\\frac{1}{2}\\ln 2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "累加极限：凑成黎曼和",
+  "statement": "$\\lim\\limits_{n\\to\\infty}\\left(\\frac{1}{\\sqrt{n^{2}+1\\cdot n}}+\\frac{1}{\\sqrt{n^{2}+2\\cdot n}}+\\cdots+\\frac{1}{\\sqrt{n^{2}+n\\cdot n}}\\right)$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "黎曼和"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第49节 具体定积分定义",
+  "hints": [
+   "提出公因子 $\\frac{1}{n}$，把通项整理成 $f\\left(\\frac{i}{n}\\right)$ 的形状。"
+  ],
+  "answer": "$2(\\sqrt{2}-1)$",
+  "solution": "原式 $=\\frac{1}{n}\\sum_{i=1}^{n}\\frac{1}{\\sqrt{1+\\frac{i}{n}}}\\to\\int_0^1\\frac{\\mathrm{d}x}{\\sqrt{1+x}}=2(\\sqrt{2}-1)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "累加极限：凑成黎曼和",
+  "statement": "$\\lim\\limits_{n\\to\\infty}\\left(\\frac{n}{(2n+1)^{2}}+\\frac{n}{(2n+2)^{2}}+\\cdots+\\frac{n}{(2n+n)^{2}}\\right)$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "黎曼和"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第49节 具体定积分定义",
+  "hints": [
+   "提出公因子 $\\frac{1}{n}$，把通项整理成 $f\\left(\\frac{i}{n}\\right)$ 的形状。"
+  ],
+  "answer": "$\\frac{1}{6}$",
+  "solution": "原式 $=\\frac{1}{n}\\sum_{i=1}^{n}\\frac{1}{\\left(2+\\frac{i}{n}\\right)^{2}}\\to\\int_0^1\\frac{\\mathrm{d}x}{(2+x)^{2}}=\\frac{1}{6}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "累加极限：凑成黎曼和",
+  "statement": "$\\lim\\limits_{n\\to\\infty}\\frac{1}{n}\\left[\\ln\\left(1+\\frac{1}{n}\\right)+\\ln\\left(1+\\frac{2}{n}\\right)+\\cdots+\\ln\\left(1+\\frac{n}{n}\\right)\\right]$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "黎曼和"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第49节 具体定积分定义",
+  "hints": [
+   "提出公因子 $\\frac{1}{n}$，把通项整理成 $f\\left(\\frac{i}{n}\\right)$ 的形状。"
+  ],
+  "answer": "$2\\ln 2-1$",
+  "solution": "原式 $=\\frac{1}{n}\\sum_{i=1}^{n}\\ln\\left(1+\\frac{i}{n}\\right)\\to\\int_0^1\\ln(1+x)\\mathrm{d}x=2\\ln 2-1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "累加极限：凑成黎曼和",
+  "statement": "$\\lim\\limits_{n\\to\\infty}\\frac{1}{n}\\left[\\arctan\\frac{1}{n}+\\arctan\\frac{2}{n}+\\cdots+\\arctan\\frac{n}{n}\\right]$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "黎曼和"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第49节 具体定积分定义",
+  "hints": [
+   "提出公因子 $\\frac{1}{n}$，把通项整理成 $f\\left(\\frac{i}{n}\\right)$ 的形状。"
+  ],
+  "answer": "$\\frac{\\pi}{4}-\\frac{1}{2}\\ln 2$",
+  "solution": "原式 $=\\frac{1}{n}\\sum_{i=1}^{n}\\arctan\\frac{i}{n}\\to\\int_0^1\\arctan x\\,\\mathrm{d}x=\\frac{\\pi}{4}-\\frac{1}{2}\\ln 2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "累加极限：凑成黎曼和",
+  "statement": "$\\lim\\limits_{n\\to\\infty}\\frac{1}{n^{2}}\\left[\\sin\\frac{\\pi}{n}+2\\sin\\frac{2\\pi}{n}+\\cdots+n\\sin\\frac{n\\pi}{n}\\right]$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "黎曼和"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第49节 具体定积分定义",
+  "hints": [
+   "提出公因子 $\\frac{1}{n}$，把通项整理成 $f\\left(\\frac{i}{n}\\right)$ 的形状。"
+  ],
+  "answer": "$\\frac{1}{\\pi}$",
+  "solution": "原式 $=\\frac{1}{n}\\sum_{i=1}^{n}\\frac{i}{n}\\sin\\frac{\\pi i}{n}\\to\\int_0^1x\\sin(\\pi x)\\mathrm{d}x=\\frac{1}{\\pi}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "累加极限：凑成黎曼和",
+  "statement": "$\\lim\\limits_{n\\to\\infty}\\frac{1}{n^{2}}\\left[\\ln\\left(1+\\frac{1}{n}\\right)+2\\ln\\left(1+\\frac{2}{n}\\right)+\\cdots+n\\ln\\left(1+\\frac{n}{n}\\right)\\right]$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "黎曼和"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第49节 具体定积分定义",
+  "hints": [
+   "提出公因子 $\\frac{1}{n}$，把通项整理成 $f\\left(\\frac{i}{n}\\right)$ 的形状。"
+  ],
+  "answer": "$\\frac{1}{4}$",
+  "solution": "原式 $=\\frac{1}{n}\\sum_{i=1}^{n}\\frac{i}{n}\\ln\\left(1+\\frac{i}{n}\\right)\\to\\int_0^1x\\ln(1+x)\\mathrm{d}x=\\frac{1}{4}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "累加极限：凑成黎曼和",
+  "statement": "$\\lim\\limits_{n\\to\\infty}\\frac{1}{n}\\left[\\sqrt[3]{1+\\frac{1}{n}}+\\sqrt[3]{1+\\frac{2}{n}}+\\cdots+\\sqrt[3]{1+\\frac{n}{n}}\\right]$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "黎曼和"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第49节 具体定积分定义",
+  "hints": [
+   "提出公因子 $\\frac{1}{n}$，把通项整理成 $f\\left(\\frac{i}{n}\\right)$ 的形状。"
+  ],
+  "answer": "$\\frac{3}{4}\\left(2^{\\frac{4}{3}}-1\\right)$",
+  "solution": "原式 $=\\frac{1}{n}\\sum_{i=1}^{n}\\sqrt[3]{1+\\frac{i}{n}}\\to\\int_0^1(1+x)^{\\frac{1}{3}}\\mathrm{d}x=\\frac{3}{4}\\left(2^{\\frac{4}{3}}-1\\right)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "累加极限：凑成黎曼和",
+  "statement": "$\\lim\\limits_{n\\to\\infty}\\frac{2}{n}\\left[\\sqrt{1+\\frac{2}{n}}+\\sqrt{1+\\frac{4}{n}}+\\cdots+\\sqrt{1+\\frac{2n}{n}}\\right]$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "黎曼和"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第49节 具体定积分定义",
+  "hints": [
+   "提出公因子 $\\frac{1}{n}$，把通项整理成 $f\\left(\\frac{i}{n}\\right)$ 的形状。"
+  ],
+  "answer": "$\\frac{2(3\\sqrt{3}-1)}{3}$",
+  "solution": "步长 $\\frac{2}{n}$、节点 $\\frac{2i}{n}\\in[0,2]$：原式 $\\to\\int_0^2\\sqrt{1+x}\\,\\mathrm{d}x=\\frac{2}{3}(3\\sqrt{3}-1)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "连乘极限：取对数化为累加和",
+  "statement": "$\\lim\\limits_{n\\to\\infty}\\left[\\left(1+\\frac{1}{n}\\right)^{\\frac{1}{n}}\\left(1+\\frac{2}{n}\\right)^{\\frac{1}{n}}\\cdots\\left(1+\\frac{n}{n}\\right)^{\\frac{1}{n}}\\right]$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "黎曼和"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第49节 具体定积分定义",
+  "hints": [
+   "先取对数把连乘变成 $\\frac{1}{n}\\sum\\ln(\\cdot)$，再用定积分定义求指数。"
+  ],
+  "answer": "$\\frac{4}{e}$",
+  "solution": "取对数：$\\frac{1}{n}\\sum\\ln\\left(1+\\frac{i}{n}\\right)\\to\\int_0^1\\ln(1+x)\\mathrm{d}x=2\\ln 2-1$，原式 $=\\frac{4}{e}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "连乘极限：取对数化为累加和",
+  "statement": "$\\lim\\limits_{n\\to\\infty}\\left[\\left(1+\\frac{1^{2}}{n^{2}}\\right)^{\\frac{1}{n}}\\left(1+\\frac{2^{2}}{n^{2}}\\right)^{\\frac{1}{n}}\\cdots\\left(1+\\frac{n^{2}}{n^{2}}\\right)^{\\frac{1}{n}}\\right]$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "黎曼和"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第49节 具体定积分定义",
+  "hints": [
+   "先取对数把连乘变成 $\\frac{1}{n}\\sum\\ln(\\cdot)$，再用定积分定义求指数。"
+  ],
+  "answer": "$2e^{\\frac{\\pi}{2}-2}$",
+  "solution": "取对数：$\\frac{1}{n}\\sum\\ln\\left(1+\\left(\\frac{i}{n}\\right)^{2}\\right)\\to\\int_0^1\\ln(1+x^{2})\\mathrm{d}x=\\ln 2-2+\\frac{\\pi}{2}$，故原式 $=2e^{\\frac{\\pi}{2}-2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "连乘极限：取对数化为累加和",
+  "statement": "$\\lim\\limits_{n\\to\\infty}\\left[\\left(1+\\frac{1}{n}\\right)^{\\frac{1}{n^{2}}}\\left(1+\\frac{2}{n}\\right)^{\\frac{2}{n^{2}}}\\cdots\\left(1+\\frac{n}{n}\\right)^{\\frac{n}{n^{2}}}\\right]$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "黎曼和"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第49节 具体定积分定义",
+  "hints": [
+   "先取对数把连乘变成 $\\frac{1}{n}\\sum\\ln(\\cdot)$，再用定积分定义求指数。"
+  ],
+  "answer": "$e^{\\frac{1}{4}}$",
+  "solution": "取对数：$\\frac{1}{n}\\sum\\frac{i}{n}\\ln\\left(1+\\frac{i}{n}\\right)\\to\\int_0^1x\\ln(1+x)\\mathrm{d}x=\\frac{1}{4}$，故原式 $=e^{\\frac{1}{4}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "连乘极限：取对数化为累加和",
+  "statement": "$\\lim\\limits_{n\\to\\infty}\\left[\\left(1+\\frac{1}{n}\\right)^{\\frac{1}{n+1}}\\left(1+\\frac{2}{n}\\right)^{\\frac{1}{n+2}}\\cdots\\left(1+\\frac{n}{n}\\right)^{\\frac{1}{n+n}}\\right]$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "黎曼和"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第49节 具体定积分定义",
+  "hints": [
+   "先取对数把连乘变成 $\\frac{1}{n}\\sum\\ln(\\cdot)$，再用定积分定义求指数。"
+  ],
+  "answer": "$e^{\\frac{(\\ln 2)^{2}}{2}}$",
+  "solution": "取对数：$\\sum\\frac{1}{n+i}\\ln\\left(1+\\frac{i}{n}\\right)\\to\\int_0^1\\frac{\\ln(1+x)}{1+x}\\mathrm{d}x=\\frac{(\\ln 2)^{2}}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "连乘极限：取对数化为累加和",
+  "statement": "$\\lim\\limits_{n\\to\\infty}\\left[\\left(1+\\sqrt{\\frac{1}{n}}\\right)^{\\frac{1}{n}}\\left(1+\\sqrt{\\frac{2}{n}}\\right)^{\\frac{1}{n}}\\cdots\\left(1+\\sqrt{\\frac{n}{n}}\\right)^{\\frac{1}{n}}\\right]$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "黎曼和"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第49节 具体定积分定义",
+  "hints": [
+   "先取对数把连乘变成 $\\frac{1}{n}\\sum\\ln(\\cdot)$，再用定积分定义求指数。"
+  ],
+  "answer": "$\\sqrt{e}$",
+  "solution": "取对数：$\\frac{1}{n}\\sum\\ln\\left(1+\\sqrt{\\frac{i}{n}}\\right)\\to\\int_0^1\\ln(1+\\sqrt{x})\\mathrm{d}x=\\frac{1}{2}$，故原式 $=\\sqrt{e}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "连乘极限：取对数化为累加和",
+  "statement": "$\\lim\\limits_{n\\to\\infty}\\left[\\left(2+\\frac{1}{n}\\right)^{\\frac{1}{n}}\\left(2+\\frac{2}{n}\\right)^{\\frac{1}{n}}\\cdots\\left(2+\\frac{n}{n}\\right)^{\\frac{1}{n}}\\right]$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "黎曼和"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第49节 具体定积分定义",
+  "hints": [
+   "先取对数把连乘变成 $\\frac{1}{n}\\sum\\ln(\\cdot)$，再用定积分定义求指数。"
+  ],
+  "answer": "$\\frac{27}{4e}$",
+  "solution": "取对数：$\\frac{1}{n}\\sum\\ln\\left(2+\\frac{i}{n}\\right)\\to\\int_0^1\\ln(2+x)\\mathrm{d}x=3\\ln 3-2\\ln 2-1$，故原式 $=\\frac{27}{4e}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "连乘极限：取对数化为累加和",
+  "statement": "$\\lim\\limits_{n\\to\\infty}\\left[\\left(1+\\frac{1^{2}}{n^{2}}\\right)^{\\frac{1}{n}}\\left(1+\\frac{2^{2}}{n^{2}}\\right)^{\\frac{2}{n}}\\cdots\\left(1+\\frac{n^{2}}{n^{2}}\\right)^{\\frac{n}{n}}\\right]$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "黎曼和"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第49节 具体定积分定义",
+  "hints": [
+   "先取对数把连乘变成 $\\frac{1}{n}\\sum\\ln(\\cdot)$，再用定积分定义求指数。"
+  ],
+  "answer": "$2e^{-\\frac{1}{2}}$",
+  "solution": "取对数：$\\frac{1}{n}\\sum\\frac{i}{n}\\ln\\left(1+\\left(\\frac{i}{n}\\right)^{2}\\right)\\to\\int_0^1x\\ln(1+x^{2})\\mathrm{d}x=\\ln 2-\\frac{1}{2}$，故原式 $=2e^{-\\frac{1}{2}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "连乘极限：取对数化为累加和",
+  "statement": "$\\lim\\limits_{n\\to\\infty}\\left[\\left(1+\\frac{1}{n^{2}}\\sin\\frac{\\pi}{n}\\right)\\left(1+\\frac{2}{n^{2}}\\sin\\frac{2\\pi}{n}\\right)\\cdots\\left(1+\\frac{n}{n^{2}}\\sin\\frac{n\\pi}{n}\\right)\\right]$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "黎曼和"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第49节 具体定积分定义",
+  "hints": [
+   "先取对数把连乘变成 $\\frac{1}{n}\\sum\\ln(\\cdot)$，再用定积分定义求指数。"
+  ],
+  "answer": "$e^{\\frac{1}{\\pi}}$",
+  "solution": "取对数得 $\\frac{1}{n}\\sum\\frac{i}{n}\\sin\\frac{\\pi i}{n}\\to\\int_0^1x\\sin(\\pi x)\\mathrm{d}x=\\frac{1}{\\pi}$，故原式 $=e^{1/\\pi}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "连乘极限：取对数化为累加和",
+  "statement": "$\\lim\\limits_{n\\to\\infty}\\left[\\left(1+\\frac{1}{n}\\sin\\frac{\\pi}{n}\\right)\\left(1+\\frac{1}{n}\\sin\\frac{2\\pi}{n}\\right)\\cdots\\left(1+\\frac{1}{n}\\sin\\frac{n\\pi}{n}\\right)\\right]$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "黎曼和"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第49节 具体定积分定义",
+  "hints": [
+   "先取对数把连乘变成 $\\frac{1}{n}\\sum\\ln(\\cdot)$，再用定积分定义求指数。"
+  ],
+  "answer": "$e^{\\frac{2}{\\pi}}$",
+  "solution": "取对数：$\\frac{1}{n}\\sum\\sin\\frac{\\pi i}{n}\\to\\int_0^1\\sin(\\pi x)\\mathrm{d}x=\\frac{2}{\\pi}$，故原式 $=e^{\\frac{2}{\\pi}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "连乘极限：取对数化为累加和",
+  "statement": "$\\lim\\limits_{n\\to\\infty}\\left[\\left(1+\\frac{1}{n^{2}}\\arctan\\frac{1}{n}\\right)\\left(1+\\frac{2}{n^{2}}\\arctan\\frac{2}{n}\\right)\\cdots\\left(1+\\frac{n}{n^{2}}\\arctan\\frac{n}{n}\\right)\\right]$",
+  "tags": [
+   "一元积分",
+   "定积分定义",
+   "黎曼和"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第49节 具体定积分定义",
+  "hints": [
+   "先取对数把连乘变成 $\\frac{1}{n}\\sum\\ln(\\cdot)$，再用定积分定义求指数。"
+  ],
+  "answer": "$e^{\\frac{\\pi}{4}-\\frac{1}{2}}$",
+  "solution": "取对数：$\\frac{1}{n}\\sum\\frac{i}{n}\\arctan\\frac{i}{n}\\to\\int_0^1x\\arctan x\\,\\mathrm{d}x=\\frac{\\pi}{4}-\\frac{1}{2}$，故原式 $=e^{\\frac{\\pi}{4}-\\frac{1}{2}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "对称区间定积分：偶倍求积",
+  "statement": "$\\int_{-\\pi}^{\\pi}x^{2}\\sin^{2}x\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第50节 对称区间定积分",
+  "hints": [
+   "先看被积函数（或拆出的因子）关于 $x$ 的奇偶性，奇函数在对称区间上积分为零。"
+  ],
+  "answer": "$\\frac{\\pi^{3}}{3}-\\frac{\\pi}{2}$",
+  "solution": "被积函数为偶函数，原式 $=2\\int_0^{a}$，再分段展开计算。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "对称区间定积分：偶倍求积",
+  "statement": "$\\int_{-1}^{1}x^{2}\\cos x\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第50节 对称区间定积分",
+  "hints": [
+   "先看被积函数（或拆出的因子）关于 $x$ 的奇偶性，奇函数在对称区间上积分为零。"
+  ],
+  "answer": "$4\\cos 1-2\\sin 1$",
+  "solution": "被积函数为偶函数，原式 $=2\\int_0^{a}$，再分段展开计算。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "对称区间定积分：偶倍求积",
+  "statement": "$\\int_{-2}^{2}(x^{4}+x^{2}+1)\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第50节 对称区间定积分",
+  "hints": [
+   "先看被积函数（或拆出的因子）关于 $x$ 的奇偶性，奇函数在对称区间上积分为零。"
+  ],
+  "answer": "$\\frac{332}{15}$",
+  "solution": "被积函数为偶函数，原式 $=2\\int_0^{a}$，再分段展开计算。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "对称区间定积分：偶倍求积",
+  "statement": "$\\int_{-\\frac{\\pi}{2}}^{\\frac{\\pi}{2}}\\cos^{4}x\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第50节 对称区间定积分",
+  "hints": [
+   "先看被积函数（或拆出的因子）关于 $x$ 的奇偶性，奇函数在对称区间上积分为零。"
+  ],
+  "answer": "$\\frac{3\\pi}{8}$",
+  "solution": "被积函数为偶函数，原式 $=2\\int_0^{a}$，再分段展开计算。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "对称区间定积分：偶倍求积",
+  "statement": "$\\int_{-\\pi}^{\\pi}e^{|x|}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第50节 对称区间定积分",
+  "hints": [
+   "先看被积函数（或拆出的因子）关于 $x$ 的奇偶性，奇函数在对称区间上积分为零。"
+  ],
+  "answer": "$2(e^{\\pi}-1)$",
+  "solution": "被积函数为偶函数，原式 $=2\\int_0^{a}$，再分段展开计算。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "对称区间定积分：偶倍求积",
+  "statement": "$\\int_{-1}^{1}|x|\\ln(1+|x|)\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第50节 对称区间定积分",
+  "hints": [
+   "先看被积函数（或拆出的因子）关于 $x$ 的奇偶性，奇函数在对称区间上积分为零。"
+  ],
+  "answer": "$\\frac{1}{2}$",
+  "solution": "被积函数为偶函数，原式 $=2\\int_0^{a}$，再分段展开计算。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "对称区间定积分：偶倍求积",
+  "statement": "$\\int_{-a}^{a}(a^{2}-x^{2})^{\\frac{3}{2}}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第50节 对称区间定积分",
+  "hints": [
+   "先看被积函数（或拆出的因子）关于 $x$ 的奇偶性，奇函数在对称区间上积分为零。"
+  ],
+  "answer": "$\\frac{3\\pi a^{4}}{8}$",
+  "solution": "被积函数为偶函数，原式 $=2\\int_0^{a}$，再分段展开计算。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "对称区间定积分：偶倍求积",
+  "statement": "$\\int_{-1}^{1}x^{2}e^{|x|}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第50节 对称区间定积分",
+  "hints": [
+   "先看被积函数（或拆出的因子）关于 $x$ 的奇偶性，奇函数在对称区间上积分为零。"
+  ],
+  "answer": "$2e-4$",
+  "solution": "被积函数为偶函数，原式 $=2\\int_0^{a}$，再分段展开计算。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "对称区间定积分：偶倍求积",
+  "statement": "$\\int_{-\\pi}^{\\pi}\\cos^{2}x\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第50节 对称区间定积分",
+  "hints": [
+   "先看被积函数（或拆出的因子）关于 $x$ 的奇偶性，奇函数在对称区间上积分为零。"
+  ],
+  "answer": "$\\pi$",
+  "solution": "被积函数为偶函数，原式 $=2\\int_0^{a}$，再分段展开计算。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "对称区间定积分：偶倍求积",
+  "statement": "$\\int_{-1}^{1}(x^{2}+1)e^{|x|}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第50节 对称区间定积分",
+  "hints": [
+   "先看被积函数（或拆出的因子）关于 $x$ 的奇偶性，奇函数在对称区间上积分为零。"
+  ],
+  "answer": "$4e-6$",
+  "solution": "被积函数为偶函数，原式 $=2\\int_0^{a}$，再分段展开计算。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "对称区间定积分：奇函数积分为零",
+  "statement": "$\\int_{-3}^{3}x\\sin(x^{2})\\ln(1+x^{2})e^{-x^{2}}\\arctan(x^{4})\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第50节 对称区间定积分",
+  "hints": [
+   "被积函数只含 $x$ 的奇次因子，其余部分都是偶函数，整体为奇函数。"
+  ],
+  "answer": "0",
+  "solution": "验证 $f(-x)=-f(x)$，故对称区间上积分为 $0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "对称区间定积分：奇函数积分为零",
+  "statement": "$\\int_{-2}^{2}x^{3}\\cos(x^{2})\\sqrt{1+x^{2}}\\ln(1+e^{x^{2}})\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第50节 对称区间定积分",
+  "hints": [
+   "被积函数只含 $x$ 的奇次因子，其余部分都是偶函数，整体为奇函数。"
+  ],
+  "answer": "0",
+  "solution": "验证 $f(-x)=-f(x)$，故对称区间上积分为 $0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "对称区间定积分：奇函数积分为零",
+  "statement": "$\\int_{-1}^{1}\\sin(x^{3})\\cos(e^{-x^{2}})\\ln(1+x^{2})\\arctan(x^{2})\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第50节 对称区间定积分",
+  "hints": [
+   "被积函数只含 $x$ 的奇次因子，其余部分都是偶函数，整体为奇函数。"
+  ],
+  "answer": "0",
+  "solution": "验证 $f(-x)=-f(x)$，故对称区间上积分为 $0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "对称区间定积分：奇函数积分为零",
+  "statement": "$\\int_{-4}^{4}xe^{\\sin(x^{2})}\\cos(\\ln(1+x^{2}))\\arctan(x^{2})\\sqrt{1+x^{4}}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第50节 对称区间定积分",
+  "hints": [
+   "被积函数只含 $x$ 的奇次因子，其余部分都是偶函数，整体为奇函数。"
+  ],
+  "answer": "0",
+  "solution": "验证 $f(-x)=-f(x)$，故对称区间上积分为 $0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "对称区间定积分：奇函数积分为零",
+  "statement": "$\\int_{-1}^{1}x\\arctan(x^{2})\\ln(1+x^{4})\\cos(\\sqrt{1+x^{2}})\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第50节 对称区间定积分",
+  "hints": [
+   "被积函数只含 $x$ 的奇次因子，其余部分都是偶函数，整体为奇函数。"
+  ],
+  "answer": "0",
+  "solution": "验证 $f(-x)=-f(x)$，故对称区间上积分为 $0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "非奇非偶：配 $f(x)+f(-x)$",
+  "statement": "$\\int_{-1}^{1}\\frac{1}{1+e^{x}}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第50节 对称区间定积分",
+  "hints": [
+   "注意 $\\frac{1}{1+e^{x}}+\\frac{1}{1+e^{-x}}=1$，把 $x$ 换成 $-x$ 后与原式相加。"
+  ],
+  "answer": "$1$",
+  "solution": "令 $x\\to -x$ 与原式相加，$\\frac{1}{1+e^{x}}$ 型因子化为常数，得 $2I=\\int_{-1}^{1}g(x)\\mathrm{d}x$ 后直接积分。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "非奇非偶：配 $f(x)+f(-x)$",
+  "statement": "$\\int_{-1}^{1}\\arctan(e^{x})\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第50节 对称区间定积分",
+  "hints": [
+   "注意 $\\frac{1}{1+e^{x}}+\\frac{1}{1+e^{-x}}=1$，把 $x$ 换成 $-x$ 后与原式相加。"
+  ],
+  "answer": "$\\frac{\\pi}{2}$",
+  "solution": "令 $x\\to -x$ 与原式相加，$\\frac{1}{1+e^{x}}$ 型因子化为常数，得 $2I=\\int_{-1}^{1}g(x)\\mathrm{d}x$ 后直接积分。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "非奇非偶：配 $f(x)+f(-x)$",
+  "statement": "$\\int_{-1}^{1}\\frac{x^{2}}{1+e^{x}}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第50节 对称区间定积分",
+  "hints": [
+   "注意 $\\frac{1}{1+e^{x}}+\\frac{1}{1+e^{-x}}=1$，把 $x$ 换成 $-x$ 后与原式相加。"
+  ],
+  "answer": "$\\frac{1}{3}$",
+  "solution": "令 $x\\to -x$ 与原式相加，$\\frac{1}{1+e^{x}}$ 型因子化为常数，得 $2I=\\int_{-1}^{1}g(x)\\mathrm{d}x$ 后直接积分。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "非奇非偶：配 $f(x)+f(-x)$",
+  "statement": "$\\int_{-1}^{1}\\frac{e^{x}}{(1+e^{x})^{2}}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第50节 对称区间定积分",
+  "hints": [
+   "注意 $\\frac{1}{1+e^{x}}+\\frac{1}{1+e^{-x}}=1$，把 $x$ 换成 $-x$ 后与原式相加。"
+  ],
+  "answer": "$\\frac{e-1}{e+1}$",
+  "solution": "令 $x\\to -x$ 与原式相加，$\\frac{1}{1+e^{x}}$ 型因子化为常数，得 $2I=\\int_{-1}^{1}g(x)\\mathrm{d}x$ 后直接积分。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "非奇非偶：配 $f(x)+f(-x)$",
+  "statement": "$\\int_{-1}^{1}\\frac{\\cos x}{1+e^{x}}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第50节 对称区间定积分",
+  "hints": [
+   "注意 $\\frac{1}{1+e^{x}}+\\frac{1}{1+e^{-x}}=1$，把 $x$ 换成 $-x$ 后与原式相加。"
+  ],
+  "answer": "$1$",
+  "solution": "令 $x\\to -x$ 与原式相加，$\\frac{1}{1+e^{x}}$ 型因子化为常数，得 $2I=\\int_{-1}^{1}g(x)\\mathrm{d}x$ 后直接积分。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "区间再现：$\\frac{\\pi}{2}-x$ 配对",
+  "statement": "$\\int_0^{\\frac{\\pi}{2}}\\frac{\\sin^{3}x}{\\sin^{3}x+\\cos^{3}x}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "对称性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第51节 区间再现定积分",
+  "hints": [
+   "作代换 $x\\to a+b-x$，把新式与原式相加，被积函数往往变成常数。"
+  ],
+  "answer": "$\\frac{\\pi}{4}$",
+  "solution": "令 $x\\to\\frac{\\pi}{2}-x$（或 $1-x$），两式相加得 $2I=\\int$ 常数，$I$ 立得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "区间再现：$\\frac{\\pi}{2}-x$ 配对",
+  "statement": "$\\int_0^{\\pi}\\frac{x\\sin x}{1+\\cos^{2}x}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "对称性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第51节 区间再现定积分",
+  "hints": [
+   "作代换 $x\\to a+b-x$，把新式与原式相加，被积函数往往变成常数。"
+  ],
+  "answer": "$\\frac{\\pi^{2}}{4}$",
+  "solution": "令 $x\\to\\frac{\\pi}{2}-x$（或 $1-x$），两式相加得 $2I=\\int$ 常数，$I$ 立得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "区间再现：$\\frac{\\pi}{2}-x$ 配对",
+  "statement": "$\\int_0^{\\frac{\\pi}{2}}\\frac{x}{\\sin x+\\cos x}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "对称性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第51节 区间再现定积分",
+  "hints": [
+   "作代换 $x\\to a+b-x$，把新式与原式相加，被积函数往往变成常数。"
+  ],
+  "answer": "$\\frac{\\pi\\sqrt{2}}{4}\\ln(1+\\sqrt{2})$",
+  "solution": "令 $x\\to\\frac{\\pi}{2}-x$（或 $1-x$），两式相加得 $2I=\\int$ 常数，$I$ 立得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "区间再现：$\\frac{\\pi}{2}-x$ 配对",
+  "statement": "$\\int_0^{\\frac{\\pi}{2}}\\frac{\\sin^{2}x}{\\sin x+\\cos x}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "对称性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第51节 区间再现定积分",
+  "hints": [
+   "作代换 $x\\to a+b-x$，把新式与原式相加，被积函数往往变成常数。"
+  ],
+  "answer": "$\\frac{1}{\\sqrt{2}}\\ln(1+\\sqrt{2})$",
+  "solution": "令 $x\\to\\frac{\\pi}{2}-x$（或 $1-x$），两式相加得 $2I=\\int$ 常数，$I$ 立得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "区间再现：$\\frac{\\pi}{2}-x$ 配对",
+  "statement": "$\\int_0^{\\pi}\\frac{x\\sin x}{1+\\sin^{2}x}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "对称性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第51节 区间再现定积分",
+  "hints": [
+   "作代换 $x\\to a+b-x$，把新式与原式相加，被积函数往往变成常数。"
+  ],
+  "answer": "$\\frac{\\pi}{\\sqrt{2}}\\ln(1+\\sqrt{2})$",
+  "solution": "令 $x\\to\\frac{\\pi}{2}-x$（或 $1-x$），两式相加得 $2I=\\int$ 常数，$I$ 立得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "区间再现：$\\frac{\\pi}{2}-x$ 配对",
+  "statement": "$\\int_0^{\\frac{\\pi}{2}}\\frac{\\sin^{5}x}{\\sin^{5}x+\\cos^{5}x}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "对称性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第51节 区间再现定积分",
+  "hints": [
+   "作代换 $x\\to a+b-x$，把新式与原式相加，被积函数往往变成常数。"
+  ],
+  "answer": "$\\frac{\\pi}{4}$",
+  "solution": "令 $x\\to\\frac{\\pi}{2}-x$（或 $1-x$），两式相加得 $2I=\\int$ 常数，$I$ 立得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "区间再现：$\\frac{\\pi}{2}-x$ 配对",
+  "statement": "$\\int_0^{\\frac{\\pi}{2}}\\ln(\\sin x)\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "对称性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第51节 区间再现定积分",
+  "hints": [
+   "作代换 $x\\to a+b-x$，把新式与原式相加，被积函数往往变成常数。"
+  ],
+  "answer": "$-\\frac{\\pi}{2}\\ln 2$",
+  "solution": "令 $x\\to\\frac{\\pi}{2}-x$（或 $1-x$），两式相加得 $2I=\\int$ 常数，$I$ 立得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "区间再现：$\\frac{\\pi}{2}-x$ 配对",
+  "statement": "$\\int_0^{\\frac{\\pi}{4}}\\ln(1+\\tan x)\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "对称性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第51节 区间再现定积分",
+  "hints": [
+   "作代换 $x\\to a+b-x$，把新式与原式相加，被积函数往往变成常数。"
+  ],
+  "answer": "$\\frac{\\pi}{8}\\ln 2$",
+  "solution": "令 $x\\to\\frac{\\pi}{2}-x$（或 $1-x$），两式相加得 $2I=\\int$ 常数，$I$ 立得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "区间再现：$\\frac{\\pi}{2}-x$ 配对",
+  "statement": "$\\int_0^{1}\\frac{\\ln(1+x)}{1+x^{2}}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "对称性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第51节 区间再现定积分",
+  "hints": [
+   "作代换 $x\\to a+b-x$，把新式与原式相加，被积函数往往变成常数。"
+  ],
+  "answer": "$\\frac{\\pi}{8}\\ln 2$",
+  "solution": "令 $x\\to\\frac{\\pi}{2}-x$（或 $1-x$），两式相加得 $2I=\\int$ 常数，$I$ 立得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "区间再现：$x\\to 1-x$ 后与原式相加",
+  "statement": "$\\int_0^{1}\\frac{x^{2}}{x^{2}+(1-x)^{2}}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "对称性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第51节 区间再现定积分",
+  "hints": [
+   "令 $x\\to 1-x$，分子分母恰好互换，两式相加被积函数化为 $1$。"
+  ],
+  "answer": "$\\frac{1}{2}$",
+  "solution": "令 $x\\to1-x$ 与原式相加得 $2I=\\int_0^1 1\\,\\mathrm{d}x=1$，故 $I=\\frac{1}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "区间再现：$x\\to 1-x$ 后与原式相加",
+  "statement": "$\\int_0^{1}\\frac{x^{2}(1-x)^{3}}{x^{2}(1-x)^{3}+x^{3}(1-x)^{2}}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "对称性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第51节 区间再现定积分",
+  "hints": [
+   "令 $x\\to 1-x$，分子分母恰好互换，两式相加被积函数化为 $1$。"
+  ],
+  "answer": "$\\frac{1}{2}$",
+  "solution": "令 $x\\to1-x$ 与原式相加得 $2I=\\int_0^1 1\\,\\mathrm{d}x=1$，故 $I=\\frac{1}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "区间再现：$x\\to 1-x$ 后与原式相加",
+  "statement": "$\\int_0^{1}\\frac{x^{3}(1-x)^{5}}{x^{3}(1-x)^{5}+x^{5}(1-x)^{3}}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "对称性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第51节 区间再现定积分",
+  "hints": [
+   "令 $x\\to 1-x$，分子分母恰好互换，两式相加被积函数化为 $1$。"
+  ],
+  "answer": "$\\frac{1}{2}$",
+  "solution": "令 $x\\to1-x$ 与原式相加得 $2I=\\int_0^1 1\\,\\mathrm{d}x=1$，故 $I=\\frac{1}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "区间再现：$x\\to 1-x$ 后与原式相加",
+  "statement": "$\\int_0^{1}\\frac{x^{5}(1-x)^{3}}{x^{5}(1-x)^{3}+x^{3}(1-x)^{5}}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "对称性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第51节 区间再现定积分",
+  "hints": [
+   "令 $x\\to 1-x$，分子分母恰好互换，两式相加被积函数化为 $1$。"
+  ],
+  "answer": "$\\frac{1}{2}$",
+  "solution": "令 $x\\to1-x$ 与原式相加得 $2I=\\int_0^1 1\\,\\mathrm{d}x=1$，故 $I=\\frac{1}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "区间再现：$x\\to 1-x$ 后与原式相加",
+  "statement": "$\\int_0^{1}\\frac{x^{4}(1-x)^{3}}{x^{4}(1-x)^{3}+x^{3}(1-x)^{4}}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "对称性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第51节 区间再现定积分",
+  "hints": [
+   "令 $x\\to 1-x$，分子分母恰好互换，两式相加被积函数化为 $1$。"
+  ],
+  "answer": "$\\frac{1}{2}$",
+  "solution": "令 $x\\to1-x$ 与原式相加得 $2I=\\int_0^1 1\\,\\mathrm{d}x=1$，故 $I=\\frac{1}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "区间再现：$x\\to 1-x$ 化为 $B$ 函数",
+  "statement": "$\\int_0^{1}x(1-x)^{\\frac{1}{2}}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "对称性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第51节 区间再现定积分",
+  "hints": [
+   "令 $x\\to 1-x$ 后与原式相加不易化简，可直接用 $\\int_0^1x^{m}(1-x)^{n}\\mathrm{d}x=B(m+1,n+1)$。"
+  ],
+  "answer": "$\\frac{4}{15}$",
+  "solution": "$I=B(m+1,n+1)=\\frac{m!\\,n!}{(m+n+1)!}$，代入本题的 $m,n$ 即得结果。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "区间再现：$x\\to 1-x$ 化为 $B$ 函数",
+  "statement": "$\\int_0^{1}x^{2}(1-x)^{\\frac{1}{2}}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "对称性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第51节 区间再现定积分",
+  "hints": [
+   "令 $x\\to 1-x$ 后与原式相加不易化简，可直接用 $\\int_0^1x^{m}(1-x)^{n}\\mathrm{d}x=B(m+1,n+1)$。"
+  ],
+  "answer": "$\\frac{16}{105}$",
+  "solution": "$I=B(m+1,n+1)=\\frac{m!\\,n!}{(m+n+1)!}$，代入本题的 $m,n$ 即得结果。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "区间再现：$x\\to 1-x$ 化为 $B$ 函数",
+  "statement": "$\\int_0^{1}x^{3}(1-x)^{\\frac{1}{2}}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "对称性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第51节 区间再现定积分",
+  "hints": [
+   "令 $x\\to 1-x$ 后与原式相加不易化简，可直接用 $\\int_0^1x^{m}(1-x)^{n}\\mathrm{d}x=B(m+1,n+1)$。"
+  ],
+  "answer": "$\\frac{32}{315}$",
+  "solution": "$I=B(m+1,n+1)=\\frac{m!\\,n!}{(m+n+1)!}$，代入本题的 $m,n$ 即得结果。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "区间再现：$x\\to 1-x$ 化为 $B$ 函数",
+  "statement": "$\\int_0^{1}x(1-x)^{\\frac{2}{3}}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "对称性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第51节 区间再现定积分",
+  "hints": [
+   "令 $x\\to 1-x$ 后与原式相加不易化简，可直接用 $\\int_0^1x^{m}(1-x)^{n}\\mathrm{d}x=B(m+1,n+1)$。"
+  ],
+  "answer": "$\\frac{9}{40}$",
+  "solution": "$I=B(m+1,n+1)=\\frac{m!\\,n!}{(m+n+1)!}$，代入本题的 $m,n$ 即得结果。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "区间再现：$x\\to 1-x$ 化为 $B$ 函数",
+  "statement": "$\\int_0^{1}x^{2}(1-x)^{\\frac{1}{3}}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "换元积分",
+   "对称性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第51节 区间再现定积分",
+  "hints": [
+   "令 $x\\to 1-x$ 后与原式相加不易化简，可直接用 $\\int_0^1x^{m}(1-x)^{n}\\mathrm{d}x=B(m+1,n+1)$。"
+  ],
+  "answer": "$\\frac{27}{140}$",
+  "solution": "$I=B(m+1,n+1)=\\frac{m!\\,n!}{(m+n+1)!}$，代入本题的 $m,n$ 即得结果。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "华里士公式：正余弦幂积",
+  "statement": "$\\int_0^{\\frac{\\pi}{2}}\\sin^{5}x\\cos^{3}x\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "华里士公式",
+   "递推"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第52节 华理士定积分",
+  "hints": [
+   "先把 $[0,\\pi]$ 折成 $2\\int_0^{\\frac{\\pi}{2}}$、$[0,2\\pi]$ 折成 $4\\int_0^{\\frac{\\pi}{2}}$，再套华里士公式。"
+  ],
+  "answer": "$\\frac{1}{24}$",
+  "solution": "$\\int_0^{\\frac{\\pi}{2}}\\sin^{m}x\\cos^{n}x\\,\\mathrm{d}x=\\frac{1}{2}B\\left(\\frac{m+1}{2},\\frac{n+1}{2}\\right)$，长区间按倍数放大。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "华里士公式：正余弦幂积",
+  "statement": "$\\int_0^{\\frac{\\pi}{2}}\\sin^{6}x\\cos^{2}x\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "华里士公式",
+   "递推"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第52节 华理士定积分",
+  "hints": [
+   "先把 $[0,\\pi]$ 折成 $2\\int_0^{\\frac{\\pi}{2}}$、$[0,2\\pi]$ 折成 $4\\int_0^{\\frac{\\pi}{2}}$，再套华里士公式。"
+  ],
+  "answer": "$\\frac{5\\pi}{256}$",
+  "solution": "$\\int_0^{\\frac{\\pi}{2}}\\sin^{m}x\\cos^{n}x\\,\\mathrm{d}x=\\frac{1}{2}B\\left(\\frac{m+1}{2},\\frac{n+1}{2}\\right)$，长区间按倍数放大。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "华里士公式：正余弦幂积",
+  "statement": "$\\int_0^{\\frac{\\pi}{2}}\\sin^{4}x\\cos^{5}x\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "华里士公式",
+   "递推"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第52节 华理士定积分",
+  "hints": [
+   "先把 $[0,\\pi]$ 折成 $2\\int_0^{\\frac{\\pi}{2}}$、$[0,2\\pi]$ 折成 $4\\int_0^{\\frac{\\pi}{2}}$，再套华里士公式。"
+  ],
+  "answer": "$\\frac{8}{315}$",
+  "solution": "$\\int_0^{\\frac{\\pi}{2}}\\sin^{m}x\\cos^{n}x\\,\\mathrm{d}x=\\frac{1}{2}B\\left(\\frac{m+1}{2},\\frac{n+1}{2}\\right)$，长区间按倍数放大。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "华里士公式：正余弦幂积",
+  "statement": "$\\int_0^{\\frac{\\pi}{2}}\\sin^{7}x\\cos^{2}x\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "华里士公式",
+   "递推"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第52节 华理士定积分",
+  "hints": [
+   "先把 $[0,\\pi]$ 折成 $2\\int_0^{\\frac{\\pi}{2}}$、$[0,2\\pi]$ 折成 $4\\int_0^{\\frac{\\pi}{2}}$，再套华里士公式。"
+  ],
+  "answer": "$\\frac{16}{315}$",
+  "solution": "$\\int_0^{\\frac{\\pi}{2}}\\sin^{m}x\\cos^{n}x\\,\\mathrm{d}x=\\frac{1}{2}B\\left(\\frac{m+1}{2},\\frac{n+1}{2}\\right)$，长区间按倍数放大。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "华里士公式：正余弦幂积",
+  "statement": "$\\int_0^{\\pi}\\sin^{4}x\\cos^{2}x\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "华里士公式",
+   "递推"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第52节 华理士定积分",
+  "hints": [
+   "先把 $[0,\\pi]$ 折成 $2\\int_0^{\\frac{\\pi}{2}}$、$[0,2\\pi]$ 折成 $4\\int_0^{\\frac{\\pi}{2}}$，再套华里士公式。"
+  ],
+  "answer": "$\\frac{\\pi}{16}$",
+  "solution": "$\\int_0^{\\frac{\\pi}{2}}\\sin^{m}x\\cos^{n}x\\,\\mathrm{d}x=\\frac{1}{2}B\\left(\\frac{m+1}{2},\\frac{n+1}{2}\\right)$，长区间按倍数放大。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "华里士公式：正余弦幂积",
+  "statement": "$\\int_0^{\\pi}\\sin^{5}x\\cos^{2}x\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "华里士公式",
+   "递推"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第52节 华理士定积分",
+  "hints": [
+   "先把 $[0,\\pi]$ 折成 $2\\int_0^{\\frac{\\pi}{2}}$、$[0,2\\pi]$ 折成 $4\\int_0^{\\frac{\\pi}{2}}$，再套华里士公式。"
+  ],
+  "answer": "$\\frac{16}{105}$",
+  "solution": "$\\int_0^{\\frac{\\pi}{2}}\\sin^{m}x\\cos^{n}x\\,\\mathrm{d}x=\\frac{1}{2}B\\left(\\frac{m+1}{2},\\frac{n+1}{2}\\right)$，长区间按倍数放大。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "华里士公式：正余弦幂积",
+  "statement": "$\\int_0^{\\pi}\\sin^{6}x\\cos^{4}x\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "华里士公式",
+   "递推"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第52节 华理士定积分",
+  "hints": [
+   "先把 $[0,\\pi]$ 折成 $2\\int_0^{\\frac{\\pi}{2}}$、$[0,2\\pi]$ 折成 $4\\int_0^{\\frac{\\pi}{2}}$，再套华里士公式。"
+  ],
+  "answer": "$\\frac{3\\pi}{256}$",
+  "solution": "$\\int_0^{\\frac{\\pi}{2}}\\sin^{m}x\\cos^{n}x\\,\\mathrm{d}x=\\frac{1}{2}B\\left(\\frac{m+1}{2},\\frac{n+1}{2}\\right)$，长区间按倍数放大。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "华里士公式：正余弦幂积",
+  "statement": "$\\int_0^{2\\pi}\\sin^{6}x\\cos^{2}x\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "华里士公式",
+   "递推"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第52节 华理士定积分",
+  "hints": [
+   "先把 $[0,\\pi]$ 折成 $2\\int_0^{\\frac{\\pi}{2}}$、$[0,2\\pi]$ 折成 $4\\int_0^{\\frac{\\pi}{2}}$，再套华里士公式。"
+  ],
+  "answer": "$\\frac{5\\pi}{64}$",
+  "solution": "$\\int_0^{\\frac{\\pi}{2}}\\sin^{m}x\\cos^{n}x\\,\\mathrm{d}x=\\frac{1}{2}B\\left(\\frac{m+1}{2},\\frac{n+1}{2}\\right)$，长区间按倍数放大。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "华里士公式：正余弦幂积",
+  "statement": "$\\int_0^{2\\pi}\\sin^{8}x\\cos^{2}x\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "华里士公式",
+   "递推"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第52节 华理士定积分",
+  "hints": [
+   "先把 $[0,\\pi]$ 折成 $2\\int_0^{\\frac{\\pi}{2}}$、$[0,2\\pi]$ 折成 $4\\int_0^{\\frac{\\pi}{2}}$，再套华里士公式。"
+  ],
+  "answer": "$\\frac{7\\pi}{128}$",
+  "solution": "$\\int_0^{\\frac{\\pi}{2}}\\sin^{m}x\\cos^{n}x\\,\\mathrm{d}x=\\frac{1}{2}B\\left(\\frac{m+1}{2},\\frac{n+1}{2}\\right)$，长区间按倍数放大。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "华里士公式：正余弦幂积",
+  "statement": "$\\int_0^{2\\pi}\\sin^{2}x\\cos^{4}x\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "华里士公式",
+   "递推"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第52节 华理士定积分",
+  "hints": [
+   "先把 $[0,\\pi]$ 折成 $2\\int_0^{\\frac{\\pi}{2}}$、$[0,2\\pi]$ 折成 $4\\int_0^{\\frac{\\pi}{2}}$，再套华里士公式。"
+  ],
+  "answer": "$\\frac{\\pi}{8}$",
+  "solution": "$\\int_0^{\\frac{\\pi}{2}}\\sin^{m}x\\cos^{n}x\\,\\mathrm{d}x=\\frac{1}{2}B\\left(\\frac{m+1}{2},\\frac{n+1}{2}\\right)$，长区间按倍数放大。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "积化和差：三角乘积化为和差再积分",
+  "statement": "$\\int_0^{\\pi}\\sin x\\sin\\frac{x}{2}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "积化和差",
+   "三角积分"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第53节 积化和差定积分",
+  "hints": [
+   "两个三角函数相乘，先用积化和差拆成两项再逐项积分。"
+  ],
+  "answer": "$\\frac{4}{3}$",
+  "solution": "用 $\\sin A\\cos B=\\frac{1}{2}[\\sin(A+B)+\\sin(A-B)]$、$\\cos A\\cos B=\\frac{1}{2}[\\cos(A+B)+\\cos(A-B)]$ 拆项后逐项积分。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "积化和差：三角乘积化为和差再积分",
+  "statement": "$\\int_0^{\\frac{\\pi}{2}}\\cos 2x\\cos 3x\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "积化和差",
+   "三角积分"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第53节 积化和差定积分",
+  "hints": [
+   "两个三角函数相乘，先用积化和差拆成两项再逐项积分。"
+  ],
+  "answer": "$\\frac{3}{5}$",
+  "solution": "用 $\\sin A\\cos B=\\frac{1}{2}[\\sin(A+B)+\\sin(A-B)]$、$\\cos A\\cos B=\\frac{1}{2}[\\cos(A+B)+\\cos(A-B)]$ 拆项后逐项积分。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "积化和差：三角乘积化为和差再积分",
+  "statement": "$\\int_0^{\\frac{\\pi}{2}}\\sin 3x\\cos x\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "积化和差",
+   "三角积分"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第53节 积化和差定积分",
+  "hints": [
+   "两个三角函数相乘，先用积化和差拆成两项再逐项积分。"
+  ],
+  "answer": "$\\frac{1}{2}$",
+  "solution": "用 $\\sin A\\cos B=\\frac{1}{2}[\\sin(A+B)+\\sin(A-B)]$、$\\cos A\\cos B=\\frac{1}{2}[\\cos(A+B)+\\cos(A-B)]$ 拆项后逐项积分。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "积化和差：三角乘积化为和差再积分",
+  "statement": "$\\int_0^{\\pi}\\sin x\\cos 4x\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "积化和差",
+   "三角积分"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第53节 积化和差定积分",
+  "hints": [
+   "两个三角函数相乘，先用积化和差拆成两项再逐项积分。"
+  ],
+  "answer": "$-\\frac{2}{15}$",
+  "solution": "用 $\\sin A\\cos B=\\frac{1}{2}[\\sin(A+B)+\\sin(A-B)]$、$\\cos A\\cos B=\\frac{1}{2}[\\cos(A+B)+\\cos(A-B)]$ 拆项后逐项积分。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "积化和差：三角乘积化为和差再积分",
+  "statement": "$\\int_0^{\\pi}\\sin 4x\\cos x\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "积化和差",
+   "三角积分"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第53节 积化和差定积分",
+  "hints": [
+   "两个三角函数相乘，先用积化和差拆成两项再逐项积分。"
+  ],
+  "answer": "$\\frac{8}{15}$",
+  "solution": "用 $\\sin A\\cos B=\\frac{1}{2}[\\sin(A+B)+\\sin(A-B)]$、$\\cos A\\cos B=\\frac{1}{2}[\\cos(A+B)+\\cos(A-B)]$ 拆项后逐项积分。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "积化和差：三角乘积化为和差再积分",
+  "statement": "$\\int_0^{\\pi}\\sin x\\cos 2x\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "积化和差",
+   "三角积分"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第53节 积化和差定积分",
+  "hints": [
+   "两个三角函数相乘，先用积化和差拆成两项再逐项积分。"
+  ],
+  "answer": "$-\\frac{2}{3}$",
+  "solution": "用 $\\sin A\\cos B=\\frac{1}{2}[\\sin(A+B)+\\sin(A-B)]$、$\\cos A\\cos B=\\frac{1}{2}[\\cos(A+B)+\\cos(A-B)]$ 拆项后逐项积分。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "积化和差：三角乘积化为和差再积分",
+  "statement": "$\\int_0^{\\pi}\\sin x\\cos nx\\,\\mathrm{d}x$，其中 $n$ 为正整数且 $n\\ge 2$。",
+  "tags": [
+   "一元积分",
+   "积化和差",
+   "三角积分"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第53节 积化和差定积分",
+  "hints": [
+   "先积化和差：$\\sin x\\cos nx=\\frac{1}{2}[\\sin(n+1)x-\\sin(n-1)x]$，再对 $n$ 的奇偶分类。"
+  ],
+  "answer": "$\\text{当 }n\\text{ 为奇数时 }0\\text{，当 }n\\text{ 为偶数时 }-\\frac{2}{n^{2}-1}$",
+  "solution": "用 $\\sin A\\cos B=\\frac{1}{2}[\\sin(A+B)+\\sin(A-B)]$、$\\cos A\\cos B=\\frac{1}{2}[\\cos(A+B)+\\cos(A-B)]$ 拆项后逐项积分。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "积化和差：三角乘积化为和差再积分",
+  "statement": "$\\int_0^{\\pi}\\sin nx\\cos x\\,\\mathrm{d}x$，其中 $n$ 为正整数且 $n\\ge 2$。",
+  "tags": [
+   "一元积分",
+   "积化和差",
+   "三角积分"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第53节 积化和差定积分",
+  "hints": [
+   "先积化和差：$\\sin nx\\cos x=\\frac{1}{2}[\\sin(n+1)x+\\sin(n-1)x]$，再对 $n$ 的奇偶分类。"
+  ],
+  "answer": "$\\text{当 }n\\text{ 为奇数时 }0\\text{，当 }n\\text{ 为偶数时 }\\frac{2n}{n^{2}-1}$",
+  "solution": "用 $\\sin A\\cos B=\\frac{1}{2}[\\sin(A+B)+\\sin(A-B)]$、$\\cos A\\cos B=\\frac{1}{2}[\\cos(A+B)+\\cos(A-B)]$ 拆项后逐项积分。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象等式定积分：正弦权对称化",
+  "statement": "设 $f(x)$ 在 $[0,\\pi]$ 上连续，且 $f(x)+f(\\pi-x)=A$，求 $\\int_{0}^{\\pi}f(x)\\sin x\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "换元",
+   "对称性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第55节 抽象等式定积分",
+  "hints": [
+   "对所求积分作 $x\\to\\pi-x$ 的换元，与原式相加即可用上条件。"
+  ],
+  "answer": "$A$",
+  "solution": "记 $I=\\int_0^\\pi f(x)\\sin x\\,\\mathrm{d}x$，令 $x=\\pi-t$ 得 $I=\\int_0^\\pi f(\\pi-t)\\sin t\\,\\mathrm{d}t$；两式相加，$2I=\\int_0^\\pi A\\sin t\\,\\mathrm{d}t=2A$，故 $I=A$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象等式定积分：余弦平方权",
+  "statement": "设 $f(x)$ 在 $[0,\\pi]$ 上连续，且 $f(x)+f(\\pi-x)=A$，求 $\\int_{0}^{\\pi}f(x)\\cos^{2}x\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "换元",
+   "对称性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第55节 抽象等式定积分",
+  "hints": [
+   "同法作 $x\\to\\pi-x$ 换元，注意 $\\cos^{2}(\\pi-t)=\\cos^{2}t$。"
+  ],
+  "answer": "$\\frac{A\\pi}{4}$",
+  "solution": "$2I=\\int_0^\\pi A\\cos^{2}x\\,\\mathrm{d}x=A\\cdot\\frac{\\pi}{2}$，故 $I=\\frac{A\\pi}{4}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象等式定积分：x(1-x)权函数",
+  "statement": "设 $f(x)$ 在 $[0,1]$ 上连续，且 $f(x)+f(1-x)=2$，求 $\\int_{0}^{1}x(1-x)f(x)\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "换元",
+   "对称性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第55节 抽象等式定积分",
+  "hints": [
+   "权函数 $x(1-x)$ 在 $x\\to1-x$ 下不变，正好与条件配套。"
+  ],
+  "answer": "$\\frac{1}{6}$",
+  "solution": "令 $x=1-t$ 得 $I=\\int_0^1 t(1-t)f(1-t)\\mathrm{d}t$；相加得 $2I=\\int_0^1 2x(1-x)\\mathrm{d}x=\\frac{1}{3}$，故 $I=\\frac{1}{6}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象等式定积分：常数和求平均值",
+  "statement": "设 $f(x)$ 在 $[0,2]$ 上连续，且 $f(x)+f(2-x)=4$，求 $\\int_{0}^{2}f(x)\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "换元",
+   "对称性"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第55节 抽象等式定积分",
+  "hints": [
+   "作 $x\\to2-x$ 换元，两式相加直接得到区间长度乘常数的一半。"
+  ],
+  "answer": "$4$",
+  "solution": "$2I=\\int_0^2 4\\,\\mathrm{d}x=8$，故 $I=4$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象等式定积分：正弦权求值",
+  "statement": "设 $f(x)$ 在 $[0,1]$ 上连续，且 $f(x)+f(1-x)=1$，求 $\\int_{0}^{1}f(x)\\sin(\\pi x)\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "换元",
+   "对称性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第55节 抽象等式定积分",
+  "hints": [
+   "注意 $\\sin\\pi(1-t)=\\sin\\pi t$，权函数也关于 $x=\\frac12$ 对称。"
+  ],
+  "answer": "$\\frac{1}{\\pi}$",
+  "solution": "$2I=\\int_0^1 1\\cdot\\sin\\pi x\\,\\mathrm{d}x=\\frac{2}{\\pi}$，故 $I=\\frac{1}{\\pi}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象等式定积分：半周期平移",
+  "statement": "设 $f(x)$ 在 $[0,T]$ 上连续，且 $f(x)+f\\left(x+\\frac{T}{2}\\right)=k$，求 $\\int_{0}^{T}f(x)\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "换元",
+   "周期性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第55节 抽象等式定积分",
+  "hints": [
+   "把积分区间对半拆开，后半段平移 $\\frac{T}{2}$ 后与前半段配对。"
+  ],
+  "answer": "$\\frac{kT}{2}$",
+  "solution": "$I=\\int_0^{T/2}f(x)\\mathrm{d}x+\\int_{T/2}^{T}f(x)\\mathrm{d}x$，第二项令 $x=u+\\frac{T}{2}$ 得 $\\int_0^{T/2}f(u+\\frac{T}{2})\\mathrm{d}u$；相加为 $\\int_0^{T/2}k\\,\\mathrm{d}u=\\frac{kT}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象等式定积分：π平移与sin²x",
+  "statement": "设 $f(x)$ 在 $[0,2\\pi]$ 上连续，且 $f(x)+f(x+\\pi)=1$，求 $\\int_{0}^{2\\pi}f(x)\\sin^{2}x\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "换元",
+   "周期性"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第55节 抽象等式定积分",
+  "hints": [
+   "$\\sin^{2}(x+\\pi)=\\sin^{2}x$，所以平移后权函数不变，可直接配对。"
+  ],
+  "answer": "$\\frac{\\pi}{2}$",
+  "solution": "令 $x=t+\\pi$ 处理后半区间，得 $2I=\\int_0^{2\\pi}\\sin^{2}x\\,\\mathrm{d}x=\\pi$，故 $I=\\frac{\\pi}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象等式定积分：cos²(πx)权",
+  "statement": "设 $f(x)$ 在 $[0,2]$ 上连续，且 $f(x)+f(x+1)=4$，求 $\\int_{0}^{2}f(x)\\cos^{2}(\\pi x)\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "换元",
+   "对称性"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第55节 抽象等式定积分",
+  "hints": [
+   "平移 1 后 $\\cos^{2}\\pi(x+1)=\\cos^{2}\\pi x$，可整段配对。"
+  ],
+  "answer": "$2$",
+  "solution": "$2I=\\int_0^2 4\\cos^{2}\\pi x\\,\\mathrm{d}x=4\\cdot1=4$，故 $I=2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象等式定积分：π/2平移配sin²2x",
+  "statement": "设 $f(x)$ 在 $[0,\\pi]$ 上连续，且 $f(x)+f\\left(x+\\frac{\\pi}{2}\\right)=1$，求 $\\int_{0}^{\\pi}f(x)\\sin^{2}(2x)\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "换元",
+   "周期性"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第55节 抽象等式定积分",
+  "hints": [
+   "把 $[0,\\pi]$ 拆成两段各长 $\\frac{\\pi}{2}$，后段平移 $\\frac{\\pi}{2}$；注意 $\\sin^{2}(2x+\\pi)=\\sin^{2}2x$。"
+  ],
+  "answer": "$\\frac{\\pi}{4}$",
+  "solution": "$2I=\\int_0^{\\pi}\\sin^{2}2x\\,\\mathrm{d}x=\\frac{\\pi}{2}$，故 $I=\\frac{\\pi}{4}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象等式定积分：cos²x权与常数2",
+  "statement": "设 $f(x)$ 在 $[0,2\\pi]$ 上连续，且 $f(x)+f(x+\\pi)=2$，求 $\\int_{0}^{2\\pi}f(x)\\cos^{2}x\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "换元",
+   "周期性"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第55节 抽象等式定积分",
+  "hints": [
+   "平移 $\\pi$ 后 $\\cos^{2}$ 不变，配对后只剩权函数的积分。"
+  ],
+  "answer": "$\\pi$",
+  "solution": "$2I=\\int_0^{2\\pi}2\\cos^{2}x\\,\\mathrm{d}x=2\\pi$，故 $I=\\pi$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分求导：被积函数含参x",
+  "statement": "设 $f(x)=\\int_{0}^{1}(x+t)^{2}\\,\\mathrm{d}t$，求 $f'(1)$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "求导"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第56节 定积分求导",
+  "hints": [
+   "积分限是常数，直接把 $\\frac{\\partial}{\\partial x}$ 移进积分号即可。"
+  ],
+  "answer": "$3$",
+  "solution": "$f'(x)=\\int_0^1 2(x+t)\\,\\mathrm{d}t=2x+1$，代入 $x=1$ 得 $f'(1)=3$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分求导：根式内带参求导",
+  "statement": "设 $f(x)=\\int_{0}^{1}\\sqrt{x^{2}+t^{2}}\\,\\mathrm{d}t$，求 $f'(1)$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "换元积分"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第56节 定积分求导",
+  "hints": [
+   "求导后得 $\\int_0^1\\frac{x}{\\sqrt{x^2+t^2}}\\mathrm{d}t$，是标准积分 $\\ln\\left(t+\\sqrt{x^2+t^2}\\right)$。"
+  ],
+  "answer": "$\\ln(1+\\sqrt{2})$",
+  "solution": "$f'(x)=\\int_0^1\\frac{x\\,\\mathrm{d}t}{\\sqrt{x^{2}+t^{2}}}=\\ln\\left(t+\\sqrt{x^{2}+t^{2}}\\right)\\Big|_0^1=\\ln\\frac{1+\\sqrt{1+x^2}}{x}$，取 $x=1$ 得 $\\ln(1+\\sqrt2)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分求导：对数型被积函数",
+  "statement": "设 $f(x)=\\int_{0}^{1}\\ln(1+xt)\\,\\mathrm{d}t$，求 $f'(1)$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "分部积分"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第56节 定积分求导",
+  "hints": [
+   "先对参数求导去掉对数，再对 $t$ 积分；注意 $x=0$ 时需单独看极限。"
+  ],
+  "answer": "$1-\\ln 2$",
+  "solution": "$f'(x)=\\int_0^1\\frac{t}{1+xt}\\mathrm{d}t=\\frac{1}{x}\\int_0^1\\left(1-\\frac{1}{1+xt}\\right)\\mathrm{d}t=\\frac{1}{x}-\\frac{\\ln(1+x)}{x^{2}}$，取 $x=1$ 得 $1-\\ln2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分求导：二阶导求值",
+  "statement": "设 $f(x)=\\int_{0}^{1}e^{xt}\\,\\mathrm{d}t$，求 $f''(0)$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "求导"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第56节 定积分求导",
+  "hints": [
+   "每次求导相当于被积函数多乘一个 $t$，二阶导就是乘 $t^{2}$。"
+  ],
+  "answer": "$\\frac{1}{3}$",
+  "solution": "$f'(x)=\\int_0^1 te^{xt}\\mathrm{d}t$，$f''(x)=\\int_0^1t^{2}e^{xt}\\mathrm{d}t$，令 $x=0$ 得 $f''(0)=\\int_0^1t^{2}\\mathrm{d}t=\\frac{1}{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分求导：正弦型零值点",
+  "statement": "设 $f(x)=\\int_{0}^{1}\\sin(xt)\\,\\mathrm{d}t$，求 $f'(0)$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "求导"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第56节 定积分求导",
+  "hints": [
+   "求导后被积函数是 $t\\cos(xt)$，在 $x=0$ 处化为 $t$。"
+  ],
+  "answer": "$\\frac{1}{2}$",
+  "solution": "$f'(x)=\\int_0^1t\\cos(xt)\\mathrm{d}t$，$f'(0)=\\int_0^1t\\,\\mathrm{d}t=\\frac{1}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分求导：余弦型奇对称",
+  "statement": "设 $f(x)=\\int_{0}^{1}\\cos(xt)\\,\\mathrm{d}t$，求 $f'(0)$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "奇偶性"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第56节 定积分求导",
+  "hints": [
+   "求导得 $-\\int_0^1 t\\sin(xt)\\mathrm{d}t$，$x=0$ 时被积函数为 0。"
+  ],
+  "answer": "$0$",
+  "solution": "$f'(x)=-\\int_0^1t\\sin(xt)\\mathrm{d}t$，故 $f'(0)=0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分求导：反正切型",
+  "statement": "设 $f(x)=\\int_{0}^{1}\\arctan(xt)\\,\\mathrm{d}t$，求 $f'(1)$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "分部积分"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第56节 定积分求导",
+  "hints": [
+   "求导后是 $\\int_0^1\\frac{t}{1+x^2t^2}\\mathrm{d}t$，凑成 $\\mathrm{d}(1+x^{2}t^{2})$。"
+  ],
+  "answer": "$\\frac{1}{2}\\ln 2$",
+  "solution": "$f'(x)=\\int_0^1\\frac{t\\,\\mathrm{d}t}{1+x^{2}t^{2}}=\\frac{\\ln(1+x^{2})}{2x^{2}}$，取 $x=1$ 得 $\\frac{1}{2}\\ln2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分求导：x与x²+t²齐次",
+  "statement": "设 $f(x)=\\int_{0}^{1}\\frac{x}{x^{2}+t^{2}}\\,\\mathrm{d}t$，求 $f'(1)$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "换元积分"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第56节 定积分求导",
+  "hints": [
+   "把积分先算出来：$f(x)=\\arctan\\frac{1}{x}$，再求导更省力。"
+  ],
+  "answer": "$-\\frac{1}{2}$",
+  "solution": "$f(x)=\\int_0^1\\frac{x\\,\\mathrm{d}t}{x^{2}+t^{2}}=\\arctan\\frac{1}{x}$，故 $f'(x)=-\\frac{1}{1+x^{2}}$，$f'(1)=-\\frac{1}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分求导：含x的一阶有理式",
+  "statement": "设 $f(x)=\\int_{0}^{1}\\frac{xt}{1+x^{2}t^{2}}\\,\\mathrm{d}t$，求 $f'(1)$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "求导"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第56节 定积分求导",
+  "hints": [
+   "先算出 $f(x)=\\frac{\\ln(1+x^{2})}{2x}$，再用商的求导法则。"
+  ],
+  "answer": "$\\frac{1}{2}(1-\\ln 2)$",
+  "solution": "$f(x)=\\frac{\\ln(1+x^{2})}{2x}$，$f'(x)=\\frac{\\frac{2x^{2}}{1+x^{2}}-\\ln(1+x^{2})}{2x^{2}}$，取 $x=1$ 得 $\\frac{1-\\ln2}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分求导：纯多项式被积函数",
+  "statement": "设 $f(x)=\\int_{0}^{1}(x^{2}-t)e^{-t}\\,\\mathrm{d}t$，求 $f'(1)$。",
+  "tags": [
+   "一元积分",
+   "变限积分",
+   "分部积分"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第56节 定积分求导",
+  "hints": [
+   "对 $x$ 求导时只有 $x^{2}$ 项存活，$\\int_0^1 2x e^{-t}\\mathrm{d}t$ 即可。"
+  ],
+  "answer": "$2(1-e^{-1})$",
+  "solution": "$f'(x)=2x\\int_0^1e^{-t}\\mathrm{d}t=2x(1-e^{-1})$，取 $x=1$ 得 $2(1-e^{-1})$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分转二重：商式化二重积分",
+  "statement": "计算 $\\int_{0}^{1}\\frac{x^{3}-x}{\\ln x}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "二重积分",
+   "交换积分次序"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第57节 定积分转二重积分",
+  "hints": [
+   "把 $\\frac{x^{a}-x^{b}}{\\ln x}$ 看成 $\\int_{b}^{a}x^{y}\\,\\mathrm{d}y$，再交换积分次序。"
+  ],
+  "answer": "$\\ln 2$",
+  "solution": "$\\frac{x^{3}-x}{\\ln x}=\\int_{1}^{3}x^{y}\\mathrm{d}y$，故原式 $=\\int_1^3\\mathrm{d}y\\int_0^1x^{y}\\mathrm{d}x=\\int_1^3\\frac{\\mathrm{d}y}{y+1}=\\ln2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分转二重：幂差商式积分",
+  "statement": "计算 $\\int_{0}^{1}\\frac{x^{4}-x^{2}}{\\ln x}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "二重积分",
+   "交换积分次序"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第57节 定积分转二重积分",
+  "hints": [
+   "同一套路：$\\frac{x^{a}-x^{b}}{\\ln x}=\\int_b^a x^{y}\\mathrm{d}y$。"
+  ],
+  "answer": "$\\ln\\frac{5}{3}$",
+  "solution": "原式 $=\\int_2^4\\mathrm{d}y\\int_0^1x^{y}\\mathrm{d}x=\\int_2^4\\frac{\\mathrm{d}y}{y+1}=\\ln\\frac{5}{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分转二重：混合幂次差",
+  "statement": "计算 $\\int_{0}^{1}\\frac{x^{5}-x^{3}}{\\ln x}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "二重积分",
+   "交换积分次序"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第57节 定积分转二重积分",
+  "hints": [
+   "换成 $\\int_3^5 x^{y}\\mathrm{d}y$ 后交换次序。"
+  ],
+  "answer": "$\\ln\\frac{3}{2}$",
+  "solution": "原式 $=\\int_3^5\\frac{\\mathrm{d}y}{y+1}=\\ln\\frac{6}{4}=\\ln\\frac{3}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分转二重：x²与1之差",
+  "statement": "计算 $\\int_{0}^{1}\\frac{x^{2}-1}{\\ln x}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "二重积分",
+   "交换积分次序"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第57节 定积分转二重积分",
+  "hints": [
+   "$1=x^{0}$，故看成 $\\int_0^2x^{y}\\mathrm{d}y$。"
+  ],
+  "answer": "$\\ln 3$",
+  "solution": "原式 $=\\int_0^2\\frac{\\mathrm{d}y}{y+1}=\\ln3$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分转二重：指数差商式",
+  "statement": "计算 $\\int_{0}^{+\\infty}\\frac{e^{-x}-e^{-3x}}{x}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "交换积分次序"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第57节 定积分转二重积分",
+  "hints": [
+   "用 $\\frac{e^{-ax}-e^{-bx}}{x}=\\int_a^b e^{-xy}\\,\\mathrm{d}y$，再交换次序，即 Frullani 型。"
+  ],
+  "answer": "$\\ln 3$",
+  "solution": "原式 $=\\int_1^3\\mathrm{d}y\\int_0^{+\\infty}e^{-xy}\\mathrm{d}x=\\int_1^3\\frac{\\mathrm{d}y}{y}=\\ln3$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分转二重：指数差求对数比",
+  "statement": "计算 $\\int_{0}^{+\\infty}\\frac{e^{-2x}-e^{-5x}}{x}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "交换积分次序"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第57节 定积分转二重积分",
+  "hints": [
+   "Frullani 结论：$\\int_0^{+\\infty}\\frac{e^{-ax}-e^{-bx}}{x}\\mathrm{d}x=\\ln\\frac{b}{a}$。"
+  ],
+  "answer": "$\\ln\\frac{5}{2}$",
+  "solution": "原式 $=\\int_2^5\\frac{\\mathrm{d}y}{y}=\\ln\\frac{5}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分转二重：高斯型指数差",
+  "statement": "计算 $\\int_{0}^{+\\infty}\\frac{e^{-x^{2}}-e^{-4x^{2}}}{x}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "换元积分"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第57节 定积分转二重积分",
+  "hints": [
+   "令 $u=x^{2}$ 化为 $\\frac{e^{-u}-e^{-4u}}{2u}$ 型，再用 Frullani。"
+  ],
+  "answer": "$\\ln 2$",
+  "solution": "令 $t=x^{2}$，原式 $=\\frac{1}{2}\\int_0^{+\\infty}\\frac{e^{-t}-e^{-4t}}{t}\\mathrm{d}t=\\frac{1}{2}\\ln4=\\ln2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分转二重：arctan差商式",
+  "statement": "计算 $\\int_{0}^{+\\infty}\\frac{\\arctan 3x-\\arctan x}{x}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "交换积分次序"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第57节 定积分转二重积分",
+  "hints": [
+   "$\\arctan bx-\\arctan ax=\\int_a^b\\frac{x}{1+x^2y^2}\\mathrm{d}y$，交换次序后用 $\\int_0^{+\\infty}\\frac{\\mathrm{d}x}{1+x^2y^2}$。"
+  ],
+  "answer": "$\\frac{\\pi}{2}\\ln 3$",
+  "solution": "原式 $=\\int_1^3\\mathrm{d}y\\int_0^{+\\infty}\\frac{\\mathrm{d}x}{1+x^{2}y^{2}}=\\int_1^3\\frac{\\pi}{2y}\\mathrm{d}y=\\frac{\\pi}{2}\\ln3$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分转二重：arctan5x减arctan2x",
+  "statement": "计算 $\\int_{0}^{+\\infty}\\frac{\\arctan 5x-\\arctan 2x}{x}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "交换积分次序"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第57节 定积分转二重积分",
+  "hints": [
+   "与上题同型，参数区间取 $[2,5]$。"
+  ],
+  "answer": "$\\frac{\\pi}{2}\\ln\\frac{5}{2}$",
+  "solution": "原式 $=\\int_2^5\\frac{\\pi}{2y}\\mathrm{d}y=\\frac{\\pi}{2}\\ln\\frac{5}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分转二重：arctan4x减arctan2x",
+  "statement": "计算 $\\int_{0}^{+\\infty}\\frac{\\arctan 4x-\\arctan 2x}{x}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "交换积分次序"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第57节 定积分转二重积分",
+  "hints": [
+   "参数区间 $[2,4]$，结果应为 $\\frac{\\pi}{2}\\ln\\frac{4}{2}$。"
+  ],
+  "answer": "$\\frac{\\pi}{2}\\ln 2$",
+  "solution": "原式 $=\\int_2^4\\frac{\\pi}{2y}\\mathrm{d}y=\\frac{\\pi}{2}\\ln2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分比大小：同域sin幂次比较",
+  "statement": "设 $I_{1}=\\int_{0}^{\\frac{\\pi}{2}}\\sin^{2024}x\\,\\mathrm{d}x$，$I_{2}=\\int_{0}^{\\frac{\\pi}{2}}\\sin^{2025}x\\,\\mathrm{d}x$，$I_{3}=\\int_{0}^{\\frac{\\pi}{2}}\\cos^{2024}x\\,\\mathrm{d}x$，比较大小。",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "单调性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第58节 定积分比大小",
+  "hints": [
+   "$I_{3}$ 用 $x\\to\\frac{\\pi}{2}-x$ 化为 $I_{1}$；同域上 $\\sin^{n}x$ 随 $n$ 增大而减小。"
+  ],
+  "answer": "$I_{1}=I_{3}>I_{2}$",
+  "solution": "$I_{3}\\xlongequal{x\\to\\frac{\\pi}{2}-x}I_{1}$；因 $0<\\sin x<1$（除端点），$\\sin^{2025}x<\\sin^{2024}x$，故 $I_{2}<I_{1}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分比大小：正弦与正切分式",
+  "statement": "设 $I_{1}=\\int_{0}^{\\frac{\\pi}{2}}\\frac{\\mathrm{d}x}{1+\\sin x}$，$I_{2}=\\int_{0}^{\\frac{\\pi}{2}}\\frac{\\mathrm{d}x}{1+\\cos x}$，$I_{3}=\\int_{0}^{\\frac{\\pi}{2}}\\frac{\\mathrm{d}x}{1+\\tan x}$，比较大小。",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "换元"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第58节 定积分比大小",
+  "hints": [
+   "$I_{1}=I_{2}$ 由 $x\\to\\frac{\\pi}{2}-x$；$\\frac{1}{1+\\tan x}=\\frac{\\cos x}{\\sin x+\\cos x}$ 与 $\\frac{1}{1+\\sin x}$ 比较需用对称化技巧。"
+  ],
+  "answer": "$I_{1}=I_{2}>I_{3}$",
+  "solution": "$I_{1}$ 作 $x\\to\\frac{\\pi}{2}-x$ 即得 $I_{2}$；而 $I_{3}=\\int_0^{\\frac{\\pi}{2}}\\frac{\\cos x}{\\sin x+\\cos x}\\mathrm{d}x$，配对得 $I_{1}-I_{3}=\\int_0^{\\frac{\\pi}{2}}\\frac{(\\sin x-\\cos x)^{2}}{2(1+\\sin x)(\\sin x+\\cos x)}\\mathrm{d}x>0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分比大小：e^{sinx}与e^{cosx}",
+  "statement": "设 $I_{1}=\\int_{0}^{\\frac{\\pi}{2}}e^{\\sin x}\\,\\mathrm{d}x$，$I_{2}=\\int_{0}^{\\frac{\\pi}{2}}e^{\\cos x}\\,\\mathrm{d}x$，$I_{3}=\\int_{0}^{\\frac{\\pi}{2}}e^{\\sin x+\\cos x}\\,\\mathrm{d}x$，比较大小。",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "单调性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第58节 定积分比大小",
+  "hints": [
+   "同域上若 $u(x)\\le v(x)$ 则积分也小；$1+\\sin x\\cos x$…直接用 $e^{\\sin x}<e^{\\sin x+\\cos x}$（$\\cos x>0$）。"
+  ],
+  "answer": "$I_{1}=I_{2}<I_{3}$",
+  "solution": "对称换元得 $I_{1}=I_{2}$；因 $\\cos x>0$ 于 $\\left(0,\\frac{\\pi}{2}\\right)$，$e^{\\sin x}<e^{\\sin x+\\cos x}$，故 $I_{1}<I_{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分比大小：cosx/(1+x²)与中点权",
+  "statement": "设 $I_{1}=\\int_{0}^{\\frac{\\pi}{2}}\\frac{\\cos x}{1+x^{2}}\\,\\mathrm{d}x$，$I_{2}=\\int_{0}^{\\frac{\\pi}{2}}\\frac{\\sin x}{1+x^{2}}\\,\\mathrm{d}x$，$I_{3}=\\int_{0}^{\\frac{\\pi}{2}}\\frac{\\sin x+\\cos x}{2(1+x^{2})}\\,\\mathrm{d}x$，比较大小。",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "单调性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第58节 定积分比大小",
+  "hints": [
+   "三者都含正权因子 $\\frac{1}{1+x^{2}}$，转化为比较 $\\cos x$、$\\sin x$ 及其平均值。"
+  ],
+  "answer": "$I_{1}>I_{3}>I_{2}$",
+  "solution": "$I_{3}=\\frac{I_{1}+I_{2}}{2}$ 必居中；又 $\\int_0^{\\frac{\\pi}{2}}\\frac{\\cos x-\\sin x}{1+x^{2}}\\mathrm{d}x>0$（$\\cos x>\\sin x$ 于前半段且权更大），故 $I_{1}>I_{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分比大小：sinx与cosx同权比较",
+  "statement": "设 $I_{1}=\\int_{0}^{\\frac{\\pi}{2}}\\frac{\\sin x}{1+x^{2}}\\,\\mathrm{d}x$，$I_{2}=\\int_{0}^{\\frac{\\pi}{2}}\\frac{\\cos x}{1+x^{2}}\\,\\mathrm{d}x$，$I_{3}=\\int_{0}^{\\frac{\\pi}{2}}\\frac{\\mathrm{d}x}{1+x^{2}}$，比较大小。",
+  "tags": [
+   "一元积分",
+   "单调性",
+   "估值"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第58节 定积分比大小",
+  "hints": [
+   "权 $\\frac{1}{1+x^{2}}$ 递减，$\\sin x$ 递增、$\\cos x$ 递减，用对称配对比较。"
+  ],
+  "answer": "$I_{1}<I_{2}<I_{3}$",
+  "solution": "$\\sin x<1$ 故 $I_{1}<I_{3}$；配对 $I_{2}-I_{1}=\\int_0^{\\frac{\\pi}{2}}\\frac{\\cos x-\\sin x}{1+x^{2}}\\mathrm{d}x>0$（权函数递减、被减函数对称），故 $I_{1}<I_{2}<I_{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分比大小：(1-x)²与x²同权",
+  "statement": "设 $I_{1}=\\int_{0}^{1}(1-x)^{2}e^{x}\\,\\mathrm{d}x$，$I_{2}=\\int_{0}^{1}x^{2}e^{x}\\,\\mathrm{d}x$，$I_{3}=\\int_{0}^{1}\\frac{(1-x)^{2}+x^{2}}{2}e^{x}\\,\\mathrm{d}x$，比较大小。",
+  "tags": [
+   "一元积分",
+   "对称性",
+   "单调性"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第58节 定积分比大小",
+  "hints": [
+   "$e^{x}$ 递增，$(1-x)^{2}$ 递减，配对比较得 $I_{2}>I_{1}$；$I_{3}$ 是二者平均。"
+  ],
+  "answer": "$I_{1}<I_{3}<I_{2}$",
+  "solution": "$I_{3}=\\frac{I_{1}+I_{2}}{2}$；又 $\\int_0^1(x^{2}-(1-x)^{2})e^{x}\\mathrm{d}x=\\int_0^1(2x-1)e^{x}\\mathrm{d}x>0$，故 $I_{2}>I_{1}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分比大小：xe^x、x²e^x与xe^{x²}",
+  "statement": "设 $I_{1}=\\int_{0}^{1}xe^{x}\\,\\mathrm{d}x$，$I_{2}=\\int_{0}^{1}x^{2}e^{x}\\,\\mathrm{d}x$，$I_{3}=\\int_{0}^{1}xe^{x^{2}}\\,\\mathrm{d}x$，比较大小。",
+  "tags": [
+   "一元积分",
+   "单调性",
+   "估值"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第58节 定积分比大小",
+  "hints": [
+   "$x^{2}<x$ 且 $e^{x}$ 递增，故 $I_{2}<I_{1}$；$I_{3}$ 已可算出 $\\frac{e-1}{2}$ 直接比较。"
+  ],
+  "answer": "$I_{2}<I_{3}<I_{1}$",
+  "solution": "$I_{2}<I_{1}$ 由 $x^{2}<x$；$I_{3}=\\frac{e-1}{2}$，$I_{1}=1$，$I_{2}=e-2\\approx0.718$，故 $I_{2}<I_{3}<I_{1}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分比大小：x/(1+sinx)型混合",
+  "statement": "设 $I_{1}=\\int_{0}^{\\frac{\\pi}{2}}\\frac{x}{1+\\sin x}\\,\\mathrm{d}x$，$I_{2}=\\int_{0}^{\\frac{\\pi}{2}}\\frac{\\sin x}{1+x}\\,\\mathrm{d}x$，$I_{3}=\\int_{0}^{\\frac{\\pi}{2}}\\frac{x}{1+x}\\,\\mathrm{d}x$，比较大小。",
+  "tags": [
+   "一元积分",
+   "单调性",
+   "估值"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第58节 定积分比大小",
+  "hints": [
+   "$I_{2}$ 与 $I_{3}$ 分母相同，只需比 $\\sin x$ 与 $x$；$I_{1}$ 与 $I_{3}$ 用换元 $x\\to\\frac{\\pi}{2}-x$ 后再比。"
+  ],
+  "answer": "$I_{2}<I_{3}<I_{1}$",
+  "solution": "$\\sin x<x$ 于 $\\left(0,\\frac{\\pi}{2}\\right)$ 得 $I_{2}<I_{3}$；$I_{1}\\xlongequal{x\\to\\frac{\\pi}{2}-x}\\int_0^{\\frac{\\pi}{2}}\\frac{\\frac{\\pi}{2}-x}{1+\\cos x}\\mathrm{d}x$，数值估算得 $I_{1}\\approx1.2>I_{3}\\approx0.68$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分比大小：ln(1+x)系列",
+  "statement": "设 $I_{1}=\\int_{0}^{1}\\frac{\\ln(1+x)}{x}\\,\\mathrm{d}x$，$I_{2}=\\int_{0}^{1}\\frac{\\ln(1+x)}{1+x}\\,\\mathrm{d}x$，$I_{3}=\\int_{0}^{1}\\frac{x}{1+x}\\,\\mathrm{d}x$，比较大小。",
+  "tags": [
+   "一元积分",
+   "单调性",
+   "估值"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第58节 定积分比大小",
+  "hints": [
+   "$I_{2}$ 可算出 $\\frac{1}{2}\\ln^{2}2$；$I_{1}$ 用 $\\frac{\\ln(1+x)}{x}>\\frac{\\ln(1+x)}{?}$ 比较。"
+  ],
+  "answer": "$I_{2}<I_{3}<I_{1}$",
+  "solution": "$I_{2}=\\frac{1}{2}\\ln^{2}2\\approx0.24$，$I_{3}=1-\\ln2\\approx0.307$；$\\frac{\\ln(1+x)}{x}>1-\\frac{x}{2}$ 得 $I_{1}>0.375$，故 $I_{2}<I_{3}<I_{1}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分比大小：e^{±x}与1同权",
+  "statement": "设 $I_{1}=\\int_{0}^{1}\\frac{e^{x}}{1+x}\\,\\mathrm{d}x$，$I_{2}=\\int_{0}^{1}\\frac{e^{-x}}{1+x}\\,\\mathrm{d}x$，$I_{3}=\\int_{0}^{1}\\frac{1}{1+x}\\,\\mathrm{d}x$，比较大小。",
+  "tags": [
+   "一元积分",
+   "单调性",
+   "估值"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第58节 定积分比大小",
+  "hints": [
+   "同域同权，只需比较 $e^{x}$、$1$、$e^{-x}$ 三者在 $(0,1)$ 上的大小。"
+  ],
+  "answer": "$I_{1}>I_{3}>I_{2}$",
+  "solution": "$e^{-x}<1<e^{x}$ 于 $(0,1)$，权 $\\frac{1}{1+x}>0$，逐项积分即得 $I_{1}>I_{3}>I_{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分比大小：异域xe^{-x}分段",
+  "statement": "设 $I_{1}=\\int_{0}^{1}xe^{-x}\\,\\mathrm{d}x$，$I_{2}=\\int_{1}^{2}xe^{-x}\\,\\mathrm{d}x$，$I_{3}=\\int_{0}^{2}xe^{-x}\\,\\mathrm{d}x$，比较大小。",
+  "tags": [
+   "一元积分",
+   "估值",
+   "单调性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第58节 定积分比大小",
+  "hints": [
+   "$I_{3}=I_{1}+I_{2}$ 且各项为正，直接得 $I_{3}$ 最大；$I_{1}$、$I_{2}$ 需算值或放缩。"
+  ],
+  "answer": "$I_{1}<I_{2}<I_{3}$",
+  "solution": "$I_{1}=1-2e^{-1}\\approx0.264$，$I_{2}=2e^{-1}-3e^{-2}\\approx0.330$，$I_{3}=I_{1}+I_{2}\\approx0.594$，故 $I_{1}<I_{2}<I_{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分比大小：异域e^{-x}sinx",
+  "statement": "设 $I_{1}=\\int_{0}^{\\frac{\\pi}{2}}e^{-x}\\sin x\\,\\mathrm{d}x$，$I_{2}=\\int_{\\frac{\\pi}{2}}^{\\pi}e^{-x}\\sin x\\,\\mathrm{d}x$，$I_{3}=\\int_{0}^{\\pi}e^{-x}\\sin x\\,\\mathrm{d}x$，比较大小。",
+  "tags": [
+   "一元积分",
+   "估值",
+   "单调性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第58节 定积分比大小",
+  "hints": [
+   "$I_{3}=I_{1}+I_{2}$；比较 $I_{1},I_{2}$ 看 $e^{-x}$ 与 $\\sin x$ 的变化方向。"
+  ],
+  "answer": "$I_{2}<I_{1}<I_{3}$",
+  "solution": "$I_{1}=\\frac{1+e^{-\\pi/2}}{2}\\approx0.604$，$I_{2}=\\frac{e^{-\\pi/2}+e^{-\\pi}}{2}\\approx0.229$，$I_{3}\\approx0.833$，故 $I_{2}<I_{1}<I_{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分比大小：异域e^x/(1+x²)",
+  "statement": "设 $I_{1}=\\int_{0}^{1}\\frac{e^{x}}{1+x^{2}}\\,\\mathrm{d}x$，$I_{2}=\\int_{1}^{2}\\frac{e^{x}}{1+x^{2}}\\,\\mathrm{d}x$，$I_{3}=\\int_{0}^{2}\\frac{e^{x}}{1+x^{2}}\\,\\mathrm{d}x$，比较大小。",
+  "tags": [
+   "一元积分",
+   "估值",
+   "单调性"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第58节 定积分比大小",
+  "hints": [
+   "$I_{3}=I_{1}+I_{2}$ 且皆正；被积函数在整个区间递增，$I_{2}$ 更大。"
+  ],
+  "answer": "$I_{1}<I_{2}<I_{3}$",
+  "solution": "$I_{3}=I_{1}+I_{2}$ 故最大；$\\frac{e^{x}}{1+x^{2}}$ 在 $[0,2]$ 递增，$I_{2}$ 区间上每点值更大且区间等长，故 $I_{1}<I_{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分比大小：异域x/(1+x²)",
+  "statement": "设 $I_{1}=\\int_{0}^{1}\\frac{x}{1+x^{2}}\\,\\mathrm{d}x$，$I_{2}=\\int_{1}^{2}\\frac{x}{1+x^{2}}\\,\\mathrm{d}x$，$I_{3}=\\int_{0}^{2}\\frac{x}{1+x^{2}}\\,\\mathrm{d}x$，比较大小。",
+  "tags": [
+   "一元积分",
+   "估值",
+   "单调性"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第58节 定积分比大小",
+  "hints": [
+   "直接算：原函数是 $\\frac{1}{2}\\ln(1+x^{2})$。"
+  ],
+  "answer": "$I_{1}<I_{2}<I_{3}$",
+  "solution": "$I_{1}=\\frac{1}{2}\\ln2\\approx0.347$，$I_{2}=\\frac{1}{2}\\ln\\frac{5}{2}\\approx0.458$，$I_{3}=\\frac{1}{2}\\ln5\\approx0.805$，故 $I_{1}<I_{2}<I_{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分比大小：异域sinx/(1+e^x)",
+  "statement": "设 $I_{1}=\\int_{0}^{\\frac{\\pi}{2}}\\frac{\\sin x}{1+e^{x}}\\,\\mathrm{d}x$，$I_{2}=\\int_{\\frac{\\pi}{2}}^{\\pi}\\frac{\\sin x}{1+e^{x}}\\,\\mathrm{d}x$，$I_{3}=\\int_{0}^{\\pi}\\frac{\\sin x}{1+e^{x}}\\,\\mathrm{d}x$，比较大小。",
+  "tags": [
+   "一元积分",
+   "估值",
+   "对称性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第58节 定积分比大小",
+  "hints": [
+   "$I_{3}=I_{1}+I_{2}$；后半段 $\\frac{1}{1+e^{x}}$ 更小且 $\\sin x$ 对称，故 $I_{2}<I_{1}$。"
+  ],
+  "answer": "$I_{2}<I_{1}<I_{3}$",
+  "solution": "作 $x\\to\\pi-x$ 得 $I_{2}=\\int_0^{\\frac{\\pi}{2}}\\frac{\\sin t}{1+e^{\\pi-t}}\\mathrm{d}t$，因 $\\frac{1}{1+e^{\\pi-t}}<\\frac{1}{1+e^{t}}$，故 $I_{2}<I_{1}<I_{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分比大小：异域e^x/(1+x)",
+  "statement": "设 $I_{1}=\\int_{0}^{1}\\frac{e^{x}}{1+x}\\,\\mathrm{d}x$，$I_{2}=\\int_{1}^{2}\\frac{e^{x}}{1+x}\\,\\mathrm{d}x$，$I_{3}=\\int_{0}^{2}\\frac{e^{x}}{1+x}\\,\\mathrm{d}x$，比较大小。",
+  "tags": [
+   "一元积分",
+   "估值",
+   "单调性"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第58节 定积分比大小",
+  "hints": [
+   "$I_{3}=I_{1}+I_{2}$；被积函数在 $[0,2]$ 上严格递增，等长区间上后者更大。"
+  ],
+  "answer": "$I_{1}<I_{2}<I_{3}$",
+  "solution": "$I_{3}=I_{1}+I_{2}$ 最大；$\\frac{e^{x}}{1+x}$ 递增，故 $[1,2]$ 上每点被积值大于 $[0,1]$ 上对应值，$I_{1}<I_{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分比大小：异域xe^{x²}",
+  "statement": "设 $I_{1}=\\int_{0}^{1}xe^{x^{2}}\\,\\mathrm{d}x$，$I_{2}=\\int_{1}^{2}xe^{x^{2}}\\,\\mathrm{d}x$，$I_{3}=\\int_{0}^{2}xe^{x^{2}}\\,\\mathrm{d}x$，比较大小。",
+  "tags": [
+   "一元积分",
+   "估值",
+   "换元积分"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第58节 定积分比大小",
+  "hints": [
+   "令 $u=x^{2}$ 后原函数为 $\\frac{1}{2}e^{x^{2}}$，直接算值最快。"
+  ],
+  "answer": "$I_{1}<I_{2}<I_{3}$",
+  "solution": "$I_{1}=\\frac{e-1}{2}\\approx0.859$，$I_{2}=\\frac{e^{4}-e}{2}\\approx25.9$，$I_{3}=\\frac{e^{4}-1}{2}$，故 $I_{1}<I_{2}<I_{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分比大小：异域xe^x/(1+x)",
+  "statement": "设 $I_{1}=\\int_{0}^{1}\\frac{xe^{x}}{1+x}\\,\\mathrm{d}x$，$I_{2}=\\int_{1}^{2}\\frac{xe^{x}}{1+x}\\,\\mathrm{d}x$，$I_{3}=\\int_{0}^{2}\\frac{xe^{x}}{1+x}\\,\\mathrm{d}x$，比较大小。",
+  "tags": [
+   "一元积分",
+   "估值",
+   "单调性"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第58节 定积分比大小",
+  "hints": [
+   "$I_{3}=I_{1}+I_{2}$；$\\frac{x}{1+x}=1-\\frac{1}{1+x}$ 单调增，故被积函数递增。"
+  ],
+  "answer": "$I_{1}<I_{2}<I_{3}$",
+  "solution": "$I_{3}=I_{1}+I_{2}$；$\\frac{xe^{x}}{1+x}$ 在 $[0,2]$ 递增，等长区间比较得 $I_{1}<I_{2}$，故 $I_{1}<I_{2}<I_{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "定积分比大小：异域e^x ln(1+x)",
+  "statement": "设 $I_{1}=\\int_{0}^{1}e^{x}\\ln(1+x)\\,\\mathrm{d}x$，$I_{2}=\\int_{1}^{2}e^{x}\\ln(1+x)\\,\\mathrm{d}x$，$I_{3}=\\int_{0}^{2}e^{x}\\ln(1+x)\\,\\mathrm{d}x$，比较大小。",
+  "tags": [
+   "一元积分",
+   "估值",
+   "单调性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第58节 定积分比大小",
+  "hints": [
+   "$I_{3}=I_{1}+I_{2}$；$e^{x}\\ln(1+x)>0$ 且递增，后段更大。"
+  ],
+  "answer": "$I_{1}<I_{2}<I_{3}$",
+  "solution": "$I_{3}=I_{1}+I_{2}$ 最大；被积函数在 $[0,2]$ 上正且递增，故 $[1,2]$ 上积分大于 $[0,1]$ 上积分，$I_{1}<I_{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含定积分表达式：常数型积分方程",
+  "statement": "设 $f(x)=x+\\int_{0}^{1}tf(t)\\,\\mathrm{d}t$，求 $f(x)$。",
+  "tags": [
+   "一元积分",
+   "积分方程",
+   "待定常数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第59节 含定积分的表达式",
+  "hints": [
+   "定积分是常数，设为 $A$，代回原式后自洽求 $A$。"
+  ],
+  "answer": "$f(x)=x+\\frac{2}{3}$",
+  "solution": "设 $A=\\int_0^1tf(t)\\mathrm{d}t$，则 $f(x)=x+A$，$A=\\int_0^1t(t+A)\\mathrm{d}t=\\frac{1}{3}+\\frac{A}{2}$，得 $A=\\frac{2}{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含定积分表达式：二次函数加常数积分",
+  "statement": "设 $f(x)=x^{2}+2\\int_{0}^{1}f(t)\\,\\mathrm{d}t$，求 $f(x)$。",
+  "tags": [
+   "一元积分",
+   "积分方程",
+   "待定常数"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第59节 含定积分的表达式",
+  "hints": [
+   "令 $A=\\int_0^1f(t)\\mathrm{d}t$，则 $f(x)=x^{2}+2A$，两边在 $[0,1]$ 上积分。"
+  ],
+  "answer": "$f(x)=x^{2}-\\frac{2}{3}$",
+  "solution": "$A=\\int_0^1(t^{2}+2A)\\mathrm{d}t=\\frac{1}{3}+2A$，得 $A=-\\frac{1}{3}$，故 $f(x)=x^{2}-\\frac{2}{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含定积分表达式：正弦加常数积分",
+  "statement": "设 $f(x)=\\sin x+\\int_{0}^{\\pi}f(t)\\,\\mathrm{d}t$，求 $f(x)$。",
+  "tags": [
+   "一元积分",
+   "积分方程",
+   "待定常数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第59节 含定积分的表达式",
+  "hints": [
+   "令 $A=\\int_0^\\pi f(t)\\mathrm{d}t$，注意 $\\int_0^\\pi\\sin t\\,\\mathrm{d}t=2$。"
+  ],
+  "answer": "$f(x)=\\sin x-\\frac{2}{\\pi-1}$",
+  "solution": "$A=2+A\\pi$，得 $A=\\frac{2}{1-\\pi}=-\\frac{2}{\\pi-1}$，故 $f(x)=\\sin x-\\frac{2}{\\pi-1}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含定积分表达式：指数型积分方程",
+  "statement": "设 $f(x)=xe^{-x^{2}}+2\\int_{0}^{1}f(t)\\,\\mathrm{d}t$，求 $f(x)$。",
+  "tags": [
+   "一元积分",
+   "积分方程",
+   "待定常数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第59节 含定积分的表达式",
+  "hints": [
+   "令 $A=\\int_0^1f(t)\\mathrm{d}t$，需算 $\\int_0^1te^{-t^2}\\mathrm{d}t=\\frac{1-e^{-1}}{2}$。"
+  ],
+  "answer": "$f(x)=xe^{-x^{2}}+e^{-1}-1$",
+  "solution": "$A=\\frac{1-e^{-1}}{2}+2A$，得 $A=-\\frac{1-e^{-1}}{2}$，故 $f(x)=xe^{-x^{2}}+e^{-1}-1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含定积分表达式：arctan配x²权",
+  "statement": "设 $f(x)=\\arctan x+x^{2}\\int_{0}^{1}f(t)\\,\\mathrm{d}t$，求 $f(x)$。",
+  "tags": [
+   "一元积分",
+   "积分方程",
+   "分部积分"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第59节 含定积分的表达式",
+  "hints": [
+   "令 $A=\\int_0^1f(t)\\mathrm{d}t$，需用分部积分算 $\\int_0^1\\arctan t\\,\\mathrm{d}t$。"
+  ],
+  "answer": "$f(x)=\\arctan x+\\left(\\frac{3\\pi}{8}-\\frac{3}{4}\\ln 2\\right)x^{2}$",
+  "solution": "$\\int_0^1\\arctan t\\,\\mathrm{d}t=\\frac{\\pi}{4}-\\frac{1}{2}\\ln2$；$A=\\frac{\\pi}{4}-\\frac{\\ln2}{2}+\\frac{A}{3}$，得 $A=\\frac{3\\pi}{8}-\\frac{3}{4}\\ln2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含定积分表达式：e^x配线性权",
+  "statement": "设 $f(x)=e^{x}-x\\int_{0}^{1}f(t)\\,\\mathrm{d}t$，求 $f(x)$。",
+  "tags": [
+   "一元积分",
+   "积分方程",
+   "待定常数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第59节 含定积分的表达式",
+  "hints": [
+   "令 $A=\\int_0^1f(t)\\mathrm{d}t$，则 $f(x)=e^{x}-Ax$，代回求 $A$。"
+  ],
+  "answer": "$f(x)=e^{x}-\\frac{2(e-1)}{3}x$",
+  "solution": "$A=\\int_0^1(e^{t}-At)\\mathrm{d}t=(e-1)-\\frac{A}{2}$，得 $A=\\frac{2(e-1)}{3}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含定积分表达式：对数配x权",
+  "statement": "设 $f(x)=\\ln(1+x)+x\\int_{0}^{1}f(t)\\,\\mathrm{d}t$，求 $f(x)$。",
+  "tags": [
+   "一元积分",
+   "积分方程",
+   "待定常数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第59节 含定积分的表达式",
+  "hints": [
+   "令 $A=\\int_0^1f(t)\\mathrm{d}t$，注意 $\\int_0^1\\ln(1+t)\\mathrm{d}t=2\\ln2-1$。"
+  ],
+  "answer": "$f(x)=\\ln(1+x)+(4\\ln 2-2)x$",
+  "solution": "$A=(2\\ln2-1)+\\frac{A}{2}$，得 $A=4\\ln2-2$，故 $f(x)=\\ln(1+x)+(4\\ln2-2)x$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含定积分表达式：余弦型区间再现",
+  "statement": "设 $f(x)=\\cos x+2\\int_{0}^{\\frac{\\pi}{2}}f(t)\\sin t\\,\\mathrm{d}t$，求 $f(x)$。",
+  "tags": [
+   "一元积分",
+   "积分方程",
+   "待定常数"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第59节 含定积分的表达式",
+  "hints": [
+   "令 $A=\\int_0^{\\frac{\\pi}{2}}f(t)\\sin t\\,\\mathrm{d}t$，则 $A=\\int_0^{\\frac{\\pi}{2}}\\cos t\\sin t\\,\\mathrm{d}t+2A$，注意第一个积分为 1。"
+  ],
+  "answer": "$f(x)=\\cos x-1$",
+  "solution": "$A=1+2A$，得 $A=-1$，故 $f(x)=\\cos x-1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含定积分表达式：核(x+t)的双参数方程",
+  "statement": "设 $f(x)=x^{3}+\\int_{0}^{1}(x+t)f(t)\\,\\mathrm{d}t$，求 $f(x)$。",
+  "tags": [
+   "一元积分",
+   "积分方程",
+   "待定常数"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第59节 含定积分的表达式",
+  "hints": [
+   "同时设 $A=\\int_0^1f(t)\\mathrm{d}t$、$B=\\int_0^1tf(t)\\mathrm{d}t$，列两个方程联立。"
+  ],
+  "answer": "$f(x)=x^{3}-\\frac{39}{10}x-\\frac{11}{5}$",
+  "solution": "$f(x)=x^{3}+Ax+B$，$A=\\frac{1}{4}+\\frac{A}{2}+B$，$B=\\frac{1}{5}+\\frac{A}{3}+\\frac{B}{2}$，解得 $A=-\\frac{39}{10}$，$B=-\\frac{11}{5}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "含定积分表达式：核(1+xt)的双参数方程",
+  "statement": "设 $f(x)=x^{2}+\\int_{0}^{1}(1+xt)f(t)\\,\\mathrm{d}t$，求 $f(x)$。",
+  "tags": [
+   "一元积分",
+   "积分方程",
+   "待定常数"
+  ],
+  "thinking": 8,
+  "difficulty": 8,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第59节 含定积分的表达式",
+  "hints": [
+   "设 $A=\\int_0^1f$、$B=\\int_0^1tf$，由 $A$ 式中 $A$ 系数为 1 可先解出 $B$。"
+  ],
+  "answer": "$f(x)=x^{2}-\\frac{2}{3}x-\\frac{25}{18}$",
+  "solution": "$f=x^{2}+A+Bx$；$A=\\frac{1}{3}+A+\\frac{B}{2}$ 得 $B=-\\frac{2}{3}$；$B=\\frac{1}{4}+\\frac{A}{2}+\\frac{B}{3}$ 得 $A=-\\frac{25}{18}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分：xe^{-x}基本计算",
+  "statement": "计算 $\\int_{0}^{+\\infty}xe^{-x}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "分部积分"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第60节 反常积分",
+  "hints": [
+   "分部积分一次即化为 $\\int_0^{+\\infty}e^{-x}\\mathrm{d}x$。"
+  ],
+  "answer": "$1$",
+  "solution": "$\\int_0^{+\\infty}xe^{-x}\\mathrm{d}x=\\left[-xe^{-x}\\right]_0^{+\\infty}+\\int_0^{+\\infty}e^{-x}\\mathrm{d}x=0+1=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分：有理式部分分式",
+  "statement": "计算 $\\int_{1}^{+\\infty}\\frac{\\mathrm{d}x}{x^{2}(1+x^{2})}$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "部分分式"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第60节 反常积分",
+  "hints": [
+   "$\\frac{1}{x^{2}(1+x^{2})}=\\frac{1}{x^{2}}-\\frac{1}{1+x^{2}}$。"
+  ],
+  "answer": "$1-\\frac{\\pi}{4}$",
+  "solution": "拆项后 $\\left[-\\frac{1}{x}-\\arctan x\\right]_1^{+\\infty}=0-(-1-\\frac{\\pi}{4})=1-\\frac{\\pi}{4}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分：三次方根式三角换元",
+  "statement": "计算 $\\int_{0}^{+\\infty}\\frac{\\mathrm{d}x}{(1+x^{2})^{3/2}}$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "三角换元"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第60节 反常积分",
+  "hints": [
+   "令 $x=\\tan\\theta$，$\\theta\\in\\left[0,\\frac{\\pi}{2}\\right)$。"
+  ],
+  "answer": "$1$",
+  "solution": "$x=\\tan\\theta$，$\\mathrm{d}x=\\sec^{2}\\theta\\,\\mathrm{d}\\theta$，积分化为 $\\int_0^{\\frac{\\pi}{2}}\\cos\\theta\\,\\mathrm{d}\\theta=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分：对数幂次倒代换",
+  "statement": "计算 $\\int_{2}^{+\\infty}\\frac{\\mathrm{d}x}{x(\\ln x)^{2}}$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "换元积分"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第60节 反常积分",
+  "hints": [
+   "令 $u=\\ln x$，则为 $\\int_{\\ln2}^{+\\infty}\\frac{\\mathrm{d}u}{u^{2}}$。"
+  ],
+  "answer": "$\\frac{1}{\\ln 2}$",
+  "solution": "$u=\\ln x$ 得 $\\left[-\\frac{1}{u}\\right]_{\\ln2}^{+\\infty}=\\frac{1}{\\ln2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分：x/(1+x²)²凑微分",
+  "statement": "计算 $\\int_{0}^{+\\infty}\\frac{x}{(1+x^{2})^{2}}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "凑微分"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第60节 反常积分",
+  "hints": [
+   "$x\\,\\mathrm{d}x=\\frac{1}{2}\\mathrm{d}(1+x^{2})$。"
+  ],
+  "answer": "$\\frac{1}{2}$",
+  "solution": "$\\frac{1}{2}\\int_0^{+\\infty}\\frac{\\mathrm{d}(1+x^{2})}{(1+x^{2})^{2}}=\\left[-\\frac{1}{2(1+x^{2})}\\right]_0^{+\\infty}=\\frac{1}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分：无界函数lnx基本型",
+  "statement": "计算 $\\int_{0}^{1}\\ln x\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "分部积分"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第60节 反常积分",
+  "hints": [
+   "$x=0$ 是瑕点，分部积分后瑕项 $t\\ln t\\to0$。"
+  ],
+  "answer": "$-1$",
+  "solution": "$\\lim_{t\\to0^{+}}\\left[x\\ln x-x\\right]_t^1=\\lim_{t\\to0^{+}}(-1-t\\ln t+t)=-1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分：1/√(1-x²)瑕积分",
+  "statement": "计算 $\\int_{0}^{1}\\frac{\\mathrm{d}x}{\\sqrt{1-x^{2}}}$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "三角换元"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第60节 反常积分",
+  "hints": [
+   "原函数是 $\\arcsin x$，直接代上下限并取极限。"
+  ],
+  "answer": "$\\frac{\\pi}{2}$",
+  "solution": "$\\left[\\arcsin x\\right]_0^1=\\frac{\\pi}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分：x/√(1-x²)凑微分",
+  "statement": "计算 $\\int_{0}^{1}\\frac{x}{\\sqrt{1-x^{2}}}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "凑微分"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第60节 反常积分",
+  "hints": [
+   "$x\\,\\mathrm{d}x=-\\frac{1}{2}\\mathrm{d}(1-x^{2})$，原函数为 $-\\sqrt{1-x^{2}}$。"
+  ],
+  "answer": "$1$",
+  "solution": "$\\left[-\\sqrt{1-x^{2}}\\right]_0^1=0-(-1)=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分：1/(√x(1+x))瑕积分",
+  "statement": "计算 $\\int_{0}^{1}\\frac{\\mathrm{d}x}{\\sqrt{x}(1+x)}$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "换元积分"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第60节 反常积分",
+  "hints": [
+   "令 $t=\\sqrt{x}$，$\\mathrm{d}x=2t\\,\\mathrm{d}t$，化为 $\\int_0^1\\frac{2\\,\\mathrm{d}t}{1+t^{2}}$。"
+  ],
+  "answer": "$\\frac{\\pi}{2}$",
+  "solution": "$t=\\sqrt{x}$ 得 $2\\arctan t\\big|_0^1=\\frac{\\pi}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分：lnx/√x瑕积分",
+  "statement": "计算 $\\int_{0}^{1}\\frac{\\ln x}{\\sqrt{x}}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "分部积分"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第60节 反常积分",
+  "hints": [
+   "把 $\\frac{1}{\\sqrt{x}}$ 看成 $(2\\sqrt{x})'$，分部积分一次即可。"
+  ],
+  "answer": "$-4$",
+  "solution": "$\\int_0^1\\ln x\\cdot x^{-1/2}\\mathrm{d}x=\\left[2\\sqrt{x}\\ln x\\right]_0^1-\\int_0^12x^{-1/2}\\mathrm{d}x=0-4=-4$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分：1/√|x-1|区间拆分",
+  "statement": "计算 $\\int_{0}^{2}\\frac{\\mathrm{d}x}{\\sqrt{|x-1|}}$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "分段函数"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第60节 反常积分",
+  "hints": [
+   "$x=1$ 是瑕点，拆成 $[0,1]$ 与 $[1,2]$ 两个瑕积分分别算。"
+  ],
+  "answer": "$4$",
+  "solution": "$\\int_0^1\\frac{\\mathrm{d}x}{\\sqrt{1-x}}=2$，$\\int_1^2\\frac{\\mathrm{d}x}{\\sqrt{x-1}}=2$，合计 $4$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分：1/(x√(x²-1))三角换元",
+  "statement": "计算 $\\int_{1}^{+\\infty}\\frac{\\mathrm{d}x}{x\\sqrt{x^{2}-1}}$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "三角换元"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第60节 反常积分",
+  "hints": [
+   "令 $x=\\sec\\theta$，则 $\\sqrt{x^{2}-1}=\\tan\\theta$，$\\mathrm{d}x=\\sec\\theta\\tan\\theta\\,\\mathrm{d}\\theta$。"
+  ],
+  "answer": "$\\frac{\\pi}{2}$",
+  "solution": "代入得 $\\int_0^{\\frac{\\pi}{2}}\\mathrm{d}\\theta=\\frac{\\pi}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分：lnx/(1+x²)对称化",
+  "statement": "计算 $\\int_{0}^{+\\infty}\\frac{\\ln x}{1+x^{2}}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "对称性"
+  ],
+  "thinking": 9,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第60节 反常积分",
+  "hints": [
+   "作 $x=\\frac{1}{t}$，积分化为自身的相反数。"
+  ],
+  "answer": "$0$",
+  "solution": "令 $x=\\frac{1}{t}$，$I=\\int_0^{+\\infty}\\frac{-\\ln t}{t^{2}+1}\\mathrm{d}t=-I$，故 $I=0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分：1/√(x(1-x))瑕积分",
+  "statement": "计算 $\\int_{0}^{1}\\frac{\\mathrm{d}x}{\\sqrt{x(1-x)}}$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "三角换元"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第60节 反常积分",
+  "hints": [
+   "配方得 $\\frac{1}{4}-\\left(x-\\frac{1}{2}\\right)^{2}$，属 $\\arcsin$ 型。"
+  ],
+  "answer": "$\\pi$",
+  "solution": "$x(1-x)=\\frac{1}{4}-\\left(x-\\frac12\\right)^{2}$，故积分 $=\\left[\\arcsin(2x-1)\\right]_0^1=\\pi$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分：1/(√x(1+x)³)拆分",
+  "statement": "计算 $\\int_{0}^{+\\infty}\\frac{\\mathrm{d}x}{\\sqrt{x}(1+x)^{3}}$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "换元积分"
+  ],
+  "thinking": 9,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第60节 反常积分",
+  "hints": [
+   "令 $t=\\sqrt{x}$ 化为 $2\\int_0^{+\\infty}\\frac{\\mathrm{d}t}{(1+t^{2})^{3}}$，再用 $t=\\tan\\theta$ 与瓦里斯公式。"
+  ],
+  "answer": "$\\frac{3\\pi}{8}$",
+  "solution": "$t=\\sqrt{x}$ 后 $I=2\\int_0^{+\\infty}\\frac{\\mathrm{d}t}{(1+t^{2})^{3}}=2\\int_0^{\\frac{\\pi}{2}}\\cos^{4}\\theta\\,\\mathrm{d}\\theta=2\\cdot\\frac{3\\pi}{16}=\\frac{3\\pi}{8}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分：e^{-√x}/√x换元",
+  "statement": "计算 $\\int_{0}^{+\\infty}\\frac{e^{-\\sqrt{x}}}{\\sqrt{x}}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "换元积分"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第60节 反常积分",
+  "hints": [
+   "令 $t=\\sqrt{x}$，则 $\\mathrm{d}x=2t\\,\\mathrm{d}t$，$\\frac{\\mathrm{d}x}{\\sqrt{x}}=2\\,\\mathrm{d}t$。"
+  ],
+  "answer": "$2$",
+  "solution": "$t=\\sqrt{x}$ 得 $2\\int_0^{+\\infty}e^{-t}\\mathrm{d}t=2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分：x/√(x(1-x))化为根式",
+  "statement": "计算 $\\int_{0}^{1}\\frac{x}{\\sqrt{x(1-x)}}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "对称性"
+  ],
+  "thinking": 9,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第60节 反常积分",
+  "hints": [
+   "被积函数为 $\\sqrt{\\frac{x}{1-x}}$，令 $x=\\sin^{2}\\theta$ 最顺。"
+  ],
+  "answer": "$\\frac{\\pi}{2}$",
+  "solution": "$x=\\sin^{2}\\theta$，$\\mathrm{d}x=2\\sin\\theta\\cos\\theta\\,\\mathrm{d}\\theta$，积分 $=2\\int_0^{\\frac{\\pi}{2}}\\sin^{2}\\theta\\,\\mathrm{d}\\theta=\\frac{\\pi}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分：1/(√x(1+x²))换元",
+  "statement": "计算 $\\int_{0}^{+\\infty}\\frac{\\mathrm{d}x}{\\sqrt{x}(1+x^{2})}$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "换元积分"
+  ],
+  "thinking": 9,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第60节 反常积分",
+  "hints": [
+   "令 $t=\\sqrt{x}$ 得 $2\\int_0^{+\\infty}\\frac{\\mathrm{d}t}{1+t^{4}}$，需用 $t-\\frac1t$ 或分解因式。"
+  ],
+  "answer": "$\\frac{\\pi}{\\sqrt{2}}$",
+  "solution": "$t=\\sqrt{x}$ 后 $I=2\\int_0^{+\\infty}\\frac{\\mathrm{d}t}{1+t^{4}}$；利用 $\\int_0^{+\\infty}\\frac{\\mathrm{d}t}{1+t^{4}}=\\frac{\\pi}{2\\sqrt2}$，得 $I=\\frac{\\pi}{\\sqrt2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分：lnx/(√x(1+x))对称化",
+  "statement": "计算 $\\int_{0}^{+\\infty}\\frac{\\ln x}{\\sqrt{x}(1+x)}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "对称性"
+  ],
+  "thinking": 9,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第60节 反常积分",
+  "hints": [
+   "与 $\\int_0^{+\\infty}\\frac{\\ln x}{1+x^{2}}\\mathrm{d}x$ 同法：作 $x=\\frac{1}{t}$，权函数恰变为自身。"
+  ],
+  "answer": "$0$",
+  "solution": "$x=\\frac1t$ 时 $\\frac{\\mathrm{d}x}{\\sqrt{x}(1+x)}=-\\frac{\\mathrm{d}t}{\\sqrt{t}(1+t)}$，故 $I=-I$，$I=0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分敛散性：p积分与对数型判别",
+  "statement": "下列积分发散的是（　）\nA. $\\int_{1}^{+\\infty}\\frac{\\mathrm{d}x}{x^{2}}$\nB. $\\int_{1}^{+\\infty}\\frac{\\ln x}{x^{2}}\\,\\mathrm{d}x$\nC. $\\int_{1}^{+\\infty}\\frac{\\mathrm{d}x}{\\sqrt{x}}$\nD. $\\int_{1}^{+\\infty}e^{-x}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "比较判别法"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第61节 反常积分敛散性",
+  "hints": [
+   "无穷区间上只有 $p>1$ 的 $\\frac{1}{x^{p}}$ 收敛；对数乘在幂函数上是低阶因子。"
+  ],
+  "answer": "$\\mathrm{C}$",
+  "solution": "C 中 $p=\\frac{1}{2}<1$ 发散；A 收（$p=2$），B 由 $\\frac{\\ln x}{x^{2}}\\le\\frac{C}{x^{3/2}}$ 收敛，D 指数收敛。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分敛散性：瑕点处p积分比较",
+  "statement": "下列积分发散的是（　）\nA. $\\int_{0}^{1}\\frac{\\mathrm{d}x}{\\sqrt{x}}$\nB. $\\int_{0}^{1}\\frac{\\mathrm{d}x}{x^{2}}$\nC. $\\int_{0}^{1}\\ln x\\,\\mathrm{d}x$\nD. $\\int_{0}^{1}\\frac{\\sin x}{x}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "比较判别法"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第61节 反常积分敛散性",
+  "hints": [
+   "瑕点型判据：$\\int_0^1\\frac{\\mathrm{d}x}{x^{p}}$ 当 $p<1$ 收敛。"
+  ],
+  "answer": "$\\mathrm{B}$",
+  "solution": "B 中 $p=2>1$ 发散；A 收（$p=\\frac12$），C、D 有界可积。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分敛散性：无穷区间有理式阶比较",
+  "statement": "下列积分发散的是（　）\nA. $\\int_{0}^{+\\infty}\\frac{\\mathrm{d}x}{1+x^{2}}$\nB. $\\int_{0}^{+\\infty}\\frac{x}{1+x^{2}}\\,\\mathrm{d}x$\nC. $\\int_{0}^{+\\infty}\\frac{\\mathrm{d}x}{x^{2}+2x+2}$\nD. $\\int_{0}^{+\\infty}e^{-x^{2}}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "比较判别法"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第61节 反常积分敛散性",
+  "hints": [
+   "看 $x\\to+\\infty$ 时被积函数的等价阶，B 相当于 $\\frac{1}{x}$。"
+  ],
+  "answer": "$\\mathrm{B}$",
+  "solution": "B 中 $\\frac{x}{1+x^{2}}\\sim\\frac{1}{x}$，$p=1$ 发散；A、C 为 $\\frac{1}{x^{2}}$ 阶，D 指数衰减，均收敛。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分敛散性：对数幂次p判别",
+  "statement": "下列积分发散的是（　）\nA. $\\int_{2}^{+\\infty}\\frac{\\mathrm{d}x}{x\\ln^{2}x}$\nB. $\\int_{2}^{+\\infty}\\frac{\\mathrm{d}x}{x\\ln x}$\nC. $\\int_{2}^{+\\infty}\\frac{\\mathrm{d}x}{x\\ln^{3}x}$\nD. $\\int_{2}^{+\\infty}\\frac{\\mathrm{d}x}{x^{2}\\ln x}$",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "换元积分"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第61节 反常积分敛散性",
+  "hints": [
+   "令 $u=\\ln x$，则 $\\int\\frac{\\mathrm{d}x}{x\\ln^{q}x}=\\int\\frac{\\mathrm{d}u}{u^{q}}$，按 $q>1$ 收敛判断。"
+  ],
+  "answer": "$\\mathrm{B}$",
+  "solution": "B 中 $q=1$，$\\int\\frac{\\mathrm{d}u}{u}$ 发散；A、C 的 $q>1$ 收敛，D 有 $x^{2}$ 因子绝对收敛。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分敛散性：绝对收敛与条件收敛",
+  "statement": "下列积分发散的是（　）\nA. $\\int_{1}^{+\\infty}\\frac{\\sin x}{x}\\,\\mathrm{d}x$\nB. $\\int_{1}^{+\\infty}\\frac{|\\sin x|}{x}\\,\\mathrm{d}x$\nC. $\\int_{1}^{+\\infty}\\frac{\\cos x}{x^{2}}\\,\\mathrm{d}x$\nD. $\\int_{1}^{+\\infty}\\frac{\\sin x}{x^{3/2}}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "比较判别法"
+  ],
+  "thinking": 9,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第61节 反常积分敛散性",
+  "hints": [
+   "$|\\sin x|$ 在每个 $\\pi$ 长区间上平均值约为 $\\frac{2}{\\pi}$，与 $\\frac{1}{x}$ 相乘即发散。"
+  ],
+  "answer": "$\\mathrm{B}$",
+  "solution": "B 中 $\\frac{|\\sin x|}{x}\\ge\\frac{\\sin^{2}x}{x}=\\frac{1-\\cos2x}{2x}$，而 $\\int\\frac{\\mathrm{d}x}{2x}$ 发散，故发散；A、C、D 均收敛。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分敛散性：分子次数比较",
+  "statement": "下列积分发散的是（　）\nA. $\\int_{0}^{+\\infty}\\frac{\\mathrm{d}x}{x^{3}+1}$\nB. $\\int_{0}^{+\\infty}\\frac{x}{x^{3}+1}\\,\\mathrm{d}x$\nC. $\\int_{0}^{+\\infty}\\frac{x^{2}}{x^{3}+1}\\,\\mathrm{d}x$\nD. $\\int_{0}^{+\\infty}\\frac{\\mathrm{d}x}{\\sqrt{x^{3}+1}}$",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "比较判别法"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第61节 反常积分敛散性",
+  "hints": [
+   "$x\\to+\\infty$ 时 C 的被积函数 $\\sim\\frac{1}{x}$，阶不够。"
+  ],
+  "answer": "$\\mathrm{C}$",
+  "solution": "C 中 $\\frac{x^{2}}{x^{3}+1}\\sim\\frac{1}{x}$ 发散；A、B、D 分别为 $\\frac{1}{x^{3}},\\frac{1}{x^{2}},\\frac{1}{x^{3/2}}$ 阶，收敛。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分敛散性：区间两端分别判别",
+  "statement": "下列积分发散的是（　）\nA. $\\int_{0}^{+\\infty}\\frac{\\ln(1+x)}{x^{3/2}}\\,\\mathrm{d}x$\nB. $\\int_{1}^{+\\infty}\\frac{\\ln x}{x^{3/2}}\\,\\mathrm{d}x$\nC. $\\int_{1}^{+\\infty}\\frac{\\ln x}{\\sqrt{x}}\\,\\mathrm{d}x$\nD. $\\int_{1}^{+\\infty}\\frac{\\mathrm{d}x}{x^{3/2}}$",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "比较判别法"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第61节 反常积分敛散性",
+  "hints": [
+   "对数因子是低阶无穷大，指数 $\\frac{1}{2}$ 小于 1 时仍发散。"
+  ],
+  "answer": "$\\mathrm{C}$",
+  "solution": "C 中 $\\frac{\\ln x}{\\sqrt{x}}$ 的发散性同 $\\frac{1}{x^{1/2}}$，发散；A、B、D 均收敛。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分敛散性：两端瑕点与无穷",
+  "statement": "下列积分发散的是（　）\nA. $\\int_{0}^{+\\infty}\\frac{\\mathrm{d}x}{\\sqrt{x}(1+x)}$\nB. $\\int_{0}^{+\\infty}\\frac{\\mathrm{d}x}{x(1+x)}$\nC. $\\int_{0}^{+\\infty}\\frac{\\mathrm{d}x}{\\sqrt{x}(1+x^{2})}$\nD. $\\int_{0}^{+\\infty}\\frac{x}{1+x^{3}}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "区间拆分"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第61节 反常积分敛散性",
+  "hints": [
+   "$x\\to0^{+}$ 与 $x\\to+\\infty$ 两端都要查；B 两端都像 $\\frac{1}{x}$。"
+  ],
+  "answer": "$\\mathrm{B}$",
+  "solution": "B 在 $0$ 端与 $+\\infty$ 端均相当于 $\\int\\frac{\\mathrm{d}x}{x}$，发散；A、C、D 两端分别收敛。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分敛散性：lnx/x的阶判断",
+  "statement": "下列积分发散的是（　）\nA. $\\int_{1}^{+\\infty}\\frac{\\ln x}{x}\\,\\mathrm{d}x$\nB. $\\int_{1}^{+\\infty}\\frac{\\ln x}{x^{2}}\\,\\mathrm{d}x$\nC. $\\int_{2}^{+\\infty}\\frac{\\mathrm{d}x}{x\\ln^{2}x}$\nD. $\\int_{2}^{+\\infty}\\frac{\\mathrm{d}x}{x^{2}\\ln x}$",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "换元积分"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第61节 反常积分敛散性",
+  "hints": [
+   "A 中令 $u=\\ln x$，积分变成 $\\int u\\,\\mathrm{d}u$。"
+  ],
+  "answer": "$\\mathrm{A}$",
+  "solution": "A $=\\frac{1}{2}\\ln^{2}x\\to+\\infty$，发散；B $=\\frac{\\ln x}{x^{2}}$ 型收敛，C、D 收敛。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "反常积分敛散性：双无穷区间奇偶性",
+  "statement": "下列积分发散的是（　）\nA. $\\int_{-\\infty}^{+\\infty}\\frac{\\mathrm{d}x}{1+x^{2}}$\nB. $\\int_{-\\infty}^{+\\infty}\\frac{x}{1+x^{2}}\\,\\mathrm{d}x$\nC. $\\int_{-\\infty}^{+\\infty}e^{-x^{2}}\\,\\mathrm{d}x$\nD. $\\int_{-\\infty}^{+\\infty}\\frac{\\sin x}{1+x^{2}}\\,\\mathrm{d}x$",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "奇偶性"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第61节 反常积分敛散性",
+  "hints": [
+   "双无穷积分须两端各自收敛，不能靠 Cauchy 主值抵消。"
+  ],
+  "answer": "$\\mathrm{B}$",
+  "solution": "B 中 $\\int_0^{+\\infty}\\frac{x}{1+x^{2}}\\mathrm{d}x$ 发散，故整体发散；A、C、D 绝对收敛。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "求参数：x^a+x^b型收敛条件",
+  "statement": "设 $0<a<b$，反常积分 $\\int_{0}^{+\\infty}\\frac{\\mathrm{d}x}{x^{a}+x^{b}}$ 收敛，则（　）\nA. $a<1<b$\nB. $a>1$ 且 $b>1$\nC. $a<1$ 且 $b<1$\nD. $a>1$ 且 $b<1$",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "比较判别法"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第61节 反常积分敛散性",
+  "hints": [
+   "在 $0$ 端由 $x^{a}$ 主导，在 $+\\infty$ 端由 $x^{b}$ 主导，两端各要一个收敛条件。"
+  ],
+  "answer": "$\\mathrm{A}$",
+  "solution": "$x\\to0^{+}$ 时 $\\sim\\frac{1}{x^{a}}$，需 $a<1$；$x\\to+\\infty$ 时 $\\sim\\frac{1}{x^{b}}$，需 $b>1$。故 $a<1<b$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "求参数：x^p(1+x)^q型条件",
+  "statement": "设 $q>0$，反常积分 $\\int_{0}^{+\\infty}\\frac{\\mathrm{d}x}{x^{p}(1+x)^{q}}$ 收敛，则（　）\nA. $p<1$ 且 $p+q>1$\nB. $p>1$ 且 $p+q>1$\nC. $p<1$ 且 $p+q<1$\nD. $p>1$ 且 $p+q<1$",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "比较判别法"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第61节 反常积分敛散性",
+  "hints": [
+   "$0$ 端阶为 $p$，$+\\infty$ 端阶为 $p+q$。"
+  ],
+  "answer": "$\\mathrm{A}$",
+  "solution": "$x\\to0^{+}$ 需 $p<1$；$x\\to+\\infty$ 需 $p+q>1$，故选 A。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "求参数：x^{p-1}/(1+x)^q型条件",
+  "statement": "设 $q>0$，反常积分 $\\int_{0}^{+\\infty}\\frac{x^{p-1}}{(1+x)^{q}}\\,\\mathrm{d}x$ 收敛，则（　）\nA. $0<p<q$\nB. $p>0$ 且 $q>1$\nC. $p<q$ 且 $q>1$\nD. $p>1$ 且 $q>p$",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "比较判别法"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第61节 反常积分敛散性",
+  "hints": [
+   "这是 Beta 型积分：$0$ 端需 $p>0$，$+\\infty$ 端需 $q-p>1$…注意本题两端阶分别是 $1-p$ 与 $q-p+1$。"
+  ],
+  "answer": "$\\mathrm{A}$",
+  "solution": "$x\\to0^{+}$：$\\sim x^{p-1}$，需 $p>0$；$x\\to+\\infty$：$\\sim x^{p-1-q}$，需 $q-p>1$…实际判据为 $p>0$ 且 $q>p$，选 A。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "求参数：ln(1+x)/x^p收敛范围",
+  "statement": "设 $p>0$，反常积分 $\\int_{0}^{+\\infty}\\frac{\\ln(1+x)}{x^{p}}\\,\\mathrm{d}x$ 收敛，则 $p$ 的取值范围是（　）\nA. $1<p<2$\nB. $p>2$\nC. $0<p<1$\nD. $p>1$",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "比较判别法"
+  ],
+  "thinking": 9,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第61节 反常积分敛散性",
+  "hints": [
+   "$x\\to0^{+}$ 时 $\\ln(1+x)\\sim x$，阶为 $p-1$；$x\\to+\\infty$ 时对数慢于任意幂。"
+  ],
+  "answer": "$\\mathrm{A}$",
+  "solution": "$0$ 端：$\\frac{\\ln(1+x)}{x^{p}}\\sim\\frac{1}{x^{p-1}}$，需 $p-1<1$ 即 $p<2$；$+\\infty$ 端需 $p>1$。故 $1<p<2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "求参数：1/(x^p ln^q x)收敛条件",
+  "statement": "设 $q>0$，反常积分 $\\int_{1}^{+\\infty}\\frac{\\mathrm{d}x}{x^{p}\\ln^{q}x}$ 收敛，则（　）\nA. $p>1$，或 $p=1$ 且 $q>1$\nB. $p>1$ 且 $q>1$\nC. $p<1$ 且 $q>1$\nD. $p=1$ 且 $q<1$",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "比较判别法"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第61节 反常积分敛散性",
+  "hints": [
+   "对数幂只能改变临界情形 $p=1$ 的判别，不能补偿 $p<1$。"
+  ],
+  "answer": "$\\mathrm{A}$",
+  "solution": "$p>1$ 时必收敛；$p=1$ 时化为 $\\int\\frac{\\mathrm{d}u}{u^{q}}$ 需 $q>1$；$p<1$ 必发散。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "求参数：x^a/√(1-x)瑕积分",
+  "statement": "反常积分 $\\int_{0}^{1}\\frac{x^{a}}{\\sqrt{1-x}}\\,\\mathrm{d}x$ 收敛，则 $a$ 的取值范围是（　）\nA. $a>-1$\nB. $a>0$\nC. $a<1$\nD. $a>-2$",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "比较判别法"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 8,
+  "source": "柳贯一题型专项 · 第61节 反常积分敛散性",
+  "hints": [
+   "只有 $x=1$ 是瑕点（$\\frac{1}{2}$ 阶），$x=0$ 端收敛要求 $a>-1$。"
+  ],
+  "answer": "$\\mathrm{A}$",
+  "solution": "$x\\to1^{-}$：$\\frac{1}{\\sqrt{1-x}}$ 为 $\\frac{1}{2}$ 阶瑕点，收敛；$x\\to0^{+}$：$\\sim x^{a}$，需 $a>-1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "求参数：Beta型幂函数积分",
+  "statement": "反常积分 $\\int_{0}^{1}x^{p-1}(1-x)^{q-1}\\,\\mathrm{d}x$ 收敛，则（　）\nA. $p>0$ 且 $q>0$\nB. $p<1$ 且 $q<1$\nC. $p>1$ 且 $q>1$\nD. $p<1$ 且 $q>1$",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "比较判别法"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第61节 反常积分敛散性",
+  "hints": [
+   "$0$ 端要求指数 $p-1>-1$，$1$ 端要求 $q-1>-1$。"
+  ],
+  "answer": "$\\mathrm{A}$",
+  "solution": "$x\\to0^{+}$ 需 $p-1>-1$ 即 $p>0$；$x\\to1^{-}$ 需 $q-1>-1$ 即 $q>0$，故 $p>0,q>0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "求参数：arctanx/x^p收敛范围",
+  "statement": "设 $p>0$，反常积分 $\\int_{0}^{+\\infty}\\frac{\\arctan x}{x^{p}}\\,\\mathrm{d}x$ 收敛，则 $p$ 的取值范围是（　）\nA. $1<p<2$\nB. $p>2$\nC. $0<p<1$\nD. $p>1$",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "比较判别法"
+  ],
+  "thinking": 9,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第61节 反常积分敛散性",
+  "hints": [
+   "$0$ 端 $\\arctan x\\sim x$，$+\\infty$ 端 $\\arctan x\\to\\frac{\\pi}{2}$ 相当于常数。"
+  ],
+  "answer": "$\\mathrm{A}$",
+  "solution": "$0$ 端 $\\sim x^{1-p}$ 需 $p<2$；$+\\infty$ 端 $\\sim\\frac{1}{x^{p}}$ 需 $p>1$，故 $1<p<2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "求参数：sinx/x^p条件收敛范围",
+  "statement": "设 $p>0$，反常积分 $\\int_{0}^{+\\infty}\\frac{\\sin x}{x^{p}}\\,\\mathrm{d}x$ 收敛，则 $p$ 的取值范围是（　）\nA. $0<p<2$\nB. $p>1$\nC. $p<2$\nD. $1<p<2$",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "比较判别法"
+  ],
+  "thinking": 9,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第61节 反常积分敛散性",
+  "hints": [
+   "$0$ 端用 $\\sin x\\sim x$ 需 $p<2$；$+\\infty$ 端用 Dirichlet 判别只需 $p>0$。"
+  ],
+  "answer": "$\\mathrm{A}$",
+  "solution": "$+\\infty$ 端由 Dirichlet（$\\int\\sin x$ 有界、$x^{-p}$ 单调趋零）收敛，仅需 $p>0$；$0$ 端需 $p<2$。故 $0<p<2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "求参数：(1-cosx)/x^p收敛范围",
+  "statement": "设 $p>0$，反常积分 $\\int_{0}^{+\\infty}\\frac{1-\\cos x}{x^{p}}\\,\\mathrm{d}x$ 收敛，则（　）\nA. $1<p<3$\nB. $0<p<2$\nC. $p>1$\nD. $p<3$",
+  "tags": [
+   "一元积分",
+   "反常积分",
+   "比较判别法"
+  ],
+  "thinking": 9,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项 · 第61节 反常积分敛散性",
+  "hints": [
+   "$0$ 端 $1-\\cos x\\sim\\frac{x^{2}}{2}$；$+\\infty$ 端有界非负量除以 $x^{p}$，需 $p>1$。"
+  ],
+  "answer": "$\\mathrm{A}$",
+  "solution": "$0$ 端 $\\sim x^{2-p}$ 需 $p<3$；$+\\infty$ 端非负且不含振荡符号，需 $p>1$（绝对收敛）。故 $1<p<3$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "伽马函数：x⁷e^{-x}直接计算",
+  "statement": "计算 $\\int_{0}^{+\\infty}x^{7}e^{-x}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "伽马函数",
+   "递推公式"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第62节 伽马函数",
+  "hints": [
+   "$\\int_0^{+\\infty}x^{n}e^{-x}\\mathrm{d}x=\\Gamma(n+1)=n!$。"
+  ],
+  "answer": "$5040$",
+  "solution": "$\\Gamma(8)=7!=5040$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "伽马函数：x^{7/2}e^{-x}半整数",
+  "statement": "计算 $\\int_{0}^{+\\infty}x^{\\frac{7}{2}}e^{-x}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "伽马函数",
+   "递推公式"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第62节 伽马函数",
+  "hints": [
+   "$\\Gamma\\left(\\frac{9}{2}\\right)=\\frac{7}{2}\\cdot\\frac{5}{2}\\cdot\\frac{3}{2}\\cdot\\frac{1}{2}\\Gamma\\left(\\frac{1}{2}\\right)$，$\\Gamma\\left(\\frac12\\right)=\\sqrt{\\pi}$。"
+  ],
+  "answer": "$\\frac{105\\sqrt{\\pi}}{16}$",
+  "solution": "$\\Gamma\\left(\\frac{9}{2}\\right)=\\frac{7\\cdot5\\cdot3\\cdot1}{2^{4}}\\sqrt{\\pi}=\\frac{105\\sqrt{\\pi}}{16}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "伽马函数：x^{9/2}e^{-x}半整数",
+  "statement": "计算 $\\int_{0}^{+\\infty}x^{\\frac{9}{2}}e^{-x}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "伽马函数",
+   "递推公式"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第62节 伽马函数",
+  "hints": [
+   "在 $\\Gamma\\left(\\frac{9}{2}\\right)$ 基础上再乘 $\\frac{9}{2}$。"
+  ],
+  "answer": "$\\frac{945\\sqrt{\\pi}}{32}$",
+  "solution": "$\\Gamma\\left(\\frac{11}{2}\\right)=\\frac{9}{2}\\cdot\\frac{105\\sqrt{\\pi}}{16}=\\frac{945\\sqrt{\\pi}}{32}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "伽马函数：xe^{-5x}缩放变换",
+  "statement": "计算 $\\int_{0}^{+\\infty}xe^{-5x}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "伽马函数",
+   "换元积分"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第62节 伽马函数",
+  "hints": [
+   "令 $t=5x$，用 $\\int_0^{+\\infty}te^{-t}\\mathrm{d}t=1$。"
+  ],
+  "answer": "$\\frac{1}{25}$",
+  "solution": "$I=\\frac{1}{5^{2}}\\Gamma(2)=\\frac{1}{25}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "伽马函数：x⁵e^{-3x}缩放",
+  "statement": "计算 $\\int_{0}^{+\\infty}x^{5}e^{-3x}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "伽马函数",
+   "换元积分"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第62节 伽马函数",
+  "hints": [
+   "通式：$\\int_0^{+\\infty}x^{n}e^{-ax}\\mathrm{d}x=\\frac{n!}{a^{n+1}}$。"
+  ],
+  "answer": "$\\frac{40}{243}$",
+  "solution": "$I=\\frac{5!}{3^{6}}=\\frac{120}{729}=\\frac{40}{243}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "伽马函数：e^{-4x²}高斯积分",
+  "statement": "计算 $\\int_{0}^{+\\infty}e^{-4x^{2}}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "伽马函数",
+   "换元积分"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第62节 伽马函数",
+  "hints": [
+   "$\\int_0^{+\\infty}e^{-ax^{2}}\\mathrm{d}x=\\frac{1}{2}\\sqrt{\\frac{\\pi}{a}}$。"
+  ],
+  "answer": "$\\frac{\\sqrt{\\pi}}{4}$",
+  "solution": "$a=4$，故 $I=\\frac{1}{2}\\sqrt{\\frac{\\pi}{4}}=\\frac{\\sqrt{\\pi}}{4}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "伽马函数：x²e^{-x²}计算",
+  "statement": "计算 $\\int_{0}^{+\\infty}x^{2}e^{-x^{2}}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "伽马函数",
+   "递推公式"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第62节 伽马函数",
+  "hints": [
+   "$\\int_0^{+\\infty}x^{2}e^{-x^{2}}\\mathrm{d}x=\\frac{1}{2}\\Gamma\\left(\\frac{3}{2}\\right)$。"
+  ],
+  "answer": "$\\frac{\\sqrt{\\pi}}{4}$",
+  "solution": "$I=\\frac{1}{2}\\cdot\\frac{\\sqrt{\\pi}}{2}=\\frac{\\sqrt{\\pi}}{4}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "伽马函数：x⁴e^{-x²}计算",
+  "statement": "计算 $\\int_{0}^{+\\infty}x^{4}e^{-x^{2}}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "伽马函数",
+   "递推公式"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第62节 伽马函数",
+  "hints": [
+   "$I=\\frac{1}{2}\\Gamma\\left(\\frac{5}{2}\\right)$。"
+  ],
+  "answer": "$\\frac{3\\sqrt{\\pi}}{8}$",
+  "solution": "$I=\\frac{1}{2}\\cdot\\frac{3}{2}\\cdot\\frac{1}{2}\\sqrt{\\pi}=\\frac{3\\sqrt{\\pi}}{8}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "伽马函数：x⁶e^{-x²}计算",
+  "statement": "计算 $\\int_{0}^{+\\infty}x^{6}e^{-x^{2}}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "伽马函数",
+   "递推公式"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第62节 伽马函数",
+  "hints": [
+   "$I=\\frac{1}{2}\\Gamma\\left(\\frac{7}{2}\\right)$，再逐项乘 $\\frac{5}{2},\\frac{3}{2},\\frac{1}{2}$。"
+  ],
+  "answer": "$\\frac{15\\sqrt{\\pi}}{16}$",
+  "solution": "$I=\\frac{1}{2}\\cdot\\frac{15}{8}\\sqrt{\\pi}=\\frac{15\\sqrt{\\pi}}{16}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "伽马函数：(-lnx)⁵对数型积分",
+  "statement": "计算 $\\int_{0}^{1}(-\\ln x)^{5}\\,\\mathrm{d}x$。",
+  "tags": [
+   "一元积分",
+   "伽马函数",
+   "换元积分"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第62节 伽马函数",
+  "hints": [
+   "令 $t=-\\ln x$，$\\mathrm{d}x=-e^{-t}\\mathrm{d}t$，化为 $\\int_0^{+\\infty}t^{5}e^{-t}\\mathrm{d}t$。"
+  ],
+  "answer": "$120$",
+  "solution": "$I=\\int_0^{+\\infty}t^{5}e^{-t}\\mathrm{d}t=5!=120$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "伽马函数反求：x^n e^{-x}=120",
+  "statement": "已知 $\\int_{0}^{+\\infty}x^{n}e^{-x}\\,\\mathrm{d}x=120$，其中 $n$ 为正整数，求 $n$。",
+  "tags": [
+   "一元积分",
+   "伽马函数",
+   "递推公式"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "柳贯一题型专项 · 第62节 伽马函数",
+  "hints": [
+   "积分等于 $n!$，只需找哪个阶乘等于 120。"
+  ],
+  "answer": "$n=5$",
+  "solution": "$n!=120=5!$，故 $n=5$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "伽马函数反求：x^n e^{-x}=720",
+  "statement": "已知 $\\int_{0}^{+\\infty}x^{n}e^{-x}\\,\\mathrm{d}x=720$，其中 $n$ 为正整数，求 $n$。",
+  "tags": [
+   "一元积分",
+   "伽马函数",
+   "递推公式"
+  ],
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "柳贯一题型专项 · 第62节 伽马函数",
+  "hints": [
+   "$6!=720$。"
+  ],
+  "answer": "$n=6$",
+  "solution": "$n!=720=6!$，故 $n=6$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "伽马函数反求：半整数幂定n",
+  "statement": "已知 $\\int_{0}^{+\\infty}x^{\\frac{1}{2}}e^{-nx}\\,\\mathrm{d}x=\\frac{\\sqrt{\\pi}}{16}\\ (n>0)$，求 $n$。",
+  "tags": [
+   "一元积分",
+   "伽马函数",
+   "解方程"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第62节 伽马函数",
+  "hints": [
+   "$\\int x^{1/2}e^{-nx}\\mathrm{d}x=\\frac{\\Gamma(3/2)}{n^{3/2}}=\\frac{\\sqrt{\\pi}}{2n^{3/2}}$。"
+  ],
+  "answer": "$n=4$",
+  "solution": "$\\frac{\\sqrt{\\pi}}{2n^{3/2}}=\\frac{\\sqrt{\\pi}}{16}$ 得 $n^{3/2}=8$，故 $n=4$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "伽马函数反求：x²e^{-nx}定n",
+  "statement": "已知 $\\int_{0}^{+\\infty}x^{2}e^{-nx}\\,\\mathrm{d}x=\\frac{2}{27}\\ (n>0)$，求 $n$。",
+  "tags": [
+   "一元积分",
+   "伽马函数",
+   "解方程"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第62节 伽马函数",
+  "hints": [
+   "利用 $\\int x^{2}e^{-nx}\\mathrm{d}x=\\frac{2}{n^{3}}$。"
+  ],
+  "answer": "$n=3$",
+  "solution": "$\\frac{2}{n^{3}}=\\frac{2}{27}$，得 $n^{3}=27$，$n=3$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "伽马函数反求：x⁴e^{-nx}定n",
+  "statement": "已知 $\\int_{0}^{+\\infty}x^{4}e^{-nx}\\,\\mathrm{d}x=\\frac{3}{4}\\ (n>0)$，求 $n$。",
+  "tags": [
+   "一元积分",
+   "伽马函数",
+   "解方程"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第62节 伽马函数",
+  "hints": [
+   "$\\int x^{4}e^{-nx}\\mathrm{d}x=\\frac{4!}{n^{5}}$。"
+  ],
+  "answer": "$n=2$",
+  "solution": "$\\frac{24}{n^{5}}=\\frac{3}{4}$ 得 $n^{5}=32$，故 $n=2$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "伽马函数反求：x⁵e^{-nx}=120",
+  "statement": "已知 $\\int_{0}^{+\\infty}x^{5}e^{-nx}\\,\\mathrm{d}x=120\\ (n>0)$，求 $n$。",
+  "tags": [
+   "一元积分",
+   "伽马函数",
+   "解方程"
+  ],
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "柳贯一题型专项 · 第62节 伽马函数",
+  "hints": [
+   "$\\frac{120}{n^{6}}=120$。"
+  ],
+  "answer": "$n=1$",
+  "solution": "$n^{6}=1$，$n>0$ 得 $n=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "伽马函数反求：e^{-nx²}高斯型定n",
+  "statement": "已知 $\\int_{0}^{+\\infty}e^{-nx^{2}}\\,\\mathrm{d}x=\\frac{\\sqrt{\\pi}}{6}\\ (n>0)$，求 $n$。",
+  "tags": [
+   "一元积分",
+   "伽马函数",
+   "解方程"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第62节 伽马函数",
+  "hints": [
+   "$\\int_0^{+\\infty}e^{-nx^{2}}\\mathrm{d}x=\\frac{1}{2}\\sqrt{\\frac{\\pi}{n}}$。"
+  ],
+  "answer": "$n=9$",
+  "solution": "$\\frac{1}{2}\\sqrt{\\frac{\\pi}{n}}=\\frac{\\sqrt{\\pi}}{6}$ 得 $\\sqrt{\\frac{1}{n}}=\\frac{1}{3}$，$n=9$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "伽马函数反求：x²e^{-nx²}定n",
+  "statement": "已知 $\\int_{0}^{+\\infty}x^{2}e^{-nx^{2}}\\,\\mathrm{d}x=\\frac{\\sqrt{\\pi}}{32}\\ (n>0)$，求 $n$。",
+  "tags": [
+   "一元积分",
+   "伽马函数",
+   "解方程"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第62节 伽马函数",
+  "hints": [
+   "$\\int_0^{+\\infty}x^{2}e^{-nx^{2}}\\mathrm{d}x=\\frac{1}{4}\\sqrt{\\frac{\\pi}{n^{3}}}$。"
+  ],
+  "answer": "$n=4$",
+  "solution": "$\\frac{1}{4n^{3/2}}=\\frac{1}{32}$ 得 $n^{3/2}=8$，故 $n=4$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "伽马函数反求：x³e^{-nx²}定n",
+  "statement": "已知 $\\int_{0}^{+\\infty}x^{3}e^{-nx^{2}}\\,\\mathrm{d}x=\\frac{1}{2}\\ (n>0)$，求 $n$。",
+  "tags": [
+   "一元积分",
+   "伽马函数",
+   "解方程"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第62节 伽马函数",
+  "hints": [
+   "$\\int_0^{+\\infty}x^{3}e^{-nx^{2}}\\mathrm{d}x=\\frac{1}{2n^{2}}$（令 $t=x^{2}$ 即可看出）。"
+  ],
+  "answer": "$n=1$",
+  "solution": "$\\frac{1}{2n^{2}}=\\frac{1}{2}$，得 $n^{2}=1$，$n=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "伽马函数反求：x^n e^{-2x}=3/4",
+  "statement": "已知 $\\int_{0}^{+\\infty}x^{n}e^{-2x}\\,\\mathrm{d}x=\\frac{3}{4}$，其中 $n$ 为正整数，求 $n$。",
+  "tags": [
+   "一元积分",
+   "伽马函数",
+   "解方程"
+  ],
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "柳贯一题型专项 · 第62节 伽马函数",
+  "hints": [
+   "$\\int_0^{+\\infty}x^{n}e^{-2x}\\mathrm{d}x=\\frac{n!}{2^{n+1}}$，试 $n=4$：$\\frac{24}{32}=\\frac34$。"
+  ],
+  "answer": "$n=4$",
+  "solution": "$\\frac{n!}{2^{n+1}}=\\frac{3}{4}$，代入 $n=4$ 成立（$\\frac{24}{32}$），故 $n=4$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "旋转体体积：绕x轴圆盘法",
+  "statement": "区域由 $y=x^{2}$、$x=1$ 与 $x$ 轴围成，绕 $x$ 轴旋转一周，求旋转体体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "圆盘法"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "绕 $x$ 轴时截面是圆盘，半径就是 $y$，直接对 $y^{2}$ 积分。"
+  ],
+  "answer": "$\\frac{\\pi}{5}$",
+  "solution": "$V=\\pi\\int_{0}^{1}x^{4}\\,\\mathrm{d}x=\\frac{\\pi}{5}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "旋转体体积：绕x轴根式函数",
+  "statement": "区域由 $y=\\sqrt{x}$、$x=1$、$x=4$ 与 $x$ 轴围成，绕 $x$ 轴旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "圆盘法"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "$\\sqrt{x}^{2}=x$，被积函数退化成一次函数。"
+  ],
+  "answer": "$\\frac{15\\pi}{2}$",
+  "solution": "$V=\\pi\\int_{1}^{4}x\\,\\mathrm{d}x=\\pi\\cdot\\frac{16-1}{2}=\\frac{15\\pi}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "旋转体体积：正弦半拱绕x轴",
+  "statement": "区域由 $y=\\sin x$、$x=0$、$x=\\pi$ 与 $x$ 轴围成，绕 $x$ 轴旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "三角恒等式"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "被积函数是 $\\sin^{2}x$，先用降幂公式。"
+  ],
+  "answer": "$\\frac{\\pi^{2}}{2}$",
+  "solution": "$V=\\pi\\int_{0}^{\\pi}\\sin^{2}x\\,\\mathrm{d}x=\\frac{\\pi}{2}\\int_{0}^{\\pi}(1-\\cos 2x)\\,\\mathrm{d}x=\\frac{\\pi^{2}}{2}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "旋转体体积：指数函数绕x轴",
+  "statement": "区域由 $y=e^{x}$、$x=0$、$x=1$ 与 $x$ 轴围成，绕 $x$ 轴旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "圆盘法"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "$(e^{x})^{2}=e^{2x}$，指数直接积分即可。"
+  ],
+  "answer": "$\\frac{\\pi}{2}(e^{2}-1)$",
+  "solution": "$V=\\pi\\int_{0}^{1}e^{2x}\\,\\mathrm{d}x=\\frac{\\pi}{2}(e^{2}-1)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "旋转体体积：对数曲线绕x轴",
+  "statement": "区域由 $y=\\ln x$、$x=1$、$x=e$ 与 $x$ 轴围成，绕 $x$ 轴旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "分部积分"
+  ],
+  "thinking": 7,
+  "difficulty": 7,
+  "calc": 7,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "要算 $\\int(\\ln x)^{2}\\mathrm{d}x$，连续两次分部积分，记住原函数 $x(\\ln x)^{2}-2x\\ln x+2x$。"
+  ],
+  "answer": "$\\pi(e-2)$",
+  "solution": "$V=\\pi\\int_{1}^{e}(\\ln x)^{2}\\mathrm{d}x=\\pi\\big[x(\\ln x)^{2}-2x\\ln x+2x\\big]_{1}^{e}=\\pi(e-2)$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "旋转体体积：绕y轴柱壳法",
+  "statement": "区域由 $y=x^{2}$、$x=1$ 与 $x$ 轴围成，绕 $y$ 轴旋转一周，求体积。",
+  "tags": [
+   "一元积分",
+   "旋转体体积",
+   "柱壳法"
+  ],
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 6,
+  "source": "柳贯一题型专项 · 第63节 旋转体体积",
+  "hints": [
+   "绕 $y$ 轴用柱壳法：$2\\pi\\int x\\,y\\,\\mathrm{d}x$，半径就是 $x$。"
+  ],
+  "answer": "$\\frac{\\pi}{2}$",
+  "solution": "$V=2\\pi\\int_{0}^{1}x\\cdot x^{2}\\,\\mathrm{d}x=\\frac{2\\pi}{4}=\\frac{\\pi}{2}$。",
+  "authorName": "柳贯一题型专项"
+ }
+]
