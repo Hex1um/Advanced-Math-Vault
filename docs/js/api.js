@@ -27,6 +27,21 @@
     try { return localStorage.getItem(TOKEN_KEY) || ''; } catch (e) { return ''; }
   }
 
+  /* 静态资源（/uploads/xxx.png）走的是同一个网关，必须带 sharecode，
+     否则会被当成未授权请求挡掉——讨论区图片「打不开」就是这个原因。 */
+  function fileUrl(p) {
+    const s = String(p || '');
+    if (!s) return '';
+    if (/^(data:|blob:|https?:\/\/)/i.test(s)) return s;
+    const base = String(cfg().apiBase || '').replace(/\/+$/, '');
+    let url = base + (s[0] === '/' ? s : '/' + s);
+    const code = cfg().sharecode;
+    if (code && url.indexOf('sharecode=') < 0) {
+      url += (url.indexOf('?') >= 0 ? '&' : '?') + 'sharecode=' + encodeURIComponent(code);
+    }
+    return url;
+  }
+
   function setToken(t) {
     try {
       if (t) localStorage.setItem(TOKEN_KEY, t);
@@ -90,6 +105,7 @@
     get: (p) => request(p),
     post: (p, body) => request(p, { method: 'POST', body: body || {} }),
     url: apiUrl,
+    fileUrl,
     sameOrigin,
     token,
     setToken,

@@ -132,14 +132,25 @@
           // 没有视觉模型：先用浏览器 OCR 把图片转成文字，填进题干框让用户核对
           if (window.OCR) {
             try {
-              const text = window.OCR.tidy(await window.OCR.imageToText(image, function (pct) {
+              let text = window.OCR.tidy(await window.OCR.imageToText(image, function (pct) {
                 box.innerHTML = '<div class="small muted" style="padding:8px 0">本地 OCR 识别中 ' + pct + '%…</div>';
               }));
               if (text) {
+                // 关键一步：tesseract 只认字形，交给 AI 按上下文改写成合法 LaTeX
+                if (window.OCR.polishWithAI) {
+                  box.innerHTML = '<div class="small muted" style="padding:8px 0">正在把识别结果规范成 LaTeX…</div>';
+                  try {
+                    const polished = await window.OCR.polishWithAI(text, { llm: window.UI.llmConfig() });
+                    if (polished && polished.trim().length > 8) text = polished;
+                  } catch (e2) {
+                    console.warn('[ocr] AI 规范化失败，用原始识别结果', e2.message);
+                  }
+                }
+                if (window.OCR.repairDelims) text = window.OCR.repairDelims(text);
                 const fm = document.getElementById('submitForm');
                 fm.statement.value = text;
                 box.innerHTML = '<div class="judge-result correct"><b>已 OCR 识别</b>'
-                  + '<span>文字已填入「题干」，请核对公式后手动补全答案与解析</span></div>';
+                  + '<span>已尽量规范成 LaTeX，公式仍需你核对一遍；答案与解析请补全</span></div>';
                 return;
               }
             } catch (e) {

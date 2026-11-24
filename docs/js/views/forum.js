@@ -245,7 +245,8 @@
             + '<div class="post-content md" id="postBody"></div>'
             + ((post.images && post.images.length)
               ? '<div class="post-images">' + post.images.map(function (src) {
-                return '<a class="post-image" href="' + src + '" target="_blank" rel="noopener"><img src="' + src + '" alt="题目图片" loading="lazy" /></a>';
+                const u = window.API.fileUrl ? window.API.fileUrl(src) : src;
+                return '<a class="post-image" href="' + u + '" target="_blank" rel="noopener"><img src="' + u + '" alt="题目图片" loading="lazy" /></a>';
               }).join('') + '</div>'
               : '')
             + '<div class="tags" style="margin-top:10px">'
@@ -347,7 +348,8 @@
           + '<div class="reply-body md" data-reply="' + r.id + '"></div>'
           + ((r.images && r.images.length)
             ? '<div class="post-images small">' + r.images.map(function (src) {
-              return '<a class="post-image" href="' + src + '" target="_blank" rel="noopener"><img src="' + src + '" alt="回复图片" loading="lazy" /></a>';
+              const u = window.API.fileUrl ? window.API.fileUrl(src) : src;
+              return '<a class="post-image" href="' + u + '" target="_blank" rel="noopener"><img src="' + u + '" alt="回复图片" loading="lazy" /></a>';
             }).join('') + '</div>'
             : '')
           + '</div></div>';

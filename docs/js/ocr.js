@@ -175,7 +175,9 @@
      识别串改写成合法 LaTeX（补 \frac、配对花括号、修正上下标归属）。 */
   async function polishWithAI(rawText, opts) {
     const o = opts || {};
-    const res = await fetch('api/ai/ocr-fix', {
+    // 必须走 API.url：直接写相对路径不会被加上 sharecode，线上会被网关 403
+    const url = (window.API && window.API.url) ? window.API.url('/api/ai/ocr-fix') : 'api/ai/ocr-fix';
+    const res = await fetch(url, {
       method: 'POST',
       headers: Object.assign({ 'Content-Type': 'application/json' }, (window.API && window.API.authHeaders) ? window.API.authHeaders() : {}),
       cache: 'no-store',
@@ -186,12 +188,27 @@
     return j.text || rawText;
   }
 
+  /* 把 $ 配对补回来：OCR/AI 经常漏一个 $，整段公式就不渲染了 */
+  function repairDelims(text) {
+    let s = String(text || '');
+    s = s.replace(/```(?:latex|tex|math)?/gi, '').replace(/```/g, '');
+    const n = (s.match(/\$/g) || []).length;
+    if (n % 2 === 1) {
+      const last = s.lastIndexOf('$');
+      s = last >= 0 ? s.slice(0, last) + s.slice(last + 1) : s + '$';
+    }
+    // 中文标点紧跟在 $$ 后面时收成 $
+    s = s.replace(/\$\$(?=[，。；、,.;）)])/g, '$');
+    return s.trim();
+  }
+
   window.OCR = {
     imageToText: imageToText,
     hasVisionModel: hasVisionModel,
     preprocess: preprocess,
     tidy: tidy,
     fixMathText: fixMathText,
-    polishWithAI: polishWithAI
+    polishWithAI: polishWithAI,
+    repairDelims: repairDelims
   };
 })();
