@@ -1691,7 +1691,14 @@ async function handleApi(req, res, pathname, query) {
 
       if (!judged) {
         if (processMatchesAnswer(only, p.answer)) {
-          judged = { verdict: 'correct', score: answerOnly ? 80 : 90, comment: '暂时连不上阅卷模型，只核对了最终答案，过程请自己再检查一遍。', errors: [] };
+          judged = {
+            verdict: 'correct',
+            score: answerOnly ? 80 : 100,
+            comment: answerOnly
+              ? '暂时连不上阅卷模型，只核对了最终答案（正确），按规则给 80 分。'
+              : '暂时连不上阅卷模型；已核对结论行的答案正确，按规则给满分，中间步骤未逐项核对。',
+            errors: []
+          };
           judgedBy = '规则比对';
         } else if (answerOnly) {
           // 只交答案又对不上：直接判错并重扣，别让用户以为「没判」
@@ -1707,16 +1714,26 @@ async function handleApi(req, res, pathname, query) {
         }
       }
 
-      // 只交答案：分数压到 70 以内，且不能判为 correct
-      // 分数线与给分规则（2026-11 调整）：
+      // 分数线与给分规则（2026-11-25 调整）：
+      //   正确答案 + 简要思路/过程 → 100 分，中间跳步不扣分
       //   只交正确答案            → 80 分，通过
-      //   简要思路 + 正确答案      → 90 分，通过
-      //   出错                    → 大幅扣分，不过线
+      //   最终答案错误            → 大幅扣分，不过线
+      // 模型常因「跳步 / 不够严谨」把 verdict 压到 partial，这里按结论行的最终答案兜底纠正。
+      const answerConfirmed = processMatchesAnswer(only, p.answer);
+      if (!answerOnly && answerConfirmed && judged.verdict !== 'correct') {
+        judged = Object.assign({}, judged, {
+          verdict: 'correct',
+          score: 100,
+          comment: '最终答案正确；按现行规则，写了思路或过程即给满分，中间步骤未逐项核对。',
+          errors: []
+        });
+      }
+
       let score = Number.isFinite(judged.score) ? Math.round(judged.score) : 0;
       score = Math.max(0, Math.min(100, score));
       let verdict = judged.verdict;
       if (verdict === 'correct') {
-        const base = answerOnly ? 80 : 90;
+        const base = answerOnly ? 80 : 100;
         score = Math.max(base, score);
       } else if (verdict === 'wrong') {
         score = Math.min(score || 40, 50);   // 出错重罚
@@ -2458,16 +2475,42 @@ function answersEquiv(student, expected) {
   return false;
 }
 
+/* 只认结论行：末行，或带「综上/故/所以/答案/最终/结果」标记的行。
+   旧实现扫全文所有数字，过程里出现「第 1 步」而答案恰好是 1 就会误判。 */
+function conclusionSegments(process) {
+  const lines = String(process || '').split(/[\r\n]+|[。；;]+/).map(function (x) { return x.trim(); }).filter(Boolean);
+  if (!lines.length) return [];
+  const mark = /综上|故|所以|因此|答案|最终|结果|答[:：]|结论|=>/;
+  const out = lines.filter(function (x) { return mark.test(x); });
+  out.push(lines[lines.length - 1]);
+  return out.filter(function (x, i) { return out.indexOf(x) === i; });
+}
+
 function processMatchesAnswer(process, expected) {
   if (!process || !expected) return false;
   if (answersEquiv(process, expected)) return true;
-  const target = numericValue(canonAnswer(expected));
-  if (target === null) return canonAnswer(process).indexOf(canonAnswer(expected)) >= 0;
-  const tokens = String(process).match(/-?\d+(?:\.\d+)?(?:\/\d+)?|\\[dt]?frac\{\d+\}\{\d+\}/g) || [];
-  return tokens.some(function (tk) {
-    const v = numericValue(tk);
-    return v !== null && Math.abs(v - target) < 1e-9;
-  });
+  const targetText = canonAnswer(expected);
+  if (!targetText) return false;
+  const targetNum = numericValue(targetText);
+  for (const line of conclusionSegments(process)) {
+    if (answersEquiv(line, expected)) return true;
+    const candidates = [];
+    (line.match(/\$[^$]+\$/g) || []).forEach(function (x) { candidates.push(x); });
+    (line.match(/=\s*[^=，。；;,]+/g) || []).forEach(function (x) { candidates.push(x.replace(/^=\s*/, '')); });
+    (line.match(/\\?[dt]?frac\{-?[\d.]+\}\{-?[\d.]+\}|-?[\d.]+\/-?[\d.]+|-?[\d.]+/g) || []).forEach(function (x) { candidates.push(x); });
+    const tail = line.split(/综上|故|所以|因此|答案(?:是)?[:：]?|最终(?:结果)?(?:是)?[:：]?|结果(?:是)?[:：]?|答[:：]|结论[:：]?|=>/).pop();
+    if (tail) candidates.push(tail);
+    for (const cand of candidates) {
+      const c = canonAnswer(cand);
+      if (!c) continue;
+      if (c === targetText) return true;
+      const n = numericValue(c);
+      if (targetNum !== null && n !== null && Math.abs(n - targetNum) < 1e-9) return true;
+      // 文字型答案（如「条件收敛」）：只在不含数字时允许作为结论子串出现
+      if (targetNum === null && targetText.length >= 2 && c.indexOf(targetText) >= 0) return true;
+    }
+  }
+  return false;
 }
 
 const VISION_MODEL = /gpt-4o|gpt-4\.1|o3|o4|claude|gemini|qwen.*vl|glm-4v|vision|llava|internvl/i;
@@ -2489,15 +2532,15 @@ function judgeMessages(problem, process, hasImage, opts) {
     '每行一条，格式：位置｜原因',
     '没有错误就写：无',
     '',
-    '打分尺度：',
-    '1. 方法与结论都对、步骤完整 → 90-100；',
-    '2. 思路对但有计算失误、漏 +C、漏讨论、跳步不严谨 → 50-79；',
-    '3. 方法错了但有正确的一步 → 20-49；',
-    '4. 完全不着边 → 0-19；',
-    '5. 只有最终答案、没有过程：即便答案正确，最高给 70 分，并在 [COMMENT] 里说明「缺少过程」。',
+    '打分尺度（2026-11-25 起）：',
+    '1. 最终答案正确，且写了任何思路或过程（哪怕只有一两句、中间跳步、省略验算）→ verdict=correct，score=100；不要因跳步、步骤不完整、不够严谨扣分；',
+    '2. 只交最终答案、完全没有过程 → 即便答案正确也最高 80 分，verdict=partial，并在 [COMMENT] 里说明「缺少思路」；',
+    '3. 最终答案错误 → 按错误程度给 0-79，verdict=wrong / partial；过程再完整也不能判 correct；',
+    '4. 完全不着边 → 0-19。',
     '',
     '其它要求：',
-    '- 错误要具体到「第几步、把什么写成了什么」，不要只说「计算有误」；',
+    '- 答案正确时 [ERRORS] 写「无」，不要列举跳步或省略步骤的问题；',
+    '- 答案错误时，错误要具体到「第几步、把什么写成了什么」，不要只说「计算有误」；',
     '- 公式用 $...$ 写；只评价，不要重写整份解答；',
     '- 如果给了「之前的提交记录」，要指出这次比上次好在哪、问题是否还在。'
   ].join('\n');

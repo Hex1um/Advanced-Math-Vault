@@ -128,14 +128,28 @@ try {
   });
   ok('过程不对不计经验', wrong.json.ok && wrong.json.verdict !== 'correct' && !wrong.json.gained, JSON.stringify(wrong.json).slice(0, 120));
 
+  // 旧规则会扫全文数字：过程里的 0.5 恰好等于标准答案 1/2 就被判对。现在只看结论行。
+  const decoy = await req('/api/problems/HS1001/answer', {
+    method: 'POST',
+    body: JSON.stringify({ process: '第 1 步先算 0.5，然后发现问题不对；最后重新算得到 3/4。' })
+  });
+  ok('过程里的无关数字不算答案', decoy.json.ok && decoy.json.verdict !== 'correct', JSON.stringify(decoy.json).slice(0, 120));
+
   const right = await req('/api/problems/HS1001/answer', {
     method: 'POST',
     body: JSON.stringify({ process: '先通分，再用泰勒展开：tanx-sinx 的主部是 x³/2，所以原极限等于 1/2。' })
   });
   ok('过程正确判定通过', right.json.verdict === 'correct' && right.json.gained > 0, JSON.stringify(right.json).slice(0, 120));
+  ok('思路 + 正确答案直接给满分', right.json.score === 100, JSON.stringify(right.json).slice(0, 120));
   ok('看答案后经验有折扣', right.json.gained < 60);
   const right2 = await req('/api/problems/HS1001/answer', { method: 'POST', body: JSON.stringify({ process: '再交一次看看，答案还是 1/2。' }) });
   ok('同题不重复给经验', right2.json.already === true, JSON.stringify(right2.json).slice(0, 160));
+
+  const answerOnly = await req('/api/problems/HS1002/answer', {
+    method: 'POST',
+    body: JSON.stringify({ mode: 'answer', answer: '$e^{-1/2}=\\dfrac{1}{\\sqrt e}$' })
+  });
+  ok('只交正确答案仍是 80 分', answerOnly.json.score === 80, JSON.stringify(answerOnly.json).slice(0, 160));
 
   console.log('\n[5] 投稿 → 审核 → 入库');
   const submit = await req('/api/submit', {

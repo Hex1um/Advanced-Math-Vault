@@ -30,8 +30,8 @@
       + '<button type="button" class="jp-fold" id="jpFold">收起题目</button>'
       + '</div>'
       + '<div class="judge-tip">AI 按 <b>0-100</b> 打分并指出错在哪一步。'
-      + '<b>思路 + 正确答案</b>给 90 分；<b>只交正确答案</b>给 80 分；'
-      + '<b>出错会大幅扣分</b>（错一步就掉到 50 分以下）。</div>'
+      + '<b>思路 + 正确答案直接给 100 分</b>（中间跳步、省略验算都不扣分）；'
+      + '<b>只交正确答案</b>给 80 分；<b>答案错误</b>会大幅扣分。</div>'
       + '<div class="seg" id="modeSeg" style="margin-bottom:12px">'
       + '<button type="button" data-mode="process" class="active">写思路 + 答案</button>'
       + '<button type="button" data-mode="answer">只交答案</button></div>'
@@ -48,7 +48,7 @@
       + '<span class="small muted">答错可以改完再交，不限次数</span></div>'
       + '<div id="judgeResult"></div>';
 
-    const m = window.UI.modal({ title: '提交解题过程 · ' + p.code, sub: '由 AI 逐步核对并指出错误位置', body: el, wide: true });
+    const m = window.UI.modal({ title: '提交解题过程 · ' + p.code, sub: '答案正确 + 写了思路即可满分，跳步不扣分', body: el, wide: true });
     if (window.MathKey) window.MathKey.attachAll(el);
 
     /* 弹窗里回显题干，做题时不用来回切页面 */
@@ -92,7 +92,7 @@
         ta.rows = mode === 'answer' ? 2 : 8;
         ta.placeholder = mode === 'answer'
           ? '只写最终答案，比如 $x-\\ln(3e^{x}+1)+C$（答对得 80 分）'
-          : '写清每一步和依据：换元、分部积分、回代…';
+          : '写清思路和最终答案即可，跳步不扣分：换元、分部积分、回代…';
         el.querySelector('#judgeBtn').textContent = mode === 'answer' ? '提交答案评分' : '提交批改';
       });
     });
