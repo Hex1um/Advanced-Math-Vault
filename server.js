@@ -88,6 +88,20 @@ function loadDb() {
       if (!Array.isArray(db.feedbacks)) db.feedbacks = [];
       if (!db.emailCodes || typeof db.emailCodes !== 'object') db.emailCodes = {};
       if (!db.meta.feedbackSeq) db.meta.feedbackSeq = 1;
+      // 计数器必须追上已有数据：从线上同步回来的帖子/回复可能比本地 postSeq 还新，
+      // 不修正就会「新帖拿到已被占用的 id」，发帖看起来成功、实际写进了别人的帖子。
+      const maxOf = (arr, f) => arr.reduce((m, x) => Math.max(m, Number(f(x)) || 0), 0);
+      const maxPostId = maxOf(db.posts, (p) => p.id);
+      const maxReplyId = db.posts.reduce((m, p) => Math.max(m, maxOf(p.replies || [], (r) => r.id)), 0);
+      const maxFeedbackId = maxOf(db.feedbacks, (f) => f.id);
+      const maxProblemSeq = db.problems.reduce((m, p) => {
+        const n = Number(String(p.code || '').replace(/\D/g, ''));
+        return Number.isFinite(n) ? Math.max(m, n) : m;
+      }, 1000);
+      db.meta.postSeq = Math.max(Number(db.meta.postSeq) || 1, maxPostId + 1);
+      db.meta.replySeq = Math.max(Number(db.meta.replySeq) || 1, maxReplyId + 1);
+      db.meta.feedbackSeq = Math.max(Number(db.meta.feedbackSeq) || 1, maxFeedbackId + 1);
+      db.meta.seq = Math.max(Number(db.meta.seq) || 1001, maxProblemSeq + 1);
       db.problems.forEach((p) => {
         if (typeof p.scoreSum !== 'number') p.scoreSum = 0;
         if (typeof p.scoreCount !== 'number') p.scoreCount = 0;
@@ -284,10 +298,14 @@ function levelInfo(exp) {
 function publicUser(u) {
   if (!u) return null;
   const li = levelInfo(u.exp);
+  const solvedMap = u.solved || {};
+  // 只统计真正做出来的（≥80 分），做过但没过的单独给 attempts
+  const doneCount = Object.keys(solvedMap).filter((k) => solvedMap[k] && solvedMap[k].done).length;
   return {
     id: u.id, name: u.name, role: u.role || 'user',
     exp: u.exp || 0, level: li.level, levelProgress: li.progress,
-    solvedCount: Object.keys(u.solved || {}).length,
+    solvedCount: doneCount,
+    attempts: u.attempts || 0,
     createdAt: u.createdAt,
     email: u.email || '',
     emailVerified: !!u.emailVerified
@@ -1094,13 +1112,15 @@ async function streamLLM(cfg, messages, onDelta) {
 
 /* --------------------------------------------------------- 答疑区 AI 回帖 */
 
-async function generateForumReply(post, problem) {
+async function generateForumReply(post, problem, ask) {
   const sys = {
     role: 'system',
     content: '你是「Advanced-Math-Vault」答疑区的 AI 助教。回答要短（150-300 字）、直接、有可执行的第一步，公式用 $...$。'
       + '不要空泛鼓励，不要重复帖子里已有的内容。如果帖子信息不足，就指出还缺什么。'
+      + (ask ? '这次是有人专门 @ 你追问，要针对他那句话回答，指出其中对/错在哪。' : '')
   };
   const parts = ['## 帖子：' + post.title, post.body];
+  if (ask) parts.push('## 有人 @ 你追问：' + ask);
   if (problem) {
     parts.push('## 关联题目 ' + problem.code + '：' + problem.title);
     parts.push('题干：' + problem.statement);
@@ -1133,15 +1153,18 @@ async function generateForumReply(post, problem) {
   return out.join('\n');
 }
 
-function scheduleForumReply(postId) {
+function scheduleForumReply(postId, opts) {
+  const ask = opts && opts.ask ? String(opts.ask).slice(0, 1000) : '';
+  const afterReplyId = opts && opts.afterReplyId ? opts.afterReplyId : null;
   setTimeout(async () => {
     const post = db.posts.find((p) => p.id === postId);
     if (!post) return;
-    if (post.replies.some((r) => r.isAI)) return;
+    // 发帖时的首答：已经有一个 AI 回答就不再重复；被 @ 追问时要另外答一条
+    if (!ask && post.replies.some((r) => r.isAI)) return;
     const problem = post.problemCode ? db.problems.find((p) => p.code === post.problemCode) : null;
     let body = '';
     try {
-      body = await generateForumReply(post, problem);
+      body = await generateForumReply(post, problem, ask);
     } catch (e) {
       body = '**AI 助教暂时没连上**，先把题目条件拆成「已知 / 要求」，再贴一下你卡住的步骤。';
     }
@@ -1152,6 +1175,7 @@ function scheduleForumReply(postId) {
       authorId: null,
       authorName: 'AI 助教',
       isAI: true,
+      replyTo: afterReplyId,
       body,
       createdAt: new Date().toISOString()
     });
@@ -1608,8 +1632,7 @@ async function handleApi(req, res, pathname, query) {
     }
 
     if (sub === '/answer' && method === 'POST') {
-      if (!user) return fail(res, 401, '登录后才能提交');
-      const body = await readBody(req, 8 * 1024 * 1024);
+      if (!user) return fail(res, 401, '登录后才能提交');      const body = await readBody(req, 8 * 1024 * 1024);
       const process = String(body.process || '').trim().slice(0, 4000);
       const answerOnly = body.mode === 'answer' || (!process && String(body.answer || '').trim());
       const only = process || String(body.answer || '').trim();
@@ -1626,6 +1649,7 @@ async function handleApi(req, res, pathname, query) {
       if (!answerOnly && only && only.length < 20) return fail(res, 400, '过程太短了：至少写清用了什么方法、关键几步怎么来的');
 
       p.attemptCount = (p.attemptCount || 0) + 1;
+      user.attempts = (user.attempts || 0) + 1;   // 用于排行榜显示「做过多少题」
 
       const own = userLlmConfig(body);
       if (image && !(own && VISION_MODEL.test(own.model))) {
@@ -1898,6 +1922,7 @@ async function handleApi(req, res, pathname, query) {
         replyCount: p.replies.length, createdAt: p.createdAt,
         excerpt: String(p.body || '').replace(/\s+/g, ' ').slice(0, 120),
         image: p.image || '',
+        imageCount: (Array.isArray(p.images) ? p.images.length : (p.image ? 1 : 0)),
         updatedAt: p.updatedAt || p.createdAt, problemCode: p.problemCode,
         solved: !!p.solved
       })),
@@ -1997,9 +2022,9 @@ async function handleApi(req, res, pathname, query) {
     const body = await readBody(req);
     const title = String(body.title || '').trim();
     const content = String(body.body || '').trim();
-    const image = typeof body.image === 'string' && body.image.indexOf('data:image/') === 0 ? body.image : '';
+    const images = saveUploads(body);
     if (title.length < 4) return fail(res, 400, '标题至少 4 个字');
-    if (content.length < 6 && !image) return fail(res, 400, '正文至少 6 个字（或者直接传一张图）');
+    if (content.length < 6 && !images.length) return fail(res, 400, '正文至少 6 个字（或者直接传一张图）');
     let tags = body.tags;
     if (typeof tags === 'string') tags = tags.split(/[,，、\s]+/);
     tags = Array.isArray(tags) ? tags.map((t) => String(t).trim()).filter(Boolean).slice(0, 4) : [];
@@ -2011,7 +2036,8 @@ async function handleApi(req, res, pathname, query) {
       body: content,
       tags,
       problemCode: problemCode || '',
-      image: image ? saveUpload(image) : '',
+      image: images[0] || '',
+      images: images,
       authorId: user.id,
       authorName: user.name,
       createdAt: new Date().toISOString(),
@@ -2045,6 +2071,7 @@ async function handleApi(req, res, pathname, query) {
           createdAt: post.createdAt, views: post.views || 0,
           problemCode: post.problemCode,
           problem: problem ? { code: problem.code, title: problem.title } : null,
+          images: Array.isArray(post.images) && post.images.length ? post.images : (post.image ? [post.image] : []),
           solved: !!post.solved,
           replies: post.replies
         }
@@ -2058,20 +2085,26 @@ async function handleApi(req, res, pathname, query) {
       if (q.blocked) return fail(res, 429, q.message);
       const body = await readBody(req);
       const content = String(body.body || '').trim();
-      if (content.length < 2) return fail(res, 400, '回复不能为空');
+      const images = saveUploads(body);
+      if (content.length < 2 && !images.length) return fail(res, 400, '回复不能为空');
+      const replyId = db.meta.replySeq++;
+      const mentionAI = /@\s*(?:AI\s*助教|AI|ai|助教)/.test(content);
       post.replies.push({
-        id: db.meta.replySeq++,
+        id: replyId,
         authorId: user.id,
         authorName: user.name,
         isAI: false,
         body: content.slice(0, 4000),
+        images,
         createdAt: new Date().toISOString()
       });
       post.updatedAt = new Date().toISOString();
       noteQuota(user, true);
       logActivity(user, '在答疑区回复了 #' + post.id, '');
       saveDb();
-      return send(res, 200, { ok: true });
+      // 回复里 @ 了 AI 助教：让 AI 针对这条回复再答一次
+      if (mentionAI) scheduleForumReply(post.id, { ask: content, afterReplyId: replyId });
+      return send(res, 200, { ok: true, id: replyId, aiAsked: mentionAI });
     }
 
     if (sub === '/delete' && method === 'POST') {
@@ -2134,6 +2167,26 @@ async function handleApi(req, res, pathname, query) {
         };
       })
       .sort((a, b) => (b.at || 0) - (a.at || 0));
+    return send(res, 200, { ok: true, items });
+  }
+
+  /* 最近作答（含没通过线的），让「我的记录」能看到每次提交 */
+  if (pathname === '/api/my/attempts' && method === 'GET') {
+    if (!user) return send(res, 200, { ok: true, items: [] });
+    const items = db.submissions
+      .filter((x) => x.uid === user.id)
+      .slice(-40)
+      .reverse()
+      .map((x) => {
+        const p = db.problems.find((q) => q.code === x.code);
+        return {
+          id: x.id, code: x.code,
+          title: p ? p.title : x.code,
+          score: x.score, verdict: x.verdict, mode: x.mode,
+          judgedBy: x.judgedBy || '', at: x.at,
+          comment: String(x.comment || '').slice(0, 120)
+        };
+      });
     return send(res, 200, { ok: true, items });
   }
 
@@ -2334,11 +2387,12 @@ async function handleApi(req, res, pathname, query) {
 
   /* ---- 排行榜 ---- */
   if (pathname === '/api/leaderboard' && method === 'GET') {
-    const items = db.users.slice()
-      .sort((a, b) => (b.exp || 0) - (a.exp || 0))
-      .slice(0, 10)
-      .map((u, i) => Object.assign({ rank: i + 1 }, publicUser(u)));
-    return send(res, 200, { ok: true, items });
+    // 全站账号都列出来（按经验、做出题数排序），不再只给前 10 名
+    const all = db.users.slice()
+      .map((u) => publicUser(u))
+      .sort((a, b) => (b.exp - a.exp) || (b.solvedCount - a.solvedCount) || String(a.name).localeCompare(String(b.name)))
+      .map((u, i) => Object.assign({ rank: i + 1 }, u));
+    return send(res, 200, { ok: true, total: all.length, items: all.slice(0, 200) });
   }
 
   /* ---- 对话系统提示词（给浏览器直连免费通道用） ---- */
@@ -2761,6 +2815,16 @@ function saveUpload(dataUrl) {
     console.error('[upload] 保存失败:', e.message);
     return '';
   }
+}
+
+/* 发帖/回帖最多带 3 张图，逐张落盘后返回 URL 列表 */
+function saveUploads(body) {
+  const raw = Array.isArray(body.images) ? body.images : (body.image ? [body.image] : []);
+  return raw
+    .filter((s) => typeof s === 'string' && s.indexOf('data:image/') === 0)
+    .slice(0, 3)
+    .map(saveUpload)
+    .filter(Boolean);
 }
 
 function serveUpload(res, pathname) {

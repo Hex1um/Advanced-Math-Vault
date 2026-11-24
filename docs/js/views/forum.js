@@ -7,6 +7,29 @@
 
   /* ---------------------------------------------------------- 发帖 */
 
+  /* 客户端压缩图片：长边压到 1400px、jpeg 0.82，避免手机原图把请求体撑爆 */
+  function compressImage(file) {
+    return new Promise(function (resolve, reject) {
+      const reader = new FileReader();
+      reader.onload = function () {
+        const img = new Image();
+        img.onload = function () {
+          const max = 1400;
+          const scale = Math.min(1, max / Math.max(img.width, img.height));
+          const cv = document.createElement('canvas');
+          cv.width = Math.round(img.width * scale);
+          cv.height = Math.round(img.height * scale);
+          cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+          resolve(cv.toDataURL('image/jpeg', 0.82));
+        };
+        img.onerror = function () { reject(new Error('图片读取失败')); };
+        img.src = reader.result;
+      };
+      reader.onerror = function () { reject(new Error('图片读取失败')); };
+      reader.readAsDataURL(file);
+    });
+  }
+
   function newPostModal() {
     if (!window.UI.requireLogin(null, '登录后才能发帖')) return;
 
@@ -21,6 +44,11 @@
       + '<div class="tip">正文写好后点「AI 起标题」，会根据内容自动补一版，可再改。</div></div>'
       + '<div class="field"><label>正文</label><textarea name="body" rows="7" placeholder="写出你的思路和卡点。公式用 $...$ 包住，独立公式用 $$...$$。"></textarea>'
       + '<div class="tip">正文越具体，AI 助教和同学越能直接帮到你。</div></div>'
+      + '<div class="field"><label>图片（最多 3 张，可选）</label>'
+      + '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'
+      + '<label class="btn btn-sm" style="cursor:pointer">选择图片<input type="file" id="postImgs" accept="image/*" multiple style="display:none" /></label>'
+      + '<span class="small muted">手写过程拍照上传更快，会自动压缩</span></div>'
+      + '<div id="imgPreview" class="post-img-preview"></div></div>'
       + '<div class="field-row">'
       + '<div class="field"><label>关联题目编号（可选）</label><input name="problemCode" placeholder="例如 HS1001" /></div>'
       + '<div class="field"><label>标签（逗号分隔）</label><input name="tags" placeholder="极限, 泰勒展开" /></div>'
@@ -31,8 +59,34 @@
       + '<button type="submit" class="btn btn-primary" id="submitPost">发布</button>'
       + '</div></form>';
 
-    const m = window.UI.modal({ title: '发一个新帖', sub: '登录后可以发帖，发布后 AI 助教会先给一版思路', body: el, wide: true });
+    const m = window.UI.modal({ title: '发一个新帖', sub: '发帖后 AI 助教会先给一版思路；帖子里 @AI助教 可以再追问', body: el, wide: true });
     const form = el.querySelector('#postForm');
+    const picked = [];   // 已选图片的 dataURL
+
+    function renderPicked() {
+      const box = el.querySelector('#imgPreview');
+      if (!box) return;
+      box.innerHTML = picked.map(function (src, i) {
+        return '<span class="post-img-thumb"><img src="' + src + '" alt="待上传" />'
+          + '<button type="button" class="rm" data-i="' + i + '" title="移除">×</button></span>';
+      }).join('');
+      box.querySelectorAll('.rm').forEach(function (b) {
+        b.addEventListener('click', function () {
+          picked.splice(Number(b.getAttribute('data-i')), 1);
+          renderPicked();
+        });
+      });
+    }
+
+    el.querySelector('#postImgs').addEventListener('change', async function (e) {
+      const files = Array.prototype.slice.call(e.target.files || []);
+      e.target.value = '';
+      for (const f of files) {
+        if (picked.length >= 3) { window.UI.toast('最多 3 张图', 'err'); break; }
+        try { picked.push(await compressImage(f)); } catch (err) { window.UI.toast(err.message, 'err'); }
+      }
+      renderPicked();
+    });
 
     const aiTitleBtn = el.querySelector('#aiTitle');
     if (aiTitleBtn) {
@@ -61,14 +115,15 @@
       const title = form.title.value.trim();
       const body = form.body.value.trim();
       if (title.length < 4) { err.textContent = '标题至少 4 个字'; return; }
-      if (body.length < 10) { err.textContent = '正文至少 10 个字'; return; }
+      if (body.length < 10 && !picked.length) { err.textContent = '正文至少 10 个字（或者传张图）'; return; }
       btn.disabled = true;
       btn.textContent = '发布中…';
       try {
         const res = await window.API.post('/api/forum', {
           title: title, body: body,
           problemCode: form.problemCode.value.trim(),
-          tags: form.tags.value
+          tags: form.tags.value,
+          images: picked
         });
         m.close();
         window.UI.toast('已发布，AI 助教正在看你的问题', 'ok');
@@ -187,6 +242,11 @@
             + '<button class="btn btn-sm right" id="delPost" style="margin-left:8px;color:var(--red);border-color:var(--red)" title="' + (St.me && St.me.role === 'admin' && St.me.id !== post.authorId ? '管理员删除他人帖子' : '删除我的帖子') + '">删除</button>'
             + '</div>'
             + '<div class="post-content md" id="postBody"></div>'
+            + ((post.images && post.images.length)
+              ? '<div class="post-images">' + post.images.map(function (src) {
+                return '<a class="post-image" href="' + src + '" target="_blank" rel="noopener"><img src="' + src + '" alt="题目图片" loading="lazy" /></a>';
+              }).join('') + '</div>'
+              : '')
             + '<div class="tags" style="margin-top:10px">'
             + (post.tags || []).map(function (t) { return '<span class="tag gray">' + window.Md.esc(t) + '</span>'; }).join('')
             + '</div>'
@@ -201,8 +261,11 @@
             + '<div id="replyList"></div>'
             + '</div>'
             + '<div class="reply-editor">'
-            + '<textarea id="replyInput" placeholder="写下你的想法或补充。公式用 $...$。' + (St.me ? '' : '登录后才能回复。') + '" ' + (St.me ? '' : 'disabled') + '></textarea>'
-            + '<div class="row"><span class="small muted">' + (St.me ? '以 ' + window.Md.esc(St.me.name) + ' 的身份回复' : '登录后可参与讨论') + '</span>'
+            + '<textarea id="replyInput" placeholder="写下你的想法或补充。公式用 $...$。想单独追问 AI 就在句子里带上 @AI助教。' + (St.me ? '' : '登录后才能回复。') + '" ' + (St.me ? '' : 'disabled') + '></textarea>'
+            + '<div class="row"><span class="small muted">'
+            + (St.me ? '以 ' + window.Md.esc(St.me.name) + ' 的身份回复' : '登录后可参与讨论')
+            + '　<button type="button" class="btn btn-sm" id="mentionAI"' + (St.me ? '' : ' disabled') + '>@AI助教</button>'
+            + '</span>'
             + '<button class="btn btn-primary btn-sm" id="replyBtn"' + (St.me ? '' : ' disabled') + '>发表回复</button></div>'
             + '</div></div>';
 
@@ -236,6 +299,18 @@
               if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') sendReply();
             });
           }
+          const mentionBtn = document.getElementById('mentionAI');
+          if (mentionBtn) {
+            mentionBtn.addEventListener('click', function () {
+              const box = document.getElementById('replyInput');
+              const at = box.selectionStart || box.value.length;
+              const txt = box.value;
+              const ins = (at > 0 && !/\s$/.test(txt.slice(0, at)) ? ' ' : '') + '@AI助教 ';
+              box.value = txt.slice(0, at) + ins + txt.slice(at);
+              box.focus();
+              box.selectionStart = box.selectionEnd = at + ins.length;
+            });
+          }
         }
 
         renderReplies(post.replies, hasAI);
@@ -265,8 +340,15 @@
           + '<div class="reply-main"><div class="reply-head">'
           + '<span class="name">' + window.Md.esc(r.authorName) + '</span>'
           + (r.isAI ? '<span class="ai-badge">AI 助教</span>' : '')
+          + (r.replyTo ? '<span class="small muted">回复 #' + r.replyTo + '</span>' : '')
           + '<span class="when">' + window.UI.timeAgo(r.createdAt) + '</span></div>'
-          + '<div class="reply-body md" data-reply="' + r.id + '"></div></div></div>';
+          + '<div class="reply-body md" data-reply="' + r.id + '"></div>'
+          + ((r.images && r.images.length)
+            ? '<div class="post-images small">' + r.images.map(function (src) {
+              return '<a class="post-image" href="' + src + '" target="_blank" rel="noopener"><img src="' + src + '" alt="回复图片" loading="lazy" /></a>';
+            }).join('') + '</div>'
+            : '')
+          + '</div></div>';
       }).join('');
 
       replies.forEach(function (r) {

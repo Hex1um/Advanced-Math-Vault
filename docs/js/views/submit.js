@@ -232,11 +232,13 @@
     Promise.all([
       window.API.get('/api/me'),
       window.API.get('/api/my/submissions').catch(function () { return { items: [] }; }),
-      window.API.get('/api/my/solved').catch(function () { return { items: [] }; })
+      window.API.get('/api/my/solved').catch(function () { return { items: [] }; }),
+      window.API.get('/api/my/attempts').catch(function () { return { items: [] }; })
     ]).then(function (arr) {
       const me = arr[0].user;
       const subs = arr[1].items || [];
       const solved = arr[2].items || [];
+      const attempts = arr[3].items || [];
       window.UI.applyUser(me);
 
       el.innerHTML =
@@ -262,6 +264,21 @@
               + (s.revealed ? '<span class="tag gold">看过答案</span>' : '<span class="tag teal">独立完成</span>') + '</a>';
           }).join('')
           : '<div class="small muted">还没有做题记录，去题库挑一道。</div>')
+        + '</div>'
+        + '<div class="card side-card" style="padding:18px 20px;margin-top:14px"><h3>最近作答</h3>'
+        + (attempts.length
+          ? attempts.slice(0, 12).map(function (a) {
+            const tone = a.verdict === 'correct' ? 'teal' : a.verdict === 'partial' ? 'gold'
+              : a.verdict === 'wrong' ? 'red' : 'gray';
+            const label = a.verdict === 'correct' ? '通过' : a.verdict === 'partial' ? '部分对'
+              : a.verdict === 'wrong' ? '未通过' : '未判定';
+            return '<a class="related-item" href="#/problem/' + a.code + '">'
+              + '<span class="code">' + a.code + '</span>'
+              + '<span class="t">' + window.Md.inlineTex(a.title) + '</span>'
+              + '<span class="tag ' + tone + '">' + label + ' ' + (Number.isFinite(a.score) ? a.score : 0) + ' 分</span></a>';
+          }).join('')
+          : '<div class="small muted">还没有提交记录。做完一道题交上来，这里会留一次底。</div>')
+        + (attempts.length > 12 ? '<div class="small muted" style="margin-top:6px">只显示最近 12 次</div>' : '')
         + '</div>'
         + '<div class="card side-card" style="padding:18px 20px;margin-top:14px"><h3>我的投稿</h3>'
         + (subs.length

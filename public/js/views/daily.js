@@ -69,15 +69,17 @@
         + '</div>'
 
         + '<aside>'
-        + '<div class="card side-card"><h3>经验榜</h3>'
+        + '<div class="card side-card"><h3>经验榜 <span class="small muted">共 ' + (board.total || board.items.length) + ' 人</span></h3>'
         + (board.items.length
-          ? board.items.slice(0, 6).map(function (u) {
+          ? '<div class="leader-list">' + board.items.map(function (u) {
             return '<div class="kv" style="align-items:center">'
               + '<span style="display:flex;align-items:center;gap:8px;min-width:0">'
-              + '<b style="width:14px;color:' + (u.rank <= 3 ? '#ffd9a3' : 'var(--muted)') + '">' + u.rank + '</b>'
+              + '<b style="width:18px;color:' + (u.rank <= 3 ? 'var(--orange)' : 'var(--muted)') + '">' + u.rank + '</b>'
               + window.UI.avatar(u.name) + '<span style="color:var(--text-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + window.Md.esc(u.name) + '</span></span>'
-              + '<b>' + u.exp + '</b></div>';
-          }).join('')
+              + '<span style="display:flex;align-items:center;gap:10px">'
+              + '<span class="small muted">' + u.solvedCount + ' 题</span>'
+              + '<b>' + u.exp + '</b></span></div>';
+          }).join('') + '</div>'
           : '<div class="small muted">还没有人留下记录，你可以是第一个。</div>')
         + '</div>'
         + '<div class="card side-card"><h3>经验怎么算</h3><div class="xp-rule">'

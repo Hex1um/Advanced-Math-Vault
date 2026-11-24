@@ -13,3 +13,4 @@ data/backups/
 data/db.json.before-*
 data/db.json.broken-*
 data/*.before-*
+data/uploads/
