@@ -23,10 +23,17 @@
   function openAnswerModal(p, rules, onPassed) {
     const el = document.createElement('div');
     el.innerHTML =
-      '<div class="judge-tip">AI 按 <b>0-100</b> 打分并指出错在哪一步。<b>写完整过程</b>才有机会过 80 分线；'
-      + '只交一个答案最高只能得 70 分，不会通过。</div>'
+      '<div class="judge-problem">'
+      + '<div class="jp-head"><span class="code">' + p.code + '</span>'
+      + '<span class="t" id="jpTitle"></span></div>'
+      + '<div class="jp-body md" id="jpStmt"></div>'
+      + '<button type="button" class="jp-fold" id="jpFold">收起题目</button>'
+      + '</div>'
+      + '<div class="judge-tip">AI 按 <b>0-100</b> 打分并指出错在哪一步。'
+      + '<b>思路 + 正确答案</b>给 90 分；<b>只交正确答案</b>给 80 分；'
+      + '<b>出错会大幅扣分</b>（错一步就掉到 50 分以下）。</div>'
       + '<div class="seg" id="modeSeg" style="margin-bottom:12px">'
-      + '<button type="button" data-mode="process" class="active">交完整过程</button>'
+      + '<button type="button" data-mode="process" class="active">写思路 + 答案</button>'
       + '<button type="button" data-mode="answer">只交答案</button></div>'
       + '<div id="historyBox"></div>'
       + '<div class="field"><label>解题过程</label>'
@@ -43,6 +50,20 @@
 
     const m = window.UI.modal({ title: '提交解题过程 · ' + p.code, sub: '由 AI 逐步核对并指出错误位置', body: el, wide: true });
     if (window.MathKey) window.MathKey.attachAll(el);
+
+    /* 弹窗里回显题干，做题时不用来回切页面 */
+    const jpTitle = el.querySelector('#jpTitle');
+    const jpStmt = el.querySelector('#jpStmt');
+    if (jpTitle) jpTitle.innerHTML = window.Md.inlineTex(p.title || p.code);
+    if (jpStmt) window.Md.render(jpStmt, p.statement || '');
+    const jpFold = el.querySelector('#jpFold');
+    if (jpFold) {
+      jpFold.addEventListener('click', function () {
+        const hidden = jpStmt.style.display === 'none';
+        jpStmt.style.display = hidden ? '' : 'none';
+        jpFold.textContent = hidden ? '收起题目' : '展开题目';
+      });
+    }
     const resultBox = el.querySelector('#judgeResult');
     let image = '';
     let mode = 'process';

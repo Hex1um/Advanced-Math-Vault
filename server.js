@@ -1691,7 +1691,11 @@ async function handleApi(req, res, pathname, query) {
 
       if (!judged) {
         if (processMatchesAnswer(only, p.answer)) {
-          judged = { verdict: 'correct', score: answerOnly ? 70 : 90, comment: '暂时连不上阅卷模型，只核对了最终答案，过程请自己再检查一遍。', errors: [] };
+          judged = { verdict: 'correct', score: answerOnly ? 80 : 90, comment: '暂时连不上阅卷模型，只核对了最终答案，过程请自己再检查一遍。', errors: [] };
+          judgedBy = '规则比对';
+        } else if (answerOnly) {
+          // 只交答案又对不上：直接判错并重扣，别让用户以为「没判」
+          judged = { verdict: 'wrong', score: 30, comment: '最终答案和标准答案不一致。只交答案时只核对这一项，请检查计算过程。', errors: [] };
           judgedBy = '规则比对';
         } else {
           saveDb();
@@ -1704,15 +1708,23 @@ async function handleApi(req, res, pathname, query) {
       }
 
       // 只交答案：分数压到 70 以内，且不能判为 correct
+      // 分数线与给分规则（2026-11 调整）：
+      //   只交正确答案            → 80 分，通过
+      //   简要思路 + 正确答案      → 90 分，通过
+      //   出错                    → 大幅扣分，不过线
       let score = Number.isFinite(judged.score) ? Math.round(judged.score) : 0;
       score = Math.max(0, Math.min(100, score));
       let verdict = judged.verdict;
-      if (answerOnly) {
-        score = Math.min(score, 70);
-        if (verdict === 'correct') verdict = 'partial';
+      if (verdict === 'correct') {
+        const base = answerOnly ? 80 : 90;
+        score = Math.max(base, score);
+      } else if (verdict === 'wrong') {
+        score = Math.min(score || 40, 50);   // 出错重罚
+      } else {
+        score = Math.min(score, 79);         // 部分对/说不清，不给过
       }
       const PASS = 80;
-      const passed = !answerOnly && score >= PASS;
+      const passed = verdict === 'correct' && score >= PASS;
 
       // 记录这次提交
       const submission = {
@@ -2627,28 +2639,44 @@ function parseJudge(text) {
     const image = typeof body.image === 'string' && body.image.indexOf('data:image/') === 0 ? body.image : '';
     if (!image) return fail(res, 400, '先上传一张题目图片');
     const own = userLlmConfig(body);
-    if (!(own && VISION_MODEL.test(own.model))) {
+    // 先试用户自己的 Key，再试服务端配置/免费通道里能看图的模型；
+    // 都没有才让前端回退 tesseract（数学公式识别很差，只作兜底）
+    const visionCfgs = [];
+    if (own && VISION_MODEL.test(own.model || '')) visionCfgs.push(own);
+    for (const cfg of llmCandidates(body)) {
+      if (!VISION_MODEL.test(cfg.model || '')) continue;
+      if (visionCfgs.some((c) => c.name === cfg.name && c.model === cfg.model)) continue;
+      visionCfgs.push(cfg);
+    }
+    if (!visionCfgs.length) {
       return send(res, 200, { ok: false, needVision: true, prompt: OCR_PROMPT });
     }
     let out = '';
-    try {
-      out = await callLLM(own, [
-        { role: 'system', content: OCR_PROMPT },
-        {
-          role: 'user',
-          content: [
-            { type: 'text', text: '按格式转写这张图里的题目。' },
-            { type: 'image_url', image_url: { url: image } }
-          ]
-        }
-      ]);
-    } catch (e) {
-      return fail(res, 502, '识图模型调用失败：' + e.message);
+    let used = null;
+    const errors = [];
+    for (const cfg of visionCfgs) {
+      try {
+        out = await callLLM(cfg, [
+          { role: 'system', content: OCR_PROMPT },
+          {
+            role: 'user',
+            content: [
+              { type: 'text', text: '按格式转写这张图里的题目。公式用 LaTeX，不要把水印或页眉页脚写进去。' },
+              { type: 'image_url', image_url: { url: image } }
+            ]
+          }
+        ]);
+        if (out && out.trim()) { used = cfg; break; }
+      } catch (e) {
+        errors.push(cfg.name + ': ' + e.message);
+        console.error('[from-image] ' + cfg.name + ' 失败:', e.message);
+      }
     }
+    if (!out) return fail(res, 502, '识图模型调用失败：' + (errors[0] || '无可用通道'));
     const raw = parseGenerated(out) || extractJson(out);
     const item = validateGenerated(raw);
     if (!item) return send(res, 200, { ok: false, needVision: false, prompt: OCR_PROMPT, raw: String(out).slice(0, 800) });
-    return send(res, 200, { ok: true, problem: item, model: { provider: own.name, model: own.model } });
+    return send(res, 200, { ok: true, problem: item, model: { provider: used.name, model: used.model } });
   }
 
   /* ---- 出题提示词（给浏览器直连免费通道用） ---- */

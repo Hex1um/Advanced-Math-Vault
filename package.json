@@ -1,6 +1,6 @@
 {
   "name": "math-vault",
-  "version": "0.9.4",
+  "version": "0.10.0",
   "private": true,
   "description": "高数好题收藏室：人工审核题库 + 每日一题 + 答疑区 + AI 答疑",
   "main": "server.js",

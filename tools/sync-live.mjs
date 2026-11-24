@@ -81,14 +81,57 @@ function main() {
     /* 用户：以 id 为准，线上的经验/做题记录为准；本地独有的用户保留 */
     const lUsers = byKey(local.users, 'id');
     let addedUsers = 0, updatedUsers = 0;
+    /* 用户：逐字段并集合并。以前「本地有数据就整条保留」，
+       会把线上新增的做题记录冲掉，导致做题记录莫名其妙减少。 */
+    const mergeUser = (cur, live) => {
+      cur.exp = Math.max(Number(cur.exp) || 0, Number(live.exp) || 0);
+      cur.attempts = Math.max(Number(cur.attempts) || 0, Number(live.attempts) || 0);
+      // solved：按题号并集，done 优先、时间新优先
+      const solved = Object.assign({}, cur.solved || {});
+      for (const [code, rec] of Object.entries(live.solved || {})) {
+        const old = solved[code];
+        if (!old) { solved[code] = rec; continue; }
+        if ((rec.done && !old.done) || ((rec.at || 0) > (old.at || 0))) {
+          solved[code] = Object.assign({}, old, rec, { done: !!(rec.done || old.done) });
+        }
+      }
+      cur.solved = solved;
+      // wrong：保留尝试次数多的
+      const wrong = Object.assign({}, cur.wrong || {});
+      for (const [code, rec] of Object.entries(live.wrong || {})) {
+        const old = wrong[code];
+        if (!old || (rec.tries || 0) >= (old.tries || 0)) wrong[code] = rec;
+      }
+      cur.wrong = wrong;
+      // best：保留最高分
+      const best = Object.assign({}, cur.best || {});
+      for (const [code, rec] of Object.entries(live.best || {})) {
+        const old = best[code];
+        if (!old || (rec.score || 0) > (old.score || 0)) best[code] = rec;
+      }
+      cur.best = best;
+      // activity：按时间去重并集
+      const seen = new Set();
+      const act = [];
+      for (const a of [].concat(cur.activity || [], live.activity || [])) {
+        const k = String(a.at || '') + '|' + String(a.text || '');
+        if (seen.has(k)) continue;
+        seen.add(k);
+        act.push(a);
+      }
+      act.sort((x, y) => String(y.at || '').localeCompare(String(x.at || '')));
+      cur.activity = act.slice(0, 200);
+      if (!cur.passhash && live.passhash) cur.passhash = live.passhash;
+      if (!cur.email && live.email) { cur.email = live.email; cur.emailVerified = live.emailVerified; }
+      if (!cur.role && live.role) cur.role = live.role;
+      return cur;
+    };
+
     for (const u of keepUsers) {
       const cur = lUsers.get(String(u.id));
       if (!cur) { (local.users = local.users || []).push(u); addedUsers++; continue; }
-      // 线上有活动就用线上的，避免本地空壳把线上经验冲掉
-      const liveHasData = (u.exp || 0) > 0 || Object.keys(u.solved || {}).length > 0 || (u.activity || []).length > 0;
-      const localHasData = (cur.exp || 0) > 0 || Object.keys(cur.solved || {}).length > 0;
-      if (liveHasData && !localHasData) { Object.assign(cur, u); updatedUsers++; }
-      else if (!cur.passhash && u.passhash) { cur.passhash = u.passhash; updatedUsers++; }
+      mergeUser(cur, u);
+      updatedUsers++;
     }
 
     /* 帖子：以 id 为准，两边并集（线上为主，本地独有的补上） */
