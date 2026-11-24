@@ -235,7 +235,7 @@
     el.innerHTML =
       '<div class="page-head">'
       + '<div><h1>题库</h1>'
-      + '<p class="sub">每道题都经过人工审核才进入题库，配有考点标签与思维量、难度、计算量三个维度的评分。做不出来可以看答案，也可以直接问 AI。</p></div>'
+      + '<p class="sub">题库统一校对后入库，每题标注考点与思维量、难度、计算量三个维度，附带答案与关键思路。做不出来可以看答案，也可以直接问 AI。</p></div>'
       + '<div class="head-actions">'
       + '<button class="btn" id="seqBtn" title="按编号刷当前筛选里还没做过的题">顺序刷</button>'
       + '<button class="btn" id="randBtn" title="随机来一道还没做过的题">随机刷</button>'

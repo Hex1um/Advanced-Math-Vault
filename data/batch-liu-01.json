@@ -1,1066 +1,952 @@
 [
  {
-  "title": "分位点对称：区间概率等于置信水平",
-  "statement": "设随机变量 $X\\sim\\chi^{2}(12)$，已知 $\\chi^{2}_{0.025}(12)=a$，$\\chi^{2}_{0.975}(12)=b$，求 $P(a\\le X\\le b)$。",
+  "title": "Beta 积分：x(1−x)^{3/2}",
+  "statement": "计算 $\\int_{0}^{1}x(1-x)^{\\frac{3}{2}}\\,\\mathrm{d}x$。",
   "tags": [
-   "概率统计",
-   "分位点",
-   "卡方分布"
+   "一元积分",
+   "换元积分",
+   "Beta 函数"
   ],
-  "thinking": 4,
-  "difficulty": 4,
-  "calc": 3,
-  "source": "柳贯一题型专项 · 第246节 统计量分布概率",
-  "hints": [
-   "两个分位点之间的概率就是两个尾部概率之差。"
-  ],
-  "answer": "0.95",
-  "solution": "$P(a\\le X\\le b)=P(X\\le b)-P(X<a)=0.975-0.025=0.95$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "$t$ 分布的双侧尾部概率",
-  "statement": "设随机变量 $T\\sim t(9)$，已知 $t_{0.025}(9)=a$，求 $P(|T|\\ge a)$。",
-  "tags": [
-   "概率统计",
-   "分位点",
-   "t分布"
-  ],
-  "thinking": 4,
-  "difficulty": 4,
-  "calc": 3,
-  "source": "柳贯一题型专项 · 第246节 统计量分布概率",
-  "hints": [
-   "$t$ 分布关于 0 对称，两侧各占一半。"
-  ],
-  "answer": "0.05",
-  "solution": "$P(|T|\\ge a)=2P(T\\ge a)=2\\times0.025=0.05$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "$F$ 分布上分位点与左侧概率",
-  "statement": "设 $X\\sim F(6,8)$，已知 $F_{0.05}(6,8)=a$，求 $P(X\\le a)$。",
-  "tags": [
-   "概率统计",
-   "分位点",
-   "F分布"
-  ],
-  "thinking": 4,
-  "difficulty": 4,
-  "calc": 3,
-  "source": "柳贯一题型专项 · 第246节 统计量分布概率",
-  "hints": [
-   "上侧概率 0.05 与左侧概率互补。"
-  ],
-  "answer": "0.95",
-  "solution": "$P(X\\le a)=1-P(X>a)=1-0.05=0.95$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "$\\chi^2(2)$ 显式密度算概率",
-  "statement": "设 $X\\sim\\chi^{2}(2)$，其概率密度为 $f(x)=\\frac{1}{2}e^{-x/2}$（$x>0$），求 $P(X>2\\ln 2)$。",
-  "tags": [
-   "概率统计",
-   "卡方分布",
-   "定积分"
-  ],
-  "thinking": 4,
-  "difficulty": 5,
-  "calc": 4,
-  "source": "柳贯一题型专项 · 第246节 统计量分布概率",
-  "hints": [
-   "指数分布尾概率 $P(X>x)=e^{-x/2}$。"
-  ],
-  "answer": "0.5",
-  "solution": "$P(X>2\\ln2)=\\int_{2\\ln2}^{+\\infty}\\frac12e^{-x/2}\\mathrm{d}x=e^{-\\ln2}=\\frac12$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "标准化后 $\\sum(X_i/2)^2$ 的卡方化",
-  "statement": "设 $X_{1},X_{2},\\ldots,X_{10}$ 是来自总体 $N(0,4)$ 的简单随机样本，令 $Y=\\frac{1}{4}\\sum_{i=1}^{10}X_{i}^{2}$。已知 $\\chi^{2}_{0.05}(10)=a$，求 $P(Y>a)$。",
-  "tags": [
-   "概率统计",
-   "卡方分布",
-   "标准化"
-  ],
-  "thinking": 4,
-  "difficulty": 5,
-  "calc": 3,
-  "source": "柳贯一题型专项 · 第246节 统计量分布概率",
-  "hints": [
-   "$X_i/2\\sim N(0,1)$，故 $Y=\\sum(X_i/2)^2\\sim\\chi^2(10)$。"
-  ],
-  "answer": "0.05",
-  "solution": "$Y=\\sum_{i=1}^{10}\\left(\\frac{X_i}{2}\\right)^{2}\\sim\\chi^{2}(10)$，故 $P(Y>a)=P(\\chi^{2}(10)>\\chi^{2}_{0.05}(10))=0.05$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "倒数变换：$F$ 分布的对称性",
-  "statement": "设 $X\\sim F(3,3)$，且 $P(X>a)=0.05$，求 $P\\left(X<\\frac{1}{a}\\right)$。",
-  "tags": [
-   "概率统计",
-   "F分布",
-   "对称性"
-  ],
-  "thinking": 5,
-  "difficulty": 6,
-  "calc": 4,
-  "source": "柳贯一题型专项 · 第246节 统计量分布概率",
-  "hints": [
-   "$\\frac{1}{X}\\sim F(3,3)$，且 $X>a\\Leftrightarrow\\frac1X<\\frac1a$。"
-  ],
-  "answer": "0.05",
-  "solution": "$\\frac1X\\sim F(3,3)$，故 $P\\left(X<\\frac1a\\right)=P\\left(\\frac1X>a\\right)=P(X>a)=0.05$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "$t^2$ 化为 $F(1,12)$ 的尾部概率",
-  "statement": "设 $T\\sim t(12)$，若 $P(|T|>a)=0.05$，求 $P(T^{2}>a^{2})$。",
-  "tags": [
-   "概率统计",
-   "t分布",
-   "F分布"
-  ],
-  "thinking": 4,
-  "difficulty": 5,
-  "calc": 3,
-  "source": "柳贯一题型专项 · 第246节 统计量分布概率",
-  "hints": [
-   "$|T|>a$ 与 $T^{2}>a^{2}$ 是同一个事件。"
-  ],
-  "answer": "0.05",
-  "solution": "$\\{T^{2}>a^{2}\\}=\\{|T|>a\\}$，故概率仍为 $0.05$；又 $T^{2}\\sim F(1,12)$，可验证 $a^{2}=F_{0.05}(1,12)$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "用 $\\chi^2_{0.95}$ 求左侧概率",
-  "statement": "设总体 $X\\sim N(\\mu,\\sigma^{2})$，$X_{1},X_{2},\\ldots,X_{15}$ 为来自该总体的简单随机样本，样本方差为 $S^{2}$。已知 $\\chi^{2}_{0.95}(14)=a$，求 $P\\left(\\frac{14S^{2}}{\\sigma^{2}}\\le a\\right)$。",
-  "tags": [
-   "概率统计",
-   "卡方分布",
-   "分位点"
-  ],
-  "thinking": 5,
-  "difficulty": 5,
-  "calc": 4,
-  "source": "柳贯一题型专项 · 第246节 统计量分布概率",
-  "hints": [
-   "$\\frac{14S^{2}}{\\sigma^{2}}\\sim\\chi^{2}(14)$，而 $\\chi^{2}_{0.95}(14)$ 是使左侧概率为 0.05 的点。"
-  ],
-  "answer": "0.05",
-  "solution": "$\\frac{(15-1)S^{2}}{\\sigma^{2}}\\sim\\chi^{2}(14)$，故 $P\\left(\\frac{14S^{2}}{\\sigma^{2}}\\le\\chi^{2}_{0.95}(14)\\right)=0.05$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "双侧分位点夹住的 $F$ 概率",
-  "statement": "设 $X\\sim F(5,5)$，已知 $F_{0.05}(5,5)=a$，求 $P\\left(\\frac{1}{a}<X<a\\right)$。",
-  "tags": [
-   "概率统计",
-   "F分布",
-   "对称性"
-  ],
-  "thinking": 5,
-  "difficulty": 6,
-  "calc": 4,
-  "source": "柳贯一题型专项 · 第246节 统计量分布概率",
-  "hints": [
-   "两侧各去掉 0.05，$\\frac1a=F_{0.95}(5,5)$。"
-  ],
-  "answer": "0.90",
-  "solution": "由于 $\\frac1a=F_{0.95}(5,5)$，$P\\left(\\frac1a<X<a\\right)=1-0.05-0.05=0.90$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "$t$ 分布左尾：利用对称性换侧",
-  "statement": "设 $T\\sim t(25)$，已知 $t_{0.05}(25)=a$，求 $P(T<-a)$。",
-  "tags": [
-   "概率统计",
-   "t分布",
-   "对称性"
-  ],
-  "thinking": 4,
-  "difficulty": 4,
-  "calc": 3,
-  "source": "柳贯一题型专项 · 第246节 统计量分布概率",
-  "hints": [
-   "$t$ 分布关于 0 对称，左尾与右尾等概率。"
-  ],
-  "answer": "0.05",
-  "solution": "$P(T<-a)=P(T>a)=0.05$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "指数分布矩估计：一阶矩反解",
-  "statement": "设总体 $X$ 服从指数分布，其概率密度为 $f(x;\\lambda)=\\lambda e^{-\\lambda x}$（$x>0$），$\\lambda>0$ 未知。$X_{1},X_{2},\\ldots,X_{n}$ 是来自总体 $X$ 的简单随机样本，求 $\\lambda$ 的矩估计量。",
-  "tags": [
-   "概率统计",
-   "矩估计",
-   "参数估计"
-  ],
-  "thinking": 7,
+  "thinking": 6,
   "difficulty": 8,
   "calc": 6,
-  "source": "柳贯一题型专项 · 第247节 矩估计",
+  "source": "柳贯一题型专项·数二 · 第51节 区间再现定积分",
   "hints": [
-   "写出 $E(X)$ 关于 $\\lambda$ 的表达式，令其等于 $\\bar X$ 后反解。"
+   "令 $u=1-x$，得 $\\int_{0}^{1}(1-u)u^{3/2}\\mathrm{d}u$，再逐项积分。"
   ],
-  "answer": "$\\hat\\lambda=\\frac{1}{\\bar X}$",
-  "solution": "$E(X)=\\frac{1}{\\lambda}$，令 $\\frac{1}{\\lambda}=\\bar X$，解得 $\\hat\\lambda=\\frac{1}{\\bar X}$。",
+  "answer": "$\\frac{9}{40}$",
+  "solution": "$=\\frac{2}{5}-\\frac{4}{7}\\cdot\\frac{1}{2}$ 型的幂函数积分，按 $B(2,\\frac{5}{2})$ 直接套公式计算。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "泊松分布矩估计：均值即参数",
-  "statement": "设总体 $X$ 服从参数为 $\\lambda$ 的泊松分布，$\\lambda>0$ 未知，$X_{1},X_{2},\\ldots,X_{n}$ 是来自总体 $X$ 的简单随机样本，求 $\\lambda$ 的矩估计量。",
+  "title": "华理士公式：sin⁵x cos³x",
+  "statement": "$\\int_{0}^{\\frac{\\pi}{2}}\\sin^{5}x\\cos^{3}x\\,\\mathrm{d}x=$",
   "tags": [
-   "概率统计",
-   "矩估计",
-   "参数估计"
+   "一元积分",
+   "华理士公式",
+   "递推"
+  ],
+  "thinking": 5,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项·数二 · 第52节 华理士定积分",
+  "hints": [
+   "$\\int_{0}^{\\pi/2}\\sin^{m}x\\cos^{n}x\\,\\mathrm{d}x=\\frac{(m-1)!!(n-1)!!}{(m+n)!!}$（至少一个为奇数）。"
+  ],
+  "answer": "$\\frac{1}{24}$",
+  "solution": "$=\\frac{4!!\\cdot2!!}{8!!}=\\frac{8\\cdot2}{384}=\\frac{1}{24}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "华理士公式：sin⁶x cos²x",
+  "statement": "$\\int_{0}^{\\frac{\\pi}{2}}\\sin^{6}x\\cos^{2}x\\,\\mathrm{d}x=$",
+  "tags": [
+   "一元积分",
+   "华理士公式",
+   "递推"
   ],
   "thinking": 6,
   "difficulty": 7,
   "calc": 5,
-  "source": "柳贯一题型专项 · 第247节 矩估计",
+  "source": "柳贯一题型专项·数二 · 第52节 华理士定积分",
   "hints": [
-   "$E(X)=\\lambda$，一阶矩方程直接给出答案。"
+   "两指数全偶，公式为 $\\frac{(m-1)!!(n-1)!!}{(m+n)!!}\\cdot\\frac{\\pi}{2}$。"
   ],
-  "answer": "$\\hat\\lambda=\\bar X$",
-  "solution": "$E(X)=\\lambda$，令 $\\lambda=\\bar X$，得 $\\hat\\lambda=\\bar X$。",
+  "answer": "$\\frac{5\\pi}{256}$",
+  "solution": "$=\\frac{5!!\\cdot1!!}{8!!}\\cdot\\frac{\\pi}{2}=\\frac{15}{384}\\cdot\\frac{\\pi}{2}=\\frac{5\\pi}{256}$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "二项分布：已知 $m$ 估 $p$",
-  "statement": "设总体 $X\\sim b(m,p)$，其中 $m$ 已知，$p$ 未知（$0<p<1$），$X_{1},X_{2},\\ldots,X_{n}$ 为来自总体 $X$ 的简单随机样本，求 $p$ 的矩估计量。",
+  "title": "华理士公式：sin⁴x cos⁵x",
+  "statement": "$\\int_{0}^{\\frac{\\pi}{2}}\\sin^{4}x\\cos^{5}x\\,\\mathrm{d}x=$",
   "tags": [
-   "概率统计",
-   "矩估计",
-   "二项分布"
-  ],
-  "thinking": 7,
-  "difficulty": 7,
-  "calc": 5,
-  "source": "柳贯一题型专项 · 第247节 矩估计",
-  "hints": [
-   "$E(X)=mp$，把 $m$ 当常数移到分母。"
-  ],
-  "answer": "$\\hat p=\\frac{\\bar X}{m}$",
-  "solution": "$E(X)=mp$，令 $mp=\\bar X$，得 $\\hat p=\\frac{\\bar X}{m}$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "几何分布：$E(X)=\\frac{1}{p}$ 反解",
-  "statement": "设总体 $X$ 服从几何分布 $P\\{X=k\\}=p(1-p)^{k-1}$，$k=1,2,\\ldots$，$0<p<1$ 未知。$X_{1},X_{2},\\ldots,X_{n}$ 是来自 $X$ 的简单随机样本，求 $p$ 的矩估计量。",
-  "tags": [
-   "概率统计",
-   "矩估计",
-   "几何分布"
-  ],
-  "thinking": 7,
-  "difficulty": 8,
-  "calc": 6,
-  "source": "柳贯一题型专项 · 第247节 矩估计",
-  "hints": [
-   "几何分布的期望是成功概率的倒数。"
-  ],
-  "answer": "$\\hat p=\\frac{1}{\\bar X}$",
-  "solution": "$E(X)=\\frac{1}{p}$，令 $\\frac{1}{p}=\\bar X$，得 $\\hat p=\\frac{1}{\\bar X}$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "均匀分布 $[0,\\theta]$：上限为两倍均值",
-  "statement": "设总体 $X$ 在区间 $[0,\\theta]$ 上服从均匀分布，$\\theta>0$ 未知，$X_{1},X_{2},\\ldots,X_{n}$ 是来自总体 $X$ 的简单随机样本，求 $\\theta$ 的矩估计量。",
-  "tags": [
-   "概率统计",
-   "矩估计",
-   "均匀分布"
+   "一元积分",
+   "华理士公式",
+   "递推"
   ],
   "thinking": 6,
   "difficulty": 7,
   "calc": 5,
-  "source": "柳贯一题型专项 · 第247节 矩估计",
+  "source": "柳贯一题型专项·数二 · 第52节 华理士定积分",
   "hints": [
-   "$E(X)=\\frac{\\theta}{2}$。"
+   "含奇次幂，结果为 $\\frac{3!!\\cdot4!!}{9!!}$。"
   ],
-  "answer": "$\\hat\\theta=2\\bar X$",
-  "solution": "$E(X)=\\frac{\\theta}{2}$，令 $\\frac{\\theta}{2}=\\bar X$，得 $\\hat\\theta=2\\bar X$。",
+  "answer": "$\\frac{8}{315}$",
+  "solution": "$=\\frac{3!!\\cdot4!!}{9!!}=\\frac{3\\cdot24}{945}=\\frac{8}{315}$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "均匀分布 $[\\theta,2\\theta]$：均值为 $\\frac{3\\theta}{2}$",
-  "statement": "设总体 $X$ 在区间 $[\\theta,2\\theta]$ 上服从均匀分布，$\\theta>0$ 未知，$X_{1},X_{2},\\ldots,X_{n}$ 是来自总体 $X$ 的简单随机样本，求 $\\theta$ 的矩估计量。",
+  "title": "华理士公式：sin⁷x cos²x",
+  "statement": "$\\int_{0}^{\\frac{\\pi}{2}}\\sin^{7}x\\cos^{2}x\\,\\mathrm{d}x=$",
   "tags": [
-   "概率统计",
-   "矩估计",
-   "均匀分布"
-  ],
-  "thinking": 7,
-  "difficulty": 7,
-  "calc": 5,
-  "source": "柳贯一题型专项 · 第247节 矩估计",
-  "hints": [
-   "区间端点为 $\\theta$ 与 $2\\theta$，均值是两端点平均。"
-  ],
-  "answer": "$\\hat\\theta=\\frac{2}{3}\\bar X$",
-  "solution": "$E(X)=\\frac{\\theta+2\\theta}{2}=\\frac{3\\theta}{2}$，令其等于 $\\bar X$，得 $\\hat\\theta=\\frac23\\bar X$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "幂型密度 $(\\theta+1)x^{\\theta}$：解出 $\\theta$",
-  "statement": "设总体 $X$ 的概率密度为 $f(x;\\theta)=(\\theta+1)x^{\\theta}$，$0<x<1$，其中 $\\theta>-1$ 未知，$X_{1},X_{2},\\ldots,X_{n}$ 为简单随机样本，求 $\\theta$ 的矩估计量。",
-  "tags": [
-   "概率统计",
-   "矩估计",
-   "参数估计"
-  ],
-  "thinking": 8,
-  "difficulty": 9,
-  "calc": 7,
-  "source": "柳贯一题型专项 · 第247节 矩估计",
-  "hints": [
-   "先算 $E(X)=\\int_0^1 x(\\theta+1)x^{\\theta}\\mathrm{d}x$，再反解 $\\theta$。"
-  ],
-  "answer": "$\\hat\\theta=\\frac{2\\bar X-1}{1-\\bar X}$",
-  "solution": "$E(X)=\\frac{\\theta+1}{\\theta+2}$，令 $\\frac{\\theta+1}{\\theta+2}=\\bar X$，解得 $\\theta=\\frac{2\\bar X-1}{1-\\bar X}$，故 $\\hat\\theta=\\frac{2\\bar X-1}{1-\\bar X}$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "正态分布两参数：一、二阶矩联立",
-  "statement": "设总体 $X\\sim N(\\mu,\\sigma^{2})$，$\\mu$ 与 $\\sigma^{2}$ 均未知，$X_{1},X_{2},\\ldots,X_{n}$ 是来自总体 $X$ 的简单随机样本，求 $\\mu$ 和 $\\sigma^{2}$ 的矩估计量。",
-  "tags": [
-   "概率统计",
-   "矩估计",
-   "正态分布"
-  ],
-  "thinking": 7,
-  "difficulty": 8,
-  "calc": 6,
-  "source": "柳贯一题型专项 · 第247节 矩估计",
-  "hints": [
-   "两个参数用两个方程：$E(X)=\\mu$，$E(X^{2})=\\mu^{2}+\\sigma^{2}$。"
-  ],
-  "answer": "$\\hat\\mu=\\bar X$，$\\hat\\sigma^{2}=\\frac{1}{n}\\sum_{i=1}^{n}(X_{i}-\\bar X)^{2}$",
-  "solution": "$E(X)=\\mu\\Rightarrow\\hat\\mu=\\bar X$；$E(X^{2})=\\mu^{2}+\\sigma^{2}\\Rightarrow\\hat\\sigma^{2}=\\frac1n\\sum X_i^{2}-\\bar X^{2}=\\frac1n\\sum(X_i-\\bar X)^{2}$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "指数分布 $\\frac1\\theta e^{-x/\\theta}$：$\\hat\\theta=\\bar X$",
-  "statement": "设总体 $X$ 的概率密度为 $f(x;\\theta)=\\frac{1}{\\theta}e^{-x/\\theta}$（$x>0$），$\\theta>0$ 未知，$X_{1},X_{2},\\ldots,X_{n}$ 为简单随机样本，求 $\\theta$ 的矩估计量。",
-  "tags": [
-   "概率统计",
-   "矩估计",
-   "指数分布"
+   "一元积分",
+   "华理士公式",
+   "递推"
   ],
   "thinking": 6,
   "difficulty": 7,
   "calc": 5,
-  "source": "柳贯一题型专项 · 第247节 矩估计",
+  "source": "柳贯一题型专项·数二 · 第52节 华理士定积分",
   "hints": [
-   "$E(X)=\\theta$，一阶矩方程即为答案。"
+   "$=\\frac{6!!\\cdot1!!}{9!!}$。"
   ],
-  "answer": "$\\hat\\theta=\\bar X$",
-  "solution": "$E(X)=\\theta$，令 $\\theta=\\bar X$，得 $\\hat\\theta=\\bar X$。",
+  "answer": "$\\frac{16}{315}$",
+  "solution": "$=\\frac{48}{945}=\\frac{16}{315}$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "一般区间 $[a,b]$：用二阶中心矩反解端点",
-  "statement": "设总体 $X$ 在区间 $[a,b]$ 上服从均匀分布，$a<b$ 且均未知，$X_{1},X_{2},\\ldots,X_{n}$ 是来自总体 $X$ 的简单随机样本，求 $a$ 和 $b$ 的矩估计量。",
+  "title": "华理士公式：[0,π] 上 sin⁴cos²",
+  "statement": "$\\int_{0}^{\\pi}\\sin^{4}x\\cos^{2}x\\,\\mathrm{d}x=$",
   "tags": [
-   "概率统计",
-   "矩估计",
-   "均匀分布"
+   "一元积分",
+   "华理士公式",
+   "周期对称"
   ],
-  "thinking": 8,
-  "difficulty": 10,
-  "calc": 8,
-  "source": "柳贯一题型专项 · 第247节 矩估计",
-  "hints": [
-   "$E(X)=\\frac{a+b}{2}$，$D(X)=\\frac{(b-a)^{2}}{12}$，两式联立解 $a$、$b$。"
-  ],
-  "answer": "$\\hat a=\\bar X-\\sqrt{3B_{2}}$，$\\hat b=\\bar X+\\sqrt{3B_{2}}$，其中 $B_{2}=\\frac{1}{n}\\sum_{i=1}^{n}(X_{i}-\\bar X)^{2}$",
-  "solution": "令 $\\frac{a+b}{2}=\\bar X$，$\\frac{(b-a)^{2}}{12}=B_{2}$，则 $b-a=2\\sqrt{3B_2}$，解得 $\\hat a=\\bar X-\\sqrt{3B_2}$，$\\hat b=\\bar X+\\sqrt{3B_2}$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "两点分布 MLE：对数似然求导",
-  "statement": "设总体 $X\\sim b(1,p)$，$X_{1},\\ldots,X_{n}$ 为样本，求 $p$ 的最大似然估计量。",
-  "tags": [
-   "概率统计",
-   "最大似然估计",
-   "对数似然"
-  ],
-  "thinking": 7,
-  "difficulty": 8,
-  "calc": 6,
-  "source": "柳贯一题型专项 · 第248节 最大似然估计",
-  "hints": [
-   "写出 $L(p)=p^{\\sum x_i}(1-p)^{n-\\sum x_i}$，取对数后对 $p$ 求导置零。"
-  ],
-  "answer": "$\\hat p=\\frac{1}{n}\\sum_{i=1}^{n}X_{i}$",
-  "solution": "$\\ln L=\\sum x_i\\ln p+(n-\\sum x_i)\\ln(1-p)$，令导数为零得 $\\frac{\\sum x_i}{p}=\\frac{n-\\sum x_i}{1-p}$，解出 $\\hat p=\\bar X$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "泊松分布 MLE：$\\hat\\lambda=\\bar X$",
-  "statement": "设总体 $X\\sim P(\\lambda)$，$X_{1},\\ldots,X_{n}$ 为样本，求 $\\lambda$ 的最大似然估计量。",
-  "tags": [
-   "概率统计",
-   "最大似然估计",
-   "对数似然"
-  ],
-  "thinking": 7,
+  "thinking": 6,
   "difficulty": 7,
-  "calc": 6,
-  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "calc": 5,
+  "source": "柳贯一题型专项·数二 · 第52节 华理士定积分",
   "hints": [
-   "$\\ln L=\\sum x_i\\ln\\lambda-n\\lambda-\\sum\\ln x_i!$，求导最简单。"
+   "周期为 $\\pi$，化成 $2\\int_{0}^{\\pi/2}$。"
   ],
-  "answer": "$\\hat\\lambda=\\frac{1}{n}\\sum_{i=1}^{n}X_{i}$",
-  "solution": "$\\ln L=\\sum x_i\\ln\\lambda-n\\lambda-\\sum\\ln(x_i!)$，$\\frac{\\mathrm{d}\\ln L}{\\mathrm{d}\\lambda}=\\frac{\\sum x_i}{\\lambda}-n=0$，得 $\\hat\\lambda=\\bar X$。",
+  "answer": "$\\frac{\\pi}{16}$",
+  "solution": "$2\\cdot\\frac{3!!\\cdot1!!}{6!!}\\cdot\\frac{\\pi}{2}=2\\cdot\\frac{3}{48}\\cdot\\frac{\\pi}{2}=\\frac{\\pi}{16}$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "几何分布 MLE：$\\hat\\theta=\\frac{1}{\\bar X}$",
-  "statement": "设总体 $X$ 的分布律为 $P\\{X=k\\}=\\theta(1-\\theta)^{k-1}$，$k=1,2,\\ldots$，$0<\\theta<1$，求 $\\theta$ 的最大似然估计量。",
+  "title": "华理士公式：[0,π] 上 sin⁵cos²",
+  "statement": "$\\int_{0}^{\\pi}\\sin^{5}x\\cos^{2}x\\,\\mathrm{d}x=$",
   "tags": [
-   "概率统计",
-   "最大似然估计",
-   "几何分布"
+   "一元积分",
+   "华理士公式",
+   "周期对称"
   ],
-  "thinking": 8,
-  "difficulty": 9,
-  "calc": 7,
-  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项·数二 · 第52节 华理士定积分",
   "hints": [
-   "$\\ln L=n\\ln\\theta+(\\sum x_i-n)\\ln(1-\\theta)$。"
+   "$\\int_{0}^{\\pi}=2\\int_{0}^{\\pi/2}$，再套公式。"
   ],
-  "answer": "$\\hat\\theta=\\frac{1}{\\bar X}$",
-  "solution": "$\\ln L=n\\ln\\theta+(\\sum x_i-n)\\ln(1-\\theta)$，令 $\\frac{n}{\\theta}-\\frac{\\sum x_i-n}{1-\\theta}=0$，得 $\\hat\\theta=\\frac{1}{\\bar X}$。",
+  "answer": "$\\frac{16}{105}$",
+  "solution": "$2\\cdot\\frac{4!!\\cdot1!!}{7!!}=2\\cdot\\frac{8}{105}=\\frac{16}{105}$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "二项分布 MLE：已知 $m$ 估 $p$",
-  "statement": "设总体 $X\\sim b(m,p)$，$m$ 已知，$X_{1},\\ldots,X_{n}$ 为样本，求 $p$ 的最大似然估计量。",
+  "title": "华理士公式：[0,π] 上 sin⁶cos⁴",
+  "statement": "$\\int_{0}^{\\pi}\\sin^{6}x\\cos^{4}x\\,\\mathrm{d}x=$",
   "tags": [
-   "概率统计",
-   "最大似然估计",
-   "二项分布"
+   "一元积分",
+   "华理士公式",
+   "周期对称"
   ],
-  "thinking": 8,
-  "difficulty": 8,
-  "calc": 7,
-  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项·数二 · 第52节 华理士定积分",
   "hints": [
-   "$\\ln L$ 中 $p$ 的幂次是 $\\sum x_i$，$(1-p)$ 的幂次是 $nm-\\sum x_i$。"
+   "化为 $2\\int_{0}^{\\pi/2}$，两指数都偶要带 $\\frac{\\pi}{2}$。"
   ],
-  "answer": "$\\hat p=\\frac{\\sum_{i=1}^{n}X_{i}}{nm}$",
-  "solution": "$\\ln L=\\sum x_i\\ln p+(nm-\\sum x_i)\\ln(1-p)+C$，令导数为零得 $\\frac{\\sum x_i}{p}=\\frac{nm-\\sum x_i}{1-p}$，即 $\\hat p=\\frac{\\bar X}{m}$。",
+  "answer": "$\\frac{3\\pi}{256}$",
+  "solution": "$2\\cdot\\frac{5!!\\cdot3!!}{10!!}\\cdot\\frac{\\pi}{2}=2\\cdot\\frac{45}{3840}\\cdot\\frac{\\pi}{2}=\\frac{3\\pi}{256}$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "三段分布律：用频数写似然",
-  "statement": "总体 $X$ 的分布律：$P\\{X=1\\}=\\theta$，$P\\{X=2\\}=\\theta$，$P\\{X=3\\}=1-2\\theta$，$0<\\theta<\\frac{1}{2}$，$n_{1},n_{2},n_{3}$ 为各取值频数，求 $\\theta$ 的最大似然估计量。",
+  "title": "华理士公式：[0,2π] 上 sin⁶cos²",
+  "statement": "$\\int_{0}^{2\\pi}\\sin^{6}x\\cos^{2}x\\,\\mathrm{d}x=$",
   "tags": [
-   "概率统计",
-   "最大似然估计",
-   "离散分布"
+   "一元积分",
+   "华理士公式",
+   "周期对称"
   ],
-  "thinking": 8,
-  "difficulty": 9,
-  "calc": 7,
-  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项·数二 · 第52节 华理士定积分",
   "hints": [
-   "$L=\\theta^{n_1}\\cdot\\theta^{n_2}\\cdot(1-2\\theta)^{n_3}=\\theta^{n_1+n_2}(1-2\\theta)^{n_3}$。"
+   "$[0,2\\pi]$ 是四个四分之一周期，系数取 4。"
   ],
-  "answer": "$\\hat\\theta=\\frac{n_{1}+n_{2}}{2n}$",
-  "solution": "$\\ln L=(n_1+n_2)\\ln\\theta+n_3\\ln(1-2\\theta)$，求导得 $\\frac{n_1+n_2}{\\theta}=\\frac{2n_3}{1-2\\theta}$，解得 $\\hat\\theta=\\frac{n_1+n_2}{2n}$。",
+  "answer": "$\\frac{5\\pi}{64}$",
+  "solution": "$4\\cdot\\frac{5!!\\cdot1!!}{8!!}\\cdot\\frac{\\pi}{2}=4\\cdot\\frac{15}{384}\\cdot\\frac{\\pi}{2}=\\frac{5\\pi}{64}$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "离散均匀分布：MLE 取最大次序统计量",
-  "statement": "设总体 $X\\sim U\\{1,N\\}$，即 $P\\{X=k\\}=\\frac{1}{N}$，$k=1,\\ldots,N$，求 $N$ 的最大似然估计量。",
+  "title": "华理士公式：[0,2π] 上 sin⁸cos²",
+  "statement": "$\\int_{0}^{2\\pi}\\sin^{8}x\\cos^{2}x\\,\\mathrm{d}x=$",
   "tags": [
-   "概率统计",
-   "最大似然估计",
-   "次序统计量"
+   "一元积分",
+   "华理士公式",
+   "周期对称"
   ],
-  "thinking": 8,
-  "difficulty": 9,
-  "calc": 6,
-  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项·数二 · 第52节 华理士定积分",
   "hints": [
-   "似然是 $N^{-n}$，在满足 $N\\ge\\max x_i$ 的约束下关于 $N$ 递减，故取最小可行值。"
+   "$4\\int_{0}^{\\pi/2}\\sin^{8}x\\cos^{2}x\\,\\mathrm{d}x$。"
   ],
-  "answer": "$\\hat N=\\max\\limits_{1\\le i\\le n}X_{i}$",
-  "solution": "$L=N^{-n}$（当 $N\\ge\\max x_i$），$L$ 关于 $N$ 单调递减，故在 $N=\\max x_i$ 处取最大，即 $\\hat N=\\max\\limits_{1\\le i\\le n}X_i$。",
+  "answer": "$\\frac{7\\pi}{128}$",
+  "solution": "$4\\cdot\\frac{7!!\\cdot1!!}{10!!}\\cdot\\frac{\\pi}{2}=4\\cdot\\frac{105}{3840}\\cdot\\frac{\\pi}{2}=\\frac{7\\pi}{128}$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "从 0 起的几何型分布：$\\hat p=\\frac{1}{1+\\bar X}$",
-  "statement": "设总体 $X$ 的分布律为 $P\\{X=k\\}=p(1-p)^{k}$，$k=0,1,2,\\ldots$，求 $p$ 的最大似然估计量。",
+  "title": "华理士公式：[0,2π] 上 sin²cos⁴",
+  "statement": "$\\int_{0}^{2\\pi}\\sin^{2}x\\cos^{4}x\\,\\mathrm{d}x=$",
   "tags": [
-   "概率统计",
-   "最大似然估计",
-   "对数似然"
+   "一元积分",
+   "华理士公式",
+   "周期对称"
   ],
-  "thinking": 8,
-  "difficulty": 9,
-  "calc": 7,
-  "source": "柳贯一题型专项 · 第248节 最大似然估计",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项·数二 · 第52节 华理士定积分",
   "hints": [
-   "$\\ln L=n\\ln p+\\sum x_i\\ln(1-p)$，解出 $p$ 后取倒数形式。"
+   "$4\\int_{0}^{\\pi/2}\\sin^{2}x\\cos^{4}x\\,\\mathrm{d}x$。"
   ],
-  "answer": "$\\hat p=\\frac{1}{1+\\bar X}$",
-  "solution": "$\\ln L=n\\ln p+(\\sum x_i)\\ln(1-p)$，令 $\\frac{n}{p}=\\frac{\\sum x_i}{1-p}$，得 $\\hat p=\\frac{n}{n+\\sum x_i}=\\frac{1}{1+\\bar X}$。",
+  "answer": "$\\frac{\\pi}{8}$",
+  "solution": "$4\\cdot\\frac{1!!\\cdot3!!}{6!!}\\cdot\\frac{\\pi}{2}=4\\cdot\\frac{3}{48}\\cdot\\frac{\\pi}{2}=\\frac{\\pi}{8}$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "负二项分布：$\\hat p=\\frac{r}{\\bar X}$",
-  "statement": "设总体 $X$ 服从负二项分布，$r$ 已知，$P\\{X=k\\}=\\binom{k-1}{r-1}p^{r}(1-p)^{k-r}$，$k=r,r+1,\\ldots$，求 $p$ 的最大似然估计量。",
+  "title": "积化和差：cos2x cos3x",
+  "statement": "计算定积分 $\\int_{0}^{\\frac{\\pi}{2}}\\cos2x\\cos3x\\,\\mathrm{d}x$。",
   "tags": [
-   "概率统计",
-   "最大似然估计",
-   "负二项分布"
-  ],
-  "thinking": 8,
-  "difficulty": 10,
-  "calc": 8,
-  "source": "柳贯一题型专项 · 第248节 最大似然估计",
-  "hints": [
-   "$\\ln L=nr\\ln p+(\\sum x_i-nr)\\ln(1-p)+C$。"
-  ],
-  "answer": "$\\hat p=\\frac{r}{\\bar X}$",
-  "solution": "$\\ln L=nr\\ln p+(\\sum x_i-nr)\\ln(1-p)+C$，令 $\\frac{nr}{p}=\\frac{\\sum x_i-nr}{1-p}$，得 $\\hat p=\\frac{nr}{\\sum x_i}=\\frac{r}{\\bar X}$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "三项分布律：二次型的似然最大化",
-  "statement": "总体分布律：$P\\{X=1\\}=\\theta^{2}$，$P\\{X=2\\}=2\\theta(1-\\theta)$，$P\\{X=3\\}=(1-\\theta)^{2}$，$n_{1},n_{2}$ 为取 1，2 的频数，求 $\\theta$ 的最大似然估计量。",
-  "tags": [
-   "概率统计",
-   "最大似然估计",
-   "离散分布"
-  ],
-  "thinking": 8,
-  "difficulty": 10,
-  "calc": 8,
-  "source": "柳贯一题型专项 · 第248节 最大似然估计",
-  "hints": [
-   "$\\ln L=(2n_1+n_2)\\ln\\theta+(n_2+2n_3)\\ln(1-\\theta)+C$。"
-  ],
-  "answer": "$\\hat\\theta=\\frac{2n_{1}+n_{2}}{2n}$",
-  "solution": "$\\ln L=(2n_1+n_2)\\ln\\theta+(n_2+2n_3)\\ln(1-\\theta)+C$，令导数为零得 $\\frac{2n_1+n_2}{\\theta}=\\frac{n_2+2n_3}{1-\\theta}$，解得 $\\hat\\theta=\\frac{2n_1+n_2}{2n}$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "参数 $\\theta>1$ 的几何型：$\\hat\\theta=\\bar X$",
-  "statement": "设总体 $X$ 分布律为 $P\\{X=k\\}=\\frac{1}{\\theta}\\left(1-\\frac{1}{\\theta}\\right)^{k-1}$，$k=1,2,\\ldots$，$\\theta>1$，求 $\\theta$ 的最大似然估计量。",
-  "tags": [
-   "概率统计",
-   "最大似然估计",
-   "几何分布"
-  ],
-  "thinking": 8,
-  "difficulty": 9,
-  "calc": 7,
-  "source": "柳贯一题型专项 · 第248节 最大似然估计",
-  "hints": [
-   "令 $q=1-\\frac{1}{\\theta}$，先估 $q$ 再回代。"
-  ],
-  "answer": "$\\hat\\theta=\\bar X$",
-  "solution": "$\\ln L=-n\\ln\\theta+(\\sum x_i-n)\\ln\\left(1-\\frac1\\theta\\right)$，求导置零得 $\\theta=\\bar X$，即 $\\hat\\theta=\\bar X$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "正态分布两参数的 MLE",
-  "statement": "设总体 $X\\sim N(\\mu,\\sigma^{2})$，$\\mu,\\sigma^{2}$ 未知，$X_{1},\\ldots,X_{n}$ 为样本，求 $\\mu,\\sigma^{2}$ 的最大似然估计量。",
-  "tags": [
-   "概率统计",
-   "最大似然估计",
-   "正态分布"
-  ],
-  "thinking": 8,
-  "difficulty": 9,
-  "calc": 7,
-  "source": "柳贯一题型专项 · 第248节 最大似然估计",
-  "hints": [
-   "分别对 $\\mu$ 与 $\\sigma^{2}$ 求偏导置零；注意方差估计分母是 $n$ 而不是 $n-1$。"
-  ],
-  "answer": "$\\hat\\mu=\\frac{1}{n}\\sum_{i=1}^{n}X_{i}$，$\\hat\\sigma^{2}=\\frac{1}{n}\\sum_{i=1}^{n}(X_{i}-\\bar X)^{2}$",
-  "solution": "$\\ln L=-\\frac{n}{2}\\ln(2\\pi)-\\frac{n}{2}\\ln\\sigma^{2}-\\frac{1}{2\\sigma^{2}}\\sum(x_i-\\mu)^{2}$，对 $\\mu$ 求偏导得 $\\hat\\mu=\\bar X$；回代后对 $\\sigma^{2}$ 求偏导得 $\\hat\\sigma^{2}=\\frac1n\\sum(x_i-\\bar x)^{2}$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "指数型密度 $\\theta e^{-\\theta x}$ 的 MLE",
-  "statement": "设总体 $X$ 的概率密度为 $f(x;\\theta)=\\theta e^{-\\theta x}$（$x>0$，$\\theta>0$），$X_{1},\\ldots,X_{n}$ 为样本，求 $\\theta$ 的最大似然估计量。",
-  "tags": [
-   "概率统计",
-   "最大似然估计",
-   "指数分布"
-  ],
-  "thinking": 7,
-  "difficulty": 8,
-  "calc": 6,
-  "source": "柳贯一题型专项 · 第248节 最大似然估计",
-  "hints": [
-   "$\\ln L=n\\ln\\theta-\\theta\\sum x_i$，求导置零一步到位。"
-  ],
-  "answer": "$\\hat\\theta=\\frac{1}{\\bar X}$",
-  "solution": "$\\ln L=n\\ln\\theta-\\theta\\sum x_i$，$\\frac{\\mathrm{d}\\ln L}{\\mathrm{d}\\theta}=\\frac{n}{\\theta}-\\sum x_i=0$，得 $\\hat\\theta=\\frac{1}{\\bar X}$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "均匀分布 $U(0,\\theta)$：似然单调取端点",
-  "statement": "设总体 $X\\sim U(0,\\theta)$，$\\theta>0$，$X_{1},\\ldots,X_{n}$ 为样本，求 $\\theta$ 的最大似然估计量。",
-  "tags": [
-   "概率统计",
-   "最大似然估计",
-   "次序统计量"
-  ],
-  "thinking": 8,
-  "difficulty": 9,
-  "calc": 6,
-  "source": "柳贯一题型专项 · 第248节 最大似然估计",
-  "hints": [
-   "密度在 $0<x<\\theta$ 时为 $\\frac1\\theta$，似然 $\\theta^{-n}$ 随 $\\theta$ 递减，受 $\\theta\\ge\\max x_i$ 约束。"
-  ],
-  "answer": "$\\hat\\theta=\\max\\limits_{1\\le i\\le n}X_{i}$",
-  "solution": "$L(\\theta)=\\theta^{-n}$（当 $\\theta\\ge\\max x_i$），关于 $\\theta$ 单调递减，故在 $\\theta=\\max x_i$ 处最大，$\\hat\\theta=\\max\\limits_{1\\le i\\le n}X_i$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "拉普拉斯型密度：$\\hat\\theta=\\frac1n\\sum|X_i|$",
-  "statement": "设总体 $X$ 的概率密度为 $f(x;\\theta)=\\frac{1}{2\\theta}e^{-\\frac{|x|}{\\theta}}$，$x\\in R$，$\\theta>0$，求 $\\theta$ 的最大似然估计量。",
-  "tags": [
-   "概率统计",
-   "最大似然估计",
-   "对数似然"
-  ],
-  "thinking": 8,
-  "difficulty": 9,
-  "calc": 7,
-  "source": "柳贯一题型专项 · 第248节 最大似然估计",
-  "hints": [
-   "$\\ln L=-n\\ln(2\\theta)-\\frac{1}{\\theta}\\sum|x_i|$，把 $\\sum|x_i|$ 看作整体。"
-  ],
-  "answer": "$\\hat\\theta=\\frac{1}{n}\\sum_{i=1}^{n}|X_{i}|$",
-  "solution": "$\\ln L=-n\\ln2-n\\ln\\theta-\\frac{1}{\\theta}\\sum|x_i|$，求导得 $-\\frac{n}{\\theta}+\\frac{\\sum|x_i|}{\\theta^{2}}=0$，故 $\\hat\\theta=\\frac1n\\sum|X_i|$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "均匀分布 $U(\\theta,2\\theta)$：取半倍最大次序统计量",
-  "statement": "设总体 $X\\sim U(\\theta,2\\theta)$，$\\theta>0$，$X_{1},\\ldots,X_{n}$ 为样本，求 $\\theta$ 的最大似然估计量。",
-  "tags": [
-   "概率统计",
-   "最大似然估计",
-   "次序统计量"
-  ],
-  "thinking": 8,
-  "difficulty": 10,
-  "calc": 7,
-  "source": "柳贯一题型专项 · 第248节 最大似然估计",
-  "hints": [
-   "样本必须落在 $[\\theta,2\\theta]$，即 $\\theta\\le\\min x_i$ 且 $\\theta\\ge\\frac{\\max x_i}{2}$，似然 $\\theta^{-n}$ 递减。"
-  ],
-  "answer": "$\\hat\\theta=\\frac{1}{2}\\max\\limits_{1\\le i\\le n}X_{i}$",
-  "solution": "$L=\\theta^{-n}$（当 $\\frac{\\max x_i}{2}\\le\\theta\\le\\min x_i$），单调递减，故取 $\\hat\\theta=\\frac{\\max x_i}{2}=\\frac12\\max\\limits_{1\\le i\\le n}X_i$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "线性型密度 $\\frac{2x}{\\theta^2}$：似然单调取端点",
-  "statement": "设总体 $X$ 的概率密度为 $f(x;\\theta)=\\frac{2x}{\\theta^{2}}$，$0<x<\\theta$，求 $\\theta$ 的最大似然估计量。",
-  "tags": [
-   "概率统计",
-   "最大似然估计",
-   "次序统计量"
-  ],
-  "thinking": 8,
-  "difficulty": 9,
-  "calc": 7,
-  "source": "柳贯一题型专项 · 第248节 最大似然估计",
-  "hints": [
-   "似然 $L=2^{n}\\prod x_i\\cdot\\theta^{-2n}$ 关于 $\\theta$ 递减，受 $\\theta\\ge\\max x_i$ 限制。"
-  ],
-  "answer": "$\\hat\\theta=\\max\\limits_{1\\le i\\le n}X_{i}$",
-  "solution": "$L(\\theta)=\\frac{2^{n}\\prod x_i}{\\theta^{2n}}$（$\\theta\\ge\\max x_i$），关于 $\\theta$ 单调递减，故在 $\\theta=\\max x_i$ 处取最大，即 $\\hat\\theta=\\max\\limits_{1\\le i\\le n}X_i$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "标准差 $\\sigma$ 的 MLE：对方差开方",
-  "statement": "设总体 $X\\sim N(\\mu,\\sigma^{2})$，求标准差 $\\sigma$ 的最大似然估计量。",
-  "tags": [
-   "概率统计",
-   "最大似然估计",
-   "正态分布"
-  ],
-  "thinking": 8,
-  "difficulty": 8,
-  "calc": 7,
-  "source": "柳贯一题型专项 · 第248节 最大似然估计",
-  "hints": [
-   "先求 $\\sigma^{2}$ 的 MLE，再由 MLE 的不变性取平方根。"
-  ],
-  "answer": "$\\hat\\sigma=\\sqrt{\\frac{1}{n}\\sum_{i=1}^{n}(X_{i}-\\bar X)^{2}}$",
-  "solution": "$\\hat\\sigma^{2}=\\frac1n\\sum(X_i-\\bar X)^{2}$，由最大似然估计的不变性（$g(\\theta)$ 的 MLE 为 $g(\\hat\\theta)$），得 $\\hat\\sigma=\\sqrt{\\frac1n\\sum(X_i-\\bar X)^{2}}$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "二维独立指数型：$\\hat\\theta=\\frac{\\bar X+\\bar Y}{2}$",
-  "statement": "二维总体 $(X,Y)$ 联合密度 $f(x,y;\\theta)=\\frac{1}{\\theta^{2}}e^{-\\frac{x+y}{\\theta}}$，$x,y>0$，$\\theta>0$，$(X_{1},Y_{1}),\\ldots,(X_{n},Y_{n})$ 为样本，求 $\\theta$ 的最大似然估计量。",
-  "tags": [
-   "概率统计",
-   "最大似然估计",
-   "二维总体"
-  ],
-  "thinking": 8,
-  "difficulty": 9,
-  "calc": 8,
-  "source": "柳贯一题型专项 · 第248节 最大似然估计",
-  "hints": [
-   "$\\ln L=-2n\\ln\\theta-\\frac{1}{\\theta}\\sum(x_i+y_i)$，把 $\\sum(x_i+y_i)$ 看成整体。"
-  ],
-  "answer": "$\\hat\\theta=\\frac{\\bar X+\\bar Y}{2}$",
-  "solution": "$\\ln L=-2n\\ln\\theta-\\frac{1}{\\theta}\\sum(x_i+y_i)$，令导数为零得 $\\theta=\\frac{\\sum(x_i+y_i)}{2n}=\\frac{\\bar X+\\bar Y}{2}$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "二维均匀：取两方向最大值的较大者",
-  "statement": "二维总体 $(X,Y)$ 在 $0<x<\\theta$，$0<y<\\theta$ 上服从均匀分布，$\\theta>0$ 未知，求 $\\theta$ 的最大似然估计量。",
-  "tags": [
-   "概率统计",
-   "最大似然估计",
-   "次序统计量"
-  ],
-  "thinking": 8,
-  "difficulty": 9,
-  "calc": 6,
-  "source": "柳贯一题型专项 · 第248节 最大似然估计",
-  "hints": [
-   "似然为 $\\theta^{-2n}$，要求 $\\theta$ 同时不小于所有 $x_i$ 与 $y_i$。"
-  ],
-  "answer": "$\\hat\\theta=\\max\\left\\{\\max\\limits_{1\\le i\\le n}X_{i},\\max\\limits_{1\\le i\\le n}Y_{i}\\right\\}$",
-  "solution": "$L=\\theta^{-2n}$（$\\theta\\ge\\max\\{x_i,y_i\\}$）单调递减，故 $\\hat\\theta=\\max\\left\\{\\max_i X_i,\\max_i Y_i\\right\\}$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "带 $x$ 因子的指数型：$\\hat\\theta=\\frac{\\bar X}{2}$",
-  "statement": "设总体 $X$ 的概率密度为 $f(x;\\theta)=\\frac{1}{\\theta^{2}}xe^{-x/\\theta}$，$x>0$，$\\theta>0$，求 $\\theta$ 的最大似然估计量。",
-  "tags": [
-   "概率统计",
-   "最大似然估计",
-   "对数似然"
-  ],
-  "thinking": 8,
-  "difficulty": 9,
-  "calc": 8,
-  "source": "柳贯一题型专项 · 第248节 最大似然估计",
-  "hints": [
-   "$\\ln L=-2n\\ln\\theta+\\sum\\ln x_i-\\frac{1}{\\theta}\\sum x_i$。"
-  ],
-  "answer": "$\\hat\\theta=\\frac{\\bar X}{2}$",
-  "solution": "$\\ln L=-2n\\ln\\theta-\\frac{1}{\\theta}\\sum x_i+\\sum\\ln x_i$，令导数为零得 $\\frac{2n}{\\theta}=\\frac{\\sum x_i}{\\theta^{2}}$，故 $\\hat\\theta=\\frac{\\bar X}{2}$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "正态均值平方和：定无偏常数 $c=\\frac1n$",
-  "statement": "设总体 $X\\sim N(\\mu,\\sigma^{2})$，$X_{1},X_{2},\\ldots,X_{n}$ 为简单随机样本，$\\bar X$ 为样本均值。统计量 $T=c\\sum_{i=1}^{n}(X_{i}-\\mu)^{2}$，若 $T$ 是 $\\sigma^{2}$ 的无偏估计，求常数 $c$。",
-  "tags": [
-   "概率统计",
-   "无偏估计",
-   "数字特征"
+   "一元积分",
+   "积化和差",
+   "三角积分"
   ],
   "thinking": 4,
-  "difficulty": 5,
-  "calc": 4,
-  "source": "柳贯一题型专项 · 第249节 【数一】无偏估计量",
+  "difficulty": 4,
+  "calc": 5,
+  "source": "柳贯一题型专项·数二 · 第53节 积化和差定积分",
   "hints": [
-   "每项 $E(X_i-\\mu)^{2}=\\sigma^{2}$，共 $n$ 项。"
+   "$\\cos2x\\cos3x=\\frac{1}{2}(\\cos5x+\\cos x)$。"
   ],
-  "answer": "$\\frac{1}{n}$",
-  "solution": "$E(T)=c\\sum E(X_i-\\mu)^{2}=cn\\sigma^{2}$，令 $cn\\sigma^{2}=\\sigma^{2}$，得 $c=\\frac1n$。",
+  "answer": "$\\frac{3}{5}$",
+  "solution": "$=\\frac{1}{2}\\left[\\frac{\\sin5x}{5}+\\sin x\\right]_{0}^{\\pi/2}=\\frac{1}{2}\\left(\\frac{1}{5}+1\\right)=\\frac{3}{5}$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "均匀总体 $[0,\\theta]$：三个样本定系数",
-  "statement": "设总体 $X\\sim U(0,\\theta)$（$\\theta>0$），$X_{1},X_{2},X_{3}$ 为样本。令 $\\hat\\theta=k(X_{1}+X_{2}+X_{3})$，若 $\\hat\\theta$ 是 $\\theta$ 的无偏估计，求常数 $k$。",
+  "title": "积化和差：sin5x cos3x",
+  "statement": "计算定积分 $\\int_{0}^{\\frac{\\pi}{2}}\\sin5x\\cos3x\\,\\mathrm{d}x$。",
   "tags": [
-   "概率统计",
-   "无偏估计",
-   "均匀分布"
+   "一元积分",
+   "积化和差",
+   "三角积分"
   ],
   "thinking": 4,
-  "difficulty": 5,
-  "calc": 4,
-  "source": "柳贯一题型专项 · 第249节 【数一】无偏估计量",
+  "difficulty": 4,
+  "calc": 5,
+  "source": "柳贯一题型专项·数二 · 第53节 积化和差定积分",
   "hints": [
-   "$E(X)=\\frac{\\theta}{2}$，三个样本和为 $\\frac{3\\theta}{2}$。"
-  ],
-  "answer": "$\\frac{2}{3}$",
-  "solution": "$E(\\hat\\theta)=k\\cdot3\\cdot\\frac{\\theta}{2}=\\frac{3k\\theta}{2}$，令其等于 $\\theta$，得 $k=\\frac23$。",
-  "authorName": "柳贯一题型专项"
- },
- {
-  "title": "组合估计量：用均值为 1 定 $k$",
-  "statement": "设总体 $X$ 的均值 $\\mu$ 未知，$X_{1},X_{2},X_{3}$ 为样本。设 $\\hat\\mu=\\frac{X_{1}+X_{2}}{4}+kX_{3}$，若 $\\hat\\mu$ 是 $\\mu$ 的无偏估计，求 $k$。",
-  "tags": [
-   "概率统计",
-   "无偏估计",
-   "线性估计"
-  ],
-  "thinking": 4,
-  "difficulty": 5,
-  "calc": 4,
-  "source": "柳贯一题型专项 · 第249节 【数一】无偏估计量",
-  "hints": [
-   "无偏即系数之和等于 1。"
+   "$\\sin5x\\cos3x=\\frac{1}{2}(\\sin8x+\\sin2x)$。"
   ],
   "answer": "$\\frac{1}{2}$",
-  "solution": "$E(\\hat\\mu)=\\frac{1}{4}\\mu\\times2+k\\mu=\\left(\\frac12+k\\right)\\mu$，令系数为 1，得 $k=\\frac12$。",
+  "solution": "$=\\frac{1}{2}\\left[-\\frac{\\cos8x}{8}-\\frac{\\cos2x}{2}\\right]_{0}^{\\pi/2}=\\frac{1}{2}$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "指数分布：两样本之和的系数",
-  "statement": "设总体 $X\\sim \\mathrm{Exp}(\\theta)$，密度 $f(x;\\theta)=\\frac{1}{\\theta}e^{-x/\\theta}$（$x>0$，$\\theta>0$），$E(X)=\\theta$。$X_{1},X_{2}$ 为样本。令 $\\hat\\theta=c(X_{1}+X_{2})$，若 $\\hat\\theta$ 是 $\\theta$ 的无偏估计，求 $c$。",
+  "title": "积化和差：sin3x cos x",
+  "statement": "计算定积分 $\\int_{0}^{\\frac{\\pi}{2}}\\sin3x\\cos x\\,\\mathrm{d}x$。",
   "tags": [
-   "概率统计",
-   "无偏估计",
-   "指数分布"
+   "一元积分",
+   "积化和差",
+   "三角积分"
   ],
   "thinking": 4,
   "difficulty": 4,
-  "calc": 3,
-  "source": "柳贯一题型专项 · 第249节 【数一】无偏估计量",
+  "calc": 5,
+  "source": "柳贯一题型专项·数二 · 第53节 积化和差定积分",
   "hints": [
-   "$E(X_1+X_2)=2\\theta$。"
+   "$\\sin3x\\cos x=\\frac{1}{2}(\\sin4x+\\sin2x)$。"
   ],
   "answer": "$\\frac{1}{2}$",
-  "solution": "$E(\\hat\\theta)=2c\\theta$，令 $2c\\theta=\\theta$，得 $c=\\frac12$。",
+  "solution": "$=\\frac{1}{2}\\left[-\\frac{\\cos4x}{4}-\\frac{\\cos2x}{2}\\right]_{0}^{\\pi/2}=\\frac{1}{2}$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "两点分布：凑系数使期望为 $p$",
-  "statement": "设总体 $X\\sim B(1,p)$（$0<p<1$），$X_{1},X_{2}$ 为样本。统计量 $\\hat p=0.4X_{1}+kX_{2}$，若 $\\hat p$ 是 $p$ 的无偏估计，求常数 $k$。",
+  "title": "链式求导：正弦与平方差型",
+  "statement": "设 $z=f(y\\sin x,\\ x^{2}-y^{2})$，$f_1'(0,0)=2$，$f_2'(0,0)=-1$，求 $z_{xy}''(0,0)$。",
   "tags": [
-   "概率统计",
-   "无偏估计",
-   "两点分布"
+   "多元微分",
+   "链式法则",
+   "高阶偏导"
   ],
-  "thinking": 4,
-  "difficulty": 4,
-  "calc": 3,
-  "source": "柳贯一题型专项 · 第249节 【数一】无偏估计量",
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项·数二 · 第87节 多元链式求导",
   "hints": [
-   "系数相加等于 1。"
+   "先对 $x$ 求偏导得 $f_1'u_x+f_2'v_x$，再对 $y$ 求一次，代点时含 $x$ 的因子会使二阶项消失。"
   ],
-  "answer": "0.6",
-  "solution": "$E(\\hat p)=(0.4+k)p$，令 $0.4+k=1$，得 $k=0.6$。",
+  "answer": "2",
+  "solution": "$z_x=f_1'\\,y\\cos x+f_2'\\,2x$。再对 $y$ 求偏导，代 $(0,0)$ 后二阶偏导项因 $x=y=0$ 全为零，只剩 $f_1'\\cos x=2$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "均匀 $[\\theta,2\\theta]$：均值为 $\\frac{3\\theta}{2}$",
-  "statement": "设总体 $X\\sim U(\\theta,2\\theta)$（$\\theta>0$），$X_{1},X_{2},X_{3}$ 为样本。令 $\\hat\\theta=c(X_{1}+X_{2}+X_{3})$，若 $\\hat\\theta$ 是 $\\theta$ 的无偏估计，求常数 $c$。",
+  "title": "链式求导：余弦与指数型",
+  "statement": "设 $z=f(x\\cos y,\\ e^{xy}-1)$，$f_1'(0,0)=3$，$f_2'(0,0)=4$，求 $z_{xy}''(0,0)$。",
   "tags": [
-   "概率统计",
-   "无偏估计",
-   "均匀分布"
+   "多元微分",
+   "链式法则",
+   "高阶偏导"
   ],
-  "thinking": 5,
-  "difficulty": 6,
-  "calc": 4,
-  "source": "柳贯一题型专项 · 第249节 【数一】无偏估计量",
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项·数二 · 第87节 多元链式求导",
   "hints": [
-   "$E(X)=\\frac{3\\theta}{2}$，再乘 3 个样本。"
+   "$v_x=ye^{xy}$ 对 $y$ 求导在原点得 $1$，这一项会保留下来。"
   ],
-  "answer": "$\\frac{2}{9}$",
-  "solution": "$E(\\hat\\theta)=c\\cdot3\\cdot\\frac{3\\theta}{2}=\\frac{9c\\theta}{2}=\\theta$，得 $c=\\frac29$。",
+  "answer": "4",
+  "solution": "$z_x=f_1'\\cos y+f_2'\\,ye^{xy}$。对 $y$ 求偏导后令 $x=y=0$：第一项为 $-f_1'\\sin0=0$，第二项得 $f_2'(e^{xy}+xye^{xy})=f_2'=4$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "差值平方和：$a=2b$ 与无偏性联立",
-  "statement": "设总体 $X$ 的方差 $\\sigma^{2}$ 存在，$X_{1},X_{2},X_{3},X_{4}$ 为样本。统计量 $T=a(X_{1}-X_{2})^{2}+b(X_{3}-X_{4})^{2}$，若 $T$ 是 $\\sigma^{2}$ 的无偏估计，且 $a=2b$，求常数 $a,b$。",
+  "title": "链式求导：对数与双正弦型",
+  "statement": "设 $z=f(y\\ln(1+x),\\ \\sin x\\sin y)$，$f_1'(0,0)=-2$，$f_2'(0,0)=5$，求 $z_{xy}''(0,0)$。",
   "tags": [
-   "概率统计",
-   "无偏估计",
-   "方差"
+   "多元微分",
+   "链式法则",
+   "高阶偏导"
   ],
-  "thinking": 5,
-  "difficulty": 7,
-  "calc": 5,
-  "source": "柳贯一题型专项 · 第249节 【数一】无偏估计量",
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项·数二 · 第87节 多元链式求导",
   "hints": [
-   "$E(X_1-X_2)^{2}=2\\sigma^{2}$，两个差平方各贡献 $2\\sigma^{2}$。"
+   "两部分各自对 $y$ 求导后在原点分别给出 $f_1'$ 与 $f_2'$，注意符号。"
   ],
-  "answer": "$a=\\frac{1}{3}$，$b=\\frac{1}{6}$",
-  "solution": "$E(T)=(a+b)\\cdot2\\sigma^{2}=2(a+b)\\sigma^{2}=\\sigma^{2}$，即 $2a+2b=1$；又 $a=2b$，解得 $b=\\frac16$，$a=\\frac13$。",
+  "answer": "3",
+  "solution": "$z_x=f_1'\\frac{y}{1+x}+f_2'\\cos x\\sin y$。对 $y$ 求偏导并令 $(x,y)=(0,0)$：第一项给 $f_1'\\cdot1=-2$，第二项给 $f_2'\\cos0\\cos0=5$，合计 $3$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "零均值正态：平方和系数 $\\frac1n$",
-  "statement": "设总体 $X\\sim N(0,\\sigma^{2})$，$X_{1},X_{2},\\ldots,X_{n}$ 为样本。令 $\\hat\\sigma^{2}=c\\sum_{i=1}^{n}X_{i}^{2}$，若 $\\hat\\sigma^{2}$ 是 $\\sigma^{2}$ 的无偏估计，求常数 $c$。",
+  "title": "链式求导：反正切与正切型",
+  "statement": "设 $z=f(\\arctan(xy),\\ y\\tan x)$，$f_1'(0,0)=1$，$f_2'(0,0)=6$，求 $z_{xy}''(0,0)$。",
   "tags": [
-   "概率统计",
-   "无偏估计",
-   "正态分布"
+   "多元微分",
+   "链式法则",
+   "高阶偏导"
   ],
-  "thinking": 4,
-  "difficulty": 4,
-  "calc": 3,
-  "source": "柳贯一题型专项 · 第249节 【数一】无偏估计量",
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项·数二 · 第87节 多元链式求导",
   "hints": [
-   "$E(X_i^{2})=\\sigma^{2}$，共 $n$ 项。"
+   "$\\arctan(xy)$ 对 $x$ 求导得 $\\frac{y}{1+x^{2}y^{2}}$，它对 $y$ 求导在原点仍是 $1$。"
   ],
-  "answer": "$\\frac{1}{n}$",
-  "solution": "$E(\\hat\\sigma^{2})=c\\cdot n\\sigma^{2}=\\sigma^{2}$，得 $c=\\frac1n$。",
+  "answer": "7",
+  "solution": "$z_x=f_1'\\frac{y}{1+x^{2}y^{2}}+f_2'\\,y\\sec^{2}x$。对 $y$ 求偏导取 $(0,0)$：分别得 $f_1'\\cdot1=1$ 与 $f_2'\\cdot1=6$，共 $7$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "区间长度 2：减常数使估计无偏",
-  "statement": "设总体 $X\\sim U(\\theta,\\theta+2)$（$\\theta>0$），$X_{1},X_{2},\\ldots,X_{n}$ 为样本，$\\bar X$ 为样本均值。令 $\\hat\\theta=\\bar X-k$，若 $\\hat\\theta$ 是 $\\theta$ 的无偏估计，求常数 $k$。",
+  "title": "链式求导：对数乘积型",
+  "statement": "设 $z=f(\\ln(1+xy),\\ x\\sin y)$，$f_1'(0,0)=4$，$f_2'(0,0)=-3$，求 $z_{xy}''(0,0)$。",
   "tags": [
-   "概率统计",
-   "无偏估计",
-   "均匀分布"
+   "多元微分",
+   "链式法则",
+   "高阶偏导"
   ],
-  "thinking": 5,
-  "difficulty": 5,
-  "calc": 4,
-  "source": "柳贯一题型专项 · 第249节 【数一】无偏估计量",
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项·数二 · 第87节 多元链式求导",
   "hints": [
-   "$E(X)=\\theta+1$，与 $\\theta$ 差 1。"
+   "两个内层函数对 $x$ 求导后，再对 $y$ 求导时原点处的值都退化为系数 $1$。"
   ],
   "answer": "1",
-  "solution": "$E(\\bar X)=\\theta+1$，故 $E(\\hat\\theta)=\\theta+1-k=\\theta$，得 $k=1$。",
+  "solution": "$z_x=f_1'\\frac{y}{1+xy}+f_2'\\sin y$。对 $y$ 求偏导取 $(0,0)$：得 $f_1'\\cdot1+f_2'\\cdot\\cos0=4-3=1$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "泊松分布：$b=2a$ 联立定系数",
-  "statement": "设总体 $X\\sim P(\\lambda)$（$\\lambda>0$），$X_{1},X_{2},X_{3}$ 为样本。统计量 $\\hat\\lambda=a(X_{1}+X_{2})+bX_{3}$，若 $\\hat\\lambda$ 是 $\\lambda$ 的无偏估计，且 $b=2a$，求常数 $a,b$。",
+  "title": "链式求导：正切与立方和型",
+  "statement": "设 $z=f(y\\tan x,\\ x^{3}+y^{3})$，$f_1'(0,0)=2$，$f_2'(0,0)=7$，求 $z_{xy}''(0,0)$。",
   "tags": [
-   "概率统计",
-   "无偏估计",
-   "泊松分布"
+   "多元微分",
+   "链式法则",
+   "高阶偏导"
   ],
-  "thinking": 5,
-  "difficulty": 6,
-  "calc": 4,
-  "source": "柳贯一题型专项 · 第249节 【数一】无偏估计量",
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项·数二 · 第87节 多元链式求导",
   "hints": [
-   "$E(X)=\\lambda$，故系数和 $2a+b=1$。"
+   "$3x^{2}$ 在原点为零且对 $y$ 求导仍为零，只有第一部分的贡献。"
   ],
-  "answer": "$a=\\frac{1}{4}$，$b=\\frac{1}{2}$",
-  "solution": "$E(\\hat\\lambda)=(2a+b)\\lambda$，令 $2a+b=1$，与 $b=2a$ 联立得 $4a=1$，即 $a=\\frac14$，$b=\\frac12$。",
+  "answer": "2",
+  "solution": "$z_x=f_1'\\,y\\sec^{2}x+3x^{2}f_2'$。对 $y$ 求偏导取原点：只有 $f_1'\\sec^{2}0=f_1'=2$ 保留。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "比较 $\\hat\\mu_1$ 与加权组合的方差",
-  "statement": "设总体 $X\\sim N(\\mu,1)$，样本 $X_{1},X_{2},X_{3}$。比较无偏估计 $\\hat\\mu_{1}=\\frac{1}{3}\\sum X_{i}$ 与 $\\hat\\mu_{2}=\\frac{1}{2}X_{1}+\\frac{1}{4}X_{2}+\\frac{1}{4}X_{3}$ 的有效性。",
+  "title": "链式求导：倍角正弦型",
+  "statement": "设 $z=f(y\\sin 2x,\\ \\sin 3x\\sin y)$，$f_1'(0,0)=-1$，$f_2'(0,0)=2$，求 $z_{xy}''(0,0)$。",
   "tags": [
-   "概率统计",
-   "有效估计",
-   "方差比较"
+   "多元微分",
+   "链式法则",
+   "高阶偏导"
   ],
-  "thinking": 4,
-  "difficulty": 5,
-  "calc": 4,
-  "source": "柳贯一题型专项 · 第250节 有效估计量",
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 8,
+  "source": "柳贯一题型专项·数二 · 第87节 多元链式求导",
   "hints": [
-   "方差越小越有效，系数平方和越小方差越小。"
+   "注意系数 $2$ 与 $3$ 会乘上去：第一部分给 $2f_1'$，第二部分给 $3f_2'$。"
   ],
-  "answer": "$\\hat\\mu_{1}$ 更有效",
-  "solution": "$D(\\hat\\mu_1)=\\frac{1}{9}\\cdot3=\\frac13$，$D(\\hat\\mu_2)=\\frac14+\\frac1{16}+\\frac1{16}=\\frac38$，因 $\\frac13<\\frac38$，故 $\\hat\\mu_1$ 更有效。",
+  "answer": "4",
+  "solution": "$z_x=2f_1'y\\cos2x+3f_2'\\cos3x\\sin y$。对 $y$ 求偏导取原点：$2f_1'+3f_2'\\cos0=-2+6=4$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "四样本：$\\frac14\\sum X_i$ 优于不等权组合",
-  "statement": "设总体 $X\\sim N(\\mu,\\sigma^{2})$，样本 $X_{1},X_{2},X_{3},X_{4}$。比较 $\\mu$ 的无偏估计 $\\hat\\mu_{1}=\\frac{1}{4}\\sum X_{i}$ 与 $\\hat\\mu_{2}=\\frac{1}{2}X_{1}+\\frac{1}{6}(X_{2}+X_{3}+X_{4})$ 的有效性。",
+  "title": "链式求导：负积与双正弦型",
+  "statement": "设 $z=f(-xy,\\ \\sin x\\sin y)$，$f_1'(0,0)=3$，$f_2'(0,0)=-2$，求 $z_{xy}''(0,0)$。",
   "tags": [
-   "概率统计",
-   "有效估计",
-   "方差比较"
+   "多元微分",
+   "链式法则",
+   "高阶偏导"
   ],
-  "thinking": 4,
-  "difficulty": 5,
-  "calc": 4,
-  "source": "柳贯一题型专项 · 第250节 有效估计量",
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项·数二 · 第87节 多元链式求导",
   "hints": [
-   "等权平均的方差最小（Cauchy 不等式）。"
+   "第一部分对 $x$ 求导得 $-y$，再对 $y$ 求导给 $-1$。"
   ],
-  "answer": "$\\hat\\mu_{1}$ 更有效",
-  "solution": "$D(\\hat\\mu_1)=\\frac{\\sigma^{2}}{4}$，$D(\\hat\\mu_2)=\\sigma^{2}\\left(\\frac14+3\\cdot\\frac1{36}\\right)=\\frac{\\sigma^{2}}{3}$，故 $\\hat\\mu_1$ 更有效。",
+  "answer": "-5",
+  "solution": "$z_x=-f_1'y+f_2'\\cos x\\sin y$。对 $y$ 求偏导取原点：$-f_1'+f_2'\\cos0\\cos0=-3-2=-5$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "均匀总体：$2\\bar X$ 与 $\\frac32\\max$ 的方差",
-  "statement": "设总体 $X\\sim U[0,\\theta]$，样本 $X_{1},X_{2}$。比较无偏估计 $\\hat\\theta_{1}=2\\bar X$ 与 $\\hat\\theta_{2}=\\frac{3}{2}\\max(X_{1},X_{2})$ 的方差，并判断有效性。",
+  "title": "链式求导：乘积与对数型",
+  "statement": "设 $z=f(xy,\\ y\\ln(1+x))$，$f_1'(0,0)=5$，$f_2'(0,0)=-4$，求 $z_{xy}''(0,0)$。",
   "tags": [
-   "概率统计",
-   "有效估计",
-   "次序统计量"
+   "多元微分",
+   "链式法则",
+   "高阶偏导"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项·数二 · 第87节 多元链式求导",
+  "hints": [
+   "$xy$ 对 $x$ 求导得 $y$，再对 $y$ 求导给 $1$；$\\frac{y}{1+x}$ 同理。"
+  ],
+  "answer": "1",
+  "solution": "$z_x=f_1'y+f_2'\\frac{y}{1+x}$。对 $y$ 求偏导取原点得 $f_1'\\cdot1+f_2'\\cdot1=5-4=1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "链式求导：指数与余弦差型",
+  "statement": "设 $z=f(e^{xy}-1,\\ \\cos x-\\cos y)$，$f_1'(0,0)=6$，$f_2'(0,0)=2$，求 $z_{xy}''(0,0)$。",
+  "tags": [
+   "多元微分",
+   "链式法则",
+   "高阶偏导"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项·数二 · 第87节 多元链式求导",
+  "hints": [
+   "第二部分对 $x$ 求导得 $\\sin x$，它在原点为零，故其后再求导不贡献。"
+  ],
+  "answer": "6",
+  "solution": "$z_x=f_1'y e^{xy}+f_2'(-\\sin x)$。对 $y$ 求偏导取原点：$f_1'(e^{xy}+xye^{xy})=f_1'=6$，第二项含 $\\sin x$ 为 $0$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极值判定：极限为正则取极小",
+  "statement": "设 $\\lim\\limits_{(x,y)\\to(0,0)}\\frac{f(x,y)}{x^{2}+y^{2}}=1$，则（　）\n(A) $f(0,0)$ 是 $f(x,y)$ 的极小值\n(B) $f(0,0)$ 是 $f(x,y)$ 的极大值\n(C) 点 $(0,0)$ 是曲面 $z=f(x,y)$ 的鞍点\n(D) $f_x'(0,0)=1$",
+  "tags": [
+   "多元微分",
+   "极值",
+   "极限保号性"
   ],
   "thinking": 6,
-  "difficulty": 8,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项·数二 · 第88节 多元极限等式函数性状",
+  "hints": [
+   "极限为正说明在原点附近 $f$ 与 $x^{2}+y^{2}$ 同号，而 $x^{2}+y^{2}>0$。"
+  ],
+  "answer": "A",
+  "solution": "由极限为 $1$ 知 $f(x,y)=x^{2}+y^{2}+o(x^{2}+y^{2})$，在去心邻域内 $f>0=f(0,0)$，故为极小值。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极值判定：增量为正取极小",
+  "statement": "设 $\\lim\\limits_{(x,y)\\to(0,0)}\\frac{f(x,y)-f(0,0)}{x^{2}+2y^{2}}=1$，则（　）\n(A) $f(0,0)$ 是 $f(x,y)$ 的极大值\n(B) $f(0,0)$ 是 $f(x,y)$ 的极小值\n(C) 点 $(0,0)$ 不是 $f(x,y)$ 的极值点\n(D) $f_x'(0,0)=1$",
+  "tags": [
+   "多元微分",
+   "极值",
+   "极限保号性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项·数二 · 第88节 多元极限等式函数性状",
+  "hints": [
+   "增量 $f-f(0,0)$ 与正定二次型同阶且同号。"
+  ],
+  "answer": "B",
+  "solution": "$f(x,y)-f(0,0)=x^{2}+2y^{2}+o(x^{2}+2y^{2})>0$（充分接近原点时），故 $f(0,0)$ 为极小值。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极值判定：增量为负且含 $y$ 项",
+  "statement": "设 $\\lim\\limits_{(x,y)\\to(0,0)}\\frac{f(x,y)-f(0,0)}{2x^{2}+y^{2}}=-1$，$\\lim\\limits_{(x,y)\\to(0,0)}\\frac{f_y'(x,y)}{y}=-2$，则（　）\n(A) $f(0,0)$ 是 $f(x,y)$ 的极大值\n(B) $f(0,0)$ 是 $f(x,y)$ 的极小值\n(C) 点 $(0,0)$ 是曲面 $z=f(x,y)$ 的鞍点\n(D) $f_y'(0,0)=-2$",
+  "tags": [
+   "多元微分",
+   "极值",
+   "极限保号性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项·数二 · 第88节 多元极限等式函数性状",
+  "hints": [
+   "极限为负、分母恒正，所以增量恒负。"
+  ],
+  "answer": "A",
+  "solution": "$f-f(0,0)=-(2x^{2}+y^{2})+o(2x^{2}+y^{2})<0$，故 $f(0,0)$ 为极大值。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "极值判定：正定二次型取极小",
+  "statement": "设 $\\lim\\limits_{(x,y)\\to(0,0)}\\frac{f(x,y)-x^{2}-y^{2}}{x^{2}+y^{2}}=0$，$\\lim\\limits_{(x,y)\\to(0,0)}\\frac{f_y'(x,y)}{y}=2$，则（　）\n(A) $f(0,0)$ 是 $f(x,y)$ 的极大值\n(B) 点 $(0,0)$ 是曲面 $z=f(x,y)$ 的鞍点\n(C) $f(0,0)$ 是 $f(x,y)$ 的极小值\n(D) $f_y'(0,0)=2$",
+  "tags": [
+   "多元微分",
+   "极值",
+   "极限保号性"
+  ],
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "柳贯一题型专项·数二 · 第88节 多元极限等式函数性状",
+  "hints": [
+   "$f\\approx x^{2}+y^{2}$ 为正定，增量在去心邻域恒正。"
+  ],
+  "answer": "C",
+  "solution": "$f=x^{2}+y^{2}+o(x^{2}+y^{2})>0$（足够接近原点），故 $f(0,0)$ 为极小值。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数求偏导：指数与正弦型",
+  "statement": "设方程 $e^{xy}+\\sin(xz)=0$ 确定了隐函数 $z=z(x,y)$，求 $\\frac{\\partial z}{\\partial x}$。",
+  "tags": [
+   "多元微分",
+   "隐函数求导",
+   "链式法则"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项·数二 · 第89节 隐函数方程偏微分",
+  "hints": [
+   "设 $F=e^{xy}+\\sin(xz)$，用 $z_x=-\\frac{F_x}{F_z}$，注意 $\\sin(xz)$ 求导时 $z$ 也含 $x$。"
+  ],
+  "answer": "$-\\frac{ye^{xy}+z\\cos(xz)}{x\\cos(xz)}$",
+  "solution": "$F_x=ye^{xy}+z\\cos(xz)$，$F_z=x\\cos(xz)$，故 $z_x=-\\frac{ye^{xy}+z\\cos(xz)}{x\\cos(xz)}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数求偏导：球面的二阶混合偏导",
+  "statement": "设方程 $x^{2}+y^{2}+z^{2}=1$ 确定了隐函数 $z=z(x,y)$，求 $\\frac{\\partial^{2}z}{\\partial x\\partial y}$。",
+  "tags": [
+   "多元微分",
+   "隐函数求导",
+   "高阶偏导"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项·数二 · 第89节 隐函数方程偏微分",
+  "hints": [
+   "先得 $z_x=-\\frac{x}{z}$，再对 $y$ 求导时把 $z$ 当成 $z(x,y)$。"
+  ],
+  "answer": "$-\\frac{xy}{z^{3}}$",
+  "solution": "$z_x=-\\frac{x}{z}$，$z_{xy}=-x\\left(-\\frac{1}{z^{2}}\\right)z_y=\\frac{x}{z^{2}}\\left(-\\frac{y}{z}\\right)=-\\frac{xy}{z^{3}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数求偏导：三次曲面求二阶偏导",
+  "statement": "设方程 $z^{3}-3xyz=1$ 确定了隐函数 $z=z(x,y)$，求 $\\frac{\\partial^{2}z}{\\partial x^{2}}$。",
+  "tags": [
+   "多元微分",
+   "隐函数求导",
+   "高阶偏导"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项·数二 · 第89节 隐函数方程偏微分",
+  "hints": [
+   "令 $w=z^{2}-xy$，则 $z_x=\\frac{yz}{w}$，对 $x$ 再求导时 $w_x=2zz_x-y$。"
+  ],
+  "answer": "$-\\frac{2xy^{3}z}{(z^{2}-xy)^{3}}$",
+  "solution": "$F_x=-3yz,\\ F_z=3(z^{2}-xy)$，得 $z_x=\\frac{yz}{z^{2}-xy}$；再对 $x$ 求导，用 $w_x=2zz_x-y$ 化简得 $-\\frac{2xy^{3}z}{(z^{2}-xy)^{3}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数求偏导：对数方程求二阶偏导",
+  "statement": "设方程 $\\ln(xz)+yz=0$ 确定了隐函数 $z=z(x,y)$，求 $\\frac{\\partial^{2}z}{\\partial y^{2}}$。",
+  "tags": [
+   "多元微分",
+   "隐函数求导",
+   "高阶偏导"
+  ],
+  "thinking": 8,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项·数二 · 第89节 隐函数方程偏微分",
+  "hints": [
+   "先求 $z_y=-\\frac{z^{2}}{1+yz}$，再把它对 $y$ 求导，注意 $z$ 仍是 $y$ 的函数。"
+  ],
+  "answer": "$\\frac{z^{3}(3+2yz)}{(1+yz)^{3}}$",
+  "solution": "$z_y=-\\frac{z^{2}}{1+yz}$；由 $z_{yy}\\cdot\\frac{1+yz}{z}=2\\cdot\\frac{z^{2}}{1+yz}+\\frac{z^{2}}{(1+yz)^{2}}$ 化简易得 $\\frac{z^{3}(3+2yz)}{(1+yz)^{3}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数求偏导：正弦与余弦型",
+  "statement": "设方程 $\\sin(xy)+\\cos(yz)=1$ 确定了隐函数 $z=z(x,y)$，求 $\\frac{\\partial z}{\\partial y}$。",
+  "tags": [
+   "多元微分",
+   "隐函数求导",
+   "链式法则"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项·数二 · 第89节 隐函数方程偏微分",
+  "hints": [
+   "对方程两边关于 $y$ 求导，$\\cos(yz)$ 是复合函数，含 $(z+yz_y)$。"
+  ],
+  "answer": "$\\frac{x\\cos(xy)-z\\sin(yz)}{y\\sin(yz)}$",
+  "solution": "$F_y=x\\cos(xy)-z\\sin(yz)$，$F_z=-y\\sin(yz)$，故 $z_y=\\frac{x\\cos(xy)-z\\sin(yz)}{y\\sin(yz)}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象隐函数：和式与平方和型",
+  "statement": "设方程 $F(x+y+z,\\ x^{2}+y^{2}+z^{2})=0$ 确定了隐函数 $z=z(x,y)$，求 $\\frac{\\partial z}{\\partial x}$。",
+  "tags": [
+   "多元微分",
+   "隐函数求导",
+   "链式法则"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项·数二 · 第89节 隐函数方程偏微分",
+  "hints": [
+   "两边对 $x$ 求偏导，注意 $z$ 是 $x$ 的函数，两个中间变量都要用链式法则。"
+  ],
+  "answer": "$-\\frac{F_1'+2xF_2'}{F_1'+2zF_2'}$",
+  "solution": "$F_1'(1+z_x)+F_2'(2x+2zz_x)=0$，解得 $z_x=-\\frac{F_1'+2xF_2'}{F_1'+2zF_2'}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象隐函数：比值型与齐次性",
+  "statement": "设方程 $F\\left(\\frac{x}{z},\\ \\frac{y}{z}\\right)=0$ 确定了隐函数 $z=z(x,y)$，求 $x\\frac{\\partial z}{\\partial x}+y\\frac{\\partial z}{\\partial y}$。",
+  "tags": [
+   "多元微分",
+   "隐函数求导",
+   "齐次函数"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
   "calc": 6,
-  "source": "柳贯一题型专项 · 第250节 有效估计量",
+  "source": "柳贯一题型专项·数二 · 第89节 隐函数方程偏微分",
   "hints": [
-   "$D(X)=\\frac{\\theta^{2}}{12}$；对最大值要先求其分布（密度 $\\frac{2x}{\\theta^{2}}$）。"
+   "看出 $z$ 关于 $(x,y)$ 是一次齐次的，用欧拉定理或直接相加两个偏导方程。"
   ],
-  "answer": "$D(\\hat\\theta_{1})=\\frac{\\theta^{2}}{6}$，$D(\\hat\\theta_{2})=\\frac{\\theta^{2}}{8}$，$\\hat\\theta_{2}$ 更有效",
-  "solution": "$D(\\hat\\theta_1)=4\\cdot\\frac{\\theta^{2}/12}{2}=\\frac{\\theta^{2}}{6}$；$M=\\max$ 的密度为 $\\frac{2x}{\\theta^{2}}$，$E(M)=\\frac{2\\theta}{3}$，$D(M)=\\frac{\\theta^{2}}{18}$，故 $D(\\hat\\theta_2)=\\frac94\\cdot\\frac{\\theta^{2}}{18}=\\frac{\\theta^{2}}{8}$，更有效。",
+  "answer": "$z$",
+  "solution": "由 $F(x/z,y/z)=0$ 知 $z$ 是 $x,y$ 的一次齐次函数；由欧拉定理 $xz_x+yz_y=z$。（也可把两个偏导式相加验证。）",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "两点总体：等权与加权估计的方差",
-  "statement": "设总体 $X\\sim B(1,p)$，样本 $X_{1},X_{2},X_{3}$。比较无偏估计 $\\hat p_{1}=\\bar X$ 与 $\\hat p_{2}=\\frac{1}{2}X_{1}+\\frac{1}{4}X_{2}+\\frac{1}{4}X_{3}$ 的有效性。",
+  "title": "抽象隐函数：三乘积循环型",
+  "statement": "设方程 $F(xy,\\ yz,\\ zx)=0$ 确定了隐函数 $z=z(x,y)$，求 $\\frac{\\partial z}{\\partial x}$。",
   "tags": [
-   "概率统计",
-   "有效估计",
-   "方差比较"
+   "多元微分",
+   "隐函数求导",
+   "链式法则"
   ],
-  "thinking": 4,
-  "difficulty": 5,
-  "calc": 4,
-  "source": "柳贯一题型专项 · 第250节 有效估计量",
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项·数二 · 第89节 隐函数方程偏微分",
   "hints": [
-   "比较系数平方和：$\\frac13$ 与 $\\frac38$。"
+   "三个中间变量对 $x$ 求偏导依次是 $y,\\ yz_x,\\ z+xz_x$，代入解出 $z_x$。"
   ],
-  "answer": "$\\hat p_{1}$ 更有效",
-  "solution": "$D(\\hat p_1)=\\frac{p(1-p)}{3}$，$D(\\hat p_2)=p(1-p)\\left(\\frac14+\\frac1{16}+\\frac1{16}\\right)=\\frac{3}{8}p(1-p)$，故 $\\hat p_1$ 更有效。",
+  "answer": "$-\\frac{yF_1'+zF_3'}{yF_2'+xF_3'}$",
+  "solution": "$F_1'y+F_2'\\,yz_x+F_3'(z+xz_x)=0$，整理得 $z_x=-\\frac{yF_1'+zF_3'}{yF_2'+xF_3'}$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "三个无偏估计按方差排序",
-  "statement": "设总体 $X$ 有 $E(X)=\\mu$，$D(X)=\\sigma^{2}$，样本 $X_{1},X_{2},X_{3}$。将无偏估计 $\\hat\\mu_{1}=\\frac{1}{3}\\sum X_{i}$，$\\hat\\mu_{2}=\\frac{1}{2}X_{1}+\\frac{1}{3}X_{2}+\\frac{1}{6}X_{3}$，$\\hat\\mu_{3}=0.4X_{1}+0.3X_{2}+0.3X_{3}$ 按有效性从高到低排序。",
+  "title": "抽象隐函数：$G(x+z,y+z)$ 两偏导之和",
+  "statement": "设方程 $G(x+z,\\ y+z)=0$ 确定了隐函数 $z=z(x,y)$，求 $\\frac{\\partial z}{\\partial x}+\\frac{\\partial z}{\\partial y}$。",
   "tags": [
-   "概率统计",
-   "有效估计",
-   "方差比较"
+   "多元微分",
+   "隐函数求导",
+   "链式法则"
   ],
-  "thinking": 5,
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项·数二 · 第89节 隐函数方程偏微分",
+  "hints": [
+   "分别对 $x$、$y$ 求偏导得到两个式子，再相加消去公因子。"
+  ],
+  "answer": "$-1$",
+  "solution": "$G_1'(1+z_x)+G_2'z_x=0$，$G_1'z_y+G_2'(1+z_y)=0$；两式相加得 $(G_1'+G_2')(1+z_x+z_y)=0$，故和为 $-1$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象隐函数：平方和与线性组合",
+  "statement": "设方程 $\\Phi(x^{2}+y^{2},\\ z-xy)=0$ 确定了隐函数 $z=z(x,y)$，求 $\\frac{\\partial z}{\\partial x}$。",
+  "tags": [
+   "多元微分",
+   "隐函数求导",
+   "链式法则"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 7,
+  "source": "柳贯一题型专项·数二 · 第89节 隐函数方程偏微分",
+  "hints": [
+   "对 $x$ 求偏导：$2x\\Phi_1'+\\Phi_2'(z_x-y)=0$，直接解出。"
+  ],
+  "answer": "$y-\\frac{2x\\Phi_1'}{\\Phi_2'}$",
+  "solution": "$2x\\Phi_1'+\\Phi_2'(z_x-y)=0$，故 $z_x=y-\\frac{2x\\Phi_1'}{\\Phi_2'}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数组：圆与直线的方程组",
+  "statement": "设方程组 $\\begin{cases}u^{2}+v^{2}-x^{2}=0\\\\ u-v+y=0\\end{cases}$ 确定了隐函数 $u=u(x,y),\\ v=v(x,y)$，求 $\\frac{\\partial u}{\\partial x}$。",
+  "tags": [
+   "多元微分",
+   "隐函数组",
+   "链式法则"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项·数二 · 第89节 隐函数方程偏微分",
+  "hints": [
+   "两个方程分别对 $x$ 求偏导，得关于 $u_x,v_x$ 的线性方程组，且由第二个方程知 $u_x=v_x$。"
+  ],
+  "answer": "$\\frac{x}{u+v}$",
+  "solution": "$2uu_x+2vv_x-2x=0$，$u_x-v_x=0$，即 $u_x=v_x$；代入得 $2(u+v)u_x=2x$，$u_x=\\frac{x}{u+v}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数组：平面与球面的交线",
+  "statement": "设方程组 $\\begin{cases}x+y+z=0\\\\ x^{2}+y^{2}+z^{2}=1\\end{cases}$ 确定了隐函数 $y=y(x),\\ z=z(x)$，求 $\\frac{\\partial y}{\\partial x}$。",
+  "tags": [
+   "多元微分",
+   "隐函数组",
+   "克莱姆法则"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项·数二 · 第89节 隐函数方程偏微分",
+  "hints": [
+   "对 $x$ 求导得两个线性方程，用克莱姆法则解出 $y'$，分母是 $y-z$。"
+  ],
+  "answer": "$\\frac{z-x}{y-z}$",
+  "solution": "$1+y'+z'=0$，$x+yy'+zz'=0$。消去 $z'=-1-y'$ 得 $y'(y-z)=z-x$，故 $y'=\\frac{z-x}{y-z}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数组：极坐标型方程组",
+  "statement": "设方程组 $\\begin{cases}e^{u}\\cos v=x\\\\ e^{u}\\sin v=y\\end{cases}$ 确定了隐函数 $u=u(x,y),\\ v=v(x,y)$，求 $\\frac{\\partial u}{\\partial x}$。",
+  "tags": [
+   "多元微分",
+   "隐函数组",
+   "克莱姆法则"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项·数二 · 第89节 隐函数方程偏微分",
+  "hints": [
+   "这组方程实质是极坐标 $x=r\\cos v,\\ y=r\\sin v$，$e^{u}=r$；也可用克莱姆法则。"
+  ],
+  "answer": "$\\frac{x}{x^{2}+y^{2}}$",
+  "solution": "两式平方相加得 $e^{2u}=x^{2}+y^{2}$，即 $u=\\frac12\\ln(x^{2}+y^{2})$，故 $u_x=\\frac{x}{x^{2}+y^{2}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数组：线性型方程组",
+  "statement": "设方程组 $\\begin{cases}xu+yv=1\\\\ yu-xv=0\\end{cases}$ 确定了隐函数 $u=u(x,y),\\ v=v(x,y)$，求 $\\frac{\\partial u}{\\partial x}$。",
+  "tags": [
+   "多元微分",
+   "隐函数组",
+   "克莱姆法则"
+  ],
+  "thinking": 7,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项·数二 · 第89节 隐函数方程偏微分",
+  "hints": [
+   "先解出 $u,v$ 的显式：两式平方相加可消去交叉项。"
+  ],
+  "answer": "$\\frac{y^{2}-x^{2}}{(x^{2}+y^{2})^{2}}$",
+  "solution": "由第二式 $v=\\frac{yu}{x}$，代入第一式得 $u=\\frac{x}{x^{2}+y^{2}}$，于是 $u_x=\\frac{(x^{2}+y^{2})-2x^{2}}{(x^{2}+y^{2})^{2}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "隐函数组：指数乘积型",
+  "statement": "设方程组 $\\begin{cases}ue^{v}=x\\\\ ue^{-v}=y\\end{cases}$ 确定了隐函数 $u=u(x,y),\\ v=v(x,y)$，求 $\\frac{\\partial u}{\\partial x}$。",
+  "tags": [
+   "多元微分",
+   "隐函数组",
+   "链式法则"
+  ],
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 7,
+  "source": "柳贯一题型专项·数二 · 第89节 隐函数方程偏微分",
+  "hints": [
+   "两式相乘消去 $e^{v}$，直接得到 $u$ 与 $x,y$ 的关系。"
+  ],
+  "answer": "$\\frac12\\sqrt{\\frac{y}{x}}$",
+  "solution": "两式相乘：$u^{2}=xy$，即 $u=\\sqrt{xy}$，故 $u_x=\\frac{1}{2}\\sqrt{\\frac{y}{x}}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象隐函数组：$u,z$ 都是 $x$ 的函数",
+  "statement": "设方程组 $\\begin{cases}u=f(x,\\ln x,z)\\\\ g(e^{x},u,z)=0\\end{cases}$ 将 $u,z$ 视为 $x$ 的函数，求 $\\frac{\\partial u}{\\partial x}$。",
+  "tags": [
+   "多元微分",
+   "隐函数组",
+   "链式法则"
+  ],
+  "thinking": 9,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项·数二 · 第89节 隐函数方程偏微分",
+  "hints": [
+   "两式都对 $x$ 求导，从第二式解出 $z'$ 再代回第一式，整理出 $u'$。"
+  ],
+  "answer": "$\\frac{\\left(f_1'+\\frac{f_2'}{x}\\right)g_3'-f_3'g_1'e^{x}}{g_3'+f_3'g_2'}$",
+  "solution": "$u'=f_1'+\\frac{f_2'}{x}+f_3'z'$；$g_1'e^{x}+g_2'u'+g_3'z'=0$ 给 $z'=-\\frac{g_1'e^{x}+g_2'u'}{g_3'}$。代入并整理得 $u'=\\frac{(f_1'+f_2'/x)g_3'-f_3'g_1'e^{x}}{g_3'+f_3'g_2'}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象隐函数组：$u=f$ 与约束 $g=0$",
+  "statement": "设方程组 $\\begin{cases}u=f(x,y,z)\\\\ g(x,y,z)=0\\end{cases}$ 将 $z$ 视为 $x,y$ 的函数，求 $\\frac{\\partial u}{\\partial x}$。",
+  "tags": [
+   "多元微分",
+   "隐函数组",
+   "链式法则"
+  ],
+  "thinking": 8,
+  "difficulty": 9,
+  "calc": 8,
+  "source": "柳贯一题型专项·数二 · 第89节 隐函数方程偏微分",
+  "hints": [
+   "先由 $g=0$ 得 $z_x=-\\frac{g_1'}{g_3'}$，再代入 $u_x=f_1'+f_3'z_x$。"
+  ],
+  "answer": "$\\frac{f_1'g_3'-f_3'g_1'}{g_3'}$",
+  "solution": "$z_x=-\\frac{g_1'}{g_3'}$，$u_x=f_1'+f_3'z_x=f_1'-\\frac{f_3'g_1'}{g_3'}=\\frac{f_1'g_3'-f_3'g_1'}{g_3'}$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象隐函数组：两个方程定 $y,z$",
+  "statement": "设方程组 $\\begin{cases}F(x,y,z)=0\\\\ G(y,z,x^{2})=0\\end{cases}$ 确定了隐函数 $y=y(x),\\ z=z(x)$，求 $\\frac{\\partial y}{\\partial x}$。",
+  "tags": [
+   "多元微分",
+   "隐函数组",
+   "克莱姆法则"
+  ],
+  "thinking": 9,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项·数二 · 第89节 隐函数方程偏微分",
+  "hints": [
+   "两式对 $x$ 求导得二元线性方程组，系数行列式是 $F_2'G_2'-F_3'G_1'$。"
+  ],
+  "answer": "$\\frac{2xF_3'G_3'-F_1'G_2'}{F_2'G_2'-F_3'G_1'}$",
+  "solution": "$F_1'+F_2'y'+F_3'z'=0$，$G_1'y'+G_2'z'+2xG_3'=0$；用克莱姆法则解出 $y'$ 即得。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象隐函数组：$u,v$ 由两方程确定",
+  "statement": "设方程组 $\\begin{cases}F(u,v,x)=0\\\\ G(u,v,y)=0\\end{cases}$ 确定了隐函数 $u=u(x,y),\\ v=v(x,y)$，求 $\\frac{\\partial u}{\\partial x}$。",
+  "tags": [
+   "多元微分",
+   "隐函数组",
+   "克莱姆法则"
+  ],
+  "thinking": 9,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项·数二 · 第89节 隐函数方程偏微分",
+  "hints": [
+   "对 $x$ 求偏导时第二式的右端为 $0$，只出现 $F_3'$ 这一个自由项。"
+  ],
+  "answer": "$-\\frac{F_3'G_2'}{F_1'G_2'-F_2'G_1'}$",
+  "solution": "$F_1'u_x+F_2'v_x+F_3'=0$，$G_1'u_x+G_2'v_x=0$；消去 $v_x=-\\frac{G_1'u_x}{G_2'}$ 得 $u_x(F_1'G_2'-F_2'G_1')=-F_3'G_2'$。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "抽象隐函数组：字母顺序打乱的情形",
+  "statement": "设方程组 $\\begin{cases}F(y,x,z)=0\\\\ G(z,y,x)=0\\end{cases}$ 确定了隐函数 $y=y(x),\\ z=z(x)$，求 $\\frac{\\partial y}{\\partial x}$。",
+  "tags": [
+   "多元微分",
+   "隐函数组",
+   "克莱姆法则"
+  ],
+  "thinking": 9,
+  "difficulty": 10,
+  "calc": 9,
+  "source": "柳贯一题型专项·数二 · 第89节 隐函数方程偏微分",
+  "hints": [
+   "先按各函数中字母的实际位置写出偏导：$F$ 中第一个变量是 $y$、第三个是 $z$。"
+  ],
+  "answer": "$\\frac{F_3'G_3'-F_2'G_1'}{F_1'G_1'-F_3'G_2'}$",
+  "solution": "$F_1'y'+F_2'+F_3'z'=0$，$G_1'z'+G_2'y'+G_3'=0$；对 $y',z'$ 用克莱姆法则，行列式 $F_1'G_1'-F_3'G_2'$，得 $y'$ 如上。",
+  "authorName": "柳贯一题型专项"
+ },
+ {
+  "title": "全微分：线性项与指数交叉项",
+  "statement": "设方程 $xz+ze^{y}=2$，且 $z(1,0)=1$，求 $\\mathrm{d}z\\big|_{(1,0)}$。",
+  "tags": [
+   "多元微分",
+   "全微分",
+   "隐函数求导"
+  ],
+  "thinking": 7,
   "difficulty": 7,
-  "calc": 5,
-  "source": "柳贯一题型专项 · 第250节 有效估计量",
+  "calc": 7,
+  "source": "柳贯一题型专项·数二 · 第90节 隐函数方程全微分",
   "hints": [
-   "只比较系数平方和：$\\frac13$、$\\frac{14}{36}$、$0.34$。"
+   "把方程写成 $xz+ze^{y}-2=0$，注意对 $z$ 求偏导时两项都有贡献。"
   ],
-  "answer": "$\\hat\\mu_{1}>\\hat\\mu_{3}>\\hat\\mu_{2}$",
-  "solution": "$D_1=\\frac{\\sigma^{2}}{3}\\approx0.333\\sigma^{2}$，$D_2=\\sigma^{2}\\left(\\frac14+\\frac19+\\frac1{36}\\right)=\\frac{14}{36}\\sigma^{2}\\approx0.389\\sigma^{2}$，$D_3=0.34\\sigma^{2}$，方差小者更有效，故 $\\hat\\mu_1>\\hat\\mu_3>\\hat\\mu_2$。",
+  "answer": "$\\mathrm{d}z=-\\frac12\\mathrm{d}x-\\frac12\\mathrm{d}y$",
+  "solution": "$F_x=z=1,\\ F_y=ze^{y}=1,\\ F_z=x+e^{y}=2$，故 $\\mathrm{d}z=-\\frac12\\mathrm{d}x-\\frac12\\mathrm{d}y$。",
   "authorName": "柳贯一题型专项"
  },
  {
-  "title": "零均值正态：平方和型估计的方差比较",
-  "statement": "设总体 $X\\sim N(0,\\sigma^{2})$，样本 $X_{1},X_{2},X_{3},X_{4}$。比较 $\\sigma^{2}$ 的无偏估计 $\\hat\\sigma_{1}^{2}=\\frac{1}{4}\\sum_{i=1}^{4}X_{i}^{2}$ 与 $\\hat\\sigma_{2}^{2}=\\frac{1}{2}(X_{1}^{2}+X_{2}^{2})$ 的有效性。",
+  "title": "全微分：指数与正切型",
+  "statement": "设方程 $e^{x+y}+\\tan z=2$，且 $z(0,0)=\\frac{\\pi}{4}$，求 $\\mathrm{d}z\\big|_{(0,0)}$。",
   "tags": [
-   "概率统计",
-   "有效估计",
-   "无偏估计"
+   "多元微分",
+   "全微分",
+   "隐函数求导"
   ],
-  "thinking": 5,
+  "thinking": 7,
   "difficulty": 7,
-  "calc": 5,
-  "source": "柳贯一题型专项 · 第250节 有效估计量",
+  "calc": 7,
+  "source": "柳贯一题型专项·数二 · 第90节 隐函数方程全微分",
   "hints": [
-   "$D(X_i^{2})=2\\sigma^{4}$，算两个估计量的方差再比较大小。"
+   "$\\tan z$ 对 $z$ 的偏导是 $\\sec^{2}z$，在 $\\frac{\\pi}{4}$ 处等于 $2$。"
   ],
-  "answer": "",
-  "solution": "$D(\\hat\\sigma_1^{2})=\\frac{1}{16}\\cdot4\\cdot2\\sigma^{4}=\\frac{\\sigma^{4}}{2}$，$D(\\hat\\sigma_2^{2})=\\frac14\\cdot2\\cdot2\\sigma^{4}=\\sigma^{4}$，故 $\\hat\\sigma_1^{2}$ 更有效。",
+  "answer": "$\\mathrm{d}z=-\\frac12\\mathrm{d}x-\\frac12\\mathrm{d}y$",
+  "solution": "$F_x=F_y=e^{x+y}=1$，$F_z=\\sec^{2}z=2$，故 $\\mathrm{d}z=-\\frac12\\mathrm{d}x-\\frac12\\mathrm{d}y$。",
   "authorName": "柳贯一题型专项"
  }
 ]

@@ -83,7 +83,7 @@
           : '<div class="small muted">还没有人留下记录，你可以是第一个。</div>')
         + '</div>'
         + '<div class="card side-card"><h3>经验怎么算</h3><div class="xp-rule">'
-        + '独立做出：按三维评分给经验<br/>看过答案：<b>×0.6</b>　问过 AI：再 <b>×0.8</b><br/>同一题只计一次</div></div>'
+        + '独立做出：按三维评分给经验<br/>看过答案：<b>−40%</b>　问过 AI：再 <b>−20%</b><br/>同一题只计一次</div></div>'
         + '</aside>'
         + '</div>';
 

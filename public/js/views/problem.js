@@ -76,7 +76,7 @@
         + h.items.map(function (it) {
           return '<div class="hist-item"><div class="hist-top"><span>' + window.UI.fmtDate(it.at) + '</span>'
             + '<span class="tag">' + it.score + ' 分</span>'
-            + '<span class="small muted">' + (it.mode === 'answer' ? '只交答案' : '完整过程') + '</span></div>'
+            + '<span class="small muted">' + (it.mode === 'answer' ? '只交答案' : '思路+答案') + '</span></div>'
             + (it.comment ? '<div class="hist-comment md">' + window.Md.inlineTex(String(it.comment).slice(0, 120)) + '</div>' : '')
             + (it.process ? '<div class="hist-proc">' + window.Md.esc(String(it.process).slice(0, 140)) + '</div>' : '')
             + '</div>';
@@ -91,7 +91,7 @@
         const ta = el.querySelector('#ansProcess');
         ta.rows = mode === 'answer' ? 2 : 8;
         ta.placeholder = mode === 'answer'
-          ? '只写最终答案，比如 $x-\\ln(3e^{x}+1)+C$（最高 70 分）'
+          ? '只写最终答案，比如 $x-\\ln(3e^{x}+1)+C$（答对得 80 分）'
           : '写清每一步和依据：换元、分部积分、回代…';
         el.querySelector('#judgeBtn').textContent = mode === 'answer' ? '提交答案评分' : '提交批改';
       });
@@ -440,7 +440,7 @@
         + '  </div>'
         + '  <div class="card side-card"><h3>经验规则</h3>'
         + '    <div class="xp-rule">独立做出：<b>+' + data.xpRules.base + '</b> 经验<br/>'
-        + '      看过答案：经验 <b>×0.6</b><br/>'
+        + '      看过答案：经验 <b>−40%</b><br/>'
         + '      问过 AI：再 <b>×0.8</b><br/>'
         + '      <span class="muted">每题只计一次，自动化计算不重复给分。</span></div>'
         + '  </div>'
@@ -513,7 +513,7 @@
           box.className = 'answer-box';
           box.innerHTML =
             '<div class="answer-head"><b>参考答案与解析</b>'
-            + '<span class="small muted right">看答案后经验 ×0.6</span></div>'
+            + '<span class="small muted right">看答案后经验 −40%</span></div>'
             + '<div class="answer-body"><div class="md" id="ansBody"></div></div>';
           answerSlot.innerHTML = '';
           answerSlot.appendChild(box);

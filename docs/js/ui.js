@@ -356,7 +356,7 @@
       + '<div class="field"><label>API Key</label>'
       + '<input id="llmKey" type="password" value="' + ESC(cur.apiKey || '') + '" placeholder="sk-..." autocomplete="off" />'
       + '<div class="tip">只保存在这台设备的浏览器（localStorage），不写进站点数据库，别人看不到。换了设备要重新填。</div></div>'
-      + '<div class="small muted" style="margin:4px 0 14px;line-height:1.8">不填也能用：问答与判卷会走免费公共通道（Pollinations，同一网络 45 秒一次），再不行用内置讲解。<br/>'
+      + '<div class="small muted" style="margin:4px 0 14px;line-height:1.8">不填也能用：问答与判卷会走免费公共通道（Pollinations，有频率限制，同一网络大约每分钟一次），再不行用内置讲解。<br/>'
       + '判卷要读手写照片时，模型名需要支持图片，例如 <code>gpt-4o</code>、<code>qwen-vl-max</code>、<code>glm-4v</code>、<code>claude-3-5-sonnet</code>、<code>gemini-1.5-pro</code>。</div>'
       + '<div style="display:flex;gap:9px;justify-content:flex-end">'
       + '<button class="btn" id="clearLlm">清除</button>'
