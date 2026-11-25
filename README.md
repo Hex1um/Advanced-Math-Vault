@@ -159,7 +159,6 @@ tools/verify_limits.py    极限题数值验证（mpmath 50 位精度）
 tools/verify_batch5.py    第五批答案的符号校验
 tools/check-katex.mjs     用仓库自带 KaTeX 校验题库公式
 tools/cdp-eval.mjs        用 Edge 无头 + CDP 跑页面 JS / 截图（调试用）
-.github/workflows/smoke.yml  push 时自动跑冒烟、积分校验与公式检查
 ```
 
 ## 测试
@@ -172,6 +171,8 @@ python tools/verify_batch5.py        # 第五批答案校验
 node tools/check-katex.mjs           # 题库公式可渲染性检查（没有 db.json 时自动读 batch 题库）
 node tools/migrate-tags.mjs          # 只报告标签迁移结果；加 --write 才写盘
 ```
+
+> CI：`.github/workflows/smoke.yml` 已准备好，但当前 GitHub OAuth 只有 `repo` scope，推送工作流需要额外的 `workflow` scope；授权后再提交该文件即可。
 
 > 录题纪律：每道积分的答案都先用 sympy 求导验证再入库，`verify_integrals.py` 里保留了对应用例，新增题目时追加即可。
 

@@ -16,7 +16,7 @@
 - `tools/sync-live.mjs` 修正密码同步字段（`passHash` + `salt`），避免部署后用户密码被旧值顶回。
 - `tools/deploy.mjs` 发布必须显式加 `--publish`（或 `USER_ASKED_TO_PUBLISH=1`），不再默认授权。
 - `tools/check-katex.mjs` 在没有 `data/db.json` 时自动回退到 batch 题库，新克隆可直接跑。
-- 新增 MIT `LICENSE` 与 GitHub Actions `smoke` 工作流（冒烟 + 积分校验 + KaTeX 检查 + 标签迁移幂等检查）。
+- 新增 MIT `LICENSE`；GitHub Actions `smoke` 工作流已生成，但推送需要 OAuth 的 `workflow` scope，当前凭据只有 `repo`，先保留为本地待提交文件。
 - 更新 README：题库规模、标签体系、部署命令与 sharecode 定位。
 
 ### 测试
