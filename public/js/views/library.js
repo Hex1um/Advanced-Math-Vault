@@ -5,7 +5,7 @@
   const Views = window.Views = window.Views || {};
   const St = window.API.State;
 
-  let filters = { q: '', mainTag: '', tags: [], level: '', status: 'all', sort: 'code', page: 1, tagsExpanded: false };
+  let filters = { q: '', mainTag: '', examTag: '', tags: [], level: '', status: 'all', sort: 'code', page: 1, tagsExpanded: false };
   let cache = null;
 
   function titleHTML(t) {
@@ -17,6 +17,7 @@
     const p = new URLSearchParams();
     if (filters.q) p.set('q', filters.q);
     if (filters.mainTag) p.set('main', filters.mainTag);
+    if (filters.examTag) p.set('exam', filters.examTag);
     if (filters.tags.length) p.set('tags', filters.tags.join(','));
     if (filters.level) p.set('level', filters.level);
     if (filters.status !== 'all') p.set('status', filters.status);
@@ -42,6 +43,7 @@
     if (!window.UI.requireLogin(null, '登录后才能刷题（要记录进度）')) return;
     const q = new URLSearchParams({ mode: mode });
     if (filters.mainTag) q.set('main', filters.mainTag);
+    if (filters.examTag) q.set('exam', filters.examTag);
     if (filters.tags.length) q.set('tags', filters.tags.join(','));
     if (filters.level) {
       const map = { easy: [1, 3], medium: [4, 6], hard: [7, 10], expert: [11, 15] };
@@ -89,9 +91,20 @@
         : [])
       .join('');
 
+    const examTags = St.examTags || [];
+    const examChips = examTags.length
+      ? '<div class="filter-row"><span class="filter-label">来源</span><div class="chip-scroll">'
+        + '<button class="chip' + (!filters.examTag ? ' active' : '') + '" data-exam="">全部来源</button>'
+        + examTags.map(function (x) {
+          return '<button class="chip' + (filters.examTag === x.name ? ' active' : '') + '" data-exam="' + window.Md.esc(x.name) + '">'
+            + window.Md.esc(x.name) + '<span class="n">' + x.count + '</span></button>';
+        }).join('') + '</div></div>'
+      : '';
+
     d.innerHTML =
       '<div class="filter-row"><span class="filter-label">主标签</span><div class="chip-scroll">' + mainChips + '</div></div>'
       + '<div class="filter-row"><span class="filter-label">子标签</span><div class="chip-scroll">' + tagChips + '</div></div>'
+      + examChips
       + '<div class="filter-row"><span class="filter-label">难度</span><div class="chip-scroll">' + levelChips + '</div></div>'
       + '<div class="filter-row" style="gap:10px">'
       + '<div class="search-box">' + window.UI.icon('search')
@@ -124,6 +137,13 @@
         filters.mainTag = b.dataset.main;
         filters.tags = [];
         filters.tagsExpanded = false;
+        filters.page = 1;
+        load();
+      });
+    });
+    d.querySelectorAll('[data-exam]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        filters.examTag = b.dataset.exam;
         filters.page = 1;
         load();
       });
@@ -242,6 +262,7 @@
     try {
       const data = await window.API.get('/api/problems?' + buildQuery());
       St.tagTree = data.tagTree || St.tagTree || [];
+      St.examTags = data.examTags || St.examTags || [];
       St.tags = data.tags || [];
       renderFilters();
       renderList(data);
@@ -254,6 +275,7 @@
 
   Views.library = function (el, params) {
     if (params && params.main) { filters.mainTag = params.main; }
+    if (params && params.exam) { filters.examTag = params.exam; }
     if (params && params.tag) { filters.tags = [params.tag]; }
     if (params && params.q) { filters.q = params.q; }
 

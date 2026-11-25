@@ -66,6 +66,7 @@
       St.me = meta.me;
       St.stats = meta.stats;
       St.tagTree = meta.tagTree || [];
+      St.examTags = meta.examTags || [];
       St.tags = (meta.tagTree || []).reduce(function (arr, m) {
         return arr.concat(m.children || []);
       }, []).sort(function (a, b) { return b.count - a.count; });

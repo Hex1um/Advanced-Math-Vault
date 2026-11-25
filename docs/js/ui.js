@@ -489,6 +489,7 @@
     const o = opts || {};
     const parts = [];
     if (p && p.mainTag && !o.hideMain) parts.push('<span class="tag tag-main">' + ESC(p.mainTag) + '</span>');
+    for (const t of (p && p.examTags) || []) parts.push('<span class="tag gold">' + ESC(t) + '</span>');
     if (p && p.kind && o.showKind) parts.push('<span class="tag gray">' + ESC(p.kind) + '</span>');
     for (const t of (p && p.tags) || []) parts.push('<span class="tag">' + ESC(t) + '</span>');
     return parts.join('');

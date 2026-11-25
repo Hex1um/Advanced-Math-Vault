@@ -7,6 +7,7 @@
     meta: null,
     tags: [],
     tagTree: [],
+    examTags: [],
     llm: { configured: false, model: '', free: [] },
     stats: null,
     route: { name: 'library', params: {} }

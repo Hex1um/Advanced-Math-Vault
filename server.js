@@ -11,6 +11,9 @@ const path = require('path');
 const crypto = require('crypto');
 const tagTax = require('./tag-taxonomy');
 
+/* 来源标签：不参与知识点主/子标签树，单独展示与筛选 */
+const EXAM_TAGS = ['华科期中', '华科期末'];
+
 const ROOT = __dirname;
 const PUBLIC_DIR = path.join(ROOT, 'public');
 const DATA_DIR = path.join(ROOT, 'data');
@@ -265,6 +268,8 @@ function qualityGate(item, existing) {
 function dedupeCanon(raw) {
   return String(raw || '')
     .toLowerCase()
+    .replace(/\\(?:mathrm|mathbf|mathit|mathsf|mathtt|text|operatorname|mathbb|mathcal)\s*/g, '')
+    .replace(/\\(?:left|right|limits|nolimits|displaystyle|textstyle)\b/g, '')
     .replace(/\\[a-zA-Z]+\*?/g, (m) => m.replace(/^\\/, ''))  // 保留命令名（sin/cos 不能都删成空）
     .replace(/\$/g, '')
     .replace(/[\s\u3000]+/g, '')
@@ -330,6 +335,7 @@ function normalizeProblem(raw) {
     statement: mathify(statement),
     mainTag: tagInfo.mainTag,
     tags: tagInfo.tags,
+    examTags: Array.isArray(raw.examTags) ? raw.examTags.map(String).filter((t) => EXAM_TAGS.includes(t)) : [],
     kind: String(raw.kind || tagInfo.kind || '').slice(0, 12),
     thinking: clampScore(raw.thinking, 6),
     difficulty: clampScore(raw.difficulty, 6, DIFF_MAX),
@@ -609,6 +615,7 @@ function visibleProblem(p, user) {
     myBest: best ? best.score : null,
     mainTag: p.mainTag || '综合',
     tags: p.tags,
+    examTags: Array.isArray(p.examTags) ? p.examTags : [],
     kind: p.kind || '',
     thinking: p.thinking,
     difficulty: p.difficulty,
@@ -672,6 +679,13 @@ function tagTree() {
         .sort((a, b) => b[1] - a[1])
         .map(([name, count]) => ({ name, count }))
     }));
+}
+
+function examTagCounts() {
+  return EXAM_TAGS.map((name) => ({
+    name,
+    count: db.problems.filter((p) => p.status === 'approved' && (p.examTags || []).includes(name)).length
+  })).filter((x) => x.count > 0);
 }
 
 function todayKey(d) {
@@ -1238,6 +1252,7 @@ function parseMetaText(raw, full) {
     title: title.slice(0, 40),
     mainTag: tagInfo.mainTag,
     tags: tagInfo.tags,
+    examTags: Array.isArray(raw.examTags) ? raw.examTags.map(String).filter((t) => EXAM_TAGS.includes(t)) : [],
     thinking: num(sec('THINKING'), '思维量'), difficulty: num(sec('DIFFICULTY'), '难度'), calc: num(sec('CALC'), '计算量'),
     hints: sec('HINTS').split(/\n+/).map((x) => x.replace(/^[-*·\d.、\s]+/, '').trim()).filter(Boolean).slice(0, 5),
     answer: full ? sec('ANSWER').trim() : '',
@@ -1710,6 +1725,7 @@ async function handleApi(req, res, pathname, query) {
         mainTags: tagTree().length
       },
       tagTree: tagTree(),
+      examTags: examTagCounts(),
       llm: {
         configured: llmConfigured(),
         model: llmConfigured() ? db.settings.llm.model : '',
@@ -1952,6 +1968,7 @@ async function handleApi(req, res, pathname, query) {
     const q = String(query.q || '').trim().toLowerCase();
     const tags = String(query.tags || '').split(',').filter(Boolean);
     const mainTag = String(query.main || '').trim();
+    const examTag = String(query.exam || '').trim();
     const level = String(query.level || '').trim();
     const status = String(query.status || 'all');
     const sort = String(query.sort || 'code');
@@ -1964,12 +1981,14 @@ async function handleApi(req, res, pathname, query) {
         p.title.toLowerCase().includes(q) ||
         p.code.toLowerCase().includes(q) ||
         String(p.mainTag || '').toLowerCase().includes(q) ||
+        (p.examTags || []).some((t) => t.toLowerCase().includes(q)) ||
         p.tags.some((t) => t.toLowerCase().includes(q)) ||
         String(p.source || '').toLowerCase().includes(q)
       );
     }
     if (codeList.length) list = list.filter((p) => codeList.includes(p.code));
     if (mainTag) list = list.filter((p) => p.mainTag === mainTag);
+    if (examTag) list = list.filter((p) => (p.examTags || []).includes(examTag));
     if (tags.length) list = list.filter((p) => tags.every((t) => p.tags.includes(t) || p.mainTag === t || String(p.mainTag || '').includes(t)));
     if (level) list = list.filter((p) => levelOf(p.difficulty).name === level);
     if (status === 'solved') list = list.filter((p) => user && user.solved && user.solved[p.code]);
@@ -2000,6 +2019,7 @@ async function handleApi(req, res, pathname, query) {
       pages: Math.max(1, Math.ceil(total / size)),
       tags: allTags(),
       tagTree: tagTree(),
+      examTags: examTagCounts(),
       levels: LEVELS.map((l) => l.name)
     });
   }
@@ -2762,7 +2782,7 @@ async function handleApi(req, res, pathname, query) {
 
     if (pathname === '/api/admin/pending' && method === 'GET') {
       const items = db.problems.filter((p) => p.status === 'pending').map((p) => ({
-        code: p.code, title: p.title, statement: p.statement, mainTag: p.mainTag, tags: p.tags, kind: p.kind,
+        code: p.code, title: p.title, statement: p.statement, mainTag: p.mainTag, tags: p.tags, examTags: p.examTags || [], kind: p.kind,
         thinking: p.thinking, difficulty: p.difficulty, calc: p.calc,
         source: p.source, authorName: p.authorName, createdAt: p.createdAt,
         hints: p.hints, answer: p.answer, solution: p.solution
