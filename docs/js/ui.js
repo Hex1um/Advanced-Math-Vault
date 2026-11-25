@@ -356,8 +356,16 @@
       + '<div class="field"><label>API Key</label>'
       + '<input id="llmKey" type="password" value="' + ESC(cur.apiKey || '') + '" placeholder="sk-..." autocomplete="off" />'
       + '<div class="tip">只保存在这台设备的浏览器（localStorage），不写进站点数据库，别人看不到。换了设备要重新填。</div></div>'
-      + '<div class="small muted" style="margin:4px 0 14px;line-height:1.8">不填也能用：问答与判卷会走免费公共通道（Pollinations，有频率限制，同一网络大约每分钟一次），再不行用内置讲解。<br/>'
-      + '判卷要读手写照片时，模型名需要支持图片，例如 <code>gpt-4o</code>、<code>qwen-vl-max</code>、<code>glm-4v</code>、<code>claude-3-5-sonnet</code>、<code>gemini-1.5-pro</code>。</div>'
+      + '<div class="small muted" style="margin:4px 0 10px;line-height:1.8">不填也能用：问答与判卷会走免费公共通道（Pollinations，有频率限制，同一网络大约每分钟一次），再不行用内置讲解。<br/>'
+      + '要读手写/拍照，模型必须支持图片（vision）。下面是几个<b>目前免费</b>的：</div>'
+      + '<div class="preset-row" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">'
+      + '<button type="button" class="btn btn-sm" data-preset="glm">智谱 GLM-4V-Flash（免费）</button>'
+      + '<button type="button" class="btn btn-sm" data-preset="sensetime">商汤 sensenova（免费档）</button>'
+      + '<button type="button" class="btn btn-sm" data-preset="openrouter">OpenRouter 免费 VL</button>'
+      + '</div>'
+      + '<div class="small muted" style="margin:0 0 14px;line-height:1.8">'
+      + '智谱：<code>https://open.bigmodel.cn/api/paas/v4</code> + <code>glm-4v-flash</code>（完全免费，实名即可，中文和公式都不错）<br/>'
+      + 'OpenRouter：<code>https://openrouter.ai/api/v1</code> + <code>qwen/qwen2.5-vl-72b-instruct:free</code>（免费档有速率限制）</div>'
       + '<div style="display:flex;gap:9px;justify-content:flex-end">'
       + '<button class="btn" id="clearLlm">清除</button>'
       + '<button class="btn btn-primary" id="saveLlm">保存</button></div>';
@@ -365,6 +373,21 @@
     const m = modal({ title: '设置 · 模型通道', sub: '用自己的 Key 可以不受免费通道限速', body: el, wide: true });
 
     el.querySelector('#saveLlm').addEventListener('click', function () {
+      const presets = {
+        glm: { baseUrl: 'https://open.bigmodel.cn/api/paas/v4', model: 'glm-4v-flash' },
+        sensetime: { baseUrl: 'https://api.sensenova.cn/compatible-mode/v1', model: 'SenseNova-V6-5-Turbo' },
+        openrouter: { baseUrl: 'https://openrouter.ai/api/v1', model: 'qwen/qwen2.5-vl-72b-instruct:free' }
+      };
+      el.querySelectorAll('[data-preset]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          const pr = presets[b.dataset.preset];
+          if (!pr) return;
+          el.querySelector('#llmBase').value = pr.baseUrl;
+          el.querySelector('#llmModel').value = pr.model;
+          toast('已填入 ' + pr.model + '，把 API Key 填上再保存', 'ok');
+        });
+      });
+
       const baseUrl = el.querySelector('#llmBase').value.trim();
       const model = el.querySelector('#llmModel').value.trim();
       const apiKey = el.querySelector('#llmKey').value.trim();

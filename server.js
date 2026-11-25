@@ -1055,7 +1055,10 @@ const LLM_HOSTS = new Set([
   'api.deepseek.com', 'api.openai.com', 'open.bigmodel.cn', 'dashscope.aliyuncs.com',
   'generativelanguage.googleapis.com', 'api.anthropic.com', 'api.groq.com', 'openrouter.ai',
   'api.moonshot.cn', 'api.minimax.chat', 'text.pollinations.ai', 'pollinations.ai',
-  'api.x.ai', 'api.cohere.com', 'api.together.xyz', 'api.fireworks.ai'
+  'api.x.ai', 'api.cohere.com', 'api.together.xyz', 'api.fireworks.ai',
+  // 免费视觉通道常被用到的几家
+  'api.sensenova.cn', 'api-inference.modelscope.cn', 'api.siliconflow.cn',
+  'ark.cn-beijing.volces.com', 'hunyuan.tencentcloudapi.com', 'qianfan.baidubce.com'
 ]);
 for (const h of String(process.env.LLM_ALLOWED_HOSTS || '').split(',')) {
   const v = h.trim().toLowerCase().replace(/^https?:\/\//, '').split('/')[0];

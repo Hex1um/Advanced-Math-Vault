@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v0.15.1 — 2026-11-25
+
+设置页加「免费视觉模型」预设（读手写/拍照的刚需）。
+
+- 三个一键预设：智谱 `glm-4v-flash`（完全免费）、商汤 sensenova（免费档）、OpenRouter `qwen/qwen2.5-vl-72b-instruct:free`（免费档有速率限制）；
+- 点预设只填接口地址与模型名，Key 仍要用户自己填，不落库；
+- LLM 域名白名单补 `api.sensenova.cn` / `api-inference.modelscope.cn` / `api.siliconflow.cn` / 火山方舟 / 混元 / 千帆，否则这些通道会被 SSRF 防护挡掉。
+
+
 ## v0.15.0 — 2026-11-25
 
 每日一题 → **每日一积**；OCR 加框选与 PSM 6。
