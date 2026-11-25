@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v1.2.2 — 2026-11-25
+
+部署工具补一个只检查不发布的开关，并隔离 `.env` 对测试的影响。
+
+- `deploy.mjs` 新增 `--preflight-only`：只跑反代/跨域/库文件检查，不合并线上数据、不上传。发布前想确认 `.env` 是否生效时用它，避免为了看一行提示去动线上。
+- **`.env` 会污染测试**：仓库根一旦有生产用 `.env`（`TRUST_PROXY=1`），冒烟里「伪造 X-Forwarded-For 不能绕过限流」必然失败——服务端按 XFF 分桶了。现在 `MV_NO_DOTENV=1` 可关闭 `.env` 加载，`smoke.mjs` 的两个子进程都显式设置它，测试结果不再受本机配置影响。
+- README 补一句终端差异：`VAR=value node ...` 是 Git Bash / POSIX 写法，Windows 终端要写成 `$env:VAR="..."; node ...`，否则会报 `CommandNotFoundException`（这不是脚本问题）。
+- 冒烟 121/121（JSON 与 SQLite 双引擎）。
+
 ## v1.2.1 — 2026-11-25
 
 修复部署导致用户提交记录丢失。

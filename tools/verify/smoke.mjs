@@ -88,6 +88,7 @@ const child = spawn(process.execPath, ['server.js'], {
     LLM_API_KEY: '',
     DEEPSEEK_API_KEY: '',
     NO_FREE: '1',
+    MV_NO_DOTENV: '1',
     BACKUP_KEEP: '2',
     // 测试需要「首个注册账号自动成为管理员」；生产环境已禁用该后门，这里显式开开发模式
     NODE_ENV: 'development'
@@ -513,7 +514,8 @@ try {
     env: Object.assign({}, process.env, {
       PORT: String(proxyPort), DB_FILE: DB_JSON + '.proxy', DB_ENGINE: ENGINE, DB_MIRROR_JSON: '0',
       LLM_API_KEY: '', DEEPSEEK_API_KEY: '',
-      NO_FREE: '1', TRUST_PROXY: '1'
+      NO_FREE: '1',
+    MV_NO_DOTENV: '1', TRUST_PROXY: '1'
     }),
     stdio: ['ignore', 'pipe', 'pipe']
   });

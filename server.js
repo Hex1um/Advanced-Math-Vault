@@ -10,8 +10,12 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const { loadDotEnv } = require('./lib/env');
-/* 部署目录里的 .env（平台面板的环境变量优先，不会被覆盖） */
-loadDotEnv(path.join(__dirname, '.env'), { log: (m) => console.log(m) });
+/* 部署目录里的 .env（平台面板的环境变量优先，不会被覆盖）。
+   测试与需要完全可控环境的场景用 MV_NO_DOTENV=1 关掉，否则一个遗留的 .env
+   会悄悄改掉 TRUST_PROXY / NODE_ENV 这类开关，让冒烟测试结果不可复现。 */
+if (process.env.MV_NO_DOTENV !== '1') {
+  loadDotEnv(path.join(__dirname, '.env'), { log: (m) => console.log(m) });
+}
 const tagTax = require('./tag-taxonomy');
 const { createStore } = require('./lib/store');
 const { createMailer } = require('./lib/mail');
