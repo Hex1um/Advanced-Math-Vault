@@ -1,10 +1,12 @@
-# Advanced-Math-Vault
+# 数海晴岸（Advanced-Math-Vault）
 
 高等数学好题收藏室。
 
 线上地址：**https://hex1um.github.io/Advanced-Math-Vault/** （前端，GitHub Pages）
 接口服务：https://math-vault-10141.app.workbuddy.host （后端，Node 单进程）
 仓库：https://github.com/Hex1um/Advanced-Math-Vault
+
+> 「数海晴岸」是站点中文名；仓库名与线上域名仍沿用 `Advanced-Math-Vault`，不影响已有链接。
 
 一个面向高等数学的好题收藏站：**每道题都要人工审核才能进题库**，每题标注「主标签 + 子标签」两级考点与「思维量 / 难度 / 计算量」三个 10 分制维度，全站共享同一份数据（题库、每日一题、答疑区、经验）。
 

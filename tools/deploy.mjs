@@ -39,7 +39,7 @@ async function deploy() {
     directory: ROOT,
     language: 'node',
     port: Number(process.env.PORT || 8787),
-    appName: '高数好题收藏室',
+    appName: '数海晴岸',
     domainPrefix: 'math-vault-10141',
     userAskedToPublish: PUBLISH
   };

@@ -1,8 +1,8 @@
 {
   "name": "math-vault",
-  "version": "0.18.5",
+  "version": "0.19.0",
   "private": true,
-  "description": "高数好题收藏室：人工审核题库 + 每日一题 + 答疑区 + AI 答疑",
+  "description": "数海晴岸：高等数学好题收藏室，人工审核题库 + 每日一积 + 答疑区 + AI 出题/批改",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

@@ -64,13 +64,13 @@ fs.writeFileSync(path.join(OUT, 'js', 'config.js'), `/* 由 tools/build-pages.mj
 window.MV_CONFIG = {
   apiBase: ${JSON.stringify(API_BASE)},
   sharecode: ${JSON.stringify(SHARECODE)},
-  siteName: 'Advanced-Math-Vault'
+  siteName: '数海晴岸'
 };
 `, 'utf8');
 
 // Pages 上不需要 404 兜底页，但保留一个说明，避免直接访问子路径时一片空白
 fs.writeFileSync(path.join(OUT, '404.html'), `<!DOCTYPE html><meta charset="utf-8"><title>页面不存在</title>
-<p style="font-family:system-ui;padding:40px">这个地址没有内容，回到 <a href="./">高数好题收藏室</a>。</p>
+<p style="font-family:system-ui;padding:40px">这个地址没有内容，回到 <a href="./">数海晴岸</a>。</p>
 `, 'utf8');
 
 let files = 0;

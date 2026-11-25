@@ -39,7 +39,7 @@
 
     const el = document.getElementById('view');
     el.innerHTML = '';
-    document.title = (window.MV_CONFIG && window.MV_CONFIG.siteName) || 'Advanced-Math-Vault';
+    document.title = ((window.MV_CONFIG && window.MV_CONFIG.siteName) || '数海晴岸') + ' · 高等数学好题收藏室';
 
     const view = window.Views[route.name];
     if (!view) {

@@ -1,5 +1,5 @@
 /**
- * Advanced-Math-Vault · 零依赖后端
+ * 数海晴岸 · 零依赖后端
  * 单进程 Node HTTP 服务：账号 / 题库 / 审核 / 答疑区 / 每日一题 / 经验 / LLM 代理
  * 数据落盘：data/db.json（原子写），首次启动自动导入 data/problems.seed.json
  */
@@ -17,7 +17,7 @@ const DATA_DIR = path.join(ROOT, 'data');
 const DB_FILE = process.env.DB_FILE || path.join(DATA_DIR, 'db.json');
 const SEED_FILE = process.env.SEED_FILE || path.join(DATA_DIR, 'problems.seed.json');
 const PORT = Number(process.env.PORT || 8787);
-const SITE_NAME = process.env.SITE_NAME || 'Advanced-Math-Vault';
+const SITE_NAME = process.env.SITE_NAME || '数海晴岸';
 const HOST = process.env.HOST || '0.0.0.0';
 
 /* ---------------------------------------------------------------- 数据层 */
@@ -1436,7 +1436,7 @@ async function streamLLM(cfg, messages, onDelta) {
 async function generateForumReply(post, problem, ask) {
   const sys = {
     role: 'system',
-    content: '你是「Advanced-Math-Vault」答疑区的 AI 助教。回答要短（150-300 字）、直接、有可执行的第一步，公式用 $...$。'
+    content: '你是「数海晴岸」答疑区的 AI 助教。回答要短（150-300 字）、直接、有可执行的第一步，公式用 $...$。'
       + '不要空泛鼓励，不要重复帖子里已有的内容。如果帖子信息不足，就指出还缺什么。'
       + (ask ? '这次是有人专门 @ 你追问，要针对他那句话回答，指出其中对/错在哪。' : '')
   };
@@ -1568,7 +1568,7 @@ async function generateFeedbackReview(problem, feedback) {
   const sys = {
     role: 'system',
     content: [
-      '你是 Advanced-Math-Vault 题库的审题助理。用户提交了一条对题目的反馈，你要先替管理员审阅一遍。',
+      '你是数海晴岸题库的审题助理。用户提交了一条对题目的反馈，你要先替管理员审阅一遍。',
       '步骤：1) 判断这条反馈是否有实质内容（有没有指出具体问题）；2) 归类；3) 用一句话给管理员摘要；4) 给一条处理建议。',
       '输出严格用下面分段格式，不要 JSON、不要代码块、不要多余解释：',
       '[VALID]', 'yes 或 no',

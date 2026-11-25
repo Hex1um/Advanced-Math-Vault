@@ -2,5 +2,5 @@
 window.MV_CONFIG = {
   apiBase: '',
   sharecode: '',
-  siteName: 'Advanced-Math-Vault'
+  siteName: '数海晴岸'
 };
