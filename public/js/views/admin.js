@@ -520,7 +520,10 @@
             + '<div class="review-head"><span class="problem-code-badge">' + p.code + '</span>'
             + '<h3>' + window.Md.esc(p.title) + '</h3>'
             + '<span class="small muted">' + window.Md.esc(p.authorName || '') + ' · ' + window.UI.timeAgo(p.createdAt) + '</span></div>'
-            + '<div class="tags">' + window.UI.tagBadges(p, { showKind: true }) + '</div>'
+            + '<div class="tags">' + window.UI.tagBadges(p, { showKind: true })
+            + (p.needsReview ? '<span class="tag gold" title="' + window.Md.esc(p.reviewReason || '') + '">待验算：' + window.Md.esc((p.reviewReason || '').slice(0, 18)) + '</span>' : '')
+            + (p.qualityWarn && p.qualityWarn.length ? '<span class="tag gold" title="' + window.Md.esc(p.qualityWarn.join('；')) + '">质量提醒 ' + p.qualityWarn.length + '</span>' : '')
+            + '</div>'
             + '<div class="review-grid" style="margin-top:12px">'
             + scoreInput('思维量', p.thinking) + scoreInput('难度', p.difficulty) + scoreInput('计算量', p.calc)
             + '<div class="field"><label>主标签</label><select data-f="mainTag">' + window.UI.mainTagOptions(p.mainTag) + '</select></div>'

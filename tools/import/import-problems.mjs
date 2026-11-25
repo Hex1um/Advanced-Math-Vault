@@ -8,10 +8,14 @@
  *
  *   2) 通过 HTTP 接口导入（服务运行中，需要管理员账号）：
  *      node tools/import/import-problems.mjs data/batch-01.json --url http://localhost:8787 --user 管理员 --pass 密码
+ *
+ *   3) 带入库门禁（推荐）：先跑积分/极限符号校验，再给判不了的题打 needsReview
+ *      node tools/import/import-problems.mjs data/batch-01.json --verify
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { markList, runPythonGates, printGate } from './gate.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..', '..');
@@ -116,6 +120,19 @@ for (const raw of list) {
   const n = normalize(raw);
   if (!n) skipped.push(String((raw && raw.title) || '无标题'));
   else items.push(n);
+}
+
+/* --verify：先过硬门禁，再给「自动验算不了」的题打标 */
+const VERIFY = argv.includes('--verify');
+if (VERIFY) {
+  const gate = runPythonGates();
+  printGate(gate);
+  if (!gate.ok) die('符号/数值自检未通过（积分/极限校验有 FAIL），已中止导入');
+  const stats = markList(items);
+  console.log('入库门禁：共 ' + stats.total + ' 题，需人工复核 ' + stats.flagged + ' 题');
+  for (const [reason, n] of Object.entries(stats.reasons).sort((a, b) => b[1] - a[1])) {
+    console.log('  · ' + reason + '：' + n);
+  }
 }
 
 async function viaApi(baseUrl, user, pass) {

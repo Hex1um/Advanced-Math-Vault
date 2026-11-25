@@ -1,5 +1,39 @@
 # CHANGELOG
 
+## v1.2.0 — 2026-11-25
+
+入题流水线加自动校验关口、配置支持 `.env`、Pages 交给 Actions 构建。
+
+### 入库门禁：判不了的题自动打 `needsReview`
+
+- **根因**：以前导入只看「字段齐不齐」，答案对不对全靠人眼。仓库里其实已有 `verify_integrals.py`（sympy 求导）与 `verify_limits.py`（mpmath 50 位），但它们只是给人手工跑的脚本，从没进过流水线。
+- 新增 `tools/import/gate.mjs`，两层：
+  - **硬门禁**：导入前跑两个校验脚本，有 FAIL 就中止导入（说明「已知答案的自检样例都过不了」，此时入库没有任何意义）。
+  - **软标记**：按题干与答案判断「这台机器能不能自动验算」——含极限/定积分/重积分/级数、答案缺失、无解析、答案是文字结论的题，写 `needsReview: true` + `reviewReason` 入库；其余视为可自动核对。
+- 用法：`node tools/import/import-problems.mjs <file> --verify`；`import-contest.mjs --verify` 同款。单独预览：`node tools/import/gate.mjs data/batch-01.json`（加 `--write` 才写回文件）。
+- 审核后台的待审卡片会显示「待验算：原因」与「质量提醒 N」两个标签，人工注意力直接落在需要看的地方。
+- 两个校验脚本补了退出码（`sys.exit(1)`），此前永远是 0，CI 与门禁都无法据此判断成败。
+
+### 配置：支持部署目录里的 `.env`
+
+- 新增 `lib/env.js`：解析仓库根 `.env`，**不覆盖已存在的环境变量**（平台面板与命令行优先），支持引号、行内注释、续行、`${VAR}` 展开。
+- 场景：托管平台没有环境变量面板、只能上传目录后直接跑 `node server.js` 时，把 `.env` 一起放进去即可；`.env` 已在 `.gitignore` 里，仓库只提交 `.env.example`。
+- 自测：`npm run check:env`（10 项），覆盖解析规则与「不覆盖」策略。
+
+### Pages 由 Actions 构建发布
+
+- 新增 `.github/workflows/pages.yml`：`public/**` 或 `docs/**` 变动时，Actions 先用 `build-pages.mjs` 从 `public/` 重建 `docs/`（需要 `SHARECODE` secret），再发布到 GitHub Pages；没有 secret 时直接发布仓库里已提交的 `docs/`，不会卡住发布。
+- 仓库内 `docs/` 的双份提交暂时保留（作为无 secret 时的兜底），后续可以按这个工作流逐步停掉手工提交。
+
+### 前端接口契约
+
+- `public/js/api.js` 补 JSDoc：`ApiOk` / `ApiFail` / `ApiError`（`status`、`data`）、`RequestOptions`、`AppState`，以及 `request()` / `download()` 的参数与抛错约定。仍是零构建，不引入 TS。
+- `CONTRIBUTING.md` 新增「发布前检查清单」：双引擎测试、题库体检、`build:pages`、浏览器端到端抽查（公式渲染、移动端长公式横向滚动、投稿 OCR 回填、判卷流式）、缓存串升版、CHANGELOG 与发布。
+
+### 测试
+
+- 新增 `check:env`（10 项）。其余保持：`npm test` / `test:sqlite` 121 项、`check:store` 20 项、`check:mail` 14 项、`check:robust` 0 错误、`check:katex` 0 失败。
+
 ## v1.1.0 — 2026-11-25
 
 工程基建与运行期可靠性：存储可切 SQLite、验证码真发信、每日备份、配置自检、CI 门禁。

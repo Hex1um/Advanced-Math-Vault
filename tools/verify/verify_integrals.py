@@ -146,3 +146,7 @@ if bad:
     print('未通过:', bad)
 if not unresolved:
     print('结论: 全部用例可信（含 2 例分支割线人工核验）')
+
+# CI / 入库门禁用：有任何未通过用例就非零退出
+import sys as _sys
+_sys.exit(1 if unresolved else 0)

@@ -1,7 +1,43 @@
 /* 极简 API 客户端 + 全局状态（支持跨域 token，静态托管上也能用） */
+
+/**
+ * 前端接口契约（保持零构建，用 JSDoc 而不是 TS）。
+ * 后端返回的统一形状：成功 `{ok:true, ...}`，失败 `{ok:false, error:string}`。
+ *
+ * @typedef {Object} ApiOk
+ * @property {true} ok
+ *
+ * @typedef {Object} ApiFail
+ * @property {false} ok
+ * @property {string} error
+ *
+ * @typedef {ApiFail & {status?: number, data?: ApiFail}} ApiError
+ *   `request()` 抛出的错误对象：`error.status` 是 HTTP 状态码，`error.data` 是原始失败响应体（401 会自动清 token）
+ *
+ * @typedef {Object} RequestOptions
+ * @property {'GET'|'POST'} [method]
+ * @property {Object|string} [body] 传对象会自动 JSON 序列化并补 Content-Type
+ * @property {Object<string,string>} [headers]
+ *
+ * @typedef {Object} LlmState
+ * @property {boolean} configured 站点是否配了 Key
+ * @property {string} model
+ * @property {string[]} free 浏览器直连的免费通道名
+ *
+ * @typedef {Object} AppState
+ * @property {?Object} me 当前登录用户（publicUser 形状）
+ * @property {?Object} meta /api/meta 的统计与标签树
+ * @property {string[]} tags 扁平的子标签全集
+ * @property {string[]} tagTree 九大主标签
+ * @property {string[]} examTags 来源标签（华科期中 / 华科期末）
+ * @property {LlmState} llm
+ * @property {?Object} stats
+ * @property {{name: string, params: Object}} route
+ */
 (function () {
   'use strict';
 
+  /** @type {AppState} */
   const State = {
     me: null,
     meta: null,
@@ -61,6 +97,13 @@
     return !String(cfg().apiBase || '').trim();
   }
 
+  /**
+   * 统一请求入口：自动带 token、序列化 body、解析 JSON、失败抛 ApiError。
+   * @param {string} path 以 /api 开头的路径（sharecode 会自动拼上）
+   * @param {RequestOptions} [options]
+   * @returns {Promise<ApiOk & Object>}
+   * @throws {ApiError}
+   */
   async function request(path, options) {
     const opts = Object.assign({ method: 'GET', credentials: sameOrigin() ? 'include' : 'omit', cache: 'no-store' }, options || {});
     opts.headers = Object.assign({}, authHeaders(), opts.headers || {});
@@ -90,6 +133,12 @@
     return data;
   }
 
+  /**
+   * 下载二进制（导出备份等）：走 blob，不经过 JSON 解析。
+   * @param {string} path
+   * @param {string} [filename]
+   * @returns {Promise<void>}
+   */
   async function download(path, filename) {
     const res = await fetch(apiUrl(path), { headers: authHeaders(), credentials: sameOrigin() ? 'include' : 'omit', cache: 'no-store' });
     if (!res.ok) throw new Error('导出失败 ' + res.status);

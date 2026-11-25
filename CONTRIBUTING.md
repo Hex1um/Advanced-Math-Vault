@@ -118,6 +118,22 @@ node tools/verify/robustness-check.mjs                # 全库体检
 
 ---
 
+## 发布前检查清单
+
+前端零构建，所以没有编译期兜底；这几步是唯一的防线，按顺序走：
+
+1. `npm test` + `npm run test:sqlite`：两条链路都要绿（存储层改动尤其要跑第二条）。
+2. `npm run check:robust` + `npm run check:katex`：题库层面 0 错误、0 渲染失败。
+3. `SHARECODE=... npm run build:pages`：把 `public/` 同步到 `docs/`（Pages 产物），确认输出的 `apiBase` 与 sharecode 指向正确后端。
+4. **浏览器端到端抽查**（`node tools/verify/cdp-eval.mjs "<url>" "<js>"`，或直接开页面看）：
+   - 题库列表与题目页公式渲染正常，没有裸 `$`、`\frac` 文字；
+   - 移动端窄屏下长公式能横向滚动，不撑破卡片；
+   - 投稿页贴图后 OCR 回填的题干可编辑、公式包裹正确；
+   - 判卷提交后流式输出不重复、不丢前半段；
+   - 审核后台「运行状态」能读到引擎、邮件模式与 AI 通道表。
+5. **升缓存串**：改过 `public/` 就必须把 `index.html` 里所有 `?v=` 升到新版本号，否则老用户拿到旧 JS 与新后端打架。
+6. 写 `CHANGELOG.md`（面向使用者：症状 → 根因 → 改后行为，数值给出前后对比），再按「数据同步与发布」走 `node tools/ops/deploy.mjs --publish`。
+
 ## 提 PR
 
 1. 从 `main` 拉分支，一次 PR 只做一件事。

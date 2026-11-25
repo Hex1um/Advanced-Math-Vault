@@ -10,11 +10,15 @@ import mpmath as mp
 
 mp.mp.dps = 50
 
+_FAILS = []
+
 
 def show(name, val, expect, tol=1e-3):
     val = mp.mpf(val)
     expect = mp.mpf(expect)
     ok = abs(val - expect) < max(mp.mpf(tol), abs(expect) * mp.mpf(tol))
+    if not ok:
+        _FAILS.append(name)
     print(('  OK  ' if ok else '  FAIL ') +
           f'{name}: {mp.nstr(val, 10)} vs {mp.nstr(expect, 10)}')
 
@@ -102,3 +106,9 @@ for x in (mp.mpf('0.001'), mp.mpf('-0.001')):
     num = x * mp.e ** (x / 2) - mp.sin(x)
     den = x * x * mp.sin(x)
     print(f'  x={mp.nstr(x, 4)}: {mp.nstr(num / den, 8)}')
+
+# CI / 入库门禁用：show() 里有 FAIL 就非零退出
+import sys as _sys
+if _FAILS:
+    print('未通过用例:', _FAILS)
+_sys.exit(1 if _FAILS else 0)

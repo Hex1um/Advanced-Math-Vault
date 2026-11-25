@@ -9,6 +9,9 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { loadDotEnv } = require('./lib/env');
+/* 部署目录里的 .env（平台面板的环境变量优先，不会被覆盖） */
+loadDotEnv(path.join(__dirname, '.env'), { log: (m) => console.log(m) });
 const tagTax = require('./tag-taxonomy');
 const { createStore } = require('./lib/store');
 const { createMailer } = require('./lib/mail');
@@ -492,6 +495,12 @@ function normalizeProblem(raw) {
     scoreSum: 0,
     scoreCount: 0
   };
+  // 入库门禁（tools/import/gate.mjs）判不了自动验算的题会带这两个字段进库，
+  // 审核后台据此显示「待验算：原因」，提醒审核人重点核对推导
+  if (raw.needsReview) {
+    itemOut.needsReview = true;
+    itemOut.reviewReason = String(raw.reviewReason || '').slice(0, 120);
+  }
   const warns = qualityGate(itemOut, db.problems);
   if (warns.length) itemOut.qualityWarn = warns;
   return itemOut;

@@ -195,6 +195,19 @@ for (const p of imported.slice(0, 10)) console.log(' ', p.code, 'L' + (p.source.
 console.log('\n跳过示例：');
 for (const s of skipped.slice(0, 10)) console.log(' ', JSON.stringify(s).slice(0, 240));
 
+/* --verify：硬门禁 + needsReview 标记（与 import-problems.mjs 同一套） */
+if (process.argv.includes('--verify')) {
+  const { markList, runPythonGates, printGate } = await import('./gate.mjs');
+  const gate = runPythonGates();
+  printGate(gate);
+  if (!gate.ok) {
+    console.error('✗ 符号/数值自检未通过，已中止导入');
+    process.exit(1);
+  }
+  const g = markList(imported);
+  console.log('入库门禁：需人工复核 ' + g.flagged + ' / ' + g.total + ' 题');
+}
+
 if (WRITE) {
   fs.copyFileSync(DB_FILE, DB_FILE + '.before-contest-' + Date.now() + '.json');
   db.problems.push(...imported);

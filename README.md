@@ -106,6 +106,13 @@ curl -b cookie localhost:8787/api/admin/ai-stats  # 管理员：AI 通道成功�
 3. 命令行（服务已停止时写库）：`node tools/import/import-problems.mjs data/batch-01.json`
    或服务运行中走接口：`node tools/import/import-problems.mjs data/batch-01.json --url http://localhost:8787 --user 管理员 --pass 密码`
 
+加 `--verify` 会先跑符号/数值校验再入库，并给「自动验算不了」的题打 `needsReview` 标记，审核后台会显示「待验算：原因」：
+
+```bash
+node tools/import/import-problems.mjs data/batch-05.json --verify   # 导入 + 门禁
+node tools/import/gate.mjs data/batch-05.json                        # 只预览会被标哪些题
+```
+
 编号自动分配：`HS1001`、`HS1002`……
 
 ## AI 通道（四级自动降级）
@@ -150,6 +157,7 @@ server.js                 后端（路由 / 鉴权 / 审核 / 论坛 / AI 代理
 tag-taxonomy.js           主标签 / 子标签定义与历史标签归并规则
 lib/store.js              存储层：JSON 全量写 / SQLite 行级增量写，双引擎可切
 lib/mail.js               邮件通道：SMTP / Resend / 自建 HTTP / 日志降级
+lib/env.js                部署目录 .env 加载（不覆盖平台环境变量）
 .env.example              全部环境变量与含义（含 TRUST_PROXY、ALLOW_ORIGINS、邮件、存储）
 data/batch-*.json          分批题库（约 2470 道）
 data/problems.seed.sample.json  示例题库（默认不加载）
@@ -165,8 +173,8 @@ public/js/views/*.js      题库 / 题目 / 每日一题 / 答疑区 / 投稿 / 
 public/vendor/katex/      本地 KaTeX（离线可用）
 tools/README.md           脚本分层说明与新增脚本的规矩
 tools/ops/                部署 / 同步 / 备份 / 回流 / 迁移
-tools/verify/             冒烟、体检、公式、存储与邮件自测、符号校验
-tools/import/             导入与数据规范化
+tools/verify/             冒烟、体检、公式、存储/邮件/.env 自测、符号校验
+tools/import/             导入、数据规范化与入库门禁（gate.mjs）
 tools/archive/            已合并的历史脚本（只作追溯）
 ```
 
@@ -215,15 +223,17 @@ npm test                             # 121 项断言（JSON 引擎）：注册/�
 npm run test:sqlite                  # 同一套断言，跑在 SQLite 引擎上
 npm run check:store                  # 存储层：导入、增量落盘、重载一致性
 npm run check:mail                   # 邮件通道（本地假 SMTP）
+npm run check:env                    # .env 解析与「不覆盖已有变量」
 npm run check:robust                 # 题库体检（没有 db.json 时自动读 batch 题库）
 npm run check:katex                  # 公式可渲染性，必须 0 失败
+```
 python tools/verify/verify_integrals.py   # 逐题对答案求导，数值双点验证
 python tools/verify/verify_limits.py      # 极限题数值验证（高精度）
 python tools/archive/verify_batch5.py     # 第五批答案校验（历史脚本）
 node tools/import/migrate-tags.mjs        # 只报告标签迁移结果；加 --write 才写盘
 ```
 
-CI 见 `.github/workflows/smoke.yml`：push / PR 到 `main` 自动跑上面这串（外加 sympy 符号校验 job），不需要装任何 npm 依赖。
+CI 见 `.github/workflows/smoke.yml`：push / PR 到 `main` 自动跑上面这串（外加 sympy 符号校验 job），不需要装任何 npm 依赖；`.github/workflows/pages.yml` 负责用 Actions 重建并发布 `docs/`。
 
 > 录题纪律：每道积分的答案都先用 sympy 求导验证再入库，`verify_integrals.py` 里保留了对应用例，新增题目时追加即可。
 
