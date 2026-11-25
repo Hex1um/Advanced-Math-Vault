@@ -1,0 +1,357 @@
+{
+  "users": [
+    {
+      "id": "11056e89-c68c-4a5b-8904-5c9c0c31bffe",
+      "name": "tester",
+      "salt": "04c49fdb428c0a8d19be3bd523353f90",
+      "passHash": "40fc8dbc59f88ea8f4580361274895b15658639acde4f332b1460fd4db7578b58c55ae0459312346b2c93f927cdd16225817e2d06c1bb03c1510787a74d4f36a",
+      "role": "admin",
+      "exp": 0,
+      "solved": {},
+      "activity": [],
+      "createdAt": "2026-11-25T03:46:22.316Z",
+      "best": {},
+      "wrong": {},
+      "attempts": 1
+    }
+  ],
+  "problems": [
+    {
+      "code": "HS1001",
+      "title": "通分之后是道泰勒题",
+      "statement": "求\n\n$$\\lim_{x\\to 0}\\left(\\frac{1}{x}-\\frac{1}{e^{x}-1}\\right).$$",
+      "tags": [
+        "极限",
+        "泰勒展开",
+        "无穷小比较"
+      ],
+      "thinking": 6,
+      "difficulty": 6,
+      "calc": 5,
+      "source": "同济《高等数学》习题改编",
+      "hints": [
+        "两项相减的 $\\infty-\\infty$ 型，先通分合成一个分式。",
+        "分母里 $e^{x}-1\\sim x$，所以分母整体等价于 $x^{2}$。",
+        "分子 $e^{x}-1-x$ 泰勒展开到 $x^{2}$ 项就够了。"
+      ],
+      "answer": "$\\dfrac{1}{2}$",
+      "solution": "### 第一步：通分\n\n原式 $=\\lim_{x\\to0}\\dfrac{e^{x}-1-x}{x(e^{x}-1)}$。\n\n### 第二步：分母做等价无穷小\n\n当 $x\\to0$ 时 $e^{x}-1\\sim x$，故\n\n$$x(e^{x}-1)\\sim x^{2}.$$\n\n### 第三步：分子泰勒展开\n\n$$e^{x}-1-x=\\left(1+x+\\frac{x^{2}}{2}+o(x^{2})\\right)-1-x=\\frac{x^{2}}{2}+o(x^{2}).$$\n\n### 第四步：合并\n\n$$\\lim_{x\\to0}\\frac{\\frac{x^{2}}{2}+o(x^{2})}{x^{2}}=\\frac{1}{2}.$$\n\n> 用洛必达要连求两次导，第二次仍是 $0/0$；泰勒一步到位。",
+      "status": "approved",
+      "authorId": null,
+      "authorName": "题库组",
+      "rejectReason": "",
+      "createdAt": "2026-11-25T03:46:22.090Z",
+      "reviewedAt": "2026-11-25T03:46:22.090Z",
+      "solvedCount": 0,
+      "attemptCount": 1,
+      "scoreSum": 0,
+      "scoreCount": 0,
+      "views": 1
+    },
+    {
+      "code": "HS1002",
+      "title": "$1^{\\infty}$ 型：取对数才是正路",
+      "statement": "求\n\n$$\\lim_{x\\to 0}(\\cos x)^{\\frac{1}{x^{2}}}.$$",
+      "tags": [
+        "极限",
+        "幂指函数",
+        "等价无穷小"
+      ],
+      "thinking": 7,
+      "difficulty": 6,
+      "calc": 5,
+      "source": "考研真题改编",
+      "hints": [
+        "幂指函数 $u^{v}$ 一律先写成 $e^{v\\ln u}$。",
+        "$\\ln\\cos x=\\ln\\bigl(1+(\\cos x-1)\\bigr)\\sim \\cos x-1$。",
+        "$1-\\cos x\\sim \\dfrac{x^{2}}{2}$。"
+      ],
+      "answer": "$e^{-1/2}=\\dfrac{1}{\\sqrt e}$",
+      "solution": "### 取对数\n\n设 $y=(\\cos x)^{1/x^{2}}$，则\n\n$$\\ln y=\\frac{\\ln\\cos x}{x^{2}}.$$\n\n### 依次等价\n\n$\\cos x\\to1$，故 $\\ln\\cos x=\\ln\\bigl(1+(\\cos x-1)\\bigr)\\sim\\cos x-1$，又 $\\cos x-1\\sim-\\dfrac{x^{2}}{2}$，于是\n\n$$\\lim_{x\\to0}\\ln y=\\lim_{x\\to0}\\frac{-x^{2}/2}{x^{2}}=-\\frac{1}{2}.$$\n\n### 还原\n\n$$\\lim_{x\\to0}(\\cos x)^{1/x^{2}}=e^{-1/2}=\\frac{1}{\\sqrt e}.$$\n\n> 坑：不能因为 $\\cos x\\to1$ 就把底数当常数 $1$。$1^{\\infty}$ 型的极限取决于底数偏离 $1$ 的速度。",
+      "status": "approved",
+      "authorId": null,
+      "authorName": "题库组",
+      "rejectReason": "",
+      "createdAt": "2026-11-25T03:46:22.090Z",
+      "reviewedAt": "2026-11-25T03:46:22.090Z",
+      "solvedCount": 0,
+      "attemptCount": 0,
+      "scoreSum": 0,
+      "scoreCount": 0
+    },
+    {
+      "code": "HS1003",
+      "title": "一眼看不出，动手长除法：$\\dfrac{22}{7}-\\pi$",
+      "statement": "计算\n\n$$\\int_{0}^{1}\\frac{x^{4}(1-x)^{4}}{1+x^{2}}\\,\\mathrm{d}x.$$",
+      "tags": [
+        "定积分",
+        "有理函数积分",
+        "代数变形"
+      ],
+      "thinking": 8,
+      "difficulty": 8,
+      "calc": 9,
+      "source": "经典竞赛题",
+      "hints": [
+        "被积函数是假分式，先做多项式长除法，拆成「多项式 + 真分式」。",
+        "先展开分子：$x^{4}(1-x)^{4}=x^{8}-4x^{7}+6x^{6}-4x^{5}+x^{4}$。",
+        "除以 $x^{2}+1$ 后余项是常数，最终会出现 $\\arctan x$。"
+      ],
+      "answer": "$\\dfrac{22}{7}-\\pi$",
+      "solution": "### 第一步：展开分子\n\n$$x^{4}(1-x)^{4}=x^{8}-4x^{7}+6x^{6}-4x^{5}+x^{4}.$$\n\n### 第二步：长除法\n\n逐项除 $x^{2}+1$：\n\n$$x^{8}-4x^{7}+6x^{6}-4x^{5}+x^{4}=(x^{2}+1)\\left(x^{6}-4x^{5}+5x^{4}-4x^{2}+4\\right)-4.$$\n\n所以\n\n$$\\frac{x^{4}(1-x)^{4}}{1+x^{2}}=x^{6}-4x^{5}+5x^{4}-4x^{2}+4-\\frac{4}{1+x^{2}}.$$\n\n### 第三步：逐项积分\n\n$$\\int_0^1\\left(x^{6}-4x^{5}+5x^{4}-4x^{2}+4\\right)\\mathrm{d}x=\\frac17-\\frac46+\\frac55-\\frac43+4=\\frac17+3=\\frac{22}{7}.$$\n\n$$\\int_0^1\\frac{4}{1+x^{2}}\\mathrm{d}x=4\\arctan x\\Big|_0^1=4\\cdot\\frac{\\pi}{4}=\\pi.$$\n\n### 结论\n\n$$\\int_0^1\\frac{x^{4}(1-x)^{4}}{1+x^{2}}\\mathrm{d}x=\\frac{22}{7}-\\pi\\approx 0.001264.$$\n\n> 这个积分是 $\\pi$ 的经典逼近来源：$\\frac{22}{7}-\\pi>0$ 且极小，常被用来证明 $\\pi<\\frac{22}{7}$。",
+      "status": "approved",
+      "authorId": null,
+      "authorName": "题库组",
+      "rejectReason": "",
+      "createdAt": "2026-11-25T03:46:22.090Z",
+      "reviewedAt": "2026-11-25T03:46:22.090Z",
+      "solvedCount": 0,
+      "attemptCount": 0,
+      "scoreSum": 0,
+      "scoreCount": 0
+    },
+    {
+      "code": "HS1004",
+      "title": "看到 $f'-f$ 就该想到乘 $e^{-x}$",
+      "statement": "设 $f(x)$ 在 $[0,1]$ 上连续，在 $(0,1)$ 内可导，且 $f(0)=f(1)=0$。\n\n证明：存在 $\\xi\\in(0,1)$，使得\n\n$$f'(\\xi)=f(\\xi).$$",
+      "tags": [
+        "中值定理",
+        "罗尔定理",
+        "辅助函数"
+      ],
+      "thinking": 8,
+      "difficulty": 7,
+      "calc": 3,
+      "source": "考研证明题改编",
+      "hints": [
+        "把结论里的 $\\xi$ 换成 $x$，看成微分方程 $f'(x)-f(x)=0$。",
+        "这个方程的积分因子是 $e^{-x}$，于是构造 $F(x)=e^{-x}f(x)$。",
+        "验证 $F$ 在 $[0,1]$ 上的三个条件，端点值都是 $0$。"
+      ],
+      "answer": "构造 $F(x)=e^{-x}f(x)$，对 $F$ 用罗尔定理。",
+      "solution": "### 第一步：从结论倒推辅助函数\n\n要证 $f'(\\xi)-f(\\xi)=0$。把 $\\xi$ 看成变量，得微分方程\n\n$$f'(x)-f(x)=0,$$\n\n积分因子为 $e^{\\int(-1)\\mathrm{d}x}=e^{-x}$。于是构造\n\n$$F(x)=e^{-x}f(x).$$\n\n### 第二步：验证罗尔定理三条件\n\n- **连续**：$e^{-x}$ 与 $f(x)$ 在 $[0,1]$ 上连续，故 $F$ 连续；\n- **可导**：在 $(0,1)$ 内\n\n$$F'(x)=e^{-x}\\bigl(f'(x)-f(x)\\bigr);$$\n\n- **端点相等**：$F(0)=f(0)=0$，$F(1)=e^{-1}f(1)=0$。\n\n### 第三步：用罗尔定理\n\n存在 $\\xi\\in(0,1)$ 使 $F'(\\xi)=0$，即\n\n$$e^{-\\xi}\\bigl(f'(\\xi)-f(\\xi)\\bigr)=0\\ \\Longrightarrow\\ f'(\\xi)=f(\\xi).$$\n\n> 记忆方式：结论是 $f'+g'f=0$ 型，就乘 $e^{g(x)}$；结论是 $f'-\\lambda f=0$ 型，就乘 $e^{-\\lambda x}$。",
+      "status": "approved",
+      "authorId": null,
+      "authorName": "题库组",
+      "rejectReason": "",
+      "createdAt": "2026-11-25T03:46:22.090Z",
+      "reviewedAt": "2026-11-25T03:46:22.090Z",
+      "solvedCount": 0,
+      "attemptCount": 0,
+      "scoreSum": 0,
+      "scoreCount": 0
+    },
+    {
+      "code": "HS1005",
+      "title": "夹在 $\\dfrac{x}{1+x}$ 和 $x$ 之间的 $\\ln(1+x)$",
+      "statement": "证明：当 $x>0$ 时，\n\n$$\\frac{x}{1+x}<\\ln(1+x)<x.$$",
+      "tags": [
+        "不等式证明",
+        "导数应用",
+        "函数性质"
+      ],
+      "thinking": 5,
+      "difficulty": 5,
+      "calc": 4,
+      "source": "同济《高等数学》例题",
+      "hints": [
+        "两个不等式分开证，各构造一个函数。",
+        "右边：$f(x)=\\ln(1+x)-x$，$f(0)=0$，看 $f'$ 的符号。",
+        "左边：$g(x)=\\ln(1+x)-\\dfrac{x}{1+x}$，算一下 $g'(x)=\\dfrac{x}{(1+x)^{2}}$。"
+      ],
+      "answer": "分别对 $\\ln(1+x)-x$ 和 $\\ln(1+x)-\\dfrac{x}{1+x}$ 用单调性。",
+      "solution": "### 右边：$\\ln(1+x)<x$\n\n令 $f(x)=\\ln(1+x)-x$，$x\\ge0$。$f(0)=0$，且\n\n$$f'(x)=\\frac{1}{1+x}-1=-\\frac{x}{1+x}<0\\quad(x>0),$$\n\n故 $f$ 在 $[0,+\\infty)$ 上单调递减，$f(x)<f(0)=0$，即 $\\ln(1+x)<x$。\n\n### 左边：$\\dfrac{x}{1+x}<\\ln(1+x)$\n\n令 $g(x)=\\ln(1+x)-\\dfrac{x}{1+x}$，$g(0)=0$，且\n\n$$g'(x)=\\frac{1}{1+x}-\\frac{(1+x)-x}{(1+x)^{2}}=\\frac{1}{1+x}-\\frac{1}{(1+x)^{2}}=\\frac{x}{(1+x)^{2}}>0\\quad(x>0),$$\n\n故 $g$ 单调递增，$g(x)>g(0)=0$，即 $\\dfrac{x}{1+x}<\\ln(1+x)$。\n\n### 合并\n\n$$\\frac{x}{1+x}<\\ln(1+x)<x\\quad(x>0).$$\n\n> 这类题固定三步：移项构造函数 → 算端点值 → 用一阶导符号定单调。",
+      "status": "approved",
+      "authorId": null,
+      "authorName": "题库组",
+      "rejectReason": "",
+      "createdAt": "2026-11-25T03:46:22.090Z",
+      "reviewedAt": "2026-11-25T03:46:22.090Z",
+      "solvedCount": 0,
+      "attemptCount": 0,
+      "scoreSum": 0,
+      "scoreCount": 0
+    },
+    {
+      "code": "HS1006",
+      "title": "分部两次会自己转回来",
+      "statement": "求不定积分\n\n$$\\int e^{x}\\sin x\\,\\mathrm{d}x.$$",
+      "tags": [
+        "不定积分",
+        "分部积分"
+      ],
+      "thinking": 5,
+      "difficulty": 5,
+      "calc": 6,
+      "source": "基本题型",
+      "hints": [
+        "连续两次分部积分，第二次会出现原来的积分。",
+        "按「反对幂指三」取 $u$，这里取 $u=\\sin x$ 或 $u=e^{x}$ 都行，但要两次保持一致。",
+        "把出现的 $I$ 移到等号左边解方程。"
+      ],
+      "answer": "$\\dfrac{e^{x}}{2}(\\sin x-\\cos x)+C$",
+      "solution": "记 $I=\\int e^{x}\\sin x\\,\\mathrm{d}x$。\n\n### 第一次分部\n\n取 $u=\\sin x,\\ \\mathrm{d}v=e^{x}\\mathrm{d}x$：\n\n$$I=e^{x}\\sin x-\\int e^{x}\\cos x\\,\\mathrm{d}x.$$\n\n### 第二次分部\n\n对 $\\int e^{x}\\cos x\\,\\mathrm{d}x$ 取 $u=\\cos x,\\ \\mathrm{d}v=e^{x}\\mathrm{d}x$：\n\n$$\\int e^{x}\\cos x\\,\\mathrm{d}x=e^{x}\\cos x+\\int e^{x}\\sin x\\,\\mathrm{d}x=e^{x}\\cos x+I.$$\n\n### 移项求解\n\n$$I=e^{x}\\sin x-e^{x}\\cos x-I\\ \\Longrightarrow\\ 2I=e^{x}(\\sin x-\\cos x).$$\n\n$$\\boxed{\\ I=\\frac{e^{x}}{2}(\\sin x-\\cos x)+C\\ }$$\n\n> 验算：$\\dfrac{\\mathrm{d}}{\\mathrm{d}x}\\left[\\dfrac{e^{x}}{2}(\\sin x-\\cos x)\\right]=\\dfrac{e^{x}}{2}(\\sin x-\\cos x)+\\dfrac{e^{x}}{2}(\\cos x+\\sin x)=e^{x}\\sin x$。",
+      "status": "approved",
+      "authorId": null,
+      "authorName": "题库组",
+      "rejectReason": "",
+      "createdAt": "2026-11-25T03:46:22.090Z",
+      "reviewedAt": "2026-11-25T03:46:22.090Z",
+      "solvedCount": 0,
+      "attemptCount": 0,
+      "scoreSum": 0,
+      "scoreCount": 0
+    },
+    {
+      "code": "HS1007",
+      "title": "收敛但要说是哪种收敛",
+      "statement": "讨论级数\n\n$$\\sum_{n=1}^{\\infty}\\frac{(-1)^{n}}{\\sqrt{n}}$$\n\n的收敛性（绝对收敛 / 条件收敛 / 发散）。",
+      "tags": [
+        "级数",
+        "交错级数",
+        "绝对收敛"
+      ],
+      "thinking": 6,
+      "difficulty": 5,
+      "calc": 4,
+      "source": "同济《高等数学》习题",
+      "hints": [
+        "先取绝对值，看 $\\sum \\dfrac{1}{\\sqrt n}$ 是什么级数。",
+        "$p$ 级数 $\\sum \\dfrac{1}{n^{p}}$，这里 $p=\\dfrac12$。",
+        "交错级数用莱布尼茨判别法：单调递减且通项趋于 $0$。"
+      ],
+      "answer": "条件收敛",
+      "solution": "### 第一步：不绝对收敛\n\n$$\\sum_{n=1}^{\\infty}\\left|\\frac{(-1)^{n}}{\\sqrt n}\\right|=\\sum_{n=1}^{\\infty}\\frac{1}{n^{1/2}},$$\n\n这是 $p=\\dfrac12\\le1$ 的 $p$ 级数，**发散**。\n\n### 第二步：莱布尼茨判别法\n\n记 $u_n=\\dfrac{1}{\\sqrt n}$：\n\n- $u_{n+1}=\\dfrac{1}{\\sqrt{n+1}}<\\dfrac{1}{\\sqrt n}=u_n$，单调递减；\n- $\\lim\\limits_{n\\to\\infty}u_n=0$。\n\n两条都满足，故原级数收敛。\n\n### 结论\n\n原级数**条件收敛**。\n\n> 判断顺序：通项是否趋于 $0$（必要条件）→ 绝对收敛 → 莱布尼茨。顺序颠倒会白算。",
+      "status": "approved",
+      "authorId": null,
+      "authorName": "题库组",
+      "rejectReason": "",
+      "createdAt": "2026-11-25T03:46:22.090Z",
+      "reviewedAt": "2026-11-25T03:46:22.090Z",
+      "solvedCount": 0,
+      "attemptCount": 0,
+      "scoreSum": 0,
+      "scoreCount": 0
+    },
+    {
+      "code": "HS1008",
+      "title": "把 $y/x$ 整体看成一个函数",
+      "statement": "求初值问题\n\n$$y'-\\frac{y}{x}=x^{2},\\qquad y(1)=1$$\n\n在 $x>0$ 上的解。",
+      "tags": [
+        "微分方程",
+        "一阶线性方程"
+      ],
+      "thinking": 5,
+      "difficulty": 5,
+      "calc": 5,
+      "source": "同济《高等数学》习题",
+      "hints": [
+        "这是一阶线性方程 $y'+P(x)y=Q(x)$，$P(x)=-\\dfrac1x$。",
+        "积分因子 $\\mu=e^{\\int P\\mathrm{d}x}=e^{-\\ln x}=\\dfrac1x$。",
+        "两边乘 $\\dfrac1x$ 后，左边正好是 $\\left(\\dfrac{y}{x}\\right)'$。"
+      ],
+      "answer": "$y=\\dfrac{x^{3}+x}{2}$",
+      "solution": "### 第一步：写成标准形\n\n$$y'-\\frac{1}{x}y=x^{2},\\qquad P(x)=-\\frac1x,\\ Q(x)=x^{2}.$$\n\n### 第二步：求积分因子\n\n$$\\mu(x)=e^{\\int P\\mathrm{d}x}=e^{-\\ln x}=\\frac{1}{x}.$$\n\n### 第三步：两边乘 $\\mu$\n\n$$\\frac{y'}{x}-\\frac{y}{x^{2}}=x\\ \\Longrightarrow\\ \\left(\\frac{y}{x}\\right)'=x.$$\n\n### 第四步：积分并代初值\n\n$$\\frac{y}{x}=\\frac{x^{2}}{2}+C\\ \\Longrightarrow\\ y=\\frac{x^{3}}{2}+Cx.$$\n\n由 $y(1)=1$：$\\dfrac12+C=1$，得 $C=\\dfrac12$。因此\n\n$$\\boxed{\\ y=\\frac{x^{3}+x}{2}\\ }$$\n\n> 一阶线性方程的积分因子是通法，但很多时候能直接看出「整体是某个乘积的导数」，那样更快。",
+      "status": "approved",
+      "authorId": null,
+      "authorName": "题库组",
+      "rejectReason": "",
+      "createdAt": "2026-11-25T03:46:22.090Z",
+      "reviewedAt": "2026-11-25T03:46:22.090Z",
+      "solvedCount": 0,
+      "attemptCount": 0,
+      "scoreSum": 0,
+      "scoreCount": 0
+    },
+    {
+      "code": "HS1009",
+      "title": "先证存在，再求极限",
+      "statement": "设 $x_1=1$，$x_{n+1}=\\sqrt{2+x_n}\\ (n=1,2,\\dots)$。证明数列 $\\{x_n\\}$ 收敛，并求 $\\lim\\limits_{n\\to\\infty}x_n$。",
+      "tags": [
+        "数列极限",
+        "单调有界定理"
+      ],
+      "thinking": 6,
+      "difficulty": 6,
+      "calc": 4,
+      "source": "考研真题改编",
+      "hints": [
+        "先猜极限：若极限为 $L$，则 $L=\\sqrt{2+L}$，得 $L=2$。",
+        "用归纳法证 $x_n<2$（有界）。",
+        "比较 $x_{n+1}^{2}$ 与 $x_n^{2}$ 证单调递增。"
+      ],
+      "answer": "$\\lim\\limits_{n\\to\\infty}x_n=2$",
+      "solution": "### 第一步：有界性\n\n$x_1=1<2$。若 $x_n<2$，则\n\n$$x_{n+1}=\\sqrt{2+x_n}<\\sqrt{2+2}=2.$$\n\n由归纳法，$x_n<2$ 对一切 $n$ 成立。\n\n### 第二步：单调性\n\n$$x_{n+1}^{2}-x_n^{2}=(2+x_n)-x_n^{2}=(2-x_n)(1+x_n)>0,$$\n\n故 $x_{n+1}>x_n$，数列单调递增。\n\n### 第三步：单调有界 ⇒ 收敛\n\n设 $\\lim\\limits_{n\\to\\infty}x_n=L$（存在且 $1\\le L\\le 2$）。对递推式两边取极限：\n\n$$L=\\sqrt{2+L}\\ \\Longrightarrow\\ L^{2}-L-2=0\\ \\Longrightarrow\\ L=2\\ \\text{或}\\ L=-1.$$\n\n由 $L\\ge1$ 舍去 $-1$，故\n\n$$\\lim_{n\\to\\infty}x_n=2.$$\n\n> 顺序不能反：必须先证明极限存在，才能对递推式取极限。",
+      "status": "approved",
+      "authorId": null,
+      "authorName": "题库组",
+      "rejectReason": "",
+      "createdAt": "2026-11-25T03:46:22.090Z",
+      "reviewedAt": "2026-11-25T03:46:22.090Z",
+      "solvedCount": 0,
+      "attemptCount": 0,
+      "scoreSum": 0,
+      "scoreCount": 0
+    },
+    {
+      "code": "HS1010",
+      "title": "区域是四分之一圆，别硬算直角坐标",
+      "statement": "计算\n\n$$\\iint_{D}e^{-(x^{2}+y^{2})}\\,\\mathrm{d}x\\,\\mathrm{d}y,$$\n\n其中 $D=\\{(x,y)\\mid x^{2}+y^{2}\\le 1,\\ x\\ge0,\\ y\\ge0\\}$。",
+      "tags": [
+        "二重积分",
+        "极坐标"
+      ],
+      "thinking": 6,
+      "difficulty": 6,
+      "calc": 6,
+      "source": "同济《高等数学》习题",
+      "hints": [
+        "被积函数只含 $x^{2}+y^{2}$，区域是圆的一部分 → 极坐标。",
+        "别忘雅可比行列式：$\\mathrm{d}x\\mathrm{d}y=r\\,\\mathrm{d}r\\,\\mathrm{d}\\theta$。",
+        "$\\int e^{-r^{2}}r\\,\\mathrm{d}r$ 用凑微分，令 $u=r^{2}$。"
+      ],
+      "answer": "$\\dfrac{\\pi}{4}\\left(1-\\dfrac1e\\right)$",
+      "solution": "### 第一步：极坐标换元\n\n令 $x=r\\cos\\theta,\\ y=r\\sin\\theta$，则 $\\mathrm{d}x\\mathrm{d}y=r\\,\\mathrm{d}r\\,\\mathrm{d}\\theta$，且\n\n$$D:\\ 0\\le r\\le1,\\quad 0\\le\\theta\\le\\frac{\\pi}{2}.$$\n\n### 第二步：化为累次积分\n\n$$\\iint_D e^{-(x^{2}+y^{2})}\\mathrm{d}x\\mathrm{d}y=\\int_0^{\\pi/2}\\mathrm{d}\\theta\\int_0^1 e^{-r^{2}}r\\,\\mathrm{d}r.$$\n\n### 第三步：算内层\n\n$$\\int_0^1 e^{-r^{2}}r\\,\\mathrm{d}r=\\left[-\\frac12e^{-r^{2}}\\right]_0^1=\\frac12\\left(1-\\frac1e\\right).$$\n\n### 结论\n\n$$\\iint_D e^{-(x^{2}+y^{2})}\\mathrm{d}x\\mathrm{d}y=\\frac{\\pi}{2}\\cdot\\frac12\\left(1-\\frac1e\\right)=\\frac{\\pi}{4}\\left(1-\\frac1e\\right).$$\n\n> 若忘了 $r$，结果是 $\\dfrac{\\pi}{2}\\left(1-\\dfrac1e\\right)$，正好差一倍——这是最常见的丢分点。",
+      "status": "approved",
+      "authorId": null,
+      "authorName": "题库组",
+      "rejectReason": "",
+      "createdAt": "2026-11-25T03:46:22.090Z",
+      "reviewedAt": "2026-11-25T03:46:22.090Z",
+      "solvedCount": 0,
+      "attemptCount": 0,
+      "scoreSum": 0,
+      "scoreCount": 0
+    }
+  ],
+  "posts": [],
+  "sessions": {
+    "14ec6f594ae0f6884d9029732bc04f4c7ccb3ffe30260458": {
+      "uid": "11056e89-c68c-4a5b-8904-5c9c0c31bffe",
+      "exp": 1798170382316
+    }
+  },
+  "daily": {},
+  "submissions": [],
+  "feedbacks": [],
+  "emailCodes": {},
+  "settings": {
+    "llm": {
+      "baseUrl": "https://api.deepseek.com/v1",
+      "model": "deepseek-chat",
+      "apiKey": ""
+    },
+    "site": "Advanced-Math-Vault",
+    "llmVision": {
+      "baseUrl": "https://open.bigmodel.cn/api/paas/v4",
+      "model": "glm-4v-flash",
+      "apiKey": ""
+    }
+  },
+  "meta": {
+    "seq": 1011,
+    "postSeq": 1,
+    "replySeq": 1,
+    "feedbackSeq": 1
+  }
+}

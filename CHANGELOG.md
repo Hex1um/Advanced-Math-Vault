@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v0.17.3 — 2026-11-25
+
+修复图片判卷的两处回归，让站点识图 Key 真正可用于全站图片判卷。
+
+- **误伤图片判卷**：v0.17.1 加的「防提示注入」降级（模型判 correct 但文字结论没答案 → 降到 79）对图片提交也生效了，而图片提交的文字 `only` 本就为空、`answerConfirmed` 必然 false → 所有正确的手写判卷都被压到 79、提示「请写出明确的最终答案」。修复：降级条件加 `!image`，图片判卷由视觉模型读图判定。
+- **站点识图 Key 不认**：判卷接口的可视通道检查只看用户自己的 Key（`userLlmConfig`），管理员在后台配的站点识图 Key（`db.settings.llmVision`）被忽略，图片提交仍返回 needVision。修复：候选通道包含任一视觉模型即放行，`llmCandidates` 里站点/用户视觉通道都能进入判卷循环。
+- 端到端实测：真实图片 + 站点识图 Key → `verdict=correct, score=100, passed=true`，经验正常入账。
+- 冒烟 110/110。
+
 ## v0.17.2 — 2026-11-25
 
 修复带图片判卷的 `Cannot access 'VISION_MODEL' before initialization` 报错。

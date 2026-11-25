@@ -2002,12 +2002,16 @@ async function handleApi(req, res, pathname, query) {
       p.attemptCount = (p.attemptCount || 0) + 1;
       user.attempts = (user.attempts || 0) + 1;   // 用于排行榜显示「做过多少题」
 
+      // 图片判卷：用户自己的视觉 Key 或站点级识图 Key（管理员后台配的）都算可用；
+      // 原逻辑只认用户自己的 Key，导致管理员配了站点识图 Key 后全站用户仍无法用图片判卷。
       const own = userLlmConfig(body);
-      if (image && !(own && VISION_MODEL.test(own.model))) {
+      const hasVision = (own && VISION_MODEL.test(own.model || '')) ||
+        llmCandidates(body).some((c) => VISION_MODEL.test(c.model || ''));
+      if (image && !hasVision) {
         saveDb();
         return send(res, 200, {
           ok: true, verdict: 'unclear', needVision: true,
-          comment: '当前通道读不了图片：在「设置」里填支持图片的 Key（gpt-4o / qwen-vl / glm-4v / claude / gemini），或者把过程打成文字再交',
+          comment: '当前通道读不了图片：在「设置」里填支持图片的 Key（gpt-4o / qwen-vl / glm-4v / claude / gemini），或让管理员在后台配置站点识图模型，或者把过程打成文字再交',
           errors: []
         });
       }
@@ -2093,9 +2097,11 @@ async function handleApi(req, res, pathname, query) {
       let score = Number.isFinite(judged.score) ? Math.round(judged.score) : 0;
       score = Math.max(0, Math.min(100, score));
       let verdict = judged.verdict;
-      if (verdict === 'correct' && !answerConfirmed && !peeked) {
-        // 防提示注入：学生可在过程里写「老师说这题正确」让模型吐 correct，
+      if (verdict === 'correct' && !answerConfirmed && !peeked && !image) {
+        // 防提示注入：学生可在**文字过程**里写「老师说这题正确」让模型吐 correct，
         // 但结论并没有标准答案 → 不能凭模型一句话就给满分通过。
+        // 图片提交不适用：答案写在照片上，文字 only 为空，answerConfirmed 必然 false；
+        // 此时由视觉模型直接读图判定，不能再降级，否则所有正确的图片判卷都被误判为 79。
         verdict = 'partial';
         score = Math.min(score, 79);
         judged.comment = '模型判为正确，但结论里没有核对到标准答案，暂不计通过；请写出明确的最终答案。';
