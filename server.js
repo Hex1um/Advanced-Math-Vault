@@ -3120,7 +3120,7 @@ function parseJudge(text) {
       visionCfgs.push(cfg);
     }
     if (!visionCfgs.length) {
-      return send(res, 200, { ok: false, needVision: true, prompt: OCR_PROMPT });
+      return send(res, 200, { ok: true, needVision: true, prompt: OCR_PROMPT });
     }
     let out = '';
     let used = null;
@@ -3146,7 +3146,7 @@ function parseJudge(text) {
     if (!out) return fail(res, 502, '识图模型调用失败：' + (errors[0] || '无可用通道'));
     const raw = parseGenerated(out) || extractJson(out);
     const item = validateGenerated(raw);
-    if (!item) return send(res, 200, { ok: false, needVision: false, prompt: OCR_PROMPT, raw: String(out).slice(0, 800) });
+    if (!item) return send(res, 200, { ok: true, needVision: false, parsed: false, prompt: OCR_PROMPT, raw: String(out).slice(0, 800) });
     return send(res, 200, { ok: true, problem: item, model: { provider: used.name, model: used.model } });
   }
 

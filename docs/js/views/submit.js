@@ -246,7 +246,7 @@
           const skipVision = channel === 'local';
           const visCfg = window.UI.visionConfig ? window.UI.visionConfig() : window.UI.llmConfig();
           const res = skipVision ? { ok: false, needVision: true } : await window.API.post('/api/ai/from-image', { image: ocrImage, llm: visCfg });
-          if (res.ok) {
+          if (res.ok && !res.needVision) {
             const p = res.problem;
             const fm = document.getElementById('submitForm');
             fm.title.value = p.title || '';
@@ -265,7 +265,8 @@
             box.innerHTML = '<div class="judge-result correct"><b>已补全</b><span>核对一遍再提交，AI 转写可能漏字</span></div>';
             return;
           }
-          // 没有视觉模型：先用浏览器 OCR 把图片转成文字，填进题干框让用户核对
+          if (res && res.parsed === false) console.warn('[ocr] 视觉模型输出解析失败，回落本地 OCR');
+          // 没有视觉模型 / 解析失败：先用浏览器 OCR 把图片转成文字，填进题干框让用户核对
           if (window.OCR) {
             try {
               let text = window.OCR.tidy(await window.OCR.imageToText(ocrImage, function (pct) {
