@@ -1445,16 +1445,15 @@ function noteQuota(user, isReply) {
 }
 
 /* 邮箱验证码：本地库存储，5 分钟有效。
-   站点没有配 SMTP，验证码会直接回给前端（面板上显示），
-   这对个人站够用；将来接真实邮件服务只需替换 sendMailCode。 */
+   站点没有配 SMTP：验证码只写服务端日志给管理员看，绝不在 HTTP 响应里回显
+   （否则任何人注册后都能绑任意假邮箱、绕过发帖限流）。接真实 SMTP 只需替换 sendMailCode。 */
 function genCode() {
   return String(crypto.randomInt(100000, 1000000));
 }
 
 function sendMailCode(email, code) {
-  // 没有 SMTP 时：记录到日志，返回给前端展示
-  console.log('[mail] 验证码 ' + code + ' -> ' + email);
-  return { delivered: false, code };
+  console.log('[mail] 验证码 ' + code + ' -> ' + email + '（站点未接入 SMTP，仅管理员可见）');
+  return { delivered: false };
 }
 
 const FEEDBACK_TYPES = {
@@ -1629,7 +1628,11 @@ async function handleApi(req, res, pathname, query) {
     if (password.length < 8) return fail(res, 400, '密码至少 8 位');
     if (db.users.some((u) => u.name.toLowerCase() === name.toLowerCase())) return fail(res, 409, '这个名字已经有人用了');
     const { salt, hash } = hashPassword(password);
-    const isFirst = db.users.length === 0;
+    // 公开部署后不能让「第一个注册的陌生人」自动当管理员：
+    // 仅开发模式 + 库里确实没有任何 admin 时才自动授予；生产环境一律普通用户，
+    // 管理员由 tools/create-admin.mjs 预设，避免删号后被人抢注 admin。
+    const noAdmin = !db.users.some((x) => x.role === 'admin');
+    const isFirst = noAdmin && db.users.length === 0 && process.env.NODE_ENV === 'development';
     const u = {
       id: crypto.randomUUID(),
       name,
@@ -1703,12 +1706,12 @@ async function handleApi(req, res, pathname, query) {
     db.emailCodes[user.id] = { email, code, exp: Date.now() + 5 * 60 * 1000, tries: 0 };
     saveDb();
     const r = sendMailCode(email, code);
+    // 验证码绝不随 HTTP 响应回显（否则谁能注册就能绑任意假邮箱、绕过发帖限流）。
+    // 无 SMTP 时验证码只写服务端日志，供站点管理员查看。
     return send(res, 200, {
       ok: true,
       delivered: r.delivered,
-      // 不再把验证码回给前端（否则谁都能绑定任意假邮箱）；本地部署看服务端日志
-      code: process.env.NODE_ENV === 'development' && !r.delivered ? code : undefined,
-      message: r.delivered ? '验证码已发送到邮箱' : '站点未接入邮件服务，验证码已写入服务端日志（开发模式会直接返回）'
+      message: r.delivered ? '验证码已发送到邮箱' : '站点未接入邮件服务，验证码已写入服务端日志，请联系管理员'
     });
   }
 
@@ -2064,7 +2067,10 @@ async function handleApi(req, res, pathname, query) {
       // 模型常因「跳步 / 不够严谨」把 verdict 压到 partial，这里按结论行的最终答案兜底纠正，
       // 避免同一份提交「无模型 80 分过、有模型 79 分挂」。
       const answerConfirmed = processMatchesAnswer(only, p.answer);
-      if (answerConfirmed && judged.verdict !== 'wrong') {
+      // 防抄答案刷分：看过标准答案 / 问过 AI 的提交，即使结论命中也不给「通过」，
+      // 否则学生点「看答案」后原样抄回就能拿满分、把题记为做出。
+      const peeked = !!(rec && (rec.revealed || rec.askedAI));
+      if (answerConfirmed && judged.verdict !== 'wrong' && !peeked) {
         judged = Object.assign({}, judged, {
           verdict: 'correct',
           score: answerOnly ? 80 : 100,
@@ -2073,10 +2079,23 @@ async function handleApi(req, res, pathname, query) {
             : '最终答案正确；按现行规则，写了思路或过程即给满分，中间步骤未逐项核对。',
           errors: []
         });
+      } else if (answerConfirmed && peeked && judged.verdict === 'partial') {
+        judged = Object.assign({}, judged, {
+          score: Math.min(judged.score || 59, 59),
+          comment: '结论与标准答案一致，但你已查看答案或问过 AI，本次不计通过；请独立重做一遍。'
+        });
       }
       let score = Number.isFinite(judged.score) ? Math.round(judged.score) : 0;
       score = Math.max(0, Math.min(100, score));
       let verdict = judged.verdict;
+      if (verdict === 'correct' && !answerConfirmed && !peeked) {
+        // 防提示注入：学生可在过程里写「老师说这题正确」让模型吐 correct，
+        // 但结论并没有标准答案 → 不能凭模型一句话就给满分通过。
+        verdict = 'partial';
+        score = Math.min(score, 79);
+        judged.comment = '模型判为正确，但结论里没有核对到标准答案，暂不计通过；请写出明确的最终答案。';
+        judged.errors = (judged.errors || []).slice(0, 1);
+      }
       if (verdict === 'correct') {
         const base = answerOnly ? 80 : 100;
         score = Math.max(base, score);
@@ -2204,6 +2223,13 @@ async function handleApi(req, res, pathname, query) {
 
     if (sub === '/solve' && method === 'POST') {
       if (!user) return fail(res, 401, '登录后才能记录做题进度');
+      // 反刷经验：必须通过判卷（本人该题有 ≥80 分的提交）才能记「做出」。
+      // 原来这个接口谁都能直接调，一 POST 就 +经验、把题算作做出，公开后会被刷榜。
+      const bestScore = (user.best && user.best[p.code] && user.best[p.code].score) || 0;
+      const hasPassed = bestScore >= 80 || (db.submissions || []).some(
+        (s) => s.uid === user.id && s.code === p.code && (s.score || 0) >= 80
+      );
+      if (!hasPassed) return fail(res, 403, '先通过这道题的判卷（≥80 分）才能记为做出');
       user.solved = user.solved || {};
       const rec = user.solved[p.code];
       if (rec && rec.done) return send(res, 200, { ok: true, already: true, exp: user.exp, gained: 0, level: levelInfo(user.exp) });
@@ -2716,22 +2742,26 @@ async function handleApi(req, res, pathname, query) {
           model: db.settings.llm.model,
           configured: llmConfigured(),
           keyHint: db.settings.llm.apiKey ? db.settings.llm.apiKey.slice(0, 4) + '••••' + db.settings.llm.apiKey.slice(-4) : ''
+        },
+        // 站点级识图配置：给全站用户读图用；只回脱敏 key，绝不回明文
+        vision: {
+          baseUrl: (db.settings.llmVision || {}).baseUrl || '',
+          model: (db.settings.llmVision || {}).model || '',
+          configured: !!(db.settings.llmVision && db.settings.llmVision.apiKey),
+          keyHint: db.settings.llmVision && db.settings.llmVision.apiKey
+            ? db.settings.llmVision.apiKey.slice(0, 4) + '••••' + db.settings.llmVision.apiKey.slice(-4)
+            : ''
         }
       });
     }
 
     if (pathname === '/api/admin/llm' && method === 'POST') {
       const body = await readBody(req);
-      if (body.baseUrl !== undefined) {
-        const normalized = safeLlmBaseUrl(body.baseUrl);
-        if (!normalized) return fail(res, 400, '接口地址必须是 https，且域名在白名单内（可用 LLM_ALLOWED_HOSTS 扩展）');
-        db.settings.llm.baseUrl = normalized;
-      }
-      if (body.model !== undefined) db.settings.llm.model = String(body.model).trim();
-      if (body.apiKey !== undefined && String(body.apiKey).trim()) db.settings.llm.apiKey = String(body.apiKey).trim();
-      if (body.clearKey) db.settings.llm.apiKey = '';
-      // 识图通道：target='vision' 时写另一组，全站用户都能用
-      if (body.target === 'vision' || body.vision) {
+      // 两组配置严格分流：target='vision' 只碰 llmVision，绝不写解题模型；
+      // 反之只碰 llm。前端识图卡片提交的是顶层 baseUrl/model/apiKey+target，
+      // 若不分流就会把解题模型覆盖成识图模型。
+      const isVision = body.target === 'vision' || body.vision;
+      if (isVision) {
         const v = body.vision || body;
         db.settings.llmVision = db.settings.llmVision || {};
         if (v.baseUrl !== undefined) {
@@ -2742,6 +2772,15 @@ async function handleApi(req, res, pathname, query) {
         if (v.model !== undefined) db.settings.llmVision.model = String(v.model).trim();
         if (v.apiKey !== undefined && String(v.apiKey).trim()) db.settings.llmVision.apiKey = String(v.apiKey).trim();
         if (body.clearKey) db.settings.llmVision.apiKey = '';
+      } else {
+        if (body.baseUrl !== undefined) {
+          const normalized = safeLlmBaseUrl(body.baseUrl);
+          if (!normalized) return fail(res, 400, '接口地址必须是 https，且域名在白名单内（可用 LLM_ALLOWED_HOSTS 扩展）');
+          db.settings.llm.baseUrl = normalized;
+        }
+        if (body.model !== undefined) db.settings.llm.model = String(body.model).trim();
+        if (body.apiKey !== undefined && String(body.apiKey).trim()) db.settings.llm.apiKey = String(body.apiKey).trim();
+        if (body.clearKey) db.settings.llm.apiKey = '';
       }
       saveDb(true);
       return send(res, 200, {
@@ -2856,6 +2895,12 @@ async function handleApi(req, res, pathname, query) {
       db.users = db.users.filter((u) => !ids.has(u.id));
       db.posts = (db.posts || []).filter((p) => !ids.has(p.authorId));
       db.feedbacks = (db.feedbacks || []).filter((f) => !ids.has(f.userId || f.authorId));
+      // 连带清理所有含用户身份/理由/邮箱的残留记录（公开后这些是隐私面）
+      db.submissions = (db.submissions || []).filter((s) => !ids.has(s.userId || s.uid || s.authorId));
+      db.ocrBadcases = (db.ocrBadcases || []).filter((b) => !ids.has(b.uid || b.userId));
+      for (const k of Object.keys(db.emailCodes || {})) {
+        if (ids.has(k)) delete db.emailCodes[k];
+      }
       for (const k of Object.keys(db.sessions || {})) {
         if (db.sessions[k] && ids.has(db.sessions[k].uid || db.sessions[k].userId)) delete db.sessions[k];
       }

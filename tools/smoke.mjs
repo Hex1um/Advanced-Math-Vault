@@ -72,7 +72,9 @@ const child = spawn(process.execPath, ['server.js'], {
     SEED_FILE: path.join(ROOT, 'data', 'problems.seed.sample.json'),
     LLM_API_KEY: '',
     DEEPSEEK_API_KEY: '',
-    NO_FREE: '1'
+    NO_FREE: '1',
+    // 测试需要「首个注册账号自动成为管理员」；生产环境已禁用该后门，这里显式开开发模式
+    NODE_ENV: 'development'
   }),
   stdio: ['ignore', 'pipe', 'pipe']
 });

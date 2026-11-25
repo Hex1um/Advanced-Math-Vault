@@ -10,7 +10,7 @@ import path from 'node:path';
 
 const ROOT = path.resolve(new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
 const DB_FILE = process.env.DB_FILE || path.join(ROOT, 'data', 'db.json');
-const SRC_DIR = process.env.SRC_DIR || 'C:/Users/11603/WorkBuddy/2026-11-23-21-11-27/liugy-out';
+const SRC_DIR = process.env.SRC_DIR || path.join(ROOT, 'liugy-out');
 const WRITE = process.argv.includes('--write');
 
 /* 题干指纹：去掉格式包装、保留函数名与符号，中文与数字都留 */
