@@ -25,6 +25,7 @@
 
 - 新增 `.github/workflows/pages.yml`：`public/**` 或 `docs/**` 变动时，Actions 先用 `build-pages.mjs` 从 `public/` 重建 `docs/`（需要 `SHARECODE` secret），再发布到 GitHub Pages；没有 secret 时直接发布仓库里已提交的 `docs/`，不会卡住发布。
 - 仓库内 `docs/` 的双份提交暂时保留（作为无 secret 时的兜底），后续可以按这个工作流逐步停掉手工提交。
+- **已推送并首次跑通**：`smoke`（20 个步骤）与 `pages` 均 green，见 [run 45626954102](https://github.com/Hex1um/Advanced-Math-Vault/actions/runs/45626954102)。GitHub 对 OAuth App 创建/修改 workflow 文件强制要求 `workflow` scope，授权后 `push` 才被接受。
 
 ### 前端接口契约
 

@@ -49,6 +49,8 @@ npm run check:katex   # 公式渲染，必须 0 失败
 
 CI（`.github/workflows/smoke.yml`）在 push / PR 到 `main` 时自动跑上面这一串，另外有一个 sympy job 跑 `verify_integrals.py` / `verify_limits.py`。本地过了不代表 CI 会过，反过来亦然——两边都看。
 
+> 改 CI 配置前注意：GitHub 对 OAuth App 创建/修改 `.github/workflows/*.yml` 强制要求 `workflow` scope。设备码登录的 token 默认没有，需要 `gh auth refresh -h github.com -s workflow` 授权，否则 push 会被拒绝（不是权限配置问题）。
+
 ### 硬性约定
 
 - **零依赖**：新增 npm 依赖会被拒。需要的能力用 Node 内置模块（`node:sqlite`、`node:tls`、`fetch`）自己实现，或者做成可选路径。
