@@ -24,6 +24,7 @@
     if (seg[0] === 'generate') return { name: 'generate', params: params, nav: 'generate' };
     if (seg[0] === 'wrong') return { name: 'wrongbook', params: params, nav: 'wrong' };
     if (seg[0] === 'paper') return { name: 'paper', params: params, nav: 'paper' };
+    if (seg[0] === 'exam') return { name: 'exam', params: params, nav: 'paper' };
     if (seg[0] === 'submit') return { name: 'submit', params: params, nav: 'submit' };
     if (seg[0] === 'my') return { name: 'my', params: params, nav: '' };
     if (seg[0] === 'admin') return { name: 'admin', params: params, nav: '' };
@@ -156,6 +157,15 @@
   };
 
   initTheme();
+
+  /* PWA：只在 https 或 localhost 注册。失败不影响使用（file:// 与内网 http 都会抛）。 */
+  if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('./sw.js').catch(function (e) {
+        console.warn('[pwa] Service Worker 注册失败（不影响使用）', e && e.message);
+      });
+    });
+  }
 
   /* 全局兜底：任何漏网的异常都提示一次，不让页面停在半截或静默失败 */
   (function guard() {

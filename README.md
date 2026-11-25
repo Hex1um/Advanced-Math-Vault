@@ -216,10 +216,27 @@ npm run test:sqlite                                # 全链路冒烟（SQLite �
 - **手动备份**：`node tools/ops/backup-db.mjs --label before-import`。
 - **题库回流**：`node tools/ops/export-batch.mjs`（先只报告），确认后加 `--write` 生成下一个 `data/batch-NN.json`；按「标题 + 题干」去重，只导题本体，作者统一写「题库组」，不带做题统计与审核人。
 
+## 组卷与计时模考
+
+- 组卷页的「智能组卷」按考点轮转抽题（尽量覆盖多个主标签），难度按 30% / 50% / 20% 配额，可限定考点、题量、时长；生成结果是本地区列表，可直接打印。
+- 「开始模考」进入 `#/exam`：倒计时（最后 5 分钟变红）、答案自动保存在 localStorage（刷新不丢）、进度条、交卷前未答提醒、时间到自动交卷。
+- 交卷判分：选择题 / 填空题按答案等价自动判（`/api/exam/grade`），解答题标「待自评」并给回原题链接；接口不回传正确答案，答案仍只在原题的 `/reveal` 里给。
+- 题型判定 `problemKind()`：标题优先，其次看答案形态（短答案且不含「证明/构造/略」视为填空题），所以历史题即使没标题型也能自动判分。
+
+## 错题本与间隔重复（FSRS）
+
+- 错题按稳定度 / 难度排期（`lib/fsrs.js`，确定性实现）：判错把稳定度腰斩、难度上调，首次做错立刻进今日复习；答对按「良好」推进，间隔到 8 天自动出本。
+- 每行可以直接自评「忘了 / 吃力 / 良好 / 简单」（`POST /api/wrongbook/:code/review`），也可以写一句错因备注（`POST /api/wrongbook/:code/note`，不影响排期）。
+- 今日复习按「逾期越久越优先、稳定度越低越优先」排序。
+
+## 离线与安装（PWA）
+
+`manifest.json` + `sw.js`：`/api/` 与 `/uploads/` 永远走网络（缓存接口会导致登录态错乱），页面导航网络优先、断网回退缓存，静态资源 stale-while-revalidate；缓存名带版本号，升级自动清旧缓存。
+
 ## 测试
 
 ```bash
-npm test                             # 129 项断言（JSON 引擎）：注册/改密/审核/做题/AI/论坛/两级标签/权限与安全
+npm test                             # 143 项断言（JSON 引擎）：注册/改密/审核/做题/AI/论坛/两级标签/权限与安全
 npm run test:sqlite                  # 同一套断言，跑在 SQLite 引擎上
 npm run check:store                  # 存储层：导入、增量落盘、重载一致性（32 项，含 Map 主键/精确增删/对账口径）
 npm run check:mail                   # 邮件通道（本地假 SMTP）
@@ -229,6 +246,8 @@ npm run check:ops                    # 管理员一次性重置机制
 npm run check:http                   # 路径穿越 / TRUST_PROXY / 500 脱敏 / 限流桶上限 / CORS 组合
 npm run check:md                     # Markdown 渲染、XSS 链接白名单、行内代码与公式边界
 npm run check:mathkey                # 公式键盘的光标环境状态机
+npm run check:components             # 前端公共组件（题目行 / 标签 / 统计条 / 自评）
+npm run check:fsrs                   # 错题本 FSRS 调度器（单调性 / 边界 / 旧数据兼容）
 npm run check:pages                  # docs/ 产物自检（入口、本地资源、config.js）
 npm run check:dedup                  # 查重工具自检
 npm run check:katex                  # 公式可渲染性，必须 0 失败（--strict-unclosed 连未闭合分隔符一起卡）

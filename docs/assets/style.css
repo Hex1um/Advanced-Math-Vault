@@ -1419,3 +1419,48 @@ html[data-theme="dark"] .mk-tab.on { background: #2f5fd0; border-color: #2f5fd0;
   border: 1px solid var(--line); border-radius: 4px;
   background: var(--surface); color: var(--text-2);
 }
+
+/* ---------------------------------------------------------------- 错题本 · FSRS
+   自评按钮与错因备注：做成紧凑的行内控件，避免把表格行撑高太多。 */
+.rate-btns { display: inline-flex; gap: 4px; flex-wrap: wrap; margin-top: 6px; }
+.rate-btns .chip { height: 24px; font-size: 12px; padding: 0 8px; cursor: pointer; }
+.rate-btns .chip[data-rate="again"] { border-color: #f0c2c2; color: #b03b3b; }
+.rate-btns .chip[data-rate="hard"] { border-color: #f2ddb8; color: #8a5a12; }
+.rate-btns .chip[data-rate="good"] { border-color: #bcd9f5; color: #255f9c; }
+.rate-btns .chip[data-rate="easy"] { border-color: #bde3d4; color: #1f7a68; }
+.rate-btns .chip:disabled { opacity: .55; cursor: default; }
+.review-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.review-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.wrong-note { display: flex; gap: 6px; align-items: center; margin-top: 6px; max-width: 520px; }
+.wrong-note .control { height: 26px; font-size: 12px; padding: 0 8px; flex: 1; min-width: 0; }
+.wrong-note .chip { height: 26px; font-size: 12px; cursor: pointer; }
+[data-theme="dark"] .rate-btns .chip[data-rate="again"] { border-color: #6d3232; color: #f0a8a8; }
+[data-theme="dark"] .rate-btns .chip[data-rate="hard"] { border-color: #6a5730; color: #e6c789; }
+[data-theme="dark"] .rate-btns .chip[data-rate="good"] { border-color: #33536f; color: #9cc6ee; }
+[data-theme="dark"] .rate-btns .chip[data-rate="easy"] { border-color: #2d5a4d; color: #8fd6bf; }
+
+/* ---------------------------------------------------------------- 计时模考 */
+.exam-bar {
+  position: sticky; top: 54px; z-index: 20;
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 10px 14px; margin-bottom: 14px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 4px;
+}
+.exam-timer { font-family: var(--mono); font-size: 20px; font-weight: 600; color: var(--text); letter-spacing: .5px; }
+.exam-timer.urgent { color: #b03b3b; }
+.exam-progress { flex: 1; min-width: 120px; height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.exam-progress i { display: block; height: 100%; background: var(--brand, #2f6fed); transition: width .2s; }
+.exam-list { display: flex; flex-direction: column; gap: 12px; }
+.exam-item { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 12px 14px; }
+.exam-q-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.exam-q-body { font-size: 13.5px; line-height: 1.9; color: var(--text); }
+.exam-q-body p { margin: 4px 0; }
+.exam-input { width: 100%; margin-top: 10px; font-size: 13.5px; }
+textarea.exam-input { resize: vertical; min-height: 78px; font-family: inherit; }
+.exam-answer.static { margin-top: 10px; padding: 8px 10px; border: 1px dashed var(--line); border-radius: 4px; font-size: 13.5px; color: var(--text-2); white-space: pre-wrap; }
+.exam-item.locked { opacity: .92; }
+.exam-result { padding: 18px; margin-bottom: 16px; }
+.exam-score { font-size: 34px; font-weight: 700; color: var(--text); }
+.exam-score small { font-size: 14px; font-weight: 400; color: var(--muted); }
+.sm-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 12px; }
+.sm-tags .chip { cursor: pointer; }

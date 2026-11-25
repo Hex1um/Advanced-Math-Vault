@@ -377,6 +377,25 @@ try {
   ok('组卷接口返回题目', paperGen.json.ok && paperGen.json.total > 0, JSON.stringify(paperGen.json).slice(0, 100));
   ok('组卷按题型分组', Array.isArray(paperGen.json.parts) && paperGen.json.parts.length === 3);
 
+  // 智能组卷：题量/时长/考点覆盖/分值
+  const auto = await req('/api/paper/auto', { method: 'POST', body: JSON.stringify({ count: 8, minutes: 40, difficulty: 'mixed' }) });
+  ok('智能组卷按题量返回', auto.json.ok && auto.json.total === 8, JSON.stringify(auto.json).slice(0, 120));
+  ok('智能组卷尊重时长设置', auto.json.minutes === 40 && auto.json.perQuestionSec > 0);
+  ok('智能组卷给出考点覆盖', auto.json.coverage && Object.keys(auto.json.coverage).length >= 1, JSON.stringify(auto.json.coverage));
+  ok('每题都有分值与建议时长', (auto.json.parts || []).every((p) => p.items.every((it) => it.points >= 3 && it.seconds > 0)));
+  const autoEmpty = await req('/api/paper/auto', { method: 'POST', body: JSON.stringify({ count: 5, mainTags: ['不存在的考点'] }) });
+  ok('无可用题时给出明确提示', autoEmpty.status === 404 || (autoEmpty.json && autoEmpty.json.total > 0), String(autoEmpty.status));
+
+  // 模考判卷：客观题按答案等价判定，不泄露正确答案
+  const rev = await req('/api/problems/HS1001/reveal', { method: 'POST', body: JSON.stringify({}) });
+  const rightAns = String(rev.json.answer || '').slice(0, 400);
+  const gOk = await req('/api/exam/grade', { method: 'POST', body: JSON.stringify({ items: [{ code: 'HS1001', answer: rightAns }] }) });
+  ok('模考判卷：正确答案得分', gOk.json.ok && gOk.json.score > 0, JSON.stringify(gOk.json).slice(0, 160));
+  const gBad = await req('/api/exam/grade', { method: 'POST', body: JSON.stringify({ items: [{ code: 'HS1001', answer: 'zzz-完全不对' }, { code: 'HS1002', answer: '' }] }) });
+  ok('模考判卷：错误答案 0 分', gBad.json.score === 0);
+  ok('模考判卷：空白标记 blank', gBad.json.items.some((x) => x.status === 'blank'));
+  ok('模考判卷不返回正确答案', gBad.json.items.every((x) => x.expected === undefined));
+
   const sug = await u2('/api/forum/suggest-title', { method: 'POST', body: JSON.stringify({ body: '我算 lim x->0 (e^x-1)/x 得到 1，但答案写的是 2，不知道哪步错了' }) });
   ok('AI 起标题有返回', sug.json.ok && typeof sug.json.title === 'string', JSON.stringify(sug.json).slice(0, 100));
 
@@ -387,6 +406,20 @@ try {
   ok('只交错误答案判 wrong 且不及格', wrongOnly.json.verdict === 'wrong' && wrongOnly.json.passed === false, JSON.stringify(wrongOnly.json).slice(0, 120));
   const rv = await req('/api/my/review-today');
   ok('今日复习队列有到期题', rv.json && rv.json.ok && rv.json.due >= 1 && rv.json.items.length >= 1, JSON.stringify(rv.json && { due: rv.json.due }));
+
+  // FSRS：自评复习（again/hard/good/easy）与个人备注
+  const wb1 = await req('/api/wrongbook');
+  ok('错题本带 FSRS 字段', wb1.json.items.length > 0 && wb1.json.items.every((i) => typeof i.stability === 'number' && typeof i.state === 'string'), JSON.stringify(wb1.json.items[0] || {}).slice(0, 120));
+  const rvCode = wb1.json.items[0].code;
+  const rated = await req('/api/wrongbook/' + rvCode + '/review', { method: 'POST', body: JSON.stringify({ rating: 'good', note: '泰勒展开要展开到 3 阶' }) });
+  ok('自评复习返回新间隔', rated.json.ok && rated.json.intervalDays >= 1 && rated.json.stability > 0, JSON.stringify(rated.json).slice(0, 120));
+  const wb2 = await req('/api/wrongbook');
+  const card2 = wb2.json.items.filter((i) => i.code === rvCode)[0];
+  ok('评分后 reps 增加且备注保存', !!card2 && card2.reps >= 1 && card2.note === '泰勒展开要展开到 3 阶', JSON.stringify(card2 || {}).slice(0, 140));
+  const badRate = await req('/api/wrongbook/' + rvCode + '/review', { method: 'POST', body: JSON.stringify({ rating: '乱填' }) });
+  ok('非法评分按 good 处理且不报错', badRate.json.ok === true, JSON.stringify(badRate.json).slice(0, 120));
+  const notInBook = await req('/api/wrongbook/NOSUCH99/review', { method: 'POST', body: JSON.stringify({ rating: 'good' }) });
+  ok('不在错题本的题不能自评', notInBook.status === 404, String(notInBook.status));
   ok('到期题带复习间隔', !!(rv.json.items && rv.json.items[0] && rv.json.items[0].intervalDays >= 1));
 
   const st = await req('/api/my/stats');

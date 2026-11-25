@@ -223,21 +223,16 @@
       return;
     }
 
+    /* 行渲染交给 Components.problemRow：题库 / 错题本 / 组卷预览共用同一份结构，
+       改一次三处生效（以前是三份手写 HTML，样式改了经常漏一处）。 */
     const rows = data.items.map(function (p) {
-      const lv = window.UI.levelOf(p.difficulty);
-      const rate = p.attemptCount ? Math.round((p.solvedCount / Math.max(1, p.attemptCount + p.solvedCount)) * 100) + '%' : '—';
-      return '<div class="prow' + (p.solved ? ' solved' : '') + '" data-code="' + p.code + '">'
-        + '<div class="pstate">' + (p.solved ? '<span class="ok">✓</span>' : '<span class="none"></span>') + '</div>'
-        + '<div class="pcode">' + p.code + '</div>'
-        + '<div class="pmain">'
-        + '<div class="pexcerpt"><a href="#/problem/' + p.code + '">' + titleHTML(p.excerpt || p.title) + '</a></div>'
-        + '<div class="tags">' + window.UI.tagBadges(p, { showKind: true }) + '</div>'
-        + window.UI.scoreBars(p, true)
-        + '</div>'
-        + '<div class="pdiff">' + window.UI.levelBadge(p) + '<span class="rate">通过率 ' + rate + '</span></div>'
-        + '<div class="pmeta"><button class="paper-add" data-code="' + p.code + '" title="加入试卷">' + (window.Paper && window.Paper.has(p.code) ? '✓' : '+') + '</button>'
-        + '<span>' + p.solvedCount + ' 通过</span></div>'
-        + '</div>';
+      // 列表里把展示型分式收成行内分式，避免行高被撑开（与 titleHTML 的处理一致）
+      const slim = Object.assign({}, p, {
+        excerpt: String(p.excerpt || p.title || '').replace(/\\dfrac/g, '\\frac').replace(/\\displaystyle/g, '')
+      });
+      return window.Components.problemRow(slim, {
+        paperAdded: !!(window.Paper && window.Paper.has(p.code))
+      });
     }).join('');
 
     wrap.innerHTML =

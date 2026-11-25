@@ -36,6 +36,102 @@
 
   window.Paper = { load: load, save: save, has: has, toggle: toggle, clear: clear };
 
+  /* ---- 智能组卷 / 模考的记住上次设置 ---- */
+  const SMART_KEY = 'mv_smart_v1';
+  const SMART_DEF = { count: 10, minutes: 60, difficulty: 'mixed', mains: [] };
+
+  function loadSmart() {
+    try {
+      const v = JSON.parse(localStorage.getItem(SMART_KEY) || 'null');
+      return v && typeof v === 'object' ? Object.assign({}, SMART_DEF, v) : Object.assign({}, SMART_DEF);
+    } catch (e) { return Object.assign({}, SMART_DEF); }
+  }
+  function saveSmart(v) {
+    try { localStorage.setItem(SMART_KEY, JSON.stringify(v)); } catch (e) {}
+  }
+
+  function smartPanel(smart) {
+    const mains = (window.API.State.tagTree || []).map(function (m) { return m.name; });
+    const existing = window.Exam && window.Exam.read ? window.Exam.read() : null;
+    return '<div class="card form-card" id="smartPanel" style="margin-bottom:18px">'
+      + '<h3 style="margin:0 0 6px;font-size:15px">智能组卷 / 计时模考</h3>'
+      + '<p class="small muted" style="margin:0 0 10px">按考点轮转抽题（尽量覆盖多个主标签），难度按 30% / 50% / 20% 配额；'
+      + '可以直接生成打印卷，也可以进入倒计时模考（答案自动保存，交卷后客观题自动判分）。</p>'
+      + '<div class="field-row three">'
+      + '<div class="field"><label>题量</label><input id="smCount" type="number" min="3" max="30" value="' + smart.count + '" /></div>'
+      + '<div class="field"><label>时长（分钟）</label><input id="smMinutes" type="number" min="10" max="180" value="' + smart.minutes + '" /></div>'
+      + '<div class="field"><label>难度</label><select id="smDiff" class="control">'
+      + ['mixed:混合（基础/中等/提高）', 'easy:基础', 'medium:中等', 'hard:提高'].map(function (x) {
+        const parts = x.split(':');
+        return '<option value="' + parts[0] + '"' + (smart.difficulty === parts[0] ? ' selected' : '') + '>' + parts[1] + '</option>';
+      }).join('')
+      + '</select></div></div>'
+      + '<div class="small muted">限定考点（不选=全部）</div>'
+      + '<div class="sm-tags" id="smTags">'
+      + mains.map(function (m) {
+        return '<button class="chip' + (smart.mains.indexOf(m) >= 0 ? ' active' : '') + '" data-main="' + window.Md.esc(m) + '">' + window.Md.esc(m) + '</button>';
+      }).join('')
+      + '</div>'
+      + '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">'
+      + '<button class="btn btn-primary" id="smExam">开始模考</button>'
+      + '<button class="btn" id="smGen">生成试卷</button>'
+      + (existing ? '<a class="btn" href="#/exam">继续上次模考（剩余 ' + window.Exam.mmss(existing.endsAt - Date.now()) + '）</a>' : '')
+      + '<span class="small muted" id="smHint"></span></div>'
+      + '</div>';
+  }
+
+  function bindSmart(el) {
+    const panel = el.querySelector('#smartPanel');
+    if (!panel) return;
+    const smart = loadSmart();
+
+    panel.querySelectorAll('#smTags .chip').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        const m = chip.getAttribute('data-main');
+        const i = smart.mains.indexOf(m);
+        if (i >= 0) smart.mains.splice(i, 1);
+        else smart.mains.push(m);
+        chip.classList.toggle('active', i < 0);
+        saveSmart(smart);
+      });
+    });
+
+    async function run(goExam) {
+      const hint = panel.querySelector('#smHint');
+      const count = Number(panel.querySelector('#smCount').value || 10);
+      const minutes = Number(panel.querySelector('#smMinutes').value || 60);
+      const difficulty = panel.querySelector('#smDiff').value;
+      Object.assign(smart, { count: count, minutes: minutes, difficulty: difficulty });
+      saveSmart(smart);
+      const btns = panel.querySelectorAll('button.btn');
+      btns.forEach(function (b) { b.disabled = true; });
+      if (hint) hint.textContent = '正在抽题…';
+      try {
+        const r = await window.API.post('/api/paper/auto', {
+          count: count, minutes: minutes, difficulty: difficulty, mainTags: smart.mains
+        });
+        if (!r.total) throw new Error('没抽到题，放宽条件再试');
+        if (goExam) {
+          if (!window.Exam) throw new Error('模考模块未加载');
+          window.Exam.start({ title: r.title, minutes: r.minutes, parts: r.parts });
+          location.hash = '#/exam';
+          return;
+        }
+        const codes = [];
+        r.parts.forEach(function (part) { part.items.forEach(function (it) { codes.push(it.code); }); });
+        save({ items: codes, title: r.title, points: {} });
+        if (hint) hint.textContent = '已组卷 ' + codes.length + ' 题（覆盖 ' + Object.keys(r.coverage).length + ' 个主标签）';
+        Views.paper(el);
+      } catch (e) {
+        if (hint) hint.textContent = window.API.describe ? window.API.describe(e) : e.message;
+        btns.forEach(function (b) { b.disabled = false; });
+      }
+    }
+
+    panel.querySelector('#smExam').addEventListener('click', function () { run(true); });
+    panel.querySelector('#smGen').addEventListener('click', function () { run(false); });
+  }
+
   /* 底部悬浮条 */
   function mountBar() {
     let bar = document.getElementById('paperBar');
@@ -113,9 +209,11 @@
     if (!p.items.length) {
       el.innerHTML = '<div class="page-head"><div><h1>组卷</h1>'
         + '<p class="sub">一键随机组卷，或者在题库点题目右侧的「+」自己挑。</p></div></div>'
+        + smartPanel(loadSmart())
         + genPanel
         + '<div class="empty"><b>还没有选题</b><a href="#/problems">去题库挑题</a></div>';
       bindGen(el);
+      bindSmart(el);
       mountBar();
       return;
     }
@@ -127,9 +225,11 @@
       + '<button class="btn btn-primary" id="printPaper">打印试卷</button>'
       + '<button class="btn" id="clearPaper">清空</button>'
       + '</div></div>'
+      + smartPanel(loadSmart())
       + genPanel
       + '<div class="card paper-sheet" id="paperSheet"><div class="loading-row"><span class="spinner"></span>正在排卷…</div></div>';
     bindGen(el);
+    bindSmart(el);
 
     window.API.get('/api/problems?c=' + encodeURIComponent(p.items.join(',')) + '&size=100')
       .then(function (d) { render(d.items || []); })

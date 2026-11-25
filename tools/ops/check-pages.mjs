@@ -63,5 +63,27 @@ if (!fs.existsSync(cfgFile)) {
   }
 }
 
+/* PWA：manifest 必须可解析，sw.js 必须在产物里（否则离线/安装提示永远不出现） */
+const mf = path.join(DOCS, 'manifest.json');
+if (!fs.existsSync(mf)) {
+  bad('缺少 docs/manifest.json');
+} else {
+  try {
+    const m = JSON.parse(fs.readFileSync(mf, 'utf8'));
+    if (!m.name || !m.start_url) bad('manifest 缺少 name / start_url');
+    else good('manifest.json 可解析（' + m.short_name + '）');
+    const icons = Array.isArray(m.icons) ? m.icons : [];
+    const missingIcon = icons.find((i) => !fs.existsSync(path.join(DOCS, String(i.src || '').replace(/^\.\//, ''))));
+    if (missingIcon) bad('manifest 图标不存在：' + missingIcon.src);
+    else if (icons.length) good('manifest 图标齐全（' + icons.length + ' 个）');
+  } catch (e) {
+    bad('manifest.json 解析失败：' + e.message);
+  }
+}
+const sw = path.join(DOCS, 'sw.js');
+if (!fs.existsSync(sw)) bad('缺少 docs/sw.js（Service Worker）');
+else if (!/addEventListener\('fetch'/.test(fs.readFileSync(sw, 'utf8'))) bad('sw.js 里没有 fetch 处理逻辑');
+else good('sw.js 存在且带 fetch 处理');
+
 console.log(fail ? '\n✗ Pages 产物自检未通过（' + fail + ' 项）' : '\n✓ Pages 产物自检通过');
 process.exit(fail ? 1 : 0);

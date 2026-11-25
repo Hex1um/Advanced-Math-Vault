@@ -179,6 +179,73 @@ for (const f of [JSON2, SQLITE2, SQLITE2 + '-wal', SQLITE2 + '-shm']) {
 }
 try { fs.rmdirSync(TMP2); } catch (e) {}
 
+/* ---------------------------------------------------- P2-3 搜索索引等价性
+   索引只负责把候选缩小，最终仍由同一套内存谓词判定。
+   这里用真实题库数据逐条比对：索引候选必须是内存结果的超集，
+   且「索引候选 ∩ 谓词」与「全量 ∩ 谓词」完全一致。 */
+console.log('\n[6] P2-3 搜索索引：与内存过滤逐条等价');
+const TMP3 = path.join(ROOT, 'data', '.store-test3');
+const JSON3 = path.join(TMP3, 'db.json');
+const SQLITE3 = path.join(TMP3, 'db.sqlite');
+for (const f of [JSON3, SQLITE3, SQLITE3 + '-wal', SQLITE3 + '-shm']) {
+  try { if (fs.existsSync(f)) fs.unlinkSync(f); } catch (e) {}
+}
+fs.mkdirSync(TMP3, { recursive: true });
+const corpus = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'batch-01.json'), 'utf8'))
+  .map((p, i) => Object.assign({}, p, { code: (p.code || 'S' + i), status: 'approved', tags: p.tags || [] }));
+const fixture3 = {
+  problems: corpus, users: [], posts: [], submissions: [], feedbacks: [],
+  sessions: {}, daily: {}, emailCodes: {}, settings: {}, meta: { seq: corpus.length + 1 }
+};
+fs.writeFileSync(JSON3, JSON.stringify(fixture3, null, 2));
+const store3 = createStore({ engine: 'sqlite', dbFile: JSON3, mirrorJson: false, log: () => {} });
+store3.open();
+store3.importAll(fixture3);
+
+const matchQ = (p, q) =>
+  p.title.toLowerCase().includes(q) ||
+  p.code.toLowerCase().includes(q) ||
+  String(p.mainTag || '').toLowerCase().includes(q) ||
+  (p.examTags || []).some((t) => t.toLowerCase().includes(q)) ||
+  (p.tags || []).some((t) => t.toLowerCase().includes(q)) ||
+  String(p.source || '').toLowerCase().includes(q);
+
+const queries = ['积分', '定积', 'arcsin', '求', 'sin', 'ln', 'x^2', '根号', '分部', '指数', '不存在的关键词zzz', '洛必达'];
+let parityBad = 0;
+for (const q of queries) {
+  const term = q.toLowerCase();
+  const mem = corpus.filter((p) => matchQ(p, term)).map((p) => p.code).sort();
+  const idx = store3.searchProblemCodes(q);
+  if (!idx) { ok('索引对「' + q + '」可用', false, '返回 null'); parityBad++; continue; }
+  const missing = mem.filter((c) => !idx.has(c));
+  const viaIdx = corpus.filter((p) => idx.has(p.code) && matchQ(p, term)).map((p) => p.code).sort();
+  const same = JSON.stringify(viaIdx) === JSON.stringify(mem);
+  ok('「' + q + '」索引结果与内存一致（' + mem.length + ' 条）', !missing.length && same,
+    '缺少 ' + missing.slice(0, 3).join(',') + ' / 结果不一致');
+  if (missing.length || !same) parityBad++;
+}
+ok('索引查询整体等价', parityBad === 0, parityBad + ' 条不一致');
+
+// 增量维护：改题、删题后索引必须跟着变
+let db3 = store3.attach(store3.load());
+const target = db3.problems.find((p) => p.code === corpus[0].code);
+target.title = '新标题：傅里叶级数收敛判别';
+store3.save(db3);
+ok('改题后新关键词可命中', (store3.searchProblemCodes('傅里叶') || new Set()).has(corpus[0].code));
+ok('改题后旧关键词不再误命中',
+  !(store3.searchProblemCodes(String(corpus[0].title || 'zzz').toLowerCase().slice(0, 6)) || new Set()).has(corpus[0].code)
+  || String(corpus[0].title || '').slice(0, 6) === '新标题：傅');
+
+db3.problems.splice(0, 1);
+store3.save(db3);
+ok('删题后从索引移除', !(store3.searchProblemCodes('傅里叶') || new Set()).has(corpus[0].code));
+
+store3.close(store3.load());
+for (const f of [JSON3, SQLITE3, SQLITE3 + '-wal', SQLITE3 + '-shm']) {
+  try { if (fs.existsSync(f)) fs.unlinkSync(f); } catch (e) {}
+}
+try { fs.rmdirSync(TMP3); } catch (e) {}
+
 console.log('\n结果: ' + pass + ' 通过 / ' + fail + ' 失败');
 for (const f of [JSON_FILE, SQLITE_FILE, SQLITE_FILE + '-wal', SQLITE_FILE + '-shm']) {
   try { if (fs.existsSync(f)) fs.unlinkSync(f); } catch (e) {}
