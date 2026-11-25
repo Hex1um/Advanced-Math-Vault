@@ -248,6 +248,11 @@ try {
   ok('批量导入成功', imp.json.ok && imp.json.added.length === 1);
   const board = await req('/api/leaderboard');
   ok('排行榜有数据', board.json.items.length >= 1 && board.json.items[0].exp > 0);
+  const genPrompt = await req('/api/ai/prompt', { method: 'POST', body: JSON.stringify({ mainTag: '积分', tags: ['定积分'], thinking: 6, difficulty: 6, calc: 5 }) });
+  const genSys = genPrompt.json && genPrompt.json.messages && genPrompt.json.messages[0] && genPrompt.json.messages[0].content || '';
+  ok('出题 prompt 锁定结构并要求验算', /结构锁定/.test(genSys) && /验算/.test(genSys));
+  const ocrPrompt = await req('/api/ai/ocr-prompt');
+  ok('OCR prompt 要求两遍核对', /两遍/.test((ocrPrompt.json && ocrPrompt.json.prompt) || ''));
   const logout = await req('/api/auth/logout', { method: 'POST', body: '{}' });
   ok('退出登录', logout.json.ok);
   const meAfter = await req('/api/me');
