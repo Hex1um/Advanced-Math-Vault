@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v1.5.1 — 2026-11-26
+
+服务端按路由组继续拆分（纯重构，无行为变化）。
+
+- 题库域整段搬到 `routes/problems.js`：列表、详情、判题提交、看答案、分层提示、反馈、提交记录、AI 标记，共 8 个接口。依赖通过 `deps` 显式注入，`db` 用 `getDb()` 取（启动时会被重新赋值），返回 `false` 表示路径不归本模块。
+- 判题纯函数（`canonAnswer` / `answersEquiv` / `problemKind` / `examPoints` / `processMatchesAnswer` / `judgeMessages` / `parseJudge`）原来嵌在 `handleApi` 里，挪到模块作用域——它们不依赖请求上下文，放在请求处理器内部既无法复用也无法单测。
+- `server.js` 从 4327 行降到 3522 行；冒烟 143 项双引擎、运维重置 12 项全部通过。
+- 拆分的收益是「题库域的改动不再牵动主文件」，代价是 28 个依赖需要显式注入：漏一个就是运行期 ReferenceError，所以这一步只做了依赖最清晰的一组，剩余路由组（forum / admin / ai）仍在主文件。
+
 ## v1.5.0 — 2026-11-26
 
 把 v1.4.0 留下的「架构演进」与「学习闭环」补齐：SQLite 查询索引、错题本 FSRS、智能组卷与计时模考、前端公共组件、AI 层独立成模块、PWA。仍然是零第三方依赖。
