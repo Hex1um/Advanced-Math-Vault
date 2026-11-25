@@ -20,7 +20,7 @@ import process from 'node:process';
 
 const ROOT = path.resolve(new URL('../..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
 const DB_FILE = process.env.DB_FILE || path.join(ROOT, 'data', 'db.json');
-const BASE = (process.env.BASE || 'https://math-vault-10141.app.workbuddy.host').replace(/\/$/, '');
+const BASE = (process.env.BASE || 'https://math-vault-10141-52003.app.workbuddy.host').replace(/\/$/, '');
 function requiredEnv(name) {
   const v = process.env[name];
   if (v === undefined || !String(v).trim()) {

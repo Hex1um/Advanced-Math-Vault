@@ -73,7 +73,7 @@ async function deploy() {
     language: 'node',
     port: Number(process.env.PORT || 8787),
     appName: '数海晴岸',
-    domainPrefix: 'math-vault-10141',
+    domainPrefix: process.env.DOMAIN_PREFIX || 'math-vault-10141',
     userAskedToPublish: PUBLISH
   };
   const body = JSON.stringify({

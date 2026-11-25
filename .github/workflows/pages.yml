@@ -1,7 +1,8 @@
 name: pages
 
-# GitHub Pages：优先由 Actions 从 public/ 构建 docs/，没有 SHARECODE secret 时
-# 直接发布仓库里已提交的 docs/（保证不会因为缺 secret 而卡住发布）。
+# GitHub Pages：从 public/ 重建 docs/ 后发布。
+# 接口地址与 sharecode 沿用仓库里已提交的 docs/js/config.js（两者都是公开信息），
+# 所以这里不需要任何 secret；要换后端就改 site 的 config 并提交。
 on:
   push:
     branches: [main]
@@ -31,17 +32,8 @@ jobs:
         with:
           node-version: '22'
 
-      - name: 构建 docs/（有 SHARECODE secret 时从 public/ 重新生成）
-        env:
-          SHARECODE: ${{ secrets.SHARECODE }}
-          API_BASE: ${{ vars.API_BASE || 'https://math-vault-10141.app.workbuddy.host' }}
-        run: |
-          if [ -n "$SHARECODE" ]; then
-            node tools/ops/build-pages.mjs
-            echo "已从 public/ 重新构建 docs/"
-          else
-            echo "::warning::未配置 SHARECODE secret，直接发布仓库里已提交的 docs/"
-          fi
+      - name: 构建 docs/
+        run: node tools/ops/build-pages.mjs
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

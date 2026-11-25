@@ -4,8 +4,12 @@
  * 同时写入 docs/js/config.js，把接口地址指向后端。
  *
  * 用法：
- *   node tools/ops/build-pages.mjs
- *   API_BASE=https://your-api.example.com SHARECODE=xxxx node tools/ops/build-pages.mjs
+ *   node tools/ops/build-pages.mjs                                    # 沿用已有 docs/js/config.js 里的地址
+ *   API_BASE=https://api.example.com SHARECODE=xxxx node tools/ops/build-pages.mjs   # 换后端
+ *
+ * 关于 sharecode：它是托管网关的公开访问码，必然随前端发布（就在 docs/js/config.js 里），
+ * 不是密钥；管理员密码才是密钥，且只走环境变量。这里为了避免「重建时把地址改回旧值」，
+ * 未显式传参时沿用上一次生成的 docs/js/config.js，没有该文件才报错。
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -16,11 +20,26 @@ const ROOT = path.join(__dirname, '..', '..');
 const SRC = path.join(ROOT, 'public');
 const OUT = path.join(ROOT, 'docs');
 
-const API_BASE = process.env.API_BASE || 'https://math-vault-10141.app.workbuddy.host';
-const SHARECODE = process.env.SHARECODE || '';
+const PREV_FILE = path.join(OUT, 'js', 'config.js');
+function prevConfig() {
+  try {
+    const s = fs.readFileSync(PREV_FILE, 'utf8');
+    const pick = (k) => {
+      const m = new RegExp(k + "\\s*:\\s*[\"']([^\"']*)[\"']").exec(s);
+      return m ? m[1] : '';
+    };
+    return { apiBase: pick('apiBase'), sharecode: pick('sharecode'), siteName: pick('siteName') };
+  } catch (e) {
+    return { apiBase: '', sharecode: '', siteName: '' };
+  }
+}
+const prev = prevConfig();
+const API_BASE = process.env.API_BASE || prev.apiBase || 'https://math-vault-10141-52003.app.workbuddy.host';
+const SITE_NAME = process.env.SITE_NAME || prev.siteName || '数海晴岸';
+const SHARECODE = process.env.SHARECODE || prev.sharecode || '';
 if (!SHARECODE) {
-  console.error('缺少 SHARECODE。它是托管网关的公开访问码，必须随站点发布，但不能在仓库里写默认值：');
-  console.error('  SHARECODE=xxxx node tools/ops/build-pages.mjs');
+  console.error('缺少 SHARECODE：既没有显式传入，也没有可沿用的 docs/js/config.js。');
+  console.error('  SHARECODE=xxxx API_BASE=https://your-api.example.com node tools/ops/build-pages.mjs');
   process.exit(2);
 }
 
@@ -64,7 +83,7 @@ fs.writeFileSync(path.join(OUT, 'js', 'config.js'), `/* 由 tools/ops/build-page
 window.MV_CONFIG = {
   apiBase: ${JSON.stringify(API_BASE)},
   sharecode: ${JSON.stringify(SHARECODE)},
-  siteName: '数海晴岸'
+  siteName: ${JSON.stringify(SITE_NAME)}
 };
 `, 'utf8');
 
