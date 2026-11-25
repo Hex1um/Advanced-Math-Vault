@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## v0.18.1 — 2026-11-25
+
+修复两道德语料题里的 LaTeX 渲染错误，KaTeX 全库 0 失败。
+
+- **HS2672**（2023 数学一 · 选择题）第 8 题：`E(|X-EX|)` 后面的嵌套 `array` 只有一个空行，KaTeX 报 `Expected & or \\ or \cr or \end`。改成标准的空括号占位 `\left( \quad \right)`。
+- **HS2688**（2025 数学一 · 填空题）第 13 题：方向导数那一步的 `\stackrel{...}{\underset{...}{\chi}}` 括号不配对，KaTeX 报 `Unexpected end of input in a macro argument`。改成 `\left. \frac{\partial u}{\partial \vec n} \right|_{(1,1,1)}`。
+- **data/batch-18.json** 另一道「2025 数学一 · 解答题」使用了 KaTeX 不支持的 `\int \displaylimits`，一并改为 `\int_`（原库中无此条，只影响 batch 回退检查）。
+- 验证：`node tools/check-katex.mjs` 对 `data/db.json` 6003 题、24175 个数学片段 **0 失败**；无 db 时回退 batch 题库 2442 题、9882 片段 **0 失败**。
+- 冒烟 115/115，标签迁移保持幂等。
+
 ## v0.18.0 — 2026-11-25
 
 考点标签升级为「主标签 + 子标签」两级体系，并修正公开前审查发现的工程问题。
