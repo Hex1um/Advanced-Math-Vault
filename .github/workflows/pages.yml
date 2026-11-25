@@ -35,6 +35,9 @@ jobs:
       - name: 构建 docs/
         run: node tools/ops/build-pages.mjs
 
+      - name: 产物自检（入口文件 / 本地资源 / config.js）
+        run: node tools/ops/check-pages.mjs
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

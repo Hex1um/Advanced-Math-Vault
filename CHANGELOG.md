@@ -1,5 +1,59 @@
 # CHANGELOG
 
+## v1.4.0 — 2026-11-26
+
+按《代码深度审计与工程计划》完成 P0/P1 全部安全与性能修复、P2 的进程生命周期治理、P3 的校验工具链与 CI 护栏。**不变的部分**：仍然是零第三方 npm 依赖、前端零构建、JSON / SQLite 双引擎等价。
+
+### 安全（P0）
+
+- **Markdown 渲染的链接白名单**：`public/js/md.js` 之前对 `[文字](url)` 只做 HTML 转义，不校验协议。现在所有链接/图片地址都过 `sanitizeUrl()`：只放行 `http(s)` / `mailto` / 站内相对路径 / 锚点，图片额外放行 `data:image/*;base64`；`javascript:`、`vbscript:`、`data:text/html`、`file:` 以及 `java\tscript:` 这类控制字符绕过一律降级成纯文本。外链自动补 `rel="noopener noreferrer nofollow"` 与 `target="_blank"`。行内代码里的 `$` 不再被当成公式边界；`inlineTex()` 先抽公式再跑行内替换，`$a_1 * b_2$` 不会再被吃成 `<em>`；占位符改用每次调用随机生成的 nonce。
+- **伪造 `X-Forwarded-Proto` 骗 `Secure` Cookie**：`isHttps()` 之前无条件读该头，现在只有 `TRUST_PROXY=1` 时才认，否则只看 `socket.encrypted`。冒烟测试新增「伪造头不下发 Secure Cookie」断言。
+- **静态文件路径穿越**：`full.startsWith(PUBLIC_DIR)` 改成 `path.resolve` 后比较 `base + path.sep`，`public_backup/` 这类同前缀兄弟目录不再能绕过；`/../server.js`、`/..%2fserver.js`、`/js/../../server.js` 均返回 403/404（有断言）。
+- **500 不再透传内部异常**：`/api/` 的兜底改为 `{error:'服务器内部错误', reqId}`，完整堆栈只进服务端日志；仅 `NODE_ENV=development` 附 `detail`。避免把绝对路径、SQLite 语句、上游 LLM 报错回给客户端。
+- **CORS**：不再出现 `Allow-Origin: *` 与 `Allow-Credentials: true` 的非法组合（只有命中具体白名单来源时才允许带凭据）；生产环境仍用 `*` 时启动打印强警告。
+- **scrypt 异步化**：`hashPassword` / `verifyPassword` 由 `scryptSync` 改为 `util.promisify(crypto.scrypt)`，成本参数不变（老哈希照常校验）。以前并发登录几个就能把单进程事件循环按住几十毫秒。
+
+### 存储层（P0）
+
+- **Map 条目主键丢失**：`db.sessions[token].exp = x` 之前被记成 `markDirty('sessions','exp')`，SQLite 增量落盘静默丢写。现在子对象一路透传 `entryKey`，改 token 下的任何字段都会精确落盘（新增回归用例）。
+- **push / splice 触发整表重建**：之前往 `problems` push 一条就 `DELETE` 全表再重插 6400+ 行。现在按 key 差集只 UPSERT 新增行、只 DELETE 删除行；数组索引写入、`delete arr[i]`、`length` 收缩都做了精细追踪，无法追踪时才回退整表重建。
+- **对账口径**：`reconcile()` 之前先 `COUNT(*)` 再清过期行，而内存侧过滤了 `exp > now`，表里只要有一条过期会话就必然不等，每 N 次保存误触发一次 10 张表重建。现在先两侧一起清过期再比行数（新增「25 次保存不误触发」断言）。
+- 删除追踪补齐 `parentCtx.row` / `parentCtx.map` 内部数组；`stats()` 暴露 `pendingDeletes`。
+
+### 性能（P0/P1）
+
+- **详情页写放大**：`GET /api/problems/:code` 与帖子详情不再每次 `saveDb()`。内存累加，默认 30 秒统一刷一次盘，`SIGINT` / `SIGTERM` / 进程退出时强制刷；同一 `(IP, 目标)` 60 秒内只计一次（上限 1 万条自动淘汰）。AI 调用统计并入同一批刷盘。
+- **OCR**：预处理从「一次算完三种变体」改为按需生成——`gray2x` 置信度 ≥ 88 就直接返回，不再白算 `sauvola` / `otsu` 的积分图与中值滤波；Tesseract worker 改为模块级单例（空闲 5 分钟才回收），识别任务串行排队；`onProgress(pct, stage)` 汇报阶段，支持 `AbortSignal` 取消。
+- **首屏**：`boot()` 不再 `await refreshMeta()` 才渲染，改用 `sessionStorage` 里的 meta 缓存先画，meta 到货后通过事件总线局部刷新。
+- **API 客户端**：默认 20 秒超时、支持外部 `AbortSignal`，错误按「断网 / 超时 / 5xx / 401」分级给中文提示（`API.describe()`）。
+- **限流器**：固定窗口改为近似滑动窗口（上一窗口按剩余时间加权），并加 20000 桶上限，超限先清过期再按最早重置淘汰。
+
+### 竞态与交互（P1）
+
+- `library.js`：快速连点筛选会并发出多个请求、先发后到把列表刷成旧结果。现在每次 `load()` abort 上一个请求并用单调 `reqSeq` 丢弃过期响应；视图 `cleanup` 时一起中断。
+- `problem.js`：判题按钮文案按模式恢复（`提交答案评分` / `提交批改`），不再硬编码回「提交批改」。
+- `free-llm.js`：`stream()` / `complete()` 支持 `{signal, timeoutMs=45000}`（内部手动合并外部中断与超时，不依赖 `AbortSignal.any`）；`chat.js` 流式期间把发送键变成「停止」，已生成内容保留并标注「已停止」。
+- `mathkey.js`：`insideMath()` 从「数 `$` 奇偶」改为单遍词法状态机，区分 `TEXT` / 行内代码 / 围栏代码 / `$...$` / `$$...$$` / `\(...\)` / `\[...\]`，正确处理 `\$`、`\\`；代码块里插入符号不再自动补 `$`。
+
+### 构建与运维（P0/P1）
+
+- `build-pages.mjs`：`?v=` 缓存串由 `package.json` 版本统一注入（不再手写滞后版本）；`syncInto` 改为递归比对，`public/js/views/` 里删掉的文件不会永远留在 `docs/`；删除失败不再被空 `catch` 吞掉。
+- `backup-db.mjs`：SQLite 改用 `VACUUM INTO` 热备份（服务在写也能拿到一致快照），备份后 `PRAGMA integrity_check` 必须为 `ok`；JSON 备份做 `JSON.parse` 校验；新增 `--include-uploads` 一并归档用户图片。实测在 4372 次并发写入期间备份通过校验。
+- `deploy.mjs`：结果判定从 `&&` 改为解析 JSON-RPC `result`/`error` + HTTP 状态 + 失败关键词（HTTP 200 但响应体报错不再算成功）；`--publish` 流程固定为「预检 → 门禁 → 热备份 → 同步 → 发布」，`--preflight-only` 输出库体积、行数、待审数、完整性。
+- 优雅停机：`SIGINT`/`SIGTERM` 先 `server.close()` 停止接收新连接，再刷盘退出；`uncaughtException` 记录完整堆栈、尽力落盘后以非零码退出（避免带病写库），`unhandledRejection` 仍然只记录。
+- `server.js` 的 HTTP 基础层拆到 `lib/http.js`、限流器拆到 `lib/ratelimit.js`（P2-1 Step 1，零依赖、可单测）。
+
+### 校验工具链与 CI（P3）
+
+- `check-katex.mjs`：字段覆盖从 `statement` 扩到 `title` / `statement` / `answer` / `solution` / `hints[]`；识别 `$$`、`$`、`\[`、`\(`；跳过围栏/行内代码与 `\$`、`\[6pt]` 行距；**未闭合分隔符**单独计数（`--strict-unclosed` 时判失败）；新增 `--file`、`--sqlite`、`--field`、`--json`。当前 batch 题库：32497 个数学片段 0 个渲染失败，但**报出 164 处未闭合分隔符**（历史 PDF 抽取遗留，待清理）。
+- `gate.mjs`：修 Windows 下 `new URL().pathname` 导致 CLI 分支不执行的 bug（改 `fileURLToPath`）；把待入库文件透传给 Python 脚本与 `check-katex`；占位词检查扩到 `answer`/`solution`/`statement`；新增主/子标签合法性与三维评分 1..10 整数校验；新增 `--strict`（缺 Python 也算失败）。
+- 新增 `dedup-problems.mjs`：4-gram Jaccard 查重，2474 题约 0.5 秒，当前报出 28 对疑似重复（多为同一题从「题型专项」与「笔记截图」两批各导入一次）；`--strict` 可挡在导入之前。
+- CI：`smoke.yml` 加 `permissions: contents: read`、补 `check:ops` / `check:http` / `check:md` / `check:mathkey` / 生产模式启动检查（含「生产环境不给首个注册者发管理员」断言）、Python 依赖锁定到 `requirements-verify.txt` 并启用 pip 缓存；`pages.yml` 在上传前跑 `check-pages.mjs`（入口文件、22 个本地资源、`config.js` 可解析且 `apiBase` 非空）。
+
+### 未完成（下一版）
+
+`server.js` 按路由组拆分（P2-1 Step 2~4）、SQLite FTS5 查询接口（P2-3）、前端组件化（P2-4/T16）、错题本 FSRS（T17）、智能组卷与计时模考 / PWA（T18）。详见《advanced_math_vault.md》工单表。
+
 ## v1.3.1 — 2026-11-26
 
 线上实例重建（换后端地址）与 Pages 构建去 secret。

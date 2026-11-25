@@ -6,8 +6,15 @@
  * 以后一律用 `node tools/ops/deploy.mjs` 发布，不要手工调发布工具。
  *
  * 用法：
- *   node tools/ops/deploy.mjs              # 同步 + 部署
- *   node tools/ops/deploy.mjs --no-sync    # 跳过同步（仅当确认线上无用户数据时）
+ *   node tools/ops/deploy.mjs                     # 检查 → 门禁 → 备份 → 同步 → 部署
+ *   node tools/ops/deploy.mjs --preflight-only    # 只做配置与库状态检查（不上传）
+ *   node tools/ops/deploy.mjs --skip-checks       # 跳过 check:katex / check:store（不推荐）
+ *   node tools/ops/deploy.mjs --no-sync           # 跳过同步（需 ALLOW_NO_SYNC=1）
+ *
+ * 发布结果判定（v1.3.1 的坑）：
+ *   旧代码 `if (!/成功|deployed|http/i.test(out) && res.status >= 400)` 用 && 连接，
+ *   HTTP 200 但响应体里写着错误也被当成成功。现在解析 JSON-RPC 的 result/error，
+ *   再叠加 HTTP 状态与失败关键词，任一命中就判失败并打印完整响应。
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -17,38 +24,125 @@ import { createRequire } from 'node:module';
 const ROOT = path.resolve(new URL('../..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
 const require = createRequire(import.meta.url);
 const { parse: parseEnv } = require(path.join(ROOT, 'lib', 'env.js'));
-const SKIP_SYNC = process.argv.includes('--no-sync');
-const ALLOW_NO_SYNC = process.env.ALLOW_NO_SYNC === '1';
-const PUBLISH = process.argv.includes('--publish') || process.env.USER_ASKED_TO_PUBLISH === '1';
 
-/* 部署前自检：线上最常漏的两项（反代信任、跨域白名单）配错不会报错，只会静默降级 */
-function preflight() {
+const argv = process.argv.slice(2);
+const hasFlag = (n) => argv.includes('--' + n);
+const SKIP_SYNC = hasFlag('no-sync');
+const ALLOW_NO_SYNC = process.env.ALLOW_NO_SYNC === '1';
+const PUBLISH = hasFlag('publish') || process.env.USER_ASKED_TO_PUBLISH === '1';
+const PREFLIGHT_ONLY = hasFlag('preflight-only');
+const SKIP_CHECKS = hasFlag('skip-checks');
+
+const DB_FILE = path.join(ROOT, 'data', 'db.json');
+const SQLITE_FILE = path.join(ROOT, 'data', 'db.sqlite');
+const ANCHOR_FILE = path.join(ROOT, '.deploy-anchor');
+
+function loadEnv() {
   const envFile = path.join(ROOT, '.env');
   const fileEnv = fs.existsSync(envFile) ? parseEnv(fs.readFileSync(envFile, 'utf8'), process.env) : {};
-  const merged = Object.assign({}, fileEnv, process.env);
-  const warns = [];
+  return { envFile, merged: Object.assign({}, fileEnv, process.env) };
+}
+
+function dbStatus() {
+  const out = { json: null, sqlite: null };
+  if (fs.existsSync(DB_FILE)) {
+    const size = fs.statSync(DB_FILE).size;
+    const st = { file: DB_FILE, size, mb: (size / 1024 / 1024).toFixed(1), ok: false, counts: {} };
+    try {
+      const j = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
+      st.ok = true;
+      for (const k of ['problems', 'users', 'posts', 'submissions', 'feedbacks']) {
+        st.counts[k] = Array.isArray(j[k]) ? j[k].length : 0;
+      }
+      st.pending = (j.problems || []).filter((p) => p.status === 'pending').length;
+    } catch (e) {
+      st.error = e.message;
+    }
+    out.json = st;
+  }
+  if (fs.existsSync(SQLITE_FILE)) {
+    const size = fs.statSync(SQLITE_FILE).size;
+    const st = { file: SQLITE_FILE, size, mb: (size / 1024 / 1024).toFixed(1), ok: false, counts: {} };
+    try {
+      const { DatabaseSync } = require('node:sqlite');
+      const db = new DatabaseSync(SQLITE_FILE);
+      try {
+        const row = db.prepare('PRAGMA quick_check').get();
+        st.ok = String(row && (row.quick_check !== undefined ? row.quick_check : Object.values(row)[0])).toLowerCase() === 'ok';
+        for (const t of ['problems', 'users', 'posts', 'submissions', 'feedbacks']) {
+          st.counts[t] = Number(db.prepare('SELECT COUNT(*) AS n FROM ' + t).get().n);
+        }
+      } finally { try { db.close(); } catch (e) {} }
+    } catch (e) {
+      st.error = e.message;
+    }
+    out.sqlite = st;
+  }
+  return out;
+}
+
+function preflight() {
+  const { envFile, merged } = loadEnv();
+  const warnings = [];
+  const errors = [];
+
   if (!fs.existsSync(envFile) && !process.env.TRUST_PROXY && !process.env.ALLOW_ORIGINS) {
-    warns.push('没有 .env，也没有 TRUST_PROXY / ALLOW_ORIGINS：线上所有用户会共用代理 IP 的限流桶，且任何站点都能跨域调接口。');
-    warns.push('建议：cp .env.production.example .env 填好后再部署。');
+    warnings.push('没有 .env，也没有 TRUST_PROXY / ALLOW_ORIGINS：线上所有用户会共用代理 IP 的限流桶，且任何站点都能跨域调接口。');
+    warnings.push('建议：cp .env.production.example .env 填好后再部署。');
   }
   if (!/^(1|true|yes|on)$/i.test(String(merged.TRUST_PROXY || ''))) {
-    warns.push('TRUST_PROXY 未开启：如果线上在反代后面，登录/AI/投稿的限流会按代理 IP 合并计算。');
+    warnings.push('TRUST_PROXY 未开启：如果线上在反代后面，登录/AI/投稿的限流会按代理 IP 合并计算。');
   }
   const origins = String(merged.ALLOW_ORIGINS || '*');
-  if (origins.trim() === '*') warns.push('ALLOW_ORIGINS 仍是 *：建议改成 https://hex1um.github.io。');
-  if (warns.length) {
-    console.log('⚠ 部署前配置检查：');
-    for (const w of warns) console.log('  · ' + w);
-  } else {
-    console.log('✓ 部署前配置检查通过（TRUST_PROXY=' + merged.TRUST_PROXY + '，ALLOW_ORIGINS=' + origins + '）');
+  if (origins.trim() === '*') warnings.push('ALLOW_ORIGINS 仍是 *：建议改成 https://hex1um.github.io。');
+
+  // 实例绑定指纹：v1.3.1 曾因为换目录克隆触发平台新建实例，旧实例的密码与提交全部失联
+  const anchor = String(merged.DEPLOY_INSTANCE_ID || '').trim()
+    || (fs.existsSync(ANCHOR_FILE) ? fs.readFileSync(ANCHOR_FILE, 'utf8').trim() : '');
+  if (!anchor) {
+    warnings.push('没有 DEPLOY_INSTANCE_ID 或 .deploy-anchor：换目录/重新克隆时可能被平台当成新实例，'
+      + '导致旧实例的管理员密码与用户提交失联。建议把实例域名写入 .deploy-anchor。');
   }
-  const dbFile = path.join(ROOT, 'data', 'db.json');
-  if (fs.existsSync(dbFile) && !SKIP_SYNC) {
-    const size = fs.statSync(dbFile).size;
-    console.log('本地库 data/db.json ' + (size / 1024 / 1024).toFixed(1) + ' MB，将随目录一起上传（部署前会先合并线上数据）');
+
+  const db = dbStatus();
+  if (!db.json && !db.sqlite) errors.push('data/ 下既没有 db.json 也没有 db.sqlite，无库可部署');
+  if (db.json && !db.json.ok) errors.push('data/db.json 无法解析：' + db.json.error);
+  if (db.sqlite && !db.sqlite.ok) errors.push('data/db.sqlite 完整性检查未通过：' + (db.sqlite.error || 'quick_check != ok'));
+
+  console.log('▶ 部署前检查');
+  console.log('  配置：TRUST_PROXY=' + (merged.TRUST_PROXY || '(未设)') + '  ALLOW_ORIGINS=' + origins
+    + '  实例指纹=' + (anchor || '(无)'));
+  for (const [k, st] of [['JSON  ', db.json], ['SQLite', db.sqlite]]) {
+    if (!st) { console.log('  ' + k + '：不存在'); continue; }
+    const counts = Object.entries(st.counts).map(([n, c]) => n + '=' + c).join(' ');
+    console.log('  ' + k + '：' + st.mb + ' MB  ' + (st.ok ? '校验通过' : '校验失败') + '  ' + counts
+      + (st.pending !== undefined ? '  待审=' + st.pending : ''));
   }
-  return { envFile, merged };
+  for (const w of warnings) console.log('  ⚠ ' + w);
+  for (const e of errors) console.log('  ✗ ' + e);
+  if (!warnings.length && !errors.length) console.log('  ✓ 全部通过');
+  return { ok: errors.length === 0, db, merged };
 }
+
+function runNode(script, args, title) {
+  console.log('▶ ' + title + '…');
+  const r = spawnSync(process.execPath, [path.join(ROOT, script)].concat(args || []), {
+    cwd: ROOT, stdio: 'inherit'
+  });
+  return r.status === 0;
+}
+
+function runGates() {
+  if (SKIP_CHECKS) {
+    console.log('⚠ 已跳过 check:katex / check:store（--skip-checks）');
+    return true;
+  }
+  if (!runNode('tools/verify/check-katex.mjs', ['--max-fail=0'], '题库 KaTeX 门禁')) return false;
+  if (!runNode('tools/verify/store-test.mjs', [], '存储层增量落盘自测')) return false;
+  return true;
+}
+
+const runBackup = (label) => runNode('tools/ops/backup-db.mjs', ['--label', label], '部署前热备份（' + label + '）');
 
 function runSync() {
   console.log('▶ 同步线上用户数据到本地库…');
@@ -92,27 +186,43 @@ async function deploy() {
   });
   const text = await res.text();
   let out = '';
+  let rpcError = null;
+  let isError = false;
   for (const line of text.split('\n')) {
-    if (!line.startsWith('data: ')) continue;
-    try {
-      const d = JSON.parse(line.slice(6));
-      const c = d.result && d.result.content && d.result.content[0];
-      if (c && c.text) out = c.text;
-      if (d.error) out = 'ERROR ' + JSON.stringify(d.error).slice(0, 300);
-    } catch (_) {}
+    const payload = line.startsWith('data: ') ? line.slice(6) : (line.trim().startsWith('{') ? line : '');
+    if (!payload) continue;
+    let d;
+    try { d = JSON.parse(payload); } catch (e) { continue; }
+    if (d.error) rpcError = typeof d.error === 'string' ? d.error : JSON.stringify(d.error).slice(0, 300);
+    const r = d.result;
+    if (r && r.isError) isError = true;
+    const c = r && r.content && r.content[0];
+    if (c && c.text) out = String(c.text);
   }
-  console.log('▶ 发布结果:', out.slice(0, 400) || text.slice(0, 300));
-  if (!/成功|deployed|http/i.test(out) && res.status >= 400) throw new Error('发布失败 HTTP ' + res.status);
+  const failure = res.status >= 400 || !!rpcError || isError
+    || /\b(error|failed|exception)\b|失败/i.test(out)
+    || !out.trim();
+  if (failure) {
+    throw new Error('发布失败（HTTP ' + res.status + '）：'
+      + String(rpcError || out || text).slice(0, 600));
+  }
+  console.log('▶ 发布结果: ' + out.slice(0, 400));
 }
 
 (async () => {
-  const PREFLIGHT_ONLY = process.argv.includes('--preflight-only');
-  preflight();
+  const pre = preflight();
+  const gatesOk = runGates();
   if (PREFLIGHT_ONLY) {
-    console.log('\n--preflight-only：只做配置检查，没有同步、没有上传。');
+    console.log('\n--preflight-only：只做检查，没有备份、没有同步、没有上传。'
+      + (pre.ok && gatesOk ? '' : '\n✗ 检查未通过，修正后再部署'));
+    if (!pre.ok || !gatesOk) process.exit(1);
     return;
   }
+  if (!pre.ok) throw new Error('部署前检查未通过，已中止');
+  if (!gatesOk) throw new Error('门禁未通过，已中止（确需跳过请加 --skip-checks）');
+  if (!runBackup('pre-deploy')) throw new Error('部署前备份失败，已中止');
   if (!PUBLISH) throw new Error('发布需要显式授权：加 --publish，或设置 USER_ASKED_TO_PUBLISH=1');
+
   if (!SKIP_SYNC) runSync();
   else {
     if (!ALLOW_NO_SYNC) throw new Error('禁止 --no-sync：同步会合并线上提交/用户数据。确实要跳过请显式设置 ALLOW_NO_SYNC=1');

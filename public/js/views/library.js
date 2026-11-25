@@ -8,6 +8,12 @@
   let filters = { q: '', mainTag: '', examTag: '', tags: [], level: '', status: 'all', sort: 'code', page: 1, tagsExpanded: false };
   let cache = null;
 
+  /* 防竞态：快速连点筛选会并发出多个请求，先发的后到就会把列表刷成旧结果。
+     每次 load 都 abort 上一个请求并用单调递增的 reqSeq 丢弃过期响应。 */
+  let activeCtrl = null;
+  let reqSeq = 0;
+  let unsubMeta = null;
+
   function titleHTML(t) {
     // 列表里把展示型分式收成行内分式，避免行高被撑开
     return window.Md.inlineTex(String(t || '').replace(/\\dfrac/g, '\\frac').replace(/\\displaystyle/g, ''));
@@ -259,8 +265,16 @@
   async function load() {
     const wrap = document.getElementById('listWrap');
     if (wrap && !cache) wrap.innerHTML = '<div class="loading-row"><span class="spinner"></span>正在取题…</div>';
+
+    if (activeCtrl) { try { activeCtrl.abort(); } catch (e) {} }
+    const ctrl = new AbortController();
+    activeCtrl = ctrl;
+    const mySeq = ++reqSeq;
+
     try {
-      const data = await window.API.get('/api/problems?' + buildQuery());
+      const data = await window.API.get('/api/problems?' + buildQuery(), { signal: ctrl.signal });
+      if (mySeq !== reqSeq) return;   // 已有更新的请求发出，这次结果作废
+      cache = data;
       St.tagTree = data.tagTree || St.tagTree || [];
       St.examTags = data.examTags || St.examTags || [];
       St.tags = data.tags || [];
@@ -269,7 +283,11 @@
       renderStats();
       bindPaperAdd(document.getElementById('listWrap'));
     } catch (e) {
-      if (wrap) wrap.innerHTML = window.UI.empty('加载失败', e.message);
+      if (mySeq !== reqSeq) return;
+      if (e && e.kind === 'aborted') return;
+      if (wrap) wrap.innerHTML = window.UI.empty('加载失败', window.API.describe ? window.API.describe(e) : e.message);
+    } finally {
+      if (activeCtrl === ctrl) activeCtrl = null;
     }
   }
 
@@ -299,7 +317,20 @@
     if (seqBtn) seqBtn.addEventListener('click', function () { startPractice('seq'); });
     if (randBtn) randBtn.addEventListener('click', function () { startPractice('random'); });
 
+    /* meta 是并行加载的：到货后只重画统计条与筛选器，不重新拉列表 */
+    if (unsubMeta) { unsubMeta(); unsubMeta = null; }
+    unsubMeta = St.subscribe('meta:updated', function () {
+      if (!document.getElementById('filterBox')) return;
+      renderStats();
+      if (!cache) renderFilters();
+    });
+
     load();
+
+    return function cleanup() {
+      if (activeCtrl) { try { activeCtrl.abort(); } catch (e) {} activeCtrl = null; }
+      if (unsubMeta) { unsubMeta(); unsubMeta = null; }
+    };
   };
 
   Views.library.reset = function () {

@@ -219,18 +219,28 @@ npm run test:sqlite                                # 全链路冒烟（SQLite �
 ## 测试
 
 ```bash
-npm test                             # 121 项断言（JSON 引擎）：注册/改密/审核/做题/AI/论坛/两级标签/权限与安全
+npm test                             # 129 项断言（JSON 引擎）：注册/改密/审核/做题/AI/论坛/两级标签/权限与安全
 npm run test:sqlite                  # 同一套断言，跑在 SQLite 引擎上
-npm run check:store                  # 存储层：导入、增量落盘、重载一致性
+npm run check:store                  # 存储层：导入、增量落盘、重载一致性（32 项，含 Map 主键/精确增删/对账口径）
 npm run check:mail                   # 邮件通道（本地假 SMTP）
 npm run check:env                    # .env 解析与「不覆盖已有变量」
 npm run check:robust                 # 题库体检（没有 db.json 时自动读 batch 题库）
-npm run check:katex                  # 公式可渲染性，必须 0 失败
+npm run check:ops                    # 管理员一次性重置机制
+npm run check:http                   # 路径穿越 / TRUST_PROXY / 500 脱敏 / 限流桶上限 / CORS 组合
+npm run check:md                     # Markdown 渲染、XSS 链接白名单、行内代码与公式边界
+npm run check:mathkey                # 公式键盘的光标环境状态机
+npm run check:pages                  # docs/ 产物自检（入口、本地资源、config.js）
+npm run check:dedup                  # 查重工具自检
+npm run check:katex                  # 公式可渲染性，必须 0 失败（--strict-unclosed 连未闭合分隔符一起卡）
 ```
-python tools/verify/verify_integrals.py   # 逐题对答案求导，数值双点验证
-python tools/verify/verify_limits.py      # 极限题数值验证（高精度）
-python tools/archive/verify_batch5.py     # 第五批答案校验（历史脚本）
-node tools/import/migrate-tags.mjs        # 只报告标签迁移结果；加 --write 才写盘
+
+```bash
+python tools/verify/verify_integrals.py [--file x.json]   # 逐题对答案求导，数值双点验证
+python tools/verify/verify_limits.py    [--file x.json]   # 极限题数值验证（高精度）
+node tools/import/gate.mjs data/xxx.json --strict         # 入库门禁：符号校验 + KaTeX + 标签/评分/占位词
+node tools/verify/dedup-problems.mjs --threshold=0.85     # 题库查重（4-gram Jaccard）
+node tools/verify/dedup-problems.mjs --strict             # 有疑似重复就非零退出，可挡在导入之前
+node tools/import/migrate-tags.mjs                        # 只报告标签迁移结果；加 --write 才写盘
 ```
 
 CI 见 `.github/workflows/smoke.yml`：push / PR 到 `main` 自动跑上面这串（外加 sympy 符号校验 job），不需要装任何 npm 依赖；`.github/workflows/pages.yml` 负责用 Actions 重建并发布 `docs/`。

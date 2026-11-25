@@ -60,29 +60,56 @@
     el.textContent = '收录 ' + (s.problems || 0) + ' 题 · ' + (s.users || 0) + ' 位同学 · ' + (s.mainTags || 0) + ' 个主标签 / ' + (s.tags || 0) + ' 个子标签';
   }
 
+  /* 元信息缓存：弱网/后端冷启动时，先用上一次的统计与标签树把页面画出来，
+     真正的数据到货后再局部刷新，避免「白屏等一个请求」。 */
+  const META_CACHE_KEY = 'mv_meta_cache';
+  const META_CACHE_TTL = 10 * 60 * 1000;
+
+  function readMetaCache() {
+    try {
+      const raw = sessionStorage.getItem(META_CACHE_KEY);
+      if (!raw) return null;
+      const box = JSON.parse(raw);
+      if (!box || !box.at || Date.now() - box.at > META_CACHE_TTL) return null;
+      return box.meta || null;
+    } catch (e) { return null; }
+  }
+
+  function writeMetaCache(meta) {
+    try {
+      sessionStorage.setItem(META_CACHE_KEY, JSON.stringify({ at: Date.now(), meta: meta }));
+    } catch (e) {}
+  }
+
   async function refreshMeta() {
     try {
       const meta = await window.API.get('/api/meta');
-      St.me = meta.me;
-      St.stats = meta.stats;
-      St.tagTree = meta.tagTree || [];
-      St.examTags = meta.examTags || [];
-      St.tags = (meta.tagTree || []).reduce(function (arr, m) {
-        return arr.concat(m.children || []);
-      }, []).sort(function (a, b) { return b.count - a.count; });
-      St.llm = meta.llm;
-      window.UI.renderHeader();
-      updateFooter();
+      St.applyMeta(meta);
+      writeMetaCache(meta);
     } catch (e) {
       console.error('[app] meta 加载失败', e);
     }
   }
 
+  /* 首屏不再 await meta：先渲染当前路由（列表页自己有骨架屏与缓存），
+     meta 到货后通过事件总线通知已挂载的视图局部更新。 */
   async function boot() {
-    await refreshMeta();
+    const cached = readMetaCache();
+    if (cached) {
+      try { St.applyMeta(cached); } catch (e) {}
+    }
     render();
     window.addEventListener('hashchange', render);
+    refreshMeta();
   }
+
+  St.subscribe('meta:updated', function () {
+    try { window.UI.renderHeader(); } catch (e) {}
+    updateFooter();
+  });
+  St.subscribe('auth:changed', function () {
+    try { window.UI.renderHeader(); } catch (e) {}
+  });
 
   /* ---------------------------------------------------------- 暗色模式
      存在 localStorage；默认跟随系统（prefers-color-scheme）。 */

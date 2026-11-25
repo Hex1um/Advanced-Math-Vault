@@ -49,6 +49,45 @@
     route: { name: 'library', params: {} }
   };
 
+  /* ------------------------------------------------------------- 事件总线
+     State 原来是普通可变对象：登录/退出/刷新元信息后，各个视图得自己记得同步 UI，
+     漏一个就是「页头显示已登录、错题本还提示请登录」。
+     这里用原生 EventTarget 做一个极简发布订阅，不引入任何依赖。 */
+  const bus = (typeof EventTarget === 'function') ? new EventTarget() : null;
+  const handlers = new Map();
+
+  State.subscribe = function (event, fn) {
+    if (!bus || typeof fn !== 'function') return function () {};
+    const wrapped = function (e) { try { fn(e && e.detail); } catch (err) { console.error('[state]', event, err); } };
+    bus.addEventListener(event, wrapped);
+    handlers.set(fn, { event: event, wrapped: wrapped });
+    return function unsubscribe() {
+      bus.removeEventListener(event, wrapped);
+      handlers.delete(fn);
+    };
+  };
+
+  State.emit = function (event, detail) {
+    if (!bus) return;
+    try { bus.dispatchEvent(new CustomEvent(event, { detail: detail })); }
+    catch (e) { /* 老浏览器没有 CustomEvent 构造器时静默降级 */ }
+  };
+
+  /** 拉取并广播元信息（登录态、统计、标签树） */
+  State.applyMeta = function (meta) {
+    if (!meta) return;
+    State.me = meta.me;
+    State.stats = meta.stats;
+    State.tagTree = meta.tagTree || [];
+    State.examTags = meta.examTags || [];
+    State.tags = (meta.tagTree || []).reduce(function (arr, m) {
+      return arr.concat(m.children || []);
+    }, []).sort(function (a, b) { return b.count - a.count; });
+    State.llm = meta.llm;
+    State.emit('meta:updated', { me: State.me, stats: State.stats });
+    if (State.me) State.emit('auth:changed', State.me);
+  };
+
   const TOKEN_KEY = 'mv_token';
 
   function cfg() { return window.MV_CONFIG || {}; }
@@ -104,30 +143,88 @@
    * @returns {Promise<ApiOk & Object>}
    * @throws {ApiError}
    */
+  const DEFAULT_TIMEOUT_MS = 20000;
+
+  function apiError(message, kind, extra) {
+    const err = new Error(message);
+    err.kind = kind;
+    if (extra) Object.assign(err, extra);
+    return err;
+  }
+
+  /* 把底层异常翻译成用户能看懂的中文，区分「断网 / 超时 / 服务端 5xx / 未登录」。
+     以前统一是「连不上服务器」，用户不知道该重试还是该重新登录。 */
+  function describe(err) {
+    if (!err) return '未知错误';
+    if (err.kind === 'timeout') return err.message;
+    if (err.kind === 'offline') return '网络已断开，恢复后重试';
+    if (err.kind === 'network') return '连不上服务器，检查网络或后端地址';
+    if (err.kind === 'server') return '服务器出错了（' + (err.status || 500) + '），稍后重试';
+    if (err.kind === 'auth') return '登录已过期，请重新登录';
+    return err.message || '请求失败';
+  }
+
+  /**
+   * 统一请求入口：自动带 token、序列化 body、解析 JSON、失败抛 ApiError。
+   * @param {string} path
+   * @param {RequestOptions & {timeoutMs?: number, signal?: AbortSignal}} [options]
+   * @returns {Promise<ApiOk & Object>}
+   */
   async function request(path, options) {
-    const opts = Object.assign({ method: 'GET', credentials: sameOrigin() ? 'include' : 'omit', cache: 'no-store' }, options || {});
+    const opt = options || {};
+    const timeoutMs = opt.timeoutMs === undefined ? DEFAULT_TIMEOUT_MS : Number(opt.timeoutMs);
+    const opts = Object.assign({ method: 'GET', credentials: sameOrigin() ? 'include' : 'omit', cache: 'no-store' }, opt);
+    delete opts.timeoutMs;
     opts.headers = Object.assign({}, authHeaders(), opts.headers || {});
     if (opts.body && typeof opts.body !== 'string') {
       opts.body = JSON.stringify(opts.body);
       opts.headers['Content-Type'] = 'application/json';
     }
+
+    const ctrl = new AbortController();
+    let timedOut = false;
+    let timer = null;
+    if (timeoutMs > 0) {
+      timer = setTimeout(function () { timedOut = true; try { ctrl.abort(); } catch (e) {} }, timeoutMs);
+    }
+    const outer = opt.signal;
+    const onOuterAbort = function () { try { ctrl.abort(); } catch (e) {} };
+    if (outer) {
+      if (outer.aborted) onOuterAbort();
+      else if (outer.addEventListener) outer.addEventListener('abort', onOuterAbort);
+    }
+    opts.signal = ctrl.signal;
+
     let res;
     try {
       res = await fetch(apiUrl(path), opts);
     } catch (e) {
-      throw new Error('连不上服务器，检查后端地址或网络');
+      if (timedOut) throw apiError('请求超时（' + Math.round(timeoutMs / 1000) + ' 秒），检查网络后重试', 'timeout');
+      if (outer && outer.aborted) throw apiError('请求已取消', 'aborted');
+      if (typeof navigator !== 'undefined' && navigator.onLine === false) throw apiError('网络已断开', 'offline');
+      throw apiError('连不上服务器', 'network');
+    } finally {
+      if (timer) clearTimeout(timer);
+      if (outer && outer.removeEventListener) outer.removeEventListener('abort', onOuterAbort);
     }
+
     const ct = res.headers.get('content-type') || '';
     if (ct.indexOf('application/json') < 0) {
-      throw new Error('服务返回异常（' + res.status + '）');
+      const err = apiError('服务返回了非 JSON 内容（' + res.status + '）', res.status >= 500 ? 'server' : 'client', { status: res.status });
+      throw err;
     }
-    const data = await res.json();
+    let data;
+    try { data = await res.json(); }
+    catch (e) { throw apiError('服务返回数据损坏', 'server', { status: res.status }); }
     if (data.token) setToken(data.token);
     if (data.ok === false || !res.ok) {
-      const err = new Error(data.error || ('请求失败 ' + res.status));
-      err.status = res.status;
-      err.data = data;
-      if (res.status === 401) setToken('');
+      const kind = res.status === 401 ? 'auth' : (res.status >= 500 ? 'server' : 'client');
+      const err = apiError(data.error || ('请求失败 ' + res.status), kind, { status: res.status, data: data });
+      if (res.status === 401) {
+        setToken('');
+        State.me = null;
+        State.emit('auth:changed', null);
+      }
       throw err;
     }
     return data;
@@ -162,6 +259,8 @@
     token,
     setToken,
     authHeaders,
-    download
+    download,
+    describe,
+    DEFAULT_TIMEOUT_MS
   };
 })();

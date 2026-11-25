@@ -9,6 +9,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 concurrency:
   group: smoke-${{ github.ref }}
   cancel-in-progress: true
@@ -46,8 +49,40 @@ jobs:
       - name: 鲁棒性体检（无 db.json 时回退 batch 题库）
         run: npm run check:robust
 
-      - name: KaTeX 全量校验（必须 0 失败）
-        run: npm run check:katex
+      - name: 管理员一次性重置机制
+        run: npm run check:ops
+
+      - name: HTTP 安全边界（路径穿越 / TRUST_PROXY / 500 脱敏 / 限流桶上限）
+        run: npm run check:http
+
+      - name: Markdown 渲染与 XSS 链接白名单
+        run: npm run check:md
+
+      - name: 公式键盘状态机
+        run: npm run check:mathkey
+
+      - name: 生产模式启动检查（健康检查 + 不给陌生人发管理员）
+        env:
+          NODE_ENV: production
+          PORT: '8931'
+          DB_FILE: data/.ci-prod.json
+          LLM_API_KEY: ''
+          DEEPSEEK_API_KEY: ''
+          NO_FREE: '1'
+          NO_AUTO_RESTORE: '1'
+        run: |
+          node server.js > /tmp/prod.log 2>&1 &
+          SERVER_PID=$!
+          trap "kill $SERVER_PID 2>/dev/null || true" EXIT
+          for i in $(seq 1 40); do
+            if curl -fsS "http://127.0.0.1:8931/api/health" > /tmp/health.json; then break; fi
+            sleep 0.5
+          done
+          cat /tmp/health.json
+          node -e "const h=require('/tmp/health.json'); if(!h.ok||!h.version) process.exit(1); if(h.warnings===undefined) process.exit(1); console.log('health ok', h.version, 'engine', h.engine);"
+          REG=$(curl -fsS -X POST "http://127.0.0.1:8931/api/auth/register" -H 'Content-Type: application/json' -d '{"name":"ci_probe_user","password":"abcdefgh1"}')
+          echo "$REG"
+          node -e "const j=JSON.parse(process.argv[1]); if(j.user && j.user.role==='admin') { console.error('生产模式给首个注册者发了管理员'); process.exit(1); } console.log('production register ok, role=', j.user && j.user.role);" "$REG"
 
   symbolic:
     name: 符号 / 数值校验（sympy + mpmath）
@@ -59,9 +94,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: pip
+          cache-dependency-path: requirements-verify.txt
 
-      - name: 安装依赖
-        run: pip install --disable-pip-version-check sympy mpmath
+      - name: 安装依赖（版本锁定，避免 numpy/sympy 上游变更导致误报）
+        run: pip install --disable-pip-version-check -r requirements-verify.txt
 
       - name: 积分答案求导验证
         run: python tools/verify/verify_integrals.py

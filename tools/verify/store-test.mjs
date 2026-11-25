@@ -110,6 +110,75 @@ ok('对账后行数与内容一致', stats.counts.problems === 4 && stats.counts
 store.close(re);
 ok('关闭后 sqlite 文件存在', fs.existsSync(SQLITE_FILE));
 
+/* ---------------------------------------------------------- P0-2 专项回归
+   1) 改 map 条目字段（db.sessions[tok].exp）要能落盘——旧实现把 key 丢了，
+      记成 markDirty('sessions','exp')，SQLite 增量落盘静默丢写。
+   2) push 一条新数据不该整表重建（wrote 必须等于 1，不是 6400+）。
+   3) 表里有过期会话时，连续保存不能每次对账都误触发全库重建。
+   4) 嵌套数组（hints）内元素的增删要能落盘。 */
+console.log('\n[5] P0-2 回归：Map 主键 / 精确增删 / 对账口径');
+const TMP2 = path.join(ROOT, 'data', '.store-test2');
+const JSON2 = path.join(TMP2, 'db.json');
+const SQLITE2 = path.join(TMP2, 'db.sqlite');
+for (const f of [JSON2, JSON2 + '.tmp', SQLITE2, SQLITE2 + '-wal', SQLITE2 + '-shm']) {
+  try { if (fs.existsSync(f)) fs.unlinkSync(f); } catch (e) {}
+}
+fs.mkdirSync(TMP2, { recursive: true });
+const logs = [];
+const store2 = createStore({ engine: 'sqlite', dbFile: JSON2, mirrorJson: false, reconcileEvery: 5, log: (m) => logs.push(String(m)) });
+store2.open();
+store2.importAll(JSON.parse(JSON.stringify(fixture)));
+let d2 = store2.attach(store2.load());
+
+// 1) map 条目字段：key 不能丢
+const newExp = future + 3600000;
+d2.sessions.live.exp = newExp;
+let r2 = store2.save(d2);
+ok('改 map 条目字段只写 1 行', r2.wrote === 1, 'wrote=' + r2.wrote);
+let re2 = store2.load();
+ok('sessions[token].exp 已落盘', !!(re2.sessions.live && re2.sessions.live.exp === newExp), JSON.stringify(re2.sessions.live));
+
+// 2) push 一条新题：只 UPSERT 那一行
+d2.problems.push({ code: 'HS9', title: '题九', statement: '新增', mainTag: '级数', tags: ['幂级数'], difficulty: 5, status: 'approved', hints: [] });
+r2 = store2.save(d2);
+ok('push 只写新增的 1 行（无整表重建）', r2.wrote === 1, 'wrote=' + r2.wrote);
+ok('push 后新题可重载', store2.load().problems.some((p) => p.code === 'HS9'));
+
+// 3) splice 删除一条：只 DELETE 那一行
+d2.feedbacks.splice(0, 1);
+r2 = store2.save(d2);
+ok('splice 删除只动 1 行', r2.wrote === 1, 'wrote=' + r2.wrote);
+ok('删除已生效', store2.load().feedbacks.length === 0);
+
+// 4) 含过期会话时连续保存，不触发全库重建
+d2.sessions.stale = { uid: 'u1', exp: Date.now() - 1000 };
+store2.save(d2);
+logs.length = 0;
+for (let i = 0; i < 25; i++) store2.save(d2);
+ok('25 次保存不误触发整库重建', !logs.some((m) => /整表重建|行数对不上/.test(m)), logs.join(' | '));
+ok('过期会话已被清理', !store2.load().sessions.stale);
+
+// 5) 嵌套数组元素增删
+const row1 = d2.problems.find((p) => p.code === 'HS1');
+row1.hints.push('b');
+store2.save(d2);
+ok('hints 新增已落盘', JSON.stringify(store2.load().problems.find((p) => p.code === 'HS1').hints) === '["a","b"]');
+d2.problems.find((p) => p.code === 'HS1').hints.splice(0, 1);
+store2.save(d2);
+ok('hints 删除已落盘', JSON.stringify(store2.load().problems.find((p) => p.code === 'HS1').hints) === '["b"]');
+
+// 6) 直接按索引删除元素（delete arr[i]）
+delete d2.problems[0];
+r2 = store2.save(d2);
+ok('delete arr[i] 精确删行', r2.wrote === 1, 'wrote=' + r2.wrote);
+ok('delete arr[i] 已生效', !store2.load().problems.some((p) => p.code === 'HS1'));
+
+store2.close(store2.load());
+for (const f of [JSON2, SQLITE2, SQLITE2 + '-wal', SQLITE2 + '-shm']) {
+  try { if (fs.existsSync(f)) fs.unlinkSync(f); } catch (e) {}
+}
+try { fs.rmdirSync(TMP2); } catch (e) {}
+
 console.log('\n结果: ' + pass + ' 通过 / ' + fail + ' 失败');
 for (const f of [JSON_FILE, SQLITE_FILE, SQLITE_FILE + '-wal', SQLITE_FILE + '-shm']) {
   try { if (fs.existsSync(f)) fs.unlinkSync(f); } catch (e) {}

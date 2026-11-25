@@ -6,6 +6,40 @@
   const MODELS = ['openai-fast', 'openai'];
   const GUARD = /^(The API key used|Too Many Requests|Rate limit|Free limit)/i;
 
+  /* 外部中断 + 超时联动：AbortSignal.any 不是所有浏览器都有，这里手动合并 */
+  function linkSignal(outer, timeoutMs) {
+    const ctrl = new AbortController();
+    let timer = null;
+    let timedOut = false;
+    if (timeoutMs > 0) {
+      timer = setTimeout(function () { timedOut = true; try { ctrl.abort(); } catch (e) {} }, timeoutMs);
+    }
+    const onAbort = function () { try { ctrl.abort(); } catch (e) {} };
+    if (outer) {
+      if (outer.aborted) onAbort();
+      else if (outer.addEventListener) outer.addEventListener('abort', onAbort);
+    }
+    return {
+      signal: ctrl.signal,
+      cleanup: function () {
+        if (timer) clearTimeout(timer);
+        if (outer && outer.removeEventListener) outer.removeEventListener('abort', onAbort);
+      },
+      throwIfAborted: function () {
+        if (!ctrl.signal.aborted) return;
+        if (timedOut) {
+          const e = new Error('免费通道响应超时，先用站点通道或本地讲解');
+          e.code = 'FREE_TIMEOUT';
+          throw e;
+        }
+        const e = new Error('已停止生成');
+        e.name = 'AbortError';
+        e.code = 'ABORTED';
+        throw e;
+      }
+    };
+  }
+
   function httpError(status) {
     const e = new Error(status === 402
       ? '免费通道冷却中：同一网络 45 秒只能问一次'
@@ -15,12 +49,24 @@
     return e;
   }
 
-  async function stream(messages, onDelta) {
+  async function stream(messages, onDelta, options) {
+    const opts = options || {};
+    const link = linkSignal(opts.signal, opts.timeoutMs === undefined ? 45000 : Number(opts.timeoutMs));
+    try {
+      return await streamInner(messages, onDelta, link);
+    } finally {
+      link.cleanup();
+    }
+  }
+
+  async function streamInner(messages, onDelta, link) {
     for (const model of MODELS) {
+      link.throwIfAborted();
       const res = await fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ model, messages, stream: true, temperature: 0.6 })
+        body: JSON.stringify({ model, messages, stream: true, temperature: 0.6 }),
+        signal: link.signal
       });
       if (!res.ok) {
         if (res.status === 402) throw httpError(402);
@@ -51,6 +97,7 @@
       };
 
       while (true) {
+        link.throwIfAborted();
         const r = await reader.read();
         if (r.done) break;
         buf += dec.decode(r.value, { stream: true });
@@ -78,12 +125,24 @@
     throw new Error('免费通道没有返回内容');
   }
 
-  async function complete(messages) {
+  async function complete(messages, options) {
+    const opts = options || {};
+    const link = linkSignal(opts.signal, opts.timeoutMs === undefined ? 45000 : Number(opts.timeoutMs));
+    try {
+      return await completeInner(messages, link);
+    } finally {
+      link.cleanup();
+    }
+  }
+
+  async function completeInner(messages, link) {
     for (const model of MODELS) {
+      link.throwIfAborted();
       const res = await fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ model, messages, stream: false, temperature: 0.7 })
+        body: JSON.stringify({ model, messages, stream: false, temperature: 0.7 }),
+        signal: link.signal
       });
       if (!res.ok) {
         if (res.status === 402) throw httpError(402);

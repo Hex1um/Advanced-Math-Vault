@@ -1,5 +1,39 @@
-"""逐题校验不定积分：对答案求导，与积分函数比较（符号 + 数值双重）"""
+"""逐题校验不定积分：对答案求导，与积分函数比较（符号 + 数值双重）
+
+用法：
+  python tools/verify/verify_integrals.py                       # 只跑内置样例（校验工具链本身）
+  python tools/verify/verify_integrals.py --file data/x.json    # 同时统计本次导入里含积分题的规模
+                                                                # （由 gate.mjs 透传，便于一眼看出这批题的验算压力）
+"""
+import argparse
+import json
+import os
+
 import sympy as sp
+
+_ap = argparse.ArgumentParser(add_help=True)
+_ap.add_argument('--file', default=None, help='待入库的题目 JSON，用于统计本次导入涉及多少积分题')
+_args, _unknown = _ap.parse_known_args()
+
+
+def report_target(path):
+    if not path:
+        return
+    if not os.path.exists(path):
+        print(f'! --file 指向的文件不存在: {path}')
+        return
+    try:
+        with open(path, encoding='utf-8') as f:
+            data = json.load(f)
+    except Exception as e:
+        print(f'! --file 解析失败: {e}')
+        return
+    items = data if isinstance(data, list) else data.get('problems', [])
+    if not isinstance(items, list):
+        return
+    integral = [p for p in items if '\\int' in str(p.get('statement') or '')]
+    print(f'[target] {os.path.basename(path)}：共 {len(items)} 题，其中含积分 {len(integral)} 题')
+    print(f'[target] 这些题的答案仍需人工/符号验算（本脚本只保证校验工具链本身可用）')
 
 x = sp.Symbol('x', positive=True, real=True)
 t = sp.Symbol('t')
@@ -7,6 +41,8 @@ S = sp.sqrt
 
 def L(v):
     return sp.log(sp.Abs(v))
+
+report_target(_args.file)
 
 cases = []
 

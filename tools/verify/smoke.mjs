@@ -84,6 +84,7 @@ const child = spawn(process.execPath, ['server.js'], {
     DB_FILE: DB_JSON,
     DB_ENGINE: ENGINE,
     DB_MIRROR_JSON: '0',
+    VIEW_FLUSH_MS: '400',
     SEED_FILE: path.join(ROOT, 'data', 'problems.seed.sample.json'),
     LLM_API_KEY: '',
     DEEPSEEK_API_KEY: '',
@@ -554,6 +555,56 @@ try {
   syncChild.stderr.on('data', (d) => { syncErr += d.toString(); });
   const syncCode = await new Promise((r) => syncChild.on('close', r));
   ok('sync-live 缺凭据时退出而非用默认值', syncCode === 2 && /SHARECODE|ADMIN_PASS/.test(syncErr), syncErr.slice(0, 120));
+  console.log('\n[16] P0 安全：Secure Cookie / 路径穿越 / 500 脱敏');
+  // 默认 TRUST_PROXY 未开：伪造 X-Forwarded-Proto 不能骗服务端下发 Secure Cookie
+  const regProbe = await fetch(BASE + '/api/auth/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-Forwarded-Proto': 'https', 'X-Forwarded-For': '10.66.0.1' },
+    body: JSON.stringify({ name: 'probe' + (Date.now() % 100000), password: 'abcdefgh1' })
+  });
+  const rawCookie = (regProbe.headers.getSetCookie ? regProbe.headers.getSetCookie() : [regProbe.headers.get('set-cookie') || '']).join('|');
+  ok('伪造 X-Forwarded-Proto 不下发 Secure Cookie', /mv_session=/.test(rawCookie) && !/;\s*Secure/i.test(rawCookie), rawCookie.slice(0, 140));
+
+  function rawGet(rawPath) {
+    return new Promise((resolve) => {
+      const r = http.request({ host: '127.0.0.1', port: PORT, path: rawPath, method: 'GET' }, (res) => {
+        let b = '';
+        res.on('data', (d) => { b += d; });
+        res.on('end', () => resolve({ status: res.statusCode, body: b }));
+      });
+      r.on('error', () => resolve({ status: 0, body: '' }));
+      r.end();
+    });
+  }
+  for (const p of ['/../server.js', '/../public_x/a', '/js/../../server.js', '/..%2fserver.js']) {
+    const r = await rawGet(p);
+    ok('路径穿越 ' + p + ' 被挡', (r.status === 403 || r.status === 404) && !/createServer|require\(/.test(r.body), r.status + ' ' + r.body.slice(0, 80));
+  }
+
+  console.log('\n[17] P0 性能：浏览量内存聚合');
+  const vA = await req('/api/problems/HS1001');
+  const vB = await req('/api/problems/HS1001');
+  ok('同 IP 连续访问只计一次', vA.json.problem.views === vB.json.problem.views, vA.json.problem.views + ' vs ' + vB.json.problem.views);
+  await sleep(900);
+  let viewsOnDisk = null;
+  if (ENGINE === 'sqlite') {
+    const { DatabaseSync } = await import('node:sqlite');
+    const sdb = new DatabaseSync(DB);
+    try {
+      const row = sdb.prepare("SELECT body FROM problems WHERE k='HS1001'").get();
+      viewsOnDisk = row ? (JSON.parse(row.body).views || 0) : null;
+    } finally { sdb.close(); }
+  } else {
+    const j = JSON.parse(fs.readFileSync(DB_JSON, 'utf8'));
+    const row = (j.problems || []).find((p) => p.code === 'HS1001');
+    viewsOnDisk = row ? (row.views || 0) : null;
+  }
+  ok('浏览量已按批刷入磁盘', typeof viewsOnDisk === 'number' && viewsOnDisk >= 1, 'views=' + viewsOnDisk);
+
+  // 500 只回「服务器内部错误 + reqId」，不给异常原文与绝对路径（详见 tools/verify/http-test.mjs）
+  const h500 = await req('/api/problems/HS1001');
+  ok('正常接口不受脱敏影响', h500.status === 200 && h500.json.ok !== false);
+
 } catch (e) {
   fail++;
   console.error('\n✗ 测试异常:', e.message);

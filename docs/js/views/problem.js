@@ -127,6 +127,9 @@
 
     el.querySelector('#judgeBtn').addEventListener('click', async function () {
       const btn = this;
+      // 进请求前先记住按钮原文案（答案是「提交答案评分」、批改是「提交批改」），
+      // 结束时恢复它，而不是硬编码回「提交批改」——模式不同，文案本来就不一样。
+      const idleText = btn.textContent;
       let process = el.querySelector('#ansProcess').value.trim();
       const answerOnly = mode === 'answer';
       if (!process && !image) { window.UI.toast(answerOnly ? '写下答案' : '把解题过程写下来，或者传张照片', 'err'); return; }
@@ -140,8 +143,8 @@
         btn.textContent = '识别图片中…';
         resultBox.innerHTML = '<div class="judge-result pending"><span class="spinner"></span>没有视觉模型，先用 OCR 把图片转成文字（首次需下载识别组件）…</div>';
         try {
-          let text = window.OCR.tidy(await window.OCR.imageToText(image, function (pct) {
-            btn.textContent = '识别中 ' + pct + '%';
+          let text = window.OCR.tidy(await window.OCR.imageToText(image, function (pct, stage) {
+            btn.textContent = (stage || '识别中') + ' ' + pct + '%';
           }));
           if (!text) throw new Error('图片里没识别到文字，请改用文字输入或配置视觉模型');
           // OCR 只认字形，公式结构要靠 AI 补回来
@@ -158,12 +161,12 @@
           resultBox.innerHTML = '<div class="judge-result wrong">OCR 失败：' + window.Md.esc(e.message)
             + '<br/>可以配置支持视觉的模型（gpt-4o / qwen-vl 等），或把过程手打成文字。</div>';
           btn.disabled = false;
-          btn.textContent = '提交批改';
+          btn.textContent = idleText;
           return;
         }
       }
 
-      if (!answerOnly && process && process.length < 20) { window.UI.toast('识别出的文字太短，请补充过程', 'err'); btn.disabled = false; btn.textContent = '提交批改'; return; }
+      if (!answerOnly && process && process.length < 20) { window.UI.toast('识别出的文字太短，请补充过程', 'err'); btn.disabled = false; btn.textContent = idleText; return; }
       btn.disabled = true;
       btn.textContent = '批改中…';
       resultBox.innerHTML = '<div class="judge-result pending"><span class="spinner"></span>正在逐步核对…（免费通道排队时可能要十几秒）</div>';
@@ -180,7 +183,7 @@
         resultBox.innerHTML = '<div class="judge-result wrong">提交失败：' + window.Md.esc(e.message) + '</div>';
       } finally {
         btn.disabled = false;
-        btn.textContent = '提交批改';
+        btn.textContent = idleText;
       }
     });
 

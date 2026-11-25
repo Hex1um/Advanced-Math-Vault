@@ -5,12 +5,42 @@
 2) sqrt(x±1)-2sqrt(x) 这类相近数相减发生灾难性抵消。
 统一改用 mpmath 的 50 位精度，并对幂塔取对数计算。
 """
+import argparse
+import json
 import math
+import os
+
 import mpmath as mp
+
+_ap = argparse.ArgumentParser(add_help=True)
+_ap.add_argument('--file', default=None, help='待入库的题目 JSON，用于统计本次导入涉及多少极限题')
+_args, _unknown = _ap.parse_known_args()
+
+
+def report_target(path):
+    if not path:
+        return
+    if not os.path.exists(path):
+        print(f'! --file 指向的文件不存在: {path}')
+        return
+    try:
+        with open(path, encoding='utf-8') as f:
+            data = json.load(f)
+    except Exception as e:
+        print(f'! --file 解析失败: {e}')
+        return
+    items = data if isinstance(data, list) else data.get('problems', [])
+    if not isinstance(items, list):
+        return
+    lim = [p for p in items if '\\lim' in str(p.get('statement') or '')]
+    print(f'[target] {os.path.basename(path)}：共 {len(items)} 题，其中含极限 {len(lim)} 题')
+    print('[target] 这些题的答案仍需人工/符号验算（本脚本只保证校验工具链本身可用）')
 
 mp.mp.dps = 50
 
 _FAILS = []
+
+report_target(_args.file)
 
 
 def show(name, val, expect, tol=1e-3):

@@ -408,8 +408,8 @@
           // 没有视觉模型 / 解析失败：先用浏览器 OCR 把图片转成文字，填进题干框让用户核对
           if (window.OCR) {
             try {
-              let text = window.OCR.tidy(await window.OCR.imageToText(ocrImage, function (pct) {
-                box.innerHTML = '<div class="small muted" style="padding:8px 0">本地 OCR 识别中 ' + pct + '%…</div>';
+              let text = window.OCR.tidy(await window.OCR.imageToText(ocrImage, function (pct, stage) {
+                box.innerHTML = '<div class="small muted" style="padding:8px 0">本地 OCR ' + (stage || '识别中') + ' ' + pct + '%…</div>';
               }));
               if (stale()) return;
               if (text) {

@@ -19,6 +19,13 @@ if (process.env.MV_NO_DOTENV !== '1') {
 const tagTax = require('./tag-taxonomy');
 const { createStore } = require('./lib/store');
 const { createMailer } = require('./lib/mail');
+const httpLib = require('./lib/http');
+const { createRateLimiter } = require('./lib/ratelimit');
+
+/* HTTP 基础层与限流器已拆到 lib/（P2-1 Step 1），server.js 只做组装与路由分发。
+   保留同名绑定，业务代码不用跟着改调用形式。 */
+const { send, fail, readBody, parseCookies, isHttps, clientIp, applyCors, serveStatic } = httpLib;
+const { fail500 } = httpLib;
 
 /* 来源标签：不参与知识点主/子标签树，单独展示与筛选 */
 const EXAM_TAGS = ['华科期中', '华科期末'];
@@ -263,6 +270,49 @@ function saveDb(immediate) {
   }, 400);
 }
 
+/* --------------------------------------------------- 浏览计数聚合
+   GET /api/problems/:code 与帖子详情是最高频接口。原实现每次访问都 saveDb()：
+   JSON 引擎会同步序列化整个库并 fsync，SQLite 引擎也会每次开一个写事务——
+   这是典型的「读接口写放大」。现在只在内存里 +1，30 秒统一刷一次盘，
+   进程退出/收到 SIGINT/SIGTERM 时强制刷一次，保证数据不丢。
+   同一 (IP, 目标) 在 VIEW_DEDUPE_MS 内只计一次，防刷。 */
+const pendingViews = new Map();
+const viewSeen = new Map();
+const VIEW_DEDUPE_MS = Number(process.env.VIEW_DEDUPE_MS || 60000);
+const VIEW_SEEN_MAX = 10000;
+
+function bumpView(kind, id, ip) {
+  const now = Date.now();
+  const key = kind + ':' + id + '|' + ip;
+  const last = viewSeen.get(key);
+  if (last && now - last < VIEW_DEDUPE_MS) return false;
+  viewSeen.set(key, now);
+  if (viewSeen.size > VIEW_SEEN_MAX) {
+    for (const [k, t] of viewSeen) if (now - t >= VIEW_DEDUPE_MS) viewSeen.delete(k);
+    if (viewSeen.size > VIEW_SEEN_MAX) {
+      let drop = viewSeen.size - VIEW_SEEN_MAX;
+      for (const k of viewSeen.keys()) { if (drop-- <= 0) break; viewSeen.delete(k); }
+    }
+  }
+  pendingViews.set(kind, (pendingViews.get(kind) || 0) + 1);
+  return true;
+}
+
+function flushViews() {
+  if (!pendingViews.size) return 0;
+  const n = [...pendingViews.values()].reduce((a, b) => a + b, 0);
+  pendingViews.clear();
+  try {
+    writeDbFile();
+  } catch (e) {
+    console.error('[views] 刷盘失败:', e.message);
+    return 0;
+  }
+  return n;
+}
+
+setInterval(() => flushViews(), Number(process.env.VIEW_FLUSH_MS || 30000)).unref();
+
 /* --------------------------------------------- 运行期备份 / 上线配置自检 */
 
 const BACKUP_DIR = path.join(DATA_DIR, 'backups', 'daily');
@@ -345,7 +395,7 @@ function configSummary() {
    文件格式不对时一律不动库，避免误放一个空文件就把密码改成空。 */
 const OPS_DIR = process.env.OPS_DIR || path.join(DATA_DIR, 'ops');
 
-function applyOpsReset() {
+async function applyOpsReset() {
   const file = path.join(OPS_DIR, 'reset-admin.json');
   if (!fs.existsSync(file)) return;
   try {
@@ -357,7 +407,7 @@ function applyOpsReset() {
     if (pw.length < 8) throw new Error('新密码至少 8 位');
     const u = db.users.find((x) => String(x.name || '').toLowerCase() === name.toLowerCase());
     if (!u) throw new Error('库里没有用户 ' + name);
-    const hashed = hashPassword(pw);
+    const hashed = await hashPassword(pw);
     u.salt = hashed.salt;
     u.passHash = hashed.hash;
     const wasAdmin = u.role === 'admin';
@@ -583,17 +633,22 @@ function nextProblemCode() {
   return code;
 }
 
-function hashPassword(password, salt) {
+/* scrypt 是 CPU 密集操作：同步版（scryptSync）会把整个事件循环按住几十毫秒，
+   并发登录几个就能让全站卡住。改成 promisify 版本，成本参数与历史库保持一致
+   （Node 默认 N=16384, r=8, p=1），老哈希仍可正常校验。 */
+const scryptAsync = require('util').promisify(crypto.scrypt);
+
+async function hashPassword(password, salt) {
   const s = salt || crypto.randomBytes(16).toString('hex');
-  const h = crypto.scryptSync(String(password), s, 64).toString('hex');
-  return { salt: s, hash: h };
+  const buf = await scryptAsync(String(password), s, 64);
+  return { salt: s, hash: Buffer.from(buf).toString('hex') };
 }
 
-function verifyPassword(password, user) {
+async function verifyPassword(password, user) {
   try {
-    const h = crypto.scryptSync(String(password), user.salt, 64);
+    const buf = await scryptAsync(String(password), user.salt, 64);
     const stored = Buffer.from(user.passHash, 'hex');
-    return h.length === stored.length && crypto.timingSafeEqual(h, stored);
+    return buf.length === stored.length && crypto.timingSafeEqual(buf, stored);
   } catch (e) { return false; }
 }
 
@@ -626,55 +681,7 @@ function publicUser(u, withPrivate) {
   return out;
 }
 
-function readBody(req, limit) {
-  limit = limit || 1024 * 1024;
-  return new Promise((resolve, reject) => {
-    let size = 0;
-    const chunks = [];
-    req.on('data', (c) => {
-      size += c.length;
-      if (size > limit) { reject(new Error('请求体过大')); req.destroy(); return; }
-      chunks.push(c);
-    });
-    req.on('end', () => {
-      const raw = Buffer.concat(chunks).toString('utf8');
-      if (!raw) return resolve({});
-      try { resolve(JSON.parse(raw)); } catch (e) { reject(new Error('JSON 格式错误')); }
-    });
-    req.on('error', reject);
-  });
-}
-
-function parseCookies(req) {
-  const out = {};
-  const raw = req.headers.cookie || '';
-  raw.split(';').forEach((part) => {
-    const i = part.indexOf('=');
-    if (i < 0) return;
-    try {
-      out[part.slice(0, i).trim()] = decodeURIComponent(part.slice(i + 1).trim());
-    } catch (e) {
-      out[part.slice(0, i).trim()] = part.slice(i + 1).trim();
-    }
-  });
-  return out;
-}
-
 const ALLOWED_ORIGINS = String(process.env.ALLOW_ORIGINS || '*').split(',').map((x) => x.trim()).filter(Boolean);
-
-function applyCors(req, res) {
-  const origin = req.headers.origin || '';
-  let allow = '';
-  if (ALLOWED_ORIGINS.includes('*')) allow = '*';
-  else if (origin && ALLOWED_ORIGINS.includes(origin)) allow = origin;
-  if (allow) {
-    res.setHeader('Access-Control-Allow-Origin', allow);
-    res.setHeader('Vary', 'Origin');
-  }
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-MV-Token');
-  res.setHeader('Access-Control-Max-Age', '86400');
-}
 
 function bearerToken(req) {
   const h = req.headers.authorization || '';
@@ -687,43 +694,14 @@ function bearerToken(req) {
   return '';
 }
 
-// 默认不信任 X-Forwarded-For：客户端伪造它就能换一个限流桶。
-// 只有部署在可信反向代理后、显式设置 TRUST_PROXY=1 时才解析 XFF。
+// 默认不信任 X-Forwarded-For / X-Forwarded-Proto：客户端伪造它就能换限流桶、
+// 骗到 Secure Cookie。只有部署在可信反向代理后、显式 TRUST_PROXY=1 才解析。
 const TRUST_PROXY = /^(1|true|yes|on)$/i.test(process.env.TRUST_PROXY || '');
-function clientIp(req) {
-  if (TRUST_PROXY) {
-    const fwd = req.headers['x-forwarded-for'];
-    if (fwd) {
-      const first = String(fwd).split(',')[0].trim();
-      if (/^[0-9a-fA-F:.]+$/.test(first)) return first;
-    }
-  }
-  return (req.socket && req.socket.remoteAddress) || 'unknown';
-}
 
-/* 简单滑动窗口限流：内存级，够单进程站点用 */
-const buckets = new Map();
-
-function rateLimit(key, limit, windowMs) {
-  const now = Date.now();
-  let b = buckets.get(key);
-  if (!b || now > b.reset) {
-    b = { count: 0, reset: now + windowMs };
-    buckets.set(key, b);
-  }
-  b.count += 1;
-  return b.count <= limit;
-}
-
-setInterval(() => {
-  const now = Date.now();
-  for (const [k, b] of buckets) if (now > b.reset) buckets.delete(k);
-}, 5 * 60 * 1000).unref();
-
-function isHttps(req) {
-  const proto = String(req.headers['x-forwarded-proto'] || '').split(',')[0].trim();
-  return proto === 'https' || !!(req.socket && req.socket.encrypted);
-}
+/* 限流器带容量上限（默认 20000 桶），超限先清过期再按最早重置淘汰，避免被扫描打爆内存 */
+const limiter = createRateLimiter({ maxBuckets: Number(process.env.RATE_LIMIT_MAX_BUCKETS || 20000) });
+const rateLimit = (key, limit, windowMs) => limiter.hit(key, limit, windowMs);
+setInterval(() => limiter.sweep(), 5 * 60 * 1000).unref();
 
 function sessionCookie(req, token, maxAge) {
   const parts = [
@@ -733,7 +711,7 @@ function sessionCookie(req, token, maxAge) {
     'SameSite=Lax',
     'Max-Age=' + (maxAge === undefined ? 2592000 : maxAge)
   ];
-  if (isHttps(req) && Number(maxAge) !== 0) parts.push('Secure');
+  if (isHttps(req, { trustProxy: TRUST_PROXY }) && Number(maxAge) !== 0) parts.push('Secure');
   return parts.join('; ');
 }
 
@@ -745,20 +723,6 @@ function currentUser(req) {
   const u = db.users.find((x) => x.id === s.uid);
   return u || null;
 }
-
-function send(res, status, obj) {
-  const body = JSON.stringify(obj);
-  res.writeHead(status, {
-    'Content-Type': 'application/json; charset=utf-8',
-    'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
-    'Pragma': 'no-cache',
-    'Expires': '0',
-    'Content-Length': Buffer.byteLength(body)
-  });
-  res.end(body);
-}
-
-function fail(res, status, msg) { send(res, status, { ok: false, error: msg }); }
 
 /* ------------------------------------------------------------- 业务逻辑 */
 
@@ -1646,6 +1610,8 @@ function noteAi(cfg, ok, ms, err) {
     }
     st.channels[name] = b;
     st.calls = (st.calls || 0) + 1;
+    // 统计也走同一批定时刷盘：一次 AI 调用就 saveDb() 会跟着刷全库
+    pendingViews.set('aiStats', 1);
   } catch (e) {
     // 统计不能影响主流程
   }
@@ -2017,7 +1983,7 @@ async function handleApi(req, res, pathname, query) {
   const method = req.method;
 
   if (method === 'POST') {
-    const ip = clientIp(req);
+    const ip = clientIp(req, { trustProxy: TRUST_PROXY });
     for (const [re, limit, win, msg] of RATE_RULES) {
       if (re.test(pathname) && !rateLimit(ip + '|' + pathname, limit, win)) {
         return fail(res, 429, msg);
@@ -2082,7 +2048,7 @@ async function handleApi(req, res, pathname, query) {
     if (!/^[\w\u4e00-\u9fa5.-]+$/.test(name)) return fail(res, 400, '用户名只能包含中英文、数字、下划线');
     if (password.length < 8) return fail(res, 400, '密码至少 8 位');
     if (db.users.some((u) => u.name.toLowerCase() === name.toLowerCase())) return fail(res, 409, '这个名字已经有人用了');
-    const { salt, hash } = hashPassword(password);
+    const { salt, hash } = await hashPassword(password);
     // 公开部署后不能让「第一个注册的陌生人」自动当管理员：
     // 仅开发模式 + 库里确实没有任何 admin 时才自动授予；生产环境一律普通用户，
     // 管理员由 tools/create-admin.mjs 预设，避免删号后被人抢注 admin。
@@ -2112,7 +2078,7 @@ async function handleApi(req, res, pathname, query) {
     const name = String(body.name || '').trim();
     const password = String(body.password || '');
     const u = db.users.find((x) => x.name.toLowerCase() === name.toLowerCase());
-    if (!u || !verifyPassword(password, u)) return fail(res, 401, '用户名或密码不正确');
+    if (!u || !(await verifyPassword(password, u))) return fail(res, 401, '用户名或密码不正确');
     const token = crypto.randomBytes(24).toString('hex');
     db.sessions[token] = { uid: u.id, exp: Date.now() + 30 * 864e5 };
     saveDb();
@@ -2132,9 +2098,9 @@ async function handleApi(req, res, pathname, query) {
     const body = await readBody(req);
     const oldPwd = String(body.oldPassword || '');
     const newPwd = String(body.newPassword || '');
-    if (!verifyPassword(oldPwd, user)) return fail(res, 400, '原密码不正确');
+    if (!(await verifyPassword(oldPwd, user))) return fail(res, 400, '原密码不正确');
     if (newPwd.length < 8) return fail(res, 400, '新密码至少 8 位');
-    const { salt, hash } = hashPassword(newPwd);
+    const { salt, hash } = await hashPassword(newPwd);
     user.salt = salt;
     user.passHash = hash;
     // 其他会话失效
@@ -2433,8 +2399,7 @@ async function handleApi(req, res, pathname, query) {
     }
 
     if (!sub && method === 'GET') {
-      p.views = (p.views || 0) + 1;
-      saveDb();
+      if (bumpView('problem', p.code, clientIp(req, { trustProxy: TRUST_PROXY }))) p.views = (p.views || 0) + 1;
       return send(res, 200, {
         ok: true,
         problem: fullProblem(p, user),
@@ -3013,8 +2978,7 @@ async function handleApi(req, res, pathname, query) {
     const problem = post.problemCode ? db.problems.find((p) => p.code === post.problemCode) : null;
 
     if (!sub && method === 'GET') {
-      post.views = (post.views || 0) + 1;
-      saveDb();
+      if (bumpView('post', post.id, clientIp(req, { trustProxy: TRUST_PROXY }))) post.views = (post.views || 0) + 1;
       return send(res, 200, {
         ok: true,
         post: {
@@ -4149,20 +4113,6 @@ function parseJudge(text) {
 
 /* ------------------------------------------------------------- 静态资源 */
 
-const MIME = {
-  '.html': 'text/html; charset=utf-8',
-  '.js': 'text/javascript; charset=utf-8',
-  '.css': 'text/css; charset=utf-8',
-  '.json': 'application/json; charset=utf-8',
-  '.svg': 'image/svg+xml',
-  '.png': 'image/png',
-  '.jpg': 'image/jpeg',
-  '.ico': 'image/x-icon',
-  '.woff2': 'font/woff2',
-  '.woff': 'font/woff',
-  '.ttf': 'font/ttf'
-};
-
 /* 上传的图片落盘到 data/uploads，URL 记在库里 */
 const UPLOAD_DIR = path.join(DATA_DIR, 'uploads');
 
@@ -4193,56 +4143,6 @@ function saveUploads(body) {
     .filter(Boolean);
 }
 
-function serveUpload(res, pathname) {
-  const name = path.basename(pathname);
-  if (!/^[A-Za-z0-9]+\.(png|jpg|jpeg|webp|gif)$/i.test(name)) return fail(res, 404, '图片不存在');
-  const file = path.join(UPLOAD_DIR, name);
-  fs.readFile(file, (err, data) => {
-    if (err) return fail(res, 404, '图片不存在');
-    const ext = path.extname(file).toLowerCase();
-    res.writeHead(200, {
-      'Content-Type': MIME[ext] || 'image/jpeg',
-      'Cache-Control': 'public, max-age=86400'
-    });
-    res.end(data);
-  });
-}
-
-function serveStatic(req, res, pathname) {
-  if (pathname.indexOf('/uploads/') === 0) return serveUpload(res, pathname);
-  // 非法百分号编码（如 /%zz）会让 decodeURIComponent 抛 URIError；
-  // 这里曾经在 try/catch 之外，一个匿名请求就能把进程打死。
-  let rel;
-  try {
-    rel = decodeURIComponent(pathname);
-  } catch (e) {
-    return fail(res, 400, '请求路径编码不合法');
-  }
-  if (rel === '/') rel = '/index.html';
-  const filePath = path.join(PUBLIC_DIR, path.normalize(rel).replace(/^(\.\.[/\\])+/, ''));
-  if (!filePath.startsWith(PUBLIC_DIR)) return fail(res, 403, '禁止访问');
-  fs.readFile(filePath, (err, data) => {
-    if (err) {
-      if (req.headers.accept && req.headers.accept.includes('text/html')) {
-        return fs.readFile(path.join(PUBLIC_DIR, 'index.html'), (e2, html) => {
-          if (e2) return fail(res, 404, '页面不存在');
-          res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
-          res.end(html);
-        });
-      }
-      return fail(res, 404, '资源不存在');
-    }
-    const ext = path.extname(filePath).toLowerCase();
-    res.writeHead(200, {
-      'Content-Type': MIME[ext] || 'application/octet-stream',
-      'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
-      'Pragma': 'no-cache',
-      'Expires': '0'
-    });
-    res.end(data);
-  });
-}
-
 /* --------------------------------------------------------------- 启动 */
 
 const server = http.createServer(async (req, res) => {
@@ -4254,7 +4154,7 @@ const server = http.createServer(async (req, res) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Referrer-Policy', 'same-origin');
 
-  applyCors(req, res);
+  applyCors(req, res, ALLOWED_ORIGINS);
 
   if (req.method === 'OPTIONS') {
     res.writeHead(204);
@@ -4265,14 +4165,18 @@ const server = http.createServer(async (req, res) => {
     try {
       await handleApi(req, res, pathname, query);
     } catch (e) {
-      console.error('[api]', pathname, e);
-      if (!res.headersSent) fail(res, 500, e.message || '服务器内部错误');
-      else try { res.end(); } catch (_) {}
+      // 只把「服务器内部错误 + reqId」返回给客户端：e.message 里可能带绝对路径、
+      // SQLite 语句或上游 LLM 的原始报错，属于内部实现细节。
+      fail500(res, e, {
+        tag: req.method + ' ' + pathname,
+        dev: process.env.NODE_ENV === 'development',
+        log: console.error
+      });
     }
     return;
   }
 
-  serveStatic(req, res, pathname);
+  serveStatic(req, res, pathname, { publicDir: PUBLIC_DIR, uploadDir: path.join(DATA_DIR, 'uploads') });
  } catch (e) {
    console.error('[http] 未捕获异常:', req.method, req.url, (e && e.stack) || e);
    try {
@@ -4282,13 +4186,33 @@ const server = http.createServer(async (req, res) => {
  }
 });
 
-// 最后一道兜底：任何漏网的异常都不许把进程带走
-process.on('uncaughtException', (e) => { console.error('[uncaught]', (e && e.stack) || e); });
+/* 兜底策略：
+   - uncaughtException：内存状态可能已经半损坏，继续跑会把脏数据写进库。
+     记录完整堆栈 → 尽力刷一次盘 → 以非零码退出，交给进程守护重启。
+   - unhandledRejection：多数是某个 await 忘了 catch，不足以证明状态损坏，
+     只记录不退出（否则一个第三方 SDK 的 rejection 就能把站点打下线）。 */
+process.on('uncaughtException', (e) => {
+  console.error('[uncaught]', (e && e.stack) || e);
+  try {
+    flushViews();
+    if (store.engine === 'sqlite') { store.save(db); store.close(db); }
+    else writeDbFile();
+  } catch (e2) {
+    console.error('[uncaught] 退出前落盘失败:', e2.message);
+  }
+  process.exit(1);
+});
 process.on('unhandledRejection', (e) => { console.error('[unhandledRejection]', (e && e.stack) || e); });
 
 loadDb();
-applyOpsReset();
 
+/* 先消费一次性管理员重置（scrypt 已异步化，必须等它落盘后再对外提供服务），
+   再开始监听。失败不影响启动：紧急通道坏掉不该让站点起不来。 */
+applyOpsReset()
+  .catch((e) => console.error('[ops] 重置流程异常:', e && e.message))
+  .finally(() => startServer());
+
+function startServer() {
 server.listen(PORT, HOST, () => {
   console.log(SITE_NAME + ' v' + VERSION + ' running at http://localhost:' + PORT);
   console.log('题目数:', db.problems.filter((p) => p.status === 'approved').length, '| 用户数:', db.users.length, '| LLM:', llmConfigured() ? db.settings.llm.model : '本地讲解模式');
@@ -4305,11 +4229,27 @@ server.listen(PORT, HOST, () => {
   if (store.engine === 'sqlite') {
     setInterval(() => { try { store.save(db); store.mirror(db); } catch (e) { console.error('[store] 定期镜像失败:', e.message); } }, 10 * 60 * 1000).unref();
   }
+  if (/^prod/i.test(String(process.env.NODE_ENV || '')) && ALLOWED_ORIGINS.includes('*')) {
+    console.warn('[cors] 生产环境 ALLOW_ORIGINS=*：任何站点都能调用本站接口，请尽快改成白名单');
+  }
 });
+}
 
-function shutdown(signal) {
-  console.log('[shutdown] ' + signal + '，正在落盘…');
+let shuttingDown = false;
+
+/* 优雅停机：先停止接收新连接，再把内存里攒的计数与库落盘。
+   顺序很重要——先 close() 才不会出现「新请求进来改了内存、落盘却已经做过」的丢写。 */
+function shutdown(signal, code) {
+  if (shuttingDown) return;
+  shuttingDown = true;
+  console.log('[shutdown] ' + signal + '，停止接收新连接并落盘…');
   try {
+    server.close();
+    if (typeof server.closeAllConnections === 'function') server.closeAllConnections();
+  } catch (e) { /* 还没 listen 就退出时会抛，忽略 */ }
+  try {
+    const flushed = flushViews();
+    if (flushed) console.log('[shutdown] 已刷入 ' + flushed + ' 次浏览/AI 统计');
     if (store.engine === 'sqlite') {
       store.save(db);
       store.mirror(db);
@@ -4319,8 +4259,9 @@ function shutdown(signal) {
     }
   } catch (e) {
     console.error('[shutdown] 落盘失败:', e.message);
+    process.exit(1);
   }
-  process.exit(0);
+  process.exit(code || 0);
 }
 
 process.on('SIGINT', () => shutdown('SIGINT'));

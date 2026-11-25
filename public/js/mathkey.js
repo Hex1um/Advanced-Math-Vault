@@ -78,14 +78,77 @@
     }
   ];
 
-  /* 光标是否已经在 $...$ 里 */
-  function insideMath(value, pos) {
-    let dollars = 0;
-    for (let i = 0; i < pos; i++) {
-      if (value[i] === '\\') { i++; continue; }
-      if (value[i] === '$') dollars++;
+  /* --------------------------------------------------------- 公式环境状态机
+     旧实现只数「非转义 $ 的奇偶」，遇到 $$...$$（两个 $ 奇偶不变）、\[...\]、
+     \(...\)、代码块都会判错，插入符号时就多包或少包一对 $。
+     现在做单遍词法扫描，返回光标所在的精确环境。 */
+  function scanContext(value, pos) {
+    const s = String(value == null ? '' : value);
+    const n = Math.max(0, Math.min(pos == null ? s.length : pos, s.length));
+    let mode = 'TEXT';
+    let i = 0;
+    while (i < n) {
+      const ch = s[i];
+      if (mode === 'TEXT') {
+        if (ch === '\\') {
+          if (s[i + 1] === '[') { mode = 'BRACKET_BLOCK'; i += 2; continue; }
+          if (s[i + 1] === '(') { mode = 'PAREN_INLINE'; i += 2; continue; }
+          i += 2; // \$ \\ 等转义，跳过被转义的字符
+          continue;
+        }
+        if (ch === '`') {
+          const lineStart = s.lastIndexOf('\n', i - 1) + 1;
+          const before = s.slice(lineStart, i);
+          if (/^\s*$/.test(before) && s.slice(i, i + 3) === '```') { mode = 'FENCE_CODE'; i += 3; continue; }
+          mode = 'INLINE_CODE'; i += 1; continue;
+        }
+        if (ch === '$') {
+          if (s[i + 1] === '$') { mode = 'DOLLAR_BLOCK'; i += 2; continue; }
+          mode = 'DOLLAR_INLINE'; i += 1; continue;
+        }
+        i += 1;
+        continue;
+      }
+      if (mode === 'INLINE_CODE') {
+        if (ch === '`') { mode = 'TEXT'; }
+        i += 1;
+        continue;
+      }
+      if (mode === 'FENCE_CODE') {
+        if (s.slice(i, i + 3) === '```') { mode = 'TEXT'; i += 3; continue; }
+        i += 1;
+        continue;
+      }
+      if (mode === 'DOLLAR_INLINE') {
+        if (ch === '\\') { i += 2; continue; }
+        if (ch === '$') { mode = 'TEXT'; }
+        i += 1;
+        continue;
+      }
+      if (mode === 'DOLLAR_BLOCK') {
+        if (ch === '\\') { i += 2; continue; }
+        if (s.slice(i, i + 2) === '$$') { mode = 'TEXT'; i += 2; continue; }
+        i += 1;
+        continue;
+      }
+      if (mode === 'PAREN_INLINE') {
+        if (ch === '\\' && s[i + 1] === ')') { mode = 'TEXT'; i += 2; continue; }
+        i += 1;
+        continue;
+      }
+      if (mode === 'BRACKET_BLOCK') {
+        if (ch === '\\' && s[i + 1] === ']') { mode = 'TEXT'; i += 2; continue; }
+        i += 1;
+        continue;
+      }
+      i += 1;
     }
-    return dollars % 2 === 1;
+    const inMath = mode === 'DOLLAR_INLINE' || mode === 'DOLLAR_BLOCK' || mode === 'PAREN_INLINE' || mode === 'BRACKET_BLOCK';
+    return { inMath: inMath, mode: mode, inCode: mode === 'INLINE_CODE' || mode === 'FENCE_CODE' };
+  }
+
+  function insideMath(value, pos) {
+    return scanContext(value, pos).inMath;
   }
 
   function insert(ta, tpl) {
@@ -101,7 +164,9 @@
       text = text.replace('$0', sel || '');
     }
 
-    const needWrap = !insideMath(value, start);
+    const ctx = scanContext(value, start);
+    // 代码块/行内代码里插入的是代码，不补 $ 包裹；已在公式环境里也不再包一层
+    const needWrap = !ctx.inMath && !ctx.inCode;
     const wrapped = needWrap && text !== '' ? '$' + text + '$' : text;
     const shift = needWrap && text !== '' ? 1 : 0;
 
@@ -236,7 +301,7 @@
 
   const cache = new WeakMap();
 
-  window.MathKey = {
+  const MathKeyAPI = {
     attach: function (ta, opts) {
       if (!ta) return null;
       if (cache.has(ta)) return cache.get(ta);
@@ -250,12 +315,18 @@
       Array.prototype.forEach.call(root.querySelectorAll('textarea'), function (ta) {
         if (ta.readOnly || ta.disabled) return;
         if (ta.getAttribute('data-nomk') === '1') return;
-        window.MathKey.attach(ta);
+        MathKeyAPI.attach(ta);
       });
     },
     insert: function (ta, tpl) {
-      const inst = window.MathKey.attach(ta);
+      const inst = MathKeyAPI.attach(ta);
       if (inst) inst.insert(tpl);
-    }
+    },
+    // 纯函数：给单测与预览用的公式环境判定
+    context: scanContext,
+    insideMath: insideMath
   };
+
+  if (typeof window !== 'undefined') window.MathKey = MathKeyAPI;
+  if (typeof module !== 'undefined' && module.exports) module.exports = MathKeyAPI;
 })();

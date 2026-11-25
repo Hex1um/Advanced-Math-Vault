@@ -15,8 +15,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
+import { createRequire } from 'node:module';
+import { fileURLToPath } from 'node:url';
 
-const ROOT = path.resolve(new URL('../..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
+const require = createRequire(import.meta.url);
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+const tagTax = require(path.join(ROOT, 'tag-taxonomy.js'));
+const PLACEHOLDER = /(待补|TODO|TBD|略|见解析|详见|同上)/i;
 
 /** 能不能自动验算：返回 '' 表示无需人工，非空表示需要人工复核的原因 */
 export function reviewReason(p) {
@@ -26,6 +31,25 @@ export function reviewReason(p) {
 
   if (!ans || /^(略|无|未给出|见解析|同上)$/.test(ans)) return '答案缺失，无法自动比对';
   if (!sol) return '没有解析，无法核对推导链';
+  // 占位词不止会出现在答案里：题干写「详见教材」、解析写「略」，同样是没写完
+  if (PLACEHOLDER.test(ans)) return '答案里有占位词（待补/TODO/略/见解析…）';
+  if (PLACEHOLDER.test(sol)) return '解析里有占位词（待补/TODO/略/见解析…）';
+  if (PLACEHOLDER.test(st)) return '题干里有占位词（待补/TODO/略/见解析…）';
+
+  // 标签与三维评分：字段级硬伤必须在入库前拦下来
+  const main = String((p && p.mainTag) || '').trim();
+  if (main && !tagTax.isValidMain(main)) return '主标签不在考点体系内：' + main;
+  const tags = Array.isArray(p && p.tags) ? p.tags : [];
+  const allowedSub = new Set();
+  for (const m of tagTax.MAIN_TAGS) for (const s of tagTax.SUB_TAGS[m] || []) allowedSub.add(s);
+  const badTag = tags.find((t) => !allowedSub.has(String(t)));
+  if (badTag) return '子标签不在考点体系内：' + badTag;
+  for (const [k, label] of [['thinking', '思维量'], ['difficulty', '难度'], ['calc', '计算量']]) {
+    const v = p && p[k];
+    if (v === undefined || v === null || v === '') continue;
+    const n = Number(v);
+    if (!Number.isInteger(n) || n < 1 || n > 10) return label + '必须是 1..10 的整数（当前 ' + v + '）';
+  }
 
   const heavy = [];
   if (/\\lim/.test(st)) heavy.push('极限');
@@ -65,26 +89,44 @@ const PY_GATES = [
 ];
 
 /**
- * 跑符号/数值自检。返回 {ok, results:[{name, ok, out}]}
- * python 缺失（本机没装 sympy）时按「跳过」处理，不阻断本地录题。
+ * 跑符号/数值自检。返回 {ok, results:[{name, ok, skipped, out}]}
+ *
+ * 关键变化：把待入库的 JSON 路径透传给 Python 脚本（旧实现只跑脚本自带的样例，
+ * 根本不看这次要入库的题）；Python 缺失时按「跳过」记，--strict 下算失败。
  */
 export function runPythonGates(opts) {
   const options = opts || {};
   const py = options.python || process.env.PYTHON || (process.platform === 'win32' ? 'python' : 'python3');
+  const target = options.file ? path.resolve(options.file) : '';
   const results = [];
   for (const [file, name] of PY_GATES) {
     const abs = path.join(ROOT, file);
-    if (!fs.existsSync(abs)) continue;
-    const r = spawnSync(py, [abs], { cwd: ROOT, encoding: 'utf8', timeout: 180000 });
+    if (!fs.existsSync(abs)) {
+      results.push({ name, ok: !options.strict, skipped: true, out: '脚本不存在：' + file });
+      continue;
+    }
+    const args = [abs];
+    if (target) args.push('--file', target);
+    const r = spawnSync(py, args, { cwd: ROOT, encoding: 'utf8', timeout: 180000 });
     if (r.error && /ENOENT/.test(String(r.error.code || r.error.message))) {
-      results.push({ name, ok: true, skipped: true, out: '未找到 python，跳过（CI 里会真正执行）' });
+      results.push({ name, ok: false, skipped: true, out: '未找到 python（装 python3 + sympy/mpmath 后重试）' });
       continue;
     }
     const out = ((r.stdout || '') + (r.stderr || '')).trim();
     const tail = out.split('\n').slice(-3).join(' / ').slice(0, 300);
-    results.push({ name, ok: r.status === 0, out: tail });
+    results.push({ name, ok: r.status === 0, skipped: false, out: tail });
   }
   return { ok: results.every((x) => x.ok), results };
+}
+
+/** KaTeX 门禁：针对本次要入库的文件，且不允许未闭合分隔符 */
+export function runKatexGate(file) {
+  const script = path.join(ROOT, 'tools', 'verify', 'check-katex.mjs');
+  const r = spawnSync(process.execPath, [script, '--file', path.resolve(file), '--max-fail=0', '--strict-unclosed'], {
+    cwd: ROOT, encoding: 'utf8', timeout: 180000
+  });
+  const out = ((r.stdout || '') + (r.stderr || '')).trim();
+  return { name: 'KaTeX 公式渲染校验', ok: r.status === 0, skipped: false, out: out.split('\n').slice(-2).join(' / ').slice(0, 300) };
 }
 
 export function printGate(gate) {
@@ -95,12 +137,19 @@ export function printGate(gate) {
 }
 
 // ---------------------------------------------------------------- CLI
-const isMain = process.argv[1] && path.resolve(process.argv[1]) === path.resolve(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
+/* Windows 下 new URL(...).pathname 是 /C:/...，跟 process.argv[1] 永远不相等，
+   导致 CLI 分支静默不执行（只导出函数）。统一走 fileURLToPath。 */
+const isMain = (() => {
+  const self = path.resolve(fileURLToPath(import.meta.url));
+  const entry = process.argv[1] ? path.resolve(process.argv[1]) : '';
+  return !!entry && entry === self;
+})();
 if (isMain) {
   const argv = process.argv.slice(2);
+  const STRICT = argv.includes('--strict') || process.env.MV_GATE_STRICT === '1';
   const file = argv.find((a) => !a.startsWith('--'));
   if (!file) {
-    console.error('用法: node tools/import/gate.mjs <题目.json> [--write]');
+    console.error('用法: node tools/import/gate.mjs <题目.json> [--write] [--strict]');
     process.exit(1);
   }
   const abs = path.resolve(process.cwd(), file);
@@ -110,10 +159,15 @@ if (isMain) {
     console.error('文件内容必须是数组，或 { "problems": [...] }');
     process.exit(1);
   }
-  const gate = runPythonGates();
+  const gate = runPythonGates({ file: abs, strict: STRICT });
+  gate.results.push(runKatexGate(abs));
   printGate(gate);
   if (!gate.ok) {
-    console.error('✗ 自检未通过，先修校验脚本或答案再入库');
+    console.error('✗ 门禁未通过：' + (STRICT ? '（--strict：缺 Python 或跳过项也算失败）' : '先修校验脚本或答案再入库'));
+    process.exit(1);
+  }
+  if (STRICT && gate.results.some((x) => x.skipped)) {
+    console.error('✗ --strict 下存在被跳过的校验项');
     process.exit(1);
   }
   const stats = markList(list);

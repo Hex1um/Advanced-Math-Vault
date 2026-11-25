@@ -212,53 +212,168 @@
     return out.join(' ').replace(/\[\/low\]\s+\[low\]/g, ' ');
   }
 
-  /* dataUrl -> 识别文字。默认中英混合。
-     多版本（放大灰度 / Sauvola / Otsu / 反色）各跑一遍，按平均置信度取最优。 */
-  async function imageToText(dataUrl, onProgress, langs, opts) {
-    const o = opts || {};
+  /* ------------------------------------------------------- Worker 单例
+     以前每次识别都 createWorker() + terminate()：反复加载 WASM 和 chi_sim 语言包，
+     第二张图还要再等好几秒。现在模块级复用同一个 worker，空闲 5 分钟才回收；
+     识别任务串行排队，避免并发 setParameters/recognize 互相踩。 */
+  let workerPromise = null;
+  let workerIdleTimer = null;
+  let jobQueue = Promise.resolve();
+  const WORKER_IDLE_MS = 5 * 60 * 1000;
+
+  function workerAlive() { return workerPromise; }
+
+  async function getWorker(langs) {
+    if (workerPromise) { touchWorker(); return workerPromise; }
     const T = await ensure();
     const base = scriptBase();
-    const variants = [];
-    try { variants.push({ name: 'gray2x', src: await preprocess(dataUrl, { scale: 2, mode: 'none' }) }); } catch (e) {}
-    try { variants.push({ name: 'sauvola', src: await preprocess(dataUrl, { scale: 2, mode: 'sauvola' }) }); } catch (e) {}
-    try { variants.push({ name: 'otsu', src: await preprocess(dataUrl, { scale: 2, mode: 'otsu' }) }); } catch (e) {}
-    if (!variants.length) variants.push({ name: 'raw', src: dataUrl });
-
-    const worker = await T.createWorker(langs || 'chi_sim+eng', 1, {
+    workerPromise = T.createWorker(langs || 'chi_sim+eng', 1, {
       workerPath: base + 'worker.min.js',
       corePath: base,
       langPath: base + 'lang',
       gzip: true,
-      logger: function (m) {
-        if (m && m.status === 'recognizing text' && onProgress) onProgress(Math.round((m.progress || 0) * 100));
-      }
+      logger: function () {}
+    }).catch(function (e) { workerPromise = null; throw e; });
+    const w = await workerPromise;
+    touchWorker();
+    return w;
+  }
+
+  function touchWorker() {
+    if (workerIdleTimer) clearTimeout(workerIdleTimer);
+    workerIdleTimer = setTimeout(function () { disposeWorker().catch(function () {}); }, WORKER_IDLE_MS);
+    if (workerIdleTimer && workerIdleTimer.unref) workerIdleTimer.unref();
+  }
+
+  async function disposeWorker() {
+    const p = workerPromise;
+    workerPromise = null;
+    if (workerIdleTimer) { clearTimeout(workerIdleTimer); workerIdleTimer = null; }
+    if (!p) return;
+    try { const w = await p; await w.terminate(); } catch (e) {}
+  }
+
+  /* 单张图识别：进队列串行执行，进度回调 pct 百分比 */
+  function recognize(src, opts, onPct) {
+    const run = jobQueue.then(async function () {
+      const w = await getWorker(opts && opts.langs);
+      try {
+        await w.setParameters({
+          tessedit_pageseg_mode: String((opts && opts.psm) || '6'),
+          preserve_interword_spaces: '1'
+        });
+      } catch (e) {}
+      const r = await w.recognize(src);
+      touchWorker();
+      return r;
     });
-    // PSM 6：按单块文本解析；公式截图比默认 PSM 3 好很多
-    try {
-      await worker.setParameters({
-        tessedit_pageseg_mode: String(o.psm || '6'),
-        preserve_interword_spaces: '1'
-      });
-    } catch (e) {}
+    jobQueue = run.catch(function () {});
+    return run;
+  }
+
+  /* ---------------------------------------------------------- 预处理变体
+     三个变体按需生成：gray2x 先跑，置信度够就直接返回。
+     旧实现不管需不需要都先把 2 倍放大 + 中值滤波 + Sauvola + Otsu 全算一遍
+     （大图上每步都是几十毫秒的主线程循环），清晰截图白付两遍开销。 */
+  function makeGray2x(dataUrl, onStage) {
+    if (onStage) onStage('图像增强');
+    return preprocess(dataUrl, { scale: 2, mode: 'none' });
+  }
+
+  function makeSauvola(grayDataUrl, opts) {
+    const o = opts || {};
+    return preprocess(grayDataUrl, { scale: 1, mode: 'sauvola', median: false, block: o.block || 16, k: o.k || 0.2 });
+  }
+
+  function makeOtsu(grayDataUrl) {
+    return preprocess(grayDataUrl, { scale: 1, mode: 'otsu', median: false });
+  }
+
+  function aborted(signal) {
+    return !!(signal && signal.aborted);
+  }
+
+  function abortError() {
+    const e = new Error('已取消识别');
+    e.name = 'AbortError';
+    return e;
+  }
+
+  /* dataUrl -> 识别文字。默认中英混合。
+     opts.stages 可指定变体顺序（默认 gray2x → sauvola → otsu）；
+     opts.signal 支持中途取消；onProgress(pct, stage) 汇报进度。 */
+  async function imageToText(dataUrl, onProgress, langs, opts) {
+    const o = opts || {};
+    const signal = o.signal || null;
+    const notify = function (pct, stage) {
+      if (!onProgress) return;
+      try {
+        // 老调用方只写 function(pct)：多传一个 stage 不影响它们
+        onProgress(Math.max(0, Math.min(100, Math.round(pct))), stage || '');
+      } catch (e) {}
+    };
+    const guard = function () { if (aborted(signal)) throw abortError(); };
+
+    guard();
+    notify(3, '加载识别组件');
+    const T = await ensure();
+    if (!T) throw new Error('OCR 组件不可用');
+    guard();
+
+    const order = Array.isArray(o.stages) && o.stages.length ? o.stages : ['gray2x', 'sauvola', 'otsu'];
+    let gray = '';
     let best = null;
-    try {
-      for (let i = 0; i < variants.length; i++) {
-        if (onProgress) onProgress(Math.round(((i + 1) / variants.length) * 100));
-        let r;
-        try { r = await worker.recognize(variants[i].src); } catch (e) { continue; }
-        const d = (r && r.data) || {};
-        const text = String(d.text || '').trim();
-        if (!text) continue;
-        const conf = typeof d.confidence === 'number' ? d.confidence : 0;
-        if (!best || conf > best.conf || (conf === best.conf && text.length > best.text.length)) {
-          best = { text, conf, variant: variants[i].name, words: d.words || [] };
+
+    for (let i = 0; i < order.length; i++) {
+      const name = order[i];
+      guard();
+      let src;
+      try {
+        if (name === 'gray2x') {
+          notify(10, '图像增强');
+          src = gray = await makeGray2x(dataUrl, function (st) { notify(14, st); });
+        } else if (name === 'sauvola') {
+          if (!gray) gray = await makeGray2x(dataUrl);
+          notify(20, '局部二值化');
+          src = await makeSauvola(gray, o);
+        } else if (name === 'otsu') {
+          if (!gray) gray = await makeGray2x(dataUrl);
+          notify(24, '全局二值化');
+          src = await makeOtsu(gray);
+        } else {
+          src = dataUrl;
         }
-        // 灰度版本已经在 88 分以上就不必再试更激进的二值化
-        if (best.conf >= 88 && best.variant === 'gray2x') break;
+      } catch (e) {
+        continue;
       }
-    } finally {
-      try { await worker.terminate(); } catch (e) {}
+      if (!src) continue;
+      guard();
+
+      const base = 30 + i * 20;
+      notify(base, '识别中');
+      let r;
+      try {
+        r = await recognize(src, Object.assign({ langs: langs, psm: o.psm }, o), function () {});
+      } catch (e) {
+        if (aborted(signal)) throw abortError();
+        continue;
+      }
+      guard();
+      const d = (r && r.data) || {};
+      const text = String(d.text || '').trim();
+      if (!text) continue;
+      const conf = typeof d.confidence === 'number' ? d.confidence : 0;
+      if (!best || conf > best.conf || (conf === best.conf && text.length > best.text.length)) {
+        best = { text: text, conf: conf, variant: name, words: d.words || [] };
+      }
+      notify(Math.min(96, base + 18), '识别完成');
+      // 清晰截图：gray2x 已过 88 分，不必再跑两种二值化（它们更慢，且容易把细笔画抹掉）
+      if (best.variant === 'gray2x' && best.conf >= 88) break;
+      if (best.conf >= 92) break;
     }
+
+    if (aborted(signal)) throw abortError();
+    notify(100, '完成');
     if (!best) return '';
     lastRun = best;
     return best.text;
@@ -361,6 +476,11 @@
     markLowConfidence: markLowConfidence,
     lastRun: function () { return lastRun; },
     imageToText: imageToText,
+    makeGray2x: makeGray2x,
+    makeSauvola: makeSauvola,
+    makeOtsu: makeOtsu,
+    disposeWorker: disposeWorker,
+    workerReady: function () { return !!workerPromise; },
     hasVisionModel: hasVisionModel,
     preprocess: preprocess,
     tidy: tidy,

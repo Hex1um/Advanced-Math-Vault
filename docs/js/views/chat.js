@@ -20,6 +20,8 @@
   let activeId = null;
   let streaming = false;
   let expertOn = true;
+  /* 正在进行的流式请求：点「停止」就 abort，已生成的部分保留 */
+  let abortCtl = null;
   let ctx = { problemCode: '', title: '', statement: '' };
 
   function loadSessions() {
@@ -241,7 +243,16 @@
     if (!s) return;
     const sendBtn = document.getElementById('aiSend');
     streaming = true;
-    if (sendBtn) sendBtn.disabled = true;
+    abortCtl = new AbortController();
+    const stopSignal = abortCtl.signal;
+    /* 流式期间把发送键变成「停止」：长回答 / 免费通道排队时，用户得能打断 */
+    if (sendBtn) {
+      sendBtn.disabled = false;
+      sendBtn.dataset.idle = sendBtn.innerHTML;
+      sendBtn.innerHTML = '<span style="font-size:11px;line-height:1">停止</span>';
+      sendBtn.title = '停止生成';
+      sendBtn.classList.add('stopping');
+    }
 
     const thread = document.getElementById('aiThread');
     const last = thread ? thread.querySelector('.msg.assistant:last-child .md') : null;
@@ -290,7 +301,8 @@
         headers: Object.assign({ 'Content-Type': 'application/json' }, window.API.authHeaders()),
         credentials: window.API.sameOrigin() ? 'include' : 'omit',
         cache: 'no-store',
-        body: JSON.stringify(body)
+        body: JSON.stringify(body),
+        signal: stopSignal
       });
       if (!resp.ok || !resp.body) {
         let msg = 'AI 服务不可用（' + resp.status + '）';
@@ -335,7 +347,7 @@
       setModeLabel('免费通道 · 本机直连', '#1f7a68');
       setStatus('免费通道思考中…');
       const messages = [{ role: 'system', content: sys.system }].concat(s.messages.slice(-14));
-      await window.FreeLLM.stream(messages, push);
+      await window.FreeLLM.stream(messages, push, { signal: stopSignal, timeoutMs: 45000 });
     };
 
     try {
@@ -360,14 +372,31 @@
       }
       finish();
     } catch (e) {
-      const errText = '**出错了**：' + e.message + '\n\n可以稍后重试，或先在题目页看分层提示。';
-      s.messages.push({ role: 'assistant', content: errText });
-      persist();
-      if (last) window.Md.render(last, errText);
-      window.UI.toast(e.message, 'err');
+      const stopped = (e && (e.name === 'AbortError' || e.kind === 'aborted'));
+      if (stopped) {
+        // 用户主动停止：保留已经生成的部分，不写「出错了」
+        const partial = buffer.trim();
+        const note = partial ? partial + '\n\n_（已停止）_' : '_（已停止）_';
+        s.messages.push({ role: 'assistant', content: note });
+        persist();
+        if (last) window.Md.render(last, note);
+        window.UI.toast('已停止生成', 'ok');
+      } else {
+        const errText = '**出错了**：' + e.message + '\n\n可以稍后重试，或先在题目页看分层提示。';
+        s.messages.push({ role: 'assistant', content: errText });
+        persist();
+        if (last) window.Md.render(last, errText);
+        window.UI.toast(e.message, 'err');
+      }
     } finally {
       streaming = false;
-      if (sendBtn) sendBtn.disabled = false;
+      abortCtl = null;
+      if (sendBtn) {
+        sendBtn.disabled = false;
+        if (sendBtn.dataset.idle) sendBtn.innerHTML = sendBtn.dataset.idle;
+        sendBtn.classList.remove('stopping');
+        sendBtn.title = '发送';
+      }
       const ta2 = document.getElementById('aiInput');
       if (ta2) ta2.focus();
     }
@@ -464,6 +493,10 @@
       }
     });
     sendBtn.addEventListener('click', function () {
+      if (streaming) {
+        if (abortCtl) { try { abortCtl.abort(); } catch (e) {} }
+        return;
+      }
       const v = input.value;
       input.value = '';
       input.style.height = 'auto';
