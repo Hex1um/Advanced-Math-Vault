@@ -280,61 +280,9 @@
   /* ---------------------------------------------------------------- 预处理
      ProcessOn 那类工具准确率高，一半功劳在预处理：先放大、灰度、拉对比、二值化，
      让字符边缘锐利。tesseract 对模糊小图几乎无解，对清晰黑白图能用得多。 */
-  function preprocess(dataUrl, opts) {
-    const o = Object.assign({ scale: 2, threshold: 0, invert: false }, opts || {});
-    return new Promise(function (resolve) {
-      const img = new Image();
-      img.onload = function () {
-        const w = Math.max(1, Math.round(img.width * o.scale));
-        const h = Math.max(1, Math.round(img.height * o.scale));
-        const cv = document.createElement('canvas');
-        cv.width = w; cv.height = h;
-        const g = cv.getContext('2d');
-        g.imageSmoothingEnabled = true;
-        g.imageSmoothingQuality = 'high';
-        g.drawImage(img, 0, 0, w, h);
-
-        const data = g.getImageData(0, 0, w, h);
-        const px = data.data;
-        // 灰度 + 统计直方图求自适应阈值
-        const hist = new Uint32Array(256);
-        for (let i = 0; i < px.length; i += 4) {
-          const v = (px[i] * 0.299 + px[i + 1] * 0.587 + px[i + 2] * 0.114) | 0;
-          px[i] = px[i + 1] = px[i + 2] = v;
-          hist[v]++;
-        }
-        let th = o.threshold;
-        if (!th) {
-          // Otsu：让前景/背景类间方差最大，比固定 128 稳
-          const total = w * h;
-          let sum = 0;
-          for (let i = 0; i < 256; i++) sum += i * hist[i];
-          let sumB = 0, wB = 0, best = 0;
-          for (let i = 0; i < 256; i++) {
-            wB += hist[i];
-            if (!wB) continue;
-            const wF = total - wB;
-            if (!wF) break;
-            sumB += i * hist[i];
-            const mB = sumB / wB, mF = (sum - sumB) / wF;
-            const between = wB * wF * (mB - mF) * (mB - mF);
-            if (between > best) { best = between; th = i; }
-          }
-          th = th || 128;
-        }
-        for (let i = 0; i < px.length; i += 4) {
-          let v = px[i] > th ? 255 : 0;
-          if (o.invert) v = 255 - v;
-          px[i] = px[i + 1] = px[i + 2] = v;
-          px[i + 3] = 255;
-        }
-        g.putImageData(data, 0, 0);
-        resolve(cv.toDataURL('image/png'));
-      };
-      img.onerror = function () { resolve(dataUrl); };
-      img.src = dataUrl;
-    });
-  }
+  /* preprocess 只在上面定义一次（支持 mode: none/otsu/sauvola）。
+     旧版 Otsu-only 实现曾重复声明在这里，因函数提升覆盖新版，导致三种变体全变成 Otsu，
+     多版本取优形同虚设——已删除，勿再重复添加。 */
 
   /* ---------------------------------------------------- 数学符号纠错（规则）
      tesseract 的典型误识别，专门为数学文本写一份替换表。

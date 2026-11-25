@@ -226,6 +226,19 @@
       + '</div>'
 
       + '<div class="card form-card" style="margin-top:22px">'
+      + '<h3 style="margin:0 0 6px;font-size:15px">识图模型（全站共用）</h3>'
+      + '<p class="small muted" style="margin:0 0 14px">给全站用户读题图用（投稿识图、图片判卷）。填一个支持图片的模型，如智谱 <code>glm-4v-flash</code>（免费）。不填则用户只能用本地 OCR 或自己的 Key。Key 只存服务端，不会下发给访客。</p>'
+      + '<div class="field-row">'
+      + '<div class="field"><label>Base URL</label><input id="vBase" placeholder="https://open.bigmodel.cn/api/paas/v4" /></div>'
+      + '<div class="field"><label>模型名</label><input id="vModel" placeholder="glm-4v-flash" /></div>'
+      + '</div>'
+      + '<div class="field"><label>API Key</label><input id="vKey" type="password" placeholder="留空表示不改" /></div>'
+      + '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="btn btn-primary" id="saveVision">保存</button>'
+      + '<button class="btn" id="clearVision">清空识图 Key</button>'
+      + '<span class="small muted" id="visionStatus"></span></div>'
+      + '</div>'
+
+      + '<div class="card form-card" style="margin-top:22px">'
       + '<h3 style="margin:0 0 10px;font-size:15px">题目反馈 <span class="tag gold" id="fbCount">0 条待处理</span></h3>'
       + '<p class="small muted" style="margin:0 0 14px">用户反馈先由 AI 审阅归类，结论与建议随原文一并转到这里。只有 AI 审阅完成的反馈才会出现。</p>'
       + '<div id="fbReviewing" class="small muted" style="margin-bottom:10px"></div>'
@@ -329,8 +342,41 @@
         document.getElementById('llmStatus').innerHTML = data.llm.configured
           ? '<span style="color:'+window.UI.tone('teal')+'">已配置 · ' + window.Md.esc(data.llm.model) + ' · key ' + window.Md.esc(data.llm.keyHint) + '</span>'
           : '<span style="color:'+window.UI.tone('warn')+'">未配置，使用本地讲解模式</span>';
+        const v = data.vision || {};
+        const vb = document.getElementById('vBase'), vm = document.getElementById('vModel'), vs = document.getElementById('visionStatus');
+        if (vb) vb.value = v.baseUrl || '';
+        if (vm) vm.value = v.model || '';
+        if (vs) vs.innerHTML = v.configured
+          ? '<span style="color:'+window.UI.tone('teal')+'">已配置 · ' + window.Md.esc(v.model || '') + ' · key ' + window.Md.esc(v.keyHint || '') + '</span>'
+          : '<span style="color:'+window.UI.tone('warn')+'">未配置，全站识图不可用</span>';
       } catch (e) {}
     }
+
+    /* 识图模型保存 / 清空 */
+    const saveVisionBtn = document.getElementById('saveVision');
+    if (saveVisionBtn) saveVisionBtn.addEventListener('click', async function () {
+      const btn = this; btn.disabled = true;
+      try {
+        await window.API.post('/api/admin/llm', {
+          target: 'vision',
+          baseUrl: document.getElementById('vBase').value.trim(),
+          model: document.getElementById('vModel').value.trim(),
+          apiKey: document.getElementById('vKey').value.trim()
+        });
+        document.getElementById('vKey').value = '';
+        window.UI.toast('识图模型已保存', 'ok');
+        loadLLM();
+      } catch (e) { window.UI.toast(e.message, 'err'); }
+      finally { btn.disabled = false; }
+    });
+    const clearVisionBtn = document.getElementById('clearVision');
+    if (clearVisionBtn) clearVisionBtn.addEventListener('click', async function () {
+      try {
+        await window.API.post('/api/admin/llm', { target: 'vision', clearKey: true });
+        window.UI.toast('识图 Key 已清空', 'ok');
+        loadLLM();
+      } catch (e) { window.UI.toast(e.message, 'err'); }
+    });
 
     async function loadRejected() {
       try {
