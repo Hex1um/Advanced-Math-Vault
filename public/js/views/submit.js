@@ -27,7 +27,7 @@
       + '<input type="file" id="ocrFile" accept="image/*" style="display:none" />'
       + '<div class="upload-row"><button type="button" class="btn btn-sm" id="ocrPick">选一张题目图片</button>'
       + '<span class="small muted" id="ocrHint">有视觉模型 Key 时自动补全题目、答案与解析；没有就走下面的提示词</span></div>'
-      + '<div id="ocrPreview"></div><div id="ocrResult"></div></div>'
+      + '<div id="ocrQuality"></div><div id="ocrPreview"></div><div id="ocrResult"></div></div>'
       + '<div class="form-section-title">题目基本信息</div>'
       + '<div class="field"><label>标题 *</label><input name="title" maxlength="120" placeholder="给这道题起一个能记住的标题" /></div>'
       + '<div class="field"><label>题干 *</label><textarea name="statement" rows="7" placeholder="完整题干。行内公式 $...$，独立公式 $$...$$"></textarea>'
@@ -89,13 +89,33 @@
         rd.onload = function () {
           const img = new Image();
           img.onload = function () {
-            const max = 1600;
+            // OCR 输入保长边 2200px：压到 1400 会把笔画细节抹掉，反而更认不准
+            const max = 2200;
             const sc = Math.min(1, max / Math.max(img.width, img.height));
             const cv = document.createElement('canvas');
             cv.width = Math.round(img.width * sc);
             cv.height = Math.round(img.height * sc);
-            cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
-            image = cv.toDataURL('image/jpeg', 0.85);
+            const g2 = cv.getContext('2d');
+            g2.imageSmoothingQuality = 'high';
+            g2.drawImage(img, 0, 0, cv.width, cv.height);
+            image = cv.toDataURL('image/jpeg', 0.92);
+
+            const warnBox = document.getElementById('ocrQuality');
+            if (warnBox) warnBox.innerHTML = '';
+            if (window.OCR && window.OCR.assessImage) {
+              window.OCR.assessImage(image).then(function (q) {
+                const tips = [];
+                if (q.blurry) tips.push('<b>有点糊</b>：手别抖，等对焦再拍，或者直接截电子版');
+                if (q.lightUneven) tips.push('<b>光线不匀</b>：避开阴影和反光，让纸面亮度均匀');
+                if (tips.length && warnBox) {
+                  warnBox.innerHTML = '<div class="judge-errors" style="margin-top:8px">'
+                    + '<div class="je-head">拍摄质量可能影响识别</div><ul>'
+                    + tips.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>'
+                    + '<div class="small muted">电子版截图 / 扫描件的识别准确率明显高于手写拍照。</div></div>';
+                }
+              }).catch(function () {});
+            }
+
             document.getElementById('ocrPreview').innerHTML = '<img src="' + image + '" class="judge-img" alt="题目预览" />'
               + '<div style="margin-top:8px"><button type="button" class="btn btn-primary btn-sm" id="ocrGo">识图补全</button></div>';
             document.getElementById('ocrGo').addEventListener('click', runOcr);
@@ -136,11 +156,21 @@
                 box.innerHTML = '<div class="small muted" style="padding:8px 0">本地 OCR 识别中 ' + pct + '%…</div>';
               }));
               if (text) {
+                // 把低置信度片段标出来，AI 才知道哪里该保守、哪里可以放心补
+                const run = window.OCR.lastRun && window.OCR.lastRun();
+                let marked = text;
+                if (run && run.words && run.words.length && window.OCR.markLowConfidence) {
+                  const m = window.OCR.markLowConfidence(run.words, 70);
+                  if (m && m.replace(/\[\/?low\]/g, '').trim().length > 8) marked = m;
+                }
+                if (marked !== text) {
+                  box.innerHTML = '<div class="small muted" style="padding:8px 0">已标出 ' + (marked.match(/\[low\]/g) || []).length + ' 处低置信度片段，正在交给 AI 校对…</div>';
+                }
                 // 关键一步：tesseract 只认字形，交给 AI 按上下文改写成合法 LaTeX
                 if (window.OCR.polishWithAI) {
                   box.innerHTML = '<div class="small muted" style="padding:8px 0">正在把识别结果规范成 LaTeX…</div>';
                   try {
-                    const polished = await window.OCR.polishWithAI(text, { llm: window.UI.llmConfig() });
+                    const polished = await window.OCR.polishWithAI(marked, { llm: window.UI.llmConfig() });
                     if (polished && polished.trim().length > 8) text = polished;
                   } catch (e2) {
                     console.warn('[ocr] AI 规范化失败，用原始识别结果', e2.message);
