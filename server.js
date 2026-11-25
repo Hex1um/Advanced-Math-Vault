@@ -1680,7 +1680,8 @@ function publicFeedback(f, user) {
     submissionId: f.submissionId || '',
     submissionScore: f.submissionScore,
     submissionAt: f.submissionAt || '',
-    isMine: !!(user && f.userId === user.id)
+    isMine: !!(user && f.userId === user.id),
+    problemDeleted: !!f.problemDeleted
   };
 }
 
@@ -2796,8 +2797,108 @@ async function handleApi(req, res, pathname, query) {
   }
 
   /* ---- 管理端 ---- */
+/* 管理端删除题目：连带清掉每日一题、用户做题记录、帖子关联，保留历史提交但标记 */
+function deleteProblemCascade(code, adminName) {
+  const idx = db.problems.findIndex((p) => p.code === code);
+  if (idx < 0) return null;
+  db.problems.splice(idx, 1);
+  let daily = 0;
+  if (db.daily && typeof db.daily === 'object') {
+    for (const date of Object.keys(db.daily)) {
+      if (db.daily[date] === code) { delete db.daily[date]; daily++; }
+    }
+  }
+  let userRecords = 0;
+  for (const u of db.users || []) {
+    for (const key of ['solved', 'best', 'wrong']) {
+      if (u[key] && Object.prototype.hasOwnProperty.call(u[key], code)) { delete u[key][code]; userRecords++; }
+    }
+  }
+  let posts = 0;
+  for (const post of db.posts || []) {
+    if (post.problemCode === code) { post.problemCode = ''; posts++; }
+  }
+  for (const sub of db.submissions || []) {
+    if (sub.code === code) sub.problemDeleted = true;
+  }
+  for (const fb of db.feedbacks || []) {
+    if (fb.code === code) {
+      fb.problemDeleted = true;
+      fb.status = 'resolved';
+      fb.handledAt = fb.handledAt || new Date().toISOString();
+      fb.handlerName = fb.handlerName || adminName;
+    }
+  }
+  return { daily, userRecords, posts };
+}
+
   if (pathname.startsWith('/api/admin/')) {
     if (!user || user.role !== 'admin') return fail(res, 403, '需要管理员权限');
+
+    const adminProblemMatch = pathname.match(/^\/api\/admin\/problem\/([A-Za-z0-9_-]+)$/);
+    if (adminProblemMatch && method === 'GET') {
+      const p = db.problems.find((x) => x.code === adminProblemMatch[1]);
+      if (!p) return fail(res, 404, '题目不存在');
+      return send(res, 200, { ok: true, problem: p });
+    }
+    if (adminProblemMatch && method === 'POST') {
+      const p = db.problems.find((x) => x.code === adminProblemMatch[1]);
+      if (!p) return fail(res, 404, '题目不存在');
+      const body = await readBody(req);
+      if (body.title !== undefined) {
+        const title = String(body.title).trim();
+        if (title.length < 2) return fail(res, 400, '标题至少 2 个字');
+        p.title = title.slice(0, 120);
+      }
+      if (body.statement !== undefined) {
+        const statement = String(body.statement).trim();
+        if (statement.length < 8) return fail(res, 400, '题干至少 8 个字');
+        p.statement = statement;
+      }
+      if (body.answer !== undefined) p.answer = String(body.answer).trim();
+      if (body.solution !== undefined) {
+        const solution = String(body.solution).trim();
+        if (!solution) return fail(res, 400, '解析不能为空');
+        p.solution = solution;
+      }
+      if (Array.isArray(body.hints)) p.hints = body.hints.map(String).map((x) => x.trim()).filter(Boolean).slice(0, 5);
+      if (body.source !== undefined) p.source = String(body.source).slice(0, 80);
+      if (Array.isArray(body.tags) && body.tags.length) {
+        const tagInfo = tagTax.normalize(body.tags, p.mainTag);
+        p.mainTag = tagInfo.mainTag; p.tags = tagInfo.tags;
+      }
+      if (body.thinking !== undefined) p.thinking = clampScore(body.thinking, p.thinking);
+      if (body.difficulty !== undefined) p.difficulty = clampScore(body.difficulty, p.difficulty);
+      if (body.calc !== undefined) p.calc = clampScore(body.calc, p.calc);
+      p.editedAt = new Date().toISOString();
+      p.editorName = user.name;
+      if (body.feedbackId) {
+        const fb = db.feedbacks.find((f) => f.id === Number(body.feedbackId));
+        if (fb) {
+          fb.status = 'resolved'; fb.handledAt = p.editedAt; fb.handlerName = user.name;
+          fb.adminNote = String(body.note || '已修改题目/解析').slice(0, 500);
+        }
+      }
+      saveDb();
+      return send(res, 200, { ok: true, code: p.code });
+    }
+    const adminDeleteMatch = pathname.match(/^\/api\/admin\/problem\/([A-Za-z0-9_-]+)\/delete$/);
+    if (adminDeleteMatch && method === 'POST') {
+      const code = adminDeleteMatch[1];
+      const body = await readBody(req);
+      const result = deleteProblemCascade(code, user.name);
+      if (!result) return fail(res, 404, '题目不存在');
+      if (body.feedbackId) {
+        const fb = db.feedbacks.find((f) => f.id === Number(body.feedbackId));
+        if (fb) {
+          fb.status = 'resolved'; fb.problemDeleted = true;
+          fb.handledAt = new Date().toISOString(); fb.handlerName = user.name;
+          fb.adminNote = String(body.note || '题目已删除').slice(0, 500);
+        }
+      }
+      saveDb();
+      return send(res, 200, { ok: true, code, removed: result });
+    }
 
     if (pathname === '/api/admin/pending' && method === 'GET') {
       const items = db.problems.filter((p) => p.status === 'pending').map((p) => ({
@@ -2843,7 +2944,7 @@ async function handleApi(req, res, pathname, query) {
         p.rejectReason = String(body.reason || '未说明原因').slice(0, 200);
         p.reviewedAt = new Date().toISOString();
       } else if (action === 'delete') {
-        db.problems = db.problems.filter((x) => x.code !== p.code);
+        deleteProblemCascade(p.code, user.name);
       } else {
         return fail(res, 400, '未知操作');
       }
@@ -3089,7 +3190,10 @@ async function handleApi(req, res, pathname, query) {
       const pending = list.filter((f) => !((f.ai && f.ai.reviewedAt) || f.type === 'appeal'));
       const withTitle = (f) => {
         const pr = db.problems.find((p) => p.code === f.code);
-        return Object.assign(publicFeedback(f, user), { title: pr ? pr.title : '', tags: pr ? pr.tags : [] });
+        return Object.assign(publicFeedback(f, user), {
+          title: pr ? pr.title : '', tags: pr ? pr.tags : [],
+          adminNote: f.adminNote || '', handledAt: f.handledAt || '', handlerName: f.handlerName || ''
+        });
       };
       return send(res, 200, {
         ok: true,

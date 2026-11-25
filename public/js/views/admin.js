@@ -9,6 +9,52 @@
     return '<div class="field"><label>' + name + '</label><input type="number" min="1" max="10" value="' + value + '" data-f="' + name + '" /></div>';
   }
 
+  async function openProblemEditor(fb) {
+    let data;
+    try {
+      data = await window.API.get('/api/admin/problem/' + encodeURIComponent(fb.code));
+    } catch (e) {
+      window.UI.toast(e.message, 'err');
+      return;
+    }
+    const p = data.problem || {};
+    const body = document.createElement('div');
+    body.innerHTML = '<div class="field"><label>标题</label><input id="epTitle" value="' + window.Md.esc(p.title || '') + '" /></div>'
+      + '<div class="field"><label>题干</label><textarea id="epStatement" rows="10" style="width:100%">' + window.Md.esc(p.statement || '') + '</textarea></div>'
+      + '<div class="field"><label>最终答案</label><input id="epAnswer" value="' + window.Md.esc(p.answer || '') + '" /></div>'
+      + '<div class="field"><label>完整解析</label><textarea id="epSolution" rows="12" style="width:100%">' + window.Md.esc(p.solution || '') + '</textarea></div>'
+      + '<div class="field"><label>分层提示（每行一条）</label><textarea id="epHints" rows="3" style="width:100%">' + window.Md.esc((p.hints || []).join('\n')) + '</textarea></div>'
+      + '<div class="small muted" id="epMsg">保存后立即生效，并自动把这条反馈标为已处理。</div>'
+      + '<div style="display:flex;gap:10px;margin-top:12px"><button class="btn btn-primary" id="epSave">保存修改</button>'
+      + '<button class="btn" id="epCancel">取消</button></div>';
+    const modal = window.UI.modal({ title: '修改题目 · ' + fb.code, sub: '管理员直接编辑，保存后同步到题库', body: body, wide: true });
+    if (window.MathKey) window.MathKey.attachAll(body);
+    body.querySelector('#epCancel').addEventListener('click', modal.close);
+    body.querySelector('#epSave').addEventListener('click', async function () {
+      const btn = body.querySelector('#epSave');
+      const msg = body.querySelector('#epMsg');
+      const payload = {
+        title: body.querySelector('#epTitle').value,
+        statement: body.querySelector('#epStatement').value,
+        answer: body.querySelector('#epAnswer').value,
+        solution: body.querySelector('#epSolution').value,
+        hints: body.querySelector('#epHints').value.split(/\n+/).map(function (x) { return x.trim(); }).filter(Boolean),
+        feedbackId: fb.id
+      };
+      btn.disabled = true; btn.textContent = '保存中…';
+      try {
+        await window.API.post('/api/admin/problem/' + encodeURIComponent(fb.code), payload);
+        window.UI.toast('题目已更新', 'ok');
+        modal.close();
+        loadFeedback();
+      } catch (e) {
+        msg.textContent = e.message;
+        msg.style.color = window.UI.tone('err');
+        btn.disabled = false; btn.textContent = '保存修改';
+      }
+    });
+  }
+
   async function loadFeedback() {
     const wrap = document.getElementById('feedbackList');
     if (!wrap) return;
@@ -23,9 +69,12 @@
         const ai = f.ai || {};
         const validTag = ai.valid === 'no' ? '<span class="tag">疑似无效</span>'
           : ai.valid === 'yes' ? '<span class="tag gold">有效反馈</span>' : '<span class="tag">待复核</span>';
+        const codeHtml = f.problemDeleted
+          ? '<span class="mono">' + window.Md.esc(f.code) + '</span><span class="tag">题目已删除</span>'
+          : '<a class="mono" href="#/problem/' + f.code + '">' + f.code + '</a>';
         return '<div class="review-item" data-fid="' + f.id + '" style="padding:14px;margin-bottom:12px;border:1px solid var(--border,#dde);border-radius:8px">'
           + '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'
-          + '<a class="mono" href="#/problem/' + f.code + '">' + f.code + '</a>'
+          + codeHtml
           + '<span class="tag">' + window.Md.esc(f.typeName || '其他') + '</span>' + validTag
           + '<span class="tag">' + window.Md.esc(ai.category || '未分类') + '</span>'
           + '<span class="small muted">' + window.Md.esc(f.userName || '用户') + ' · ' + window.UI.fmtDate(f.createdAt) + '</span>'
@@ -46,6 +95,7 @@
             : '')
           + '<div class="field" style="margin-top:8px"><input class="fb-note" placeholder="处理备注（选填）" value="' + window.Md.esc(f.adminNote || '') + '" /></div>'
           + '<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">'
+          + (f.problemDeleted ? '' : '<button class="btn btn-sm" data-fact="edit">修改题目/解析</button><button class="btn btn-sm btn-danger" data-fact="delete">删除题目</button>')
           + '<button class="btn btn-sm btn-ok" data-fact="resolve">标记已处理</button>'
           + '<button class="btn btn-sm" data-fact="ignore">忽略</button>'
           + (f.status !== 'open' ? '<button class="btn btn-sm" data-fact="reopen">重新打开</button>' : '')
@@ -53,7 +103,8 @@
       };
 
       window.__appealMap = {};
-      d.items.forEach(function (f) { if (f.submissionId) window.__appealMap[f.id] = f.submissionId; });
+      window.__fbMap = {};
+      d.items.forEach(function (f) { window.__fbMap[f.id] = f; if (f.submissionId) window.__appealMap[f.id] = f.submissionId; });
       wrap.innerHTML = d.items.length
         ? d.items.map(Item).join('')
         : '<div class="empty" style="padding:18px">暂无 AI 已审阅的反馈。</div>';
@@ -63,6 +114,16 @@
           btn.addEventListener('click', async function () {
             const note = (node.querySelector('.fb-note') || {}).value || '';
             try {
+              const fb = (window.__fbMap || {})[node.dataset.fid];
+              if (!fb) throw new Error('找不到这条反馈');
+              if (btn.dataset.fact === 'edit') { await openProblemEditor(fb); return; }
+              if (btn.dataset.fact === 'delete') {
+                if (!window.confirm('确定删除 ' + fb.code + '？会同时清理每日一题、用户做题记录和帖子关联，且不可恢复。')) return;
+                await window.API.post('/api/admin/problem/' + encodeURIComponent(fb.code) + '/delete', { feedbackId: fb.id, note: note || '管理员从反馈删除题目' });
+                window.UI.toast('题目已删除', 'ok');
+                loadFeedback();
+                return;
+              }
               if (btn.dataset.fact === 'override') {
                 const raw = (node.querySelector('.ap-score') || {}).value;
                 const sc = Number(raw);
