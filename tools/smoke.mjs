@@ -337,6 +337,14 @@ try {
   const appealHandled = (fbLoop.json.items || []).some((f) => f.submissionId === apSub && f.status === 'handled');
   ok('改分后申诉自动标记已处理', appealHandled);
 
+  console.log('\n[回归] OCR 坏例闭环');
+  const bc = await req('/api/ai/ocr-badcase', { method: 'POST', body: JSON.stringify({ raw: 'l i m x->0 (1+x) 1/x', final: '$\\lim_{x\\to 0}(1+x)^{1/x}$', conf: 61, variant: 'sauvola' }) });
+  ok('坏例采集成功', bc.json && bc.json.ok === true, JSON.stringify(bc.json).slice(0, 100));
+  const bcSame = await req('/api/ai/ocr-badcase', { method: 'POST', body: JSON.stringify({ raw: 'same text', final: 'same text' }) });
+  ok('未修改不计入坏例', bcSame.json && bcSame.json.skipped);
+  const bcList = await req('/api/admin/ocr-badcases');
+  ok('管理员可读坏例列表', bcList.json && bcList.json.ok && bcList.json.total >= 1, JSON.stringify(bcList.json && { total: bcList.json.total }).slice(0, 80));
+
   console.log('\n[回归] 健壮性 / 隐私 / 质量门禁');
   // P0：非法百分号编码不许把进程打死
   for (const bad of ['/%zz', '/%E0%A4%A']) {

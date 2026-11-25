@@ -81,6 +81,9 @@
       const file = document.getElementById('ocrFile');
       if (!pick) return;
       let image = '';
+      let ocrRaw = '';
+      let ocrMeta = null;
+      let lastQuality = null;
       pick.addEventListener('click', function () { file.click(); });
       file.addEventListener('change', function (ev) {
         const f = ev.target.files && ev.target.files[0];
@@ -104,6 +107,7 @@
             if (warnBox) warnBox.innerHTML = '';
             if (window.OCR && window.OCR.assessImage) {
               window.OCR.assessImage(image).then(function (q) {
+                lastQuality = { blur: q.blur, uneven: q.uneven, blurry: q.blurry, lightUneven: q.lightUneven };
                 const tips = [];
                 if (q.blurry) tips.push('<b>有点糊</b>：手别抖，等对焦再拍，或者直接截电子版');
                 if (q.lightUneven) tips.push('<b>光线不匀</b>：避开阴影和反光，让纸面亮度均匀');
@@ -166,6 +170,8 @@
                 if (marked !== text) {
                   box.innerHTML = '<div class="small muted" style="padding:8px 0">已标出 ' + (marked.match(/\[low\]/g) || []).length + ' 处低置信度片段，正在交给 AI 校对…</div>';
                 }
+                ocrRaw = marked;
+                ocrMeta = { conf: (run && run.conf) || 0, variant: (run && run.variant) || '', quality: lastQuality };
                 // 关键一步：tesseract 只认字形，交给 AI 按上下文改写成合法 LaTeX
                 if (window.OCR.polishWithAI) {
                   box.innerHTML = '<div class="small muted" style="padding:8px 0">正在把识别结果规范成 LaTeX…</div>';
@@ -249,6 +255,14 @@
           answer: form.answer.value.trim(),
           solution: solution
         });
+        if (ocrRaw && ocrRaw !== statement) {
+          window.API.post('/api/ai/ocr-badcase', {
+            raw: ocrRaw, final: statement, code: res.code,
+            conf: (ocrMeta && ocrMeta.conf) || 0,
+            variant: (ocrMeta && ocrMeta.variant) || '',
+            quality: (ocrMeta && ocrMeta.quality) || null
+          }).catch(function () {});
+        }
         el.innerHTML = '<div class="empty" style="padding:80px 20px"><b>已提交，编号 ' + res.code + '</b>'
           + '管理员审核通过后才会进入题库。审核结果在「我的投稿」里可见。'
           + '<div style="margin-top:18px;display:flex;gap:10px;justify-content:center">'

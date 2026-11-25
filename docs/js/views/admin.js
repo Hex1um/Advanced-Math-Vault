@@ -87,6 +87,60 @@
     }
   }
 
+  /* OCR 坏例：左原文 / 右改正，字符级 diff */
+  function charDiff(a, b) {
+    const A = Array.from(a).slice(0, 600), B = Array.from(b).slice(0, 600);
+    const n = A.length, m = B.length;
+    if (n * m > 250000) return { left: A.join(''), right: B.join('') };
+    const dp = Array.from({ length: n + 1 }, () => new Uint16Array(m + 1));
+    for (let i = n - 1; i >= 0; i--) {
+      for (let j = m - 1; j >= 0; j--) {
+        dp[i][j] = A[i] === B[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+      }
+    }
+    let i = 0, j = 0, right = '', left = '';
+    while (i < n && j < m) {
+      if (A[i] === B[j]) { right += window.Md.esc(B[j]); left += window.Md.esc(A[i]); i++; j++; }
+      else if (dp[i + 1][j] >= dp[i][j + 1]) { left += '<del>' + window.Md.esc(A[i]) + '</del>'; i++; }
+      else { right += '<ins>' + window.Md.esc(B[j]) + '</ins>'; j++; }
+    }
+    while (i < n) { left += '<del>' + window.Md.esc(A[i++]) + '</del>'; }
+    while (j < m) { right += '<ins>' + window.Md.esc(B[j++]) + '</ins>'; }
+    return { left, right };
+  }
+
+  async function loadOcrBadcases() {
+    const wrap = document.getElementById('bcList');
+    if (!wrap) return;
+    try {
+      const d = await window.API.get('/api/admin/ocr-badcases');
+      const cnt = document.getElementById('bcCount');
+      if (cnt) cnt.textContent = d.total + ' 条';
+      if (!d.items.length) {
+        wrap.innerHTML = '<div class="empty" style="padding:18px">还没有坏例。用户走 OCR 投稿并手动改错后，会自动记录下来。</div>';
+        return;
+      }
+      wrap.innerHTML = d.items.slice(0, 30).map(function (c) {
+        const diff = charDiff(String(c.raw || ''), String(c.final || ''));
+        const rawShown = window.Md.esc(String(c.raw || '').replace(/\[low\]/g, '⟨').replace(/\[\/low\]/g, '⟩'))
+          .replace(/⟨/g, '<span class="tag gold">').replace(/⟩/g, '</span>');
+        return '<div class="bc-card" style="border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:12px">'
+          + '<div class="small muted" style="display:flex;gap:8px;flex-wrap:wrap">'
+          + '<span class="mono">' + window.Md.esc(c.id || '') + '</span>'
+          + '<span class="tag">conf ' + (c.conf || 0) + '</span>'
+          + '<span class="tag">' + window.Md.esc(c.variant || 'n/a') + '</span>'
+          + (c.quality ? '<span class="tag">blur ' + c.quality.blur + ' / uneven ' + c.quality.uneven + '</span>' : '')
+          + '<span>' + window.UI.fmtDate(c.at) + '</span></div>'
+          + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px">'
+          + '<div><div class="small muted">识别原文</div><div class="md" style="max-height:180px;overflow:auto;font-size:12.5px;white-space:pre-wrap">' + rawShown + '</div></div>'
+          + '<div><div class="small muted">用户改正</div><div class="md" style="max-height:180px;overflow:auto;font-size:12.5px;white-space:pre-wrap">' + diff.right + '</div></div>'
+          + '</div></div>';
+      }).join('');
+    } catch (e) {
+      wrap.innerHTML = window.UI.empty('坏例加载失败', e.message);
+    }
+  }
+
   /* 用户提交记录：谁在什么时候交了哪道题、AI 给了多少分 */
   async function loadSubmissions() {
     const wrap = document.getElementById('subList');
@@ -185,6 +239,12 @@
       + '</div>'
 
       + '<div class="card form-card" style="margin-top:22px">'
+      + '<h3 style="margin:0 0 10px;font-size:15px">OCR 坏例 <span class="tag" id="bcCount">0 条</span></h3>'
+      + '<p class="small muted" style="margin:0 0 14px">左边是识别原文（<span class="tag gold">黄色</span>为低置信度片段），右边是用户改正后的版本，标红的是被改写的字符。用来判断该改预处理还是该改提示词。</p>'
+      + '<div id="bcList" class="small muted">加载中…</div>'
+      + '</div>'
+
+      + '<div class="card form-card" style="margin-top:22px">'
       + '<h3 style="margin:0 0 10px;font-size:15px">已驳回</h3><div id="rejectedList" class="small muted">加载中…</div>'
       + '</div>';
 
@@ -193,6 +253,7 @@
     loadLLM();
     loadFeedback();
     loadSubmissions();
+    loadOcrBadcases();
 
     /* 批量导入 */
     const fileInput = document.getElementById('importFile');

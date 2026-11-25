@@ -3015,6 +3015,36 @@ function parseJudge(text) {
     return send(res, 200, { ok: true, problem: item, model: { provider: used.name, model: used.model } });
   }
 
+  /* ---- OCR 坏例采集：用户纠错前后的对照，用来量化改进 ---- */
+  if (pathname === '/api/ai/ocr-badcase' && method === 'POST') {
+    if (!user) return fail(res, 401, '登录后才能提交');
+    const body = await readBody(req, 512 * 1024);
+    const raw = String(body.raw || '').slice(0, 4000);
+    const final = String(body.final || '').slice(0, 4000);
+    if (!raw || !final) return fail(res, 400, '缺少识别结果或改正结果');
+    if (raw === final) return send(res, 200, { ok: true, skipped: '未修改，不计入坏例' });
+    db.ocrBadcases = db.ocrBadcases || [];
+    db.ocrBadcases.push({
+      id: 'BC' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5),
+      at: new Date().toISOString(),
+      uid: user.id, name: user.name,
+      raw, final,
+      conf: Number(body.conf) || 0,
+      variant: String(body.variant || '').slice(0, 20),
+      quality: body.quality || null,
+      code: String(body.code || '').slice(0, 20)
+    });
+    if (db.ocrBadcases.length > 500) db.ocrBadcases = db.ocrBadcases.slice(-500);
+    saveDb();
+    return send(res, 200, { ok: true });
+  }
+
+  if (pathname === '/api/admin/ocr-badcases' && method === 'GET') {
+    if (!user || user.role !== 'admin') return fail(res, 403, '需要管理员权限');
+    const list = (db.ocrBadcases || []).slice(-200).reverse();
+    return send(res, 200, { ok: true, total: (db.ocrBadcases || []).length, items: list });
+  }
+
   /* ---- 出题提示词（给浏览器直连免费通道用） ---- */
   if (pathname === '/api/ai/prompt' && method === 'POST') {
     if (!user) return fail(res, 401, '登录后才能使用 AI 接口');
