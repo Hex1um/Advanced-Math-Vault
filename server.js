@@ -957,11 +957,19 @@ const SECTION_MAP = {
   HINTS: 'hints', ANSWER: 'answer', SOLUTION: 'solution', SOURCE: 'source'
 };
 
+/* 视觉模型常把段标记写歪：[TAGS]→(TAGS]、[ANSWER→(ANSWER) ；统一把两侧括号夹正成 [TAG]。
+   所有分段解析器共用，避免同一份输出在不同解析器里表现不一致。 */
+const SECTION_NAMES = 'TITLE|STATEMENT|TAGS|THINKING|DIFFICULTY|CALC|HINTS|ANSWER|SOLUTION|SOURCE|NOTE';
+function normalizeSectionMarks(text) {
+  const re = new RegExp('[\\[(（]\\s*(' + SECTION_NAMES + ')\\s*[\\])）]', 'gi');
+  return String(text || '').replace(re, '[$1]');
+}
+
 
 /* 模型经常把标记写成一行：[TITLE] 不定积分 [STATEMENT] ... —— 上面的解析器只认独占一行，
    这里补一个「标记出现在任意位置」的宽容版，避免整段塞进题干。 */
 function parseTaggedInline(text) {
-  const t = String(text || '').replace(/\r/g, '');
+  const t = normalizeSectionMarks(String(text || '')).replace(/\r/g, '');
   const re = /\[(TITLE|STATEMENT|TAGS|THINKING|DIFFICULTY|CALC|HINTS|ANSWER|SOLUTION|SOURCE)\][ \t:：]*/gi;
   const marks = [];
   let m;
@@ -977,7 +985,7 @@ function parseTaggedInline(text) {
 }
 
 function parseGenerated(text) {
-  const t = String(text || '').replace(/\r/g, '');
+  const t = normalizeSectionMarks(String(text || '')).replace(/\r/g, '');
   const re = /^[ \t>*#-]*\[(TITLE|STATEMENT|TAGS|THINKING|DIFFICULTY|CALC|HINTS|ANSWER|SOLUTION|SOURCE)\][ \t:：]*$/gim;
   const marks = [];
   let m;
@@ -1066,6 +1074,92 @@ function validateGenerated(raw) {
   if (item.statement.length < 20 || (item.solution || '').length < 40) return null;
   item.source = String(raw.source || 'AI 出题 · 待人工审核').slice(0, 80);
   return item;
+}
+
+/* 识图专用校验：图片里常常只有题目没有解答，不能因为 solution 短就把整段判失败。
+   占位词（未给出/无）清空，题号式标题（第(3)题）清掉，留给补全步骤填真正的标题与解析。 */
+const OCR_PLACEHOLDER = /^(未给出|未|无|暂无|n\/a|na|-+|\/)$/i;
+function validateFromImage(raw) {
+  if (!raw || typeof raw !== 'object') return null;
+  const item = normalizeProblem(raw);
+  if (!item || !item.statement || item.statement.length < 8) return null;
+  if (OCR_PLACEHOLDER.test(item.answer.trim())) item.answer = '';
+  if (OCR_PLACEHOLDER.test(item.solution.trim())) item.solution = '';
+  if (item.hints.length === 1 && OCR_PLACEHOLDER.test(item.hints[0])) item.hints = [];
+  let title = String(raw.title || '').replace(/\$\$?/g, '').replace(/\s+/g, ' ').trim();
+  // 「第(3)题」「第11题」「(11)」「3.」这类题号不是标题，清掉让补全生成
+  title = title.replace(/^第?\s*[（(]?\s*[\d一二三四五六七八九十]+\s*[）).]?\s*题?\s*/, '').trim();
+  item.title = title.length >= 4 && !/\\[a-zA-Z]/.test(title) ? title.slice(0, 40) : '';
+  item.source = String(raw.source || '').slice(0, 80);
+  return item;
+}
+
+/* 元信息补全：标题/考点/三维/提示/答案/解析。识图与手动补全共用同一套提示词与解析，
+   识图时直接复用「识图成功的那个模型」，因此一张图就能靠同一个 Key 补全全部字段。 */
+function metaSystem(full) {
+  return {
+    role: 'system',
+    content: [
+      '你是数学题库编辑。给你一道题的题干，补全它在题库里需要的元信息。',
+      '',
+      '规则：',
+      '1. 标题 ≤18 字，说清「考什么方法 / 什么对象」，不带题号，不要「求解」「计算题」这类空话；',
+      '2. 考点 1-3 个名词短语，用顿号分隔；',
+      '3. 三维评分各 1-10 的整数：思维量=想到方法的难度（套公式 3-4，需构造 7-9）、难度=综合难度、计算量=算到底的工作量；',
+      '4. 分层提示 1-3 条，每条一句话，第一句只给方向、不直接给答案；',
+      full ? '5. 最终答案要精确（LaTeX，行内用 $...$）；完整解析分步写清思路与关键计算，不要只写答案；' : '5. 不要写答案和解析；',
+      '6. 认不出来的地方写 $\\square$，不要编造数字；',
+      '',
+      '严格按下面的段输出，不要解释、不要代码块：',
+      '[TITLE]', '[TAGS]', '[THINKING]', '[DIFFICULTY]', '[CALC]', '[HINTS]', '[ANSWER]', '[SOLUTION]'
+    ].join('\n')
+  };
+}
+
+function parseMetaText(raw, full) {
+  const text = normalizeSectionMarks(raw);
+  const sec = (tag) => {
+    const re = new RegExp('\\[' + tag + '\\]([\\s\\S]*?)(?=\\[[A-Z]+\\]|$)', 'i');
+    const m = re.exec(text);
+    return m ? m[1].trim() : '';
+  };
+  // 模型有时把三维塞进一段「思维量=8, 难度=7, 计算量=8」；按标签各取一个数字
+  const labeled = (name) => {
+    const m = sec(name).match(new RegExp(name + '\\s*[=:：]?\\s*(\\d+)', 'i'));
+    return m ? Number(m[1]) : 0;
+  };
+  const num = (t, tag) => {
+    const lv = labeled(tag);
+    if (lv >= 1 && lv <= 15) return lv;
+    const v = Number(String(t).replace(/[^0-9]/g, ''));
+    return v >= 1 && v <= 15 ? v : 0;
+  };
+  // 标题只留纯文字：去掉公式、引号、题号，避免把 $\int...$ 截断塞进标题框
+  let title = sec('TITLE').replace(/\$[^$]*\$/g, '').replace(/`[^`]*`/g, '')
+    .replace(/[「」""'。.]/g, '').replace(/\n.*/s, '').trim()
+    .replace(/^第?\s*[（(]?\s*[\d一二三四五六七八九十]+\s*[）).]?\s*题?\s*/, '').trim();
+  if (title.length < 4 || /\\[a-zA-Z]/.test(title)) title = '';
+  return {
+    title: title.slice(0, 40),
+    tags: sec('TAGS').split(/[、,，;；\n]/).map((x) => x.trim()).filter(Boolean).slice(0, 3),
+    thinking: num(sec('THINKING'), '思维量'), difficulty: num(sec('DIFFICULTY'), '难度'), calc: num(sec('CALC'), '计算量'),
+    hints: sec('HINTS').split(/\n+/).map((x) => x.replace(/^[-*·\d.、\s]+/, '').trim()).filter(Boolean).slice(0, 5),
+    answer: full ? sec('ANSWER').trim() : '',
+    solution: full ? sec('SOLUTION').trim() : ''
+  };
+}
+
+async function completeProblemMeta(statement, cfgs) {
+  const sys = metaSystem(true);
+  const userMsg = { role: 'user', content: '题干：\n' + String(statement || '').slice(0, 1800) };
+  for (const cfg of cfgs) {
+    try {
+      const raw = String(await callLLM(cfg, [sys, userMsg]) || '');
+      const out = parseMetaText(raw, true);
+      if (out.title || out.tags.length || out.hints.length) return { out: out, cfg: cfg };
+    } catch (e) { /* 换下一个通道 */ }
+  }
+  return null;
 }
 
 /* 模型链：用户自带 Key → 站点 Key → 免费通道 → 本地讲解
@@ -2238,46 +2332,15 @@ async function handleApi(req, res, pathname, query) {
     const st = String(body.statement || '').trim();
     if (st.length < 8) return fail(res, 400, '题干太短，先识别或写几行再补全');
     const full = pathname === '/api/ai/complete-problem';
-    const sys = {
-      role: 'system',
-      content: [
-        '你是数学题库编辑。给你一道题的题干，补全它在题库里需要的元信息。',
-        '',
-        '规则：',
-        '1. 标题 ≤18 字，说清「考什么方法 / 什么对象」，不带题号，不要「求解」「计算题」这类空话；',
-        '2. 考点 1-3 个名词短语，用顿号分隔；',
-        '3. 三维评分各 1-10 的整数：思维量=想到方法的难度（套公式 3-4，需构造 7-9）、难度=综合难度、计算量=算到底的工作量；',
-        '4. 分层提示 1-3 条，每条一句话，第一句只给方向、不直接给答案；',
-        full ? '5. 最终答案要精确（LaTeX，行内用 $...$）；完整解析分步写清思路与关键计算，不要只写答案；' : '5. 不要写答案和解析；',
-        '6. 认不出来的地方写 $\\square$，不要编造数字；',
-        '',
-        '严格按下面的段输出，不要解释、不要代码块：',
-        '[TITLE]', '[TAGS]', '[THINKING]', '[DIFFICULTY]', '[CALC]', '[HINTS]', '[ANSWER]', '[SOLUTION]'
-      ].join('\n')
-    };
+    const sys = metaSystem(full);
     const userMsg = { role: 'user', content: '题干：\n' + st.slice(0, 1800) };
     for (const cfg of llmCandidates(body.llm || null)) {
       try {
         const raw = String(await callLLM(cfg, [sys, userMsg]) || '');
-        const sec = (tag) => {
-          const re = new RegExp('\\\\[' + tag + '\\\\]([\\\\s\\\\S]*?)(?=\\\\[[A-Z]+\\\\]|$)', 'i');
-          const m = re.exec(raw);
-          return m ? m[1].trim() : '';
-        };
-        const num = (t) => {
-          const v = Number(String(t).replace(/[^0-9]/g, ''));
-          return v >= 1 && v <= 10 ? v : 0;
-        };
-        const title = sec('TITLE').replace(/[「」""'。.]/g, '').replace(/\n.*/s, '').trim().slice(0, 40);
-        const tags = sec('TAGS').split(/[、,，;；\n]/).map((x) => x.trim()).filter(Boolean).slice(0, 3);
-        const out = {
-          ok: true, by: cfg.name, title, tags,
-          thinking: num(sec('THINKING')), difficulty: num(sec('DIFFICULTY')), calc: num(sec('CALC')),
-          hints: sec('HINTS').split(/\n+/).map((x) => x.replace(/^[-*·\d.、\s]+/, '').trim()).filter(Boolean).slice(0, 5),
-          answer: full ? sec('ANSWER').trim() : '',
-          solution: full ? sec('SOLUTION').trim() : ''
-        };
-        if (title || tags.length || out.hints.length) return send(res, 200, out);
+        const out = parseMetaText(raw, full);
+        if (out.title || out.tags.length || out.hints.length) {
+          return send(res, 200, Object.assign({ ok: true, by: cfg.name }, out));
+        }
       } catch (e) { /* 换下一个通道 */ }
     }
     return fail(res, 502, '暂时连不上模型，可以手动填');
@@ -3164,26 +3227,47 @@ function parseJudge(text) {
     }
     if (!out) return fail(res, 502, '识图模型调用失败：' + (errors[0] || '无可用通道'));
     const raw = parseGenerated(out) || parseTaggedInline(out) || extractJson(out);
-    const item = validateGenerated(raw);
+    let item = validateFromImage(raw);
+    let plain = false;
     if (!item) {
-      // 模型常常直接吐纯 LaTeX（不按 [TITLE] 分段）：把整段当题干，交给后续补全
-      const plain = String(out)
-        .replace(/\[(TITLE|STATEMENT|TAGS|THINKING|DIFFICULTY|CALC|HINTS|ANSWER|SOLUTION|SOURCE|NOTE)\]/gi, '\n')
+      // 模型直接吐纯 LaTeX（不按 [TITLE] 分段）：整段当题干，后面照样补全其余字段
+      const text = normalizeSectionMarks(out)
+        .replace(new RegExp('\\[(' + SECTION_NAMES + ')\\][ \\t:：]*', 'gi'), '\n')
         .replace(/```[a-z]*/gi, '').replace(/```/g, '')
         .replace(/\n{3,}/g, '\n\n').trim();
-      if (plain.length >= 8) {
-        return send(res, 200, {
-          ok: true, plain: true,
-          problem: {
-            title: '', statement: plain.slice(0, 4000), tags: [], answer: '',
-            solution: '', hints: [], thinking: 5, difficulty: 5, calc: 5
-          },
-          model: { provider: used.name, model: used.model }
+      if (text.length < 8) {
+        return send(res, 200, { ok: true, needVision: false, parsed: false, prompt: OCR_PROMPT, raw: String(out).slice(0, 800) });
+      }
+      item = {
+        title: '', statement: text.slice(0, 4000), tags: [], answer: '',
+        solution: '', hints: [], thinking: 5, difficulty: 5, calc: 5, source: ''
+      };
+      plain = true;
+    }
+    // 标题/答案/解析（图片常没有）用识图成功的同一个模型补全，字段各归其位；
+    // 题干始终以视觉转写为准，不被补全模型改写。
+    const needMeta = !item.title || !item.answer || !item.solution || !item.tags.length;
+    if (needMeta) {
+      const done = await completeProblemMeta(item.statement, visionCfgs);
+      if (done) {
+        const m = done.out;
+        if (!item.title) item.title = m.title;
+        if (!item.tags.length) item.tags = m.tags;
+        if (!item.hints.length) item.hints = m.hints;
+        if (!item.answer) item.answer = m.answer;
+        if (!item.solution) item.solution = m.solution;
+        ['thinking', 'difficulty', 'calc'].forEach((k) => {
+          if (m[k] && (!item[k] || item[k] === 5)) item[k] = m[k];
         });
       }
-      return send(res, 200, { ok: true, needVision: false, parsed: false, prompt: OCR_PROMPT, raw: String(out).slice(0, 800) });
     }
-    return send(res, 200, { ok: true, problem: item, model: { provider: used.name, model: used.model } });
+    if (!item.title) {
+      item.title = '待命名 · ' + (item.tags || []).slice(0, 2).join(' / ') || '待命名题目';
+    }
+    return send(res, 200, {
+      ok: true, plain: plain, problem: item,
+      model: { provider: used.name, model: used.model }
+    });
   }
 
   /* ---- OCR 坏例采集：用户纠错前后的对照，用来量化改进 ---- */

@@ -5,6 +5,14 @@
   const Views = window.Views = window.Views || {};
   const St = window.API.State;
 
+  /* 题干清洗：剥掉模型偶尔混进来的分段标记/代码围栏，公式与换行原样保留 */
+  function cleanStmt(s) {
+    return String(s || '')
+      .replace(/\[(TITLE|STATEMENT|TAGS|THINKING|DIFFICULTY|CALC|HINTS|ANSWER|SOLUTION|SOURCE|NOTE)\][ \t:：]*/gi, '')
+      .replace(/```[a-z]*/gi, '').replace(/```/g, '')
+      .replace(/\n{3,}/g, '\n\n').trim();
+  }
+
   function loginGate(el, text) {
     el.innerHTML = '<div class="page-head"><div><h1>' + text + '</h1></div></div>'
       + '<div class="empty"><b>这一步需要登录</b>登录后才能投稿、记录经验与发帖。'
@@ -262,20 +270,20 @@
               const lbl = document.getElementById('v_' + k);
               if (lbl) lbl.textContent = fm[k].value;
             });
-            // 视觉模型只给了题干（没给标题/答案）时，继续用文本模型补全其余字段
-            if (!p.title || !p.answer) {
+            // 服务端已用识图模型补全全部字段；仅当个别字段仍为空时用文本模型兜底
+            if (!fm.title.value.trim() || !fm.answer.value.trim() || !fm.solution.value.trim()) {
               try {
                 const meta = await window.API.post('/api/ai/complete-problem', { statement: p.statement || '', llm: window.UI.llmConfig() });
-                const fillV = function (name, val, force) {
+                const fillV = function (name, val) {
                   if (val === undefined || val === null || val === '') return;
-                  if (!fm[name] || (String(fm[name].value || '').trim() && !force)) return;
+                  if (!fm[name] || String(fm[name].value || '').trim()) return;
                   fm[name].value = val;
                 };
                 fillV('title', meta.title);
-                fillV('tags', (meta.tags || []).join(', '), true);
-                fillV('hints', (meta.hints || []).join('\n'), true);
-                fillV('answer', meta.answer, true);
-                fillV('solution', meta.solution, true);
+                fillV('tags', (meta.tags || []).join(', '));
+                fillV('hints', (meta.hints || []).join('\n'));
+                fillV('answer', meta.answer);
+                fillV('solution', meta.solution);
                 ['thinking', 'difficulty', 'calc'].forEach(function (k) {
                   if (!meta[k]) return;
                   if (fm[k].value && Number(fm[k].value) !== 5) return;
@@ -285,7 +293,7 @@
                 });
               } catch (e) { /* 补全失败不影响已填的题干 */ }
             }
-            box.innerHTML = '<div class="judge-result correct"><b>已补全</b><span>核对一遍再提交，AI 转写可能漏字</span></div>';
+            box.innerHTML = '<div class="judge-result correct"><b>已补全</b><span>标题、考点、评分、提示、答案与解析已归位，核对一遍再提交</span></div>';
             return;
           }
           // 视觉模型读到了东西但格式没解析出来：直接拿它的原文当题干，别再退回 tesseract
