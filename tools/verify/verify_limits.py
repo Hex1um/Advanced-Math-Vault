@@ -91,21 +91,11 @@ show(f'i2-8 n={n}', s, 1.0)
 
 # 被标注为存疑的两题：看看是否真的发散
 print('\n[存疑] i2-4: (e^x - x^2)^{1/sin^3 x} 在 x->0 两侧')
-<<<<<<< HEAD
 for x in (mp.mpf('0.001'), mp.mpf('-0.001')):
     base = mp.e ** x - x * x
     power = 1 / mp.sin(x) ** 3
     val = mp.e ** (power * mp.log(base)) if base > 0 else mp.nan
     print(f'  x={mp.nstr(x, 4)}: {mp.nstr(val, 8)}')
-=======
-for x in (1e-3, -1e-3):
-    base = math.exp(x) - x * x
-    try:
-        val = base ** (1 / math.sin(x) ** 3) if base > 0 else float('nan')
-    except OverflowError:
-        val = float('nan')   # 幂塔数值溢出，属脚本局限，不算题目错
-    print(f'  x={x}: {val:.4g}')
->>>>>>> c0b5307 (v0.11.0: 按外部审计报告修 P0 崩溃/邮箱泄露/80分规则/删号字段/meta.site/验证码，补 9 项回归断言与质量门禁)
 
 print('\n[存疑] i2-7: (x e^{x/2} - sin x)/(x^2 sin x) 在 x->0 两侧')
 for x in (mp.mpf('0.001'), mp.mpf('-0.001')):
