@@ -293,6 +293,20 @@ html[data-theme="dark"] .btn-primary:hover { background:#2650b8; border-color:#2
 }
 .tag.gray { background:var(--surface-2); color:var(--muted); }
 .tag.tag-main { background:var(--blue-weak); color:var(--blue-dark); border-color:var(--line-2); font-weight:600; }
+
+/* 图片预览右上角的移除按钮：移动端也要好点 */
+.crop-remove {
+  position: absolute; top: 8px; right: 8px; z-index: 6;
+  width: 34px; height: 34px; padding: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(255,255,255,.55); border-radius: 50%;
+  background: rgba(20,24,34,.62); color: #fff;
+  font-size: 22px; line-height: 1; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,.22);
+  -webkit-tap-highlight-color: transparent;
+}
+.crop-remove:hover { background: rgba(20,24,34,.82); }
+.crop-remove:active { transform: scale(.94); }
 .tag.teal { background:var(--surface-2); color:var(--green); border-color:#cfe9e2; }
 .tag.gold { background:var(--surface-2); color:var(--orange); border-color:#f2e2c0; }
 

@@ -98,6 +98,8 @@
       if (!pick) return;
       let image = '';
       let ocrRaw = '';
+      let previewSeq = 0;   // 防止图片已移除、旧的文件读取回调还往页面里写
+      let ocrRunSeq = 0;    // 防止图片已移除、旧的 OCR 请求返回后又填表
       const CH_KEY = 'mv_ocr_channel';
       const chSel = document.getElementById('ocrChannel');
       const chNow = document.getElementById('ocrChannelNow');
@@ -122,10 +124,13 @@
       file.addEventListener('change', function (ev) {
         const f = ev.target.files && ev.target.files[0];
         if (!f) return;
+        const seq = ++previewSeq;
         const rd = new FileReader();
         rd.onload = function () {
+          if (seq !== previewSeq) return;
           const img = new Image();
           img.onload = function () {
+            if (seq !== previewSeq) return;
             // OCR 输入保长边 2200px：压到 1400 会把笔画细节抹掉，反而更认不准
             const max = 2200;
             const sc = Math.min(1, max / Math.max(img.width, img.height));
@@ -141,6 +146,7 @@
             if (warnBox) warnBox.innerHTML = '';
             if (window.OCR && window.OCR.assessImage) {
               window.OCR.assessImage(image).then(function (q) {
+                if (seq !== previewSeq || !image) return;
                 lastQuality = { blur: q.blur, uneven: q.uneven, blurry: q.blurry, lightUneven: q.lightUneven };
                 const tips = [];
                 if (q.blurry) tips.push('<b>有点糊</b>：手别抖，等对焦再拍，或者直接截电子版');
@@ -157,18 +163,55 @@
             document.getElementById('ocrPreview').innerHTML =
               '<div id="cropWrap" style="position:relative;display:inline-block;max-width:100%;cursor:crosshair">'
               + '<img src="' + image + '" id="cropImg" class="judge-img" alt="题目预览" style="display:block" />'
+              + '<button type="button" id="cropRemove" class="crop-remove" aria-label="移除图片" title="移除图片">×</button>'
               + '<div id="cropRect" style="position:absolute;border:2px dashed #4f8cff;background:rgba(79,140,255,.15);display:none"></div></div>'
               + '<div class="small muted" style="margin-top:6px">在图上拖一个框，只识别框里的公式会更准（不框就整张识别）。</div>'
               + '<div style="margin-top:8px"><button type="button" class="btn btn-primary btn-sm" id="ocrGo">识图补全</button>'
               + '<button type="button" class="btn btn-sm" id="cropClear" style="margin-left:8px;display:none">取消框选</button></div>';
             document.getElementById('ocrGo').addEventListener('click', runOcr);
             bindCrop();
+            bindRemove();
           };
           img.src = String(rd.result);
         };
         rd.readAsDataURL(f);
       });
 
+
+      /* 移除已选图片：清空预览、裁剪框、识别结果和文件选择，避免误点后只能刷新页面 */
+      function clearImage() {
+        previewSeq++;
+        ocrRunSeq++;
+        image = '';
+        ocrRaw = '';
+        ocrMeta = null;
+        lastQuality = null;
+        cropRect = null;
+        const fileInput = document.getElementById('ocrFile');
+        if (fileInput) fileInput.value = '';
+        const preview = document.getElementById('ocrPreview');
+        if (preview) preview.innerHTML = '';
+        const quality = document.getElementById('ocrQuality');
+        if (quality) quality.innerHTML = '';
+        const result = document.getElementById('ocrResult');
+        if (result) result.innerHTML = '';
+      }
+
+      function bindRemove() {
+        const btn = document.getElementById('cropRemove');
+        if (!btn) return;
+        const stop = function (ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+        };
+        // 阻止点击叉号时触发图片上的框选
+        btn.addEventListener('mousedown', stop);
+        btn.addEventListener('touchstart', stop, { passive: false });
+        btn.addEventListener('click', function (ev) {
+          stop(ev);
+          clearImage();
+        });
+      }
 
       /* 框选区域：公式混排在整页里时，单独框出来识别准确率高一截 */
       let cropRect = null;
@@ -241,10 +284,14 @@
       }
 
       async function runOcr() {
+        const runId = ++ocrRunSeq;
+        if (!image) return;
+        const stale = function () { return !image || runId !== ocrRunSeq; };
         const box = document.getElementById('ocrResult');
         box.innerHTML = '<div class="small muted" style="padding:8px 0">识别中…</div>';
         try {
           const ocrImage = await cropImage(image, cropRect);
+          if (stale()) return;
           const channel = chSel.value || 'auto';
           const hasVision = window.OCR && window.OCR.hasVisionModel && window.OCR.hasVisionModel();
           if (channel === 'vision' && !hasVision) {
@@ -256,6 +303,7 @@
           const skipVision = channel === 'local';
           const visCfg = window.UI.visionConfig ? window.UI.visionConfig() : window.UI.llmConfig();
           const res = skipVision ? { ok: false, needVision: true } : await window.API.post('/api/ai/from-image', { image: ocrImage, llm: visCfg });
+          if (stale()) return;
           if (res.ok && !res.needVision && res.problem) {
             const p = res.problem;
             const fm = document.getElementById('submitForm');
@@ -277,6 +325,7 @@
             if (!fm.title.value.trim() || !fm.answer.value.trim() || !fm.solution.value.trim()) {
               try {
                 const meta = await window.API.post('/api/ai/complete-problem', { statement: p.statement || '', llm: window.UI.llmConfig() });
+                if (stale()) return;
                 const fillV = function (name, val) {
                   if (val === undefined || val === null || val === '') return;
                   if (!fm[name] || String(fm[name].value || '').trim()) return;
@@ -311,6 +360,7 @@
               if (!fm2.statement.value.trim()) fm2.statement.value = cleaned;
               try {
                 const meta = await window.API.post('/api/ai/complete-problem', { statement: cleaned, llm: window.UI.llmConfig() });
+                if (stale()) return;
                 const fill2 = function (name, val) {
                   if (val === undefined || val === null || val === '') return;
                   if (!fm2[name] || String(fm2[name].value || '').trim()) return;
@@ -342,6 +392,7 @@
               let text = window.OCR.tidy(await window.OCR.imageToText(ocrImage, function (pct) {
                 box.innerHTML = '<div class="small muted" style="padding:8px 0">本地 OCR 识别中 ' + pct + '%…</div>';
               }));
+              if (stale()) return;
               if (text) {
                 // 把低置信度片段标出来，AI 才知道哪里该保守、哪里可以放心补
                 const run = window.OCR.lastRun && window.OCR.lastRun();
@@ -360,6 +411,7 @@
                   box.innerHTML = '<div class="small muted" style="padding:8px 0">正在把识别结果规范成 LaTeX…</div>';
                   try {
                     const polished = await window.OCR.polishWithAI(marked, { llm: window.UI.llmConfig() });
+                    if (stale()) return;
                     if (polished && polished.trim().length > 8) text = polished;
                   } catch (e2) {
                     console.warn('[ocr] AI 规范化失败，用原始识别结果', e2.message);
@@ -372,6 +424,7 @@
                 box.innerHTML = '<div class="small muted" style="padding:8px 0">正在补全标题、考点、评分、提示、答案与解析…</div>';
                 try {
                   const meta = await window.API.post('/api/ai/complete-problem', { statement: text, llm: window.UI.llmConfig() });
+                  if (stale()) return;
                   const fill = function (name, val) {
                     if (val === undefined || val === null || val === '') return;
                     if (!fm[name] || String(fm[name].value || '').trim()) return;
