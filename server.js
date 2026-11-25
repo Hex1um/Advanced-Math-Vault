@@ -3146,7 +3146,21 @@ function parseJudge(text) {
     if (!out) return fail(res, 502, '识图模型调用失败：' + (errors[0] || '无可用通道'));
     const raw = parseGenerated(out) || extractJson(out);
     const item = validateGenerated(raw);
-    if (!item) return send(res, 200, { ok: true, needVision: false, parsed: false, prompt: OCR_PROMPT, raw: String(out).slice(0, 800) });
+    if (!item) {
+      // 模型常常直接吐纯 LaTeX（不按 [TITLE] 分段）：把整段当题干，交给后续补全
+      const plain = String(out).replace(/```[a-z]*/gi, '').replace(/```/g, '').trim();
+      if (plain.length >= 8) {
+        return send(res, 200, {
+          ok: true, plain: true,
+          problem: {
+            title: '', statement: plain.slice(0, 4000), tags: [], answer: '',
+            solution: '', hints: [], thinking: 5, difficulty: 5, calc: 5
+          },
+          model: { provider: used.name, model: used.model }
+        });
+      }
+      return send(res, 200, { ok: true, needVision: false, parsed: false, prompt: OCR_PROMPT, raw: String(out).slice(0, 800) });
+    }
     return send(res, 200, { ok: true, problem: item, model: { provider: used.name, model: used.model } });
   }
 

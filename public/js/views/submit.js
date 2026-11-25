@@ -262,6 +262,29 @@
               const lbl = document.getElementById('v_' + k);
               if (lbl) lbl.textContent = fm[k].value;
             });
+            // 视觉模型只给了题干（没给标题/答案）时，继续用文本模型补全其余字段
+            if (!p.title || !p.answer) {
+              try {
+                const meta = await window.API.post('/api/ai/complete-problem', { statement: p.statement || '', llm: window.UI.llmConfig() });
+                const fillV = function (name, val, force) {
+                  if (val === undefined || val === null || val === '') return;
+                  if (!fm[name] || (String(fm[name].value || '').trim() && !force)) return;
+                  fm[name].value = val;
+                };
+                fillV('title', meta.title);
+                fillV('tags', (meta.tags || []).join(', '), true);
+                fillV('hints', (meta.hints || []).join('\n'), true);
+                fillV('answer', meta.answer, true);
+                fillV('solution', meta.solution, true);
+                ['thinking', 'difficulty', 'calc'].forEach(function (k) {
+                  if (!meta[k]) return;
+                  if (fm[k].value && Number(fm[k].value) !== 5) return;
+                  fm[k].value = meta[k];
+                  const lbl = document.getElementById('v_' + k);
+                  if (lbl) lbl.textContent = meta[k];
+                });
+              } catch (e) { /* 补全失败不影响已填的题干 */ }
+            }
             box.innerHTML = '<div class="judge-result correct"><b>已补全</b><span>核对一遍再提交，AI 转写可能漏字</span></div>';
             return;
           }
