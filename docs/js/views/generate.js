@@ -5,14 +5,20 @@
   const Views = window.Views = window.Views || {};
   const St = window.API.State;
 
-  let spec = { tags: [], thinking: 6, difficulty: 6, calc: 5, style: '', note: '' };
+  let spec = { mainTag: '', tags: [], thinking: 6, difficulty: 6, calc: 5, style: '', note: '' };
   let last = null;
   let busy = false;
 
   const STYLES = ['不限', '计算题', '证明题', '概念辨析', '应用题'];
 
+  function subTags() {
+    const tree = St.tagTree || [];
+    const node = tree.filter(function (m) { return m.name === spec.mainTag; })[0];
+    return node ? node.children : (St.tags || []);
+  }
+
   function tagChips() {
-    const tags = St.tags || [];
+    const tags = subTags();
     if (!tags.length) return '<span class="small muted">题库暂无标签，可直接生成</span>';
     return tags.map(function (t) {
       const on = spec.tags.indexOf(t.name) >= 0;
@@ -22,6 +28,16 @@
   }
 
   function bindTags(el) {
+    const mainSel = el.querySelector('#gMain');
+    if (mainSel && !mainSel.dataset.bound) {
+      mainSel.dataset.bound = '1';
+      mainSel.addEventListener('change', function () {
+        spec.mainTag = mainSel.value;
+        spec.tags = [];
+        const box = el.querySelector('#genTags');
+        if (box) { box.innerHTML = tagChips(); bindTags(el); }
+      });
+    }
     el.querySelectorAll('#genTags [data-tag]').forEach(function (b) {
       b.addEventListener('click', function () {
         const t = b.dataset.tag;
@@ -42,7 +58,9 @@
   function renderForm() {
     return '<form class="card form-card" id="genForm">'
       + '<div class="form-section-title">知识点</div>'
+      + '<div class="field"><label>主标签</label><select id="gMain">' + window.UI.mainTagOptions(spec.mainTag) + '</select></div>'
       + '<div class="chip-scroll" id="genTags">' + tagChips() + '</div>'
+      + '<div class="tip">先选主标签，再选 1-2 个子标签；不选主标签时会从全部子标签里选。</div>'
       + '<div class="form-section-title">三个维度</div>'
       + row('思维量', 'gThink', spec.thinking)
       + row('难度', 'gDiff', spec.difficulty)
@@ -88,7 +106,8 @@
       + '<div class="field"><label>题干</label><textarea name="statement" rows="5">' + window.Md.esc(p.statement) + '</textarea></div>'
       + '<div class="preview md" id="genPreview"></div>'
       + '<div class="field-row">'
-      + '<div class="field"><label>考点标签（逗号分隔）</label><input name="tags" value="' + window.Md.esc((p.tags || []).join(', ')) + '" /></div>'
+      + '<div class="field"><label>主标签</label><select name="mainTag">' + window.UI.mainTagOptions(p.mainTag) + '</select></div>'
+      + '<div class="field"><label>子标签（逗号分隔）</label><input name="tags" value="' + window.Md.esc((p.tags || []).join(', ')) + '" /></div>'
       + '<div class="field"><label>来源</label><input name="source" value="' + window.Md.esc(p.source || 'AI 出题 · 待人工审核') + '" /></div>'
       + '</div>'
       + '<div class="field-row three">'
@@ -129,6 +148,7 @@
     return {
       title: v('[name="title"]').trim(),
       statement: v('[name="statement"]').trim(),
+      mainTag: v('[name="mainTag"]'),
       tags: v('[name="tags"]').split(/[,，、\s]+/).map(function (s) { return s.trim(); }).filter(Boolean),
       source: v('[name="source"]').trim(),
       thinking: Number(v('[name="thinking"]')),
@@ -179,7 +199,7 @@
       let p;
       if (own || siteReady || !window.FreeLLM) {
         const res = await window.API.post('/api/ai/generate', {
-          tags: spec.tags, thinking: spec.thinking, difficulty: spec.difficulty, calc: spec.calc,
+          mainTag: spec.mainTag, tags: spec.tags, thinking: spec.thinking, difficulty: spec.difficulty, calc: spec.calc,
           style: spec.style, note: spec.note, llm: own || undefined
         });
         p = res.problem;
@@ -189,7 +209,7 @@
       } else {
         // 浏览器直连免费通道，用访客自己的 IP 额度
         const prompt = await window.API.post('/api/ai/prompt', {
-          tags: spec.tags, thinking: spec.thinking, difficulty: spec.difficulty, calc: spec.calc,
+          mainTag: spec.mainTag, tags: spec.tags, thinking: spec.thinking, difficulty: spec.difficulty, calc: spec.calc,
           style: spec.style, note: spec.note
         });
         const text = await window.FreeLLM.complete(prompt.messages);
@@ -219,7 +239,7 @@
   }
 
   Views.generate = function (el) {
-    spec = { tags: [], thinking: 6, difficulty: 6, calc: 5, style: '', note: '' };
+    spec = { mainTag: '', tags: [], thinking: 6, difficulty: 6, calc: 5, style: '', note: '' };
     last = null;
     busy = false;
 

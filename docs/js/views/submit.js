@@ -48,8 +48,10 @@
       + '<div class="tip">支持 Markdown 与 LaTeX，例如 $$\\lim_{x\\to 0}\\frac{\\sin x}{x}=1$$</div></div>'
       + '<div class="field-row">'
       + '<div class="field"><label>来源</label><input name="source" maxlength="80" placeholder="教材 / 考研真题 / 自编" /></div>'
-      + '<div class="field"><label>考点标签（逗号分隔）</label><input name="tags" placeholder="极限, 泰勒展开" /></div>'
+      + '<div class="field"><label>主标签</label><select name="mainTag">' + window.UI.mainTagOptions('') + '</select></div>'
       + '</div>'
+      + '<div class="field"><label>子标签（逗号分隔，1-3 个）</label><input name="tags" placeholder="等价无穷小, 泰勒展开" />'
+      + '<div class="tip">主标签决定题目归属，子标签写具体考点；写不准也可以只填子标签，服务端会自动归到主标签。</div></div>'
 
       + '<div class="form-section-title">三维评分（思维量/计算量 1-10，难度 1-15）</div>'
       + rangeRow('thinking', '思维量', 5, '只算「想到方法」有多难：套公式的纯计算题给 2-4 分')
@@ -260,6 +262,7 @@
             fm.title.value = p.title || '';
             fm.statement.value = cleanStmt(p.statement || '');
             fm.tags.value = (p.tags || []).join(', ');
+          if (fm.mainTag && p.mainTag) fm.mainTag.value = p.mainTag;
             fm.answer.value = p.answer || '';
             fm.solution.value = p.solution || '';
             fm.hints.value = (p.hints || []).join('\n');
@@ -281,6 +284,7 @@
                 };
                 fillV('title', meta.title);
                 fillV('tags', (meta.tags || []).join(', '));
+                if (meta.mainTag && fm.mainTag && !fm.mainTag.value) fm.mainTag.value = meta.mainTag;
                 fillV('hints', (meta.hints || []).join('\n'));
                 fillV('answer', meta.answer);
                 fillV('solution', meta.solution);
@@ -314,6 +318,7 @@
                 };
                 fill2('title', meta.title);
                 fill2('tags', (meta.tags || []).join(', '));
+                if (meta.mainTag && fm2.mainTag && !fm2.mainTag.value) fm2.mainTag.value = meta.mainTag;
                 fill2('hints', (meta.hints || []).join('\n'));
                 fill2('answer', meta.answer);
                 fill2('solution', meta.solution);
@@ -422,6 +427,7 @@
               fm.title.value = p.title || '';
               fm.statement.value = p.statement || '';
               fm.tags.value = (p.tags || []).join(', ');
+          if (fm.mainTag && p.mainTag) fm.mainTag.value = p.mainTag;
               fm.answer.value = p.answer || '';
               fm.solution.value = p.solution || '';
               document.getElementById('pasteResult').innerHTML = '<div class="judge-result correct" style="margin-top:8px"><b>已填入表单</b></div>';
@@ -452,6 +458,7 @@
           title: title,
           statement: statement,
           source: form.source.value.trim(),
+          mainTag: form.mainTag.value,
           tags: form.tags.value,
           thinking: form.thinking.value,
           difficulty: form.difficulty.value,

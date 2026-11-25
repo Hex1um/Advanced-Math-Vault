@@ -46,12 +46,23 @@ function segments(s) {
   return out;
 }
 
-const db = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
+let problems = [];
+if (fs.existsSync(DB_FILE)) {
+  problems = JSON.parse(fs.readFileSync(DB_FILE, 'utf8')).problems || [];
+} else {
+  // 新克隆没有运行时 db.json：退回仓库内的 batch 题库，保证脚本开箱可跑
+  const dir = path.join(ROOT, 'data');
+  for (const f of fs.readdirSync(dir).filter((x) => /^batch.*\.json$/.test(x)).sort()) {
+    const arr = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
+    if (Array.isArray(arr)) problems = problems.concat(arr);
+  }
+  console.log('未找到 data/db.json，改用 batch 题库：' + problems.length + ' 题');
+}
 let badProblems = 0, badSegs = 0, totalSegs = 0;
 const samples = [];
 const byReason = {};
 
-for (const p of db.problems) {
+for (const p of problems) {
   let bad = 0;
   for (const seg of segments(p.statement || '')) {
     totalSegs++;
@@ -68,7 +79,7 @@ for (const p of db.problems) {
   if (bad) badProblems++;
 }
 
-console.log('题数', db.problems.length, '| 数学片段', totalSegs, '| 渲染失败片段', badSegs, '| 受影响题目', badProblems);
+console.log('题数', problems.length, '| 数学片段', totalSegs, '| 渲染失败片段', badSegs, '| 受影响题目', badProblems);
 console.log('失败原因 TOP:');
 Object.entries(byReason).sort((a, b) => b[1] - a[1]).slice(0, 8).forEach(([k, v]) => console.log('  ', v, k));
 for (const s of samples) console.log('  -', s.code, '|', s.tex, '|', s.msg);

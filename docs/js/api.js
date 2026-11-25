@@ -6,6 +6,7 @@
     me: null,
     meta: null,
     tags: [],
+    tagTree: [],
     llm: { configured: false, model: '', free: [] },
     stats: null,
     route: { name: 'library', params: {} }

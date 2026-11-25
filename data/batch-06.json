@@ -2,81 +2,162 @@
   {
     "title": "指数乘正弦，两次分部就回来",
     "statement": "求不定积分\n\n$$\\int e^{2x}\\sin 3x\\,\\mathrm{d}x.$$",
-    "tags": ["不定积分", "分部积分", "循环积分"],
-    "thinking": 5, "difficulty": 6, "calc": 6,
+    "tags": [
+      "不定积分",
+      "换元与分部"
+    ],
+    "thinking": 5,
+    "difficulty": 6,
+    "calc": 6,
     "source": "循环迭代不定积分讲义 · 一",
-    "hints": ["两次分部积分后会回到原积分，把它当成未知数解方程", "设 $I=\\int e^{2x}\\sin3x\\,\\mathrm{d}x$，分部时取 $u=\\sin3x$", "整理成 $I=\\dfrac{e^{2x}}{13}(2\\sin3x-3\\cos3x)$"],
+    "hints": [
+      "两次分部积分后会回到原积分，把它当成未知数解方程",
+      "设 $I=\\int e^{2x}\\sin3x\\,\\mathrm{d}x$，分部时取 $u=\\sin3x$",
+      "整理成 $I=\\dfrac{e^{2x}}{13}(2\\sin3x-3\\cos3x)$"
+    ],
     "answer": "$\\dfrac{e^{2x}}{13}\\left(2\\sin 3x-3\\cos 3x\\right)+C$",
-    "solution": "### 设 $I$，分部两次\n\n$$I=\\int e^{2x}\\sin3x\\,\\mathrm{d}x=\\frac{e^{2x}}{2}\\sin3x-\\frac32\\int e^{2x}\\cos3x\\,\\mathrm{d}x.$$\n\n再对后一项分部（仍是 $u=\\cos3x$）：\n\n$$\\int e^{2x}\\cos3x\\,\\mathrm{d}x=\\frac{e^{2x}}{2}\\cos3x+\\frac32 I.$$\n\n代回：\n\n$$I=\\frac{e^{2x}}{2}\\sin3x-\\frac32\\left(\\frac{e^{2x}}{2}\\cos3x+\\frac32I\\right).$$\n\n### 解方程\n\n$$I+\\frac94I=\\frac{e^{2x}}{2}\\sin3x-\\frac{3e^{2x}}{4}\\cos3x\\ \\Longrightarrow\\ \\frac{13}{4}I=\\frac{e^{2x}}{4}(2\\sin3x-3\\cos3x).$$\n\n$$I=\\frac{e^{2x}}{13}(2\\sin3x-3\\cos3x)+C.$$\n\n> 通用公式：$\\int e^{ax}\\sin bx\\,\\mathrm{d}x=\\dfrac{e^{ax}}{a^{2}+b^{2}}(a\\sin bx-b\\cos bx)+C$，这里 $a=2,b=3$，分母 $13$。"
+    "solution": "### 设 $I$，分部两次\n\n$$I=\\int e^{2x}\\sin3x\\,\\mathrm{d}x=\\frac{e^{2x}}{2}\\sin3x-\\frac32\\int e^{2x}\\cos3x\\,\\mathrm{d}x.$$\n\n再对后一项分部（仍是 $u=\\cos3x$）：\n\n$$\\int e^{2x}\\cos3x\\,\\mathrm{d}x=\\frac{e^{2x}}{2}\\cos3x+\\frac32 I.$$\n\n代回：\n\n$$I=\\frac{e^{2x}}{2}\\sin3x-\\frac32\\left(\\frac{e^{2x}}{2}\\cos3x+\\frac32I\\right).$$\n\n### 解方程\n\n$$I+\\frac94I=\\frac{e^{2x}}{2}\\sin3x-\\frac{3e^{2x}}{4}\\cos3x\\ \\Longrightarrow\\ \\frac{13}{4}I=\\frac{e^{2x}}{4}(2\\sin3x-3\\cos3x).$$\n\n$$I=\\frac{e^{2x}}{13}(2\\sin3x-3\\cos3x)+C.$$\n\n> 通用公式：$\\int e^{ax}\\sin bx\\,\\mathrm{d}x=\\dfrac{e^{ax}}{a^{2}+b^{2}}(a\\sin bx-b\\cos bx)+C$，这里 $a=2,b=3$，分母 $13$。",
+    "mainTag": "积分"
   },
   {
     "title": "指数乘余弦，符号与正弦版差一位",
     "statement": "求不定积分\n\n$$\\int e^{3x}\\cos 4x\\,\\mathrm{d}x.$$",
-    "tags": ["不定积分", "分部积分", "循环积分"],
-    "thinking": 4, "difficulty": 5, "calc": 6,
+    "tags": [
+      "不定积分",
+      "换元与分部"
+    ],
+    "thinking": 4,
+    "difficulty": 5,
+    "calc": 6,
     "source": "循环迭代不定积分讲义 · 一",
-    "hints": ["同样是两次分部回到自身", "用公式 $\\int e^{ax}\\cos bx\\,\\mathrm{d}x=\\dfrac{e^{ax}}{a^{2}+b^{2}}(a\\cos bx+b\\sin bx)$", "$a=3,\\ b=4$，分母 $25$"],
+    "hints": [
+      "同样是两次分部回到自身",
+      "用公式 $\\int e^{ax}\\cos bx\\,\\mathrm{d}x=\\dfrac{e^{ax}}{a^{2}+b^{2}}(a\\cos bx+b\\sin bx)$",
+      "$a=3,\\ b=4$，分母 $25$"
+    ],
     "answer": "$\\dfrac{e^{3x}}{25}\\left(3\\cos 4x+4\\sin 4x\\right)+C$",
-    "solution": "### 两次分部\n\n$$I=\\int e^{3x}\\cos4x\\,\\mathrm{d}x=\\frac{e^{3x}}{3}\\cos4x+\\frac43\\int e^{3x}\\sin4x\\,\\mathrm{d}x.$$\n\n$$\\int e^{3x}\\sin4x\\,\\mathrm{d}x=\\frac{e^{3x}}{3}\\sin4x-\\frac43 I.$$\n\n代入并整理：\n\n$$I=\\frac{e^{3x}}{3}\\cos4x+\\frac{4e^{3x}}{9}\\sin4x-\\frac{16}{9}I\\ \\Longrightarrow\\ \\frac{25}{9}I=\\frac{e^{3x}}{9}(3\\cos4x+4\\sin4x).$$\n\n$$I=\\frac{e^{3x}}{25}(3\\cos4x+4\\sin4x)+C.$$\n\n> 记公式时只记一个即可：正弦版是 $(a\\sin-b\\cos)$，余弦版是 $(a\\cos+b\\sin)$，分子都是 $e^{ax}$，分母都是 $a^{2}+b^{2}$。"
+    "solution": "### 两次分部\n\n$$I=\\int e^{3x}\\cos4x\\,\\mathrm{d}x=\\frac{e^{3x}}{3}\\cos4x+\\frac43\\int e^{3x}\\sin4x\\,\\mathrm{d}x.$$\n\n$$\\int e^{3x}\\sin4x\\,\\mathrm{d}x=\\frac{e^{3x}}{3}\\sin4x-\\frac43 I.$$\n\n代入并整理：\n\n$$I=\\frac{e^{3x}}{3}\\cos4x+\\frac{4e^{3x}}{9}\\sin4x-\\frac{16}{9}I\\ \\Longrightarrow\\ \\frac{25}{9}I=\\frac{e^{3x}}{9}(3\\cos4x+4\\sin4x).$$\n\n$$I=\\frac{e^{3x}}{25}(3\\cos4x+4\\sin4x)+C.$$\n\n> 记公式时只记一个即可：正弦版是 $(a\\sin-b\\cos)$，余弦版是 $(a\\cos+b\\sin)$，分子都是 $e^{ax}$，分母都是 $a^{2}+b^{2}$。",
+    "mainTag": "积分"
   },
   {
     "title": "衰减指数配正弦，结果带负号",
     "statement": "求不定积分\n\n$$\\int e^{-2x}\\sin 5x\\,\\mathrm{d}x.$$",
-    "tags": ["不定积分", "分部积分", "循环积分"],
-    "thinking": 5, "difficulty": 6, "calc": 7,
+    "tags": [
+      "不定积分",
+      "换元与分部"
+    ],
+    "thinking": 5,
+    "difficulty": 6,
+    "calc": 7,
     "source": "循环迭代不定积分讲义 · 一",
-    "hints": ["$a=-2$ 代入公式时分母是 $a^{2}+b^{2}=29$", "别把 $e^{-2x}$ 的负号漏在分母外面", "结果是 $-\\dfrac{e^{-2x}}{29}(2\\sin5x+5\\cos5x)$"],
+    "hints": [
+      "$a=-2$ 代入公式时分母是 $a^{2}+b^{2}=29$",
+      "别把 $e^{-2x}$ 的负号漏在分母外面",
+      "结果是 $-\\dfrac{e^{-2x}}{29}(2\\sin5x+5\\cos5x)$"
+    ],
     "answer": "$-\\dfrac{e^{-2x}}{29}\\left(2\\sin 5x+5\\cos 5x\\right)+C$",
-    "solution": "### 直接套公式\n\n$$\\int e^{ax}\\sin bx\\,\\mathrm{d}x=\\frac{e^{ax}}{a^{2}+b^{2}}(a\\sin bx-b\\cos bx)+C,$$\n\n取 $a=-2,\\ b=5$，分母 $=4+25=29$：\n\n$$I=\\frac{e^{-2x}}{29}\\left(-2\\sin5x-5\\cos5x\\right)+C=-\\frac{e^{-2x}}{29}(2\\sin5x+5\\cos5x)+C.$$\n\n### 也可以分部验证\n\n$$I=-\\frac{e^{-2x}}{2}\\sin5x+\\frac52\\int e^{-2x}\\cos5x\\,\\mathrm{d}x,\\qquad \\int e^{-2x}\\cos5x\\,\\mathrm{d}x=-\\frac{e^{-2x}}{2}\\cos5x-\\frac52 I,$$\n\n整理得 $\\dfrac{29}{4}I=-\\dfrac{e^{-2x}}{4}(2\\sin5x+5\\cos5x)$，结果一致。\n\n> 这类题的失分点几乎都在符号：$a<0$ 时 $a\\sin bx$ 和 $-b\\cos bx$ 都要跟着变号。"
+    "solution": "### 直接套公式\n\n$$\\int e^{ax}\\sin bx\\,\\mathrm{d}x=\\frac{e^{ax}}{a^{2}+b^{2}}(a\\sin bx-b\\cos bx)+C,$$\n\n取 $a=-2,\\ b=5$，分母 $=4+25=29$：\n\n$$I=\\frac{e^{-2x}}{29}\\left(-2\\sin5x-5\\cos5x\\right)+C=-\\frac{e^{-2x}}{29}(2\\sin5x+5\\cos5x)+C.$$\n\n### 也可以分部验证\n\n$$I=-\\frac{e^{-2x}}{2}\\sin5x+\\frac52\\int e^{-2x}\\cos5x\\,\\mathrm{d}x,\\qquad \\int e^{-2x}\\cos5x\\,\\mathrm{d}x=-\\frac{e^{-2x}}{2}\\cos5x-\\frac52 I,$$\n\n整理得 $\\dfrac{29}{4}I=-\\dfrac{e^{-2x}}{4}(2\\sin5x+5\\cos5x)$，结果一致。\n\n> 这类题的失分点几乎都在符号：$a<0$ 时 $a\\sin bx$ 和 $-b\\cos bx$ 都要跟着变号。",
+    "mainTag": "积分"
   },
   {
     "title": "$\\sin(\\ln x)$：换元之后还要再分部",
     "statement": "求不定积分\n\n$$\\int \\sin(\\ln x)\\,\\mathrm{d}x.$$",
-    "tags": ["不定积分", "换元积分", "循环积分"],
-    "thinking": 6, "difficulty": 7, "calc": 6,
+    "tags": [
+      "不定积分",
+      "换元与分部"
+    ],
+    "thinking": 6,
+    "difficulty": 7,
+    "calc": 6,
     "source": "循环迭代不定积分讲义 · 二",
-    "hints": ["先令 $x=e^{t}$，化成 $\\int e^{t}\\sin t\\,\\mathrm{d}t$", "再用两次分部回到自身", "$\\int e^{t}\\sin t\\,\\mathrm{d}t=\\dfrac{e^{t}}{2}(\\sin t-\\cos t)$，回代 $t=\\ln x$"],
+    "hints": [
+      "先令 $x=e^{t}$，化成 $\\int e^{t}\\sin t\\,\\mathrm{d}t$",
+      "再用两次分部回到自身",
+      "$\\int e^{t}\\sin t\\,\\mathrm{d}t=\\dfrac{e^{t}}{2}(\\sin t-\\cos t)$，回代 $t=\\ln x$"
+    ],
     "answer": "$\\dfrac{x}{2}\\left[\\sin(\\ln x)-\\cos(\\ln x)\\right]+C$",
-    "solution": "### 换元\n\n令 $t=\\ln x$，则 $x=e^{t}$，$\\mathrm{d}x=e^{t}\\mathrm{d}t$：\n\n$$I=\\int e^{t}\\sin t\\,\\mathrm{d}t.$$\n\n### 两次分部\n\n$$\\int e^{t}\\sin t\\,\\mathrm{d}t=e^{t}\\sin t-\\int e^{t}\\cos t\\,\\mathrm{d}t=e^{t}\\sin t-\\left(e^{t}\\cos t+\\int e^{t}\\sin t\\,\\mathrm{d}t\\right).$$\n\n设 $J=\\int e^{t}\\sin t\\,\\mathrm{d}t$：\n\n$$J=e^{t}(\\sin t-\\cos t)-J\\ \\Longrightarrow\\ J=\\frac{e^{t}}{2}(\\sin t-\\cos t).$$\n\n### 回代\n\n$$I=\\frac{e^{\\ln x}}{2}\\left[\\sin(\\ln x)-\\cos(\\ln x)\\right]+C=\\frac{x}{2}\\left[\\sin(\\ln x)-\\cos(\\ln x)\\right]+C.$$\n\n> 看到 $\\sin(\\ln x)$、$\\cos(\\ln x)$ 一律先换元 $t=\\ln x$，它本质就是「指数乘三角」。"
+    "solution": "### 换元\n\n令 $t=\\ln x$，则 $x=e^{t}$，$\\mathrm{d}x=e^{t}\\mathrm{d}t$：\n\n$$I=\\int e^{t}\\sin t\\,\\mathrm{d}t.$$\n\n### 两次分部\n\n$$\\int e^{t}\\sin t\\,\\mathrm{d}t=e^{t}\\sin t-\\int e^{t}\\cos t\\,\\mathrm{d}t=e^{t}\\sin t-\\left(e^{t}\\cos t+\\int e^{t}\\sin t\\,\\mathrm{d}t\\right).$$\n\n设 $J=\\int e^{t}\\sin t\\,\\mathrm{d}t$：\n\n$$J=e^{t}(\\sin t-\\cos t)-J\\ \\Longrightarrow\\ J=\\frac{e^{t}}{2}(\\sin t-\\cos t).$$\n\n### 回代\n\n$$I=\\frac{e^{\\ln x}}{2}\\left[\\sin(\\ln x)-\\cos(\\ln x)\\right]+C=\\frac{x}{2}\\left[\\sin(\\ln x)-\\cos(\\ln x)\\right]+C.$$\n\n> 看到 $\\sin(\\ln x)$、$\\cos(\\ln x)$ 一律先换元 $t=\\ln x$，它本质就是「指数乘三角」。",
+    "mainTag": "积分"
   },
   {
     "title": "$\\cos(\\ln x)$：与正弦版只差一个中间符号",
     "statement": "求不定积分\n\n$$\\int \\cos(\\ln x)\\,\\mathrm{d}x.$$",
-    "tags": ["不定积分", "换元积分", "循环积分"],
-    "thinking": 6, "difficulty": 7, "calc": 6,
+    "tags": [
+      "不定积分",
+      "换元与分部"
+    ],
+    "thinking": 6,
+    "difficulty": 7,
+    "calc": 6,
     "source": "循环迭代不定积分讲义 · 二",
-    "hints": ["同样先换 $t=\\ln x$", "$\\int e^{t}\\cos t\\,\\mathrm{d}t=\\dfrac{e^{t}}{2}(\\sin t+\\cos t)$", "注意中间是加号，不是减号"],
+    "hints": [
+      "同样先换 $t=\\ln x$",
+      "$\\int e^{t}\\cos t\\,\\mathrm{d}t=\\dfrac{e^{t}}{2}(\\sin t+\\cos t)$",
+      "注意中间是加号，不是减号"
+    ],
     "answer": "$\\dfrac{x}{2}\\left[\\sin(\\ln x)+\\cos(\\ln x)\\right]+C$",
-    "solution": "### 换元 + 分部\n\n令 $t=\\ln x$，$\\mathrm{d}x=e^{t}\\mathrm{d}t$：\n\n$$I=\\int e^{t}\\cos t\\,\\mathrm{d}t.$$\n\n$$\\int e^{t}\\cos t\\,\\mathrm{d}t=e^{t}\\cos t+\\int e^{t}\\sin t\\,\\mathrm{d}t=e^{t}\\cos t+e^{t}\\sin t-\\int e^{t}\\cos t\\,\\mathrm{d}t.$$\n\n设 $J=\\int e^{t}\\cos t\\,\\mathrm{d}t$：\n\n$$2J=e^{t}(\\sin t+\\cos t)\\ \\Longrightarrow\\ J=\\frac{e^{t}}{2}(\\sin t+\\cos t).$$\n\n### 回代\n\n$$I=\\frac{x}{2}\\left[\\sin(\\ln x)+\\cos(\\ln x)\\right]+C.$$\n\n> 与上一题对照记：正弦版是 $\\sin-\\cos$，余弦版是 $\\sin+\\cos$，前面都是 $\\dfrac{x}{2}$。"
+    "solution": "### 换元 + 分部\n\n令 $t=\\ln x$，$\\mathrm{d}x=e^{t}\\mathrm{d}t$：\n\n$$I=\\int e^{t}\\cos t\\,\\mathrm{d}t.$$\n\n$$\\int e^{t}\\cos t\\,\\mathrm{d}t=e^{t}\\cos t+\\int e^{t}\\sin t\\,\\mathrm{d}t=e^{t}\\cos t+e^{t}\\sin t-\\int e^{t}\\cos t\\,\\mathrm{d}t.$$\n\n设 $J=\\int e^{t}\\cos t\\,\\mathrm{d}t$：\n\n$$2J=e^{t}(\\sin t+\\cos t)\\ \\Longrightarrow\\ J=\\frac{e^{t}}{2}(\\sin t+\\cos t).$$\n\n### 回代\n\n$$I=\\frac{x}{2}\\left[\\sin(\\ln x)+\\cos(\\ln x)\\right]+C.$$\n\n> 与上一题对照记：正弦版是 $\\sin-\\cos$，余弦版是 $\\sin+\\cos$，前面都是 $\\dfrac{x}{2}$。",
+    "mainTag": "积分"
   },
   {
     "title": "$\\tan^{3}x$：拆成 $\\tan x\\cdot\\tan^{2}x$",
     "statement": "求不定积分\n\n$$\\int \\tan^{3}x\\,\\mathrm{d}x.$$",
-    "tags": ["不定积分", "换元积分", "三角变形"],
-    "thinking": 4, "difficulty": 5, "calc": 5,
+    "tags": [
+      "不定积分",
+      "换元与分部",
+      "有理函数与三角积分"
+    ],
+    "thinking": 4,
+    "difficulty": 5,
+    "calc": 5,
     "source": "循环迭代不定积分讲义 · 三",
-    "hints": ["$\\tan^{2}x=\\sec^{2}x-1$，把 $\\tan x\\sec^{2}x$ 留作凑微分", "$\\int\\tan x\\sec^{2}x\\,\\mathrm{d}x=\\dfrac12\\tan^{2}x$", "$\\int\\tan x\\,\\mathrm{d}x=-\\ln|\\cos x|$"],
+    "hints": [
+      "$\\tan^{2}x=\\sec^{2}x-1$，把 $\\tan x\\sec^{2}x$ 留作凑微分",
+      "$\\int\\tan x\\sec^{2}x\\,\\mathrm{d}x=\\dfrac12\\tan^{2}x$",
+      "$\\int\\tan x\\,\\mathrm{d}x=-\\ln|\\cos x|$"
+    ],
     "answer": "$\\dfrac12\\tan^{2}x+\\ln|\\cos x|+C$",
-    "solution": "### 拆项\n\n$$\\int\\tan^{3}x\\,\\mathrm{d}x=\\int\\tan x\\,(\\sec^{2}x-1)\\,\\mathrm{d}x=\\int\\tan x\\sec^{2}x\\,\\mathrm{d}x-\\int\\tan x\\,\\mathrm{d}x.$$\n\n### 分别积\n\n令 $u=\\tan x$，$\\mathrm{d}u=\\sec^{2}x\\,\\mathrm{d}x$：\n\n$$\\int\\tan x\\sec^{2}x\\,\\mathrm{d}x=\\int u\\,\\mathrm{d}u=\\frac12\\tan^{2}x.$$\n\n$$\\int\\tan x\\,\\mathrm{d}x=-\\ln|\\cos x|.$$\n\n### 结果\n\n$$I=\\frac12\\tan^{2}x+\\ln|\\cos x|+C.$$\n\n> 奇次幂的正切/余切都这么拆：留一个一次因子凑 $\\mathrm{d}(\\tan x)$，其余用 $\\tan^{2}=\\sec^{2}-1$ 降幂。"
+    "solution": "### 拆项\n\n$$\\int\\tan^{3}x\\,\\mathrm{d}x=\\int\\tan x\\,(\\sec^{2}x-1)\\,\\mathrm{d}x=\\int\\tan x\\sec^{2}x\\,\\mathrm{d}x-\\int\\tan x\\,\\mathrm{d}x.$$\n\n### 分别积\n\n令 $u=\\tan x$，$\\mathrm{d}u=\\sec^{2}x\\,\\mathrm{d}x$：\n\n$$\\int\\tan x\\sec^{2}x\\,\\mathrm{d}x=\\int u\\,\\mathrm{d}u=\\frac12\\tan^{2}x.$$\n\n$$\\int\\tan x\\,\\mathrm{d}x=-\\ln|\\cos x|.$$\n\n### 结果\n\n$$I=\\frac12\\tan^{2}x+\\ln|\\cos x|+C.$$\n\n> 奇次幂的正切/余切都这么拆：留一个一次因子凑 $\\mathrm{d}(\\tan x)$，其余用 $\\tan^{2}=\\sec^{2}-1$ 降幂。",
+    "mainTag": "积分"
   },
   {
     "title": "$\\sec^{3}x$：分部一次就回到自己",
     "statement": "求不定积分\n\n$$\\int \\sec^{3}x\\,\\mathrm{d}x.$$",
-    "tags": ["不定积分", "分部积分", "循环积分"],
-    "thinking": 7, "difficulty": 8, "calc": 7,
+    "tags": [
+      "不定积分",
+      "换元与分部"
+    ],
+    "thinking": 7,
+    "difficulty": 8,
+    "calc": 7,
     "source": "循环迭代不定积分讲义 · 三",
-    "hints": ["拆成 $\\sec x\\cdot\\sec^{2}x$，对 $\\sec^{2}x$ 求原函数", "分部后出现 $\\int\\sec x\\tan^{2}x\\,\\mathrm{d}x$，用 $\\tan^{2}=\\sec^{2}-1$ 转回 $I$", "解得 $I=\\dfrac12\\sec x\\tan x+\\dfrac12\\ln|\\sec x+\\tan x|$"],
+    "hints": [
+      "拆成 $\\sec x\\cdot\\sec^{2}x$，对 $\\sec^{2}x$ 求原函数",
+      "分部后出现 $\\int\\sec x\\tan^{2}x\\,\\mathrm{d}x$，用 $\\tan^{2}=\\sec^{2}-1$ 转回 $I$",
+      "解得 $I=\\dfrac12\\sec x\\tan x+\\dfrac12\\ln|\\sec x+\\tan x|$"
+    ],
     "answer": "$\\dfrac12\\sec x\\tan x+\\dfrac12\\ln\\left|\\sec x+\\tan x\\right|+C$",
-    "solution": "### 分部\n\n$$I=\\int\\sec^{3}x\\,\\mathrm{d}x=\\int\\sec x\\cdot\\sec^{2}x\\,\\mathrm{d}x=\\sec x\\tan x-\\int\\sec x\\tan^{2}x\\,\\mathrm{d}x.$$\n\n用 $\\tan^{2}x=\\sec^{2}x-1$：\n\n$$I=\\sec x\\tan x-\\int\\sec^{3}x\\,\\mathrm{d}x+\\int\\sec x\\,\\mathrm{d}x=\\sec x\\tan x-I+\\ln|\\sec x+\\tan x|.$$\n\n### 解出 $I$\n\n$$2I=\\sec x\\tan x+\\ln|\\sec x+\\tan x|\\ \\Longrightarrow\\ I=\\frac12\\sec x\\tan x+\\frac12\\ln|\\sec x+\\tan x|+C.$$\n\n> 这题是「分部 + 降幂」的模板题，和 $\\int\\sec^{5}x\\,\\mathrm{d}x$ 走的是同一条路，只是后者要连着用两次。"
+    "solution": "### 分部\n\n$$I=\\int\\sec^{3}x\\,\\mathrm{d}x=\\int\\sec x\\cdot\\sec^{2}x\\,\\mathrm{d}x=\\sec x\\tan x-\\int\\sec x\\tan^{2}x\\,\\mathrm{d}x.$$\n\n用 $\\tan^{2}x=\\sec^{2}x-1$：\n\n$$I=\\sec x\\tan x-\\int\\sec^{3}x\\,\\mathrm{d}x+\\int\\sec x\\,\\mathrm{d}x=\\sec x\\tan x-I+\\ln|\\sec x+\\tan x|.$$\n\n### 解出 $I$\n\n$$2I=\\sec x\\tan x+\\ln|\\sec x+\\tan x|\\ \\Longrightarrow\\ I=\\frac12\\sec x\\tan x+\\frac12\\ln|\\sec x+\\tan x|+C.$$\n\n> 这题是「分部 + 降幂」的模板题，和 $\\int\\sec^{5}x\\,\\mathrm{d}x$ 走的是同一条路，只是后者要连着用两次。",
+    "mainTag": "积分"
   },
   {
     "title": "$\\sin^{n}x$ 的递推：分部积分一次就降两阶",
     "statement": "设 $I_n=\\int\\sin^{n}x\\,\\mathrm{d}x\\ (n\\ge2)$，推导递推公式，并给出 $I_0,\\ I_1$。",
-    "tags": ["不定积分", "递推积分", "分部积分"],
-    "thinking": 8, "difficulty": 8, "calc": 6,
+    "tags": [
+      "不定积分",
+      "换元与分部"
+    ],
+    "thinking": 8,
+    "difficulty": 8,
+    "calc": 6,
     "source": "循环迭代不定积分讲义 · 三",
-    "hints": ["把 $\\sin^{n}x$ 拆成 $\\sin^{n-1}x\\cdot\\sin x$，后者配给 $\\mathrm{d}x$", "分部后得到 $\\int\\sin^{n-2}x\\cos^{2}x\\,\\mathrm{d}x$，用 $\\cos^{2}=1-\\sin^{2}$ 转回 $I_{n}$ 与 $I_{n-2}$", "整理得 $nI_n=-\\sin^{n-1}x\\cos x+(n-1)I_{n-2}$"],
+    "hints": [
+      "把 $\\sin^{n}x$ 拆成 $\\sin^{n-1}x\\cdot\\sin x$，后者配给 $\\mathrm{d}x$",
+      "分部后得到 $\\int\\sin^{n-2}x\\cos^{2}x\\,\\mathrm{d}x$，用 $\\cos^{2}=1-\\sin^{2}$ 转回 $I_{n}$ 与 $I_{n-2}$",
+      "整理得 $nI_n=-\\sin^{n-1}x\\cos x+(n-1)I_{n-2}$"
+    ],
     "answer": "$I_n=-\\dfrac1n\\sin^{n-1}x\\cos x+\\dfrac{n-1}{n}I_{n-2}$；$I_0=x+C,\\ I_1=-\\cos x+C$",
-    "solution": "### 分部积分\n\n$$I_n=\\int\\sin^{n-1}x\\cdot\\sin x\\,\\mathrm{d}x=-\\sin^{n-1}x\\cos x+(n-1)\\int\\sin^{n-2}x\\cos^{2}x\\,\\mathrm{d}x.$$\n\n用 $\\cos^{2}x=1-\\sin^{2}x$：\n\n$$I_n=-\\sin^{n-1}x\\cos x+(n-1)I_{n-2}-(n-1)I_n.$$\n\n### 整理\n\n$$nI_n=-\\sin^{n-1}x\\cos x+(n-1)I_{n-2},$$\n\n$$I_n=-\\frac1n\\sin^{n-1}x\\cos x+\\frac{n-1}{n}I_{n-2}\\qquad(n\\ge2).$$\n\n### 初值\n\n$$I_0=\\int1\\,\\mathrm{d}x=x+C,\\qquad I_1=\\int\\sin x\\,\\mathrm{d}x=-\\cos x+C.$$\n\n> 用这个递推式，$I_4$ 可以由 $I_2$、$I_2$ 由 $I_0$ 一路算下来；注意 $n$ 是奇数时最终落到 $I_1$，偶数时落到 $I_0$。"
+    "solution": "### 分部积分\n\n$$I_n=\\int\\sin^{n-1}x\\cdot\\sin x\\,\\mathrm{d}x=-\\sin^{n-1}x\\cos x+(n-1)\\int\\sin^{n-2}x\\cos^{2}x\\,\\mathrm{d}x.$$\n\n用 $\\cos^{2}x=1-\\sin^{2}x$：\n\n$$I_n=-\\sin^{n-1}x\\cos x+(n-1)I_{n-2}-(n-1)I_n.$$\n\n### 整理\n\n$$nI_n=-\\sin^{n-1}x\\cos x+(n-1)I_{n-2},$$\n\n$$I_n=-\\frac1n\\sin^{n-1}x\\cos x+\\frac{n-1}{n}I_{n-2}\\qquad(n\\ge2).$$\n\n### 初值\n\n$$I_0=\\int1\\,\\mathrm{d}x=x+C,\\qquad I_1=\\int\\sin x\\,\\mathrm{d}x=-\\cos x+C.$$\n\n> 用这个递推式，$I_4$ 可以由 $I_2$、$I_2$ 由 $I_0$ 一路算下来；注意 $n$ 是奇数时最终落到 $I_1$，偶数时落到 $I_0$。",
+    "mainTag": "积分"
   }
 ]

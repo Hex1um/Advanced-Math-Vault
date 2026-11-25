@@ -5,7 +5,7 @@
   const Views = window.Views = window.Views || {};
   const St = window.API.State;
 
-  let filters = { q: '', tags: [], level: '', status: 'all', sort: 'code', page: 1, tagsExpanded: false };
+  let filters = { q: '', mainTag: '', tags: [], level: '', status: 'all', sort: 'code', page: 1, tagsExpanded: false };
   let cache = null;
 
   function titleHTML(t) {
@@ -16,6 +16,7 @@
   function buildQuery() {
     const p = new URLSearchParams();
     if (filters.q) p.set('q', filters.q);
+    if (filters.mainTag) p.set('main', filters.mainTag);
     if (filters.tags.length) p.set('tags', filters.tags.join(','));
     if (filters.level) p.set('level', filters.level);
     if (filters.status !== 'all') p.set('status', filters.status);
@@ -32,7 +33,7 @@
     if (!wrap) return;
     wrap.innerHTML =
       '<div class="stat"><div class="k">收录题目</div><div class="v">' + (s.problems || 0) + '<small>题</small></div></div>'
-      + '<div class="stat"><div class="k">考点标签</div><div class="v">' + (s.tags || 0) + '<small>个</small></div></div>'
+      + '<div class="stat"><div class="k">主标签</div><div class="v">' + (s.mainTags || 0) + '<small>个</small></div></div>'
       + '<div class="stat"><div class="k">全站做题</div><div class="v">' + (s.solves || 0) + '<small>次</small></div></div>'
       + '<div class="stat"><div class="k">我的进度</div><div class="v">' + (me ? me.solvedCount : 0) + '<small>' + (me ? '题' : '登录后记录') + '</small></div></div>';
   }
@@ -40,6 +41,7 @@
   async function startPractice(mode) {
     if (!window.UI.requireLogin(null, '登录后才能刷题（要记录进度）')) return;
     const q = new URLSearchParams({ mode: mode });
+    if (filters.mainTag) q.set('main', filters.mainTag);
     if (filters.tags.length) q.set('tags', filters.tags.join(','));
     if (filters.level) {
       const map = { easy: [1, 3], medium: [4, 6], hard: [7, 10], expert: [11, 15] };
@@ -55,31 +57,42 @@
     }
   }
 
-  function renderFilters(tags) {
+  function renderFilters() {
     const d = document.getElementById('filterBox');
     if (!d) return;
 
+    const tree = St.tagTree || [];
+    const flat = St.tags || [];
     const levelChips = ['<button class="chip' + (!filters.level ? ' active' : '') + '" data-level="">全部难度</button>']
       .concat(window.UI.LEVELS.map(function (l) {
         return '<button class="chip' + (filters.level === l.name ? ' active' : '') + '" data-level="' + window.Md.esc(l.name) + '">'
           + '<span style="width:6px;height:6px;border-radius:50%;background:' + l.color + '"></span>' + l.name + '</button>';
       })).join('');
 
-    const shownTags = filters.tagsExpanded ? tags : tags.slice(0, 10);
-    const tagChips = ['<button class="chip' + (!filters.tags.length ? ' active' : '') + '" data-tag="">不限考点</button>']
+    const activeMain = tree.filter(function (m) { return m.name === filters.mainTag; })[0] || null;
+    const mainChips = ['<button class="chip' + (!filters.mainTag ? ' active' : '') + '" data-main="">全部主标签</button>']
+      .concat(tree.map(function (m) {
+        return '<button class="chip' + (filters.mainTag === m.name ? ' active' : '') + '" data-main="' + window.Md.esc(m.name) + '">'
+          + window.Md.esc(m.name) + '<span class="n">' + m.count + '</span></button>';
+      })).join('');
+
+    const pool = activeMain ? activeMain.children : flat;
+    const shownTags = filters.tagsExpanded ? pool : pool.slice(0, 12);
+    const tagChips = ['<button class="chip' + (!filters.tags.length ? ' active' : '') + '" data-tag="">不限子标签</button>']
       .concat(shownTags.map(function (t) {
         const on = filters.tags.indexOf(t.name) >= 0;
         return '<button class="chip' + (on ? ' active' : '') + '" data-tag="' + window.Md.esc(t.name) + '">'
           + window.Md.esc(t.name) + '<span class="n">' + t.count + '</span></button>';
       }))
-      .concat(tags.length > 10
-        ? ['<button class="chip" data-more="1">' + (filters.tagsExpanded ? '收起考点' : '更多考点 +' + (tags.length - 10)) + '</button>']
+      .concat(pool.length > 12
+        ? ['<button class="chip" data-more="1">' + (filters.tagsExpanded ? '收起子标签' : '更多子标签 +' + (pool.length - 12)) + '</button>']
         : [])
       .join('');
 
     d.innerHTML =
-      '<div class="filter-row"><span class="filter-label">难度</span><div class="chip-scroll">' + levelChips + '</div></div>'
-      + '<div class="filter-row"><span class="filter-label">考点</span><div class="chip-scroll">' + tagChips + '</div></div>'
+      '<div class="filter-row"><span class="filter-label">主标签</span><div class="chip-scroll">' + mainChips + '</div></div>'
+      + '<div class="filter-row"><span class="filter-label">子标签</span><div class="chip-scroll">' + tagChips + '</div></div>'
+      + '<div class="filter-row"><span class="filter-label">难度</span><div class="chip-scroll">' + levelChips + '</div></div>'
       + '<div class="filter-row" style="gap:10px">'
       + '<div class="search-box">' + window.UI.icon('search')
       + '<input id="qInput" placeholder="搜索题目 / 编号 / 考点" value="' + window.Md.esc(filters.q) + '" />'
@@ -106,6 +119,15 @@
         load();
       });
     });
+    d.querySelectorAll('[data-main]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        filters.mainTag = b.dataset.main;
+        filters.tags = [];
+        filters.tagsExpanded = false;
+        filters.page = 1;
+        load();
+      });
+    });
     d.querySelectorAll('[data-tag]').forEach(function (b) {
       b.addEventListener('click', function () {
         const t = b.dataset.tag;
@@ -124,7 +146,7 @@
     if (more) {
       more.addEventListener('click', function () {
         filters.tagsExpanded = !filters.tagsExpanded;
-        renderFilters(St.tags || []);
+        renderFilters();
       });
     }
 
@@ -144,6 +166,7 @@
     d.querySelector('#statusSel').addEventListener('change', function (e) { filters.status = e.target.value; filters.page = 1; load(); });
     d.querySelector('#sortSel').addEventListener('change', function (e) { filters.sort = e.target.value; filters.page = 1; load(); });
   }
+
 
   function bindPaperAdd(root) {
     if (!root || root.__paperBound) return;
@@ -182,7 +205,7 @@
         + '<div class="pcode">' + p.code + '</div>'
         + '<div class="pmain">'
         + '<div class="pexcerpt"><a href="#/problem/' + p.code + '">' + titleHTML(p.excerpt || p.title) + '</a></div>'
-        + '<div class="tags">' + p.tags.map(function (t) { return '<span class="tag">' + window.Md.esc(t) + '</span>'; }).join('') + '</div>'
+        + '<div class="tags">' + window.UI.tagBadges(p, { showKind: true }) + '</div>'
         + window.UI.scoreBars(p, true)
         + '</div>'
         + '<div class="pdiff">' + window.UI.levelBadge(p) + '<span class="rate">通过率 ' + rate + '</span></div>'
@@ -218,8 +241,9 @@
     if (wrap && !cache) wrap.innerHTML = '<div class="loading-row"><span class="spinner"></span>正在取题…</div>';
     try {
       const data = await window.API.get('/api/problems?' + buildQuery());
-      St.tags = data.tags;
-      renderFilters(data.tags);
+      St.tagTree = data.tagTree || St.tagTree || [];
+      St.tags = data.tags || [];
+      renderFilters();
       renderList(data);
       renderStats();
       bindPaperAdd(document.getElementById('listWrap'));
@@ -229,6 +253,7 @@
   }
 
   Views.library = function (el, params) {
+    if (params && params.main) { filters.mainTag = params.main; }
     if (params && params.tag) { filters.tags = [params.tag]; }
     if (params && params.q) { filters.q = params.q; }
 

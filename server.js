@@ -9,6 +9,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const tagTax = require('./tag-taxonomy');
 
 const ROOT = __dirname;
 const PUBLIC_DIR = path.join(ROOT, 'public');
@@ -105,8 +106,11 @@ function loadDb() {
       db.problems.forEach((p) => {
         if (typeof p.scoreSum !== 'number') p.scoreSum = 0;
         if (typeof p.scoreCount !== 'number') p.scoreCount = 0;
-        if (!Array.isArray(p.tags)) p.tags = ['未分类'];
-        if (p.tags.length > 3) p.tags = p.tags.slice(0, 3);
+        // 每次启动都过一遍标签体系：老库、线上同步回来的题、AI 草稿都能落到同一套主/子标签上
+        const tagInfo = tagTax.normalize(p.tags, p.mainTag);
+        p.mainTag = tagInfo.mainTag;
+        p.tags = tagInfo.tags;
+        if (tagInfo.kind && !p.kind) p.kind = tagInfo.kind;
         if (p.difficulty > DIFF_MAX) p.difficulty = DIFF_MAX;
       });
       db.users.forEach((u) => {
@@ -261,9 +265,7 @@ function normalizeProblem(raw) {
   const title = String(raw.title || '').trim();
   const statement = String(raw.statement || raw.body || '').trim();
   if (!title || !statement) return null;
-  let tags = raw.tags;
-  if (typeof tags === 'string') tags = tags.split(/[,，、\s]+/);
-  tags = Array.isArray(tags) ? tags.map((t) => String(t).trim()).filter(Boolean).slice(0, 3) : [];
+  const tagInfo = tagTax.normalize(raw.tags, raw.mainTag);
   let hints = raw.hints;
   if (typeof hints === 'string') hints = [hints];
   hints = Array.isArray(hints) ? hints.map((h) => String(h).trim()).filter(Boolean).slice(0, 5) : [];
@@ -271,7 +273,9 @@ function normalizeProblem(raw) {
     code: '',
     title: title.slice(0, 120),
     statement: mathify(statement),
-    tags: tags.length ? tags : ['未分类'],
+    mainTag: tagInfo.mainTag,
+    tags: tagInfo.tags,
+    kind: String(raw.kind || tagInfo.kind || '').slice(0, 12),
     thinking: clampScore(raw.thinking, 6),
     difficulty: clampScore(raw.difficulty, 6, DIFF_MAX),
     calc: clampScore(raw.calc !== undefined ? raw.calc : raw.calculation, 5),
@@ -548,7 +552,9 @@ function visibleProblem(p, user) {
     avgScore: p.scoreCount ? Math.round((p.scoreSum / p.scoreCount) * 10) / 10 : null,
     scoreCount: p.scoreCount || 0,
     myBest: best ? best.score : null,
+    mainTag: p.mainTag || '综合',
     tags: p.tags,
+    kind: p.kind || '',
     thinking: p.thinking,
     difficulty: p.difficulty,
     calc: p.calc,
@@ -591,6 +597,26 @@ function allTags() {
     for (const t of p.tags) map.set(t, (map.get(t) || 0) + 1);
   }
   return [...map.entries()].sort((a, b) => b[1] - a[1]).map(([name, count]) => ({ name, count }));
+}
+
+/* 主标签 → 子标签的树，给前端做两段式筛选 */
+function tagTree() {
+  const mains = new Map(tagTax.MAIN_TAGS.map((name) => [name, { name, count: 0, children: new Map() }]));
+  for (const p of db.problems) {
+    if (p.status !== 'approved') continue;
+    const node = mains.get(p.mainTag) || mains.get('综合');
+    node.count++;
+    for (const t of p.tags) node.children.set(t, (node.children.get(t) || 0) + 1);
+  }
+  return [...mains.values()]
+    .filter((m) => m.count > 0)
+    .map((m) => ({
+      name: m.name,
+      count: m.count,
+      children: [...m.children.entries()]
+        .sort((a, b) => b[1] - a[1])
+        .map(([name, count]) => ({ name, count }))
+    }));
 }
 
 function todayKey(d) {
@@ -900,7 +926,9 @@ function llmMessages(problem, history, opts) {
 /* ------------------------------------------------------- AI 出题 */
 
 function buildGenerateMessages(spec) {
-  const tags = (spec.tags && spec.tags.length) ? spec.tags.join('、') : '不定积分、定积分、极限、导数、中值定理等高等数学常见考点';
+  const mainTag = spec.mainTag && tagTax.isValidMain(spec.mainTag) ? spec.mainTag : '';
+  const subs = mainTag ? tagTax.SUB_TAGS[mainTag] : [];
+  const tags = (spec.tags && spec.tags.length) ? spec.tags.join('、') : (subs.length ? subs.slice(0, 6).join('、') : '不定积分、定积分、极限、导数、中值定理等高等数学常见考点');
   const sys = [
     '你是高等数学命题老师，负责给大学生出原创练习题。',
     '',
@@ -934,11 +962,14 @@ function buildGenerateMessages(spec) {
     '5. 先在草稿里把题目算一遍、确认答案唯一且可验证，再输出；',
     '6. 不要出套一次公式就能做完的题，难度低于 6 的题目不要输出；',
     '6.1 打分口径：思维量只衡量「想到方法」有多难，纯计算题（套公式、代数变形）思维量给 2-4 分，把难度体现在计算量上；',
-    '7. 考点最多写 3 个，难度允许超过 10（最高 ' + DIFF_MAX + '）。'
-  ].join('\n');
+    '7. 考点最多写 3 个，难度允许超过 10（最高 ' + DIFF_MAX + '）。',
+    '8. [TAGS] 只写子标签（如「等价无穷小」「分部积分」），不要写「选择题」「证明」这类题型词。',
+    mainTag ? ('9. 主标签固定为「' + mainTag + '」，子标签优先从这些里选：' + subs.join('、')) : ''
+  ].filter(Boolean).join('\n');
 
   const user = [
     '请出一道高数题。',
+    '主标签：' + (mainTag || '由你根据考点判断'),
     '考点范围：' + tags,
     '目标难度：' + spec.difficulty + '/' + DIFF_MAX,
     '目标思维量：' + (spec.thinking || 6) + '/10（需要多少洞察才能想到）',
@@ -1104,7 +1135,7 @@ function metaSystem(full) {
       '',
       '规则：',
       '1. 标题 ≤18 字，说清「考什么方法 / 什么对象」，不带题号，不要「求解」「计算题」这类空话；',
-      '2. 考点 1-3 个名词短语，用顿号分隔；',
+      '2. 考点 1-3 个名词短语，用顿号分隔；只写具体子标签（如「等价无穷小」「分部积分」），不要写「选择题」「证明」这类题型词；',
       '3. 三维评分各 1-10 的整数：思维量=想到方法的难度（套公式 3-4，需构造 7-9）、难度=综合难度、计算量=算到底的工作量；',
       '4. 分层提示 1-3 条，每条一句话，第一句只给方向、不直接给答案；',
       full ? '5. 最终答案要精确（LaTeX，行内用 $...$）；完整解析分步写清思路与关键计算，不要只写答案；' : '5. 不要写答案和解析；',
@@ -1139,9 +1170,12 @@ function parseMetaText(raw, full) {
     .replace(/[「」""'。.]/g, '').replace(/\n.*/s, '').trim()
     .replace(/^第?\s*[（(]?\s*[\d一二三四五六七八九十]+\s*[）).]?\s*题?\s*/, '').trim();
   if (title.length < 4 || /\\[a-zA-Z]/.test(title)) title = '';
+  const parsedTags = sec('TAGS').split(/[、,，;；\n]/).map((x) => x.trim()).filter(Boolean);
+  const tagInfo = tagTax.normalize(parsedTags);
   return {
     title: title.slice(0, 40),
-    tags: sec('TAGS').split(/[、,，;；\n]/).map((x) => x.trim()).filter(Boolean).slice(0, 3),
+    mainTag: tagInfo.mainTag,
+    tags: tagInfo.tags,
     thinking: num(sec('THINKING'), '思维量'), difficulty: num(sec('DIFFICULTY'), '难度'), calc: num(sec('CALC'), '计算量'),
     hints: sec('HINTS').split(/\n+/).map((x) => x.replace(/^[-*·\d.、\s]+/, '').trim()).filter(Boolean).slice(0, 5),
     answer: full ? sec('ANSWER').trim() : '',
@@ -1610,8 +1644,10 @@ async function handleApi(req, res, pathname, query) {
         solves: solvedTotal,
         pending: db.problems.filter((p) => p.status === 'pending').length,
         feedback: db.feedbacks.filter((f) => (f.status || 'open') === 'open').length,
-        tags: allTags().length
+        tags: allTags().length,
+        mainTags: tagTree().length
       },
+      tagTree: tagTree(),
       llm: {
         configured: llmConfigured(),
         model: llmConfigured() ? db.settings.llm.model : '',
@@ -1853,6 +1889,7 @@ async function handleApi(req, res, pathname, query) {
     const codeList = String(query.c || '').split(',').map((x) => x.trim().toUpperCase()).filter(Boolean);
     const q = String(query.q || '').trim().toLowerCase();
     const tags = String(query.tags || '').split(',').filter(Boolean);
+    const mainTag = String(query.main || '').trim();
     const level = String(query.level || '').trim();
     const status = String(query.status || 'all');
     const sort = String(query.sort || 'code');
@@ -1864,12 +1901,14 @@ async function handleApi(req, res, pathname, query) {
       list = list.filter((p) =>
         p.title.toLowerCase().includes(q) ||
         p.code.toLowerCase().includes(q) ||
+        String(p.mainTag || '').toLowerCase().includes(q) ||
         p.tags.some((t) => t.toLowerCase().includes(q)) ||
         String(p.source || '').toLowerCase().includes(q)
       );
     }
     if (codeList.length) list = list.filter((p) => codeList.includes(p.code));
-    if (tags.length) list = list.filter((p) => tags.every((t) => p.tags.includes(t)));
+    if (mainTag) list = list.filter((p) => p.mainTag === mainTag);
+    if (tags.length) list = list.filter((p) => tags.every((t) => p.tags.includes(t) || p.mainTag === t || String(p.mainTag || '').includes(t)));
     if (level) list = list.filter((p) => levelOf(p.difficulty).name === level);
     if (status === 'solved') list = list.filter((p) => user && user.solved && user.solved[p.code]);
     if (status === 'unsolved') list = list.filter((p) => !(user && user.solved && user.solved[p.code]));
@@ -1898,6 +1937,7 @@ async function handleApi(req, res, pathname, query) {
       ok: true, items, total, page, size,
       pages: Math.max(1, Math.ceil(total / size)),
       tags: allTags(),
+      tagTree: tagTree(),
       levels: LEVELS.map((l) => l.name)
     });
   }
@@ -2285,9 +2325,11 @@ async function handleApi(req, res, pathname, query) {
   if (pathname === '/api/practice' && method === 'GET') {
     const mode = query.mode === 'random' ? 'random' : 'seq';
     const tags = String(query.tags || '').split(',').map((x) => x.trim()).filter(Boolean);
+    const mainTag = String(query.main || '').trim();
     const dmin = Number(query.dmin || 1);
     const dmax = Number(query.dmax || DIFF_MAX);
     let pool = db.problems.filter((p) => p.status === 'approved');
+    if (mainTag) pool = pool.filter((p) => p.mainTag === mainTag);
     if (tags.length) pool = pool.filter((p) => p.tags.some((t) => tags.includes(t)));
     pool = pool.filter((p) => p.difficulty >= dmin && p.difficulty <= dmax);
     if (user) {
@@ -2419,11 +2461,13 @@ async function handleApi(req, res, pathname, query) {
       choice: Math.max(0, Math.min(20, Number(body.choice !== undefined ? body.choice : 10))),
       fill: Math.max(0, Math.min(20, Number(body.fill !== undefined ? body.fill : 6))),
       solution: Math.max(0, Math.min(20, Number(body.solution !== undefined ? body.solution : 6))),
+      mainTag: String(body.mainTag || '').slice(0, 20),
       tags: Array.isArray(body.tags) ? body.tags.map(String).slice(0, 5) : [],
       difficulty: String(body.difficulty || '')
     };
 
     let pool = db.problems.filter((p) => p.status === 'approved');
+    if (spec.mainTag) pool = pool.filter((p) => p.mainTag === spec.mainTag);
     if (spec.tags.length) pool = pool.filter((p) => p.tags.some((t) => spec.tags.includes(t)));
     if (spec.difficulty) pool = pool.filter((p) => levelOf(p.difficulty).name === spec.difficulty);
 
@@ -2648,7 +2692,7 @@ async function handleApi(req, res, pathname, query) {
 
     if (pathname === '/api/admin/pending' && method === 'GET') {
       const items = db.problems.filter((p) => p.status === 'pending').map((p) => ({
-        code: p.code, title: p.title, statement: p.statement, tags: p.tags,
+        code: p.code, title: p.title, statement: p.statement, mainTag: p.mainTag, tags: p.tags, kind: p.kind,
         thinking: p.thinking, difficulty: p.difficulty, calc: p.calc,
         source: p.source, authorName: p.authorName, createdAt: p.createdAt,
         hints: p.hints, answer: p.answer, solution: p.solution
@@ -2665,7 +2709,13 @@ async function handleApi(req, res, pathname, query) {
         const patch = body.patch || {};
         if (patch.title) p.title = String(patch.title).slice(0, 120);
         if (patch.statement) p.statement = String(patch.statement);
-        if (Array.isArray(patch.tags) && patch.tags.length) p.tags = patch.tags.map(String).slice(0, 6);
+        if (patch.mainTag !== undefined && tagTax.isValidMain(patch.mainTag)) p.mainTag = String(patch.mainTag);
+        if (Array.isArray(patch.tags) && patch.tags.length) {
+          const tagInfo = tagTax.normalize(patch.tags, p.mainTag);
+          p.mainTag = tagInfo.mainTag;
+          p.tags = tagInfo.tags;
+          if (tagInfo.kind) p.kind = tagInfo.kind;
+        }
         if (patch.thinking !== undefined) p.thinking = clampScore(patch.thinking, p.thinking);
         if (patch.difficulty !== undefined) p.difficulty = clampScore(patch.difficulty, p.difficulty);
         if (patch.calc !== undefined) p.calc = clampScore(patch.calc, p.calc);
@@ -3359,6 +3409,7 @@ function parseJudge(text) {
     if (!user) return fail(res, 401, '登录后才能使用 AI 接口');
     const body = await readBody(req, 64 * 1024);
     const spec = {
+      mainTag: String(body.mainTag || '').slice(0, 20),
       tags: Array.isArray(body.tags) ? body.tags.map(String).slice(0, 4) : [],
       thinking: clampScore(body.thinking, 6),
       difficulty: clampScore(body.difficulty, 6),
@@ -3383,6 +3434,7 @@ function parseJudge(text) {
     if (!user) return fail(res, 401, '登录后才能使用 AI 接口');
     const body = await readBody(req, 256 * 1024);
     const spec = {
+      mainTag: String(body.mainTag || '').slice(0, 20),
       tags: Array.isArray(body.tags) ? body.tags.map(String).slice(0, 4) : [],
       thinking: clampScore(body.thinking, 6),
       difficulty: clampScore(body.difficulty, 6),

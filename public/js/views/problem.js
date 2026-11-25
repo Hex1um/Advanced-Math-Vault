@@ -470,7 +470,7 @@
         + '    <div class="kv"><span>难度评级</span><b style="color:' + window.UI.levelOf(p.difficulty).color + '">' + window.UI.levelOf(p.difficulty).name + '</b></div>'
         + '    <div class="kv"><span>供稿</span><b>' + window.Md.esc(p.authorName || '题库组') + '</b></div>'
         + '    <div class="kv"><span>提示数</span><b>' + p.hintCount + '</b></div>'
-        + '    <div style="margin-top:10px" class="tags">' + p.tags.map(function (t) { return '<span class="tag">' + window.Md.esc(t) + '</span>'; }).join('') + '</div>'
+        + '    <div style="margin-top:10px" class="tags">' + window.UI.tagBadges(p, { showKind: true }) + '</div>'
         + '  </div>'
         + '  <div class="card side-card"><h3>经验规则</h3>'
         + '    <div class="xp-rule">独立做出：<b>+' + data.xpRules.base + '</b> 经验<br/>'

@@ -203,8 +203,8 @@
 
       + '<div class="card form-card" style="margin-top:22px">'
       + '<h3 style="margin:0 0 6px;font-size:15px">批量导入题目</h3>'
-      + '<p class="small muted" style="margin:0 0 12px">粘贴 JSON 数组，每项字段：<code>title, statement, tags[], thinking, difficulty, calc, source, hints[], answer, solution</code>。导入即视为审核通过。</p>'
-      + '<div class="field"><textarea id="importBox" rows="8" placeholder=\'[{"title":"…","statement":"求 $$\\\\lim_{x\\\\to 0}…$$","tags":["极限"],"thinking":6,"difficulty":6,"calc":5,"source":"…","hints":["…"],"answer":"…","solution":"…"}]\'></textarea></div>'
+      + '<p class="small muted" style="margin:0 0 12px">粘贴 JSON 数组，每项字段：<code>title, statement, mainTag?, tags[], thinking, difficulty, calc, source, hints[], answer, solution</code>。导入即视为审核通过。</p>'
+      + '<div class="field"><textarea id="importBox" rows="8" placeholder=\'[{"title":"…","statement":"求 $$\\\\lim_{x\\\\to 0}…$$","mainTag":"极限与连续","tags":["函数极限"],"thinking":6,"difficulty":6,"calc":5,"source":"…","hints":["…"],"answer":"…","solution":"…"}]\'></textarea></div>'
       + '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">'
       + '<input type="file" id="importFile" accept=".json,application/json" style="display:none" />'
       + '<button class="btn" id="pickFile">选择 JSON 文件</button>'
@@ -405,10 +405,11 @@
             + '<div class="review-head"><span class="problem-code-badge">' + p.code + '</span>'
             + '<h3>' + window.Md.esc(p.title) + '</h3>'
             + '<span class="small muted">' + window.Md.esc(p.authorName || '') + ' · ' + window.UI.timeAgo(p.createdAt) + '</span></div>'
-            + '<div class="tags">' + (p.tags || []).map(function (t) { return '<span class="tag">' + window.Md.esc(t) + '</span>'; }).join('') + '</div>'
+            + '<div class="tags">' + window.UI.tagBadges(p, { showKind: true }) + '</div>'
             + '<div class="review-grid" style="margin-top:12px">'
             + scoreInput('思维量', p.thinking) + scoreInput('难度', p.difficulty) + scoreInput('计算量', p.calc)
-            + '<div class="field"><label>考点标签（逗号分隔）</label><input data-f="tags" value="' + window.Md.esc((p.tags || []).join(', ')) + '" /></div>'
+            + '<div class="field"><label>主标签</label><select data-f="mainTag">' + window.UI.mainTagOptions(p.mainTag) + '</select></div>'
+            + '<div class="field"><label>子标签（逗号分隔）</label><input data-f="tags" value="' + window.Md.esc((p.tags || []).join(', ')) + '" /></div>'
             + '</div>'
             + '<div class="review-statement md" data-md="stmt">' + window.Md.toHtml(p.statement) + '</div>'
             + (p.solution ? '<details style="margin:8px 0"><summary class="small muted" style="cursor:pointer">展开解析</summary><div class="review-statement md" data-md="sol">' + window.Md.toHtml(p.solution) + '</div></details>' : '<div class="small" style="color:'+window.UI.tone('err')+'">没填解析</div>')
@@ -427,6 +428,7 @@
             item.querySelectorAll('[data-f]').forEach(function (input) {
               const f = input.dataset.f;
               if (f === 'tags') patch.tags = input.value.split(/[,，、\s]+/).map(function (s) { return s.trim(); }).filter(Boolean);
+              else if (f === 'mainTag') patch.mainTag = input.value;
               else if (f === 'reason') patch.reason = input.value;
               else if (f === '思维量') patch.thinking = Number(input.value);
               else if (f === '难度') patch.difficulty = Number(input.value);

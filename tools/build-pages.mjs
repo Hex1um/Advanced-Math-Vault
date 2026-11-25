@@ -17,7 +17,12 @@ const SRC = path.join(ROOT, 'public');
 const OUT = path.join(ROOT, 'docs');
 
 const API_BASE = process.env.API_BASE || 'https://math-vault-10141.app.workbuddy.host';
-const SHARECODE = process.env.SHARECODE || 'Q6CZHVVW3K';
+const SHARECODE = process.env.SHARECODE || '';
+if (!SHARECODE) {
+  console.error('缺少 SHARECODE。它是托管网关的公开访问码，必须随站点发布，但不能在仓库里写默认值：');
+  console.error('  SHARECODE=xxxx node tools/build-pages.mjs');
+  process.exit(2);
+}
 
 /* 不用 rm -rf：沙箱会把递归删除拦成回收站操作。这里改成「覆盖 + 删多余文件」。 */
 function syncInto(srcDir, outDir) {
@@ -78,4 +83,4 @@ let files = 0;
 
 console.log('已生成 docs/：' + files + ' 个文件');
 console.log('  apiBase  = ' + API_BASE);
-console.log('  sharecode= ' + (SHARECODE ? SHARECODE : '(无)'));
+console.log('  sharecode= ' + (SHARECODE ? SHARECODE.slice(0, 4) + '••••' : '(无)'));

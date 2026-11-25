@@ -3,9 +3,7 @@
     "title": "一点处的对数+正切叠加，用导数定义拆",
     "statement": "$$\\lim_{x\\to1^-}\\frac{\\ln(1-x)+\\tan\\frac{\\pi}{2}x}{\\cot\\pi x}$$",
     "tags": [
-      "极限",
-      "函数极限",
-      "洛必达"
+      "函数极限"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -17,15 +15,14 @@
       "$\\tan\\frac{\\pi}{2}x/\\cot\\pi x=\\frac{\\sin(\\pi x/2)}{\\cos(\\pi x/2)}\\cdot\\frac{\\sin\\pi x}{\\cos\\pi x}$，$x\\to1$ 时为 $-2$"
     ],
     "answer": "$-2$",
-    "solution": "### 拆成两项\n\n$$\\lim_{x\\to1^-}\\frac{\\ln(1-x)}{\\cot\\pi x}+\\lim_{x\\to1^-}\\frac{\\tan(\\pi x/2)}{\\cot\\pi x}.$$\n\n### 第一项\n令 $t=1-x\\to0^+$，$\\cot\\pi x=\\cot(\\pi-\\pi t)=-\\cot\\pi t\\sim-\\dfrac1{\\pi t}$，故\n$$\\frac{\\ln t}{\\cot\\pi x}\\sim-\\pi t\\ln t\\to0.$$\n\n### 第二项\n$$\\frac{\\tan(\\pi x/2)}{\\cot\\pi x}=\\frac{\\sin(\\pi x/2)\\sin\\pi x}{\\cos(\\pi x/2)\\cos\\pi x}.$$\n$x\\to1^-$：$\\sin(\\pi x/2)\\to1$，$\\sin\\pi x\\sim\\pi(1-x)$，$\\cos(\\pi x/2)\\sim\\frac\\pi2(1-x)$，$\\cos\\pi x\\to-1$，比值 $\\to-2$。\n\n> 答案 $-2$，已数值校验。"
+    "solution": "### 拆成两项\n\n$$\\lim_{x\\to1^-}\\frac{\\ln(1-x)}{\\cot\\pi x}+\\lim_{x\\to1^-}\\frac{\\tan(\\pi x/2)}{\\cot\\pi x}.$$\n\n### 第一项\n令 $t=1-x\\to0^+$，$\\cot\\pi x=\\cot(\\pi-\\pi t)=-\\cot\\pi t\\sim-\\dfrac1{\\pi t}$，故\n$$\\frac{\\ln t}{\\cot\\pi x}\\sim-\\pi t\\ln t\\to0.$$\n\n### 第二项\n$$\\frac{\\tan(\\pi x/2)}{\\cot\\pi x}=\\frac{\\sin(\\pi x/2)\\sin\\pi x}{\\cos(\\pi x/2)\\cos\\pi x}.$$\n$x\\to1^-$：$\\sin(\\pi x/2)\\to1$，$\\sin\\pi x\\sim\\pi(1-x)$，$\\cos(\\pi x/2)\\sim\\frac\\pi2(1-x)$，$\\cos\\pi x\\to-1$，比值 $\\to-2$。\n\n> 答案 $-2$，已数值校验。",
+    "mainTag": "极限与连续"
   },
   {
     "title": "平方差里藏二阶无穷小，展开到 $1/x$ 的一阶",
     "statement": "$$\\lim_{x\\to\\infty}\\left[(x-\\tfrac12)^2-x^4\\ln^2\\left(1+\\tfrac1x\\right)\\right]$$",
     "tags": [
-      "极限",
-      "函数极限",
-      "泰勒展开"
+      "函数极限"
     ],
     "thinking": 8,
     "difficulty": 8,
@@ -37,15 +34,14 @@
       "平方后与 $(x-1/2)^2$ 相减，常数项剩 $-\\frac13+\\frac14$"
     ],
     "answer": "$-\\dfrac{2}{3}$",
-    "solution": "### 取对数展开\n\n$$\\ln\\Big(1+\\frac1x\\Big)=\\frac1x-\\frac1{2x^2}+\\frac1{3x^3}+O(x^{-4}),$$\n$$x^2\\ln\\Big(1+\\frac1x\\Big)=x-\\frac12+\\frac1{3x}+O(x^{-2}).$$\n\n### 平方并相减\n设 $a=x-\\frac12$，$b=\\frac1{3x}+O(x^{-2})$，则\n$$x^4\\ln^2\\Big(1+\\frac1x\\Big)=(a+b)^2=a^2+2ab+O(x^{-2})=a^2+\\frac{2x-1}{3x}+O(x^{-2}).$$\n故原式 $=-\\dfrac{2x-1}{3x}+O(x^{-2})\\to-\\dfrac23$。\n\n> sympy 符号求极限得 $-\\frac23$。"
+    "solution": "### 取对数展开\n\n$$\\ln\\Big(1+\\frac1x\\Big)=\\frac1x-\\frac1{2x^2}+\\frac1{3x^3}+O(x^{-4}),$$\n$$x^2\\ln\\Big(1+\\frac1x\\Big)=x-\\frac12+\\frac1{3x}+O(x^{-2}).$$\n\n### 平方并相减\n设 $a=x-\\frac12$，$b=\\frac1{3x}+O(x^{-2})$，则\n$$x^4\\ln^2\\Big(1+\\frac1x\\Big)=(a+b)^2=a^2+2ab+O(x^{-2})=a^2+\\frac{2x-1}{3x}+O(x^{-2}).$$\n故原式 $=-\\dfrac{2x-1}{3x}+O(x^{-2})\\to-\\dfrac23$。\n\n> sympy 符号求极限得 $-\\frac23$。",
+    "mainTag": "极限与连续"
   },
   {
     "title": "$e^{\\text{幂指}}$ 与幂指函数之争，取对数到二阶",
     "statement": "$$\\lim_{x\\to\\infty}x^2\\left[e^{(1+1/x)^x}-\\left(1+\\tfrac1x\\right)^{ex}\\right]$$",
     "tags": [
-      "极限",
-      "幂指函数",
-      "泰勒展开"
+      "函数极限"
     ],
     "thinking": 9,
     "difficulty": 9,
@@ -57,15 +53,15 @@
       "$u-e\\sim-\\frac{e}{2x}$，二次项会留下一阶差"
     ],
     "answer": "$\\dfrac{e^{1+e}}{8}$",
-    "solution": "### 展开 $(1+1/x)^x$\n\n$$u:=e^{x\\ln(1+1/x)}=e^{1-\\frac1{2x}+\\frac1{3x^2}+O(x^{-3})}=e\\left(1-\\frac1{2x}+\\frac{11}{24x^2}+O(x^{-3})\\right).$$\n记 $h=u-e\\sim-\\dfrac{e}{2x}$。\n\n### 两个函数在 $e$ 处的二阶展开\n$$e^{u}=e^e\\left(1+h+\\frac{h^2}{2}+\\cdots\\right),\\qquad u^e=e^e\\left(1+\\frac{e-1}{e}h+\\cdots\\right).$$\n相减后 $h$ 的一次项系数为 $1-\\frac{e-1}{e}=\\frac1e$，故\n$$e^u-u^e=e^e\\cdot\\frac{h}{e}+O(h^2)=e^{e-1}\\cdot\\left(-\\frac{e}{2x}\\right)+O(x^{-2})=-\\frac{e^e}{2x}+O(x^{-2}).$$\n\n### 乘 $x^2$？\n注意此时 $x^2(e^u-u^e)$ 似乎发散——需保留到 $h^2$ 项：$\\frac12-\\frac{e-1}{2e}=\\frac1{2e}$，于是\n$$e^u-u^e=e^e\\left(\\frac{h}{e}+\\frac{h^2}{2e}+O(h^3)\\right).$$\n取 $h=-\\frac{e}{2x}+\\frac{11e}{24x^2}$，代入得 $x^2(e^u-u^e)\\to\\dfrac{e^{1+e}}{8}$。\n\n> 已用 sympy 符号极限验证：$\\exp(1+e)/8$。"
+    "solution": "### 展开 $(1+1/x)^x$\n\n$$u:=e^{x\\ln(1+1/x)}=e^{1-\\frac1{2x}+\\frac1{3x^2}+O(x^{-3})}=e\\left(1-\\frac1{2x}+\\frac{11}{24x^2}+O(x^{-3})\\right).$$\n记 $h=u-e\\sim-\\dfrac{e}{2x}$。\n\n### 两个函数在 $e$ 处的二阶展开\n$$e^{u}=e^e\\left(1+h+\\frac{h^2}{2}+\\cdots\\right),\\qquad u^e=e^e\\left(1+\\frac{e-1}{e}h+\\cdots\\right).$$\n相减后 $h$ 的一次项系数为 $1-\\frac{e-1}{e}=\\frac1e$，故\n$$e^u-u^e=e^e\\cdot\\frac{h}{e}+O(h^2)=e^{e-1}\\cdot\\left(-\\frac{e}{2x}\\right)+O(x^{-2})=-\\frac{e^e}{2x}+O(x^{-2}).$$\n\n### 乘 $x^2$？\n注意此时 $x^2(e^u-u^e)$ 似乎发散——需保留到 $h^2$ 项：$\\frac12-\\frac{e-1}{2e}=\\frac1{2e}$，于是\n$$e^u-u^e=e^e\\left(\\frac{h}{e}+\\frac{h^2}{2e}+O(h^3)\\right).$$\n取 $h=-\\frac{e}{2x}+\\frac{11e}{24x^2}$，代入得 $x^2(e^u-u^e)\\to\\dfrac{e^{1+e}}{8}$。\n\n> 已用 sympy 符号极限验证：$\\exp(1+e)/8$。",
+    "mainTag": "极限与连续"
   },
   {
     "title": "$(1+1/n)^n-e$ 的标准一阶修正",
     "statement": "$$\\lim_{n\\to\\infty}n\\left[\\left(1+\\tfrac1n\\right)^n-e\\right]$$",
     "tags": [
-      "极限",
-      "数列极限",
-      "泰勒展开"
+      "函数极限",
+      "数列极限"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -77,15 +73,14 @@
       "减去 $e$ 后主部 $-e/(2n)$"
     ],
     "answer": "$-\\dfrac{e}{2}$",
-    "solution": "### 取指数展开\n\n$$n\\ln\\Big(1+\\frac1n\\Big)=1-\\frac1{2n}+\\frac1{3n^2}+O(n^{-3}),$$\n$$\\Big(1+\\frac1n\\Big)^n=e\\cdot e^{-\\frac1{2n}+O(n^{-2})}=e\\left(1-\\frac1{2n}+O(n^{-2})\\right).$$\n\n### 取极限\n$$n\\left[\\Big(1+\\frac1n\\Big)^n-e\\right]=n\\left[-\\frac{e}{2n}+O(n^{-2})\\right]\\to-\\frac e2.$$\n\n> sympy 符号验证通过。"
+    "solution": "### 取指数展开\n\n$$n\\ln\\Big(1+\\frac1n\\Big)=1-\\frac1{2n}+\\frac1{3n^2}+O(n^{-3}),$$\n$$\\Big(1+\\frac1n\\Big)^n=e\\cdot e^{-\\frac1{2n}+O(n^{-2})}=e\\left(1-\\frac1{2n}+O(n^{-2})\\right).$$\n\n### 取极限\n$$n\\left[\\Big(1+\\frac1n\\Big)^n-e\\right]=n\\left[-\\frac{e}{2n}+O(n^{-2})\\right]\\to-\\frac e2.$$\n\n> sympy 符号验证通过。",
+    "mainTag": "极限与连续"
   },
   {
     "title": "两个对数相乘减一个对数，四阶相消",
     "statement": "$$\\lim_{x\\to0}\\frac{\\ln(1+x)\\ln(1-x)-\\ln(1-x^2)}{x^4}$$",
     "tags": [
-      "极限",
-      "函数极限",
-      "泰勒展开"
+      "函数极限"
     ],
     "thinking": 7,
     "difficulty": 6,
@@ -97,15 +92,14 @@
       "相消后主部留在 $x^4$"
     ],
     "answer": "$\\dfrac{1}{12}$",
-    "solution": "### 分别展开\n\n$$\\ln(1+x)\\ln(1-x)=\\left(x-\\frac{x^2}{2}+\\frac{x^3}{3}-\\frac{x^4}{4}\\right)\\left(-x-\\frac{x^2}{2}-\\frac{x^3}{3}-\\frac{x^4}{4}\\right)+\\cdots$$\n乘积中 $x^2$ 项 $-x^2$，$x^4$ 项 $-\\frac{x^4}{3}+\\frac{x^4}{4}-\\frac{x^4}{3}=-\\frac{5x^4}{12}$。\n\n$$\\ln(1-x^2)=-x^2-\\frac{x^4}{2}+O(x^6).$$\n\n### 相减\n分子 $=-\\frac{5}{12}x^4+\\frac12x^4+O(x^6)=\\frac{x^4}{12}$，极限 $=\\frac1{12}$。\n\n> sympy 符号验证通过。"
+    "solution": "### 分别展开\n\n$$\\ln(1+x)\\ln(1-x)=\\left(x-\\frac{x^2}{2}+\\frac{x^3}{3}-\\frac{x^4}{4}\\right)\\left(-x-\\frac{x^2}{2}-\\frac{x^3}{3}-\\frac{x^4}{4}\\right)+\\cdots$$\n乘积中 $x^2$ 项 $-x^2$，$x^4$ 项 $-\\frac{x^4}{3}+\\frac{x^4}{4}-\\frac{x^4}{3}=-\\frac{5x^4}{12}$。\n\n$$\\ln(1-x^2)=-x^2-\\frac{x^4}{2}+O(x^6).$$\n\n### 相减\n分子 $=-\\frac{5}{12}x^4+\\frac12x^4+O(x^6)=\\frac{x^4}{12}$，极限 $=\\frac1{12}$。\n\n> sympy 符号验证通过。",
+    "mainTag": "极限与连续"
   },
   {
     "title": "根号差有理化后要保留到二阶",
     "statement": "$$\\lim_{x\\to0}\\frac{x^2}{\\sqrt{1+x\\sin x}-\\sqrt{\\cos x}}$$",
     "tags": [
-      "极限",
-      "函数极限",
-      "根式有理化"
+      "函数极限"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -117,15 +111,15 @@
       "分母 $\\sim\\frac34x^2$"
     ],
     "answer": "$\\dfrac{4}{3}$",
-    "solution": "### 有理化\n\n$$\\frac{x^2(\\sqrt{1+x\\sin x}+\\sqrt{\\cos x})}{(1+x\\sin x)-\\cos x}.$$\n\n### 展开\n$x\\sin x=x^2+O(x^4)$，$\\cos x=1-\\frac{x^2}{2}+O(x^4)$，故分母 $=x^2+\\frac{x^2}{2}+O(x^4)=\\frac32x^2+O(x^4)$；分子 $\\sim x^2\\cdot2$。\n\n$$\\text{原式}\\to\\frac{2x^2}{\\frac32x^2}=\\frac43.$$\n\n> mpmath 数值验证：$1.333333\\ldots$。"
+    "solution": "### 有理化\n\n$$\\frac{x^2(\\sqrt{1+x\\sin x}+\\sqrt{\\cos x})}{(1+x\\sin x)-\\cos x}.$$\n\n### 展开\n$x\\sin x=x^2+O(x^4)$，$\\cos x=1-\\frac{x^2}{2}+O(x^4)$，故分母 $=x^2+\\frac{x^2}{2}+O(x^4)=\\frac32x^2+O(x^4)$；分子 $\\sim x^2\\cdot2$。\n\n$$\\text{原式}\\to\\frac{2x^2}{\\frac32x^2}=\\frac43.$$\n\n> mpmath 数值验证：$1.333333\\ldots$。",
+    "mainTag": "极限与连续"
   },
   {
     "title": "$e$ 的阶乘展开配正弦，小数部分决定答案",
     "statement": "$$\\lim_{n\\to\\infty}n\\sin\\big(2\\pi e\\,n!\\big)$$",
     "tags": [
-      "极限",
-      "数列极限",
-      "无理数小数部分"
+      "函数极限",
+      "数列极限"
     ],
     "thinking": 8,
     "difficulty": 6,
@@ -137,15 +131,15 @@
       "$\\sin$ 在小量处等价于该小量"
     ],
     "answer": "$2\\pi$",
-    "solution": "### 抓住 $e$ 的阶乘展开\n\n$$e\\,n!=\\underbrace{\\sum_{k=0}^{n}\\frac{n!}{k!}}_{\\text{整数}}+\\frac{1}{n+1}+\\frac{1}{(n+1)(n+2)}+\\cdots$$\n记小数部分 $\\delta_n=\\frac1{n+1}+O(n^{-2})$。\n\n### 正弦的周期性\n$$\\sin(2\\pi e\\,n!)=\\sin(2\\pi\\delta_n)\\sim 2\\pi\\delta_n\\sim\\frac{2\\pi}{n+1}.$$\n故 $n\\sin(2\\pi e n!)\\to2\\pi$。\n\n> 这是「$e$ 是无理数」那一族经典极限题。"
+    "solution": "### 抓住 $e$ 的阶乘展开\n\n$$e\\,n!=\\underbrace{\\sum_{k=0}^{n}\\frac{n!}{k!}}_{\\text{整数}}+\\frac{1}{n+1}+\\frac{1}{(n+1)(n+2)}+\\cdots$$\n记小数部分 $\\delta_n=\\frac1{n+1}+O(n^{-2})$。\n\n### 正弦的周期性\n$$\\sin(2\\pi e\\,n!)=\\sin(2\\pi\\delta_n)\\sim 2\\pi\\delta_n\\sim\\frac{2\\pi}{n+1}.$$\n故 $n\\sin(2\\pi e n!)\\to2\\pi$。\n\n> 这是「$e$ 是无理数」那一族经典极限题。",
+    "mainTag": "极限与连续"
   },
   {
     "title": "二项式系数倒数加权求和，端点 dominates",
     "statement": "$$\\lim_{n\\to\\infty}\\sum_{i=1}^{n}(n+1-i)\\left(n\\binom{n}{i}\\right)^{-1}$$",
     "tags": [
-      "极限",
-      "数列极限",
-      "组合恒等式"
+      "函数极限",
+      "数列极限"
     ],
     "thinking": 8,
     "difficulty": 7,
@@ -157,15 +151,14 @@
       "其余项都是 $O(n^{-2})$ 或更小"
     ],
     "answer": "$0$",
-    "solution": "### 估计主项\n\n$i=n$ 时 $\\binom nn=1$，该项 $=\\dfrac{n+1-n}{n}=\\dfrac1n$。\n\n$i=n-1$ 时 $\\binom n{n-1}=n$，该项 $=\\dfrac{2}{n\\cdot n}=\\dfrac2{n^2}$。\n\n$i=1$ 时 $\\binom n1=n$，该项 $=\\dfrac{n}{n^2}=\\dfrac1n$。\n\n### 整体估计\n把求和按 $i$ 距端点的距离分层，除 $i=1,n$ 两项为 $O(1/n)$ 外，其余项合计 $O(\\log n/n^2)$，故总和 $\\to0$。\n\n> 数值验证：$n=1000$ 时约 $0.002$。"
+    "solution": "### 估计主项\n\n$i=n$ 时 $\\binom nn=1$，该项 $=\\dfrac{n+1-n}{n}=\\dfrac1n$。\n\n$i=n-1$ 时 $\\binom n{n-1}=n$，该项 $=\\dfrac{2}{n\\cdot n}=\\dfrac2{n^2}$。\n\n$i=1$ 时 $\\binom n1=n$，该项 $=\\dfrac{n}{n^2}=\\dfrac1n$。\n\n### 整体估计\n把求和按 $i$ 距端点的距离分层，除 $i=1,n$ 两项为 $O(1/n)$ 外，其余项合计 $O(\\log n/n^2)$，故总和 $\\to0$。\n\n> 数值验证：$n=1000$ 时约 $0.002$。",
+    "mainTag": "极限与连续"
   },
   {
     "title": "立方根与二次项拼出的三阶相消",
     "statement": "$$\\lim_{x\\to0}\\frac{\\frac{x^2}{3}+1-\\sqrt[3]{1+x^2}}{(\\cos x-e^{x^2})\\sin(x^2)}$$",
     "tags": [
-      "极限",
-      "函数极限",
-      "泰勒展开"
+      "函数极限"
     ],
     "thinking": 8,
     "difficulty": 8,
@@ -177,16 +170,15 @@
       "分子主部 $\\frac{x^4}{9}$"
     ],
     "answer": "$-\\dfrac{2}{27}$",
-    "solution": "### 分子展开\n\n$$(1+x^2)^{1/3}=1+\\frac{x^2}{3}-\\frac{x^4}{9}+O(x^6),$$\n故分子 $=\\frac{x^4}{9}+O(x^6)$。\n\n### 分母展开\n$$\\cos x-e^{x^2}=\\left(1-\\frac{x^2}{2}+O(x^4)\\right)-\\left(1+x^2+O(x^4)\\right)=-\\frac32x^2+O(x^4),$$\n$$\\sin(x^2)\\sim x^2,\\qquad \\text{分母}\\sim-\\frac32x^4.$$\n\n### 取极限\n$$\\frac{x^4/9}{-\\frac32x^4}=-\\frac{2}{27}.$$\n\n> sympy 符号验证通过。"
+    "solution": "### 分子展开\n\n$$(1+x^2)^{1/3}=1+\\frac{x^2}{3}-\\frac{x^4}{9}+O(x^6),$$\n故分子 $=\\frac{x^4}{9}+O(x^6)$。\n\n### 分母展开\n$$\\cos x-e^{x^2}=\\left(1-\\frac{x^2}{2}+O(x^4)\\right)-\\left(1+x^2+O(x^4)\\right)=-\\frac32x^2+O(x^4),$$\n$$\\sin(x^2)\\sim x^2,\\qquad \\text{分母}\\sim-\\frac32x^4.$$\n\n### 取极限\n$$\\frac{x^4/9}{-\\frac32x^4}=-\\frac{2}{27}.$$\n\n> sympy 符号验证通过。",
+    "mainTag": "极限与连续"
   },
   {
     "title": "$\\frac1n-\\sin\\frac1n$ 的三分之一次方乘阶乘几何平均",
     "statement": "$$\\lim_{n\\to\\infty}\\left(\\frac1n-\\sin\\frac1n\\right)^{1/3}\\sqrt[n]{n!}$$",
     "tags": [
-      "极限",
-      "数列极限",
-      "泰勒展开",
-      "斯特林公式"
+      "函数极限",
+      "数列极限"
     ],
     "thinking": 9,
     "difficulty": 8,
@@ -198,13 +190,13 @@
       "两者相乘得常数"
     ],
     "answer": "$\\dfrac{1}{e\\sqrt[3]{6}}$",
-    "solution": "### 第一因子\n\n$$\\sin\\frac1n=\\frac1n-\\frac1{6n^3}+O(n^{-5}),\\qquad \\frac1n-\\sin\\frac1n=\\frac1{6n^3}+O(n^{-5}),$$\n$$\\left(\\frac1n-\\sin\\frac1n\\right)^{1/3}\\sim\\frac{1}{\\sqrt[3]{6}\\,n}.$$\n\n### 第二因子\n由 Stirling 公式 $n!\\sim\\sqrt{2\\pi n}(n/e)^n$，故 $\\sqrt[n]{n!}\\sim\\dfrac ne$。\n\n### 相乘\n$$\\frac{1}{\\sqrt[3]6\\,n}\\cdot\\frac ne=\\frac{1}{e\\sqrt[3]6}.$$\n\n> mpmath 数值验证：$n=10^4$ 时约 $0.20256$，理论值 $0.20245$。"
+    "solution": "### 第一因子\n\n$$\\sin\\frac1n=\\frac1n-\\frac1{6n^3}+O(n^{-5}),\\qquad \\frac1n-\\sin\\frac1n=\\frac1{6n^3}+O(n^{-5}),$$\n$$\\left(\\frac1n-\\sin\\frac1n\\right)^{1/3}\\sim\\frac{1}{\\sqrt[3]{6}\\,n}.$$\n\n### 第二因子\n由 Stirling 公式 $n!\\sim\\sqrt{2\\pi n}(n/e)^n$，故 $\\sqrt[n]{n!}\\sim\\dfrac ne$。\n\n### 相乘\n$$\\frac{1}{\\sqrt[3]6\\,n}\\cdot\\frac ne=\\frac{1}{e\\sqrt[3]6}.$$\n\n> mpmath 数值验证：$n=10^4$ 时约 $0.20256$，理论值 $0.20245$。",
+    "mainTag": "极限与连续"
   },
   {
     "title": "取对数后减去 $\\sin x$，分母只留立方根主部",
     "statement": "$$\\lim_{x\\to0}\\frac{\\ln\\left(e^{\\sin x}+\\sqrt[3]{1-\\cos x}\\right)-\\sin x}{\\arctan\\left(4\\sqrt[3]{1-\\cos x}\\right)}$$",
     "tags": [
-      "极限",
       "函数极限",
       "等价无穷小"
     ],
@@ -218,15 +210,14 @@
       "分母 $\\arctan(4u)\\sim4u$"
     ],
     "answer": "$\\dfrac{1}{4}$",
-    "solution": "### 提取对数\n\n$$\\ln(e^{\\sin x}+u)=\\ln\\left[e^{\\sin x}(1+u e^{-\\sin x})\\right]=\\sin x+\\ln(1+u e^{-\\sin x}),$$\n其中 $u=\\sqrt[3]{1-\\cos x}\\to0$，且 $ue^{-\\sin x}\\to0$，故 $\\ln(1+ue^{-\\sin x})\\sim u$。\n\n### 分母\n$\\arctan(4u)\\sim4u$。\n\n### 取极限\n$$\\frac{\\sin x+u-\\sin x}{4u}=\\frac14.$$\n\n> mpmath 数值验证：$0.2499999$。"
+    "solution": "### 提取对数\n\n$$\\ln(e^{\\sin x}+u)=\\ln\\left[e^{\\sin x}(1+u e^{-\\sin x})\\right]=\\sin x+\\ln(1+u e^{-\\sin x}),$$\n其中 $u=\\sqrt[3]{1-\\cos x}\\to0$，且 $ue^{-\\sin x}\\to0$，故 $\\ln(1+ue^{-\\sin x})\\sim u$。\n\n### 分母\n$\\arctan(4u)\\sim4u$。\n\n### 取极限\n$$\\frac{\\sin x+u-\\sin x}{4u}=\\frac14.$$\n\n> mpmath 数值验证：$0.2499999$。",
+    "mainTag": "极限与连续"
   },
   {
     "title": "幂指型极限，取对数后偏爱求和指标",
     "statement": "$$\\lim_{x\\to0}\\left(\\frac{1}{n}\\sum_{i=1}^{n}e^{ix}\\right)^{1/x}\\qquad(n\\in\\mathbb{N}^*)$$",
     "tags": [
-      "极限",
-      "幂指函数",
-      "导数定义"
+      "函数极限"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -238,15 +229,14 @@
       "$\\left(\\frac1n\\sum e^{ix}\\right)'_{x=0}=\\frac1n\\sum i=\\frac{n+1}{2}$"
     ],
     "answer": "$e^{\\frac{n+1}{2}}$",
-    "solution": "### 取对数\n\n$$L=\\lim_{x\\to0}\\frac{\\ln\\left(\\frac1n\\sum_{i=1}^n e^{ix}\\right)}{x}.$$\n\n这是 $\\ln f(x)$ 在 $x=0$ 处的导数，其中 $f(0)=\\frac1n\\sum_{i=1}^n1=1$，$\\ln f(0)=0$。\n\n### 求导\n$$\\frac{\\mathrm d}{\\mathrm dx}\\ln f(x)\\Big|_{x=0}=\\frac{f'(0)}{f(0)}=\\frac1n\\sum_{i=1}^n i=\\frac{n+1}{2}.$$\n\n故 $L=\\frac{n+1}{2}$，原极限 $=e^{(n+1)/2}$。\n\n> 注意这里 $i$ 是求和指标（$1,2,\\ldots,n$），指数 $ix$ 中的 $i$ 即该整数。"
+    "solution": "### 取对数\n\n$$L=\\lim_{x\\to0}\\frac{\\ln\\left(\\frac1n\\sum_{i=1}^n e^{ix}\\right)}{x}.$$\n\n这是 $\\ln f(x)$ 在 $x=0$ 处的导数，其中 $f(0)=\\frac1n\\sum_{i=1}^n1=1$，$\\ln f(0)=0$。\n\n### 求导\n$$\\frac{\\mathrm d}{\\mathrm dx}\\ln f(x)\\Big|_{x=0}=\\frac{f'(0)}{f(0)}=\\frac1n\\sum_{i=1}^n i=\\frac{n+1}{2}.$$\n\n故 $L=\\frac{n+1}{2}$，原极限 $=e^{(n+1)/2}$。\n\n> 注意这里 $i$ 是求和指标（$1,2,\\ldots,n$），指数 $ix$ 中的 $i$ 即该整数。",
+    "mainTag": "极限与连续"
   },
   {
     "title": "$\\frac\\pi2$ 附近的余角取对数幂",
     "statement": "$$\\lim_{x\\to+\\infty}\\left(\\frac{\\pi}{2}-\\arctan x\\right)^{1/\\ln x}$$",
     "tags": [
-      "极限",
-      "幂指函数",
-      "反三角函数"
+      "函数极限"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -258,15 +248,14 @@
       "原式 $\\to e^{-1}$"
     ],
     "answer": "$\\dfrac{1}{e}$",
-    "solution": "### 取对数\n\n$$\\ln L=\\lim_{x\\to+\\infty}\\frac{\\ln\\left(\\frac\\pi2-\\arctan x\\right)}{\\ln x}.$$\n\n因为 $\\frac\\pi2-\\arctan x=\\arctan\\frac1x\\sim\\frac1x$，故分子 $\\sim-\\ln x$，\n\n$$\\ln L=\\lim_{x\\to\\infty}\\frac{-\\ln x+O(1)}{\\ln x}=-1.$$\n\n故 $L=e^{-1}$。\n\n> mpmath 数值验证：$0.36787944117=\\frac1e$。"
+    "solution": "### 取对数\n\n$$\\ln L=\\lim_{x\\to+\\infty}\\frac{\\ln\\left(\\frac\\pi2-\\arctan x\\right)}{\\ln x}.$$\n\n因为 $\\frac\\pi2-\\arctan x=\\arctan\\frac1x\\sim\\frac1x$，故分子 $\\sim-\\ln x$，\n\n$$\\ln L=\\lim_{x\\to\\infty}\\frac{-\\ln x+O(1)}{\\ln x}=-1.$$\n\n故 $L=e^{-1}$。\n\n> mpmath 数值验证：$0.36787944117=\\frac1e$。",
+    "mainTag": "极限与连续"
   },
   {
     "title": "分子恰是分母之商的导数",
     "statement": "$$\\int\\frac{1-\\ln x}{(x-\\ln x)^2}\\,\\mathrm{d}x$$",
     "tags": [
-      "不定积分",
-      "凑微分",
-      "对数求导"
+      "不定积分"
     ],
     "thinking": 5,
     "difficulty": 4,
@@ -278,15 +267,15 @@
       "直接得到原函数"
     ],
     "answer": "$\\dfrac{x}{x-\\ln x}+C$",
-    "solution": "### 观察商的导数\n\n$$\\left(\\frac{x}{x-\\ln x}\\right)'=\\frac{(x-\\ln x)-x\\left(1-\\frac1x\\right)}{(x-\\ln x)^2}=\\frac{1-\\ln x}{(x-\\ln x)^2}.$$\n\n故\n\n$$\\int\\frac{1-\\ln x}{(x-\\ln x)^2}\\,\\mathrm dx=\\frac{x}{x-\\ln x}+C.$$\n\n> 已用 sympy 求导验证。"
+    "solution": "### 观察商的导数\n\n$$\\left(\\frac{x}{x-\\ln x}\\right)'=\\frac{(x-\\ln x)-x\\left(1-\\frac1x\\right)}{(x-\\ln x)^2}=\\frac{1-\\ln x}{(x-\\ln x)^2}.$$\n\n故\n\n$$\\int\\frac{1-\\ln x}{(x-\\ln x)^2}\\,\\mathrm dx=\\frac{x}{x-\\ln x}+C.$$\n\n> 已用 sympy 求导验证。",
+    "mainTag": "积分"
   },
   {
     "title": "二倍角把三角分式压成 $\\sec^2$ 与 $\\tan$",
     "statement": "$$\\int\\frac{1+\\sin 2x}{1+\\cos 2x}\\,\\mathrm{d}x$$",
     "tags": [
       "不定积分",
-      "三角变形",
-      "三角有理式"
+      "有理函数与三角积分"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -298,15 +287,16 @@
       "分别积分"
     ],
     "answer": "$\\dfrac{1}{2}\\tan x-\\ln|\\cos x|+C$",
-    "solution": "### 化简被积函数\n\n$$\\frac{1+\\sin2x}{1+\\cos2x}=\\frac{1+2\\sin x\\cos x}{2\\cos^2x}=\\frac12\\sec^2x+\\tan x.$$\n\n### 积分\n$$\\int\\frac12\\sec^2x\\,\\mathrm dx+\\int\\tan x\\,\\mathrm dx=\\frac12\\tan x+\\ln|\\sec x|+C=\\frac12\\tan x-\\ln|\\cos x|+C.$$\n\n> sympy 求导验证通过。"
+    "solution": "### 化简被积函数\n\n$$\\frac{1+\\sin2x}{1+\\cos2x}=\\frac{1+2\\sin x\\cos x}{2\\cos^2x}=\\frac12\\sec^2x+\\tan x.$$\n\n### 积分\n$$\\int\\frac12\\sec^2x\\,\\mathrm dx+\\int\\tan x\\,\\mathrm dx=\\frac12\\tan x+\\ln|\\sec x|+C=\\frac12\\tan x-\\ln|\\cos x|+C.$$\n\n> sympy 求导验证通过。",
+    "mainTag": "积分"
   },
   {
     "title": "指数换元后配方成反正切",
     "statement": "$$\\int\\frac{1}{2e^{-x}+e^{x}+2}\\,\\mathrm{d}x$$",
     "tags": [
       "不定积分",
-      "换元积分",
-      "指数代换"
+      "换元与分部",
+      "有理函数与三角积分"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -318,15 +308,16 @@
       "$\\int\\frac{\\mathrm dt}{(t+1)^2+1}$"
     ],
     "answer": "$\\arctan(e^{x}+1)+C$",
-    "solution": "### 换元\n\n令 $t=e^x$，则 $\\mathrm dx=\\dfrac{\\mathrm dt}{t}$，\n\n$$\\int\\frac{1}{2e^{-x}+e^x+2}\\,\\mathrm dx=\\int\\frac{1}{\\frac2t+t+2}\\cdot\\frac{\\mathrm dt}{t}=\\int\\frac{\\mathrm dt}{t^2+2t+2}.$$\n\n### 配方\n$$t^2+2t+2=(t+1)^2+1,\\qquad \\int\\frac{\\mathrm dt}{(t+1)^2+1}=\\arctan(t+1)+C.$$\n\n回代 $t=e^x$ 即得。\n\n> sympy 求导验证通过。"
+    "solution": "### 换元\n\n令 $t=e^x$，则 $\\mathrm dx=\\dfrac{\\mathrm dt}{t}$，\n\n$$\\int\\frac{1}{2e^{-x}+e^x+2}\\,\\mathrm dx=\\int\\frac{1}{\\frac2t+t+2}\\cdot\\frac{\\mathrm dt}{t}=\\int\\frac{\\mathrm dt}{t^2+2t+2}.$$\n\n### 配方\n$$t^2+2t+2=(t+1)^2+1,\\qquad \\int\\frac{\\mathrm dt}{(t+1)^2+1}=\\arctan(t+1)+C.$$\n\n回代 $t=e^x$ 即得。\n\n> sympy 求导验证通过。",
+    "mainTag": "积分"
   },
   {
     "title": "两个根式相加，令 $t=\\sqrt x+\\sqrt{1+x}$",
     "statement": "$$\\int\\frac{1}{1+\\sqrt{x}+\\sqrt{1+x}}\\,\\mathrm{d}x$$",
     "tags": [
       "不定积分",
-      "换元积分",
-      "根式代换"
+      "换元与分部",
+      "有理函数与三角积分"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -338,15 +329,16 @@
       "$\\mathrm dx=\\frac12(1-t^{-4})\\mathrm dt$，化简后逐项积分"
     ],
     "answer": "$\\dfrac12\\left(t-\\ln t-\\dfrac1t+\\dfrac{1}{2t^2}\\right)+C,\\ t=\\sqrt{x}+\\sqrt{1+x}$",
-    "solution": "### 对称换元\n\n设 $t=\\sqrt x+\\sqrt{1+x}$，由 $(\\sqrt{1+x}+\\sqrt x)(\\sqrt{1+x}-\\sqrt x)=1$ 得\n\n$$\\sqrt x=\\frac12\\left(t-\\frac1t\\right),\\qquad x=\\frac14\\left(t-\\frac1t\\right)^2,\\qquad \\mathrm dx=\\frac12\\left(1-\\frac1{t^4}\\right)\\mathrm dt.$$\n\n### 化简积分\n$$\\int\\frac{1}{1+t}\\cdot\\frac12\\left(1-\\frac1{t^4}\\right)\\mathrm dt=\\frac12\\int\\frac{t^4-1}{t^4(1+t)}\\mathrm dt=\\frac12\\int\\frac{(t-1)(t^2+1)}{t^4}\\,\\mathrm dt.$$\n\n被积函数 $=\\frac12(t^{-1}-t^{-2}+t^{-3}-t^{-4})$，逐项积分得\n\n$$\\frac12\\left(\\ln t+\\frac1t-\\frac1{2t^2}+\\frac1{3t^3}\\right)+C.$$\n\n> 与上式等价：把 $t$ 与 $1/t$ 的关系代入可互相转化；已数值求导验证。"
+    "solution": "### 对称换元\n\n设 $t=\\sqrt x+\\sqrt{1+x}$，由 $(\\sqrt{1+x}+\\sqrt x)(\\sqrt{1+x}-\\sqrt x)=1$ 得\n\n$$\\sqrt x=\\frac12\\left(t-\\frac1t\\right),\\qquad x=\\frac14\\left(t-\\frac1t\\right)^2,\\qquad \\mathrm dx=\\frac12\\left(1-\\frac1{t^4}\\right)\\mathrm dt.$$\n\n### 化简积分\n$$\\int\\frac{1}{1+t}\\cdot\\frac12\\left(1-\\frac1{t^4}\\right)\\mathrm dt=\\frac12\\int\\frac{t^4-1}{t^4(1+t)}\\mathrm dt=\\frac12\\int\\frac{(t-1)(t^2+1)}{t^4}\\,\\mathrm dt.$$\n\n被积函数 $=\\frac12(t^{-1}-t^{-2}+t^{-3}-t^{-4})$，逐项积分得\n\n$$\\frac12\\left(\\ln t+\\frac1t-\\frac1{2t^2}+\\frac1{3t^3}\\right)+C.$$\n\n> 与上式等价：把 $t$ 与 $1/t$ 的关系代入可互相转化；已数值求导验证。",
+    "mainTag": "积分"
   },
   {
     "title": "平方根与立方根并存，取六次根统一",
     "statement": "$$\\int\\frac{1}{\\sqrt{1+x}+\\sqrt[3]{1+x}}\\,\\mathrm{d}x$$",
     "tags": [
       "不定积分",
-      "换元积分",
-      "根式代换"
+      "换元与分部",
+      "有理函数与三角积分"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -358,15 +350,16 @@
       "多项式除法：$u^3/(u+1)=u^2-u+1-\\frac1{u+1}$"
     ],
     "answer": "$2u^3-3u^2+6u-6\\ln(u+1)+C,\\ u=\\sqrt[6]{1+x}$",
-    "solution": "### 统一根式\n\n令 $u=(1+x)^{1/6}$，则 $1+x=u^6$，$\\mathrm dx=6u^5\\mathrm du$，\n\n$$\\int\\frac{6u^5}{u^3+u^2}\\,\\mathrm du=\\int\\frac{6u^3}{u+1}\\,\\mathrm du.$$\n\n### 多项式除法\n$$\\frac{u^3}{u+1}=u^2-u+1-\\frac1{u+1}.$$\n\n故原积分\n\n$$6\\left(\\frac{u^3}{3}-\\frac{u^2}{2}+u-\\ln(u+1)\\right)+C=2u^3-3u^2+6u-6\\ln(u+1)+C.$$\n\n> sympy 数值求导验证通过。"
+    "solution": "### 统一根式\n\n令 $u=(1+x)^{1/6}$，则 $1+x=u^6$，$\\mathrm dx=6u^5\\mathrm du$，\n\n$$\\int\\frac{6u^5}{u^3+u^2}\\,\\mathrm du=\\int\\frac{6u^3}{u+1}\\,\\mathrm du.$$\n\n### 多项式除法\n$$\\frac{u^3}{u+1}=u^2-u+1-\\frac1{u+1}.$$\n\n故原积分\n\n$$6\\left(\\frac{u^3}{3}-\\frac{u^2}{2}+u-\\ln(u+1)\\right)+C=2u^3-3u^2+6u-6\\ln(u+1)+C.$$\n\n> sympy 数值求导验证通过。",
+    "mainTag": "积分"
   },
   {
     "title": "分式次幂的换元：令两因子之比开三次方",
     "statement": "$$\\int\\frac{1}{\\sqrt[3]{(x+1)^2(x-1)^4}}\\,\\mathrm{d}x$$",
     "tags": [
       "不定积分",
-      "换元积分",
-      "根式代换"
+      "换元与分部",
+      "有理函数与三角积分"
     ],
     "thinking": 8,
     "difficulty": 8,
@@ -378,15 +371,15 @@
       "$\\mathrm dx=-\\frac{6t^2}{(t^3-1)^2}\\mathrm dt$，被积式化为常数倍的 $\\mathrm dt$"
     ],
     "answer": "$-\\dfrac{3}{2}\\sqrt[3]{\\dfrac{x+1}{x-1}}+C$",
-    "solution": "### 换元\n\n令 $t=\\sqrt[3]{\\dfrac{x+1}{x-1}}$，则 $t^3=\\dfrac{x+1}{x-1}$，解出 $x=\\dfrac{t^3+1}{t^3-1}$，\n\n$$\\mathrm dx=\\frac{3t^2(t^3-1)-3t^2(t^3+1)}{(t^3-1)^2}\\,\\mathrm dt=-\\frac{6t^2}{(t^3-1)^2}\\,\\mathrm dt.$$\n\n### 化简\n$x+1=\\dfrac{2t^3}{t^3-1}$，$x-1=\\dfrac{2}{t^3-1}$，故\n\n$$\\sqrt[3]{(x+1)^2(x-1)^4}=\\frac{2t^2}{(t^3-1)^2}\\quad\\Longrightarrow\\quad \\text{被积式}\\,\\mathrm dx=-\\frac32\\,\\mathrm dt.$$\n\n于是原积分 $=-\\dfrac32t+C=-\\dfrac32\\sqrt[3]{\\dfrac{x+1}{x-1}}+C$。\n\n> sympy 求导验证通过。"
+    "solution": "### 换元\n\n令 $t=\\sqrt[3]{\\dfrac{x+1}{x-1}}$，则 $t^3=\\dfrac{x+1}{x-1}$，解出 $x=\\dfrac{t^3+1}{t^3-1}$，\n\n$$\\mathrm dx=\\frac{3t^2(t^3-1)-3t^2(t^3+1)}{(t^3-1)^2}\\,\\mathrm dt=-\\frac{6t^2}{(t^3-1)^2}\\,\\mathrm dt.$$\n\n### 化简\n$x+1=\\dfrac{2t^3}{t^3-1}$，$x-1=\\dfrac{2}{t^3-1}$，故\n\n$$\\sqrt[3]{(x+1)^2(x-1)^4}=\\frac{2t^2}{(t^3-1)^2}\\quad\\Longrightarrow\\quad \\text{被积式}\\,\\mathrm dx=-\\frac32\\,\\mathrm dt.$$\n\n于是原积分 $=-\\dfrac32t+C=-\\dfrac32\\sqrt[3]{\\dfrac{x+1}{x-1}}+C$。\n\n> sympy 求导验证通过。",
+    "mainTag": "积分"
   },
   {
     "title": "$1+\\sin x$ 的倒数，乘共轭后凑 $\\sec^2$",
     "statement": "$$\\int_{0}^{\\pi/4}\\frac{1}{1+\\sin x}\\,\\mathrm{d}x$$",
     "tags": [
       "定积分",
-      "三角变形",
-      "三角有理式"
+      "有理函数与三角积分"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -398,15 +391,15 @@
       "原函数 $\\tan x-\\sec x$"
     ],
     "answer": "$2-\\sqrt{2}$",
-    "solution": "### 有理化\n\n$$\\frac{1}{1+\\sin x}=\\frac{1-\\sin x}{\\cos^2x}=\\sec^2x-\\sec x\\tan x.$$\n\n### 代入上下限\n$$\\int_0^{\\pi/4}=\\Big[\\tan x-\\sec x\\Big]_0^{\\pi/4}=(1-\\sqrt2)-(0-1)=2-\\sqrt2.$$\n\n> sympy 符号积分验证通过。"
+    "solution": "### 有理化\n\n$$\\frac{1}{1+\\sin x}=\\frac{1-\\sin x}{\\cos^2x}=\\sec^2x-\\sec x\\tan x.$$\n\n### 代入上下限\n$$\\int_0^{\\pi/4}=\\Big[\\tan x-\\sec x\\Big]_0^{\\pi/4}=(1-\\sqrt2)-(0-1)=2-\\sqrt2.$$\n\n> sympy 符号积分验证通过。",
+    "mainTag": "积分"
   },
   {
     "title": "对数换元后是指数乘正弦的标准循环积分",
     "statement": "$$\\int_{1}^{e}\\sin(\\pi\\ln x)\\,\\mathrm{d}x$$",
     "tags": [
       "定积分",
-      "换元积分",
-      "循环积分"
+      "换元与分部"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -418,15 +411,15 @@
       "$\\int e^{at}\\sin bt\\,dt=\\frac{e^{at}(a\\sin bt-b\\cos bt)}{a^2+b^2}$"
     ],
     "answer": "$\\dfrac{\\pi(1+e)}{1+\\pi^2}$",
-    "solution": "### 换元\n\n令 $t=\\ln x$，则 $x=e^t$，$\\mathrm dx=e^t\\mathrm dt$，积分限 $0\\to1$。\n\n$$\\int_0^1 e^t\\sin(\\pi t)\\,dt=\\left[\\frac{e^t(\\sin\\pi t-\\pi\\cos\\pi t)}{1+\\pi^2}\\right]_0^1.$$\n\n### 代入\n上限 $t=1$：$\\dfrac{e(0+\\pi)}{1+\\pi^2}=\\dfrac{\\pi e}{1+\\pi^2}$；下限 $t=0$：$\\dfrac{-\\pi}{1+\\pi^2}$。\n\n相减得 $\\dfrac{\\pi(e+1)}{1+\\pi^2}$。\n\n> sympy 符号积分验证通过。"
+    "solution": "### 换元\n\n令 $t=\\ln x$，则 $x=e^t$，$\\mathrm dx=e^t\\mathrm dt$，积分限 $0\\to1$。\n\n$$\\int_0^1 e^t\\sin(\\pi t)\\,dt=\\left[\\frac{e^t(\\sin\\pi t-\\pi\\cos\\pi t)}{1+\\pi^2}\\right]_0^1.$$\n\n### 代入\n上限 $t=1$：$\\dfrac{e(0+\\pi)}{1+\\pi^2}=\\dfrac{\\pi e}{1+\\pi^2}$；下限 $t=0$：$\\dfrac{-\\pi}{1+\\pi^2}$。\n\n相减得 $\\dfrac{\\pi(e+1)}{1+\\pi^2}$。\n\n> sympy 符号积分验证通过。",
+    "mainTag": "积分"
   },
   {
     "title": "$\\arcsin(2\\sqrt{x(1-x)})$ 的分段化简",
     "statement": "$$\\int_{0}^{1}x\\arcsin\\left(2\\sqrt{x(1-x)}\\right)\\mathrm{d}x$$",
     "tags": [
       "定积分",
-      "反三角函数",
-      "对称性"
+      "对称性与周期性"
     ],
     "thinking": 8,
     "difficulty": 7,
@@ -438,15 +431,16 @@
       "$\\mathrm dx=\\sin2\\theta\\,\\mathrm d\\theta$，分两段积分"
     ],
     "answer": "$\\dfrac{1}{2}$",
-    "solution": "### 换元与分段\n\n令 $x=\\sin^2\\theta$，$\\theta\\in[0,\\pi/2]$，则 $\\mathrm dx=\\sin2\\theta\\,\\mathrm d\\theta$，$2\\sqrt{x(1-x)}=\\sin2\\theta$。\n\n$$\\arcsin(\\sin2\\theta)=\\begin{cases}2\\theta,&0\\leq\\theta\\leq\\pi/4,\\\\ \\pi-2\\theta,&\\pi/4<\\theta\\leq\\pi/2.\\end{cases}$$\n\n### 两段积分\n$$I=\\int_0^{\\pi/4}\\sin^2\\theta\\cdot 2\\theta\\cdot\\sin2\\theta\\,\\mathrm d\\theta+\\int_{\\pi/4}^{\\pi/2}\\sin^2\\theta(\\pi-2\\theta)\\sin2\\theta\\,\\mathrm d\\theta.$$\n用对称性（令第二段 $\\theta\\mapsto\\frac\\pi2-\\theta$）可化到同一区间，合并后 $I=\\int_0^{\\pi/4}2\\theta\\sin2\\theta\\,\\mathrm d\\theta=\\dfrac12$。\n\n> sympy 分段符号积分验证：结果 $\\frac12$。"
+    "solution": "### 换元与分段\n\n令 $x=\\sin^2\\theta$，$\\theta\\in[0,\\pi/2]$，则 $\\mathrm dx=\\sin2\\theta\\,\\mathrm d\\theta$，$2\\sqrt{x(1-x)}=\\sin2\\theta$。\n\n$$\\arcsin(\\sin2\\theta)=\\begin{cases}2\\theta,&0\\leq\\theta\\leq\\pi/4,\\\\ \\pi-2\\theta,&\\pi/4<\\theta\\leq\\pi/2.\\end{cases}$$\n\n### 两段积分\n$$I=\\int_0^{\\pi/4}\\sin^2\\theta\\cdot 2\\theta\\cdot\\sin2\\theta\\,\\mathrm d\\theta+\\int_{\\pi/4}^{\\pi/2}\\sin^2\\theta(\\pi-2\\theta)\\sin2\\theta\\,\\mathrm d\\theta.$$\n用对称性（令第二段 $\\theta\\mapsto\\frac\\pi2-\\theta$）可化到同一区间，合并后 $I=\\int_0^{\\pi/4}2\\theta\\sin2\\theta\\,\\mathrm d\\theta=\\dfrac12$。\n\n> sympy 分段符号积分验证：结果 $\\frac12$。",
+    "mainTag": "积分"
   },
   {
     "title": "$\\sqrt{1-\\sin2x}=|\\sin x-\\cos x|$ 的周期积分",
     "statement": "$$\\int_{0}^{n\\pi}\\sqrt{1-\\sin 2x}\\,\\mathrm{d}x\\qquad(n\\in\\mathbb{N}^*)$$",
     "tags": [
       "定积分",
-      "三角变形",
-      "周期性"
+      "有理函数与三角积分",
+      "对称性与周期性"
     ],
     "thinking": 6,
     "difficulty": 5,
@@ -458,15 +452,15 @@
       "一个周期 $\\pi$ 上的积分为 $2\\sqrt2$，再乘 $n$"
     ],
     "answer": "$2\\sqrt{2}\\,n$",
-    "solution": "### 化简被积函数\n\n$$1-\\sin2x=(\\sin x-\\cos x)^2=2\\sin^2\\left(x-\\frac\\pi4\\right),$$\n$$\\sqrt{1-\\sin2x}=\\sqrt2\\left|\\sin\\left(x-\\frac\\pi4\\right)\\right|,$$\n后者以 $\\pi$ 为周期。\n\n### 一个周期\n$$\\int_0^{\\pi}\\sqrt2\\left|\\sin\\left(x-\\frac\\pi4\\right)\\right|\\mathrm dx=\\sqrt2\\int_{-\\pi/4}^{3\\pi/4}|\\sin u|\\,\\mathrm du=2\\sqrt2.$$\n\n故 $n$ 个周期为 $2\\sqrt2\\,n$。"
+    "solution": "### 化简被积函数\n\n$$1-\\sin2x=(\\sin x-\\cos x)^2=2\\sin^2\\left(x-\\frac\\pi4\\right),$$\n$$\\sqrt{1-\\sin2x}=\\sqrt2\\left|\\sin\\left(x-\\frac\\pi4\\right)\\right|,$$\n后者以 $\\pi$ 为周期。\n\n### 一个周期\n$$\\int_0^{\\pi}\\sqrt2\\left|\\sin\\left(x-\\frac\\pi4\\right)\\right|\\mathrm dx=\\sqrt2\\int_{-\\pi/4}^{3\\pi/4}|\\sin u|\\,\\mathrm du=2\\sqrt2.$$\n\n故 $n$ 个周期为 $2\\sqrt2\\,n$。",
+    "mainTag": "积分"
   },
   {
     "title": "对称区间上 $f(x)+f(-x)$ 的配对技巧",
     "statement": "$$\\int_{-\\pi/2}^{\\pi/2}\\frac{\\sin^4 x}{1+e^{-x}}\\,\\mathrm{d}x$$",
     "tags": [
       "定积分",
-      "对称性",
-      "指数变形"
+      "对称性与周期性"
     ],
     "thinking": 6,
     "difficulty": 5,
@@ -478,15 +472,16 @@
       "化为 $\\int_0^{\\pi/2}\\sin^4x\\,\\mathrm dx$"
     ],
     "answer": "$\\dfrac{3\\pi}{16}$",
-    "solution": "### 配对\n\n$$I=\\int_{-\\pi/2}^{\\pi/2}\\frac{\\sin^4x}{1+e^{-x}}\\mathrm dx=\\int_{-\\pi/2}^{\\pi/2}\\frac{\\sin^4x}{1+e^{x}}\\mathrm dx.$$\n\n两式相加，利用 $\\dfrac{1}{1+e^{-x}}+\\dfrac{1}{1+e^{x}}=1$：\n\n$$2I=\\int_{-\\pi/2}^{\\pi/2}\\sin^4x\\,\\mathrm dx=2\\int_0^{\\pi/2}\\sin^4x\\,\\mathrm dx.$$\n\n### 求值\n$\\int_0^{\\pi/2}\\sin^4x\\,\\mathrm dx=\\frac{3\\pi}{16}$（华里士公式），故 $I=\\frac{3\\pi}{16}$。"
+    "solution": "### 配对\n\n$$I=\\int_{-\\pi/2}^{\\pi/2}\\frac{\\sin^4x}{1+e^{-x}}\\mathrm dx=\\int_{-\\pi/2}^{\\pi/2}\\frac{\\sin^4x}{1+e^{x}}\\mathrm dx.$$\n\n两式相加，利用 $\\dfrac{1}{1+e^{-x}}+\\dfrac{1}{1+e^{x}}=1$：\n\n$$2I=\\int_{-\\pi/2}^{\\pi/2}\\sin^4x\\,\\mathrm dx=2\\int_0^{\\pi/2}\\sin^4x\\,\\mathrm dx.$$\n\n### 求值\n$\\int_0^{\\pi/2}\\sin^4x\\,\\mathrm dx=\\frac{3\\pi}{16}$（华里士公式），故 $I=\\frac{3\\pi}{16}$。",
+    "mainTag": "积分"
   },
   {
     "title": "分母对称，分子拆出常数加奇偶",
     "statement": "$$\\int_{0}^{\\pi/2}\\frac{\\sin^3x}{\\sin x+\\cos x}\\,\\mathrm{d}x$$",
     "tags": [
       "定积分",
-      "三角变形",
-      "区间对称"
+      "有理函数与三角积分",
+      "对称性与周期性"
     ],
     "thinking": 7,
     "difficulty": 6,
@@ -498,15 +493,16 @@
       "$I-J$ 用立方差公式化为 $-\\int_0^{\\pi/2}\\sin(x-\\pi/4)\\cdot$ 之类，直接算"
     ],
     "answer": "$\\dfrac{\\pi-1}{4}$",
-    "solution": "### 配对\n\n令 $I=\\int_0^{\\pi/2}\\frac{\\sin^3x}{\\sin x+\\cos x}\\mathrm dx$，$J=\\int_0^{\\pi/2}\\frac{\\cos^3x}{\\sin x+\\cos x}\\mathrm dx$。\n\n$$I+J=\\int_0^{\\pi/2}\\frac{(\\sin x+\\cos x)(\\sin^2x-\\sin x\\cos x+\\cos^2x)}{\\sin x+\\cos x}\\mathrm dx=\\int_0^{\\pi/2}(1-\\sin x\\cos x)\\mathrm dx=\\frac\\pi2-\\frac12.$$\n\n### 差\n用 $x\\mapsto\\frac\\pi2-x$ 的对称性配合立方差化简可得 $I-J=0$（严格地：把 $J$ 换元后与 $I$ 结构相同），故\n\n$$I=\\frac12\\left(\\frac\\pi2-\\frac12\\right)=\\frac{\\pi-1}{4}.$$\n\n> sympy 符号积分验证：$\\frac\\pi4-\\frac14$。"
+    "solution": "### 配对\n\n令 $I=\\int_0^{\\pi/2}\\frac{\\sin^3x}{\\sin x+\\cos x}\\mathrm dx$，$J=\\int_0^{\\pi/2}\\frac{\\cos^3x}{\\sin x+\\cos x}\\mathrm dx$。\n\n$$I+J=\\int_0^{\\pi/2}\\frac{(\\sin x+\\cos x)(\\sin^2x-\\sin x\\cos x+\\cos^2x)}{\\sin x+\\cos x}\\mathrm dx=\\int_0^{\\pi/2}(1-\\sin x\\cos x)\\mathrm dx=\\frac\\pi2-\\frac12.$$\n\n### 差\n用 $x\\mapsto\\frac\\pi2-x$ 的对称性配合立方差化简可得 $I-J=0$（严格地：把 $J$ 换元后与 $I$ 结构相同），故\n\n$$I=\\frac12\\left(\\frac\\pi2-\\frac12\\right)=\\frac{\\pi-1}{4}.$$\n\n> sympy 符号积分验证：$\\frac\\pi4-\\frac14$。",
+    "mainTag": "积分"
   },
   {
     "title": "区间对称的 $x f(\\sin x)$ 型积分",
     "statement": "$$\\int_{-\\pi/4}^{\\pi/4}\\frac{x}{1+\\sin x}\\,\\mathrm{d}x$$",
     "tags": [
       "定积分",
-      "对称性",
-      "三角有理式"
+      "对称性与周期性",
+      "有理函数与三角积分"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -518,6 +514,7 @@
       "$2I=\\int_{-\\pi/4}^{\\pi/4}2x\\sec^2x\\,\\mathrm dx$，分部积分"
     ],
     "answer": "$2\\ln(1+\\sqrt2)-\\dfrac{\\sqrt2\\pi}{2}$",
-    "solution": "### 配对\n\n$$I=\\int_{-\\pi/4}^{\\pi/4}\\frac{x}{1+\\sin x}\\mathrm dx=\\int_{-\\pi/4}^{\\pi/4}\\frac{-x}{1-\\sin x}\\mathrm dx.$$\n\n两式相加：\n\n$$2I=\\int_{-\\pi/4}^{\\pi/4}x\\left(\\frac1{1+\\sin x}-\\frac1{1-\\sin x}\\right)\\mathrm dx=\\int_{-\\pi/4}^{\\pi/4}x\\cdot\\frac{-2\\sin x}{\\cos^2x}\\,\\mathrm dx.$$\n\n### 分部积分\n$$\\int x\\,\\mathrm d(\\sec x)=x\\sec x-\\int\\sec x\\,\\mathrm dx.$$\n于是 $2I=-2\\left[x\\sec x-\\ln|\\sec x+\\tan x|\\right]_{-\\pi/4}^{\\pi/4}$。\n\n代入上下限：$x=\\pi/4$ 时 $\\sec x=\\sqrt2$，$\\sec x+\\tan x=1+\\sqrt2$；$x=-\\pi/4$ 时对称。整理得\n\n$$I=2\\ln(1+\\sqrt2)-\\frac{\\sqrt2\\pi}{2}.$$\n\n> sympy 符号积分验证通过。"
+    "solution": "### 配对\n\n$$I=\\int_{-\\pi/4}^{\\pi/4}\\frac{x}{1+\\sin x}\\mathrm dx=\\int_{-\\pi/4}^{\\pi/4}\\frac{-x}{1-\\sin x}\\mathrm dx.$$\n\n两式相加：\n\n$$2I=\\int_{-\\pi/4}^{\\pi/4}x\\left(\\frac1{1+\\sin x}-\\frac1{1-\\sin x}\\right)\\mathrm dx=\\int_{-\\pi/4}^{\\pi/4}x\\cdot\\frac{-2\\sin x}{\\cos^2x}\\,\\mathrm dx.$$\n\n### 分部积分\n$$\\int x\\,\\mathrm d(\\sec x)=x\\sec x-\\int\\sec x\\,\\mathrm dx.$$\n于是 $2I=-2\\left[x\\sec x-\\ln|\\sec x+\\tan x|\\right]_{-\\pi/4}^{\\pi/4}$。\n\n代入上下限：$x=\\pi/4$ 时 $\\sec x=\\sqrt2$，$\\sec x+\\tan x=1+\\sqrt2$；$x=-\\pi/4$ 时对称。整理得\n\n$$I=2\\ln(1+\\sqrt2)-\\frac{\\sqrt2\\pi}{2}.$$\n\n> sympy 符号积分验证通过。",
+    "mainTag": "积分"
   }
 ]

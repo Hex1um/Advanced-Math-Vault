@@ -6,7 +6,7 @@
 接口服务：https://math-vault-10141.app.workbuddy.host （后端，Node 单进程）
 仓库：https://github.com/Hex1um/Advanced-Math-Vault
 
-一个面向高等数学的好题收藏站：**每道题都要人工审核才能进题库**，每题标注考点标签与「思维量 / 难度 / 计算量」三个 10 分制维度，全站共享同一份数据（题库、每日一题、答疑区、经验）。
+一个面向高等数学的好题收藏站：**每道题都要人工审核才能进题库**，每题标注「主标签 + 子标签」两级考点与「思维量 / 难度 / 计算量」三个 10 分制维度，全站共享同一份数据（题库、每日一题、答疑区、经验）。
 
 ## 架构（为什么前端在 Pages、后端在别处）
 
@@ -34,7 +34,7 @@ PORT=9000 node server.js  # 换端口
 
 首次启动会建空库（`data/db.json`）。示例题库在 `data/problems.seed.sample.json`（10 道经典高数题），需要时用 `SEED_FILE=data/problems.seed.sample.json node server.js` 加载。
 
-当前题库：`data/batch-01.json` 的 20 道不定积分题，每道含分层提示、答案与分步解析，已校验入库（编号 `HS1001`–`HS1020`）。
+当前题库按批次放在 `data/batch-*.json`（合计约 2400 道，含 `HS1001` 起的编号）；本地运行库约 5800 道已通过审核的题。每道题含分层提示、答案与分步解析，积分题答案用 sympy 求导校验后入库。
 
 ## 账号与审核
 
@@ -49,6 +49,26 @@ PORT=9000 node server.js  # 换端口
   - 没有可用模型时退化为「只核对结论行的最终答案」，答案正确且写了思路同样给 100 分，并在总评里标注「中间步骤未逐项核对」；只交答案正确给 80 分。
 - 做题经验：`10 + 难度×3 + 思维量 + 计算量`；看过答案 ×0.6，问过 AI 再 ×0.8；每题只计一次。
 
+## 考点标签：主标签 + 子标签
+
+题库采用两级考点体系，避免历史自由标签越积越碎：
+
+| 主标签 | 子标签示例 |
+|---|---|
+| 极限与连续 | 函数极限、数列极限、等价无穷小、夹逼与单调有界、连续与间断、渐近线 |
+| 导数与微分 | 导数定义、求导法则、隐函数与参数方程求导、高阶导数、多元函数微分、微分中值定理、泰勒展开、洛必达法则、函数性态与不等式 |
+| 积分 | 不定积分、定积分、变限积分、反常积分、二重积分、三重积分、曲线积分、曲面积分、换元与分部、有理函数与三角积分、对称性与周期性、积分不等式、定积分应用 |
+| 级数 | 数项级数、幂级数、傅里叶级数、函数展开、收敛判别 |
+| 微分方程 | 一阶微分方程、可降阶方程、二阶常系数方程、欧拉方程、初值问题 |
+| 线性代数 | 行列式、矩阵运算、逆矩阵与秩、线性方程组、向量组、特征值与特征向量、二次型、相似与对角化、线性空间与变换 |
+| 概率统计 | 随机事件与概率、随机变量与分布、多维随机变量、数字特征、极限定理、参数估计、假设检验 |
+| 空间解析几何 | 向量代数、平面与直线、曲面与曲线、坐标变换 |
+| 综合 | 综合应用 |
+
+- 每题只有一个 `mainTag`，`tags` 存 1-3 个子标签；`kind` 单独存「选择题 / 填空题 / 证明题 / 应用题 / 概念题」。
+- 定义在根目录 `tag-taxonomy.js`，服务端启动时会把旧库里的自由标签自动归并；`tools/migrate-tags.mjs` 可批量迁移 `data/batch-*.json` 与 `data/db.json`。
+- 历史标签里「高等数学」「线性代数」「概率论」这类章节名、以及题型词会从 `tags` 移除（章节名归入主标签，题型词归入 `kind`），不再占用考点位。
+
 ## 批量导入题目
 
 题目字段：
@@ -57,7 +77,8 @@ PORT=9000 node server.js  # 换端口
 {
   "title": "标题（支持 $LaTeX$）",
   "statement": "题干，行内 $...$，独立 $$...$$",
-  "tags": ["极限", "泰勒展开"],
+  "mainTag": "导数与微分",
+  "tags": ["等价无穷小", "泰勒展开"],
   "thinking": 6,
   "difficulty": 6,
   "calc": 5,
@@ -116,7 +137,8 @@ LLM_BASE_URL=https://api.deepseek.com/v1 LLM_MODEL=deepseek-chat LLM_API_KEY=sk-
 
 ```
 server.js                 后端（路由 / 鉴权 / 审核 / 论坛 / AI 代理 / 静态服务）
-data/batch-01.json        第一批 20 道不定积分题（已入库）
+tag-taxonomy.js           主标签 / 子标签定义与历史标签归并规则
+data/batch-*.json          分批题库（约 2400 道）
 data/problems.seed.sample.json  示例题库（默认不加载）
 data/db.json              运行时数据库（自动生成）
 public/index.html         单页外壳
@@ -128,24 +150,27 @@ public/js/app.js          路由
 public/js/views/*.js      题库 / 题目 / 每日一题 / 答疑区 / 投稿 / 我的 / 审核 / AI 对话
 public/vendor/katex/      本地 KaTeX（离线可用）
 tools/import-problems.mjs 批量导入
-tools/smoke.mjs           全链路冒烟测试（82 项断言）
+tools/smoke.mjs           全链路冒烟测试（115 项断言）
 tools/sync-live.mjs       部署前把线上用户数据合并回本地（凭据走环境变量）
-tools/deploy.mjs          安全发布：先同步再上传
+tools/deploy.mjs          安全发布：先同步再上传（需 --publish 显式授权）
+tools/migrate-tags.mjs    把历史自由标签迁移到主/子标签体系
 tools/verify_integrals.py 用 sympy 对不定积分答案求导校验（多定义域点数值）
 tools/verify_limits.py    极限题数值验证（mpmath 50 位精度）
 tools/verify_batch5.py    第五批答案的符号校验
 tools/check-katex.mjs     用仓库自带 KaTeX 校验题库公式
 tools/cdp-eval.mjs        用 Edge 无头 + CDP 跑页面 JS / 截图（调试用）
+.github/workflows/smoke.yml  push 时自动跑冒烟、积分校验与公式检查
 ```
 
 ## 测试
 
 ```bash
-node tools/smoke.mjs                 # 82 项断言，覆盖注册/改密/审核/做题/AI/论坛/权限与安全债
+node tools/smoke.mjs                 # 115 项断言，覆盖注册/改密/审核/做题/AI/论坛/两级标签/权限与安全债
 python tools/verify_integrals.py     # 逐题对答案求导，数值双点验证
 python tools/verify_limits.py        # 极限题数值验证（高精度）
 python tools/verify_batch5.py        # 第五批答案校验
-node tools/check-katex.mjs           # 题库公式可渲染性检查
+node tools/check-katex.mjs           # 题库公式可渲染性检查（没有 db.json 时自动读 batch 题库）
+node tools/migrate-tags.mjs          # 只报告标签迁移结果；加 --write 才写盘
 ```
 
 > 录题纪律：每道积分的答案都先用 sympy 求导验证再入库，`verify_integrals.py` 里保留了对应用例，新增题目时追加即可。
@@ -157,13 +182,16 @@ node tools/check-katex.mjs           # 题库公式可渲染性检查
 脚本已移除内置的生产凭据，运行前必须显式提供：
 
 ```bash
-SHARECODE=... ADMIN_PASS=... node tools/deploy.mjs
+SHARECODE=... ADMIN_PASS=... node tools/deploy.mjs --publish
 # 只看差异、不写盘：
 SHARECODE=... ADMIN_PASS=... node tools/sync-live.mjs --dry
 ```
 
 - `SHARECODE` 或 `ADMIN_PASS` 缺失时，`tools/sync-live.mjs` 直接报错退出（退出码 2），不再回退到任何默认值。
-- 历史版本曾把管理员明文密码与 sharecode 写进源码。**请先轮换线上管理员密码**，再用 `git filter-repo` / BFG 清理 git 历史中的明文凭据，并让协作者重新克隆。
+- `tools/deploy.mjs` 默认只同步、不发布；发布必须加 `--publish`（或 `USER_ASKED_TO_PUBLISH=1`），避免误触发线上覆盖。
+- **`SHARECODE` 是托管网关的公开访问码**，必须随前端发布，所以会出现在 `docs/js/config.js`；它不是管理员密码，也不应该被当成密钥。管理员密码只通过 `ADMIN_PASS` 环境变量传入。
+- `tools/build-pages.mjs` 不再内置 sharecode 默认值，重建 Pages 时必须显式传 `SHARECODE=...`。
+- 历史版本曾把管理员密码写进源码。若线上管理员密码曾在旧提交中出现过，请轮换密码，并用 `git filter-repo` / BFG 清理历史；sharecode 则可以按公开访问码处理。
 - 凭据只通过当前命令的环境变量传入，不要写进仓库、截图或日志。
 
 ## 设计说明

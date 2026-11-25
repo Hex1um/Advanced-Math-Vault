@@ -113,8 +113,13 @@ try {
   const withScores = list.json.items.every((p) => p.thinking >= 1 && p.difficulty >= 1 && p.calc >= 1);
   ok('每题都有三维评分', withScores);
   ok('每题都有考点标签', list.json.items.every((p) => p.tags.length > 0));
-  const filtered = await req('/api/problems?tags=' + encodeURIComponent('极限'));
-  ok('按考点筛选生效', filtered.json.items.length > 0 && filtered.json.items.every((p) => p.tags.includes('极限')));
+  const filtered = await req('/api/problems?main=' + encodeURIComponent('积分'));
+  ok('按主标签筛选生效', filtered.json.items.length > 0 && filtered.json.items.every((p) => p.mainTag === '积分'));
+  const subFiltered = await req('/api/problems?tags=' + encodeURIComponent('定积分'));
+  ok('按子标签筛选生效', subFiltered.json.items.length > 0 && subFiltered.json.items.every((p) => p.tags.includes('定积分')));
+  const tree = await req('/api/meta');
+  ok('meta 返回主/子标签树', Array.isArray(tree.json.tagTree) && tree.json.tagTree.length > 0
+    && tree.json.tagTree.every((m) => m.name && Array.isArray(m.children)));
 
   console.log('\n[4] 题目详情 / 看答案 / 标记完成得经验');
   const detail = await req('/api/problems/HS1001');
@@ -178,12 +183,15 @@ try {
   ok('投稿成功并拿到编号', submit.json.ok && /^HS\d+$/.test(submit.json.code), submit.text.slice(0, 120));
   const pending = await req('/api/admin/pending');
   ok('待审列表有 1 题', pending.json.items.length === 1);
-  const review = await req('/api/admin/review', { method: 'POST', body: JSON.stringify({ code: submit.json.code, action: 'approve', patch: { calc: 2 } }) });
+  ok('投稿自动归入主标签', pending.json.items[0].mainTag === '积分', JSON.stringify(pending.json.items[0]).slice(0, 160));
+  ok('投稿子标签已归一化', pending.json.items[0].tags.includes('定积分'), JSON.stringify(pending.json.items[0].tags));
+  const review = await req('/api/admin/review', { method: 'POST', body: JSON.stringify({ code: submit.json.code, action: 'approve', patch: { calc: 2, mainTag: '积分', tags: ['定积分', '换元与分部'] } }) });
   ok('审核通过', review.json.ok);
   const afterApprove = await req('/api/problems?size=50');
   ok('入库后总数变 11', afterApprove.json.total === 11, '实际 ' + afterApprove.json.total);
   const approved = await req('/api/problems/' + submit.json.code);
   ok('审核时修改的评分已生效', approved.json.problem.calc === 2);
+  ok('审核时修改的主/子标签已生效', approved.json.problem.mainTag === '积分' && approved.json.problem.tags.includes('换元与分部'), JSON.stringify(approved.json.problem.tags));
   const bareNum = await req('/api/problems/' + submit.json.code + '/answer', {
     method: 'POST',
     body: JSON.stringify({ process: '我先把 1/2 当作中间量代进去，最后发现原式根本不成立。' })

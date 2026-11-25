@@ -3,9 +3,8 @@
     "title": "由通解反求同解方程组",
     "statement": "已知非齐次方程组(I)的通解为 $x=(1,0,1)^T+k(1,1,-1)^T$，方程组(II)为 $\\begin{cases}x_1+ax_2+x_3=b\\\\2x_1+cx_2+x_3=d\\end{cases}$，且(I)与(II)同解，求 $a,b,c,d$ 的值。",
     "tags": [
-      "线性代数",
-      "通解",
-      "同解方程组"
+      "线性代数综合",
+      "线性方程组"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -17,15 +16,16 @@
     ],
     "answer": "$a=0,b=2,c=-1,d=3$",
     "solution": "1. 方向向量 $(1,1,-1)^T$ 满足导出齐次组：$1+a-1=0\\Rightarrow a=0$，$2+c-1=0\\Rightarrow c=-1$。\n2. 特解 $(1,0,1)^T$ 代入：$1+0+1=b\\Rightarrow b=2$，$2+0+1=d\\Rightarrow d=3$。\n3. 得 $a=0,b=2,c=-1,d=3$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "分母不可因式分解的有理函数积分（凑导数）",
     "statement": "求 $\\int \\frac{2x+3}{x^2+2x+5}\\,dx$。",
     "tags": [
       "不定积分",
-      "有理函数积分",
-      "换元积分"
+      "有理函数与三角积分",
+      "换元与分部"
     ],
     "thinking": 4,
     "difficulty": 4,
@@ -37,15 +37,16 @@
     ],
     "answer": "$\\ln(x^2+2x+5)+\\frac12\\arctan\\frac{x+1}{2}+C$",
     "solution": "1. 分母导数 $(x^2+2x+5)'=2x+2$，拆分子 $2x+3=(2x+2)+1$。\n2. 原式 $=\\ln(x^2+2x+5)+\\int\\frac{dx}{(x+1)^2+4}$。\n3. 配方后令 $u=x+1$，得 $\\frac12\\arctan\\frac{x+1}{2}+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "有理函数积分：分子为分母导数的倍数",
     "statement": "求 $\\int \\frac{3x+1}{x^2+2x+2}\\,dx$。",
     "tags": [
       "不定积分",
-      "有理函数积分",
-      "换元积分"
+      "有理函数与三角积分",
+      "换元与分部"
     ],
     "thinking": 4,
     "difficulty": 4,
@@ -57,15 +58,16 @@
     ],
     "answer": "$\\frac32\\ln(x^2+2x+2)-2\\arctan(x+1)+C$",
     "solution": "1. 分母导数 $2x+2$，拆 $3x+1=\\frac32(2x+2)-2$。\n2. 原式 $=\\frac32\\ln(x^2+2x+2)-2\\int\\frac{dx}{(x+1)^2+1}$。\n3. 后一项为 $-2\\arctan(x+1)+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "配方后含 $\\sqrt2$ 的反正切积分",
     "statement": "求 $\\int \\frac{x+2}{x^2+2x+3}\\,dx$。",
     "tags": [
       "不定积分",
-      "有理函数积分",
-      "换元积分"
+      "有理函数与三角积分",
+      "换元与分部"
     ],
     "thinking": 4,
     "difficulty": 4,
@@ -77,15 +79,16 @@
     ],
     "answer": "$\\frac12\\ln(x^2+2x+3)+\\frac{1}{\\sqrt2}\\arctan\\frac{x+1}{\\sqrt2}+C$",
     "solution": "1. 拆分子 $x+2=\\frac12(2x+2)+1$。\n2. 原式 $=\\frac12\\ln(x^2+2x+3)+\\int\\frac{dx}{(x+1)^2+2}$。\n3. 套公式得 $\\frac{1}{\\sqrt2}\\arctan\\frac{x+1}{\\sqrt2}+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "有理函数积分：配方 $(x+2)^2+3$",
     "statement": "求 $\\int \\frac{4x+5}{x^2+4x+7}\\,dx$。",
     "tags": [
       "不定积分",
-      "有理函数积分",
-      "换元积分"
+      "有理函数与三角积分",
+      "换元与分部"
     ],
     "thinking": 4,
     "difficulty": 5,
@@ -97,15 +100,16 @@
     ],
     "answer": "$2\\ln(x^2+4x+7)-\\sqrt3\\arctan\\frac{x+2}{\\sqrt3}+C$",
     "solution": "1. 拆 $4x+5=2(2x+4)-3$。\n2. 原式 $=2\\ln(x^2+4x+7)-3\\int\\frac{dx}{(x+2)^2+3}$。\n3. $-3\\cdot\\frac{1}{\\sqrt3}\\arctan\\frac{x+2}{\\sqrt3}=-\\sqrt3\\arctan\\frac{x+2}{\\sqrt3}$，加 $C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "有理函数积分：常数项较大的分解",
     "statement": "求 $\\int \\frac{5x+2}{x^2+4x+5}\\,dx$。",
     "tags": [
       "不定积分",
-      "有理函数积分",
-      "换元积分"
+      "有理函数与三角积分",
+      "换元与分部"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -117,15 +121,16 @@
     ],
     "answer": "$\\frac52\\ln(x^2+4x+5)-8\\arctan(x+2)+C$",
     "solution": "1. 分母导数 $2x+4$，拆 $5x+2=\\frac52(2x+4)-8$。\n2. 原式 $=\\frac52\\ln(x^2+4x+5)-8\\int\\frac{dx}{(x+2)^2+1}$。\n3. 后一项 $=-8\\arctan(x+2)+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "有理函数积分：配方 $(x+3)^2+4$",
     "statement": "求 $\\int \\frac{2x-1}{x^2+6x+13}\\,dx$。",
     "tags": [
       "不定积分",
-      "有理函数积分",
-      "换元积分"
+      "有理函数与三角积分",
+      "换元与分部"
     ],
     "thinking": 4,
     "difficulty": 5,
@@ -137,15 +142,16 @@
     ],
     "answer": "$\\ln(x^2+6x+13)-\\frac72\\arctan\\frac{x+3}{2}+C$",
     "solution": "1. 拆 $2x-1=(2x+6)-7$。\n2. 原式 $=\\ln(x^2+6x+13)-7\\int\\frac{dx}{(x+3)^2+4}$。\n3. $-7\\cdot\\frac12\\arctan\\frac{x+3}{2}+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "有理函数积分：分子一次项系数较小",
     "statement": "求 $\\int \\frac{x+1}{x^2+4x+5}\\,dx$。",
     "tags": [
       "不定积分",
-      "有理函数积分",
-      "换元积分"
+      "有理函数与三角积分",
+      "换元与分部"
     ],
     "thinking": 4,
     "difficulty": 4,
@@ -157,15 +163,16 @@
     ],
     "answer": "$\\frac12\\ln(x^2+4x+5)-\\arctan(x+2)+C$",
     "solution": "1. 拆 $x+1=\\frac12(2x+4)-1$。\n2. 原式 $=\\frac12\\ln(x^2+4x+5)-\\int\\frac{dx}{(x+2)^2+1}$。\n3. 得 $-\\arctan(x+2)+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "分母含负一次项的有理函数积分",
     "statement": "求 $\\int \\frac{3x}{x^2-2x+5}\\,dx$。",
     "tags": [
       "不定积分",
-      "有理函数积分",
-      "换元积分"
+      "有理函数与三角积分",
+      "换元与分部"
     ],
     "thinking": 4,
     "difficulty": 5,
@@ -177,15 +184,16 @@
     ],
     "answer": "$\\frac32\\ln(x^2-2x+5)+\\frac32\\arctan\\frac{x-1}{2}+C$",
     "solution": "1. 分母导数 $2x-2$，拆 $3x=\\frac32(2x-2)+3$。\n2. 原式 $=\\frac32\\ln(x^2-2x+5)+3\\int\\frac{dx}{(x-1)^2+4}$。\n3. $3\\cdot\\frac12\\arctan\\frac{x-1}{2}+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "有理函数积分：配方 $(x+1)^2+9$",
     "statement": "求 $\\int \\frac{4x+1}{x^2+2x+10}\\,dx$。",
     "tags": [
       "不定积分",
-      "有理函数积分",
-      "换元积分"
+      "有理函数与三角积分",
+      "换元与分部"
     ],
     "thinking": 4,
     "difficulty": 5,
@@ -197,15 +205,16 @@
     ],
     "answer": "$2\\ln(x^2+2x+10)-\\arctan\\frac{x+1}{3}+C$",
     "solution": "1. 拆 $4x+1=2(2x+2)-3$。\n2. 原式 $=2\\ln(x^2+2x+10)-3\\int\\frac{dx}{(x+1)^2+9}$。\n3. $-3\\cdot\\frac13\\arctan\\frac{x+1}{3}=-\\arctan\\frac{x+1}{3}+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "有理函数积分：带播放按钮遮挡的末题",
     "statement": "求 $\\int \\frac{2x+7}{x^2-4x+13}\\,dx$。",
     "tags": [
       "不定积分",
-      "有理函数积分",
-      "换元积分"
+      "有理函数与三角积分",
+      "换元与分部"
     ],
     "thinking": 4,
     "difficulty": 5,
@@ -217,14 +226,14 @@
     ],
     "answer": "$\\ln(x^2-4x+13)+\\frac{11}{3}\\arctan\\frac{x-2}{3}+C$",
     "solution": "1. 拆 $2x+7=(2x-4)+11$。\n2. 原式 $=\\ln(x^2-4x+13)+11\\int\\frac{dx}{(x-2)^2+9}$。\n3. $11\\cdot\\frac13\\arctan\\frac{x-2}{3}+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "一次分式方程的变量替换（常数平移）",
     "statement": "求微分方程 $(x+y-3)\\,dx+(x-1)\\,dy=0$ 的通解。",
     "tags": [
-      "微分方程",
-      "换元积分"
+      "微分方程综合"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -236,14 +245,14 @@
     ],
     "answer": "$(x-1)^2+2(x-1)(y-2)=C$",
     "solution": "1. 令 $X=x-1,\\;Y=y-2$，方程化为 $(X+Y)dX+XdY=0$。\n2. 即 $\\frac{dY}{dX}+1=-\\frac{Y}{X}$，令 $Y=uX$ 得 $X\\frac{du}{dX}=-1-2u$。\n3. 分离变量：$\\frac{du}{1+2u}=-\\frac{dX}{X}$，积分得 $X^2+2XY=C$。\n4. 回代得 $(x-1)^2+2(x-1)(y-2)=C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "微分方程"
   },
   {
     "title": "变量替换化为一阶线性方程",
     "statement": "求微分方程 $(2x-y+1)\\,dx+(x+1)\\,dy=0$ 的通解。",
     "tags": [
-      "微分方程",
-      "换元积分"
+      "微分方程综合"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -255,14 +264,14 @@
     ],
     "answer": "$\\frac{y+1}{x+1}+2\\ln|x+1|=C$",
     "solution": "1. 令 $X=x+1,\\;Y=y+1$，方程化为 $(2X-Y)dX+XdY=0$。\n2. 即 $\\frac{dY}{dX}-\\frac{Y}{X}=-2$，积分因子 $\\frac1X$。\n3. 得 $d(\\frac{Y}{X})=-\\frac{2dX}{X}$，积分：$\\frac{Y}{X}+2\\ln|X|=C$。\n4. 回代得 $\\frac{y+1}{x+1}+2\\ln|x+1|=C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "微分方程"
   },
   {
     "title": "变量替换后出现分式对数答案",
     "statement": "求微分方程 $(x+2y-2)\\,dx+(y-1)\\,dy=0$ 的通解。",
     "tags": [
-      "微分方程",
-      "换元积分"
+      "微分方程综合"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -274,14 +283,14 @@
     ],
     "answer": "$\\ln|x+y-1|+\\frac{x}{x+y-1}=C$",
     "solution": "1. 令 $X=x+y-1$，则 $dx=dX-dy$，且 $x+2y-2=X+y-1$，原方程化为 $(X+y-1)dX-XdY$ 形式：$(X+y-1)dX-Xdy=0$。\n2. 令 $Y=y-1$，得 $\\frac{dY}{dX}-\\frac{Y}{X}=1$，积分因子 $\\frac1X$。\n3. $d(\\frac{Y}{X})=\\frac{dX}{X}$，故 $\\frac{Y}{X}=\\ln|X|+C$，即 $-\\frac{y-1}{X}=\\ln|X|+C'$。\n4. 由 $\\frac{x}{X}=1-\\frac{y-1}{X}$ 吸收常数得 $\\ln|x+y-1|+\\frac{x}{x+y-1}=C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "微分方程"
   },
   {
     "title": "平移变换后化为恰当方程",
     "statement": "求微分方程 $(3x+y-4)\\,dx+(x-2)\\,dy=0$ 的通解。",
     "tags": [
-      "微分方程",
-      "换元积分"
+      "微分方程综合"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -293,14 +302,14 @@
     ],
     "answer": "$(x-2)(3x+2y-2)=C$",
     "solution": "1. 令 $X=x-2,\\;Y=y+2$，原方程化为 $(3X+Y)dX+XdY=0$。\n2. 即 $X\\frac{dY}{dX}+Y=-3X$，故 $\\frac{d(XY)}{dX}=-3X$。\n3. 积分得 $XY=-\\frac32X^2+C$，即 $X(2Y+3X)=C$。\n4. 回代得 $(x-2)(3x+2y-2)=C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "微分方程"
   },
   {
     "title": "变量替换：注意常数项符号",
     "statement": "求微分方程 $(2x+y-1)\\,dx+(x-1)\\,dy=0$ 的通解。",
     "tags": [
-      "微分方程",
-      "换元积分"
+      "微分方程综合"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -312,14 +321,14 @@
     ],
     "answer": "$(x-1)^2+(x-1)(y+1)=C$",
     "solution": "1. 令 $X=x-1,\\;Y=y+1$，方程化为 $(2X+Y)dX+XdY=0$。\n2. 即 $\\frac{dY}{dX}+\\frac{Y}{X}=-2$，积分因子 $X$。\n3. 得 $\\frac{d(XY)}{dX}=-2X$，积分 $XY=-X^2+C$。\n4. 回代得 $(x-1)^2+(x-1)(y+1)=C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "微分方程"
   },
   {
     "title": "变量替换：交点平移法",
     "statement": "求微分方程 $(x+y+1)\\,dx+(x-2)\\,dy=0$ 的通解。",
     "tags": [
-      "微分方程",
-      "换元积分"
+      "微分方程综合"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -331,14 +340,14 @@
     ],
     "answer": "$(x-2)^2+2(x-2)(y+3)=C$",
     "solution": "1. 令 $X=x-2,\\;Y=y+3$，两直线交点平移后方程为 $(X+Y)dX+XdY=0$。\n2. 令 $Y=uX$，得 $X\\frac{du}{dX}=-(1+2u)$。\n3. 分离变量积分得 $X^2+2XY=C$。\n4. 回代得 $(x-2)^2+2(x-2)(y+3)=C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "微分方程"
   },
   {
     "title": "变量替换后对数前分子为 $y-3$",
     "statement": "求微分方程 $(4x-y+7)\\,dx+(x+1)\\,dy=0$ 的通解。",
     "tags": [
-      "微分方程",
-      "换元积分"
+      "微分方程综合"
     ],
     "thinking": 6,
     "difficulty": 7,
@@ -350,14 +359,14 @@
     ],
     "answer": "$\\frac{y-3}{x+1}+4\\ln|x+1|=C$",
     "solution": "1. 令 $X=x+1,\\;Y=y$，方程化为 $(4X-Y+3)dX+XdY=0$。\n2. 即 $\\frac{dY}{dX}-\\frac{Y}{X}=-4-\\frac3X$，积分因子 $\\frac1X$。\n3. $d(\\frac{Y}{X})=-\\frac4X dX-\\frac{3}{X^2}dX$，积分得 $\\frac{Y}{X}=-4\\ln|X|+\\frac3X+C$。\n4. 整理回代得 $\\frac{y-3}{x+1}+4\\ln|x+1|=C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "微分方程"
   },
   {
     "title": "变量替换：解出平方乘一次式",
     "statement": "求微分方程 $(3x+2y-5)\\,dx+(x-1)\\,dy=0$ 的通解。",
     "tags": [
-      "微分方程",
-      "换元积分"
+      "微分方程综合"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -369,14 +378,14 @@
     ],
     "answer": "$(x-1)^2(x+y-2)=C$",
     "solution": "1. 令 $X=x-1,\\;Y=y-1$，方程化为 $(3X+2Y)dX+XdY=0$。\n2. 即 $\\frac{dY}{dX}+\\frac{2Y}{X}=-3$，积分因子 $X^2$。\n3. $d(X^2Y)=-3X^2dX$，积分得 $X^2Y=-X^3+C$，即 $X^2(Y+X)=C$。\n4. 回代得 $(x-1)^2(x+y-2)=C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "微分方程"
   },
   {
     "title": "变量替换：答案含 $3y$ 的因式",
     "statement": "求微分方程 $(x+2y-4)\\,dx+(x-2)\\,dy=0$ 的通解。",
     "tags": [
-      "微分方程",
-      "换元积分"
+      "微分方程综合"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -388,14 +397,14 @@
     ],
     "answer": "$(x-2)^2(x+3y-5)=C$",
     "solution": "1. 令 $X=x-2,\\;Y=y-1$，方程化为 $(X+2Y)dX+XdY=0$。\n2. 即 $\\frac{dY}{dX}+\\frac{2Y}{X}=-1$，积分因子 $X^2$。\n3. $d(X^2Y)=-X^2dX$，积分得 $X^2Y=-\\frac13X^3+C$，即 $X^2(3Y+X)=C$。\n4. 回代得 $(x-2)^2(x+3y-5)=C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "微分方程"
   },
   {
     "title": "变量替换：系数较简单的可积组合",
     "statement": "求微分方程 $(2x+y+1)\\,dx+(x-2)\\,dy=0$ 的通解。",
     "tags": [
-      "微分方程",
-      "换元积分"
+      "微分方程综合"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -407,14 +416,15 @@
     ],
     "answer": "$(x-2)(x+y+3)=C$",
     "solution": "1. 令 $X=x-2,\\;Y=y+5$，方程化为 $(2X+Y)dX+XdY=0$。\n2. 即 $\\frac{dY}{dX}+\\frac{Y}{X}=-2$，积分因子 $X$。\n3. $d(XY)=-2XdX$，积分得 $XY=-X^2+C$，即 $X(Y+X)=C$。\n4. 回代得 $(x-2)(x+y+3)=C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "微分方程"
   },
   {
     "title": "全微分方程：验证恰当性后凑原函数",
     "statement": "求全微分方程 $[e^x(x+y+1)+2xy]dx+(e^x+x^2+3y^2)dy=0$ 的通解。",
     "tags": [
-      "微分方程",
-      "全微分方程"
+      "微分方程综合",
+      "一阶微分方程"
     ],
     "thinking": 5,
     "difficulty": 6,
@@ -426,14 +436,15 @@
     ],
     "answer": "$e^x(x+y)+x^2y+y^3=C$",
     "solution": "1. $M=e^x(x+y+1)+2xy$，$N=e^x+x^2+3y^2$，$\\partial M/\\partial y=e^x+2x=\\partial N/\\partial x$，为全微分方程。\n2. 对 $x$ 积分：$u=\\int M\\,dx=e^x(x+y)+x^2y+\\varphi(y)$。\n3. 由 $\\partial u/\\partial y=e^x+x^2+\\varphi'(y)=N$ 得 $\\varphi'(y)=3y^2$，$\\varphi=y^3$。\n4. 通解 $e^x(x+y)+x^2y+y^3=C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "微分方程"
   },
   {
     "title": "全微分方程：多项式型原函数",
     "statement": "求全微分方程 $(2xy-y^2)dx+(x^2-2xy)dy=0$ 的通解。",
     "tags": [
-      "微分方程",
-      "全微分方程"
+      "微分方程综合",
+      "一阶微分方程"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -445,14 +456,15 @@
     ],
     "answer": "$x^2y-xy^2=C$",
     "solution": "1. $\\partial M/\\partial y=2x-2y=\\partial N/\\partial x$，是全微分方程。\n2. 对 $x$ 积分：$u=\\int(2xy-y^2)dx=x^2y-xy^2+\\varphi(y)$。\n3. $\\partial u/\\partial y=x^2-2xy+\\varphi'(y)=N$，故 $\\varphi'=0$。\n4. 通解 $x^2y-xy^2=C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "微分方程"
   },
   {
     "title": "全微分方程：含三角函数的原函数",
     "statement": "求全微分方程 $(y\\cos x+2xy)dx+(\\sin x+x^2+3y^2)dy=0$ 的通解。",
     "tags": [
-      "微分方程",
-      "全微分方程"
+      "微分方程综合",
+      "一阶微分方程"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -464,14 +476,15 @@
     ],
     "answer": "$y\\sin x+x^2y+y^3=C$",
     "solution": "1. 验证 $\\partial M/\\partial y=\\cos x+2x=\\partial N/\\partial x$。\n2. 对 $x$ 积分：$u=y\\sin x+x^2y+\\varphi(y)$。\n3. 由 $\\partial u/\\partial y=\\sin x+x^2+\\varphi'(y)=N$ 得 $\\varphi'=3y^2$，$\\varphi=y^3$。\n4. 通解 $y\\sin x+x^2y+y^3=C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "微分方程"
   },
   {
     "title": "全微分方程：简单多项式积分",
     "statement": "求全微分方程 $(3x^2+2y)dx+(2x+4y)dy=0$ 的通解。",
     "tags": [
-      "微分方程",
-      "全微分方程"
+      "微分方程综合",
+      "一阶微分方程"
     ],
     "thinking": 4,
     "difficulty": 4,
@@ -483,14 +496,15 @@
     ],
     "answer": "$x^3+2xy+2y^2=C$",
     "solution": "1. $\\partial M/\\partial y=2=\\partial N/\\partial x$，为全微分方程。\n2. 对 $x$ 积分：$u=x^3+2xy+\\varphi(y)$。\n3. $\\partial u/\\partial y=2x+\\varphi'(y)=2x+4y$，故 $\\varphi=2y^2$。\n4. 通解 $x^3+2xy+2y^2=C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "微分方程"
   },
   {
     "title": "全微分方程：幂函数与三角混合",
     "statement": "求全微分方程 $(2xy^3+y^2\\cos x)dx+(3x^2y^2+2y\\sin x)dy=0$ 的通解。",
     "tags": [
-      "微分方程",
-      "全微分方程"
+      "微分方程综合",
+      "一阶微分方程"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -502,14 +516,15 @@
     ],
     "answer": "$x^2y^3+y^2\\sin x=C$",
     "solution": "1. 验证 $\\partial M/\\partial y=6xy^2+2y\\cos x=\\partial N/\\partial x$。\n2. 对 $x$ 积分：$u=x^2y^3+y^2\\sin x+\\varphi(y)$。\n3. $\\partial u/\\partial y=3x^2y^2+2y\\sin x+\\varphi'(y)=N$，故 $\\varphi'=0$。\n4. 通解 $x^2y^3+y^2\\sin x=C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "微分方程"
   },
   {
     "title": "全微分方程初值问题（$y(0)=1$）",
     "statement": "求全微分方程 $(3x^2+2xy)dx+(x^2+3y^2)dy=0$ 满足 $y(0)=1$ 的特解。",
     "tags": [
-      "微分方程",
-      "全微分方程"
+      "微分方程综合",
+      "一阶微分方程"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -521,14 +536,15 @@
     ],
     "answer": "$x^3+x^2y+y^3=1$",
     "solution": "1. $\\partial M/\\partial y=2x=\\partial N/\\partial x$，是全微分方程。\n2. 对 $x$ 积分：$u=x^3+x^2y+\\varphi(y)$，由 $\\partial u/\\partial y=x^2+\\varphi'=x^2+3y^2$ 得 $\\varphi=y^3$。\n3. 通解 $x^3+x^2y+y^3=C$。\n4. 代入 $y(0)=1$：$0+0+1=C$，故 $C=1$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "微分方程"
   },
   {
     "title": "全微分方程初值问题（$y(1)=2$）",
     "statement": "求全微分方程 $(y^2-3x^2y)dx+(2xy-x^3)dy=0$ 满足 $y(1)=2$ 的特解。",
     "tags": [
-      "微分方程",
-      "全微分方程"
+      "微分方程综合",
+      "一阶微分方程"
     ],
     "thinking": 5,
     "difficulty": 6,
@@ -540,14 +556,15 @@
     ],
     "answer": "$xy^2-x^3y=2$",
     "solution": "1. 验证 $\\partial M/\\partial y=2y-3x^2=\\partial N/\\partial x$。\n2. 对 $x$ 积分：$u=xy^2-x^3y+\\varphi(y)$，比较 $\\partial u/\\partial y=2xy-x^3+\\varphi'=N$ 得 $\\varphi'=0$。\n3. 通解 $xy^2-x^3y=C$。\n4. 代入 $y(1)=2$：$1\\cdot4-1\\cdot2=2=C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "微分方程"
   },
   {
     "title": "全微分方程初值问题：答案为 $-1$",
     "statement": "求全微分方程 $(2x+y^2)dx+(2xy-3y^2)dy=0$ 满足 $y(0)=1$ 的特解。",
     "tags": [
-      "微分方程",
-      "全微分方程"
+      "微分方程综合",
+      "一阶微分方程"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -559,14 +576,15 @@
     ],
     "answer": "$x^2+xy^2-y^3=-1$",
     "solution": "1. 验证 $\\partial M/\\partial y=2y=\\partial N/\\partial x$。\n2. 对 $x$ 积分：$u=x^2+xy^2+\\varphi(y)$，由 $\\partial u/\\partial y=2xy+\\varphi'=2xy-3y^2$ 得 $\\varphi=-y^3$。\n3. 通解 $x^2+xy^2-y^3=C$。\n4. 代入 $y(0)=1$：$0+0-1=-1=C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "微分方程"
   },
   {
     "title": "全微分方程初值问题：二次齐次式",
     "statement": "求全微分方程 $(2x+y)dx+(x+2y)dy=0$ 满足 $y(0)=1$ 的特解。",
     "tags": [
-      "微分方程",
-      "全微分方程"
+      "微分方程综合",
+      "一阶微分方程"
     ],
     "thinking": 4,
     "difficulty": 4,
@@ -578,14 +596,15 @@
     ],
     "answer": "$x^2+xy+y^2=1$",
     "solution": "1. $\\partial M/\\partial y=1=\\partial N/\\partial x$，是全微分方程。\n2. 对 $x$ 积分：$u=x^2+xy+\\varphi(y)$，由 $\\partial u/\\partial y=x+\\varphi'=x+2y$ 得 $\\varphi=y^2$。\n3. 通解 $x^2+xy+y^2=C$。\n4. 代入 $y(0)=1$：$0+0+1=1=C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "微分方程"
   },
   {
     "title": "全微分方程初值问题：含常数项 $x$",
     "statement": "求全微分方程 $(2xy+1)dx+(x^2+2y)dy=0$ 满足 $y(0)=1$ 的特解。",
     "tags": [
-      "微分方程",
-      "全微分方程"
+      "微分方程综合",
+      "一阶微分方程"
     ],
     "thinking": 4,
     "difficulty": 4,
@@ -597,15 +616,16 @@
     ],
     "answer": "$x^2y+x+y^2=1$",
     "solution": "1. $\\partial M/\\partial y=2x=\\partial N/\\partial x$，是全微分方程。\n2. 对 $x$ 积分：$u=x^2y+x+\\varphi(y)$，由 $\\partial u/\\partial y=x^2+\\varphi'=x^2+2y$ 得 $\\varphi=y^2$。\n3. 通解 $x^2y+x+y^2=C$。\n4. 代入 $y(0)=1$：$0+0+1=1=C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "微分方程"
   },
   {
     "title": "指数分布下 $e^{-X}$ 的方差",
     "statement": "设随机变量 $X$ 服从参数为 $1$ 的指数分布，求 $D(e^{-X})$。",
     "tags": [
-      "概率论",
-      "随机变量",
-      "期望方差"
+      "概率统计综合",
+      "随机变量与分布",
+      "数字特征"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -617,15 +637,16 @@
     ],
     "answer": "$\\frac{1}{12}$",
     "solution": "1. $E(e^{-X})=\\int_0^\\infty e^{-x}\\cdot e^{-x}dx=\\int_0^\\infty e^{-2x}dx=\\frac12$。\n2. $E(e^{-2X})=\\int_0^\\infty e^{-3x}dx=\\frac13$。\n3. $D(e^{-X})=\\frac13-(\\frac12)^2=\\frac13-\\frac14=\\frac1{12}$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "概率统计"
   },
   {
     "title": "指数分布下 $\\sqrt X$ 的方差",
     "statement": "设随机变量 $X$ 服从参数为 $1$ 的指数分布，求 $D(\\sqrt{X})$。",
     "tags": [
-      "概率论",
-      "随机变量",
-      "期望方差"
+      "概率统计综合",
+      "随机变量与分布",
+      "数字特征"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -637,15 +658,16 @@
     ],
     "answer": "$1-\\frac{\\pi}{4}$",
     "solution": "1. $E(\\sqrt X)=\\int_0^\\infty x^{1/2}e^{-x}dx=\\Gamma(\\frac32)=\\frac{\\sqrt\\pi}{2}$。\n2. $E[(\\sqrt X)^2]=EX=1$。\n3. $D(\\sqrt X)=1-(\\frac{\\sqrt\\pi}{2})^2=1-\\frac\\pi4$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "概率统计"
   },
   {
     "title": "均匀分布下 $\\sqrt X$ 的方差",
     "statement": "设随机变量 $X$ 在区间 $[0,2]$ 上服从均匀分布，求 $D(\\sqrt{X})$。",
     "tags": [
-      "概率论",
-      "分布",
-      "期望方差"
+      "概率统计综合",
+      "随机变量与分布",
+      "数字特征"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -657,15 +679,16 @@
     ],
     "answer": "$\\frac{1}{9}$",
     "solution": "1. $E(\\sqrt X)=\\int_0^2 \\sqrt x\\cdot\\frac12 dx=\\frac13x^{3/2}\\big|_0^2=\\frac{2\\sqrt2}{3}$。\n2. $E[(\\sqrt X)^2]=EX=1$。\n3. $D(\\sqrt X)=1-\\frac{8}{9}=\\frac19$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "概率统计"
   },
   {
     "title": "均匀分布的倒数函数方差",
     "statement": "设随机变量 $X\\sim U(0,1)$，求 $D\\left(\\frac{1}{1+X}\\right)$。",
     "tags": [
-      "概率论",
-      "分布",
-      "期望方差"
+      "概率统计综合",
+      "随机变量与分布",
+      "数字特征"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -677,15 +700,16 @@
     ],
     "answer": "$\\frac12-(\\ln 2)^2$",
     "solution": "1. $E(\\frac1{1+X})=\\int_0^1\\frac{dx}{1+x}=\\ln2$。\n2. $E(\\frac1{(1+X)^2})=\\int_0^1\\frac{dx}{(1+x)^2}=1-\\frac12=\\frac12$。\n3. $D=\\frac12-(\\ln2)^2$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "概率统计"
   },
   {
     "title": "对称均匀分布的绝对值方差",
     "statement": "设随机变量 $X\\sim U(-1,1)$，求 $D(|X|)$。",
     "tags": [
-      "概率论",
-      "分布",
-      "期望方差"
+      "概率统计综合",
+      "随机变量与分布",
+      "数字特征"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -697,15 +721,16 @@
     ],
     "answer": "$\\frac{1}{12}$",
     "solution": "1. $E|X|=\\int_{-1}^1|x|\\cdot\\frac12dx=\\int_0^1 x\\,dx=\\frac12$。\n2. $E|X|^2=EX^2=\\frac13$。\n3. $D(|X|)=\\frac13-\\frac14=\\frac1{12}$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "概率统计"
   },
   {
     "title": "均匀分布三次幂的方差",
     "statement": "设随机变量 $X\\sim U(0,1)$，求 $D(X^3)$。",
     "tags": [
-      "概率论",
-      "分布",
-      "期望方差"
+      "概率统计综合",
+      "随机变量与分布",
+      "数字特征"
     ],
     "thinking": 4,
     "difficulty": 4,
@@ -717,15 +742,16 @@
     ],
     "answer": "$\\frac{9}{112}$",
     "solution": "1. $E(X^3)=\\int_0^1 x^3dx=\\frac14$。\n2. $E(X^6)=\\int_0^1 x^6dx=\\frac17$。\n3. $D(X^3)=\\frac17-\\frac1{16}=\\frac{16-7}{112}=\\frac9{112}$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "概率统计"
   },
   {
     "title": "标准正态平方的方差",
     "statement": "设随机变量 $X\\sim N(0,1)$，求 $D(X^2)$。",
     "tags": [
-      "概率论",
-      "分布",
-      "期望方差"
+      "概率统计综合",
+      "随机变量与分布",
+      "数字特征"
     ],
     "thinking": 4,
     "difficulty": 4,
@@ -737,15 +763,16 @@
     ],
     "answer": "$2$",
     "solution": "1. $EX=0,\\;DX=1$，故 $E(X^2)=1$。\n2. 正态四阶矩 $E(X^4)=3$。\n3. $D(X^2)=3-1^2=2$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "概率统计"
   },
   {
     "title": "正态随机变量指数函数的方差",
     "statement": "设随机变量 $X\\sim N(\\mu,\\sigma^2)$，求 $D(e^X)$。",
     "tags": [
-      "概率论",
-      "分布",
-      "期望方差"
+      "概率统计综合",
+      "随机变量与分布",
+      "数字特征"
     ],
     "thinking": 6,
     "difficulty": 7,
@@ -757,15 +784,16 @@
     ],
     "answer": "$e^{2\\mu+\\sigma^2}\\left(e^{\\sigma^2}-1\\right)$",
     "solution": "1. $E(e^X)=e^{\\mu+\\sigma^2/2}$。\n2. $E(e^{2X})=e^{2\\mu+2\\sigma^2}$。\n3. $D(e^X)=e^{2\\mu+2\\sigma^2}-e^{2\\mu+\\sigma^2}=e^{2\\mu+\\sigma^2}(e^{\\sigma^2}-1)$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "概率统计"
   },
   {
     "title": "正态三次幂的方差",
     "statement": "设随机变量 $X\\sim N(0,\\sigma^2)$，求 $D(X^3)$。",
     "tags": [
-      "概率论",
-      "分布",
-      "期望方差"
+      "概率统计综合",
+      "随机变量与分布",
+      "数字特征"
     ],
     "thinking": 5,
     "difficulty": 6,
@@ -777,15 +805,16 @@
     ],
     "answer": "$15\\sigma^6$",
     "solution": "1. $E(X^3)=0$（奇函数）。\n2. $E(X^6)=5!!\\,\\sigma^6=15\\sigma^6$。\n3. $D(X^3)=15\\sigma^6-0=15\\sigma^6$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "概率统计"
   },
   {
     "title": "标准正态四次幂的方差",
     "statement": "设随机变量 $X\\sim N(0,1)$，求 $D(X^4)$。",
     "tags": [
-      "概率论",
-      "分布",
-      "期望方差"
+      "概率统计综合",
+      "随机变量与分布",
+      "数字特征"
     ],
     "thinking": 5,
     "difficulty": 6,
@@ -797,15 +826,16 @@
     ],
     "answer": "$96$",
     "solution": "1. $E(X^4)=3$。\n2. $E(X^8)=7!!=105$。\n3. $D(X^4)=105-3^2=96$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "概率统计"
   },
   {
     "title": "二项分布 $B(2,p)$ 的 $X^2$ 方差",
     "statement": "设随机变量 $X\\sim B(2,p)\\ (0<p<1)$，求 $D(X^2)$。",
     "tags": [
-      "概率论",
-      "分布",
-      "期望方差"
+      "概率统计综合",
+      "随机变量与分布",
+      "数字特征"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -817,15 +847,15 @@
     ],
     "answer": "$2p+10p^2-8p^3-4p^4$",
     "solution": "1. $P(X=0)=(1-p)^2,\\;P(X=1)=2p(1-p),\\;P(X=2)=p^2$。\n2. $E(X^2)=2p(1-p)+4p^2=2p+2p^2$；$E(X^4)=2p(1-p)+16p^2=2p+14p^2$。\n3. $D(X^2)=2p+14p^2-(2p+2p^2)^2=2p+10p^2-8p^3-4p^4$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "概率统计"
   },
   {
     "title": "绝对值变上限积分 $|x^2-t^2|$",
     "statement": "求 $F(x)=\\int_0^1|x^2-t^2|\\,dt$ 的表达式。",
     "tags": [
       "定积分",
-      "变限积分",
-      "分段讨论"
+      "变限积分"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -837,15 +867,15 @@
     ],
     "answer": "$F(x)=\\begin{cases}\\frac43|x|^3-x^2+\\frac13, & |x|\\le 1,\\\\ x^2-\\frac13, & |x|>1.\\end{cases}$",
     "solution": "1. 当 $|x|>1$：$x^2-t^2\\ge0$，故 $F=\\int_0^1(x^2-t^2)dt=x^2-\\frac13$。\n2. 当 $|x|\\le1$：在 $t=|x|$ 处分段，$F=\\int_0^{|x|}(x^2-t^2)dt+\\int_{|x|}^1(t^2-x^2)dt$。\n3. 计算得 $2x^2|x|-\\frac23|x|^3+\\frac13-x^2=\\frac43|x|^3-x^2+\\frac13$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "含绝对值变上限积分：被积函数 $|x-t|$",
     "statement": "求 $F(x)=\\int_0^1|x-t|\\,dt$ 的表达式。",
     "tags": [
       "定积分",
-      "变限积分",
-      "分段讨论"
+      "变限积分"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -857,15 +887,15 @@
     ],
     "answer": "$F(x)=\\begin{cases}\\frac12-x, & x<0,\\\\ x^2-x+\\frac12, & 0\\le x\\le1,\\\\ x-\\frac12, & x>1.\\end{cases}$",
     "solution": "1. $x<0$ 时 $|x-t|=t-x$，$F=\\int_0^1(t-x)dt=\\frac12-x$。\n2. $x>1$ 时 $|x-t|=x-t$，$F=x-\\frac12$。\n3. $0\\le x\\le1$ 时 $F=\\int_0^x(x-t)dt+\\int_x^1(t-x)dt=\\frac{x^2}{2}+\\frac{(1-x)^2}{2}=x^2-x+\\frac12$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "含绝对值变上限积分：被积函数 $|x-t^3|$",
     "statement": "求 $F(x)=\\int_0^1|x-t^3|\\,dt$ 的表达式。",
     "tags": [
       "定积分",
-      "变限积分",
-      "分段讨论"
+      "变限积分"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -877,15 +907,15 @@
     ],
     "answer": "$F(x)=\\begin{cases}\\frac14-x, & x<0,\\\\ \\frac14-x+\\frac32x^{4/3}, & 0\\le x\\le1,\\\\ x-\\frac14, & x>1.\\end{cases}$",
     "solution": "1. $x<0$：$|x-t^3|=t^3-x$，$F=\\frac14-x$。\n2. $x>1$：$|x-t^3|=x-t^3$，$F=x-\\frac14$。\n3. $0\\le x\\le1$：在 $t=x^{1/3}$ 处分段，$\\int_0^{x^{1/3}}(x-t^3)dt+\\int_{x^{1/3}}^1(t^3-x)dt=\\frac34x^{4/3}+\\frac14-x+\\frac34x^{4/3}=\\frac14-x+\\frac32x^{4/3}$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "带权 $e^t$ 的绝对值积分",
     "statement": "求 $F(x)=\\int_0^1|x-t|e^t\\,dt$ 的表达式。",
     "tags": [
       "定积分",
-      "分部积分",
-      "分段讨论"
+      "换元与分部"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -897,15 +927,15 @@
     ],
     "answer": "$F(x)=\\begin{cases}1+(1-e)x, & x<0,\\\\ 2e^x-(1+e)x-1, & 0\\le x\\le1,\\\\ (e-1)x-1, & x>1.\\end{cases}$",
     "solution": "1. $x<0$：$F=\\int_0^1(t-x)e^tdt=[(t-1)e^t]_0^1-x(e-1)=1+(1-e)x$。\n2. $x>1$：$F=\\int_0^1(x-t)e^tdt=x(e-1)-1$。\n3. $0\\le x\\le1$：$F=\\int_0^x(x-t)e^tdt+\\int_x^1(t-x)e^tdt=(e^x-x-1)+(e^x-xe)=2e^x-(1+e)x-1$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "含参数绝对值积分 $|xt-1|$",
     "statement": "求 $F(x)=\\int_0^1|xt-1|\\,dt$ 的表达式。",
     "tags": [
       "定积分",
-      "变限积分",
-      "分段讨论"
+      "变限积分"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -917,15 +947,16 @@
     ],
     "answer": "$F(x)=\\begin{cases}1-\\frac{x}{2}, & x\\le1,\\\\ \\frac{x}{2}-1+\\frac1x, & x>1.\\end{cases}$",
     "solution": "1. $x\\le1$：$xt\\le1$，故 $F=\\int_0^1(1-xt)dt=1-\\frac x2$。\n2. $x>1$：在 $t=1/x$ 处分段，$F=\\int_0^{1/x}(1-xt)dt+\\int_{1/x}^1(xt-1)dt$。\n3. 计算得 $\\frac1{2x}+(\\frac x2-\\frac1{2x})=\\frac x2-1+\\frac1x$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "相似变换：求可逆矩阵 $P$（第6题）",
     "statement": "设 $A=\\begin{pmatrix}1&0&0\\\\-1&2&0\\\\-1&-1&3\\end{pmatrix}$，$B=\\begin{pmatrix}1&1&1\\\\0&2&1\\\\0&0&3\\end{pmatrix}$，求可逆矩阵 $P$ 使 $A=P^{-1}BP$。",
     "tags": [
-      "线性代数",
-      "矩阵",
-      "特征值"
+      "线性代数综合",
+      "矩阵运算",
+      "特征值与特征向量"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -937,15 +968,16 @@
     ],
     "answer": "$P=\\begin{pmatrix}1&-1&0\\\\1&0&-1\\\\1&0&0\\end{pmatrix}$",
     "solution": "1. 求出 $A$ 属于 $1,2,3$ 的特征向量与 $B$ 属于 $1,2,3$ 的特征向量。\n2. 取 $A$ 的 $1$ 特征向量 $\\alpha_1$、$2$ 特征向量 $\\alpha_2$、$3$ 特征向量 $\\alpha_3$，以及 $B$ 的对应特征向量 $\\beta_1,\\beta_2,\\beta_3$。\n3. 令 $P=(\\alpha_1,\\alpha_2,\\alpha_3)(\\beta_1,\\beta_2,\\beta_3)^{-1}$，则 $A=P^{-1}BP$。\n4. 计算得 $P=\\begin{pmatrix}1&-1&0\\\\1&0&-1\\\\1&0&0\\end{pmatrix}$。验证：$AP=PB$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "相似变换：求可逆矩阵 $P$（第7题）",
     "statement": "设 $A=\\begin{pmatrix}1&0&0\\\\-1&2&0\\\\2&-2&4\\end{pmatrix}$，$B=\\begin{pmatrix}1&1&-1\\\\0&2&2\\\\0&0&4\\end{pmatrix}$，求可逆矩阵 $P$ 使 $A=P^{-1}BP$。",
     "tags": [
-      "线性代数",
-      "矩阵",
-      "特征值"
+      "线性代数综合",
+      "矩阵运算",
+      "特征值与特征向量"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -957,15 +989,16 @@
     ],
     "answer": "$P=\\begin{pmatrix}1&-1&1\\\\1&0&0\\\\0&1&0\\end{pmatrix}$",
     "solution": "1. $A,B$ 特征值同为 $1,2,4$。\n2. 分别求 $A,B$ 属于各特征值的特征向量 $\\alpha_i,\\beta_i$。\n3. 令 $P=(\\alpha_1,\\alpha_2,\\alpha_3)(\\beta_1,\\beta_2,\\beta_3)^{-1}$。\n4. 计算得 $P=\\begin{pmatrix}1&-1&1\\\\1&0&0\\\\0&1&0\\end{pmatrix}$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "相似变换：求可逆矩阵 $P$（第8题）",
     "statement": "设 $A=\\begin{pmatrix}2&0&0\\\\-2&3&0\\\\1&-2&5\\end{pmatrix}$，$B=\\begin{pmatrix}2&1&2\\\\0&3&2\\\\0&0&5\\end{pmatrix}$，求可逆矩阵 $P$ 使 $A=P^{-1}BP$。",
     "tags": [
-      "线性代数",
-      "矩阵",
-      "特征值"
+      "线性代数综合",
+      "矩阵运算",
+      "特征值与特征向量"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -977,15 +1010,16 @@
     ],
     "answer": "$P=\\begin{pmatrix}1&-1&0\\\\2&-1&-1\\\\1&0&0\\end{pmatrix}$",
     "solution": "1. $A,B$ 特征值同为 $2,3,5$。\n2. 分别取 $A,B$ 对应特征值的特征向量 $\\alpha_i,\\beta_i$。\n3. $P=(\\alpha_1,\\alpha_2,\\alpha_3)(\\beta_1,\\beta_2,\\beta_3)^{-1}$。\n4. 计算得 $P=\\begin{pmatrix}1&-1&0\\\\2&-1&-1\\\\1&0&0\\end{pmatrix}$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "相似变换：求可逆矩阵 $P$（第9题）",
     "statement": "设 $A=\\begin{pmatrix}1&0&0\\\\0&3&0\\\\-5&-3&6\\end{pmatrix}$，$B=\\begin{pmatrix}1&2&-2\\\\0&3&3\\\\0&0&6\\end{pmatrix}$，求可逆矩阵 $P$ 使 $A=P^{-1}BP$。",
     "tags": [
-      "线性代数",
-      "矩阵",
-      "特征值"
+      "线性代数综合",
+      "矩阵运算",
+      "特征值与特征向量"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -997,15 +1031,16 @@
     ],
     "answer": "$P=\\begin{pmatrix}1&-1&1\\\\0&1&-1\\\\1&0&1\\end{pmatrix}$",
     "solution": "1. $A,B$ 特征值同为 $1,3,6$。\n2. 分别求两矩阵对应特征值的特征向量 $\\alpha_i,\\beta_i$。\n3. $P=(\\alpha_1,\\alpha_2,\\alpha_3)(\\beta_1,\\beta_2,\\beta_3)^{-1}$。\n4. 计算得 $P=\\begin{pmatrix}1&-1&1\\\\0&1&-1\\\\1&0&1\\end{pmatrix}$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "相似变换：求可逆矩阵 $P$（第10题）",
     "statement": "设 $A=\\begin{pmatrix}2&2&0\\\\0&4&0\\\\0&-3&7\\end{pmatrix}$，$B=\\begin{pmatrix}2&0&0\\\\-2&4&0\\\\3&-3&7\\end{pmatrix}$，求可逆矩阵 $P$ 使 $A=P^{-1}BP$。",
     "tags": [
-      "线性代数",
-      "矩阵",
-      "特征值"
+      "线性代数综合",
+      "矩阵运算",
+      "特征值与特征向量"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -1017,15 +1052,15 @@
     ],
     "answer": "$P=\\begin{pmatrix}0&1&0\\\\-1&1&0\\\\0&0&1\\end{pmatrix}$",
     "solution": "1. $A,B$ 特征值同为 $2,4,7$。\n2. 分别求两矩阵对应特征值的特征向量 $\\alpha_i,\\beta_i$。\n3. $P=(\\alpha_1,\\alpha_2,\\alpha_3)(\\beta_1,\\beta_2,\\beta_3)^{-1}$。\n4. 计算得 $P=\\begin{pmatrix}0&1&0\\\\-1&1&0\\\\0&0&1\\end{pmatrix}$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "抽象行列式：列向量重排与线性组合",
     "statement": "设4维列向量 $\\alpha_1,\\alpha_2,\\alpha_3,\\beta_1,\\beta_2$，矩阵 $A=(\\alpha_1,\\alpha_2,\\alpha_3,\\beta_1)$，$B=(\\alpha_3,\\alpha_1,\\alpha_2,\\beta_2)$，且 $|A|=1,|B|=2$，求 $|A-2B|$。",
     "tags": [
-      "线性代数",
-      "行列式",
-      "向量"
+      "线性代数综合",
+      "行列式"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -1037,15 +1072,15 @@
     ],
     "answer": "$21$",
     "solution": "1. $A-2B=(\\alpha_1-2\\alpha_3,\\;\\alpha_2-2\\alpha_1,\\;\\alpha_3-2\\alpha_2,\\;\\beta_1-2\\beta_2)$。\n2. 前三列对 $(\\alpha_1,\\alpha_2,\\alpha_3)$ 的系数矩阵为 $\\begin{pmatrix}1&-2&0\\\\0&1&-2\\\\-2&0&1\\end{pmatrix}$，行列式 $=-7$。\n3. $(\\alpha_1,\\alpha_2,\\alpha_3,\\beta_1-2\\beta_2)$ 的行列式 $=|A|-2|\\alpha_1,\\alpha_2,\\alpha_3,\\beta_2|=1-2\\cdot2=-3$。\n4. 故 $|A-2B|=(-7)\\times(-3)=21$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "抽象行列式：$|2A+3B|$ 的计算",
     "statement": "设4维列向量 $\\alpha_1,\\alpha_2,\\alpha_3,\\beta_1,\\beta_2$，矩阵 $A=(\\alpha_1,\\alpha_2,\\alpha_3,\\beta_1)$，$B=(\\alpha_2,\\alpha_3,\\alpha_1,\\beta_2)$，且 $|A|=2,|B|=-1$，求 $|2A+3B|$。",
     "tags": [
-      "线性代数",
-      "行列式",
-      "向量"
+      "线性代数综合",
+      "行列式"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -1057,15 +1092,15 @@
     ],
     "answer": "$35$",
     "solution": "1. $2A+3B=(2\\alpha_1+3\\alpha_2,\\;2\\alpha_2+3\\alpha_3,\\;2\\alpha_3+3\\alpha_1,\\;2\\beta_1+3\\beta_2)$。\n2. 前三列系数矩阵 $\\begin{pmatrix}2&0&3\\\\3&2&0\\\\0&3&2\\end{pmatrix}$，行列式 $=2\\cdot4+3\\cdot9=35$。\n3. $|\\alpha_1,\\alpha_2,\\alpha_3,\\beta_2|=|B|=-1$（偶置换），故第四列为 $2|A|+3(-1)=1$。\n4. $|2A+3B|=35\\times1=35$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "抽象行列式：列倒序的行列式符号",
     "statement": "设4维列向量 $\\alpha_1,\\alpha_2,\\alpha_3,\\alpha_4$，矩阵 $A=(\\alpha_1,\\alpha_2,\\alpha_3,\\alpha_4)$，$B=(\\alpha_4,\\alpha_3,\\alpha_2,\\alpha_1)$，且 $|A|=5$，求 $|B|$。",
     "tags": [
-      "线性代数",
-      "行列式",
-      "向量"
+      "线性代数综合",
+      "行列式"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -1077,15 +1112,15 @@
     ],
     "answer": "$5$",
     "solution": "1. $B$ 的列是 $A$ 的列按 $4,3,2,1$ 重排。\n2. 逆序数 $\\tau(4321)=6$ 为偶数。\n3. 故 $|B|=(-1)^6|A|=|A|=5$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "抽象行列式：列和的行列式",
     "statement": "设3维列向量 $\\alpha_1,\\alpha_2,\\alpha_3$，矩阵 $A=(\\alpha_1,\\alpha_2,\\alpha_3)$，$B=(\\alpha_1+\\alpha_2,\\alpha_2+\\alpha_3,\\alpha_3)$，且 $|A|=2$，求 $|B|$。",
     "tags": [
-      "线性代数",
-      "行列式",
-      "向量"
+      "线性代数综合",
+      "行列式"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -1097,15 +1132,15 @@
     ],
     "answer": "$2$",
     "solution": "1. $B$ 的各列对 $(\\alpha_1,\\alpha_2,\\alpha_3)$ 的系数矩阵为 $C=\\begin{pmatrix}1&0&0\\\\1&1&0\\\\0&1&1\\end{pmatrix}$。\n2. $|C|=1$。\n3. $|B|=|A||C|=2\\times1=2$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "抽象行列式：$|2A-3B|$（同前三个列向量）",
     "statement": "设4维列向量 $\\alpha_1,\\alpha_2,\\alpha_3,\\beta_1,\\beta_2$，矩阵 $A=(\\alpha_1,\\alpha_2,\\alpha_3,\\beta_1)$，$B=(\\alpha_1,\\alpha_2,\\alpha_3,\\beta_2)$，且 $|A|=2,|B|=-3$，求 $|2A-3B|$。",
     "tags": [
-      "线性代数",
-      "行列式",
-      "向量"
+      "线性代数综合",
+      "行列式"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1117,15 +1152,16 @@
     ],
     "answer": "$-13$",
     "solution": "1. $2A-3B=(-\\alpha_1,-\\alpha_2,-\\alpha_3,\\;2\\beta_1-3\\beta_2)$。\n2. 提出前三列的 $(-1)^3=-1$。\n3. 余下行列式 $=2|A|-3|B|=4+9=13$。\n4. 故 $|2A-3B|=(-1)\\times13=-13$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "抽象行列式：$|A+B|$ 提取公因子",
     "statement": "设 $A,B$ 为3阶矩阵，$A=(\\alpha_1,\\alpha_2,\\alpha_3)$，$B=(\\beta_1,\\alpha_2,\\alpha_3)$，且 $|A|=2,|B|=3$，求 $|A+B|$。",
     "tags": [
-      "线性代数",
+      "线性代数综合",
       "行列式",
-      "矩阵"
+      "矩阵运算"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1137,15 +1173,15 @@
     ],
     "answer": "$20$",
     "solution": "1. $A+B=(\\alpha_1+\\beta_1,\\;2\\alpha_2,\\;2\\alpha_3)$。\n2. 提出第二、三列的 $2$：$|A+B|=4|\\alpha_1+\\beta_1,\\alpha_2,\\alpha_3|$。\n3. 由列线性性 $=4(|A|+|B|)=4(2+3)=20$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "抽象行列式：$|A+B|$（4维循环列）",
     "statement": "设4维列向量 $\\alpha_1,\\alpha_2,\\alpha_3,\\beta,\\gamma$，矩阵 $A=(\\alpha_1,\\alpha_2,\\alpha_3,\\beta)$，$B=(\\alpha_2,\\alpha_3,\\alpha_1,\\gamma)$，且 $|A|=1,|B|=2$，求 $|A+B|$。",
     "tags": [
-      "线性代数",
-      "行列式",
-      "向量"
+      "线性代数综合",
+      "行列式"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -1157,15 +1193,16 @@
     ],
     "answer": "$6$",
     "solution": "1. $A+B=(\\alpha_1+\\alpha_2,\\;\\alpha_2+\\alpha_3,\\;\\alpha_3+\\alpha_1,\\;\\beta+\\gamma)$。\n2. 前三列系数矩阵 $\\begin{pmatrix}1&0&1\\\\1&1&0\\\\0&1&1\\end{pmatrix}$，行列式 $=2$。\n3. $(\\alpha_1,\\alpha_2,\\alpha_3,\\beta+\\gamma)$ 行列式 $=|A|+|B|=3$（因 $B$ 为偶置换）。\n4. $|A+B|=2\\times3=6$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "伴随矩阵的伴随矩阵的行列式",
     "statement": "设 $A$ 为3阶矩阵，且 $|A|=3$，求 $|(A^*)^*|$。",
     "tags": [
-      "线性代数",
+      "线性代数综合",
       "行列式",
-      "矩阵"
+      "矩阵运算"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1177,15 +1214,15 @@
     ],
     "answer": "$81$",
     "solution": "1. 对 $n$ 阶矩阵有 $|A^*|=|A|^{n-1}$。\n2. 这里 $n=3$，故 $|A^*|=|A|^2=9$。\n3. $|(A^*)^*|=|A^*|^{3-1}=9^2=81$。\n4. （等价公式：$|(A^*)^*|=|A|^{(n-1)^2}=3^4=81$。）",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "抽象行列式：列线性组合的系数矩阵",
     "statement": "设3维列向量 $\\alpha_1,\\alpha_2,\\alpha_3$，矩阵 $A=(\\alpha_1,\\alpha_2,\\alpha_3)$，$B=(\\alpha_1-\\alpha_2,\\;\\alpha_2-\\alpha_3,\\;\\alpha_3+2\\alpha_1)$，且 $|A|=3$，求 $|B|$。",
     "tags": [
-      "线性代数",
-      "行列式",
-      "向量"
+      "线性代数综合",
+      "行列式"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1197,15 +1234,15 @@
     ],
     "answer": "$9$",
     "solution": "1. 系数矩阵 $C=\\begin{pmatrix}1&0&2\\\\-1&1&0\\\\0&-1&1\\end{pmatrix}$。\n2. $|C|=1\\cdot(1\\cdot1-0)+2\\cdot((-1)(-1)-1\\cdot0)=1+2=3$。\n3. $|B|=|A||C|=3\\times3=9$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "抽象行列式：另一组列线性组合",
     "statement": "设3维列向量 $\\alpha_1,\\alpha_2,\\alpha_3$，矩阵 $A=(\\alpha_1,\\alpha_2,\\alpha_3)$，$B=(\\alpha_1+\\alpha_3,\\;\\alpha_2,\\;\\alpha_3-\\alpha_1)$，且 $|A|=2$，求 $|B|$。",
     "tags": [
-      "线性代数",
-      "行列式",
-      "向量"
+      "线性代数综合",
+      "行列式"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1217,14 +1254,15 @@
     ],
     "answer": "$4$",
     "solution": "1. 系数矩阵 $C=\\begin{pmatrix}1&0&-1\\\\0&1&0\\\\1&0&1\\end{pmatrix}$。\n2. $|C|=1(1\\cdot1-0)+(-1)(0\\cdot0-1\\cdot1)=1+1=2$。\n3. $|B|=|A||C|=2\\times2=4$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "特征行列式反求参数：二阶矩阵",
     "statement": "设矩阵 $A=\\begin{pmatrix}1&a\\\\2&3\\end{pmatrix}$，若 $\\lambda=4$ 是 $A$ 的特征值，求 $a$。",
     "tags": [
-      "线性代数",
-      "特征值",
+      "线性代数综合",
+      "特征值与特征向量",
       "行列式"
     ],
     "thinking": 4,
@@ -1237,14 +1275,15 @@
     ],
     "answer": "$\\frac32$",
     "solution": "1. 特征方程 $|\\lambda E-A|=\\begin{vmatrix}\\lambda-1&-a\\\\-2&\\lambda-3\\end{vmatrix}=(\\lambda-1)(\\lambda-3)-2a=0$。\n2. 代入 $\\lambda=4$：$3\\times1-2a=0$。\n3. 解得 $a=\\frac32$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "特征行列式反求参数：三阶上三角分块",
     "statement": "设矩阵 $A=\\begin{pmatrix}1&0&0\\\\0&2&k\\\\0&1&2\\end{pmatrix}$，且 $A$ 的特征值为 $1,1,3$，求 $k$。",
     "tags": [
-      "线性代数",
-      "特征值",
+      "线性代数综合",
+      "特征值与特征向量",
       "行列式"
     ],
     "thinking": 5,
@@ -1257,14 +1296,15 @@
     ],
     "answer": "$1$",
     "solution": "1. 特征多项式 $=(\\lambda-1)\\big[(\\lambda-2)^2-k\\big]$。\n2. 另两个特征值为 $1,3$，故 $(\\lambda-1)(\\lambda-3)=\\lambda^2-4\\lambda+3=(\\lambda-2)^2-1$。\n3. 比较得 $k=1$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "特征行列式反求参数：对称分块",
     "statement": "设矩阵 $A=\\begin{pmatrix}2&-1&0\\\\-1&2&0\\\\0&0&a\\end{pmatrix}$，且 $A$ 的特征值为 $1,1,3$，求 $a$。",
     "tags": [
-      "线性代数",
-      "特征值",
+      "线性代数综合",
+      "特征值与特征向量",
       "行列式"
     ],
     "thinking": 5,
@@ -1277,14 +1317,15 @@
     ],
     "answer": "$1$",
     "solution": "1. 左上二阶块特征多项式 $(\\lambda-2)^2-1=(\\lambda-1)(\\lambda-3)$，特征值 $1,3$。\n2. 整体特征值为 $1,3,a$，已知为 $1,1,3$。\n3. 故 $a=1$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "特征行列式反求参数：已知 $-2$ 为特征值",
     "statement": "设矩阵 $A=\\begin{pmatrix}0&-1&1\\\\-1&0&a\\\\1&a&0\\end{pmatrix}$，已知 $-2$ 是 $A$ 的特征值，求 $a$。",
     "tags": [
-      "线性代数",
-      "特征值",
+      "线性代数综合",
+      "特征值与特征向量",
       "行列式"
     ],
     "thinking": 6,
@@ -1297,14 +1338,15 @@
     ],
     "answer": "$-2$ 或 $1$",
     "solution": "1. $|-2E-A|=\\begin{vmatrix}-2&1&-1\\\\1&-2&-a\\\\-1&-a&-2\\end{vmatrix}$。\n2. 展开：$-2(4-a^2)-(-2-a)+(-1)(-a-2)=2a^2+2a-4=2(a+2)(a-1)$。\n3. 令其为 $0$ 得 $a=-2$ 或 $a=1$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "特征行列式反求参数：对称矩阵 $\\pm1$",
     "statement": "设矩阵 $A=\\begin{pmatrix}2&a&0\\\\a&2&0\\\\0&0&1\\end{pmatrix}$，已知 $\\lambda=3$ 是 $A$ 的特征值，求 $a$。",
     "tags": [
-      "线性代数",
-      "特征值",
+      "线性代数综合",
+      "特征值与特征向量",
       "行列式"
     ],
     "thinking": 5,
@@ -1317,14 +1359,15 @@
     ],
     "answer": "$\\pm1$",
     "solution": "1. 特征多项式 $=(\\lambda-1)\\big[(\\lambda-2)^2-a^2\\big]$。\n2. 代入 $\\lambda=3$：$2(1-a^2)=0$。\n3. 得 $a^2=1$，故 $a=\\pm1$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "特征行列式反求参数：给出全部特征值",
     "statement": "设矩阵 $A=\\begin{pmatrix}1&a&0\\\\a&1&0\\\\0&0&2\\end{pmatrix}$，且 $A$ 的特征值为 $3,-1,2$，求 $a$。",
     "tags": [
-      "线性代数",
-      "特征值",
+      "线性代数综合",
+      "特征值与特征向量",
       "行列式"
     ],
     "thinking": 6,
@@ -1337,14 +1380,15 @@
     ],
     "answer": "$\\pm2$",
     "solution": "1. 特征多项式 $=(\\lambda-2)\\big[(\\lambda-1)^2-a^2\\big]$。\n2. $\\lambda=3$ 代入：$(3-1)^2-a^2=4-a^2=0$；$\\lambda=-1$ 亦给 $(-2)^2-a^2=0$。\n3. 故 $a^2=4$，$a=\\pm2$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "特征行列式反求参数：二重特征值",
     "statement": "设矩阵 $A=\\begin{pmatrix}3&2&-1\\\\a&0&b\\\\1&0&1\\end{pmatrix}$，已知 $\\lambda=2$ 是 $A$ 的二重特征值，求 $a$ 和 $b$。",
     "tags": [
-      "线性代数",
-      "特征值",
+      "线性代数综合",
+      "特征值与特征向量",
       "行列式"
     ],
     "thinking": 7,
@@ -1357,15 +1401,16 @@
     ],
     "answer": "$a=0,\\ b=0$",
     "solution": "1. 计算特征多项式 $f(\\lambda)=|\\lambda E-A|$，展开。\n2. 由 $\\lambda=2$ 是二重根，列 $f(2)=0,\\;f'(2)=0$ 两个方程。\n3. 联立解得 $a=0,b=0$。\n4. 验证：此时 $A=\\begin{pmatrix}3&2&-1\\\\0&0&0\\\\1&0&1\\end{pmatrix}$，特征值确为 $2,2,4$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "矩阵相似于对角阵反求参数",
     "statement": "设矩阵 $A=\\begin{pmatrix}2&0&0\\\\1&1&a\\\\0&0&1\\end{pmatrix}$，且 $A$ 与对角矩阵 $\\mathrm{diag}(1,1,2)$ 相似，求 $a$。",
     "tags": [
-      "线性代数",
-      "矩阵",
-      "特征值"
+      "线性代数综合",
+      "矩阵运算",
+      "特征值与特征向量"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -1377,15 +1422,16 @@
     ],
     "answer": "$0$",
     "solution": "1. 特征多项式 $=(\\lambda-2)(\\lambda-1)^2$，特征值 $2,1,1$。\n2. 可对角化要求 $\\lambda=1$ 有两个线性无关特征向量，即 $r(A-E)=1$。\n3. $A-E=\\begin{pmatrix}1&0&0\\\\1&0&a\\\\0&0&0\\end{pmatrix}$，要秩为 $1$ 须 $a=0$。\n4. 故 $a=0$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "由特征多项式反求伴随矩阵参数",
     "statement": "设矩阵 $A=\\begin{pmatrix}0&1&0\\\\0&0&1\\\\a&b&c\\end{pmatrix}$，已知 $A$ 的特征多项式为 $(\\lambda-1)^3$，求 $a,b,c$。",
     "tags": [
-      "线性代数",
-      "特征值",
-      "矩阵"
+      "线性代数综合",
+      "特征值与特征向量",
+      "矩阵运算"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1397,15 +1443,16 @@
     ],
     "answer": "$a=1,\\ b=-3,\\ c=3$",
     "solution": "1. 友矩阵的特征多项式 $=|\\lambda E-A|=\\lambda^3-c\\lambda^2-b\\lambda-a$。\n2. $(\\lambda-1)^3=\\lambda^3-3\\lambda^2+3\\lambda-1$。\n3. 比较系数：$-c=-3,\\;-b=3,\\;-a=-1$。\n4. 故 $a=1,b=-3,c=3$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "由特征值反求参数 $k$",
     "statement": "设矩阵 $A=\\begin{pmatrix}k&1&0\\\\1&k&0\\\\0&0&1\\end{pmatrix}$，且 $A$ 的特征值为 $1,2,0$，求 $k$。",
     "tags": [
-      "线性代数",
-      "特征值",
-      "矩阵"
+      "线性代数综合",
+      "特征值与特征向量",
+      "矩阵运算"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -1417,15 +1464,15 @@
     ],
     "answer": "$1$",
     "solution": "1. 分块对角矩阵特征值为 $1$ 与二阶块 $\\begin{pmatrix}k&1\\\\1&k\\end{pmatrix}$ 的特征值 $k+1,k-1$。\n2. 已知特征值为 $1,2,0$，故 $\\{k+1,k-1\\}=\\{2,0\\}$。\n3. 得 $k=1$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "用特征向量求 $A^n\\beta$（1,2,3）",
     "statement": "已知三阶矩阵 $A$ 的特征值为 $1,2,3$，对应特征向量分别为 $\\alpha_1=(1,1,1)^T$，$\\alpha_2=(1,2,4)^T$，$\\alpha_3=(1,3,9)^T$。若 $\\beta=(4,9,25)^T$，求 $A^n\\beta$。",
     "tags": [
-      "线性代数",
-      "特征值",
-      "向量"
+      "线性代数综合",
+      "特征值与特征向量"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1437,15 +1484,15 @@
     ],
     "answer": "$(2-2^n+3^{n+1},\\;2-2^{n+1}+3^{n+2},\\;2-2^{n+2}+3^{n+3})^T$",
     "solution": "1. 解 $\\beta=c_1\\alpha_1+c_2\\alpha_2+c_3\\alpha_3$：由 $\\begin{cases}c_1+c_2+c_3=4\\\\c_1+2c_2+3c_3=9\\\\c_1+4c_2+9c_3=25\\end{cases}$ 得 $c_1=2,c_2=-1,c_3=3$。\n2. $A^n\\beta=2\\cdot1^n\\alpha_1-2^n\\alpha_2+3\\cdot3^n\\alpha_3$。\n3. 逐分量写出即得 $(2-2^n+3^{n+1},\\;2-2^{n+1}+3^{n+2},\\;2-2^{n+2}+3^{n+3})^T$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "用特征向量求 $A^n\\beta$（2,3,4）",
     "statement": "已知三阶矩阵 $A$ 的特征值为 $2,3,4$，对应特征向量分别为 $\\alpha_1=(1,1,1)^T$，$\\alpha_2=(1,2,4)^T$，$\\alpha_3=(1,3,9)^T$。若 $\\beta=(4,4,2)^T$，求 $A^n\\beta$。",
     "tags": [
-      "线性代数",
-      "特征值",
-      "向量"
+      "线性代数综合",
+      "特征值与特征向量"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1457,15 +1504,15 @@
     ],
     "answer": "$(3\\cdot2^n+2\\cdot3^n-4^n,\\;3\\cdot2^n+4\\cdot3^n-3\\cdot4^n,\\;3\\cdot2^n+8\\cdot3^n-9\\cdot4^n)^T$",
     "solution": "1. 解 $\\beta=c_1\\alpha_1+c_2\\alpha_2+c_3\\alpha_3$ 得 $c_1=3,c_2=2,c_3=-1$。\n2. $A^n\\beta=3\\cdot2^n\\alpha_1+2\\cdot3^n\\alpha_2-4^n\\alpha_3$。\n3. 逐分量写出即得答案。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "用特征向量求 $A^n\\beta$（含 -1）",
     "statement": "已知三阶矩阵 $A$ 的特征值为 $1,-1,2$，对应特征向量分别为 $\\alpha_1=(1,1,1)^T$，$\\alpha_2=(1,-1,0)^T$，$\\alpha_3=(1,0,-1)^T$。若 $\\beta=(3,-1,4)^T$，求 $A^n\\beta$。",
     "tags": [
-      "线性代数",
-      "特征值",
-      "向量"
+      "线性代数综合",
+      "特征值与特征向量"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1477,15 +1524,15 @@
     ],
     "answer": "$(2+3(-1)^n-2^{n+1},\\;2-3(-1)^n,\\;2+2^{n+1})^T$",
     "solution": "1. 解 $\\beta=c_1\\alpha_1+c_2\\alpha_2+c_3\\alpha_3$：$\\begin{cases}c_1+c_2+c_3=3\\\\c_1-c_2=-1\\\\c_1-c_3=4\\end{cases}$ 得 $c_1=2,c_2=3,c_3=-2$。\n2. $A^n\\beta=2\\alpha_1+3(-1)^n\\alpha_2-2\\cdot2^n\\alpha_3$。\n3. 逐分量写出即得答案。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "用特征向量求 $A^n\\beta$（另一组）",
     "statement": "已知三阶矩阵 $A$ 的特征值为 $1,2,3$，对应特征向量分别为 $\\alpha_1=(1,1,0)^T$，$\\alpha_2=(1,0,1)^T$，$\\alpha_3=(0,1,1)^T$。若 $\\beta=(1,3,6)^T$，求 $A^n\\beta$。",
     "tags": [
-      "线性代数",
-      "特征值",
-      "向量"
+      "线性代数综合",
+      "特征值与特征向量"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1497,15 +1544,15 @@
     ],
     "answer": "$(-1+2^{n+1},\\;-1+4\\cdot3^n,\\;2^{n+1}+4\\cdot3^n)^T$",
     "solution": "1. 解 $c_1+c_2=1,\\;c_1+c_3=3,\\;c_2+c_3=6$，三式相加得 $c_1+c_2+c_3=5$，故 $c_1=-1,c_2=2,c_3=4$。\n2. $A^n\\beta=-\\alpha_1+2\\cdot2^n\\alpha_2+4\\cdot3^n\\alpha_3$。\n3. 逐分量写出即得答案。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "用特征向量求 $A^n\\beta$（2,3,4）",
     "statement": "已知三阶矩阵 $A$ 的特征值为 $2,3,4$，对应特征向量分别为 $\\alpha_1=(1,1,0)^T$，$\\alpha_2=(1,0,1)^T$，$\\alpha_3=(0,1,1)^T$。若 $\\beta=(1,4,-1)^T$，求 $A^n\\beta$。",
     "tags": [
-      "线性代数",
-      "特征值",
-      "向量"
+      "线性代数综合",
+      "特征值与特征向量"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1517,15 +1564,15 @@
     ],
     "answer": "$(3\\cdot2^n-2\\cdot3^n,\\;3\\cdot2^n+4^n,\\;-2\\cdot3^n+4^n)^T$",
     "solution": "1. 解 $c_1+c_2=1,\\;c_1+c_3=4,\\;c_2+c_3=-1$，得 $c_1=3,c_2=-2,c_3=1$。\n2. $A^n\\beta=3\\cdot2^n\\alpha_1-2\\cdot3^n\\alpha_2+4^n\\alpha_3$。\n3. 逐分量写出即得答案。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "矩阵方程判可逆：$AB=A+B$",
     "statement": "设 $A,B$ 为 $n$ 阶矩阵，满足 $AB=A+B$，则下列矩阵中一定可逆的是 (A) $A$ (B) $B$ (C) $A-E$ (D) $A+E$。",
     "tags": [
-      "线性代数",
-      "矩阵",
-      "选择题"
+      "线性代数综合",
+      "矩阵运算"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1537,15 +1584,16 @@
     ],
     "answer": "C",
     "solution": "1. 由 $AB=A+B$ 得 $AB-A-B=E$。\n2. 两边加 $E$：$(A-E)(B-E)=E$，故 $A-E$ 可逆（其逆为 $B-E$）。\n3. 选 C。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数",
+    "kind": "选择题"
   },
   {
     "title": "矩阵方程判可逆：$AB=2A+B$",
     "statement": "设 $A,B$ 为 $n$ 阶矩阵，满足 $AB=2A+B$，则下列矩阵中一定可逆的是 (A) $A-2E$ (B) $A-E$ (C) $B$ (D) $B+E$。",
     "tags": [
-      "线性代数",
-      "矩阵",
-      "选择题"
+      "线性代数综合",
+      "矩阵运算"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1557,15 +1605,16 @@
     ],
     "answer": "B",
     "solution": "1. 由 $AB=2A+B$ 得 $AB-2A-B=0$。\n2. 两边加 $2E$：$AB-2A-B+2E=2E$，即 $(A-E)(B-2E)=2E$。\n3. 故 $A-E$ 可逆，选 B。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数",
+    "kind": "选择题"
   },
   {
     "title": "矩阵方程判可逆：$AB+A+B=0$",
     "statement": "设 $A,B$ 为 $n$ 阶矩阵，满足 $AB+A+B=0$，则下列矩阵中一定可逆的是 (A) $A$ (B) $B$ (C) $A+E$ (D) $A-E$。",
     "tags": [
-      "线性代数",
-      "矩阵",
-      "选择题"
+      "线性代数综合",
+      "矩阵运算"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1577,15 +1626,16 @@
     ],
     "answer": "C",
     "solution": "1. 由 $AB+A+B=0$，两边加 $E$ 得 $AB+A+B+E=E$。\n2. 即 $(A+E)(B+E)=E$，故 $A+E$ 可逆。\n3. 选 C。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数",
+    "kind": "选择题"
   },
   {
     "title": "矩阵方程判可逆：$AB-A-B=E$",
     "statement": "设 $A,B$ 为 $n$ 阶矩阵，满足 $AB-A-B=E$，则下列矩阵中一定可逆的是 (A) $A$ (B) $B$ (C) $A-E$ (D) $A+E$。",
     "tags": [
-      "线性代数",
-      "矩阵",
-      "选择题"
+      "线性代数综合",
+      "矩阵运算"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1597,15 +1647,16 @@
     ],
     "answer": "C",
     "solution": "1. 由 $AB-A-B=E$，两边加 $E$：$AB-A-B+E=2E$。\n2. 即 $(A-E)(B-E)=2E$，故 $A-E$ 可逆。\n3. 选 C。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数",
+    "kind": "选择题"
   },
   {
     "title": "矩阵方程判可逆：$AB-A+B=0$",
     "statement": "设 $A,B$ 为 $n$ 阶矩阵，满足 $AB-A+B=0$，则下列矩阵中一定可逆的是 (A) $A-E$ (B) $A+E$ (C) $B$ (D) $B+E$。",
     "tags": [
-      "线性代数",
-      "矩阵",
-      "选择题"
+      "线性代数综合",
+      "矩阵运算"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1617,14 +1668,15 @@
     ],
     "answer": "B",
     "solution": "1. 由 $AB-A+B=0$ 得 $AB+B=A$，即 $(A+E)B=A$。\n2. 两边减 $A+E$：$(A+E)B-(A+E)=A-(A+E)=-E$。\n3. 即 $(A+E)(B-E)=-E$，故 $A+E$ 可逆（其逆为 $-(B-E)$）。\n4. 选 B。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数",
+    "kind": "选择题"
   },
   {
     "title": "极大无关组：由向量关系直接写出",
     "statement": "设 $\\alpha_1=(1,2,1,3)^T$，$\\alpha_2=(2,4,3,5)^T$，$\\alpha_3=(3,6,4,8)^T$，$\\alpha_4=(1,2,2,3)^T$，求向量组的一个极大无关组，并将其余向量用该极大无关组线性表出。",
     "tags": [
-      "线性代数",
-      "向量"
+      "线性代数综合"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -1636,15 +1688,15 @@
     ],
     "answer": "极大无关组 $\\alpha_1,\\alpha_2,\\alpha_4$；$\\alpha_3=\\alpha_1+\\alpha_2$",
     "solution": "1. $(1+2,2+4,1+3,3+5)=(3,6,4,8)=\\alpha_3$，故 $\\alpha_3=\\alpha_1+\\alpha_2$。\n2. 以 $\\alpha_1,\\alpha_2,\\alpha_4$ 为列作矩阵，初等行变换可得秩为 $3$，线性无关。\n3. 故极大无关组为 $\\alpha_1,\\alpha_2,\\alpha_4$，且 $\\alpha_3=\\alpha_1+\\alpha_2$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "极大无关组：矩阵列向量组的秩",
     "statement": "已知矩阵 $A=(\\alpha_1,\\alpha_2,\\alpha_3,\\alpha_4)$，其中 $\\alpha_1=(1,1,1,2)^T$，$\\alpha_2=(1,2,3,3)^T$，$\\alpha_3=(2,3,4,5)^T$，$\\alpha_4=(1,0,1,1)^T$。求向量组 $\\alpha_1,\\alpha_2,\\alpha_3,\\alpha_4$ 的秩与一个极大无关组，并把其余向量用该极大无关组线性表出。",
     "tags": [
-      "线性代数",
-      "向量",
-      "矩阵"
+      "线性代数综合",
+      "矩阵运算"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1656,14 +1708,14 @@
     ],
     "answer": "秩为 $3$，极大无关组 $\\alpha_1,\\alpha_2,\\alpha_4$；$\\alpha_3=\\alpha_1+\\alpha_2$",
     "solution": "1. $\\alpha_1+\\alpha_2=(2,3,4,5)^T=\\alpha_3$，故 $\\alpha_3$ 可由 $\\alpha_1,\\alpha_2$ 表出。\n2. 将 $(\\alpha_1,\\alpha_2,\\alpha_4)$ 作行变换，得三个非零行，秩为 $3$，故 $\\alpha_1,\\alpha_2,\\alpha_4$ 线性无关。\n3. 向量组的秩为 $3$，极大无关组为 $\\alpha_1,\\alpha_2,\\alpha_4$，且 $\\alpha_3=\\alpha_1+\\alpha_2$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "极大无关组：秩为 2 的简单组合",
     "statement": "设向量组 $\\alpha_1=(1,2,-1,0)^T$，$\\alpha_2=(2,4,1,3)^T$，$\\alpha_3=(3,6,0,3)^T$，$\\alpha_4=(1,2,2,3)^T$。求其秩与一个极大线性无关组，并将其余向量用该极大无关组线性表出。",
     "tags": [
-      "线性代数",
-      "向量"
+      "线性代数综合"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -1675,14 +1727,14 @@
     ],
     "answer": "秩为 $2$，极大无关组 $\\alpha_1,\\alpha_2$；$\\alpha_3=\\alpha_1+\\alpha_2$，$\\alpha_4=-\\alpha_1+\\alpha_2$",
     "solution": "1. $\\alpha_1+\\alpha_2=(3,6,0,3)^T=\\alpha_3$。\n2. $-\\alpha_1+\\alpha_2=(1,2,2,3)^T=\\alpha_4$。\n3. $\\alpha_1,\\alpha_2$ 分量不成比例，线性无关，故秩为 $2$，极大无关组为 $\\alpha_1,\\alpha_2$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "极大无关组：把其余向量一一表出",
     "statement": "已知向量组 $\\alpha_1=(1,0,1,2)^T$，$\\alpha_2=(2,1,0,1)^T$，$\\alpha_3=(1,1,-1,-1)^T$，$\\alpha_4=(0,1,2,3)^T$。求该向量组的一个极大无关组，并将其余向量用该极大无关组线性表出。",
     "tags": [
-      "线性代数",
-      "向量"
+      "线性代数综合"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1694,14 +1746,14 @@
     ],
     "answer": "极大无关组 $\\alpha_1,\\alpha_2,\\alpha_4$；$\\alpha_3=-\\alpha_1+\\alpha_2$",
     "solution": "1. $-\\alpha_1+\\alpha_2=(1,1,-1,-1)^T=\\alpha_3$。\n2. 以 $\\alpha_1,\\alpha_2,\\alpha_4$ 为列作行变换，得秩 $3$，线性无关。\n3. 故极大无关组为 $\\alpha_1,\\alpha_2,\\alpha_4$，$\\alpha_3=-\\alpha_1+\\alpha_2$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "由线性表出条件反求参数 $a$",
     "statement": "已知向量组 $\\alpha_1=(1,0,2,1)^T$，$\\alpha_2=(2,1,0,1)^T$，$\\alpha_3=(1,1,-2,0)^T$，$\\alpha_4=(0,1,-4,a)^T$。若 $\\alpha_4$ 可由 $\\alpha_1,\\alpha_2,\\alpha_3$ 线性表出，求 $a$。",
     "tags": [
-      "线性代数",
-      "向量"
+      "线性代数综合"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1713,14 +1765,14 @@
     ],
     "answer": "$a=-1$",
     "solution": "1. 设 $x_1\\alpha_1+x_2\\alpha_2+x_3\\alpha_3=\\alpha_4$，列方程组。\n2. 对增广矩阵作初等行变换，前三行给出 $x_1,x_2,x_3$ 的关系。\n3. 相容性要求最后一行满足 $a=-1$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "由秩为 2 反求参数并取极大无关组",
     "statement": "设3维向量组 $\\alpha_1=(a,1,1)^T$，$\\alpha_2=(1,a,1)^T$，$\\alpha_3=(1,1,a)^T$。若该向量组的秩为 $2$，求 $a$ 的值，并求此时的一个极大无关组。",
     "tags": [
-      "线性代数",
-      "向量",
+      "线性代数综合",
       "行列式"
     ],
     "thinking": 7,
@@ -1733,14 +1785,14 @@
     ],
     "answer": "$a=-2$，极大无关组 $\\alpha_1,\\alpha_2$",
     "solution": "1. $\\det A=(a+2)(a-1)^2$。\n2. $a=1$ 时 $A$ 各列均为 $(1,1,1)^T$，秩为 $1$，舍去。\n3. $a=-2$ 时各行元素和为 $0$，$\\det=0$ 且存在二阶非零子式，秩为 $2$。\n4. 此时 $\\alpha_1,\\alpha_2$ 线性无关，为一个极大无关组。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "两向量组等价反求参数",
     "statement": "设有向量组 (I)：$\\beta_1=(1,2,1)^T$，$\\beta_2=(2,3,3)^T$，$\\beta_3=(3,4,5)^T$；向量组 (II)：$\\gamma_1=(1,1,2)^T$，$\\gamma_2=(1,2,1)^T$，$\\gamma_3=(0,1,a)^T$。若两向量组等价，求 $a$，并求向量组 (I) 的一个极大无关组。",
     "tags": [
-      "线性代数",
-      "向量"
+      "线性代数综合"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -1752,14 +1804,14 @@
     ],
     "answer": "$a=-1$，极大无关组 $\\beta_1,\\beta_2$",
     "solution": "1. $\\beta_3=-\\beta_1+2\\beta_2$，故 (I) 的秩为 $2$，极大无关组可取 $\\beta_1,\\beta_2$。\n2. 向量组等价要求 (II) 的秩也为 $2$ 且 $\\gamma_3$ 可由 $\\beta_1,\\beta_2$ 表出。\n3. 设 $\\gamma_3=x\\beta_1+y\\beta_2$，解得 $a=-1$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "由秩为 2 求参数并作线性表出",
     "statement": "已知向量组 $\\alpha_1=(1,1,0,2)^T$，$\\alpha_2=(2,1,1,4)^T$，$\\alpha_3=(1,2,-1,a)^T$。若向量组的秩为 $2$，求 $a$ 的值，并求此时的一个极大无关组及 $\\alpha_3$ 由该极大无关组的线性表示。",
     "tags": [
-      "线性代数",
-      "向量"
+      "线性代数综合"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -1771,14 +1823,14 @@
     ],
     "answer": "$a=2$，极大无关组 $\\alpha_1,\\alpha_2$；$\\alpha_3=3\\alpha_1-\\alpha_2$",
     "solution": "1. $\\alpha_1,\\alpha_2$ 线性无关，秩至少为 $2$；秩为 $2$ 要求 $\\alpha_3$ 可由它们表出。\n2. 解 $x\\alpha_1+y\\alpha_2=\\alpha_3$ 得 $x=3,y=-1$，第四分量 $a=3\\cdot2-4=2$。\n3. 故 $a=2$，$\\alpha_3=3\\alpha_1-\\alpha_2$，极大无关组为 $\\alpha_1,\\alpha_2$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "由秩为 2 求参数 $b$",
     "statement": "设 $\\alpha_1=(1,2,3)^T$，$\\alpha_2=(3,2,1)^T$，$\\alpha_3=(2,0,-2)^T$，$\\alpha_4=(1,0,b)^T$。若向量组的秩为 $2$，求 $b$ 的值，并确定一个极大无关组。",
     "tags": [
-      "线性代数",
-      "向量"
+      "线性代数综合"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1790,14 +1842,14 @@
     ],
     "answer": "$b=-1$，极大无关组 $\\alpha_1,\\alpha_2$",
     "solution": "1. $\\alpha_1-\\alpha_2=(-2,0,2)^T=-\\alpha_3$，故 $\\alpha_3$ 可由 $\\alpha_1,\\alpha_2$ 表出。\n2. $\\alpha_4=x\\alpha_1+y\\alpha_2$：由前两分量 $x+3y=1,\\;2x+2y=0$ 得 $x=-\\frac12,y=\\frac12$。\n3. 第三分量 $b=3x+y=-\\frac32+\\frac12=-1$，故 $b=-1$，极大无关组为 $\\alpha_1,\\alpha_2$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "已知极大无关组反求参数并表出向量",
     "statement": "设 $\\alpha_1=(1,2,1,0)^T$，$\\alpha_2=(2,1,0,1)^T$，$\\alpha_3=(1,1,a,2)^T$，$\\alpha_4=(3,3,2,3)^T$。已知 $\\alpha_1,\\alpha_2,\\alpha_4$ 为向量组的一个极大无关组，求 $a$ 的值，并将 $\\alpha_3$ 用该极大无关组线性表出。",
     "tags": [
-      "线性代数",
-      "向量"
+      "线性代数综合"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -1809,14 +1861,14 @@
     ],
     "answer": "$a=\\frac76$，$\\alpha_3=-\\frac12\\alpha_1-\\frac12\\alpha_2+\\frac56\\alpha_4$",
     "solution": "1. 设 $\\alpha_3=x\\alpha_1+y\\alpha_2+z\\alpha_4$，由第一、二分容：$x+2y+3z=1,\\;2x+y+3z=1$。\n2. 由第四分量：$y+3z=2$，联立解得 $z=\\frac56,\\;x=y=-\\frac12$。\n3. 第三分量 $a=x+0\\cdot y+2z=-\\frac12+\\frac{10}{6}=\\frac76$。\n4. 故 $\\alpha_3=-\\frac12\\alpha_1-\\frac12\\alpha_2+\\frac56\\alpha_4$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "线性表出：唯一、不唯一与不能表出（一）",
     "statement": "设 $\\alpha_1=(1,0,1)^T$，$\\alpha_2=(1,1,0)^T$，$\\alpha_3=(0,1,a)^T$，$\\beta=(1,2,b)^T$。试讨论 $a,b$ 取何值时，$\\beta$ 可由 $\\alpha_1,\\alpha_2,\\alpha_3$ 唯一线性表出？表示法不唯一？不能线性表出？",
     "tags": [
-      "线性代数",
-      "向量"
+      "线性代数综合"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -1828,14 +1880,14 @@
     ],
     "answer": "唯一表出：$a\\ne-1$；表示不唯一：$a=-1$ 且 $b=-1$；不能表出：$a=-1$ 且 $b\\ne-1$",
     "solution": "1. $\\det(\\alpha_1,\\alpha_2,\\alpha_3)=a+1$，故 $a\\ne-1$ 时唯一表出。\n2. $a=-1$ 时 $\\alpha_1-\\alpha_2+\\alpha_3=0$，左零向量为 $(1,-1,-1)^T$。\n3. 相容条件 $(1,-1,-1)\\cdot\\beta=1-2-b=0$，即 $b=-1$ 时表示不唯一，否则不能表出。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "线性表出：唯一、不唯一与不能表出（二）",
     "statement": "已知向量组 $\\alpha_1=(1,0,2)^T$，$\\alpha_2=(0,1,1)^T$，$\\alpha_3=(1,-1,a)^T$，$\\beta=(3,2,b)^T$。讨论 $a,b$ 为何值时，$\\beta$ 可由 $\\alpha_1,\\alpha_2,\\alpha_3$ 线性表出且表示方式唯一？有无穷多种表示方式？不能表示？",
     "tags": [
-      "线性代数",
-      "向量"
+      "线性代数综合"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -1847,14 +1899,14 @@
     ],
     "answer": "唯一：$a\\ne1$；表示不唯一：$a=1$ 且 $b=8$；不能表出：$a=1$ 且 $b\\ne8$",
     "solution": "1. $\\det(\\alpha_1,\\alpha_2,\\alpha_3)=a-1\\ne0$ 时唯一表出。\n2. $a=1$ 时 $\\alpha_3=\\alpha_1-\\alpha_2$，向量组秩为 $2$，$\\beta$ 须落在 $\\mathrm{span}(\\alpha_1,\\alpha_2)$ 中。\n3. 解 $x\\alpha_1+y\\alpha_2=(3,2,b)$ 得 $x=3,y=2$，故 $b=2x+y=8$ 时无穷多表示，否则不能表出。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "线性表出：唯一、不唯一与不能表出（三）",
     "statement": "设 $\\alpha_1=(1,1,1)^T$，$\\alpha_2=(1,2,3)^T$，$\\alpha_3=(2,3,a)^T$，$\\beta=(1,4,b)^T$。问 $a,b$ 满足什么条件时，$\\beta$ 能由 $\\alpha_1,\\alpha_2,\\alpha_3$ 唯一线性表出？表示法无穷多？不能线性表出？",
     "tags": [
-      "线性代数",
-      "向量"
+      "线性代数综合"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -1866,14 +1918,14 @@
     ],
     "answer": "唯一表出：$a\\ne4$；表示不唯一：$a=4$ 且 $b=7$；不能表出：$a=4$ 且 $b\\ne7$",
     "solution": "1. $\\det(\\alpha_1,\\alpha_2,\\alpha_3)=4-a\\ne0$ 时唯一表出。\n2. $a=4$ 时 $\\alpha_3=\\alpha_1+\\alpha_2$，秩为 $2$。\n3. 解 $x\\alpha_1+y\\alpha_2=(1,4,b)$ 得 $x=-2,y=3$，故 $b=x+3y=7$ 时表示不唯一，否则不能表出。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "线性表出：唯一、不唯一与不能表出（四）",
     "statement": "设有向量组 $\\alpha_1=(2,1,0)^T$，$\\alpha_2=(1,0,1)^T$，$\\alpha_3=(0,1,a)^T$，$\\beta=(3,2,b)^T$。问 $a,b$ 为何值时 $\\beta$ 可由 $\\alpha_1,\\alpha_2,\\alpha_3$ 线性表出？何时唯一？何时有无穷多种表出？何时不能表出？",
     "tags": [
-      "线性代数",
-      "向量"
+      "线性代数综合"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -1885,14 +1937,14 @@
     ],
     "answer": "唯一表出：$a\\ne-2$；表示不唯一：$a=-2$ 且 $b=-1$；不能表出：$a=-2$ 且 $b\\ne-1$",
     "solution": "1. $\\det(\\alpha_1,\\alpha_2,\\alpha_3)=-2-a\\ne0$ 时唯一表出。\n2. $a=-2$ 时 $\\alpha_3$ 落在 $\\alpha_1,\\alpha_2$ 张成空间，秩为 $2$。\n3. 由前两分量解出系数后检验第三分量，相容当且仅当 $b=-1$，此时表示不唯一；否则不能表出。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "线性表出：唯一、不唯一与不能表出（五）",
     "statement": "已知 $\\alpha_1=(1,2,3)^T$，$\\alpha_2=(3,2,1)^T$，$\\alpha_3=(1,0,a)^T$，$\\beta=(0,2,b)^T$。试就参数 $a,b$ 的取值，讨论 $\\beta$ 能否由 $\\alpha_1,\\alpha_2,\\alpha_3$ 线性表出，并指出表出唯一、表出不唯一及不能表出的条件。",
     "tags": [
-      "线性代数",
-      "向量"
+      "线性代数综合"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -1904,14 +1956,14 @@
     ],
     "answer": "唯一表出：$a\\ne-1$；表示不唯一：$a=-1$ 且 $b=4$；不能表出：$a=-1$ 且 $b\\ne4$",
     "solution": "1. $\\det(\\alpha_1,\\alpha_2,\\alpha_3)=-4(a+1)\\ne0$ 时唯一表出。\n2. $a=-1$ 时 $\\alpha_3$ 与 $\\alpha_1,\\alpha_2$ 相关，秩为 $2$。\n3. 左零向量点乘 $\\beta$ 得相容条件 $b=4$，此时表示不唯一，否则不能表出。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "齐次方程组的非零公共解（求 $a$）",
     "statement": "设齐次线性方程组 (I) $\\begin{cases}x_1+x_2-x_3=0\\\\x_2-x_3=0\\end{cases}$ 与 (II) $\\begin{cases}x_1-x_2+x_3=0\\\\2x_1+ax_2=0\\end{cases}$。若 (I) 与 (II) 有非零公共解，求 $a$ 的值及全部公共解。",
     "tags": [
-      "线性代数",
-      "向量"
+      "线性代数综合"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1923,14 +1975,14 @@
     ],
     "answer": "$a=0$，公共解为 $k(0,1,1)^T$，$k$ 为任意常数",
     "solution": "1. 解 (I)：$x_2=x_3,\\;x_1=0$，基础解系 $(0,1,1)^T$。\n2. 代入 (II) 第一式：$0-1+1=0$ 自动满足。\n3. 代入第二式：$0+a\\cdot1=0$，故 $a=0$。\n4. 全部公共解为 $k(0,1,1)^T$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "两齐次方程组的非零公共解（求 $a,b$）",
     "statement": "已知方程组 (I) $\\begin{cases}x_1+x_2-x_3=0\\\\x_1-2x_2+3x_3=0\\end{cases}$ 与 (II) $\\begin{cases}2x_1-x_2+ax_3=0\\\\x_1+bx_2+x_3=0\\end{cases}$。若 (I) 与 (II) 有非零公共解，求 $a,b$ 满足的条件。",
     "tags": [
-      "线性代数",
-      "向量"
+      "线性代数综合"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1942,14 +1994,14 @@
     ],
     "answer": "$a=2,\\;b=-\\frac12$",
     "solution": "1. 解 (I)：$x_1=-x_3/3,\\;x_2=4x_3/3$，取 $x_3=3$ 得 $(-1,4,3)^T$。\n2. 代入 (II) 第一式：$-2-4+3a=0\\Rightarrow a=2$。\n3. 代入第二式：$-1+4b+3=0\\Rightarrow b=-\\frac12$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "两个非齐次方程组的公共解",
     "statement": "设有方程组 (I) $\\begin{cases}x_1+x_2=1\\\\x_1-x_3=0\\end{cases}$ 与 (II) $\\begin{cases}2x_1-x_2+x_3=a\\\\x_1+2x_2-x_3=2\\end{cases}$。若两方程组有公共解，求 $a$ 及该公共解。",
     "tags": [
-      "线性代数",
-      "向量"
+      "线性代数综合"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1961,14 +2013,14 @@
     ],
     "answer": "$a=-1$，公共解为 $(0,1,0)^T$",
     "solution": "1. 由 (I)：$x_3=x_1,\\;x_2=1-x_1$。\n2. 代入 (II) 第二式：$x_1+2(1-x_1)-x_1=2-2x_1=2\\Rightarrow x_1=0$。\n3. 于是 $x_2=1,\\;x_3=0$。\n4. 代入 (II) 第一式：$0-1+0=a\\Rightarrow a=-1$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "齐次方程组有公共非零解求参数 $b,c$",
     "statement": "已知齐次线性方程组 (I) $\\begin{cases}x_1+2x_2+3x_3=0\\\\2x_1+3x_2+5x_3=0\\end{cases}$ 与 (II) $\\begin{cases}x_1+bx_2+cx_3=0\\\\2x_1+b^2x_2+(c+1)x_3=0\\end{cases}$。当 $b,c$ 为何值时，(I) 与 (II) 有公共非零解？并求所有公共解。",
     "tags": [
-      "线性代数",
-      "向量"
+      "线性代数综合"
     ],
     "thinking": 8,
     "difficulty": 8,
@@ -1980,14 +2032,14 @@
     ],
     "answer": "当 $b=0,c=1$ 或 $b=1,c=2$ 时，有公共非零解 $k(-1,-1,1)^T,\\ k\\ne0$",
     "solution": "1. 解 (I)：两式相减得 $x_2=-x_3$，进而 $x_1=-x_3$，基础解系 $(-1,-1,1)^T$。\n2. 代入 (II) 第一式：$-1-b+c=0\\Rightarrow c=b+1$。\n3. 代入第二式：$-2-b^2+c+1=0\\Rightarrow c=b^2+1$。\n4. 联立 $b+1=b^2+1\\Rightarrow b=0$ 或 $1$，对应 $c=1$ 或 $2$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "由基础解系与系数矩阵求公共解",
     "statement": "设方程组 (I) 的基础解系为 $\\xi_1=(1,0,-1)^T,\\;\\xi_2=(0,1,2)^T$；方程组 (II) 的系数矩阵为 $\\begin{pmatrix}1&0&1\\\\0&1&1\\end{pmatrix}$。求 (I) 与 (II) 的公共解。",
     "tags": [
-      "线性代数",
-      "向量"
+      "线性代数综合"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -1999,14 +2051,14 @@
     ],
     "answer": "仅有零解 $x_1=x_2=x_3=0$",
     "solution": "1. 解 (II)：$x_1=-x_3,\\;x_2=-x_3$，解为 $t(-1,-1,1)^T$。\n2. (I) 的解为 $s\\xi_1+t\\xi_2=(s,t,-s+2t)^T$。\n3. 要求 $(s,t,-s+2t)\\parallel(-1,-1,1)$：取 $s=-k,t=-k$，则第三分量为 $-k$，须等于 $k$，得 $k=0$。\n4. 故只有零解。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "两齐次方程组公共非零解求 $a,b$ 关系",
     "statement": "已知方程组 (I) $\\begin{cases}x_1+2x_2+3x_3=0\\\\2x_1+3x_2+4x_3=0\\end{cases}$ 与 (II) $\\begin{cases}x_1+ax_2+bx_3=0\\\\3x_1+2x_2+x_3=0\\end{cases}$。若 (I) 与 (II) 有公共非零解，求 $a,b$ 满足的关系，并写出公共解。",
     "tags": [
-      "线性代数",
-      "向量"
+      "线性代数综合"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -2018,14 +2070,14 @@
     ],
     "answer": "$b=2a-1$，公共解为 $k(1,-2,1)^T$，$k$ 为任意常数",
     "solution": "1. 解 (I)：两式消元得 $x_2=-2x_3,\\;x_1=x_3$，基础解系 $(1,-2,1)^T$。\n2. 代入 (II) 第二式：$3-4+1=0$ 自动满足。\n3. 代入第一式：$1-2a+b=0\\Rightarrow b=2a-1$。\n4. 公共解为 $k(1,-2,1)^T$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "两非齐次方程组有公共解求 $a,b$",
     "statement": "设非齐次线性方程组 (I) $\\begin{cases}x_1+x_2=2\\\\x_1-x_2+x_3=0\\end{cases}$ 与 (II) $\\begin{cases}x_1+2x_2-x_3=1\\\\2x_1+ax_2+x_3=b\\end{cases}$。当 $a,b$ 为何值时，两方程组有公共解？并求出公共解。",
     "tags": [
-      "线性代数",
-      "向量"
+      "线性代数综合"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -2037,15 +2089,16 @@
     ],
     "answer": "当 $b=3a+2$ 时，有公共解 $(-1,3,4)^T$",
     "solution": "1. 由 (I)：$x_2=2-x_1,\\;x_3=x_2-x_1=2-2x_1$。\n2. 代入 (II) 第一式：$x_1+2(2-x_1)-(2-2x_1)=x_1+2=1\\Rightarrow x_1=-1$，故 $x_2=3,\\;x_3=4$。\n3. 代入 (II) 第二式：$2(-1)+3a+4=b\\Rightarrow b=3a+2$。\n4. 公共解为 $(-1,3,4)^T$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "对称分式∫(x²+1)/(x⁴+1)dx",
     "statement": "求 $\\int \\frac{x^2+1}{x^4+1}\\,dx$。",
     "tags": [
       "不定积分",
-      "有理函数积分",
-      "换元积分"
+      "有理函数与三角积分",
+      "换元与分部"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -2057,15 +2110,16 @@
     ],
     "answer": "$\\frac{1}{\\sqrt2}\\arctan\\left(\\frac{x^2-1}{\\sqrt2\\,x}\\right)+C$",
     "solution": "**步骤1**：分子分母同除以 $x^2$，得 $\\int\\frac{1+\\frac1{x^2}}{x^2+\\frac1{x^2}}\\,dx$。\n\n**步骤2**：令 $u=x-\\frac1x$，则 $u^2=x^2-2+\\frac1{x^2}$，故分母 $x^2+\\frac1{x^2}=u^2+2$，且 $\\mathrm{d}u=(1+\\frac1{x^2})\\mathrm{d}x$。\n\n**步骤3**：原积分 $=\\int\\frac{\\mathrm{d}u}{u^2+2}=\\frac{1}{\\sqrt2}\\arctan\\frac{u}{\\sqrt2}+C$。\n\n**步骤4**：代回 $u=\\frac{x^2-1}{x}$，得 $\\frac{1}{\\sqrt2}\\arctan\\left(\\frac{x^2-1}{\\sqrt2 x}\\right)+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "对称分式∫(x²+1)/(x⁴+x²+1)dx",
     "statement": "求 $\\int \\frac{x^2+1}{x^4+x^2+1}\\,dx$。",
     "tags": [
       "不定积分",
-      "有理函数积分",
-      "换元积分"
+      "有理函数与三角积分",
+      "换元与分部"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -2077,15 +2131,16 @@
     ],
     "answer": "$\\frac{1}{\\sqrt3}\\arctan\\left(\\frac{x^2-1}{\\sqrt3\\,x}\\right)+C$",
     "solution": "**步骤1**：分子分母同除以 $x^2$：$\\int\\frac{1+\\frac1{x^2}}{x^2+1+\\frac1{x^2}}\\,dx$。\n\n**步骤2**：令 $u=x-\\frac1x$，分母 $=u^2+2+1=u^2+3$，$\\mathrm{d}u=(1+\\frac1{x^2})\\mathrm{d}x$。\n\n**步骤3**：$=\\int\\frac{\\mathrm{d}u}{u^2+3}=\\frac{1}{\\sqrt3}\\arctan\\frac{u}{\\sqrt3}+C$，代回得答案。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "对称分式∫(x²-1)/(x⁴+x²+1)dx",
     "statement": "求 $\\int \\frac{x^2-1}{x^4+x^2+1}\\,dx$。",
     "tags": [
       "不定积分",
-      "有理函数积分",
-      "换元积分"
+      "有理函数与三角积分",
+      "换元与分部"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -2097,15 +2152,16 @@
     ],
     "answer": "$\\frac12\\ln\\left|\\frac{x^2-x+1}{x^2+x+1}\\right|+C$",
     "solution": "**步骤1**：分子分母同除以 $x^2$：$\\int\\frac{1-\\frac1{x^2}}{x^2+1+\\frac1{x^2}}\\,dx$。\n\n**步骤2**：令 $u=x+\\frac1x$，$\\mathrm{d}u=(1-\\frac1{x^2})\\mathrm{d}x$，分母 $=u^2-1$。\n\n**步骤3**：$=\\int\\frac{\\mathrm{d}u}{u^2-1}=\\frac12\\ln\\left|\\frac{u-1}{u+1}\\right|+C$。\n\n**步骤4**：$u-1=\\frac{x^2-x+1}{x}$，$u+1=\\frac{x^2+x+1}{x}$，相比消去 $x$ 得答案。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "对称分式∫(x²+1)/(x⁴-x²+1)dx",
     "statement": "求 $\\int \\frac{x^2+1}{x^4-x^2+1}\\,dx$。",
     "tags": [
       "不定积分",
-      "有理函数积分",
-      "换元积分"
+      "有理函数与三角积分",
+      "换元与分部"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -2117,15 +2173,16 @@
     ],
     "answer": "$\\arctan\\left(\\frac{x^2-1}{x}\\right)+C$",
     "solution": "**步骤1**：分子分母除以 $x^2$：$\\int\\frac{1+\\frac1{x^2}}{x^2-1+\\frac1{x^2}}\\,dx$。\n\n**步骤2**：令 $u=x-\\frac1x$，分母 $=u^2+1$，$\\mathrm{d}u=(1+\\frac1{x^2})\\mathrm{d}x$。\n\n**步骤3**：$=\\arctan u+C=\\arctan\\left(\\frac{x^2-1}{x}\\right)+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "对称分式∫(x²-1)/(x⁴-x²+1)dx",
     "statement": "求 $\\int \\frac{x^2-1}{x^4-x^2+1}\\,dx$。",
     "tags": [
       "不定积分",
-      "有理函数积分",
-      "换元积分"
+      "有理函数与三角积分",
+      "换元与分部"
     ],
     "thinking": 6,
     "difficulty": 7,
@@ -2137,15 +2194,16 @@
     ],
     "answer": "$\\frac{1}{2\\sqrt3}\\ln\\left|\\frac{x^2-\\sqrt3x+1}{x^2+\\sqrt3x+1}\\right|+C$",
     "solution": "**步骤1**：分子分母除以 $x^2$：$\\int\\frac{1-\\frac1{x^2}}{x^2-1+\\frac1{x^2}}\\,dx$。\n\n**步骤2**：令 $u=x+\\frac1x$，$\\mathrm{d}u=(1-\\frac1{x^2})\\mathrm{d}x$，分母 $=u^2-3$。\n\n**步骤3**：$=\\int\\frac{\\mathrm{d}u}{u^2-3}=\\frac{1}{2\\sqrt3}\\ln\\left|\\frac{u-\\sqrt3}{u+\\sqrt3}\\right|+C$。\n\n**步骤4**：$u\\pm\\sqrt3=\\frac{x^2\\pm\\sqrt3x+1}{x}$，约去 $x$ 得答案。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "对称分式∫(x²+1)/(x⁴+3x²+1)dx",
     "statement": "求 $\\int \\frac{x^2+1}{x^4+3x^2+1}\\,dx$。",
     "tags": [
       "不定积分",
-      "有理函数积分",
-      "换元积分"
+      "有理函数与三角积分",
+      "换元与分部"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -2156,15 +2214,16 @@
     ],
     "answer": "$\\frac{1}{\\sqrt5}\\arctan\\left(\\frac{x^2-1}{\\sqrt5\\,x}\\right)+C$",
     "solution": "**步骤1**：分子分母同除以 $x^2$：$\\int\\frac{1+\\frac1{x^2}}{x^2+3+\\frac1{x^2}}\\,dx$。\n\n**步骤2**：令 $u=x-\\frac1x$，分母 $=u^2+5$，$\\mathrm{d}u=(1+\\frac1{x^2})\\mathrm{d}x$。\n\n**步骤3**：$=\\frac{1}{\\sqrt5}\\arctan\\frac{u}{\\sqrt5}+C$，代回得答案。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "对称分式∫(x²-1)/(x⁴+3x²+1)dx",
     "statement": "求 $\\int \\frac{x^2-1}{x^4+3x^2+1}\\,dx$。",
     "tags": [
       "不定积分",
-      "有理函数积分",
-      "换元积分"
+      "有理函数与三角积分",
+      "换元与分部"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -2175,15 +2234,16 @@
     ],
     "answer": "$\\arctan\\left(\\frac{x^2+1}{x}\\right)+C$",
     "solution": "**步骤1**：分子分母同除以 $x^2$：$\\int\\frac{1-\\frac1{x^2}}{x^2+3+\\frac1{x^2}}\\,dx$。\n\n**步骤2**：令 $u=x+\\frac1x$，分母 $=u^2+1$，$\\mathrm{d}u=(1-\\frac1{x^2})\\mathrm{d}x$。\n\n**步骤3**：$=\\arctan u+C=\\arctan\\left(\\frac{x^2+1}{x}\\right)+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "对称分式∫(x²+1)/(x⁴+4x²+1)dx",
     "statement": "求 $\\int \\frac{x^2+1}{x^4+4x^2+1}\\,dx$。",
     "tags": [
       "不定积分",
-      "有理函数积分",
-      "换元积分"
+      "有理函数与三角积分",
+      "换元与分部"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -2194,15 +2254,16 @@
     ],
     "answer": "$\\frac{1}{\\sqrt6}\\arctan\\left(\\frac{x^2-1}{\\sqrt6\\,x}\\right)+C$",
     "solution": "**步骤1**：分子分母同除以 $x^2$：$\\int\\frac{1+\\frac1{x^2}}{x^2+4+\\frac1{x^2}}\\,dx$。\n\n**步骤2**：令 $u=x-\\frac1x$，分母 $=u^2+6$，$\\mathrm{d}u=(1+\\frac1{x^2})\\mathrm{d}x$。\n\n**步骤3**：$=\\frac{1}{\\sqrt6}\\arctan\\frac{u}{\\sqrt6}+C$，代回得答案。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "对称分式∫(x²-1)/(x⁴+4x²+1)dx",
     "statement": "求 $\\int \\frac{x^2-1}{x^4+4x^2+1}\\,dx$。",
     "tags": [
       "不定积分",
-      "有理函数积分",
-      "换元积分"
+      "有理函数与三角积分",
+      "换元与分部"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -2213,15 +2274,16 @@
     ],
     "answer": "$\\frac{1}{\\sqrt2}\\arctan\\left(\\frac{x^2+1}{\\sqrt2\\,x}\\right)+C$",
     "solution": "**步骤1**：分子分母同除以 $x^2$：$\\int\\frac{1-\\frac1{x^2}}{x^2+4+\\frac1{x^2}}\\,dx$。\n\n**步骤2**：令 $u=x+\\frac1x$，分母 $=u^2+2$，$\\mathrm{d}u=(1-\\frac1{x^2})\\mathrm{d}x$。\n\n**步骤3**：$=\\frac{1}{\\sqrt2}\\arctan\\frac{u}{\\sqrt2}+C$，代回得答案。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "对称分式∫(x²+1)/(x⁴+5x²+1)dx",
     "statement": "求 $\\int \\frac{x^2+1}{x^4+5x^2+1}\\,dx$。",
     "tags": [
       "不定积分",
-      "有理函数积分",
-      "换元积分"
+      "有理函数与三角积分",
+      "换元与分部"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -2232,13 +2294,14 @@
     ],
     "answer": "$\\frac{1}{\\sqrt7}\\arctan\\left(\\frac{x^2-1}{\\sqrt7\\,x}\\right)+C$",
     "solution": "**步骤1**：分子分母同除以 $x^2$：$\\int\\frac{1+\\frac1{x^2}}{x^2+5+\\frac1{x^2}}\\,dx$。\n\n**步骤2**：令 $u=x-\\frac1x$，分母 $=u^2+7$，$\\mathrm{d}u=(1+\\frac1{x^2})\\mathrm{d}x$。\n\n**步骤3**：$=\\frac{1}{\\sqrt7}\\arctan\\frac{u}{\\sqrt7}+C$，代回得答案。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "分部积分∫x²e^x dx",
     "statement": "求 $\\int x^2 e^x\\,dx$。",
     "tags": [
-      "分部积分",
+      "换元与分部",
       "不定积分"
     ],
     "thinking": 3,
@@ -2250,13 +2313,14 @@
     ],
     "answer": "$e^x(x^2-2x+2)+C$",
     "solution": "**步骤1**：取 $u=x^2,\\ \\mathrm{d}v=e^x\\mathrm{d}x$，得 $x^2e^x-2\\int xe^x\\mathrm{d}x$。\n\n**步骤2**：$\\int xe^x\\mathrm{d}x=xe^x-e^x+C$。\n\n**步骤3**：合并得 $e^x(x^2-2x+2)+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "分部积分∫x²e^{2x}dx",
     "statement": "求 $\\int x^2 e^{2x}\\,dx$。",
     "tags": [
-      "分部积分",
+      "换元与分部",
       "不定积分"
     ],
     "thinking": 3,
@@ -2268,13 +2332,14 @@
     ],
     "answer": "$\\frac12 x^2 e^{2x}-\\frac12 x e^{2x}+\\frac14 e^{2x}+C$",
     "solution": "**步骤1**：$u=x^2$，$\\mathrm{d}v=e^{2x}\\mathrm{d}x\\Rightarrow v=\\frac12e^{2x}$，得 $\\frac12x^2e^{2x}-\\int xe^{2x}\\mathrm{d}x$。\n\n**步骤2**：$\\int xe^{2x}\\mathrm{d}x=\\frac12xe^{2x}-\\frac14e^{2x}+C$。\n\n**步骤3**：相减得 $\\frac12x^2e^{2x}-\\frac12xe^{2x}+\\frac14e^{2x}+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "分部积分∫x²e^{3x}dx",
     "statement": "求 $\\int x^2 e^{3x}\\,dx$。",
     "tags": [
-      "分部积分",
+      "换元与分部",
       "不定积分"
     ],
     "thinking": 3,
@@ -2286,13 +2351,14 @@
     ],
     "answer": "$\\frac13 x^2 e^{3x}-\\frac29 x e^{3x}+\\frac{2}{27} e^{3x}+C$",
     "solution": "**步骤1**：$u=x^2,\\ v=\\frac13e^{3x}$，得 $\\frac13x^2e^{3x}-\\frac23\\int xe^{3x}\\mathrm{d}x$。\n\n**步骤2**：$\\int xe^{3x}\\mathrm{d}x=\\frac13xe^{3x}-\\frac19e^{3x}+C$。\n\n**步骤3**：代入并整理得 $\\frac13x^2e^{3x}-\\frac29xe^{3x}+\\frac{2}{27}e^{3x}+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "分部积分∫x³e^x dx",
     "statement": "求 $\\int x^3 e^x\\,dx$。",
     "tags": [
-      "分部积分",
+      "换元与分部",
       "不定积分"
     ],
     "thinking": 3,
@@ -2304,15 +2370,16 @@
     ],
     "answer": "$e^x(x^3-3x^2+6x-6)+C$",
     "solution": "**步骤1**：反复取多项式为 $u$，得递推 $I_n=x^ne^x-nI_{n-1}$。\n\n**步骤2**：$I_0=e^x$，$I_1=e^x(x-1)$，$I_2=e^x(x^2-2x+2)$。\n\n**步骤3**：$I_3=x^3e^x-3I_2=e^x(x^3-3x^2+6x-6)+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "分部积分∫x²sinx dx",
     "statement": "求 $\\int x^2\\sin x\\,dx$。",
     "tags": [
-      "分部积分",
+      "换元与分部",
       "不定积分",
-      "三角变形"
+      "有理函数与三角积分"
     ],
     "thinking": 4,
     "difficulty": 5,
@@ -2323,15 +2390,16 @@
     ],
     "answer": "$-x^2\\cos x+2x\\sin x+2\\cos x+C$",
     "solution": "**步骤1**：$u=x^2,\\ v=-\\cos x$，得 $-x^2\\cos x+2\\int x\\cos x\\,\\mathrm{d}x$。\n\n**步骤2**：$\\int x\\cos x\\,\\mathrm{d}x=x\\sin x+\\cos x+C$。\n\n**步骤3**：合并得 $-x^2\\cos x+2x\\sin x+2\\cos x+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "分部积分∫x²cosx dx",
     "statement": "求 $\\int x^2\\cos x\\,dx$。",
     "tags": [
-      "分部积分",
+      "换元与分部",
       "不定积分",
-      "三角变形"
+      "有理函数与三角积分"
     ],
     "thinking": 4,
     "difficulty": 5,
@@ -2342,15 +2410,16 @@
     ],
     "answer": "$x^2\\sin x+2x\\cos x-2\\sin x+C$",
     "solution": "**步骤1**：$u=x^2,\\ v=\\sin x$，得 $x^2\\sin x-2\\int x\\sin x\\,\\mathrm{d}x$。\n\n**步骤2**：$\\int x\\sin x\\,\\mathrm{d}x=-x\\cos x+\\sin x+C$。\n\n**步骤3**：代入得 $x^2\\sin x+2x\\cos x-2\\sin x+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "分部积分∫x²sin2x dx",
     "statement": "求 $\\int x^2\\sin 2x\\,dx$。",
     "tags": [
-      "分部积分",
+      "换元与分部",
       "不定积分",
-      "三角变形"
+      "有理函数与三角积分"
     ],
     "thinking": 4,
     "difficulty": 5,
@@ -2361,15 +2430,16 @@
     ],
     "answer": "$-\\frac12 x^2\\cos 2x+\\frac12 x\\sin 2x+\\frac14\\cos 2x+C$",
     "solution": "**步骤1**：$u=x^2,\\ v=-\\frac12\\cos2x$，得 $-\\frac12x^2\\cos2x+\\int x\\cos2x\\,\\mathrm{d}x$。\n\n**步骤2**：$\\int x\\cos2x\\,\\mathrm{d}x=\\frac12x\\sin2x+\\frac14\\cos2x+C$。\n\n**步骤3**：合并即得答案。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "分部积分∫x²cos2x dx",
     "statement": "求 $\\int x^2\\cos 2x\\,dx$。",
     "tags": [
-      "分部积分",
+      "换元与分部",
       "不定积分",
-      "三角变形"
+      "有理函数与三角积分"
     ],
     "thinking": 4,
     "difficulty": 5,
@@ -2380,13 +2450,14 @@
     ],
     "answer": "$\\frac12 x^2\\sin 2x+\\frac12 x\\cos 2x-\\frac14\\sin 2x+C$",
     "solution": "**步骤1**：$u=x^2,\\ v=\\frac12\\sin2x$，得 $\\frac12x^2\\sin2x-\\int x\\sin2x\\,\\mathrm{d}x$。\n\n**步骤2**：$\\int x\\sin2x\\,\\mathrm{d}x=-\\frac12x\\cos2x+\\frac14\\sin2x+C$。\n\n**步骤3**：代入得 $\\frac12x^2\\sin2x+\\frac12x\\cos2x-\\frac14\\sin2x+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "分部积分∫x²(lnx)²dx",
     "statement": "求 $\\int x^2(\\ln x)^2\\,dx$。",
     "tags": [
-      "分部积分",
+      "换元与分部",
       "不定积分"
     ],
     "thinking": 4,
@@ -2398,15 +2469,16 @@
     ],
     "answer": "$\\frac13 x^3(\\ln x)^2-\\frac29 x^3\\ln x+\\frac{2}{27}x^3+C$",
     "solution": "**步骤1**：$u=(\\ln x)^2,\\ v=\\frac13x^3$，得 $\\frac13x^3(\\ln x)^2-\\frac23\\int x^2\\ln x\\,\\mathrm{d}x$。\n\n**步骤2**：$\\int x^2\\ln x\\,\\mathrm{d}x=\\frac13x^3\\ln x-\\frac19x^3+C$。\n\n**步骤3**：代入整理得 $\\frac13x^3(\\ln x)^2-\\frac29x^3\\ln x+\\frac{2}{27}x^3+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "三角换元∫dx/√(a²-x²)",
     "statement": "求 $\\int \\frac{\\mathrm{d}x}{\\sqrt{a^2-x^2}}\\,(a>0)$。",
     "tags": [
-      "换元积分",
+      "换元与分部",
       "不定积分",
-      "三角变形"
+      "有理函数与三角积分"
     ],
     "thinking": 3,
     "difficulty": 3,
@@ -2417,13 +2489,14 @@
     ],
     "answer": "$\\arcsin\\frac{x}{a}+C$",
     "solution": "**步骤1**：令 $x=a\\sin t\\ (|t|<\\frac\\pi2)$，则 $\\sqrt{a^2-x^2}=a\\cos t$，$\\mathrm{d}x=a\\cos t\\,\\mathrm{d}t$。\n\n**步骤2**：原积分 $=\\int\\mathrm{d}t=t+C$。\n\n**步骤3**：代回 $t=\\arcsin\\frac xa$，得 $\\arcsin\\frac xa+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "三角换元∫dx/√(a²+x²)",
     "statement": "求 $\\int \\frac{\\mathrm{d}x}{\\sqrt{a^2+x^2}}\\,(a>0)$。",
     "tags": [
-      "换元积分",
+      "换元与分部",
       "不定积分"
     ],
     "thinking": 4,
@@ -2435,13 +2508,14 @@
     ],
     "answer": "$\\ln\\left|x+\\sqrt{a^2+x^2}\\right|+C$",
     "solution": "**步骤1**：令 $x=a\\tan t$，则 $\\sqrt{a^2+x^2}=a\\sec t$，$\\mathrm{d}x=a\\sec^2t\\,\\mathrm{d}t$。\n\n**步骤2**：原积分 $=\\int\\sec t\\,\\mathrm{d}t=\\ln|\\sec t+\\tan t|+C$。\n\n**步骤3**：$\\sec t=\\frac{\\sqrt{a^2+x^2}}{a},\\ \\tan t=\\frac xa$，合并对数得 $\\ln|x+\\sqrt{a^2+x^2}|+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "三角换元∫dx/√(x²-a²)",
     "statement": "求 $\\int \\frac{\\mathrm{d}x}{\\sqrt{x^2-a^2}}\\,(a>0)$。",
     "tags": [
-      "换元积分",
+      "换元与分部",
       "不定积分"
     ],
     "thinking": 4,
@@ -2453,15 +2527,16 @@
     ],
     "answer": "$\\ln\\left|x+\\sqrt{x^2-a^2}\\right|+C$",
     "solution": "**步骤1**：令 $x=a\\sec t$，则 $\\sqrt{x^2-a^2}=a\\tan t$，$\\mathrm{d}x=a\\sec t\\tan t\\,\\mathrm{d}t$。\n\n**步骤2**：原积分 $=\\int\\sec t\\,\\mathrm{d}t=\\ln|\\sec t+\\tan t|+C$。\n\n**步骤3**：代回得 $\\ln|x+\\sqrt{x^2-a^2}|+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "三角换元∫√(a²-x²)dx",
     "statement": "求 $\\int \\sqrt{a^2-x^2}\\,dx\\,(a>0)$。",
     "tags": [
-      "换元积分",
+      "换元与分部",
       "不定积分",
-      "三角变形"
+      "有理函数与三角积分"
     ],
     "thinking": 4,
     "difficulty": 5,
@@ -2472,13 +2547,14 @@
     ],
     "answer": "$\\frac{x}{2}\\sqrt{a^2-x^2}+\\frac{a^2}{2}\\arcsin\\frac{x}{a}+C$",
     "solution": "**步骤1**：令 $x=a\\sin t$，则积分化为 $a^2\\int\\cos^2t\\,\\mathrm{d}t$。\n\n**步骤2**：$\\cos^2t=\\frac{1+\\cos2t}{2}$，故 $=\\frac{a^2}{2}t+\\frac{a^2}{4}\\sin2t+C$。\n\n**步骤3**：$\\sin2t=2\\sin t\\cos t=\\frac{2x\\sqrt{a^2-x^2}}{a^2}$，代回整理得答案。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "三角换元∫√(a²+x²)dx",
     "statement": "求 $\\int \\sqrt{a^2+x^2}\\,dx\\,(a>0)$。",
     "tags": [
-      "换元积分",
+      "换元与分部",
       "不定积分"
     ],
     "thinking": 4,
@@ -2490,13 +2566,14 @@
     ],
     "answer": "$\\frac{x}{2}\\sqrt{a^2+x^2}+\\frac{a^2}{2}\\ln\\left|x+\\sqrt{a^2+x^2}\\right|+C$",
     "solution": "**步骤1**：分部积分：$I=x\\sqrt{a^2+x^2}-\\int\\frac{x^2}{\\sqrt{a^2+x^2}}\\,\\mathrm{d}x$。\n\n**步骤2**：$\\frac{x^2}{\\sqrt{a^2+x^2}}=\\sqrt{a^2+x^2}-\\frac{a^2}{\\sqrt{a^2+x^2}}$，故 $I=x\\sqrt{a^2+x^2}-I+a^2\\ln|x+\\sqrt{a^2+x^2}|$。\n\n**步骤3**：解出 $I=\\frac{x}{2}\\sqrt{a^2+x^2}+\\frac{a^2}{2}\\ln|x+\\sqrt{a^2+x^2}|+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "三角换元∫√(x²-a²)dx",
     "statement": "求 $\\int \\sqrt{x^2-a^2}\\,dx\\,(a>0)$。",
     "tags": [
-      "换元积分",
+      "换元与分部",
       "不定积分"
     ],
     "thinking": 4,
@@ -2508,15 +2585,16 @@
     ],
     "answer": "$\\frac{x}{2}\\sqrt{x^2-a^2}-\\frac{a^2}{2}\\ln\\left|x+\\sqrt{x^2-a^2}\\right|+C$",
     "solution": "**步骤1**：分部积分 $I=x\\sqrt{x^2-a^2}-\\int\\frac{x^2}{\\sqrt{x^2-a^2}}\\,\\mathrm{d}x$。\n\n**步骤2**：$\\frac{x^2}{\\sqrt{x^2-a^2}}=\\sqrt{x^2-a^2}+\\frac{a^2}{\\sqrt{x^2-a^2}}$。\n\n**步骤3**：得 $I=x\\sqrt{x^2-a^2}-I-a^2\\ln|x+\\sqrt{x^2-a^2}|$，解出答案。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "三角换元∫x²/√(a²-x²)dx",
     "statement": "求 $\\int \\frac{x^2}{\\sqrt{a^2-x^2}}\\,dx\\,(a>0)$。",
     "tags": [
-      "换元积分",
+      "换元与分部",
       "不定积分",
-      "三角变形"
+      "有理函数与三角积分"
     ],
     "thinking": 4,
     "difficulty": 5,
@@ -2527,13 +2605,14 @@
     ],
     "answer": "$\\frac{a^2}{2}\\arcsin\\frac{x}{a}-\\frac{x}{2}\\sqrt{a^2-x^2}+C$",
     "solution": "**步骤1**：令 $x=a\\sin t$，积分化为 $a^2\\int\\sin^2t\\,\\mathrm{d}t$。\n\n**步骤2**：$\\int\\sin^2t\\,\\mathrm{d}t=\\frac t2-\\frac14\\sin2t$。\n\n**步骤3**：代回 $\\sin2t=\\frac{2x\\sqrt{a^2-x^2}}{a^2}$，得 $\\frac{a^2}{2}\\arcsin\\frac xa-\\frac x2\\sqrt{a^2-x^2}+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "三角换元∫dx/(a²+x²)^{3/2}",
     "statement": "求 $\\int \\frac{\\mathrm{d}x}{(a^2+x^2)^{3/2}}\\,(a>0)$。",
     "tags": [
-      "换元积分",
+      "换元与分部",
       "不定积分"
     ],
     "thinking": 4,
@@ -2545,15 +2624,16 @@
     ],
     "answer": "$\\frac{x}{a^2\\sqrt{a^2+x^2}}+C$",
     "solution": "**步骤1**：令 $x=a\\tan t$，$(a^2+x^2)^{3/2}=a^3\\sec^3t$，$\\mathrm{d}x=a\\sec^2t\\,\\mathrm{d}t$。\n\n**步骤2**：积分 $=\\frac1{a}\\int\\cos t\\,\\mathrm{d}t=\\frac1a\\sin t+C$。\n\n**步骤3**：$\\sin t=\\frac{x}{\\sqrt{a^2+x^2}}$，得 $\\frac{x}{a^2\\sqrt{a^2+x^2}}+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "三角换元∫dx/(x²√(a²-x²))",
     "statement": "求 $\\int \\frac{\\mathrm{d}x}{x^2\\sqrt{a^2-x^2}}\\,(a>0)$。",
     "tags": [
-      "换元积分",
+      "换元与分部",
       "不定积分",
-      "三角变形"
+      "有理函数与三角积分"
     ],
     "thinking": 5,
     "difficulty": 6,
@@ -2564,15 +2644,16 @@
     ],
     "answer": "$-\\frac{\\sqrt{a^2-x^2}}{a^2 x}+C$",
     "solution": "**步骤1**：令 $x=a\\sin t$，则积分 $=\\frac1{a^2}\\int\\frac{\\cos t}{\\sin^2t}\\,\\mathrm{d}t=\\frac1{a^2}\\int\\csc^2t\\,\\mathrm{d}t$。\n\n**步骤2**：$=-\\frac1{a^2}\\cot t+C$。\n\n**步骤3**：$\\cot t=\\frac{\\sqrt{a^2-x^2}}{x}$，得 $-\\frac{\\sqrt{a^2-x^2}}{a^2x}+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "三角换元∫dx/(x²√(x²-a²))",
     "statement": "求 $\\int \\frac{\\mathrm{d}x}{x^2\\sqrt{x^2-a^2}}\\,(a>0)$。",
     "tags": [
-      "换元积分",
+      "换元与分部",
       "不定积分",
-      "三角变形"
+      "有理函数与三角积分"
     ],
     "thinking": 5,
     "difficulty": 6,
@@ -2583,14 +2664,14 @@
     ],
     "answer": "$\\frac{\\sqrt{x^2-a^2}}{a^2 x}+C$",
     "solution": "**步骤1**：令 $x=a\\sec t$，则 $\\sqrt{x^2-a^2}=a\\tan t$，$\\mathrm{d}x=a\\sec t\\tan t\\,\\mathrm{d}t$。\n\n**步骤2**：积分 $=\\frac1a\\int\\frac{\\sec t\\tan t}{\\sec^2t\\tan t}\\,\\mathrm{d}t=\\frac1a\\int\\cos t\\,\\mathrm{d}t=\\frac1a\\sin t+C$。\n\n**步骤3**：$\\sin t=\\frac{\\sqrt{x^2-a^2}}{x}$，得 $\\frac{\\sqrt{x^2-a^2}}{a^2x}+C$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "二重积分定义：指数型二重和极限",
     "statement": "计算 $\\lim_{n\\to\\infty}\\frac{1}{n^2}\\sum_{i=1}^{n}\\sum_{j=1}^{i}e^{\\frac{i+j}{n}}$。",
     "tags": [
       "二重积分",
-      "数列极限",
       "定积分"
     ],
     "thinking": 7,
@@ -2603,15 +2684,15 @@
     ],
     "answer": "$\\frac{(e-1)^2}{2}$",
     "solution": "**步骤1**：令 $x=\\frac in,y=\\frac jn$，区域为 $0\\le y\\le x\\le 1$，被积函数 $e^{x+y}$。\n\n**步骤2**：原极限 $=\\int_0^1\\mathrm{d}x\\int_0^x e^{x+y}\\,\\mathrm{d}y=\\int_0^1(e^{2x}-e^x)\\,\\mathrm{d}x$。\n\n**步骤3**：$=\\left[\\frac12e^{2x}-e^x\\right]_0^1=\\frac12e^2-e+\\frac12=\\frac{(e-1)^2}{2}$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "二重积分定义：正弦型二重和极限",
     "statement": "计算 $\\lim_{n\\to\\infty}\\frac{1}{n^2}\\sum_{i=1}^{n}\\sum_{j=1}^{2i}\\sin\\left(\\frac{i+j}{n}\\right)$。",
     "tags": [
       "二重积分",
-      "数列极限",
-      "三角变形"
+      "有理函数与三角积分"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -2622,15 +2703,15 @@
     ],
     "answer": "$\\sin 1-\\frac13\\sin 3$",
     "solution": "**步骤1**：$x=\\frac in\\in(0,1],\\ y=\\frac jn\\in(0,2x]$，故极限 $=\\int_0^1\\mathrm{d}x\\int_0^{2x}\\sin(x+y)\\,\\mathrm{d}y$。\n\n**步骤2**：内层 $=\\cos x-\\cos3x$，故积分 $=\\int_0^1(\\cos x-\\cos3x)\\,\\mathrm{d}x$。\n\n**步骤3**：$=\\sin1-\\frac13\\sin3$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "二重积分定义：分式线性二重和极限",
     "statement": "计算 $\\lim_{n\\to\\infty}\\frac{1}{n^2}\\sum_{i=1}^{n}\\sum_{j=i}^{2i}\\frac{1}{1+\\frac{i}{n}+\\frac{j}{n}}$。",
     "tags": [
       "二重积分",
-      "数列极限",
-      "有理函数积分"
+      "有理函数与三角积分"
     ],
     "thinking": 7,
     "difficulty": 8,
@@ -2642,15 +2723,15 @@
     ],
     "answer": "$\\frac83\\ln 2-\\frac32\\ln 3$",
     "solution": "**步骤1**：令 =\\frac in,y=\\frac jn$，化为 =\\int_0^1\\mathrm{d}x\\int_x^{2x}\\frac{\\mathrm{d}y}{1+x+y}$。\n\n**步骤2**：内层积分 $=\\ln(1+3x)-\\ln(1+2x)$，故 =\\int_0^1\\ln\\frac{1+3x}{1+2x}\\,\\mathrm{d}x$。\n\n**步骤3**：利用 $\\int_0^1\\ln(1+ax)\\,\\mathrm{d}x=\\frac{(1+a)\\ln(1+a)-a}{a}$，得 =\\frac{4\\ln4-3}{3}-\\frac{3\\ln3-2}{2}=\\frac83\\ln2-\\frac32\\ln3$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "二重积分定义：余弦差型二重和极限",
     "statement": "计算 $\\lim_{n\\to\\infty}\\frac{1}{n^2}\\sum_{i=1}^{n}\\sum_{j=1}^{i}\\cos\\left(\\frac{i-j}{n}\\right)$。",
     "tags": [
       "二重积分",
-      "数列极限",
-      "三角变形"
+      "有理函数与三角积分"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -2661,14 +2742,13 @@
     ],
     "answer": "$1-\\cos 1$",
     "solution": "**步骤1**：化为 $I=\\int_0^1\\mathrm{d}x\\int_0^x\\cos(x-y)\\,\\mathrm{d}y$。\n\n**步骤2**：内层 $=\\sin x$，故 $I=\\int_0^1\\sin x\\,\\mathrm{d}x=1-\\cos1$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "二重积分定义：根式型二重和极限",
     "statement": "计算 $\\lim_{n\\to\\infty}\\frac{1}{n^2}\\sum_{i=1}^{n}\\sum_{j=1}^{i}\\sqrt{\\left(\\frac in\\right)^2+\\left(\\frac jn\\right)^2}$。",
     "tags": [
-      "二重积分",
-      "数列极限",
       "二重积分"
     ],
     "thinking": 8,
@@ -2680,15 +2760,15 @@
     ],
     "answer": "$\\frac16\\left(\\sqrt2+\\ln(1+\\sqrt2)\\right)$",
     "solution": "**步骤1**：化为 $I=\\int_0^1\\mathrm{d}x\\int_0^x\\sqrt{x^2+y^2}\\,\\mathrm{d}y$。\n\n**步骤2**：改用极坐标：区域为 $0\\le\\theta\\le\\frac\\pi4,\\ 0\\le r\\le\\sec\\theta$（由 $x=r\\cos\\theta\\le1$）。\n\n**步骤3**：$I=\\int_0^{\\pi/4}\\mathrm{d}\\theta\\int_0^{\\sec\\theta}r\\cdot r\\,\\mathrm{d}r=\\frac13\\int_0^{\\pi/4}\\sec^3\\theta\\,\\mathrm{d}\\theta$。\n\n**步骤4**：$\\int\\sec^3\\theta\\,\\mathrm{d}\\theta=\\frac12(\\sec\\theta\\tan\\theta+\\ln|\\sec\\theta+\\tan\\theta|)$，代入上下限得 $\\frac16(\\sqrt2+\\ln(1+\\sqrt2))$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "二重积分定义：指数正弦混合和极限",
     "statement": "计算 $\\lim_{n\\to\\infty}\\frac{1}{n^2}\\sum_{i=1}^{n}\\sum_{j=i}^{n}e^{-\\frac in}\\sin\\left(\\frac jn\\right)$。",
     "tags": [
       "二重积分",
-      "数列极限",
-      "三角变形"
+      "有理函数与三角积分"
     ],
     "thinking": 8,
     "difficulty": 8,
@@ -2700,14 +2780,14 @@
     ],
     "answer": "$\\frac12-\\cos 1+\\frac{\\sin 1+\\cos 1}{2e}$",
     "solution": "**步骤1**：化为 =\\int_0^1\\mathrm{d}x\\int_x^1 e^{-x}\\sin y\\,\\mathrm{d}y=\\int_0^1 e^{-x}(\\cos x-\\cos1)\\,\\mathrm{d}x$。\n\n**步骤2**：$\\int_0^1 e^{-x}\\cos x\\,\\mathrm{d}x=\\left[\\frac{e^{-x}(\\sin x-\\cos x)}{2}\\right]_0^1=\\frac{\\sin1-\\cos1}{2e}+\\frac12$，且 $\\int_0^1e^{-x}\\,\\mathrm{d}x=1-\\frac1e$。\n\n**步骤3**：=\\frac12+\\frac{\\sin1-\\cos1}{2e}-\\cos1\\left(1-\\frac1e\\right)=\\frac12-\\cos1+\\frac{\\sin1+\\cos1}{2e}$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "二重积分定义：根式分母二重和极限",
     "statement": "计算 $\\lim_{n\\to\\infty}\\frac{1}{n^2}\\sum_{i=1}^{n}\\sum_{j=1}^{2i}\\frac{1}{\\sqrt{1+\\frac in+\\frac jn}}$。",
     "tags": [
-      "二重积分",
-      "数列极限"
+      "二重积分"
     ],
     "thinking": 8,
     "difficulty": 8,
@@ -2719,14 +2799,14 @@
     ],
     "answer": "$\\frac{40-24\\sqrt2}{9}$",
     "solution": "**步骤1**：化为 $I=\\int_0^1\\mathrm{d}x\\int_0^{2x}\\frac{\\mathrm{d}y}{\\sqrt{1+x+y}}$。\n\n**步骤2**：内层 $=2(\\sqrt{1+3x}-\\sqrt{1+x})$。\n\n**步骤3**：$I=2\\int_0^1(\\sqrt{1+3x}-\\sqrt{1+x})\\,\\mathrm{d}x=2\\left[\\frac{2}{9}(1+3x)^{3/2}-\\frac23(1+x)^{3/2}\\right]_0^1$。\n\n**步骤4**：$=\\frac49(8-1)-\\frac43(2\\sqrt2-1)=\\frac{28}{9}-\\frac{8\\sqrt2}{3}+\\frac43=\\frac{40-24\\sqrt2}{9}$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "二重积分定义：多项式指数和极限",
     "statement": "计算 $\\lim_{n\\to\\infty}\\frac{1}{n^2}\\sum_{i=1}^{n}\\sum_{j=1}^{i}\\left(\\frac in+\\frac jn\\right)^2 e^{\\frac in}$。",
     "tags": [
-      "二重积分",
-      "数列极限"
+      "二重积分"
     ],
     "thinking": 8,
     "difficulty": 8,
@@ -2737,14 +2817,14 @@
     ],
     "answer": "$14-\\frac{14}{3}e$",
     "solution": "**步骤1**：化为 $I=\\int_0^1 e^x\\,\\mathrm{d}x\\int_0^x(x+y)^2\\,\\mathrm{d}y=\\int_0^1 e^x\\cdot\\frac{(2x)^3-x^3}{3}\\,\\mathrm{d}x=\\frac73\\int_0^1x^3e^x\\,\\mathrm{d}x$。\n\n**步骤2**：$\\int_0^1x^3e^x\\,\\mathrm{d}x=[e^x(x^3-3x^2+6x-6)]_0^1=e(-2)+6=6-2e$。\n\n**步骤3**：$I=\\frac73(6-2e)=14-\\frac{14}{3}e$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "二重积分定义：x²型指数和极限",
     "statement": "计算 $\\lim_{n\\to\\infty}\\frac{1}{n^2}\\sum_{i=1}^{n}\\sum_{j=1}^{i}\\left(\\frac in\\right)^2 e^{\\frac jn}$。",
     "tags": [
-      "二重积分",
-      "数列极限"
+      "二重积分"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -2755,14 +2835,14 @@
     ],
     "answer": "$e-\\frac73$",
     "solution": "**步骤1**：化为 $I=\\int_0^1x^2\\,\\mathrm{d}x\\int_0^x e^y\\,\\mathrm{d}y=\\int_0^1x^2(e^x-1)\\,\\mathrm{d}x$。\n\n**步骤2**：$\\int_0^1x^2e^x\\,\\mathrm{d}x=[e^x(x^2-2x+2)]_0^1=e-2$。\n\n**步骤3**：$\\int_0^1x^2\\,\\mathrm{d}x=\\frac13$，故 $I=e-2-\\frac13=e-\\frac73$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "二重积分定义：分式型二重和极限",
     "statement": "计算 $\\lim_{n\\to\\infty}\\frac{1}{n^2}\\sum_{i=1}^{n}\\sum_{j=1}^{2i}\\frac{\\frac in}{1+\\left(\\frac in\\right)^2}$。",
     "tags": [
-      "二重积分",
-      "数列极限"
+      "二重积分"
     ],
     "thinking": 8,
     "difficulty": 8,
@@ -2774,15 +2854,14 @@
     ],
     "answer": "$2-\\frac{\\pi}{2}$",
     "solution": "**步骤1**：内层与 $j$ 无关，共 $2i$ 项，故原极限 $=\\lim\\frac1{n^2}\\sum_i 2i\\cdot\\frac{\\frac in}{1+(\\frac in)^2}=2\\int_0^1\\frac{x^2}{1+x^2}\\,\\mathrm{d}x$。\n\n**步骤2**：$\\frac{x^2}{1+x^2}=1-\\frac1{1+x^2}$。\n\n**步骤3**：$I=2\\left[x-\\arctan x\\right]_0^1=2\\left(1-\\frac\\pi4\\right)=2-\\frac\\pi2$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "含绝对值参数积分F(x)=∫₀²|x-t|dt",
     "statement": "求 $F(x)=\\int_0^2 |x-t|\\,dt$ 的表达式。",
     "tags": [
-      "定积分",
-      "分段讨论",
-      "绝对值"
+      "定积分"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -2793,15 +2872,14 @@
     ],
     "answer": "$F(x)=\\begin{cases}2-2x, & x<0,\\\\ x^2-2x+2, & 0\\le x\\le 2,\\\\ 2x-2, & x>2.\\end{cases}$",
     "solution": "**步骤1**：$x<0$ 时 $|x-t|=t-x$，故 $F(x)=\\int_0^2(t-x)\\,dt=2-2x$。\n\n**步骤2**：$0\\le x\\le2$ 时，$F(x)=\\int_0^x(x-t)\\,dt+\\int_x^2(t-x)\\,dt=\\frac{x^2}{2}+\\frac{(2-x)^2}{2}=x^2-2x+2$。\n\n**步骤3**：$x>2$ 时 $|x-t|=x-t$，故 $F(x)=\\int_0^2(x-t)\\,dt=2x-2$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "含绝对值参数积分F(x)=∫₀¹|x-t|t dt",
     "statement": "求 $F(x)=\\int_0^1 |x-t|t\\,dt$ 的表达式。",
     "tags": [
-      "定积分",
-      "分段讨论",
-      "绝对值"
+      "定积分"
     ],
     "thinking": 5,
     "difficulty": 6,
@@ -2812,15 +2890,14 @@
     ],
     "answer": "$F(x)=\\begin{cases}\\frac13-\\frac x2, & x<0,\\\\ \\frac13-\\frac x2+\\frac{x^3}{3}, & 0\\le x\\le 1,\\\\ \\frac x2-\\frac13, & x>1.\\end{cases}$",
     "solution": "**步骤1**：$x<0$：$|x-t|t=(t-x)t$，$\\int_0^1(t^2-xt)\\,dt=\\frac13-\\frac x2$。\n\n**步骤2**：$0\\le x\\le1$：$F=\\int_0^x(x-t)t\\,dt+\\int_x^1(t-x)t\\,dt=\\frac{x^3}{6}+\\left(\\frac13-\\frac{x^3}{3}\\right)-\\frac x2(1-x^2)=\\frac13-\\frac x2+\\frac{x^3}{3}$。\n\n**步骤3**：$x>1$：$|x-t|=(x-t)$，$\\int_0^1(xt-t^2)\\,dt=\\frac x2-\\frac13$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "含绝对值参数积分F(x)=∫₀¹|x²-t|dt",
     "statement": "求 $F(x)=\\int_0^1 |x^2-t|\\,dt$ 的表达式。",
     "tags": [
-      "定积分",
-      "分段讨论",
-      "绝对值"
+      "定积分"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -2831,15 +2908,14 @@
     ],
     "answer": "$F(x)=\\begin{cases}x^4-x^2+\\frac12, & |x|\\le 1,\\\\ x^2-\\frac12, & |x|>1.\\end{cases}$",
     "solution": "**步骤1**：$|x|\\le1$ 时 $x^2\\in[0,1]$，分段点 $t=x^2$：$F=\\int_0^{x^2}(x^2-t)\\,dt+\\int_{x^2}^1(t-x^2)\\,dt=x^4-\\frac{x^4}{2}+\\frac{(1-x^2)^2}{2}=x^4-x^2+\\frac12$。\n\n**步骤2**：$|x|>1$ 时 $x^2>1$，$t\\in[0,1]$ 上恒有 $x^2>t$，故 $F=\\int_0^1(x^2-t)\\,dt=x^2-\\frac12$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "含绝对值参数积分F(x)=∫₀¹|t²-x|dt",
     "statement": "求 $F(x)=\\int_0^1 |t^2-x|\\,dt$ 的表达式。",
     "tags": [
-      "定积分",
-      "分段讨论",
-      "绝对值"
+      "定积分"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -2851,15 +2927,14 @@
     ],
     "answer": "$F(x)=\\begin{cases}\\frac13-x, & x\\le 0,\\\\ \\frac13-x+\\frac43x^{3/2}, & 0\\le x\\le 1,\\\\ x-\\frac13, & x\\ge 1.\\end{cases}$",
     "solution": "**步骤1**：$x\\le0$ 时 $|t^2-x|=t^2-x$，$\\int_0^1(t^2-x)\\,dt=\\frac13-x$。\n\n**步骤2**：$0\\le x\\le1$ 时分段点 $t=\\sqrt x$：$F=\\int_0^{\\sqrt x}(x-t^2)\\,dt+\\int_{\\sqrt x}^1(t^2-x)\\,dt=x\\sqrt x-\\frac{x^{3/2}}{3}+\\frac13-\\frac{x^{3/2}}{3}-x(1-\\sqrt x)=\\frac13-x+\\frac43x^{3/2}$。\n\n**步骤3**：$x\\ge1$ 时 $|t^2-x|=x-t^2$，$F=x-\\frac13$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "含绝对值参数积分F(x)=∫₋₁¹|x-t|dt",
     "statement": "求 $F(x)=\\int_{-1}^1 |x-t|\\,dt$ 的表达式。",
     "tags": [
-      "定积分",
-      "分段讨论",
-      "绝对值"
+      "定积分"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -2870,14 +2945,15 @@
     ],
     "answer": "$F(x)=\\begin{cases}-2x, & x<-1,\\\\ x^2+1, & -1\\le x\\le 1,\\\\ 2x, & x>1.\\end{cases}$",
     "solution": "**步骤1**：$x<-1$ 时 $|x-t|=t-x$，$F=\\int_{-1}^1(t-x)\\,dt=-2x$。\n\n**步骤2**：$-1\\le x\\le1$ 时，$F=\\int_{-1}^x(x-t)\\,dt+\\int_x^1(t-x)\\,dt=\\frac{(x+1)^2}{2}+\\frac{(1-x)^2}{2}=x^2+1$。\n\n**步骤3**：$x>1$ 时 $|x-t|=x-t$，$F=\\int_{-1}^1(x-t)\\,dt=2x$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "积分"
   },
   {
     "title": "合同变换求正交矩阵Q（A=QᵀBQ）第一组",
     "statement": "设 $A=\\begin{pmatrix}4&0&2\\\\0&4&0\\\\2&0&4\\end{pmatrix}$，$B=\\begin{pmatrix}3&1&0\\\\1&3&0\\\\0&0&6\\end{pmatrix}$，求 $Q$ 使 $A=Q^T BQ$。",
     "tags": [
-      "线性代数",
-      "矩阵",
+      "线性代数综合",
+      "矩阵运算",
       "二次型"
     ],
     "thinking": 7,
@@ -2889,14 +2965,15 @@
     ],
     "answer": "$Q=\\begin{pmatrix}\\frac12&-\\frac12&\\frac{1}{\\sqrt2}\\\\\\frac{1}{\\sqrt2}&\\frac{1}{\\sqrt2}&0\\\\-\\frac12&\\frac12&\\frac{1}{\\sqrt2}\\end{pmatrix}$",
     "solution": "**步骤1**：$A$ 的特征值为 $2,4,6$，$B$ 的特征值为 $2,4,6$，按同特征值配对。\n\n**步骤2**：取 $A$ 的属于 $2,4,6$ 的单位特征向量 $u_1=(\\frac12,0,-\\frac12)^T$（模长需归一化）、$u_2=(0,1,0)^T$、$u_3=(\\frac{1}{\\sqrt2},0,\\frac{1}{\\sqrt2})^T$。\n\n**步骤3**：取 $B$ 的属于 $2,4,6$ 的单位特征向量 $v_1=\\frac{1}{\\sqrt2}(1,-1,0)^T$、$v_2=(0,0,1)^T$、$v_3=\\frac{1}{\\sqrt2}(1,1,0)^T$。\n\n**步骤4**：令 $Q=U V^T$，即得题中印刷答案矩阵（向量符号可整体取反，仍满足合同关系）。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "合同变换求正交矩阵Q（A=QᵀBQ）第二组",
     "statement": "设 $A=\\begin{pmatrix}\\frac{57}{25}&\\frac{24}{25}&0\\\\\\frac{24}{25}&\\frac{43}{25}&0\\\\0&0&4\\end{pmatrix}$，$B=\\begin{pmatrix}2&1&0\\\\1&2&0\\\\0&0&4\\end{pmatrix}$，求 $Q$。",
     "tags": [
-      "线性代数",
-      "矩阵",
+      "线性代数综合",
+      "矩阵运算",
       "二次型"
     ],
     "thinking": 7,
@@ -2908,14 +2985,15 @@
     ],
     "answer": "$Q=\\begin{pmatrix}\\frac{7}{5\\sqrt2}&\\frac{1}{5\\sqrt2}&0\\\\-\\frac{1}{5\\sqrt2}&\\frac{7}{5\\sqrt2}&0\\\\0&0&1\\end{pmatrix}$",
     "solution": "**步骤1**：$A$ 的左上块特征值为 $3,1$，$B$ 的左上块特征值为 $3,1$，第三特征值为 $4$。\n\n**步骤2**：对 $B$ 作正交对角化 $B=V\\operatorname{diag}(3,1,4)V^T$，$V=\\begin{pmatrix}\\frac1{\\sqrt2}&\\frac1{\\sqrt2}&0\\\\\\frac1{\\sqrt2}&-\\frac1{\\sqrt2}&0\\\\0&0&1\\end{pmatrix}$。\n\n**步骤3**：令 $Q=U V^T$，其中 $U$ 为 $A$ 的单位特征向量矩阵，计算得印刷答案矩阵。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "合同变换求正交矩阵Q（A=QᵀBQ）第三组",
     "statement": "设 $A=\\begin{pmatrix}\\frac{18}{5}&\\frac45&0\\\\\\frac45&\\frac{12}{5}&0\\\\0&0&5\\end{pmatrix}$，$B=\\begin{pmatrix}3&1&0\\\\1&3&0\\\\0&0&5\\end{pmatrix}$，求 $Q$。",
     "tags": [
-      "线性代数",
-      "矩阵",
+      "线性代数综合",
+      "矩阵运算",
       "二次型"
     ],
     "thinking": 7,
@@ -2927,14 +3005,15 @@
     ],
     "answer": "$Q=\\begin{pmatrix}-\\frac{1}{\\sqrt{10}}&-\\frac{3}{\\sqrt{10}}&0\\\\\\frac{3}{\\sqrt{10}}&-\\frac{1}{\\sqrt{10}}&0\\\\0&0&1\\end{pmatrix}$【印刷答案，待核】",
     "solution": "**步骤1**：$A$ 的左上块与 $B$ 的左上块均有特征值 $4,2$。\n\n**步骤2**：$B$ 左上块的特征向量为 $(1,1)^T/\\sqrt2$（$\\lambda=4$）与 $(1,-1)^T/\\sqrt2$（$\\lambda=2$）。\n\n**步骤3**：由 $Q^T BQ=A$ 解出正交矩阵，得 $\\begin{pmatrix}-\\frac1{\\sqrt{10}}&-\\frac3{\\sqrt{10}}&0\\\\\\frac3{\\sqrt{10}}&-\\frac1{\\sqrt{10}}&0\\\\0&0&1\\end{pmatrix}$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "合同变换求正交矩阵Q（A=QᵀBQ）第四组",
     "statement": "设 $A=\\begin{pmatrix}\\frac95&\\frac85&0\\\\\\frac85&\\frac{21}{5}&0\\\\0&0&6\\end{pmatrix}$，$B=\\begin{pmatrix}3&2&0\\\\2&3&0\\\\0&0&6\\end{pmatrix}$，求 $Q$。",
     "tags": [
-      "线性代数",
-      "矩阵",
+      "线性代数综合",
+      "矩阵运算",
       "二次型"
     ],
     "thinking": 7,
@@ -2946,14 +3025,15 @@
     ],
     "answer": "$Q=\\begin{pmatrix}-\\frac{1}{\\sqrt{10}}&\\frac{3}{\\sqrt{10}}&0\\\\\\frac{3}{\\sqrt{10}}&\\frac{1}{\\sqrt{10}}&0\\\\0&0&1\\end{pmatrix}$",
     "solution": "**步骤1**：$A$ 与 $B$ 的左上块特征值均为 $5,1$，第三特征值均为 $6$。\n\n**步骤2**：将 $B$ 正交对角化：$B=V\\operatorname{diag}(5,1,6)V^T$，$V$ 的列为 $\\frac1{\\sqrt2}(1,1,0)^T,\\frac1{\\sqrt2}(1,-1,0)^T,(0,0,1)^T$。\n\n**步骤3**：取 $A$ 的对应单位特征向量矩阵 $U$，令 $Q=UV^T$ 得印刷答案。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "合同变换求正交矩阵Q（A=QᵀBQ）第五组",
     "statement": "设 $A=\\begin{pmatrix}\\frac{19}{5}&\\frac35&0\\\\\\frac35&\\frac{11}{5}&0\\\\0&0&7\\end{pmatrix}$，$B=\\begin{pmatrix}3&1&0\\\\1&3&0\\\\0&0&7\\end{pmatrix}$，求 $Q$。",
     "tags": [
-      "线性代数",
-      "矩阵",
+      "线性代数综合",
+      "矩阵运算",
       "二次型"
     ],
     "thinking": 7,
@@ -2965,15 +3045,15 @@
     ],
     "answer": "$Q=\\begin{pmatrix}\\frac{2}{\\sqrt5}&\\frac{1}{\\sqrt5}&0\\\\-\\frac{1}{\\sqrt5}&\\frac{2}{\\sqrt5}&0\\\\0&0&1\\end{pmatrix}$",
     "solution": "**步骤1**：$A$ 左上块 $\\begin{pmatrix}\\frac{19}5&\\frac35\\\\\\frac35&\\frac{11}5\\end{pmatrix}$ 特征值 $4,2$；$B$ 左上块特征值 $4,2$。\n\n**步骤2**：$B$ 的单位特征向量为 $\\frac1{\\sqrt2}(1,1,0)^T,\\frac1{\\sqrt2}(1,-1,0)^T,(0,0,1)^T$。\n\n**步骤3**：配对后取 $Q=UV^T$，得 $Q=\\begin{pmatrix}\\frac2{\\sqrt5}&\\frac1{\\sqrt5}&0\\\\-\\frac1{\\sqrt5}&\\frac2{\\sqrt5}&0\\\\0&0&1\\end{pmatrix}$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "四阶行列式第三列代数余子式之和",
     "statement": "设 4 阶行列式 $D=\\begin{vmatrix}1&2&3&4\\\\1&0&1&2\\\\2&3&0&5\\\\1&1&1&1\\end{vmatrix}$，$A_{ij}$ 为元素 $a_{ij}$ 的代数余子式，则 $A_{13}+A_{23}+A_{33}+A_{43}=$",
     "tags": [
       "行列式",
-      "线性代数",
-      "代数余子式"
+      "线性代数综合"
     ],
     "thinking": 5,
     "difficulty": 6,
@@ -2984,15 +3064,15 @@
     ],
     "answer": "$-4$",
     "solution": "**步骤1**：$A_{13}+A_{23}+A_{33}+A_{43}$ 等于把 $D$ 的第 3 列全部换成 1 后的行列式 $D'$（按第 3 列展开）。\n\n**步骤2**：$D'=\\begin{vmatrix}1&2&1&4\\\\1&0&1&2\\\\2&3&1&5\\\\1&1&1&1\\end{vmatrix}$，第 1 行减第 2 行、第 3 行减 2 倍第 2 行、第 4 行减第 2 行，化简后计算得 $-4$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "行列式代数余子式求余子式M41",
     "statement": "已知 4 阶行列式 $|A|=5$，其中 $A$ 的代数余子式 $A_{11}=2,A_{12}=-3,A_{13}=1,A_{14}=4$，则行列式 $\\begin{vmatrix}1&2&0&0\\\\0&1&3&0\\\\0&0&1&4\\\\a_{41}&a_{42}&a_{43}&a_{44}\\end{vmatrix}$ 中元素 $a_{41}$ 的余子式 $M_{41}=$",
     "tags": [
       "行列式",
-      "线性代数",
-      "代数余子式"
+      "线性代数综合"
     ],
     "thinking": 4,
     "difficulty": 5,
@@ -3003,15 +3083,16 @@
     ],
     "answer": "$24$",
     "solution": "**步骤1**：划去第 4 行、第 1 列，得 $M_{41}=\\begin{vmatrix}2&0&0\\\\1&3&0\\\\0&1&4\\end{vmatrix}$。\n\n**步骤2**：这是下三角行列式，等于主对角线乘积 $2\\times3\\times4=24$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "伴随矩阵逆的(i,j)元",
     "statement": "设 $A$ 为 $n$ 阶可逆矩阵，$A^*$ 为 $A$ 的伴随矩阵，则 $(A^*)^{-1}$ 的 $(i,j)$ 元等于",
     "tags": [
-      "矩阵",
-      "伴随矩阵",
-      "线性代数"
+      "矩阵运算",
+      "逆矩阵与秩",
+      "线性代数综合"
     ],
     "thinking": 4,
     "difficulty": 4,
@@ -3022,15 +3103,15 @@
     ],
     "answer": "$\\frac{a_{ij}}{|A|}$",
     "solution": "**步骤1**：由 $A^*=|A|A^{-1}$，取逆得 $(A^*)^{-1}=(|A|A^{-1})^{-1}=\\frac{1}{|A|}A$。\n\n**步骤2**：故 $(A^*)^{-1}$ 的 $(i,j)$ 元为 $a_{ij}/|A|$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "三阶矩阵代数余子式第一行之和",
     "statement": "设 3 阶矩阵 $A=\\begin{pmatrix}1&2&3\\\\2&2&1\\\\3&4&3\\end{pmatrix}$，$A_{ij}$ 是元素 $a_{ij}$ 的代数余子式，则 $A_{11}+A_{12}+A_{13}=$",
     "tags": [
       "行列式",
-      "代数余子式",
-      "矩阵"
+      "矩阵运算"
     ],
     "thinking": 4,
     "difficulty": 5,
@@ -3041,15 +3122,15 @@
     ],
     "answer": "$1$",
     "solution": "**步骤1**：$A_{11}+A_{12}+A_{13}$ 等于把 $A$ 第 1 行全换成 1 后的行列式。\n\n**步骤2**：$D'=\\begin{vmatrix}1&1&1\\\\2&2&1\\\\3&4&3\\end{vmatrix}$，第 2 行减 2 倍第 1 行、第 3 行减 3 倍第 1 行，得 $\\begin{vmatrix}1&1&1\\\\0&0&-1\\\\0&1&0\\end{vmatrix}=1$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "四阶行列式全部代数余子式之和",
     "statement": "已知 4 阶行列式 $D=\\begin{vmatrix}1&1&1&0\\\\1&1&0&1\\\\1&0&1&1\\\\0&1&1&1\\end{vmatrix}$，则所有代数余子式之和 $\\sum_{i,j=1}^4 A_{ij}=$",
     "tags": [
       "行列式",
-      "代数余子式",
-      "线性代数"
+      "线性代数综合"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -3060,15 +3141,16 @@
     ],
     "answer": "$-4$",
     "solution": "**步骤1**：设 $J$ 为元素全为 1 的 4 阶矩阵。由矩阵行列式引理 $\\det(D+J)=\\det D\\,(1+\\mathbf{1}^TD^{-1}\\mathbf{1})$，而 $D^{-1}=\\frac{D^*}{|D|}$，故 $\\mathbf{1}^TD^{-1}\\mathbf{1}=\\frac{1}{|D|}\\sum_{i,j}A_{ij}$。\n\n**步骤2**：于是 $\\sum_{i,j}A_{ij}=\\det(D+J)-\\det D$。（等价解释：把 $D$ 的第 $i$ 行换成全 1 行后按该行展开即得 $\\sum_j A_{ij}$，对 $i$ 求和。）\n\n**步骤3**：计算得 $\\det D=-3$，$\\det(D+J)=-7$，故 $\\sum_{i,j}A_{ij}=-7-(-3)=-4$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "伴随矩阵(2,3)元",
     "statement": "设 $A=\\begin{pmatrix}2&0&1\\\\0&3&0\\\\1&0&2\\end{pmatrix}$，$A^*$ 为 $A$ 的伴随矩阵，则 $A^*$ 的 $(2,3)$ 元等于",
     "tags": [
-      "矩阵",
-      "伴随矩阵",
-      "线性代数"
+      "矩阵运算",
+      "逆矩阵与秩",
+      "线性代数综合"
     ],
     "thinking": 4,
     "difficulty": 5,
@@ -3079,15 +3161,15 @@
     ],
     "answer": "$0$",
     "solution": "**步骤1**：$A^*$ 的 $(2,3)$ 元等于 $a_{32}$ 的代数余子式 $A_{32}$。\n\n**步骤2**：划去第 3 行第 2 列得 $\\begin{vmatrix}2&1\\\\0&0\\end{vmatrix}=0$，故 $A_{32}=0$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "正交矩阵代数余子式与元素关系",
     "statement": "设 $A$ 是 $n$ 阶正交矩阵，且 $|A|=1$，则 $A$ 的代数余子式 $A_{ij}$ 与元素 $a_{ij}$ 满足的关系是",
     "tags": [
-      "矩阵",
-      "线性代数",
-      "概念题"
+      "矩阵运算",
+      "线性代数综合"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -3098,14 +3180,16 @@
     ],
     "answer": "$A_{ij}=a_{ij}$",
     "solution": "**步骤1**：由 $AA^*=|A|E=E$ 得 $A^*=A^{-1}=A^T$。\n\n**步骤2**：$A^*$ 的 $(i,j)$ 元为 $A_{ji}$，$A^T$ 的 $(i,j)$ 元为 $a_{ji}$，故 $A_{ji}=a_{ji}$，即 $A_{ij}=a_{ij}$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数",
+    "kind": "概念题"
   },
   {
     "title": "伴随矩阵的伴随矩阵元素的余子式",
     "statement": "设 $A=\\begin{pmatrix}1&0&0\\\\0&2&1\\\\0&0&3\\end{pmatrix}$，$A^*$ 为 $A$ 的伴随矩阵，则 $(A^*)^*$ 的 $(2,2)$ 元的余子式为",
     "tags": [
-      "矩阵",
-      "伴随矩阵",
+      "矩阵运算",
+      "逆矩阵与秩",
       "行列式"
     ],
     "thinking": 6,
@@ -3117,15 +3201,15 @@
     ],
     "answer": "$108$",
     "solution": "**步骤1**：$|A|=1\\times2\\times3=6$，$A^*$ 可逆且 $(A^*)^*=|A|^{n-2}A=6A$。\n\n**步骤2**：$6A=\\operatorname{diag}(6,12,18)$。\n\n**步骤3**：其 $(2,2)$ 元的余子式为划去第 2 行第 2 列的行列式 $=6\\times18=108$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "行列式按行展开求值",
     "statement": "设 4 阶行列式 $D$ 的某一行元素全为 2，且该行对应的代数余子式依次为 $1,-1,2,-3$，则此行列式 $D=$",
     "tags": [
       "行列式",
-      "代数余子式",
-      "线性代数"
+      "线性代数综合"
     ],
     "thinking": 4,
     "difficulty": 5,
@@ -3136,15 +3220,15 @@
     ],
     "answer": "$-2$",
     "solution": "**步骤1**：按该行展开：$D=2\\times1+2\\times(-1)+2\\times2+2\\times(-3)=2(1-1+2-3)=-2$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "非零矩阵满足a_ij+A_ij=0求行列式",
     "statement": "设 $A=(a_{ij})$ 是 3 阶非零矩阵，$|A|$ 为实数，$A_{ij}$ 是 $a_{ij}$ 的代数余子式，且 $a_{ij}+A_{ij}=0\\ (i,j=1,2,3)$，则 $|A|=$",
     "tags": [
-      "矩阵",
-      "行列式",
-      "代数余子式"
+      "矩阵运算",
+      "行列式"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -3155,15 +3239,16 @@
     ],
     "answer": "$-1$",
     "solution": "**步骤1**：$A_{ij}=-a_{ij}$ 即 $A^*=-A$，两边取行列式：$|A^*|=|{-A}|=(-1)^3|A|=-|A|$。\n\n**步骤2**：又 $|A^*|=|A|^{n-1}=|A|^2$，故 $|A|^2=-|A|$，即 $|A|(|A|+1)=0$。\n\n**步骤3**：若 $|A|=0$ 则 $A$ 奇异，由 $A^*=-A$ 且 $A^*A=0$ 可推出 $A=0$ 与非零矛盾；故 $|A|=-1$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "伴随矩阵行列式|(2A)*|",
     "statement": "设 $A$ 为 3 阶矩阵，$|A|=3$，则 $|(2A)^*|=$",
     "tags": [
-      "伴随矩阵",
+      "逆矩阵与秩",
       "行列式",
-      "矩阵"
+      "矩阵运算"
     ],
     "thinking": 4,
     "difficulty": 5,
@@ -3174,15 +3259,16 @@
     ],
     "answer": "$576$",
     "solution": "**步骤1**：$2A$ 的行列式 $=2^3|A|=8\\times3=24$。\n\n**步骤2**：$|(2A)^*|=|2A|^{n-1}=24^2=576$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "伴随矩阵的伴随矩阵加矩阵行列式",
     "statement": "设 $A$ 为 3 阶矩阵，$|A|=-2$，则 $|(A^*)^*+3A|=$",
     "tags": [
-      "伴随矩阵",
+      "逆矩阵与秩",
       "行列式",
-      "矩阵"
+      "矩阵运算"
     ],
     "thinking": 5,
     "difficulty": 6,
@@ -3193,15 +3279,16 @@
     ],
     "answer": "$-2$",
     "solution": "**步骤1**：$(A^*)^*=|A|^{n-2}A=(-2)A=-2A$。\n\n**步骤2**：$(A^*)^*+3A=A$，故 $|(A^*)^*+3A|=|A|=-2$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "矩阵方程ABA*=8E求|B*|",
     "statement": "设 $A$ 为 3 阶矩阵，$|A|=2$，且满足 $ABA^*=8E$，则 $|B^*|=$",
     "tags": [
-      "矩阵",
+      "矩阵运算",
       "行列式",
-      "伴随矩阵"
+      "逆矩阵与秩"
     ],
     "thinking": 5,
     "difficulty": 6,
@@ -3212,15 +3299,16 @@
     ],
     "answer": "$4096$",
     "solution": "**步骤1**：由 $ABA^*=8E$，取行列式：$|A|\\cdot|B|\\cdot|A^*|=8^3=512$。\n\n**步骤2**：$|A^*|=|A|^2=4$，故 $2\\cdot|B|\\cdot4=512$，$|B|=64$。\n\n**步骤3**：$|B^*|=|B|^{n-1}=64^2=4096$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "伴随矩阵减逆矩阵行列式",
     "statement": "设 $A$ 为 3 阶矩阵，$|A|=2$，则 $|A^*-3A^{-1}|=$",
     "tags": [
-      "伴随矩阵",
+      "逆矩阵与秩",
       "行列式",
-      "矩阵"
+      "矩阵运算"
     ],
     "thinking": 5,
     "difficulty": 6,
@@ -3231,15 +3319,16 @@
     ],
     "answer": "$-\\frac12$",
     "solution": "**步骤1**：$A^*=2A^{-1}$，故 $A^*-3A^{-1}=-A^{-1}$。\n\n**步骤2**：$|-A^{-1}|=(-1)^3\\frac1{|A|}=-\\frac12$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "伴随矩阵加逆矩阵行列式",
     "statement": "设 $A$ 为 3 阶矩阵，$|A|=2$，则 $|A^*+3A^{-1}|=$",
     "tags": [
-      "伴随矩阵",
+      "逆矩阵与秩",
       "行列式",
-      "矩阵"
+      "矩阵运算"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -3250,14 +3339,15 @@
     ],
     "answer": "$\\frac{125}{2}$",
     "solution": "**步骤1**：$A^*+3A^{-1}=2A^{-1}+3A^{-1}=5A^{-1}$。\n\n**步骤2**：$|5A^{-1}|=5^3\\cdot\\frac1{|A|}=\\frac{125}{2}$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "正交矩阵组合行列式",
     "statement": "设 $A$ 为 3 阶正交矩阵，且 $|A|=-1$，则 $|2A^*-A^{-1}|=$",
     "tags": [
-      "矩阵",
-      "正交矩阵",
+      "矩阵运算",
+      "相似与对角化",
       "行列式"
     ],
     "thinking": 6,
@@ -3269,15 +3359,16 @@
     ],
     "answer": "$27$",
     "solution": "**步骤1**：$A^*=|A|A^{-1}=-A^{-1}$，故 $2A^*-A^{-1}=-2A^{-1}-A^{-1}=-3A^{-1}$。\n\n**步骤2**：$|-3A^{-1}|=(-3)^3\\cdot\\frac1{|A|}=-27\\cdot(-1)=27$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "由A*=2Aᵀ求行列式之差",
     "statement": "设 $A$ 为 3 阶矩阵，满足 $A^*=2A^T$ 且 $|A|>0$，则 $|A^{-1}-A^*|=$",
     "tags": [
-      "伴随矩阵",
+      "逆矩阵与秩",
       "行列式",
-      "矩阵"
+      "矩阵运算"
     ],
     "thinking": 7,
     "difficulty": 8,
@@ -3288,15 +3379,16 @@
     ],
     "answer": "$-\\frac{343}{8}$",
     "solution": "**步骤1**：对 $A^*=2A^T$ 取行列式：$|A|^2=2^3|A|=8|A|$，因 $|A|>0$ 得 $|A|=8$。\n\n**步骤2**：$A^{-1}=\\frac{A^*}{|A|}=\\frac{2A^T}{8}=\\frac14A^T$，故 $A^T=4A^{-1}$，从而 $A^*=2A^T=8A^{-1}$。\n\n**步骤3**：$A^{-1}-A^*=-7A^{-1}$，行列式 $=(-7)^3/|A|=-\\frac{343}{8}$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "伴随矩阵的伴随矩阵行列式",
     "statement": "设 $A$ 为 3 阶矩阵，$|A|=3$，则 $|(A^*)^*|=$",
     "tags": [
-      "伴随矩阵",
+      "逆矩阵与秩",
       "行列式",
-      "矩阵"
+      "矩阵运算"
     ],
     "thinking": 4,
     "difficulty": 5,
@@ -3307,15 +3399,16 @@
     ],
     "answer": "$81$",
     "solution": "**步骤1**：$|(A^*)^*|=||A^*|\\cdot(A^*)^{-1}|=|A^*|^{3}\\cdot\\frac1{|A^*|}=|A^*|^2$。\n\n**步骤2**：$|A^*|=|A|^2=9$，故 $|(A^*)^*|=9^2=81$（即 $|A|^{(n-1)^2}=3^4=81$）。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "逆矩阵伴随矩阵行列式",
     "statement": "设 $A$ 为 3 阶矩阵，$|A|=2$，则 $|(2A^{-1})^*|=$",
     "tags": [
-      "伴随矩阵",
+      "逆矩阵与秩",
       "行列式",
-      "矩阵"
+      "矩阵运算"
     ],
     "thinking": 5,
     "difficulty": 6,
@@ -3326,14 +3419,15 @@
     ],
     "answer": "$16$",
     "solution": "**步骤1**：$|2A^{-1}|=2^3\\cdot\\frac12=4$，$(2A^{-1})^{-1}=\\frac12A$。\n\n**步骤2**：$(2A^{-1})^*=4\\cdot\\frac12A=2A$。\n\n**步骤3**：$|2A|=2^3|A|=8\\times2=16$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "矩阵方程A*BA=3E求|B|",
     "statement": "设 $A$ 为 3 阶矩阵，$|A|=2$，且 $A^*BA=3E$，则 $|B|=$",
     "tags": [
-      "伴随矩阵",
-      "矩阵",
+      "逆矩阵与秩",
+      "矩阵运算",
       "行列式"
     ],
     "thinking": 5,
@@ -3345,15 +3439,16 @@
     ],
     "answer": "$\\frac{27}{8}$",
     "solution": "**步骤1**：取行列式 $|A^*|\\cdot|B|\\cdot|A|=27$。\n\n**步骤2**：$|A^*|=|A|^2=4$，故 $4\\cdot|B|\\cdot2=27$，$|B|=\\frac{27}{8}$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "用特征向量求Aⁿβ（特征值1,2,3）",
     "statement": "已知三阶矩阵 $A$ 的特征值为 $1,2,3$，对应特征向量分别为 $\\alpha_1=(1,1,1)^T,\\alpha_2=(1,-1,0)^T,\\alpha_3=(1,0,-1)^T$。若 $\\beta=(5,5,2)^T$，求 $A^n\\beta$。",
     "tags": [
-      "特征值",
-      "矩阵",
-      "线性代数"
+      "特征值与特征向量",
+      "矩阵运算",
+      "线性代数综合"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -3365,15 +3460,16 @@
     ],
     "answer": "$(4-2^n+2\\cdot3^n,\\ 4+2^n,\\ 4-2\\cdot3^n)^T$",
     "solution": "**步骤1**：解 $\\beta=c_1\\alpha_1+c_2\\alpha_2+c_3\\alpha_3$：由 $c_1+c_2=5,c_1-c_3=2,c_1+c_2+c_3=5$ 得 $c_1=4,c_2=-1,c_3=2$。\n\n**步骤2**：$A^n\\beta=c_1\\alpha_1+2^nc_2\\alpha_2+3^nc_3\\alpha_3$。\n\n**步骤3**：逐分量计算得 $(4-2^n+2\\cdot3^n,\\ 4+2^n,\\ 4-2\\cdot3^n)^T$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "用特征向量求Aⁿβ（特征值1,2,4）",
     "statement": "已知三阶矩阵 $A$ 的特征值为 $1,2,4$，对应特征向量分别为 $\\alpha_1=(1,1,1)^T,\\alpha_2=(1,2,4)^T,\\alpha_3=(1,4,16)^T$。若 $\\beta=(4,4,-2)^T$，求 $A^n\\beta$。",
     "tags": [
-      "特征值",
-      "矩阵",
-      "线性代数"
+      "特征值与特征向量",
+      "矩阵运算",
+      "线性代数综合"
     ],
     "thinking": 5,
     "difficulty": 6,
@@ -3384,15 +3480,16 @@
     ],
     "answer": "$(2+3\\cdot2^n-4^n,\\ 2+6\\cdot2^n-4^{n+1},\\ 2+12\\cdot2^n-4^{n+2})^T$",
     "solution": "**步骤1**：由 $c_1+c_2+c_3=4,\\ c_1+2c_2+4c_3=4,\\ c_1+4c_2+16c_3=-2$ 解得 $c_1=2,c_2=3,c_3=-1$。\n\n**步骤2**：$A^n\\beta=c_1\\alpha_1+2^nc_2\\alpha_2+4^nc_3\\alpha_3$。\n\n**步骤3**：逐分量得 $(2+3\\cdot2^n-4^n,\\ 2+6\\cdot2^n-4^{n+1},\\ 2+12\\cdot2^n-4^{n+2})^T$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "用特征向量求Aⁿβ（特征值1,3,5）",
     "statement": "已知三阶矩阵 $A$ 的特征值为 $1,3,5$，对应特征向量分别为 $\\alpha_1=(1,1,0)^T,\\alpha_2=(1,0,1)^T,\\alpha_3=(0,1,1)^T$。若 $\\beta=(3,1,8)^T$，求 $A^n\\beta$。",
     "tags": [
-      "特征值",
-      "矩阵",
-      "线性代数"
+      "特征值与特征向量",
+      "矩阵运算",
+      "线性代数综合"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -3403,15 +3500,16 @@
     ],
     "answer": "$(-2+5\\cdot3^n,\\ -2+3\\cdot5^n,\\ 5\\cdot3^n+3\\cdot5^n)^T$",
     "solution": "**步骤1**：由 $c_1+c_2=3,c_1+c_3=1,c_2+c_3=8$ 解得 $c_1=-2,c_2=5,c_3=3$。\n\n**步骤2**：$A^n\\beta=-2\\alpha_1+5\\cdot3^n\\alpha_2+3\\cdot5^n\\alpha_3$。\n\n**步骤3**：逐分量得 $(-2+5\\cdot3^n,\\ -2+3\\cdot5^n,\\ 5\\cdot3^n+3\\cdot5^n)^T$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "用特征向量求Aⁿβ（特征值2,3,5）",
     "statement": "已知三阶矩阵 $A$ 的特征值为 $2,3,5$，对应特征向量分别为 $\\alpha_1=(1,1,1)^T,\\alpha_2=(1,-1,0)^T,\\alpha_3=(1,0,-1)^T$。若 $\\beta=(5,5,-1)^T$，求 $A^n\\beta$。",
     "tags": [
-      "特征值",
-      "矩阵",
-      "线性代数"
+      "特征值与特征向量",
+      "矩阵运算",
+      "线性代数综合"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -3422,15 +3520,16 @@
     ],
     "answer": "$(3\\cdot2^n-2\\cdot3^n+4\\cdot5^n,\\ 3\\cdot2^n+2\\cdot3^n,\\ 3\\cdot2^n-4\\cdot5^n)^T$",
     "solution": "**步骤1**：由 $c_1+c_2+c_3=5,c_1-c_2=5,c_1-c_3=-1$ 解得 $c_1=3,c_2=-2,c_3=4$。\n\n**步骤2**：$A^n\\beta=3\\cdot2^n\\alpha_1-2\\cdot3^n\\alpha_2+4\\cdot5^n\\alpha_3$。\n\n**步骤3**：逐分量得 $(3\\cdot2^n-2\\cdot3^n+4\\cdot5^n,\\ 3\\cdot2^n+2\\cdot3^n,\\ 3\\cdot2^n-4\\cdot5^n)^T$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "用特征向量求Aⁿβ（特征值1,2,3另一组）",
     "statement": "已知三阶矩阵 $A$ 的特征值为 $1,2,3$，对应特征向量分别为 $\\alpha_1=(1,1,1)^T,\\alpha_2=(1,2,3)^T,\\alpha_3=(1,4,9)^T$。若 $\\beta=(4,7,14)^T$，求 $A^n\\beta$。",
     "tags": [
-      "特征值",
-      "矩阵",
-      "线性代数"
+      "特征值与特征向量",
+      "矩阵运算",
+      "线性代数综合"
     ],
     "thinking": 5,
     "difficulty": 6,
@@ -3441,15 +3540,15 @@
     ],
     "answer": "$(5-3\\cdot2^n+2\\cdot3^n,\\ 5-6\\cdot2^n+8\\cdot3^n,\\ 5-9\\cdot2^n+18\\cdot3^n)^T$",
     "solution": "**步骤1**：由 $c_1+c_2+c_3=4,c_1+2c_2+4c_3=7,c_1+3c_2+9c_3=14$ 解得 $c_1=5,c_2=-3,c_3=2$。\n\n**步骤2**：$A^n\\beta=5\\alpha_1-3\\cdot2^n\\alpha_2+2\\cdot3^n\\alpha_3$。\n\n**步骤3**：逐分量得 $(5-3\\cdot2^n+2\\cdot3^n,\\ 5-6\\cdot2^n+8\\cdot3^n,\\ 5-9\\cdot2^n+18\\cdot3^n)^T$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "矩阵方程A²-3A+E=O求(A-E)⁻¹",
     "statement": "设 $A$ 为 $n$ 阶矩阵，满足 $A^2-3A+E=O$，则 $(A-E)^{-1}=$ \n(A) $A-2E$ (B) $A+2E$ (C) $2E-A$ (D) $A-3E$",
     "tags": [
-      "矩阵",
-      "选择题",
-      "线性代数"
+      "矩阵运算",
+      "线性代数综合"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -3460,15 +3559,16 @@
     ],
     "answer": "A",
     "solution": "**步骤1**：$(A-E)(A-2E)=A^2-3A+2E=(A^2-3A+E)+E=E$。\n\n**步骤2**：故 $(A-E)^{-1}=A-2E$，选 A。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数",
+    "kind": "选择题"
   },
   {
     "title": "矩阵方程A²+A+E=O求(A+E)⁻¹",
     "statement": "设 $A$ 为 $n$ 阶矩阵，满足 $A^2+A+E=O$，则 $(A+E)^{-1}=$ \n(A) $A$ (B) $-A$ (C) $A+E$ (D) $E-A$",
     "tags": [
-      "矩阵",
-      "选择题",
-      "线性代数"
+      "矩阵运算",
+      "线性代数综合"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -3479,15 +3579,16 @@
     ],
     "answer": "B",
     "solution": "**步骤1**：$(A+E)(-A)=-A^2-A=-(A^2+A)=E$（因 $A^2+A=-E$）。\n\n**步骤2**：故 $(A+E)^{-1}=-A$，选 B。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数",
+    "kind": "选择题"
   },
   {
     "title": "矩阵方程A²-2A+2E=O求(A-E)⁻¹",
     "statement": "设 $A$ 为 $n$ 阶矩阵，满足 $A^2-2A+2E=O$，则 $(A-E)^{-1}=$ \n(A) $A-E$ (B) $E-A$ (C) $A+E$ (D) $-(A+E)$",
     "tags": [
-      "矩阵",
-      "选择题",
-      "线性代数"
+      "矩阵运算",
+      "线性代数综合"
     ],
     "thinking": 5,
     "difficulty": 6,
@@ -3498,15 +3599,16 @@
     ],
     "answer": "B",
     "solution": "**步骤1**：$(A-E)^2=A^2-2A+E=(A^2-2A+2E)-E=-E$。\n\n**步骤2**：即 $(A-E)(E-A)=E$，故 $(A-E)^{-1}=E-A$，选 B。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数",
+    "kind": "选择题"
   },
   {
     "title": "矩阵方程A²-A-E=O求A⁻¹",
     "statement": "设 $A$ 为 $n$ 阶矩阵，满足 $A^2-A-E=O$，则 $A^{-1}=$ \n(A) $A-E$ (B) $A+E$ (C) $E-A$ (D) $A$",
     "tags": [
-      "矩阵",
-      "选择题",
-      "线性代数"
+      "矩阵运算",
+      "线性代数综合"
     ],
     "thinking": 4,
     "difficulty": 5,
@@ -3517,15 +3619,16 @@
     ],
     "answer": "A",
     "solution": "**步骤1**：$A(A-E)=A^2-A=E$（由 $A^2-A=E$）。\n\n**步骤2**：故 $A^{-1}=A-E$，选 A。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数",
+    "kind": "选择题"
   },
   {
     "title": "矩阵方程A²-4A+E=O求(A-2E)⁻¹",
     "statement": "设 $A$ 为 $n$ 阶矩阵，满足 $A^2-4A+E=O$，则 $(A-2E)^{-1}=$ \n(A) $A+2E$ (B) $\\frac13(A-2E)$ (C) $\\frac13(A+2E)$ (D) $A-2E$",
     "tags": [
-      "矩阵",
-      "选择题",
-      "线性代数"
+      "矩阵运算",
+      "线性代数综合"
     ],
     "thinking": 5,
     "difficulty": 5,
@@ -3536,15 +3639,15 @@
     ],
     "answer": "B",
     "solution": "**步骤1**：$(A-2E)^2=A^2-4A+4E=(A^2-4A+E)+3E=3E$。\n\n**步骤2**：故 $(A-2E)\\cdot\\frac13(A-2E)=E$，$(A-2E)^{-1}=\\frac13(A-2E)$，选 B。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数",
+    "kind": "选择题"
   },
   {
     "title": "向量组线性无关与矩阵行列式（判断命题）",
     "statement": "下列命题正确的是（答案：A）\nA. 设向量组 $(\\beta_1,\\beta_2,\\beta_3)=(\\alpha_1,\\alpha_2,\\alpha_3)P$，其中 $\\alpha_1,\\alpha_2,\\alpha_3$ 线性无关，则 $\\beta_1,\\beta_2,\\beta_3$ 线性无关的充分必要条件是 $P$ 的行列式不等于 0\nB. 已知 $\\alpha_1,\\alpha_2,\\alpha_3$ 线性无关，则 $\\alpha_1+\\alpha_2,\\alpha_2+\\alpha_3,\\alpha_3+\\alpha_1$ 线性相关\nC. 设 $\\alpha_1,\\alpha_2,\\cdots,\\alpha_m$ 是 $n$ 维向量，若 $m>n$，则该向量组必线性无关\nD. 设向量组 $\\alpha_1,\\alpha_2,\\cdots,\\alpha_s$ 的秩为 $r$，若 $r=s$，则该向量组必线性相关",
     "tags": [
-      "向量",
-      "选择题",
-      "线性代数"
+      "线性代数综合"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -3556,15 +3659,16 @@
     ],
     "answer": "A",
     "solution": "**步骤1**：A：$\\beta$ 组 $=(\\alpha)P$，因 $\\alpha$ 组无关，$\\beta$ 组无关 $\\iff P$ 可逆 $\\iff |P|\\ne0$，正确。\n\n**步骤2**：B：变换矩阵 $\\begin{pmatrix}1&0&1\\\\1&1&0\\\\0&1&1\\end{pmatrix}$ 行列式为 $2\\ne0$，故线性无关，B 错。\n\n**步骤3**：C：$m>n$ 时 $n$ 维向量组必线性相关，C 错；D：$r=s$ 表示向量组本身线性无关，D 错。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数",
+    "kind": "选择题"
   },
   {
     "title": "矩阵乘积为零与向量正交（判断命题）",
     "statement": "下列命题正确的是（答案：B）\nA. 若矩阵 $A$ 列满秩且 $AB=0$，则 $B\\ne0$\nB. 若 $AB=0$，则 $A$ 的行向量与 $B$ 的列向量必正交\nC. 若 $B$ 行满秩且 $AB=0$，则 $A\\ne0$\nD. 若 $AB=0$，则 $A$ 的每个行向量都是方程组 $Bx=0$ 的解",
     "tags": [
-      "矩阵",
-      "选择题",
-      "线性代数"
+      "矩阵运算",
+      "线性代数综合"
     ],
     "thinking": 6,
     "difficulty": 6,
@@ -3575,15 +3679,15 @@
     ],
     "answer": "B",
     "solution": "**步骤1**：$AB=0$ 意味着 $A$ 的第 $i$ 行乘 $B$ 的第 $j$ 列 $=0$，即二者正交，B 正确。\n\n**步骤2**：A、C：$A$ 列满秩（或 $B$ 行满秩）且 $AB=0$ 时必有 $B=0$（或 $A=0$），故 A、C 错。\n\n**步骤3**：D：$AB=0$ 说明 $A$ 的行向量是 $B^Tx=0$ 的解，而非 $Bx=0$ 的解，D 错。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数",
+    "kind": "选择题"
   },
   {
     "title": "线性相关与线性表示（判断命题）",
     "statement": "下列命题正确的是（答案：A）\nA. 设 $\\alpha_1,\\alpha_2,\\alpha_3$ 线性无关，$\\alpha_2,\\alpha_3,\\alpha_4$ 线性相关，则 $\\alpha_4$ 必可由 $\\alpha_2,\\alpha_3$ 线性表示\nB. 设 $\\alpha_1,\\alpha_2,\\alpha_3$ 线性无关，$\\beta_1$ 可由 $\\alpha_1,\\alpha_2,\\alpha_3$ 线性表示，$\\beta_2$ 不能由 $\\alpha_1,\\alpha_2,\\alpha_3$ 线性表示，则存在常数 $k$ 使得 $\\alpha_1,\\alpha_2,\\alpha_3,k\\beta_1+\\beta_2$ 线性相关\nC. 若向量组 $\\alpha_1,\\alpha_2,\\cdots,\\alpha_s$ 线性相关，则其中任一向量均可由其余向量线性表示\nD. 设向量组 $\\alpha_1,\\alpha_2,\\cdots,\\alpha_s$ 的秩为 $r$，则其中任意 $r$ 个向量均线性无关",
     "tags": [
-      "向量",
-      "选择题",
-      "线性代数"
+      "线性代数综合"
     ],
     "thinking": 6,
     "difficulty": 7,
@@ -3595,15 +3699,15 @@
     ],
     "answer": "A",
     "solution": "**步骤1**：A：$\\alpha_2,\\alpha_3$ 是 $\\alpha_1,\\alpha_2,\\alpha_3$ 的部分组，故无关；而 $\\alpha_2,\\alpha_3,\\alpha_4$ 相关，所以 $\\alpha_4$ 必可由 $\\alpha_2,\\alpha_3$ 表示，正确。\n\n**步骤2**：B：$k\\beta_1+\\beta_2$ 中 $\\beta_2$ 分量无法被 $\\alpha$ 组表示，故对任意 $k$ 仍无关，B 错。\n\n**步骤3**：C：相关组中并非任一向量都可由其余向量表示（如含零向量组），C 错；D：秩为 $r$ 只保证存在 $r$ 个无关向量，非任意 $r$ 个，D 错。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数",
+    "kind": "选择题"
   },
   {
     "title": "向量组的秩与线性表示（判断命题）",
     "statement": "下列命题正确的是（答案：B）\nA. 已知向量组 $\\alpha_1,\\alpha_2$ 的秩为 2，$\\alpha_1,\\alpha_2,\\alpha_3$ 的秩为 2，$\\alpha_1,\\alpha_2,\\alpha_4$ 的秩为 3，则 $\\alpha_1,\\alpha_2,\\alpha_3-\\alpha_4$ 的秩为 2\nB. 已知 $\\alpha_1,\\alpha_2,\\alpha_3$ 线性无关，令 $\\beta_1=\\alpha_1+\\alpha_2,\\beta_2=\\alpha_2+\\alpha_3,\\beta_3=\\alpha_3+\\alpha_1,\\beta_4=\\alpha_1-\\alpha_2$，则向量组 $\\beta_1,\\beta_2,\\beta_3,\\beta_4$ 的秩为 3\nC. 设 $A=(\\alpha_1,\\alpha_2,\\alpha_3)$，$B=(\\alpha_1,\\alpha_2,\\alpha_3,\\alpha_1+\\alpha_2)$，若 $\\alpha_1,\\alpha_2,\\alpha_3$ 线性无关，则齐次线性方程组 $Bx=0$ 的基础解系所含向量个数为 2\nD. 若向量组 (I) 可由 (II) 线性表示，且 (I) 线性无关，则 (II) 必线性无关",
     "tags": [
-      "向量",
-      "选择题",
-      "线性代数"
+      "线性代数综合"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -3614,15 +3718,15 @@
     ],
     "answer": "B",
     "solution": "**步骤1**：B：$\\beta_i$ 都是 $\\alpha_1,\\alpha_2,\\alpha_3$ 的线性组合，故秩 $\\le3$；又 $\\beta_1,\\beta_2,\\beta_3$ 的系数矩阵行列式为 2，故秩 $\\ge3$，所以秩为 3，B 正确。\n\n**步骤2**：A：$\\alpha_3$ 可由 $\\alpha_1,\\alpha_2$ 表示而 $\\alpha_4$ 不能，故 $\\alpha_3-\\alpha_4$ 不能由 $\\alpha_1,\\alpha_2$ 表示，秩为 3，A 错。\n\n**步骤3**：C：$B$ 是 $3\\times4$ 矩阵、秩 3，基础解系含 $4-3=1$ 个向量，C 错；D：(II) 可以比 (I) 多一个相关向量，D 错。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数",
+    "kind": "选择题"
   },
   {
     "title": "向量组秩的不等式与 cyclic 和（判断命题）",
     "statement": "下列命题正确的是（答案：B）\nA. 设向量组 $A:\\alpha_1,\\cdots,\\alpha_r$ 的秩为 $r$，向量组 $B:\\beta_1,\\cdots,\\beta_s$ 的秩为 $s$，且 $A$ 可由 $B$ 线性表示，则 $r\\ge s$\nB. 设 $\\alpha_1,\\alpha_2,\\cdots,\\alpha_s\\ (s\\ge2)$ 线性无关，定义 $\\beta_1=\\alpha_1+\\alpha_2,\\beta_2=\\alpha_2+\\alpha_3,\\cdots,\\beta_s=\\alpha_s+\\alpha_1$，则当 $s$ 为奇数时 $\\beta_1,\\cdots,\\beta_s$ 线性无关，当 $s$ 为偶数时线性相关\nC. 若向量组 (I) 可由 (II) 线性表示，且 (I) 线性无关，则 (II) 必线性无关\nD. 设 $\\alpha_1,\\alpha_2,\\cdots,\\alpha_s$ 线性无关，则向量组 $\\alpha_1,\\alpha_1+\\alpha_2,\\cdots,\\alpha_1+\\alpha_2+\\cdots+\\alpha_s$ 线性相关",
     "tags": [
-      "向量",
-      "选择题",
-      "线性代数"
+      "线性代数综合"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -3633,15 +3737,15 @@
     ],
     "answer": "B",
     "solution": "**步骤1**：B：$\\beta$ 组对 $\\alpha$ 组的系数矩阵为循环矩阵，其行列式 $=1+(-1)^{s+1}$：$s$ 奇时为 2（无关），$s$ 偶时为 0（相关），B 正确。\n\n**步骤2**：A：$A$ 可由 $B$ 表示 $\\Rightarrow r\\le s$，A 错。\n\n**步骤3**：C：同前，(II) 可加多余向量，C 错；D：该向量组对 $\\alpha$ 组的系数矩阵是主对角线全 1 的上三角矩阵，行列式为 1，故线性无关，D 错。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数",
+    "kind": "选择题"
   },
   {
     "title": "齐次方程组基础解系与生成组（判断命题）",
     "statement": "下列命题正确的是（答案：A）\nA. 设 $\\alpha_1,\\alpha_2,\\alpha_3$ 是齐次线性方程组 $Ax=0$ 的基础解系，则 $\\alpha_1,\\alpha_1+\\alpha_2,\\alpha_1+\\alpha_2+\\alpha_3$ 也是基础解系\nB. 设 $A=(\\alpha_1,\\alpha_2,\\alpha_3)$，$B=(\\alpha_1,\\alpha_2,\\alpha_3,\\alpha_1+\\alpha_2)$，$\\alpha_1,\\alpha_2,\\alpha_3$ 线性无关，则 $Bx=0$ 的基础解系所含向量个数为 0\nC. 设 $\\alpha_1,\\alpha_2,\\cdots,\\alpha_s\\ (s\\ge2)$ 线性无关，则 $\\alpha_1+\\alpha_2,\\alpha_2+\\alpha_3,\\cdots,\\alpha_{s-1}+\\alpha_s,\\alpha_s+\\alpha_1$ 也线性无关\nD. 设 $\\alpha_1,\\alpha_2,\\alpha_3$ 线性无关，则向量组 $\\alpha_1-\\alpha_2,\\alpha_2-\\alpha_3,\\alpha_3-\\alpha_1$ 的秩为 3",
     "tags": [
-      "向量",
-      "选择题",
-      "线性代数"
+      "线性代数综合"
     ],
     "thinking": 7,
     "difficulty": 7,
@@ -3652,15 +3756,15 @@
     ],
     "answer": "A",
     "solution": "**步骤1**：A：新组对原组的系数矩阵 $\\begin{pmatrix}1&1&1\\\\0&1&1\\\\0&0&1\\end{pmatrix}$ 行列式为 1，故新组也是基础解系，A 正确。\n\n**步骤2**：B：$B$ 为 $3\\times4$ 矩阵、秩 3，$Bx=0$ 基础解系含 1 个向量，B 错。\n\n**步骤3**：C：当 $s$ 为偶数时该组线性相关，C 错；D：三向量之和为零，秩至多 2，D 错。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数",
+    "kind": "选择题"
   },
   {
     "title": "线性相关概念综合判断",
     "statement": "下列命题正确的是（答案：D）\nA. 若向量组 $\\alpha_1,\\alpha_2,\\cdots,\\alpha_s$ 线性相关，则其中任意向量都可由其余向量线性表示\nB. 设 $\\alpha_1,\\alpha_2,\\alpha_3$ 线性无关，令 $\\beta_1=\\alpha_1+\\alpha_2,\\beta_2=\\alpha_2+\\alpha_3,\\beta_3=\\alpha_3-\\alpha_1$，则 $\\beta_1,\\beta_2,\\beta_3$ 线性无关\nC. 设 $\\alpha_1,\\cdots,\\alpha_s\\ (s\\ge2)$ 线性无关，$\\beta=\\alpha_1+\\cdots+\\alpha_s$，则 $\\alpha_1-\\beta,\\cdots,\\alpha_s-\\beta$ 线性相关\nD. 设 $A$ 为 $n$ 阶矩阵，$\\alpha_1,\\cdots,\\alpha_n$ 为 $n$ 维列向量，满足 $A\\alpha_1=\\alpha_2,A\\alpha_2=\\alpha_3,\\cdots,A\\alpha_n=0$，且 $\\alpha_1\\ne0$，则 $\\alpha_1,\\cdots,\\alpha_n$ 必线性无关",
     "tags": [
-      "向量",
-      "选择题",
-      "线性代数"
+      "线性代数综合"
     ],
     "thinking": 7,
     "difficulty": 8,
@@ -3671,15 +3775,17 @@
     ],
     "answer": "D",
     "solution": "**步骤1**：D：若 $\\sum c_i\\alpha_i=0$，用 $A^{n-1}$ 作用得 $c_1\\alpha_n=0\\Rightarrow c_1=0$；依次用 $A^{n-2},\\dots$ 作用得所有 $c_i=0$，故无关，D 正确。\n\n**步骤2**：A：相关组中未必“任一”向量都可由其余表示，A 错。\n\n**步骤3**：B：$\\beta_1+\\beta_3=\\beta_2$，故相关，B 错；C：过渡矩阵为 $I-J$，其行列式 $=1-s\\ne0$（$s\\ge2$），故线性无关，C 错。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数",
+    "kind": "选择题"
   },
   {
     "title": "特征值求|A²+A*|",
     "statement": "设三阶矩阵 $A$ 的特征值为 $1,-2,3$，则行列式 $|A^2+A^*|=$",
     "tags": [
-      "特征值",
+      "特征值与特征向量",
       "行列式",
-      "伴随矩阵"
+      "逆矩阵与秩"
     ],
     "thinking": 5,
     "difficulty": 6,
@@ -3690,15 +3796,16 @@
     ],
     "answer": "$-245$",
     "solution": "**步骤1**：$|A|=1\\times(-2)\\times3=-6$，$A^*$ 的特征值为 $-6,3,-2$。\n\n**步骤2**：$A^2+A^*$ 的特征值为 $\\lambda_i^2+\\frac{|A|}{\\lambda_i}$，即 $1-6=-5$，$4+3=7$，$9-2=7$。\n\n**步骤3**：行列式 $=(-5)\\times7\\times7=-245$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "特征值求|A*+3A|（含零特征值）",
     "statement": "设三阶矩阵 $A$ 的特征值为 $-1,0,2$，则行列式 $|A^*+3A|=$",
     "tags": [
-      "特征值",
+      "特征值与特征向量",
       "行列式",
-      "伴随矩阵"
+      "逆矩阵与秩"
     ],
     "thinking": 6,
     "difficulty": 7,
@@ -3710,15 +3817,16 @@
     ],
     "answer": "$36$",
     "solution": "**步骤1**：取 $A=\\operatorname{diag}(-1,0,2)$，则 $A^*=\\operatorname{diag}(0,-2,0)$。\n\n**步骤2**：$A^*+3A=\\operatorname{diag}(-3,-2,6)$。\n\n**步骤3**：行列式 $=(-3)\\times(-2)\\times6=36$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "四阶特征值求|A*+5E|",
     "statement": "设四阶矩阵 $A$ 的特征值为 $1,1,2,2$，则行列式 $|A^*+5E|=$",
     "tags": [
-      "特征值",
+      "特征值与特征向量",
       "行列式",
-      "伴随矩阵"
+      "逆矩阵与秩"
     ],
     "thinking": 5,
     "difficulty": 6,
@@ -3729,15 +3837,16 @@
     ],
     "answer": "$3969$",
     "solution": "**步骤1**：$|A|=1\\times1\\times2\\times2=4$，$A^*$ 的特征值为 $4,4,2,2$。\n\n**步骤2**：$A^*+5E$ 的特征值为 $9,9,7,7$。\n\n**步骤3**：行列式 $=9\\times9\\times7\\times7=3969$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "A*特征值反求|A²-3A|",
     "statement": "设三阶矩阵 $A^*$ 的特征值为 $2,3,6$，且 $|A|>0$，则行列式 $|A^2-3A|=$",
     "tags": [
-      "特征值",
+      "特征值与特征向量",
       "行列式",
-      "伴随矩阵"
+      "逆矩阵与秩"
     ],
     "thinking": 6,
     "difficulty": 7,
@@ -3749,15 +3858,16 @@
     ],
     "answer": "$0$",
     "solution": "**步骤1**：$|A^*|=2\\times3\\times6=36=|A|^2$，$|A|>0$ 故 $|A|=6$。\n\n**步骤2**：$A$ 的特征值为 $\\frac6{2}=3,\\frac6{3}=2,\\frac6{6}=1$。\n\n**步骤3**：$A^2-3A$ 的对应特征值为 $0,-2,-2$，故行列式为 $0$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "矩阵方程约束下求|A*+A|",
     "statement": "设三阶矩阵 $A$ 满足 $A^2-3A+2E=O$，且 $|A|=8$，则行列式 $|A^*+A|=$",
     "tags": [
-      "特征值",
+      "特征值与特征向量",
       "行列式",
-      "矩阵方程"
+      "矩阵运算"
     ],
     "thinking": 6,
     "difficulty": 7,
@@ -3768,15 +3878,16 @@
     ],
     "answer": "$216$",
     "solution": "**步骤1**：由 $A^2-3A+2E=O$，特征值满足 $\\lambda^2-3\\lambda+2=0$，即 $\\lambda=1$ 或 $2$。\n\n**步骤2**：$|A|=8=2^3$，故三个特征值全为 2；$A^*$ 的特征值均为 $8/2=4$。\n\n**步骤3**：$|A^*+A|=(4+2)^3=216$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "四阶特征值求|A*+A⁻¹+2E|",
     "statement": "设四阶矩阵 $A$ 的特征值为 $1,-1,2,-2$，则行列式 $|A^*+A^{-1}+2E|=$",
     "tags": [
-      "特征值",
+      "特征值与特征向量",
       "行列式",
-      "伴随矩阵"
+      "逆矩阵与秩"
     ],
     "thinking": 7,
     "difficulty": 8,
@@ -3787,15 +3898,16 @@
     ],
     "answer": "$\\frac{189}{4}$",
     "solution": "**步骤1**：$|A|=1\\times(-1)\\times2\\times(-2)=4$，$A^*$ 特征值为 $4,-4,2,-2$。\n\n**步骤2**：$A^{-1}$ 特征值为 $1,-1,\\frac12,-\\frac12$。\n\n**步骤3**：$A^*+A^{-1}+2E$ 的特征值为 $7,-3,\\frac92,-\\frac12$，乘积 $=7\\times(-3)\\times\\frac92\\times(-\\frac12)=\\frac{189}{4}$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "A*特征值反求|A+E|",
     "statement": "设三阶矩阵 $A^*$ 的特征值为 $1,1,4$，且 $|A|<0$，则行列式 $|A+E|=$",
     "tags": [
-      "特征值",
+      "特征值与特征向量",
       "行列式",
-      "伴随矩阵"
+      "逆矩阵与秩"
     ],
     "thinking": 7,
     "difficulty": 8,
@@ -3806,15 +3918,16 @@
     ],
     "answer": "$\\frac12$",
     "solution": "**步骤1**：$|A^*|=4=|A|^2$，$|A|<0$ 故 $|A|=-2$。\n\n**步骤2**：$A$ 的特征值为 $\\frac{-2}{1}=-2,-2,\\frac{-2}{4}=-\\frac12$。\n\n**步骤3**：$|A+E|=(-2+1)(-2+1)(-\\frac12+1)=(-1)(-1)\\cdot\\frac12=\\frac12$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "特征值全为1求|A*+2A-3E|",
     "statement": "设四阶矩阵 $A$ 的所有特征值均为 $1$，则行列式 $|A^*+2A-3E|=$",
     "tags": [
-      "特征值",
+      "特征值与特征向量",
       "行列式",
-      "矩阵"
+      "矩阵运算"
     ],
     "thinking": 6,
     "difficulty": 7,
@@ -3825,15 +3938,16 @@
     ],
     "answer": "$0$",
     "solution": "**步骤1**：$|A|=1^4=1$，$A^*$ 的特征值均为 $1/1=1$。\n\n**步骤2**：$A^*+2A-3E$ 的特征值均为 $1+2-3=0$。\n\n**步骤3**：故行列式为 $0$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "由多项式B=A³-3A²+2A求|B*+E|",
     "statement": "设三阶矩阵 $A$ 的特征值为 $1,2,3$，记 $B=A^3-3A^2+2A$，则 $|B^*+E|=$",
     "tags": [
-      "特征值",
+      "特征值与特征向量",
       "行列式",
-      "矩阵方程"
+      "矩阵运算"
     ],
     "thinking": 7,
     "difficulty": 8,
@@ -3845,15 +3959,16 @@
     ],
     "answer": "$1$",
     "solution": "**步骤1**：$f(\\lambda)=\\lambda^3-3\\lambda^2+2\\lambda=\\lambda(\\lambda-1)(\\lambda-2)$，$B$ 的特征值为 $f(1)=0,f(2)=0,f(3)=3$。\n\n**步骤2**：$B$ 的秩为 1，故 $B$ 的所有二阶余子式为 0，即 $B^*=O$。\n\n**步骤3**：$|B^*+E|=|E|=1$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   },
   {
     "title": "四阶特征值求|A*+A|",
     "statement": "设四阶矩阵 $A$ 的特征值为 $1,2,3,4$，则行列式 $|A^*+A|=$",
     "tags": [
-      "特征值",
+      "特征值与特征向量",
       "行列式",
-      "伴随矩阵"
+      "逆矩阵与秩"
     ],
     "thinking": 5,
     "difficulty": 6,
@@ -3864,6 +3979,7 @@
     ],
     "answer": "$38500$",
     "solution": "**步骤1**：$|A|=1\\times2\\times3\\times4=24$，$A^*$ 特征值为 $24,12,8,6$。\n\n**步骤2**：$A^*+A$ 的特征值为 $25,14,11,10$。\n\n**步骤3**：行列式 $=25\\times14\\times11\\times10=38500$。",
-    "authorName": "题库组"
+    "authorName": "题库组",
+    "mainTag": "线性代数"
   }
 ]

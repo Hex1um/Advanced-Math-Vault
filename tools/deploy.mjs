@@ -15,6 +15,7 @@ import { spawnSync } from 'node:child_process';
 
 const ROOT = path.resolve(new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
 const SKIP_SYNC = process.argv.includes('--no-sync');
+const PUBLISH = process.argv.includes('--publish') || process.env.USER_ASKED_TO_PUBLISH === '1';
 
 function runSync() {
   console.log('▶ 同步线上用户数据到本地库…');
@@ -40,7 +41,7 @@ async function deploy() {
     port: Number(process.env.PORT || 8787),
     appName: '高数好题收藏室',
     domainPrefix: 'math-vault-10141',
-    userAskedToPublish: true
+    userAskedToPublish: PUBLISH
   };
   const body = JSON.stringify({
     jsonrpc: '2.0', id: 1, method: 'tools/call',
@@ -72,6 +73,7 @@ async function deploy() {
 }
 
 (async () => {
+  if (!PUBLISH) throw new Error('发布需要显式授权：加 --publish，或设置 USER_ASKED_TO_PUBLISH=1');
   if (!SKIP_SYNC) runSync();
   else console.log('⚠ 已跳过线上同步（确保线上确实没有用户数据）');
   await deploy();

@@ -3,7 +3,10 @@
     {
       "title": "配方加三角代换求根式二次不定积分",
       "statement": "求不定积分 $$\\int \\frac{x^{2}}{\\sqrt{1+x-x^{2}}}\\,dx .$$",
-      "tags": ["不定积分", "三角代换", "二次配方"],
+      "tags": [
+        "不定积分",
+        "有理函数与三角积分"
+      ],
       "thinking": 7,
       "difficulty": 7,
       "calc": 8,
@@ -13,12 +16,16 @@
       ],
       "answer": "$\\frac{7}{8}\\arcsin\\!\\frac{2x-1}{\\sqrt5}-\\frac{2x+3}{4}\\sqrt{1+x-x^{2}}+C$",
       "solution": "**第一步：配方。** 根号内\n$$1+x-x^{2}=\\frac54-\\left(x-\\frac12\\right)^{2}.$$\n令 $u=x-\\frac12$，则 $x=u+\\frac12$，$dx=du$，且 $x^{2}=u^{2}+u+\\frac14$，于是\n$$\\int\\frac{x^{2}}{\\sqrt{1+x-x^{2}}}\\,dx=\\int\\frac{u^{2}+u+\\frac14}{\\sqrt{\\frac54-u^{2}}}\\,du .$$\n\n**第二步：拆成三项。** 记 $a^{2}=\\frac54$（$a=\\frac{\\sqrt5}{2}$）：\n$$I=\\underbrace{\\int\\frac{u^{2}\\,du}{\\sqrt{a^{2}-u^{2}}}}_{I_1}+\\underbrace{\\int\\frac{u\\,du}{\\sqrt{a^{2}-u^{2}}}}_{I_2}+\\frac14\\underbrace{\\int\\frac{du}{\\sqrt{a^{2}-u^{2}}}}_{I_3}.$$\n\n**第三步：逐项计算。** 令 $u=a\\sin\\theta$，则 $du=a\\cos\\theta\\,d\\theta$，$\\sqrt{a^{2}-u^{2}}=a\\cos\\theta$。\n- $I_1=a^{2}\\int\\sin^{2}\\theta\\,d\\theta=\\frac{a^{2}}{2}\\left(\\theta-\\sin\\theta\\cos\\theta\\right)=\\frac{a^{2}}{2}\\arcsin\\frac{u}{a}-\\frac{u}{2}\\sqrt{a^{2}-u^{2}}$；\n- $I_2=-\\sqrt{a^{2}-u^{2}}$（因为 $d(a^{2}-u^{2})=-2u\\,du$）；\n- $I_3=\\arcsin\\frac{u}{a}$。\n\n**第四步：合并。** 反正弦项系数为 $\\frac{a^{2}}{2}+\\frac14=\\frac58+\\frac14=\\frac78$；根式项系数为 $-\\left(\\frac{u}{2}+1\\right)=-\\frac{2u+3}{4}$（代回 $u=x-\\frac12$）。故\n$$\\int\\frac{x^{2}}{\\sqrt{1+x-x^{2}}}\\,dx=\\frac78\\arcsin\\frac{2x-1}{\\sqrt5}-\\frac{2x+3}{4}\\sqrt{1+x-x^{2}}+C .$$\n\n**验算：** 对结果求导可得 $\\frac{x^{2}}{\\sqrt{1+x-x^{2}}}$，符号计算已核对为零残差。",
-      "source": "柳贯一题型专项 · 不定积分"
+      "source": "柳贯一题型专项 · 不定积分",
+      "mainTag": "积分"
     },
     {
       "title": "立方根有理化换元解不定积分",
       "statement": "求不定积分 $$\\int \\frac{dx}{\\sqrt[3]{(x-2)(x+1)^{2}}} .$$",
-      "tags": ["不定积分", "根式换元", "有理函数积分"],
+      "tags": [
+        "不定积分",
+        "有理函数与三角积分"
+      ],
       "thinking": 9,
       "difficulty": 8,
       "calc": 8,
@@ -28,7 +35,8 @@
       ],
       "answer": "令 $u=\\sqrt[3]{\\frac{x-2}{x+1}}$，则积分为 $\\frac12\\ln\\frac{u^{2}+u+1}{(1-u)^{2}}-\\sqrt3\\arctan\\frac{2u+1}{\\sqrt3}+C$",
       "solution": "**第一步：选换元。** 注意到 $(x-2)(x+1)^{2}=(x+1)^{3}\\cdot\\frac{x-2}{x+1}$，故\n$$\\sqrt[3]{(x-2)(x+1)^{2}}=(x+1)\\sqrt[3]{\\frac{x-2}{x+1}} .$$\n令\n$$u=\\sqrt[3]{\\frac{x-2}{x+1}}\\quad\\Longrightarrow\\quad u^{3}=\\frac{x-2}{x+1}\\Longrightarrow x=\\frac{u^{3}+2}{1-u^{3}} .$$\n\n**第二步：计算微分与被积式。** 由上式\n$$x+1=\\frac{3}{1-u^{3}},\\qquad x-2=\\frac{3u^{3}}{1-u^{3}},\\qquad dx=\\frac{9u^{2}}{(1-u^{3})^{2}}\\,du,$$\n且 $\\sqrt[3]{(x-2)(x+1)^{2}}=(x+1)u=\\frac{3u}{1-u^{3}}$。于是\n$$\\int\\frac{dx}{\\sqrt[3]{(x-2)(x+1)^{2}}}=\\int\\frac{\\frac{9u^{2}}{(1-u^{3})^{2}}}{\\frac{3u}{1-u^{3}}}\\,du=\\int\\frac{3u}{1-u^{3}}\\,du .$$\n\n**第三步：部分分式分解。** 因 $1-u^{3}=(1-u)(1+u+u^{2})$，设\n$$\\frac{3u}{1-u^{3}}=\\frac{1}{1-u}+\\frac{u-1}{1+u+u^{2}} .$$\n其中 $\\int\\frac{du}{1-u}=-\\ln|1-u|$，而\n$$\\int\\frac{u-1}{u^{2}+u+1}\\,du=\\frac12\\ln(u^{2}+u+1)-\\sqrt3\\arctan\\frac{2u+1}{\\sqrt3}$$\n（把 $u-1=\\frac12(2u+1)-\\frac32$，并用 $u^{2}+u+1=(u+\\frac12)^{2}+\\frac34$）。\n\n**第四步：合并。** 两段对数合并为 $\\frac12\\ln\\frac{u^{2}+u+1}{(1-u)^{2}}$，故\n$$\\int\\frac{dx}{\\sqrt[3]{(x-2)(x+1)^{2}}}=\\frac12\\ln\\frac{u^{2}+u+1}{(1-u)^{2}}-\\sqrt3\\arctan\\frac{2u+1}{\\sqrt3}+C,\\quad u=\\sqrt[3]{\\frac{x-2}{x+1}} .$$\n\n**验算：** 将结果对 $x$ 求导（链式法则代入 $u(x)$），数值核对在多个点均还原被积函数，残差小于 $10^{-6}$。",
-      "source": "柳贯一题型专项 · 不定积分"
+      "source": "柳贯一题型专项 · 不定积分",
+      "mainTag": "积分"
     }
   ]
 }

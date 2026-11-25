@@ -89,7 +89,7 @@
         + '<div class="daily-date"><span class="d">' + data.date + '</span><span class="w">' + weekdayOf(data.date) + ' · 今日题</span></div>'
         + '<h1 id="dailyTitle"></h1>'
         + '<div class="daily-sub" id="dailyAlias"></div>'
-        + '<div class="tags" style="margin-bottom:6px">' + p.tags.map(function (t) { return '<span class="tag">' + window.Md.esc(t) + '</span>'; }).join('')
+        + '<div class="tags" style="margin-bottom:6px">' + window.UI.tagBadges(p)
         + '<span class="problem-code-badge" style="margin-left:4px">' + p.code + '</span>' + window.UI.levelBadge(p) + '</div>'
         + '<div class="statement" id="dailyStmt"></div>'
         + '<div class="score-panel" style="max-width:560px">'

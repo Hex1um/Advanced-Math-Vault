@@ -483,10 +483,30 @@
     return map[name] || 'var(--text)';
   }
 
+
+  /* 主标签 + 子标签 + 题型：全站统一用这一套渲染，避免各页面各写各的 */
+  function tagBadges(p, opts) {
+    const o = opts || {};
+    const parts = [];
+    if (p && p.mainTag && !o.hideMain) parts.push('<span class="tag tag-main">' + ESC(p.mainTag) + '</span>');
+    if (p && p.kind && o.showKind) parts.push('<span class="tag gray">' + ESC(p.kind) + '</span>');
+    for (const t of (p && p.tags) || []) parts.push('<span class="tag">' + ESC(t) + '</span>');
+    return parts.join('');
+  }
+
+  function mainTagOptions(selected) {
+    const tree = St.tagTree || [];
+    const names = tree.length ? tree.map(function (x) { return x.name; }) : [];
+    return ['<option value="">自动判断</option>'].concat(names.map(function (name) {
+      return '<option value="' + ESC(name) + '"' + (name === selected ? ' selected' : '') + '>' + ESC(name) + '</option>';
+    })).join('');
+  }
+
   window.UI = {
     LEVELS, levelOf, levelBadge, toast, avatar, timeAgo, fmtDate,
     scoreBars, modal, authModal, requireLogin, applyUser, renderHeader,
     setActiveNav, pagination, icon, empty, ESC, tone,
+    tagBadges, mainTagOptions,
     llmConfig, visionConfig, saveLlmConfig, llmSettings
   };
 })();

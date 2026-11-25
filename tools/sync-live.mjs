@@ -132,7 +132,9 @@ function main() {
       }
       act.sort((x, y) => String(y.at || '').localeCompare(String(x.at || '')));
       cur.activity = act.slice(0, 200);
-      if (!cur.passhash && live.passhash) cur.passhash = live.passhash;
+      // 以线上密码为准：部署会用本地库覆盖线上，若不搬 passHash/salt，
+      // 用户在线上改过的密码会被旧密码顶回去。字段名是 camelCase，不要写成 passhash。
+      if (live.passHash && live.salt) { cur.passHash = live.passHash; cur.salt = live.salt; }
       if (!cur.email && live.email) { cur.email = live.email; cur.emailVerified = live.emailVerified; }
       if (!cur.role && live.role) cur.role = live.role;
       return cur;

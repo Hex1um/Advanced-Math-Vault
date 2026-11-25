@@ -292,6 +292,7 @@ html[data-theme="dark"] .btn-primary:hover { background:#2650b8; border-color:#2
   white-space: nowrap;
 }
 .tag.gray { background:var(--surface-2); color:var(--muted); }
+.tag.tag-main { background:var(--blue-weak); color:var(--blue-dark); border-color:var(--line-2); font-weight:600; }
 .tag.teal { background:var(--surface-2); color:var(--green); border-color:#cfe9e2; }
 .tag.gold { background:var(--surface-2); color:var(--orange); border-color:#f2e2c0; }
 
@@ -371,7 +372,7 @@ html[data-theme="dark"] .btn-primary:hover { background:#2650b8; border-color:#2
   margin-bottom: 12px;
 }
 .filter-row { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
-.filter-label { font-size: 12px; color:var(--muted); width: 30px; flex: none; }
+.filter-label { font-size: 12px; color:var(--muted); width: 46px; flex: none; white-space: nowrap; }
 .chip-scroll { display: flex; gap: 6px; flex-wrap: wrap; }
 
 .search-box {

@@ -57,7 +57,7 @@
     const el = document.getElementById('footerStats');
     if (!el) return;
     const s = St.stats || {};
-    el.textContent = '收录 ' + (s.problems || 0) + ' 题 · ' + (s.users || 0) + ' 位同学 · ' + (s.tags || 0) + ' 个考点';
+    el.textContent = '收录 ' + (s.problems || 0) + ' 题 · ' + (s.users || 0) + ' 位同学 · ' + (s.mainTags || 0) + ' 个主标签 / ' + (s.tags || 0) + ' 个子标签';
   }
 
   async function refreshMeta() {
@@ -65,6 +65,10 @@
       const meta = await window.API.get('/api/meta');
       St.me = meta.me;
       St.stats = meta.stats;
+      St.tagTree = meta.tagTree || [];
+      St.tags = (meta.tagTree || []).reduce(function (arr, m) {
+        return arr.concat(m.children || []);
+      }, []).sort(function (a, b) { return b.count - a.count; });
       St.llm = meta.llm;
       window.UI.renderHeader();
       updateFooter();

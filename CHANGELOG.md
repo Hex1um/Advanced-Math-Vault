@@ -1,5 +1,27 @@
 # CHANGELOG
 
+## v0.18.0 — 2026-11-25
+
+考点标签升级为「主标签 + 子标签」两级体系，并修正公开前审查发现的工程问题。
+
+### 标签体系
+- 新增 `tag-taxonomy.js`：9 个主标签（极限与连续 / 导数与微分 / 积分 / 级数 / 微分方程 / 线性代数 / 概率统计 / 空间解析几何 / 综合）和 67 个子标签；一道题只有 1 个主标签、1-3 个子标签。
+- 历史 700+ 个自由标签自动归并：章节名（高等数学、线性代数、概率论）归入主标签；选择题/填空题/证明/应用题/概念题转存到 `kind` 字段，不再占用考点位。
+- 新增 `tools/migrate-tags.mjs`，已迁移 `data/batch-*.json` 与 `data/db.json`：6003 条记录全部补上 `mainTag`，子标签收敛到 67 个。
+- `/api/meta` 新增 `tagTree`；`/api/problems`、`/api/practice` 支持 `main=` 筛选；投稿、审核、AI 出题、题目详情全部支持两级标签。
+- 兼容旧链接：`?tags=极限` 仍能匹配「极限与连续」主标签。
+
+### 工程修复
+- `tools/build-pages.mjs` 移除 sharecode 默认值，必须显式传 `SHARECODE`。
+- `tools/sync-live.mjs` 修正密码同步字段（`passHash` + `salt`），避免部署后用户密码被旧值顶回。
+- `tools/deploy.mjs` 发布必须显式加 `--publish`（或 `USER_ASKED_TO_PUBLISH=1`），不再默认授权。
+- `tools/check-katex.mjs` 在没有 `data/db.json` 时自动回退到 batch 题库，新克隆可直接跑。
+- 新增 MIT `LICENSE` 与 GitHub Actions `smoke` 工作流（冒烟 + 积分校验 + KaTeX 检查 + 标签迁移幂等检查）。
+- 更新 README：题库规模、标签体系、部署命令与 sharecode 定位。
+
+### 测试
+- 冒烟 115/115：新增主/子标签筛选、`tagTree`、投稿自动归类、审核修改标签等断言。
+
 ## v0.17.3 — 2026-11-25
 
 修复图片判卷的两处回归，让站点识图 Key 真正可用于全站图片判卷。
