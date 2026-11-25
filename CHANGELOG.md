@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v0.17.2 — 2026-11-25
+
+修复带图片判卷的 `Cannot access 'VISION_MODEL' before initialization` 报错。
+
+- 根因：`VISION_MODEL` 常量定义在 `handleApi()` 函数体内部靠后处，而带图片的判卷接口在函数内较早处（2001 行）就调用它。无图片时不触发；一旦上传图片走 `VISION_MODEL.test()`，该 const 尚未初始化 → TDZ 报错，提交批改失败。
+- 修复：把 `VISION_MODEL` 移到 `handleApi()` 之外的模块顶层。
+- 冒烟新增「带图片判卷不报 TDZ/500」回归项，110/110 全绿。
+
 ## v0.17.1 — 2026-11-25（公开前安全加固）
 
 按三条审查线（提示词泄露 / 历史完成度 / 代码鲁棒性）全面排查并修复。

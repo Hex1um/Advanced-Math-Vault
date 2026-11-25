@@ -1578,6 +1578,11 @@ const RATE_RULES = [
   [/\/answer$/, 40, 60 * 60 * 1000, '判题刷得太快了，歇一会儿']
 ];
 
+/* 支持图片的判卷模型名单。必须在 handleApi 之外定义：
+   判卷接口（图片分支）在函数内较早处就调用它，若用函数内的 const 声明会出现 TDZ
+   「Cannot access 'VISION_MODEL' before initialization」。 */
+const VISION_MODEL = /gpt-4o|gpt-4\.1|o3|o4|claude|gemini|qwen.*vl|glm-4v|vision|llava|internvl/i;
+
 async function handleApi(req, res, pathname, query) {
   const user = currentUser(req);
   const method = req.method;
@@ -3055,8 +3060,6 @@ function processMatchesAnswer(process, expected) {
   }
   return false;
 }
-
-const VISION_MODEL = /gpt-4o|gpt-4\.1|o3|o4|claude|gemini|qwen.*vl|glm-4v|vision|llava|internvl/i;
 
 function judgeMessages(problem, process, hasImage, opts) {
   opts = opts || {};

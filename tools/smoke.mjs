@@ -154,6 +154,15 @@ try {
   });
   ok('只交正确答案仍是 80 分', answerOnly.json.score === 80, JSON.stringify(answerOnly.json).slice(0, 160));
 
+  // 带图片的判卷会走 VISION_MODEL 分支；曾因该 const 定义在 handleApi 内部而 TDZ 报错。
+  const tinyPng = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFAAH/q842iQAAAABJRU5ErkJggg==';
+  const withImage = await req('/api/problems/HS1003/answer', {
+    method: 'POST',
+    body: JSON.stringify({ image: tinyPng })
+  });
+  ok('带图片判卷不报 TDZ/500', withImage.status === 200 && withImage.json.ok === true,
+    withImage.status + ' ' + JSON.stringify(withImage.json).slice(0, 160));
+
   console.log('\n[5] 投稿 → 审核 → 入库');
   const submit = await req('/api/submit', {
     method: 'POST',
