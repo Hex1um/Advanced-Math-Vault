@@ -1115,6 +1115,15 @@ function llmCandidates(body) {
       apiKey: db.settings.llm.apiKey
     });
   }
+  // 站点识图专用 Key（管理员配置），给全站用户读图用
+  const vs = db.settings.llmVision;
+  const vBase = vs ? safeLlmBaseUrl(vs.baseUrl) : null;
+  if (vs && vs.apiKey && vBase) {
+    list.push({
+      name: '站点识图模型', mode: 'site',
+      baseUrl: vBase, model: vs.model, apiKey: vs.apiKey
+    });
+  }
   if (!body || !body.skipFree) {
     for (const f of FREE_PROVIDERS) {
       list.push({ name: f.name, mode: 'free', baseUrl: f.baseUrl, model: f.model, apiKey: '', timeout: 22000 });
@@ -1452,6 +1461,8 @@ const RATE_RULES = [
   [/^\/api\/problems\/[^/]+\/feedback$/, 12, 10 * 60 * 1000, '反馈提交太频繁了，先等等'],
   [/^\/api\/ai\/ocr-fix$/, 30, 10 * 60 * 1000, 'OCR 规范化请求太多，先等等'],
   [/^\/api\/ai\/generate$/, 12, 60 * 60 * 1000, 'AI 出题每小时最多 12 次'],
+  // 站点共享的视觉 Key 是全站共用一个额度，必须限流，否则一个人就能刷爆
+  [/^\/api\/ai\/from-image$/, 30, 60 * 60 * 1000, '识图太频繁了：每小时最多 30 次，先用本地 OCR 或稍后再试'],
   [/\/answer$/, 40, 60 * 60 * 1000, '判题刷得太快了，歇一会儿']
 ];
 
@@ -1487,6 +1498,8 @@ async function handleApi(req, res, pathname, query) {
       llm: {
         configured: llmConfigured(),
         model: llmConfigured() ? db.settings.llm.model : '',
+        visionConfigured: !!(db.settings.llmVision && db.settings.llmVision.apiKey),
+        visionModel: (db.settings.llmVision && db.settings.llmVision.model) || '',
         free: FREE_PROVIDERS.map((f) => f.name)
       },
       me: publicUser(user, true)
@@ -2583,8 +2596,26 @@ async function handleApi(req, res, pathname, query) {
       if (body.model !== undefined) db.settings.llm.model = String(body.model).trim();
       if (body.apiKey !== undefined && String(body.apiKey).trim()) db.settings.llm.apiKey = String(body.apiKey).trim();
       if (body.clearKey) db.settings.llm.apiKey = '';
+      // 识图通道：target='vision' 时写另一组，全站用户都能用
+      if (body.target === 'vision' || body.vision) {
+        const v = body.vision || body;
+        db.settings.llmVision = db.settings.llmVision || {};
+        if (v.baseUrl !== undefined) {
+          const nb = safeLlmBaseUrl(v.baseUrl);
+          if (!nb) return fail(res, 400, '识图接口地址不合法或不在白名单内');
+          db.settings.llmVision.baseUrl = nb;
+        }
+        if (v.model !== undefined) db.settings.llmVision.model = String(v.model).trim();
+        if (v.apiKey !== undefined && String(v.apiKey).trim()) db.settings.llmVision.apiKey = String(v.apiKey).trim();
+        if (body.clearKey) db.settings.llmVision.apiKey = '';
+      }
       saveDb(true);
-      return send(res, 200, { ok: true, configured: llmConfigured() });
+      return send(res, 200, {
+        ok: true,
+        configured: llmConfigured(),
+        visionConfigured: !!(db.settings.llmVision && db.settings.llmVision.apiKey),
+        visionModel: (db.settings.llmVision && db.settings.llmVision.model) || ''
+      });
     }
 
     if (pathname === '/api/admin/rejected' && method === 'GET') {
