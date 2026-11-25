@@ -26,7 +26,13 @@
       + '<div class="ocr-box">'
       + '<input type="file" id="ocrFile" accept="image/*" style="display:none" />'
       + '<div class="upload-row"><button type="button" class="btn btn-sm" id="ocrPick">选一张题目图片</button>'
-      + '<span class="small muted" id="ocrHint">有视觉模型 Key 时自动补全题目、答案与解析；没有就走下面的提示词</span></div>'
+      + '<span class="small muted" id="ocrHint">识别通道</span>'
+      + '<select id="ocrChannel" class="btn btn-sm" style="padding:4px 8px">'
+      + '<option value="auto">自动（有视觉模型就用）</option>'
+      + '<option value="vision">只用视觉模型</option>'
+      + '<option value="local">只用本地 OCR</option>'
+      + '</select>'
+      + '<span class="small muted" id="ocrChannelNow"></span></div>'
       + '<div id="ocrQuality"></div><div id="ocrPreview"></div><div id="ocrResult"></div></div>'
       + '<div class="form-section-title">题目基本信息</div>'
       + '<div class="field"><label>标题 *</label><input name="title" maxlength="120" placeholder="给这道题起一个能记住的标题" /></div>'
@@ -82,6 +88,24 @@
       if (!pick) return;
       let image = '';
       let ocrRaw = '';
+      const CH_KEY = 'mv_ocr_channel';
+      const chSel = document.getElementById('ocrChannel');
+      const chNow = document.getElementById('ocrChannelNow');
+      try { chSel.value = localStorage.getItem(CH_KEY) || 'auto'; } catch (e) {}
+      const paintChannel = function () {
+        const v = chSel.value;
+        const hasVision = window.OCR && window.OCR.hasVisionModel && window.OCR.hasVisionModel();
+        let txt = '';
+        if (v === 'local') txt = '本地 tesseract（不耗 API）';
+        else if (v === 'vision') txt = hasVision ? '视觉模型（未配 Key 会报错）' : '未配视觉模型，将无法识别';
+        else txt = hasVision ? '自动 → 视觉模型' : '自动 → 本地 OCR（未配视觉模型）';
+        if (chNow) chNow.textContent = txt;
+      };
+      chSel.addEventListener('change', function () {
+        try { localStorage.setItem(CH_KEY, chSel.value); } catch (e) {}
+        paintChannel();
+      });
+      paintChannel();
       let ocrMeta = null;
       let lastQuality = null;
       pick.addEventListener('click', function () { file.click(); });
@@ -211,7 +235,16 @@
         box.innerHTML = '<div class="small muted" style="padding:8px 0">识别中…</div>';
         try {
           const ocrImage = await cropImage(image, cropRect);
-          const res = await window.API.post('/api/ai/from-image', { image: ocrImage, llm: window.UI.llmConfig() });
+          const channel = chSel.value || 'auto';
+          const hasVision = window.OCR && window.OCR.hasVisionModel && window.OCR.hasVisionModel();
+          if (channel === 'vision' && !hasVision) {
+            box.innerHTML = '<div class="judge-errors"><div class="je-head">没有可用的视觉模型</div>'
+              + '<div class="small">去「设置 → 模型通道」填一个支持图片的模型（智谱 <code>glm-4v-flash</code> 是免费的），或者把通道切回「本地 OCR」。</div></div>';
+            return;
+          }
+          // 只用本地 OCR：跳过服务端视觉通道
+          const skipVision = channel === 'local';
+          const res = skipVision ? { ok: false, needVision: true } : await window.API.post('/api/ai/from-image', { image: ocrImage, llm: window.UI.llmConfig() });
           if (res.ok) {
             const p = res.problem;
             const fm = document.getElementById('submitForm');
