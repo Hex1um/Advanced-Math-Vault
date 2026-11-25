@@ -1,22 +1,31 @@
 {
   "name": "math-vault",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "private": true,
   "description": "数海晴岸：高等数学好题收藏室，人工审核题库 + 每日一积 + 答疑区 + AI 出题/批改",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "smoke": "node tools/smoke.mjs",
-    "test": "node tools/smoke.mjs",
-    "tags:migrate": "node tools/migrate-tags.mjs",
-    "check:robust": "node tools/robustness-check.mjs",
-    "import": "node tools/import-problems.mjs",
-    "build:pages": "node tools/build-pages.mjs",
-    "admin": "node tools/create-admin.mjs"
+    "smoke": "node tools/verify/smoke.mjs",
+    "test": "node tools/verify/smoke.mjs",
+    "test:sqlite": "node tools/verify/smoke.mjs --engine=sqlite",
+    "test:all": "node tools/verify/smoke.mjs && node tools/verify/smoke.mjs --engine=sqlite",
+    "check:robust": "node tools/verify/robustness-check.mjs",
+    "check:katex": "node tools/verify/check-katex.mjs --max-fail=0",
+    "check:store": "node tools/verify/store-test.mjs",
+    "check:mail": "node tools/verify/mail-test.mjs",
+    "tags:migrate": "node tools/import/migrate-tags.mjs",
+    "import": "node tools/import/import-problems.mjs",
+    "build:pages": "node tools/ops/build-pages.mjs",
+    "admin": "node tools/ops/create-admin.mjs",
+    "backup": "node tools/ops/backup-db.mjs",
+    "export:batch": "node tools/ops/export-batch.mjs",
+    "migrate:sqlite": "node tools/ops/migrate-json-to-sqlite.mjs",
+    "deploy": "node tools/ops/deploy.mjs"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22.5"
   },
   "license": "MIT"
 }

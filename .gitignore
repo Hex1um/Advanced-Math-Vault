@@ -21,3 +21,15 @@ zhipu-api-keys.md
 *.keys.md
 
 data/.img-judge-db.json
+
+# SQLite 引擎的库文件与 WAL（运行时数据，绝不入库）
+data/*.sqlite
+data/*.sqlite-wal
+data/*.sqlite-shm
+data/.store-test/
+data/.smoke-db*
+
+# 本地环境变量：只提交 .env.example
+.env
+.env.*
+!.env.example

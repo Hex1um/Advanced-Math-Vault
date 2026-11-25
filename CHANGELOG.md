@@ -1,5 +1,68 @@
 # CHANGELOG
 
+## v1.1.0 — 2026-11-25
+
+工程基建与运行期可靠性：存储可切 SQLite、验证码真发信、每日备份、配置自检、CI 门禁。
+
+### 存储：JSON 全量写 → 可选 SQLite 行级增量写
+
+- **根因**：6453 题 + 用户/提交/帖子后，每次 `saveDb()` 都要 `JSON.stringify` 整个库再 `fsync`，400ms 防抖挡不住高频提交时的事件循环阻塞；单文件也没法多实例。
+- **改法**：新增 `lib/store.js`，`DB_ENGINE=sqlite` 时内存里仍是同一个 `db` 对象，用 Proxy 记录「哪条被改」，保存只 UPSERT 变化的行；导入/删除这类结构性变化才重建该表。表为「索引列 + body(JSON)」混合，`problems(status, main_tag, sub_tag, difficulty)`、`submissions(user_id, problem_code)`、`feedbacks(status)` 等都有索引。
+- **兜底**：每 50 次保存做行数对账，对不上就整表重建；仍按 5 分钟（可调）导出 `db.json`，`sync-live` / `deploy` / `robustness-check` 不用改。
+- **默认不变**：不设 `DB_ENGINE` 仍是原来的 JSON 全量写，行为与 v1.0.4 一致。
+- 迁移：`node tools/ops/migrate-json-to-sqlite.mjs`（逐行内容比对，不是只比行数）；自测 `node tools/verify/store-test.mjs` 覆盖改字段、push、嵌套数组、嵌套对象、映射增删、整体重赋值、kv 修改共 20 项。
+
+### 邮件：验证码从「写日志」变成真发信
+
+- **改前症状**：绑定邮箱的验证码只打印在服务端日志里，用户拿不到，只能找管理员转发；未绑定邮箱的账号因此一直卡在「每小时 1 帖 1 回复」。
+- **改法**：新增 `lib/mail.js`，按环境变量选通道——标准 SMTP（零依赖实现，587 STARTTLS / 465 TLS，支持 AUTH PLAIN / LOGIN）、Resend HTTP、自建 HTTP 网关；都不配才退回日志模式。中文主题按 RFC 2047 编码，正文按 RFC 5321 dot-stuffing。
+- 发验证码接口新增限流：**每 IP 每小时 6 次**（会真的发信，不能让人拿来刷别人邮箱）。
+- `node tools/verify/mail-test.mjs` 用本地假 SMTP 服务器验证整条链路（14 项），不需要真实凭据。
+
+### 备份与回流
+
+- **改前症状**：`snapshotDb()` 只在进程启动时备份，线上跑一个月不重启就一直没有第二份可回滚的库。
+- 新增每日归档：启动时 + 每 30 分钟检查跨天，归档到 `data/backups/daily/`，保留 14 天（`BACKUP_KEEP`）；SQLite 引擎先 `wal_checkpoint` 再拷文件，并同时留 JSON。
+- 新增 `tools/ops/backup-db.mjs`（手动备份，可加 `--label`）与 `tools/ops/export-batch.mjs`（线上审核通过的题脱敏回流成 `data/batch-NN.json`，按标题+题干去重，作者统一写「题库组」）。
+
+### 上线配置自检与运行状态
+
+- **改前症状**：`TRUST_PROXY` 没设、`ALLOW_ORIGINS` 还是 `*`、邮件没配，全都静默降级，没有任何提示。
+- 启动日志打印上线提醒；新增 `GET /api/health`（免登录，只给版本/引擎/邮件模式/告警数，不含密钥）与管理员 `GET /api/admin/env`。
+- 审核后台新增「运行状态」卡片：存储计数、邮件通道、反代与跨域、告警列表，以及 AI 通道成功率 / 平均耗时 / 最近错误。
+
+### AI 通道可观测性
+
+- 四级降级链原来只有 `console.error`，公共免费通道挂了运维侧没有信号。现在按通道累计成功/失败/耗时（失败次数即降级次数），落 `db.meta.aiStats`，管理员 `GET /api/admin/ai-stats` 可查，后台直接看表。
+
+### 薄弱考点定向推题
+
+- `/api/my/stats` 新增 `weakMain`（九主标签维度）与 `mainRecommend`；`/api/practice?focus=weak&mode=random` 只在最弱的 1-3 个主标签里挑未做对的题。
+- 错题本页新增「薄弱考点」卡片：显示各主标签通过率，一键挑一题来练。
+
+### CI 门禁
+
+- 新增 `.github/workflows/smoke.yml`：push / PR 到 `main` 跑 `npm test`、`test:sqlite`、`check:store`、`check:mail`、`check:robust`、`check:katex`，另有 sympy job 跑积分/极限校验。零 npm 依赖，无缓存可依。
+- `robustness-check.mjs` 在没有 `data/db.json` 时回退到 `data/batch-*.json`（编号用占位），新克隆与 CI 都能跑。
+- `check-katex.mjs` 新增 `--max-fail=N`，CI 用 `--max-fail=0` 卡死失败数。
+
+### tools/ 目录分层（**路径有变**）
+
+- `tools/` 下 31 个脚本按职责拆到 `ops/`（部署/同步/备份/迁移）、`verify/`（冒烟/体检/公式/自测/符号校验）、`import/`（导入与数据规范化）、`archive/`（已合并的历史脚本）。说明见 `tools/README.md`。
+- **旧路径不再可用**，例如 `node tools/smoke.mjs` → `node tools/verify/smoke.mjs`。`package.json` 里的脚本入口全部更新，日常用 `npm test` / `npm run check:robust` 这类命令即可。
+
+### 题库：修掉 7 处公式与一处截断
+
+- 5 处 `\Bigg{|}` / `\Bigg{/}` 改成 `\Bigg|` / `\Bigg/`（KaTeX 报 `Invalid delimiter type`），1 处 `B = (1 & 1 & 1)` 改成 `pmatrix`（`&` 在普通括号里非法）。
+- 2015 数学一解答题的多重 `\left\{\begin{array}...\right.` 嵌套错乱，按实际解集重写为 `(1,1),(-1,-1),(2,-1),(-1,2)`。
+- 华科一道三重积分的雅可比行列式在导入时被截断（仅剩 `\left|\begin{vmatrix} 1-v & -u & 0 \\ v(`），补齐为三阶行列式并给出 `|J| = u^{2}v`。
+- 修完后 `npm run check:robust` 对 batch 题库（2474 题、31268 个公式片段）**0 错误 0 警告**。
+
+### 测试
+
+- 冒烟从 118 项增至 **121 项**（新增 `/api/health` 可用、暴露引擎与邮件模式、响应不含密钥字段），JSON 与 SQLite 两种引擎各 121/121 通过。
+- 新增 `store-test`（20 项）与 `mail-test`（14 项）。
+
 ## v1.0.4 — 2026-11-25
 
 管理员可在反馈卡片上直接改题或删题，并完成全仓鲁棒性检查。
