@@ -106,8 +106,13 @@ async function deploy() {
 }
 
 (async () => {
-  if (!PUBLISH) throw new Error('发布需要显式授权：加 --publish，或设置 USER_ASKED_TO_PUBLISH=1');
+  const PREFLIGHT_ONLY = process.argv.includes('--preflight-only');
   preflight();
+  if (PREFLIGHT_ONLY) {
+    console.log('\n--preflight-only：只做配置检查，没有同步、没有上传。');
+    return;
+  }
+  if (!PUBLISH) throw new Error('发布需要显式授权：加 --publish，或设置 USER_ASKED_TO_PUBLISH=1');
   if (!SKIP_SYNC) runSync();
   else {
     if (!ALLOW_NO_SYNC) throw new Error('禁止 --no-sync：同步会合并线上提交/用户数据。确实要跳过请显式设置 ALLOW_NO_SYNC=1');

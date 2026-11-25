@@ -252,10 +252,15 @@ CI 见 `.github/workflows/smoke.yml`：push / PR 到 `main` 自动跑上面这�
 
 ```bash
 cp .env.production.example .env    # 填 SMTP、Key 等
+node tools/ops/deploy.mjs --preflight-only   # 只检查配置，不上传
 node tools/ops/deploy.mjs --publish
 ```
 
 `.env` 不会进 git；`tools/ops/deploy.mjs` 会在发布前检查 `TRUST_PROXY` / `ALLOW_ORIGINS`，没配就先把风险点打出来。其余变量见 `.env.example`。
+
+> 注意：`SHARECODE=... ADMIN_PASS=... node ...` 是 Git Bash / POSIX 写法。PowerShell 里要写成
+> `$env:SHARECODE="..."; $env:ADMIN_PASS="..."; node tools/ops/deploy.mjs --publish`，
+> 否则 PowerShell 会把 `SHARECODE=...` 当成命令名，报 `CommandNotFoundException`。
 
 ## 数据同步与发布
 
