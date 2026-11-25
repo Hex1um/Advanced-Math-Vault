@@ -82,6 +82,7 @@
     if (data.ok === false || !res.ok) {
       const err = new Error(data.error || ('请求失败 ' + res.status));
       err.status = res.status;
+      err.data = data;
       if (res.status === 401) setToken('');
       throw err;
     }

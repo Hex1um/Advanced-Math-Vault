@@ -181,6 +181,17 @@ try {
     })
   });
   ok('投稿成功并拿到编号', submit.json.ok && /^HS\d+$/.test(submit.json.code), submit.text.slice(0, 120));
+  const dupSubmit = await req('/api/submit', {
+    method: 'POST',
+    body: JSON.stringify({
+      title: '冒烟测试题：$\\int_0^1 x\\,dx$（重复）',
+      statement: '计算 $$\\int_0^1 x\\,\\mathrm{d}x.$$',
+      tags: ['定积分'], thinking: 3, difficulty: 3, calc: 3,
+      solution: '$$\\int_0^1x\\mathrm{d}x=\\frac{1}{2}.$$', answer: '$\\frac12$'
+    })
+  });
+  ok('重复投稿被查重拦截', dupSubmit.status === 409 && dupSubmit.json && dupSubmit.json.duplicate,
+    JSON.stringify(dupSubmit.json || {}).slice(0, 160));
   const pending = await req('/api/admin/pending');
   ok('待审列表有 1 题', pending.json.items.length === 1);
   ok('投稿自动归入主标签', pending.json.items[0].mainTag === '积分', JSON.stringify(pending.json.items[0]).slice(0, 160));

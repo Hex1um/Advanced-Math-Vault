@@ -23,6 +23,10 @@
   Views.submit = function (el) {
     if (!St.me) return loginGate(el, '投稿好题');
 
+    // OCR 原文要跨「识图区域」和「提交表单」两个作用域使用，必须放在外层
+    let ocrRaw = '';
+    let ocrMeta = null;
+
     el.innerHTML =
       '<div class="page-head"><div><h1>投稿好题</h1>'
       + '<p class="sub">投稿不会立刻出现在题库里：管理员会逐题核对题干、解答与三个维度的评分，通过后才入库。通过后你获得 30 经验。</p></div>'
@@ -97,7 +101,6 @@
       const file = document.getElementById('ocrFile');
       if (!pick) return;
       let image = '';
-      let ocrRaw = '';
       let previewSeq = 0;   // 防止图片已移除、旧的文件读取回调还往页面里写
       let ocrRunSeq = 0;    // 防止图片已移除、旧的 OCR 请求返回后又填表
       const CH_KEY = 'mv_ocr_channel';
@@ -118,7 +121,6 @@
         paintChannel();
       });
       paintChannel();
-      let ocrMeta = null;
       let lastQuality = null;
       pick.addEventListener('click', function () { file.click(); });
       file.addEventListener('change', function (ev) {
@@ -534,7 +536,15 @@
           + '<a class="btn" href="#/my">我的投稿</a><a class="btn btn-primary" href="#/submit">再投一题</a></div></div>';
         window.UI.toast('投稿成功，等待人工审核', 'ok');
       } catch (err2) {
-        err.textContent = err2.message;
+        const dup = err2.data && err2.data.duplicate;
+        if (dup) {
+          err.innerHTML = '这道题与已有题目 <a href="#/problem/' + encodeURIComponent(dup.code) + '">'
+            + window.Md.esc(dup.code) + '「' + window.Md.esc(dup.title) + '」</a> 高度重合（'
+            + dup.score + '%），请先确认不是重复投稿；如果是同一题的不同解法，请在原题下补充讨论。';
+          err.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          err.textContent = err2.message;
+        }
         btn.disabled = false;
         btn.textContent = '提交审核';
       }

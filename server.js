@@ -260,6 +260,61 @@ function qualityGate(item, existing) {
   return warns;
 }
 
+/* 投稿查重：先把 LaTeX/空白/标点压成可比较的字符串，再用字符二元组 Jaccard 找高相似题。
+   只和 approved / pending 比；rejected 的题不挡新投稿。 */
+function dedupeCanon(raw) {
+  return String(raw || '')
+    .toLowerCase()
+    .replace(/\\[a-zA-Z]+\*?/g, (m) => m.replace(/^\\/, ''))  // 保留命令名（sin/cos 不能都删成空）
+    .replace(/\$/g, '')
+    .replace(/[\s\u3000]+/g, '')
+    .replace(/[，。；：、,.!?！？；：""''`（）()\[\]{}<>《》·—\-_/\\|]/g, '');
+}
+
+function bigrams(s) {
+  const out = new Map();
+  for (let i = 0; i + 1 < s.length; i++) {
+    const g = s.slice(i, i + 2);
+    out.set(g, (out.get(g) || 0) + 1);
+  }
+  return out;
+}
+
+function jaccard(a, b) {
+  if (!a.size && !b.size) return 1;
+  let inter = 0, union = 0;
+  for (const [g, n] of a) {
+    const m = b.get(g) || 0;
+    inter += Math.min(n, m);
+    union += Math.max(n, m);
+  }
+  for (const [g, n] of b) if (!a.has(g)) union += n;
+  return union ? inter / union : 0;
+}
+
+function findDuplicateProblem(item) {
+  const title = dedupeCanon(item.title);
+  const stmt = dedupeCanon(item.statement);
+  if (!stmt) return null;
+  const stmtGrams = bigrams(stmt);
+  let best = null;
+  for (const p of db.problems) {
+    if (!p || (p.status !== 'approved' && p.status !== 'pending')) continue;
+    const other = dedupeCanon(p.statement);
+    if (!other) continue;
+    const sim = stmt.length < 12 || other.length < 12
+      ? (stmt === other ? 1 : 0)
+      : jaccard(stmtGrams, bigrams(other));
+    const sameTitle = !!title && title === dedupeCanon(p.title);
+    if (sim >= 0.92 || (sameTitle && sim >= 0.72)) {
+      if (!best || sim > best.score) {
+        best = { code: p.code, title: p.title, status: p.status, score: Math.round(sim * 100) };
+      }
+    }
+  }
+  return best;
+}
+
 function normalizeProblem(raw) {
   if (!raw || typeof raw !== 'object') return null;
   const title = String(raw.title || '').trim();
@@ -2637,6 +2692,14 @@ async function handleApi(req, res, pathname, query) {
     const body = await readBody(req);
     const item = normalizeProblem(body);
     if (!item) return fail(res, 400, '标题和题干必填');
+    const dup = findDuplicateProblem(item);
+    if (dup) {
+      return send(res, 409, {
+        ok: false,
+        error: '这道题与已有题目「' + dup.code + ' ' + dup.title + '」高度重合（相似度 ' + dup.score + '%），请先确认不是重复投稿。',
+        duplicate: dup
+      });
+    }
     item.code = nextProblemCode();
     item.authorId = user.id;
     item.authorName = user.name;
