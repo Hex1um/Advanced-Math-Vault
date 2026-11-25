@@ -246,7 +246,7 @@
           const skipVision = channel === 'local';
           const visCfg = window.UI.visionConfig ? window.UI.visionConfig() : window.UI.llmConfig();
           const res = skipVision ? { ok: false, needVision: true } : await window.API.post('/api/ai/from-image', { image: ocrImage, llm: visCfg });
-          if (res.ok && !res.needVision) {
+          if (res.ok && !res.needVision && res.problem) {
             const p = res.problem;
             const fm = document.getElementById('submitForm');
             fm.title.value = p.title || '';
