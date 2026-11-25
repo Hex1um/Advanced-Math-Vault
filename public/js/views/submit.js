@@ -265,6 +265,40 @@
             box.innerHTML = '<div class="judge-result correct"><b>已补全</b><span>核对一遍再提交，AI 转写可能漏字</span></div>';
             return;
           }
+          // 视觉模型读到了东西但格式没解析出来：直接拿它的原文当题干，别再退回 tesseract
+          if (res && res.parsed === false && res.raw) {
+            const cleaned = String(res.raw)
+              .replace(/\[(TITLE|STATEMENT|TAGS|THINKING|DIFFICULTY|CALC|HINTS|ANSWER|SOLUTION|NOTE)\]/gi, '\n')
+              .replace(/```[a-z]*/gi, '').replace(/```/g, '')
+              .replace(/\n{3,}/g, '\n\n').trim();
+            if (cleaned.length > 8) {
+              const fm2 = document.getElementById('submitForm');
+              if (!fm2.statement.value.trim()) fm2.statement.value = cleaned;
+              try {
+                const meta = await window.API.post('/api/ai/complete-problem', { statement: cleaned, llm: window.UI.llmConfig() });
+                const fill2 = function (name, val) {
+                  if (val === undefined || val === null || val === '') return;
+                  if (!fm2[name] || String(fm2[name].value || '').trim()) return;
+                  fm2[name].value = val;
+                };
+                fill2('title', meta.title);
+                fill2('tags', (meta.tags || []).join(', '));
+                fill2('hints', (meta.hints || []).join('\n'));
+                fill2('answer', meta.answer);
+                fill2('solution', meta.solution);
+                ['thinking', 'difficulty', 'calc'].forEach(function (k) {
+                  if (!meta[k]) return;
+                  if (fm2[k].value && Number(fm2[k].value) !== 5) return;
+                  fm2[k].value = meta[k];
+                  const lbl = document.getElementById('v_' + k);
+                  if (lbl) lbl.textContent = meta[k];
+                });
+              } catch (e) { /* 补全失败不阻断 */ }
+              box.innerHTML = '<div class="judge-result correct"><b>已识别</b>'
+                + '<span>视觉模型读到的原文已填入题干，其余字段尽量补全了，请核对</span></div>';
+              return;
+            }
+          }
           if (res && res.parsed === false) console.warn('[ocr] 视觉模型输出解析失败，回落本地 OCR');
           // 没有视觉模型 / 解析失败：先用浏览器 OCR 把图片转成文字，填进题干框让用户核对
           if (window.OCR) {
