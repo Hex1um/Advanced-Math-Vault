@@ -116,7 +116,7 @@ async function scrape() {
   const board = await req(OLD_BASE + '/api/leaderboard').catch(() => ({ items: [] }));
   const daily = await req(OLD_BASE + '/api/daily').catch(() => null);
 
-  const payload = { fetchedAt: new Date().toISOString(), source: OLD_BASE, total, problems, posts, users: board.items || [], daily: daily && daily.problem ? { [daily.date]: { code: daily.problem.code } } : {} };
+  const payload = { fetchedAt: new Date().toISOString(), source: OLD_BASE, total, problems, posts, users: board.items || [], daily: daily && daily.problem ? { [daily.date]: daily.problem.code } : {} };
   fs.writeFileSync(OUT, JSON.stringify(payload), 'utf8');
   console.log('已写入 ' + OUT + '（' + (fs.statSync(OUT).size / 1024 / 1024).toFixed(1) + ' MB）');
   return payload;
