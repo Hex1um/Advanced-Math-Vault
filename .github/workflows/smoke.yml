@@ -1,0 +1,70 @@
+name: smoke
+
+# 门禁：题库与后端的任何改动都要过这一关。
+# 不装任何依赖（零依赖后端），所以跑得很快。
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: 冒烟 + 体检 + 公式（JSON / SQLite 双引擎）
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 版本信息
+        run: node -v && npm -v
+
+      - name: 冒烟测试（JSON 引擎）
+        run: npm test
+
+      - name: 冒烟测试（SQLite 引擎）
+        run: npm run test:sqlite
+
+      - name: 存储层自测（导入 / 增量落盘 / 重载一致性）
+        run: npm run check:store
+
+      - name: 邮件通道自测（假 SMTP 服务器）
+        run: npm run check:mail
+
+      - name: .env 解析自测
+        run: npm run check:env
+
+      - name: 鲁棒性体检（无 db.json 时回退 batch 题库）
+        run: npm run check:robust
+
+      - name: KaTeX 全量校验（必须 0 失败）
+        run: npm run check:katex
+
+  symbolic:
+    name: 符号 / 数值校验（sympy + mpmath）
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 安装依赖
+        run: pip install --disable-pip-version-check sympy mpmath
+
+      - name: 积分答案求导验证
+        run: python tools/verify/verify_integrals.py
+
+      - name: 极限答案数值验证
+        run: python tools/verify/verify_limits.py

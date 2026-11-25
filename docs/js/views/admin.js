@@ -300,6 +300,12 @@
       + '</div>'
 
       + '<div class="card form-card" style="margin-top:22px">'
+      + '<h3 style="margin:0 0 10px;font-size:15px">运行状态</h3>'
+      + '<p class="small muted" style="margin:0 0 14px">存储引擎、邮件通道、反代与跨域配置，以及四个 AI 通道的成功率与平均耗时。配错的环境变量会在这里直接点出来。</p>'
+      + '<div id="runtimeBox" class="small muted">加载中…</div>'
+      + '</div>'
+
+      + '<div class="card form-card" style="margin-top:22px">'
       + '<h3 style="margin:0 0 10px;font-size:15px">题目反馈 <span class="tag gold" id="fbCount">0 条待处理</span></h3>'
       + '<p class="small muted" style="margin:0 0 14px">用户反馈先由 AI 审阅归类，结论与建议随原文一并转到这里。只有 AI 审阅完成的反馈才会出现。</p>'
       + '<div id="fbReviewing" class="small muted" style="margin-bottom:10px"></div>'
@@ -325,6 +331,7 @@
     loadPending();
     loadRejected();
     loadLLM();
+    loadRuntime();
     loadFeedback();
     loadSubmissions();
     loadOcrBadcases();
@@ -394,6 +401,53 @@
         btn.disabled = false;
       }
     });
+
+    /* 运行状态：环境配置自检 + AI 通道可用性 */
+    async function loadRuntime() {
+      const box = document.getElementById('runtimeBox');
+      if (!box) return;
+      try {
+        const [env, ai] = await Promise.all([
+          window.API.get('/api/admin/env').catch(function () { return null; }),
+          window.API.get('/api/admin/ai-stats').catch(function () { return null; })
+        ]);
+        let html = '';
+        if (env) {
+          const st = env.storage || {};
+          html += '<div class="small" style="line-height:1.9">'
+            + '<div>版本 <b>' + window.Md.esc(env.version || '') + '</b> · Node ' + window.Md.esc(env.node || '') + '</div>'
+            + '<div>存储 <b>' + window.Md.esc(env.engine) + '</b>'
+            + (st.counts ? ' · 题 ' + (st.counts.problems || 0) + ' / 用户 ' + (st.counts.users || 0) + ' / 帖子 ' + (st.counts.posts || 0) : '')
+            + '</div>'
+            + '<div>邮件 <b>' + window.Md.esc((env.mail && env.mail.provider) || '') + '</b>（' + ((env.mail && env.mail.mode) === 'log' ? '日志模式' : '真实投递') + '）</div>'
+            + '<div>反代 TRUST_PROXY <b>' + (env.trustProxy ? '开' : '关') + '</b> · 允许来源 <b>' + window.Md.esc((env.allowOrigins || []).join(', ')) + '</b></div>'
+            + '</div>';
+          if (env.warnings && env.warnings.length) {
+            html += '<div style="margin-top:10px">'
+              + env.warnings.map(function (w) { return '<div class="small" style="color:' + window.UI.tone('warn') + '">· ' + window.Md.esc(w) + '</div>'; }).join('')
+              + '</div>';
+          } else {
+            html += '<div class="small" style="margin-top:10px;color:' + window.UI.tone('teal') + '">配置检查通过，没有发现问题。</div>';
+          }
+        }
+        if (ai && ai.channels && ai.channels.length) {
+          html += '<div style="margin-top:14px"><b class="small">AI 通道</b><table class="small" style="width:100%;margin-top:6px;border-collapse:collapse">'
+            + '<tr><th style="text-align:left">通道</th><th>调用</th><th>成功率</th><th>平均耗时</th><th style="text-align:left">最近错误</th></tr>'
+            + ai.channels.map(function (c) {
+              return '<tr><td>' + window.Md.esc(c.name) + '</td><td style="text-align:center">' + c.calls + '</td>'
+                + '<td style="text-align:center">' + c.successRate + '%</td>'
+                + '<td style="text-align:center">' + (c.avgMs ? c.avgMs + 'ms' : '—') + '</td>'
+                + '<td>' + window.Md.esc(c.lastError || '') + '</td></tr>';
+            }).join('')
+            + '</table></div>';
+        } else if (ai) {
+          html += '<div class="small" style="margin-top:14px">AI 通道还没有调用记录（重启后计数从头开始）。</div>';
+        }
+        box.innerHTML = html || '暂无数据';
+      } catch (e) {
+        box.innerHTML = '加载失败：' + window.Md.esc(e.message);
+      }
+    }
 
     async function loadLLM() {
       try {
@@ -466,7 +520,10 @@
             + '<div class="review-head"><span class="problem-code-badge">' + p.code + '</span>'
             + '<h3>' + window.Md.esc(p.title) + '</h3>'
             + '<span class="small muted">' + window.Md.esc(p.authorName || '') + ' · ' + window.UI.timeAgo(p.createdAt) + '</span></div>'
-            + '<div class="tags">' + window.UI.tagBadges(p, { showKind: true }) + '</div>'
+            + '<div class="tags">' + window.UI.tagBadges(p, { showKind: true })
+            + (p.needsReview ? '<span class="tag gold" title="' + window.Md.esc(p.reviewReason || '') + '">待验算：' + window.Md.esc((p.reviewReason || '').slice(0, 18)) + '</span>' : '')
+            + (p.qualityWarn && p.qualityWarn.length ? '<span class="tag gold" title="' + window.Md.esc(p.qualityWarn.join('；')) + '">质量提醒 ' + p.qualityWarn.length + '</span>' : '')
+            + '</div>'
             + '<div class="review-grid" style="margin-top:12px">'
             + scoreInput('思维量', p.thinking) + scoreInput('难度', p.difficulty) + scoreInput('计算量', p.calc)
             + '<div class="field"><label>主标签</label><select data-f="mainTag">' + window.UI.mainTagOptions(p.mainTag) + '</select></div>'

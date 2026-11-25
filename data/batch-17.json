@@ -317,7 +317,7 @@
     "source": "2007 年全国硕士研究生招生考试 数学（一）",
     "hints": [],
     "answer": "$\\frac{\\sqrt{\\mathrm{e}}}{2}$",
-    "solution": "$\\int_{1}^{2}\\frac{1}{x^3}\\mathrm{e}^{\\frac{1}{x}}\\mathrm{d}x = -\\int_{1}^{2}\\frac{1}{x}\\mathrm{e}^{\\frac{1}{x}}\\mathrm{d}\\left(\\frac{1}{x}\\right) = \\int_{\\frac{1}{2}}^{1}t\\mathrm{e}^{t}\\mathrm{d}t = (t - 1)\\mathrm{e}^{t}\\Bigg{|}_{\\frac{1}{2}}^{1} = \\frac{\\sqrt{\\mathrm{e}}}{2}.$",
+    "solution": "$\\int_{1}^{2}\\frac{1}{x^3}\\mathrm{e}^{\\frac{1}{x}}\\mathrm{d}x = -\\int_{1}^{2}\\frac{1}{x}\\mathrm{e}^{\\frac{1}{x}}\\mathrm{d}\\left(\\frac{1}{x}\\right) = \\int_{\\frac{1}{2}}^{1}t\\mathrm{e}^{t}\\mathrm{d}t = (t - 1)\\mathrm{e}^{t}\\Bigg|_{\\frac{1}{2}}^{1} = \\frac{\\sqrt{\\mathrm{e}}}{2}.$",
     "mainTag": "积分"
   },
   {
@@ -1721,7 +1721,7 @@
     "source": "2011 年全国硕士研究生招生考试 数学（一）",
     "hints": [],
     "answer": "$\\ln (1 + \\sqrt{2})$",
-    "solution": "由 $\\mathrm{ds} = \\sqrt{1 + \\left(\\frac{\\mathrm{dy}}{\\mathrm{dx}}\\right)^2}\\mathrm{dx} = \\sqrt{1 + \\tan^2x}\\mathrm{dx} = \\sec x\\mathrm{dx},$\n\n得 $s = \\int_{0}^{\\frac{\\pi}{4}}\\sqrt{1 + \\left(\\frac{\\mathrm{dy}}{\\mathrm{dx}}\\right)^{2}}\\mathrm{d}x = \\int_{0}^{\\frac{\\pi}{4}}\\sec x\\mathrm{d}x = \\ln (\\sec x + \\tan x)\\Bigg{|}_{0}^{\\frac{\\pi}{4}} = \\ln (1 + \\sqrt{2}).$\n\n方法点评：本题考查变积分限函数求导、弧微分的公式、定积分的计算.\n\n需要熟练掌握曲线的弧长计算公式：\n\n(1) 若 $L: y = f(x) (a \\leqslant x \\leqslant b)$ , 则 $\\mathrm{d}s = \\sqrt{1 + f'^2(x)} \\, \\mathrm{d}x$ , $s = \\int_{a}^{b} \\sqrt{1 + f'^2(x)} \\, \\mathrm{d}x$ ;\n(2) 若 $L: \\left\\{ \\begin{array}{l} x = \\varphi(t), \\\\ y = \\psi(t) \\end{array} \\right.$ ( $\\alpha \\leqslant t \\leqslant \\beta$ ), 则 $\\mathrm{ds} = \\sqrt{\\varphi'^2(t) + \\psi'^2(t)} \\, \\mathrm{d}t$ , $s = \\int_{\\alpha}^{\\beta} \\sqrt{\\varphi'^2(t) + \\psi'^2(t)} \\, \\mathrm{d}t$ ;\n（3）若 $L: r = r(\\theta) (\\alpha \\leqslant \\theta \\leqslant \\beta)$ ，则 $\\mathrm{d}s = \\sqrt{r'^2(\\theta) + r^2(\\theta)}\\mathrm{d}\\theta, s = \\int_{\\alpha}^{\\beta} \\sqrt{r'^2(\\theta) + r^2(\\theta)}\\mathrm{d}\\theta.$",
+    "solution": "由 $\\mathrm{ds} = \\sqrt{1 + \\left(\\frac{\\mathrm{dy}}{\\mathrm{dx}}\\right)^2}\\mathrm{dx} = \\sqrt{1 + \\tan^2x}\\mathrm{dx} = \\sec x\\mathrm{dx},$\n\n得 $s = \\int_{0}^{\\frac{\\pi}{4}}\\sqrt{1 + \\left(\\frac{\\mathrm{dy}}{\\mathrm{dx}}\\right)^{2}}\\mathrm{d}x = \\int_{0}^{\\frac{\\pi}{4}}\\sec x\\mathrm{d}x = \\ln (\\sec x + \\tan x)\\Bigg|_{0}^{\\frac{\\pi}{4}} = \\ln (1 + \\sqrt{2}).$\n\n方法点评：本题考查变积分限函数求导、弧微分的公式、定积分的计算.\n\n需要熟练掌握曲线的弧长计算公式：\n\n(1) 若 $L: y = f(x) (a \\leqslant x \\leqslant b)$ , 则 $\\mathrm{d}s = \\sqrt{1 + f'^2(x)} \\, \\mathrm{d}x$ , $s = \\int_{a}^{b} \\sqrt{1 + f'^2(x)} \\, \\mathrm{d}x$ ;\n(2) 若 $L: \\left\\{ \\begin{array}{l} x = \\varphi(t), \\\\ y = \\psi(t) \\end{array} \\right.$ ( $\\alpha \\leqslant t \\leqslant \\beta$ ), 则 $\\mathrm{ds} = \\sqrt{\\varphi'^2(t) + \\psi'^2(t)} \\, \\mathrm{d}t$ , $s = \\int_{\\alpha}^{\\beta} \\sqrt{\\varphi'^2(t) + \\psi'^2(t)} \\, \\mathrm{d}t$ ;\n（3）若 $L: r = r(\\theta) (\\alpha \\leqslant \\theta \\leqslant \\beta)$ ，则 $\\mathrm{d}s = \\sqrt{r'^2(\\theta) + r^2(\\theta)}\\mathrm{d}\\theta, s = \\int_{\\alpha}^{\\beta} \\sqrt{r'^2(\\theta) + r^2(\\theta)}\\mathrm{d}\\theta.$",
     "mainTag": "积分",
     "kind": "应用题"
   },

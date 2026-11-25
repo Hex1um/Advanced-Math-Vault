@@ -317,7 +317,7 @@
     "source": "1988 年全国硕士研究生招生考试 数学（一）",
     "hints": [],
     "answer": "",
-    "solution": "由 $\\lim_{n\\to \\infty}\\left|\\frac{a_{n + 1}}{a_n}\\right| = \\lim_{n\\to \\infty}\\frac{1}{(n + 1)\\cdot 3^{n + 1}}\\Bigg{/}\\frac{1}{n\\cdot 3^n} = \\frac{1}{3}$ ，得收敛半径 $R = 3$\n\n当 $x - 3 = -3$ ，即 $x = 0$ 时， $\\sum_{n = 1}^{\\infty}\\frac{(-1)^n}{n}$ 收敛；\n\n当 $x - 3 = 3$ ，即 $x = 6$ 时， $\\sum_{n = 1}^{\\infty}\\frac{1}{n}$ 发散，\n\n故级数 $\\sum_{n=1}^{\\infty} \\frac{(x-3)^n}{n \\cdot 3^n}$ 的收敛域为 $[0,6)$ .",
+    "solution": "由 $\\lim_{n\\to \\infty}\\left|\\frac{a_{n + 1}}{a_n}\\right| = \\lim_{n\\to \\infty}\\frac{1}{(n + 1)\\cdot 3^{n + 1}}\\Bigg/\\frac{1}{n\\cdot 3^n} = \\frac{1}{3}$ ，得收敛半径 $R = 3$\n\n当 $x - 3 = -3$ ，即 $x = 0$ 时， $\\sum_{n = 1}^{\\infty}\\frac{(-1)^n}{n}$ 收敛；\n\n当 $x - 3 = 3$ ，即 $x = 6$ 时， $\\sum_{n = 1}^{\\infty}\\frac{1}{n}$ 发散，\n\n故级数 $\\sum_{n=1}^{\\infty} \\frac{(x-3)^n}{n \\cdot 3^n}$ 的收敛域为 $[0,6)$ .",
     "mainTag": "级数"
   },
   {

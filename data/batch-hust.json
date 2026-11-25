@@ -6086,7 +6086,7 @@
     "calc": 6,
     "source": "华中科技大学 2020-2021学年微积分（一）（下）期中考试",
     "hints": [],
-    "answer": "\\textbf{Solution}.\n\n \\textbf{法一}. $\\Omega$是由平面$x+y+z=1$与三个坐标面所围成的四面体，其体积$V\n = \\frac{1}{6}$，形心坐标为$\\left(\\frac{1}{4},\\frac{1}{4},\\frac{1}{4}\\right)$.\n\n 故\n \\[\n I = \\iiint\\limits_{\\Omega}(x+2y+3z) \\mathrm{d}v = \\iiint\\limits_{\\Omega}x\n \\mathrm{d}v + 2\\iiint\\limits_{\\Omega}y \\mathrm{d}v + 3\\iiint\\limits_{\\Omega}\n z \\mathrm{d}v = (1+2+3)\\cdot \\frac{1}{4}V = \\frac{1}{4}.\n \\]\n\n \\textbf{法二}. 令$\\begin{cases}\n u = x+y+z, \\\\\n v = \\frac{y+z}{x+y+z}, \\\\\n w = \\frac{z}{y+z}\n \\end{cases}$，则$\\begin{cases}\n x = u(1-v), \\\\\n y = uv(1-w), \\\\\n z = uvw\n \\end{cases}$，$|J| = \\left|\n \\begin{vmatrix}\n 1-v & -u & 0 \\\\\n v(",
+    "answer": "\\textbf{Solution}.\n\n \\textbf{法一}. $\\Omega$是由平面$x+y+z=1$与三个坐标面所围成的四面体，其体积$V\n = \\frac{1}{6}$，形心坐标为$\\left(\\frac{1}{4},\\frac{1}{4},\\frac{1}{4}\\right)$.\n\n 故\n \\[\n I = \\iiint\\limits_{\\Omega}(x+2y+3z) \\mathrm{d}v = \\iiint\\limits_{\\Omega}x\n \\mathrm{d}v + 2\\iiint\\limits_{\\Omega}y \\mathrm{d}v + 3\\iiint\\limits_{\\Omega}\n z \\mathrm{d}v = (1+2+3)\\cdot \\frac{1}{4}V = \\frac{1}{4}.\n \\]\n\n \\textbf{法二}. 令$\\begin{cases}\n u = x+y+z, \\\\\n v = \\frac{y+z}{x+y+z}, \\\\\n w = \\frac{z}{y+z}\n \\end{cases}$，则$\\begin{cases}\n x = u(1-v), \\\\\n y = uv(1-w), \\\\\n z = uvw\n \\end{cases}$，$|J| = \\left| \\begin{vmatrix} 1-v & -u & 0 \\ v(1-w) & u(1-w) & -uv \\ vw & uw & uv \\end{vmatrix} \\right| = u^{2}v",
     "solution": "",
     "mainTag": "极限与连续"
   },

@@ -9,7 +9,12 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { loadDotEnv } = require('./lib/env');
+/* 部署目录里的 .env（平台面板的环境变量优先，不会被覆盖） */
+loadDotEnv(path.join(__dirname, '.env'), { log: (m) => console.log(m) });
 const tagTax = require('./tag-taxonomy');
+const { createStore } = require('./lib/store');
+const { createMailer } = require('./lib/mail');
 
 /* 来源标签：不参与知识点主/子标签树，单独展示与筛选 */
 const EXAM_TAGS = ['华科期中', '华科期末'];
@@ -22,6 +27,15 @@ const SEED_FILE = process.env.SEED_FILE || path.join(DATA_DIR, 'problems.seed.js
 const PORT = Number(process.env.PORT || 8787);
 const SITE_NAME = process.env.SITE_NAME || '数海晴岸';
 const HOST = process.env.HOST || '0.0.0.0';
+const VERSION = (() => {
+  try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')).version || ''; } catch (e) { return ''; }
+})();
+
+/* 存储引擎：默认沿用单文件 JSON；设 DB_ENGINE=sqlite 走行级增量落盘 */
+const store = createStore({ engine: process.env.DB_ENGINE, dbFile: DB_FILE, dataDir: DATA_DIR });
+/* 邮件通道：未配置任何环境变量时自动降级为「验证码写服务端日志」 */
+const mailer = createMailer();
+
 
 /* ---------------------------------------------------------------- 数据层 */
 
@@ -75,68 +89,119 @@ function snapshotDb() {
   }
 }
 
+/* 把读进来的原始库补齐字段、校正计数器、归并标签。不碰存储层。 */
+function normalizeLoaded() {
+  db.settings = Object.assign({ llm: {} }, db.settings || {});
+  db.meta = Object.assign({ seq: 1001, postSeq: 1, replySeq: 1 }, db.meta || {});
+  if (!Array.isArray(db.problems)) db.problems = [];
+  if (!Array.isArray(db.posts)) db.posts = [];
+  if (!Array.isArray(db.users)) db.users = [];
+  if (!db.sessions || typeof db.sessions !== 'object') db.sessions = {};
+  if (!Array.isArray(db.submissions)) db.submissions = [];
+  if (!Array.isArray(db.feedbacks)) db.feedbacks = [];
+  if (!db.emailCodes || typeof db.emailCodes !== 'object') db.emailCodes = {};
+  if (!db.meta.feedbackSeq) db.meta.feedbackSeq = 1;
+  // 计数器必须追上已有数据：从线上同步回来的帖子/回复可能比本地 postSeq 还新，
+  // 不修正就会「新帖拿到已被占用的 id」，发帖看起来成功、实际写进了别人的帖子。
+  const maxOf = (arr, f) => arr.reduce((m, x) => Math.max(m, Number(f(x)) || 0), 0);
+  const maxPostId = maxOf(db.posts, (p) => p.id);
+  const maxReplyId = db.posts.reduce((m, p) => Math.max(m, maxOf(p.replies || [], (r) => r.id)), 0);
+  const maxFeedbackId = maxOf(db.feedbacks, (f) => f.id);
+  const maxProblemSeq = db.problems.reduce((m, p) => {
+    const n = Number(String(p.code || '').replace(/\D/g, ''));
+    return Number.isFinite(n) ? Math.max(m, n) : m;
+  }, 1000);
+  db.meta.postSeq = Math.max(Number(db.meta.postSeq) || 1, maxPostId + 1);
+  db.meta.replySeq = Math.max(Number(db.meta.replySeq) || 1, maxReplyId + 1);
+  db.meta.feedbackSeq = Math.max(Number(db.meta.feedbackSeq) || 1, maxFeedbackId + 1);
+  db.meta.seq = Math.max(Number(db.meta.seq) || 1001, maxProblemSeq + 1);
+  db.problems.forEach((p) => {
+    if (typeof p.scoreSum !== 'number') p.scoreSum = 0;
+    if (typeof p.scoreCount !== 'number') p.scoreCount = 0;
+    // 每次启动都过一遍标签体系：老库、线上同步回来的题、AI 草稿都能落到同一套主/子标签上
+    const tagInfo = tagTax.normalize(p.tags, p.mainTag);
+    p.mainTag = tagInfo.mainTag;
+    p.tags = tagInfo.tags;
+    if (tagInfo.kind && !p.kind) p.kind = tagInfo.kind;
+    if (p.difficulty > DIFF_MAX) p.difficulty = DIFF_MAX;
+  });
+  db.users.forEach((u) => {
+    if (!u.best || typeof u.best !== 'object') u.best = {};
+    if (!u.wrong || typeof u.wrong !== 'object') u.wrong = {};
+  });
+  // 清理过期会话
+  const now = Date.now();
+  for (const k of Object.keys(db.sessions)) {
+    if (!db.sessions[k] || db.sessions[k].exp < now) delete db.sessions[k];
+  }
+}
+
+/* 加载完成：SQLite 引擎在这里套上变更追踪（Proxy），JSON 引擎原样返回 */
+function finishLoad() {
+  if (store.engine === 'sqlite') {
+    store.open();
+    db = store.attach(db);
+    if (!store.hasData()) store.importAll(db);
+  }
+}
+
 function loadDb() {
   ensureDirs();
   snapshotDb();
+
+  if (store.engine === 'sqlite') {
+    try {
+      const fromSqlite = store.load();
+      if (fromSqlite) {
+        db = Object.assign(emptyDb(), fromSqlite);
+        normalizeLoaded();
+        finishLoad();
+        return;
+      }
+      // 首次切到 SQLite：把现有 db.json 一次性导入，之后不再全量重写
+      if (fs.existsSync(DB_FILE)) {
+        const raw = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
+        db = Object.assign(emptyDb(), raw);
+        normalizeLoaded();
+        finishLoad();
+        console.log('[db] 已把 ' + path.basename(DB_FILE) + ' 导入 SQLite：' + store.sqliteFile);
+        return;
+      }
+      seedProblems();
+      normalizeLoaded();
+      finishLoad();
+      saveDb(true);
+      return;
+    } catch (e) {
+      console.error('[db] SQLite 加载失败，回退到 db.json:', e.message);
+      db = emptyDb();
+    }
+  }
+
   if (fs.existsSync(DB_FILE)) {
     try {
       const raw = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
       db = Object.assign(emptyDb(), raw);
-      db.settings = Object.assign({ llm: {} }, db.settings || {});
-      db.meta = Object.assign({ seq: 1001, postSeq: 1, replySeq: 1 }, db.meta || {});
-      if (!Array.isArray(db.problems)) db.problems = [];
-      if (!Array.isArray(db.posts)) db.posts = [];
-      if (!Array.isArray(db.users)) db.users = [];
-      if (!db.sessions || typeof db.sessions !== 'object') db.sessions = {};
-      if (!Array.isArray(db.submissions)) db.submissions = [];
-      if (!Array.isArray(db.feedbacks)) db.feedbacks = [];
-      if (!db.emailCodes || typeof db.emailCodes !== 'object') db.emailCodes = {};
-      if (!db.meta.feedbackSeq) db.meta.feedbackSeq = 1;
-      // 计数器必须追上已有数据：从线上同步回来的帖子/回复可能比本地 postSeq 还新，
-      // 不修正就会「新帖拿到已被占用的 id」，发帖看起来成功、实际写进了别人的帖子。
-      const maxOf = (arr, f) => arr.reduce((m, x) => Math.max(m, Number(f(x)) || 0), 0);
-      const maxPostId = maxOf(db.posts, (p) => p.id);
-      const maxReplyId = db.posts.reduce((m, p) => Math.max(m, maxOf(p.replies || [], (r) => r.id)), 0);
-      const maxFeedbackId = maxOf(db.feedbacks, (f) => f.id);
-      const maxProblemSeq = db.problems.reduce((m, p) => {
-        const n = Number(String(p.code || '').replace(/\D/g, ''));
-        return Number.isFinite(n) ? Math.max(m, n) : m;
-      }, 1000);
-      db.meta.postSeq = Math.max(Number(db.meta.postSeq) || 1, maxPostId + 1);
-      db.meta.replySeq = Math.max(Number(db.meta.replySeq) || 1, maxReplyId + 1);
-      db.meta.feedbackSeq = Math.max(Number(db.meta.feedbackSeq) || 1, maxFeedbackId + 1);
-      db.meta.seq = Math.max(Number(db.meta.seq) || 1001, maxProblemSeq + 1);
-      db.problems.forEach((p) => {
-        if (typeof p.scoreSum !== 'number') p.scoreSum = 0;
-        if (typeof p.scoreCount !== 'number') p.scoreCount = 0;
-        // 每次启动都过一遍标签体系：老库、线上同步回来的题、AI 草稿都能落到同一套主/子标签上
-        const tagInfo = tagTax.normalize(p.tags, p.mainTag);
-        p.mainTag = tagInfo.mainTag;
-        p.tags = tagInfo.tags;
-        if (tagInfo.kind && !p.kind) p.kind = tagInfo.kind;
-        if (p.difficulty > DIFF_MAX) p.difficulty = DIFF_MAX;
-      });
-      db.users.forEach((u) => {
-        if (!u.best || typeof u.best !== 'object') u.best = {};
-        if (!u.wrong || typeof u.wrong !== 'object') u.wrong = {};
-      });
-      // 清理过期会话
-      const now = Date.now();
-      for (const k of Object.keys(db.sessions)) {
-        if (!db.sessions[k] || db.sessions[k].exp < now) delete db.sessions[k];
-      }
+      normalizeLoaded();
       return;
     } catch (e) {
       console.error('[db] 读取失败，使用空库:', e.message);
       const broken = DB_FILE + '.broken-' + Date.now();
       try { fs.copyFileSync(DB_FILE, broken); } catch (_) {}
+      db = emptyDb();
     }
   }
   seedProblems();
+  normalizeLoaded();
   saveDb(true);
 }
 
 function writeDbFile() {
+  // SQLite 引擎：只写变化的行；JSON 引擎：沿用全量原子写
+  if (store.engine === 'sqlite') {
+    store.save(db);
+    return;
+  }
   const tmp = DB_FILE + '.tmp';
   const fd = fs.openSync(tmp, 'w');
   try {
@@ -163,6 +228,81 @@ function saveDb(immediate) {
       console.error('[db] 写入失败:', e.message);
     }
   }, 400);
+}
+
+/* --------------------------------------------- 运行期备份 / 上线配置自检 */
+
+const BACKUP_DIR = path.join(DATA_DIR, 'backups', 'daily');
+const BACKUP_KEEP = Math.max(2, Number(process.env.BACKUP_KEEP || 14));
+let lastBackupKey = '';
+
+/* 进程长期运行时也要有备份：启动时快照只管「这一次启动」，
+   线上跑一个月不重启的话，中间没有第二份可回滚的库。 */
+function dailyBackup(force) {
+  const key = new Date().toISOString().slice(0, 10);
+  if (!force && key === lastBackupKey) return;
+  try {
+    fs.mkdirSync(BACKUP_DIR, { recursive: true });
+    if (store.engine === 'sqlite') {
+      store.save(db);
+      store.checkpoint();
+      fs.copyFileSync(store.sqliteFile, path.join(BACKUP_DIR, 'db-' + key + '.sqlite'));
+      if (store.mirror(db)) {
+        try { fs.copyFileSync(DB_FILE, path.join(BACKUP_DIR, 'db-' + key + '.json')); } catch (_) {}
+      }
+    } else if (fs.existsSync(DB_FILE)) {
+      fs.copyFileSync(DB_FILE, path.join(BACKUP_DIR, 'db-' + key + '.json'));
+    } else {
+      saveDb(true);
+    }
+    lastBackupKey = key;
+    const files = fs.readdirSync(BACKUP_DIR).filter((f) => /^db-\d{4}-\d{2}-\d{2}\./.test(f));
+    const dates = [...new Set(files.map((f) => f.slice(3, 13)))].sort();
+    while (dates.length > BACKUP_KEEP) {
+      const drop = dates.shift();
+      for (const f of files.filter((x) => x.slice(3, 13) === drop)) {
+        try { fs.unlinkSync(path.join(BACKUP_DIR, f)); } catch (_) {}
+      }
+    }
+    console.log('[backup] 已归档 ' + key + '（保留最近 ' + BACKUP_KEEP + ' 天）');
+  } catch (e) {
+    console.error('[backup] 定时备份失败:', e.message);
+  }
+}
+
+/* 上线配置自检：这些项配错不会报错，但会静默降低安全性或让功能失效 */
+function configWarnings() {
+  const w = [];
+  const prod = /^prod/i.test(String(process.env.NODE_ENV || '')) || String(process.env.NODE_ENV || '') === 'production';
+  if (prod && ALLOWED_ORIGINS.includes('*')) {
+    w.push('ALLOW_ORIGINS 仍是 *：任何站点都能带凭据调用接口，建议改成 https://hex1um.github.io 等白名单。');
+  }
+  if (prod && !TRUST_PROXY) {
+    w.push('未设置 TRUST_PROXY=1：如果线上在反向代理后面，所有用户会共用代理 IP 的限流配额（登录 12 次/分、AI 40 次/10 分）。');
+  }
+  if (mailer.describe().mode === 'log') {
+    w.push('邮件通道是日志模式：绑定邮箱的验证码只写服务端日志，需管理员手工转发。配置 SMTP_HOST 或 RESEND_API_KEY 即可自动切换。');
+  }
+  if (store.engine === 'json') {
+    w.push('存储引擎为 JSON：每次保存都会全量序列化整个库，题目与用户继续增长后建议切 DB_ENGINE=sqlite。');
+  }
+  return w;
+}
+
+function configSummary() {
+  const m = mailer.describe();
+  return {
+    version: VERSION,
+    node: process.version,
+    engine: store.engine,
+    storage: store.stats(),
+    trustProxy: TRUST_PROXY,
+    allowOrigins: ALLOWED_ORIGINS,
+    mail: { provider: m.provider, mode: m.mode, from: m.from },
+    backup: { dir: BACKUP_DIR, keep: BACKUP_KEEP, last: lastBackupKey },
+    llm: { siteKey: llmConfigured(), free: FREE_PROVIDERS.length },
+    warnings: configWarnings()
+  };
 }
 
 function seedProblems() {
@@ -355,6 +495,12 @@ function normalizeProblem(raw) {
     scoreSum: 0,
     scoreCount: 0
   };
+  // 入库门禁（tools/import/gate.mjs）判不了自动验算的题会带这两个字段进库，
+  // 审核后台据此显示「待验算：原因」，提醒审核人重点核对推导
+  if (raw.needsReview) {
+    itemOut.needsReview = true;
+    itemOut.reviewReason = String(raw.reviewReason || '').slice(0, 120);
+  }
   const warns = qualityGate(itemOut, db.problems);
   if (warns.length) itemOut.qualityWarn = warns;
   return itemOut;
@@ -808,6 +954,40 @@ const TAG_STRATEGY = {
   '连续': ['分段点连续看左右极限是否相等', '间断点分类：可去、跳跃、无穷、振荡'],
   '无穷小比较': ['做比值的极限，看阶数', '同阶不等价时要用泰勒对齐']
 };
+
+/* 九主标签维度的做题汇总：薄弱考点定向推题、学科雷达都用它 */
+function mainTagAgg(user) {
+  const solved = (user && user.solved) || {};
+  const best = (user && user.best) || {};
+  const agg = new Map(tagTax.MAIN_TAGS.map((t) => [t, { tag: t, attempts: 0, passed: 0, scoreSum: 0 }]));
+  const byCode = new Map(db.problems.map((p) => [p.code, p]));
+  for (const [code, rec] of Object.entries(solved)) {
+    const p = byCode.get(code);
+    if (!p) continue;
+    const o = agg.get(p.mainTag || '综合');
+    if (!o) continue;
+    const sc = (best[code] && best[code].score) || (rec.done ? 100 : 0);
+    o.attempts++;
+    if (rec.done) o.passed++;
+    o.scoreSum += sc;
+  }
+  return [...agg.values()].map((o) => ({
+    tag: o.tag,
+    attempts: o.attempts,
+    passed: o.passed,
+    rate: o.attempts ? Math.round((o.passed / o.attempts) * 100) : 0,
+    avgScore: o.attempts ? Math.round(o.scoreSum / o.attempts) : 0
+  }));
+}
+
+/* 薄弱主标签：做过但没全对，按通过率、均分从低到高取前 N 个 */
+function weakMainTags(user, limit) {
+  return mainTagAgg(user)
+    .filter((t) => t.attempts > 0 && t.passed < t.attempts)
+    .sort((a, b) => a.rate - b.rate || a.avgScore - b.avgScore || b.attempts - a.attempts)
+    .slice(0, limit || 3)
+    .map((t) => t.tag);
+}
 
 function strategyFor(tags) {
   const out = [];
@@ -1367,13 +1547,50 @@ function llmCandidates(body) {
   return list;
 }
 
+/* --------------------------------------------------- AI 通道可观测性
+   四级降级链一旦某级挂了（免费公共通道最常见），用户端只会看到「答得慢」，
+   运维侧完全没有信号。这里按通道记成功/失败/耗时/降级次数，管理员可查。 */
+function aiStats() {
+  if (!db.meta.aiStats || typeof db.meta.aiStats !== 'object') {
+    db.meta.aiStats = { since: new Date().toISOString(), calls: 0, channels: {} };
+  }
+  const st = db.meta.aiStats;
+  if (!st.channels || typeof st.channels !== 'object') st.channels = {};
+  return st;
+}
+
+function noteAi(cfg, ok, ms, err) {
+  try {
+    const st = aiStats();
+    const name = String((cfg && cfg.name) || '未命名通道');
+    const b = st.channels[name] || { ok: 0, fail: 0, msSum: 0, lastOkAt: '', lastErrorAt: '', lastError: '' };
+    if (ok) {
+      b.ok = (b.ok || 0) + 1;
+      b.msSum = (b.msSum || 0) + ms;
+      b.lastOkAt = new Date().toISOString();
+    } else {
+      b.fail = (b.fail || 0) + 1;   // 每失败一次就意味着往下降了一级
+      b.lastErrorAt = new Date().toISOString();
+      b.lastError = String(err || '').slice(0, 140);
+    }
+    st.channels[name] = b;
+    st.calls = (st.calls || 0) + 1;
+  } catch (e) {
+    // 统计不能影响主流程
+  }
+}
+
 async function openChat(cfg, messages, stream) {
   const base = safeLlmBaseUrl(cfg.baseUrl || '');
-  if (!base) throw new Error(cfg.name + ' 的接口地址不合法或不在域名白名单内');
+  if (!base) {
+    noteAi(cfg, false, 0, '接口地址不合法或不在域名白名单内');
+    throw new Error(cfg.name + ' 的接口地址不合法或不在域名白名单内');
+  }
   const headers = { 'Content-Type': 'application/json' };
   if (cfg.apiKey) headers.Authorization = 'Bearer ' + cfg.apiKey;
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), cfg.timeout || 30000);
+  const t0 = Date.now();
   let resp;
   try {
     resp = await fetch(base + '/chat/completions', {
@@ -1382,13 +1599,19 @@ async function openChat(cfg, messages, stream) {
       body: JSON.stringify({ model: cfg.model, messages, temperature: 0.6, stream: !!stream }),
       signal: controller.signal
     });
+  } catch (e) {
+    const msg = e && e.name === 'AbortError' ? '超时（' + (cfg.timeout || 30000) + 'ms）' : (e && e.message);
+    noteAi(cfg, false, Date.now() - t0, msg);
+    throw e;
   } finally {
     clearTimeout(timer);
   }
   if (!resp.ok) {
     const t = await resp.text().catch(() => '');
+    noteAi(cfg, false, Date.now() - t0, 'HTTP ' + resp.status);
     throw new Error(cfg.name + ' 返回 ' + resp.status + ' ' + t.slice(0, 120));
   }
+  noteAi(cfg, true, Date.now() - t0, '');
   return resp;
 }
 
@@ -1567,15 +1790,25 @@ function noteQuota(user, isReply) {
 }
 
 /* 邮箱验证码：本地库存储，5 分钟有效。
-   站点没有配 SMTP：验证码只写服务端日志给管理员看，绝不在 HTTP 响应里回显
-   （否则任何人注册后都能绑任意假邮箱、绕过发帖限流）。接真实 SMTP 只需替换 sendMailCode。 */
+   通道由 lib/mail.js 决定：配了 SMTP / Resend 就真发信，没配就只写服务端日志。
+   验证码永远不随 HTTP 响应回显（否则任何人注册后都能绑任意假邮箱、绕过发帖限流）。 */
 function genCode() {
   return String(crypto.randomInt(100000, 1000000));
 }
 
-function sendMailCode(email, code) {
-  console.log('[mail] 验证码 ' + code + ' -> ' + email + '（站点未接入 SMTP，仅管理员可见）');
-  return { delivered: false };
+async function sendMailCode(email, code) {
+  const subject = '数海晴岸 · 邮箱验证码';
+  const text = [
+    '你的邮箱验证码是：' + code,
+    '',
+    '5 分钟内有效。绑定后可以解除发帖/回复的每小时限制：发帖 1 条、回复 1 条。',
+    '如果这不是你本人的操作，忽略本邮件即可。'
+  ].join('\n');
+  const r = await mailer.send({ to: email, subject, text });
+  if (!r.delivered) {
+    console.log('[mail] 验证码 ' + code + ' -> ' + email + '（' + (r.provider === 'log' ? '未接入邮件服务，仅管理员可见' : '发送失败: ' + (r.error || '未知原因')) + '）');
+  }
+  return r;
 }
 
 const FEEDBACK_TYPES = {
@@ -1698,6 +1931,8 @@ const RATE_RULES = [
   [/^\/api\/ai\/generate$/, 12, 60 * 60 * 1000, 'AI 出题每小时最多 12 次'],
   // 站点共享的视觉 Key 是全站共用一个额度，必须限流，否则一个人就能刷爆
   [/^\/api\/ai\/from-image$/, 30, 60 * 60 * 1000, '识图太频繁了：每小时最多 30 次，先用本地 OCR 或稍后再试'],
+  // 发验证码会真的发信（配额与费用都在我们这边），必须限流，否则能拿来刷别人邮箱
+  [/^\/api\/me\/email\/send$/, 6, 60 * 60 * 1000, '验证码发得太频繁了：每小时最多 6 次，稍后再试'],
   [/\/answer$/, 40, 60 * 60 * 1000, '判题刷得太快了，歇一会儿']
 ];
 
@@ -1717,6 +1952,24 @@ async function handleApi(req, res, pathname, query) {
         return fail(res, 429, msg);
       }
     }
+  }
+
+  /* ---- 健康检查（无需登录，只暴露运行状态，不含任何密钥） ---- */
+  if (pathname === '/api/health' && method === 'GET') {
+    const approved = db.problems.filter((p) => p.status === 'approved').length;
+    const m = mailer.describe();
+    return send(res, 200, {
+      ok: true,
+      site: SITE_NAME,
+      version: VERSION,
+      uptimeSec: Math.round(process.uptime()),
+      problems: approved,
+      engine: store.engine,
+      storageReady: store.engine === 'json' ? fs.existsSync(DB_FILE) : store.ready,
+      mail: { provider: m.provider, mode: m.mode },
+      trustProxy: TRUST_PROXY,
+      warnings: configWarnings().length
+    });
   }
 
   /* ---- 站点信息 ---- */
@@ -1836,13 +2089,18 @@ async function handleApi(req, res, pathname, query) {
     const code = genCode();
     db.emailCodes[user.id] = { email, code, exp: Date.now() + 5 * 60 * 1000, tries: 0 };
     saveDb();
-    const r = sendMailCode(email, code);
+    const r = await sendMailCode(email, code);
     // 验证码绝不随 HTTP 响应回显（否则谁能注册就能绑任意假邮箱、绕过发帖限流）。
-    // 无 SMTP 时验证码只写服务端日志，供站点管理员查看。
+    // 未配置邮件通道时验证码只写服务端日志，供站点管理员查看。
     return send(res, 200, {
       ok: true,
-      delivered: r.delivered,
-      message: r.delivered ? '验证码已发送到邮箱' : '站点未接入邮件服务，验证码已写入服务端日志，请联系管理员'
+      delivered: !!r.delivered,
+      provider: r.provider,
+      message: r.delivered
+        ? '验证码已发送到邮箱，5 分钟内有效'
+        : (r.provider === 'log'
+          ? '站点未接入邮件服务，验证码已写入服务端日志，请联系管理员'
+          : '邮件发送失败，请稍后重试或联系管理员')
     });
   }
 
@@ -1951,6 +2209,19 @@ async function handleApi(req, res, pathname, query) {
         recommend.push({ code: p.code, title: p.title, difficulty: p.difficulty, tag: w.tag });
       }
     }
+    const weakMain = weakMainTags(user, 3);
+    const mainRecommend = [];
+    for (const tag of weakMain) {
+      let n = 0;
+      for (const p of db.problems) {
+        if (n >= 2 || mainRecommend.length >= 6) break;
+        if (p.status !== 'approved' || (p.mainTag || '综合') !== tag) continue;
+        if (solvedMap[p.code] && solvedMap[p.code].done) continue;
+        if (mainRecommend.some((r) => r.code === p.code)) continue;
+        mainRecommend.push({ code: p.code, title: p.title, difficulty: p.difficulty, mainTag: tag });
+        n++;
+      }
+    }
     return send(res, 200, {
       ok: true,
       summary: {
@@ -1959,7 +2230,7 @@ async function handleApi(req, res, pathname, query) {
         avgScore: attempts ? Math.round(scoreSum / attempts) : 0,
         wrong: Object.keys(user.wrong || {}).length
       },
-      tags, mainTags, weakest, recommend
+      tags, mainTags, weakest, recommend, weakMain, mainRecommend
     });
   }
 
@@ -2430,6 +2701,7 @@ async function handleApi(req, res, pathname, query) {
     const mainTag = String(query.main || '').trim();
     const dmin = Number(query.dmin || 1);
     const dmax = Number(query.dmax || DIFF_MAX);
+    const focus = String(query.focus || '').trim();
     let pool = db.problems.filter((p) => p.status === 'approved');
     if (mainTag) pool = pool.filter((p) => p.mainTag === mainTag);
     if (tags.length) pool = pool.filter((p) => p.tags.some((t) => tags.includes(t)));
@@ -2438,7 +2710,18 @@ async function handleApi(req, res, pathname, query) {
       const solved = user.solved || {};
       pool = pool.filter((p) => !(solved[p.code] && solved[p.code].done));
     }
-    if (!pool.length) return send(res, 200, { ok: true, code: null, remaining: 0 });
+    /* 薄弱考点定向推题：按九主标签的通过率挑最差的几个，优先出这些考点的未做题 */
+    let focusTags = [];
+    if (focus === 'weak') {
+      if (!user) return fail(res, 401, '登录后才能按薄弱考点推题');
+      focusTags = weakMainTags(user, 3);
+      if (focusTags.length) {
+        const set = new Set(focusTags);
+        const narrowed = pool.filter((p) => set.has(p.mainTag));
+        if (narrowed.length) pool = narrowed;
+      }
+    }
+    if (!pool.length) return send(res, 200, { ok: true, code: null, remaining: 0, focus, focusTags });
     pool.sort((a, b) => a.code.localeCompare(b.code));
     let pick;
     if (mode === 'random') {
@@ -2448,7 +2731,7 @@ async function handleApi(req, res, pathname, query) {
       const idx = after ? pool.findIndex((p) => p.code > after) : 0;
       pick = pool[idx < 0 ? 0 : idx];
     }
-    return send(res, 200, { ok: true, code: pick.code, remaining: pool.length, mode });
+    return send(res, 200, { ok: true, code: pick.code, remaining: pool.length, mode, focus, focusTags, mainTag: pick.mainTag });
   }
 
   /* ---- 错题本 ---- */
@@ -2834,6 +3117,32 @@ function deleteProblemCascade(code, adminName) {
 
   if (pathname.startsWith('/api/admin/')) {
     if (!user || user.role !== 'admin') return fail(res, 403, '需要管理员权限');
+
+    /* 上线配置体检：管理员能看到「到底哪些环境变量没配对」 */
+    if (pathname === '/api/admin/env' && method === 'GET') {
+      return send(res, 200, Object.assign({ ok: true }, configSummary()));
+    }
+
+    /* AI 通道可用性面板 */
+    if (pathname === '/api/admin/ai-stats' && method === 'GET') {
+      const st = aiStats();
+      const channels = Object.keys(st.channels).map((name) => {
+        const b = st.channels[name] || {};
+        const total = (b.ok || 0) + (b.fail || 0);
+        return {
+          name,
+          ok: b.ok || 0,
+          fail: b.fail || 0,
+          calls: total,
+          successRate: total ? Math.round(((b.ok || 0) / total) * 100) : 0,
+          avgMs: b.ok ? Math.round((b.msSum || 0) / b.ok) : 0,
+          lastOkAt: b.lastOkAt || '',
+          lastErrorAt: b.lastErrorAt || '',
+          lastError: b.lastError || ''
+        };
+      }).sort((a, b) => b.calls - a.calls);
+      return send(res, 200, { ok: true, since: st.since, calls: st.calls || 0, channels });
+    }
 
     const adminProblemMatch = pathname.match(/^\/api\/admin\/problem\/([A-Za-z0-9_-]+)$/);
     if (adminProblemMatch && method === 'GET') {
@@ -3909,9 +4218,38 @@ process.on('unhandledRejection', (e) => { console.error('[unhandledRejection]', 
 loadDb();
 
 server.listen(PORT, HOST, () => {
-  console.log(SITE_NAME + ' running at http://localhost:' + PORT);
+  console.log(SITE_NAME + ' v' + VERSION + ' running at http://localhost:' + PORT);
   console.log('题目数:', db.problems.filter((p) => p.status === 'approved').length, '| 用户数:', db.users.length, '| LLM:', llmConfigured() ? db.settings.llm.model : '本地讲解模式');
+  console.log('存储:', store.engine === 'sqlite' ? 'SQLite ' + store.sqliteFile : 'JSON ' + DB_FILE, '| 邮件:', mailer.describe().provider + (mailer.describe().mode === 'log' ? '（日志模式）' : ''));
+  const warns = configWarnings();
+  if (warns.length) {
+    console.log('— 上线配置提醒 —');
+    for (const w of warns) console.log('  · ' + w);
+  }
+  // 启动即做一次当日备份；之后每 30 分钟检查一次是否跨天
+  dailyBackup();
+  setInterval(() => dailyBackup(), 30 * 60 * 1000).unref();
+  // SQLite 引擎下定期把 db.json 镜像刷新一遍，保证按 db.json 工作的老工具与部署流程拿到的不是陈旧数据
+  if (store.engine === 'sqlite') {
+    setInterval(() => { try { store.save(db); store.mirror(db); } catch (e) { console.error('[store] 定期镜像失败:', e.message); } }, 10 * 60 * 1000).unref();
+  }
 });
 
-process.on('SIGINT', () => { saveDb(true); process.exit(0); });
-process.on('SIGTERM', () => { saveDb(true); process.exit(0); });
+function shutdown(signal) {
+  console.log('[shutdown] ' + signal + '，正在落盘…');
+  try {
+    if (store.engine === 'sqlite') {
+      store.save(db);
+      store.mirror(db);
+      store.close(db);
+    } else {
+      writeDbFile();
+    }
+  } catch (e) {
+    console.error('[shutdown] 落盘失败:', e.message);
+  }
+  process.exit(0);
+}
+
+process.on('SIGINT', () => shutdown('SIGINT'));
+process.on('SIGTERM', () => shutdown('SIGTERM'));

@@ -1,15 +1,118 @@
 # CHANGELOG
 
-## v1.0.5 — 2026-11-25
+## v1.2.1 — 2026-11-25
 
 修复部署导致用户提交记录丢失。
 
 - 根因：`sync-live` 只合并用户/帖子/反馈，**没有合并 `submissions`**；同时管理端 `/api/admin/export` 也没导出提交记录。部署会用本地库覆盖线上，提交记录因此被清空。
 - `/api/admin/export` 现在包含 `submissions`；`sync-live` 按提交 id 并集合并线上与本地记录，并按时间排序，保证 `/api/my/attempts` 的最近 40 条正确。
 - `sync-live` 兼容旧版服务端：导出里没有 submissions 时，自动走 `/api/admin/submissions` 兜底；支持 `ADMIN_TOKEN` 会话令牌，避免必须传明文管理员密码。
-- `deploy.mjs` 的 `--no-sync` 默认拒绝，只有显式 `ALLOW_NO_SYNC=1` 才允许；正常发布必须先同步线上用户数据。
+- `tools/ops/deploy.mjs` 的 `--no-sync` 默认拒绝，只有显式 `ALLOW_NO_SYNC=1` 才允许；正常发布必须先同步线上用户数据。
 - 注意：本次修复前的历史提交若已被覆盖，只能从备份恢复；修复后新提交不会再因发布丢失。
-- 验证：同步脚本在临时环境把线上 1 条提交合并进本地；全仓鲁棒性 0 错误、冒烟 118/118。
+- 验证：同步脚本在临时环境把线上 1 条提交合并进本地；全仓鲁棒性 0 错误、冒烟 121/121。
+
+## v1.2.0 — 2026-11-25
+
+入题流水线加自动校验关口、配置支持 `.env`、Pages 交给 Actions 构建。
+
+### 入库门禁：判不了的题自动打 `needsReview`
+
+- **根因**：以前导入只看「字段齐不齐」，答案对不对全靠人眼。仓库里其实已有 `verify_integrals.py`（sympy 求导）与 `verify_limits.py`（mpmath 50 位），但它们只是给人手工跑的脚本，从没进过流水线。
+- 新增 `tools/import/gate.mjs`，两层：
+  - **硬门禁**：导入前跑两个校验脚本，有 FAIL 就中止导入（说明「已知答案的自检样例都过不了」，此时入库没有任何意义）。
+  - **软标记**：按题干与答案判断「这台机器能不能自动验算」——含极限/定积分/重积分/级数、答案缺失、无解析、答案是文字结论的题，写 `needsReview: true` + `reviewReason` 入库；其余视为可自动核对。
+- 用法：`node tools/import/import-problems.mjs <file> --verify`；`import-contest.mjs --verify` 同款。单独预览：`node tools/import/gate.mjs data/batch-01.json`（加 `--write` 才写回文件）。
+- 审核后台的待审卡片会显示「待验算：原因」与「质量提醒 N」两个标签，人工注意力直接落在需要看的地方。
+- 两个校验脚本补了退出码（`sys.exit(1)`），此前永远是 0，CI 与门禁都无法据此判断成败。
+
+### 配置：支持部署目录里的 `.env`
+
+- 新增 `lib/env.js`：解析仓库根 `.env`，**不覆盖已存在的环境变量**（平台面板与命令行优先），支持引号、行内注释、续行、`${VAR}` 展开。
+- 场景：托管平台没有环境变量面板、只能上传目录后直接跑 `node server.js` 时，把 `.env` 一起放进去即可；`.env` 已在 `.gitignore` 里，仓库只提交 `.env.example` 与 `.env.production.example`（线上模板，含 `TRUST_PROXY=1`、收紧后的 `ALLOW_ORIGINS`）。
+- `tools/ops/deploy.mjs` 增加部署前自检：没有 `.env` 又没设 `TRUST_PROXY` / `ALLOW_ORIGINS` 时，把「所有用户共用代理限流桶」「任何站点可跨域调接口」两条风险直接打出来，并提示 `cp .env.production.example .env`。
+- 自测：`npm run check:env`（10 项），覆盖解析规则与「不覆盖已有变量」策略。
+
+### Pages 由 Actions 构建发布
+
+- 新增 `.github/workflows/pages.yml`：`public/**` 或 `docs/**` 变动时，Actions 先用 `build-pages.mjs` 从 `public/` 重建 `docs/`（需要 `SHARECODE` secret），再发布到 GitHub Pages；没有 secret 时直接发布仓库里已提交的 `docs/`，不会卡住发布。
+- 仓库内 `docs/` 的双份提交暂时保留（作为无 secret 时的兜底），后续可以按这个工作流逐步停掉手工提交。
+- **已推送并首次跑通**：`smoke`（20 个步骤）与 `pages` 均 green，见 [run 45626954102](https://github.com/Hex1um/Advanced-Math-Vault/actions/runs/45626954102)。GitHub 对 OAuth App 创建/修改 workflow 文件强制要求 `workflow` scope，授权后 `push` 才被接受。
+
+### 前端接口契约
+
+- `public/js/api.js` 补 JSDoc：`ApiOk` / `ApiFail` / `ApiError`（`status`、`data`）、`RequestOptions`、`AppState`，以及 `request()` / `download()` 的参数与抛错约定。仍是零构建，不引入 TS。
+- `CONTRIBUTING.md` 新增「发布前检查清单」：双引擎测试、题库体检、`build:pages`、浏览器端到端抽查（公式渲染、移动端长公式横向滚动、投稿 OCR 回填、判卷流式）、缓存串升版、CHANGELOG 与发布。
+
+### 测试
+
+- 新增 `check:env`（10 项）。其余保持：`npm test` / `test:sqlite` 121 项、`check:store` 20 项、`check:mail` 14 项、`check:robust` 0 错误、`check:katex` 0 失败。
+
+## v1.1.0 — 2026-11-25
+
+工程基建与运行期可靠性：存储可切 SQLite、验证码真发信、每日备份、配置自检、CI 门禁。
+
+### 存储：JSON 全量写 → 可选 SQLite 行级增量写
+
+- **根因**：6453 题 + 用户/提交/帖子后，每次 `saveDb()` 都要 `JSON.stringify` 整个库再 `fsync`，400ms 防抖挡不住高频提交时的事件循环阻塞；单文件也没法多实例。
+- **改法**：新增 `lib/store.js`，`DB_ENGINE=sqlite` 时内存里仍是同一个 `db` 对象，用 Proxy 记录「哪条被改」，保存只 UPSERT 变化的行；导入/删除这类结构性变化才重建该表。表为「索引列 + body(JSON)」混合，`problems(status, main_tag, sub_tag, difficulty)`、`submissions(user_id, problem_code)`、`feedbacks(status)` 等都有索引。
+- **兜底**：每 50 次保存做行数对账，对不上就整表重建；仍按 5 分钟（可调）导出 `db.json`，`sync-live` / `deploy` / `robustness-check` 不用改。
+- **默认不变**：不设 `DB_ENGINE` 仍是原来的 JSON 全量写，行为与 v1.0.4 一致。
+- 迁移：`node tools/ops/migrate-json-to-sqlite.mjs`（逐行内容比对，不是只比行数）；自测 `node tools/verify/store-test.mjs` 覆盖改字段、push、嵌套数组、嵌套对象、映射增删、整体重赋值、kv 修改共 20 项。
+
+### 邮件：验证码从「写日志」变成真发信
+
+- **改前症状**：绑定邮箱的验证码只打印在服务端日志里，用户拿不到，只能找管理员转发；未绑定邮箱的账号因此一直卡在「每小时 1 帖 1 回复」。
+- **改法**：新增 `lib/mail.js`，按环境变量选通道——标准 SMTP（零依赖实现，587 STARTTLS / 465 TLS，支持 AUTH PLAIN / LOGIN）、Resend HTTP、自建 HTTP 网关；都不配才退回日志模式。中文主题按 RFC 2047 编码，正文按 RFC 5321 dot-stuffing。
+- 发验证码接口新增限流：**每 IP 每小时 6 次**（会真的发信，不能让人拿来刷别人邮箱）。
+- `node tools/verify/mail-test.mjs` 用本地假 SMTP 服务器验证整条链路（14 项），不需要真实凭据。
+
+### 备份与回流
+
+- **改前症状**：`snapshotDb()` 只在进程启动时备份，线上跑一个月不重启就一直没有第二份可回滚的库。
+- 新增每日归档：启动时 + 每 30 分钟检查跨天，归档到 `data/backups/daily/`，保留 14 天（`BACKUP_KEEP`）；SQLite 引擎先 `wal_checkpoint` 再拷文件，并同时留 JSON。
+- 新增 `tools/ops/backup-db.mjs`（手动备份，可加 `--label`）与 `tools/ops/export-batch.mjs`（线上审核通过的题脱敏回流成 `data/batch-NN.json`，按标题+题干去重，作者统一写「题库组」）。
+
+### 上线配置自检与运行状态
+
+- **改前症状**：`TRUST_PROXY` 没设、`ALLOW_ORIGINS` 还是 `*`、邮件没配，全都静默降级，没有任何提示。
+- 启动日志打印上线提醒；新增 `GET /api/health`（免登录，只给版本/引擎/邮件模式/告警数，不含密钥）与管理员 `GET /api/admin/env`。
+- 审核后台新增「运行状态」卡片：存储计数、邮件通道、反代与跨域、告警列表，以及 AI 通道成功率 / 平均耗时 / 最近错误。
+
+### AI 通道可观测性
+
+- 四级降级链原来只有 `console.error`，公共免费通道挂了运维侧没有信号。现在按通道累计成功/失败/耗时（失败次数即降级次数），落 `db.meta.aiStats`，管理员 `GET /api/admin/ai-stats` 可查，后台直接看表。
+
+### 薄弱考点定向推题
+
+- `/api/my/stats` 新增 `weakMain`（九主标签维度）与 `mainRecommend`；`/api/practice?focus=weak&mode=random` 只在最弱的 1-3 个主标签里挑未做对的题。
+- 错题本页新增「薄弱考点」卡片：显示各主标签通过率，一键挑一题来练。
+
+### CI 门禁
+
+- 新增 `.github/workflows/smoke.yml`：push / PR 到 `main` 跑 `npm test`、`test:sqlite`、`check:store`、`check:mail`、`check:robust`、`check:katex`，另有 sympy job 跑积分/极限校验。零 npm 依赖，无缓存可依。
+- `robustness-check.mjs` 在没有 `data/db.json` 时回退到 `data/batch-*.json`（编号用占位），新克隆与 CI 都能跑。
+- `check-katex.mjs` 新增 `--max-fail=N`，CI 用 `--max-fail=0` 卡死失败数。
+
+### tools/ 目录分层（**路径有变**）
+
+- `tools/` 下 31 个脚本按职责拆到 `ops/`（部署/同步/备份/迁移）、`verify/`（冒烟/体检/公式/自测/符号校验）、`import/`（导入与数据规范化）、`archive/`（已合并的历史脚本）。说明见 `tools/README.md`。
+- **旧路径不再可用**，例如 `node tools/smoke.mjs` → `node tools/verify/smoke.mjs`。`package.json` 里的脚本入口全部更新，日常用 `npm test` / `npm run check:robust` 这类命令即可。
+
+### 题库：修掉 7 处公式与一处截断
+
+- 5 处 `\Bigg{|}` / `\Bigg{/}` 改成 `\Bigg|` / `\Bigg/`（KaTeX 报 `Invalid delimiter type`），1 处 `B = (1 & 1 & 1)` 改成 `pmatrix`（`&` 在普通括号里非法）。
+- 2015 数学一解答题的多重 `\left\{\begin{array}...\right.` 嵌套错乱，按实际解集重写为 `(1,1),(-1,-1),(2,-1),(-1,2)`。
+- 华科一道三重积分的雅可比行列式在导入时被截断（仅剩 `\left|\begin{vmatrix} 1-v & -u & 0 \\ v(`），补齐为三阶行列式并给出 `|J| = u^{2}v`。
+- 修完后 `npm run check:robust` 对 batch 题库（2474 题、31268 个公式片段）**0 错误 0 警告**。
+
+### 顺手修掉
+
+- `tools/verify/verify_limits.py` 里残留了一段历史合并冲突标记（`<<<<<<< HEAD` … `>>>>>>>`），脚本根本跑不起来（`SyntaxError: invalid character '，'`）。清掉后 21 个用例全通过。这个文件之前在 CI 里从没被执行过，所以一直没暴露。
+
+### 测试
+
+- 冒烟从 118 项增至 **121 项**（新增 `/api/health` 可用、暴露引擎与邮件模式、响应不含密钥字段），JSON 与 SQLite 两种引擎各 121/121 通过。
+- 新增 `store-test`（20 项）与 `mail-test`（14 项）。
 
 ## v1.0.4 — 2026-11-25
 
