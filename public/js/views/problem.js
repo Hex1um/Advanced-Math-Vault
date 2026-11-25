@@ -173,7 +173,7 @@
           answer: answerOnly ? process : undefined,
           mode: answerOnly ? 'answer' : 'process',
           image: sendImage || undefined,
-          llm: window.UI.llmConfig()
+          llm: (window.UI.visionConfig ? window.UI.visionConfig() : window.UI.llmConfig())
         });
         renderJudge(res);
       } catch (e) {

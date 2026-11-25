@@ -268,10 +268,13 @@
 
   /* 用户是否配置了能看图的模型 */
   function hasVisionModel() {
+    // 优先看「识图模型」；没单独配时 visionConfig 会自动退回支持图片的解题模型
+    if (window.UI && window.UI.visionConfig) return !!window.UI.visionConfig();
     let cfg = null;
-    try { cfg = JSON.parse(localStorage.getItem('mv_llm_v1') || 'null'); } catch (e) {}
-    if (!cfg || !cfg.apiKey) return false;
-    return VISION_MODEL.test(cfg.model || '');
+    try { cfg = JSON.parse(localStorage.getItem('mv_llm_v2') || 'null'); } catch (e) {}
+    const v = cfg && cfg.vision;
+    if (v && v.apiKey) return true;
+    return false;
   }
 
   /* ---------------------------------------------------------------- 预处理

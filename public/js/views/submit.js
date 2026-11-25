@@ -244,7 +244,8 @@
           }
           // 只用本地 OCR：跳过服务端视觉通道
           const skipVision = channel === 'local';
-          const res = skipVision ? { ok: false, needVision: true } : await window.API.post('/api/ai/from-image', { image: ocrImage, llm: window.UI.llmConfig() });
+          const visCfg = window.UI.visionConfig ? window.UI.visionConfig() : window.UI.llmConfig();
+          const res = skipVision ? { ok: false, needVision: true } : await window.API.post('/api/ai/from-image', { image: ocrImage, llm: visCfg });
           if (res.ok) {
             const p = res.problem;
             const fm = document.getElementById('submitForm');

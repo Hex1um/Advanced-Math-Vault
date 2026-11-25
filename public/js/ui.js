@@ -325,88 +325,139 @@
 
   /* ---------------------------------------------------- 模型通道设置 */
 
-  const LLM_KEY = 'mv_llm_v1';
+  /* 两套模型：解题（文本/判卷）与识图（视觉，读手写照片）分开配 */
+  const LLM_KEY = 'mv_llm_v2';
+  const LLM_KEY_V1 = 'mv_llm_v1';
 
-  function llmConfig() {
-    try {
-      const v = JSON.parse(localStorage.getItem(LLM_KEY) || 'null');
-      return v && v.apiKey ? v : null;
-    } catch (e) { return null; }
+  function readAll() {
+    let v2 = null;
+    try { v2 = JSON.parse(localStorage.getItem(LLM_KEY) || 'null'); } catch (e) {}
+    if (v2 && (v2.text || v2.vision)) return v2;
+    // 迁移旧版单通道配置
+    let v1 = null;
+    try { v1 = JSON.parse(localStorage.getItem(LLM_KEY_V1) || 'null'); } catch (e) {}
+    if (v1 && v1.apiKey) {
+      const isVision = /gpt-4o|gpt-4\.1|claude|gemini|qwen.*vl|glm-4v|vision|llava|internvl/i.test(v1.model || '');
+      return { text: isVision ? null : v1, vision: isVision ? v1 : null };
+    }
+    return { text: null, vision: null };
   }
 
-  function saveLlmConfig(cfg) {
-    try {
-      if (cfg) localStorage.setItem(LLM_KEY, JSON.stringify(cfg));
-      else localStorage.removeItem(LLM_KEY);
-    } catch (e) {}
+  function writeAll(all) {
+    try { localStorage.setItem(LLM_KEY, JSON.stringify(all)); } catch (e) {}
+  }
+
+  /* 解题模型：问答、判卷、出题 */
+  function llmConfig() {
+    const c = readAll().text;
+    return c && c.apiKey ? c : null;
+  }
+
+  /* 识图模型：读图转写、图片判卷；没单独配就退回解题模型（若它本身支持图片） */
+  function visionConfig() {
+    const all = readAll();
+    if (all.vision && all.vision.apiKey) return all.vision;
+    const t = all.text;
+    if (t && t.apiKey && /gpt-4o|gpt-4\.1|claude|gemini|qwen.*vl|glm-4v|vision|llava|internvl/i.test(t.model || '')) return t;
+    return null;
+  }
+
+  function saveLlmConfig(cfg, which) {
+    const all = readAll();
+    if (!cfg) {
+      if (which === 'vision') all.vision = null;
+      else if (which === 'text') all.text = null;
+      else { all.text = null; all.vision = null; }
+    } else {
+      if (which === 'vision') all.vision = cfg;
+      else all.text = cfg;
+    }
+    writeAll(all);
   }
 
   function llmSettings() {
-    const cur = llmConfig() || {};
+    const all = readAll();
+    const curT = all.text || {};
+    const curV = all.vision || {};
     const siteReady = !!(window.API.State.llm && window.API.State.llm.configured);
     const el = document.createElement('div');
+    const vFromT = !!(curT.apiKey && /gpt-4o|gpt-4\.1|claude|gemini|qwen.*vl|glm-4v|vision|llava|internvl/i.test(curT.model || ''));
     el.innerHTML =
-      '<div class="small muted" style="margin-bottom:12px">当前通道：<b>'
-      + (cur.apiKey ? '我的 Key · ' + ESC(cur.model || '') : (siteReady ? '站点模型' : '免费通道 · Pollinations'))
-      + '</b></div>'
-      + '<div class="field"><label>接口地址（OpenAI 兼容）</label>'
-      + '<input id="llmBase" value="' + ESC(cur.baseUrl || 'https://api.deepseek.com/v1') + '" placeholder="https://api.deepseek.com/v1" /></div>'
-      + '<div class="field"><label>模型名</label>'
-      + '<input id="llmModel" value="' + ESC(cur.model || 'deepseek-chat') + '" placeholder="deepseek-chat" /></div>'
-      + '<div class="field"><label>API Key</label>'
-      + '<input id="llmKey" type="password" value="' + ESC(cur.apiKey || '') + '" placeholder="sk-..." autocomplete="off" />'
-      + '<div class="tip">只保存在这台设备的浏览器（localStorage），不写进站点数据库，别人看不到。换了设备要重新填。</div></div>'
-      + '<div class="small muted" style="margin:4px 0 10px;line-height:1.8">不填也能用：问答与判卷会走免费公共通道（Pollinations，有频率限制，同一网络大约每分钟一次），再不行用内置讲解。<br/>'
-      + '要读手写/拍照，模型必须支持图片（vision）。下面是几个<b>目前免费</b>的：</div>'
-      + '<div class="preset-row" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">'
+      '<div class="small muted" style="margin-bottom:12px">当前：解题 <b>'
+      + (curT.apiKey ? ESC(curT.model || '') : (siteReady ? '站点模型' : '免费通道'))
+      + '</b>　·　识图 <b>' + (curV.apiKey ? ESC(curV.model || '') : (vFromT ? '沿用解题模型' : '未配置')) + '</b></div>'
+
+      + '<div class="form-section-title">解题模型（问答 / 判卷 / 出题）</div>'
+      + '<div class="field"><label>接口地址</label><input id="llmBase" value="' + ESC(curT.baseUrl || 'https://api.deepseek.com/v1') + '" /></div>'
+      + '<div class="field"><label>模型名</label><input id="llmModel" value="' + ESC(curT.model || 'deepseek-chat') + '" /></div>'
+      + '<div class="field"><label>API Key</label><input id="llmKey" type="password" value="' + ESC(curT.apiKey || '') + '" autocomplete="off" /></div>'
+
+      + '<div class="form-section-title" style="margin-top:16px">识图模型（读手写 / 拍照）</div>'
+      + '<div class="small muted" style="margin:0 0 8px;line-height:1.8">手写题只有视觉模型能读准。下面几个目前免费：</div>'
+      + '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">'
       + '<button type="button" class="btn btn-sm" data-preset="glm">智谱 GLM-4V-Flash（免费）</button>'
-      + '<button type="button" class="btn btn-sm" data-preset="sensetime">商汤 sensenova（免费档）</button>'
+      + '<button type="button" class="btn btn-sm" data-preset="sensetime">商汤 sensenova</button>'
       + '<button type="button" class="btn btn-sm" data-preset="openrouter">OpenRouter 免费 VL</button>'
+      + '<button type="button" class="btn btn-sm" data-preset="same">沿用解题模型</button>'
       + '</div>'
-      + '<div class="small muted" style="margin:0 0 14px;line-height:1.8">'
-      + '智谱：<code>https://open.bigmodel.cn/api/paas/v4</code> + <code>glm-4v-flash</code>（完全免费，实名即可，中文和公式都不错）<br/>'
-      + 'OpenRouter：<code>https://openrouter.ai/api/v1</code> + <code>qwen/qwen2.5-vl-72b-instruct:free</code>（免费档有速率限制）</div>'
-      + '<div style="display:flex;gap:9px;justify-content:flex-end">'
-      + '<button class="btn" id="clearLlm">清除</button>'
+      + '<div class="field"><label>接口地址</label><input id="visBase" value="' + ESC(curV.baseUrl || '') + '" placeholder="https://open.bigmodel.cn/api/paas/v4" /></div>'
+      + '<div class="field"><label>模型名</label><input id="visModel" value="' + ESC(curV.model || '') + '" placeholder="glm-4v-flash" /></div>'
+      + '<div class="field"><label>API Key</label><input id="visKey" type="password" value="' + ESC(curV.apiKey || '') + '" placeholder="可以和解题模型不同" autocomplete="off" />'
+      + '<div class="tip">都只存在这台设备的浏览器里。留空表示不单独配置：识图会按解题模型是否支持图片来决定。</div></div>'
+
+      + '<div style="display:flex;gap:9px;justify-content:flex-end;margin-top:6px">'
+      + '<button class="btn" id="clearLlm">全部清除</button>'
       + '<button class="btn btn-primary" id="saveLlm">保存</button></div>';
 
-    const m = modal({ title: '设置 · 模型通道', sub: '用自己的 Key 可以不受免费通道限速', body: el, wide: true });
+    const m = modal({ title: '设置 · 模型通道', sub: '解题与识图可以各用各的', body: el, wide: true });
+
+    const presets = {
+      glm: { baseUrl: 'https://open.bigmodel.cn/api/paas/v4', model: 'glm-4v-flash' },
+      sensetime: { baseUrl: 'https://api.sensenova.cn/compatible-mode/v1', model: 'SenseNova-V6-5-Turbo' },
+      openrouter: { baseUrl: 'https://openrouter.ai/api/v1', model: 'qwen/qwen2.5-vl-72b-instruct:free' }
+    };
+    el.querySelectorAll('[data-preset]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        const k = b.dataset.preset;
+        if (k === 'same') {
+          el.querySelector('#visBase').value = el.querySelector('#llmBase').value;
+          el.querySelector('#visModel').value = el.querySelector('#llmModel').value;
+          el.querySelector('#visKey').value = el.querySelector('#llmKey').value;
+          toast('识图已设为沿用解题模型', 'ok');
+          return;
+        }
+        const pr = presets[k];
+        if (!pr) return;
+        el.querySelector('#visBase').value = pr.baseUrl;
+        el.querySelector('#visModel').value = pr.model;
+        toast('已填入 ' + pr.model + '，把 Key 填上再保存', 'ok');
+      });
+    });
 
     el.querySelector('#saveLlm').addEventListener('click', function () {
-      const presets = {
-        glm: { baseUrl: 'https://open.bigmodel.cn/api/paas/v4', model: 'glm-4v-flash' },
-        sensetime: { baseUrl: 'https://api.sensenova.cn/compatible-mode/v1', model: 'SenseNova-V6-5-Turbo' },
-        openrouter: { baseUrl: 'https://openrouter.ai/api/v1', model: 'qwen/qwen2.5-vl-72b-instruct:free' }
+      const t = {
+        baseUrl: el.querySelector('#llmBase').value.trim(),
+        model: el.querySelector('#llmModel').value.trim(),
+        apiKey: el.querySelector('#llmKey').value.trim()
       };
-      el.querySelectorAll('[data-preset]').forEach(function (b) {
-        b.addEventListener('click', function () {
-          const pr = presets[b.dataset.preset];
-          if (!pr) return;
-          el.querySelector('#llmBase').value = pr.baseUrl;
-          el.querySelector('#llmModel').value = pr.model;
-          toast('已填入 ' + pr.model + '，把 API Key 填上再保存', 'ok');
-        });
-      });
-
-      const baseUrl = el.querySelector('#llmBase').value.trim();
-      const model = el.querySelector('#llmModel').value.trim();
-      const apiKey = el.querySelector('#llmKey').value.trim();
-      if (!apiKey) {
-        saveLlmConfig(null);
-        toast('没填 Key，继续用免费通道', 'ok');
-        m.close();
-        if (window.Chat && window.Chat.refreshModeLabel) window.Chat.refreshModeLabel();
-        return;
-      }
-      saveLlmConfig({ baseUrl: baseUrl || 'https://api.deepseek.com/v1', model: model || 'deepseek-chat', apiKey: apiKey });
-      toast('已保存到本机，问答与判卷都会优先用你的模型', 'ok');
+      const v = {
+        baseUrl: el.querySelector('#visBase').value.trim(),
+        model: el.querySelector('#visModel').value.trim(),
+        apiKey: el.querySelector('#visKey').value.trim()
+      };
+      const all2 = readAll();
+      all2.text = (t.apiKey && t.model) ? t : null;
+      all2.vision = (v.apiKey && v.model) ? v : null;
+      writeAll(all2);
+      toast('已保存：解题用 ' + (all2.text ? all2.text.model : '站点/免费通道')
+        + '，识图用 ' + (all2.vision ? all2.vision.model : '自动判断'), 'ok');
       m.close();
       if (window.Chat && window.Chat.refreshModeLabel) window.Chat.refreshModeLabel();
     });
 
     el.querySelector('#clearLlm').addEventListener('click', function () {
-      saveLlmConfig(null);
-      toast('已清除，回到免费通道', 'ok');
+      writeAll({ text: null, vision: null });
+      toast('已全部清除，回到免费通道', 'ok');
       m.close();
       if (window.Chat && window.Chat.refreshModeLabel) window.Chat.refreshModeLabel();
     });
@@ -436,6 +487,6 @@
     LEVELS, levelOf, levelBadge, toast, avatar, timeAgo, fmtDate,
     scoreBars, modal, authModal, requireLogin, applyUser, renderHeader,
     setActiveNav, pagination, icon, empty, ESC, tone,
-    llmConfig, saveLlmConfig, llmSettings
+    llmConfig, visionConfig, saveLlmConfig, llmSettings
   };
 })();
