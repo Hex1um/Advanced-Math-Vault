@@ -57,10 +57,10 @@
 
   function renderForm() {
     return '<form class="card form-card" id="genForm">'
-      + '<div class="form-section-title">知识点</div>'
+      + '<div class="form-section-title">考点（主标签 → 子标签）</div>'
       + '<div class="field"><label>主标签</label><select id="gMain">' + window.UI.mainTagOptions(spec.mainTag) + '</select></div>'
       + '<div class="chip-scroll" id="genTags">' + tagChips() + '</div>'
-      + '<div class="tip">先选主标签，再选 1-2 个子标签；不选主标签时会从全部子标签里选。</div>'
+      + '<div class="tip">先选主标签；不选主标签时会显示全部子标签。</div>'
       + '<div class="form-section-title">三个维度</div>'
       + row('思维量', 'gThink', spec.thinking)
       + row('难度', 'gDiff', spec.difficulty)
@@ -245,15 +245,15 @@
 
     el.innerHTML =
       '<div class="page-head"><div><h1>让 AI 出一道题</h1>'
-      + '<p class="sub">选知识点和难度，AI 生成题干、答案和解析。生成的题不会自动进题库——需要你和管理员核对后提交审核，和人工投稿走同一条流程。</p></div></div>'
+      + '<p class="sub">先选主标签和 1-2 个子标签，再定难度；AI 生成题干、答案和解析。生成的题不会自动进题库——需要你和管理员核对后提交审核，和人工投稿走同一条流程。</p></div></div>'
       + '<div class="gen-layout">'
       + '<div id="genFormBox">' + renderForm() + '</div>'
       + '<aside>'
       + '<div class="card side-card"><h3>出题建议</h3><div class="xp-rule">'
-      + '· 考点选 1-2 个最准，选太多会出成四不像<br/>'
-      + '· 难度 7 以上建议备注「不要超纲」<br/>'
-      + '· 生成结果里的答案必须自己验算，AI 会算错<br/>'
-      + '· 免费通道每小时最多 12 次</div></div>'
+      + '· 主标签 1 个 + 子标签 1-2 个，别贪多<br/>'
+      + '· 难度 ≥7 时，附加要求写「不要超纲」<br/>'
+      + '· 答案必须自己验算，AI 会算错<br/>'
+      + '· 免费通道 45 秒/次；站点接口 12 次/小时</div></div>'
       + '<div class="card side-card"><h3>当前通道</h3><div class="xp-rule" id="genChannel">—</div></div>'
       + '</aside></div>'
       + '<div id="genResult" style="margin-top:18px"></div>';

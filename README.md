@@ -124,10 +124,10 @@ PORT=9000 node server.js  # 换端口
 
 ## AI 出题
 
-`AI 出题` 页选知识点（最多 2 个）、难度、计算量、题型，生成题干/答案/分步解析，结果可编辑后提交审核。
+`AI 出题` 页先选 1 个主标签，再选 1-2 个子标签，配合难度、计算量、题型生成题干/答案/分步解析；结果可编辑后提交审核。
 - 走同一套通道链；无 Key 时浏览器直连免费通道，服务端只提供提示词与结果校验（`/api/ai/prompt`、`/api/ai/parse`）。
 - 生成的是**草稿**，入库仍要人工核对——实测免费模型会算错（例如把 `∫x²sech²x dx` 答成 π²/8，正确是 π²/12）。
-- 限流：每小时 12 次（同一 IP）。
+- 限流：站点出题接口每小时 12 次（同一 IP）；浏览器直连免费通道另有「同一网络 45 秒一次」的冷却。
 
 启动时想用固定 Key 也可以：
 
@@ -152,7 +152,7 @@ public/js/app.js          路由
 public/js/views/*.js      题库 / 题目 / 每日一题 / 答疑区 / 投稿 / 我的 / 审核 / AI 对话
 public/vendor/katex/      本地 KaTeX（离线可用）
 tools/import-problems.mjs 批量导入
-tools/smoke.mjs           全链路冒烟测试（115 项断言）
+tools/smoke.mjs           全链路冒烟测试（118 项断言）
 tools/sync-live.mjs       部署前把线上用户数据合并回本地（凭据走环境变量）
 tools/deploy.mjs          安全发布：先同步再上传（需 --publish 显式授权）
 tools/migrate-tags.mjs    把历史自由标签迁移到主/子标签体系
@@ -166,7 +166,7 @@ tools/cdp-eval.mjs        用 Edge 无头 + CDP 跑页面 JS / 截图（调试�
 ## 测试
 
 ```bash
-node tools/smoke.mjs                 # 115 项断言，覆盖注册/改密/审核/做题/AI/论坛/两级标签/权限与安全债
+node tools/smoke.mjs                 # 118 项断言，覆盖注册/改密/审核/做题/AI/论坛/两级标签/权限与安全债
 python tools/verify_integrals.py     # 逐题对答案求导，数值双点验证
 python tools/verify_limits.py        # 极限题数值验证（高精度）
 python tools/verify_batch5.py        # 第五批答案校验
