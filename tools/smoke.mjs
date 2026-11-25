@@ -282,10 +282,20 @@ try {
   ok('未绑邮箱第 2 帖被限流(429)', up2.status === 429, 'status ' + up2.status);
 
   const codeSend = await u2('/api/me/email/send', { method: 'POST', body: JSON.stringify({ email: 'smoke@example.com' }) });
-  ok('可以发送邮箱验证码', codeSend.json.ok && !!codeSend.json.code);
+  ok('可以发送邮箱验证码', codeSend.json.ok === true);
+  ok('验证码不再随响应回显', codeSend.json.code === undefined);
+  // 测试里直接读临时库拿验证码（等价于部署者看服务端日志）
+  let mailCode = '';
+  try {
+    await sleep(900);
+    const snap = JSON.parse(fs.readFileSync(DB, 'utf8'));
+    const rec = Object.values(snap.emailCodes || {})[0];
+    mailCode = (rec && rec.code) || '';
+  } catch (e) {}
+  ok('服务端已生成验证码', /^\d{6}$/.test(mailCode), mailCode);
   const codeBad = await u2('/api/me/email/verify', { method: 'POST', body: JSON.stringify({ code: '000000' }) });
   ok('错误验证码被拒', codeBad.status === 400);
-  const codeOk = await u2('/api/me/email/verify', { method: 'POST', body: JSON.stringify({ code: codeSend.json.code }) });
+  const codeOk = await u2('/api/me/email/verify', { method: 'POST', body: JSON.stringify({ code: mailCode }) });
   ok('正确验证码绑定成功', codeOk.json.ok && codeOk.json.user.emailVerified === true);
   const up3 = await u2('/api/forum', { method: 'POST', body: JSON.stringify({ title: '绑定邮箱后发帖', body: '绑定之后应该不再受每小时限制' }) });
   ok('绑定后可以继续发帖', up3.json.ok);
@@ -303,6 +313,37 @@ try {
   ok('AI 起标题有返回', sug.json.ok && typeof sug.json.title === 'string', JSON.stringify(sug.json).slice(0, 100));
 
   console.log('\n[12] 静态资源与防缓存头');
+  console.log('\n[回归] 健壮性 / 隐私 / 质量门禁');
+  // P0：非法百分号编码不许把进程打死
+  for (const bad of ['/%zz', '/%E0%A4%A']) {
+    const r = await fetch(BASE + bad).catch((e) => ({ status: 'ERR:' + e.message }));
+    ok('畸形路径 ' + bad + ' 返回 4xx', typeof r.status === 'number' && r.status >= 400 && r.status < 500, String(r.status));
+  }
+  const alive = await req('/api/meta');
+  ok('畸形请求后服务仍存活', alive.status === 200 && alive.json && alive.json.ok);
+  ok('/api/meta.site 非空', !!(alive.json && alive.json.site), JSON.stringify(alive.json && alive.json.site));
+
+  // P1-1：公共排行榜不得泄露邮箱
+  const lb = await fetch(BASE + '/api/leaderboard').then((r) => r.text());
+  ok('排行榜不含 email 字段', !/"email"/.test(lb));
+
+  // P3：注册密码下限 8 位
+  const shortPwd = await req('/api/auth/register', { method: 'POST', body: JSON.stringify({ name: '短密码' + Date.now(), password: '123456' }) });
+  ok('6 位密码注册被拒', shortPwd.status === 400, String(shortPwd.status));
+
+  // D-3：质量门禁把可疑点打标（不阻断入库）
+  const badItem = {
+    title: '门禁用例 ' + Date.now(),
+    statement: '求 $\\frac{1}{2}$ 的值（答案：$1/2$）',
+    answer: '1/2',
+    tags: ['测试'],
+    thinking: 5, difficulty: 5, calc: 5
+  };
+  const impGate = await req('/api/admin/import', { method: 'POST', body: JSON.stringify({ problems: [badItem], status: 'pending' }) });
+  const created = (impGate.json && (impGate.json.added || impGate.json.problems || impGate.json.items || []))[0] || null;
+  const warns = created && created.qualityWarn;
+  ok('质量门禁标记「题干含答案」', Array.isArray(warns) && warns.some((w) => /含答案/.test(w)), JSON.stringify(warns));
+
   const html = await fetch(BASE + '/');
   ok('首页 200', html.status === 200);
   ok('首页 no-store', /no-store/.test(html.headers.get('cache-control') || ''));

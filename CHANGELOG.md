@@ -1,5 +1,55 @@
 # CHANGELOG
 
+## v0.11.0 — 2026-11-25
+
+按外部测试与评价报告（v0.10.4 全量审计）修复缺陷，并补上对应的回归断言。
+
+### P0 非法 URL 编码可远程打死进程
+
+**根因**：`serveStatic()` 里 `decodeURIComponent(pathname)` 位于 try/catch 之外，`/%zz` 抛 `URIError` 后变成 unhandled rejection，Node ≥15 直接退出。未鉴权、单请求即可反复触发。
+
+**做法**：`decodeURIComponent` 包 try/catch（失败 400）；`http.createServer` 回调整体包 try/catch；补 `uncaughtException` / `unhandledRejection` 日志兜底（只记日志不退出）；`parseCookies()` 的畸形 cookie 也改为容错解析。
+
+### P1 排行榜泄露注册邮箱
+
+**根因**：`publicUser()` 无条件返回 `email`，`/api/leaderboard` 直接复用它。
+
+**做法**：`publicUser(u, withPrivate)` 默认不带邮箱，仅 `/api/me`、注册/登录、邮箱绑定、后台接口传 `true`。
+
+### P1 判卷「只交答案 80 分」被计分代码推翻
+
+**根因**：模型按提示词返回 `verdict=partial, score=80`，服务端把 partial 压到 79，同一份提交「无模型 80 过、有模型 79 挂」。
+
+**做法**：计分前统一归一——只要 `processMatchesAnswer(only, p.answer)` 成立且 verdict 不是 wrong，就置 `correct`，分数 `answerOnly ? 80 : max(90, score)`。
+
+### P2 管理员删号清理字段名写错
+
+`feedbacks` 的字段是 `userId`（代码写成 `authorId`）、`sessions` 的字段是 `uid`（代码写成 `userId`），导致删号后反馈残留、会话记录清不掉。已按真实字段修正（保留旧字段兜底）。
+
+### P2 `/api/meta.site` 恒为 undefined
+
+库里字段是 `site`，代码读 `siteName`。改为 `db.settings.site || db.settings.siteName || ''`。
+
+### P2 邮箱验证码形同虚设
+
+验证码用 `Math.random()` 且直接随响应回显，任何人可绑定任意假邮箱绕过发帖配额。改为 `crypto.randomInt(100000, 1000000)`，响应不再回显（仅 `NODE_ENV=development` 可选返回），本地部署看服务端日志。
+
+### P3 打包
+
+- 去掉 `bearerToken()` 的 `?tk=` query 兜底（token 会进浏览器历史/反代日志/Referer）；
+- `saveDb` 写文件后 `fsync`，强杀不丢最近写入；
+- 注册密码下限 6 → 8，与改密口径统一。
+
+### D 数据质量
+
+- 入库质量门禁 `qualityGate()`：`$` 奇偶、未包 `$` 的裸命令、题干含答案、`tasks`/HTML 表格残留、连续四个 `$`、标题重复；命中不阻断入库，打 `qualityWarn` 标记，`/api/admin/import` 的 `added` 现在返回 `{code,title,qualityWarn}`。
+- 全库体检：上线题 `tasks`/裸命令/HTML 表格/题干含答案 均为 **0**；仅驳回区剩 2 例 KaTeX 失败（前台不可见）。
+- `verify_integrals.py` 增加 2 例分支割线说明（H5、R3 人工求导已核）；`verify_limits.py` 幂塔溢出不中断脚本。
+
+### 测试
+
+`tools/smoke.mjs` 71 → **80 项**，新增：畸形路径不打死进程、畸形后仍存活、`meta.site` 非空、排行榜不含邮箱、6 位密码被拒、验证码不回显且服务端已生成、质量门禁标记。
+
 ## v0.10.4 — 2026-11-25
 
 P0 安全债：凭据、SSRF、限流绕过与校验脚本。

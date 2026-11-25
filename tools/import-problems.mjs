@@ -50,6 +50,22 @@ const clamp = (v, d) => {
   return Number.isFinite(n) ? Math.max(1, Math.min(10, n)) : d;
 };
 
+
+/* 与 server.js 同源的质量门禁：可疑点打到 qualityWarn，不阻断入库 */
+const EXISTING = [];
+
+function qualityGate(item, existing) {
+  const warns = [];
+  const st = String(item.statement || '');
+  if (((st.match(/\$/g) || []).length) % 2) warns.push('定界符不配对（$ 个数为奇数）');
+  const bare = st.replace(/\$\$[\s\S]*?\$\$/g, '').replace(/\$[^$]*\$/g, '');
+  if (/\\[a-zA-Z]{2,}/.test(bare)) warns.push('正文含未包 $ 的 LaTeX 命令');
+  if (/答\s*案\s*[：:]|解\s*[：:]/.test(st)) warns.push('题干疑似含答案/解答');
+  if (/\\begin\{tasks\}|\\begin\{tabular\}|<table/i.test(st)) warns.push('残留题目环境或 HTML 表格');
+  if (Array.isArray(existing) && item.title && existing.some((x) => x.title === item.title)) warns.push('标题与库内已有题目重复');
+  return warns;
+}
+
 function normalize(raw) {
   if (!raw || typeof raw !== 'object') return null;
   const title = String(raw.title || '').trim();
@@ -61,7 +77,7 @@ function normalize(raw) {
   let hints = raw.hints;
   if (typeof hints === 'string') hints = [hints];
   hints = Array.isArray(hints) ? hints.map(String).map((s) => s.trim()).filter(Boolean).slice(0, 5) : [];
-  return {
+  const item = {
     title: title.slice(0, 120),
     statement,
     tags: tags.length ? tags : ['未分类'],
@@ -81,7 +97,18 @@ function normalize(raw) {
     solvedCount: 0,
     attemptCount: 0
   };
+  const warns = qualityGate(item, EXISTING);
+  if (warns.length) item.qualityWarn = warns;
+  return item;
 }
+
+/* 先读现有题库标题，供「标题重复」门禁用 */
+try {
+  if (fs.existsSync(DB_FILE)) {
+    const cur = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
+    for (const p of cur.problems || []) EXISTING.push({ code: p.code, title: p.title });
+  }
+} catch (e) { console.warn('读取现有题库失败，标题查重跳过:', e.message); }
 
 const items = [];
 const skipped = [];

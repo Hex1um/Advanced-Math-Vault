@@ -129,21 +129,29 @@ function loadDb() {
   saveDb(true);
 }
 
+function writeDbFile() {
+  const tmp = DB_FILE + '.tmp';
+  const fd = fs.openSync(tmp, 'w');
+  try {
+    fs.writeFileSync(fd, JSON.stringify(db, null, 2), 'utf8');
+    fs.fsyncSync(fd);          // 强杀/断电时不丢最近写入
+  } finally {
+    fs.closeSync(fd);
+  }
+  fs.renameSync(tmp, DB_FILE);
+}
+
 function saveDb(immediate) {
   if (immediate) {
     if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; }
-    const tmp = DB_FILE + '.tmp';
-    fs.writeFileSync(tmp, JSON.stringify(db, null, 2), 'utf8');
-    fs.renameSync(tmp, DB_FILE);
+    writeDbFile();
     return;
   }
   if (saveTimer) return;
   saveTimer = setTimeout(() => {
     saveTimer = null;
     try {
-      const tmp = DB_FILE + '.tmp';
-      fs.writeFileSync(tmp, JSON.stringify(db, null, 2), 'utf8');
-      fs.renameSync(tmp, DB_FILE);
+      writeDbFile();
     } catch (e) {
       console.error('[db] 写入失败:', e.message);
     }
@@ -231,6 +239,23 @@ function mathify(src) {
   return t;
 }
 
+/* 入库质量门禁：不拦人，但把可疑点在题目上打标，审核后台显示警示 */
+function qualityGate(item, existing) {
+  const warns = [];
+  const st = String(item.statement || '');
+  if (((st.match(/\$/g) || []).length) % 2) warns.push('定界符不配对（$ 个数为奇数）');
+  const bare = st.replace(/\$\$[\s\S]*?\$\$/g, '').replace(/\$[^$]*\$/g, '');
+  if (/\\[a-zA-Z]{2,}/.test(bare)) warns.push('正文含未包 $ 的 LaTeX 命令');
+  if (/答\s*案\s*[：:]|解\s*[：:]/.test(st)) warns.push('题干疑似含答案/解答');
+  if (/\\begin\{tasks\}|\\begin\{tabular\}|<table/i.test(st)) warns.push('残留题目环境或 HTML 表格');
+  if (/\$\$\$\$/.test(st)) warns.push('连续四个 $');
+  const tl = String(item.title || '');
+  if (Array.isArray(existing) && tl && existing.some((x) => x.title === tl && x.code !== item.code)) {
+    warns.push('标题与库内已有题目重复');
+  }
+  return warns;
+}
+
 function normalizeProblem(raw) {
   if (!raw || typeof raw !== 'object') return null;
   const title = String(raw.title || '').trim();
@@ -242,7 +267,7 @@ function normalizeProblem(raw) {
   let hints = raw.hints;
   if (typeof hints === 'string') hints = [hints];
   hints = Array.isArray(hints) ? hints.map((h) => String(h).trim()).filter(Boolean).slice(0, 5) : [];
-  return {
+  const itemOut = {
     code: '',
     title: title.slice(0, 120),
     statement: mathify(statement),
@@ -265,6 +290,9 @@ function normalizeProblem(raw) {
     scoreSum: 0,
     scoreCount: 0
   };
+  const warns = qualityGate(itemOut, db.problems);
+  if (warns.length) itemOut.qualityWarn = warns;
+  return itemOut;
 }
 
 function nextProblemCode() {
@@ -295,21 +323,25 @@ function levelInfo(exp) {
   return { level, exp: e, cur, next, progress: Math.min(1, (e - cur) / Math.max(1, next - cur)) };
 }
 
-function publicUser(u) {
+function publicUser(u, withPrivate) {
   if (!u) return null;
   const li = levelInfo(u.exp);
   const solvedMap = u.solved || {};
   // 只统计真正做出来的（≥80 分），做过但没过的单独给 attempts
   const doneCount = Object.keys(solvedMap).filter((k) => solvedMap[k] && solvedMap[k].done).length;
-  return {
+  const out = {
     id: u.id, name: u.name, role: u.role || 'user',
     exp: u.exp || 0, level: li.level, levelProgress: li.progress,
     solvedCount: doneCount,
     attempts: u.attempts || 0,
-    createdAt: u.createdAt,
-    email: u.email || '',
-    emailVerified: !!u.emailVerified
+    createdAt: u.createdAt
   };
+  // 邮箱只给本人和后台看；排行榜/公共列表默认不带
+  if (withPrivate) {
+    out.email = u.email || '';
+    out.emailVerified = !!u.emailVerified;
+  }
+  return out;
 }
 
 function readBody(req, limit) {
@@ -337,7 +369,11 @@ function parseCookies(req) {
   raw.split(';').forEach((part) => {
     const i = part.indexOf('=');
     if (i < 0) return;
-    out[part.slice(0, i).trim()] = decodeURIComponent(part.slice(i + 1).trim());
+    try {
+      out[part.slice(0, i).trim()] = decodeURIComponent(part.slice(i + 1).trim());
+    } catch (e) {
+      out[part.slice(0, i).trim()] = part.slice(i + 1).trim();
+    }
   });
   return out;
 }
@@ -365,11 +401,7 @@ function bearerToken(req) {
   // 有些托管网关会吃掉 Authorization 头，这里再认一个自定义头
   const alt = req.headers['x-mv-token'];
   if (alt && /^[A-Za-z0-9]+$/.test(String(alt))) return String(alt);
-  // 最后兜底：托管网关可能把自定义头也过滤掉，允许用 query 传
-  try {
-    const tk = new URL(req.url, 'http://localhost').searchParams.get('tk');
-    if (tk && /^[A-Za-z0-9]+$/.test(tk)) return tk;
-  } catch (e) {}
+  // 不再接受 ?tk= query：token 会进浏览器历史、反代日志和 Referer
   return '';
 }
 
@@ -1270,7 +1302,7 @@ function noteQuota(user, isReply) {
    站点没有配 SMTP，验证码会直接回给前端（面板上显示），
    这对个人站够用；将来接真实邮件服务只需替换 sendMailCode。 */
 function genCode() {
-  return String(Math.floor(100000 + Math.random() * 900000));
+  return String(crypto.randomInt(100000, 1000000));
 }
 
 function sendMailCode(email, code) {
@@ -1413,7 +1445,7 @@ async function handleApi(req, res, pathname, query) {
     const solvedTotal = db.users.reduce((s, u) => s + Object.keys(u.solved || {}).length, 0);
     return send(res, 200, {
       ok: true,
-      site: db.settings.siteName,
+      site: db.settings.site || db.settings.siteName || '',
       stats: {
         problems: approved.length,
         users: db.users.length,
@@ -1428,7 +1460,7 @@ async function handleApi(req, res, pathname, query) {
         model: llmConfigured() ? db.settings.llm.model : '',
         free: FREE_PROVIDERS.map((f) => f.name)
       },
-      me: publicUser(user)
+      me: publicUser(user, true)
     });
   }
 
@@ -1439,7 +1471,7 @@ async function handleApi(req, res, pathname, query) {
     const password = String(body.password || '');
     if (name.length < 2 || name.length > 16) return fail(res, 400, '用户名需要 2-16 个字符');
     if (!/^[\w\u4e00-\u9fa5.-]+$/.test(name)) return fail(res, 400, '用户名只能包含中英文、数字、下划线');
-    if (password.length < 6) return fail(res, 400, '密码至少 6 位');
+    if (password.length < 8) return fail(res, 400, '密码至少 8 位');
     if (db.users.some((u) => u.name.toLowerCase() === name.toLowerCase())) return fail(res, 409, '这个名字已经有人用了');
     const { salt, hash } = hashPassword(password);
     const isFirst = db.users.length === 0;
@@ -1459,7 +1491,7 @@ async function handleApi(req, res, pathname, query) {
     db.sessions[token] = { uid: u.id, exp: Date.now() + 30 * 864e5 };
     saveDb();
     res.setHeader('Set-Cookie', sessionCookie(req, token));
-    return send(res, 200, { ok: true, user: publicUser(u), token, isFirstAdmin: isFirst });
+    return send(res, 200, { ok: true, user: publicUser(u, true), token, isFirstAdmin: isFirst });
   }
 
   if (pathname === '/api/auth/login' && method === 'POST') {
@@ -1472,7 +1504,7 @@ async function handleApi(req, res, pathname, query) {
     db.sessions[token] = { uid: u.id, exp: Date.now() + 30 * 864e5 };
     saveDb();
     res.setHeader('Set-Cookie', sessionCookie(req, token));
-    return send(res, 200, { ok: true, user: publicUser(u), token });
+    return send(res, 200, { ok: true, user: publicUser(u, true), token });
   }
 
   if (pathname === '/api/auth/logout' && method === 'POST') {
@@ -1500,7 +1532,7 @@ async function handleApi(req, res, pathname, query) {
   }
 
   if (pathname === '/api/me' && method === 'GET') {
-    return send(res, 200, { ok: true, user: publicUser(user), activity: (user && user.activity) || [] });
+    return send(res, 200, { ok: true, user: publicUser(user, true), activity: (user && user.activity) || [] });
   }
 
   /* ---- 邮箱绑定：发验证码 ---- */
@@ -1519,9 +1551,9 @@ async function handleApi(req, res, pathname, query) {
     return send(res, 200, {
       ok: true,
       delivered: r.delivered,
-      // 未接邮件服务时把验证码直接回给前端，页面会提示「验证码：xxxxxx」
-      code: r.delivered ? undefined : code,
-      message: r.delivered ? '验证码已发送到邮箱' : '站点未接入邮件服务，验证码直接显示在这里'
+      // 不再把验证码回给前端（否则谁都能绑定任意假邮箱）；本地部署看服务端日志
+      code: process.env.NODE_ENV === 'development' && !r.delivered ? code : undefined,
+      message: r.delivered ? '验证码已发送到邮箱' : '站点未接入邮件服务，验证码已写入服务端日志（开发模式会直接返回）'
     });
   }
 
@@ -1541,7 +1573,7 @@ async function handleApi(req, res, pathname, query) {
     user.emailVerifiedAt = new Date().toISOString();
     delete db.emailCodes[user.id];
     saveDb(true);
-    return send(res, 200, { ok: true, user: publicUser(user) });
+    return send(res, 200, { ok: true, user: publicUser(user, true) });
   }
 
   /* ---- 题库 ---- */
@@ -1765,17 +1797,19 @@ async function handleApi(req, res, pathname, query) {
       //   正确答案 + 简要思路/过程 → 100 分，中间跳步不扣分
       //   只交正确答案            → 80 分，通过
       //   最终答案错误            → 大幅扣分，不过线
-      // 模型常因「跳步 / 不够严谨」把 verdict 压到 partial，这里按结论行的最终答案兜底纠正。
+      // 模型常因「跳步 / 不够严谨」把 verdict 压到 partial，这里按结论行的最终答案兜底纠正，
+      // 避免同一份提交「无模型 80 分过、有模型 79 分挂」。
       const answerConfirmed = processMatchesAnswer(only, p.answer);
-      if (!answerOnly && answerConfirmed && judged.verdict !== 'correct') {
+      if (answerConfirmed && judged.verdict !== 'wrong') {
         judged = Object.assign({}, judged, {
           verdict: 'correct',
-          score: 100,
-          comment: '最终答案正确；按现行规则，写了思路或过程即给满分，中间步骤未逐项核对。',
+          score: answerOnly ? 80 : 100,
+          comment: answerOnly
+            ? '最终答案正确；只交答案按 80 分计，通过。'
+            : '最终答案正确；按现行规则，写了思路或过程即给满分，中间步骤未逐项核对。',
           errors: []
         });
       }
-
       let score = Number.isFinite(judged.score) ? Math.round(judged.score) : 0;
       score = Math.max(0, Math.min(100, score));
       let verdict = judged.verdict;
@@ -2331,10 +2365,11 @@ async function handleApi(req, res, pathname, query) {
         item.authorId = user.id;
         item.reviewedAt = new Date().toISOString();
         db.problems.push(item);
-        added.push(item.code);
+        // 带上门禁结果，导入方能立刻看到哪些题需要人工复核
+        added.push({ code: item.code, title: item.title, qualityWarn: item.qualityWarn || [] });
       }
       saveDb();
-      return send(res, 200, { ok: true, added, skipped });
+      return send(res, 200, { ok: true, added, addedCodes: added.map((a) => a.code), skipped });
     }
 
     if (pathname === '/api/admin/submissions' && method === 'GET') {
@@ -2412,9 +2447,9 @@ async function handleApi(req, res, pathname, query) {
       const ids = new Set(victims.map((u) => u.id));
       db.users = db.users.filter((u) => !ids.has(u.id));
       db.posts = (db.posts || []).filter((p) => !ids.has(p.authorId));
-      db.feedbacks = (db.feedbacks || []).filter((f) => !ids.has(f.authorId));
+      db.feedbacks = (db.feedbacks || []).filter((f) => !ids.has(f.userId || f.authorId));
       for (const k of Object.keys(db.sessions || {})) {
-        if (db.sessions[k] && ids.has(db.sessions[k].userId)) delete db.sessions[k];
+        if (db.sessions[k] && ids.has(db.sessions[k].uid || db.sessions[k].userId)) delete db.sessions[k];
       }
       saveDb(true);
       return send(res, 200, { ok: true, removed: victims.map((u) => u.name) });
@@ -2975,7 +3010,14 @@ function serveUpload(res, pathname) {
 
 function serveStatic(req, res, pathname) {
   if (pathname.indexOf('/uploads/') === 0) return serveUpload(res, pathname);
-  let rel = decodeURIComponent(pathname);
+  // 非法百分号编码（如 /%zz）会让 decodeURIComponent 抛 URIError；
+  // 这里曾经在 try/catch 之外，一个匿名请求就能把进程打死。
+  let rel;
+  try {
+    rel = decodeURIComponent(pathname);
+  } catch (e) {
+    return fail(res, 400, '请求路径编码不合法');
+  }
   if (rel === '/') rel = '/index.html';
   const filePath = path.join(PUBLIC_DIR, path.normalize(rel).replace(/^(\.\.[/\\])+/, ''));
   if (!filePath.startsWith(PUBLIC_DIR)) return fail(res, 403, '禁止访问');
@@ -3004,6 +3046,7 @@ function serveStatic(req, res, pathname) {
 /* --------------------------------------------------------------- 启动 */
 
 const server = http.createServer(async (req, res) => {
+ try {
   const parsed = new URL(req.url, 'http://' + (req.headers.host || 'localhost'));
   const pathname = parsed.pathname;
   const query = Object.fromEntries(parsed.searchParams.entries());
@@ -3030,7 +3073,18 @@ const server = http.createServer(async (req, res) => {
   }
 
   serveStatic(req, res, pathname);
+ } catch (e) {
+   console.error('[http] 未捕获异常:', req.method, req.url, (e && e.stack) || e);
+   try {
+     if (!res.headersSent) fail(res, 500, '服务器内部错误');
+     else res.end();
+   } catch (e2) {}
+ }
 });
+
+// 最后一道兜底：任何漏网的异常都不许把进程带走
+process.on('uncaughtException', (e) => { console.error('[uncaught]', (e && e.stack) || e); });
+process.on('unhandledRejection', (e) => { console.error('[unhandledRejection]', (e && e.stack) || e); });
 
 loadDb();
 
