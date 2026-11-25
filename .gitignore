@@ -18,3 +18,5 @@ data/uploads/
 # 本地凭据文档，绝不入库
 zhipu-api-keys.md
 *.keys.md
+
+data/.img-judge-db.json
