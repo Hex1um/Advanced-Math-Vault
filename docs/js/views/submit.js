@@ -13,6 +13,23 @@
       .replace(/\n{3,}/g, '\n\n').trim();
   }
 
+  function missingFields(fm) {
+    const miss = [];
+    if (!fm.title.value.trim()) miss.push('标题');
+    if (!fm.tags.value.trim()) miss.push('考点');
+    if (!fm.mainTag.value) miss.push('主标签');
+    if (!fm.answer.value.trim()) miss.push('答案');
+    if (!fm.solution.value.trim()) miss.push('解析');
+    return miss;
+  }
+
+  function fillSummary(fm) {
+    const miss = missingFields(fm);
+    return miss.length
+      ? '<b>部分补全</b><span>还缺：' + miss.join('、') + '，请手动补齐后再提交</span>'
+      : '<b>已补全</b><span>标题、考点、评分、提示、答案与解析已归位，核对一遍再提交</span>';
+  }
+
   function loginGate(el, text) {
     el.innerHTML = '<div class="page-head"><div><h1>' + text + '</h1></div></div>'
       + '<div class="empty"><b>这一步需要登录</b>登录后才能投稿、记录经验与发帖。'
@@ -348,7 +365,7 @@
                 });
               } catch (e) { /* 补全失败不影响已填的题干 */ }
             }
-            box.innerHTML = '<div class="judge-result correct"><b>已补全</b><span>标题、考点、评分、提示、答案与解析已归位，核对一遍再提交</span></div>';
+            box.innerHTML = '<div class="judge-result correct">' + fillSummary(fm) + '</div>';
             return;
           }
           // 视觉模型读到了东西但格式没解析出来：直接拿它的原文当题干，别再退回 tesseract
@@ -383,7 +400,7 @@
                 });
               } catch (e) { /* 补全失败不阻断 */ }
               box.innerHTML = '<div class="judge-result correct"><b>已识别</b>'
-                + '<span>视觉模型读到的原文已填入题干，其余字段尽量补全了，请核对</span></div>';
+                + '<span>视觉模型读到的原文已填入题干；' + fillSummary(fm2) + '</span></div>';
               return;
             }
           }
@@ -434,6 +451,7 @@
                   };
                   fill('title', meta.title);
                   fill('tags', (meta.tags || []).join(', '));
+                  if (meta.mainTag && fm.mainTag && !fm.mainTag.value) fm.mainTag.value = meta.mainTag;
                   fill('hints', (meta.hints || []).join('\n'));
                   fill('answer', meta.answer);
                   fill('solution', meta.solution);
@@ -444,14 +462,11 @@
                     const lbl = document.getElementById('v_' + k);
                     if (lbl) lbl.textContent = meta[k];
                   });
-                  box.innerHTML = '<div class="judge-result correct"><b>已补全</b>'
-                    + '<span>标题、考点、评分、提示、答案与解析都填好了，核对一遍再交</span></div>';
+                  box.innerHTML = '<div class="judge-result correct">' + fillSummary(fm) + '</div>';
                 } catch (e) {
                   box.innerHTML = '<div class="judge-result correct"><b>已 OCR 识别</b>'
                     + '<span>文字已填入题干；AI 补全没成功，答案与解析请手动补</span></div>';
                 }
-                box.innerHTML = '<div class="judge-result correct"><b>已 OCR 识别</b>'
-                  + '<span>已尽量规范成 LaTeX，公式仍需你核对一遍；答案与解析请补全</span></div>';
                 return;
               }
             } catch (e) {
@@ -569,19 +584,19 @@
       window.API.get('/api/my/submissions').catch(function () { return { items: [] }; }),
       window.API.get('/api/my/solved').catch(function () { return { items: [] }; }),
       window.API.get('/api/my/attempts').catch(function () { return { items: [] }; }),
-      window.API.get('/api/my/stats').catch(function () { return { tags: [], weakest: [], recommend: [], summary: {} }; })
+      window.API.get('/api/my/stats').catch(function () { return { tags: [], mainTags: [], weakest: [], recommend: [], summary: {} }; })
     ]).then(function (arr) {
       const me = arr[0].user;
       const subs = arr[1].items || [];
       const solved = arr[2].items || [];
       const attempts = arr[3].items || [];
-      const stats = arr[4] || { tags: [], weakest: [], recommend: [], summary: {} };
+      const stats = arr[4] || { tags: [], mainTags: [], weakest: [], recommend: [], summary: {} };
       window.UI.applyUser(me);
 
-      /* 考点雷达：取做题量前 6 的标签，纯 SVG 不用图表库 */
+      /* 考点雷达：固定 9 个主标签，纯 SVG 不用图表库 */
       const radar = function (tags) {
-        const list = (tags || []).slice(0, 6);
-        if (list.length < 3) return '<div class="small muted">做过 3 个以上考点的题之后，这里会出现考点雷达。</div>';
+        const list = (tags || []);
+        if (!list.length) return '<div class="small muted">暂时没有主考点数据。</div>';
         const cx = 130, cy = 118, R = 82;
         const n = list.length;
         const pt = function (i, r) {
@@ -612,11 +627,12 @@
           + labels + '</svg>';
       };
 
-      const statsCard = stats.tags && stats.tags.length
+      const mainStats = stats.mainTags || [];
+      const statsCard = mainStats.length
         ? '<div class="card side-card" style="padding:18px 20px;margin-bottom:14px">'
-          + '<h3>考点雷达</h3>'
+          + '<h3>考点雷达</h3><div class="small muted">九个主标签</div>'
           + '<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start">'
-          + '<div style="flex:1;min-width:220px">' + radar(stats.tags) + '</div>'
+          + '<div style="flex:1;min-width:220px">' + radar(mainStats) + '</div>'
           + '<div style="flex:1;min-width:220px">'
           + '<div class="small muted">正确率 = 通过题数 / 做过题数</div>'
           + (stats.weakest.length

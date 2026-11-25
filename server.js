@@ -1194,14 +1194,24 @@ function validateFromImage(raw) {
   if (item.hints.length === 1 && OCR_PLACEHOLDER.test(item.hints[0])) item.hints = [];
   let title = String(raw.title || '').replace(/\$\$?/g, '').replace(/\s+/g, ' ').trim();
   // 「第(3)题」「第11题」「(11)」「3.」这类题号不是标题，清掉让补全生成
-  title = title.replace(/^第?\s*[（(]?\s*[\d一二三四五六七八九十]+\s*[）).]?\s*题?\s*/, '').trim();
-  item.title = title.length >= 4 && !/\\[a-zA-Z]/.test(title) ? title.slice(0, 40) : '';
+  title = stripTitleNumber(title);
+  item.title = title.length >= 2 && !/\\[a-zA-Z]/.test(title) ? title.slice(0, 40) : '';
   item.source = String(raw.source || '').slice(0, 80);
   return item;
 }
 
 /* 元信息补全：标题/考点/三维/提示/答案/解析。识图与手动补全共用同一套提示词与解析，
    识图时直接复用「识图成功的那个模型」，因此一张图就能靠同一个 Key 补全全部字段。 */
+/* 只去掉真正的题号前缀，不能误伤「三角函数」「二次型」「一阶方程」这类标题 */
+function stripTitleNumber(title) {
+  return String(title || '')
+    .replace(/^第\s*[（(]?\s*[\d一二三四五六七八九十]+\s*[）)]?\s*题\s*[.、:：]?\s*/, '')
+    .replace(/^[（(]\s*[\d一二三四五六七八九十]+\s*[）)]\s*/, '')
+    .replace(/^\d+\s*[.、)]\s*/, '')
+    .replace(/^[一二三四五六七八九十]+\s*[、.]\s*/, '')
+    .trim();
+}
+
 function metaSystem(full) {
   return {
     role: 'system',
@@ -1243,11 +1253,12 @@ function parseMetaText(raw, full) {
   };
   // 标题只留纯文字：去掉公式、引号、题号，避免把 $\int...$ 截断塞进标题框
   let title = sec('TITLE').replace(/\$[^$]*\$/g, '').replace(/`[^`]*`/g, '')
-    .replace(/[「」""'。.]/g, '').replace(/\n.*/s, '').trim()
-    .replace(/^第?\s*[（(]?\s*[\d一二三四五六七八九十]+\s*[）).]?\s*题?\s*/, '').trim();
-  if (title.length < 4 || /\\[a-zA-Z]/.test(title)) title = '';
+    .replace(/[「」""'。.]/g, '').replace(/\n.*/s, '').trim();
+  title = stripTitleNumber(title);
+  if (title.length < 2 || /\\[a-zA-Z]/.test(title)) title = '';
   const parsedTags = sec('TAGS').split(/[、,，;；\n]/).map((x) => x.trim()).filter(Boolean);
   const tagInfo = tagTax.normalize(parsedTags);
+  if (!title && tagInfo.tags.length) title = tagInfo.tags.slice(0, 2).join('·');
   return {
     title: title.slice(0, 40),
     mainTag: tagInfo.mainTag,
@@ -1898,6 +1909,7 @@ async function handleApi(req, res, pathname, query) {
     const solvedMap = user.solved || {};
     const bestMap = user.best || {};
     const agg = new Map();
+    const mainAgg = new Map(tagTax.MAIN_TAGS.map((t) => [t, { tag: t, attempts: 0, passed: 0, scoreSum: 0 }]));
     let attempts = 0, passedCount = 0, scoreSum = 0;
     for (const [code, rec] of Object.entries(solvedMap)) {
       const p = db.problems.find((x) => x.code === code);
@@ -1910,12 +1922,19 @@ async function handleApi(req, res, pathname, query) {
         o.attempts++; if (rec.done) o.passed++; o.scoreSum += sc;
         agg.set(t, o);
       }
+      const mt = mainAgg.get(p.mainTag || '综合');
+      if (mt) { mt.attempts++; if (rec.done) mt.passed++; mt.scoreSum += sc; }
     }
     const tags = [...agg.values()].map((o) => ({
       tag: o.tag, attempts: o.attempts, passed: o.passed,
       rate: Math.round((o.passed / o.attempts) * 100),
       avgScore: Math.round(o.scoreSum / o.attempts)
     })).sort((a, b) => b.attempts - a.attempts);
+    const mainTags = [...mainAgg.values()].map((o) => ({
+      tag: o.tag, attempts: o.attempts, passed: o.passed,
+      rate: o.attempts ? Math.round((o.passed / o.attempts) * 100) : 0,
+      avgScore: o.attempts ? Math.round(o.scoreSum / o.attempts) : 0
+    }));
     const weakest = tags.slice()
       .filter((t) => t.attempts >= 1 && t.passed < t.attempts)
       .sort((a, b) => a.rate - b.rate || a.avgScore - b.avgScore)
@@ -1939,7 +1958,7 @@ async function handleApi(req, res, pathname, query) {
         avgScore: attempts ? Math.round(scoreSum / attempts) : 0,
         wrong: Object.keys(user.wrong || {}).length
       },
-      tags, weakest, recommend
+      tags, mainTags, weakest, recommend
     });
   }
 
