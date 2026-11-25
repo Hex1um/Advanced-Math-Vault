@@ -173,6 +173,18 @@
         throwOnError: false,
         errorColor: '#ff9b9b',
         strict: false,
+        macros: {
+          '\\arccot': '\\operatorname{arccot}',
+          '\\arcsec': '\\operatorname{arcsec}',
+          '\\arccsc': '\\operatorname{arccsc}',
+          '\\sech': '\\operatorname{sech}',
+          '\\csch': '\\operatorname{csch}',
+          '\\sgn': '\\operatorname{sgn}',
+          '\\arctg': '\\arctan',
+          '\\arcctg': '\\operatorname{arccot}',
+          '\\tg': '\\tan',
+          '\\ctg': '\\cot'
+        },
         ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
       });
     } catch (e) {
