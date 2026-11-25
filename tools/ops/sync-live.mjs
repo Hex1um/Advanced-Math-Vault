@@ -47,12 +47,29 @@ async function login() {
   const text = await res.text();
   let j = null;
   try { j = JSON.parse(text); } catch (_) {}
-  if (!res.ok || !j || !j.ok) throw new Error('登录失败: ' + res.status + ' ' + text.slice(0, 160));
+  if (!ok(res, j)) {
+    if (res.status === 401) {
+      // 401 有三个常见来源，直接点名，省得在「密码错了」上反复试
+      const hints = [];
+      if (/[^\x00-\x7F]/.test(PASS) || /你的|密码|password|xxx/i.test(PASS)) {
+        hints.push('ADMIN_PASS 里是示例占位文本（如「你的管理员密码」），要换成真实密码');
+      }
+      hints.push('确认管理员用户名 ADMIN_USER（当前 "' + USER + '"，默认 Hex1um）');
+      hints.push('也可以改用 ADMIN_TOKEN：浏览器登录站点后执行 localStorage.getItem("mv_token")，把值传给 ADMIN_TOKEN，不必传明文密码');
+      throw new Error('登录被拒（401）：' + hints.map((h) => '\n  · ' + h).join('') + '\n  服务端返回：' + text.slice(0, 120));
+    }
+    if (res.status === 429) throw new Error('登录被限流（429）：同一 IP 每分钟最多 12 次，等一分钟再试');
+    throw new Error('登录失败: ' + res.status + ' ' + text.slice(0, 160));
+  }
   // 多个 Set-Cookie（网关 __wb_rsc + 站点 mv_session）要一起带上，只取第一个会丢掉会话
   const list = res.headers.getSetCookie ? res.headers.getSetCookie() : [res.headers.get('set-cookie')];
   const cookie = list.map((s) => String(s || '').split(';')[0]).filter(Boolean).join('; ');
   if (!cookie) throw new Error('登录成功但没拿到会话 cookie');
   return cookie;
+}
+
+function ok(res, json) {
+  return res.ok && json && json.ok;
 }
 
 async function exportLive(cookie) {

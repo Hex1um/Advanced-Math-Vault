@@ -272,7 +272,11 @@ node tools/ops/deploy.mjs --publish
 SHARECODE=... ADMIN_PASS=... node tools/ops/deploy.mjs --publish
 # 只看差异、不写盘：
 SHARECODE=... ADMIN_PASS=... node tools/ops/sync-live.mjs --dry
+# 不想在命令行留明文密码，就用会话令牌（浏览器登录站点后 localStorage.getItem('mv_token')）：
+SHARECODE=... ADMIN_TOKEN=... node tools/ops/deploy.mjs --publish
 ```
+
+> 登录被拒（401）时的三种常见原因：密码填成了示例占位文本、管理员用户名不是 `Hex1um`（用 `ADMIN_USER` 改）、`ADMIN_TOKEN` 已过期。`429` 是同 IP 每分钟 12 次的登录限流，等一分钟即可。
 
 - `SHARECODE` 或 `ADMIN_PASS` 缺失时，`tools/ops/sync-live.mjs` 直接报错退出（退出码 2），不再回退到任何默认值。
 - `tools/ops/deploy.mjs` 默认只同步、不发布；发布必须加 `--publish`（或 `USER_ASKED_TO_PUBLISH=1`），避免误触发线上覆盖。

@@ -1,6 +1,6 @@
 {
   "name": "math-vault",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "private": true,
   "description": "数海晴岸：高等数学好题收藏室，人工审核题库 + 每日一积 + 答疑区 + AI 出题/批改",
   "main": "server.js",
