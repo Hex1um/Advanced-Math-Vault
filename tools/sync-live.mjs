@@ -31,12 +31,14 @@ function requiredEnv(name) {
 }
 const SHARECODE = requiredEnv('SHARECODE');
 const USER = process.env.ADMIN_USER || 'Hex1um';
-const PASS = requiredEnv('ADMIN_PASS');
+const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || '').trim();
+const PASS = ADMIN_TOKEN ? '' : requiredEnv('ADMIN_PASS');
 const DRY = process.argv.includes('--dry');
 
 function log(...a) { console.log(...a); }
 
 async function login() {
+  if (ADMIN_TOKEN) return 'mv_session=' + ADMIN_TOKEN;
   const res = await fetch(BASE + '/api/auth/login?sharecode=' + SHARECODE, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -58,7 +60,18 @@ async function exportLive(cookie) {
     headers: { cookie }
   });
   if (!res.ok) throw new Error('导出失败 ' + res.status);
-  return await res.json();
+  const data = await res.json();
+  // 旧版服务端导出不含 submissions，用管理端列表兜底；上线新版后 export 会直接带上
+  if (!Array.isArray(data.submissions)) {
+    const r2 = await fetch(BASE + '/api/admin/submissions?limit=200&sharecode=' + SHARECODE, { headers: { cookie } });
+    if (r2.ok) {
+      const j2 = await r2.json();
+      data.submissions = j2.items || [];
+    } else {
+      data.submissions = [];
+    }
+  }
+  return data;
 }
 
 function byKey(list, key) {
@@ -85,8 +98,9 @@ function main() {
     const liveFb = live.feedbacks || [];
     const liveDaily = live.daily || {};
     const liveProblems = live.problems || [];
+    const liveSubs = live.submissions || [];
 
-    log(`线上: 用户 ${keepUsers.length} / 帖子 ${livePosts.length} / 反馈 ${liveFb.length} / 题 ${liveProblems.length}`);
+    log(`线上: 用户 ${keepUsers.length} / 帖子 ${livePosts.length} / 反馈 ${liveFb.length} / 提交 ${liveSubs.length} / 题 ${liveProblems.length}`);
     log(`本地: 用户 ${(local.users || []).length} / 帖子 ${(local.posts || []).length} / 反馈 ${(local.feedbacks || []).length} / 题 ${(local.problems || []).length}`);
 
     /* 用户：以 id 为准，线上的经验/做题记录为准；本地独有的用户保留 */
@@ -167,6 +181,19 @@ function main() {
       if (!lFb.has(String(f.id))) { (local.feedbacks = local.feedbacks || []).push(f); addedFb++; }
     }
 
+    /* 提交记录：按 id 并集，线上与本地都保留；排序后 /api/my/attempts 的 slice(-40) 才是最近记录 */
+    const localSubs = local.submissions || [];
+    const subMap = new Map();
+    for (const s of localSubs) if (s && s.id) subMap.set(String(s.id), s);
+    let addedSubs = 0;
+    for (const s of liveSubs) {
+      if (!s || !s.id) continue;
+      const cur = subMap.get(String(s.id));
+      if (!cur) { subMap.set(String(s.id), s); addedSubs++; }
+      else if (String(s.at || '') > String(cur.at || '')) Object.assign(cur, s);
+    }
+    local.submissions = [...subMap.values()].sort((a, b) => String(a.at || '').localeCompare(String(b.at || '')));
+
     /* 每日记录：按日期键合并 */
     local.daily = Object.assign({}, liveDaily, local.daily || {});
 
@@ -193,7 +220,7 @@ function main() {
       if (a > b) local.meta[k] = a;
     }
 
-    log(`合并: 新增用户 ${addedUsers} / 更新用户 ${updatedUsers} / 新增帖子 ${addedPosts} / 新增反馈 ${addedFb} / 题目统计 ${stats}`);
+    log(`合并: 新增用户 ${addedUsers} / 更新用户 ${updatedUsers} / 新增帖子 ${addedPosts} / 新增反馈 ${addedFb} / 新增提交 ${addedSubs} / 题目统计 ${stats}`);
     if (DRY) { log('--dry：未写盘'); return; }
 
     const bak = DB_FILE + '.before-sync-' + Date.now() + '.json';
@@ -201,7 +228,7 @@ function main() {
     fs.writeFileSync(DB_FILE, JSON.stringify(local, null, 2), 'utf8');
     log('已写盘:', DB_FILE);
     log('原文件备份:', path.basename(bak));
-    log(`最终: 用户 ${local.users.length} / 帖子 ${local.posts.length} / 题 ${local.problems.length}`);
+    log(`最终: 用户 ${local.users.length} / 帖子 ${local.posts.length} / 提交 ${(local.submissions || []).length} / 题 ${local.problems.length}`);
   })();
 }
 

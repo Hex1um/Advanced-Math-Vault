@@ -2992,7 +2992,8 @@ function deleteProblemCascade(code, adminName) {
         problems: db.problems,
         posts: db.posts,
         daily: db.daily,
-        feedbacks: db.feedbacks
+        feedbacks: db.feedbacks,
+        submissions: db.submissions || []
       };
       // 带上用户（含密码哈希）：只给管理员，用于部署前把线上账号/经验合并回本地，避免覆盖
       if (/[?&]withUsers=1/.test(req.url || '')) payload.users = db.users;

@@ -15,6 +15,7 @@ import { spawnSync } from 'node:child_process';
 
 const ROOT = path.resolve(new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
 const SKIP_SYNC = process.argv.includes('--no-sync');
+const ALLOW_NO_SYNC = process.env.ALLOW_NO_SYNC === '1';
 const PUBLISH = process.argv.includes('--publish') || process.env.USER_ASKED_TO_PUBLISH === '1';
 
 function runSync() {
@@ -75,6 +76,9 @@ async function deploy() {
 (async () => {
   if (!PUBLISH) throw new Error('发布需要显式授权：加 --publish，或设置 USER_ASKED_TO_PUBLISH=1');
   if (!SKIP_SYNC) runSync();
-  else console.log('⚠ 已跳过线上同步（确保线上确实没有用户数据）');
+  else {
+    if (!ALLOW_NO_SYNC) throw new Error('禁止 --no-sync：同步会合并线上提交/用户数据。确实要跳过请显式设置 ALLOW_NO_SYNC=1');
+    console.log('⚠ 已跳过线上同步（显式 ALLOW_NO_SYNC=1；仅用于确认线上无用户数据）');
+  }
   await deploy();
 })().catch((e) => { console.error('✗ 部署失败:', e.message); process.exit(1); });

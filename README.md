@@ -180,7 +180,7 @@ node tools/migrate-tags.mjs          # 只报告标签迁移结果；加 --write
 
 ## 数据同步与发布
 
-发布一律用 `node tools/deploy.mjs`：它先把线上用户、帖子、反馈、每日记录合并回本地库，再上传，避免本地 `data/db.json` 覆盖线上数据。
+发布一律用 `node tools/deploy.mjs`：它先把线上用户、帖子、反馈、提交记录、每日记录合并回本地库，再上传，避免本地 `data/db.json` 覆盖线上数据。`--no-sync` 现在默认拒绝，只有显式 `ALLOW_NO_SYNC=1` 才能跳过。
 
 脚本已移除内置的生产凭据，运行前必须显式提供：
 
