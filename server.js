@@ -616,17 +616,38 @@ function recentCodes(days) {
   return used;
 }
 
+/* 每日一积候选：积分主题 + 难度 ≥ 6（较难），题干/标签/标题任一命中积分即可 */
+function isIntegralProblem(p) {
+  const hay = String(p.title || '') + ' ' + (p.tags || []).join(' ') + ' ' + String(p.statement || '');
+  if (!/积分|定积分|不定积分|二重|三重|曲线积分|曲面积分|\\int|∫/.test(hay)) return false;
+  return (p.difficulty || 0) >= 6;
+}
+
 function dailyProblem(dateKey) {
   const key = dateKey || todayKey();
   const approved = db.problems.filter((p) => p.status === 'approved');
   if (!approved.length) return null;
+  // 管理员可以手动指定某天的题（db.dailyOverride[key] = code）
+  const forced = (db.dailyOverride || {})[key];
+  if (forced) {
+    const fp = db.problems.find((x) => x.code === forced);
+    if (fp) return fp;
+  }
   const code = db.daily[key];
   let p = code ? db.problems.find((x) => x.code === code && x.status === 'approved') : null;
+  // 老缓存可能是改名前的非积分题：积分池够大就重挑
+  if (p && !isIntegralProblem(p)) {
+    const iP = approved.filter((x) => isIntegralProblem(x));
+    if (iP.length >= 30) p = null;
+  }
   if (!p) {
     // 最近 30 天出过的题不再选，题目不够时才放宽
     const used = recentCodes(30);
-    let pool = approved.filter((x) => !used[x.code]);
-    if (!pool.length) pool = approved;
+    // 优先在「较难的积分题」里挑，池子太小才退回全库
+    const integral = approved.filter((x) => isIntegralProblem(x));
+    let base = integral.length >= 30 ? integral : approved;
+    let pool = base.filter((x) => !used[x.code]);
+    if (!pool.length) pool = base;
     const sorted = pool.slice().sort((a, b) => a.code.localeCompare(b.code));
     p = sorted[strHash(key) % sorted.length];
     db.daily[key] = p.code;
@@ -2571,6 +2592,34 @@ async function handleApi(req, res, pathname, query) {
     }
 
     /* 删除账号（清理测试号/恶意注册）。只允许管理员，且不能删自己 */
+    /* 每日一积：指定某天的题，或取消指定 */
+    if (pathname === '/api/admin/daily' && method === 'POST') {
+      const body = await readBody(req);
+      const date = String(body.date || todayKey()).slice(0, 10);
+      if (body.clear) {
+        if (db.dailyOverride) delete db.dailyOverride[date];
+        if (db.daily) delete db.daily[date];
+        saveDb(true);
+        return send(res, 200, { ok: true, cleared: date });
+      }
+      const code = String(body.code || '').trim();
+      if (!code) return fail(res, 400, '缺少题号');
+      const p = db.problems.find((x) => x.code === code);
+      if (!p) return fail(res, 404, '没有这道题');
+      db.dailyOverride = db.dailyOverride || {};
+      db.dailyOverride[date] = code;
+      db.daily = db.daily || {};
+      db.daily[date] = code;
+      saveDb(true);
+      return send(res, 200, { ok: true, date, code, title: p.title });
+    }
+
+    if (pathname === '/api/admin/daily/pool' && method === 'GET') {
+      const pool = db.problems.filter((p) => p.status === 'approved' && isIntegralProblem(p));
+      const items = pool.slice(0, 300).map((p) => ({ code: p.code, title: p.title, difficulty: p.difficulty, tags: p.tags }));
+      return send(res, 200, { ok: true, total: pool.length, items });
+    }
+
     /* 人工改分：申诉复核后调整某次提交的分数 */
     if (pathname === '/api/admin/submissions/override' && method === 'POST') {
       const body = await readBody(req);

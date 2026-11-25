@@ -1,4 +1,4 @@
-/* 每日一题 */
+/* 每日一积：每天一道较难的积分题 */
 (function () {
   'use strict';
 
@@ -24,17 +24,66 @@
       const p = data.problem;
 
       if (!p) {
-        el.innerHTML = '<div class="page-head"><div><h1>每日一题</h1></div></div>'
+        el.innerHTML = '<div class="page-head"><div><h1>每日一积</h1></div></div>'
           + window.UI.empty('题库还是空的', '等第一批题目审核入库后，这里每天会固定推一道。');
         return;
       }
 
       const lv = window.UI.levelOf(p.difficulty);
 
+    /* 管理员：从「较难的积分题」池子里直接换今天的题 */
+    function bindDailyPick() {
+      const btn = document.getElementById('dailyPick');
+      if (!btn) return;
+      btn.addEventListener('click', async function () {
+        const el = document.createElement('div');
+        el.innerHTML = '<div class="small muted" style="margin-bottom:8px">候选池：难度 ≥ 6 的积分题（最多列 300 道）。</div>'
+          + '<div class="field"><input id="dpFilter" placeholder="按题号或标题筛选" /></div>'
+          + '<div id="dpList" style="max-height:320px;overflow:auto">加载中…</div>'
+          + '<div class="small muted" style="margin-top:10px">今天：' + data.date + '　'
+          + '<a href="#" id="dpClear">恢复自动选择</a></div>';
+        window.UI.modal({ title: '换今天的每日一积', sub: '选中后立即生效', body: el, wide: true });
+        const list = el.querySelector('#dpList');
+        const d = await window.API.get('/api/admin/daily/pool');
+        const render = function (kw) {
+          const items = (d.items || []).filter(function (x) {
+            return !kw || x.code.toLowerCase().includes(kw) || String(x.title).includes(kw);
+          }).slice(0, 60);
+          list.innerHTML = items.map(function (x) {
+            return '<div class="related-item" data-code="' + x.code + '" style="cursor:pointer">'
+              + '<span class="code">' + x.code + '</span>'
+              + '<span class="t">' + window.Md.inlineTex(x.title) + '</span>'
+              + '<span class="tag">难度 ' + x.difficulty + '</span></div>';
+          }).join('') || '<div class="small muted">没有匹配的题</div>';
+          list.querySelectorAll('[data-code]').forEach(function (row) {
+            row.addEventListener('click', async function () {
+              try {
+                await window.API.post('/api/admin/daily', { date: data.date, code: row.dataset.code });
+                window.UI.toast('已换成 ' + row.dataset.code, 'ok');
+                window.location.hash = '#/daily';
+                window.dispatchEvent(new HashChangeEvent('hashchange'));
+              } catch (e) { window.UI.toast(e.message, 'err'); }
+            });
+          });
+        };
+        render('');
+        el.querySelector('#dpFilter').addEventListener('input', function (e) { render(e.target.value.trim()); });
+        el.querySelector('#dpClear').addEventListener('click', async function (e) {
+          e.preventDefault();
+          await window.API.post('/api/admin/daily', { date: data.date, clear: true });
+          window.UI.toast('已恢复自动选择', 'ok');
+          window.dispatchEvent(new HashChangeEvent('hashchange'));
+        });
+      });
+    }
+
       el.innerHTML =
-        '<div class="page-head"><div><h1>每日一题</h1>'
-        + '<p class="sub">全站同一天看到的是同一道题，按日期滚动，不随刷新变化。</p></div>'
-        + '<div class="head-actions"><a class="btn" href="#/problems">全部题库</a></div></div>'
+        '<div class="page-head"><div><h1>每日一积</h1>'
+        + '<p class="sub">每天一道较难的积分题，全站同步，按日期滚动；管理员可以换成自己选的题。</p></div>'
+        + '<div class="head-actions">'
+        + (window.API.State.me && window.API.State.me.role === 'admin'
+          ? '<button class="btn" id="dailyPick">换今天的题</button>' : '')
+        + '<a class="btn" href="#/problems">全部题库</a></div></div>'
 
         + '<div class="card daily-hero">'
         + '<div class="daily-date"><span class="d">' + data.date + '</span><span class="w">' + weekdayOf(data.date) + ' · 今日题</span></div>'
@@ -101,6 +150,7 @@
       document.getElementById('dailyAsk').addEventListener('click', function () {
         window.Chat.open({ problemCode: p.code, title: p.title, statement: p.statement });
       });
+      bindDailyPick();
     }).catch(function (e) {
       el.innerHTML = window.UI.empty('加载失败', e.message);
     });

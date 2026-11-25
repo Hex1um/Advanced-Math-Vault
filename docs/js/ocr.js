@@ -214,7 +214,8 @@
 
   /* dataUrl -> 识别文字。默认中英混合。
      多版本（放大灰度 / Sauvola / Otsu / 反色）各跑一遍，按平均置信度取最优。 */
-  async function imageToText(dataUrl, onProgress, langs) {
+  async function imageToText(dataUrl, onProgress, langs, opts) {
+    const o = opts || {};
     const T = await ensure();
     const base = scriptBase();
     const variants = [];
@@ -232,6 +233,13 @@
         if (m && m.status === 'recognizing text' && onProgress) onProgress(Math.round((m.progress || 0) * 100));
       }
     });
+    // PSM 6：按单块文本解析；公式截图比默认 PSM 3 好很多
+    try {
+      await worker.setParameters({
+        tessedit_pageseg_mode: String(o.psm || '6'),
+        preserve_interword_spaces: '1'
+      });
+    } catch (e) {}
     let best = null;
     try {
       for (let i = 0; i < variants.length; i++) {

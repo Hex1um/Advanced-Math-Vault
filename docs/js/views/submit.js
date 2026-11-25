@@ -120,20 +120,98 @@
               }).catch(function () {});
             }
 
-            document.getElementById('ocrPreview').innerHTML = '<img src="' + image + '" class="judge-img" alt="题目预览" />'
-              + '<div style="margin-top:8px"><button type="button" class="btn btn-primary btn-sm" id="ocrGo">识图补全</button></div>';
+            document.getElementById('ocrPreview').innerHTML =
+              '<div id="cropWrap" style="position:relative;display:inline-block;max-width:100%;cursor:crosshair">'
+              + '<img src="' + image + '" id="cropImg" class="judge-img" alt="题目预览" style="display:block" />'
+              + '<div id="cropRect" style="position:absolute;border:2px dashed #4f8cff;background:rgba(79,140,255,.15);display:none"></div></div>'
+              + '<div class="small muted" style="margin-top:6px">在图上拖一个框，只识别框里的公式会更准（不框就整张识别）。</div>'
+              + '<div style="margin-top:8px"><button type="button" class="btn btn-primary btn-sm" id="ocrGo">识图补全</button>'
+              + '<button type="button" class="btn btn-sm" id="cropClear" style="margin-left:8px;display:none">取消框选</button></div>';
             document.getElementById('ocrGo').addEventListener('click', runOcr);
+            bindCrop();
           };
           img.src = String(rd.result);
         };
         rd.readAsDataURL(f);
       });
 
+
+      /* 框选区域：公式混排在整页里时，单独框出来识别准确率高一截 */
+      let cropRect = null;
+      function bindCrop() {
+        const wrap = document.getElementById('cropWrap');
+        const img = document.getElementById('cropImg');
+        const box = document.getElementById('cropRect');
+        const clearBtn = document.getElementById('cropClear');
+        if (!wrap || !img) return;
+        let sx = 0, sy = 0, dragging = false;
+        const pos = function (ev) {
+          const r = img.getBoundingClientRect();
+          const t = ev.touches ? ev.touches[0] : ev;
+          return {
+            x: Math.max(0, Math.min(r.width, t.clientX - r.left)),
+            y: Math.max(0, Math.min(r.height, t.clientY - r.top)),
+            w: r.width, h: r.height
+          };
+        };
+        const draw = function (a, b) {
+          const l = Math.min(a.x, b.x), t = Math.min(a.y, b.y);
+          const w = Math.abs(a.x - b.x), h = Math.abs(a.y - b.y);
+          box.style.display = 'block';
+          box.style.left = l + 'px'; box.style.top = t + 'px';
+          box.style.width = w + 'px'; box.style.height = h + 'px';
+          return { l, t, w, h, sw: a.w, sh: a.h };
+        };
+        const start = function (ev) { const p = pos(ev); sx = p; sy = p; dragging = true; ev.preventDefault(); };
+        const move = function (ev) {
+          if (!dragging) return;
+          const d = draw(sx, pos(ev));
+          if (d.w > 12 && d.h > 12) {
+            cropRect = { x: d.l / d.sw, y: d.t / d.sh, w: d.w / d.sw, h: d.h / d.sh };
+            clearBtn.style.display = 'inline-block';
+          }
+          ev.preventDefault();
+        };
+        const end = function () { dragging = false; };
+        wrap.addEventListener('mousedown', start);
+        wrap.addEventListener('mousemove', move);
+        window.addEventListener('mouseup', end);
+        wrap.addEventListener('touchstart', start, { passive: false });
+        wrap.addEventListener('touchmove', move, { passive: false });
+        wrap.addEventListener('touchend', end);
+        clearBtn.addEventListener('click', function () {
+          cropRect = null; box.style.display = 'none'; clearBtn.style.display = 'none';
+        });
+      }
+
+      /* 按框选比例裁出真实像素，再交给 OCR */
+      function cropImage(src, rect) {
+        if (!rect) return Promise.resolve(src);
+        return new Promise(function (res) {
+          const img = new Image();
+          img.onload = function () {
+            const x = Math.round(rect.x * img.width), y = Math.round(rect.y * img.height);
+            const w = Math.max(16, Math.round(rect.w * img.width)), h = Math.max(16, Math.round(rect.h * img.height));
+            // 裁出来通常很小，放大小图能明显提升识别率
+            const scale = Math.min(4, Math.max(1, 900 / Math.max(w, h)));
+            const cv = document.createElement('canvas');
+            cv.width = Math.round(w * scale); cv.height = Math.round(h * scale);
+            const g = cv.getContext('2d');
+            g.imageSmoothingQuality = 'high';
+            g.drawImage(img, x, y, w, h, 0, 0, cv.width, cv.height);
+            res(cv.toDataURL('image/png'));
+          };
+          img.onerror = function () { res(src); };
+          img.src = src;
+        });
+      }
+
       async function runOcr() {
         const box = document.getElementById('ocrResult');
         box.innerHTML = '<div class="small muted" style="padding:8px 0">识别中…</div>';
         try {
-          const res = await window.API.post('/api/ai/from-image', { image: image, llm: window.UI.llmConfig() });
+          const ocrImage = await cropImage(image, cropRect);
+          const res = await window.API.post('/api/ai/from-image', { image: ocrImage, llm: window.UI.llmConfig() });
           if (res.ok) {
             const p = res.problem;
             const fm = document.getElementById('submitForm');
@@ -156,7 +234,7 @@
           // 没有视觉模型：先用浏览器 OCR 把图片转成文字，填进题干框让用户核对
           if (window.OCR) {
             try {
-              let text = window.OCR.tidy(await window.OCR.imageToText(image, function (pct) {
+              let text = window.OCR.tidy(await window.OCR.imageToText(ocrImage, function (pct) {
                 box.innerHTML = '<div class="small muted" style="padding:8px 0">本地 OCR 识别中 ' + pct + '%…</div>';
               }));
               if (text) {

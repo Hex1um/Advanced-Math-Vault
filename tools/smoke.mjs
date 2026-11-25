@@ -337,6 +337,26 @@ try {
   const appealHandled = (fbLoop.json.items || []).some((f) => f.submissionId === apSub && f.status === 'handled');
   ok('改分后申诉自动标记已处理', appealHandled);
 
+  console.log('\n[回归] 每日一积');
+  const daily = await req('/api/daily');
+  ok('每日一积返回题目', daily.json && daily.json.ok && !!daily.json.problem, JSON.stringify(daily.json && daily.json.date));
+  const dp = daily.json.problem;
+  const pool = await req('/api/admin/daily/pool');
+  const poolCodes = new Set(((pool.json && pool.json.items) || []).map((x) => x.code));
+  // 种子库题目少，池子可能为空；有池子时必须从池子里选，且难度 ≥ 6
+  ok('积分题池可读', pool.json && pool.json.ok, JSON.stringify(pool.json && { total: pool.json.total }));
+  ok('每日一积优先取较难积分题', poolCodes.size < 30 || (poolCodes.has(dp.code) && dp.difficulty >= 6),
+    'pool=' + poolCodes.size + ' code=' + (dp && dp.code) + ' 难度=' + (dp && dp.difficulty));
+  const pick = (pool.json.items || []).find((x) => x.code !== dp.code) || (pool.json.items || [])[0];
+  if (pick) {
+    const setDaily = await req('/api/admin/daily', { method: 'POST', body: JSON.stringify({ date: daily.json.date, code: pick.code }) });
+    ok('管理员可以换今天的题', setDaily.json && setDaily.json.ok && setDaily.json.code === pick.code);
+    const daily2 = await req('/api/daily');
+    ok('换题立即生效', daily2.json.problem && daily2.json.problem.code === pick.code);
+    const clearDaily = await req('/api/admin/daily', { method: 'POST', body: JSON.stringify({ date: daily.json.date, clear: true }) });
+    ok('可以恢复自动选择', clearDaily.json && clearDaily.json.ok);
+  }
+
   console.log('\n[回归] OCR 坏例闭环');
   const bc = await req('/api/ai/ocr-badcase', { method: 'POST', body: JSON.stringify({ raw: 'l i m x->0 (1+x) 1/x', final: '$\\lim_{x\\to 0}(1+x)^{1/x}$', conf: 61, variant: 'sauvola' }) });
   ok('坏例采集成功', bc.json && bc.json.ok === true, JSON.stringify(bc.json).slice(0, 100));
