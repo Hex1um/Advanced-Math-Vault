@@ -125,6 +125,30 @@
 
   initTheme();
 
+  /* 全局兜底：任何漏网的异常都提示一次，不让页面停在半截或静默失败 */
+  (function guard() {
+    let last = 0;
+    const report = function (kind, msg) {
+      const now = Date.now();
+      if (now - last < 1500) return;      // 同一波错误只提示一次
+      last = now;
+      console.error('[' + kind + ']', msg);
+      try {
+        if (window.UI && window.UI.toast) window.UI.toast('操作出错了：' + String(msg).slice(0, 60), 'err');
+      } catch (e) {}
+    };
+    window.addEventListener('error', function (e) {
+      if (!e || !e.message) return;
+      // 图片/脚本加载失败也走这里，噪音大，只报脚本错误
+      if (e.target && e.target !== window) return;
+      report('error', e.message);
+    });
+    window.addEventListener('unhandledrejection', function (e) {
+      const r = e && e.reason;
+      report('promise', (r && (r.message || r)) || '未知错误');
+    });
+  })();
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', boot);
   } else {
