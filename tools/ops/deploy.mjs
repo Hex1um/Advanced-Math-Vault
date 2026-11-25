@@ -12,10 +12,42 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
+import { createRequire } from 'node:module';
 
 const ROOT = path.resolve(new URL('../..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
+const require = createRequire(import.meta.url);
+const { parse: parseEnv } = require(path.join(ROOT, 'lib', 'env.js'));
 const SKIP_SYNC = process.argv.includes('--no-sync');
 const PUBLISH = process.argv.includes('--publish') || process.env.USER_ASKED_TO_PUBLISH === '1';
+
+/* 部署前自检：线上最常漏的两项（反代信任、跨域白名单）配错不会报错，只会静默降级 */
+function preflight() {
+  const envFile = path.join(ROOT, '.env');
+  const fileEnv = fs.existsSync(envFile) ? parseEnv(fs.readFileSync(envFile, 'utf8'), process.env) : {};
+  const merged = Object.assign({}, fileEnv, process.env);
+  const warns = [];
+  if (!fs.existsSync(envFile) && !process.env.TRUST_PROXY && !process.env.ALLOW_ORIGINS) {
+    warns.push('没有 .env，也没有 TRUST_PROXY / ALLOW_ORIGINS：线上所有用户会共用代理 IP 的限流桶，且任何站点都能跨域调接口。');
+    warns.push('建议：cp .env.production.example .env 填好后再部署。');
+  }
+  if (!/^(1|true|yes|on)$/i.test(String(merged.TRUST_PROXY || ''))) {
+    warns.push('TRUST_PROXY 未开启：如果线上在反代后面，登录/AI/投稿的限流会按代理 IP 合并计算。');
+  }
+  const origins = String(merged.ALLOW_ORIGINS || '*');
+  if (origins.trim() === '*') warns.push('ALLOW_ORIGINS 仍是 *：建议改成 https://hex1um.github.io。');
+  if (warns.length) {
+    console.log('⚠ 部署前配置检查：');
+    for (const w of warns) console.log('  · ' + w);
+  } else {
+    console.log('✓ 部署前配置检查通过（TRUST_PROXY=' + merged.TRUST_PROXY + '，ALLOW_ORIGINS=' + origins + '）');
+  }
+  const dbFile = path.join(ROOT, 'data', 'db.json');
+  if (fs.existsSync(dbFile) && !SKIP_SYNC) {
+    const size = fs.statSync(dbFile).size;
+    console.log('本地库 data/db.json ' + (size / 1024 / 1024).toFixed(1) + ' MB，将随目录一起上传（部署前会先合并线上数据）');
+  }
+  return { envFile, merged };
+}
 
 function runSync() {
   console.log('▶ 同步线上用户数据到本地库…');
@@ -74,6 +106,7 @@ async function deploy() {
 
 (async () => {
   if (!PUBLISH) throw new Error('发布需要显式授权：加 --publish，或设置 USER_ASKED_TO_PUBLISH=1');
+  preflight();
   if (!SKIP_SYNC) runSync();
   else console.log('⚠ 已跳过线上同步（确保线上确实没有用户数据）');
   await deploy();

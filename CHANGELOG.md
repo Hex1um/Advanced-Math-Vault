@@ -17,8 +17,9 @@
 ### 配置：支持部署目录里的 `.env`
 
 - 新增 `lib/env.js`：解析仓库根 `.env`，**不覆盖已存在的环境变量**（平台面板与命令行优先），支持引号、行内注释、续行、`${VAR}` 展开。
-- 场景：托管平台没有环境变量面板、只能上传目录后直接跑 `node server.js` 时，把 `.env` 一起放进去即可；`.env` 已在 `.gitignore` 里，仓库只提交 `.env.example`。
-- 自测：`npm run check:env`（10 项），覆盖解析规则与「不覆盖」策略。
+- 场景：托管平台没有环境变量面板、只能上传目录后直接跑 `node server.js` 时，把 `.env` 一起放进去即可；`.env` 已在 `.gitignore` 里，仓库只提交 `.env.example` 与 `.env.production.example`（线上模板，含 `TRUST_PROXY=1`、收紧后的 `ALLOW_ORIGINS`）。
+- `tools/ops/deploy.mjs` 增加部署前自检：没有 `.env` 又没设 `TRUST_PROXY` / `ALLOW_ORIGINS` 时，把「所有用户共用代理限流桶」「任何站点可跨域调接口」两条风险直接打出来，并提示 `cp .env.production.example .env`。
+- 自测：`npm run check:env`（10 项），覆盖解析规则与「不覆盖已有变量」策略。
 
 ### Pages 由 Actions 构建发布
 

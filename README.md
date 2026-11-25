@@ -248,7 +248,14 @@ CI 见 `.github/workflows/smoke.yml`：push / PR 到 `main` 自动跑上面这�
 
 `TRUST_PROXY` 只在「最外层就是自己的代理」时开：`clientIp()` 依赖 `X-Forwarded-For` 首段，代理没覆盖写这个头时，客户端可以伪造它换限流桶。启动日志与 `/api/health` 都会提示当前状态；管理员在「审核后台 → 运行状态」里能看到完整摘要与告警列表。
 
-其余变量见 `.env.example`（存储引擎、邮件通道、备份保留天数、LLM 白名单）。
+托管平台没有环境变量面板时，用部署目录里的 `.env`（`server.js` 启动会读，且不覆盖平台已有变量）：
+
+```bash
+cp .env.production.example .env    # 填 SMTP、Key 等
+node tools/ops/deploy.mjs --publish
+```
+
+`.env` 不会进 git；`tools/ops/deploy.mjs` 会在发布前检查 `TRUST_PROXY` / `ALLOW_ORIGINS`，没配就先把风险点打出来。其余变量见 `.env.example`。
 
 ## 数据同步与发布
 
