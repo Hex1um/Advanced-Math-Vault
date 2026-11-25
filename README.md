@@ -262,6 +262,20 @@ node tools/ops/deploy.mjs --publish
 > `$env:SHARECODE="..."; $env:ADMIN_PASS="..."; node tools/ops/deploy.mjs --publish`，
 > 否则 PowerShell 会把 `SHARECODE=...` 当成命令名，报 `CommandNotFoundException`。
 
+## 忘了管理员密码怎么办
+
+站点没有「找回密码」入口（未接邮件闭环时也不该有），用部署目录里的**一次性文件**重置：
+
+1. 在项目根建 `data/ops/reset-admin.json`（该目录已被 gitignore）：
+   ```json
+   { "name": "Hex1um", "password": "新密码（≥8位）", "token": "16位以上随机串" }
+   ```
+2. 发布一次（`node tools/ops/deploy.mjs --publish`）；服务冷启动时读取该文件、改掉密码、清空该用户所有旧会话，然后**删除文件**并在日志打印 `[ops] 已重置 … 的密码`。
+3. 用新密码登录，立刻在「我的记录 → 账号安全」改成自己的密码。
+4. 确认 `data/ops/reset-admin.json` 已消失；若失败会改名为 `.failed` 并保留原文，日志里有原因（缺 token、密码太短、用户不存在）。
+
+安全边界：能写部署目录的人本来就能控制这台服务器，所以这不是新增的越权面；但缺 token 或字段不合规时一律不动库。
+
 ## 数据同步与发布
 
 发布一律用 `node tools/ops/deploy.mjs`：它先把线上用户、帖子、反馈、提交记录、每日记录合并回本地库，再上传，避免本地 `data/db.json` 覆盖线上数据。`--no-sync` 现在默认拒绝，只有显式 `ALLOW_NO_SYNC=1` 才能跳过。

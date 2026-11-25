@@ -149,9 +149,38 @@ function finishLoad() {
   }
 }
 
+/* 库文件不见了但备份还在：直接拿最近一份恢复，总比起一个空库好。
+   v0.9.0 那次事故的教训——部署时漏带 db.json，线上用户数据看着就"消失"了。
+   只在用默认路径时启用：测试/临时库（显式传 DB_FILE）不受影响，避免测试读到真实备份。 */
+function restoreFromBackup() {
+  if (fs.existsSync(DB_FILE)) return false;
+  if (process.env.DB_FILE || process.env.NO_AUTO_RESTORE === '1') return false;
+  const dirs = [path.join(DATA_DIR, 'backups', 'daily'), path.join(DATA_DIR, 'backups')];
+  const cands = [];
+  for (const dir of dirs) {
+    if (!fs.existsSync(dir)) continue;
+    for (const f of fs.readdirSync(dir)) {
+      if (!/^db-.*\.json$/.test(f)) continue;
+      const full = path.join(dir, f);
+      try { cands.push({ full, name: f, t: fs.statSync(full).mtimeMs }); } catch (_) {}
+    }
+  }
+  if (!cands.length) return false;
+  cands.sort((a, b) => b.t - a.t);
+  try {
+    fs.copyFileSync(cands[0].full, DB_FILE);
+    console.log('[db] 没有找到 ' + path.basename(DB_FILE) + '，已从最近备份恢复：' + cands[0].name);
+    return true;
+  } catch (e) {
+    console.error('[db] 从备份恢复失败:', e.message);
+    return false;
+  }
+}
+
 function loadDb() {
   ensureDirs();
   snapshotDb();
+  restoreFromBackup();
 
   if (store.engine === 'sqlite') {
     try {
@@ -307,6 +336,44 @@ function configSummary() {
     llm: { siteKey: llmConfigured(), free: FREE_PROVIDERS.length },
     warnings: configWarnings()
   };
+}
+
+/* --------------------------------------------------- 运维应急通道
+   场景：管理员忘了密码，而站点没有任何「找回密码」入口（没有邮箱闭环时也不该有）。
+   做法：在部署目录放 data/ops/reset-admin.json，服务启动时消费一次、改完立即删除。
+   能写部署目录的人本来就能控制这台机器，所以这不是新增的越权面；但没有 token 或
+   文件格式不对时一律不动库，避免误放一个空文件就把密码改成空。 */
+const OPS_DIR = process.env.OPS_DIR || path.join(DATA_DIR, 'ops');
+
+function applyOpsReset() {
+  const file = path.join(OPS_DIR, 'reset-admin.json');
+  if (!fs.existsSync(file)) return;
+  try {
+    const req = JSON.parse(fs.readFileSync(file, 'utf8'));
+    const token = String(req.token || '').trim();
+    const name = String(req.name || '').trim();
+    const pw = String(req.password || '');
+    if (token.length < 16) throw new Error('token 至少 16 位，用来确认这是有意为之而不是误放的文件');
+    if (pw.length < 8) throw new Error('新密码至少 8 位');
+    const u = db.users.find((x) => String(x.name || '').toLowerCase() === name.toLowerCase());
+    if (!u) throw new Error('库里没有用户 ' + name);
+    const hashed = hashPassword(pw);
+    u.salt = hashed.salt;
+    u.passHash = hashed.hash;
+    const wasAdmin = u.role === 'admin';
+    if (!wasAdmin) u.role = 'admin';
+    // 改密后旧会话必须失效，否则别人浏览器里的登录态仍然有效
+    let killed = 0;
+    for (const k of Object.keys(db.sessions)) {
+      if (db.sessions[k] && db.sessions[k].uid === u.id) { delete db.sessions[k]; killed++; }
+    }
+    saveDb(true);
+    fs.unlinkSync(file);
+    console.log('[ops] 已重置 ' + u.name + ' 的密码' + (wasAdmin ? '' : '并授予管理员') + '，清理 ' + killed + ' 个旧会话，一次性文件已删除');
+  } catch (e) {
+    console.error('[ops] 重置失败，文件已改名留待人工处理：' + e.message);
+    try { fs.renameSync(file, file + '.failed'); } catch (_) {}
+  }
 }
 
 function seedProblems() {
@@ -4220,6 +4287,7 @@ process.on('uncaughtException', (e) => { console.error('[uncaught]', (e && e.sta
 process.on('unhandledRejection', (e) => { console.error('[unhandledRejection]', (e && e.stack) || e); });
 
 loadDb();
+applyOpsReset();
 
 server.listen(PORT, HOST, () => {
   console.log(SITE_NAME + ' v' + VERSION + ' running at http://localhost:' + PORT);

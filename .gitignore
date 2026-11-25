@@ -10,6 +10,8 @@ shots/
 kaoyan-exams/
 AUDIT-*.md
 data/backups/
+# 运维应急文件（重置管理员密码用），含明文新密码，绝不入库
+data/ops/
 data/db.json.before-*
 data/db.json.broken-*
 data/*.before-*

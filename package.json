@@ -1,6 +1,6 @@
 {
   "name": "math-vault",
-  "version": "1.2.3",
+  "version": "1.3.0",
   "private": true,
   "description": "数海晴岸：高等数学好题收藏室，人工审核题库 + 每日一积 + 答疑区 + AI 出题/批改",
   "main": "server.js",
@@ -24,7 +24,8 @@
     "backup": "node tools/ops/backup-db.mjs",
     "export:batch": "node tools/ops/export-batch.mjs",
     "migrate:sqlite": "node tools/ops/migrate-json-to-sqlite.mjs",
-    "deploy": "node tools/ops/deploy.mjs"
+    "deploy": "node tools/ops/deploy.mjs",
+    "check:ops": "node tools/verify/ops-reset-test.mjs"
   },
   "engines": {
     "node": ">=22.5"
