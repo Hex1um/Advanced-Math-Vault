@@ -250,7 +250,7 @@
             const p = res.problem;
             const fm = document.getElementById('submitForm');
             fm.title.value = p.title || '';
-            fm.statement.value = p.statement || '';
+            fm.statement.value = cleanStmt(p.statement || '');
             fm.tags.value = (p.tags || []).join(', ');
             fm.answer.value = p.answer || '';
             fm.solution.value = p.solution || '';

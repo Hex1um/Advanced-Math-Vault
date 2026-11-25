@@ -957,6 +957,25 @@ const SECTION_MAP = {
   HINTS: 'hints', ANSWER: 'answer', SOLUTION: 'solution', SOURCE: 'source'
 };
 
+
+/* 模型经常把标记写成一行：[TITLE] 不定积分 [STATEMENT] ... —— 上面的解析器只认独占一行，
+   这里补一个「标记出现在任意位置」的宽容版，避免整段塞进题干。 */
+function parseTaggedInline(text) {
+  const t = String(text || '').replace(/\r/g, '');
+  const re = /\[(TITLE|STATEMENT|TAGS|THINKING|DIFFICULTY|CALC|HINTS|ANSWER|SOLUTION|SOURCE)\][ \t:：]*/gi;
+  const marks = [];
+  let m;
+  while ((m = re.exec(t)) !== null) marks.push({ key: SECTION_MAP[m[1].toUpperCase()], start: m.index, bodyStart: re.lastIndex });
+  if (marks.length < 2) return null;
+  const obj = {};
+  for (let i = 0; i < marks.length; i++) {
+    const cur = marks[i];
+    const end = i + 1 < marks.length ? marks[i + 1].start : t.length;
+    obj[cur.key] = t.slice(cur.bodyStart, end).replace(/^```[a-z]*\s*/i, '').replace(/```\s*$/, '').trim();
+  }
+  return obj;
+}
+
 function parseGenerated(text) {
   const t = String(text || '').replace(/\r/g, '');
   const re = /^[ \t>*#-]*\[(TITLE|STATEMENT|TAGS|THINKING|DIFFICULTY|CALC|HINTS|ANSWER|SOLUTION|SOURCE)\][ \t:：]*$/gim;
@@ -3144,11 +3163,14 @@ function parseJudge(text) {
       }
     }
     if (!out) return fail(res, 502, '识图模型调用失败：' + (errors[0] || '无可用通道'));
-    const raw = parseGenerated(out) || extractJson(out);
+    const raw = parseGenerated(out) || parseTaggedInline(out) || extractJson(out);
     const item = validateGenerated(raw);
     if (!item) {
       // 模型常常直接吐纯 LaTeX（不按 [TITLE] 分段）：把整段当题干，交给后续补全
-      const plain = String(out).replace(/```[a-z]*/gi, '').replace(/```/g, '').trim();
+      const plain = String(out)
+        .replace(/\[(TITLE|STATEMENT|TAGS|THINKING|DIFFICULTY|CALC|HINTS|ANSWER|SOLUTION|SOURCE|NOTE)\]/gi, '\n')
+        .replace(/```[a-z]*/gi, '').replace(/```/g, '')
+        .replace(/\n{3,}/g, '\n\n').trim();
       if (plain.length >= 8) {
         return send(res, 200, {
           ok: true, plain: true,
