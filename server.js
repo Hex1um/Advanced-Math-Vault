@@ -1312,6 +1312,7 @@ function sendMailCode(email, code) {
 }
 
 const FEEDBACK_TYPES = {
+  appeal: '判分申诉',
   wrong_answer: '答案/解析有误',
   wrong_statement: '题干有误或不完整',
   score: '三维评分不合理',
@@ -1408,6 +1409,10 @@ function publicFeedback(f, user) {
     content: f.content, createdAt: f.createdAt,
     ai: f.ai || null,
     status: f.status || 'open',
+    /* 判分申诉要带提交号，前端才能按 submissionId 改分 */
+    submissionId: f.submissionId || '',
+    submissionScore: f.submissionScore,
+    submissionAt: f.submissionAt || '',
     isMine: !!(user && f.userId === user.id)
   };
 }
@@ -1554,6 +1559,115 @@ async function handleApi(req, res, pathname, query) {
       // 不再把验证码回给前端（否则谁都能绑定任意假邮箱）；本地部署看服务端日志
       code: process.env.NODE_ENV === 'development' && !r.delivered ? code : undefined,
       message: r.delivered ? '验证码已发送到邮箱' : '站点未接入邮件服务，验证码已写入服务端日志（开发模式会直接返回）'
+    });
+  }
+
+  /* ---- 判分申诉：对 AI 打分不服，转人工复核 ---- */
+  if (pathname === '/api/submissions/appeal' && method === 'POST') {
+    if (!user) return fail(res, 401, '请先登录');
+    const body = await readBody(req);
+    const sid = String(body.submissionId || '').trim();
+    const reason = String(body.reason || '').trim();
+    if (!sid) return fail(res, 400, '缺少提交记录');
+    if (reason.length < 6) return fail(res, 400, '请写清申诉理由（至少 6 个字）');
+    const sub = (db.submissions || []).find((x) => x.id === sid && x.uid === user.id);
+    if (!sub) return fail(res, 404, '找不到这条提交记录');
+    const dup = (db.feedbacks || []).find((f) => f.submissionId === sid && f.status === 'open');
+    if (dup) return send(res, 200, { ok: true, id: dup.id, message: '这条已经在等人工复核了' });
+    const fb = {
+      id: db.meta.feedbackSeq++,
+      code: sub.code,
+      type: 'appeal',
+      content: ('申诉判分：' + reason).slice(0, 2000),
+      imageDesc: '',
+      userId: user.id,
+      userName: user.name,
+      createdAt: new Date().toISOString(),
+      status: 'open',
+      ai: null,
+      adminNote: '',
+      handledAt: null,
+      handlerName: '',
+      submissionId: sid,
+      submissionScore: sub.score || 0,
+      submissionAt: sub.at || ''
+    };
+    db.feedbacks.push(fb);
+    saveDb();
+    logActivity(user, '对 ' + sub.code + ' 的判分提出申诉', sub.code);
+    return send(res, 200, { ok: true, id: fb.id, message: '已转人工复核，结果会在反馈里回复' });
+  }
+
+  /* ---- 今日复习：间隔重复队列 ---- */
+  if (pathname === '/api/my/review-today' && method === 'GET') {
+    if (!user) return fail(res, 401, '请先登录');
+    const now = Date.now();
+    const wrong = user.wrong || {};
+    const dueCodes = [];
+    for (const [code, w] of Object.entries(wrong)) {
+      const p = db.problems.find((x) => x.code === code && x.status === 'approved');
+      if (!p) continue;
+      if ((w.nextReviewAt || 0) <= now) dueCodes.push(code);
+    }
+    const items = dueCodes.slice(0, 10).map((code) => {
+      const p = db.problems.find((x) => x.code === code);
+      const w = wrong[code];
+      return {
+        code, title: p.title, difficulty: p.difficulty, tags: p.tags,
+        intervalDays: w.intervalDays || 1, lastScore: w.score || 0, tries: w.tries || 0
+      };
+    });
+    return send(res, 200, { ok: true, items, due: dueCodes.length, total: Object.keys(wrong).length });
+  }
+
+  /* ---- 我的考点统计：按标签聚合 + 薄弱考点 + 推荐题 ---- */
+  if (pathname === '/api/my/stats' && method === 'GET') {
+    if (!user) return fail(res, 401, '请先登录');
+    const solvedMap = user.solved || {};
+    const bestMap = user.best || {};
+    const agg = new Map();
+    let attempts = 0, passedCount = 0, scoreSum = 0;
+    for (const [code, rec] of Object.entries(solvedMap)) {
+      const p = db.problems.find((x) => x.code === code);
+      if (!p) continue;
+      const sc = (bestMap[code] && bestMap[code].score) || (rec.done ? 100 : 0);
+      attempts++; scoreSum += sc;
+      if (rec.done) passedCount++;
+      for (const t of p.tags || []) {
+        const o = agg.get(t) || { tag: t, attempts: 0, passed: 0, scoreSum: 0 };
+        o.attempts++; if (rec.done) o.passed++; o.scoreSum += sc;
+        agg.set(t, o);
+      }
+    }
+    const tags = [...agg.values()].map((o) => ({
+      tag: o.tag, attempts: o.attempts, passed: o.passed,
+      rate: Math.round((o.passed / o.attempts) * 100),
+      avgScore: Math.round(o.scoreSum / o.attempts)
+    })).sort((a, b) => b.attempts - a.attempts);
+    const weakest = tags.slice()
+      .filter((t) => t.attempts >= 1 && t.passed < t.attempts)
+      .sort((a, b) => a.rate - b.rate || a.avgScore - b.avgScore)
+      .slice(0, 3);
+    const recommend = [];
+    for (const w of weakest) {
+      for (const p of db.problems) {
+        if (recommend.length >= 6) break;
+        if (p.status !== 'approved') continue;
+        if (!(p.tags || []).includes(w.tag)) continue;
+        if (solvedMap[p.code] && solvedMap[p.code].done) continue;
+        if (recommend.some((r) => r.code === p.code)) continue;
+        recommend.push({ code: p.code, title: p.title, difficulty: p.difficulty, tag: w.tag });
+      }
+    }
+    return send(res, 200, {
+      ok: true,
+      summary: {
+        attempts, passed: passedCount, solved: passedCount,
+        rate: attempts ? Math.round((passedCount / attempts) * 100) : 0,
+        avgScore: attempts ? Math.round(scoreSum / attempts) : 0,
+        wrong: Object.keys(user.wrong || {}).length
+      },
+      tags, weakest, recommend
     });
   }
 
@@ -1866,6 +1980,8 @@ async function handleApi(req, res, pathname, query) {
         comment: judged.comment || '',
         errors: judged.errors || [],
         judgedBy: judgedBy,
+        submissionId: submission.id,
+        appealable: !passed,
         attempt: prior.length + 1,
         isBest: isBest,
         myBest: user.best[p.code].score,
@@ -1885,7 +2001,16 @@ async function handleApi(req, res, pathname, query) {
         };
         user.exp = (user.exp || 0) + gained;
         p.solvedCount = (p.solvedCount || 0) + 1;
-        if (user.wrong[p.code]) delete user.wrong[p.code];
+        /* 错题本按间隔重复推进：复习正确间隔翻倍，连续掌握到 8 天才出本 */
+        const wRec = user.wrong[p.code];
+        if (wRec) {
+          wRec.intervalDays = Math.min(16, (wRec.intervalDays || 1) * 2);
+          wRec.lastResult = 'pass';
+          wRec.lastScore = score;
+          wRec.lastReviewAt = Date.now();
+          wRec.nextReviewAt = Date.now() + wRec.intervalDays * 864e5;
+          if (wRec.intervalDays >= 8) delete user.wrong[p.code];
+        }
         logActivity(user, '做出 ' + p.code + '（' + score + ' 分），+' + gained + ' 经验', p.code);
         saveDb();
         return send(res, 200, Object.assign(payload, {
@@ -1900,10 +2025,15 @@ async function handleApi(req, res, pathname, query) {
         revealed: !!(rec && rec.revealed),
         askedAI: !!(rec && rec.askedAI)
       };
+      const prevWrong = user.wrong[p.code];
       user.wrong[p.code] = {
         at: submission.at,
         score: score,
-        tries: (user.wrong[p.code] && user.wrong[p.code].tries ? user.wrong[p.code].tries : 0) + 1
+        tries: (prevWrong && prevWrong.tries ? prevWrong.tries : 0) + 1,
+        intervalDays: 1,                                  // 错了就重置为 1 天
+        lastResult: 'fail',
+        lastReviewAt: Date.now(),
+        nextReviewAt: Date.now()                          // 刚错的题立刻进今日复习队列
       };
       saveDb();
       return send(res, 200, payload);
@@ -2002,6 +2132,10 @@ async function handleApi(req, res, pathname, query) {
         thinking: p.thinking, calc: p.calc,
         levelColor: levelOf(p.difficulty).color,
         myScore: v.score, tries: v.tries, at: v.at,
+        intervalDays: v.intervalDays || 1,
+        nextReviewAt: v.nextReviewAt || 0,
+        lastResult: v.lastResult || '',
+        due: (v.nextReviewAt || 0) <= Date.now(),
         best: (user.best[code] || {}).score || v.score,
         solved: !!(user.solved[code] && user.solved[code].done),
         excerpt: excerptOf(p.statement, 100)
@@ -2437,6 +2571,63 @@ async function handleApi(req, res, pathname, query) {
     }
 
     /* 删除账号（清理测试号/恶意注册）。只允许管理员，且不能删自己 */
+    /* 人工改分：申诉复核后调整某次提交的分数 */
+    if (pathname === '/api/admin/submissions/override' && method === 'POST') {
+      const body = await readBody(req);
+      const sid = String(body.submissionId || '').trim();
+      const score = Math.max(0, Math.min(100, Math.round(Number(body.score))));
+      const note = String(body.comment || '').slice(0, 300);
+      const sub = (db.submissions || []).find((x) => x.id === sid);
+      if (!sub) return fail(res, 404, '找不到这条提交记录');
+      if (!Number.isFinite(score)) return fail(res, 400, '分数要是 0-100 的数字');
+      const before = sub.score || 0;
+      sub.score = score;
+      sub.verdict = score >= 80 ? 'correct' : (score >= 40 ? 'partial' : 'wrong');
+      sub.overridden = { by: user.name, at: new Date().toISOString(), comment: note, before };
+      const target = db.users.find((u) => u.id === sub.uid);
+      const pr = db.problems.find((x) => x.code === sub.code);
+      if (target && pr) {
+        target.solved = target.solved || {};
+        target.wrong = target.wrong || {};
+        target.best = target.best || {};
+        const curBest = target.best[sub.code];
+        if (!curBest || score > curBest.score) target.best[sub.code] = { score, at: sub.at };
+        if (score >= 80) {
+          if (!(target.solved[sub.code] && target.solved[sub.code].done)) {
+            const gained = xpForProblem(pr, target.solved[sub.code]);
+            target.solved[sub.code] = Object.assign({}, target.solved[sub.code], {
+              at: (target.solved[sub.code] && target.solved[sub.code].at) || Date.now(),
+              done: true, score
+            });
+            target.exp = (target.exp || 0) + gained;
+            pr.solvedCount = (pr.solvedCount || 0) + 1;
+            logActivity(target, '申诉复核通过 ' + sub.code + '（' + score + ' 分），+' + gained + ' 经验', sub.code);
+          } else {
+            target.solved[sub.code].score = Math.max(target.solved[sub.code].score || 0, score);
+          }
+          delete target.wrong[sub.code];
+        } else if (!(target.solved[sub.code] && target.solved[sub.code].done)) {
+          target.wrong[sub.code] = Object.assign({}, target.wrong[sub.code], {
+            at: new Date().toISOString(), score,
+            tries: ((target.wrong[sub.code] && target.wrong[sub.code].tries) || 0) + 1,
+            intervalDays: 1, lastResult: 'fail', lastReviewAt: Date.now(),
+            nextReviewAt: Date.now() + 864e5
+          });
+        }
+      }
+      // 关联的申诉标记为已处理
+      for (const f of db.feedbacks || []) {
+        if (f.submissionId === sid && f.status === 'open') {
+          f.status = 'handled';
+          f.handledAt = new Date().toISOString();
+          f.handlerName = user.name;
+          f.adminNote = (f.adminNote ? f.adminNote + ' | ' : '') + '改分为 ' + score + (note ? '：' + note : '');
+        }
+      }
+      saveDb(true);
+      return send(res, 200, { ok: true, score, before, verdict: sub.verdict });
+    }
+
     if (pathname === '/api/admin/users/delete' && method === 'POST') {
       const body = await readBody(req);
       const names = (Array.isArray(body.names) ? body.names : [body.name]).map(String).filter(Boolean);
@@ -2461,8 +2652,9 @@ async function handleApi(req, res, pathname, query) {
       let list = db.feedbacks.slice();
       if (status !== 'all') list = list.filter((f) => (f.status || 'open') === status);
       list.sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
-      const reviewed = list.filter((f) => f.ai && f.ai.reviewedAt);
-      const pending = list.filter((f) => !f.ai || !f.ai.reviewedAt);
+      // 判分申诉不走 AI 审阅，直接进管理员待办
+      const reviewed = list.filter((f) => (f.ai && f.ai.reviewedAt) || f.type === 'appeal');
+      const pending = list.filter((f) => !((f.ai && f.ai.reviewedAt) || f.type === 'appeal'));
       const withTitle = (f) => {
         const pr = db.problems.find((p) => p.code === f.code);
         return Object.assign(publicFeedback(f, user), { title: pr ? pr.title : '', tags: pr ? pr.tags : [] });

@@ -249,13 +249,74 @@
       window.API.get('/api/me'),
       window.API.get('/api/my/submissions').catch(function () { return { items: [] }; }),
       window.API.get('/api/my/solved').catch(function () { return { items: [] }; }),
-      window.API.get('/api/my/attempts').catch(function () { return { items: [] }; })
+      window.API.get('/api/my/attempts').catch(function () { return { items: [] }; }),
+      window.API.get('/api/my/stats').catch(function () { return { tags: [], weakest: [], recommend: [], summary: {} }; })
     ]).then(function (arr) {
       const me = arr[0].user;
       const subs = arr[1].items || [];
       const solved = arr[2].items || [];
       const attempts = arr[3].items || [];
+      const stats = arr[4] || { tags: [], weakest: [], recommend: [], summary: {} };
       window.UI.applyUser(me);
+
+      /* 考点雷达：取做题量前 6 的标签，纯 SVG 不用图表库 */
+      const radar = function (tags) {
+        const list = (tags || []).slice(0, 6);
+        if (list.length < 3) return '<div class="small muted">做过 3 个以上考点的题之后，这里会出现考点雷达。</div>';
+        const cx = 130, cy = 118, R = 82;
+        const n = list.length;
+        const pt = function (i, r) {
+          const a = -Math.PI / 2 + (2 * Math.PI * i) / n;
+          return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+        };
+        const rings = [0.33, 0.66, 1].map(function (k) {
+          const d = list.map(function (_, i) { return pt(i, R * k).map(function (v) { return v.toFixed(1); }).join(','); }).join(' ');
+          return '<polygon points="' + d + '" fill="none" stroke="var(--line)" stroke-width="1"/>';
+        }).join('');
+        const axes = list.map(function (_, i) {
+          const e = pt(i, R);
+          return '<line x1="' + cx + '" y1="' + cy + '" x2="' + e[0].toFixed(1) + '" y2="' + e[1].toFixed(1) + '" stroke="var(--line)" stroke-width="1"/>';
+        }).join('');
+        const poly = list.map(function (t, i) {
+          const r = R * Math.max(0.08, Math.min(1, (t.rate || 0) / 100));
+          return pt(i, r).map(function (v) { return v.toFixed(1); }).join(',');
+        }).join(' ');
+        const labels = list.map(function (t, i) {
+          const e = pt(i, R + 18);
+          const txt = String(t.tag).slice(0, 6);
+          return '<text x="' + e[0].toFixed(1) + '" y="' + e[1].toFixed(1) + '" font-size="10" fill="var(--text-2)" text-anchor="middle">'
+            + window.Md.esc(txt) + '</text>';
+        }).join('');
+        return '<svg viewBox="0 0 260 240" width="100%" style="max-width:280px">'
+          + rings + axes
+          + '<polygon points="' + poly + '" fill="rgba(78,140,255,.22)" stroke="#4f8cff" stroke-width="2"/>'
+          + labels + '</svg>';
+      };
+
+      const statsCard = stats.tags && stats.tags.length
+        ? '<div class="card side-card" style="padding:18px 20px;margin-bottom:14px">'
+          + '<h3>考点雷达</h3>'
+          + '<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start">'
+          + '<div style="flex:1;min-width:220px">' + radar(stats.tags) + '</div>'
+          + '<div style="flex:1;min-width:220px">'
+          + '<div class="small muted">正确率 = 通过题数 / 做过题数</div>'
+          + (stats.weakest.length
+            ? '<div style="margin-top:8px"><b>薄弱考点</b></div>'
+              + stats.weakest.map(function (w) {
+                return '<div class="related-item"><span class="t">' + window.Md.esc(w.tag) + '</span>'
+                  + '<span class="tag red">' + w.rate + '%</span></div>';
+              }).join('')
+            : '<div class="small muted" style="margin-top:8px">暂时没有薄弱考点。</div>')
+          + (stats.recommend.length
+            ? '<div style="margin-top:10px"><b>按薄弱考点推荐</b></div>'
+              + stats.recommend.slice(0, 4).map(function (r) {
+                return '<a class="related-item" href="#/problem/' + r.code + '"><span class="code">' + r.code + '</span>'
+                  + '<span class="t">' + window.Md.inlineTex(r.title) + '</span>'
+                  + '<span class="tag">' + window.Md.esc(r.tag) + '</span></a>';
+              }).join('')
+            : '')
+          + '</div></div></div>'
+        : '';
 
       el.innerHTML =
         '<div class="page-head"><div><h1>' + window.Md.esc(me.name) + '</h1>'
@@ -269,6 +330,7 @@
         + '<div class="stat"><div class="k">已做出</div><div class="v">' + me.solvedCount + '<small>题</small></div></div>'
         + '<div class="stat"><div class="k">待审投稿</div><div class="v">' + subs.filter(function (s) { return s.status === 'pending'; }).length + '</div></div>'
         + '</div>'
+        + statsCard
 
         + '<div class="submit-grid">'
         + '<div>'

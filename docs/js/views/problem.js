@@ -224,12 +224,18 @@
         }
       } else if (res.verdict === 'partial' || res.verdict === 'wrong') {
         html += '<div class="judge-extra">' + (typeof res.score === 'number' && res.score < 80 ? '差一点就到 80 了，改完再交一次。' : '') + '这题已进错题本。</div>';
+        if (res.appealable && res.submissionId) {
+          html += '<div class="judge-extra"><button class="btn btn-sm" id="appealBtn" data-sid="' + res.submissionId + '">'
+            + '对判分有异议？申请人工复核</button></div>';
+        }
       } else {
         html += '<div class="judge-extra">可以再交一次，或者点「查看答案」自己对照。</div>';
       }
 
       resultBox.innerHTML = html;
       window.Md.renderMath(resultBox);
+      const apBtn = resultBox.querySelector('#appealBtn');
+      if (apBtn) apBtn.addEventListener('click', function () { openAppealModal(p, apBtn.dataset.sid); });
       if (res.passed && !res.already) {
         setTimeout(function () { window.UI.toast('通过，' + res.score + ' 分，+' + (res.gained || 0) + ' 经验', 'ok'); }, 200);
       }
@@ -237,6 +243,34 @@
   }
 
   /* 每道题自己的讨论区：发帖可带图，AI 会自动回一条 */
+  /* 判分申诉：写清理由 → 转管理员人工复核 */
+  function openAppealModal(p, submissionId) {
+    if (!window.UI.requireLogin(null, '登录后才能申请复核')) return;
+    const el = document.createElement('div');
+    el.innerHTML = '<div class="judge-tip">AI 判分可能误判。写清你认为哪儿判错了，管理员会人工核对，改判结果会记在你的反馈里。</div>'
+      + '<div class="field"><label>申诉理由</label>'
+      + '<textarea id="apReason" rows="5" placeholder="例如：第 2 步换元后的上下限我写对了，AI 认成了 0 到 1；最终答案与标准答案一致。"></textarea></div>'
+      + '<div class="judge-actions"><button class="btn btn-primary" id="apSend">提交申诉</button>'
+      + '<span class="small muted">同一份提交只会生成一条申诉</span></div>'
+      + '<div id="apResult"></div>';
+    window.UI.modal({ title: '申请人工复核 · ' + p.code, sub: '提交后进入管理员待办', body: el, wide: false });
+    const btn = el.querySelector('#apSend');
+    btn.addEventListener('click', async function () {
+      const reason = (el.querySelector('#apReason').value || '').trim();
+      const box = el.querySelector('#apResult');
+      if (reason.length < 6) { box.innerHTML = '<div class="judge-result wrong">理由至少 6 个字</div>'; return; }
+      btn.disabled = true; btn.textContent = '提交中…';
+      try {
+        const r = await window.API.post('/api/submissions/appeal', { submissionId: submissionId, reason: reason });
+        box.innerHTML = '<div class="judge-result correct">' + window.Md.esc(r.message || '已提交') + '</div>';
+        window.UI.toast('申诉已提交', 'ok');
+      } catch (e) {
+        box.innerHTML = '<div class="judge-result wrong">' + window.Md.esc(e.message) + '</div>';
+      } finally { btn.disabled = false; btn.textContent = '提交申诉'; }
+    });
+  }
+
+
   /* 题目反馈：先经 AI 审阅，再转管理员 */
   function openFeedbackModal(p) {
     if (!window.UI.requireLogin(null, '登录后才能提交题目反馈')) return;

@@ -36,6 +36,14 @@
           + (ai.summary ? '<div class="small" style="margin:6px 0"><b>AI 摘要：</b>' + window.Md.esc(ai.summary) + '</div>' : '')
           + (ai.advice ? '<div class="small" style="margin:6px 0"><b>AI 建议：</b>' + window.Md.esc(ai.advice) + '</div>' : '')
           + '<div class="small muted" style="margin:6px 0">审阅模型：' + window.Md.esc(ai.model || '—') + '</div>'
+          + (f.type === 'appeal' && f.submissionId
+            ? '<div class="appeal-box" style="margin:10px 0;padding:10px;border:1px dashed var(--line);border-radius:8px">'
+              + '<div class="small muted">这条是判分申诉，原 AI 打分 <b>' + (f.submissionScore || 0) + ' 分</b>（' + window.Md.esc(f.submissionAt || '') + '）</div>'
+              + '<div style="display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap">'
+              + '<input class="ap-score" type="number" min="0" max="100" placeholder="改判分数 0-100" style="width:150px" />'
+              + '<button class="btn btn-sm btn-ok" data-fact="override">按此分数改判</button>'
+              + '<span class="small muted">改到 80 分以上会自动通过并补发经验</span></div></div>'
+            : '')
           + '<div class="field" style="margin-top:8px"><input class="fb-note" placeholder="处理备注（选填）" value="' + window.Md.esc(f.adminNote || '') + '" /></div>'
           + '<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">'
           + '<button class="btn btn-sm btn-ok" data-fact="resolve">标记已处理</button>'
@@ -44,6 +52,8 @@
           + '</div></div>';
       };
 
+      window.__appealMap = {};
+      d.items.forEach(function (f) { if (f.submissionId) window.__appealMap[f.id] = f.submissionId; });
       wrap.innerHTML = d.items.length
         ? d.items.map(Item).join('')
         : '<div class="empty" style="padding:18px">暂无 AI 已审阅的反馈。</div>';
@@ -53,6 +63,18 @@
           btn.addEventListener('click', async function () {
             const note = (node.querySelector('.fb-note') || {}).value || '';
             try {
+              if (btn.dataset.fact === 'override') {
+                const raw = (node.querySelector('.ap-score') || {}).value;
+                const sc = Number(raw);
+                if (!Number.isFinite(sc) || sc < 0 || sc > 100) { window.UI.toast('填个 0-100 的分数', 'err'); return; }
+                const fid = node.dataset.fid;
+                const target = (window.__appealMap || {})[fid];
+                if (!target) { window.UI.toast('找不到对应的提交记录', 'err'); return; }
+                await window.API.post('/api/admin/submissions/override', { submissionId: target, score: sc, comment: note });
+                window.UI.toast('已改判为 ' + sc + ' 分', 'ok');
+                loadFeedback();
+                return;
+              }
               await window.API.post('/api/admin/feedback/' + node.dataset.fid, { action: btn.dataset.fact, note: note });
               window.UI.toast('已更新', 'ok');
               loadFeedback();

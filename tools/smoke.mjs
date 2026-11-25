@@ -313,6 +313,30 @@ try {
   ok('AI 起标题有返回', sug.json.ok && typeof sug.json.title === 'string', JSON.stringify(sug.json).slice(0, 100));
 
   console.log('\n[12] 静态资源与防缓存头');
+  console.log('\n[回归] 学习闭环：复习队列 / 考点统计 / 判分申诉');
+  // 构造一次「只交答案且答案是错的」：会判 wrong、记提交、进错题本
+  const wrongOnly = await req('/api/problems/HS1003/answer', { method: 'POST', body: JSON.stringify({ mode: 'answer', answer: '-99999' }) });
+  ok('只交错误答案判 wrong 且不及格', wrongOnly.json.verdict === 'wrong' && wrongOnly.json.passed === false, JSON.stringify(wrongOnly.json).slice(0, 120));
+  const rv = await req('/api/my/review-today');
+  ok('今日复习队列有到期题', rv.json && rv.json.ok && rv.json.due >= 1 && rv.json.items.length >= 1, JSON.stringify(rv.json && { due: rv.json.due }));
+  ok('到期题带复习间隔', !!(rv.json.items && rv.json.items[0] && rv.json.items[0].intervalDays >= 1));
+
+  const st = await req('/api/my/stats');
+  ok('考点统计返回标签聚合', st.json && st.json.ok && Array.isArray(st.json.tags) && st.json.tags.length >= 1);
+  ok('考点统计带薄弱项与推荐', Array.isArray(st.json.weakest) && Array.isArray(st.json.recommend));
+
+  const apSub = wrongOnly.json && wrongOnly.json.submissionId;
+  const ap = await req('/api/submissions/appeal', { method: 'POST', body: JSON.stringify({ submissionId: apSub, reason: '最终答案我写对了，模型把符号判错了' }) });
+  ok('判分申诉创建成功', ap.json && ap.json.ok && !!ap.json.id, JSON.stringify(ap.json).slice(0, 120));
+  const ap2 = await req('/api/submissions/appeal', { method: 'POST', body: JSON.stringify({ submissionId: apSub, reason: '再点一次不应该生成第二条申诉' }) });
+  ok('重复申诉合并为一条', ap2.json && ap2.json.ok && ap2.json.id === ap.json.id);
+
+  const ov = await req('/api/admin/submissions/override', { method: 'POST', body: JSON.stringify({ submissionId: apSub, score: 88, comment: '人工复核通过' }) });
+  ok('管理员改分生效', ov.json && ov.json.ok && ov.json.score === 88 && ov.json.verdict === 'correct', JSON.stringify(ov.json).slice(0, 120));
+  const fbLoop = await req('/api/admin/feedbacks');
+  const appealHandled = (fbLoop.json.items || []).some((f) => f.submissionId === apSub && f.status === 'handled');
+  ok('改分后申诉自动标记已处理', appealHandled);
+
   console.log('\n[回归] 健壮性 / 隐私 / 质量门禁');
   // P0：非法百分号编码不许把进程打死
   for (const bad of ['/%zz', '/%E0%A4%A']) {

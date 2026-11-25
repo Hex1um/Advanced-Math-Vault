@@ -16,13 +16,38 @@
       + '<p class="sub">没过 80 分线的题自动收录；重做通过后会自动移出。</p></div></div>'
       + '<div id="wrongWrap"><div class="loading-row"><span class="spinner"></span>加载中…</div></div>';
 
-    window.API.get('/api/wrongbook').then(function (d) {
+    Promise.all([
+      window.API.get('/api/wrongbook'),
+      window.API.get('/api/my/review-today').catch(function () { return { items: [], due: 0, total: 0 }; })
+    ]).then(function (arr) {
+      const d = arr[0];
+      const rv = arr[1];
       const wrap = document.getElementById('wrongWrap');
+      const reviewCard = function () {
+        const due = rv.due || 0;
+        if (!d.items.length) return '';
+        if (!due) {
+          return '<div class="card review-card" style="padding:14px 16px;margin-bottom:14px">'
+            + '<b>今日复习</b> <span class="small muted">今天没有到期的题，按间隔重复，明天再来。</span></div>';
+        }
+        return '<div class="card review-card" style="padding:14px 16px;margin-bottom:14px">'
+          + '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">'
+          + '<b>今日复习</b><span class="tag gold">' + due + ' 题到期</span>'
+          + '<span class="small muted">答对间隔翻倍（1→2→4→8 天），答错重置为 1 天</span>'
+          + '<a class="btn btn-primary btn-sm" href="#/problem/' + rv.items[0].code + '?review=1">开始复习</a>'
+          + '</div>'
+          + '<div class="tags" style="margin-top:10px">'
+          + rv.items.map(function (x) {
+            return '<a class="tag" href="#/problem/' + x.code + '?review=1" title="上次 ' + x.lastScore + ' 分">'
+              + x.code + ' · ' + window.Md.esc(String(x.title).slice(0, 12)) + '</a>';
+          }).join('')
+          + '</div></div>';
+      };
       if (!d.items.length) {
-        wrap.innerHTML = '<div class="empty"><b>错题本是空的</b>去题库刷几道，没过 80 分的会出现在这里。</div>';
+        wrap.innerHTML = reviewCard() + '<div class="empty"><b>错题本是空的</b>去题库刷几道，没过 80 分的会出现在这里。</div>';
         return;
       }
-      wrap.innerHTML =
+      wrap.innerHTML = reviewCard() +
         '<div class="stat-strip" style="grid-template-columns:repeat(3,1fr)">'
         + '<div class="stat"><div class="k">错题数</div><div class="v">' + d.total + '<small>题</small></div></div>'
         + '<div class="stat"><div class="k">已补做通过</div><div class="v">' + d.items.filter(function (x) { return x.solved; }).length + '<small>题</small></div></div>'
@@ -42,7 +67,9 @@
             + '<span class="tag gold">难度 ' + x.difficulty + '</span></div></div>'
             + '<div class="pdiff"><span class="rate">' + (x.myScore === null ? '—' : x.myScore + ' 分') + '</span>'
             + '<span class="rate">最高 ' + (x.best === null ? '—' : x.best) + '</span></div>'
-            + '<div class="pmeta">' + x.tries + ' 次</div>'
+            + '<div class="pmeta">' + x.tries + ' 次'
+            + (x.intervalDays ? '<br><span class="small muted">间隔 ' + x.intervalDays + ' 天</span>' : '')
+            + '</div>'
             + '</div>';
         }).join('')
         + '</div>';
