@@ -2212,6 +2212,40 @@ async function handleApi(req, res, pathname, query) {
   }
 
   /* ---- AI 补全帖子标题 ---- */
+  /* 投稿：把识别出的题干交给 AI，补标题与考点 */
+  if (pathname === '/api/ai/suggest-meta' && method === 'POST') {
+    if (!user) return fail(res, 401, '请先登录');
+    const body = await readBody(req);
+    const st = String(body.statement || '').trim();
+    if (st.length < 8) return fail(res, 400, '题干太短，先识别或写几行再补全');
+    const sys = {
+      role: 'system',
+      content: [
+        '你是数学题库编辑。给你一道题的题干，请给出标题与考点标签。',
+        '',
+        '规则：',
+        '1. 标题不超过 18 个字，说清「考什么方法 / 什么对象」，不要写「求解」「计算题」这类空话，不要带题号；',
+        '2. 考点给 1-3 个，用顿号分隔，写成名词短语（如：分部积分、变限积分求导、级数收敛判别）；',
+        '3. 只输出两行，格式严格如下，不要解释、不要代码块：',
+        'TITLE: 标题',
+        'TAGS: 考点1、考点2'
+      ].join('\n')
+    };
+    const userMsg = { role: 'user', content: '题干：\n' + st.slice(0, 1500) };
+    for (const cfg of llmCandidates(body.llm || null)) {
+      try {
+        const t = await callLLM(cfg, [sys, userMsg]);
+        const text = String(t || '');
+        const mT = /TITLE[:：]\s*(.+)/i.exec(text);
+        const mG = /TAGS[:：]\s*(.+)/i.exec(text);
+        const title = (mT ? mT[1] : '').replace(/[「」""'。.]/g, '').trim().slice(0, 40);
+        const tags = (mG ? mG[1] : '').split(/[、,，;；]/).map((x) => x.trim()).filter(Boolean).slice(0, 3);
+        if (title || tags.length) return send(res, 200, { ok: true, title, tags, by: cfg.name });
+      } catch (e) { /* 换下一个通道 */ }
+    }
+    return fail(res, 502, '暂时连不上模型，标题和考点可以手动填');
+  }
+
   if (pathname === '/api/forum/suggest-title' && method === 'POST') {
     if (!user) return fail(res, 401, '请先登录');
     const body = await readBody(req);

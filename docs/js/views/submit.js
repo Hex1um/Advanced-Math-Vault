@@ -297,6 +297,15 @@
                 if (window.OCR.repairDelims) text = window.OCR.repairDelims(text);
                 const fm = document.getElementById('submitForm');
                 fm.statement.value = text;
+                // 补标题与考点：省得用户对着识别结果自己想标题
+                if (!fm.title.value.trim() || !fm.tags.value.trim()) {
+                  box.innerHTML = '<div class="small muted" style="padding:8px 0">正在补全标题与考点…</div>';
+                  try {
+                    const meta = await window.API.post('/api/ai/suggest-meta', { statement: text, llm: window.UI.llmConfig() });
+                    if (meta && meta.title && !fm.title.value.trim()) fm.title.value = meta.title;
+                    if (meta && meta.tags && meta.tags.length && !fm.tags.value.trim()) fm.tags.value = meta.tags.join(', ');
+                  } catch (e) { /* 补全失败不影响主流程 */ }
+                }
                 box.innerHTML = '<div class="judge-result correct"><b>已 OCR 识别</b>'
                   + '<span>已尽量规范成 LaTeX，公式仍需你核对一遍；答案与解析请补全</span></div>';
                 return;
