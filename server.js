@@ -2212,38 +2212,56 @@ async function handleApi(req, res, pathname, query) {
   }
 
   /* ---- AI 补全帖子标题 ---- */
-  /* 投稿：把识别出的题干交给 AI，补标题与考点 */
-  if (pathname === '/api/ai/suggest-meta' && method === 'POST') {
+  /* 投稿：题干 → AI 补全整条记录（标题/考点/三维评分/提示/答案/解析） */
+  if ((pathname === '/api/ai/suggest-meta' || pathname === '/api/ai/complete-problem') && method === 'POST') {
     if (!user) return fail(res, 401, '请先登录');
     const body = await readBody(req);
     const st = String(body.statement || '').trim();
     if (st.length < 8) return fail(res, 400, '题干太短，先识别或写几行再补全');
+    const full = pathname === '/api/ai/complete-problem';
     const sys = {
       role: 'system',
       content: [
-        '你是数学题库编辑。给你一道题的题干，请给出标题与考点标签。',
+        '你是数学题库编辑。给你一道题的题干，补全它在题库里需要的元信息。',
         '',
         '规则：',
-        '1. 标题不超过 18 个字，说清「考什么方法 / 什么对象」，不要写「求解」「计算题」这类空话，不要带题号；',
-        '2. 考点给 1-3 个，用顿号分隔，写成名词短语（如：分部积分、变限积分求导、级数收敛判别）；',
-        '3. 只输出两行，格式严格如下，不要解释、不要代码块：',
-        'TITLE: 标题',
-        'TAGS: 考点1、考点2'
+        '1. 标题 ≤18 字，说清「考什么方法 / 什么对象」，不带题号，不要「求解」「计算题」这类空话；',
+        '2. 考点 1-3 个名词短语，用顿号分隔；',
+        '3. 三维评分各 1-10 的整数：思维量=想到方法的难度（套公式 3-4，需构造 7-9）、难度=综合难度、计算量=算到底的工作量；',
+        '4. 分层提示 1-3 条，每条一句话，第一句只给方向、不直接给答案；',
+        full ? '5. 最终答案要精确（LaTeX，行内用 $...$）；完整解析分步写清思路与关键计算，不要只写答案；' : '5. 不要写答案和解析；',
+        '6. 认不出来的地方写 $\\square$，不要编造数字；',
+        '',
+        '严格按下面的段输出，不要解释、不要代码块：',
+        '[TITLE]', '[TAGS]', '[THINKING]', '[DIFFICULTY]', '[CALC]', '[HINTS]', '[ANSWER]', '[SOLUTION]'
       ].join('\n')
     };
-    const userMsg = { role: 'user', content: '题干：\n' + st.slice(0, 1500) };
+    const userMsg = { role: 'user', content: '题干：\n' + st.slice(0, 1800) };
     for (const cfg of llmCandidates(body.llm || null)) {
       try {
-        const t = await callLLM(cfg, [sys, userMsg]);
-        const text = String(t || '');
-        const mT = /TITLE[:：]\s*(.+)/i.exec(text);
-        const mG = /TAGS[:：]\s*(.+)/i.exec(text);
-        const title = (mT ? mT[1] : '').replace(/[「」""'。.]/g, '').trim().slice(0, 40);
-        const tags = (mG ? mG[1] : '').split(/[、,，;；]/).map((x) => x.trim()).filter(Boolean).slice(0, 3);
-        if (title || tags.length) return send(res, 200, { ok: true, title, tags, by: cfg.name });
+        const raw = String(await callLLM(cfg, [sys, userMsg]) || '');
+        const sec = (tag) => {
+          const re = new RegExp('\\\\[' + tag + '\\\\]([\\\\s\\\\S]*?)(?=\\\\[[A-Z]+\\\\]|$)', 'i');
+          const m = re.exec(raw);
+          return m ? m[1].trim() : '';
+        };
+        const num = (t) => {
+          const v = Number(String(t).replace(/[^0-9]/g, ''));
+          return v >= 1 && v <= 10 ? v : 0;
+        };
+        const title = sec('TITLE').replace(/[「」""'。.]/g, '').replace(/\n.*/s, '').trim().slice(0, 40);
+        const tags = sec('TAGS').split(/[、,，;；\n]/).map((x) => x.trim()).filter(Boolean).slice(0, 3);
+        const out = {
+          ok: true, by: cfg.name, title, tags,
+          thinking: num(sec('THINKING')), difficulty: num(sec('DIFFICULTY')), calc: num(sec('CALC')),
+          hints: sec('HINTS').split(/\n+/).map((x) => x.replace(/^[-*·\d.、\s]+/, '').trim()).filter(Boolean).slice(0, 5),
+          answer: full ? sec('ANSWER').trim() : '',
+          solution: full ? sec('SOLUTION').trim() : ''
+        };
+        if (title || tags.length || out.hints.length) return send(res, 200, out);
       } catch (e) { /* 换下一个通道 */ }
     }
-    return fail(res, 502, '暂时连不上模型，标题和考点可以手动填');
+    return fail(res, 502, '暂时连不上模型，可以手动填');
   }
 
   if (pathname === '/api/forum/suggest-title' && method === 'POST') {
