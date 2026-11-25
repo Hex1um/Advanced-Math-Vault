@@ -14,6 +14,7 @@ data/db.json.before-*
 data/db.json.broken-*
 data/*.before-*
 data/uploads/
+tmp/
 
 # 本地凭据文档，绝不入库
 zhipu-api-keys.md
