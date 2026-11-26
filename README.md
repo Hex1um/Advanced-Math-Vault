@@ -180,7 +180,11 @@ public/js/api.js          fetch 封装
 public/js/md.js           Markdown + LaTeX 渲染
 public/js/ui.js           头部 / Toast / 模态框 / 分页 / 评分条
 public/js/app.js          路由
-public/js/views/*.js      题库 / 题目 / 每日一题 / 答疑区 / 投稿 / 我的 / 审核 / AI 对话 / 分析 / 题单
+public/js/views/*.js      题库 / 题目 / 每日一题 / 答疑区 / 投稿 / 我的 / 审核 / AI 对话
+public/js/views/sprint*.js 期末突击：科目选择页 + 工作台（学习 / 薄弱）
+lib/sprint.js             科目包加载、判分、薄弱度算法、AI 提示词
+routes/sprint.js          期末突击 9 个接口
+data/subjects/*.json      科目包（学校-科目-学年） / 分析 / 题单
 public/js/heatmap.js      刷题热力图（纯 SVG，无图表库）
 public/js/draft-store.js  防丢稿草稿箱（7 天 TTL）
 public/js/ocr-preprocess.js 笔记本横线擦除与阴影抬升（OCR 预处理）
@@ -192,6 +196,50 @@ tools/verify/             冒烟、体检、公式、存储/邮件/.env 自测�
 tools/import/             导入、数据规范化与入库门禁（gate.mjs）
 tools/archive/            已合并的历史脚本（只作追溯）
 ```
+
+## 期末突击（v2.1.0）
+
+题库回答的是「这道题怎么解」，期末突击回答的是「这门课的考点怎么过」。入口在顶部导航「期末突击」。
+
+```
+#/sprint                选学校 · 科目 · 学年
+#/sprint/<packId>       工作台：学习知识点 / 分析薄弱
+```
+
+一个**科目包**（`data/subjects/*.json`）= 学校 + 科目 + 学年 + 考试蓝图 + 章节/考点 + 题目，与数学题库分开存放：
+
+| 字段 | 说明 |
+|---|---|
+| `exam.sections` | 题型 / 题量 / 每题分值 / 总分，页面顶部按它显示「单选 10×2=20′」 |
+| `chapters[]` | 章节，`weight` 越高越该先看 |
+| `points[]` | 考点：`core`（一句话结论，背诵版）、`detail`（展开）、`keys`、`examTypes`、`frequency`、`traps` |
+| `questions[]` | 内联题（政治类）或 `{ "ref": "HS1234" }`（引用题库真题） |
+
+**学习知识点**：左侧章节树选考点 → 一句话结论 / 展开 / 关键词 / 易错点 → 「AI 讲解」「找类似题」「AI 再出 3 道」。
+找类似题三级：包内真题 → 包内自编题 → AI 出题，前端标出哪几道来自往年卷。
+客观题（单选/判断）点选即判分并记入进度；简答/论述/材料分析不硬判，给分条得分点自评，也能让 AI 按评分标准批改。
+
+**分析薄弱**：按考点聚合「错题率 + 提问次数 + 直接看答案次数」，算出 0-100 的薄弱度（练够 3 次且正确率 ≥85% 的会压到低分区），
+给出章节维度的「薄弱板块」和考点排序；「生成突击方案」按薄弱度排 3 天任务，没配模型时用规则版，配了就走 AI 版。
+
+现有科目包：
+
+| 包 | 考点 | 题量 | 题目来源 |
+|---|---:|---:|---|
+| `hust-xigai-2026` 华科 · 习概 2026 | 97 | 168 | 按 17 章重点自编（单选/判断/简答/论述/材料分析），每题带解析 |
+| `hust-calculus-b-2026` 华科 · 微积分（B）2026 | 35 | 120 | 题库里的华科历年期中/期末真题，按章节标签挂接 |
+
+加一门新科目：
+
+```bash
+# 手写：照 data/subjects/hust-xigai-2026.json 的结构写一份，改 id/school/subject/year
+# 引用题库真题的（数学类）：维护 tools/import/build-calculus-pack.mjs 里的章节映射表后重跑
+node tools/import/build-calculus-pack.mjs --write
+# 体检：考点/题量/答案合法性/引用是否命中
+npm run check:sprint
+```
+
+科目包是只读的，学生的答题与提问记录写在 `db.sprint[uid][packId]`（跟着账号走，换设备不丢）。
 
 ## 存储：JSON 与 SQLite 双引擎
 

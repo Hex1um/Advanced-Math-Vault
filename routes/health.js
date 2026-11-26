@@ -53,6 +53,8 @@ module.exports = function registerHealthRoutes(router, ctx) {
       ok: true,
       site: SITE_NAME,
       version: VERSION,
+      commit: (ctx.config && ctx.config.commit) || '',
+      builtAt: (ctx.config && ctx.config.builtAt) || '',
       uptimeSec: Math.round(process.uptime()),
       problems: approved,
       problemCount: approved,
@@ -87,9 +89,9 @@ module.exports = function registerHealthRoutes(router, ctx) {
       },
       tagTree: tagTree(),
       examTags: examTagCounts(),
-      /* 前端据此决定是否显示「分析 / 题单」入口：
-         旧后端没有这两个接口，隐藏比点了报错更体面。 */
-      features: { analytics: true, collections: true, equivalentJudge: true },
+      /* 前端据此决定是否显示「分析 / 题单 / 期末突击」入口：
+         旧后端没有这些接口，隐藏比点了报错更体面。 */
+      features: { analytics: true, collections: true, equivalentJudge: true, sprint: true },
       llm: {
         configured: llmConfigured(),
         model: llmConfigured() ? db.settings.llm.model : '',

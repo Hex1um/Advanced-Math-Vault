@@ -638,6 +638,72 @@ try {
   const h500 = await req('/api/problems/HS1001');
   ok('正常接口不受脱敏影响', h500.status === 200 && h500.json.ok !== false);
 
+  /* ---------------------------------------------------------------- 期末突击（v2.1.0） */
+  console.log('\n[18] 期末突击：科目包 / 判分 / 薄弱分析');
+  const spPacks = await req('/api/sprint/packs');
+  ok('科目列表可读', spPacks.status === 200 && Array.isArray(spPacks.json.packs) && spPacks.json.packs.length >= 2,
+    'packs=' + (spPacks.json && spPacks.json.packs && spPacks.json.packs.length));
+  const hasXigai = (spPacks.json.packs || []).some((p) => p.id === 'hust-xigai-2026' && p.counts.points >= 80 && p.counts.questions >= 100);
+  ok('习概包考点/题量达标', hasXigai);
+  const spCalc = (spPacks.json.packs || []).find((p) => p.id === 'hust-calculus-b-2026');
+  /* 冒烟库只有 10 道示例题，引用型的真题解析不到题号，所以这里只校验科目包本身能加载；
+     真题命中情况由 npm run check:calc-pack 用真实库单独校验。 */
+  ok('微积分包可加载', !!spCalc && spCalc.counts.points >= 30, spCalc ? 'points=' + spCalc.counts.points : 'spMissing');
+
+  const metaSprint = await req('/api/meta');
+  ok('meta 声明 sprint 能力', !!(metaSprint.json.features && metaSprint.json.features.sprint === true));
+
+  const spPack = await req('/api/sprint/packs/hust-xigai-2026');
+  ok('科目骨架含章节与考点', spPack.status === 200 && (spPack.json.chapters || []).length >= 15
+    && spPack.json.chapters.every((c) => c.points.length > 0));
+
+  const spPd = await req('/api/sprint/packs/hust-xigai-2026/points/p02-3');
+  ok('考点详情含结论与题型', spPd.status === 200 && !!spPd.json.point.core && (spPd.json.point.examTypes || []).length > 0);
+
+  const spSim = await req('/api/sprint/packs/hust-xigai-2026/similar', {
+    method: 'POST', body: JSON.stringify({ pointId: 'p02-3', limit: 5 })
+  });
+  ok('找类似题返回包内题目', spSim.status === 200 && (spSim.json.items || []).length > 0);
+  ok('题目默认不带答案', (spSim.json.items || []).every((q) => !q.answer));
+
+  const spCalcSim = await req('/api/sprint/packs/hust-calculus-b-2026/similar', {
+    method: 'POST', body: JSON.stringify({ pointId: 'p3-1', limit: 3 })
+  });
+  ok('微积分找类似题接口可用', spCalcSim.status === 200 && Array.isArray(spCalcSim.json.items),
+    'items=' + ((spCalcSim.json && spCalcSim.json.items) || []).length);
+
+  const spNoAuth = await client()('/api/sprint/packs/hust-xigai-2026/answer', {
+    method: 'POST', body: JSON.stringify({ questionId: 'q00-s1', answer: 'D' })
+  });
+  ok('未登录答题被拒', spNoAuth.status === 401);
+
+  const spRight = await req('/api/sprint/packs/hust-xigai-2026/answer', {
+    method: 'POST', body: JSON.stringify({ questionId: 'q00-s1', answer: 'D' })
+  });
+  ok('客观题判分（答对）', spRight.status === 200 && spRight.json.correct === true);
+
+  const spWrong = await req('/api/sprint/packs/hust-xigai-2026/answer', {
+    method: 'POST', body: JSON.stringify({ questionId: 'q00-s2', answer: 'B' })
+  });
+  ok('客观题判分（答错并回传正解）', spWrong.status === 200 && spWrong.json.correct === false && spWrong.json.expected === 'A');
+
+  const spSubj = await req('/api/sprint/packs/hust-xigai-2026/answer', {
+    method: 'POST', body: JSON.stringify({ questionId: 'q-e1', answer: '随便写几句' })
+  });
+  ok('主观题不硬判、给得分点', spSubj.status === 200 && spSubj.json.needsHuman === true && !!spSubj.json.answer);
+
+  const spWeak = await req('/api/sprint/packs/hust-xigai-2026/weak');
+  ok('薄弱分析有统计与条目', spWeak.status === 200 && spWeak.json.weak.summary.attempts >= 2
+    && (spWeak.json.weak.items || []).length >= 1);
+
+  const spPlan = await req('/api/sprint/packs/hust-xigai-2026/plan', {
+    method: 'POST', body: JSON.stringify({ ai: false })
+  });
+  ok('规则版突击方案可生成', spPlan.status === 200 && /突击方案/.test(spPlan.json.text || '') && spPlan.json.mode === 'rule');
+
+  const spMissing = await req('/api/sprint/packs/not-a-pack');
+  ok('不存在的科目包 404', spMissing.status === 404);
+
 } catch (e) {
   fail++;
   console.error('\n✗ 测试异常:', e.message);

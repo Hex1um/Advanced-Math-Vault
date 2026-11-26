@@ -46,11 +46,26 @@ const ctx = createAppContext({
     allow: (key, limit, windowMs) => core.rateLimit(key, limit, windowMs),
   },
   taxonomy: tagTax,
-  config: { ...config, trustProxy: core.TRUST_PROXY, allowOrigins: core.ALLOWED_ORIGINS },
+  config: {
+    ...config,
+    trustProxy: core.TRUST_PROXY,
+    allowOrigins: core.ALLOWED_ORIGINS,
+    commit: config.BUILD_INFO.commit,
+    builtAt: config.BUILD_INFO.builtAt
+  },
   services: core,
   helpers: { ...core, clientIp: httpLib.clientIp },
 });
 ctx.setDb(core.db);
+
+/* 期末突击（v1.6.0）：科目包只读加载，用户进度写 db.sprint。
+   在 core.loadDb() 之后再 load()，因为引用型题目要按编号从题库取题。 */
+const createSprint = require('./lib/sprint');
+ctx.sprint = createSprint({
+  dir: path.join(DATA_DIR, 'subjects'),
+  getDb: () => core.db,
+  log: (m) => console.log(m)
+});
 
 const router = new Router();
 router.use(rateRulesMiddleware(core.RATE_RULES, { trustProxy: core.TRUST_PROXY }));
@@ -67,6 +82,7 @@ for (const mod of [
   './routes/me',
   './routes/ai',
   './routes/admin',
+  './routes/sprint',
   './routes/collections',
   './routes/problems',
 ]) {
@@ -154,6 +170,7 @@ process.on('unhandledRejection', (e) => { console.error('[unhandledRejection]', 
 
 core.loadDb();
 ctx.setDb(core.db);
+ctx.sprint.load();
 
 /* 先消费一次性管理员重置（scrypt 已异步化，必须等它落盘后再对外提供服务），
    再开始监听。失败不影响启动：紧急通道坏掉不该让站点起不来。 */

@@ -19,6 +19,8 @@
     if (seg[0] === 'problems') return { name: 'library', params: params, nav: 'problems' };
     if (seg[0] === 'problem') return { name: 'problem', params: Object.assign({ code: seg[1] || '' }, params), nav: 'problems' };
     if (seg[0] === 'daily') return { name: 'daily', params: params, nav: 'daily' };
+    if (seg[0] === 'sprint' && seg[1]) return { name: 'sprintPack', params: Object.assign({ id: seg[1] }, params), nav: 'sprint' };
+    if (seg[0] === 'sprint') return { name: 'sprint', params: params, nav: 'sprint' };
     if (seg[0] === 'forum' && seg[1]) return { name: 'post', params: Object.assign({ id: seg[1] }, params), nav: 'forum' };
     if (seg[0] === 'forum') return { name: 'forum', params: params, nav: 'forum' };
     if (seg[0] === 'generate') return { name: 'generate', params: params, nav: 'generate' };
@@ -93,6 +95,10 @@
     const supported = feats.analytics === true || feats.collections === true;
     document.querySelectorAll('[data-nav="analytics"], [data-nav="collections"]').forEach(function (a) {
       a.style.display = supported ? '' : 'none';
+    });
+    /* 期末突击是 v2.1.0 新增：后端没这个字段就说明还是旧实例，先藏起来 */
+    document.querySelectorAll('[data-nav="sprint"]').forEach(function (a) {
+      a.style.display = feats.sprint === true ? '' : 'none';
     });
     window.MV_FEATURES = feats;
   }

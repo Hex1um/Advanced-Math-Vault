@@ -43,6 +43,51 @@ function loadEnv() {
   return { envFile, merged: Object.assign({}, fileEnv, process.env) };
 }
 
+/* 可追溯性：曾经出现过「线上跑的版本号在仓库里查不到」，事后无法定位代码状态。
+   发布前把 commit 写进 data/build-info.json，/api/health 会带出来；
+   同时要求工作区干净——带未提交改动发布，等于又制造一份「线上有、仓库没有」的代码。 */
+const ALLOW_DIRTY = process.env.ALLOW_DIRTY === '1';
+
+function gitOut(args) {
+  const r = spawnSync('git', args, { cwd: ROOT, encoding: 'utf8' });
+  return r.status === 0 ? String(r.stdout || '').trim() : '';
+}
+
+function gitState() {
+  const commit = gitOut(['rev-parse', '--short=12', 'HEAD']) || '';
+  const dirtyRaw = gitOut(['status', '--porcelain']);
+  return { commit, dirty: !!dirtyRaw, dirtyFiles: dirtyRaw ? dirtyRaw.split('\n').filter(Boolean) : [] };
+}
+
+function checkGit() {
+  const g = gitState();
+  if (!g.commit) {
+    console.log('  ⚠ 读不到 git commit（不是 git 仓库？），build-info 里只会写时间戳');
+  }
+  if (g.dirty && !ALLOW_DIRTY) {
+    console.error('  ✗ 工作区有未提交改动 ' + g.dirtyFiles.length + ' 处，拒绝发布：');
+    g.dirtyFiles.slice(0, 10).forEach((f) => console.error('      ' + f));
+    if (g.dirtyFiles.length > 10) console.error('      …共 ' + g.dirtyFiles.length + ' 处');
+    console.error('    先 commit，或确实要发未提交状态时显式 ALLOW_DIRTY=1。');
+    return { ok: false, git: g };
+  }
+  return { ok: true, git: g };
+}
+
+function writeBuildInfo(git) {
+  const f = path.join(ROOT, 'data', 'build-info.json');
+  const info = {
+    version: (() => {
+      try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')).version; } catch (e) { return ''; }
+    })(),
+    commit: git.commit,
+    dirty: git.dirty,
+    builtAt: new Date().toISOString()
+  };
+  fs.writeFileSync(f, JSON.stringify(info, null, 2), 'utf8');
+  return info;
+}
+
 function dbStatus() {
   const out = { json: null, sqlite: null };
   if (fs.existsSync(DB_FILE)) {
@@ -211,14 +256,18 @@ async function deploy() {
 
 (async () => {
   const pre = preflight();
+  const gitCheck = checkGit();
+  console.log('▶ 代码状态：' + (gitCheck.git.commit || '(无 git)')
+    + (gitCheck.git.dirty ? ' + ' + gitCheck.git.dirtyFiles.length + ' 处未提交改动' : ' 干净'));
   const gatesOk = runGates();
   if (PREFLIGHT_ONLY) {
     console.log('\n--preflight-only：只做检查，没有备份、没有同步、没有上传。'
-      + (pre.ok && gatesOk ? '' : '\n✗ 检查未通过，修正后再部署'));
-    if (!pre.ok || !gatesOk) process.exit(1);
+      + (pre.ok && gatesOk && gitCheck.ok ? '' : '\n✗ 检查未通过，修正后再部署'));
+    if (!pre.ok || !gatesOk || !gitCheck.ok) process.exit(1);
     return;
   }
   if (!pre.ok) throw new Error('部署前检查未通过，已中止');
+  if (!gitCheck.ok) throw new Error('工作区不干净，已中止（确需发布未提交状态请设 ALLOW_DIRTY=1）');
   if (!gatesOk) throw new Error('门禁未通过，已中止（确需跳过请加 --skip-checks）');
   if (!runBackup('pre-deploy')) throw new Error('部署前备份失败，已中止');
   if (!PUBLISH) throw new Error('发布需要显式授权：加 --publish，或设置 USER_ASKED_TO_PUBLISH=1');
@@ -228,5 +277,7 @@ async function deploy() {
     if (!ALLOW_NO_SYNC) throw new Error('禁止 --no-sync：同步会合并线上提交/用户数据。确实要跳过请显式设置 ALLOW_NO_SYNC=1');
     console.log('⚠ 已跳过线上同步（显式 ALLOW_NO_SYNC=1；仅用于确认线上无用户数据）');
   }
+  const info = writeBuildInfo(gitCheck.git);
+  console.log('▶ build-info：' + info.version + ' @ ' + (info.commit || '(unknown)'));
   await deploy();
 })().catch((e) => { console.error('✗ 部署失败:', e.message); process.exit(1); });
