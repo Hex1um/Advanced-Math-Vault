@@ -34,7 +34,7 @@ function prevConfig() {
   }
 }
 const prev = prevConfig();
-const API_BASE = process.env.API_BASE || prev.apiBase || 'https://math-vault-10141-52003.app.workbuddy.host';
+const API_BASE = process.env.API_BASE || prev.apiBase || 'https://math-vault-10141.app.workbuddy.host';
 const SITE_NAME = process.env.SITE_NAME || prev.siteName || '数海晴岸';
 const SHARECODE = process.env.SHARECODE || prev.sharecode || '';
 if (!SHARECODE) {
