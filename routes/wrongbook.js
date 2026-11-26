@@ -9,6 +9,8 @@
  */
 'use strict';
 
+const tagTax = require('../tag-taxonomy');
+
 module.exports = function registerWrongbookRoutes(router, ctx) {
   const { send, fail, readBody, clientIp, parseCookies, isHttps } = ctx.http;
   const {
@@ -95,12 +97,15 @@ module.exports = function registerWrongbookRoutes(router, ctx) {
   /* ---- 错题本 ---- */
   if (pathname === '/api/wrongbook' && method === 'GET') {
     if (!user) return fail(res, 401, '登录后才有错题本');
+    /* 学科过滤：默认 math，与 v2.6.0 的返回内容一致（那时只有数学题） */
+    const subject = tagTax.subjectOf(query.subject);
     const out = [];
     for (const [code, v] of Object.entries(user.wrong || {})) {
       const p = db.problems.find((x) => x.code === code);
       if (!p || p.status !== 'approved') continue;
+      if (tagTax.subjectOf(p.subject) !== subject) continue;
       out.push({
-        code: p.code, title: p.title, tags: p.tags, difficulty: p.difficulty,
+        code: p.code, subject: tagTax.subjectOf(p.subject), title: p.title, tags: p.tags, difficulty: p.difficulty,
         thinking: p.thinking, calc: p.calc,
         levelColor: levelOf(p.difficulty).color,
         myScore: v.score, tries: v.tries, at: v.at,

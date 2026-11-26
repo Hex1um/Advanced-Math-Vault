@@ -16,6 +16,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { markList, runPythonGates, printGate } from './gate.mjs';
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
+const tagTax = require(path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'tag-taxonomy.js'));
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..', '..');
@@ -81,10 +85,17 @@ function normalize(raw) {
   let hints = raw.hints;
   if (typeof hints === 'string') hints = [hints];
   hints = Array.isArray(hints) ? hints.map(String).map((s) => s.trim()).filter(Boolean).slice(0, 5) : [];
+  /* 学科：物理题必须显式带 subject:"physics"，其余一律按数学处理。
+     mainTag/子标签按对应学科体系归一化，避免物理题被数学规则吞掉。 */
+  const subject = tagTax.subjectOf(raw.subject);
+  const tagInfo = tagTax.normalize(tags.length ? tags : [], raw.mainTag, subject);
   const item = {
+    subject,
     title: title.slice(0, 120),
     statement,
-    tags: tags.length ? tags : ['未分类'],
+    mainTag: tagInfo.mainTag,
+    tags: tagInfo.tags.length ? tagInfo.tags : (tags.length ? tags : ['未分类']),
+    kind: String(raw.kind || tagInfo.kind || ''),
     thinking: clamp(raw.thinking, 6),
     difficulty: clamp(raw.difficulty, 6),
     calc: clamp(raw.calc !== undefined ? raw.calc : raw.calculation, 5),
@@ -101,6 +112,19 @@ function normalize(raw) {
     solvedCount: 0,
     attemptCount: 0
   };
+  if (subject === 'physics' && raw.physicsMeta && typeof raw.physicsMeta === 'object') {
+    /* 白名单字段：导入脚本只做形状校验，详细清洗由服务端 normalizeProblem 负责 */
+    item.physicsMeta = {
+      answerType: String(raw.physicsMeta.answerType || 'symbolic'),
+      unit: String(raw.physicsMeta.unit || ''),
+      dimension: Array.isArray(raw.physicsMeta.dimension) ? raw.physicsMeta.dimension.slice(0, 7).map(Number) : null,
+      tolRel: Number.isFinite(Number(raw.physicsMeta.tolRel)) ? Number(raw.physicsMeta.tolRel) : 0.02,
+      sigFigs: Number(raw.physicsMeta.sigFigs) || null,
+      constants: Array.isArray(raw.physicsMeta.constants) ? raw.physicsMeta.constants.map(String).slice(0, 8) : [],
+      methods: Array.isArray(raw.physicsMeta.methods) ? raw.physicsMeta.methods.map(String).slice(0, 5) : [],
+      diagrams: Array.isArray(raw.physicsMeta.diagrams) ? raw.physicsMeta.diagrams.slice(0, 6) : []
+    };
+  }
   const warns = qualityGate(item, EXISTING);
   if (warns.length) item.qualityWarn = warns;
   return item;
@@ -163,8 +187,10 @@ function direct() {
   db.meta = db.meta || { seq: 1001, postSeq: 1, replySeq: 1 };
   const added = [];
   for (const item of items) {
+    /* 编号前缀按学科：数学 HS、物理 PH */
+    const prefix = (tagTax.SUBJECTS[tagTax.subjectOf(item.subject)] || {}).codePrefix || 'HS';
     let code;
-    do { code = 'HS' + db.meta.seq++; } while (db.problems.some((p) => p.code === code));
+    do { code = prefix + db.meta.seq++; } while (db.problems.some((p) => p.code === code));
     db.problems.push(Object.assign({ code }, item));
     added.push(code);
   }

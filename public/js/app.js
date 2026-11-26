@@ -46,7 +46,7 @@
 
     const el = document.getElementById('view');
     el.innerHTML = '';
-    document.title = ((window.MV_CONFIG && window.MV_CONFIG.siteName) || '数海晴岸') + ' · 高等数学好题收藏室';
+    document.title = ((window.MV_CONFIG && window.MV_CONFIG.siteName) || '数海晴岸') + ' · ' + St.subjectInfo(St.subject).brand;
 
     const view = window.Views[route.name];
     if (!view) {
@@ -64,7 +64,74 @@
     const el = document.getElementById('footerStats');
     if (!el) return;
     const s = St.stats || {};
-    el.textContent = '收录 ' + (s.problems || 0) + ' 题 · ' + (s.users || 0) + ' 位同学 · ' + (s.mainTags || 0) + ' 个主标签 / ' + (s.tags || 0) + ' 个子标签';
+    const bySubject = s.bySubject || {};
+    const phys = bySubject.physics || 0;
+    el.textContent = '收录 ' + (s.problems || 0) + ' 题'
+      + (phys ? '（物理 ' + phys + ' 题）' : '')
+      + ' · ' + (s.users || 0) + ' 位同学 · ' + (s.mainTags || 0) + ' 个主标签 / ' + (s.tags || 0) + ' 个子标签';
+  }
+
+  /* ---------------------------------------------------------- 学科切换
+     顶栏 [ 数学 | 物理 ]。状态存在 API.State.subject 并持久化；
+     切换时更新副标题、页标题、导航文案（每日一积 ↔ 每日一物），再重载当前视图。
+     物理入口只有在后端 /api/meta 声明 features.physics 且确有物理题时才显示。 */
+  let switchBound = false;
+
+  function paintSubjectChrome() {
+    const info = St.subjectInfo(St.subject);
+    const brand = document.getElementById('brandSub');
+    if (brand) brand.textContent = info.brand;
+    const dailyLink = document.querySelector('[data-nav="daily"]');
+    if (dailyLink) dailyLink.textContent = info.daily;
+    const wrap = document.getElementById('subjectSwitch');
+    if (wrap) {
+      wrap.querySelectorAll('[data-subject]').forEach(function (b) {
+        const on = b.getAttribute('data-subject') === St.subject;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+    }
+    document.title = ((window.MV_CONFIG && window.MV_CONFIG.siteName) || '数海晴岸') + ' · ' + info.brand;
+  }
+
+  function applySubjectAvailability(meta) {
+    const feats = (meta && meta.features) || {};
+    const wrap = document.getElementById('subjectSwitch');
+    if (!wrap) return;
+    const subjects = (meta && meta.subjects) || [];
+    const phys = subjects.filter(function (x) { return x.key === 'physics'; })[0];
+    /* 旧后端没有 features.physics：整块隐藏，保持单学科体验 */
+    const supported = feats.physics === true;
+    wrap.hidden = !supported;
+    const physBtn = wrap.querySelector('[data-subject="physics"]');
+    if (physBtn) {
+      const noContent = supported && (!phys || !phys.problems);
+      physBtn.disabled = !!noContent;
+      physBtn.title = noContent ? '物理题库还没有内容' : '切换到大学物理';
+      /* 物理题库空了还停在物理页，会看到一片空列表，自动退回数学 */
+      if (noContent && St.subject === 'physics') St.setSubject('math', { silent: true });
+    }
+    paintSubjectChrome();
+  }
+
+  function initSubjectSwitch() {
+    const wrap = document.getElementById('subjectSwitch');
+    if (!wrap || switchBound) return;
+    switchBound = true;
+    wrap.addEventListener('click', function (ev) {
+      const btn = ev.target.closest && ev.target.closest('[data-subject]');
+      if (!btn || btn.disabled) return;
+      const next = btn.getAttribute('data-subject');
+      if (next === St.subject) return;
+      St.setSubject(next);
+    });
+    St.subscribe('subject:changed', function (d) {
+      paintSubjectChrome();
+      try { window.UI.renderHeader(); } catch (e) {}
+      render();
+      if (!(d && d.silent)) window.UI.toast('已切换到' + d.info.label, 'ok');
+    });
+    paintSubjectChrome();
   }
 
   /* 元信息缓存：弱网/后端冷启动时，先用上一次的统计与标签树把页面画出来，
@@ -114,6 +181,7 @@
         St.applyMeta(meta);
         writeMetaCache(meta);
         applyFeatureFlags(meta);
+        applySubjectAvailability(meta);
       } catch (e) {
         console.error('[app] meta 加载失败', e);
       }
@@ -126,8 +194,9 @@
   async function boot() {
     const cached = readMetaCache();
     if (cached) {
-      try { St.applyMeta(cached); applyFeatureFlags(cached); } catch (e) {}
+      try { St.applyMeta(cached); applyFeatureFlags(cached); applySubjectAvailability(cached); } catch (e) {}
     }
+    initSubjectSwitch();
     render();
     window.addEventListener('hashchange', render);
     refreshMeta();

@@ -200,7 +200,10 @@
       if (own || siteReady || !window.FreeLLM) {
         const res = await window.API.post('/api/ai/generate', {
           mainTag: spec.mainTag, tags: spec.tags, thinking: spec.thinking, difficulty: spec.difficulty, calc: spec.calc,
-          style: spec.style, note: spec.note, llm: own || undefined
+          style: spec.style, note: spec.note, llm: own || undefined,
+          /* 学科透传：物理模式让后端切物理标签体系与物理命题 Prompt */
+          subject: window.API.State.subject,
+          numeric: window.API.State.subject === 'physics' ? !!spec.numeric : undefined
         });
         p = res.problem;
         p.modelLabel = res.model.mode === 'free'

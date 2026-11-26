@@ -289,13 +289,15 @@ module.exports = function registerAiRoutes(router, ctx) {
     if (!user) return fail(res, 401, '登录后才能使用 AI 接口');
     const body = await readBody(req, 64 * 1024);
     const spec = {
+      subject: String(body.subject || 'math') === 'physics' ? 'physics' : 'math',
       mainTag: String(body.mainTag || '').slice(0, 20),
       tags: Array.isArray(body.tags) ? body.tags.map(String).slice(0, 4) : [],
       thinking: clampScore(body.thinking, 6),
       difficulty: clampScore(body.difficulty, 6),
       calc: clampScore(body.calc, 5),
       style: String(body.style || '').slice(0, 40),
-      note: String(body.note || '').slice(0, 160)
+      note: String(body.note || '').slice(0, 160),
+      numeric: body.numeric === undefined ? undefined : !!body.numeric
     };
     return send(res, 200, { ok: true, messages: buildGenerateMessages(spec) });
   }
@@ -316,20 +318,27 @@ module.exports = function registerAiRoutes(router, ctx) {
     if (!user) return fail(res, 401, '登录后才能使用 AI 接口');
     const body = await readBody(req, 256 * 1024);
     const spec = {
+      subject: String(body.subject || 'math') === 'physics' ? 'physics' : 'math',
       mainTag: String(body.mainTag || '').slice(0, 20),
       tags: Array.isArray(body.tags) ? body.tags.map(String).slice(0, 4) : [],
       thinking: clampScore(body.thinking, 6),
       difficulty: clampScore(body.difficulty, 6),
       calc: clampScore(body.calc, 5),
       style: String(body.style || '').slice(0, 40),
-      note: String(body.note || '').slice(0, 160)
+      note: String(body.note || '').slice(0, 160),
+      numeric: body.numeric === undefined ? undefined : !!body.numeric
     };
     const messages = buildGenerateMessages(spec);
     const errors = [];
     for (const cfg of llmCandidates(body)) {
       try {
         const text = await callLLM(cfg, messages);
-        const parsed = validateGenerated(parseGenerated(text) || extractJson(text));
+        /* 先把学科写进模型返回对象，再走 validateGenerated：
+           它内部用 normalizeProblem 归一化标签，subject 必须在那一层就能看到，
+           否则物理题会被当数学题归一化，physicsMeta 被整体丢弃。 */
+        const rawOut = parseGenerated(text) || extractJson(text);
+        if (rawOut && typeof rawOut === 'object') rawOut.subject = spec.subject;
+        const parsed = validateGenerated(rawOut);
         if (parsed) {
           const gate = gateGenerated(parsed);
           if (!gate.ok) {

@@ -46,7 +46,49 @@
     examTags: [],
     llm: { configured: false, model: '', free: [] },
     stats: null,
+    /* 当前学科：math | physics。切换后所有列表/统计/组卷按它取数，
+       持久化到 localStorage，刷新与分享链接都不丢。 */
+    subject: 'math',
     route: { name: 'library', params: {} }
+  };
+
+  const SUBJECT_KEY = 'mv_subject';
+  const SUBJECT_META = {
+    math: { key: 'math', name: '数学', label: '高等数学', brand: '高等数学 · 好题收藏室', daily: '每日一积' },
+    physics: { key: 'physics', name: '物理', label: '大学物理', brand: '大学物理 · 好题收藏室', daily: '每日一物' }
+  };
+
+  function readSubject() {
+    try {
+      const v = localStorage.getItem(SUBJECT_KEY);
+      if (v === 'physics' || v === 'math') return v;
+    } catch (e) {}
+    return 'math';
+  }
+
+  State.subject = readSubject();
+  State.subjectInfo = function (key) { return SUBJECT_META[key === 'physics' ? 'physics' : 'math']; };
+  State.subjectQuery = function (sep) {
+    return (sep === undefined ? '?' : sep) + 'subject=' + State.subject;
+  };
+  /** 给以 /api/ 开头的路径补上 subject 参数（已有 subject 或非 API 路径原样返回） */
+  State.withSubject = function (path) {
+    const s = String(path || '');
+    if (!s || s.indexOf('/api/') !== 0 || /[?&]subject=/.test(s)) return s;
+    return s + (s.indexOf('?') >= 0 ? '&' : '?') + 'subject=' + State.subject;
+  };
+  State.setSubject = function (next, opts) {
+    const key = next === 'physics' ? 'physics' : 'math';
+    if (key === State.subject) return;
+    State.subject = key;
+    try { localStorage.setItem(SUBJECT_KEY, key); } catch (e) {}
+    /* meta 里带了两个学科的标签树，切换时直接换树，不必再等一次请求 */
+    const trees = (State.meta && State.meta.tagTrees) || null;
+    if (trees && trees[key]) {
+      State.tagTree = trees[key] || [];
+      State.tags = State.tagTree.reduce(function (arr, m) { return arr.concat(m.children || []); }, []);
+    }
+    State.emit('subject:changed', { subject: key, info: SUBJECT_META[key], silent: !!(opts && opts.silent) });
   };
 
   /* ------------------------------------------------------------- 事件总线
@@ -84,11 +126,15 @@
     const nextKey = (meta.me && meta.me.id) || '';
     State.me = meta.me;
     State.stats = meta.stats;
-    State.tagTree = meta.tagTree || [];
+    /* 学科树优先：后端 v2.7+ 返回 tagTrees.math / tagTrees.physics，
+       旧后端只有 tagTree（数学），此时 physics 树为空，前端会提示「还没有物理题」。 */
+    const trees = meta.tagTrees || null;
+    State.tagTree = (trees && trees[State.subject]) || meta.tagTree || [];
     State.examTags = meta.examTags || [];
-    State.tags = (meta.tagTree || []).reduce(function (arr, m) {
+    State.tags = (State.tagTree || []).reduce(function (arr, m) {
       return arr.concat(m.children || []);
     }, []).sort(function (a, b) { return b.count - a.count; });
+    State.methods = (meta.methods && meta.methods[State.subject]) || [];
     State.llm = meta.llm;
     State.emit('meta:updated', { me: State.me, stats: State.stats });
     if (nextKey !== prevKey) State.emit('auth:changed', State.me || null);

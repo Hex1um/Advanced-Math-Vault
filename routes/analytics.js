@@ -24,14 +24,19 @@ module.exports = function registerAnalyticsRoutes(router, ctx) {
   /* ---- 我的考点统计：按标签聚合 + 薄弱考点 + 推荐题 ---- */
   if (pathname === '/api/my/stats' && method === 'GET') {
     if (!user) return fail(res, 401, '请先登录');
+    /* 学科隔离：数学与物理的主标签是两套互不重叠的命名空间，
+       混在一张能力图里会出现「力学 0 分」这种无意义空行。 */
+    const subject = tagTax.subjectOf(query.subject);
+    const spec = tagTax.SUBJECTS[subject];
     const solvedMap = user.solved || {};
     const bestMap = user.best || {};
     const agg = new Map();
-    const mainAgg = new Map(tagTax.MAIN_TAGS.map((t) => [t, { tag: t, attempts: 0, passed: 0, scoreSum: 0 }]));
+    const mainAgg = new Map(spec.mainTags.map((t) => [t, { tag: t, attempts: 0, passed: 0, scoreSum: 0 }]));
     let attempts = 0, passedCount = 0, scoreSum = 0;
     for (const [code, rec] of Object.entries(solvedMap)) {
       const p = db.problems.find((x) => x.code === code);
       if (!p) continue;
+      if (tagTax.subjectOf(p.subject) !== subject) continue;
       const sc = (bestMap[code] && bestMap[code].score) || (rec.done ? 100 : 0);
       attempts++; scoreSum += sc;
       if (rec.done) passedCount++;
@@ -62,6 +67,7 @@ module.exports = function registerAnalyticsRoutes(router, ctx) {
       for (const p of db.problems) {
         if (recommend.length >= 6) break;
         if (p.status !== 'approved') continue;
+        if (tagTax.subjectOf(p.subject) !== subject) continue;
         if (!(p.tags || []).includes(w.tag)) continue;
         if (solvedMap[p.code] && solvedMap[p.code].done) continue;
         if (recommend.some((r) => r.code === p.code)) continue;
@@ -89,15 +95,17 @@ module.exports = function registerAnalyticsRoutes(router, ctx) {
         avgScore: attempts ? Math.round(scoreSum / attempts) : 0,
         wrong: Object.keys(user.wrong || {}).length
       },
-      tags, mainTags, weakest, recommend, weakMain, mainRecommend
+      tags, mainTags, weakest, recommend, weakMain, mainRecommend,
+      subject: subject
     });
   }
   }
 
   /* ---- 学习分析总览：刷题热力图 + 九大主考点掌握度 + 薄弱点靶向推荐 ---- */
-  router.get('/api/analytics/overview', async ({ res, user }) => {
+  router.get('/api/analytics/overview', async ({ res, user, query }) => {
     if (!user) return fail(res, 401, '登录后才有学习分析');
     const db = ctx.db;
+    const subject = tagTax.subjectOf(query && query.subject);
     const subs = (db.submissions || []).filter((s) => (s.uid || s.userId) === user.id);
     const probMap = new Map((db.problems || []).map((p) => [p.code, p]));
 
@@ -118,6 +126,7 @@ module.exports = function registerAnalyticsRoutes(router, ctx) {
       }
       const p = probMap.get(s.code || s.problemCode);
       if (!p) continue;
+      if (tagTax.subjectOf(p.subject) !== subject) continue;
       if (s.score >= 80) solvedSet.add(p.code);
 
       const mainTag = p.mainTag || '综合';
@@ -147,6 +156,7 @@ module.exports = function registerAnalyticsRoutes(router, ctx) {
     const weakTags = new Set(mastery.slice(0, 2).map((m) => m.mainTag));
     const recommended = (db.problems || [])
       .filter((p) => p.status === 'approved' && !solvedSet.has(p.code) &&
+        tagTax.subjectOf(p.subject) === subject &&
         (weakTags.size === 0 || weakTags.has(p.mainTag)) && p.difficulty >= 4 && p.difficulty <= 8)
       .slice(0, 6)
       .map((p) => ({ code: p.code, title: p.title, mainTag: p.mainTag, difficulty: p.difficulty }));
@@ -181,6 +191,7 @@ module.exports = function registerAnalyticsRoutes(router, ctx) {
       mastery,
       recommended,
       streak,
+      subject: subject,
       bestStreak: Math.max(bestStreak, streak)
     });
   });

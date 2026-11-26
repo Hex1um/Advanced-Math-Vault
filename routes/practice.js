@@ -9,6 +9,8 @@
  */
 'use strict';
 
+const tagTax = require('../tag-taxonomy');
+
 module.exports = function registerPracticeRoutes(router, ctx) {
   const { send, fail, readBody, clientIp, parseCookies, isHttps } = ctx.http;
   const {
@@ -26,12 +28,16 @@ module.exports = function registerPracticeRoutes(router, ctx) {
     const db = ctx.db;
   /* ---- 每日一题 ---- */
   if (pathname === '/api/daily' && method === 'GET') {
-    const p = dailyProblem();
+    /* 每日一积（数学）/ 每日一物（物理）：同一接口按 subject 分流，
+       不传 subject 时行为与 v2.6.0 完全一致。 */
+    const subject = tagTax.subjectOf(query.subject);
+    const p = dailyProblem(null, subject);
     return send(res, 200, {
       ok: true,
       date: todayKey(),
+      subject,
       problem: p ? Object.assign(visibleProblem(p, user), { statement: p.statement }) : null,
-      recent: recentDaily(8, user)
+      recent: recentDaily(8, user, subject)
     });
   }
 
@@ -43,9 +49,13 @@ module.exports = function registerPracticeRoutes(router, ctx) {
     const dmin = Number(query.dmin || 1);
     const dmax = Number(query.dmax || DIFF_MAX);
     const focus = String(query.focus || '').trim();
-    let pool = db.problems.filter((p) => p.status === 'approved');
+    /* 学科：不传按数学；每日一积（/api/daily）保持纯数学不动 */
+    const subject = tagTax.subjectOf(query.subject);
+    const method = String(query.method || '').trim();
+    let pool = db.problems.filter((p) => p.status === 'approved' && tagTax.subjectOf(p.subject) === subject);
     if (mainTag) pool = pool.filter((p) => p.mainTag === mainTag);
     if (tags.length) pool = pool.filter((p) => p.tags.some((t) => tags.includes(t)));
+    if (method) pool = pool.filter((p) => ((p.physicsMeta && p.physicsMeta.methods) || []).includes(method));
     pool = pool.filter((p) => p.difficulty >= dmin && p.difficulty <= dmax);
     if (user) {
       const solved = user.solved || {};

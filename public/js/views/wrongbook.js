@@ -44,7 +44,7 @@
       btn.disabled = true;
       const label = btn.textContent;
       btn.textContent = '挑题中…';
-      window.API.get('/api/practice?focus=weak&mode=random').then(function (r) {
+      window.API.get(window.API.State.withSubject('/api/practice?focus=weak&mode=random')).then(function (r) {
         if (r && r.code) {
           location.hash = '#/problem/' + r.code;
           return;
@@ -127,7 +127,7 @@
     }
 
     function exportAnki() {
-      window.API.get('/api/wrongbook').then(function (d) {
+      window.API.get(window.API.State.withSubject('/api/wrongbook')).then(function (d) {
         const items = (d.items || []);
         if (!items.length) { window.UI.toast('错题本是空的', 'err'); return; }
         const rows = [['Code', 'Title', 'Front', 'Back', 'Tags']];
@@ -153,9 +153,9 @@
       const wrap = document.getElementById('wrongWrap');
       if (!wrap) return;
       Promise.all([
-        window.API.get('/api/wrongbook'),
+        window.API.get(window.API.State.withSubject('/api/wrongbook')),
         window.API.get('/api/my/review-today').catch(function () { return { items: [], due: 0, total: 0 }; }),
-        window.API.get('/api/my/stats').catch(function () { return null; })
+        window.API.get(window.API.State.withSubject('/api/my/stats')).catch(function () { return null; })
       ]).then(function (arr) {
         if (disposed) return;
         const d = arr[0];

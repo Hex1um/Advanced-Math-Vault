@@ -83,11 +83,15 @@ for (const p of problems) {
   if (!p.code || !p.title || !p.statement) fail(p.code || '(无编号) 缺少 code/title/statement');
   if (seenCodes.has(p.code)) fail('重复题号 ' + p.code);
   seenCodes.add(p.code);
-  if (!tax.MAIN_TAGS.includes(p.mainTag)) fail(p.code + ' 主标签非法: ' + p.mainTag);
+  /* 按学科取标签体系：物理题走 PHYSICS 表，数学题走 MATH 表。
+     混用会得到「力学不是合法主标签」这种假错误（v2.7.0 之前的体检逻辑）。 */
+  const subject = tax.subjectOf(p.subject);
+  const spec = tax.SUBJECTS[subject];
+  if (!spec.mainTags.includes(p.mainTag)) fail(p.code + ' 主标签非法: ' + p.mainTag + '（学科 ' + subject + '）');
   if (!Array.isArray(p.tags) || !p.tags.length) fail(p.code + ' 没有子标签');
   if (Array.isArray(p.tags) && p.tags.length > 3) warn(p.code + ' 子标签超过 3 个');
   for (const t of p.tags || []) {
-    if (!tax.SUB_TAGS[p.mainTag] || !tax.SUB_TAGS[p.mainTag].includes(t)) warn(p.code + ' 子标签不在主标签下: ' + t);
+    if (!spec.subTags[p.mainTag] || !spec.subTags[p.mainTag].includes(t)) warn(p.code + ' 子标签不在主标签下: ' + t);
   }
   if (!['approved', 'pending', 'rejected'].includes(p.status)) fail(p.code + ' 状态非法: ' + p.status);
   for (const k of ['thinking', 'difficulty', 'calc']) {

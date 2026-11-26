@@ -531,6 +531,8 @@
       btn.textContent = '提交中…';
       try {
         const res = await window.API.post('/api/submit', {
+          /* 投稿跟随当前学科：物理模式下按物理标签体系归一化，编号前缀为 PH */
+          subject: window.API.State.subject,
           title: title,
           statement: statement,
           source: form.source.value.trim(),

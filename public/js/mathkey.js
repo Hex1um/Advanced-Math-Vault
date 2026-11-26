@@ -78,6 +78,42 @@
     }
   ];
 
+  /* 物理专用分组：只在 subject=physics 时追加到键盘末尾。
+     矢量箭头、偏导、梯度、单位容器与常用常数是物理解题最高频的输入，
+     数学键盘里的「线代」「微积分」分组不够用（没有 \vec、\hat、\mathrm{}）。 */
+  const PHYS_TABS = [
+    {
+      name: '矢量',
+      cols: 8,
+      keys: [
+        B('a⃗', '\\vec{a}'), B('F⃗', '\\vec{F}'), B('v⃗', '\\vec{v}'), B('单位矢', '\\hat{$0}'),
+        B('·', '\\cdot', '点乘'), B('×', '\\times', '叉乘'), B('|a|', '\\left|$0\\right|'),
+        B('分量', '($0_x,\\ $0_y,\\ $0_z)'),
+        B('∂', '\\frac{\\partial $0}{\\partial }', '偏导'), B('∇', '\\nabla'), B('∇·', '\\nabla\\cdot', '散度'),
+        B('∇×', '\\nabla\\times', '旋度'), B('Δ', '\\Delta'), B('∮', '\\oint', '环路积分'),
+        B('∫', '\\int'), B('∬', '\\iint'), B('d', '\\mathrm{d}'),
+        B('→', '\\to'), B('⇒', '\\Rightarrow'), B('∝', '\\propto'), B('≈', '\\approx'), B('≡', '\\equiv'),
+        B('∥', '\\parallel'), B('⊥', '\\perp'), B('θ', '\\theta'), B('φ', '\\varphi'), B('ω', '\\omega')
+      ]
+    },
+    {
+      name: '物理量',
+      cols: 8,
+      keys: [
+        B('单位', '\\ \\mathrm{$0}'), B('m/s', '\\ \\mathrm{m/s}'), B('m/s²', '\\ \\mathrm{m/s^2}'),
+        B('N', '\\ \\mathrm{N}'), B('J', '\\ \\mathrm{J}'), B('W', '\\ \\mathrm{W}'), B('Pa', '\\ \\mathrm{Pa}'), B('V', '\\ \\mathrm{V}'),
+        B('A', '\\ \\mathrm{A}'), B('C', '\\ \\mathrm{C}'), B('Ω', '\\ \\Omega'), B('F', '\\ \\mathrm{F}'),
+        B('H', '\\ \\mathrm{H}'), B('T', '\\ \\mathrm{T}'), B('eV', '\\ \\mathrm{eV}'), B('K', '\\ \\mathrm{K}'),
+        B('g', 'g'), B('G', 'G'), B('c', 'c'), B('e', 'e'), B('h', 'h'), B('k_B', 'k_B'), B('N_A', 'N_A'),
+        B('ε₀', '\\varepsilon_0'), B('μ₀', '\\mu_0'), B('ℏ', '\\hbar'), B('λ', '\\lambda'), B('ρ', '\\rho'), B('μ', '\\mu')
+      ]
+    }
+  ];
+
+  function tabsFor(subject) {
+    return String(subject || '') === 'physics' ? TABS.concat(PHYS_TABS) : TABS;
+  }
+
   /* --------------------------------------------------------- 公式环境状态机
      旧实现只数「非转义 $ 的奇偶」，遇到 $$...$$（两个 $ 奇偶不变）、\[...\]、
      \(...\)、代码块都会判错，插入符号时就多包或少包一对 $。
@@ -183,6 +219,7 @@
   }
 
   function build(ta, opts) {
+    const TABS = tabsFor(opts && opts.subject);
     const wrap = document.createElement('div');
     wrap.className = 'mk';
 
@@ -310,12 +347,13 @@
       return inst;
     },
     // 给对话框里的多个输入框一次性挂上
-    attachAll: function (root) {
+    attachAll: function (root, opts) {
       if (!root) return;
+      const o = opts || {};
       Array.prototype.forEach.call(root.querySelectorAll('textarea'), function (ta) {
         if (ta.readOnly || ta.disabled) return;
         if (ta.getAttribute('data-nomk') === '1') return;
-        MathKeyAPI.attach(ta);
+        MathKeyAPI.attach(ta, o);
       });
     },
     insert: function (ta, tpl) {

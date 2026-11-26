@@ -1,0 +1,1073 @@
+[
+  {
+    "title": "斜抛物体的水平射程",
+    "statement": "以初速率 $v_0=20\\ \\mathrm{m/s}$、抛射角 $\\theta=30^\\circ$ 斜向上抛出一小球，忽略空气阻力，取 $g=9.8\\ \\mathrm{m/s^2}$，求小球落回同一水平面时的水平射程 $R$。",
+    "mainTag": "力学",
+    "tags": [
+      "质点运动学"
+    ],
+    "kind": "计算题",
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 3,
+    "source": "大学物理力学精选",
+    "hints": [
+      "分解成水平匀速与竖直匀变速两个独立过程。",
+      "射程 $R=\\dfrac{v_0^2\\sin 2\\theta}{g}$，先判断落点是否与抛出点等高。"
+    ],
+    "answer": "35.3\\ \\mathrm{m}",
+    "solution": "水平方向匀速：$x=v_0\\cos\\theta\\, t$；竖直方向匀变速，落回等高点时飞行时间 $t=\\dfrac{2v_0\\sin\\theta}{g}$。\n\n两式相乘得 $R=\\dfrac{2v_0^2\\sin\\theta\\cos\\theta}{g}=\\dfrac{v_0^2\\sin2\\theta}{g}=\\dfrac{400\\times\\sin60^\\circ}{9.8}\\approx35.3\\ \\mathrm{m}$。\n\n验算：量纲 $[v^2/g]=\\mathrm{(m/s)^2/(m/s^2)}=\\mathrm{m}$，与射程一致；$\\theta=45^\\circ$ 时取最大值 $40.8\\ \\mathrm{m}$，本题 $30^\\circ$ 的结果更小，合理。",
+    "physicsMeta": {
+      "answerType": "numeric_unit",
+      "unit": "m",
+      "dimension": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 3,
+      "constants": [
+        "g=9.8 m/s^2"
+      ],
+      "methods": [
+        "运动的分解"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "雨滴相对行人的速度",
+    "statement": "雨滴竖直下落，相对地面的速率为 $10\\ \\mathrm{m/s}$；一行人沿水平方向以 $5\\ \\mathrm{m/s}$ 行走。求雨滴相对行人的速度大小。",
+    "mainTag": "力学",
+    "tags": [
+      "质点运动学"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "大学物理力学精选",
+    "hints": [
+      "相对速度 $\\vec v_{\\text{雨对人}}=\\vec v_{\\text{雨对地}}-\\vec v_{\\text{人对地}}$。",
+      "两个分速度互相垂直，用勾股定理。"
+    ],
+    "answer": "11.2\\ \\mathrm{m/s}",
+    "solution": "取地面为静止参考系，雨速 $\\vec v_1=(0,-10)$，人速 $\\vec v_2=(5,0)$。\n\n雨相对人的速度 $\\vec v_{12}=\\vec v_1-\\vec v_2=(-5,-10)$，大小 $|\\vec v_{12}|=\\sqrt{5^2+10^2}=11.18\\approx11.2\\ \\mathrm{m/s}$，方向偏离竖直方向 $\\arctan(5/10)\\approx26.6^\\circ$ 向后。\n\n验算：量纲为 $\\mathrm{m/s}$（速度）；若人静止，结果退化为 $10\\ \\mathrm{m/s}$，与题意一致。",
+    "physicsMeta": {
+      "answerType": "numeric_unit",
+      "unit": "m/s",
+      "dimension": [
+        0,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 3,
+      "constants": [],
+      "methods": [
+        "参考系变换"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "汽车转弯的最大安全速率",
+    "statement": "一辆汽车在水平路面上沿半径 $R=50\\ \\mathrm{m}$ 的圆弧转弯，轮胎与路面间的静摩擦因数 $\\mu=0.60$，取 $g=9.8\\ \\mathrm{m/s^2}$。求汽车不打滑的最大速率。",
+    "mainTag": "力学",
+    "tags": [
+      "牛顿定律与非惯性系"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "大学物理力学精选",
+    "hints": [
+      "向心力由静摩擦力提供，最大时取 $f_{\\max}=\\mu N$。",
+      "竖直方向无加速度，$N=mg$。"
+    ],
+    "answer": "17.1\\ \\mathrm{m/s}",
+    "solution": "竖直方向 $N=mg$；水平方向由静摩擦力提供向心力：$\\mu mg=\\dfrac{mv^2}{R}$。\n\n解得 $v_{\\max}=\\sqrt{\\mu gR}=\\sqrt{0.60\\times9.8\\times50}=17.15\\approx17.1\\ \\mathrm{m/s}$。\n\n验算：量纲 $\\sqrt{\\mathrm{m/s^2\\cdot m}}=\\mathrm{m/s}$；若 $\\mu\\to0$（冰面），$v_{\\max}\\to0$，符合直觉。",
+    "physicsMeta": {
+      "answerType": "numeric_unit",
+      "unit": "m/s",
+      "dimension": [
+        0,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 3,
+      "constants": [
+        "g=9.8 m/s^2",
+        "mu=0.60"
+      ],
+      "methods": [
+        "受力分析"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "完全非弹性碰撞的共同速度",
+    "statement": "质量 $m_1=2.0\\ \\mathrm{kg}$ 的小球以 $v_1=3.0\\ \\mathrm{m/s}$ 撞上静止的质量 $m_2=1.0\\ \\mathrm{kg}$ 小球，碰后两球粘在一起运动。求碰后的共同速率。",
+    "mainTag": "力学",
+    "tags": [
+      "动量与碰撞"
+    ],
+    "kind": "计算题",
+    "thinking": 2,
+    "difficulty": 2,
+    "calc": 2,
+    "source": "大学物理力学精选",
+    "hints": [
+      "碰撞时间极短，外力冲量可忽略，动量守恒。",
+      "完全非弹性碰撞：碰后速度相同。"
+    ],
+    "answer": "2.0\\ \\mathrm{m/s}",
+    "solution": "水平方向动量守恒：$m_1v_1=(m_1+m_2)v$。\n\n$v=\\dfrac{m_1v_1}{m_1+m_2}=\\dfrac{2.0\\times3.0}{3.0}=2.0\\ \\mathrm{m/s}$，方向与 $v_1$ 相同。\n\n验算：碰前动能 $9.0\\ \\mathrm{J}$，碰后 $6.0\\ \\mathrm{J}$，损失 $3.0\\ \\mathrm{J}$ 转为内能——完全非弹性碰撞必然损失动能，方向与动量均正确。",
+    "physicsMeta": {
+      "answerType": "numeric_unit",
+      "unit": "m/s",
+      "dimension": [
+        0,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [],
+      "methods": [
+        "守恒律"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "斜面下滑末速度（含摩擦）",
+    "statement": "质量为 $m$ 的物块从倾角 $\\theta$、高 $h$ 的斜面顶端由静止下滑，物块与斜面间的动摩擦因数为 $\\mu$。求物块到达斜面底端时的速率 $v$（用 $m,h,\\theta,\\mu,g$ 表示，$\\mu<\\tan\\theta$）。",
+    "mainTag": "力学",
+    "tags": [
+      "功与机械能"
+    ],
+    "kind": "推导题",
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 3,
+    "source": "大学物理力学精选",
+    "hints": [
+      "斜面长 $s=h/\\sin\\theta$，摩擦力 $f=\\mu mg\\cos\\theta$。",
+      "用动能定理：合外力做功等于动能增量。"
+    ],
+    "answer": "\\sqrt{2gh\\left(1-\\mu\\cot\\theta\\right)}",
+    "solution": "斜面长 $s=\\dfrac{h}{\\sin\\theta}$，摩擦力 $f=\\mu mg\\cos\\theta$，其做功 $W_f=-fs=-\\mu mg h\\cot\\theta$；重力做功 $W_G=mgh$。\n\n由动能定理 $W_G+W_f=\\dfrac12mv^2$，得 $v=\\sqrt{2gh\\left(1-\\mu\\cot\\theta\\right)}$。\n\n验算：令 $\\mu=0$ 退化为光滑斜面 $v=\\sqrt{2gh}$，正确；量纲 $[gh]=\\mathrm{m^2/s^2}$，开方为 $\\mathrm{m/s}$，量纲一致。",
+    "physicsMeta": {
+      "answerType": "symbolic",
+      "unit": "m/s",
+      "dimension": [
+        0,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "constants": [],
+      "methods": [
+        "动能定理"
+      ],
+      "diagrams": [
+        {
+          "id": "fbd",
+          "src": "assets/diagrams/physics/PH-incline-fbd.svg",
+          "alt": "斜面上物块受重力、支持力与摩擦力",
+          "placement": "statement"
+        }
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "细杆绕端点下摆的角速度",
+    "statement": "一根质量为 $m$、长为 $L$ 的均质细杆，一端固定在光滑水平转轴 $O$ 上，初始时杆静止于水平位置，释放后绕 $O$ 在竖直平面内转动。求杆转到竖直位置时的角速度 $\\omega$。",
+    "mainTag": "力学",
+    "tags": [
+      "刚体定轴转动"
+    ],
+    "kind": "推导题",
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 3,
+    "source": "大学物理力学精选",
+    "hints": [
+      "绕端点的转动惯量 $J=\\dfrac13mL^2$。",
+      "只有重力做功，机械能守恒；重心下降 $L/2$。"
+    ],
+    "answer": "\\sqrt{\\dfrac{3g}{L}}",
+    "solution": "取杆为研究对象，轴 $O$ 光滑，只有重力做功，机械能守恒。重心下降 $L/2$，重力势能减少 $mg\\dfrac{L}{2}$，全部转为转动动能 $\\dfrac12J\\omega^2$，其中 $J=\\dfrac13mL^2$。\n\n$mg\\dfrac{L}{2}=\\dfrac12\\cdot\\dfrac13mL^2\\omega^2\\ \\Rightarrow\\ \\omega=\\sqrt{\\dfrac{3g}{L}}$。\n\n验算：量纲 $[g/L]=\\mathrm{s^{-2}}$，开方为 $\\mathrm{rad/s}$；杆越长 $\\omega$ 越小，与「长杆下摆更慢」一致。",
+    "physicsMeta": {
+      "answerType": "symbolic",
+      "unit": "rad/s",
+      "dimension": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "constants": [],
+      "methods": [
+        "守恒律",
+        "转动惯量"
+      ],
+      "diagrams": [
+        {
+          "id": "rod",
+          "src": "assets/diagrams/physics/PH-rod-pivot.svg",
+          "alt": "细杆绕端点 O 由水平位置下摆",
+          "placement": "statement"
+        }
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "转盘上落物后的角速度",
+    "statement": "一水平转盘绕竖直轴转动，转动惯量 $J_1=2.0\\ \\mathrm{kg\\cdot m^2}$，角速度 $\\omega_1=10\\ \\mathrm{rad/s}$。将一转动惯量 $J_2=3.0\\ \\mathrm{kg\\cdot m^2}$ 的静止圆环轻放到转盘上并与之一起转动，轴处无摩擦。求共同角速度 $\\omega_2$。",
+    "mainTag": "力学",
+    "tags": [
+      "角动量守恒",
+      "刚体定轴转动"
+    ],
+    "kind": "计算题",
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 2,
+    "source": "大学物理力学精选",
+    "hints": [
+      "轴无摩擦、无外力矩，系统对转轴的角动量守恒。",
+      "注意转动惯量是相加的。"
+    ],
+    "answer": "4.0\\ \\mathrm{rad/s}",
+    "solution": "对竖直转轴无外力矩，角动量守恒：$J_1\\omega_1=(J_1+J_2)\\omega_2$。\n\n$\\omega_2=\\dfrac{2.0\\times10}{2.0+3.0}=4.0\\ \\mathrm{rad/s}$。\n\n验算：转动动能由 $100\\ \\mathrm{J}$ 降为 $40\\ \\mathrm{J}$，减少的部分转为摩擦热——角动量守恒而动能不守恒，符合落物过程的物理图像。",
+    "physicsMeta": {
+      "answerType": "numeric_unit",
+      "unit": "rad/s",
+      "dimension": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [],
+      "methods": [
+        "守恒律"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "弹簧振子的周期",
+    "statement": "一水平弹簧振子，弹簧劲度系数 $k=100\\ \\mathrm{N/m}$，振子质量 $m=0.25\\ \\mathrm{kg}$，在光滑水平面上做简谐振动。求振动周期 $T$。",
+    "mainTag": "振动与波",
+    "tags": [
+      "简谐振动"
+    ],
+    "kind": "计算题",
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 2,
+    "source": "大学物理振动与波精选",
+    "hints": [
+      "角频率 $\\omega=\\sqrt{k/m}$，周期 $T=2\\pi/\\omega$。",
+      "周期与振幅无关。"
+    ],
+    "answer": "0.31\\ \\mathrm{s}",
+    "solution": "$\\omega=\\sqrt{k/m}=\\sqrt{100/0.25}=20\\ \\mathrm{rad/s}$，故 $T=\\dfrac{2\\pi}{\\omega}=\\dfrac{2\\pi}{20}=0.314\\approx0.31\\ \\mathrm{s}$。\n\n验算：量纲 $[\\sqrt{k/m}]=\\sqrt{\\mathrm{(kg/s^2)/kg}}=\\mathrm{s^{-1}}$，取倒数得时间，量纲一致；振幅未出现在结果里，符合简谐振动等时性。",
+    "physicsMeta": {
+      "answerType": "numeric_unit",
+      "unit": "s",
+      "dimension": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.03,
+      "sigFigs": 2,
+      "constants": [],
+      "methods": [
+        "简谐振动模型"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "简谐波的波长与波速",
+    "statement": "一平面简谐波的波函数为 $y=0.02\\cos(4\\pi t-2\\pi x)$（SI 单位）。求该波的波长 $\\lambda$ 与波速 $v$。",
+    "mainTag": "振动与波",
+    "tags": [
+      "平面简谐波"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "大学物理振动与波精选",
+    "hints": [
+      "与标准形式 $y=A\\cos(\\omega t-kx)$ 对照，读出 $\\omega$ 与 $k$。",
+      "$\\lambda=2\\pi/k$，$v=\\omega/k$。"
+    ],
+    "answer": "v=2.0\\ \\mathrm{m/s}",
+    "solution": "对照 $y=A\\cos(\\omega t-kx)$：$\\omega=4\\pi\\ \\mathrm{rad/s}$，$k=2\\pi\\ \\mathrm{m^{-1}}$。\n\n故 $\\lambda=\\dfrac{2\\pi}{k}=1.0\\ \\mathrm{m}$，$v=\\dfrac{\\omega}{k}=\\dfrac{4\\pi}{2\\pi}=2.0\\ \\mathrm{m/s}$，沿 $+x$ 方向传播（$\\omega t-kx$ 形式）。\n\n验算：量纲 $[\\omega/k]=\\mathrm{s^{-1}/m^{-1}}=\\mathrm{m/s}$；一个周期内波形前进 $\\lambda=1.0\\ \\mathrm{m}$，与 $vT=2.0\\times0.5$ 一致。",
+    "physicsMeta": {
+      "answerType": "numeric_unit",
+      "unit": "m/s",
+      "dimension": [
+        0,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [],
+      "methods": [
+        "波动方程对照"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "弦上驻波的波速",
+    "statement": "一根长 $L=0.60\\ \\mathrm{m}$ 的弦两端固定，以基频 $f_1=200\\ \\mathrm{Hz}$ 振动。求弦上横波波速 $v$。",
+    "mainTag": "振动与波",
+    "tags": [
+      "波的干涉与驻波"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "大学物理振动与波精选",
+    "hints": [
+      "两端固定的弦，基频对应半波长等于弦长：$\\lambda_1=2L$。",
+      "$v=f\\lambda$。"
+    ],
+    "answer": "240\\ \\mathrm{m/s}",
+    "solution": "基频时弦上恰为一个波腹，即 $L=\\lambda_1/2$，故 $\\lambda_1=2L=1.20\\ \\mathrm{m}$。\n\n$v=f_1\\lambda_1=200\\times1.20=240\\ \\mathrm{m/s}$。\n\n验算：第二谐频应为 $400\\ \\mathrm{Hz}$（整数倍），与 $f_n=nf_1$ 一致；量纲 $\\mathrm{Hz\\cdot m}=\\mathrm{m/s}$。",
+    "physicsMeta": {
+      "answerType": "numeric_unit",
+      "unit": "m/s",
+      "dimension": [
+        0,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 3,
+      "constants": [],
+      "methods": [
+        "驻波条件"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "理想气体的压强",
+    "statement": "容积 $V=0.050\\ \\mathrm{m^3}$ 的容器内装有 $\\nu=2.0\\ \\mathrm{mol}$ 的理想气体，温度 $T=300\\ \\mathrm{K}$。取 $R=8.31\\ \\mathrm{J/(mol\\cdot K)}$，求气体压强 $p$。",
+    "mainTag": "热学",
+    "tags": [
+      "理想气体状态方程"
+    ],
+    "kind": "计算题",
+    "thinking": 2,
+    "difficulty": 2,
+    "calc": 2,
+    "source": "大学物理热学精选",
+    "hints": [
+      "$pV=\\nu RT$。",
+      "温度必须用热力学温度。"
+    ],
+    "answer": "9.97\\times10^{4}\\ \\mathrm{Pa}",
+    "solution": "$p=\\dfrac{\\nu RT}{V}=\\dfrac{2.0\\times8.31\\times300}{0.050}=9.97\\times10^{4}\\ \\mathrm{Pa}$（约 $0.98\\ \\mathrm{atm}$）。\n\n验算：量纲 $\\mathrm{mol\\cdot J\\cdot mol^{-1}K^{-1}\\cdot K/m^3}=\\mathrm{J/m^3}=\\mathrm{N/m^2}=\\mathrm{Pa}$，量纲一致；数量级接近大气压，符合常温常压气体。",
+    "physicsMeta": {
+      "answerType": "numeric_unit",
+      "unit": "Pa",
+      "dimension": [
+        1,
+        -1,
+        -2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 3,
+      "constants": [
+        "R=8.31 J/(mol*K)"
+      ],
+      "methods": [
+        "状态方程"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "等压过程中吸收的热量",
+    "statement": "$\\nu=1.0\\ \\mathrm{mol}$ 的单原子理想气体在等压过程中温度升高 $\\Delta T=100\\ \\mathrm{K}$。取 $R=8.31\\ \\mathrm{J/(mol\\cdot K)}$，求气体吸收的热量 $Q$。",
+    "mainTag": "热学",
+    "tags": [
+      "热力学第一定律"
+    ],
+    "kind": "计算题",
+    "thinking": 3,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "大学物理热学精选",
+    "hints": [
+      "单原子气体 $C_{p,m}=\\dfrac52R$。",
+      "等压吸热 $Q=\\nu C_{p,m}\\Delta T$。"
+    ],
+    "answer": "2.08\\times10^{3}\\ \\mathrm{J}",
+    "solution": "单原子分子自由度 $i=3$，$C_{p,m}=\\dfrac{i+2}{2}R=\\dfrac52R$。\n\n$Q=\\nu C_{p,m}\\Delta T=1.0\\times\\dfrac52\\times8.31\\times100=2.08\\times10^{3}\\ \\mathrm{J}$。\n\n验算：其中内能增加 $\\nu\\dfrac32R\\Delta T=1.25\\times10^{3}\\ \\mathrm{J}$，对外做功 $\\nu R\\Delta T=0.83\\times10^{3}\\ \\mathrm{J}$，两者之和恰为 $Q$，符合热力学第一定律。",
+    "physicsMeta": {
+      "answerType": "numeric_unit",
+      "unit": "J",
+      "dimension": [
+        1,
+        2,
+        -2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 3,
+      "constants": [
+        "R=8.31 J/(mol*K)"
+      ],
+      "methods": [
+        "热力学第一定律"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "卡诺热机的效率",
+    "statement": "一卡诺热机工作在高温热源 $T_1=500\\ \\mathrm{K}$ 与低温热源 $T_2=300\\ \\mathrm{K}$ 之间。求该热机的效率 $\\eta$。",
+    "mainTag": "热学",
+    "tags": [
+      "循环过程与卡诺循环"
+    ],
+    "kind": "计算题",
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 2,
+    "source": "大学物理热学精选",
+    "hints": [
+      "卡诺效率 $\\eta=1-T_2/T_1$。",
+      "温度用开尔文。"
+    ],
+    "answer": "40\\%",
+    "solution": "$\\eta=1-\\dfrac{T_2}{T_1}=1-\\dfrac{300}{500}=0.40=40\\%$。\n\n验算：$\\eta<1$ 且随 $T_1$ 升高、$T_2$ 降低而增大；若 $T_1=T_2$ 则 $\\eta=0$，符合热力学第二定律（单一热源不可能连续输出功）。",
+    "physicsMeta": {
+      "answerType": "numeric_unit",
+      "unit": "%",
+      "dimension": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [],
+      "methods": [
+        "卡诺定理"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "均匀带电球体外部的电场",
+    "statement": "半径 $R$、总电荷 $Q$ 的均匀带电球体（电荷体分布均匀）。求球外距球心 $r\\ (r>R)$ 处的电场强度大小 $E$。",
+    "mainTag": "电磁学",
+    "tags": [
+      "静电场与高斯定理"
+    ],
+    "kind": "推导题",
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 3,
+    "source": "大学物理电磁学精选",
+    "hints": [
+      "取与球同心、半径 $r$ 的高斯球面。",
+      "球外高斯面内包围的电荷就是总电荷 $Q$。"
+    ],
+    "answer": "\\dfrac{Q}{4\\pi\\varepsilon_0 r^2}",
+    "solution": "由球对称性，$E$ 沿径向且在高斯面上大小处处相等。取半径 $r>R$ 的同心球面，$\\oint\\vec E\\cdot d\\vec S=E\\cdot4\\pi r^2=\\dfrac{Q}{\\varepsilon_0}$。\n\n故 $E=\\dfrac{Q}{4\\pi\\varepsilon_0 r^2}$，方向沿径向（$Q>0$ 时向外）。\n\n验算：与点电荷场公式同形（球外等效于电荷集中于球心）；量纲 $\\mathrm{C/(F/m\\cdot m^2)}=\\mathrm{V/m}=\\mathrm{N/C}$，一致；$r\\to\\infty$ 时 $E\\to0$。",
+    "physicsMeta": {
+      "answerType": "symbolic",
+      "unit": "V/m",
+      "dimension": [
+        1,
+        1,
+        -3,
+        -1,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "constants": [
+        "epsilon_0=8.85e-12 F/m"
+      ],
+      "methods": [
+        "高斯定理",
+        "对称性"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "点电荷的电势",
+    "statement": "真空中有一点电荷 $Q=1.0\\times10^{-9}\\ \\mathrm{C}$，取无穷远处电势为零，$k=8.99\\times10^{9}\\ \\mathrm{N\\cdot m^2/C^2}$。求距电荷 $r=0.30\\ \\mathrm{m}$ 处的电势 $V$。",
+    "mainTag": "电磁学",
+    "tags": [
+      "电势与电容"
+    ],
+    "kind": "计算题",
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 2,
+    "source": "大学物理电磁学精选",
+    "hints": [
+      "点电荷电势 $V=kQ/r$（无穷远为零势点）。",
+      "注意 $Q$ 的正负决定电势符号。"
+    ],
+    "answer": "30.0\\ \\mathrm{V}",
+    "solution": "$V=\\dfrac{kQ}{r}=\\dfrac{8.99\\times10^{9}\\times1.0\\times10^{-9}}{0.30}=29.97\\approx30.0\\ \\mathrm{V}$。\n\n验算：量纲 $\\mathrm{N\\cdot m^2/C^2\\cdot C/m}=\\mathrm{N\\cdot m/C}=\\mathrm{J/C}=\\mathrm{V}$，一致；$r$ 增大电势减小，符合正电荷电势单调下降。",
+    "physicsMeta": {
+      "answerType": "numeric_unit",
+      "unit": "V",
+      "dimension": [
+        1,
+        2,
+        -3,
+        -1,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 3,
+      "constants": [
+        "k=8.99e9 N*m^2/C^2"
+      ],
+      "methods": [
+        "叠加原理"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "平行板电容器的电容",
+    "statement": "一平行板电容器，极板正对面积 $S=0.010\\ \\mathrm{m^2}$，板间距 $d=1.0\\ \\mathrm{mm}$，板间为真空，$\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$。忽略边缘效应，求电容 $C$。",
+    "mainTag": "电磁学",
+    "tags": [
+      "静电场中的导体与电介质"
+    ],
+    "kind": "计算题",
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 2,
+    "source": "大学物理电磁学精选",
+    "hints": [
+      "平行板电容 $C=\\dfrac{\\varepsilon_0 S}{d}$。",
+      "面积用 $\\mathrm{m^2}$、间距用 $\\mathrm{m}$。"
+    ],
+    "answer": "8.85\\times10^{-11}\\ \\mathrm{F}",
+    "solution": "$C=\\dfrac{\\varepsilon_0S}{d}=\\dfrac{8.85\\times10^{-12}\\times0.010}{1.0\\times10^{-3}}=8.85\\times10^{-11}\\ \\mathrm{F}\\approx88.5\\ \\mathrm{pF}$。\n\n验算：量纲 $\\mathrm{(F/m)\\cdot m^2/m}=\\mathrm{F}$；数量级与常见小电容（几十 pF）一致。",
+    "physicsMeta": {
+      "answerType": "numeric_unit",
+      "unit": "F",
+      "dimension": [
+        -1,
+        -2,
+        4,
+        2,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 3,
+      "constants": [
+        "epsilon_0=8.85e-12 F/m"
+      ],
+      "methods": [
+        "场强与电势差"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "长直导线外的磁感应强度",
+    "statement": "真空中一无限长直导线通有恒定电流 $I$。求距导线垂直距离 $r$ 处的磁感应强度大小 $B$。",
+    "mainTag": "电磁学",
+    "tags": [
+      "恒定磁场与安培环路定理"
+    ],
+    "kind": "推导题",
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 3,
+    "source": "大学物理电磁学精选",
+    "hints": [
+      "取以导线为轴、半径 $r$ 的圆形安培环路。",
+      "由对称性 $B$ 沿环切线方向、大小处处相等。"
+    ],
+    "answer": "\\dfrac{\\mu_0 I}{2\\pi r}",
+    "solution": "由轴对称性，磁感线是以导线为轴的圆，$B$ 沿切向且在同一圆周上大小相等。取半径 $r$ 的圆形安培环路：$\\oint\\vec B\\cdot d\\vec l=B\\cdot2\\pi r=\\mu_0I$。\n\n故 $B=\\dfrac{\\mu_0I}{2\\pi r}$，方向由右手螺旋定则确定。\n\n验算：量纲 $\\mathrm{(H/m)\\cdot A/m}=\\mathrm{T}$，一致；$r\\to\\infty$ 时 $B\\to0$，与「磁场随距离衰减」一致。",
+    "physicsMeta": {
+      "answerType": "symbolic",
+      "unit": "T",
+      "dimension": [
+        1,
+        0,
+        -2,
+        -1,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "constants": [
+        "mu_0=4*pi*1e-7 H/m"
+      ],
+      "methods": [
+        "安培环路定理",
+        "对称性"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "线圈中磁通变化产生的感应电动势",
+    "statement": "一匝数 $N=100$、面积 $S=0.010\\ \\mathrm{m^2}$ 的线圈置于均匀磁场中，磁场方向与线圈平面垂直。若磁感应强度在 $\\Delta t=0.10\\ \\mathrm{s}$ 内由 $0.10\\ \\mathrm{T}$ 均匀减小到零，求感应电动势的大小。",
+    "mainTag": "电磁学",
+    "tags": [
+      "电磁感应与自感互感"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "大学物理电磁学精选",
+    "hints": [
+      "法拉第电磁感应定律 $\\varepsilon=N\\left|\\dfrac{\\Delta\\Phi}{\\Delta t}\\right|$。",
+      "$\\Phi=BS\\cos\\theta$，此处 $\\theta=0$。"
+    ],
+    "answer": "1.0\\ \\mathrm{V}",
+    "solution": "每匝磁通变化量 $|\\Delta\\Phi|=S\\Delta B=0.010\\times0.10=1.0\\times10^{-3}\\ \\mathrm{Wb}$。\n\n$\\varepsilon=N\\dfrac{|\\Delta\\Phi|}{\\Delta t}=100\\times\\dfrac{1.0\\times10^{-3}}{0.10}=1.0\\ \\mathrm{V}$。\n\n验算：量纲 $\\mathrm{Wb/s}=\\mathrm{V}$，一致；由楞次定律，感应电流的磁场要阻碍原磁通减小，方向与原磁场相同。",
+    "physicsMeta": {
+      "answerType": "numeric_unit",
+      "unit": "V",
+      "dimension": [
+        1,
+        2,
+        -3,
+        -1,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [],
+      "methods": [
+        "法拉第定律"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "双缝干涉的条纹间距",
+    "statement": "杨氏双缝干涉实验中，双缝间距 $d=0.20\\ \\mathrm{mm}$，缝到屏的距离 $D=1.0\\ \\mathrm{m}$，入射光波长 $\\lambda=600\\ \\mathrm{nm}$。求相邻明条纹的间距 $\\Delta y$。",
+    "mainTag": "光学",
+    "tags": [
+      "光的干涉"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "大学物理光学精选",
+    "hints": [
+      "近轴条件下 $\\Delta y=\\dfrac{\\lambda D}{d}$。",
+      "波长先换成米：$600\\ \\mathrm{nm}=6.0\\times10^{-7}\\ \\mathrm{m}$。"
+    ],
+    "answer": "3.0\\times10^{-3}\\ \\mathrm{m}",
+    "solution": "$\\Delta y=\\dfrac{\\lambda D}{d}=\\dfrac{6.0\\times10^{-7}\\times1.0}{2.0\\times10^{-4}}=3.0\\times10^{-3}\\ \\mathrm{m}=3.0\\ \\mathrm{mm}$。\n\n验算：量纲 $\\mathrm{m\\cdot m/m}=\\mathrm{m}$；条纹间距为毫米量级，与实验室观察一致。",
+    "physicsMeta": {
+      "answerType": "numeric_unit",
+      "unit": "m",
+      "dimension": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [],
+      "methods": [
+        "光程差"
+      ],
+      "diagrams": [
+        {
+          "id": "ds",
+          "src": "assets/diagrams/physics/PH-double-slit.svg",
+          "alt": "杨氏双缝干涉装置与条纹间距",
+          "placement": "statement"
+        }
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "单缝衍射第一暗纹的位置",
+    "statement": "波长 $\\lambda=500\\ \\mathrm{nm}$ 的平行光垂直入射到宽 $a=0.10\\ \\mathrm{mm}$ 的单缝上，缝后放一焦距 $f=1.0\\ \\mathrm{m}$ 的透镜，屏在焦平面处。求第一暗纹到中央明纹中心的距离 $x_1$。",
+    "mainTag": "光学",
+    "tags": [
+      "光的衍射"
+    ],
+    "kind": "计算题",
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 2,
+    "source": "大学物理光学精选",
+    "hints": [
+      "单缝暗纹条件 $a\\sin\\theta=k\\lambda$，第一暗纹 $k=1$。",
+      "小角度下 $\\sin\\theta\\approx\\tan\\theta=x/f$。"
+    ],
+    "answer": "5.0\\times10^{-3}\\ \\mathrm{m}",
+    "solution": "第一暗纹满足 $a\\sin\\theta=\\lambda$，故 $\\sin\\theta=\\dfrac{5.0\\times10^{-7}}{1.0\\times10^{-4}}=5.0\\times10^{-3}$。\n\n小角度下 $x_1\\approx f\\sin\\theta=1.0\\times5.0\\times10^{-3}=5.0\\times10^{-3}\\ \\mathrm{m}=5.0\\ \\mathrm{mm}$。\n\n验算：中央明纹宽度为 $2x_1=10\\ \\mathrm{mm}$，与 $\\dfrac{2\\lambda f}{a}$ 一致；量纲为长度。",
+    "physicsMeta": {
+      "answerType": "numeric_unit",
+      "unit": "m",
+      "dimension": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [],
+      "methods": [
+        "半波带法"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "两偏振片后的光强",
+    "statement": "强度为 $I_0$ 的自然光垂直入射到第一块偏振片上，透射光再入射到第二块偏振片，两块偏振片的偏振化方向夹角为 $60^\\circ$。忽略吸收与反射损失，求出射光强与 $I_0$ 之比。",
+    "mainTag": "光学",
+    "tags": [
+      "光的偏振"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "大学物理光学精选",
+    "hints": [
+      "自然光过第一片偏振片后强度减半。",
+      "马吕斯定律 $I=I_1\\cos^2\\alpha$。"
+    ],
+    "answer": "12.5\\%",
+    "solution": "自然光通过第一块偏振片后 $I_1=\\dfrac{I_0}{2}$，偏振方向沿第一片的偏振化方向。\n\n再过第二片，由马吕斯定律 $I_2=I_1\\cos^2 60^\\circ=\\dfrac{I_0}{2}\\times\\dfrac14=\\dfrac{I_0}{8}$，即 $12.5\\%$。\n\n验算：$\\alpha=0$ 时 $I_2=I_1=I_0/2$（不损失），$\\alpha=90^\\circ$ 时 $I_2=0$（正交消光），两端极限均正确。",
+    "physicsMeta": {
+      "answerType": "numeric_unit",
+      "unit": "%",
+      "dimension": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 3,
+      "constants": [],
+      "methods": [
+        "马吕斯定律"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "光电子的最大初动能",
+    "statement": "用波长 $\\lambda=400\\ \\mathrm{nm}$ 的单色光照射逸出功 $W=2.0\\ \\mathrm{eV}$ 的金属表面。取 $hc=1240\\ \\mathrm{eV\\cdot nm}$，求光电子的最大初动能。",
+    "mainTag": "近代物理",
+    "tags": [
+      "黑体辐射与光电效应"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "大学物理近代物理精选",
+    "hints": [
+      "光子能量 $E=hc/\\lambda$，用 $\\mathrm{eV\\cdot nm}$ 直接算。",
+      "爱因斯坦方程 $E_k=E-W$。"
+    ],
+    "answer": "1.1\\ \\mathrm{eV}",
+    "solution": "$E=\\dfrac{hc}{\\lambda}=\\dfrac{1240}{400}=3.1\\ \\mathrm{eV}$。\n\n$E_k=E-W=3.1-2.0=1.1\\ \\mathrm{eV}$。\n\n验算：$E>W$ 才能发生光电效应（截止波长约 $620\\ \\mathrm{nm}$），本题满足；$E_k>0$，且随 $\\lambda$ 减小而增大，趋势正确。",
+    "physicsMeta": {
+      "answerType": "numeric_unit",
+      "unit": "eV",
+      "dimension": [
+        1,
+        2,
+        -2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [
+        "hc=1240 eV*nm",
+        "W=2.0 eV"
+      ],
+      "methods": [
+        "爱因斯坦光电方程"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "相对论时间膨胀",
+    "statement": "一宇宙飞船以 $v=0.60c$ 相对地面飞行。飞船上的时钟测得某过程持续 $\\Delta t_0=1.0\\ \\mu\\mathrm{s}$（固有时）。求地面观测者测得该过程的时间 $\\Delta t$。",
+    "mainTag": "近代物理",
+    "tags": [
+      "狭义相对论时空观"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "大学物理近代物理精选",
+    "hints": [
+      "$\\gamma=\\dfrac{1}{\\sqrt{1-v^2/c^2}}$。",
+      "固有时最短，$\\Delta t=\\gamma\\Delta t_0$。"
+    ],
+    "answer": "1.25\\times10^{-6}\\ \\mathrm{s}",
+    "solution": "$\\gamma=\\dfrac{1}{\\sqrt{1-0.6^2}}=\\dfrac{1}{0.8}=1.25$。\n\n$\\Delta t=\\gamma\\Delta t_0=1.25\\times1.0\\ \\mu\\mathrm{s}=1.25\\ \\mu\\mathrm{s}=1.25\\times10^{-6}\\ \\mathrm{s}$。\n\n验算：$v\\to0$ 时 $\\gamma\\to1$，回到经典同时性；$\\gamma\\ge1$ 保证运动时钟走得慢（钟慢效应），方向正确。",
+    "physicsMeta": {
+      "answerType": "numeric_unit",
+      "unit": "s",
+      "dimension": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 3,
+      "constants": [
+        "c=3.00e8 m/s"
+      ],
+      "methods": [
+        "洛伦兹变换"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "电子的德布罗意波长",
+    "statement": "电子经 $U=100\\ \\mathrm{V}$ 的电压加速（初速可忽略），求其德布罗意波长 $\\lambda$。取 $h=6.63\\times10^{-34}\\ \\mathrm{J\\cdot s}$，$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$，$e=1.60\\times10^{-19}\\ \\mathrm{C}$。",
+    "mainTag": "近代物理",
+    "tags": [
+      "德布罗意波与不确定关系"
+    ],
+    "kind": "计算题",
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 3,
+    "source": "大学物理近代物理精选",
+    "hints": [
+      "加速后动能 $E_k=eU$，动量 $p=\\sqrt{2m_eE_k}$。",
+      "$\\lambda=h/p$。"
+    ],
+    "answer": "1.23\\times10^{-10}\\ \\mathrm{m}",
+    "solution": "$E_k=eU=1.60\\times10^{-19}\\times100=1.60\\times10^{-17}\\ \\mathrm{J}$，$p=\\sqrt{2m_eE_k}=\\sqrt{2\\times9.11\\times10^{-31}\\times1.60\\times10^{-17}}=5.40\\times10^{-24}\\ \\mathrm{kg\\cdot m/s}$。\n\n$\\lambda=\\dfrac{h}{p}=\\dfrac{6.63\\times10^{-34}}{5.40\\times10^{-24}}=1.23\\times10^{-10}\\ \\mathrm{m}$（约 $0.123\\ \\mathrm{nm}$）。\n\n验算：与经验公式 $\\lambda\\approx\\dfrac{1.226}{\\sqrt{U}}\\ \\mathrm{nm}=\\dfrac{1.226}{10}=0.123\\ \\mathrm{nm}$ 一致；量纲 $\\mathrm{J\\cdot s/(kg\\cdot m/s)}=\\mathrm{m}$。",
+    "physicsMeta": {
+      "answerType": "numeric_unit",
+      "unit": "m",
+      "dimension": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 3,
+      "constants": [
+        "h=6.63e-34 J*s",
+        "m_e=9.11e-31 kg",
+        "e=1.60e-19 C"
+      ],
+      "methods": [
+        "德布罗意关系"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "B 类标准不确定度的计算",
+    "statement": "用分度值为 $0.02\\ \\mathrm{mm}$ 的游标卡尺测量一长度，只做一次测量。设仪器误差限 $\\Delta_{\\text{仪}}=0.02\\ \\mathrm{mm}$ 且服从均匀分布，忽略其他误差来源。求该次测量的 B 类标准不确定度 $u_B$。",
+    "mainTag": "物理实验与误差分析",
+    "tags": [
+      "测量误差与不确定度合成"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "普通物理实验专项",
+    "hints": [
+      "均匀分布时 $u_B=\\dfrac{\\Delta_{\\text{仪}}}{\\sqrt3}$。",
+      "结果保留 1-2 位有效数字。"
+    ],
+    "answer": "0.012\\ \\mathrm{mm}",
+    "solution": "$u_B=\\dfrac{\\Delta_{\\text{仪}}}{\\sqrt3}=\\dfrac{0.02}{1.732}=0.0115\\approx0.012\\ \\mathrm{mm}$。\n\n验算：不确定度应小于仪器误差限（$0.012<0.020$），符合「均匀分布折算后变小」的规律；不确定度通常保留 1-2 位有效数字。",
+    "physicsMeta": {
+      "answerType": "numeric_unit",
+      "unit": "mm",
+      "dimension": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.05,
+      "sigFigs": 2,
+      "constants": [
+        "Delta_instr=0.02 mm"
+      ],
+      "methods": [
+        "不确定度评定"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "单摆测重力加速度的结果表达",
+    "statement": "用单摆测得重力加速度的 6 次结果为（单位 $\\mathrm{m/s^2}$）：$9.79,\\ 9.76,\\ 9.81,\\ 9.77,\\ 9.80,\\ 9.78$。已知仪器引起的 B 类不确定度 $u_B=0.01\\ \\mathrm{m/s^2}$，取 $t_{0.95,5}=2.57$。求平均值、合成标准不确定度，并按规范写出结果表达式。",
+    "mainTag": "物理实验与误差分析",
+    "tags": [
+      "有效数字与修约",
+      "测量误差与不确定度合成"
+    ],
+    "kind": "实验题",
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 4,
+    "source": "普通物理实验专项",
+    "hints": [
+      "平均值 $\\bar g=\\dfrac1n\\sum g_i$，A 类 $u_A=\\dfrac{s}{\\sqrt n}$。",
+      "合成 $u_c=\\sqrt{u_A^2+u_B^2}$，扩展 $U=t\\,u_c$，结果与不确定度末位对齐。"
+    ],
+    "answer": "g=(9.785\\pm0.03)\\ \\mathrm{m/s^2}",
+    "solution": "平均值 $\\bar g=9.785\\ \\mathrm{m/s^2}$；样本标准差 $s\\approx0.019\\ \\mathrm{m/s^2}$，$u_A=s/\\sqrt6\\approx0.0079\\ \\mathrm{m/s^2}$。\n\n合成 $u_c=\\sqrt{0.0079^2+0.01^2}\\approx0.013\\ \\mathrm{m/s^2}$，扩展不确定度 $U=2.57\\times0.013\\approx0.033\\approx0.03\\ \\mathrm{m/s^2}$。\n\n结果写成 $g=(9.785\\pm0.03)\\ \\mathrm{m/s^2}$（不确定度取 1 位有效数字，平均值末位与之对齐）。\n\n验算：$9.78\\ \\mathrm{m/s^2}$ 与当地重力加速度量级一致；$u_c$ 介于 $u_A$ 与 $u_B$ 之间，符合合成规律。",
+    "physicsMeta": {
+      "answerType": "lab_analysis",
+      "unit": "m/s^2",
+      "dimension": [
+        0,
+        1,
+        -2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.01,
+      "sigFigs": 4,
+      "constants": [
+        "t_0.95,5=2.57",
+        "u_B=0.01 m/s^2"
+      ],
+      "methods": [
+        "不确定度评定",
+        "A 类与 B 类合成"
+      ]
+    },
+    "subject": "physics"
+  }
+]

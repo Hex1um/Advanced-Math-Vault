@@ -1,3 +1,23 @@
+## v3.0.0 — 2026-11-26
+
+多学科上线：主库从「只有数学」扩展为「数学 + 大学物理」双命名空间，并补上物理专属判题、配图、软键盘与 AI Prompt。数学 6,233 题与 6 个公开科目包**零改动、零回归**（`npm run smoke` 173 项全绿，JSON 与 SQLite 双引擎各跑一遍）。
+
+- **学科命名空间 `subject`**：题目新增顶层字段 `subject: "math" | "physics"`，缺省归一化为 `math`。`GET /api/problems`、`/api/practice`、`/api/daily`、`/api/wrongbook`、`/api/my/stats`、`/api/analytics/overview`、`/api/paper/auto` 全部支持 `?subject=`；**不传参数时行为与 v2.6.0 一致**，旧前端不需要改。物理题编号前缀 `PH`，数学仍是 `HS`。
+- **物理判题引擎 `lib/physics-equiv.js`（零依赖）**：三层判定——SI 单位换算（词头、`J/(kg·K)` 这类复合单位、`km/h`、`eV`、`atm`、`%`）→ 7 维量纲一致性 → 相对误差与有效数字。`72 km/h` 与 `20 m/s` 判对；`9.8 m/s` 对 `9.8 m/s²` 报「量纲不一致」并写出两边量纲（`L T^-1` 对 `L T^-2`），而不是笼统的「算错了」。数值 + 单位题**不消耗 LLM 额度**，符号题把预检结论注入 Prompt 后再交给模型。新增单测 62 项（`npm run check:physics-equiv`）。
+- **物理标签体系**：`tag-taxonomy.js` 改为按学科索引，物理 7 个章节主标签 + 1 个兜底「综合」、47 个子标签（力学 9 / 振动与波 6 / 热学 6 / 电磁学 7 / 光学 4 / 近代物理 8 / 实验 6，另有综合）。旧的数学常量（`MAIN_TAGS` / `SUB_TAGS` / `normalize`）签名不变，旧调用方零改动。
+- **存储迁移 v5**：`problems` 增列 `subject`、`physics_meta`（JSON 字符串）并建复合索引 `(subject, main_tag)`。迁移用 `PRAGMA table_info` 判存在性，可重复执行不报错；历史行自动回填 `math`。JSON 引擎在加载时内存补全，不重写全量历史记录。
+- **物理配图安全渲染**：题库配图一律走 `<img>` + 路径白名单（`assets/diagrams/physics/`），**不内联 SVG**——直接注入题库里的 `<svg>` 等于把 XSS 开关交给投稿人。支持点击放大灯箱；暗色模式给浅底卡片，避免黑线白图看不见。入库门禁额外扫描 `<script>`、`on*` 事件、`<foreignObject>`、断链、单图超过 300 KB。
+- **物理软键盘与常数速查**：`mathkey.js` 在物理模式追加「矢量」「物理量」两组（`\vec`、`\hat`、`\nabla\cdot`、`\mathrm{}`、`\varepsilon_0` 等）；题页提供可折叠常数条，点数值即复制，并明确本题约定常数（`g=9.8` 还是 `10`）。
+- **AI 四维 Rubric**：物理批改按「模型与坐标系 25% / 定律与方程 35% / 数学求解 25% / 单位与量纲检验 15%」给分，并把判题引擎的确定性预检结论注入 Prompt；助教改为苏格拉底式（先问研究对象、守恒量、边界条件，不直接甩公式）；出题输出新增 `[PHYSICS_META]` 段（`answerType/unit/tolRel/sigFigs/constants/methods`）。
+- **验题门禁**：`tools/verify/verify_physics.py` 用 SymPy 的 `dimsys_SI` 展开派生量纲（`newton → force → M L T^-2`），校验「声明量纲与单位是否自洽」；`tools/import/gate.mjs` 按学科分流，物理题走硬门禁（错学科标签、断链配图、非法 SVG、单位无法解析直接拒绝），数学题沿用原软标记逻辑。
+- **首批物理内容**：`data/batch-physics-01.json` 26 题（力学 7 / 振动与波 3 / 热学 3 / 电磁学 5 / 光学 3 / 近代物理 3 / 实验 2），全部带 `physicsMeta`（单位、量纲、容差、约定常数、物理思想），配 3 张 SVG 受力/装置图；`data/subjects/physics-general-2026.json` 期末突击包（4 章 10 考点 14 题）。26 题的标准答案全部通过引擎自检（`npm run check:physics-gate`）。
+- **前端学科切换**：顶栏新增紧凑 `[ 数学 | 物理 ]` 分段控件，状态持久化到 `localStorage`；切学科同步刷新副标题（高等数学 / 大学物理）、导航文案（每日一积 / 每日一物）、标签树与统计。后端未声明 `features.physics` 或物理题库为空时，开关自动隐藏或置灰并回退数学，避免点进空列表。
+- **每日一物**：`/api/daily?subject=physics` 与数学连排表共用接口但键空间独立（`p:YYYY-MM-DD`），最近 30 天不重复；数学端「每日一积」行为不变。
+- **物理组卷**：组卷接口按学科抽题，防止数学卷混入刚体题；物理卷头自动附 9 条常用物理常数表，打印时整块不跨页。
+- **版本与缓存串**：`3.0.0`；前端资源 `?v=3.0.0`，Service Worker `VERSION=v3.0.0`，避免旧缓存拿到半套代码。
+
+已知边界：符号推导题与实验分析题仍交给 AI 评判（引擎只做 `deferred` 降级，不硬判）；物理题库 26 题属首批内容，后续按同一门禁扩题。
+
 ## v2.6.0 — 2026-11-26
 
 每日一积支持「连排」：从 2026-11-26 起 20 天按顺序出一份不定积分练习单，之后回到伪随机。

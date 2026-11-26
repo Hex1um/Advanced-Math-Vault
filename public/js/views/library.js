@@ -5,7 +5,7 @@
   const Views = window.Views = window.Views || {};
   const St = window.API.State;
 
-  let filters = { q: '', mainTag: '', examTag: '', tags: [], level: '', status: 'all', sort: 'code', page: 1, tagsExpanded: false };
+  let filters = { q: '', mainTag: '', examTag: '', tags: [], method: '', level: '', status: 'all', sort: 'code', page: 1, tagsExpanded: false };
   let cache = null;
 
   /* 防竞态：快速连点筛选会并发出多个请求，先发的后到就会把列表刷成旧结果。
@@ -21,7 +21,10 @@
 
   function buildQuery() {
     const p = new URLSearchParams();
+    /* 学科永远显式传：不传时后端按 math 处理，但前端要能表达「我在物理」 */
+    p.set('subject', St.subject);
     if (filters.q) p.set('q', filters.q);
+    if (filters.method) p.set('method', filters.method);
     if (filters.mainTag) p.set('main', filters.mainTag);
     if (filters.examTag) p.set('exam', filters.examTag);
     if (filters.tags.length) p.set('tags', filters.tags.join(','));
@@ -38,17 +41,21 @@
     const me = St.me;
     const wrap = document.getElementById('statStrip');
     if (!wrap) return;
+    const by = (s.bySubject || {});
+    const cur = by[St.subject];
     wrap.innerHTML =
-      '<div class="stat"><div class="k">收录题目</div><div class="v">' + (s.problems || 0) + '<small>题</small></div></div>'
-      + '<div class="stat"><div class="k">主标签</div><div class="v">' + (s.mainTags || 0) + '<small>个</small></div></div>'
+      '<div class="stat"><div class="k">' + (St.subject === 'physics' ? '物理题' : '收录题目') + '</div><div class="v">'
+        + (cur === undefined ? (s.problems || 0) : cur) + '<small>题</small></div></div>'
+      + '<div class="stat"><div class="k">主标签</div><div class="v">' + (St.tagTree || []).length + '<small>个</small></div></div>'
       + '<div class="stat"><div class="k">全站做题</div><div class="v">' + (s.solves || 0) + '<small>次</small></div></div>'
       + '<div class="stat"><div class="k">我的进度</div><div class="v">' + (me ? me.solvedCount : 0) + '<small>' + (me ? '题' : '登录后记录') + '</small></div></div>';
   }
 
   async function startPractice(mode) {
     if (!window.UI.requireLogin(null, '登录后才能刷题（要记录进度）')) return;
-    const q = new URLSearchParams({ mode: mode });
+    const q = new URLSearchParams({ mode: mode, subject: St.subject });
     if (filters.mainTag) q.set('main', filters.mainTag);
+    if (filters.method) q.set('method', filters.method);
     if (filters.examTag) q.set('exam', filters.examTag);
     if (filters.tags.length) q.set('tags', filters.tags.join(','));
     if (filters.level) {
@@ -107,9 +114,21 @@
         }).join('') + '</div></div>'
       : '';
 
+    /* 物理思想（守恒律 / 微元法 / 量纲分析…）是物理独有的筛选维度 */
+    const methods = (St.subject === 'physics') ? (St.methods || []) : [];
+    const methodChips = methods.length
+      ? '<div class="filter-row"><span class="filter-label">物理思想</span><div class="chip-scroll">'
+        + '<button class="chip' + (!filters.method ? ' active' : '') + '" data-method="">不限</button>'
+        + methods.map(function (m) {
+          return '<button class="chip' + (filters.method === m.name ? ' active' : '') + '" data-method="' + window.Md.esc(m.name) + '">'
+            + window.Md.esc(m.name) + '<span class="n">' + m.count + '</span></button>';
+        }).join('') + '</div></div>'
+      : '';
+
     d.innerHTML =
       '<div class="filter-row"><span class="filter-label">主标签</span><div class="chip-scroll">' + mainChips + '</div></div>'
       + '<div class="filter-row"><span class="filter-label">子标签</span><div class="chip-scroll">' + tagChips + '</div></div>'
+      + methodChips
       + examChips
       + '<div class="filter-row"><span class="filter-label">难度</span><div class="chip-scroll">' + levelChips + '</div></div>'
       + '<div class="filter-row" style="gap:10px">'
@@ -150,6 +169,13 @@
     d.querySelectorAll('[data-exam]').forEach(function (b) {
       b.addEventListener('click', function () {
         filters.examTag = b.dataset.exam;
+        filters.page = 1;
+        load();
+      });
+    });
+    d.querySelectorAll('[data-method]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        filters.method = b.dataset.method;
         filters.page = 1;
         load();
       });
@@ -287,6 +313,14 @@
   }
 
   Views.library = function (el, params) {
+    /* 学科切换后旧的 mainTag/method 可能在新学科里不存在，先清掉再套用 URL 参数 */
+    if (filters.__subject !== St.subject) {
+      filters.mainTag = '';
+      filters.tags = [];
+      filters.method = '';
+      filters.page = 1;
+      filters.__subject = St.subject;
+    }
     if (params && params.main) { filters.mainTag = params.main; }
     if (params && params.exam) { filters.examTag = params.exam; }
     if (params && params.tag) { filters.tags = [params.tag]; }
@@ -329,6 +363,6 @@
   };
 
   Views.library.reset = function () {
-    filters = { q: '', tags: [], level: '', status: 'all', sort: 'code', page: 1 };
+    filters = { q: '', tags: [], method: '', level: '', status: 'all', sort: 'code', page: 1 };
   };
 })();

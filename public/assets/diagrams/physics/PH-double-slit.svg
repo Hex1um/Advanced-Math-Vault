@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 200" role="img" aria-label="杨氏双缝干涉装置示意图">
+  <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <!-- 光源与单缝 -->
+    <circle cx="26" cy="100" r="7" />
+    <path d="M52 60 L52 140" stroke-width="3" />
+    <path d="M52 96 L52 104" stroke-width="0" />
+    <!-- 双缝屏 -->
+    <path d="M132 50 L132 88" stroke-width="4" />
+    <path d="M132 112 L132 150" stroke-width="4" />
+    <!-- 缝标记 -->
+    <circle cx="132" cy="100" r="2.4" fill="currentColor" stroke="none" />
+    <!-- 光线 -->
+    <path d="M52 100 L132 92" stroke-width="1.2" />
+    <path d="M52 100 L132 108" stroke-width="1.2" />
+    <path d="M132 92 L300 84" stroke-width="1.2" />
+    <path d="M132 108 L300 116" stroke-width="1.2" />
+    <!-- 观察屏 -->
+    <path d="M300 40 L300 160" stroke-width="3" />
+    <!-- 条纹 -->
+    <path d="M300 56 L300 62 M300 78 L300 86 M300 112 L300 120 M300 138 L300 144" stroke-width="4" />
+  </g>
+  <g font-family="Georgia, serif" font-size="13" fill="currentColor">
+    <text x="20" y="82">S</text>
+    <text x="118" y="168">双缝 d</text>
+    <text x="290" y="178" font-size="11">屏 D</text>
+    <text x="196" y="72" font-size="11">Δy = λD / d</text>
+  </g>
+</svg>

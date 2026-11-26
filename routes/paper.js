@@ -30,13 +30,17 @@ module.exports = function registerPaperRoutes(router, ctx) {
     const body = await readBody(req);
     const want = Math.max(3, Math.min(30, Number(body.count || 10)));
     const minutes = Math.max(10, Math.min(180, Number(body.minutes || Math.round(want * 5))));
+    /* 学科：物理卷只从物理题抽，避免「数学卷里混进一道刚体转动」；
+       不传 subject 时按数学，与旧行为一致。 */
+    const subject = tagTax.subjectOf(body.subject);
+    const allowedMains = tagTax.SUBJECTS[subject].mainTags;
     const mains = Array.isArray(body.mainTags)
-      ? body.mainTags.map(String).filter((t) => tagTax.MAIN_TAGS.includes(t))
+      ? body.mainTags.map(String).filter((t) => allowedMains.includes(t))
       : [];
     const diff = ['easy', 'medium', 'hard', 'mixed'].includes(String(body.difficulty))
       ? String(body.difficulty) : 'mixed';
 
-    let pool = db.problems.filter((p) => p.status === 'approved');
+    let pool = db.problems.filter((p) => p.status === 'approved' && tagTax.subjectOf(p.subject) === subject);
     if (mains.length) pool = pool.filter((p) => mains.includes(p.mainTag));
     if (diff === 'easy') pool = pool.filter((p) => p.difficulty <= 4);
     if (diff === 'medium') pool = pool.filter((p) => p.difficulty >= 4 && p.difficulty <= 7);

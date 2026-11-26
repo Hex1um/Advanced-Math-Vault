@@ -40,7 +40,7 @@
       return;
     }
 
-    window.API.get('/api/analytics/overview').then(function (d) {
+    window.API.get(window.API.State.withSubject('/api/analytics/overview')).then(function (d) {
       el.innerHTML =
         '<div class="page-head"><div><h1>学习分析</h1>'
         + '<p class="sub">累计提交 ' + d.totalSubmissions + ' 次，做出 ' + d.totalSolved + ' 题；'
@@ -73,7 +73,7 @@
   Views.practice = function (el, params) {
     el.innerHTML = '<div class="loading-row"><span class="spinner"></span>正在挑一道适合你的题…</div>';
     const q = params && params.focus === 'weak' ? '?focus=weak&mode=random' : '?mode=random';
-    window.API.get('/api/practice' + q).then(function (r) {
+    window.API.get(window.API.State.withSubject('/api/practice' + q)).then(function (r) {
       if (r && r.code) { location.replace('#/problem/' + r.code); return; }
       el.innerHTML = window.UI.empty('这个范围暂时没有未做的题', '换一个考点，或去题库自己挑一道。');
     }).catch(function (e) {

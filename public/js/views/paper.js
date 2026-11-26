@@ -108,7 +108,8 @@
       if (hint) hint.textContent = '正在抽题…';
       try {
         const r = await window.API.post('/api/paper/auto', {
-          count: count, minutes: minutes, difficulty: difficulty, mainTags: smart.mains
+          count: count, minutes: minutes, difficulty: difficulty, mainTags: smart.mains,
+          subject: window.API.State.subject
         });
         if (!r.total) throw new Error('没抽到题，放宽条件再试');
         if (goExam) {
@@ -171,7 +172,8 @@
         const r = await window.API.post('/api/paper/generate', {
           choice: Number(el.querySelector('#genChoice').value || 0),
           fill: Number(el.querySelector('#genFill').value || 0),
-          solution: Number(el.querySelector('#genSolution').value || 0)
+          solution: Number(el.querySelector('#genSolution').value || 0),
+          subject: window.API.State.subject
         });
         const codes = [];
         r.parts.forEach(function (part) { part.items.forEach(function (it) { codes.push(it.code); }); });
@@ -325,6 +327,9 @@
         + '<li>试卷共 ' + [g.choice, g.fill, g.solution].filter(function (x) { return x.length; }).length + ' 大题，满分 ' + total + ' 分，考试时间 180 分钟。</li>'
         + '</ol></div>'
         + '<div class="exam-meta"><span>姓名 ____________</span><span>考生编号 ____________</span><span>得分 ____________</span></div>'
+        /* 物理卷自动附常用常数表：物理题「用哪个 g」直接影响数值答案，
+           卷头统一给出，避免同一份卷子里 9.8 与 10 混用。 */
+        + (window.API.State.subject === 'physics' ? PHYS_CONSTANTS_BLOCK : '')
         + section('选择题', '每小题 5 分，共 ' + g.choice.length * 5 + ' 分。下列每题给出的四个选项中，只有一个选项符合题目要求。', g.choice, false)
         + section('填空题', '每小题 5 分，共 ' + g.fill.length * 5 + ' 分。', g.fill, false)
         + section('解答题', '共 70 分。解答应写出文字说明、证明过程或演算步骤。', g.solution, true)

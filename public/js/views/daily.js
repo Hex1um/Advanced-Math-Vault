@@ -14,9 +14,12 @@
 
   Views.daily = function (el) {
     el.innerHTML = '<div class="loading-row"><span class="spinner"></span>今天的好题正在出库…</div>';
+    /* 物理模式是「每日一物」：同一套视图，文案与取题接口按学科切换 */
+    const isPhys = St.subject === 'physics';
+    const TITLE = isPhys ? '每日一物' : '每日一积';
 
     Promise.all([
-      window.API.get('/api/daily'),
+      window.API.get(St.withSubject('/api/daily')),
       window.API.get('/api/leaderboard').catch(function () { return { items: [] }; })
     ]).then(function (arr) {
       const data = arr[0];
@@ -24,7 +27,7 @@
       const p = data.problem;
 
       if (!p) {
-        el.innerHTML = '<div class="page-head"><div><h1>每日一积</h1></div></div>'
+        el.innerHTML = '<div class="page-head"><div><h1>' + TITLE + '</h1></div></div>'
           + window.UI.empty('题库还是空的', '等第一批题目审核入库后，这里每天会固定推一道。');
         return;
       }
@@ -78,7 +81,7 @@
     }
 
       el.innerHTML =
-        '<div class="page-head"><div><h1>每日一积</h1>'
+        '<div class="page-head"><div><h1>' + TITLE + '</h1>'
         + '<p class="sub">每天一道较难的积分题，全站同步，按日期滚动；管理员可以换成自己选的题。</p></div>'
         + '<div class="head-actions">'
         + (window.API.State.me && window.API.State.me.role === 'admin'

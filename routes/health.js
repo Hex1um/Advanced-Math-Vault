@@ -24,6 +24,8 @@ module.exports = function registerHealthRoutes(router, ctx) {
     publicUser,
     allTags,
     tagTree,
+    methodCounts,
+    subjectCounts,
     examTagCounts,
     FREE_PROVIDERS,
     llmConfigured,
@@ -74,6 +76,7 @@ module.exports = function registerHealthRoutes(router, ctx) {
   if (pathname === '/api/meta' && method === 'GET') {
     const approved = db.problems.filter((p) => p.status === 'approved');
     const solvedTotal = db.users.reduce((s, u) => s + Object.keys(u.solved || {}).length, 0);
+    const counts = subjectCounts();
     return send(res, 200, {
       ok: true,
       site: db.settings.site || db.settings.siteName || '',
@@ -84,10 +87,19 @@ module.exports = function registerHealthRoutes(router, ctx) {
         solves: solvedTotal,
         pending: db.problems.filter((p) => p.status === 'pending').length,
         feedback: db.feedbacks.filter((f) => (f.status || 'open') === 'open').length,
+        /* 默认仍是数学口径：旧前端只认 tags / mainTags，口径不能变 */
         tags: allTags().length,
-        mainTags: tagTree().length
+        mainTags: tagTree().length,
+        bySubject: counts
       },
       tagTree: tagTree(),
+      /* 多学科：前端顶栏切换时直接用这两份树，不必为每个学科再发一次请求。
+         物理的 methodCounts 是「物理思想」筛选的来源。 */
+      subjects: require('../tag-taxonomy').allSubjectInfos().map((s) => Object.assign({}, s, {
+        problems: counts[s.key] || 0
+      })),
+      tagTrees: { math: tagTree('math'), physics: tagTree('physics') },
+      methods: { math: [], physics: methodCounts('physics') },
       examTags: examTagCounts(),
       /* 前端据此决定是否显示「分析 / 题单 / 期末突击」入口：
          旧后端没有这些接口，隐藏比点了报错更体面。 */
@@ -96,6 +108,10 @@ module.exports = function registerHealthRoutes(router, ctx) {
         collections: true,
         equivalentJudge: true,
         sprint: true,
+        /* v2.7.0 多学科：前端据此决定是否显示 [ 数学 | 物理 ] 切换器。
+           旧后端没有该字段 → 前端按单学科（数学）渲染，行为不变。 */
+        physics: true,
+        physicsJudge: true,
         /* 背单词依赖科目包里的 vocabFile，没词库时不亮这个能力，前端就不加那个 Tab */
         vocab: !!(ctx.sprint && ctx.sprint.list().some((p) => p.counts && p.counts.vocab > 0))
       },

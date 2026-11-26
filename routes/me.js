@@ -37,7 +37,7 @@ module.exports = function registerMeRoutes(router, ctx) {
         duplicate: dup
       });
     }
-    item.code = nextProblemCode();
+    item.code = nextProblemCode(item.subject);
     item.authorId = user.id;
     item.authorName = user.name;
     db.problems.push(item);

@@ -21,7 +21,85 @@ import { fileURLToPath } from 'node:url';
 const require = createRequire(import.meta.url);
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const tagTax = require(path.join(ROOT, 'tag-taxonomy.js'));
-const PLACEHOLDER = /(待补|TODO|TBD|略|见解析|详见|同上)/i;
+const physics = require(path.join(ROOT, 'lib', 'physics-equiv.js'));
+/* 占位词检测：物理题干里「忽略空气阻力」「略去边缘效应」是正常表述，
+   不能把「略」当没写完。这里用前后文排除掉这些正常用法。 */
+const PLACEHOLDER = /(待补|TODO|TBD|见解析|详见|同上|(?<![忽略省简粗战策大])略(?![过错去微])|^略$)/i;
+
+/* 危险 SVG：直接拒绝，而不是「进库后审核再看」。
+   <foreignObject> 能嵌 HTML，on* 事件能执行脚本，都是题库配图的经典 XSS 入口。 */
+const SVG_DANGER = [
+  [/<script[\s>]/i, '<script>'],
+  [/\son[a-z]+\s*=/i, 'on* 事件属性'],
+  [/<foreignObject[\s>]/i, '<foreignObject>'],
+  [/<iframe[\s>]/i, '<iframe>'],
+  [/xlink:href\s*=\s*["']?\s*(?:javascript:|data:text\/html)/i, 'javascript: / data:text/html 外链']
+];
+
+/**
+ * 物理题专项门禁。
+ * 返回错误数组（非空即拒绝入库）：与数学门禁的「软标记」不同，
+ * 这里的错误都是确定性的（标签不属于物理体系、配图断链、单位解析不了）。
+ */
+export function physicsGate(p, opts) {
+  const errors = [];
+  const options = opts || {};
+  const root = options.root || ROOT;
+  const meta = (p && p.physicsMeta) || {};
+  const spec = tagTax.SUBJECTS.physics;
+
+  if (!Object.prototype.hasOwnProperty.call(p, 'subject')) errors.push('物理题必须显式声明 subject: "physics"');
+  const main = String(p.mainTag || '').trim();
+  if (main && !spec.mainTags.includes(main)) errors.push('物理主标签非法：' + main);
+  if (main) {
+    const allowed = new Set(spec.subTags[main] || []);
+    for (const t of (p.tags || [])) {
+      if (!allowed.has(String(t))) errors.push('子标签「' + t + '」不属于物理主标签「' + main + '」');
+    }
+  }
+
+  const type = String(meta.answerType || '');
+  if (type && !['symbolic', 'numeric_unit', 'vector', 'choice', 'proof', 'lab_analysis'].includes(type)) {
+    errors.push('answerType 非法：' + type);
+  }
+
+  /* 配图：路径必须落在 public/assets/diagrams/physics/ 内，文件真实存在，SVG 安全，且有体积上限 */
+  for (const d of (Array.isArray(meta.diagrams) ? meta.diagrams : [])) {
+    const src = String((d && d.src) || '');
+    if (!src) { errors.push('配图条目缺 src'); continue; }
+    if (!/^assets\/diagrams\/physics\/[\w./-]+\.(svg|webp|png|jpg)$/i.test(src) || src.includes('..')) {
+      errors.push('配图路径不合法（只允许 assets/diagrams/physics/ 下的相对路径）：' + src);
+      continue;
+    }
+    const abs = path.join(root, 'public', src.replace(/\//g, path.sep));
+    if (!fs.existsSync(abs)) { errors.push('配图不存在（断链）：' + src); continue; }
+    const stat = fs.statSync(abs);
+    if (stat.size > 300 * 1024) errors.push('配图过大（' + Math.round(stat.size / 1024) + ' KB > 300 KB）：' + src);
+    if (/\.svg$/i.test(src)) {
+      const text = fs.readFileSync(abs, 'utf8');
+      for (const [re, label] of SVG_DANGER) {
+        if (re.test(text)) errors.push('配图含危险内容（' + label + '）：' + src);
+      }
+    }
+  }
+
+  /* 单位可解析：numeric_unit 题的答案单位必须能被判题引擎认出来，否则学生永远判不对 */
+  if (type === 'numeric_unit') {
+    const unitText = String(meta.unit || '');
+    if (!unitText) errors.push('answerType=numeric_unit 但缺少 physicsMeta.unit');
+    else {
+      const u = physics.parseUnitExpr(unitText);
+      if (u.error) errors.push('physicsMeta.unit 无法解析：' + unitText);
+    }
+    if (!/[0-9]/.test(String(p.answer || ''))) errors.push('numeric_unit 题的答案里没有数值');
+  }
+  if (Number.isFinite(Number(meta.tolRel)) && (Number(meta.tolRel) < 0 || Number(meta.tolRel) > 0.5)) {
+    errors.push('tolRel 必须在 0..0.5 之间（当前 ' + meta.tolRel + '）');
+  }
+
+  return errors;
+}
+
 
 /** 能不能自动验算：返回 '' 表示无需人工，非空表示需要人工复核的原因 */
 export function reviewReason(p) {
@@ -36,12 +114,14 @@ export function reviewReason(p) {
   if (PLACEHOLDER.test(sol)) return '解析里有占位词（待补/TODO/略/见解析…）';
   if (PLACEHOLDER.test(st)) return '题干里有占位词（待补/TODO/略/见解析…）';
 
-  // 标签与三维评分：字段级硬伤必须在入库前拦下来
+  // 标签与三维评分：字段级硬伤必须在入库前拦下来（按学科取对应标签表）
+  const subject = tagTax.subjectOf(p && p.subject);
+  const spec = tagTax.SUBJECTS[subject];
   const main = String((p && p.mainTag) || '').trim();
-  if (main && !tagTax.isValidMain(main)) return '主标签不在考点体系内：' + main;
+  if (main && !spec.mainTags.includes(main)) return '主标签不在考点体系内：' + main;
   const tags = Array.isArray(p && p.tags) ? p.tags : [];
   const allowedSub = new Set();
-  for (const m of tagTax.MAIN_TAGS) for (const s of tagTax.SUB_TAGS[m] || []) allowedSub.add(s);
+  for (const m of spec.mainTags) for (const s of spec.subTags[m] || []) allowedSub.add(s);
   const badTag = tags.find((t) => !allowedSub.has(String(t)));
   if (badTag) return '子标签不在考点体系内：' + badTag;
   for (const [k, label] of [['thinking', '思维量'], ['difficulty', '难度'], ['calc', '计算量']]) {
@@ -49,6 +129,23 @@ export function reviewReason(p) {
     if (v === undefined || v === null || v === '') continue;
     const n = Number(v);
     if (!Number.isInteger(n) || n < 1 || n > 10) return label + '必须是 1..10 的整数（当前 ' + v + '）';
+  }
+
+  /* 物理题的「能不能机器判」由量纲引擎决定，不套数学的积分/极限启发式 */
+  if (subject === 'physics') {
+    const meta = (p && p.physicsMeta) || {};
+    if (String(meta.answerType || '') === 'numeric_unit' || String(meta.answerType || '') === 'numeric') {
+      const chk = physics.checkAnswer(String(ans), String(ans), meta);
+      if (chk.verdict === 'unitUnknown') return '答案单位无法解析：' + (meta.unit || '');
+      if (chk.verdict === 'dimensionMismatch') return '答案量纲与声明单位不一致：' + (meta.unit || '');
+      if (physics.canAutoJudge(p)) return '';
+      return '数值题但机器判不了，需人工核对单位与容差';
+    }
+    if (String(meta.answerType || '') === 'symbolic') return '符号推导题，需人工核对建模与推导链';
+    if (['lab_analysis', 'vector', 'proof', 'choice'].includes(String(meta.answerType || ''))) {
+      return '题型为 ' + meta.answerType + '，需人工核对评分点';
+    }
+    return '物理题缺少 answerType，需人工复核';
   }
 
   const heavy = [];
@@ -65,10 +162,19 @@ export function reviewReason(p) {
 }
 
 /** 给一批题打标记，返回统计。不修改入参以外的数据 */
-export function markList(list) {
-  const out = { total: 0, flagged: 0, reasons: {} };
+export function markList(list, opts) {
+  const out = { total: 0, flagged: 0, blocked: [], reasons: {} };
   for (const p of list || []) {
     out.total++;
+    /* 物理题先过硬门禁：断链配图、非法 SVG、错学科标签这类问题是确定性错误，
+       直接拒绝入库，不放进「待人工复核」——人能看出来的没必要让人再看一遍。 */
+    if (tagTax.subjectOf(p && p.subject) === 'physics') {
+      const errs = physicsGate(p, opts);
+      if (errs.length) {
+        out.blocked.push({ title: String((p && p.title) || ''), errors: errs });
+        continue;
+      }
+    }
     const reason = reviewReason(p);
     if (!reason) {
       delete p.needsReview;
@@ -85,7 +191,8 @@ export function markList(list) {
 
 const PY_GATES = [
   ['tools/verify/verify_integrals.py', '积分答案求导校验'],
-  ['tools/verify/verify_limits.py', '极限答案数值校验']
+  ['tools/verify/verify_limits.py', '极限答案数值校验'],
+  ['tools/verify/verify_physics.py', '物理量纲与单位校验']
 ];
 
 /**
@@ -170,10 +277,21 @@ if (isMain) {
     console.error('✗ --strict 下存在被跳过的校验项');
     process.exit(1);
   }
-  const stats = markList(list);
+  const stats = markList(list, { root: ROOT });
   console.log('\n共 ' + stats.total + ' 题，需人工复核 ' + stats.flagged + ' 题');
+  if (stats.blocked.length) {
+    console.error('\n✗ 物理门禁拒绝入库 ' + stats.blocked.length + ' 题：');
+    for (const b of stats.blocked) {
+      console.error('  · ' + (b.title || '(无标题)'));
+      for (const e of b.errors) console.error('      - ' + e);
+    }
+  }
   for (const [reason, n] of Object.entries(stats.reasons).sort((a, b) => b[1] - a[1])) {
     console.log('  · ' + reason + '：' + n);
+  }
+  if (stats.blocked.length) {
+    console.error('✗ 存在被门禁拒绝的物理题，请先修正后再入库');
+    process.exit(1);
   }
   if (argv.includes('--write')) {
     const back = Array.isArray(parsed) ? list : Object.assign({}, parsed, { problems: list });

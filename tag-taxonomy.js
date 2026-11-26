@@ -177,7 +177,181 @@ const RULES = [
   { main: '综合', sub: '综合应用', re: /综合|高等数学|数学分析|未分类|其他|参数|反求参数|复求方程|反求方程|解方程|阶乘|乘积|复根|三角右端|待定切点|对比系数|路径逼近|路径法|排队论/ }
 ];
 
+/* ======================================================================
+ * 物理标签体系（v2.7.0 引入）
+ *
+ * 与数学的关系：两套体系**完全独立**。subject 为顶层命名空间，数学题只看
+ * MATH 表，物理题只看 PHYSICS 表，避免「导数」「积分」这类数学词把物理题
+ * 吸到数学主标签上（物理里也有「积分」，但语义是「用积分求场」）。
+ *
+ * 物理 7 个章节主标签 + 1 个兜底主标签「综合」：兜底只用于标签全部无法识别
+ * 的历史/投稿数据，保证 normalize 一定有合法主标签，不会把题丢进数学命名空间。
+ * ====================================================================== */
+
+const PHYSICS_MAIN_TAGS = [
+  '力学',
+  '振动与波',
+  '热学',
+  '电磁学',
+  '光学',
+  '近代物理',
+  '物理实验与误差分析',
+  '综合'
+];
+
+const PHYSICS_SUB_TAGS = {
+  '力学': [
+    '质点运动学', '牛顿定律与非惯性系', '动量与碰撞', '功与机械能', '万有引力与天体运动',
+    '刚体定轴转动', '刚体平面平行运动', '角动量守恒', '流体力学基础'
+  ],
+  '振动与波': ['简谐振动', '阻尼与受迫振动', '振动合成', '平面简谐波', '波的干涉与驻波', '多普勒效应'],
+  '热学': [
+    '理想气体状态方程', '气体动理论', '麦克斯韦速率分布', '热力学第一定律',
+    '循环过程与卡诺循环', '热力学第二定律与熵'
+  ],
+  '电磁学': [
+    '静电场与高斯定理', '电势与电容', '静电场中的导体与电介质', '恒定磁场与安培环路定理',
+    '洛伦兹力与安培力', '电磁感应与自感互感', '麦克斯韦方程组与电磁波'
+  ],
+  '光学': ['几何光学与薄透镜成像', '光的干涉', '光的衍射', '光的偏振'],
+  '近代物理': [
+    '狭义相对论时空观', '相对论动力学', '黑体辐射与光电效应', '康普顿散射',
+    '玻尔氢原子模型', '德布罗意波与不确定关系', '一维定态薛定谔方程', '原子核与激光基础'
+  ],
+  '物理实验与误差分析': [
+    '测量误差与不确定度合成', '有效数字与修约', '逐差法与最小二乘法',
+    '薄透镜焦距测量', '分光计与光谱测量', '电桥与示波器测量'
+  ],
+  '综合': ['综合应用']
+};
+
+/* 物理题型与数学同构：kind 不进标签位，只做展示与组卷权重 */
+const PHYSICS_KIND_TAGS = {
+  '选择题': '选择题',
+  '填空题': '填空题',
+  '证明题': '证明题',
+  '证明': '证明题',
+  '推导题': '证明题',
+  '计算题': '计算题',
+  '实验题': '实验题',
+  '实验数据处理': '实验题',
+  '简答题': '简答题',
+  '概念题': '概念题'
+};
+
+/* 顺序即优先级：先具体、后泛化。每条规则都必须让规范子标签自身命中自己，
+   否则同一题反复迁移会漂移到别的主标签。 */
+const PHYSICS_RULES = [
+  /* ---------- 物理实验：最先匹配，避免「误差」被当热学、「透镜」被当几何光学 ---------- */
+  { main: '物理实验与误差分析', sub: '分光计与光谱测量', re: /^分光计与光谱测量$|分光计|光谱仪|棱镜摄谱|光栅常数测量/ },
+  { main: '物理实验与误差分析', sub: '电桥与示波器测量', re: /^电桥与示波器测量$|惠斯登电桥|电桥|示波器|李萨如图/ },
+  { main: '物理实验与误差分析', sub: '薄透镜焦距测量', re: /^薄透镜焦距测量$|自准直|物距像距法|共轭法|焦距测量/ },
+  { main: '物理实验与误差分析', sub: '逐差法与最小二乘法', re: /^逐差法与最小二乘法$|逐差法|最小二乘法|线性拟合|作图法/ },
+  { main: '物理实验与误差分析', sub: '有效数字与修约', re: /^有效数字与修约$|有效数字|修约|位数取舍/ },
+  { main: '物理实验与误差分析', sub: '测量误差与不确定度合成', re: /^测量误差与不确定度合成$|不确定度|误差传递|误差合成|A ?类|B ?类|标准偏差|置信概率|仪器误差/ },
+  { main: '物理实验与误差分析', sub: '综合应用', re: /实验数据|实验报告|测量结果|实验原理/ },
+
+  /* ---------- 近代物理 ---------- */
+  { main: '近代物理', sub: '一维定态薛定谔方程', re: /^一维定态薛定谔方程$|薛定谔|波函数|一维势阱|无限深势井|谐振子|隧道效应|势垒/ },
+  { main: '近代物理', sub: '德布罗意波与不确定关系', re: /^德布罗意波与不确定关系$|德布罗意|物质波|不确定关系|不确定度关系|海森堡/ },
+  { main: '近代物理', sub: '原子核与激光基础', re: /^原子核与激光基础$|原子核|放射性|衰变|半衰期|结合能|激光|受激辐射|核反应/ },
+  { main: '近代物理', sub: '康普顿散射', re: /^康普顿散射$|康普顿/ },
+  { main: '近代物理', sub: '玻尔氢原子模型', re: /^玻尔氢原子模型$|玻尔|巴尔末|里德伯|氢原子|能级跃迁|光谱线/ },
+  { main: '近代物理', sub: '黑体辐射与光电效应', re: /^黑体辐射与光电效应$|黑体|斯特藩|维恩位移|普朗克|光电效应|逸出功|遏止电压/ },
+  { main: '近代物理', sub: '相对论动力学', re: /^相对论动力学$|相对论质量|相对论能量|质能关系|相对论动量|静能/ },
+  { main: '近代物理', sub: '狭义相对论时空观', re: /^狭义相对论时空观$|相对论|洛伦兹变换|时间膨胀|长度收缩|同时性|尺缩|钟慢/ },
+
+  /* ---------- 光学 ---------- */
+  { main: '光学', sub: '光的偏振', re: /^光的偏振$|偏振|马吕斯|布儒斯特|双折射|旋光/ },
+  { main: '光学', sub: '光的衍射', re: /^光的衍射$|衍射|单缝|光栅|夫琅禾费|菲涅耳|缺级|瑞利判据|分辨本领/ },
+  { main: '光学', sub: '光的干涉', re: /^光的干涉$|干涉|杨氏双缝|双缝|薄膜干涉|劈尖|牛顿环|等厚|等倾|相干光|光程差/ },
+  { main: '光学', sub: '几何光学与薄透镜成像', re: /^几何光学与薄透镜成像$|几何光学|薄透镜|成像|折射定律|全反射|放大镜|显微镜|望远镜|球面镜|焦距/ },
+
+  /* ---------- 电磁学 ---------- */
+  { main: '电磁学', sub: '麦克斯韦方程组与电磁波', re: /^麦克斯韦方程组与电磁波$|麦克斯韦|位移电流|电磁波|坡印廷|能流密度/ },
+  { main: '电磁学', sub: '电磁感应与自感互感', re: /^电磁感应与自感互感$|电磁感应|法拉第|楞次|动生电动势|感生电动势|自感|互感|涡旋电场|磁场能量/ },
+  { main: '电磁学', sub: '洛伦兹力与安培力', re: /^洛伦兹力与安培力$|洛伦兹力|安培力|带电粒子在磁场|回旋|霍尔效应|磁矩|磁力矩/ },
+  { main: '电磁学', sub: '恒定磁场与安培环路定理', re: /^恒定磁场与安培环路定理$|安培环路|毕奥|萨伐尔|磁感应强度|稳恒磁场|恒定磁场|螺线管|磁通量|磁高斯定理/ },
+  { main: '电磁学', sub: '静电场中的导体与电介质', re: /^静电场中的导体与电介质$|静电场中的导体|导体与电介质|导体静电平衡|静电屏蔽|电介质|极化|介电常数|电容器|电容/ },
+  { main: '电磁学', sub: '电势与电容', re: /^电势与电容$|电势|电势差|电势能|等势面|电场力做功/ },
+  { main: '电磁学', sub: '静电场与高斯定理', re: /^静电场与高斯定理$|高斯定理|电场强度|库仑定律|点电荷|电偶极子|电场线|静电平衡|均匀带电/ },
+
+  /* ---------- 热学 ---------- */
+  { main: '热学', sub: '热力学第二定律与熵', re: /^热力学第二定律与熵$|热力学第二定律|熵|可逆过程|卡诺定理|克劳修斯|玻尔兹曼熵/ },
+  { main: '热学', sub: '循环过程与卡诺循环', re: /^循环过程与卡诺循环$|循环过程|卡诺循环|热机效率|制冷系数|奥托循环|斯特林/ },
+  { main: '热学', sub: '热力学第一定律', re: /^热力学第一定律$|热力学第一定律|等温|等压|等容|绝热|摩尔热容|内能|做功与传热/ },
+  { main: '热学', sub: '麦克斯韦速率分布', re: /^麦克斯韦速率分布$|麦克斯韦速率|速率分布|最概然速率|方均根速率|平均自由程/ },
+  { main: '热学', sub: '气体动理论', re: /^气体动理论$|气体动理论|自由度|能量均分|分子平均动能|压强公式|理想气体微观/ },
+  { main: '热学', sub: '理想气体状态方程', re: /^理想气体状态方程$|状态方程|pV|克拉珀龙|等温线|摩尔气体常数/ },
+
+  /* ---------- 振动与波 ---------- */
+  { main: '振动与波', sub: '多普勒效应', re: /^多普勒效应$|多普勒/ },
+  { main: '振动与波', sub: '波的干涉与驻波', re: /^波的干涉与驻波$|驻波|波节|波腹|波程差|相干波|波的叠加|拍频/ },
+  { main: '振动与波', sub: '平面简谐波', re: /^平面简谐波$|简谐波|波函数|波长|波速|波数|波形图|机械波|波动方程/ },
+  { main: '振动与波', sub: '振动合成', re: /^振动合成$|振动合成|同方向简谐|互相垂直|李萨如|相位差/ },
+  { main: '振动与波', sub: '阻尼与受迫振动', re: /^阻尼与受迫振动$|阻尼|受迫振动|共振|品质因数|弛豫/ },
+  { main: '振动与波', sub: '简谐振动', re: /^简谐振动$|简谐振动|简谐运动|振幅|角频率|初相|振动方程|单摆|复摆|弹簧振子/ },
+
+  /* ---------- 力学 ---------- */
+  { main: '力学', sub: '流体力学基础', re: /^流体力学基础$|流体|伯努利|连续性方程|黏滞|雷诺数|泊肃叶/ },
+  { main: '力学', sub: '刚体平面平行运动', re: /^刚体平面平行运动$|平面平行|滚动|纯滚动|瞬心|圆柱滚/ },
+  { main: '力学', sub: '角动量守恒', re: /^角动量守恒$|角动量|冲量矩|旋进|进动/ },
+  { main: '力学', sub: '刚体定轴转动', re: /^刚体定轴转动$|定轴转动|转动惯量|力矩|角加速度|转动定律|平行轴定理/ },
+  { main: '力学', sub: '万有引力与天体运动', re: /^万有引力与天体运动$|万有引力|引力势能|卫星|轨道|开普勒|逃逸速度|宇宙速度/ },
+  { main: '力学', sub: '功与机械能', re: /^功与机械能$|机械能|动能定理|势能|保守力|功能原理|功率/ },
+  { main: '力学', sub: '动量与碰撞', re: /^动量与碰撞$|动量守恒|碰撞|冲量|恢复系数|完全弹性|完全非弹性|质心/ },
+  { main: '力学', sub: '牛顿定律与非惯性系', re: /^牛顿定律与非惯性系$|牛顿第二定律|牛顿定律|受力分析|摩擦力|惯性力|非惯性系|连接体|斜面|圆周运动向心/ },
+  { main: '力学', sub: '质点运动学', re: /^质点运动学$|运动学|位移|速度|加速度|抛体|相对运动|切向加速度|法向加速度|运动方程/ },
+
+  { main: '综合', sub: '综合应用', re: /综合|大学物理|普通物理|未分类|其他/ }
+];
+
+const SUBJECTS = {
+  math: {
+    name: '数学',
+    short: '数学',
+    label: '高等数学',
+    mainTags: MAIN_TAGS,
+    subTags: SUB_TAGS,
+    kindTags: KIND_TAGS,
+    rules: RULES,
+    defaultMain: '综合',
+    codePrefix: 'HS'
+  },
+  physics: {
+    name: '物理',
+    short: '物理',
+    label: '大学物理',
+    mainTags: PHYSICS_MAIN_TAGS,
+    subTags: PHYSICS_SUB_TAGS,
+    kindTags: PHYSICS_KIND_TAGS,
+    rules: PHYSICS_RULES,
+    defaultMain: '综合',
+    codePrefix: 'PH'
+  }
+};
+
+/** 学科归一化：任何未知值都退回 math（保证旧数据与旧调用方语义不变） */
+function subjectOf(value) {
+  return String(value || '').toLowerCase() === 'physics' ? 'physics' : 'math';
+}
+
+function specOf(subject) {
+  return SUBJECTS[subjectOf(subject)];
+}
+
 const KIND_RE = /^(选择题|填空题|证明题|证明|应用题|概念题|概念判断|计算题)$/;
+
+/* 物理子标签精确索引：规范子标签自身必须命中自己，保证迁移幂等。
+   例：RULES 里「静电场中的导体与电介质」用长锚点匹配，而题库里常见写法是
+   「静电场中的导体」——精确索引让所有规范写法一律直接命中，不依赖正则完备性。 */
+const PHYSICS_SUB_INDEX = (function () {
+  const map = new Map();
+  for (const main of PHYSICS_MAIN_TAGS) {
+    for (const sub of PHYSICS_SUB_TAGS[main] || []) map.set(sub, { main: main, sub: sub });
+  }
+  return map;
+})();
 
 function cleanTag(raw) {
   return String(raw == null ? '' : raw)
@@ -187,33 +361,45 @@ function cleanTag(raw) {
     .replace(/\s+/g, ' ');
 }
 
-function resolveTag(raw) {
+/* 数学版（旧签名）：subject 缺省 math。所有历史调用方（迁移脚本、门禁、后台）
+   都走这两个函数，改动必须保持行为完全一致。 */
+function resolveTag(raw, subject) {
+  const key = subjectOf(subject || 'math');
+  const spec = SUBJECTS[key];
   const tag = cleanTag(raw);
   if (!tag) return null;
-  if (KIND_TAGS[tag]) return { kind: KIND_TAGS[tag] };
-  for (const rule of RULES) {
+  if (spec.kindTags[tag]) return { kind: spec.kindTags[tag] };
+  if (key === 'physics') {
+    const exact = PHYSICS_SUB_INDEX.get(tag);
+    if (exact) return { main: exact.main, sub: exact.sub };
+  }
+  for (const rule of spec.rules) {
     if (rule.re.test(tag)) return { main: rule.main, sub: rule.sub };
   }
   return null;
 }
 
-function defaultSub(main) {
-  const list = SUB_TAGS[main] || SUB_TAGS['综合'];
+function defaultSub(main, subject) {
+  const spec = specOf(subject || 'math');
+  const list = spec.subTags[main] || spec.subTags[spec.defaultMain];
   return list[list.length - 1];
 }
 
 /**
- * 把任意历史标签集合归一化。
+ * 把任意历史标签集合归一化（按学科）。
  * @param {string[]|string} rawTags
  * @param {string} mainHint 可选：显式主标签（用户/管理员指定优先）
+ * @param {string} subject 'math' | 'physics'，缺省 math
  * @returns {{mainTag:string, tags:string[], kind:string, dropped:string[], unknown:string[]}}
  */
-function normalize(rawTags, mainHint) {
+function normalize(rawTags, mainHint, subject) {
+  const spec = specOf(subject || 'math');
   let list = rawTags;
   if (typeof list === 'string') list = list.split(/[,，、;；\s]+/);
   list = Array.isArray(list) ? list : [];
 
-  let main = MAIN_TAGS.indexOf(cleanTag(mainHint)) >= 0 ? cleanTag(mainHint) : '';
+  const hint = cleanTag(mainHint);
+  let main = spec.mainTags.indexOf(hint) >= 0 ? hint : '';
   const subs = [];
   const dropped = [];
   const unknown = [];
@@ -222,7 +408,7 @@ function normalize(rawTags, mainHint) {
   for (const raw of list) {
     const tag = cleanTag(raw);
     if (!tag) continue;
-    const hit = resolveTag(tag);
+    const hit = resolveTag(tag, spec === SUBJECTS.physics ? 'physics' : 'math');
     if (!hit) { unknown.push(tag); continue; }
     if (hit.kind) { if (!kind) kind = hit.kind; dropped.push(tag); continue; }
     if (!main) main = hit.main;
@@ -230,8 +416,8 @@ function normalize(rawTags, mainHint) {
     if (!subs.includes(hit.sub)) subs.push(hit.sub);
   }
 
-  if (!main) main = '综合';
-  if (!subs.length) subs.push(defaultSub(main));
+  if (!main) main = spec.defaultMain;
+  if (!subs.length) subs.push(defaultSub(main, spec === SUBJECTS.physics ? 'physics' : 'math'));
 
   return {
     mainTag: main,
@@ -242,8 +428,39 @@ function normalize(rawTags, mainHint) {
   };
 }
 
-function isValidMain(name) {
-  return MAIN_TAGS.indexOf(cleanTag(name)) >= 0;
+function isValidMain(name, subject) {
+  return specOf(subject || 'math').mainTags.indexOf(cleanTag(name)) >= 0;
+}
+
+/** 某个学科的主标签列表（前端筛选器按学科取） */
+function mainTagsOf(subject) {
+  return specOf(subject).mainTags.slice();
+}
+
+/** 某个学科的主标签 → 子标签映射（只读副本，避免调用方改到常量） */
+function subTagsOf(subject) {
+  const spec = specOf(subject);
+  const out = {};
+  for (const m of spec.mainTags) out[m] = (spec.subTags[m] || []).slice();
+  return out;
+}
+
+/** 学科元信息（品牌副标题、编号前缀等），供 meta 接口与前端复用 */
+function subjectInfo(subject) {
+  const spec = specOf(subject);
+  return {
+    key: subjectOf(subject),
+    name: spec.name,
+    label: spec.label,
+    codePrefix: spec.codePrefix,
+    mainTags: spec.mainTags.slice(),
+    mainTagCount: spec.mainTags.length,
+    subTagCount: spec.mainTags.reduce((n, m) => n + (spec.subTags[m] || []).length, 0)
+  };
+}
+
+function allSubjectInfos() {
+  return ['math', 'physics'].map(subjectInfo);
 }
 
 module.exports = {
@@ -251,9 +468,19 @@ module.exports = {
   SUB_TAGS: SUB_TAGS,
   KIND_TAGS: KIND_TAGS,
   RULES: RULES,
+  PHYSICS_MAIN_TAGS: PHYSICS_MAIN_TAGS,
+  PHYSICS_SUB_TAGS: PHYSICS_SUB_TAGS,
+  PHYSICS_KIND_TAGS: PHYSICS_KIND_TAGS,
+  PHYSICS_RULES: PHYSICS_RULES,
+  SUBJECTS: SUBJECTS,
   cleanTag: cleanTag,
   resolveTag: resolveTag,
   normalize: normalize,
   isValidMain: isValidMain,
-  defaultSub: defaultSub
+  defaultSub: defaultSub,
+  subjectOf: subjectOf,
+  mainTagsOf: mainTagsOf,
+  subTagsOf: subTagsOf,
+  subjectInfo: subjectInfo,
+  allSubjectInfos: allSubjectInfos
 };

@@ -6,6 +6,8 @@
  * 依赖改为从 ctx 上取（ctx.db / ctx.services / ctx.http），不再逐个透传 28 个参数。
  */
 const { isMathEquivalent } = require('../lib/math-equiv');
+const tagTax = require('../tag-taxonomy');
+const physics = require('../lib/physics-equiv');
 
 /**
  * 数值等价兜底：字符串快路径判不出来时，再用采样判等。
@@ -27,7 +29,7 @@ function createProblemsRoutes(deps) {
     fail, send, readBody, clientIp, store,
     levelOf, levelInfo, visibleProblem, fullProblem, xpForProblem,
     logActivity, saveDb, publicUser, publicFeedback, scheduleFeedbackReview, bumpView,
-    allTags, tagTree, examTagCounts, FEEDBACK_TYPES, judgeMessages, parseJudge,
+    allTags, tagTree, methodCounts, examTagCounts, FEEDBACK_TYPES, judgeMessages, parseJudge,
     fsrs, processMatchesAnswer, callLLM, llmCandidates, userLlmConfig,
     LEVELS, TRUST_PROXY, VISION_MODEL
   } = deps;
@@ -50,8 +52,14 @@ function createProblemsRoutes(deps) {
     const sort = String(query.sort || 'code');
     const page = Math.max(1, Number(query.page || 1));
     const size = Math.max(5, Math.min(50, Number(query.size || 20)));
+    /* 学科筛选：不传 → math（与 v2.6.0 行为逐字节一致，旧前端不受影响）；
+       subject=all 只在管理/组卷场景用，普通前端不传。 */
+    const subjectRaw = String(query.subject || '').toLowerCase();
+    const subject = subjectRaw === 'all' ? 'all' : tagTax.subjectOf(subjectRaw);
+    const method = String(query.method || '').trim();
 
-    let list = db.problems.filter((p) => p.status === 'approved');
+    let list = db.problems.filter((p) => p.status === 'approved'
+      && (subject === 'all' || tagTax.subjectOf(p.subject) === subject));
     if (q) {
       /* 关键词过滤：SQLite 引擎先用 problem_search 索引把候选缩到几十条，
          再跑同一套内存谓词做精确判定（索引是超集，谓词保证语义与 JSON 引擎完全一致）。
@@ -72,6 +80,10 @@ function createProblemsRoutes(deps) {
     if (mainTag) list = list.filter((p) => p.mainTag === mainTag);
     if (examTag) list = list.filter((p) => (p.examTags || []).includes(examTag));
     if (tags.length) list = list.filter((p) => tags.every((t) => p.tags.includes(t) || p.mainTag === t || String(p.mainTag || '').includes(t)));
+    if (method) {
+      /* 物理思想筛选（守恒律 / 微元法 / 量纲分析…），数学题没有这个维度 */
+      list = list.filter((p) => ((p.physicsMeta && p.physicsMeta.methods) || []).includes(method));
+    }
     if (level) list = list.filter((p) => levelOf(p.difficulty).name === level);
     if (status === 'solved') list = list.filter((p) => user && user.solved && user.solved[p.code]);
     if (status === 'unsolved') list = list.filter((p) => !(user && user.solved && user.solved[p.code]));
@@ -97,10 +109,11 @@ function createProblemsRoutes(deps) {
       return v;
     });
     return send(res, 200, {
-      ok: true, items, total, page, size,
+      ok: true, items, total, page, size, subject,
       pages: Math.max(1, Math.ceil(total / size)),
-      tags: allTags(),
-      tagTree: tagTree(),
+      tags: allTags(subject === 'all' ? 'all' : subject),
+      tagTree: tagTree(subject === 'all' ? 'math' : subject),
+      methods: subject === 'all' ? [] : methodCounts(subject),
       examTags: examTagCounts(),
       levels: LEVELS.map((l) => l.name)
     });
@@ -159,7 +172,9 @@ function createProblemsRoutes(deps) {
         problem: fullProblem(p, user),
         xpRules: { base: 10 + p.difficulty * 3 + p.thinking + p.calc, revealedPenalty: 0.4, aiPenalty: 0.2 },
         related: db.problems
-          .filter((x) => x.status === 'approved' && x.code !== p.code && x.tags.some((t) => p.tags.includes(t)))
+          .filter((x) => x.status === 'approved' && x.code !== p.code
+            && tagTax.subjectOf(x.subject) === tagTax.subjectOf(p.subject)
+            && x.tags.some((t) => p.tags.includes(t)))
           .slice(0, 4)
           .map((x) => ({ code: x.code, title: x.title, difficulty: x.difficulty, levelColor: levelOf(x.difficulty).color }))
       });
@@ -225,10 +240,48 @@ function createProblemsRoutes(deps) {
 
       let judged = null;
       let judgedBy = '';
-      for (const cfg of llmCandidates(body)) {
+      /* ---- 物理题：先跑确定性预检（单位 / 量纲 / 相对误差） ----
+         数值+单位题能机器判定时**不消耗 LLM 额度**；符号题把预检结论注入
+         Prompt，让模型围绕「单位对不对、量纲通不通」批改，减少幻觉。 */
+      const isPhysics = tagTax.subjectOf(p.subject) === 'physics';
+      const unitCheck = isPhysics
+        ? physics.checkAnswer(only, p.answer, p.physicsMeta || {})
+        : null;
+      if (isPhysics && unitCheck && (unitCheck.ok || unitCheck.verdict === 'valueOff' || unitCheck.verdict === 'dimensionMismatch')) {
+        if (unitCheck.ok) {
+          judged = {
+            verdict: 'correct',
+            score: answerOnly ? 80 : 100,
+            comment: answerOnly
+              ? '答案与标准值一致（' + unitCheck.detail + '）；只交答案按 80 分计，通过。'
+              : '数值、单位与量纲均通过机器核对（' + unitCheck.detail + '），按规则给满分。',
+            errors: (unitCheck.warnings || []).map((w) => '单位｜' + w)
+          };
+          judgedBy = '量纲核对';
+        } else if (unitCheck.verdict === 'dimensionMismatch') {
+          judged = {
+            verdict: 'wrong',
+            score: 30,
+            comment: unitCheck.detail,
+            errors: ['单位｜' + unitCheck.detail]
+          };
+          judgedBy = '量纲核对';
+        } else if (unitCheck.verdict === 'valueOff' && answerOnly) {
+          /* 只交答案时，数值不符就是明确的错，不必再叫模型来猜 */
+          judged = {
+            verdict: 'wrong',
+            score: 30,
+            comment: unitCheck.detail,
+            errors: ['数值｜' + unitCheck.detail]
+          };
+          judgedBy = '量纲核对';
+        }
+      }
+
+      for (const cfg of (judged ? [] : llmCandidates(body))) {
         if (image && !VISION_MODEL.test(cfg.model || '')) continue;
         try {
-          let msgs = judgeMessages(p, only, !!image, { history: prior, answerOnly });
+          let msgs = judgeMessages(p, only, !!image, { history: prior, answerOnly, precheck: unitCheck });
           if (image) {
             msgs = [msgs[0], {
               role: 'user',
@@ -248,7 +301,10 @@ function createProblemsRoutes(deps) {
       }
 
       if (!judged) {
-        if (processMatchesAnswer(only, p.answer) || mathEquivalentAnswer(only, p.answer)) {
+        const confirmed = isPhysics && unitCheck
+          ? unitCheck.ok
+          : (processMatchesAnswer(only, p.answer) || mathEquivalentAnswer(only, p.answer));
+        if (confirmed) {
           judged = {
             verdict: 'correct',
             score: answerOnly ? 80 : 100,
@@ -278,7 +334,9 @@ function createProblemsRoutes(deps) {
       //   最终答案错误            → 大幅扣分，不过线
       // 模型常因「跳步 / 不够严谨」把 verdict 压到 partial，这里按结论行的最终答案兜底纠正，
       // 避免同一份提交「无模型 80 分过、有模型 79 分挂」。
-      const answerConfirmed = processMatchesAnswer(only, p.answer) || mathEquivalentAnswer(only, p.answer);
+      const answerConfirmed = isPhysics && unitCheck
+        ? unitCheck.ok
+        : (processMatchesAnswer(only, p.answer) || mathEquivalentAnswer(only, p.answer));
       // 防抄答案刷分：看过标准答案 / 问过 AI 的提交，即使结论命中也不给「通过」，
       // 否则学生点「看答案」后原样抄回就能拿满分、把题记为做出。
       const peeked = !!(rec && (rec.revealed || rec.askedAI));
@@ -295,6 +353,15 @@ function createProblemsRoutes(deps) {
         judged = Object.assign({}, judged, {
           score: Math.min(judged.score || 59, 59),
           comment: '结论与标准答案一致，但你已查看答案或问过 AI，本次不计通过；请独立重做一遍。'
+        });
+      }
+      /* 物理机器判对 + 已看答案：机器判定绕过了模型的 partial 压制，
+         这里单独拦一次，否则「看答案 → 抄数值」能直接拿满分。 */
+      if (isPhysics && answerConfirmed && peeked && judged.verdict === 'correct') {
+        judged = Object.assign({}, judged, {
+          verdict: 'partial',
+          score: 59,
+          comment: '数值与标准答案一致，但你已查看答案或问过 AI，本次不计通过；请独立重做一遍。'
         });
       }
       let score = Number.isFinite(judged.score) ? Math.round(judged.score) : 0;
@@ -369,7 +436,16 @@ function createProblemsRoutes(deps) {
         isBest: isBest,
         myBest: user.best[p.code].score,
         avgScore: p.scoreCount ? Math.round((p.scoreSum / p.scoreCount) * 10) / 10 : null,
-        scoreCount: p.scoreCount
+        scoreCount: p.scoreCount,
+        /* 物理题额外回传单位/量纲预检：前端在判卷结果里单独高亮一段，
+           学生能立刻看到「是量纲错了」还是「是算错了」。 */
+        unitCheck: unitCheck ? {
+          ok: !!unitCheck.ok,
+          verdict: unitCheck.verdict,
+          detail: unitCheck.detail,
+          warnings: unitCheck.warnings || [],
+          mode: unitCheck.mode || ''
+        } : undefined
       };
 
       if (passed) {

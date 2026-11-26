@@ -18,6 +18,7 @@ module.exports = function registerAdminRoutes(router, ctx) {
     configSummary,
     clampScore,
     normalizeProblem,
+    cleanPhysicsMeta,
     nextProblemCode,
     xpForProblem,
     todayKey,
@@ -128,8 +129,13 @@ function deleteProblemCascade(code, adminName) {
       if (Array.isArray(body.hints)) p.hints = body.hints.map(String).map((x) => x.trim()).filter(Boolean).slice(0, 5);
       if (body.source !== undefined) p.source = String(body.source).slice(0, 80);
       if (Array.isArray(body.tags) && body.tags.length) {
-        const tagInfo = tagTax.normalize(body.tags, p.mainTag);
+        const tagInfo = tagTax.normalize(body.tags, p.mainTag, p.subject);
         p.mainTag = tagInfo.mainTag; p.tags = tagInfo.tags;
+      }
+      /* 审核后台可直接改物理元数据（单位/容差/常数/思想标签）：
+         题库里最常需要人工修的就是「单位写错」和「容差过严」。 */
+      if (body.physicsMeta && tagTax.subjectOf(p.subject) === 'physics') {
+        p.physicsMeta = cleanPhysicsMeta(Object.assign({}, p.physicsMeta, body.physicsMeta), p);
       }
       if (body.thinking !== undefined) p.thinking = clampScore(body.thinking, p.thinking);
       if (body.difficulty !== undefined) p.difficulty = clampScore(body.difficulty, p.difficulty);
@@ -165,8 +171,12 @@ function deleteProblemCascade(code, adminName) {
     }
 
     if (pathname === '/api/admin/pending' && method === 'GET') {
-      const items = db.problems.filter((p) => p.status === 'pending').map((p) => ({
-        code: p.code, title: p.title, statement: p.statement, mainTag: p.mainTag, tags: p.tags, examTags: p.examTags || [], kind: p.kind,
+      const subjectQ = String(query.subject || '').toLowerCase();
+      const items = db.problems.filter((p) => p.status === 'pending'
+        && (!subjectQ || tagTax.subjectOf(p.subject) === tagTax.subjectOf(subjectQ))).map((p) => ({
+        code: p.code, subject: tagTax.subjectOf(p.subject), title: p.title, statement: p.statement,
+        mainTag: p.mainTag, tags: p.tags, examTags: p.examTags || [], kind: p.kind,
+        physicsMeta: p.physicsMeta || null,
         thinking: p.thinking, difficulty: p.difficulty, calc: p.calc,
         source: p.source, authorName: p.authorName, createdAt: p.createdAt,
         hints: p.hints, answer: p.answer, solution: p.solution
@@ -225,7 +235,7 @@ function deleteProblemCascade(code, adminName) {
       for (const raw of list) {
         const item = normalizeProblem(raw);
         if (!item) { skipped.push(String(raw && raw.title || '无标题')); continue; }
-        item.code = nextProblemCode();
+        item.code = nextProblemCode(item.subject);
         item.status = 'approved';
         item.authorName = (raw && raw.authorName) || user.name;
         item.authorId = user.id;

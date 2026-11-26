@@ -296,6 +296,73 @@
     return d.innerHTML;
   }
 
+  /* ------------------------------------------------------------ 配图
+   * 题库里的配图只允许「仓库内相对路径 + 白名单目录」，并且**不做 SVG 内联**：
+   * 直接把题库里的 <svg> 字符串塞进 innerHTML 等于把 XSS 开关交给投稿人，
+   * <script>、onload、<foreignObject> 三种路子都能执行脚本。这里统一走
+   * <img src>：浏览器只在图片上下文里解析它，脚本不会执行；
+   * 门禁（tools/import/gate.mjs）在入库时再扫一遍 SVG 源码，双保险。 */
+  const DIAGRAM_WHITELIST = [
+    /^assets\/diagrams\/physics\/[\w./-]+\.(svg|webp|png|jpg)$/i,
+    /^assets\/diagrams\/[\w./-]+\.(webp|png|jpg)$/i
+  ];
+
+  function diagramUrl(src) {
+    const s = String(src || '').trim();
+    if (!s || s.indexOf('..') >= 0) return '';
+    if (!DIAGRAM_WHITELIST.some(function (re) { return re.test(s); })) return '';
+    return './' + s.replace(/^\.?\//, '');
+  }
+
+  let lightboxBound = false;
+  function bindLightbox() {
+    if (lightboxBound || typeof document === 'undefined') return;
+    lightboxBound = true;
+    document.addEventListener('click', function (ev) {
+      const img = ev.target.closest && ev.target.closest('img.diagram-img');
+      if (!img) return;
+      ev.preventDefault();
+      let box = document.getElementById('diagramLightbox');
+      if (!box) {
+        box = document.createElement('div');
+        box.id = 'diagramLightbox';
+        box.className = 'diagram-lightbox';
+        box.innerHTML = '<img alt="" /><button class="diagram-close" aria-label="关闭">×</button>';
+        document.body.appendChild(box);
+        box.addEventListener('click', function () { box.classList.remove('open'); });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') box.classList.remove('open');
+        });
+      }
+      const big = box.querySelector('img');
+      big.src = img.getAttribute('src');
+      big.alt = img.getAttribute('alt') || '';
+      box.classList.add('open');
+    });
+  }
+
+  /**
+   * 渲染配图列表（placement = statement | solution）。
+   * @param {Array} diagrams
+   * @param {string} placement
+   * @returns {string} HTML
+   */
+  function diagramHtml(diagrams, placement) {
+    const list = (diagrams || []).filter(function (d) {
+      return d && (!d.placement || d.placement === (placement || 'statement'));
+    });
+    if (!list.length) return '';
+    bindLightbox();
+    return '<div class="diagram-grid">' + list.map(function (d) {
+      const url = diagramUrl(d.src);
+      if (!url) {
+        return '<div class="diagram-broken">配图路径不在白名单内：' + esc(String(d.src || '')) + '</div>';
+      }
+      return '<figure class="diagram"><img class="diagram-img" src="' + esc(url) + '" alt="'
+        + esc(d.alt || '题目配图') + '" loading="lazy" /><figcaption>' + esc(d.alt || '点击放大') + '</figcaption></figure>';
+    }).join('') + '</div>';
+  }
+
   const Md = {
     render: render,
     toHtml: toHtml,
@@ -303,7 +370,9 @@
     esc: esc,
     inlineTex: inlineTex,
     inline: inline,
-    sanitizeUrl: sanitizeUrl
+    sanitizeUrl: sanitizeUrl,
+    diagramUrl: diagramUrl,
+    diagramHtml: diagramHtml
   };
 
   if (typeof window !== 'undefined') window.Md = Md;

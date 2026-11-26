@@ -52,7 +52,7 @@
     const DRAFT_KEY = 'answer:' + p.code;
     let unbindDraft = function () {};
     const m = window.UI.modal({ title: '提交解题过程 · ' + p.code, sub: '答案正确 + 写了思路即可满分，跳步不扣分', body: el, wide: true });
-    if (window.MathKey) window.MathKey.attachAll(el);
+    if (window.MathKey) window.MathKey.attachAll(el, { subject: (p && p.subject) || window.API.State.subject });
     if (window.DraftStore) {
       unbindDraft = window.DraftStore.bindTextarea(el.querySelector('#ansProcess'), DRAFT_KEY, function () {
         window.UI.toast('已恢复上次未提交的草稿', 'ok');
@@ -210,6 +210,16 @@
         + (res.verdict !== 'unclear' ? '<span class="small muted">通过线 ' + (res.passLine || 80) + '</span>' : '')
         + (res.judgedBy ? '<span class="judged-by">阅卷：' + window.Md.esc(res.judgedBy) + '</span>' : '')
         + '</div>';
+
+      /* 物理题：把「单位/量纲预检」单独提出来，学生一眼能分清是量纲错还是算错 */
+      if (res.unitCheck && res.unitCheck.detail) {
+        const uc = res.unitCheck;
+        const cls = uc.ok ? 'ok' : (uc.verdict === 'unitUnknown' || uc.verdict === 'valueOff' ? 'warn' : 'bad');
+        const head = uc.ok ? '量纲与单位核对通过' : (uc.verdict === 'dimensionMismatch' ? '量纲不一致' : '单位/数值核对未通过');
+        html += '<div class="unit-check ' + cls + '"><b>' + head + '</b>　' + window.Md.esc(uc.detail)
+          + (Array.isArray(uc.warnings) && uc.warnings.length ? '<div class="small muted">' + window.Md.esc(uc.warnings.join('；')) + '</div>' : '')
+          + '</div>';
+      }
 
       if (res.comment) html += '<div class="judge-comment md">' + window.Md.inlineTex(res.comment) + '</div>';
 
@@ -503,7 +513,45 @@
         + '</div>';
 
       // 题干直接作为正文主体，原标题放进提示区
-      window.Md.render(document.getElementById('stmt'), p.statement);
+      const stmtEl = document.getElementById('stmt');
+      window.Md.render(stmtEl, p.statement);
+
+      /* 物理题：题干配图 + 约定常数 + 软键盘分组。
+         配图统一走 <img> 白名单渲染（Md.diagramHtml），不内联 SVG。 */
+      if (p.subject === 'physics' && p.physicsMeta) {
+        const meta = p.physicsMeta;
+        const diagrams = window.Md.diagramHtml(meta.diagrams, 'statement');
+        if (diagrams) {
+          const fig = document.createElement('div');
+          fig.innerHTML = diagrams;
+          stmtEl.after(fig);
+        }
+        if (Array.isArray(meta.constants) && meta.constants.length) {
+          const box = document.createElement('details');
+          box.className = 'phys-constants';
+          box.innerHTML = '<summary>本题约定常数（点数值可复制）</summary><div class="const-list">'
+            + meta.constants.map(function (c) {
+              return '<span class="const-item" data-copy="' + window.Md.esc(c) + '">' + window.Md.inlineTex(String(c).replace(/_/g, '\\_')) + '</span>';
+            }).join('') + '</div>';
+          box.addEventListener('click', function (ev) {
+            const it = ev.target.closest && ev.target.closest('[data-copy]');
+            if (!it) return;
+            const val = it.getAttribute('data-copy');
+            if (navigator.clipboard) navigator.clipboard.writeText(val).catch(function () {});
+            window.UI.toast('已复制：' + val, 'ok');
+          });
+          stmtEl.after(box);
+        }
+        if (meta.unit) {
+          const unitBar = document.createElement('div');
+          unitBar.className = 'small muted';
+          unitBar.style.marginTop = '8px';
+          unitBar.innerHTML = '答案单位：<b>' + window.Md.esc(meta.unit) + '</b>'
+            + (meta.sigFigs ? '　建议保留 ' + meta.sigFigs + ' 位有效数字' : '')
+            + (meta.tolRel ? '　容差 ' + Math.round(meta.tolRel * 100) + '%' : '');
+          stmtEl.after(unitBar);
+        }
+      }
       renderDiscussion(document.getElementById('discussSlot'), p.code);
 
       if (p.hintCount) {
