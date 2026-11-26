@@ -40,7 +40,9 @@ const SUB_TAGS = {
   '理论力学': [
     '变分法与 Euler-Lagrange 方程', 'Noether 定理与对称性', '中心力场与 Kepler 问题',
     '非惯性系与 Coriolis 力', '刚体 Euler 方程与 Euler 角', '小振动与简正模',
-    'Hamilton 方程与 Poisson 括号', '正则变换'
+    'Hamilton 方程与 Poisson 括号', '正则变换',
+    /* 经典散射：Landau §18 的核心内容，与量子力学的「散射理论」是两回事 */
+    '经典散射'
   ],
   '电动力学': [
     '静电场边值问题', '磁矢势与磁偶极', 'Maxwell 方程与电磁波',
@@ -313,7 +315,9 @@ const PHYSICS_SUB_TAGS = {
   '理论力学': [
     '变分法与 Euler-Lagrange 方程', 'Noether 定理与对称性', '中心力场与 Kepler 问题',
     '非惯性系与 Coriolis 力', '刚体 Euler 方程与 Euler 角', '小振动与简正模',
-    'Hamilton 方程与 Poisson 括号', '正则变换'
+    'Hamilton 方程与 Poisson 括号', '正则变换',
+    /* 经典散射：Landau §18 的核心内容，与量子力学的「散射理论」是两回事 */
+    '经典散射'
   ],
   '电动力学': [
     '静电场边值问题', '磁矢势与磁偶极', 'Maxwell 方程与电磁波',
@@ -451,6 +455,7 @@ const PHYSICS_RULES = [
   { main: '理论力学', sub: '小振动与简正模', re: /^小振动与简正模$|简正模|小振动|耦合振子|简正频率|久期方程/ },
   { main: '理论力学', sub: 'Hamilton 方程与 Poisson 括号', re: /^Hamilton 方程与 Poisson 括号$|Hamilton|哈密顿|Poisson 括号|泊松括号|相空间/ },
   { main: '理论力学', sub: '正则变换', re: /^正则变换$|正则变换|生成函数|作用量-角变量|H-Jacobi|哈密顿-雅可比/ },
+  { main: '理论力学', sub: '经典散射', re: /^经典散射$|卢瑟福散射|瞄准距|小角散射|散射截面（经典）/ },
 
   { main: '电动力学', sub: '静电场边值问题', re: /^静电场边值问题$|镜像法|边值问题|多极展开|分离变量.*静电|唯一性定理/ },
   { main: '电动力学', sub: '磁矢势与磁偶极', re: /^磁矢势与磁偶极$|磁矢势|矢势|磁偶极|磁标势/ },

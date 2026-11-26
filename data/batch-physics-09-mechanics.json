@@ -1,0 +1,1612 @@
+[
+  {
+    "title": "圆周运动的法向加速度",
+    "statement": "质点沿半径 $R=2.0\\ \\mathrm{m}$ 的圆周运动，弧长与时间的关系为 $s=t^3$（SI 单位）。求 $t=1.0\\ \\mathrm{s}$ 时的法向加速度 $a_n$。",
+    "mainTag": "力学",
+    "tags": [
+      "质点运动学"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 3,
+    "source": "漆安慎《力学》第4版 · 质点运动学",
+    "hints": [
+      "速率 $v=\\mathrm{d}s/\\mathrm{d}t$。",
+      "$a_n=v^2/R$，与切向加速度 $a_t=\\mathrm{d}v/\\mathrm{d}t$ 分开算。"
+    ],
+    "answer": "4.5\\ \\mathrm{m/s^2}",
+    "solution": "$v=\\mathrm{d}s/\\mathrm{d}t=3t^2$，$t=1\\ \\mathrm{s}$ 时 $v=3\\ \\mathrm{m/s}$。\n\n$a_n=\\dfrac{v^2}{R}=\\dfrac{9}{2.0}=4.5\\ \\mathrm{m/s^2}$。\n\n验算：量纲 $\\mathrm{(m/s)^2/m}=\\mathrm{m/s^2}$；同一时刻 $a_t=6t=6\\ \\mathrm{m/s^2}$，总加速度 $\\sqrt{4.5^2+6^2}=7.5\\ \\mathrm{m/s^2}$，与「变速圆周运动加速度有两分量」一致。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "m/s^2",
+      "dimension": [
+        0,
+        1,
+        -2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "methods": [
+        "运动的分解"
+      ],
+      "constants": [],
+      "textbookRef": "漆安慎《力学》第4版 第一章"
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "抛体最高点处的曲率半径",
+    "statement": "以 $v_0=20\\ \\mathrm{m/s}$、抛射角 $60^\\circ$ 斜抛一小球，取 $g=9.8\\ \\mathrm{m/s^2}$。求轨迹最高点处的曲率半径 $\\rho$。",
+    "mainTag": "力学",
+    "tags": [
+      "质点运动学"
+    ],
+    "kind": "计算题",
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 3,
+    "source": "漆安慎《力学》第4版 · 质点运动学",
+    "hints": [
+      "最高点竖直分速度为零，速度只剩水平分量。",
+      "法向加速度就是 $g$（重力全在法向）。"
+    ],
+    "answer": "10.2\\ \\mathrm{m}",
+    "solution": "最高点 $v=v_0\\cos60^\\circ=10\\ \\mathrm{m/s}$，加速度 $g$ 全部沿法向。\n\n由 $a_n=v^2/\\rho$ 得 $\\rho=\\dfrac{v^2}{g}=\\dfrac{100}{9.8}=10.2\\ \\mathrm{m}$。\n\n验算：量纲 $\\mathrm{(m/s)^2/(m/s^2)}=\\mathrm{m}$；抛出点曲率半径 $\\rho_0=v_0^2/(g\\cos60^\\circ)=81.6\\ \\mathrm{m}$，比最高点大，符合「速度越小、法向加速度越大 → 曲率半径越小」。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "m",
+      "dimension": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 3,
+      "constants": [
+        "g=9.8 m/s^2"
+      ],
+      "methods": [
+        "法向加速度"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "渡河的最短时间",
+    "statement": "河宽 $d=200\\ \\mathrm{m}$，水流速率 $2.0\\ \\mathrm{m/s}$，船相对水的速率 $4.0\\ \\mathrm{m/s}$。求渡河的最短时间。",
+    "mainTag": "力学",
+    "tags": [
+      "质点运动学"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "漆安慎《力学》第4版 · 相对运动",
+    "hints": [
+      "最短时间要求船头正对岸（把全部船速用于横渡）。",
+      "此时沿河漂移由水流决定，不影响渡河时间。"
+    ],
+    "answer": "50\\ \\mathrm{s}",
+    "solution": "船头垂直河岸时，横渡分速度最大为 $4.0\\ \\mathrm{m/s}$，故 $t_{\\min}=\\dfrac{d}{v_{\\text{船}}}=\\dfrac{200}{4.0}=50\\ \\mathrm{s}$。\n\n此时漂移 $x=2.0\\times50=100\\ \\mathrm{m}$，实际航程 $\\sqrt{200^2+100^2}=224\\ \\mathrm{m}$。\n\n验算：量纲 $\\mathrm{m/(m/s)}=\\mathrm{s}$；若要求「直达正对岸」，则需 $\\cos\\theta=2/4$ 斜向上游，时间会变为 $200/\\sqrt{16-4}=57.7\\ \\mathrm{s}$，比最短时间长，符合「最短时间与最短航程不可兼得」。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "s",
+      "dimension": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [],
+      "methods": [
+        "参考系变换",
+        "运动的分解"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "匀速圆周运动的加速度矢量",
+    "statement": "质点作半径 $R$、角速度 $\\omega$ 的匀速圆周运动，位置矢量 $\\vec r$ 从圆心指向质点。写出加速度矢量 $\\vec a$ 的表达式。",
+    "mainTag": "力学",
+    "tags": [
+      "质点运动学"
+    ],
+    "kind": "推导题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "漆安慎《力学》第4版 · 质点运动学",
+    "hints": [
+      "$\\vec r=R(\\cos\\omega t,\\ \\sin\\omega t)$。",
+      "对时间求两次导。"
+    ],
+    "answer": "\\vec a=-\\omega^2\\vec r",
+    "solution": "取 $\\vec r=R(\\cos\\omega t\\,\\vec i+\\sin\\omega t\\,\\vec j)$，两次求导得 $\\vec a=-\\omega^2R(\\cos\\omega t\\,\\vec i+\\sin\\omega t\\,\\vec j)=-\\omega^2\\vec r$。\n\n验算：$|\\vec a|=\\omega^2R=v^2/R$，与向心加速度公式一致；负号表示指向圆心，量纲 $\\mathrm{s^{-2}\\cdot m}=\\mathrm{m/s^2}$。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "symbolic",
+      "unit": "m/s^2",
+      "methods": [
+        "矢量求导"
+      ],
+      "constants": []
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "变速圆周运动的总加速度",
+    "statement": "汽车沿半径 $R=50\\ \\mathrm{m}$ 的弯道行驶，某时刻速率 $v=10\\ \\mathrm{m/s}$，切向加速度 $a_t=2.0\\ \\mathrm{m/s^2}$。求该时刻总加速度的大小。",
+    "mainTag": "力学",
+    "tags": [
+      "质点运动学"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "漆安慎《力学》第4版 · 质点运动学",
+    "hints": [
+      "法向加速度 $a_n=v^2/R$。",
+      "两分量互相垂直，用勾股定理。"
+    ],
+    "answer": "2.8\\ \\mathrm{m/s^2}",
+    "solution": "$a_n=\\dfrac{v^2}{R}=\\dfrac{100}{50}=2.0\\ \\mathrm{m/s^2}$。\n\n$a=\\sqrt{a_t^2+a_n^2}=\\sqrt{2.0^2+2.0^2}=2.83\\ \\mathrm{m/s^2}\\approx2.8\\ \\mathrm{m/s^2}$。\n\n验算：加速度与速度方向夹角 $\\arctan(a_n/a_t)=45^\\circ$，落在「加速转弯」的合理区间；量纲一致。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "m/s^2",
+      "dimension": [
+        0,
+        1,
+        -2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [],
+      "methods": [
+        "法向加速度"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "自由落体的高度与时间",
+    "statement": "物体自高度 $h$ 处自由下落，已知最后 $1.0\\ \\mathrm{s}$ 内下落了 $25\\ \\mathrm{m}$。取 $g=10\\ \\mathrm{m/s^2}$，求下落总时间 $t$ 与高度 $h$。",
+    "mainTag": "力学",
+    "tags": [
+      "质点运动学"
+    ],
+    "kind": "计算题",
+    "thinking": 5,
+    "difficulty": 4,
+    "calc": 3,
+    "source": "漆安慎《力学》第4版 · 质点运动学",
+    "hints": [
+      "总位移 $h=\\frac12gt^2$。",
+      "最后 1 s 的位移等于 $h(t)-h(t-1)$。"
+    ],
+    "answer": "t=3.0\\ \\mathrm{s},\\ h=45\\ \\mathrm{m}",
+    "solution": "$\\dfrac12gt^2-\\dfrac12g(t-1)^2=25$，取 $g=10$ 得 $10t-5=25$，故 $t=3.0\\ \\mathrm{s}$。\n\n$h=\\dfrac12\\times10\\times3^2=45\\ \\mathrm{m}$。\n\n验算：前 2 s 下落 $20\\ \\mathrm{m}$，第 3 s 内下落 $45-20=25\\ \\mathrm{m}$，与题意吻合。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "symbolic",
+      "unit": "m",
+      "methods": [
+        "匀变速直线运动"
+      ],
+      "constants": [
+        "g=10 m/s^2"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "阿特伍德机的加速度",
+    "statement": "定滑轮两侧悬挂质量 $m_1=3.0\\ \\mathrm{kg}$ 与 $m_2=1.0\\ \\mathrm{kg}$ 的物体，绳与滑轮质量、摩擦均忽略，取 $g=9.8\\ \\mathrm{m/s^2}$。求两物体的加速度大小。",
+    "mainTag": "力学",
+    "tags": [
+      "牛顿定律与非惯性系"
+    ],
+    "kind": "计算题",
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 2,
+    "source": "漆安慎《力学》第4版 · 牛顿运动定律",
+    "hints": [
+      "两物体加速度大小相同、方向相反。",
+      "分别列方程后相加消去绳张力。"
+    ],
+    "answer": "4.9\\ \\mathrm{m/s^2}",
+    "solution": "对 $m_1$：$m_1g-T=m_1a$；对 $m_2$：$T-m_2g=m_2a$。两式相加得 $(m_1-m_2)g=(m_1+m_2)a$。\n\n$a=\\dfrac{(3.0-1.0)\\times9.8}{3.0+1.0}=4.9\\ \\mathrm{m/s^2}$。\n\n验算：$m_2=0$ 时 $a=g$（自由落体），$m_1=m_2$ 时 $a=0$（平衡），两端极限均正确。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "m/s^2",
+      "dimension": [
+        0,
+        1,
+        -2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [
+        "g=9.8 m/s^2"
+      ],
+      "methods": [
+        "受力分析"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "斜面上开始滑动的临界角",
+    "statement": "物块静置于倾角可调的斜面上，物块与斜面间静摩擦因数 $\\mu_s=0.60$。缓慢增大倾角，求物块开始下滑的临界角 $\\theta_c$。",
+    "mainTag": "力学",
+    "tags": [
+      "牛顿定律与非惯性系"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "漆安慎《力学》第4版 · 摩擦",
+    "hints": [
+      "临界时静摩擦达到最大值 $\\mu_sN$。",
+      "$N=mg\\cos\\theta$，下滑分力 $mg\\sin\\theta$。"
+    ],
+    "answer": "31°",
+    "solution": "临界条件 $mg\\sin\\theta_c=\\mu_s mg\\cos\\theta_c$，故 $\\tan\\theta_c=\\mu_s=0.60$。\n\n$\\theta_c=\\arctan0.60=30.96^\\circ\\approx31^\\circ$。\n\n验算：$\\mu_s=0$ 时 $\\theta_c=0$（光滑面无临界角），$\\mu_s\\to\\infty$ 时 $\\theta_c\\to90^\\circ$（永不滑动），极限合理。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "°",
+      "dimension": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [
+        "mu_s=0.60"
+      ],
+      "methods": [
+        "受力分析"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "圆锥摆的角速度",
+    "statement": "长 $L=1.0\\ \\mathrm{m}$ 的细绳悬挂小球，小球在水平面内作匀速圆周运动，绳与竖直方向夹角 $\\theta=30^\\circ$，取 $g=9.8\\ \\mathrm{m/s^2}$。求角速度 $\\omega$。",
+    "mainTag": "力学",
+    "tags": [
+      "牛顿定律与非惯性系"
+    ],
+    "kind": "计算题",
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 3,
+    "source": "漆安慎《力学》第4版 · 牛顿运动定律",
+    "hints": [
+      "竖直方向 $T\\cos\\theta=mg$，水平方向 $T\\sin\\theta=m\\omega^2r$。",
+      "圆周半径 $r=L\\sin\\theta$。"
+    ],
+    "answer": "3.4\\ \\mathrm{rad/s}",
+    "solution": "竖直：$T\\cos\\theta=mg$；水平：$T\\sin\\theta=m\\omega^2L\\sin\\theta$。\n\n相除得 $\\omega^2=\\dfrac{g}{L\\cos\\theta}=\\dfrac{9.8}{1.0\\times0.866}=11.32$，故 $\\omega=3.36\\approx3.4\\ \\mathrm{rad/s}$。\n\n验算：$\\theta\\to0$ 时 $\\omega\\to\\sqrt{g/L}=3.13\\ \\mathrm{rad/s}$（小角单摆频率），与极限一致；量纲 $\\mathrm{s^{-2}}$ 开方为 $\\mathrm{rad/s}$。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "rad/s",
+      "dimension": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.03,
+      "sigFigs": 2,
+      "constants": [
+        "g=9.8 m/s^2"
+      ],
+      "methods": [
+        "受力分析",
+        "向心力"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "加速车厢中悬挂小球的偏角",
+    "statement": "车厢以 $a=2.0\\ \\mathrm{m/s^2}$ 水平加速，车内悬挂小球相对车厢静止。取 $g=9.8\\ \\mathrm{m/s^2}$，求悬线与竖直方向的夹角 $\\theta$。",
+    "mainTag": "力学",
+    "tags": [
+      "牛顿定律与非惯性系"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "漆安慎《力学》第4版 · 非惯性系",
+    "hints": [
+      "车厢参考系中加惯性力 $-m\\vec a$。",
+      "等效重力方向与竖直方向夹角即 $\\arctan(a/g)$。"
+    ],
+    "answer": "11.5°",
+    "solution": "在车厢参考系中，小球受重力 $mg$、惯性力 $ma$（向后）与张力，平衡时悬线沿等效重力方向。\n\n$\\tan\\theta=\\dfrac{a}{g}=\\dfrac{2.0}{9.8}=0.204$，$\\theta=11.5^\\circ$。\n\n验算：$a=0$ 时 $\\theta=0$（竖直下垂），$a=g$ 时 $\\theta=45^\\circ$，与「等效重力 = 重力与惯性力的矢量和」一致。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "°",
+      "dimension": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.03,
+      "sigFigs": 2,
+      "constants": [
+        "g=9.8 m/s^2"
+      ],
+      "methods": [
+        "非惯性系",
+        "等效重力"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "指数衰减力的速度积累",
+    "statement": "质量 $m$ 的质点从静止开始受变力 $F=F_0\\mathrm{e}^{-kt}$ 作用（$F_0,k$ 为常量），沿直线运动。求速度 $v(t)$。",
+    "mainTag": "力学",
+    "tags": [
+      "牛顿定律与非惯性系"
+    ],
+    "kind": "推导题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 3,
+    "source": "漆安慎《力学》第4版 · 牛顿运动定律",
+    "hints": [
+      "$m\\dfrac{\\mathrm{d}v}{\\mathrm{d}t}=F_0\\mathrm{e}^{-kt}$。",
+      "对时间积分，注意初条件 $v(0)=0$。"
+    ],
+    "answer": "v(t)=\\dfrac{F_0}{mk}\\left(1-\\mathrm{e}^{-kt}\\right)",
+    "solution": "由牛顿第二定律 $m\\dot v=F_0\\mathrm{e}^{-kt}$，积分得 $v=\\dfrac{F_0}{m}\\cdot\\dfrac{1-\\mathrm{e}^{-kt}}{k}$。\n\n验算：$t\\to\\infty$ 时 $v\\to\\dfrac{F_0}{mk}$（有限终速，因为冲量 $\\int_0^\\infty F\\,\\mathrm{d}t=F_0/k$ 有限）；$kt\\ll1$ 时 $v\\approx\\dfrac{F_0}{m}t$，退化为恒力加速。量纲 $\\mathrm{N/(kg\\cdot s^{-1})}=\\mathrm{m/s}$。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "symbolic",
+      "unit": "m/s",
+      "methods": [
+        "牛顿第二定律",
+        "积分"
+      ],
+      "constants": []
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "爆炸分离后的碎片速度",
+    "statement": "总质量 $4.0\\ \\mathrm{kg}$ 的物体静止，炸裂为 $1.0\\ \\mathrm{kg}$ 与 $3.0\\ \\mathrm{kg}$ 两块。已知 $1.0\\ \\mathrm{kg}$ 碎片的速率为 $30\\ \\mathrm{m/s}$，求 $3.0\\ \\mathrm{kg}$ 碎片的速度。",
+    "mainTag": "力学",
+    "tags": [
+      "动量与碰撞"
+    ],
+    "kind": "计算题",
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 2,
+    "source": "漆安慎《力学》第4版 · 动量定理",
+    "hints": [
+      "爆炸瞬间内力远大于外力，总动量守恒且为零。",
+      "取小碎片方向为正。"
+    ],
+    "answer": "-10\\ \\mathrm{m/s}",
+    "solution": "总动量守恒：$0=1.0\\times30+3.0\\times v$，得 $v=-10\\ \\mathrm{m/s}$。\n\n即大碎片以 $10\\ \\mathrm{m/s}$ 沿相反方向运动。\n\n验算：动量 $30-30=0$ 复原初始动量；动能由 0 增为 $450+150=600\\ \\mathrm{J}$，来自化学能，符合爆炸过程「动量守恒而动能增加」。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "m/s",
+      "dimension": [
+        0,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [],
+      "methods": [
+        "守恒律"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "弹性碰撞后被撞球的速度",
+    "statement": "质量 $m_1=2.0\\ \\mathrm{kg}$ 的小球以 $3.0\\ \\mathrm{m/s}$ 与静止的 $m_2=1.0\\ \\mathrm{kg}$ 小球发生一维完全弹性碰撞。求碰后 $m_2$ 的速度。",
+    "mainTag": "力学",
+    "tags": [
+      "动量与碰撞"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "漆安慎《力学》第4版 · 碰撞",
+    "hints": [
+      "弹性碰撞同时满足动量守恒与动能守恒。",
+      "$u_2=\\dfrac{2m_1}{m_1+m_2}v_1$。"
+    ],
+    "answer": "4.0\\ \\mathrm{m/s}",
+    "solution": "一维弹性碰撞：$u_2=\\dfrac{2m_1}{m_1+m_2}v_1=\\dfrac{2\\times2.0}{3.0}\\times3.0=4.0\\ \\mathrm{m/s}$，方向与入射方向相同。\n\n另一个根 $u_1=\\dfrac{m_1-m_2}{m_1+m_2}v_1=1.0\\ \\mathrm{m/s}$。\n\n验算：动量 $2\\times3=6$，碰后 $2\\times1+1\\times4=6$ ✓；动能 $9\\ \\mathrm{J}$，碰后 $1+8=9\\ \\mathrm{J}$ ✓。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "m/s",
+      "dimension": [
+        0,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [],
+      "methods": [
+        "守恒律",
+        "碰撞"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "冲击摆测子弹速度",
+    "statement": "质量 $m=10\\ \\mathrm{g}$ 的子弹水平射入悬挂的 $M=1.99\\ \\mathrm{kg}$ 木块并留在其中，木块随后摆起的最大高度 $h=0.20\\ \\mathrm{m}$，取 $g=9.8\\ \\mathrm{m/s^2}$。求子弹初速度 $v_0$。",
+    "mainTag": "力学",
+    "tags": [
+      "动量与碰撞",
+      "功与机械能"
+    ],
+    "kind": "计算题",
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 3,
+    "source": "漆安慎《力学》第4版 · 碰撞",
+    "hints": [
+      "先由摆起高度求碰后共同速度。",
+      "再用动量守恒反推子弹速度。"
+    ],
+    "answer": "396\\ \\mathrm{m/s}",
+    "solution": "碰后共同速度 $v=\\sqrt{2gh}=\\sqrt{2\\times9.8\\times0.20}=1.98\\ \\mathrm{m/s}$。\n\n动量守恒：$mv_0=(m+M)v$，故 $v_0=\\dfrac{2.00}{0.010}\\times1.98=396\\ \\mathrm{m/s}$。\n\n验算：碰前动能 $800\\ \\mathrm{J}$，碰后 $3.9\\ \\mathrm{J}$，绝大部分转为内能——完全非弹性碰撞的典型特征；若用能量守恒会得到错误的高值，说明必须分两阶段处理。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "m/s",
+      "dimension": [
+        0,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.03,
+      "sigFigs": 3,
+      "constants": [
+        "g=9.8 m/s^2"
+      ],
+      "methods": [
+        "守恒律",
+        "碰撞"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "人跳离小船后的船速",
+    "statement": "质量 $150\\ \\mathrm{kg}$ 的小船静止于静水中，质量 $50\\ \\mathrm{kg}$ 的人以相对岸 $4.0\\ \\mathrm{m/s}$ 的水平速度跳离船尾。忽略水的阻力，求船获得的速度。",
+    "mainTag": "力学",
+    "tags": [
+      "动量与碰撞"
+    ],
+    "kind": "计算题",
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 2,
+    "source": "漆安慎《力学》第4版 · 动量守恒",
+    "hints": [
+      "系统总动量守恒且为零。",
+      "注意题目给的是相对岸的速度，不需要做相对速度换算。"
+    ],
+    "answer": "-1.3\\ \\mathrm{m/s}",
+    "solution": "$0=50\\times4.0+150\\times v$，得 $v=-1.33\\ \\mathrm{m/s}$。\n\n船以 $1.3\\ \\mathrm{m/s}$ 沿人跳跃的反方向退行。\n\n验算：动量 $200-200=0$ ✓；若人相对船以 $4\\ \\mathrm{m/s}$ 跳出，则需先换算相对速度，结果为 $v=-1.0\\ \\mathrm{m/s}$——两种问法答案不同，读题要看清参考系。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "m/s",
+      "dimension": [
+        0,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.03,
+      "sigFigs": 2,
+      "constants": [],
+      "methods": [
+        "守恒律"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "变力做功",
+    "statement": "质点在力 $F=3x^2\\ \\mathrm{N}$ 作用下沿 $x$ 轴由 $x=0$ 移到 $x=2.0\\ \\mathrm{m}$。求该力做的功。",
+    "mainTag": "力学",
+    "tags": [
+      "功与机械能"
+    ],
+    "kind": "计算题",
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 2,
+    "source": "漆安慎《力学》第4版 · 功与能",
+    "hints": [
+      "$W=\\int F\\,\\mathrm{d}x$。",
+      "$\\int_0^2 3x^2\\mathrm{d}x=[x^3]_0^2$。"
+    ],
+    "answer": "8.0\\ \\mathrm{J}",
+    "solution": "$W=\\displaystyle\\int_0^{2}3x^2\\,\\mathrm{d}x=\\left[x^3\\right]_0^2=8.0\\ \\mathrm{J}$。\n\n验算：量纲 $\\mathrm{N\\cdot m}=\\mathrm{J}$；力随 $x$ 增大，平均力 $4\\ \\mathrm{N}$ 乘位移 $2\\ \\mathrm{m}$ 也是 $8\\ \\mathrm{J}$，与积分一致。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "J",
+      "dimension": [
+        1,
+        2,
+        -2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [],
+      "methods": [
+        "积分求功"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "弹簧振子的总能量与最大速率",
+    "statement": "弹簧振子 $k=100\\ \\mathrm{N/m}$，振子质量 $m=1.0\\ \\mathrm{kg}$，振幅 $A=0.10\\ \\mathrm{m}$，水平面光滑。求总能量与最大速率。",
+    "mainTag": "振动与波",
+    "tags": [
+      "简谐振动"
+    ],
+    "kind": "计算题",
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 2,
+    "source": "漆安慎《力学》第4版 · 振动",
+    "hints": [
+      "$E=\\frac12kA^2$。",
+      "$v_{\\max}=\\omega A$，$\\omega=\\sqrt{k/m}$。"
+    ],
+    "answer": "E=0.50\\ \\mathrm{J},\\ v_{\\max}=1.0\\ \\mathrm{m/s}",
+    "solution": "$E=\\dfrac12kA^2=\\dfrac12\\times100\\times0.01=0.50\\ \\mathrm{J}$。\n\n$\\omega=\\sqrt{k/m}=10\\ \\mathrm{rad/s}$，$v_{\\max}=\\omega A=1.0\\ \\mathrm{m/s}$。\n\n验算：$\\dfrac12mv_{\\max}^2=0.50\\ \\mathrm{J}=E$，动能与势能相互转换、总量守恒；$A$ 加倍则 $E$ 变 4 倍、$v_{\\max}$ 变 2 倍，符合 $E\\propto A^2$。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "symbolic",
+      "unit": "J",
+      "methods": [
+        "简谐振动模型",
+        "能量守恒"
+      ],
+      "constants": []
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "竖直圆轨道的临界速度",
+    "statement": "小球沿竖直平面内半径 $R=0.50\\ \\mathrm{m}$ 的光滑圆轨道内侧运动。求小球能通过最高点的最小速度（取 $g=9.8\\ \\mathrm{m/s^2}$）。",
+    "mainTag": "力学",
+    "tags": [
+      "牛顿定律与非惯性系",
+      "功与机械能"
+    ],
+    "kind": "计算题",
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 3,
+    "source": "漆安慎《力学》第4版 · 圆周运动",
+    "hints": [
+      "最高点临界条件：重力恰好提供向心力，$N=0$。",
+      "$mg=mv^2/R$。"
+    ],
+    "answer": "2.2\\ \\mathrm{m/s}",
+    "solution": "最高点临界时轨道支持力为零，$mg=\\dfrac{mv^2}{R}$，故 $v=\\sqrt{gR}=\\sqrt{9.8\\times0.50}=2.21\\ \\mathrm{m/s}$。\n\n验算：对应最低点速度 $\\sqrt{v^2+4gR}=\\sqrt{4.9+19.6}=4.95\\ \\mathrm{m/s}$，比 $\\sqrt{5gR}=4.95$ 一致；若用「最高点速度为零」的错误条件，会得出小球中途脱离轨道的矛盾结论。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "m/s",
+      "dimension": [
+        0,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [
+        "g=9.8 m/s^2"
+      ],
+      "methods": [
+        "向心力",
+        "临界条件"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "恒定功率下的最大速度",
+    "statement": "质量 $1000\\ \\mathrm{kg}$ 的汽车以恒定功率 $P=20\\ \\mathrm{kW}$ 行驶，所受阻力恒为 $500\\ \\mathrm{N}$。求汽车能达到的最大速度。",
+    "mainTag": "力学",
+    "tags": [
+      "功与机械能"
+    ],
+    "kind": "计算题",
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 2,
+    "source": "漆安慎《力学》第4版 · 功率",
+    "hints": [
+      "最大速度时牵引力等于阻力。",
+      "$P=Fv$。"
+    ],
+    "answer": "40\\ \\mathrm{m/s}",
+    "solution": "匀速时 $F=f=500\\ \\mathrm{N}$，由 $P=Fv$ 得 $v_{\\max}=\\dfrac{20000}{500}=40\\ \\mathrm{m/s}$。\n\n验算：量纲 $\\mathrm{W/N}=\\mathrm{(J/s)/(N)}=\\mathrm{m/s}$；功率加倍则最大速度加倍，符合 $v\\propto P$。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "m/s",
+      "dimension": [
+        0,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [],
+      "methods": [
+        "功率"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "滑块压缩弹簧的最大压缩量",
+    "statement": "质量 $m=1.0\\ \\mathrm{kg}$ 的滑块从高 $h=0.50\\ \\mathrm{m}$ 的光滑斜面顶端由静止下滑，在水平面上压缩劲度系数 $k=1000\\ \\mathrm{N/m}$ 的弹簧。忽略一切摩擦，取 $g=9.8\\ \\mathrm{m/s^2}$，求最大压缩量 $x$。",
+    "mainTag": "力学",
+    "tags": [
+      "功与机械能"
+    ],
+    "kind": "计算题",
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 3,
+    "source": "漆安慎《力学》第4版 · 机械能守恒",
+    "hints": [
+      "从释放到最大压缩，机械能守恒。",
+      "$mgh=\\frac12kx^2$。"
+    ],
+    "answer": "0.099\\ \\mathrm{m}",
+    "solution": "$mgh=\\dfrac12kx^2$，故 $x=\\sqrt{\\dfrac{2mgh}{k}}=\\sqrt{\\dfrac{2\\times1.0\\times9.8\\times0.50}{1000}}=\\sqrt{9.8\\times10^{-3}}=0.099\\ \\mathrm{m}$。\n\n验算：量纲 $\\sqrt{\\mathrm{J/(N/m)}}=\\sqrt{\\mathrm{m^2}}=\\mathrm{m}$；$h$ 增大 4 倍则 $x$ 增大 2 倍（$x\\propto\\sqrt h$），符合能量线性关系。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "m",
+      "dimension": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.03,
+      "sigFigs": 2,
+      "constants": [
+        "g=9.8 m/s^2"
+      ],
+      "methods": [
+        "机械能守恒"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "转盘的角动量",
+    "statement": "一半径 $0.50\\ \\mathrm{m}$、质量 $4.0\\ \\mathrm{kg}$ 的均质圆盘绕中心轴以 $10\\ \\mathrm{rad/s}$ 转动。求其角动量大小。",
+    "mainTag": "力学",
+    "tags": [
+      "角动量守恒",
+      "刚体定轴转动"
+    ],
+    "kind": "计算题",
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 2,
+    "source": "漆安慎《力学》第4版 · 角动量",
+    "hints": [
+      "圆盘绕中心 $J=\\frac12mR^2$。",
+      "$L=J\\omega$。"
+    ],
+    "answer": "5.0\\ \\mathrm{kg\\cdot m^2/s}",
+    "solution": "$J=\\dfrac12mR^2=\\dfrac12\\times4.0\\times0.25=0.50\\ \\mathrm{kg\\cdot m^2}$。\n\n$L=J\\omega=0.50\\times10=5.0\\ \\mathrm{kg\\cdot m^2/s}$。\n\n验算：量纲 $\\mathrm{kg\\,m^2\\,s^{-1}}$；若把圆盘当圆环（$J=mR^2$）会得 $10$，是常见的 $2$ 倍错误。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "kg*m^2/s",
+      "dimension": [
+        1,
+        2,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [],
+      "methods": [
+        "转动惯量",
+        "角动量"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "人走向转台中心时的角速度",
+    "statement": "转台转动惯量 $J_0=8.0\\ \\mathrm{kg\\cdot m^2}$，以 $\\omega_0=2.0\\ \\mathrm{rad/s}$ 转动。质量 $50\\ \\mathrm{kg}$ 的人（视为质点）从中心走到半径 $r=0.40\\ \\mathrm{m}$ 处并随台转动。求此时角速度。",
+    "mainTag": "力学",
+    "tags": [
+      "角动量守恒"
+    ],
+    "kind": "计算题",
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 3,
+    "source": "漆安慎《力学》第4版 · 角动量守恒",
+    "hints": [
+      "轴无外力矩，系统角动量守恒。",
+      "人的转动惯量 $mr^2$，与转台直接相加。"
+    ],
+    "answer": "1.0\\ \\mathrm{rad/s}",
+    "solution": "人的转动惯量 $J_1=mr^2=50\\times0.16=8.0\\ \\mathrm{kg\\cdot m^2}$。\n\n$J_0\\omega_0=(J_0+J_1)\\omega$，故 $\\omega=\\dfrac{8.0\\times2.0}{16}=1.0\\ \\mathrm{rad/s}$。\n\n验算：角动量 $16\\ \\mathrm{kg\\cdot m^2/s}$ 前后一致；动能由 $16\\ \\mathrm{J}$ 降为 $8\\ \\mathrm{J}$，减少部分用于克服离心趋势做功，符合「角动量守恒、动能不守恒」。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "rad/s",
+      "dimension": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [],
+      "methods": [
+        "守恒律",
+        "转动惯量"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "行星运动的面积速度",
+    "statement": "某行星在近日点距太阳 $r=1.0\\ \\mathrm{AU}=1.496\\times10^{11}\\ \\mathrm{m}$，速度 $v=3.0\\times10^{4}\\ \\mathrm{m/s}$，速度与矢径垂直。求其面积速度 $\\mathrm{d}A/\\mathrm{d}t$。",
+    "mainTag": "力学",
+    "tags": [
+      "角动量守恒",
+      "万有引力与天体运动"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 3,
+    "source": "漆安慎《力学》第4版 · 万有引力",
+    "hints": [
+      "面积速度 $\\dfrac{\\mathrm{d}A}{\\mathrm{d}t}=\\dfrac12r^2\\dot\\theta=\\dfrac12rv_\\perp$。",
+      "近日点处 $v\\perp r$。"
+    ],
+    "answer": "2.2\\times10^{15}\\ \\mathrm{m^2/s}",
+    "solution": "$\\dfrac{\\mathrm{d}A}{\\mathrm{d}t}=\\dfrac12rv=\\dfrac12\\times1.496\\times10^{11}\\times3.0\\times10^{4}=2.24\\times10^{15}\\ \\mathrm{m^2/s}$。\n\n验算：量纲 $\\mathrm{m\\cdot m/s}=\\mathrm{m^2/s}$；由 $\\mathrm{d}A/\\mathrm{d}t=L/(2m)$ 恒定，远日点速度必然更小，正是开普勒第二定律的内容。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "m^2/s",
+      "dimension": [
+        0,
+        2,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.03,
+      "sigFigs": 2,
+      "constants": [],
+      "methods": [
+        "角动量守恒",
+        "开普勒定律"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "恒定力矩作用后的角速度",
+    "statement": "转动惯量 $J=1.5\\ \\mathrm{kg\\cdot m^2}$ 的刚体绕定轴转动，受恒定力矩 $M=2.0\\ \\mathrm{N\\cdot m}$ 作用 $3.0\\ \\mathrm{s}$。初始静止，求末角速度。",
+    "mainTag": "力学",
+    "tags": [
+      "刚体定轴转动"
+    ],
+    "kind": "计算题",
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 2,
+    "source": "漆安慎《力学》第4版 · 转动定律",
+    "hints": [
+      "角动量定理 $M\\Delta t=J\\omega$。",
+      "也可先用 $\\beta=M/J$ 求角加速度。"
+    ],
+    "answer": "4.0\\ \\mathrm{rad/s}",
+    "solution": "$\\beta=\\dfrac{M}{J}=\\dfrac{2.0}{1.5}=1.33\\ \\mathrm{rad/s^2}$，故 $\\omega=\\beta t=1.33\\times3.0=4.0\\ \\mathrm{rad/s}$。\n\n验算：角冲量 $M\\Delta t=6.0\\ \\mathrm{N\\cdot m\\cdot s}$，除以 $J$ 得 $4.0\\ \\mathrm{rad/s}$，两条路径一致。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "rad/s",
+      "dimension": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [],
+      "methods": [
+        "转动定律",
+        "角动量定理"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "近地卫星的环绕速度",
+    "statement": "取地球质量 $M=5.97\\times10^{24}\\ \\mathrm{kg}$、半径 $R=6.37\\times10^{6}\\ \\mathrm{m}$、$G=6.674\\times10^{-11}\\ \\mathrm{N\\cdot m^2/kg^2}$。求近地圆轨道卫星的环绕速度。",
+    "mainTag": "力学",
+    "tags": [
+      "万有引力与天体运动"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 3,
+    "source": "漆安慎《力学》第4版 · 万有引力",
+    "hints": [
+      "$G\\dfrac{Mm}{R^2}=\\dfrac{mv^2}{R}$。",
+      "结果是第一宇宙速度。"
+    ],
+    "answer": "7.9\\ \\mathrm{km/s}",
+    "solution": "$v_1=\\sqrt{\\dfrac{GM}{R}}=\\sqrt{\\dfrac{6.674\\times10^{-11}\\times5.97\\times10^{24}}{6.37\\times10^{6}}}=\\sqrt{6.25\\times10^{7}}=7.91\\times10^{3}\\ \\mathrm{m/s}$。\n\n验算：量纲 $\\sqrt{\\mathrm{N\\,m^2\\,kg^{-2}\\cdot kg/m}}=\\mathrm{m/s}$；与熟知的 7.9 km/s 一致，周期 $2\\pi R/v_1=84\\ \\mathrm{min}$，也与近地轨道实测相符。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "km/s",
+      "dimension": [
+        0,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [
+        "G=6.674e-11 N*m^2/kg^2",
+        "M=5.97e24 kg",
+        "R=6.37e6 m"
+      ],
+      "methods": [
+        "万有引力",
+        "向心力"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "地球表面的逃逸速度",
+    "statement": "承上题条件，求从地球表面逃逸所需的最小速度（第二宇宙速度）。",
+    "mainTag": "力学",
+    "tags": [
+      "万有引力与天体运动"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "漆安慎《力学》第4版 · 万有引力",
+    "hints": [
+      "逃逸条件：总机械能恰为零。",
+      "$v_2=\\sqrt{2GM/R}=\\sqrt2\\,v_1$。"
+    ],
+    "answer": "11.2\\ \\mathrm{km/s}",
+    "solution": "$\\dfrac12mv^2-\\dfrac{GMm}{R}=0$，故 $v_2=\\sqrt{\\dfrac{2GM}{R}}=\\sqrt2\\times7.91=11.2\\ \\mathrm{km/s}$。\n\n验算：$v_2/v_1=\\sqrt2=1.41$，与理论比值一致；月球表面 $M,R$ 更小，算得 $2.4\\ \\mathrm{km/s}$，符合「月球留不住大气」的事实。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "km/s",
+      "dimension": [
+        0,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 3,
+      "constants": [
+        "G=6.674e-11 N*m^2/kg^2",
+        "M=5.97e24 kg",
+        "R=6.37e6 m"
+      ],
+      "methods": [
+        "机械能守恒",
+        "万有引力"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "地球同步卫星的轨道高度",
+    "statement": "地球自转周期按 $T=8.616\\times10^{4}\\ \\mathrm{s}$ 计，$GM=3.986\\times10^{14}\\ \\mathrm{m^3/s^2}$，地球半径 $R=6.37\\times10^{6}\\ \\mathrm{m}$。求同步卫星距地面的高度 $h$。",
+    "mainTag": "力学",
+    "tags": [
+      "万有引力与天体运动"
+    ],
+    "kind": "计算题",
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 4,
+    "source": "漆安慎《力学》第4版 · 万有引力",
+    "hints": [
+      "由 $GM/r^3=\\omega^2=(2\\pi/T)^2$ 解 $r$。",
+      "$h=r-R$，别把 $r$ 当高度。"
+    ],
+    "answer": "3.6\\times10^{4}\\ \\mathrm{km}",
+    "solution": "$r=\\left(\\dfrac{GMT^2}{4\\pi^2}\\right)^{1/3}=\\left(\\dfrac{3.986\\times10^{14}\\times7.424\\times10^{9}}{39.48}\\right)^{1/3}=(7.50\\times10^{22})^{1/3}=4.22\\times10^{7}\\ \\mathrm{m}$。\n\n$h=r-R=4.22\\times10^{7}-6.37\\times10^{6}=3.58\\times10^{7}\\ \\mathrm{m}\\approx3.6\\times10^{4}\\ \\mathrm{km}$。\n\n验算：与公认值 35 786 km 相符（误差来自 $T$ 取整）；若误用 $r$ 当高度会得到 42 200 km，是常见错法。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "km",
+      "dimension": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.03,
+      "sigFigs": 2,
+      "constants": [
+        "GM=3.986e14 m^3/s^2",
+        "T=8.616e4 s",
+        "R=6.37e6 m"
+      ],
+      "methods": [
+        "万有引力",
+        "圆周运动"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "细杆绕端点的转动惯量",
+    "statement": "质量 $m$、长 $L$ 的均质细杆，绕通过其一端且垂直于杆的轴转动。求转动惯量 $J$。",
+    "mainTag": "力学",
+    "tags": [
+      "刚体定轴转动"
+    ],
+    "kind": "推导题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 3,
+    "source": "漆安慎《力学》第4版 · 刚体",
+    "hints": [
+      "取距轴 $x$ 处长度元 $\\mathrm{d}x$，质量元 $\\mathrm{d}m=\\frac{m}{L}\\mathrm{d}x$。",
+      "$J=\\int x^2\\mathrm{d}m$。"
+    ],
+    "answer": "J=\\dfrac13mL^2",
+    "solution": "$J=\\displaystyle\\int_0^L x^2\\dfrac{m}{L}\\mathrm{d}x=\\dfrac{m}{L}\\cdot\\dfrac{L^3}{3}=\\dfrac13mL^2$。\n\n验算：由平行轴定理，绕中心 $J_C=J-\\dfrac{mL^2}{4}=\\dfrac13mL^2-\\dfrac14mL^2=\\dfrac1{12}mL^2$，与熟知结果一致；量纲 $\\mathrm{kg\\,m^2}$。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "symbolic",
+      "unit": "kg*m^2",
+      "methods": [
+        "微元法",
+        "转动惯量"
+      ],
+      "constants": []
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "圆柱体沿斜面纯滚动的加速度",
+    "statement": "均质圆柱体（$J=\\frac12mR^2$）沿倾角 $30^\\circ$ 的斜面无滑动滚下，取 $g=9.8\\ \\mathrm{m/s^2}$。求质心加速度。",
+    "mainTag": "力学",
+    "tags": [
+      "刚体平面平行运动"
+    ],
+    "kind": "计算题",
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 3,
+    "source": "漆安慎《力学》第4版 · 刚体平面运动",
+    "hints": [
+      "纯滚动条件 $a=\\beta R$。",
+      "$mg\\sin\\theta-f=ma$，$fR=J\\beta$。"
+    ],
+    "answer": "3.3\\ \\mathrm{m/s^2}",
+    "solution": "由 $mg\\sin\\theta-f=ma$、$fR=J\\beta=J\\dfrac{a}{R}$ 消去 $f$，得 $a=\\dfrac{g\\sin\\theta}{1+J/(mR^2)}$。\n\n圆柱 $J/(mR^2)=1/2$，故 $a=\\dfrac{9.8\\times0.5}{1.5}=3.27\\approx3.3\\ \\mathrm{m/s^2}$。\n\n验算：滑块（$J=0$）为 $4.9$，圆环（$J=mR^2$）为 $2.45$，圆柱居中，符合「转动惯量越大滚得越慢」；量纲为加速度。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "m/s^2",
+      "dimension": [
+        0,
+        1,
+        -2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.03,
+      "sigFigs": 2,
+      "constants": [
+        "g=9.8 m/s^2"
+      ],
+      "methods": [
+        "刚体平面运动",
+        "纯滚动"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "子弹击中悬挂细杆后的角速度",
+    "statement": "长 $L=1.0\\ \\mathrm{m}$、质量 $M=2.0\\ \\mathrm{kg}$ 的均质细杆可绕上端水平轴自由转动，初始静止下垂。质量 $m=10\\ \\mathrm{g}$ 的子弹以 $v=300\\ \\mathrm{m/s}$ 水平击中杆的下端并嵌入。求碰后瞬间的角速度。",
+    "mainTag": "力学",
+    "tags": [
+      "角动量守恒",
+      "刚体定轴转动"
+    ],
+    "kind": "计算题",
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 4,
+    "source": "漆安慎《力学》第4版 · 角动量守恒",
+    "hints": [
+      "碰撞瞬间对轴的角动量守恒（杆受轴的反作用冲量，但对该轴无力矩）。",
+      "碰后转动惯量 $\\frac13ML^2+mL^2$。"
+    ],
+    "answer": "4.4\\ \\mathrm{rad/s}",
+    "solution": "碰前 $L_i=mvL=0.010\\times300\\times1.0=3.0\\ \\mathrm{kg\\cdot m^2/s}$。\n\n碰后 $J=\\dfrac13\\times2.0\\times1^2+0.010\\times1^2=0.667+0.010=0.677\\ \\mathrm{kg\\cdot m^2}$，故 $\\omega=\\dfrac{3.0}{0.677}=4.43\\approx4.4\\ \\mathrm{rad/s}$。\n\n验算：用动量守恒会得到错误结果（轴有冲量），必须用角动量；碰前动能 $450\\ \\mathrm{J}$，碰后仅 $6.6\\ \\mathrm{J}$，其余转为内能，符合完全非弹性碰撞。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "rad/s",
+      "dimension": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.03,
+      "sigFigs": 2,
+      "constants": [],
+      "methods": [
+        "守恒律",
+        "转动惯量"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "陀螺的进动角速度",
+    "statement": "一对称陀螺绕自转轴以 $\\omega=100\\ \\mathrm{rad/s}$ 转动，自转轴转动惯量 $J=0.020\\ \\mathrm{kg\\cdot m^2}$，质心到支点距离 $l=0.10\\ \\mathrm{m}$，质量 $m=0.50\\ \\mathrm{kg}$。求进动角速度 $\\Omega$（取 $g=9.8\\ \\mathrm{m/s^2}$）。",
+    "mainTag": "理论力学",
+    "tags": [
+      "刚体 Euler 方程与 Euler 角"
+    ],
+    "kind": "计算题",
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 3,
+    "source": "Landau《力学》刚体运动 / 漆安慎《力学》陀螺",
+    "hints": [
+      "$\\Omega=\\dfrac{mgl}{J\\omega}$（快转近似）。",
+      "进动方向由 $\\vec M=\\vec\\Omega\\times\\vec L$ 决定。"
+    ],
+    "answer": "0.25\\ \\mathrm{rad/s}",
+    "solution": "重力矩 $M=mgl=0.50\\times9.8\\times0.10=0.49\\ \\mathrm{N\\cdot m}$。\n\n快转近似下 $\\Omega=\\dfrac{M}{J\\omega}=\\dfrac{0.49}{0.020\\times100}=0.245\\approx0.25\\ \\mathrm{rad/s}$。\n\n验算：$\\omega$ 加倍则 $\\Omega$ 减半（$\\Omega\\propto1/\\omega$），与「转得越快越不倒」的直觉一致；量纲 $\\mathrm{N\\,m/(kg\\,m^2\\,s^{-1})}=\\mathrm{s^{-1}}$。",
+    "physicsMeta": {
+      "course": "theory",
+      "answerType": "numeric_unit",
+      "unit": "rad/s",
+      "dimension": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.03,
+      "sigFigs": 2,
+      "constants": [
+        "g=9.8 m/s^2"
+      ],
+      "methods": [
+        "陀螺",
+        "角动量定理"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "双球哑铃绕中点的转动惯量",
+    "statement": "两个质量均为 $m$、半径均为 $R$ 的均质小球，用长为 $2l$ 的轻杆相连。求该系统绕通过杆中点且垂直杆的轴的转动惯量。",
+    "mainTag": "力学",
+    "tags": [
+      "刚体定轴转动"
+    ],
+    "kind": "推导题",
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 3,
+    "source": "漆安慎《力学》第4版 · 转动惯量",
+    "hints": [
+      "每个球的转动惯量 = 自身绕球心 $\\frac25mR^2$ 加平行轴项 $ml^2$。",
+      "两个球求和。"
+    ],
+    "answer": "J=2m\\left(\\dfrac{2}{5}R^2+l^2\\right)",
+    "solution": "对单个球，绕距球心 $l$ 的平行轴：$J_1=\\dfrac25mR^2+ml^2$。\n\n两球求和：$J=2\\left(\\dfrac25mR^2+ml^2\\right)=2m\\left(\\dfrac{2}{5}R^2+l^2\\right)$。\n\n验算：$l=0$（两球重合于轴）时退化为 $\\dfrac45mR^2$，等于两球自转之和；$R\\to0$（质点）时为 $2ml^2$，与「两个质点相距 $2l$」一致。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "symbolic",
+      "unit": "kg*m^2",
+      "methods": [
+        "平行轴定理",
+        "转动惯量"
+      ],
+      "constants": []
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "秒摆的长度",
+    "statement": "要使单摆的小振动周期恰为 $2.0\\ \\mathrm{s}$，摆长应为多少？取 $g=9.8\\ \\mathrm{m/s^2}$。",
+    "mainTag": "振动与波",
+    "tags": [
+      "简谐振动"
+    ],
+    "kind": "计算题",
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 2,
+    "source": "漆安慎《力学》第4版 · 振动",
+    "hints": [
+      "$T=2\\pi\\sqrt{L/g}$。",
+      "反解 $L=gT^2/(4\\pi^2)$。"
+    ],
+    "answer": "0.99\\ \\mathrm{m}",
+    "solution": "$L=\\dfrac{gT^2}{4\\pi^2}=\\dfrac{9.8\\times4.0}{39.48}=0.993\\approx0.99\\ \\mathrm{m}$。\n\n验算：这就是历史上「秒摆」约 1 m 的由来；$T$ 减半则 $L$ 变 $1/4$，符合 $T\\propto\\sqrt L$。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "m",
+      "dimension": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [
+        "g=9.8 m/s^2"
+      ],
+      "methods": [
+        "单摆"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "两音叉的拍频",
+    "statement": "两只音叉频率分别为 $440\\ \\mathrm{Hz}$ 与 $444\\ \\mathrm{Hz}$，同时发声。求拍频。",
+    "mainTag": "振动与波",
+    "tags": [
+      "波的干涉与驻波"
+    ],
+    "kind": "计算题",
+    "thinking": 2,
+    "difficulty": 2,
+    "calc": 1,
+    "source": "漆安慎《力学》第4版 · 波动",
+    "hints": [
+      "拍频等于两频率之差。",
+      "拍是振幅的慢调制，不是新的声源频率。"
+    ],
+    "answer": "4\\ \\mathrm{Hz}",
+    "solution": "拍频 $f_{\\mathrm{beat}}=|f_1-f_2|=4\\ \\mathrm{Hz}$，即每秒听到 4 次强弱起伏。\n\n验算：拍周期 $0.25\\ \\mathrm{s}$，远长于声波周期（约 $2.3\\ \\mathrm{ms}$），符合「拍是包络调制」的图像。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "Hz",
+      "dimension": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.01,
+      "sigFigs": 2,
+      "constants": [],
+      "methods": [
+        "波的叠加"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "弦上横波的波速",
+    "statement": "一根弦的张力 $T=100\\ \\mathrm{N}$，线密度 $\\mu=0.010\\ \\mathrm{kg/m}$。求弦上横波的传播速度。",
+    "mainTag": "振动与波",
+    "tags": [
+      "平面简谐波"
+    ],
+    "kind": "计算题",
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 2,
+    "source": "漆安慎《力学》第4版 · 波动",
+    "hints": [
+      "$v=\\sqrt{T/\\mu}$。",
+      "$\\mu$ 是线密度，不是体密度。"
+    ],
+    "answer": "100\\ \\mathrm{m/s}",
+    "solution": "$v=\\sqrt{\\dfrac{T}{\\mu}}=\\sqrt{\\dfrac{100}{0.010}}=100\\ \\mathrm{m/s}$。\n\n验算：量纲 $\\sqrt{\\mathrm{N/(kg/m)}}=\\sqrt{\\mathrm{m^2/s^2}}=\\mathrm{m/s}$；弦长 $1.0\\ \\mathrm{m}$ 两端固定时基频 $f=v/2L=50\\ \\mathrm{Hz}$，与吉他弦的实际量级一致。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "numeric_unit",
+      "unit": "m/s",
+      "dimension": [
+        0,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [],
+      "methods": [
+        "波动方程"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "阻尼振动的对数减缩",
+    "statement": "某阻尼振动的相邻两个同向振幅之比为 $1.20$。求对数减缩 $\\delta$ 与阻尼比 $\\zeta$（小阻尼近似）。",
+    "mainTag": "振动与波",
+    "tags": [
+      "阻尼与受迫振动"
+    ],
+    "kind": "计算题",
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 3,
+    "source": "漆安慎《力学》第4版 · 阻尼振动",
+    "hints": [
+      "$\\delta=\\ln(A_n/A_{n+1})$。",
+      "小阻尼时 $\\zeta\\approx\\delta/(2\\pi)$。"
+    ],
+    "answer": "\\delta=0.18,\\ \\zeta=0.029",
+    "solution": "$\\delta=\\ln1.20=0.182$。\n\n小阻尼下每周期振幅衰减 $\\mathrm{e}^{-\\delta}$，且 $\\delta=2\\pi\\zeta$，故 $\\zeta=\\dfrac{0.182}{2\\pi}=0.029$。\n\n验算：$\\zeta<0.1$ 满足小阻尼前提，此时周期与无阻尼周期相差不到 $0.1\\%$，可近似用 $T_0$；若 $\\zeta$ 接近 1 则必须用精确式。",
+    "physicsMeta": {
+      "course": "general",
+      "answerType": "symbolic",
+      "unit": "",
+      "methods": [
+        "阻尼振动"
+      ],
+      "constants": []
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "自由粒子拉格朗日量的伽利略不变性",
+    "statement": "惯性系中自由粒子的拉格朗日量为 $L=\\frac12mv^2$。证明在以恒定速度 $\\vec V$ 相对运动的两惯性系之间，两个拉格朗日量只相差一个对时间的全导数。",
+    "mainTag": "理论力学",
+    "tags": [
+      "Noether 定理与对称性"
+    ],
+    "kind": "证明题",
+    "thinking": 6,
+    "difficulty": 5,
+    "calc": 3,
+    "source": "Landau《力学》伽利略相对性原理",
+    "hints": [
+      "$\\vec v'=\\vec v-\\vec V$ 代入。",
+      "展开后把含 $\\vec v$ 的项写成 $\\dfrac{\\mathrm{d}}{\\mathrm{d}t}(\\cdots)$。"
+    ],
+    "answer": "L'=L+\\dfrac{\\mathrm{d}}{\\mathrm{d}t}\\left(-m\\vec V\\cdot\\vec r+\\dfrac12mV^2t\\right)",
+    "solution": "$L'=\\dfrac12m(\\vec v-\\vec V)^2=\\dfrac12mv^2-m\\vec v\\cdot\\vec V+\\dfrac12mV^2$。\n\n注意 $\\vec v=\\dfrac{\\mathrm{d}\\vec r}{\\mathrm{d}t}$，故 $-m\\vec V\\cdot\\vec v+\\dfrac12mV^2=\\dfrac{\\mathrm{d}}{\\mathrm{d}t}\\left(-m\\vec V\\cdot\\vec r+\\dfrac12mV^2t\\right)$，即两拉格朗日量相差全导数。\n\n验算：全导数不影响作用量的变分（端点固定时 $\\delta\\int\\mathrm{d}F/\\mathrm{d}t=0$），因此运动方程相同——这正是伽利略相对性原理在拉格朗日框架下的表述。",
+    "physicsMeta": {
+      "course": "theory",
+      "answerType": "proof",
+      "unit": "",
+      "methods": [
+        "伽利略不变性",
+        "拉格朗日量"
+      ],
+      "constants": [],
+      "textbookRef": "Landau《力学》§3–§4"
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "Binet 方程",
+    "statement": "质点在中心力 $F(r)$ 作用下运动，角动量为 $L$、质量 $m$。令 $u=1/r$，写出轨道满足的 Binet 方程。",
+    "mainTag": "理论力学",
+    "tags": [
+      "中心力场与 Kepler 问题"
+    ],
+    "kind": "推导题",
+    "thinking": 7,
+    "difficulty": 7,
+    "calc": 4,
+    "source": "Landau《力学》中心力场",
+    "hints": [
+      "用 $\\dot\\theta=L/(mr^2)=Lu^2/m$ 把对 $t$ 的导数换成对 $\\theta$ 的导数。",
+      "$\\ddot r-r\\dot\\theta^2=F/m$。"
+    ],
+    "answer": "\\dfrac{\\mathrm{d}^2u}{\\mathrm{d}\\theta^2}+u=-\\dfrac{m}{L^2u^2}F\\!\\left(\\dfrac1u\\right)",
+    "solution": "由 $r=1/u$、$\\dot\\theta=Lu^2/m$，有 $\\dot r=-\\dfrac{L}{m}\\dfrac{\\mathrm{d}u}{\\mathrm{d}\\theta}$，$\\ddot r=-\\dfrac{L^2u^2}{m^2}\\dfrac{\\mathrm{d}^2u}{\\mathrm{d}\\theta^2}$。\n\n代入径向方程 $m(\\ddot r-r\\dot\\theta^2)=F$ 并整理，得 $\\dfrac{\\mathrm{d}^2u}{\\mathrm{d}\\theta^2}+u=-\\dfrac{mF(1/u)}{L^2u^2}$。\n\n验算：对 $F=-k/r^2=-ku^2$，方程化为 $u''+u=\\dfrac{mk}{L^2}$，解为 $u=\\dfrac{mk}{L^2}(1+e\\cos\\theta)$，正是圆锥曲线轨道，说明方程正确。",
+    "physicsMeta": {
+      "course": "theory",
+      "answerType": "symbolic",
+      "unit": "1/m",
+      "methods": [
+        "Binet 方程",
+        "中心力场"
+      ],
+      "constants": [],
+      "textbookRef": "Landau《力学》§14"
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "小角散射的偏转角",
+    "statement": "质量为 $m$、速度为 $v$ 的粒子在势场 $U(r)=k/r$（$k>0$，排斥）中运动，瞄准距为 $b$，且偏转角很小。求偏转角 $\\theta$ 的近似表达式。",
+    "mainTag": "理论力学",
+    "tags": [
+      "经典散射"
+    ],
+    "kind": "推导题",
+    "thinking": 8,
+    "difficulty": 7,
+    "calc": 5,
+    "source": "Landau《力学》散射",
+    "hints": [
+      "小角时横向冲量 $\\Delta p_\\perp\\approx\\displaystyle\\int F_\\perp\\mathrm{d}t$。",
+      "$F_\\perp=-\\mathrm{d}U/\\mathrm{d}r\\cdot(b/r)$，沿未扰轨道积分。"
+    ],
+    "answer": "\\theta\\approx\\dfrac{2k}{mv^2b}",
+    "solution": "横向冲量 $\\Delta p_\\perp=\\displaystyle\\int_{-\\infty}^{\\infty}F_\\perp\\mathrm{d}t$，取未扰直线轨道 $r=\\sqrt{b^2+v^2t^2}$，$F_\\perp=\\dfrac{k}{r^2}\\cdot\\dfrac{b}{r}$。\n\n积分得 $\\Delta p_\\perp=\\dfrac{2k}{vb}$，故 $\\theta\\approx\\dfrac{\\Delta p_\\perp}{p}=\\dfrac{2k}{mv^2b}$。\n\n验算：量纲 $\\dfrac{\\mathrm{J\\,m}}{\\mathrm{kg\\,(m/s)^2\\,m}}=1$（弧度无量纲）✓；$b\\to\\infty$ 时 $\\theta\\to0$（远处掠过不偏转），$k$ 越大偏转越大，趋势正确。",
+    "physicsMeta": {
+      "course": "theory",
+      "answerType": "symbolic",
+      "unit": "rad",
+      "methods": [
+        "散射",
+        "冲量近似"
+      ],
+      "constants": [],
+      "textbookRef": "Landau《力学》§18"
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "对称陀螺的自由转动",
+    "statement": "对称陀螺（$J_1=J_2\\ne J_3$）在无外力矩情况下绕质心自由转动。证明角速度在自转轴上的分量 $\\omega_3$ 保持不变。",
+    "mainTag": "理论力学",
+    "tags": [
+      "刚体 Euler 方程与 Euler 角"
+    ],
+    "kind": "证明题",
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 3,
+    "source": "Landau《力学》刚体运动方程",
+    "hints": [
+      "Euler 方程第三式：$J_3\\dot\\omega_3-(J_1-J_2)\\omega_1\\omega_2=M_3$。",
+      "对称性使 $J_1=J_2$，外力矩为零。"
+    ],
+    "answer": "\\omega_3=\\mathrm{const}",
+    "solution": "Euler 方程第三式为 $J_3\\dot\\omega_3-(J_1-J_2)\\omega_1\\omega_2=M_3$。\n\n因 $J_1=J_2$ 且 $M_3=0$，得 $J_3\\dot\\omega_3=0$，故 $\\omega_3$ 恒定。\n\n验算：这是「对称陀螺规则进动」的基础——自转分量不变、横向分量绕自转轴匀速旋转；若 $J_1\\ne J_2$（不对称陀螺），该项不为零，$\\omega_3$ 会变化，说明对称性是关键前提。",
+    "physicsMeta": {
+      "course": "theory",
+      "answerType": "proof",
+      "unit": "rad/s",
+      "methods": [
+        "Euler 方程",
+        "对称性"
+      ],
+      "constants": [],
+      "textbookRef": "Landau《力学》§§ 34–35"
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "绝热不变量与振幅变化",
+    "statement": "一维谐振子的频率被缓慢改变（频率变化远慢于振动周期）。若频率由 $\\omega$ 缓慢加倍，其振动能量如何变化？",
+    "mainTag": "理论力学",
+    "tags": [
+      "Hamilton 方程与 Poisson 括号"
+    ],
+    "kind": "推导题",
+    "thinking": 7,
+    "difficulty": 6,
+    "calc": 3,
+    "source": "Landau《力学》绝热不变量",
+    "hints": [
+      "一维振子的绝热不变量是 $I=E/\\omega$。",
+      "缓慢变化时 $I$ 守恒，故 $E\\propto\\omega$。"
+    ],
+    "answer": "E_2=2E_1",
+    "solution": "缓慢（绝热）改变参数时，作用量 $I=\\dfrac{E}{\\omega}$ 保持不变。\n\n$\\omega$ 加倍则 $E$ 加倍：$E_2=2E_1$。\n\n验算：振幅 $A=\\sqrt{2E/(m\\omega^2)}\\propto\\sqrt{E}/\\omega\\propto1/\\sqrt\\omega$，故频率加倍时振幅变为 $1/\\sqrt2$——与「缩短单摆摆长，摆幅变小但能量增大」的实验现象一致。",
+    "physicsMeta": {
+      "course": "theory",
+      "answerType": "symbolic",
+      "unit": "J",
+      "methods": [
+        "绝热不变量"
+      ],
+      "constants": [],
+      "textbookRef": "Landau《力学》§49"
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "正则变换交换坐标与动量",
+    "statement": "取第一类生成函数 $F_1(q,Q)=qQ$。求新坐标 $Q$ 与新动量 $P$ 同旧变量 $(q,p)$ 的关系。",
+    "mainTag": "理论力学",
+    "tags": [
+      "正则变换"
+    ],
+    "kind": "推导题",
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 3,
+    "source": "Landau《力学》正则变换",
+    "hints": [
+      "$p=\\dfrac{\\partial F_1}{\\partial q}$，$P=-\\dfrac{\\partial F_1}{\\partial Q}$。",
+      "生成函数 $F_1=qQ$ 会交换哪两个量？"
+    ],
+    "answer": "Q=p,\\ P=-q",
+    "solution": "由 $p=\\dfrac{\\partial F_1}{\\partial q}=Q$ 得 $Q=p$；由 $P=-\\dfrac{\\partial F_1}{\\partial Q}=-q$ 得 $P=-q$。\n\n验算：新变量满足 $\\{Q,P\\}_{q,p}=\\{p,-q\\}=1$，仍是正则变量（Poisson 括号不变）；这是一类「交换坐标与动量」的典型正则变换，常用于把哈密顿量化为更易解的形式。",
+    "physicsMeta": {
+      "course": "theory",
+      "answerType": "symbolic",
+      "unit": "",
+      "methods": [
+        "正则变换",
+        "Poisson 括号"
+      ],
+      "constants": [],
+      "textbookRef": "Landau《力学》§45"
+    },
+    "subject": "physics"
+  }
+]
