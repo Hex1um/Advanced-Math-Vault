@@ -34,6 +34,8 @@
       chapters: [],
       tab: params.tab === 'weak' ? 'weak' : 'study',
       pointId: params.p || '',
+      openChapter: '',
+      loggedIn: false,
       point: null,
       mine: null,
       questions: [],
@@ -74,8 +76,8 @@
         + '<div class="sp-tabs">'
         + '  <button class="sp-tab' + (state.tab === 'study' ? ' active' : '') + '" data-tab="study">学习知识点</button>'
         + '  <button class="sp-tab' + (state.tab === 'weak' ? ' active' : '') + '" data-tab="weak">分析薄弱</button>'
-        + '  <span class="sp-tabs-hint">' + (state.mine
-          ? '已练 ' + state.mine.attempts + ' 题 · 学过 ' + state.mine.touchedPoints + ' 个考点'
+        + '  <span class="sp-tabs-hint">' + (state.loggedIn && state.mine
+          ? '已练 ' + (state.mine.attempts || 0) + ' 题 · 学过 ' + (state.mine.touchedPoints || 0) + ' 个考点'
           : '登录后记录答题与提问') + '</span>'
         + '</div>'
         + '<div class="sp-work">'
@@ -92,10 +94,16 @@
       progress.forEach(function (it) { weakMap[it.pointId] = it; });
       box.innerHTML = state.chapters.map(function (ch) {
         const active = state.point && state.point.chapter === ch.id;
+        /* 展开状态单独用一个字段控制：以前只有「当前章节」自动展开，
+           别的章节标题没有点击处理，手机上点第二、三章完全没反应。 */
+        const open = state.openChapter === ch.id;
         return ''
-          + '<div class="sp-chapter' + (active ? ' active' : '') + '">'
-          + '  <div class="sp-ch-title"><span>' + esc(ch.no ? ch.no + ' ' : '') + esc(ch.title) + '</span>'
-          + '    <em>' + ch.points.length + '</em></div>'
+          + '<div class="sp-chapter' + (active ? ' active' : '') + (open ? ' open' : '') + '">'
+          + '  <button class="sp-ch-title" data-chapter="' + esc(ch.id) + '" aria-expanded="' + (open ? 'true' : 'false') + '">'
+          + '    <span>' + esc(ch.no ? ch.no + ' ' : '') + esc(ch.title) + '</span>'
+          + '    <em>' + ch.points.length + '</em>'
+          + '    <i class="sp-caret" aria-hidden="true"></i>'
+          + '  </button>'
           + '  <div class="sp-ch-points">'
           + ch.points.map(function (pt) {
             const w = weakMap[pt.id];
@@ -328,6 +336,7 @@
         state.point = d.point;
         state.mine = state.mine || {};
         state.mine.point = d.mine;
+        if (d.point && d.point.chapter) state.openChapter = d.point.chapter;
         renderChapters();
         renderPane();
         loadSimilar(false);
@@ -511,6 +520,24 @@
         return;
       }
 
+      const chBtn = e.target.closest('[data-chapter]');
+      if (chBtn) {
+        const cid = chBtn.getAttribute('data-chapter');
+        const ch = state.chapters.filter(function (c) { return c.id === cid; })[0];
+        if (!ch) return;
+        if (state.openChapter === cid) {
+          state.openChapter = '';
+          renderChapters();
+          return;
+        }
+        state.openChapter = cid;
+        renderChapters();
+        /* 展开后如果当前考点不在这一章，自动选中该章第一个考点，省一次点击 */
+        const inside = state.point && state.point.chapter === cid;
+        if (!inside && state.tab === 'study' && ch.points[0]) loadPoint(ch.points[0].id);
+        return;
+      }
+
       const pointBtn = e.target.closest('[data-point]');
       if (pointBtn) { onHashPoint(e); return; }
 
@@ -537,6 +564,16 @@
       state.pack = d.pack;
       state.chapters = d.chapters || [];
       state.mine = d.me || {};
+      state.loggedIn = !!d.me;
+      /* 默认展开：带 ?p= 时展开该考点所在章节，否则展开第一章 */
+      if (!state.openChapter) {
+        const pid = state.pointId || (state.chapters[0] && state.chapters[0].points[0] && state.chapters[0].points[0].id);
+        state.chapters.some(function (ch) {
+          if (ch.points.some(function (pt) { return pt.id === pid; })) { state.openChapter = ch.id; return true; }
+          return false;
+        });
+        if (!state.openChapter && state.chapters[0]) state.openChapter = state.chapters[0].id;
+      }
       el.innerHTML = shellHTML();
       el.addEventListener('click', onClick);
 

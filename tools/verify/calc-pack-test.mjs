@@ -79,6 +79,30 @@ if (cb) {
   ok('变限积分考点能捞到题', sim.items.length >= 1 && sim.items.some((q) => q.isPast));
 }
 
+/* ---------------------------------------------------------------- C 语言 / 综合英语 */
+const c = spr.get('hust-c-2026');
+ok('C 语言包存在', !!c);
+if (c) {
+  ok('C 语言考点数 ≥ 25', c.points.length >= 25, 'points=' + c.points.length);
+  ok('C 语言题量 ≥ 60', c.questions.length >= 60, 'questions=' + c.questions.length);
+  const emptyPoint = c.points.filter((p) => !p.questionIds.length);
+  ok('C 语言每个考点至少 1 题', emptyPoint.length === 0, emptyPoint.map((p) => p.id).join(','));
+  const badChoice = c.questions.filter((q) => q.type === 'single' && !/^[A-D]$/.test(q.answer));
+  ok('C 语言选择题答案合法', badChoice.length === 0, badChoice.slice(0, 3).map((q) => q.id).join(','));
+  ok('C 语言含编程题', (c.counts.byType.code || 0) >= 8, 'code=' + (c.counts.byType.code || 0));
+}
+
+const en = spr.get('hust-english-2026');
+ok('综合英语包存在', !!en);
+if (en) {
+  ok('英语考点数 ≥ 20', en.points.length >= 20, 'points=' + en.points.length);
+  ok('英语题量 ≥ 40', en.questions.length >= 40, 'questions=' + en.questions.length);
+  const emptyPoint = en.points.filter((p) => !p.questionIds.length);
+  ok('英语每个考点至少 1 题', emptyPoint.length === 0, emptyPoint.map((p) => p.id).join(','));
+  ok('英语含阅读/写作题型', (en.counts.byType.reading || 0) >= 3 && (en.counts.byType.essay || 0) >= 3,
+    JSON.stringify(en.counts.byType));
+}
+
 const dupWarn = logs.filter((m) => /重复|不存在/.test(m));
 ok('加载日志无重复/缺号告警', dupWarn.length === 0, dupWarn.slice(0, 2).join(' / '));
 

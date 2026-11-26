@@ -1562,6 +1562,7 @@ textarea.exam-input { resize: vertical; min-height: 78px; font-family: inherit; 
   appearance: none; border: 0; background: none; cursor: pointer;
   padding: 9px 4px; margin-right: 16px; font-size: 14px; color: var(--muted);
   border-bottom: 2px solid transparent; font-family: inherit;
+  white-space: nowrap;
 }
 .sp-tab.active { color: var(--text); border-bottom-color: var(--blue); font-weight: 500; }
 .sp-tabs-hint { margin-left: auto; font-size: 12px; color: var(--muted); padding-bottom: 8px; }
@@ -1574,15 +1575,26 @@ textarea.exam-input { resize: vertical; min-height: 78px; font-family: inherit; 
 }
 .sp-chapter { border-bottom: 1px solid var(--line); }
 .sp-chapter:last-child { border-bottom: 0; }
+/* 章节标题是按钮：手机上点它展开/收起考点列表 */
 .sp-ch-title {
-  display: flex; justify-content: space-between; gap: 8px;
-  padding: 10px 12px; font-size: 13px; font-weight: 500; color: var(--text);
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  width: 100%; padding: 10px 12px; border: 0; cursor: pointer;
+  font-family: inherit; text-align: left;
+  font-size: 13px; font-weight: 500; color: var(--text);
   background: var(--surface-2);
 }
-.sp-ch-title em { font-style: normal; color: var(--muted); font-size: 11.5px; font-family: var(--mono); }
+.sp-ch-title:hover { background: var(--blue-weak); }
+.sp-ch-title em { font-style: normal; color: var(--muted); font-size: 11.5px; font-family: var(--mono); margin-left: auto; }
+.sp-caret {
+  width: 0; height: 0; flex: 0 0 auto;
+  border-left: 4px solid transparent; border-right: 4px solid transparent;
+  border-top: 5px solid var(--muted);
+  transition: transform .15s;
+}
+.sp-chapter.open .sp-caret { transform: rotate(180deg); }
 .sp-chapter.active .sp-ch-title { color: var(--blue); }
 .sp-ch-points { display: none; }
-.sp-chapter.active .sp-ch-points { display: block; }
+.sp-chapter.open .sp-ch-points { display: block; }
 .sp-ch-point {
   display: flex; align-items: center; gap: 7px; width: 100%; text-align: left;
   border: 0; background: none; cursor: pointer; font-family: inherit;
@@ -1740,4 +1752,10 @@ textarea.exam-input { resize: vertical; min-height: 78px; font-family: inherit; 
   .sp-side { position: static; max-height: none; }
   .sp-stats { grid-template-columns: repeat(2, 1fr); }
   .sp-bar-row { grid-template-columns: 120px 1fr 30px; }
+  /* 手机上 Tab 与进度提示挤在一行会折行，让提示单独占一行 */
+  .sp-tabs { flex-wrap: wrap; }
+  .sp-tabs-hint { flex-basis: 100%; margin-left: 0; padding: 0 0 8px; }
+  .sp-tab { font-size: 13.5px; margin-right: 12px; }
+  .sp-ch-title { padding: 12px; }
+  .sp-ch-point { padding: 10px 12px 10px 16px; }
 }
