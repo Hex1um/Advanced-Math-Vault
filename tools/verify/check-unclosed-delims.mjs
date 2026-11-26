@@ -26,50 +26,11 @@ const EXEMPT = {
   'batch-hust.json': '整份试卷 LaTeX 源码转储，未导入题库'
 };
 
-export function scanText(text) {
-  if (!text || typeof text !== 'string') return [];
-  const issues = [];
-  const clean = text.replace(/\\\$/g, '  ');
-
-  const blockCount = (clean.match(/\$\$/g) || []).length;
-  if (blockCount % 2 !== 0) issues.push(`未闭合的块级公式 $$（共出现 ${blockCount} 次）`);
-
-  const noBlock = clean.replace(/\$\$/g, '');
-  const inlineCount = (noBlock.match(/\$/g) || []).length;
-  if (inlineCount % 2 !== 0) issues.push(`未闭合的行内公式 $（共出现 ${inlineCount} 次）`);
-
-  const leftCount = (text.match(/\\left(?![A-Za-z])/g) || []).length;
-  const rightCount = (text.match(/\\right(?![A-Za-z])/g) || []).length;
-  if (leftCount !== rightCount) issues.push(`\\left(${leftCount}) 与 \\right(${rightCount}) 数量不匹配`);
-
-  const stack = [];
-  const envRe = /\\(begin|end)\{([A-Za-z0-9*]+)\}/g;
-  let m;
-  while ((m = envRe.exec(text)) !== null) {
-    const [, kind, env] = m;
-    if (kind === 'begin') stack.push(env);
-    else if (stack.length === 0 || stack[stack.length - 1] !== env) {
-      issues.push(`环境闭合错位：\\end{${env}}（栈顶：${stack[stack.length - 1] || '空'}）`);
-      stack.pop();
-    } else {
-      stack.pop();
-    }
-  }
-  if (stack.length > 0) issues.push(`未闭合的环境：${stack.map((e) => `\\begin{${e}}`).join(', ')}`);
-
-  return issues;
-}
-
-/** 只在「唯一且明显」的情况下自动补齐行尾的 $$，其余不动 */
-export function autoFixText(text) {
-  if (!text || typeof text !== 'string') return { text, changed: false };
-  const clean = text.replace(/\\\$/g, '  ');
-  const blockCount = (clean.match(/\$\$/g) || []).length;
-  if (blockCount % 2 === 1 && text.trimEnd().endsWith('$') && !text.trimEnd().endsWith('$$')) {
-    return { text: text.replace(/\$\s*$/, '$$'), changed: true };
-  }
-  return { text, changed: false };
-}
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+/* 与后端共用同一份实现：服务端 AI 出题门禁和 CI 门禁不允许有两套语义 */
+const { scanText, autoFixText } = require('../../lib/math-check.js');
+export { scanText, autoFixText };
 
 function main() {
   const strict = process.argv.includes('--strict');

@@ -9,6 +9,35 @@
  */
 'use strict';
 
+const { scanText, autoFixText } = require('../lib/math-check');
+
+/**
+ * AI 出题/识图的落库前门禁：模型经常把 $$ 写成单个 $、或者忘了闭合 \left(。
+ * 这类题一旦入库，前端整段公式就渲染成裸源码。这里先尝试「唯一且明显」的自动补齐，
+ * 补不了就明确拒绝，而不是把坏题放过去（管理员也省得逐题肉眼检查）。
+ */
+function gateGenerated(problem) {
+  if (!problem || typeof problem !== 'object') return { ok: false, reason: '题目结构不完整' };
+  const fields = ['statement', 'answer', 'solution'];
+  const blocking = [];
+  for (const f of fields) {
+    const text = problem[f];
+    if (!text || typeof text !== 'string') continue;
+    if (!scanText(text).length) continue;
+    const fixed = autoFixText(text);
+    if (fixed.changed && !scanText(fixed.text).length) problem[f] = fixed.text;
+    else blocking.push(f + '：' + scanText(text)[0]);
+  }
+  if (Array.isArray(problem.hints)) {
+    problem.hints = problem.hints.map(function (h) {
+      const fixed = autoFixText(h);
+      return fixed.changed ? fixed.text : h;
+    });
+  }
+  if (blocking.length) return { ok: false, reason: blocking[0] };
+  return { ok: true };
+}
+
 module.exports = function registerAiRoutes(router, ctx) {
   const { send, fail, readBody, clientIp, parseCookies, isHttps } = ctx.http;
   const {
@@ -277,6 +306,8 @@ module.exports = function registerAiRoutes(router, ctx) {
     const body = await readBody(req, 256 * 1024);
     const parsed = validateGenerated(parseGenerated(body.text) || extractJson(body.text));
     if (!parsed) return fail(res, 422, 'AI 返回的题目不完整，换一次试试');
+    const gate = gateGenerated(parsed);
+    if (!gate.ok) return fail(res, 422, '公式定界符不闭合（' + gate.reason + '），让 AI 重新生成一次');
     return send(res, 200, { ok: true, problem: parsed });
   }
 
@@ -300,6 +331,11 @@ module.exports = function registerAiRoutes(router, ctx) {
         const text = await callLLM(cfg, messages);
         const parsed = validateGenerated(parseGenerated(text) || extractJson(text));
         if (parsed) {
+          const gate = gateGenerated(parsed);
+          if (!gate.ok) {
+            errors.push(cfg.name + '：公式定界符不闭合（' + gate.reason + '）');
+            continue;
+          }
           return send(res, 200, {
             ok: true,
             problem: parsed,

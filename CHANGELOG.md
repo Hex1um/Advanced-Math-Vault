@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## v2.0.1 — 2026-11-26
+
+v2.0.0 发布后的 CI 修复与两处补强。**前端没有改动**，不需要升降缓存串。
+
+- **CI 修复**：`docs/` 不再入库后，`robustness-check.mjs` 与 `check-katex.mjs` 仍在
+  从 `docs/vendor/katex` 加载 KaTeX，导致冒烟 job 的「鲁棒性体检」整步失败。改为从
+  `public/vendor/katex` 加载（`KATEX_DIR` 仍可覆盖）。本地 `check:robust` 与
+  `check:katex` 均已复跑通过（2474 题 / 31273 个公式片段 / 渲染失败 0）。
+- **SQLite 原子热备份**：新增 `store.backupTo()`，用 `VACUUM INTO` 生成一致性快照；
+  `dailyBackup()` 优先走它，失败才退回文件拷贝。WAL 模式下 `copyFile` 可能拷到写了一半的页，
+  这是此前备份机制的真实隐患。
+- **AI 出题落库门禁**：新增 `lib/math-check.js`（CI 门禁与服务端共用同一份实现），
+  `/api/ai/parse` 与 `/api/ai/generate` 在返回前检查 `$`/`$$` 成对、`\left/\right` 配对、
+  `\begin/\end` 栈平衡；能自动补齐的补齐，补不了直接 422 让模型重出，
+  避免渲染崩坏的题干流进投稿页。
+
 ## v2.0.0 — 2026-11-26
 
 一次结构性大版本：把 3522 行的 `server.js` 拆成「组合根 + 9 个域路由 + 业务核心」，

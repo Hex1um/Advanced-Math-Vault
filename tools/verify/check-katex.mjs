@@ -33,7 +33,8 @@ const JSON_OUT = HAS('json');
 const FIELD_ONLY = ARG('field', null);
 const DB_FILE = process.env.DB_FILE || path.join(ROOT, 'data', 'db.json');
 
-const katexDir = process.env.KATEX_DIR || path.join(ROOT, 'docs', 'vendor', 'katex');
+/* docs/ 不进仓库后，KaTeX 从 public/ 取；仍允许 KATEX_DIR 覆盖 */
+const katexDir = process.env.KATEX_DIR || path.join(ROOT, 'public', 'vendor', 'katex');
 const katexFile = path.join(katexDir, 'katex.min.js');
 if (!fs.existsSync(katexFile)) {
   console.error('找不到本地 KaTeX: ' + katexFile);

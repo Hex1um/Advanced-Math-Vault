@@ -42,7 +42,8 @@ function loadDb() {
 const loaded = loadDb();
 const db = loaded.db;
 const tax = require(path.join(ROOT, 'tag-taxonomy.js'));
-const katex = require(path.join(ROOT, 'docs', 'vendor', 'katex', 'katex.min.js'));
+/* docs/ 已不再入库（改由 CI 构建），KaTeX 直接从 public/ 取 */
+const katex = require(path.join(ROOT, 'public', 'vendor', 'katex', 'katex.min.js'));
 
 const problems = db.problems || [];
 const codes = new Set(problems.map((p) => p.code));
