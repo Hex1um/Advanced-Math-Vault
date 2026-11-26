@@ -111,7 +111,9 @@ module.exports = function registerHealthRoutes(router, ctx) {
         analytics: true,
         collections: true,
         equivalentJudge: true,
-        sprint: true,
+        /* 突击包已下线：只有当 data/subjects/ 里真有包时才亮入口，
+           没有包时前端隐藏导航，避免点进去是空页面。数据放回即自动恢复。 */
+        sprint: !!(ctx.sprint && ctx.sprint.list().length > 0),
         /* v2.7.0 多学科：前端据此决定是否显示 [ 数学 | 物理 ] 切换器。
            旧后端没有该字段 → 前端按单学科（数学）渲染，行为不变。 */
         physics: true,

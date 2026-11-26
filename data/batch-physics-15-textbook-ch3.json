@@ -1,0 +1,1034 @@
+[
+ {
+  "title": "由运动学方程反求恒力",
+  "statement": "质量为 $2\\ \\mathrm{kg}$ 的质点的运动学方程为 $\\vec r=\\left(6t^2-1\\right)\\vec i+\\left(3t^2+3t+1\\right)\\vec j$（SI 单位）。求证质点受恒力而运动，并求力的大小和方向。",
+  "mainTag": "力学",
+  "tags": [
+   "牛顿定律与非惯性系"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 3,
+  "calc": 2,
+  "source": "漆安慎《力学》第4版 习题3.4.1",
+  "hints": [
+   "求二阶导数得加速度。",
+   "$F=ma$，方向用 $\\arctan\\left(F_y/F_x\\right)$。"
+  ],
+  "answer": "2.7\\times10^{1}\\ \\mathrm{N}",
+  "solution": "$$\\vec a=\\frac{\\mathrm{d}^2\\vec r}{\\mathrm{d}t^2}=12\\vec i+6\\vec j\\ \\mathrm{m/s^2},$$\n与 $t$ 无关，故加速度恒定、力恒定：\n$$\\vec F=m\\vec a=2\\times\\left(12\\vec i+6\\vec j\\right)=24\\vec i+12\\vec j\\ \\mathrm{N},$$\n$$F=\\sqrt{24^2+12^2}=26.8\\ \\mathrm{N}\\approx2.7\\times10^{1}\\ \\mathrm{N},$$\n方向与 $x$ 轴夹角\n$$\\theta=\\arctan\\frac{12}{24}=26.6^\\circ.$$\n\n注意 $\\vec a$ 恒定时质点做**匀变速曲线运动**（抛物线型），不是匀速直线运动。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "N",
+   "methods": [
+    "牛顿第二定律",
+    "运动学"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.4.1"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "斜面上的人与可滑动斜面",
+  "statement": "如图，质量为 $m_2$ 的斜面可在光滑水平面上滑动，斜面倾角为 $\\alpha$；质量为 $m_1$ 的运动员与斜面之间亦无摩擦。求运动员相对于斜面的加速度及其对斜面的压力。",
+  "mainTag": "力学",
+  "tags": [
+   "牛顿定律与非惯性系"
+  ],
+  "kind": "推导题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题3.4.5",
+  "hints": [
+   "设斜面加速度 $A$（水平）、人相对斜面加速度 $a^{\\prime}$（沿斜面）。",
+   "分别对人和斜面写牛顿第二定律，联立消去 $A$。"
+  ],
+  "answer": "a'=\\frac{\\left(m_1+m_2\\right)g\\sin\\alpha}{m_2+m_1\\sin^{2}\\alpha},\\qquad N=\\frac{m_1m_2g\\cos\\alpha}{m_2+m_1\\sin^{2}\\alpha}",
+  "solution": "设斜面向右加速度 $A$，人相对斜面向下沿斜面加速度 $a'$。人的绝对加速度分量为\n$$a_x=a'\\cos\\alpha-A,\\qquad a_y=-a'\\sin\\alpha.$$\n\n对人：竖直方向 $m_1g-N\\cos\\alpha=m_1a'\\sin\\alpha$，水平方向 $N\\sin\\alpha=m_1\\left(a'\\cos\\alpha-A\\right)$。\n对斜面（水平方向）：$N\\sin\\alpha=m_2A$。\n\n由后两式得 $A=\\dfrac{N\\sin\\alpha}{m_2}$，代入人的水平方程：\n$$N\\sin\\alpha=m_1a'\\cos\\alpha-\\frac{m_1N\\sin^2\\alpha}{m_2}\n\\quad\\Rightarrow\\quad N\\left(1+\\frac{m_1}{m_2}\\sin^2\\alpha\\right)=m_1a'\\cos\\alpha.$$\n与竖直方程联立消去 $N$，得\n$$a'=\\frac{\\left(m_1+m_2\\right)g\\sin\\alpha}{m_2+m_1\\sin^2\\alpha},\\qquad\nN=\\frac{m_1m_2g\\cos\\alpha}{m_2+m_1\\sin^2\\alpha}.$$\n\n检验：$m_2\\to\\infty$（斜面固定）时 $a'\\to g\\sin\\alpha$、$N\\to m_1g\\cos\\alpha$，退化为固定斜面；$m_2\\to0$ 时 $a'\\to g/\\sin\\alpha$、$N\\to0$，人与斜面一起自由「让路」，合理。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "牛顿第二定律",
+    "相对运动"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.4.5",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-3-4-5-p115-0.webp",
+     "alt": "题 3.4.5 图：斜面 m₂ 与斜面上的人 m₁"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "天平称滑轮系统的等效重量",
+  "statement": "如图，天平左端挂一定滑轮，一轻绳跨过滑轮，绳的两端分别系上质量为 $m_1$、$m_2$ 的物体（$m_1\\ne m_2$），天平右端的托盘内放有砝码。问托盘和砝码的总重量为多少，才能保持天平平衡？不计滑轮和绳的质量及轴承摩擦，绳不伸长。",
+  "mainTag": "力学",
+  "tags": [
+   "牛顿定律与非惯性系"
+  ],
+  "kind": "推导题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题3.4.8",
+  "hints": [
+   "滑轮悬挂点受到的力是两侧绳张力的合力。",
+   "$T=\\dfrac{2m_1m_2g}{m_1+m_2}$，悬挂点受力 $2T$。"
+  ],
+  "answer": "\\frac{4m_1m_2g}{m_1+m_2}",
+  "solution": "两物体加速度大小\n$$a=\\frac{m_1-m_2}{m_1+m_2}g,$$\n绳张力\n$$T=m_1\\left(g-a\\right)=\\frac{2m_1m_2g}{m_1+m_2}.$$\n滑轮受两侧绳的向下拉力各 $T$，故悬挂点（天平左端）受力\n$$F=2T=\\frac{4m_1m_2g}{m_1+m_2}.$$\n天平平衡要求右端砝码总重等于 $F$。\n\n注意结果**小于** $(m_1+m_2)g$：因为两物体在加速运动，整体并非静止悬挂；当 $m_1=m_2$ 时 $F=(m_1+m_2)g$，恢复静止悬挂的重量。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "牛顿第二定律",
+    "滑轮"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.4.8",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-3-4-8-p115-3.webp",
+     "alt": "题 3.4.8 图：天平 + 定滑轮 + m₁/m₂"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "平方阻力下跳伞员的速率",
+  "statement": "跳伞运动员初张伞时的速度为 $v_0=0$，阻力大小与速度平方成正比，即 $f=\\alpha v^2$（$\\alpha$ 为常量），人和伞的总质量为 $m$。求速率随时间的变化 $v\\left(t\\right)$。",
+  "mainTag": "力学",
+  "tags": [
+   "牛顿定律与非惯性系"
+  ],
+  "kind": "推导题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题3.4.9",
+  "hints": [
+   "运动方程 $m\\dfrac{\\mathrm{d}v}{\\mathrm{d}t}=mg-\\alpha v^2$。",
+   "分离变量后用 $\\int\\dfrac{\\mathrm{d}u}{1-u^2}=\\operatorname{artanh}u$。"
+  ],
+  "answer": "v=\\sqrt{\\frac{mg}{\\alpha}}\\tanh\\left(t\\sqrt{\\frac{\\alpha g}{m}}\\right)",
+  "solution": "取向下为正：\n$$m\\frac{\\mathrm{d}v}{\\mathrm{d}t}=mg-\\alpha v^2.$$\n记 $v_\\infty=\\sqrt{mg/\\alpha}$，分离变量：\n$$\\frac{\\mathrm{d}v}{1-\\left(v/v_\\infty\\right)^2}=g\\,\\mathrm{d}t\n\\quad\\Rightarrow\\quad\nv_\\infty\\operatorname{artanh}\\frac{v}{v_\\infty}=gt.$$\n由 $v\\left(0\\right)=0$：\n$$v=v_\\infty\\tanh\\frac{gt}{v_\\infty}\n=\\sqrt{\\frac{mg}{\\alpha}}\\tanh\\left(t\\sqrt{\\frac{\\alpha g}{m}}\\right).$$\n\n当 $t\\to\\infty$ 时 $v\\to v_\\infty=\\sqrt{mg/\\alpha}$，即收尾速度；$t$ 很小时 $\\tanh x\\approx x$，退化为 $v\\approx gt$ 的自由落体。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "变力运动",
+    "分离变量"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.4.9",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-3-4-9-p115-4.webp",
+     "alt": "题 3.4.9 图：张伞的跳伞员"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "由冲量求最大打击力",
+  "statement": "棒球质量为 $0.14\\ \\mathrm{kg}$。用棒击棒球的力随时间的变化如图所示：力从 $t=0$ 线性增大，到 $t=0.05\\ \\mathrm{s}$ 达到最大值，再线性减小，到 $t=0.08\\ \\mathrm{s}$ 降为零。设棒被击前后速度增量大小为 $70\\ \\mathrm{m/s}$，求力的最大值。打击时不计重力。",
+  "mainTag": "力学",
+  "tags": [
+   "动量与碰撞"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题3.4.11",
+  "hints": [
+   "冲量等于 $F\\text{-}t$ 图线下面积。",
+   "$I=m\\Delta v$。"
+  ],
+  "answer": "2.45\\times10^{2}\\ \\mathrm{N}",
+  "solution": "冲量等于 $F\\text{-}t$ 图线下三角形面积：\n$$I=\\frac12F_{\\max}\\times0.08=0.04F_{\\max}.$$\n由动量定理\n$$I=m\\Delta v=0.14\\times70=9.8\\ \\mathrm{N\\cdot s},$$\n$$F_{\\max}=\\frac{9.8}{0.04}=245\\ \\mathrm{N}\\approx2.45\\times10^{2}\\ \\mathrm{N}.$$\n\n平均力 $\\bar F=I/\\Delta t=9.8/0.08=123\\ \\mathrm{N}$，峰值是平均值的 2 倍——这正是三角形脉冲的特征。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "N",
+   "methods": [
+    "冲量",
+    "动量定理"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.4.11",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-3-4-11-p116-0.webp",
+     "alt": "题 3.4.11 图：F-t 三角形脉冲"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "玩具火箭的最大速率",
+  "statement": "沿竖直向上发射玩具火箭的推力随时间的变化如图所示：推力从 $t=0$ 线性增大，到 $t=20\\ \\mathrm{s}$ 达到 $3mg$。火箭质量为 $2\\ \\mathrm{kg}$，$t=0$ 时静止，推力大于重力时才开始启动。求火箭发射后的最大速率（$g=9.8\\ \\mathrm{m/s^2}$）。",
+  "mainTag": "力学",
+  "tags": [
+   "动量与碰撞"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题3.4.12",
+  "hints": [
+   "启动时刻：$F=mg$，由线性关系求出该时刻。",
+   "合力冲量 $=\\int\\left(F-mg\\right)\\mathrm{d}t$，等于 $mv_{\\max}$。"
+  ],
+  "answer": "1.3\\times10^{2}\\ \\mathrm{m/s}",
+  "solution": "推力线性增长：$F\\left(t\\right)=\\dfrac{3mg}{20}t$。启动条件 $F=mg$ 给出\n$$t_1=\\frac{20}{3}=6.67\\ \\mathrm{s}.$$\n从 $t_1$ 到 $t=20\\ \\mathrm{s}$，合力 $F-mg$ 从 $0$ 线性增到 $2mg$，其冲量为三角形面积。$2mg=2\\times2\\times9.8=39.2\\ \\mathrm{N}$，故\n$$I=\\frac12\\times13.33\\times39.2=261.3\\ \\mathrm{N\\cdot s}.$$\n由动量定理\n$$v_{\\max}=\\frac{I}{m}=\\frac{261.3}{2}=130.6\\ \\mathrm{m/s}\\approx1.3\\times10^{2}\\ \\mathrm{m/s}.$$\n\n此后推力继续减小（图在 $t=20\\ \\mathrm{s}$ 后下降），火箭在重力作用下减速，故 $t=20\\ \\mathrm{s}$ 时速率最大。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m/s",
+   "methods": [
+    "冲量",
+    "变力"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.4.12",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-3-4-12-p116-1.webp",
+     "alt": "题 3.4.12 图：推力随时间线性增至 3mg"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "抛物线弯管中小环的平衡角速度",
+  "statement": "如图，抛物线形弯管的表面光滑，绕竖直轴以匀角速率转动，抛物线方程为 $y=ax^2$，$a$ 为正常量。小环套于弯管上。(1) 弯管角速度多大，小环可在管上任意位置相对弯管静止？(2) 若为圆形光滑弯管，情况如何？",
+  "mainTag": "力学",
+  "tags": [
+   "牛顿定律与非惯性系"
+  ],
+  "kind": "推导题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题3.4.13",
+  "hints": [
+   "在转动参考系中，小环受重力、支持力与离心力，三力平衡。",
+   "抛物线在 $x$ 处的斜率为 $2ax$，法线方向与竖直夹角满足 $\\tan\\theta=2ax$。"
+  ],
+  "answer": "\\omega=\\sqrt{2ag}",
+  "solution": "在随管转动的参考系中，小环受重力 $mg$、管壁支持力 $N$（沿法线）与离心力 $m\\omega^2x$（水平向外）。平衡条件要求合力沿管壁法线方向为零：\n\n抛物线 $y=ax^2$ 在 $x$ 处斜率 $y'=2ax$，法线与竖直方向的夹角 $\\theta$ 满足 $\\tan\\theta=2ax$。沿法线方向：\n$$N\\cos\\theta=mg,\\qquad N\\sin\\theta=m\\omega^2x.$$\n两式相除：\n$$\\tan\\theta=\\frac{\\omega^2x}{g}.$$\n与 $\\tan\\theta=2ax$ 比较，要对**任意** $x$ 都成立，必须\n$$\\frac{\\omega^2}{g}=2a\\quad\\Rightarrow\\quad\\omega=\\sqrt{2ag}.$$\n\n（2）圆形弯管：圆上各点法线与竖直夹角随位置变化，而 $\\omega^2x/g$ 与位置的关系不同，二者无法对所有位置同时相等，故**不存在**使小环在任意位置都静止的角速度；只在特定位置（或特定 $\\omega$ 对应的一两个位置）可平衡。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "转动参考系",
+    "离心力"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.4.13",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-3-4-13-p116-2.webp",
+     "alt": "题 3.4.13 图：抛物线弯管与小环"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "质谱仪中离子的质量",
+  "statement": "如图，带电粒子束经狭缝 $S_1$、$S_2$ 准直后进入速度选择器（电场 $E$ 与磁场 $B_0$ 正交），只有特定速率的粒子能沿直线通过；随后进入磁感应强度为 $B$ 的均匀磁场，做半径为 $r$ 的半圆运动后打在荧光屏上。试证明粒子质量为\n$$m=\\frac{qBB_0r}{E},$$\n其中 $q$、$r$ 分别为粒子电荷量与轨道半径。",
+  "mainTag": "电磁学",
+  "tags": [
+   "洛伦兹力与安培力"
+  ],
+  "kind": "证明题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题3.4.17",
+  "hints": [
+   "速度选择器：$qE=qvB_0$，得 $v=E/B_0$。",
+   "偏转区：$qvB=mv^2/r$。"
+  ],
+  "answer": "m=\\frac{qBB_0r}{E}",
+  "solution": "速度选择器中电场力与洛伦兹力平衡：\n$$qE=qvB_0\\quad\\Rightarrow\\quad v=\\frac{E}{B_0}.$$\n进入偏转磁场后，洛伦兹力提供向心力：\n$$qvB=\\frac{mv^2}{r}\\quad\\Rightarrow\\quad m=\\frac{qBr}{v}.$$\n代入 $v=E/B_0$：\n$$m=\\frac{qBr}{E/B_0}=\\frac{qBB_0r}{E}.$$\n\n该式与粒子速率无关（速率已被选择器固定），因此同一 $E$、$B_0$、$B$、$r$ 只对应唯一质量——这就是质谱仪能分辨同位素的原因。题目所说「能检查 $0.01\\%$ 的质量差别」意味着 $r$ 的测量精度需优于 $0.01\\%$。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "proof",
+   "unit": "",
+   "methods": [
+    "洛伦兹力",
+    "速度选择器"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.4.17",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-3-4-17-p117-0.webp",
+     "alt": "题 3.4.17 图：速度选择器 + 半圆偏转"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "太空旅馆的转动角速度",
+  "statement": "某公司欲开设太空旅馆，用长 $32\\ \\mathrm{m}$ 的绳连接质量相同的两客舱，让两客舱围绕两舱中点转动。问角速度多大可使旅客感到和在地面上一样受重力作用，而没有「失重」的感觉（$g=9.8\\ \\mathrm{m/s^2}$）？",
+  "mainTag": "力学",
+  "tags": [
+   "牛顿定律与非惯性系"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 4,
+  "calc": 2,
+  "source": "漆安慎《力学》第4版 习题3.4.18",
+  "hints": [
+   "每舱做半径 $16\\ \\mathrm{m}$ 的圆周运动。",
+   "向心加速度等于 $g$：$\\omega^2r=g$。"
+  ],
+  "answer": "0.78\\ \\mathrm{rad/s}",
+  "solution": "每舱到中点的距离 $r=16\\ \\mathrm{m}$。旅客随舱转动，舱壁提供的向心加速度即「人工重力」：\n$$\\omega^2r=g\\quad\\Rightarrow\\quad\\omega=\\sqrt{\\frac{g}{r}}=\\sqrt{\\frac{9.8}{16}}=0.783\\ \\mathrm{rad/s}.$$\n对应转速\n$$n=\\frac{\\omega}{2\\pi}\\times60=7.5\\ \\mathrm{r/min},$$\n周期约 $8.0\\ \\mathrm{s}$。\n\n这个转速很低（约 7.5 转/分），但角速度小意味着半径必须足够大才能产生 $1g$；半径越小，所需转速越高，人越容易头晕。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "rad/s",
+   "methods": [
+    "圆周运动",
+    "人工重力"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.4.18",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-3-4-18-p117-1.webp",
+     "alt": "题 3.4.18 图：绳连接的两客舱"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "下颌骨的受力关系",
+  "statement": "图示为哺乳动物的下颌骨。设肌肉提供的力 $F_1$ 和 $F_2$ 均与水平方向成 $45^\\circ$，食物作用于牙齿的力为 $F$，且 $F$、$F_1$、$F_2$ 共点，$F$ 沿竖直方向。求 $F_1$ 与 $F_2$ 的关系，以及它们与 $F$ 的关系。",
+  "mainTag": "力学",
+  "tags": [
+   "牛顿定律与非惯性系"
+  ],
+  "kind": "推导题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题3.4.21",
+  "hints": [
+   "三力共点平衡，水平分量互相抵消。",
+   "竖直分量之和等于 $F$。"
+  ],
+  "answer": "F_1=F_2=\\frac{F}{\\sqrt{2}}",
+  "solution": "三力共点平衡。$F_1$、$F_2$ 均与水平成 $45^\\circ$，且分居左右两侧，水平分量等大反向：\n$$F_1\\cos45^\\circ=F_2\\cos45^\\circ\\quad\\Rightarrow\\quad F_1=F_2.$$\n竖直方向：\n$$F_1\\sin45^\\circ+F_2\\sin45^\\circ=F.$$\n代入 $F_1=F_2$：\n$$2F_1\\times\\frac{\\sqrt2}{2}=F\\quad\\Rightarrow\\quad F_1=F_2=\\frac{F}{\\sqrt2}\\approx0.707F.$$\n\n即两侧肌肉各承担约 $71\\%$ 的咬合力。若两侧力不相等（如单侧咀嚼），下颌骨会受到水平分力，这正是颞下颌关节紊乱的力学诱因之一。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "共点力平衡"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.4.21",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-3-4-21-p117-5.webp",
+     "alt": "题 3.4.21 图：下颌骨受力"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "四线悬挂重物的张力",
+  "statement": "如图，四根等长且不可伸长的轻线，上端悬于水平面正方形的四个顶点处，下端固结于一处悬挂重量为 $G$ 的重物，线与竖直方向夹角为 $\\alpha$。求各线内张力。若四根线均不等长，已知各线的方向余弦，能算出线内张力吗？",
+  "mainTag": "力学",
+  "tags": [
+   "牛顿定律与非惯性系"
+  ],
+  "kind": "推导题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题3.4.22",
+  "hints": [
+   "由对称性四线张力相等。",
+   "竖直分量之和等于 $G$。"
+  ],
+  "answer": "T=\\frac{G}{4\\cos\\alpha}",
+  "solution": "由对称性，四根线张力大小相等，设为 $T$。竖直方向合力平衡：\n$$4T\\cos\\alpha=G\\quad\\Rightarrow\\quad T=\\frac{G}{4\\cos\\alpha}.$$\n\n水平分量两两抵消（正方形对称），无需额外条件。\n\n若四线不等长：仅知各线方向余弦时，**不能**唯一确定各张力。因为四根线的水平分量必须满足两个平衡方程（$x$、$y$ 方向），加上竖直方向一个方程，共 3 个方程，却有 4 个未知张力——系统是超静定的。实际张力分配取决于各线的弹性伸长与安装预应力，需补充变形协调条件才能求解。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "共点力平衡",
+    "超静定"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.4.22",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-3-4-22-p117-4.webp",
+     "alt": "题 3.4.22 图：四线悬挂重物"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "加速小车中摆锤的偏角",
+  "statement": "如图，小车以匀加速度 $a$ 沿倾角为 $\\alpha$ 的斜面下滑，摆锤相对于小车保持静止。求悬线与竖直方向的夹角（分别自惯性系和非惯性系中求解）。",
+  "mainTag": "力学",
+  "tags": [
+   "牛顿定律与非惯性系"
+  ],
+  "kind": "推导题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题3.5.1",
+  "hints": [
+   "非惯性系中引入惯性力 $-m\\vec a$，与重力合成等效重力。",
+   "$\\tan\\theta=\\dfrac{a\\cos\\alpha}{g-a\\sin\\alpha}$。"
+  ],
+  "answer": "\\tan\\theta=\\frac{a\\cos\\alpha}{g-a\\sin\\alpha}",
+  "solution": "**非惯性系（随车平动）**：摆锤受重力 $m\\vec g$、惯性力 $-m\\vec a$、绳张力 $\\vec T$，三力平衡，故 $\\vec T=-m\\left(\\vec g-\\vec a\\right)$，悬线沿等效重力 $\\vec g_{\\text{eff}}=\\vec g-\\vec a$ 的反方向。\n\n取沿斜面为 $x$、垂直斜面为 $y$：$\\vec a$ 沿 $+x$；$\\vec g$ 的分量为 $\\left(g\\sin\\alpha,-g\\cos\\alpha\\right)$。于是\n$$g_{\\text{eff},x}=g\\sin\\alpha-a,\\qquad g_{\\text{eff},y}=-g\\cos\\alpha.$$\n等效重力与竖直方向的夹角 $\\theta$ 满足\n直接在「水平—竖直」坐标下写分量更清楚：\n$$\\vec g-\\vec a=\\left(-a\\cos\\alpha,\\;-g+a\\sin\\alpha\\right),$$\n其中 $x$ 为水平、$y$ 为竖直向下。悬线与竖直方向夹角\n$$\\tan\\theta=\\frac{a\\cos\\alpha}{g-a\\sin\\alpha}.$$\n\n**惯性系**：摆锤随车以加速度 $a$ 沿斜面运动，牛顿第二定律 $m\\vec g+\\vec T=m\\vec a$ 给出 $\\vec T=m\\left(\\vec a-\\vec g\\right)$，与上面 $\\vec T=-m\\left(\\vec g-\\vec a\\right)$ 完全一致，故偏角相同。\n\n特例：$\\alpha=90^\\circ$（竖直下落）时 $\\tan\\theta=0$，悬线竖直；$\\alpha=0$、$a\\to g$ 时 $\\theta\\to90^\\circ$，摆线趋于水平（自由落体中的「失重」）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "非惯性系",
+    "等效重力"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.5.1",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-3-5-1-p118-0.webp",
+     "alt": "题 3.5.1 图：斜面上下滑的小车与摆锤"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "升降机内阿特伍德机的加速度与张力",
+  "statement": "升降机 $A$ 内有一阿特伍德机，悬挂的两物体质量分别为 $m_1$、$m_2$ 且 $m_1\\ne m_2$。若不计绳及滑轮质量、不计轴承摩擦、绳不可伸长，求当升降机以加速度 $a$（方向向下）运动时，两物体相对于地面的加速度各是多少？绳内张力是多少？",
+  "mainTag": "力学",
+  "tags": [
+   "牛顿定律与非惯性系"
+  ],
+  "kind": "推导题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题3.5.2",
+  "hints": [
+   "在升降机参考系中，等效重力 $g^{\\prime}=g-a$。",
+   "相对加速度 $a^{\\prime}=\\dfrac{m_1-m_2}{m_1+m_2}\\left(g-a\\right)$。"
+  ],
+  "answer": "T=\\frac{2m_1m_2\\left(g-a\\right)}{m_1+m_2}",
+  "solution": "在升降机参考系中，惯性力向上、大小 $ma$，等效重力加速度 $g'=g-a$。阿特伍德机的标准结果直接替换 $g\\to g'$：\n$$a'=\\frac{m_1-m_2}{m_1+m_2}\\left(g-a\\right),\\qquad\nT=\\frac{2m_1m_2\\left(g-a\\right)}{m_1+m_2}.$$\n\n相对地面的加速度（取向下为正，设 $m_1>m_2$）：$m_1$ 相对升降机向下 $a'$，升降机本身向下 $a$，故\n$$a_1=a+a',\\qquad a_2=a-a'.$$\n即\n$$a_1=a+\\frac{m_1-m_2}{m_1+m_2}\\left(g-a\\right),\\qquad\na_2=a-\\frac{m_1-m_2}{m_1+m_2}\\left(g-a\\right).$$\n\n检验：$a=g$（自由下落）时 $T=0$、$a_1=a_2=g$，两物体与升降机一起自由落体，绳松弛——这正是空间站里「阿特伍德机失效」的原因。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "非惯性系",
+    "阿特伍德机"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.5.2",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-3-5-2-p118-3.webp",
+     "alt": "题 3.5.2 图：升降机内的阿特伍德机"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "摩托车在竖直圆筒内的最小速率",
+  "statement": "如图，摩托车选手在竖直放置的圆筒内壁于水平面内旋转。筒内壁半径为 $3.0\\ \\mathrm{m}$，轮胎与壁面静摩擦因数为 $0.6$。求摩托车的最小线速度（取非惯性系求解，$g=9.8\\ \\mathrm{m/s^2}$）。",
+  "mainTag": "力学",
+  "tags": [
+   "牛顿定律与非惯性系"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题3.5.4",
+  "hints": [
+   "转动参考系中，离心力提供正压力。",
+   "不下滑条件：$\\mu N\\ge mg$，$N=mv^2/R$。"
+  ],
+  "answer": "7.0\\ \\mathrm{m/s}",
+  "solution": "在随摩托车转动的参考系中，车受离心力 $mv^2/R$ 压向筒壁，壁的法向支持力\n$$N=\\frac{mv^2}{R}.$$\n不下滑要求最大静摩擦不小于重力：\n$$\\mu N\\ge mg\\quad\\Rightarrow\\quad\\mu\\frac{mv^2}{R}\\ge mg\n\\quad\\Rightarrow\\quad v\\ge\\sqrt{\\frac{gR}{\\mu}}.$$\n$$v_{\\min}=\\sqrt{\\frac{9.8\\times3.0}{0.6}}=\\sqrt{49}=7.0\\ \\mathrm{m/s}.$$\n\n约 $25\\ \\mathrm{km/h}$。速度再低，摩擦不足以平衡重力，车会下滑；这也是「死亡之墙」表演必须保持一定车速的物理原因。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m/s",
+   "methods": [
+    "非惯性系",
+    "静摩擦",
+    "圆周运动"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.5.4",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-3-5-4-p118-4.webp",
+     "alt": "题 3.5.4 图：竖直圆筒内壁的摩托车"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "北半球导弹的科里奥利偏转",
+  "statement": "设在北纬 $60^\\circ$ 自南向北发射一枚弹道导弹，其速率为 $400\\ \\mathrm{m/s}$，打击相距 $6.0\\ \\mathrm{km}$ 的目标。问该导弹是否受地球自转影响？如受影响，偏离目标多少？（地球自转角速度 $7.29\\times10^{-5}\\ \\mathrm{rad/s}$）",
+  "mainTag": "力学",
+  "tags": [
+   "牛顿定律与非惯性系"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题3.5.6",
+  "hints": [
+   "科里奥利加速度 $a_C=2\\omega v\\sin\\varphi$，方向向右（北半球）。",
+   "飞行时间 $t\\approx d/v$，偏转 $s\\approx\\frac12a_Ct^2$。"
+  ],
+  "answer": "5.7\\ \\mathrm{m}",
+  "solution": "飞行时间\n$$t=\\frac{d}{v}=\\frac{6.0\\times10^3}{400}=15\\ \\mathrm{s}.$$\n北纬 $60^\\circ$ 处科里奥利加速度（水平横向）\n$$a_C=2\\omega v\\sin\\varphi=2\\times7.29\\times10^{-5}\\times400\\times\\sin60^\\circ=5.05\\times10^{-2}\\ \\mathrm{m/s^2}.$$\n北半球运动物体向右偏（自南向北飞行即向东偏），偏转量\n$$s=\\frac12a_Ct^2=\\frac12\\times5.05\\times10^{-2}\\times15^2=5.68\\ \\mathrm{m}\\approx5.7\\ \\mathrm{m}.$$\n\n$6\\ \\mathrm{km}$ 射程偏 $5.7\\ \\mathrm{m}$，约 $0.1\\%$——对无制导炮弹已足以脱靶，因此远程火炮必须做科里奥利修正。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m",
+   "methods": [
+    "科里奥利力",
+    "非惯性系"
+   ],
+   "constants": [
+    "g=9.8 m/s^2",
+    "omega=7.29e-5 rad/s"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.5.6"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "变力的冲量",
+  "statement": "就下面两种受力情况：(1) $\\vec F=2t\\,\\vec i+2\\,\\vec j$；(2) $\\vec F=2t\\,\\vec i+\\left(1-t\\right)\\vec j$（SI 单位）。分别求出 $t=1\\ \\mathrm{s}$ 时的力，并求自 $t=0$ 至 $t=1\\ \\mathrm{s}$ 时间内的冲量。",
+  "mainTag": "力学",
+  "tags": [
+   "动量与碰撞"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 4,
+  "calc": 2,
+  "source": "漆安慎《力学》第4版 习题3.6.1",
+  "hints": [
+   "$t=1$ 直接代入。",
+   "$\\vec I=\\int_0^1\\vec F\\,\\mathrm{d}t$。"
+  ],
+  "answer": "\\vec I_1=\\vec i+2\\vec j,\\qquad \\vec I_2=\\vec i+\\frac{1}{2}\\vec j",
+  "solution": "（1）$t=1\\ \\mathrm{s}$ 时 $\\vec F=2\\vec i+2\\vec j\\ \\mathrm{N}$。\n$$\\vec I_1=\\int_0^1\\left(2t\\,\\vec i+2\\vec j\\right)\\mathrm{d}t=\\left[t^2\\right]_0^1\\vec i+2\\vec j=\\vec i+2\\vec j\\ \\mathrm{N\\cdot s}.$$\n\n（2）$t=1\\ \\mathrm{s}$ 时 $\\vec F=2\\vec i+0\\vec j=2\\vec i\\ \\mathrm{N}$。\n$$\\vec I_2=\\int_0^1\\left(2t\\,\\vec i+\\left(1-t\\right)\\vec j\\right)\\mathrm{d}t\n=\\vec i+\\left[t-\\frac{t^2}{2}\\right]_0^1\\vec j=\\vec i+\\frac12\\vec j\\ \\mathrm{N\\cdot s}.$$\n\n注意冲量是矢量积分，不能把两分量的大小直接相加。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "冲量",
+    "变力"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.6.1"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "椭圆运动质点的动量",
+  "statement": "一个质量为 $m$ 的质点在 $Oxy$ 平面上运动，其位置矢量为 $\\vec r=a\\cos\\omega t\\,\\vec i+b\\sin\\omega t\\,\\vec j$，$a$、$b$、$\\omega$ 为正常量。求质点的动量。",
+  "mainTag": "力学",
+  "tags": [
+   "动量与碰撞"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 3,
+  "calc": 2,
+  "source": "漆安慎《力学》第4版 习题3.6.2",
+  "hints": [
+   "先求速度（位置矢量对时间求导）。",
+   "$\\vec p=m\\vec v$。"
+  ],
+  "answer": "\\vec p=m\\omega\\left(-a\\sin\\omega t\\,\\vec i+b\\cos\\omega t\\,\\vec j\\right)",
+  "solution": "$$\\vec v=\\frac{\\mathrm{d}\\vec r}{\\mathrm{d}t}=-a\\omega\\sin\\omega t\\,\\vec i+b\\omega\\cos\\omega t\\,\\vec j,$$\n$$\\vec p=m\\vec v=m\\omega\\left(-a\\sin\\omega t\\,\\vec i+b\\cos\\omega t\\,\\vec j\\right).$$\n\n动量大小\n$$p=m\\omega\\sqrt{a^2\\sin^2\\omega t+b^2\\cos^2\\omega t},$$\n随时间变化（除非 $a=b$，即圆轨道）。方向沿轨迹切线——这说明「匀速率」不等于「动量不变」：圆周/椭圆运动的速度方向一直在变。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "动量",
+    "运动学"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.6.2"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "自动步枪连发时的平均后坐力",
+  "statement": "自动步枪连发时每分钟可射出 $120$ 发子弹，每颗子弹质量为 $7.9\\ \\mathrm{g}$，出口速率为 $735\\ \\mathrm{m/s}$。求射击时所需的平均力。",
+  "mainTag": "力学",
+  "tags": [
+   "动量与碰撞"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 4,
+  "calc": 2,
+  "source": "漆安慎《力学》第4版 习题3.6.3",
+  "hints": [
+   "每秒射出多少发？",
+   "$F=\\dfrac{\\mathrm{d}p}{\\mathrm{d}t}=\\dot m v$。"
+  ],
+  "answer": "1.16\\times10^{1}\\ \\mathrm{N}",
+  "solution": "每秒射出\n$$n=\\frac{120}{60}=2\\ \\text{发/s},$$\n质量流量\n$$\\dot m=2\\times7.9\\times10^{-3}=1.58\\times10^{-2}\\ \\mathrm{kg/s}.$$\n平均力（动量变化率）\n$$F=\\dot mv=1.58\\times10^{-2}\\times735=11.6\\ \\mathrm{N}.$$\n\n这只是**时间平均**力；单发子弹在约 $1\\ \\mathrm{ms}$ 内加速，瞬时力可达数百牛，所以枪托需要抵肩缓冲。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "N",
+   "methods": [
+    "动量定理",
+    "质量流量"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.6.3"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "棒击棒球的平均力",
+  "statement": "棒球质量为 $0.14\\ \\mathrm{kg}$，沿水平方向以速率 $50\\ \\mathrm{m/s}$ 投来，经棒击球后，球沿与水平方向成 $30^\\circ$ 角飞出，速率为 $80\\ \\mathrm{m/s}$。球与棒接触时间为 $0.02\\ \\mathrm{s}$，求棒击球的平均力。",
+  "mainTag": "力学",
+  "tags": [
+   "动量与碰撞"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题3.6.4",
+  "hints": [
+   "动量变化是矢量差：$\\Delta\\vec p=m\\vec v_2-m\\vec v_1$。",
+   "$\\bar F=\\left|\\Delta\\vec p\\right|/\\Delta t$，方向用分量比。"
+  ],
+  "answer": "8.8\\times10^{2}\\ \\mathrm{N}",
+  "solution": "取来向为 $+x$：碰前 $\\vec v_1=-50\\vec i$（速度指向击球者），碰后\n$$\\vec v_2=80\\cos30^\\circ\\vec i+80\\sin30^\\circ\\vec j=69.3\\vec i+40\\vec j.$$\n动量变化\n$$\\Delta p_x=m\\left(v_{2x}-v_{1x}\\right)=0.14\\times\\left(69.3+50\\right)=16.7\\ \\mathrm{N\\cdot s},$$\n$$\\Delta p_y=0.14\\times40=5.60\\ \\mathrm{N\\cdot s},$$\n$$\\left|\\Delta\\vec p\\right|=\\sqrt{16.7^2+5.6^2}=17.6\\ \\mathrm{N\\cdot s},\\qquad\n\\bar F=\\frac{17.6}{0.02}=8.8\\times10^{2}\\ \\mathrm{N}.$$\n方向与水平成\n$$\\theta=\\arctan\\frac{5.6}{16.7}=18.5^\\circ.$$\n\n关键点：球被「打回」时速度反向，动量变化是两者之和而非之差；漏掉反向会低估约 40%。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "N",
+   "methods": [
+    "动量定理",
+    "矢量运算"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.6.4",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-3-6-4-p119-1.webp",
+     "alt": "题 3.6.4 图：棒球以 30° 飞出"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "四质点系统的质心求位置",
+  "statement": "质量分别为 $m_1=1\\ \\mathrm{kg}$、$m_2=2\\ \\mathrm{kg}$、$m_3=3\\ \\mathrm{kg}$、$m_4=4\\ \\mathrm{kg}$ 的四个质点，其中 $m_1$、$m_2$、$m_4$ 的坐标依次为 $\\left(-1,1\\right)$、$\\left(-2,0\\right)$、$\\left(3,-2\\right)$。已知系统质心位于 $\\left(1,-1\\right)$，求 $m_3$ 的位置。",
+  "mainTag": "力学",
+  "tags": [
+   "动量与碰撞"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 3,
+  "calc": 2,
+  "source": "漆安慎《力学》第4版 习题3.6.6",
+  "hints": [
+   "质心定义：$x_C=\\dfrac{\\sum m_ix_i}{\\sum m_i}$。",
+   "总质量 10 kg，分别对 x、y 列方程。"
+  ],
+  "answer": "\\left(1,-1\\right)",
+  "solution": "总质量 $M=1+2+3+4=10\\ \\mathrm{kg}$。\n\n$x$ 方向：\n$$1\\times\\left(-1\\right)+2\\times\\left(-2\\right)+3x_3+4\\times3=10\\times1,$$\n$$-1-4+3x_3+12=10\\quad\\Rightarrow\\quad3x_3=3\\quad\\Rightarrow\\quad x_3=1.$$\n\n$y$ 方向：\n$$1\\times1+2\\times0+3y_3+4\\times\\left(-2\\right)=10\\times\\left(-1\\right),$$\n$$1-8+3y_3=-10\\quad\\Rightarrow\\quad3y_3=-3\\quad\\Rightarrow\\quad y_3=-1.$$\n\n故 $m_3$ 位于 $\\left(1,-1\\right)$，恰好与质心重合。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "质心"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.6.6"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "汽车在驳船上加速时缆绳的力",
+  "statement": "如图，质量为 $1500\\ \\mathrm{kg}$ 的汽车在静止的驳船上于 $5\\ \\mathrm{s}$ 内自静止加速至 $5\\ \\mathrm{m/s}$。问缆绳作用于驳船的平均力有多大？（用牛顿运动定律做出结果，并以此验证你的计算。）",
+  "mainTag": "力学",
+  "tags": [
+   "动量与碰撞"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题3.7.1",
+  "hints": [
+   "汽车与驳船系统的质心不动（缆绳固定）。",
+   "汽车相对船的加速度要扣除船的反向加速度。"
+  ],
+  "answer": "1.5\\times10^{3}\\ \\mathrm{N}",
+  "solution": "驳船被缆绳固定，对地不动。汽车相对船（也就是相对地面）从静止加速到 $5\\ \\mathrm{m/s}$，加速度\n$$a=\\frac{\\Delta v}{\\Delta t}=\\frac{5}{5}=1.0\\ \\mathrm{m/s^2}.$$\n汽车所需合力由船面对它的静摩擦提供：\n$$f=ma=1500\\times1.0=1.5\\times10^{3}\\ \\mathrm{N}.$$\n由牛顿第三定律，汽车对船施加大小相等、方向相反的 $1.5\\times10^{3}\\ \\mathrm{N}$；船保持静止，故缆绳对船的拉力也是 $1.5\\times10^{3}\\ \\mathrm{N}$。\n\n用动量定理验证：$5\\ \\mathrm{s}$ 内汽车动量增量\n$$\\Delta p=1500\\times5=7500\\ \\mathrm{kg\\cdot m/s},$$\n缆绳冲量 $F\\Delta t=7500$，得 $F=1500\\ \\mathrm{N}$，一致。\n\n注意：若驳船未被缆绳固定，船会后退，汽车相对船的加速度与相对地面的不同，缆绳力也就不再等于 $ma$。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "N",
+   "methods": [
+    "动量定理",
+    "质心运动"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.7.1",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-3-7-1-p119-3.webp",
+     "alt": "题 3.7.1 图：驳船上的汽车"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "汽车在行进驳船上行驶时船的加速度",
+  "statement": "若上题中驳船质量为 $6000\\ \\mathrm{kg}$。当汽车相对船静止时，由于船尾螺旋桨的转动，可使船载着汽车以加速度 $0.2\\ \\mathrm{m/s^2}$ 前进。若正在前进时，汽车自静止开始相对船以加速度 $0.5\\ \\mathrm{m/s^2}$ 与船前进相反方向行驶，船的加速度如何？",
+  "mainTag": "力学",
+  "tags": [
+   "动量与碰撞"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题3.7.2",
+  "hints": [
+   "螺旋桨推力保持不变：$F=\\left(M+m\\right)\\times0.2$。",
+   "设船加速度 $a_b$，则汽车对地加速度 $a_b-0.5$。"
+  ],
+  "answer": "0.30\\ \\mathrm{m/s^2}",
+  "solution": "螺旋桨推力（外力）不变：\n$$F=\\left(M+m\\right)a_0=\\left(6000+1500\\right)\\times0.2=1.5\\times10^{3}\\ \\mathrm{N}.$$\n\n设船对地加速度为 $a_b$（向前），汽车相对船向后 $0.5\\ \\mathrm{m/s^2}$，故汽车对地加速度 $a_b-0.5$。对整体用牛顿第二定律：\n$$F=Ma_b+m\\left(a_b-0.5\\right),$$\n$$1500=6000a_b+1500a_b-750=7500a_b-750,$$\n$$a_b=\\frac{2250}{7500}=0.30\\ \\mathrm{m/s^2}.$$\n\n船反而**加速更快**了：汽车向后跑，把船「蹬」向前。这与人在船上向船尾走、船向船头移动是同一道理（质心不变）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m/s^2",
+   "methods": [
+    "牛顿第二定律",
+    "相对运动"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.7.2"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "气球与软梯上的人",
+  "statement": "气球下悬软梯，总质量为 $m_1$，软梯上站一质量为 $m_2$ 的人，共同在气球所受浮力 $F$ 作用下加速上升。若人以相对于软梯的加速度 $a^{\\prime}$ 上升，问气球的加速度如何？",
+  "mainTag": "力学",
+  "tags": [
+   "动量与碰撞"
+  ],
+  "kind": "推导题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题3.7.3",
+  "hints": [
+   "设气球对地加速度 $a$（向上），人对地 $a+a^{\\prime}$。",
+   "$F-\\left(m_1+m_2\\right)g=m_1a+m_2\\left(a+a^{\\prime}\\right)$。"
+  ],
+  "answer": "a=\\frac{F-\\left(m_1+m_2\\right)g-m_2a^{\\prime}}{m_1+m_2}",
+  "solution": "设气球（含软梯）对地加速度 $a$ 向上，则人对地加速度为 $a+a'$。对整体用牛顿第二定律：\n$$F-\\left(m_1+m_2\\right)g=m_1a+m_2\\left(a+a'\\right).$$\n解得\n$$a=\\frac{F-\\left(m_1+m_2\\right)g-m_2a'}{m_1+m_2}.$$\n\n也可以写成\n$$a=\\frac{F}{m_1+m_2}-g-\\frac{m_2}{m_1+m_2}a'.$$\n\n人向上爬（$a'>0$）时气球加速度减小——人对梯子的向下蹬力把气球往下压。若 $a'$ 足够大，气球甚至可以改为下降。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "牛顿第二定律",
+    "相对运动"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.7.3"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "水流冲击涡轮叶片的力",
+  "statement": "如图，水流冲击在静止的涡轮叶片上，水流冲击叶片曲面前后的速率都等于 $v$，每单位时间投向叶片的水的质量保持不变且等于 $q_m$。求水作用于叶片的力。",
+  "mainTag": "力学",
+  "tags": [
+   "动量与碰撞"
+  ],
+  "kind": "推导题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题3.7.4",
+  "hints": [
+   "水流方向被叶片反转（或偏转）。",
+   "$F=q_m\\left|\\Delta\\vec v\\right|$。"
+  ],
+  "answer": "F=2q_mv",
+  "solution": "取单位时间内冲击叶片的水（质量 $q_m$）为研究对象。水在叶片的凹面上被「兜住」并沿相反方向流出（题设前后速率相同、方向相反），速度变化\n$$\\left|\\Delta\\vec v\\right|=2v.$$\n由动量定理，叶片对水的作用力\n$$F_{\\text{叶}\\to\\text{水}}=q_m\\cdot2v,$$\n方向沿水流反向；水对叶片的力大小相等、方向沿水流原方向：\n$$F=2q_mv.$$\n\n若叶片是平板（水沿板面散开而非反转），则只有法向分量被改变，力为 $q_mv$（垂直入射时）。凹面叶片能获得 2 倍推力，这正是水轮机用「勺形」叶片的原因。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "动量定理",
+    "质量流量"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.7.4",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-3-7-4-p120-0.webp",
+     "alt": "题 3.7.4 图：水流冲击涡轮叶片"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "人在船上走动时船的位移",
+  "statement": "质量为 $70\\ \\mathrm{kg}$ 的人和质量为 $210\\ \\mathrm{kg}$ 的小船最初处于静止。后来人从船后向船头匀速走了 $3.2\\ \\mathrm{m}$ 停下来。问船向哪个方向运动，移动了几米？不计船所受的阻力。",
+  "mainTag": "力学",
+  "tags": [
+   "动量与碰撞"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题3.7.5",
+  "hints": [
+   "系统水平方向动量守恒且质心不动。",
+   "$m_1s_1=m_2s_2$（相对地面），且 $s_1+s_2=3.2$。"
+  ],
+  "answer": "0.80\\ \\mathrm{m}",
+  "solution": "水平方向无外力，系统质心不动。设人对地位移 $s_1$、船对地位移 $s_2$（反向），人相对船的位移\n$$s_1+s_2=3.2\\ \\mathrm{m}.$$\n质心不动：\n$$m_1s_1=m_2s_2\\quad\\Rightarrow\\quad70s_1=210s_2\\quad\\Rightarrow\\quad s_1=3s_2.$$\n代入：$4s_2=3.2$，$s_2=0.80\\ \\mathrm{m}$，$s_1=2.4\\ \\mathrm{m}$。\n\n船向人走动的反方向移动 $0.80\\ \\mathrm{m}$。这就是「人走船退」：无论人走多快，位移比只由质量比决定。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m",
+   "methods": [
+    "动量守恒",
+    "质心"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.7.5"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "炮车发射弹丸时车厢的位移",
+  "statement": "如图，炮车固定在车厢内，最初均处于静止。炮车向右发射一枚弹丸，车厢则向左方运动。弹丸射在对面墙上后随即顺墙壁落下。问此过程中车厢移动的距离是多少？已知炮车和车厢总质量为 $m$，弹丸质量为 $m_0$，炮口到对面墙上的距离为 $L$。不计铁轨作用于车厢的阻力。",
+  "mainTag": "力学",
+  "tags": [
+   "动量与碰撞"
+  ],
+  "kind": "推导题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题3.7.6",
+  "hints": [
+   "水平方向动量守恒，质心不动。",
+   "弹丸相对车厢移动 $L$，联立 $m s_1=m\\'s_2$、$s_1+s_2=L$。"
+  ],
+  "answer": "s=\\frac{m_0L}{m+m_0}",
+  "solution": "水平方向无外力，系统质心不动。设弹丸对地位移 $s_1$（向右）、车厢对地位移 $s_2$（向左），弹丸相对车厢移动的距离为 $L$：\n$$s_1+s_2=L.$$\n质心不动：\n$$m_0s_1=ms_2.$$\n联立解得\n$$s_2=\\frac{m_0L}{m+m_0}.$$\n\n即车厢向左移动 $\\dfrac{m_0L}{m+m_0}$。\n\n弹丸打在墙上后「顺墙壁落下」，竖直方向动量由墙的冲量吸收，不影响水平方向的质心位置；整个过程中车厢只移动这一距离，不会回弹（除非弹丸反弹）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "动量守恒",
+    "质心"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.7.6",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-3-7-6-p120-1.webp",
+     "alt": "题 3.7.6 图：车厢内的炮车"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "两车相撞后的滑出速度",
+  "statement": "载人的切诺基和桑塔纳汽车质量分别为 $m_1=1.65\\times10^{3}\\ \\mathrm{kg}$ 和 $m_2=1.15\\times10^{3}\\ \\mathrm{kg}$，分别以速率 $v_1=90\\ \\mathrm{km/h}$ 和 $v_2=108\\ \\mathrm{km/h}$ 向东和向北行驶，相撞后在一起滑出。求滑出的速度（不计摩擦，请用质心参考系求解）。",
+  "mainTag": "力学",
+  "tags": [
+   "动量与碰撞"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题3.7.7",
+  "hints": [
+   "动量是矢量：两车方向垂直。",
+   "$v=\\dfrac{\\sqrt{\\left(m_1v_1\\right)^2+\\left(m_2v_2\\right)^2}}{m_1+m_2}$。"
+  ],
+  "answer": "6.9\\times10^{1}\\ \\mathrm{km/h}",
+  "solution": "两车方向垂直，动量分量\n$$p_x=m_1v_1=1.65\\times10^{3}\\times90=1.485\\times10^{5}\\ \\mathrm{kg\\cdot km/h},$$\n$$p_y=m_2v_2=1.15\\times10^{3}\\times108=1.242\\times10^{5}\\ \\mathrm{kg\\cdot km/h}.$$\n碰后共同速度\n$$v=\\frac{\\sqrt{p_x^2+p_y^2}}{m_1+m_2}\n=\\frac{\\sqrt{\\left(1.485\\right)^2+\\left(1.242\\right)^2}\\times10^{5}}{2.80\\times10^{3}}\n=\\frac{1.936\\times10^{5}}{2.80\\times10^{3}}=69.1\\ \\mathrm{km/h}.$$\n方向与东向夹角\n$$\\theta=\\arctan\\frac{1.242}{1.485}=39.9^\\circ\\ \\text{（东偏北）}.$$\n\n质心参考系中两车动量等大反向，碰撞后都静止于质心系；回到地面系即「整体以质心速度滑出」。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "km/h",
+   "methods": [
+    "动量守恒",
+    "二维碰撞"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.7.7",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-3-7-7-p120-3.webp",
+     "alt": "题 3.7.7 图：东向与北向两车相撞"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "铀核 α 衰变的反冲速率",
+  "statement": "铀-238 的核（质量为 $238$ 原子质量单位）放射一个 α 粒子（氦原子核，质量为 $4.0$ 原子质量单位）后衰变为钍-234 的核。设铀核原来是静止的，α 粒子射出时的速率为 $1.4\\times10^{7}\\ \\mathrm{m/s}$，求钍核反冲的速率。",
+  "mainTag": "力学",
+  "tags": [
+   "动量与碰撞"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 4,
+  "calc": 2,
+  "source": "漆安慎《力学》第4版 习题3.8.2",
+  "hints": [
+   "衰变前后动量守恒，初动量为零。",
+   "$m_\\alpha v_\\alpha=m_{\\mathrm{Th}}v_{\\mathrm{Th}}$。"
+  ],
+  "answer": "2.4\\times10^{5}\\ \\mathrm{m/s}",
+  "solution": "初始静止，动量守恒：\n$$0=m_\\alpha v_\\alpha-m_{\\mathrm{Th}}v_{\\mathrm{Th}},$$\n$$v_{\\mathrm{Th}}=\\frac{m_\\alpha}{m_{\\mathrm{Th}}}v_\\alpha=\\frac{4.0}{234}\\times1.4\\times10^{7}=2.39\\times10^{5}\\ \\mathrm{m/s}\\approx2.4\\times10^{5}\\ \\mathrm{m/s}.$$\n\n钍核质量取 $238-4=234$。反冲速率约为 α 粒子的 $1/58$，但钍核动能\n$$E_{\\mathrm{Th}}=\\frac12m_{\\mathrm{Th}}v_{\\mathrm{Th}}^2\\approx\\frac{4}{234}E_\\alpha\\approx1.7\\%E_\\alpha,$$\n即衰变能绝大部分由 α 粒子带走——这是 α 谱线能量单一的原因。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m/s",
+   "methods": [
+    "动量守恒",
+    "衰变"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第三章 习题3.8.2"
+  },
+  "subject": "physics"
+ }
+]

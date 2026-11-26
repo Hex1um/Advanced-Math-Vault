@@ -38,6 +38,13 @@ const spr = createSprint({ dir: path.join(ROOT, 'data', 'subjects'), getDb: () =
 const res = spr.load();
 
 console.log('题库 ' + (db.problems || []).length + ' 题；科目包加载 ' + res.loaded + ' 个');
+
+/* 突击包已下线（data/subjects 为空）时本脚本没有可校验对象，直接跳过。
+   把包放回 data/subjects/ 即恢复完整校验。 */
+if (!spr.list().length) {
+  console.log('突击包已下线，跳过科目包体检（npm run check:sprint）');
+  process.exit(0);
+}
 ok('科目包零校验错误', res.errors.length === 0, res.errors.slice(0, 2).join(' / '));
 
 /* ---------------------------------------------------------------- 习概 */
