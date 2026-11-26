@@ -214,6 +214,7 @@ function runGates() {
     return true;
   }
   if (!runNode('tools/verify/check-katex.mjs', ['--max-fail=0'], '题库 KaTeX 门禁')) return false;
+  if (!runNode('tools/verify/daily-plan-test.mjs', [], '每日一积连排表体检')) return false;
   if (!runNode('tools/verify/store-test.mjs', [], '存储层增量落盘自测')) return false;
   return true;
 }

@@ -1,0 +1,345 @@
+[
+  {
+    "title": "tan 与 sin²/cos² 的齐次分母：先换 cos",
+    "statement": "求不定积分\n\n$$\\int\\frac{\\tan x}{3\\sin^{2}x+2\\cos^{2}x}\\,\\mathrm{d}x.$$",
+    "tags": [
+      "积分",
+      "有理函数与三角积分"
+    ],
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 7,
+    "source": "每日一积 · 2026-11-26 起连排（练习单第 1 题）",
+    "hints": [
+      "分母写成 $3-\\cos^{2}x$，分子 $\\tan x\\,\\mathrm{d}x=\\dfrac{\\sin x}{\\cos x}\\mathrm{d}x$ 正好凑 $\\mathrm{d}\\cos x$",
+      "令 $u=\\cos x$，得到 $\\displaystyle\\int\\frac{\\mathrm{d}u}{u(u^{2}-3)}$",
+      "部分分式：$\\dfrac{1}{u(u^{2}-3)}=-\\dfrac{1}{3u}+\\dfrac{u}{3(u^{2}-3)}$"
+    ],
+    "answer": "$\\dfrac{1}{6}\\ln\\left(2+\\sin^{2}x\\right)-\\dfrac{1}{3}\\ln\\left|\\cos x\\right|+C$",
+    "solution": "### 化成一个变量\n\n$3\\sin^{2}x+2\\cos^{2}x=3-\\cos^{2}x$，而\n\n$$\\frac{\\tan x}{3\\sin^{2}x+2\\cos^{2}x}\\mathrm{d}x=\\frac{\\sin x\\,\\mathrm{d}x}{\\cos x\\,(3-\\cos^{2}x)}=-\\frac{\\mathrm{d}u}{u(u^{2}-3)},\\qquad u=\\cos x.$$\n\n### 部分分式\n\n$$\\frac{1}{u(u^{2}-3)}=-\\frac{1}{3u}+\\frac{u}{3(u^{2}-3)}$$\n\n所以\n\n$$I=-\\frac13\\left(-\\ln|u|+\\frac12\\ln|u^{2}-3|\\right)=\\frac13\\ln|u|-\\frac16\\ln|u^{2}-3|.$$\n\n### 回代\n\n$|u^{2}-3|=3-\\cos^{2}x=2+\\sin^{2}x>0$，故\n\n$$I=\\frac16\\ln\\left(2+\\sin^{2}x\\right)-\\frac13\\ln|\\cos x|+C.$$\n\n> 检验：求导得 $\\dfrac{\\sin x\\cos x}{3(3-\\cos^{2}x)}+\\dfrac{\\sin x}{3\\cos x}=\\dfrac{\\tan x}{3-\\cos^{2}x}$，与题相符。"
+  },
+  {
+    "title": "上下同除 x²，凑 x−1/x 的微分",
+    "statement": "求不定积分\n\n$$\\int\\frac{x^{2}+1}{x\\sqrt{x^{4}+1}}\\,\\mathrm{d}x.$$",
+    "tags": [
+      "积分",
+      "换元与分部"
+    ],
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 6,
+    "source": "每日一积 · 2026-11-26 起连排（练习单第 2 题）",
+    "hints": [
+      "把 $\\dfrac{x^{2}+1}{x^{2}}$ 拆成 $1+\\dfrac{1}{x^{2}}$，正好是 $x-\\dfrac1x$ 的导数",
+      "分母 $\\dfrac{\\sqrt{x^{4}+1}}{x}=\\sqrt{x^{2}+\\dfrac{1}{x^{2}}}=\\sqrt{\\left(x-\\dfrac1x\\right)^{2}+2}$"
+    ],
+    "answer": "$\\ln\\left|x-\\dfrac{1}{x}+\\sqrt{x^{2}+\\dfrac{1}{x^{2}}}\\right|+C$",
+    "solution": "### 同除 $x^{2}$\n\n$$\\frac{x^{2}+1}{x\\sqrt{x^{4}+1}}=\\frac{1+\\dfrac{1}{x^{2}}}{\\sqrt{x^{2}+\\dfrac{1}{x^{2}}}}.$$\n\n### 换元\n\n令 $t=x-\\dfrac1x$，则 $\\mathrm{d}t=\\left(1+\\dfrac{1}{x^{2}}\\right)\\mathrm{d}x$，且 $x^{2}+\\dfrac{1}{x^{2}}=t^{2}+2$：\n\n$$I=\\int\\frac{\\mathrm{d}t}{\\sqrt{t^{2}+2}}=\\ln\\left|t+\\sqrt{t^{2}+2}\\right|+C.$$\n\n### 回代\n\n$$I=\\ln\\left|x-\\frac1x+\\sqrt{x^{2}+\\frac{1}{x^{2}}}\\right|+C.$$"
+  },
+  {
+    "title": "x²√(1+x²) 的分母：正切换元一步到位",
+    "statement": "求不定积分\n\n$$\\int\\frac{\\mathrm{d}x}{x^{2}\\sqrt{1+x^{2}}}.$$",
+    "tags": [
+      "积分",
+      "换元与分部"
+    ],
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 6,
+    "source": "每日一积 · 2026-11-26 起连排（练习单第 3 题）",
+    "hints": [
+      "令 $x=\\tan t$，则 $\\sqrt{1+x^{2}}=\\sec t$，$\\mathrm{d}x=\\sec^{2}t\\,\\mathrm{d}t$",
+      "化简后得 $\\displaystyle\\int\\frac{\\cos t}{\\sin^{2}t}\\mathrm{d}t$"
+    ],
+    "answer": "$-\\dfrac{\\sqrt{1+x^{2}}}{x}+C$",
+    "solution": "### 正切换元\n\n令 $x=\\tan t$，$\\mathrm{d}x=\\sec^{2}t\\,\\mathrm{d}t$，$\\sqrt{1+x^{2}}=\\sec t$：\n\n$$I=\\int\\frac{\\sec^{2}t}{\\tan^{2}t\\cdot\\sec t}\\mathrm{d}t=\\int\\frac{\\sec t}{\\tan^{2}t}\\mathrm{d}t=\\int\\frac{\\cos t}{\\sin^{2}t}\\mathrm{d}t.$$\n\n### 直接积出\n\n$$I=-\\frac{1}{\\sin t}+C=-\\csc t+C.$$\n\n### 回代\n\n由 $\\tan t=x$ 得 $\\sin t=\\dfrac{x}{\\sqrt{1+x^{2}}}$，故 $\\csc t=\\dfrac{\\sqrt{1+x^{2}}}{x}$：\n\n$$I=-\\frac{\\sqrt{1+x^{2}}}{x}+C.$$"
+  },
+  {
+    "title": "arctan√x：先换元再分部",
+    "statement": "求不定积分\n\n$$\\int\\arctan\\sqrt{x}\\,\\mathrm{d}x.$$",
+    "tags": [
+      "积分",
+      "换元与分部"
+    ],
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 6,
+    "source": "每日一积 · 2026-11-26 起连排（练习单第 5 题）",
+    "hints": [
+      "令 $t=\\sqrt x$，$\\mathrm{d}x=2t\\,\\mathrm{d}t$，得 $\\displaystyle\\int2t\\arctan t\\,\\mathrm{d}t$",
+      "分部时取 $v=t^{2}$，剩下的 $\\displaystyle\\int\\frac{t^{2}}{1+t^{2}}\\mathrm{d}t$ 拆成 $1-\\dfrac{1}{1+t^{2}}$"
+    ],
+    "answer": "$(x+1)\\arctan\\sqrt{x}-\\sqrt{x}+C$",
+    "solution": "### 换元\n\n令 $t=\\sqrt x$，则 $x=t^{2}$，$\\mathrm{d}x=2t\\,\\mathrm{d}t$：\n\n$$I=\\int2t\\arctan t\\,\\mathrm{d}t.$$\n\n### 分部\n\n取 $u=\\arctan t$，$\\mathrm{d}v=2t\\,\\mathrm{d}t$，则 $v=t^{2}$：\n\n$$I=t^{2}\\arctan t-\\int\\frac{t^{2}}{1+t^{2}}\\mathrm{d}t=t^{2}\\arctan t-\\int\\left(1-\\frac{1}{1+t^{2}}\\right)\\mathrm{d}t=t^{2}\\arctan t-t+\\arctan t+C.$$\n\n### 回代\n\n$$I=(t^{2}+1)\\arctan t-t+C=(x+1)\\arctan\\sqrt x-\\sqrt x+C.$$"
+  },
+  {
+    "title": "x·tan x·sec⁴x：把 tan x sec⁴x 当成一个整体",
+    "statement": "求不定积分\n\n$$\\int x\\tan x\\sec^{4}x\\,\\mathrm{d}x.$$",
+    "tags": [
+      "积分",
+      "换元与分部"
+    ],
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 6,
+    "source": "每日一积 · 2026-11-26 起连排（练习单第 6 题）",
+    "hints": [
+      "先算 $\\displaystyle\\int\\tan x\\sec^{4}x\\,\\mathrm{d}x=\\int\\sec^{3}x\\,\\mathrm{d}(\\sec x)=\\frac{\\sec^{4}x}{4}$",
+      "再对 $x$ 分部；剩下的 $\\displaystyle\\int\\sec^{4}x\\,\\mathrm{d}x$ 用 $\\sec^{2}x=1+\\tan^{2}x$"
+    ],
+    "answer": "$\\dfrac{x}{4}\\sec^{4}x-\\dfrac{\\tan x}{4}-\\dfrac{\\tan^{3}x}{12}+C$",
+    "solution": "### 先积三角函数部分\n\n$$\\int\\tan x\\sec^{4}x\\,\\mathrm{d}x=\\int\\sec^{3}x\\,\\mathrm{d}(\\sec x)=\\frac{\\sec^{4}x}{4}.$$\n\n### 分部\n\n$$I=\\frac{x\\sec^{4}x}{4}-\\frac14\\int\\sec^{4}x\\,\\mathrm{d}x.$$\n\n而\n\n$$\\int\\sec^{4}x\\,\\mathrm{d}x=\\int(1+\\tan^{2}x)\\,\\mathrm{d}(\\tan x)=\\tan x+\\frac{\\tan^{3}x}{3}.$$\n\n### 合并\n\n$$I=\\frac{x\\sec^{4}x}{4}-\\frac{\\tan x}{4}-\\frac{\\tan^{3}x}{12}+C.$$"
+  },
+  {
+    "title": "x e^x/√(e^x−2)：换成 √(e^x−2) 就只剩 ln",
+    "statement": "求不定积分\n\n$$\\int\\frac{x\\mathrm{e}^{x}}{\\sqrt{\\mathrm{e}^{x}-2}}\\,\\mathrm{d}x.$$",
+    "tags": [
+      "积分",
+      "换元与分部"
+    ],
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 7,
+    "source": "每日一积 · 2026-11-26 起连排（练习单第 7 题）",
+    "hints": [
+      "令 $t=\\sqrt{\\mathrm{e}^{x}-2}$，则 $\\mathrm{e}^{x}=t^{2}+2$，$x=\\ln(t^{2}+2)$，$\\mathrm{d}x=\\dfrac{2t\\,\\mathrm{d}t}{t^{2}+2}$",
+      "化简后是 $\\displaystyle 2\\int\\ln(t^{2}+2)\\,\\mathrm{d}t$，再分部"
+    ],
+    "answer": "$2(x-2)\\sqrt{\\mathrm{e}^{x}-2}+4\\sqrt2\\arctan\\sqrt{\\dfrac{\\mathrm{e}^{x}-2}{2}}+C$",
+    "solution": "### 换元去掉根号\n\n令 $t=\\sqrt{\\mathrm{e}^{x}-2}$，则 $\\mathrm{e}^{x}=t^{2}+2$，$x=\\ln(t^{2}+2)$，$\\mathrm{d}x=\\dfrac{2t\\,\\mathrm{d}t}{t^{2}+2}$，于是\n\n$$I=\\int\\ln(t^{2}+2)\\cdot\\frac{t^{2}+2}{t}\\cdot\\frac{2t\\,\\mathrm{d}t}{t^{2}+2}=2\\int\\ln(t^{2}+2)\\,\\mathrm{d}t.$$\n\n### 分部\n\n$$I=2t\\ln(t^{2}+2)-4\\int\\frac{t^{2}}{t^{2}+2}\\mathrm{d}t=2t\\ln(t^{2}+2)-4t+4\\sqrt2\\arctan\\frac{t}{\\sqrt2}+C.$$\n\n### 回代\n\n注意 $\\ln(t^{2}+2)=x$，$t=\\sqrt{\\mathrm{e}^{x}-2}$：\n\n$$I=2(x-2)\\sqrt{\\mathrm{e}^{x}-2}+4\\sqrt2\\arctan\\sqrt{\\frac{\\mathrm{e}^{x}-2}{2}}+C.$$"
+  },
+  {
+    "title": "分母是 (x sinx+5cosx)²：找它的共轭型导数",
+    "statement": "求不定积分\n\n$$\\int\\frac{x^{2}+20}{\\left(x\\sin x+5\\cos x\\right)^{2}}\\,\\mathrm{d}x.$$",
+    "tags": [
+      "积分",
+      "换元与分部"
+    ],
+    "thinking": 8,
+    "difficulty": 8,
+    "calc": 6,
+    "source": "每日一积 · 2026-11-26 起连排（练习单第 8 题）",
+    "hints": [
+      "记 $D=x\\sin x+5\\cos x$，$E=x\\cos x-5\\sin x$，则 $D^{2}+E^{2}=x^{2}+25$",
+      "试求 $\\left(\\dfrac{E}{D}\\right)'$，分子恰好是 $-(x^{2}+20)$"
+    ],
+    "answer": "$\\dfrac{5\\sin x-x\\cos x}{x\\sin x+5\\cos x}+C$",
+    "solution": "### 设两个配对函数\n\n$$D=x\\sin x+5\\cos x,\\qquad E=x\\cos x-5\\sin x.$$\n\n直接展开可得 $D^{2}+E^{2}=x^{2}+25$，这正是分子里出现 $x^{2}$ 的来源。\n\n### 求 $(E/D)'$\n\n$D'=x\\cos x-4\\sin x$，$E'=-x\\sin x-4\\cos x$。代入\n\n$$\\left(\\frac{E}{D}\\right)'=\\frac{E'D-ED'}{D^{2}},$$\n\n其中\n\n$$E'D=-x^{2}\\sin^{2}x-20\\cos^{2}x-9x\\sin x\\cos x,$$\n\n$$ED'=x^{2}\\cos^{2}x+20\\sin^{2}x-9x\\sin x\\cos x.$$\n\n相减得 $E'D-ED'=-(x^{2}+20)$，于是\n\n$$\\left(\\frac{E}{D}\\right)'=-\\frac{x^{2}+20}{D^{2}}.$$\n\n### 结论\n\n$$I=-\\frac{E}{D}+C=\\frac{5\\sin x-x\\cos x}{x\\sin x+5\\cos x}+C.$$"
+  },
+  {
+    "title": "(x+1)/√(x−x²)：拆成「导数项 + 常数项」",
+    "statement": "求不定积分\n\n$$\\int\\frac{x+1}{\\sqrt{x-x^{2}}}\\,\\mathrm{d}x.$$",
+    "tags": [
+      "积分",
+      "换元与分部"
+    ],
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 5,
+    "source": "每日一积 · 2026-11-26 起连排（练习单第 9 题）",
+    "hints": [
+      "把分子写成 $A(1-2x)+B$，其中 $1-2x$ 是 $x-x^{2}$ 的导数",
+      "解得 $A=-\\dfrac12$，$B=\\dfrac32$；$\\displaystyle\\int\\frac{\\mathrm{d}x}{\\sqrt{x-x^{2}}}=\\arcsin(2x-1)$"
+    ],
+    "answer": "$-\\sqrt{x-x^{2}}+\\dfrac{3}{2}\\arcsin(2x-1)+C$",
+    "solution": "### 拆分子\n\n令 $x+1=A(1-2x)+B$，比较系数得 $A=-\\dfrac12$，$B=\\dfrac32$，故\n\n$$I=-\\frac12\\int\\frac{1-2x}{\\sqrt{x-x^{2}}}\\mathrm{d}x+\\frac32\\int\\frac{\\mathrm{d}x}{\\sqrt{x-x^{2}}}.$$\n\n### 两项分别积\n\n$$\\int\\frac{1-2x}{\\sqrt{x-x^{2}}}\\mathrm{d}x=2\\sqrt{x-x^{2}},\\qquad \\int\\frac{\\mathrm{d}x}{\\sqrt{x-x^{2}}}=\\int\\frac{\\mathrm{d}x}{\\sqrt{\\frac14-\\left(x-\\frac12\\right)^{2}}}=\\arcsin(2x-1).$$\n\n### 合并\n\n$$I=-\\sqrt{x-x^{2}}+\\frac32\\arcsin(2x-1)+C.$$"
+  },
+  {
+    "title": "e^x(1+sinx)/(1+cosx)：凑 f+f′",
+    "statement": "求不定积分\n\n$$\\int\\frac{1+\\sin x}{1+\\cos x}\\,\\mathrm{e}^{x}\\,\\mathrm{d}x.$$",
+    "tags": [
+      "积分",
+      "换元与分部"
+    ],
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 5,
+    "source": "每日一积 · 2026-11-26 起连排（练习单第 10 题）",
+    "hints": [
+      "用半角：$1+\\cos x=2\\cos^{2}\\dfrac x2$，$1+\\sin x=\\left(\\sin\\dfrac x2+\\cos\\dfrac x2\\right)^{2}$",
+      "目标是找到 $f$ 使 $f+f'=\\dfrac{1+\\sin x}{1+\\cos x}$，试 $f=\\tan\\dfrac x2$"
+    ],
+    "answer": "$\\mathrm{e}^{x}\\tan\\dfrac{x}{2}+C$",
+    "solution": "### 化成半角\n\n$$\\frac{1+\\sin x}{1+\\cos x}=\\frac{\\left(\\sin\\frac x2+\\cos\\frac x2\\right)^{2}}{2\\cos^{2}\\frac x2}=\\frac12\\left(1+\\tan\\frac x2\\right)^{2}.$$\n\n### 凑 $f+f'$\n\n取 $f=\\tan\\dfrac x2$，则 $f'=\\dfrac12\\sec^{2}\\dfrac x2$，于是\n\n$$f+f'=\\tan\\frac x2+\\frac12\\sec^{2}\\frac x2=\\frac{2\\sin\\frac x2\\cos\\frac x2+1}{2\\cos^{2}\\frac x2}=\\frac{1+\\sin x}{1+\\cos x}.$$\n\n由 $\\displaystyle\\int\\mathrm{e}^{x}\\left(f+f'\\right)\\mathrm{d}x=\\mathrm{e}^{x}f+C$ 得\n\n$$I=\\mathrm{e}^{x}\\tan\\frac x2+C.$$"
+  },
+  {
+    "title": "ln(1+e^−x)/(1+e^x)：把 ln 当整体换元",
+    "statement": "求不定积分\n\n$$\\int\\frac{\\ln\\left(1+\\mathrm{e}^{-x}\\right)}{1+\\mathrm{e}^{x}}\\,\\mathrm{d}x.$$",
+    "tags": [
+      "积分",
+      "换元与分部"
+    ],
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 4,
+    "source": "每日一积 · 2026-11-26 起连排（练习单第 11 题）",
+    "hints": [
+      "令 $u=\\ln\\left(1+\\mathrm{e}^{-x}\\right)$，则 $\\mathrm{d}u=-\\dfrac{\\mathrm{d}x}{1+\\mathrm{e}^{x}}$",
+      "于是积分变成 $-\\displaystyle\\int u\\,\\mathrm{d}u$"
+    ],
+    "answer": "$-\\dfrac12\\ln^{2}\\left(1+\\mathrm{e}^{-x}\\right)+C$",
+    "solution": "### 观察微分关系\n\n设 $u=\\ln\\left(1+\\mathrm{e}^{-x}\\right)$，则\n\n$$\\mathrm{d}u=\\frac{-\\mathrm{e}^{-x}}{1+\\mathrm{e}^{-x}}\\mathrm{d}x=-\\frac{\\mathrm{d}x}{1+\\mathrm{e}^{x}},$$\n\n恰好就是被积表达式里除 $u$ 以外的全部。\n\n### 直接积\n\n$$I=-\\int u\\,\\mathrm{d}u=-\\frac12u^{2}+C=-\\frac12\\ln^{2}\\left(1+\\mathrm{e}^{-x}\\right)+C.$$\n\n> 这类题先别急着换 $\\mathrm{e}^{x}=t$，看一眼「谁是谁的导数」往往一步就结束。"
+  },
+  {
+    "title": "sin2x+2sinx：先化 2sinx(1+cosx)",
+    "statement": "求不定积分\n\n$$\\int\\frac{\\mathrm{d}x}{\\sin 2x+2\\sin x}.$$",
+    "tags": [
+      "积分",
+      "有理函数与三角积分"
+    ],
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 7,
+    "source": "每日一积 · 2026-11-26 起连排（练习单第 12 题）",
+    "hints": [
+      "$\\sin2x+2\\sin x=2\\sin x\\,(1+\\cos x)$，分子分母同乘 $\\sin x$ 后令 $u=\\cos x$",
+      "得到 $-\\dfrac12\\displaystyle\\int\\frac{\\mathrm{d}u}{(1-u)(1+u)^{2}}$"
+    ],
+    "answer": "$\\dfrac18\\ln\\dfrac{1-\\cos x}{1+\\cos x}+\\dfrac{1}{4\\left(1+\\cos x\\right)}+C$",
+    "solution": "### 化简\n\n$$\\sin2x+2\\sin x=2\\sin x\\left(1+\\cos x\\right),$$\n\n分子分母同乘 $\\sin x$，并令 $u=\\cos x$：\n\n$$I=\\frac12\\int\\frac{\\sin x\\,\\mathrm{d}x}{\\left(1-\\cos^{2}x\\right)\\left(1+\\cos x\\right)}=-\\frac12\\int\\frac{\\mathrm{d}u}{(1-u)(1+u)^{2}}.$$\n\n### 部分分式\n\n$$\\frac{1}{(1-u)(1+u)^{2}}=\\frac{1/4}{1-u}+\\frac{1/4}{1+u}+\\frac{1/2}{(1+u)^{2}}.$$\n\n### 积分并回代\n\n$$I=\\frac18\\ln\\frac{1-\\cos x}{1+\\cos x}+\\frac{1}{4(1+\\cos x)}+C.$$\n\n> 因为 $\\dfrac{1-\\cos x}{1+\\cos x}=\\tan^{2}\\dfrac x2$，也可写成 $\\dfrac14\\ln\\left|\\tan\\dfrac x2\\right|+\\dfrac{1}{4(1+\\cos x)}+C$。"
+  },
+  {
+    "title": "1/(1+e^x)²：换成 u=1+e^x 再拆项",
+    "statement": "求不定积分\n\n$$\\int\\frac{\\mathrm{d}x}{\\left(1+\\mathrm{e}^{x}\\right)^{2}}.$$",
+    "tags": [
+      "积分",
+      "换元与分部"
+    ],
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 5,
+    "source": "每日一积 · 2026-11-26 起连排（练习单第 13 题）",
+    "hints": [
+      "令 $u=1+\\mathrm{e}^{x}$，则 $\\mathrm{d}x=\\dfrac{\\mathrm{d}u}{u-1}$",
+      "$\\dfrac{1}{(u-1)u^{2}}=\\dfrac{1}{u-1}-\\dfrac{1}{u}-\\dfrac{1}{u^{2}}$"
+    ],
+    "answer": "$x-\\ln\\left(1+\\mathrm{e}^{x}\\right)+\\dfrac{1}{1+\\mathrm{e}^{x}}+C$",
+    "solution": "### 换元\n\n令 $u=1+\\mathrm{e}^{x}$，$\\mathrm{d}u=\\mathrm{e}^{x}\\mathrm{d}x=(u-1)\\mathrm{d}x$，即 $\\mathrm{d}x=\\dfrac{\\mathrm{d}u}{u-1}$：\n\n$$I=\\int\\frac{\\mathrm{d}u}{(u-1)u^{2}}.$$\n\n### 部分分式\n\n$$\\frac{1}{(u-1)u^{2}}=\\frac{1}{u-1}-\\frac{1}{u}-\\frac{1}{u^{2}},$$\n\n故\n\n$$I=\\ln\\left|u-1\\right|-\\ln\\left|u\\right|+\\frac1u+C=x-\\ln\\left(1+\\mathrm{e}^{x}\\right)+\\frac{1}{1+\\mathrm{e}^{x}}+C.$$"
+  },
+  {
+    "title": "e^{arctanx}/(1+x²)^{3/2}：令 t=arctanx",
+    "statement": "求不定积分\n\n$$\\int\\frac{\\mathrm{e}^{\\arctan x}}{\\sqrt{\\left(1+x^{2}\\right)^{3}}}\\,\\mathrm{d}x.$$",
+    "tags": [
+      "积分",
+      "换元与分部"
+    ],
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 5,
+    "source": "每日一积 · 2026-11-26 起连排（练习单第 14 题）",
+    "hints": [
+      "令 $t=\\arctan x$，则 $\\mathrm{d}x=\\sec^{2}t\\,\\mathrm{d}t$，$\\left(1+x^{2}\\right)^{3/2}=\\sec^{3}t$",
+      "化成 $\\displaystyle\\int\\mathrm{e}^{t}\\cos t\\,\\mathrm{d}t=\\frac{\\mathrm{e}^{t}}{2}\\left(\\sin t+\\cos t\\right)$"
+    ],
+    "answer": "$\\dfrac{\\mathrm{e}^{\\arctan x}\\left(x+1\\right)}{2\\sqrt{1+x^{2}}}+C$",
+    "solution": "### 换元\n\n令 $t=\\arctan x$，则 $x=\\tan t$，$\\mathrm{d}x=\\sec^{2}t\\,\\mathrm{d}t$，$\\left(1+x^{2}\\right)^{3/2}=\\sec^{3}t$：\n\n$$I=\\int\\frac{\\mathrm{e}^{t}\\sec^{2}t}{\\sec^{3}t}\\mathrm{d}t=\\int\\mathrm{e}^{t}\\cos t\\,\\mathrm{d}t.$$\n\n### 循环积分\n\n$$\\int\\mathrm{e}^{t}\\cos t\\,\\mathrm{d}t=\\frac{\\mathrm{e}^{t}}{2}\\left(\\sin t+\\cos t\\right),$$\n\n### 回代\n\n$\\sin t=\\dfrac{x}{\\sqrt{1+x^{2}}}$，$\\cos t=\\dfrac{1}{\\sqrt{1+x^{2}}}$，故\n\n$$I=\\frac{\\mathrm{e}^{\\arctan x}\\left(x+1\\right)}{2\\sqrt{1+x^{2}}}+C.$$"
+  },
+  {
+    "title": "1/(sinx cos³x)：拆成 sin/cos³ + 1/(sinx cosx)",
+    "statement": "求不定积分\n\n$$\\int\\frac{\\mathrm{d}x}{\\sin x\\cos^{3}x}.$$",
+    "tags": [
+      "积分",
+      "有理函数与三角积分"
+    ],
+    "thinking": 5,
+    "difficulty": 6,
+    "calc": 6,
+    "source": "每日一积 · 2026-11-26 起连排（练习单第 15 题）",
+    "hints": [
+      "分子写 $1=\\sin^{2}x+\\cos^{2}x$，拆成 $\\dfrac{\\sin x}{\\cos^{3}x}+\\dfrac{1}{\\sin x\\cos x}$",
+      "$\\displaystyle\\int\\frac{\\mathrm{d}x}{\\sin x\\cos x}=\\ln\\left|\\tan x\\right|$"
+    ],
+    "answer": "$\\dfrac{1}{2\\cos^{2}x}+\\ln\\left|\\tan x\\right|+C$",
+    "solution": "### 拆项\n\n$$\\frac{1}{\\sin x\\cos^{3}x}=\\frac{\\sin^{2}x+\\cos^{2}x}{\\sin x\\cos^{3}x}=\\frac{\\sin x}{\\cos^{3}x}+\\frac{1}{\\sin x\\cos x}.$$\n\n### 分别积分\n\n$$\\int\\frac{\\sin x}{\\cos^{3}x}\\mathrm{d}x=\\int\\cos^{-3}x\\,\\mathrm{d}(-\\cos x)=\\frac{1}{2\\cos^{2}x},$$\n\n$$\\int\\frac{\\mathrm{d}x}{\\sin x\\cos x}=\\int\\frac{2\\,\\mathrm{d}x}{\\sin 2x}=\\ln\\left|\\tan x\\right|.$$\n\n### 结论\n\n$$I=\\frac{1}{2\\cos^{2}x}+\\ln\\left|\\tan x\\right|+C.$$"
+  },
+  {
+    "title": "√x/(1+√(1+x))：分子分母乘共轭",
+    "statement": "求不定积分\n\n$$\\int\\frac{\\sqrt{x}}{1+\\sqrt{1+x}}\\,\\mathrm{d}x.$$",
+    "tags": [
+      "积分",
+      "有理函数与三角积分"
+    ],
+    "thinking": 7,
+    "difficulty": 7,
+    "calc": 7,
+    "source": "每日一积 · 2026-11-26 起连排（练习单第 16 题）",
+    "hints": [
+      "分子分母同乘 $\\sqrt{1+x}-1$，因为 $\\left(1+\\sqrt{1+x}\\right)\\left(\\sqrt{1+x}-1\\right)=x$",
+      "化成 $\\displaystyle\\int\\sqrt{1+\\frac1x}\\,\\mathrm{d}x-2\\sqrt x$，前者用 $x=\\sinh^{2}u$ 或 $t=\\sqrt{1+\\frac1x}$"
+    ],
+    "answer": "$\\sqrt{x^{2}+x}-2\\sqrt{x}+\\ln\\left(\\sqrt{x+1}+\\sqrt{x}\\right)+C$",
+    "solution": "### 有理化\n\n$$\\frac{\\sqrt x}{1+\\sqrt{1+x}}=\\frac{\\sqrt x\\left(\\sqrt{1+x}-1\\right)}{\\left(1+\\sqrt{1+x}\\right)\\left(\\sqrt{1+x}-1\\right)}=\\frac{\\sqrt{1+x}-1}{\\sqrt x}=\\sqrt{1+\\frac1x}-\\frac{1}{\\sqrt x}.$$\n\n### 第一项\n\n记 $I_1=\\displaystyle\\int\\sqrt{1+\\frac1x}\\,\\mathrm{d}x$。用 $x=\\sinh^{2}u$（$u\\geqslant0$），$\\sqrt{1+\\frac1x}=\\coth u$，$\\mathrm{d}x=2\\sinh u\\cosh u\\,\\mathrm{d}u$：\n\n$$I_1=\\int2\\cosh^{2}u\\,\\mathrm{d}u=\\int\\left(1+\\cosh 2u\\right)\\mathrm{d}u=u+\\frac{\\sinh 2u}{2}=\\operatorname{arcosh}\\sqrt{1+x}+\\sqrt{x^{2}+x}.$$\n\n### 合并\n\n$$I=\\sqrt{x^{2}+x}+\\operatorname{arcosh}\\sqrt{1+x}-2\\sqrt x+C,$$\n\n又 $\\operatorname{arcosh}\\sqrt{1+x}=\\ln\\left(\\sqrt{x+1}+\\sqrt x\\right)$，故\n\n$$I=\\sqrt{x^{2}+x}-2\\sqrt x+\\ln\\left(\\sqrt{x+1}+\\sqrt{x}\\right)+C.$$"
+  },
+  {
+    "title": "1/((2x−1)√(x−x²))：先令 t=2x−1",
+    "statement": "求不定积分\n\n$$\\int\\frac{\\mathrm{d}x}{\\left(2x-1\\right)\\sqrt{x-x^{2}}}.$$",
+    "tags": [
+      "积分",
+      "有理函数与三角积分"
+    ],
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 6,
+    "source": "每日一积 · 2026-11-26 起连排（练习单第 17 题）",
+    "hints": [
+      "令 $t=2x-1$，则 $x-x^{2}=\\dfrac{1-t^{2}}{4}$，$\\sqrt{x-x^{2}}=\\dfrac{\\sqrt{1-t^{2}}}{2}$",
+      "化成 $\\displaystyle\\int\\frac{\\mathrm{d}t}{t\\sqrt{1-t^{2}}}=-\\ln\\left|\\frac{1+\\sqrt{1-t^{2}}}{t}\\right|$"
+    ],
+    "answer": "$\\ln\\left|\\dfrac{2x-1}{1+2\\sqrt{x-x^{2}}}\\right|+C$",
+    "solution": "### 换元\n\n令 $t=2x-1$，则 $x=\\dfrac{t+1}{2}$，$\\mathrm{d}x=\\dfrac{\\mathrm{d}t}{2}$，且\n\n$$x-x^{2}=\\frac{1-t^{2}}{4},\\qquad \\sqrt{x-x^{2}}=\\frac{\\sqrt{1-t^{2}}}{2}.$$\n\n故\n\n$$I=\\int\\frac{\\mathrm{d}t}{t\\sqrt{1-t^{2}}}.$$\n\n### 基本积分\n\n令 $t=\\sin\\theta$，得\n\n$$\\int\\frac{\\mathrm{d}t}{t\\sqrt{1-t^{2}}}=\\int\\frac{\\mathrm{d}\\theta}{\\sin\\theta}=\\ln\\left|\\tan\\frac{\\theta}{2}\\right|+C=-\\ln\\left|\\frac{1+\\sqrt{1-t^{2}}}{t}\\right|+C.$$\n\n### 回代\n\n$$I=-\\ln\\left|\\frac{1+2\\sqrt{x-x^{2}}}{2x-1}\\right|+C=\\ln\\left|\\frac{2x-1}{1+2\\sqrt{x-x^{2}}}\\right|+C.$$"
+  },
+  {
+    "title": "x⁴/(x⁴+5x²+4)：假分式先除，再拆两个二次因式",
+    "statement": "求不定积分\n\n$$\\int\\frac{x^{4}}{x^{4}+5x^{2}+4}\\,\\mathrm{d}x.$$",
+    "tags": [
+      "积分",
+      "有理函数与三角积分"
+    ],
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 6,
+    "source": "每日一积 · 2026-11-26 起连排（练习单第 18 题）",
+    "hints": [
+      "$x^{4}+5x^{2}+4=\\left(x^{2}+1\\right)\\left(x^{2}+4\\right)$",
+      "先写成 $1-\\dfrac{5x^{2}+4}{\\left(x^{2}+1\\right)\\left(x^{2}+4\\right)}$，再拆成 $-\\dfrac{1/3}{x^{2}+1}+\\dfrac{16/3}{x^{2}+4}$"
+    ],
+    "answer": "$x+\\dfrac13\\arctan x-\\dfrac83\\arctan\\dfrac{x}{2}+C$",
+    "solution": "### 化成真分式\n\n$x^{4}=\\left(x^{4}+5x^{2}+4\\right)-\\left(5x^{2}+4\\right)$，故\n\n$$\\frac{x^{4}}{x^{4}+5x^{2}+4}=1-\\frac{5x^{2}+4}{\\left(x^{2}+1\\right)\\left(x^{2}+4\\right)}.$$\n\n### 部分分式\n\n设 $5x^{2}+4=A\\left(x^{2}+4\\right)+C\\left(x^{2}+1\\right)$，解得 $A=-\\dfrac13$，$C=\\dfrac{16}{3}$。于是\n\n$$I=x+\\frac13\\int\\frac{\\mathrm{d}x}{x^{2}+1}-\\frac{16}{3}\\int\\frac{\\mathrm{d}x}{x^{2}+4}=x+\\frac13\\arctan x-\\frac83\\arctan\\frac x2+C.$$"
+  },
+  {
+    "title": "(cosx+x sinx)/(x+cosx)²：一眼看出是商的导数",
+    "statement": "求不定积分\n\n$$\\int\\frac{\\cos x+x\\sin x}{\\left(x+\\cos x\\right)^{2}}\\,\\mathrm{d}x.$$",
+    "tags": [
+      "积分",
+      "换元与分部"
+    ],
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 4,
+    "source": "每日一积 · 2026-11-26 起连排（练习单第 19 题）",
+    "hints": [
+      "试着求 $\\left(\\dfrac{x}{x+\\cos x}\\right)'$",
+      "分子正好是「$1\\cdot D-x\\,D'$」展开后的样子"
+    ],
+    "answer": "$\\dfrac{x}{x+\\cos x}+C$",
+    "solution": "### 直接凑商的导数\n\n记 $D=x+\\cos x$，$D'=1-\\sin x$，则\n\n$$\\left(\\frac{x}{D}\\right)'=\\frac{1\\cdot D-x\\,D'}{D^{2}}=\\frac{x+\\cos x-x\\left(1-\\sin x\\right)}{D^{2}}=\\frac{\\cos x+x\\sin x}{D^{2}}.$$\n\n### 结论\n\n被积函数恰好是这个导数，故\n\n$$I=\\frac{x}{x+\\cos x}+C.$$\n\n> 分母是某个整体平方时，先猜「分子是不是它上面那个分式的导数」，比硬拆快得多。"
+  },
+  {
+    "title": "(1+x²)arcsinx/(x²√(1−x²))：整体分部",
+    "statement": "求不定积分\n\n$$\\int\\frac{\\left(1+x^{2}\\right)\\arcsin x}{x^{2}\\sqrt{1-x^{2}}}\\,\\mathrm{d}x.$$",
+    "tags": [
+      "积分",
+      "换元与分部"
+    ],
+    "thinking": 8,
+    "difficulty": 8,
+    "calc": 7,
+    "source": "每日一积 · 2026-11-26 起连排（练习单第 20 题）",
+    "hints": [
+      "取 $u=\\arcsin x$，则 $\\mathrm{d}v=\\dfrac{1+x^{2}}{x^{2}\\sqrt{1-x^{2}}}\\mathrm{d}x$ 可以积出来：$v=\\arcsin x-\\dfrac{\\sqrt{1-x^{2}}}{x}$",
+      "分部后会出现 $\\displaystyle\\int\\frac{\\arcsin x}{\\sqrt{1-x^{2}}}\\mathrm{d}x=\\frac12\\arcsin^{2}x$ 和 $\\displaystyle\\int\\frac{\\mathrm{d}x}{x}$"
+    ],
+    "answer": "$\\dfrac12\\arcsin^{2}x-\\dfrac{\\sqrt{1-x^{2}}}{x}\\arcsin x+\\ln\\left|x\\right|+C$",
+    "solution": "### 先积 $\\mathrm{d}v$\n\n$$\\int\\frac{1+x^{2}}{x^{2}\\sqrt{1-x^{2}}}\\mathrm{d}x=\\int\\frac{\\mathrm{d}x}{\\sqrt{1-x^{2}}}+\\int\\frac{\\mathrm{d}x}{x^{2}\\sqrt{1-x^{2}}}=\\arcsin x-\\frac{\\sqrt{1-x^{2}}}{x}.$$\n\n### 分部积分\n\n取 $u=\\arcsin x$，$\\mathrm{d}u=\\dfrac{\\mathrm{d}x}{\\sqrt{1-x^{2}}}$，$v=\\arcsin x-\\dfrac{\\sqrt{1-x^{2}}}{x}$：\n\n$$I=\\arcsin^{2}x-\\frac{\\sqrt{1-x^{2}}}{x}\\arcsin x-\\int\\left(\\arcsin x-\\frac{\\sqrt{1-x^{2}}}{x}\\right)\\frac{\\mathrm{d}x}{\\sqrt{1-x^{2}}}.$$\n\n### 收尾\n\n其中\n\n$$\\int\\frac{\\arcsin x}{\\sqrt{1-x^{2}}}\\mathrm{d}x=\\frac12\\arcsin^{2}x,\\qquad \\int\\frac{\\mathrm{d}x}{x}=\\ln\\left|x\\right|,$$\n\n所以\n\n$$I=\\arcsin^{2}x-\\frac{\\sqrt{1-x^{2}}}{x}\\arcsin x-\\frac12\\arcsin^{2}x+\\ln\\left|x\\right|+C=\\frac12\\arcsin^{2}x-\\frac{\\sqrt{1-x^{2}}}{x}\\arcsin x+\\ln\\left|x\\right|+C.$$"
+  }
+]
