@@ -103,6 +103,21 @@ if (en) {
     JSON.stringify(en.counts.byType));
 }
 
+/* ---------------------------------------------------------------- 四六级 */
+for (const [id, label, minPoints] of [['cet4-2026', '四级', 30], ['cet6-2026', '六级', 30]]) {
+  const p = spr.get(id);
+  ok(label + '包存在', !!p);
+  if (!p) continue;
+  ok(label + '考点数 ≥ ' + minPoints, p.points.length >= minPoints, 'points=' + p.points.length);
+  ok(label + '题量 ≥ 25', p.questions.length >= 25, 'questions=' + p.questions.length);
+  const empty = p.points.filter((x) => !x.questionIds.length);
+  ok(label + '每个考点至少 1 题', empty.length === 0, empty.map((x) => x.id).join(','));
+  ok(label + '含写作/阅读/翻译题型',
+    (p.counts.byType.essay || 0) >= 1 && (p.counts.byType.reading || 0) >= 3 && (p.counts.byType.short || 0) >= 1,
+    JSON.stringify(p.counts.byType));
+  ok(label + '总分 710', p.exam.totalPoints === 710, 'total=' + p.exam.totalPoints);
+}
+
 const dupWarn = logs.filter((m) => /重复|不存在/.test(m));
 ok('加载日志无重复/缺号告警', dupWarn.length === 0, dupWarn.slice(0, 2).join(' / '));
 

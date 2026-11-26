@@ -1,0 +1,1257 @@
+{
+  "id": "cet6-2026",
+  "school": "全国大学英语四、六级考试",
+  "schoolShort": "全国",
+  "subject": "大学英语六级（CET-6）",
+  "subjectShort": "六级",
+  "year": "2026",
+  "term": "上半年",
+  "updatedAt": "2026-11-26",
+  "intro": "按六级官方题型与分值拆考点：写作 106.5 / 听力 248.5（长对话、听力篇章、讲座讲话）/ 阅读 248.5（选词、长篇匹配、仔细阅读）/ 翻译 106.5，总分 710。题目按真题题型与难度自编。",
+  "exam": {
+    "durationMin": 130,
+    "totalPoints": 710,
+    "sections": [
+      {
+        "type": "essay",
+        "name": "写作",
+        "count": 1,
+        "per": 106.5,
+        "points": 106.5,
+        "note": "30 分钟，150–200 词"
+      },
+      {
+        "type": "reading",
+        "name": "听力理解",
+        "count": 25,
+        "per": 9.94,
+        "points": 248.5,
+        "note": "长对话 8 + 听力篇章 7 + 讲座/讲话 10"
+      },
+      {
+        "type": "cloze",
+        "name": "阅读·选词填空",
+        "count": 10,
+        "per": 3.55,
+        "points": 35.5,
+        "note": "15 词选 10 空，词汇更抽象"
+      },
+      {
+        "type": "reading",
+        "name": "阅读·长篇匹配",
+        "count": 10,
+        "per": 7.1,
+        "points": 71,
+        "note": "段落更长，同义改写更隐蔽"
+      },
+      {
+        "type": "reading",
+        "name": "阅读·仔细阅读",
+        "count": 10,
+        "per": 14.2,
+        "points": 142,
+        "note": "两篇，长难句密集"
+      },
+      {
+        "type": "short",
+        "name": "翻译",
+        "count": 1,
+        "per": 106.5,
+        "points": 106.5,
+        "note": "汉译英段落，180–200 字"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "kind": "题型",
+      "title": "CET-6 考试大纲与题型说明",
+      "note": "题量、分值与时间按官方口径"
+    },
+    {
+      "kind": "自编",
+      "title": "按六级难度自编的练习材料",
+      "note": "不收录受版权保护的真题原文"
+    }
+  ],
+  "chapters": [
+    {
+      "id": "c1",
+      "no": "Part I",
+      "title": "写作（106.5）",
+      "weight": 5,
+      "summary": "150–200 词，六级更看论证深度与句式多样性。"
+    },
+    {
+      "id": "c2",
+      "no": "Part II",
+      "title": "听力（248.5）",
+      "weight": 6,
+      "summary": "讲座与讲话占 10 题（99 分），是最容易拉开差距的部分。"
+    },
+    {
+      "id": "c3",
+      "no": "Part III-A",
+      "title": "选词填空（35.5）",
+      "weight": 3,
+      "summary": "六级词汇更抽象，词性判断仍是第一关。"
+    },
+    {
+      "id": "c4",
+      "no": "Part III-B",
+      "title": "长篇阅读匹配（71）",
+      "weight": 4,
+      "summary": "段落长、改写隐蔽，靠题干关键词与段落主旨并行。"
+    },
+    {
+      "id": "c5",
+      "no": "Part III-C",
+      "title": "仔细阅读（142）",
+      "weight": 6,
+      "summary": "长难句密集，单题 14.2 分，必须留足时间。"
+    },
+    {
+      "id": "c6",
+      "no": "Part IV",
+      "title": "翻译（106.5）",
+      "weight": 4,
+      "summary": "180–200 字段落，文化与社会话题为主，考长句处理。"
+    },
+    {
+      "id": "c7",
+      "no": "基础",
+      "title": "高频词汇与复杂语法",
+      "weight": 4,
+      "summary": "六级差距主要在词汇深度与从句、非谓语、倒装的熟练度。"
+    }
+  ],
+  "points": [
+    {
+      "id": "s1-1",
+      "chapter": "c1",
+      "title": "150–200 词的论证结构",
+      "core": "四段更稳：现象/立场（2–3 句）→ 理由一 + 例证（3–4 句）→ 理由二或让步（3–4 句）→ 结论与建议（2 句）。",
+      "detail": "六级评分更看论证是否成立：观点要有条件限定（in most cases、for students who...），避免绝对化；例证要具体到场景而不是泛泛而谈。",
+      "keys": [
+        "四段",
+        "条件限定",
+        "具体例证"
+      ],
+      "examTypes": [
+        "essay"
+      ],
+      "frequency": 5,
+      "traps": [
+        "只堆观点不展开",
+        "用大词但搭配错误（make a progress）"
+      ]
+    },
+    {
+      "id": "s1-2",
+      "chapter": "c1",
+      "title": "句式多样性与衔接",
+      "core": "在同一篇里交替使用简单句、从句、非谓语与倒装；衔接靠连接词 + 代词回指 + 关键词复现。",
+      "detail": "可用结构：Not until... did...；It is ... that...（强调句）；What matters is...；Only when... can...。每段至少一个复杂句，但不要全篇长句。",
+      "keys": [
+        "句式交替",
+        "强调句",
+        "倒装"
+      ],
+      "examTypes": [
+        "essay"
+      ],
+      "frequency": 4,
+      "traps": [
+        "倒装后语序写错",
+        "强调句与定语从句混用"
+      ]
+    },
+    {
+      "id": "s1-3",
+      "chapter": "c1",
+      "title": "六级常考话题与储备",
+      "core": "高频话题：科技与就业、教育与公平、环境与消费、文化传承、城市生活。每类准备 3 个可复用的论据与 2 个数据型表达。",
+      "detail": "数据表达：a recent survey indicates that...；roughly two in five respondents...；the figure has nearly doubled since...。避免编造精确统计，用「大致比例」表述。",
+      "keys": [
+        "话题储备",
+        "数据表达",
+        "论据复用"
+      ],
+      "examTypes": [
+        "essay"
+      ],
+      "frequency": 4,
+      "traps": [
+        "编造具体机构与年份",
+        "论据与话题错配"
+      ]
+    },
+    {
+      "id": "s1-4",
+      "chapter": "c1",
+      "title": "常见语言扣分点",
+      "core": "六级仍会因基础错误降档：主谓一致、时态、冠词、可数不可数、介词搭配。",
+      "detail": "高频错：informations/advices（不可数）、discuss about（多余介词）、according to me（应为 in my view）、one of the student（复数）。",
+      "keys": [
+        "不可数名词",
+        "介词",
+        "搭配"
+      ],
+      "examTypes": [
+        "essay",
+        "single"
+      ],
+      "frequency": 4,
+      "traps": [
+        "把 discuss 当不及物加 about",
+        "one of + 单数名词"
+      ]
+    },
+    {
+      "id": "s2-1",
+      "chapter": "c2",
+      "title": "长对话（Section A）",
+      "core": "长对话按问答推进，答案多在回答方；注意说话人态度转变与建议句（Why don't you...、You'd better...）。",
+      "detail": "六级长对话话题更偏学术与职场：课程选择、研究设计、面试、租房合同。预读选项时先判断场景与人物关系。",
+      "keys": [
+        "问答结构",
+        "建议句",
+        "场景预判"
+      ],
+      "examTypes": [
+        "reading"
+      ],
+      "frequency": 5,
+      "traps": [
+        "把提问方的猜测当结论",
+        "忽略转折后的修正信息"
+      ]
+    },
+    {
+      "id": "s2-2",
+      "chapter": "c2",
+      "title": "听力篇章（Section B）",
+      "core": "篇章按顺序出题，首尾与转折处必考；例子、数据、引语对应细节题。",
+      "detail": "六级篇章信息密度更高，建议边听边在选项旁做极简标记（↑↓、+/-），不要写完整单词。",
+      "keys": [
+        "顺序出题",
+        "转折",
+        "极简标记"
+      ],
+      "examTypes": [
+        "reading"
+      ],
+      "frequency": 5,
+      "traps": [
+        "试图记完整句子",
+        "漏听 however 后的结论"
+      ]
+    },
+    {
+      "id": "s2-3",
+      "chapter": "c2",
+      "title": "讲座与讲话（Section C）",
+      "core": "讲座结构固定：提出问题 → 给出研究/案例 → 得出结论。听到 first/second/finally、research shows、the point is 就是出题点。",
+      "detail": "10 题 99 分，是听力里权重最大的部分。讲座常用「先抑后扬」：先讲常见看法，再用 However 推翻，答案几乎都在推翻之后。",
+      "keys": [
+        "讲座结构",
+        "研究结论",
+        "先抑后扬"
+      ],
+      "examTypes": [
+        "reading",
+        "judge"
+      ],
+      "frequency": 5,
+      "traps": [
+        "把讲座开头的常见看法当作者观点",
+        "错过最后一句总结"
+      ]
+    },
+    {
+      "id": "s2-4",
+      "chapter": "c2",
+      "title": "数字、比例与趋势",
+      "core": "六级数字题常带比例与趋势：account for、make up、rise by vs rise to、double、halve。",
+      "detail": "rise by 20% 是增长了 20%，rise to 20% 是涨到 20%；three times as many as 是「是…的三倍」。",
+      "keys": [
+        "比例",
+        "趋势",
+        "by vs to"
+      ],
+      "examTypes": [
+        "reading"
+      ],
+      "frequency": 4,
+      "traps": [
+        "把 rise to 当 rise by",
+        "百分比与百分点混淆"
+      ]
+    },
+    {
+      "id": "s2-5",
+      "chapter": "c2",
+      "title": "态度与立场",
+      "core": "态度靠评价词与语气：skeptical、cautious、supportive、critical、indifferent；讲座里讲者的态度常通过反问与让步体现。",
+      "detail": "注意双重否定与委婉表达：I'm not entirely convinced = 我不太认同；It would be a stretch to say... = 不能这么说。",
+      "keys": [
+        "评价词",
+        "委婉否定",
+        "反问"
+      ],
+      "examTypes": [
+        "reading",
+        "judge"
+      ],
+      "frequency": 4,
+      "traps": [
+        "把委婉否定当认同",
+        "把中立当支持"
+      ]
+    },
+    {
+      "id": "s2-6",
+      "chapter": "c2",
+      "title": "预读与放弃策略",
+      "core": "利用 Direction 预读长选项，圈差异点；一题卡住立刻放弃，保证后面 10 题讲座有时间。",
+      "detail": "六级听力语速更快，答题卡建议边听边涂；讲座部分题与题之间间隔短，预读要提前到上一题的作答间隙。",
+      "keys": [
+        "预读",
+        "放弃",
+        "边听边涂"
+      ],
+      "examTypes": [
+        "judge"
+      ],
+      "frequency": 4,
+      "traps": [
+        "在长对话纠缠导致讲座整段丢失",
+        "最后集中涂卡错位"
+      ]
+    },
+    {
+      "id": "s3-1",
+      "chapter": "c3",
+      "title": "抽象词的词性判断",
+      "core": "六级选词多为抽象名词与派生词，先按后缀判词性：-tion/-ment/-ity 名词，-ive/-able 形容词，-ize/-ify 动词，-ly 副词。",
+      "detail": "同一词根可能同时给名词与形容词形式（innovation / innovative），必须靠句子成分区分。",
+      "keys": [
+        "后缀",
+        "词根",
+        "句子成分"
+      ],
+      "examTypes": [
+        "cloze"
+      ],
+      "frequency": 5,
+      "traps": [
+        "把 -ing 形式一律当名词",
+        "-ly 结尾不一定是副词（friendly）"
+      ]
+    },
+    {
+      "id": "s3-2",
+      "chapter": "c3",
+      "title": "搭配与语义场",
+      "core": "第二关看搭配与语义场：动词与介词的固定组合、名词与形容词的常见搭配（a growing concern、mounting evidence）。",
+      "detail": "六级常考学术搭配：pose a threat、raise concerns、draw a distinction、shed light on、give rise to。",
+      "keys": [
+        "学术搭配",
+        "语义场",
+        "固定组合"
+      ],
+      "examTypes": [
+        "cloze"
+      ],
+      "frequency": 4,
+      "traps": [
+        "只按中文意思选，忽略英语搭配习惯"
+      ]
+    },
+    {
+      "id": "s3-3",
+      "chapter": "c3",
+      "title": "限时与检查",
+      "core": "选词 8–10 分钟：先做有把握的 6–7 空，剩下的用词性与搭配二选一，最后通读检查一致性。",
+      "detail": "每空 3.55 分，性价比低于仔细阅读；不要在单个空上超过 90 秒。",
+      "keys": [
+        "限时",
+        "先易后难",
+        "通读"
+      ],
+      "examTypes": [
+        "cloze",
+        "judge"
+      ],
+      "frequency": 3,
+      "traps": [
+        "为 3.55 分耗掉仔细阅读的时间"
+      ]
+    },
+    {
+      "id": "s4-1",
+      "chapter": "c4",
+      "title": "题干关键词与段落主旨并行",
+      "core": "先读题干圈独特名词与数字，再逐段读首末句判断主旨，两者交叉匹配；不要只靠关键词硬扫。",
+      "detail": "六级段落更长、改写更隐蔽，纯关键词匹配容易落空；先知道每段「在讲什么」，再判断题干是否落在该段。",
+      "keys": [
+        "关键词",
+        "段落主旨",
+        "交叉匹配"
+      ],
+      "examTypes": [
+        "reading"
+      ],
+      "frequency": 5,
+      "traps": [
+        "只看关键词导致选到提及但不相关的段落"
+      ]
+    },
+    {
+      "id": "s4-2",
+      "chapter": "c4",
+      "title": "抽象题干与转折信号",
+      "core": "抽象题干（如「一个反直觉的发现」）要抓段落中的转折与评价词：however、surprisingly、contrary to。",
+      "detail": "段落中的举例、数据往往对应具体题干；结论与评价句对应抽象题干。",
+      "keys": [
+        "抽象题干",
+        "转折",
+        "评价词"
+      ],
+      "examTypes": [
+        "reading"
+      ],
+      "frequency": 4,
+      "traps": [
+        "把举例段当结论段"
+      ]
+    },
+    {
+      "id": "s4-3",
+      "chapter": "c4",
+      "title": "控时 13 分钟",
+      "core": "13 分钟：读题 4 分钟、匹配 8 分钟、复查 1 分钟；超时先放弃剩余题，保证仔细阅读有 18 分钟。",
+      "detail": "六级阅读总时长约 40 分钟，建议分配：选词 9 + 匹配 13 + 仔细阅读 18。",
+      "keys": [
+        "时间分配",
+        "取舍"
+      ],
+      "examTypes": [
+        "reading",
+        "judge"
+      ],
+      "frequency": 3,
+      "traps": [
+        "在匹配上耗 20 分钟"
+      ]
+    },
+    {
+      "id": "s5-1",
+      "chapter": "c5",
+      "title": "长难句拆解",
+      "core": "先找主谓宾，再把定语从句、分词短语、插入语括起来；六级常在一句里塞两三个从句。",
+      "detail": "信号：that/which/who 引导定语从句；两个逗号之间是插入语；-ing/-ed 短语作定语或状语；冒号与破折号后是解释。",
+      "keys": [
+        "主干",
+        "从句",
+        "插入语"
+      ],
+      "examTypes": [
+        "reading",
+        "short"
+      ],
+      "frequency": 5,
+      "traps": [
+        "把定语从句的谓语当主句谓语",
+        "插入语中的否定词干扰判断"
+      ]
+    },
+    {
+      "id": "s5-2",
+      "chapter": "c5",
+      "title": "细节题与同义核对",
+      "core": "定位到句后逐项核对：主语是否一致、程度是否被放大（some→all）、因果方向是否反转。",
+      "detail": "六级选项改写幅度大，常见手法：词性转换（名词变动词）、上下位替换（vehicle→car）、双重否定。",
+      "keys": [
+        "逐项核对",
+        "程度",
+        "因果"
+      ],
+      "examTypes": [
+        "reading"
+      ],
+      "frequency": 5,
+      "traps": [
+        "看到同义改写就选，忽略主语替换"
+      ]
+    },
+    {
+      "id": "s5-3",
+      "chapter": "c5",
+      "title": "推断与作者态度",
+      "core": "推断只推一步且有原文依据；态度看评价词与让步结构（admittedly... but...）。",
+      "detail": "六级学术文章作者常持「有条件支持」：认可某观点但指出局限。这类题的正确选项通常也带条件（with some reservations）。",
+      "keys": [
+        "一步推断",
+        "有条件支持",
+        "让步"
+      ],
+      "examTypes": [
+        "reading"
+      ],
+      "frequency": 4,
+      "traps": [
+        "选绝对化表述（completely、entirely）"
+      ]
+    },
+    {
+      "id": "s5-4",
+      "chapter": "c5",
+      "title": "词义与指代",
+      "core": "猜词靠同位语、定义句（is defined as）、举例与对比；指代往前找最近的名词或整句。",
+      "detail": "六级常考抽象词的具体化：sustainability、resilience、incentive，要结合段落主题判断。",
+      "keys": [
+        "同位语",
+        "定义句",
+        "指代"
+      ],
+      "examTypes": [
+        "reading"
+      ],
+      "frequency": 4,
+      "traps": [
+        "按常见词义硬套",
+        "把 this 指代整段当成指代单个名词"
+      ]
+    },
+    {
+      "id": "s5-5",
+      "chapter": "c5",
+      "title": "主旨与标题",
+      "core": "主旨看首段、各段首句与末段；标题要覆盖全文且不过窄、不过宽。",
+      "detail": "排除法：只覆盖一段的、包含文中未提概念的、带绝对化评价的都错。",
+      "keys": [
+        "覆盖面",
+        "排除法"
+      ],
+      "examTypes": [
+        "reading"
+      ],
+      "frequency": 4,
+      "traps": [
+        "标题选得过窄（只概括第一段）"
+      ]
+    },
+    {
+      "id": "s5-6",
+      "chapter": "c5",
+      "title": "两篇的时间与顺序",
+      "core": "两篇各 9 分钟；先看题干再读文，遇到读不懂的段落先跳过，靠题目定位回读。",
+      "detail": "单题 14.2 分，允许在一道题上花 1.5 分钟，但不要超过 2 分钟。",
+      "keys": [
+        "先题干",
+        "定位回读",
+        "限时"
+      ],
+      "examTypes": [
+        "reading",
+        "judge"
+      ],
+      "frequency": 3,
+      "traps": [
+        "通读全文再做题，时间不够"
+      ]
+    },
+    {
+      "id": "s6-1",
+      "chapter": "c6",
+      "title": "段落翻译的处理顺序",
+      "core": "断句 → 定主干 → 定时态 → 补主语 → 挂修饰；六级段落 180–200 字，句子更长，允许拆句。",
+      "detail": "遇到四字短语或并列结构，先理解意思再找对应的英文表达，不要逐字对译。",
+      "keys": [
+        "断句",
+        "主干",
+        "拆句"
+      ],
+      "examTypes": [
+        "short"
+      ],
+      "frequency": 5,
+      "traps": [
+        "一句写 40 个词导致结构崩掉",
+        "中文并列全用 and 连接"
+      ]
+    },
+    {
+      "id": "s6-2",
+      "chapter": "c6",
+      "title": "文化与社会话题表达",
+      "core": "高频主题：传统技艺、城市更新、乡村振兴、数字经济、教育公平。准备「主题词 + 常用动词」组合。",
+      "detail": "常用动词：promote、preserve、inherit、revive、integrate、transform。文化词用「直译 + 简释」。",
+      "keys": [
+        "主题词",
+        "常用动词",
+        "文化词"
+      ],
+      "examTypes": [
+        "short"
+      ],
+      "frequency": 4,
+      "traps": [
+        "「非遗」臆造译名（应为 intangible cultural heritage）"
+      ]
+    },
+    {
+      "id": "s6-3",
+      "chapter": "c6",
+      "title": "长句与逻辑连接",
+      "core": "中文多短句并列，英文要显性标逻辑：用 while、whereas、which 引导的从句把并列关系整理清楚。",
+      "detail": "不要把所有逗号都译成 and；因果关系用 therefore/as a result，转折用 however/while。",
+      "keys": [
+        "逻辑显性化",
+        "从句",
+        "连接词"
+      ],
+      "examTypes": [
+        "short"
+      ],
+      "frequency": 4,
+      "traps": [
+        "逗号连接两个完整句（comma splice）"
+      ]
+    },
+    {
+      "id": "s6-4",
+      "chapter": "c6",
+      "title": "检查清单与容错",
+      "core": "五项检查：时态、主谓一致、冠词与单复数、拼写、漏译；写不出精确词时用上位词保证句子完整。",
+      "detail": "整体评分下，句子完整 > 用词高级。宁可写 simple 的正确句，也不要写华丽的错句。",
+      "keys": [
+        "检查清单",
+        "上位词",
+        "完整优先"
+      ],
+      "examTypes": [
+        "short"
+      ],
+      "frequency": 3,
+      "traps": [
+        "为用大词牺牲准确性"
+      ]
+    },
+    {
+      "id": "s7-1",
+      "chapter": "c7",
+      "title": "六级高频词辨析",
+      "core": "抽象词靠搭配与语域区分：imply/infer、comprise/consist of、attribute/contribute、substitute/replace。",
+      "detail": "常见：considerable（大量）/considerate（体贴）、industrial（工业的）/industrious（勤奋的）、historic（有历史意义的）/historical（历史的）。",
+      "keys": [
+        "语域",
+        "搭配",
+        "形近"
+      ],
+      "examTypes": [
+        "single"
+      ],
+      "frequency": 5,
+      "traps": [
+        "imply 是说话人暗示，infer 是听者推断"
+      ]
+    },
+    {
+      "id": "s7-2",
+      "chapter": "c7",
+      "title": "学术短语与搭配",
+      "core": "六级阅读写作常考学术搭配：pose a threat to、shed light on、give rise to、be subject to、in light of。",
+      "detail": "这些搭配在选词填空与写作中都能直接使用，属于「背了就能用」的部分。",
+      "keys": [
+        "学术搭配",
+        "固定用法"
+      ],
+      "examTypes": [
+        "single",
+        "cloze"
+      ],
+      "frequency": 4,
+      "traps": [
+        "把 give rise to 当「上升」"
+      ]
+    },
+    {
+      "id": "s7-3",
+      "chapter": "c7",
+      "title": "虚拟、倒装与强调",
+      "core": "虚拟三时态、Not until/Only when 引起的部分倒装、It is ... that 强调句，是六级语法题的三大块。",
+      "detail": "倒装只倒助动词：Not until he arrived did we start.（不是 started we）；强调句去掉 It is/was 和 that 后句子仍完整。",
+      "keys": [
+        "虚拟",
+        "部分倒装",
+        "强调句"
+      ],
+      "examTypes": [
+        "single"
+      ],
+      "frequency": 4,
+      "traps": [
+        "倒装时把实义动词提前",
+        "强调句与定语从句混淆"
+      ]
+    },
+    {
+      "id": "s7-4",
+      "chapter": "c7",
+      "title": "非谓语与独立主格",
+      "core": "分词作状语时逻辑主语须与主句主语一致；不一致时用独立主格（名词 + 分词）。",
+      "detail": "例：Weather permitting, we will go hiking.（独立主格）；Having been warned, he was careful.（完成被动分词）。",
+      "keys": [
+        "逻辑主语",
+        "独立主格",
+        "完成式"
+      ],
+      "examTypes": [
+        "single"
+      ],
+      "frequency": 4,
+      "traps": [
+        "悬垂修饰",
+        "独立主格少写名词"
+      ]
+    },
+    {
+      "id": "s7-5",
+      "chapter": "c7",
+      "title": "复杂从句",
+      "core": "名词性从句（主语/宾语/同位语）、定语从句（限制与非限制）、状语从句（让步、条件、原因）要能区分并正确选连接词。",
+      "detail": "易错：that 与 what 的选择（从句缺成分用 what）；whether 与 if（介词后、句首用 whether）；as/which 引导非限制性定语从句的区别。",
+      "keys": [
+        "that/what",
+        "whether/if",
+        "as/which"
+      ],
+      "examTypes": [
+        "single"
+      ],
+      "frequency": 5,
+      "traps": [
+        "介词后用 if",
+        "what 引导从句时误加先行词"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "q6-e1",
+      "type": "essay",
+      "chapter": "c1",
+      "points": [
+        "s1-1",
+        "s1-2"
+      ],
+      "stem": "Writing (30 minutes)\n\nDirections: For this part, you are allowed 30 minutes to write an essay on whether artificial intelligence should be used to grade students' writing. You should write at least 150 words but no more than 200 words.",
+      "answer": "参考骨架（约 180 词）：\n① 立场（带条件）：AI can be a useful first reader, but it should not be the final judge of a student's writing.\n② 理由一：Machines are consistent and tireless; they can flag grammatical errors and awkward phrasing within seconds, which frees teachers to focus on argument and structure.\n③ 理由二（让步 + 转折）：Admittedly, AI can already score essays with impressive reliability on surface features. However, it struggles with what makes writing worth reading — an unexpected idea, a well-earned digression, a voice.\n④ 结论：The sensible arrangement is a division of labour: AI handles mechanics, teachers judge meaning. Used this way, the technology saves time without flattening thought.",
+      "explain": "六级写作更看论证质量：立场要有条件、让步要真实、结论要给出方案。避免全篇 I think 与绝对化表述。",
+      "source": "自编·按题型",
+      "difficulty": 4
+    },
+    {
+      "id": "q6-e2",
+      "type": "essay",
+      "chapter": "c1",
+      "points": [
+        "s1-3",
+        "s1-4"
+      ],
+      "stem": "Writing (30 minutes)\n\nDirections: Write an essay of 150–200 words on the following topic: Some people argue that university students should spend more time on practical skills than on theoretical knowledge. To what extent do you agree?",
+      "answer": "参考骨架：\n① 立场：The choice is a false one; the value of each depends on the stage of learning.\n② 论证一：Practical skills make graduates employable — internships and projects teach teamwork and deadlines that lectures rarely simulate.\n③ 论证二（转折）：Yet theory is what allows a skill to be transferred. A programmer who understands algorithms adapts to a new language in weeks; one who has only memorized syntax starts again from zero.\n④ 结论：Universities should integrate rather than choose: attach projects to theory courses so that each reinforces the other.",
+      "explain": "六级常考「二元对立」题，正确策略是拒绝二选一、给出整合方案；这也让论证更容易展开。",
+      "source": "自编·按题型",
+      "difficulty": 4
+    },
+    {
+      "id": "q6-r1",
+      "type": "reading",
+      "chapter": "c2",
+      "points": [
+        "s2-1",
+        "s2-5"
+      ],
+      "stem": "听力模拟（长对话）\n\nW: I read your proposal for the urban gardening project. The idea is appealing, but the budget worries me.\nM: I expected that. The figure looks large because it includes three years of maintenance.\nW: Even so, spending half the department's fund on one project seems risky.\nM: What if we start with a single rooftop and measure the yield? If the results hold, the rest can be funded from next year's budget.\nW: That's more reasonable. But you'd need a control site to make the comparison convincing.\nM: Agreed. I'll revise the proposal and bring the revised version on Thursday.\n\nQuestions 1–3 are based on the conversation.\n1. What is the woman's main concern?\n2. What does the man propose?\n3. What does the woman suggest adding?",
+      "options": [
+        "A. The budget is too large for one project.",
+        "B. The project is not environmentally friendly.",
+        "C. The proposal is too short.",
+        "D. The department has no rooftop."
+      ],
+      "answer": "A",
+      "explain": "1. A（budget worries me / spending half the department's fund）。2. 先做一个屋顶试点、用结果决定后续（start with a single rooftop and measure the yield）。3. 需要一个对照点（a control site）才能让比较有说服力。",
+      "source": "自编·按题型",
+      "difficulty": 3
+    },
+    {
+      "id": "q6-r2",
+      "type": "reading",
+      "chapter": "c2",
+      "points": [
+        "s2-3"
+      ],
+      "stem": "听力模拟（讲座）\n\n“For decades, we assumed that willpower was a fixed trait — some people have it, others do not. That assumption shaped how we designed everything from classrooms to weight-loss programs. But the research of the past fifteen years tells a rather different story. What we call willpower is less a reservoir than a set of habits, and habits are shaped by environment far more than by intention. When a cafeteria moves fruit to eye level, consumption rises without anyone deciding to eat better. The lesson for policy is uncomfortable: we would rather lecture people than rearrange the shelves.”\n\nQuestions 4–6 are based on the lecture.\n4. What assumption is being challenged?\n5. What does the speaker say about habits?\n6. What does the cafeteria example illustrate?",
+      "options": [
+        "A. That willpower is a fixed trait.",
+        "B. That habits cannot be changed.",
+        "C. That classrooms are badly designed.",
+        "D. That fruit is expensive."
+      ],
+      "answer": "A",
+      "explain": "4. A（讲座开头先说旧假设，再用 But 推翻）。5. 习惯更多由环境塑造而非意图。6. 环境的小改动能在不依赖意志力的情况下改变行为。注意讲座「先抑后扬」，答案都在 But 之后。",
+      "source": "自编·按题型",
+      "difficulty": 3
+    },
+    {
+      "id": "q6-r3",
+      "type": "reading",
+      "chapter": "c2",
+      "points": [
+        "s2-4"
+      ],
+      "stem": "听力模拟（数字与比例）\n\n原文要点：The number of students choosing to live off campus rose by 15 percent last year, to 2,300. University housing now accommodates roughly one in three students, compared with one in two five years ago.\n\nQuestions 7–8 are based on the recording.\n7. How many students chose to live off campus last year?\n8. What happened to the proportion of students living in university housing?",
+      "options": [
+        "A. It rose to 2,300.",
+        "B. It fell by 15 percent.",
+        "C. It stayed unchanged.",
+        "D. It doubled."
+      ],
+      "answer": "A",
+      "explain": "7. A（rose by 15 percent **to** 2,300 —— by 是增幅，to 是结果值）。8. 从二分之一降到三分之一，即比例下降。注意 rise by 与 rise to 的区别。",
+      "source": "自编·按题型",
+      "difficulty": 3
+    },
+    {
+      "id": "q6-r4",
+      "type": "reading",
+      "chapter": "c5",
+      "points": [
+        "s5-1",
+        "s5-2"
+      ],
+      "stem": "Passage 1\n\nThe assumption that longer school days produce better results has an intuitive appeal that the evidence does not support. Reviews of extended-day programmes consistently find modest gains in test scores, gains that tend to disappear once the novelty fades. What the reviews do not capture, however, is the cost: hours added to the timetable are hours subtracted from sleep, play and family life, and these have their own, slower, effects on learning.\n\nA more defensible position is that the quality of the hours matters more than their number. Schools that replaced a final period of supervision with a structured tutorial — one teacher, six students, work chosen to match the previous week's errors — reported larger improvements than schools that simply extended the day. The difference is not trivial: the first arrangement requires a school to decide what each student actually needs, while the second requires only a longer bell schedule.\n\n1. What does the author say about the evidence for longer school days?\n2. What is the cost of extending the school day that reviews often miss?\n3. What distinguished the more successful schools?\n4. What is the author's attitude toward extending school hours?",
+      "options": [
+        "A. It does not support the assumption.",
+        "B. It is overwhelming.",
+        "C. It is irrelevant.",
+        "D. It proves longer days are harmful."
+      ],
+      "answer": "A",
+      "explain": "1. A（the evidence does not support）。2. 挤压睡眠、玩耍与家庭时间，而它们对学习有更慢的影响。3. 用结构化辅导替代最后一节看管课，按学生上周的错误定制内容。4. 谨慎/保留（a more defensible position is...），并非全盘否定，而是主张质量优先。",
+      "source": "自编·按题型",
+      "difficulty": 4
+    },
+    {
+      "id": "q6-r5",
+      "type": "reading",
+      "chapter": "c5",
+      "points": [
+        "s5-3",
+        "s5-4"
+      ],
+      "stem": "Passage 2\n\nThe enthusiasm for remote work has cooled, but not because employees stopped liking it. Surveys consistently show that most workers want at least two days at home. What has changed is the employer's calculus. Early studies suggested that remote work raised productivity; later, more careful studies found the effect depended heavily on the task. For routine work, the gains were real. For work requiring coordination, the picture reversed: teams spread across time zones spent more hours in meetings and reported more unresolved decisions.\n\nThis does not mean the office should be restored in its old form. It means the question has shifted from “how many days” to “which days, for what”. A team that meets on the days it actually needs to decide something can be both flexible and effective; a team that meets because it always has will pay the cost twice.\n\n1. Why has enthusiasm for remote work cooled?\n2. What did later studies find?\n3. What does the author mean by “pay the cost twice”?\n4. The word “calculus” in the first paragraph is closest in meaning to ______.",
+      "options": [
+        "A. Employers' assessment of costs and benefits.",
+        "B. A branch of mathematics.",
+        "C. Employees' preference.",
+        "D. Government policy."
+      ],
+      "answer": "A",
+      "explain": "1. 不是员工不喜欢，而是雇主的权衡变了（the employer's calculus）。2. 效果取决于任务类型：常规工作有增益，需协作的工作反而变差。3. 既付出通勤与场地成本，又没有得到决策效率。4. calculus 在此指「权衡/算计」，不是数学分支。",
+      "source": "自编·按题型",
+      "difficulty": 4
+    },
+    {
+      "id": "q6-r6",
+      "type": "reading",
+      "chapter": "c4",
+      "points": [
+        "s4-1",
+        "s4-2"
+      ],
+      "stem": "长篇阅读匹配（模拟）\n\n段落：\nA. Urban trees are often justified by aesthetics, but their measurable benefits are larger than most residents assume.\nB. A single mature tree can intercept thousands of litres of rainwater a year, reducing pressure on drainage systems.\nC. Planting programmes frequently fail because saplings are placed where they cannot get enough soil.\nD. Some cities now require developers to replace every tree removed, though replacements are usually much smaller.\nE. Shade lowers surface temperatures, which matters more as heat waves become longer.\nF. Maintenance budgets, not planting budgets, determine whether trees survive their first decade.\nG. Residents sometimes oppose planting because of leaves, roots and blocked views.\n\n题干：\n1. A reason residents may resist tree planting is mentioned.\n2. A limitation of replacement policies is noted.\n3. The importance of long-term funding is emphasized.\n4. A benefit related to temperature is described.",
+      "options": [],
+      "answer": "1 → G（居民因落叶、根系、遮挡视线反对）；2 → D（补种的树通常小得多）；3 → F（决定存活的是养护预算而非种植预算）；4 → E（树荫降低地表温度）。",
+      "explain": "六级匹配的题干改写更隐蔽：resist ≈ oppose、limitation ≈ replacements are much smaller、long-term funding ≈ maintenance budgets、temperature ≈ shade/heat waves。先判断每段主旨再匹配，比逐词扫更稳。",
+      "source": "自编·按题型",
+      "difficulty": 4
+    },
+    {
+      "id": "q6-c1",
+      "type": "cloze",
+      "chapter": "c3",
+      "points": [
+        "s3-1",
+        "s3-2"
+      ],
+      "stem": "选词填空：从 15 个词中选 10 个填入空格，每词只用一次。\n`accumulate  ambiguous  assess  coherent  constraint  diminish  empirical  incentive  interpret  persistent  plausible  reinforce  subtle  undermine  widespread`\n\nThe claim that screens (1)______ attention has become (2)______, yet the evidence remains (3)______. Most studies (4)______ behaviour in a laboratory and cannot capture how devices are used in daily life. A (5)______ finding is that notifications interrupt tasks even when they are ignored, which may (6)______ the case for stricter design rules. But there is a (7)______ difference between noticing a notification and acting on it, and researchers (8)______ this distinction in very different ways. Until the (9)______ of measurement is addressed, the (10)______ basis of policy will not improve.",
+      "answer": "(1) undermine　(2) widespread　(3) ambiguous　(4) assess　(5) persistent　(6) reinforce　(7) subtle　(8) interpret　(9) constraint　(10) empirical\n\n未使用：accumulate、coherent、diminish、incentive、plausible",
+      "explain": "词性先行：has become + 形容词（widespread/ambiguous）、most studies + 动词原形（assess）、a ... finding + 形容词（persistent）、there is a ... difference + 形容词（subtle）、researchers + 动词（interpret）、the ... of measurement + 名词（constraint）、the ... basis + 形容词（empirical）。剩下 5 个词性不匹配或语义不合，作干扰项。",
+      "source": "自编·按题型",
+      "difficulty": 5
+    },
+    {
+      "id": "q6-t1",
+      "type": "short",
+      "chapter": "c6",
+      "points": [
+        "s6-1",
+        "s6-3"
+      ],
+      "stem": "翻译：近年来，越来越多的城市开始重视老旧小区的改造。改造不仅包括加装电梯、修缮外墙，还包括增加公共活动空间。这些变化改善了居民的居住条件，也让邻里关系更加融洽。",
+      "answer": "In recent years, more and more cities have begun to pay attention to the renovation of old residential communities. The renovation includes not only installing elevators and repairing exterior walls but also adding public spaces for activities. These changes have improved residents' living conditions and made neighbourhood relations more harmonious.",
+      "explain": "踩分点：not only ... but also（不仅…还）、renovation（改造）、exterior walls（外墙）、harmonious（融洽）。中文三个短句可合并为两句，注意时态用现在完成时。",
+      "source": "自编·按题型",
+      "difficulty": 4
+    },
+    {
+      "id": "q6-t2",
+      "type": "short",
+      "chapter": "c6",
+      "points": [
+        "s6-2"
+      ],
+      "stem": "翻译：非物质文化遗产是一个民族文化身份的重要组成部分。保护和传承这些技艺，不仅需要政府的支持，也需要年轻人的参与。",
+      "answer": "Intangible cultural heritage is an important part of a nation's cultural identity. To protect and pass on these skills, support from the government is needed, and so is the participation of young people.",
+      "explain": "固定译法：intangible cultural heritage（非物质文化遗产）、cultural identity（文化身份）、pass on（传承）。第二句用 To protect... 不定式作目的状语，后半句用 so is ... 避免重复。",
+      "source": "自编·按题型",
+      "difficulty": 4
+    },
+    {
+      "id": "q6-t3",
+      "type": "short",
+      "chapter": "c6",
+      "points": [
+        "s6-4"
+      ],
+      "stem": "六级翻译 180–200 字的段落，时间只剩 5 分钟时，应该优先保证什么？",
+      "answer": "① 先保证每句都有完整的主谓结构，宁可用简单句也不用写错的复杂句；② 优先译出段落的主干信息（人物、动作、结果），修饰成分可简化；③ 时态统一，避免前后混乱；④ 不会的专有名词用「上位词 + 简释」替代；⑤ 最后 30 秒检查拼写与主谓一致，不要留空。",
+      "explain": "六级翻译按整体评分，句子完整与信息覆盖比用词高级更重要；留空一定 0 分。",
+      "source": "自编·按题型",
+      "difficulty": 3
+    },
+    {
+      "id": "q6-s1",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "s7-1"
+      ],
+      "stem": "The researcher's findings ______ that early intervention can significantly reduce dropout rates.",
+      "options": [
+        "A. imply",
+        "B. infer",
+        "C. refer",
+        "D. defer"
+      ],
+      "answer": "A",
+      "explain": "imply 是「（数据/话语）暗示」，主语是研究发现；infer 是「（人）推断」。refer 提及，defer 推迟。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "q6-s2",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "s7-1"
+      ],
+      "stem": "The committee ______ of representatives from five departments.",
+      "options": [
+        "A. comprises",
+        "B. consists",
+        "C. composes",
+        "D. constitutes"
+      ],
+      "answer": "B",
+      "explain": "consist of = 由…组成（主动，不加被动）；comprise 后直接接宾语（comprises five departments），不加 of；compose 常用 be composed of。",
+      "source": "自编·按考点",
+      "difficulty": 4
+    },
+    {
+      "id": "q6-s3",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "s7-2"
+      ],
+      "stem": "The new evidence ______ light on how the disease spreads.",
+      "options": [
+        "A. sheds",
+        "B. gives",
+        "C. takes",
+        "D. makes"
+      ],
+      "answer": "A",
+      "explain": "shed light on = 阐明、使…清楚，固定搭配。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "q6-s4",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "s7-2"
+      ],
+      "stem": "Rapid urbanization has ______ rise to a series of social problems.",
+      "options": [
+        "A. given",
+        "B. taken",
+        "C. made",
+        "D. put"
+      ],
+      "answer": "A",
+      "explain": "give rise to = 引起、导致。注意不是「上升」。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "q6-s5",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "s7-3"
+      ],
+      "stem": "Not until the results were published ______ the significance of the discovery.",
+      "options": [
+        "A. scientists realized",
+        "B. did scientists realize",
+        "C. scientists did realize",
+        "D. realized scientists"
+      ],
+      "answer": "B",
+      "explain": "Not until 置于句首，主句部分倒装：did + 主语 + 动词原形。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "q6-s6",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "s7-3"
+      ],
+      "stem": "It was not until midnight ______ he finished the report.",
+      "options": [
+        "A. when",
+        "B. that",
+        "C. which",
+        "D. then"
+      ],
+      "answer": "B",
+      "explain": "这是强调句 It was not until ... that ...，不能用 when。去掉 It was 与 that 后句子仍完整。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "q6-s7",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "s7-4"
+      ],
+      "stem": "______, the experiment was considered a success.",
+      "options": [
+        "A. All things considering",
+        "B. All things considered",
+        "C. Considering all things",
+        "D. All things to consider"
+      ],
+      "answer": "B",
+      "explain": "独立主格：All things considered = 综合考虑各方面之后（things 与 consider 是被动关系）。",
+      "source": "自编·按考点",
+      "difficulty": 4
+    },
+    {
+      "id": "q6-s8",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "s7-4"
+      ],
+      "stem": "______ from the top of the tower, the city looks like a giant circuit board.",
+      "options": [
+        "A. Seen",
+        "B. Seeing",
+        "C. To see",
+        "D. Having seen"
+      ],
+      "answer": "A",
+      "explain": "city 与 see 是被动关系（城市被看），用过去分词 Seen 作状语。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "q6-s9",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "s7-5"
+      ],
+      "stem": "______ surprised us most was the speed of the recovery.",
+      "options": [
+        "A. That",
+        "B. What",
+        "C. Which",
+        "D. It"
+      ],
+      "answer": "B",
+      "explain": "主语从句缺主语成分，用 what；that 引导主语从句时从句必须完整。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "q6-s10",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "s7-5"
+      ],
+      "stem": "The question is ______ the plan can be carried out within the budget.",
+      "options": [
+        "A. that",
+        "B. whether",
+        "C. if",
+        "D. what"
+      ],
+      "answer": "B",
+      "explain": "表语从句用 whether；if 不能引导表语从句（也不能用于句首主语从句和介词后）。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "q6-s11",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "s7-1"
+      ],
+      "stem": "The museum's collection is of ______ value, attracting scholars from around the world.",
+      "options": [
+        "A. considerable",
+        "B. considerate",
+        "C. considering",
+        "D. considered"
+      ],
+      "answer": "A",
+      "explain": "considerable = 相当大的；considerate = 体贴的。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "q6-s12",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "s7-2"
+      ],
+      "stem": "The committee's decision is ______ to review by the board.",
+      "options": [
+        "A. subject",
+        "B. subjected",
+        "C. subjective",
+        "D. subjecting"
+      ],
+      "answer": "A",
+      "explain": "be subject to = 受…约束/须经…（形容词短语）；subjected to 是动词被动，表「遭受」。",
+      "source": "自编·按考点",
+      "difficulty": 4
+    },
+    {
+      "id": "q6-j1",
+      "type": "judge",
+      "chapter": "c2",
+      "points": [
+        "s2-3"
+      ],
+      "stem": "讲座听力中，讲者在开头提到的「常见看法」通常就是作者本人的观点。",
+      "answer": "错",
+      "explain": "六级讲座常用「先抑后扬」：开头复述常见看法，随后用 However/But 推翻。答案几乎都在转折之后。",
+      "source": "自编·按策略",
+      "difficulty": 2
+    },
+    {
+      "id": "q6-j2",
+      "type": "judge",
+      "chapter": "c3",
+      "points": [
+        "s3-3"
+      ],
+      "stem": "选词填空单题 3.55 分，值得为不确定的空反复推敲，直到确定为止。",
+      "answer": "错",
+      "explain": "单题分值低，且仔细阅读单题 14.2 分。单个空超过 90 秒就该先标记跳过，把时间留给仔细阅读。",
+      "source": "自编·按策略",
+      "difficulty": 2
+    },
+    {
+      "id": "q6-j3",
+      "type": "judge",
+      "chapter": "c4",
+      "points": [
+        "s4-3"
+      ],
+      "stem": "六级长篇阅读匹配可以先用关键词硬扫，不必判断段落主旨。",
+      "answer": "错",
+      "explain": "六级段落更长、改写更隐蔽，纯关键词匹配容易选到「提及但不相关」的段落；应先判断段落主旨，再做交叉匹配。",
+      "source": "自编·按策略",
+      "difficulty": 2
+    },
+    {
+      "id": "q6-j4",
+      "type": "judge",
+      "chapter": "c2",
+      "points": [
+        "s2-2"
+      ],
+      "stem": "听力篇章的题目顺序与原文信息出现的顺序基本一致，可以边听边按顺序定位。",
+      "answer": "对",
+      "explain": "四级、六级的听力篇章都按行文顺序出题，利用这一点可以避免来回找信息。",
+      "source": "自编·按策略",
+      "difficulty": 1
+    },
+    {
+      "id": "q6-j5",
+      "type": "judge",
+      "chapter": "c2",
+      "points": [
+        "s2-6"
+      ],
+      "stem": "六级听力中，若某题完全没听懂，应停下来回想，直到想明白再继续。",
+      "answer": "错",
+      "explain": "听力是单向流，纠缠会连带丢失后续题目；应立即放弃、跟住下一题，利用间隙猜测。",
+      "source": "自编·按策略",
+      "difficulty": 2
+    },
+    {
+      "id": "q6-j6",
+      "type": "judge",
+      "chapter": "c5",
+      "points": [
+        "s5-5"
+      ],
+      "stem": "主旨题的正确答案应能覆盖全文，只概括某一段的选项通常不是答案。",
+      "answer": "对",
+      "explain": "主旨题看首末段与各段首句，正确选项覆盖面最大；过窄或过宽的选项都是干扰项。",
+      "source": "自编·按策略",
+      "difficulty": 2
+    },
+    {
+      "id": "q6-j7",
+      "type": "judge",
+      "chapter": "c5",
+      "points": [
+        "s5-6"
+      ],
+      "stem": "六级仔细阅读两篇共 20 分钟，单题可以花 3 分钟以上反复推敲。",
+      "answer": "错",
+      "explain": "两篇建议各 9 分钟，单题超过 2 分钟就该先选一个、标记后回看，否则会挤占翻译时间。",
+      "source": "自编·按策略",
+      "difficulty": 2
+    }
+  ]
+}

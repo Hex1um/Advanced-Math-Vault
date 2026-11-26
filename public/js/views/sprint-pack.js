@@ -13,7 +13,8 @@
 
   const TYPE_LABEL = {
     single: '单选', judge: '判断', short: '简答', essay: '论述',
-    material: '材料分析', fill: '填空', calc: '计算', proof: '证明'
+    material: '材料分析', fill: '填空', calc: '计算', proof: '证明',
+    code: '程序题', reading: '阅读', cloze: '选词'
   };
 
   function stars(n) {

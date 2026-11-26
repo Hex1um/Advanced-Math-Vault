@@ -1,0 +1,1294 @@
+{
+  "id": "cet4-2026",
+  "school": "全国大学英语四、六级考试",
+  "schoolShort": "全国",
+  "subject": "大学英语四级（CET-4）",
+  "subjectShort": "四级",
+  "year": "2026",
+  "term": "上半年",
+  "updatedAt": "2026-11-26",
+  "intro": "按四级官方题型与分值拆考点：写作 106.5 / 听力 248.5 / 阅读 248.5（选词填空、长篇匹配、仔细阅读）/ 翻译 106.5，总分 710。题目为按真题题型与难度自编，材料标注来源。",
+  "exam": {
+    "durationMin": 130,
+    "totalPoints": 710,
+    "sections": [
+      {
+        "type": "essay",
+        "name": "写作",
+        "count": 1,
+        "per": 106.5,
+        "points": 106.5,
+        "note": "30 分钟，120–180 词"
+      },
+      {
+        "type": "reading",
+        "name": "听力理解",
+        "count": 25,
+        "per": 9.94,
+        "points": 248.5,
+        "note": "短篇新闻 7 + 长对话 8 + 听力篇章 10"
+      },
+      {
+        "type": "cloze",
+        "name": "阅读·选词填空",
+        "count": 10,
+        "per": 3.55,
+        "points": 35.5,
+        "note": "15 词选 10 空"
+      },
+      {
+        "type": "reading",
+        "name": "阅读·长篇匹配",
+        "count": 10,
+        "per": 7.1,
+        "points": 71,
+        "note": "段落信息匹配"
+      },
+      {
+        "type": "reading",
+        "name": "阅读·仔细阅读",
+        "count": 10,
+        "per": 14.2,
+        "points": 142,
+        "note": "两篇，每篇 5 题"
+      },
+      {
+        "type": "short",
+        "name": "翻译",
+        "count": 1,
+        "per": 106.5,
+        "points": 106.5,
+        "note": "汉译英段落，30 分钟"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "kind": "题型",
+      "title": "全国大学英语四、六级考试（CET）四级考试大纲与题型说明",
+      "note": "题型顺序、题量与分值占比按官方公布口径"
+    },
+    {
+      "kind": "自编",
+      "title": "按真题难度自编的练习材料（阅读、选词、匹配、翻译、写作）",
+      "note": "不收录受版权保护的真题原文"
+    }
+  ],
+  "chapters": [
+    {
+      "id": "c1",
+      "no": "Part I",
+      "title": "写作（106.5）",
+      "weight": 5,
+      "summary": "30 分钟一篇，模板可复用，先保结构再保语言。"
+    },
+    {
+      "id": "c2",
+      "no": "Part II",
+      "title": "听力（248.5）",
+      "weight": 6,
+      "summary": "占分最高的部分，靠预读选项与同义替换，不靠逐词听懂。"
+    },
+    {
+      "id": "c3",
+      "no": "Part III-A",
+      "title": "选词填空（35.5）",
+      "weight": 3,
+      "summary": "10 空 35.5 分，先判词性再选词，性价比最高。"
+    },
+    {
+      "id": "c4",
+      "no": "Part III-B",
+      "title": "长篇阅读匹配（71）",
+      "weight": 4,
+      "summary": "10 题 71 分，先读题干关键词再扫段落，控时 12 分钟。"
+    },
+    {
+      "id": "c5",
+      "no": "Part III-C",
+      "title": "仔细阅读（142）",
+      "weight": 6,
+      "summary": "两篇 142 分，单题分值最高，值得多花时间。"
+    },
+    {
+      "id": "c6",
+      "no": "Part IV",
+      "title": "翻译（106.5）",
+      "weight": 4,
+      "summary": "汉译英段落，先搭主干再补修饰，写完必查时态。"
+    },
+    {
+      "id": "c7",
+      "no": "基础",
+      "title": "高频词汇与语法",
+      "weight": 4,
+      "summary": "听力与阅读的底层能力：词义辨析、搭配、从句与非谓语。"
+    }
+  ],
+  "points": [
+    {
+      "id": "p1-1",
+      "chapter": "c1",
+      "title": "三段式与字数控制",
+      "core": "120–180 词写三段：引言 2 句（现象 + 观点）、主体 4–5 句（两个理由各带例证）、结论 2 句（重申 + 建议）。",
+      "detail": "阅卷按「内容 + 语言 + 结构」综合评分。字数不足 100 词直接降档；超过 200 词不加分反而多错。每段一个中心，段首写主题句。",
+      "keys": [
+        "三段式",
+        "字数",
+        "主题句"
+      ],
+      "examTypes": [
+        "essay"
+      ],
+      "frequency": 5,
+      "traps": [
+        "开头大段复述题目，正文没时间展开",
+        "全篇只有观点没有例证"
+      ]
+    },
+    {
+      "id": "p1-2",
+      "chapter": "c1",
+      "title": "三类高频题型",
+      "core": "观点选择（agree/disagree）、现象评述（causes/effects）、图表或书信（describe + comment）。每类准备一个骨架即可迁移。",
+      "detail": "观点类：立场要明确，可用让步段增强说服力。现象类：原因两条 + 影响 + 建议。书信：称呼、目的句、正文、结尾客套，格式分不能丢。",
+      "keys": [
+        "题型分类",
+        "骨架",
+        "让步段"
+      ],
+      "examTypes": [
+        "essay"
+      ],
+      "frequency": 5,
+      "traps": [
+        "题目问 causes 却只写 opinions",
+        "书信漏称呼或落款"
+      ]
+    },
+    {
+      "id": "p1-3",
+      "chapter": "c1",
+      "title": "论据展开与常用句式",
+      "core": "论据三步：解释（This is mainly because...）+ 举例（A case in point is...）+ 回扣（Therefore...）。",
+      "detail": "高频句式：There is no denying that...；It is widely acknowledged that...；Only in this way can we...；What matters most is...。句式要服务于表达，不要硬塞。",
+      "keys": [
+        "解释+举例+回扣",
+        "常用句式"
+      ],
+      "examTypes": [
+        "essay"
+      ],
+      "frequency": 4,
+      "traps": [
+        "堆长难句导致语法错误",
+        "连接词重复使用 firstly/secondly/lastly"
+      ]
+    },
+    {
+      "id": "p1-4",
+      "chapter": "c1",
+      "title": "衔接与语言准确性",
+      "core": "用连接词显性标逻辑（however、therefore、moreover、for instance），并保证主谓一致、时态统一、冠词与单复数正确。",
+      "detail": "常见扣分点：主谓不一致、动词时态混用、可数名词裸用、拼写错误。宁可写短句正确，也不要写长句出错。",
+      "keys": [
+        "连接词",
+        "主谓一致",
+        "时态"
+      ],
+      "examTypes": [
+        "essay"
+      ],
+      "frequency": 4,
+      "traps": [
+        "however 后缺逗号",
+        "情态动词后加 -s"
+      ]
+    },
+    {
+      "id": "p2-1",
+      "chapter": "c2",
+      "title": "短篇新闻（Section A）",
+      "core": "新闻听力抓「5W1H + 数字」，答案常在首句（导语）或结尾（结论/引语）。",
+      "detail": "新闻结构是倒金字塔：最重要的信息在开头。常考：发生了什么、伤亡/数量、原因、各方反应。听到数字先记，再判断单位。",
+      "keys": [
+        "导语",
+        "5W1H",
+        "数字"
+      ],
+      "examTypes": [
+        "reading",
+        "judge"
+      ],
+      "frequency": 5,
+      "traps": [
+        "把新闻中的背景当主旨",
+        "数字单位漏听（thousand/million）"
+      ]
+    },
+    {
+      "id": "p2-2",
+      "chapter": "c2",
+      "title": "长对话（Section B）",
+      "core": "长对话按「问答」推进，答案多在回答方的第二、三句；先看选项预判场景（工作、学习、旅行、医疗）。",
+      "detail": "常见考点：人物关系、地点、原因、建议、态度。转折词 but/actually 后的信息优先；重复出现的词往往是主题。",
+      "keys": [
+        "问答结构",
+        "预判场景",
+        "转折词"
+      ],
+      "examTypes": [
+        "reading"
+      ],
+      "frequency": 5,
+      "traps": [
+        "只听到提问方的话就选",
+        "把建议当成事实"
+      ]
+    },
+    {
+      "id": "p2-3",
+      "chapter": "c2",
+      "title": "听力篇章（Section C）",
+      "core": "篇章题按顺序出题，边听边定位；开头与结尾必出题，例子与数据常对应细节题。",
+      "detail": "三篇文章共 10 题，单题 9.9 分。预读选项时圈出名词与动词，形成「预期信息」；没听懂时用「同义替换」匹配选项。",
+      "keys": [
+        "顺序出题",
+        "首尾",
+        "同义替换"
+      ],
+      "examTypes": [
+        "reading"
+      ],
+      "frequency": 5,
+      "traps": [
+        "纠结上一题导致漏听下一题",
+        "选项与原文词形相同就选（多为干扰）"
+      ]
+    },
+    {
+      "id": "p2-4",
+      "chapter": "c2",
+      "title": "数字、时间与计算",
+      "core": "边听边记数字与单位，注意「延迟、折扣、倍数、比例」四类运算词：delay by、30% off、twice as much、two out of three。",
+      "detail": "常考：票价与折扣、时间推迟、人口比例、增长率。听到两个数字时先判断哪个是问题所问。",
+      "keys": [
+        "运算词",
+        "单位",
+        "干扰项"
+      ],
+      "examTypes": [
+        "reading"
+      ],
+      "frequency": 4,
+      "traps": [
+        "30% off 是打七折",
+        "a quarter to nine 是 8:45"
+      ]
+    },
+    {
+      "id": "p2-5",
+      "chapter": "c2",
+      "title": "态度与弦外之音",
+      "core": "态度靠形容词、副词与语气：fortunately、regrettably、to be honest、I'm afraid；否定转移（I don't think it's wise）要按肯定理解。",
+      "detail": "常见态度：支持、反对、担忧、中立、怀疑。听到「Actually, I'd rather...」这类转折，后面才是真实态度。",
+      "keys": [
+        "评价词",
+        "否定转移",
+        "转折"
+      ],
+      "examTypes": [
+        "reading",
+        "judge"
+      ],
+      "frequency": 4,
+      "traps": [
+        "I couldn't agree more 是完全同意",
+        "把说话人的礼貌用语当成赞同"
+      ]
+    },
+    {
+      "id": "p2-6",
+      "chapter": "c2",
+      "title": "预读选项与做题节奏",
+      "core": "利用 Direction 时间预读：先扫选项的共同点判断话题，再圈差异点（数字、地点、态度词）。一题没听懂立刻放弃，跟上下一题。",
+      "detail": "节奏建议：短篇新闻每题约 12 秒作答，长对话每题 15 秒，篇章每题 15 秒。答题卡边听边涂，避免最后集中涂错位。",
+      "keys": [
+        "预读",
+        "差异点",
+        "放弃策略"
+      ],
+      "examTypes": [
+        "judge",
+        "reading"
+      ],
+      "frequency": 4,
+      "traps": [
+        "预读时逐字翻译选项，时间不够",
+        "最后集中涂卡导致错行"
+      ]
+    },
+    {
+      "id": "p3-1",
+      "chapter": "c3",
+      "title": "先判词性再选词",
+      "core": "15 词选 10 空：先给 15 个词标词性，再按空格位置判断需要名词/动词/形容词/副词，最后用搭配与单复数确认。",
+      "detail": "判断依据：冠词或介词后是名词；be 动词后是形容词或过去分词；主语后缺谓语是动词；修饰动词或形容词是副词。常有一个词性只出现一次的词作干扰。",
+      "keys": [
+        "词性标注",
+        "句子成分",
+        "单复数"
+      ],
+      "examTypes": [
+        "cloze"
+      ],
+      "frequency": 5,
+      "traps": [
+        "同一个词的 -ing/-ed 形式同时出现要看主被动",
+        "情态动词后必须动词原形"
+      ]
+    },
+    {
+      "id": "p3-2",
+      "chapter": "c3",
+      "title": "固定搭配与上下文逻辑",
+      "core": "选词第二关是搭配：动词看介词（depend on、result in）、名词看量词、形容词看介词（be aware of）。",
+      "detail": "上下文信号：however/therefore 提示转折或因果；同义复现（前文出现近义词）是强提示。填完通读一遍，确保语义连贯。",
+      "keys": [
+        "固定搭配",
+        "逻辑信号",
+        "复现"
+      ],
+      "examTypes": [
+        "cloze"
+      ],
+      "frequency": 4,
+      "traps": [
+        "只按词性选，不管搭配",
+        "忽略否定词导致语义反转"
+      ]
+    },
+    {
+      "id": "p3-3",
+      "chapter": "c3",
+      "title": "排除法与时间控制",
+      "core": "先做最有把握的空，把不确定的留到最后，用剩余词排除。整题控制在 8–10 分钟。",
+      "detail": "每空 3.55 分，性价比不如仔细阅读，不要在这里耗时过久；剩余两三个空时，用「词性 + 搭配」二选一即可。",
+      "keys": [
+        "先易后难",
+        "排除法",
+        "限时"
+      ],
+      "examTypes": [
+        "cloze"
+      ],
+      "frequency": 3,
+      "traps": [
+        "一个空反复纠结超过 1 分钟",
+        "最后没时间通读检查"
+      ]
+    },
+    {
+      "id": "p3-4",
+      "chapter": "c3",
+      "title": "常见失分点",
+      "core": "三类高频错：把名词当动词、忽略单复数、漏看否定。",
+      "detail": "复查方法：把填好的句子读一遍，检查主谓是否一致、动词形式是否正确、语义是否与前后句冲突。",
+      "keys": [
+        "词性",
+        "单复数",
+        "否定"
+      ],
+      "examTypes": [
+        "cloze",
+        "judge"
+      ],
+      "frequency": 3,
+      "traps": [
+        "把 effects 当动词用",
+        "三单漏 -s"
+      ]
+    },
+    {
+      "id": "p4-1",
+      "chapter": "c4",
+      "title": "段落主旨与关键词",
+      "core": "长篇匹配先读 10 个题干圈关键词（专有名词、数字、独特名词），再逐段扫读找对应，一段可能对应多题。",
+      "detail": "段落主旨常在首末句；题干关键词在原文中多以同义改写出现，逐字对应的反而可能是干扰。",
+      "keys": [
+        "题干关键词",
+        "同义改写",
+        "首末句"
+      ],
+      "examTypes": [
+        "reading"
+      ],
+      "frequency": 5,
+      "traps": [
+        "按段落顺序硬找，浪费来回扫读",
+        "把同词不同义的段落选上"
+      ]
+    },
+    {
+      "id": "p4-2",
+      "chapter": "c4",
+      "title": "匹配策略与顺序",
+      "core": "先做「有明显专有名词或数字」的题，再做抽象表述的题；已用段落可重复使用，不要默认一一对应。",
+      "detail": "段落数通常多于题目数，意味着有段落不被选。抽象题干（如「一个反直觉的结论」）要抓段落中的转折与评价词。",
+      "keys": [
+        "先具体后抽象",
+        "段落可重复",
+        "转折"
+      ],
+      "examTypes": [
+        "reading"
+      ],
+      "frequency": 4,
+      "traps": [
+        "以为每段只能用一次",
+        "忽略题干中的否定（NOT mentioned）"
+      ]
+    },
+    {
+      "id": "p4-3",
+      "chapter": "c4",
+      "title": "时间控制（12 分钟）",
+      "core": "长篇匹配建议 12 分钟：读题 3 分钟、扫读匹配 8 分钟、复查 1 分钟。超时就先标记，回头再补。",
+      "detail": "这部分单题 7.1 分，低于仔细阅读（14.2），不值得挤占后面时间。",
+      "keys": [
+        "限时",
+        "取舍"
+      ],
+      "examTypes": [
+        "reading",
+        "judge"
+      ],
+      "frequency": 3,
+      "traps": [
+        "在匹配上花 20 分钟导致仔细阅读没时间"
+      ]
+    },
+    {
+      "id": "p4-4",
+      "chapter": "c4",
+      "title": "同义改写识别",
+      "core": "题干与原文常用不同词表达同一意思：increase → rise、important → crucial、difficult → challenging、cause → lead to。",
+      "detail": "训练方法：做完题后把题干与原文对应句抄在一起，标出替换关系，积累 30 组就能明显提速。",
+      "keys": [
+        "同义替换",
+        "词伙"
+      ],
+      "examTypes": [
+        "reading"
+      ],
+      "frequency": 4,
+      "traps": [
+        "只找原词，找不到就放弃"
+      ]
+    },
+    {
+      "id": "p5-1",
+      "chapter": "c5",
+      "title": "细节题：定位与同义核对",
+      "core": "先读题干圈定位词，回原文找同义表达，答案通常在定位句及其前后一句；注意题干与原文的否定、时态是否一致。",
+      "detail": "定位词优先级：专有名词 > 数字 > 实义动词 > 形容词。原文说 some，选项说 all 就是错。",
+      "keys": [
+        "定位词",
+        "同义核对",
+        "否定一致"
+      ],
+      "examTypes": [
+        "reading"
+      ],
+      "frequency": 5,
+      "traps": [
+        "把原文的「可能」当成「一定」",
+        "因果倒置"
+      ]
+    },
+    {
+      "id": "p5-2",
+      "chapter": "c5",
+      "title": "推断题：只推一步",
+      "core": "推断必须有原文依据，且只推一步；正确选项常是原文的同义改写或合理概括。",
+      "detail": "排除法：无依据的、过度推断的、与原文相反的都不选。看到 must/never/only 要警惕。",
+      "keys": [
+        "一步推断",
+        "有依据",
+        "绝对化排除"
+      ],
+      "examTypes": [
+        "reading"
+      ],
+      "frequency": 4,
+      "traps": [
+        "凭常识选而不回原文",
+        "把作者没说的当成隐含意思"
+      ]
+    },
+    {
+      "id": "p5-3",
+      "chapter": "c5",
+      "title": "词义猜测与指代",
+      "core": "猜词看上下文：同位语、破折号、举例、因果、对比都能提示；it/this/they 往前找最近的名词或整句。",
+      "detail": "信号词：that is、in other words（解释）、for example（举例）、unlike/by contrast（反义）。",
+      "keys": [
+        "上下文线索",
+        "信号词",
+        "指代"
+      ],
+      "examTypes": [
+        "reading"
+      ],
+      "frequency": 4,
+      "traps": [
+        "按背过的第一个词义硬套",
+        "指代搞错导致整段理解偏移"
+      ]
+    },
+    {
+      "id": "p5-4",
+      "chapter": "c5",
+      "title": "态度与主旨",
+      "core": "态度看评价性形容词与副词；主旨看首段、各段首句与末段，正确选项覆盖面最大。",
+      "detail": "常见态度：positive / negative / neutral / objective / critical / doubtful。学术说明文作者态度多为客观。",
+      "keys": [
+        "评价词",
+        "覆盖面",
+        "客观性"
+      ],
+      "examTypes": [
+        "reading"
+      ],
+      "frequency": 4,
+      "traps": [
+        "把文中人物态度当成作者态度",
+        "标题题选成细节项"
+      ]
+    },
+    {
+      "id": "p5-5",
+      "chapter": "c5",
+      "title": "仔细阅读的做题顺序",
+      "core": "先看题干不看选项（避免先入为主），再读文章定位；两篇各 8–9 分钟，单题 14.2 分值得细读。",
+      "detail": "顺序建议：第 1 篇 → 翻译 → 第 2 篇？不建议。标准做法是两篇连着做完，再写翻译，最后检查答题卡。",
+      "keys": [
+        "先题干",
+        "限时",
+        "顺序"
+      ],
+      "examTypes": [
+        "reading",
+        "judge"
+      ],
+      "frequency": 3,
+      "traps": [
+        "先读全文再做题，时间不够",
+        "在一道题上耗 3 分钟"
+      ]
+    },
+    {
+      "id": "p6-1",
+      "chapter": "c6",
+      "title": "段落翻译：先搭主干",
+      "core": "先找出每句的主语和谓语（中文常省略主语，英文必须补），再挂定语、状语；长句可拆成两句。",
+      "detail": "五步法：① 断句 ② 定主干 ③ 定时态 ④ 补主语（we/it/people）⑤ 加修饰。段落翻译按整体评分，写完通读一遍。",
+      "keys": [
+        "断句",
+        "主干",
+        "补主语"
+      ],
+      "examTypes": [
+        "short"
+      ],
+      "frequency": 5,
+      "traps": [
+        "逐字直译导致中式英语",
+        "句子太长导致结构崩掉"
+      ]
+    },
+    {
+      "id": "p6-2",
+      "chapter": "c6",
+      "title": "无主句与被动",
+      "core": "中文无主句补 we/people/it，或用被动语态；「被/受到/得到」直接转被动。",
+      "detail": "例：「据报道」→ It is reported that...；「人们普遍认为」→ It is widely believed that...；「这座桥建于明朝」→ The bridge was built in the Ming Dynasty.",
+      "keys": [
+        "形式主语",
+        "被动语态",
+        "泛指主语"
+      ],
+      "examTypes": [
+        "short"
+      ],
+      "frequency": 4,
+      "traps": [
+        "被动漏 be 动词",
+        "It is said that 后接不完整句"
+      ]
+    },
+    {
+      "id": "p6-3",
+      "chapter": "c6",
+      "title": "中国文化与社会话题词汇",
+      "core": "文化词用「直译/音译 + 简释」：春节 the Spring Festival、四合院 courtyard house、高铁 high-speed rail、共享经济 sharing economy。",
+      "detail": "四级翻译高频主题：传统文化（节日、书法、茶）、城市发展（交通、住房）、教育与社会（义务教育的普及、老龄化）。",
+      "keys": [
+        "文化词",
+        "固定译法",
+        "主题词"
+      ],
+      "examTypes": [
+        "short"
+      ],
+      "frequency": 4,
+      "traps": [
+        "「四大发明」写成 Four Great Inventions 可以，但不要臆造其他译名",
+        "「一带一路」是 the Belt and Road Initiative"
+      ]
+    },
+    {
+      "id": "p6-4",
+      "chapter": "c6",
+      "title": "交卷前检查清单",
+      "core": "五项：时态一致、主谓一致、冠词与单复数、拼写、是否有整句漏译。",
+      "detail": "漏译一句通常比小语法错扣得多；写不出精确词时用上位词替换，保证句子完整。",
+      "keys": [
+        "检查清单",
+        "漏译",
+        "上位词"
+      ],
+      "examTypes": [
+        "short"
+      ],
+      "frequency": 3,
+      "traps": [
+        "留空不写一定 0 分",
+        "时态前后不一致"
+      ]
+    },
+    {
+      "id": "p7-1",
+      "chapter": "c7",
+      "title": "高频词义辨析",
+      "core": "形近与义近词靠搭配区分：affect/effect、adapt/adopt、principal/principle、economic/economical、considerable/considerate。",
+      "detail": "四级高频：acquire/require/inquire、assure/ensure/insure、respectful/respectable/respective。",
+      "keys": [
+        "形近词",
+        "词性",
+        "搭配"
+      ],
+      "examTypes": [
+        "single"
+      ],
+      "frequency": 5,
+      "traps": [
+        "effect 多作名词，affect 是动词",
+        "respectable 是「体面的」，不是「尊重人的」"
+      ]
+    },
+    {
+      "id": "p7-2",
+      "chapter": "c7",
+      "title": "固定搭配与短语动词",
+      "core": "短语动词意义常与动词原形无关：turn down（拒绝）、put off（推迟）、come up with（想出）、account for（占/解释）。",
+      "detail": "高频：result in/from、be subject to、take ... into account、make up for、look forward to doing（to 是介词）。",
+      "keys": [
+        "短语动词",
+        "介词搭配",
+        "及物性"
+      ],
+      "examTypes": [
+        "single"
+      ],
+      "frequency": 5,
+      "traps": [
+        "look forward to do 错，应为 doing",
+        "result in 与 result from 方向相反"
+      ]
+    },
+    {
+      "id": "p7-3",
+      "chapter": "c7",
+      "title": "时态与语态",
+      "core": "看时间状语定基准：for/since + 现在完成；by the time + 过去完成；this time tomorrow + 将来进行。",
+      "detail": "主将从现：时间与条件状语从句用一般现在时表将来。不及物动词无被动（happen、occur、belong to）。",
+      "keys": [
+        "时间状语",
+        "主将从现",
+        "不及物无被动"
+      ],
+      "examTypes": [
+        "single"
+      ],
+      "frequency": 5,
+      "traps": [
+        "has been done 与 had been done 基准不同",
+        "The book is worth reading 不能改被动"
+      ]
+    },
+    {
+      "id": "p7-4",
+      "chapter": "c7",
+      "title": "非谓语动词",
+      "core": "to do 表目的/将来，doing 表主动/习惯，done 表被动/完成；固定搭配决定用哪个。",
+      "detail": "decide/refuse/offer + to do；enjoy/mind/avoid/suggest + doing；remember/forget/stop 后接 to do 与 doing 意义不同。",
+      "keys": [
+        "to do",
+        "doing",
+        "done",
+        "固定搭配"
+      ],
+      "examTypes": [
+        "single"
+      ],
+      "frequency": 5,
+      "traps": [
+        "remember doing 与 remember to do 意思相反",
+        "悬垂修饰（分词逻辑主语与主句主语不一致）"
+      ]
+    },
+    {
+      "id": "p7-5",
+      "chapter": "c7",
+      "title": "从句与连接",
+      "core": "定语从句看先行词与从句缺什么成分；状语从句看逻辑关系（时间、原因、条件、让步）；名词性从句看从句在句中作什么成分。",
+      "detail": "非限制性定语从句不用 that；in which = where；that 不能引导介词后的定语从句。",
+      "keys": [
+        "定语从句",
+        "状语从句",
+        "连接词"
+      ],
+      "examTypes": [
+        "single"
+      ],
+      "frequency": 4,
+      "traps": [
+        "非限制性从句用 that",
+        "because 与 so 不能同时用"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "q4-e1",
+      "type": "essay",
+      "chapter": "c1",
+      "points": [
+        "p1-2",
+        "p1-3"
+      ],
+      "stem": "Writing (30 minutes)\n\nDirections: For this part, you are allowed 30 minutes to write an essay on the importance of developing good time-management habits for college students. You should write at least 120 words but no more than 180 words.",
+      "answer": "参考骨架（约 150 词）：\n① 引言：College life offers freedom, but freedom without a plan easily turns into delay. In my view, time management is the first skill a freshman should learn.\n② 理由一：A clear schedule turns vague intentions into concrete actions. For example, dividing a 3,000-word report into five daily tasks makes the deadline far less frightening.\n③ 理由二：Managing time also protects rest. Students who plan their study hours are more likely to sleep before midnight, which keeps them alert in class.\n④ 结论：Time management is not about filling every minute; it is about deciding what deserves the minutes. Once this habit is formed, it serves us far beyond college.",
+      "explain": "评分看：结构清晰（三段）、观点明确、两个理由各带例证、语言基本正确。字数不足 120 词直接降档。",
+      "source": "自编·按题型",
+      "difficulty": 3
+    },
+    {
+      "id": "q4-e2",
+      "type": "essay",
+      "chapter": "c1",
+      "points": [
+        "p1-1",
+        "p1-4"
+      ],
+      "stem": "Writing (30 minutes)\n\nDirections: Write a letter of about 120 words to your friend recommending a book you have recently read. Tell him/her what the book is about and why you recommend it.",
+      "answer": "参考骨架：\nDear Tom,\n① 目的句：I'm writing to recommend a book I finished last week — Ordinary World by Lu Yao.\n② 内容简介：It tells the story of two brothers who struggle to change their lives in a changing countryside.\n③ 推荐理由：What impressed me most is the characters' refusal to give up; whenever I feel tired of study, their persistence reminds me why I keep going.\n④ 结尾：I hope you will enjoy it as much as I did. Looking forward to hearing what you think.\nYours,\nLi Ming",
+      "explain": "书信题格式分不能丢：称呼、目的句、正文、结尾客套、落款。缺称呼或落款会扣分。",
+      "source": "自编·按题型",
+      "difficulty": 3
+    },
+    {
+      "id": "q4-r1",
+      "type": "reading",
+      "chapter": "c2",
+      "points": [
+        "p2-1"
+      ],
+      "stem": "听力模拟（短篇新闻）\n\nYou will hear: “A fire broke out in a warehouse district on the city's east side late on Tuesday night. No injuries were reported, but officials said about 40 workers had to leave their dormitories. The cause is still under investigation, and the district government has promised to check safety equipment in all nearby factories this week.”\n\nQuestions 1–2 are based on the news report.\n1. What happened on Tuesday night?\n2. What did the district government promise to do?",
+      "options": [
+        "A. A fire broke out in a warehouse district.",
+        "B. A factory was closed by the government.",
+        "C. Forty workers lost their jobs.",
+        "D. A safety check was cancelled."
+      ],
+      "answer": "A",
+      "explain": "1. A（导语直接给出）。2. 检查附近所有工厂的安全设备（check safety equipment in all nearby factories）。注意「No injuries」是细节题常见干扰。",
+      "source": "自编·按题型",
+      "difficulty": 2
+    },
+    {
+      "id": "q4-r2",
+      "type": "reading",
+      "chapter": "c2",
+      "points": [
+        "p2-2",
+        "p2-5"
+      ],
+      "stem": "听力模拟（长对话）\n\nM: I heard you're moving out of the dormitory. Isn't it a bit early?\nW: Actually, I've been thinking about it for months. The dorm is cheap, but I can never find a quiet place to study.\nM: Fair enough. Have you found a flat yet?\nW: Not yet. The ones near campus are expensive, so I'm looking a bit further away. The subway makes it manageable.\nM: But you'll spend nearly an hour on the road every day.\nW: I know. Still, I'd rather lose an hour on the train than lose every evening to noise.\n\nQuestions 3–5 are based on the conversation.\n3. Why does the woman want to move out?\n4. What does the man worry about?\n5. What is the woman's attitude toward the longer commute?",
+      "options": [
+        "A. She cannot afford the dormitory fee.",
+        "B. She needs a quiet place to study.",
+        "C. She wants to live with her parents.",
+        "D. Her roommate is moving away."
+      ],
+      "answer": "B",
+      "explain": "3. B（I can never find a quiet place to study）。4. 通勤时间太长（nearly an hour on the road）。5. 接受（I'd rather lose an hour on the train than lose every evening to noise）。",
+      "source": "自编·按题型",
+      "difficulty": 3
+    },
+    {
+      "id": "q4-r3",
+      "type": "reading",
+      "chapter": "c2",
+      "points": [
+        "p2-3"
+      ],
+      "stem": "听力模拟（听力篇章）\n\nYou will hear a short passage about campus recycling: “Three years ago, our university installed 200 recycling bins. At first, students simply threw everything into the nearest bin. Then the student union started a simple campaign: each floor put up a chart showing how much waste it had sorted correctly. Within one semester, the correct-sorting rate rose from 41 percent to 78 percent. The lesson is simple — people change their behavior when they can see how they are doing.”\n\nQuestions 6–8 are based on the passage.\n6. What was installed three years ago?\n7. What did the student union do?\n8. What does the speaker conclude?",
+      "options": [
+        "A. Recycling bins.",
+        "B. Sorting machines.",
+        "C. Waste collection trucks.",
+        "D. New dormitory buildings."
+      ],
+      "answer": "A",
+      "explain": "6. A。7. 在各楼层张贴正确分类量的图表（a chart showing how much waste it had sorted correctly）。8. 当人们能看到自己的表现时，行为会改变。",
+      "source": "自编·按题型",
+      "difficulty": 2
+    },
+    {
+      "id": "q4-r4",
+      "type": "reading",
+      "chapter": "c2",
+      "points": [
+        "p2-4"
+      ],
+      "stem": "听力模拟（数字计算）\n\n原文要点：The museum used to charge 40 yuan for adults; from next month, students will pay 30% less than the current price, while children under 1.2 meters enter free.\n\nQuestion: How much will a student pay from next month?",
+      "options": [
+        "A. 12 yuan",
+        "B. 28 yuan",
+        "C. 30 yuan",
+        "D. 40 yuan"
+      ],
+      "answer": "B",
+      "explain": "30% less than 40 = 40 × 0.7 = 28 yuan。注意「30% less」是降价三成，不是打三折。",
+      "source": "自编·按题型",
+      "difficulty": 2
+    },
+    {
+      "id": "q4-r5",
+      "type": "reading",
+      "chapter": "c5",
+      "points": [
+        "p5-1",
+        "p5-2"
+      ],
+      "stem": "Passage 1\n\nMany people assume that creativity belongs to artists. Yet a growing body of research suggests that creativity is less a gift than a habit — one that can be trained. In one study, students who were asked to write down ten unusual uses for an ordinary object every morning for two weeks performed better on a later problem-solving task than a control group. The activity was simple, but it taught the brain a pattern: before accepting the obvious answer, look for another one.\n\nWhat matters, researchers say, is not the quality of the ideas produced in such exercises but the willingness to produce them at all. Fear of being wrong shuts down this willingness earlier than lack of ability does. This is why classrooms that punish wrong answers tend to produce cautious students rather than curious ones.\n\n1. What do researchers suggest about creativity?\n2. What did the two-week exercise train students to do?\n3. What does the author imply about classrooms that punish wrong answers?\n4. What is the main idea of the passage?",
+      "options": [
+        "A. It is a habit that can be trained.",
+        "B. It belongs only to artists.",
+        "C. It is fixed at birth.",
+        "D. It depends on intelligence."
+      ],
+      "answer": "A",
+      "explain": "1. A（less a gift than a habit — one that can be trained）。2. 在接受显而易见的答案之前先找另一个答案。3. 会培养谨慎而非好奇的学生（暗示这种环境抑制创造力）。4. 创造力可以通过练习培养，关键在于敢于尝试。",
+      "source": "自编·按题型",
+      "difficulty": 3
+    },
+    {
+      "id": "q4-r6",
+      "type": "reading",
+      "chapter": "c5",
+      "points": [
+        "p5-3",
+        "p5-4"
+      ],
+      "stem": "Passage 2\n\nWhen the city introduced shared bicycles, officials expected cleaner air and shorter commutes. What they did not expect was a new kind of clutter. Bikes were left on sidewalks, in front of subway entrances, even in rivers. The first response was to ban them; the second was to regulate them. The second response worked better. Companies now pay for parking zones, and users who leave bikes in the wrong place lose points. The number of bikes has fallen, but the number of trips has hardly changed — which suggests the problem was never the bicycles themselves, but the absence of rules.\n\n1. What problem appeared after shared bikes were introduced?\n2. What does “the second response worked better” refer to?\n3. What does the drop in bikes but stable number of trips suggest?\n4. The word “clutter” in the passage is closest in meaning to ______.",
+      "options": [
+        "A. Bikes left in inappropriate places.",
+        "B. Air pollution from cars.",
+        "C. Higher subway fares.",
+        "D. Traffic accidents."
+      ],
+      "answer": "A",
+      "explain": "1. A（Bikes were left on sidewalks...）。2. 监管（regulate）而不是禁止（ban）。3. 需求没变，问题出在规则缺失。4. clutter 指乱堆乱放的东西，与「散落在不当位置的自行车」最接近。",
+      "source": "自编·按题型",
+      "difficulty": 3
+    },
+    {
+      "id": "q4-r7",
+      "type": "reading",
+      "chapter": "c4",
+      "points": [
+        "p4-1",
+        "p4-4"
+      ],
+      "stem": "长篇阅读匹配（模拟）\n\n段落：\nA. Sleep researchers have long known that teenagers naturally stay up later than adults.\nB. Schools that moved their start time to 8:30 reported better attendance.\nC. Some parents worry that a later start will leave less time for after-school activities.\nD. The change costs money, because bus schedules must be reorganized.\nE. Grades in morning classes improved most after the change.\nF. Critics argue that students should simply go to bed earlier.\nG. One district solved the bus problem by sharing buses with primary schools.\n\n题干：\n1. A solution to the transportation cost is mentioned.\n2. An academic benefit of later start times is described.\n3. A concern from parents is raised.\n4. A common objection is presented.",
+      "options": [],
+      "answer": "1 → G（共享校车解决交通成本）；2 → E（上午课成绩提升）；3 → C（家长担心课后活动时间被压缩）；4 → F（批评者认为学生应当早睡）。",
+      "explain": "长篇匹配的题干与段落不是顺序对应，且段落可以重复使用。做法是先圈题干关键词（transportation cost、academic benefit、parents' concern、objection），再扫段落找同义改写。",
+      "source": "自编·按题型",
+      "difficulty": 3
+    },
+    {
+      "id": "q4-c1",
+      "type": "cloze",
+      "chapter": "c3",
+      "points": [
+        "p3-1",
+        "p3-2"
+      ],
+      "stem": "选词填空：从 15 个词中选 10 个填入空格，每词只用一次。\n`absorb  access  affordable  balance  constant  contribute  digital  efficient  eventually  limited  opportunities  pressure  reduce  rely  therefore`\n\nOnline learning has given students (1)______ to courses they could never attend in person. It is (2)______ and flexible, which is why many working adults (3)______ on it. However, it also places a (4)______ strain on attention: without a classroom, students must (5)______ their own distractions. Some (6)______ distraction by turning off notifications; others (7)______ give up and return to printed books. Researchers suggest that the (8)______ environment matters less than the discipline it requires. A short but focused session is more (9)______ than three hours of half-attention. (10)______, the key is not the medium but the habit.",
+      "answer": "(1) access　(2) affordable　(3) rely　(4) constant　(5) balance　(6) reduce　(7) eventually　(8) digital　(9) efficient　(10) Therefore\n\n未使用：absorb、contribute、limited、opportunities、pressure",
+      "explain": "先判词性：have access to（名词）、is affordable（形容词）、rely on（动词）、constant strain（形容词）、balance distractions（动词）、reduce ... by（动词）、eventually（副词）、digital environment（形容词）、more efficient（形容词）、Therefore（连接副词）。剩下 5 个词作干扰，词性与位置都不匹配。",
+      "source": "自编·按题型",
+      "difficulty": 4
+    },
+    {
+      "id": "q4-t1",
+      "type": "short",
+      "chapter": "c6",
+      "points": [
+        "p6-1",
+        "p6-3"
+      ],
+      "stem": "翻译：中国的传统节日大多与农业社会的生活节奏有关。春节是一年中最重要的节日，家人无论多忙都会尽量团聚。近年来，越来越多的年轻人开始重新关注这些节日的文化含义。",
+      "answer": "Most traditional Chinese festivals are related to the rhythm of life in an agricultural society. The Spring Festival is the most important festival of the year, and family members will try their best to reunite no matter how busy they are. In recent years, more and more young people have begun to pay attention again to the cultural meaning of these festivals.",
+      "explain": "踩分点：be related to（与…有关）、the rhythm of life（生活节奏）、reunite（团聚）、no matter how busy（无论多忙）、pay attention to（关注）。时态：前两句一般现在时，最后一句现在完成时。",
+      "source": "自编·按题型",
+      "difficulty": 3
+    },
+    {
+      "id": "q4-t2",
+      "type": "short",
+      "chapter": "c6",
+      "points": [
+        "p6-2"
+      ],
+      "stem": "翻译：据报道，这座城市的地铁网络将在五年内扩大一倍。政府表示，新线路将连接郊区的大学城和市中心的商业区。",
+      "answer": "It is reported that the city's subway network will double in size within five years. The government says that the new lines will connect the university town in the suburbs with the business district in the city center.",
+      "explain": "「据报道」用 It is reported that；「扩大一倍」可写 double in size；「大学城」university town；「商业区」business district。注意 connect A with B。",
+      "source": "自编·按题型",
+      "difficulty": 3
+    },
+    {
+      "id": "q4-t3",
+      "type": "short",
+      "chapter": "c6",
+      "points": [
+        "p6-4"
+      ],
+      "stem": "翻译完成后，你应该按哪五项检查？",
+      "answer": "① 时态是否与中文时间一致；② 主谓一致（第三人称单数、单复数）；③ 冠词与可数名词的单复数；④ 拼写与大小写（专有名词、句首）；⑤ 是否漏译或增译导致意思改变。",
+      "explain": "四级翻译按整体评分，这五项是最容易丢分也最容易自查的地方。",
+      "source": "自编·按题型",
+      "difficulty": 2
+    },
+    {
+      "id": "q4-s1",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "p7-1"
+      ],
+      "stem": "The new policy will ______ the way students choose their courses.",
+      "options": [
+        "A. affect",
+        "B. effect",
+        "C. effort",
+        "D. effective"
+      ],
+      "answer": "A",
+      "explain": "affect 是动词「影响」；effect 多作名词；effort 名词；effective 形容词。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "q4-s2",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "p7-1"
+      ],
+      "stem": "The company decided to ______ the new technology to local conditions.",
+      "options": [
+        "A. adopt",
+        "B. adapt",
+        "C. adept",
+        "D. admit"
+      ],
+      "answer": "B",
+      "explain": "adapt ... to ... 使适应；adopt 采纳；adept 熟练的；admit 承认。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "q4-s3",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "p7-2"
+      ],
+      "stem": "The meeting has been ______ until next Friday because of the storm.",
+      "options": [
+        "A. put off",
+        "B. put on",
+        "C. put up",
+        "D. put out"
+      ],
+      "answer": "A",
+      "explain": "put off 推迟；put on 穿上/上演；put up 张贴/搭建；put out 熄灭。",
+      "source": "自编·按考点",
+      "difficulty": 1
+    },
+    {
+      "id": "q4-s4",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "p7-2"
+      ],
+      "stem": "I'm looking forward to ______ from you soon.",
+      "options": [
+        "A. hear",
+        "B. hearing",
+        "C. be heard",
+        "D. have heard"
+      ],
+      "answer": "B",
+      "explain": "look forward to 中 to 是介词，后接动名词。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "q4-s5",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "p7-3"
+      ],
+      "stem": "By the time we arrived, the film ______ for ten minutes.",
+      "options": [
+        "A. had begun",
+        "B. had been on",
+        "C. has begun",
+        "D. began"
+      ],
+      "answer": "B",
+      "explain": "for ten minutes 表示持续，begin 是瞬间动词，需用 be on；基准在过去，用过去完成时。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "q4-s6",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "p7-3"
+      ],
+      "stem": "When he ______ tomorrow, I will tell him the news.",
+      "options": [
+        "A. will come",
+        "B. comes",
+        "C. came",
+        "D. is coming"
+      ],
+      "answer": "B",
+      "explain": "时间状语从句用一般现在时表将来（主将从现）。",
+      "source": "自编·按考点",
+      "difficulty": 1
+    },
+    {
+      "id": "q4-s7",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "p7-4"
+      ],
+      "stem": "______ his homework, he went out to play basketball.",
+      "options": [
+        "A. Finished",
+        "B. Having finished",
+        "C. Finishing",
+        "D. To finish"
+      ],
+      "answer": "B",
+      "explain": "完成作业在打球之前，逻辑主语 he 是主动，用现在分词完成式。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "q4-s8",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "p7-4"
+      ],
+      "stem": "I still remember ______ this song for the first time in primary school.",
+      "options": [
+        "A. to hear",
+        "B. hearing",
+        "C. heard",
+        "D. hear"
+      ],
+      "answer": "B",
+      "explain": "remember doing 记得做过；remember to do 记得去做。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "q4-s9",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "p7-5"
+      ],
+      "stem": "This is the village ______ we visited last summer.",
+      "options": [
+        "A. where",
+        "B. which",
+        "C. when",
+        "D. what"
+      ],
+      "answer": "B",
+      "explain": "从句 visit 缺宾语，用关系代词 which；若从句不缺成分（we stayed）才用 where。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "q4-s10",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "p7-5"
+      ],
+      "stem": "He failed the exam, ______ made his parents disappointed.",
+      "options": [
+        "A. that",
+        "B. which",
+        "C. what",
+        "D. it"
+      ],
+      "answer": "B",
+      "explain": "非限制性定语从句指代整句只能用 which。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "q4-s11",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "p7-1"
+      ],
+      "stem": "She is a very ______ person; she always notices when others are upset.",
+      "options": [
+        "A. sensible",
+        "B. sensitive",
+        "C. sensational",
+        "D. senseless"
+      ],
+      "answer": "B",
+      "explain": "sensitive 敏感的、体贴的；sensible 明智的；sensational 轰动的；senseless 无意义的。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "q4-s12",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "p7-2"
+      ],
+      "stem": "The number of students who take part in the program ______ increasing.",
+      "options": [
+        "A. are",
+        "B. is",
+        "C. were",
+        "D. have been"
+      ],
+      "answer": "B",
+      "explain": "the number of + 复数名词，中心词是 number，谓语用单数。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "q4-j1",
+      "type": "judge",
+      "chapter": "c2",
+      "points": [
+        "p2-6"
+      ],
+      "stem": "听力考试中，如果某道题完全没听懂，应该停下来反复回想，直到想明白再继续。",
+      "answer": "错",
+      "explain": "听力是单向流，纠缠上一题会连带丢掉下一题。正确做法是立即放弃、跟住下一题，利用题目之间的间隙回头猜。",
+      "source": "自编·按策略",
+      "difficulty": 2
+    },
+    {
+      "id": "q4-j2",
+      "type": "judge",
+      "chapter": "c3",
+      "points": [
+        "p3-4"
+      ],
+      "stem": "选词填空中，如果一个词在语法上成立但与上下文语义冲突，仍应优先按语法选择。",
+      "answer": "错",
+      "explain": "词性只决定候选范围，最终要靠搭配与上下文语义定夺；语法成立但语义冲突的选项通常就是干扰项。",
+      "source": "自编·按策略",
+      "difficulty": 2
+    },
+    {
+      "id": "q4-j3",
+      "type": "judge",
+      "chapter": "c4",
+      "points": [
+        "p4-3"
+      ],
+      "stem": "长篇阅读匹配中，每个段落只能被使用一次。",
+      "answer": "错",
+      "explain": "段落通常多于题目，允许一段对应多题，也允许有段落不被选中。默认「一一对应」是常见错误。",
+      "source": "自编·按策略",
+      "difficulty": 2
+    },
+    {
+      "id": "q4-j4",
+      "type": "judge",
+      "chapter": "c3",
+      "points": [
+        "p3-3"
+      ],
+      "stem": "选词填空（10 空）建议控制在 8–10 分钟内完成，把时间留给仔细阅读。",
+      "answer": "对",
+      "explain": "选词每空 3.55 分，仔细阅读每题 14.2 分，时间分配应向高分项倾斜。",
+      "source": "自编·按策略",
+      "difficulty": 1
+    },
+    {
+      "id": "q4-j5",
+      "type": "judge",
+      "chapter": "c4",
+      "points": [
+        "p4-2"
+      ],
+      "stem": "做长篇阅读匹配时，应先把带专有名词或数字的题做完，再做抽象表述的题。",
+      "answer": "对",
+      "explain": "具体题干定位快、确定性高；抽象题干需要理解段落主旨，放后面做正确率更高。",
+      "source": "自编·按策略",
+      "difficulty": 2
+    },
+    {
+      "id": "q4-j6",
+      "type": "judge",
+      "chapter": "c5",
+      "points": [
+        "p5-5"
+      ],
+      "stem": "做仔细阅读时，应先通读全文再逐题作答，这样正确率最高。",
+      "answer": "错",
+      "explain": "四级仔细阅读时间紧（两篇共 18 分钟左右），应先看题干再定位回读，通读全文容易超时。",
+      "source": "自编·按策略",
+      "difficulty": 2
+    }
+  ]
+}
