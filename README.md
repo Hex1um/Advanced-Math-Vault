@@ -227,8 +227,11 @@ tools/archive/            已合并的历史脚本（只作追溯）
 
 **背单词**（四六级）：卡片先显示单词、音标、词性，空格/点击看释义（例句 + 同义词），
 然后三档自评「不认识 / 模糊 / 认识」，分别映射到错题本同一套 FSRS 的 `again / hard / good`。
-「不认识」的词插回三张之后重来，「模糊」的放到本轮末尾再过一遍，各自最多两次，一轮 20 张能走完。
+「不认识」的词插回三张之后重来，「模糊」的放到本轮末尾再过一遍，各自最多两次，一轮 20 张能走完；
+不想评价的词可以「跳过」，不计分也不改排期。
 模式分「混合 / 只复习 / 只背新词」；「速览模式」直接展开释义，适合纯过眼。
+新词按**单词哈希**排序出队（不是词库字母序，否则永远从 A 段背起），同一份已学集合永远给出同一批词，跨天可续。
+统计行有「词库 / 已学 / 待复习 / 未学 / 今日」，今日按东八区日期翻页。
 进度存在 `db.sprint[uid][packId].vocab`，换设备跟着账号走。
 
 现有科目包：
@@ -418,6 +421,20 @@ SHARECODE=... ADMIN_TOKEN=... node tools/ops/deploy.mjs --publish
 ```
 
 > 登录被拒（401）时的三种常见原因：密码填成了示例占位文本、管理员用户名不是 `Hex1um`（用 `ADMIN_USER` 改）、`ADMIN_TOKEN` 已过期。`429` 是同 IP 每分钟 12 次的登录限流，等一分钟即可。
+
+**凭据放哪**：不要写进 `.env` —— 部署会把整个目录上传到实例，`.env` 也跟着上去，等于把管理员口令明文放进线上文件系统。放在项目目录之外，`deploy.mjs` 会自动读：
+
+```bash
+# 一次性写好（Windows 下路径是 C:/Users/<你>/.math-vault-deploy.env）
+cat > ~/.math-vault-deploy.env <<'EOF'
+SHARECODE=...
+ADMIN_USER=Hex1um
+ADMIN_PASS=...
+EOF
+node tools/ops/deploy.mjs --publish      # 不用再手传环境变量
+```
+
+也支持 `DEPLOY_CRED_FILE=/path/to/file` 指定别的文件；环境变量里已有的值优先，不会被文件覆盖。
 
 - `SHARECODE` 或 `ADMIN_PASS` 缺失时，`tools/ops/sync-live.mjs` 直接报错退出（退出码 2），不再回退到任何默认值。
 - `tools/ops/deploy.mjs` 默认只同步、不发布；发布必须加 `--publish`（或 `USER_ASKED_TO_PUBLISH=1`），避免误触发线上覆盖。

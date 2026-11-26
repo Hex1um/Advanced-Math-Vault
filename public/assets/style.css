@@ -1846,3 +1846,12 @@ textarea.exam-input { resize: vertical; min-height: 78px; font-family: inherit; 
   .vc-keys { display: none; }
   .sp-vocab-top { gap: 8px; }
 }
+
+/* 今日计数与跳过 */
+.sp-vocab-stats .today b { color: var(--green); }
+.vc-foot { margin-top: 8px; text-align: center; }
+.vc-skip {
+  border: 0; background: none; cursor: pointer; font-family: inherit;
+  color: var(--muted); font-size: 12px; padding: 5px 10px; border-radius: 4px;
+}
+.vc-skip:hover { color: var(--blue); background: var(--blue-weak); }

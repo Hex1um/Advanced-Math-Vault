@@ -54,7 +54,7 @@
       vocab: {
         mode: 'mix',
         queue: [],
-        i: 0,
+        done: 0,
         stats: null,
         revealed: false,
         quick: false,
@@ -356,6 +356,7 @@
         + '  <span><b>' + (s.learned || 0) + '</b> 已学</span>'
         + '  <span class="due"><b>' + (s.due || 0) + '</b> 待复习</span>'
         + '  <span><b>' + (s.fresh === undefined ? '—' : s.fresh) + '</b> 未学</span>'
+        + '  <span class="today"><b>' + (s.today || 0) + '</b> 今日</span>'
         + '</div>';
     }
 
@@ -391,6 +392,7 @@
         + '    <button class="vc-btn hard" data-rate="hard"><b>模糊</b><kbd>2</kbd></button>'
         + '    <button class="vc-btn good" data-rate="good"><b>认识</b><kbd>3</kbd></button>'
         + '  </div>'
+        + '  <div class="vc-foot"><button class="vc-skip" data-act="vskip">跳过这个词（不计入）</button></div>'
         + '</div>';
     }
 
@@ -424,6 +426,7 @@
             ? '认识 ' + (c.good || 0) + ' · 模糊 ' + (c.hard || 0) + ' · 不认识 ' + (c.again || 0)
             : '「只复习」需要先学过一些词，或者先把模式切回「混合」')
           + '  </div>'
+          + ((v.stats && v.stats.today) ? '<div class="vc-done-sub">今天累计背了 ' + v.stats.today + ' 个词</div>' : '')
           + '  <div class="vc-done-acts">'
           + '    <button class="btn btn-primary" data-act="vnext">再来一轮（20 个）</button>'
           + '    <button class="btn" data-act="vdue">只复习到期的</button>'
@@ -431,13 +434,13 @@
           + '</div>';
       }
 
-      const w = v.queue[v.i];
-      const total = v.queue.length;
-      const pct = total ? Math.round((v.i / total) * 100) : 0;
+      const w = v.queue[0];
+      const total = v.done + v.queue.length;
+      const pct = total ? Math.round((v.done / total) * 100) : 0;
       return head
         + '<div class="sp-vocab-run">'
         + '  <div class="vc-progress"><i style="width:' + pct + '%"></i></div>'
-        + '  <div class="vc-progress-txt">本轮第 ' + (v.i + 1) + ' / ' + total + ' 张</div>'
+        + '  <div class="vc-progress-txt">已过 ' + v.done + ' 张 · 还剩 ' + v.queue.length + ' 张</div>'
         + vocabCardHTML(w)
         + '  <div class="vc-keys"><kbd>空格</kbd> 显示释义 · <kbd>1</kbd> 不认识 · <kbd>2</kbd> 模糊 · <kbd>3</kbd> 认识'
         + '<em>不认识的词会在三张之后再出现一次，评价会按 FSRS 排下次复习</em></div>'
@@ -457,7 +460,7 @@
       v.finished = false;
       v.err = '';
       v.revealed = false;
-      v.i = 0;
+      v.done = 0;
       v.queue = [];
       v.counts = { again: 0, hard: 0, good: 0 };
       renderVocab();
@@ -484,25 +487,26 @@
     function rateVocab(rating) {
       const v = state.vocab;
       if (state.tab !== 'vocab' || v.finished || v.loading) return;
-      const w = v.queue[v.i];
+      /* 当前卡恒为队首：出队后下一张自然补到 0 位，不用维护游标 */
+      const w = v.queue[0];
       if (!w) return;
       v.counts[rating] = (v.counts[rating] || 0) + 1;
+      v.done += 1;
 
       /* 队列推进：不认识 → 三张之后重来；模糊 → 本轮末尾再过一遍；认识 → 出队。
          两种重复各自最多两次，避免同一个词把一轮拖成死循环。 */
       if (rating === 'again' && (w._rep || 0) < 2) {
         w._rep = (w._rep || 0) + 1;
-        const card = v.queue.splice(v.i, 1)[0];
-        v.queue.splice(Math.min(v.queue.length, v.i + 3), 0, card);
+        const card = v.queue.shift();
+        v.queue.splice(Math.min(v.queue.length, 3), 0, card);
       } else if (rating === 'hard' && !w._hard) {
         w._hard = 1;
-        const card = v.queue.splice(v.i, 1)[0];
-        v.queue.push(card);
+        v.queue.push(v.queue.shift());
       } else {
-        v.queue.splice(v.i, 1);
+        v.queue.shift();
       }
       v.revealed = v.quick;
-      if (v.i >= v.queue.length) v.finished = true;
+      if (!v.queue.length) v.finished = true;
       renderVocab();
 
       if (!state.loggedIn) return;
@@ -511,9 +515,26 @@
         state.vocab.stats = d.stats;
         const box = document.querySelector('.sp-vocab-stats');
         if (box && state.tab === 'vocab') box.outerHTML = vocabStatsHTML();
+        /* 收尾页上的「今天累计背了 N 个词」是在最后一次 POST 回来之前渲染的，
+           这里补一次重绘，否则永远显示成第一张时的数字 */
+        if (state.vocab.finished && state.tab === 'vocab') renderVocab();
       }).catch(function (e) {
         UI.toast(e.message || '记录失败', 'err');
       });
+    }
+
+    /* 跳过：不评价、不计数，只是把这张挪到本轮末尾，下次再遇到 */
+    function skipVocab() {
+      const v = state.vocab;
+      if (state.tab !== 'vocab' || v.finished || v.loading || !v.queue.length) return;
+      if (v.queue.length <= 1) {
+        v.queue.shift();
+        v.finished = true;
+      } else {
+        v.queue.push(v.queue.shift());
+      }
+      v.revealed = v.quick;
+      renderVocab();
     }
 
 
@@ -764,6 +785,7 @@
       else if (what === 'aigrade') aiGrade(act.getAttribute('data-q'));
       else if (what === 'plan') plan();
       else if (what === 'vshow') revealVocab();
+      else if (what === 'vskip') skipVocab();
       else if (what === 'vnext') loadVocab('mix');
       else if (what === 'vdue') loadVocab('due');
       else if (what === 'vquick') {

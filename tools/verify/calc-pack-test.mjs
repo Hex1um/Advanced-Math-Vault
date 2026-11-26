@@ -140,6 +140,14 @@ for (const [id, label, minWords] of [['cet4-2026', '四级', 1000], ['cet6-2026'
   const prog = spr.blankProgress();
   const q = spr.vocabQueue(p, prog, { limit: 20 });
   ok(label + '默认取 20 张新词', q.items.length === 20 && q.items.every((x) => x.kind === 'new'), 'got=' + q.items.length);
+  /* 新词按哈希序出，不应是字母序（否则所有人永远从 A 段开始背）。
+     只比前三张不够——偶尔会碰巧升序，所以直接比 20 张的整体顺序。 */
+  const seq = q.items.map((x) => x.w);
+  ok(label + '新词不是字母序', seq.join(',') !== seq.slice().sort().join(','), seq.slice(0, 3).join(','));
+  ok(label + '首词不是词库第一个词', seq[0] !== p.vocab[0].w, 'head=' + seq[0] + ' bank0=' + p.vocab[0].w);
+  /* 同一个词库两次取词结果一致（顺序可复现，昨天背到哪今天能接上） */
+  const again = spr.vocabQueue(p, spr.blankProgress(), { limit: 20 });
+  ok(label + '取词顺序可复现', again.items.map((x) => x.w).join(',') === seq.join(','));
   const card = spr.recordVocab(prog, p, q.items[0].w, 'good', fsrs);
   ok(label + '评价后生成下次复习时间', !!card && card.nextReviewAt > Date.now(), JSON.stringify(card && card.nextReviewAt));
   /* 回归：normalizeProgress 曾漏掉 vocab 字段，导致「已学」永远为 0 */
@@ -147,6 +155,7 @@ for (const [id, label, minWords] of [['cet4-2026', '四级', 1000], ['cet6-2026'
   ok(label + '进度往返不丢词卡', Object.keys(round.vocab).length === 1, 'kept=' + Object.keys(round.vocab).length);
   const st = spr.vocabStats(p, round);
   ok(label + '统计认得出已学 1 词', st.learned === 1 && st.total === p.vocab.length, JSON.stringify(st));
+  ok(label + '今日计数随评价累加', st.today === 1, 'today=' + st.today);
   ok(label + '不存在的词不入库', spr.recordVocab(prog, p, '__no_such_word__', 'good', fsrs) === null);
 }
 

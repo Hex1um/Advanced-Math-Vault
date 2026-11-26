@@ -27,6 +27,31 @@ const { parse: parseEnv } = require(path.join(ROOT, 'lib', 'env.js'));
 
 const argv = process.argv.slice(2);
 const hasFlag = (n) => argv.includes('--' + n);
+
+/* 部署凭据放在项目目录之外。
+   原因：部署会把整个目录上传到实例，.env 也跟着上去；
+   把 ADMIN_PASS 写进 .env 等于把站点管理员口令明文放进线上文件系统。
+   这里改为读 ~/.math-vault-deploy.env（或 DEPLOY_CRED_FILE 指定的文件），
+   shell 里已显式传入的变量优先，不会被文件覆盖。 */
+const CRED_FILE = process.env.DEPLOY_CRED_FILE
+  || path.join(process.env.USERPROFILE || process.env.HOME || '', '.math-vault-deploy.env');
+const CRED_KEYS = ['SHARECODE', 'ADMIN_USER', 'ADMIN_PASS', 'ADMIN_TOKEN', 'BASE', 'API_BASE'];
+
+function loadCreds() {
+  if (!CRED_FILE || !fs.existsSync(CRED_FILE)) return { found: false, file: CRED_FILE, applied: [] };
+  let parsed = {};
+  try { parsed = parseEnv(fs.readFileSync(CRED_FILE, 'utf8'), {}); }
+  catch (e) { return { found: true, file: CRED_FILE, applied: [], error: e.message }; }
+  const applied = [];
+  for (const k of CRED_KEYS) {
+    const v = String(parsed[k] || '').trim();
+    if (!v || String(process.env[k] || '').trim()) continue;
+    process.env[k] = v;
+    applied.push(k);
+  }
+  return { found: true, file: CRED_FILE, applied: applied };
+}
+
 const SKIP_SYNC = hasFlag('no-sync');
 const ALLOW_NO_SYNC = process.env.ALLOW_NO_SYNC === '1';
 const PUBLISH = hasFlag('publish') || process.env.USER_ASKED_TO_PUBLISH === '1';
@@ -255,10 +280,16 @@ async function deploy() {
 }
 
 (async () => {
+  const creds = loadCreds();
   const pre = preflight();
   const gitCheck = checkGit();
   console.log('▶ 代码状态：' + (gitCheck.git.commit || '(无 git)')
     + (gitCheck.git.dirty ? ' + ' + gitCheck.git.dirtyFiles.length + ' 处未提交改动' : ' 干净'));
+  if (creds.found) {
+    console.log('▶ 部署凭据：' + creds.file + ' → ' + (creds.applied.length ? creds.applied.join('/') : '无新增（已由环境变量提供）'));
+  } else {
+    console.log('▶ 部署凭据：未找到 ' + creds.file + '，需要 SHARECODE 与 ADMIN_PASS 由环境变量传入');
+  }
   const gatesOk = runGates();
   if (PREFLIGHT_ONLY) {
     console.log('\n--preflight-only：只做检查，没有备份、没有同步、没有上传。'

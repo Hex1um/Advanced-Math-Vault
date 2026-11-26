@@ -726,6 +726,7 @@ try {
   const spVocabStats = await req('/api/sprint/packs/cet4-2026/vocab/stats');
   ok('统计记住已学词数', spVocabStats.status === 200 && spVocabStats.json.stats.learned === 1,
     JSON.stringify(spVocabStats.json.stats));
+  ok('统计带今日已背数', spVocabStats.json.stats.today === 1, 'today=' + spVocabStats.json.stats.today);
 
   const spVocabBad = await req('/api/sprint/packs/cet4-2026/vocab', {
     method: 'POST', body: JSON.stringify({ word: 'not_in_dict_zzz', rating: 'good' })
