@@ -88,6 +88,7 @@ curl -b cookie localhost:8787/api/admin/ai-stats  # 管理员：AI 通道成功�
 | 天体物理与天文 | 球面天文与天体力学、天体物理基础 | 2 章 14 子标签 |
 | 物理实验与实测天文 | 物理实验与误差分析 | 1 章 6 子标签 |
 
+- **教材原图（v3.4）**：`physicsMeta.diagrams` 支持教材扫描件裁出的 WebP（`tb-<题号>-p<页>-<序>.webp`，当前 21 张在用），题页按白名单渲染为 `<img>` 并支持点击放大。裁图流程见 `tools/import/ocr-textbook.md` 第 4 节：OCR 文本框 + 连通域分离图与文字，再用「题 x.y.z 图」标签自动配对，产出后必须视觉抽检。
 - **物理判题支持多单位制**：`physicsMeta.unitSystem` 取 `SI`（默认）/ `CGS`（高斯制，电磁量不校验电流维）/ `astro` / `natural`；`answerType: "order_of_magnitude"` + `tolDex` 用于天文量级估算（`0.3 dex` ≈ 2 倍以内判对）。常数速查栏可切 SI / CGS / 天文三套口径。
 - **物理是独立命名空间**：题目带 `subject: "physics"`，主标签换成力学 / 振动与波 / 热学 / 电磁学 / 光学 / 近代物理 / 物理实验与误差分析（+ 兜底「综合」），共 99 个子标签。数学与物理的标签表互不重叠，`GET /api/problems?subject=physics` 只返回物理题，不传 `subject` 仍按数学处理。
 
@@ -388,6 +389,8 @@ npm run check:diagrams               # 专业示意图模板（有效势/天球/
 # 教材扫描件录入（需本机装 pymupdf + rapidocr-onnxruntime）
 python _ocr/ingest.py toc            # 打印书签目录，定位各章「习题」页
 python _ocr/ingest.py chapter 7      # OCR 第 7 章习题段
+python _ocr/figures.py scan 154 156  # 检测题图区并打印匹配到的题号（不落盘）
+python _ocr/figures.py cut 154 156   # 裁图写入 public/assets/diagrams/physics/
 node tools/verify/check-physics-gate.mjs    # 入库门禁：标签 / 配图 / 标准答案自检
 python tools/verify/verify_physics.py --file data/batch-physics-12-textbook-mech3.json
 node tools/diagrams/make-svg.mjs     # 重新生成 public/assets/diagrams/physics/physics-*.svg

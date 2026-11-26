@@ -1,0 +1,318 @@
+[
+ {
+  "title": "恒力拉绳时木块的速度",
+  "statement": "如图，质量 $m=0.5\\ \\mathrm{kg}$ 的木块可在水平光滑直杆上滑动，木块与不可伸长的轻绳相连，绳跨过一固定的光滑小环，绳端作用着大小不变的力 $F=50\\ \\mathrm{N}$。木块在 $A$ 点时具有向右的速率 $v_0=6.0\\ \\mathrm{m/s}$；小环在 $A$ 点右上方，与 $A$ 的水平距离 $4.0\\ \\mathrm{m}$、竖直距离 $3.0\\ \\mathrm{m}$，$B$ 点在小环正下方 $3.0\\ \\mathrm{m}$ 处。求木块被拉至 $B$ 点时的速率。",
+  "mainTag": "力学",
+  "tags": [
+   "功与机械能"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题4.3.1",
+  "hints": [
+   "绳被拉过的长度等于小环到 $A$、$B$ 的距离之差。",
+   "$W=\\Delta E_k$，注意 $F$ 大小不变、方向沿绳。"
+  ],
+  "answer": "21\\ \\mathrm{m/s}",
+  "solution": "小环到 $A$ 的距离\n$$L_A=\\sqrt{4.0^2+3.0^2}=5.0\\ \\mathrm{m},$$\n小环到 $B$ 的距离 $L_B=3.0\\ \\mathrm{m}$。木块由 $A$ 到 $B$，绳被拉过的长度\n$$\\Delta L=L_A-L_B=5.0-3.0=2.0\\ \\mathrm{m}.$$\n$F$ 大小不变、作用点沿绳移动 $\\Delta L$，做功\n$$W=F\\Delta L=50\\times2.0=100\\ \\mathrm{J}.$$\n由动能定理\n$$\\frac12mv_B^2-\\frac12mv_0^2=W\n\\quad\\Rightarrow\\quad\nv_B=\\sqrt{v_0^2+\\frac{2W}{m}}=\\sqrt{6.0^2+\\frac{2\\times100}{0.5}}=\\sqrt{436}=20.9\\ \\mathrm{m/s}.$$\n\n注意不能直接对木块写 $F\\cdot AB$：$F$ 作用在绳端，方向始终沿绳、与木块位移不同向，只有「绳被拉过的长度」才是力的作用点位移。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m/s",
+   "methods": [
+    "动能定理",
+    "变力做功"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第四章 习题4.3.1",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-4-3-1-p155-0.webp",
+     "alt": "题 4.3.1 图：木块在水平杆上，绳跨过小环"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "车厢挂钩后货箱的滑行",
+  "statement": "如图，两车厢质量均为 $m$。左边车厢与其地板上质量为 $m$ 的货箱共同以 $v_0$ 向右运动；另一车厢以 $2v_0$ 从相反方向向左运动，并与左车厢碰撞挂钩。碰后货箱在地板上滑行的最大距离为 $l$。求：(1) 货箱与车厢地板间的摩擦因数；(2) 车厢在挂钩后走过的距离（不计车与地面间的摩擦）。",
+  "mainTag": "力学",
+  "tags": [
+   "动量与碰撞"
+  ],
+  "kind": "推导题",
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题4.6.10",
+  "hints": [
+   "挂钩瞬间：左侧「车厢 + 货箱」共 $2m$，右侧车厢 $m$ 以 $2v_0$ 反向。",
+   "碰后货箱仍有 $v_0$，车厢速度为多少？再对货箱用动能定理。"
+  ],
+  "answer": "\\mu=\\frac{v_0^{2}}{3gl},\\qquad s=\\frac{l}{3}",
+  "solution": "（1）挂钩瞬间（完全非弹性），对「两节车厢 + 货箱」系统动量守恒：\n$$2m\\cdot v_0-m\\cdot2v_0=3m\\cdot V\\quad\\Rightarrow\\quad V=0.$$\n即碰撞后两节车厢恰好静止；货箱不受水平冲量（摩擦冲量可忽略），仍以 $v_0$ 向右滑动。\n\n此后货箱受向后摩擦、车厢受向前摩擦：\n$$v_{\\text{货}}=v_0-\\mu gt,\\qquad v_{\\text{车}}=\\frac{\\mu mg}{2m}t=\\frac{\\mu g}{2}t.$$\n共速条件 $v_0-\\mu gt=\\dfrac{\\mu g}{2}t$ 给出\n$$t=\\frac{2v_0}{3\\mu g},\\qquad v_{\\text{共}}=\\frac{v_0}{3}.$$\n相对位移\n$$l=\\int_0^t\\left(v_{\\text{货}}-v_{\\text{车}}\\right)\\mathrm{d}t\n=\\int_0^t\\left(v_0-\\frac32\\mu gt\\right)\\mathrm{d}t\n=\\frac{2v_0^2}{3\\mu g}-\\frac{v_0^2}{3\\mu g}=\\frac{v_0^2}{3\\mu g}.$$\n故\n$$\\mu=\\frac{v_0^2}{3gl}.$$\n\n（2）车厢位移\n$$s=\\frac12\\cdot\\frac{\\mu g}{2}t^2=\\frac{\\mu g}{4}\\cdot\\frac{4v_0^2}{9\\mu^2g^2}=\\frac{v_0^2}{9\\mu g}=\\frac{l}{3}.$$\n\n也可用质心法交叉验证：系统质心速度恒为 $v_0/3$，质心位移 $\\frac{2v_0^2}{9\\mu g}$；而质心位置为 $s+\\frac{l}{3}$，代入即得 $s=\\frac{l}{3}$。\n\n能量法最快：碰后总动能 $\\frac12mv_0^2$，共速时 $\\frac12\\cdot3m\\left(\\frac{v_0}{3}\\right)^2=\\frac{mv_0^2}{6}$，摩擦生热\n$$\\mu mgl=\\frac12mv_0^2-\\frac{mv_0^2}{6}=\\frac{mv_0^2}{3}\\quad\\Rightarrow\\quad\\mu=\\frac{v_0^2}{3gl}.$$",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "动量守恒",
+    "相对运动",
+    "摩擦"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第四章 习题4.6.10",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-4-6-10-p158-3.webp",
+     "alt": "题 4.6.10 图：两车厢与货箱"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "弹性绳约束下小球的速率",
+  "statement": "如图，质量 $200\\ \\mathrm{g}$ 的小球 $B$ 由弹性绳固定在光滑水平面上的 $A$ 点，弹性绳的劲度系数 $8\\ \\mathrm{N/m}$，自由伸展长度 $600\\ \\mathrm{mm}$。最初小球位置距 $A$ 点 $400\\ \\mathrm{mm}$，速度 $v_0$ 与 $AB$ 连线成 $30^\\circ$；当小球速率变为 $v$ 时它与 $A$ 点的距离最大，且等于 $800\\ \\mathrm{mm}$。求小球此时的速率 $v$ 及初速率 $v_0$。",
+  "mainTag": "力学",
+  "tags": [
+   "角动量守恒",
+   "功与机械能"
+  ],
+  "kind": "计算题",
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题5.1.9",
+  "hints": [
+   "水平面光滑，绳张力过 $A$，角动量守恒。",
+   "最大距离处速度垂直于半径；弹性势能 $\\frac12k\\left(r-l_0\\right)^2$。"
+  ],
+  "answer": "v=0.33\\ \\mathrm{m/s}\\ \\text{（最大距离处）},\\qquad v_0=1.31\\ \\mathrm{m/s}\\ \\text{（初速率）}",
+  "solution": "张力始终沿绳过 $A$，对 $A$ 的力矩为零，角动量守恒。初态速度与半径成 $30^\\circ$，故\n$$m v_0\\left(0.40\\sin30^\\circ\\right)=m v\\cdot0.80.$$\n$$v=\\frac{0.40\\times0.5}{0.80}v_0=\\frac{v_0}{4}.$$\n\n机械能守恒（弹性绳只在 $r>l_0$ 时有力，两状态都已伸长）：\n$$\\frac12mv_0^2=\\frac12mv^2+\\frac12k\\left(0.80-0.60\\right)^2.$$\n代入 $m=0.20\\ \\mathrm{kg}$、$k=8\\ \\mathrm{N/m}$：\n$$0.10v_0^2=0.10\\times\\frac{v_0^2}{16}+0.5\\times8\\times0.04,$$\n$$0.10v_0^2\\left(1-\\frac{1}{16}\\right)=0.16\n\\quad\\Rightarrow\\quad v_0^2=\\frac{0.16}{0.10\\times0.9375}=1.707,$$\n$$v_0=1.31\\ \\mathrm{m/s},\\qquad v=0.33\\ \\mathrm{m/s}.$$\n\n检验：$v_0^2=1.707$ 时初动能 $0.171\\ \\mathrm{J}$，末动能 $0.0107\\ \\mathrm{J}$，弹性势能 $0.160\\ \\mathrm{J}$，能量闭合。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "角动量守恒",
+    "机械能守恒",
+    "弹性势能"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第五章 习题5.1.9",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-5-1-9-p178-1.webp",
+     "alt": "题 5.1.9 图：A 点、400 mm 与 30°"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "铝钢串联杆的最大负荷与总伸长",
+  "statement": "如图，上半段为横截面积 $4.0\\times10^{-4}\\ \\mathrm{m^2}$、弹性模量 $6.9\\times10^{10}\\ \\mathrm{Pa}$ 的铝杆，长 $3.0\\ \\mathrm{m}$；下半段为横截面积 $1.0\\times10^{-4}\\ \\mathrm{m^2}$、弹性模量 $19.6\\times10^{10}\\ \\mathrm{Pa}$ 的钢杆，长 $2.0\\ \\mathrm{m}$。铝杆内允许最大应力 $7.8\\times10^{7}\\ \\mathrm{Pa}$，钢杆 $13.7\\times10^{7}\\ \\mathrm{Pa}$。不计杆的自重，求杆下端所能承担的最大负荷，以及在此负荷下杆的总伸长量。",
+  "mainTag": "力学",
+  "tags": [
+   "弹性体的应力与应变"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题8.1.3",
+  "hints": [
+   "两杆串联，轴力相同，各自按自己的允许应力算最大负荷，取小者。",
+   "$\\Delta l=\\sum\\dfrac{Fl}{SE}$。"
+  ],
+  "answer": "F=1.37\\times10^{4}\\ \\mathrm{N}",
+  "solution": "串联杆轴力处处相同。分别按两杆的允许应力求极限负荷：\n$$F_{\\text{铝}}=\\sigma_{\\text{铝}}S_{\\text{铝}}=7.8\\times10^{7}\\times4.0\\times10^{-4}=3.12\\times10^{4}\\ \\mathrm{N},$$\n$$F_{\\text{钢}}=\\sigma_{\\text{钢}}S_{\\text{钢}}=13.7\\times10^{7}\\times1.0\\times10^{-4}=1.37\\times10^{4}\\ \\mathrm{N}.$$\n取小者：$F_{\\max}=1.37\\times10^{4}\\ \\mathrm{N}$（钢杆先达到允许应力）。\n\n总伸长为两段之和：\n$$\\Delta l=\\frac{F l_1}{S_1E_1}+\\frac{F l_2}{S_2E_2}\n=\\frac{1.37\\times10^{4}\\times3.0}{4.0\\times10^{-4}\\times6.9\\times10^{10}}\n+\\frac{1.37\\times10^{4}\\times2.0}{1.0\\times10^{-4}\\times19.6\\times10^{10}}$$\n$$=1.49\\times10^{-3}+1.40\\times10^{-3}=2.89\\times10^{-3}\\ \\mathrm{m}\\approx2.9\\ \\mathrm{mm}.$$\n\n两段伸长几乎相等（1.49 mm 与 1.40 mm），这是设计上的「等强度」巧合，不是必然。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "N",
+   "methods": [
+    "应力",
+    "拉伸",
+    "串联杆"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第八章 习题8.1.3",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-8-1-3-p264-0.webp",
+     "alt": "题 8.1.3 图：铝杆 3 m + 钢杆 2 m"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "两侧弹簧系统的固有频率",
+  "statement": "如图，质量为 $m$ 的物块置于光滑水平面上，两侧各连一根弹簧，劲度系数分别为 $k_1$、$k_2$，两弹簧的另一端均固定。求该系统振动的固有频率。",
+  "mainTag": "振动与波",
+  "tags": [
+   "简谐振动"
+  ],
+  "kind": "推导题",
+  "thinking": 3,
+  "difficulty": 4,
+  "calc": 2,
+  "source": "漆安慎《力学》第4版 习题9.2.2",
+  "hints": [
+   "物块偏离平衡位置 $x$ 时，一根被压缩、一根被拉伸，两弹力同向。",
+   "等效劲度系数为两弹簧之和。"
+  ],
+  "answer": "\\omega=\\sqrt{\\frac{k_1+k_2}{m}}",
+  "solution": "设物块向右偏离平衡位置 $x$。左弹簧被拉长 $x$，对小物块施向左的力 $k_1x$；右弹簧被压缩 $x$，对小物块施向左的力 $k_2x$。两力同向，合力\n$$F=-\\left(k_1+k_2\\right)x.$$\n与 $F=-kx$ 比较，等效劲度系数 $k=k_1+k_2$，故\n$$\\omega=\\sqrt{\\frac{k_1+k_2}{m}},\\qquad T=2\\pi\\sqrt{\\frac{m}{k_1+k_2}}.$$\n\n与「两弹簧串联」对比：串联时 $\\frac1k=\\frac1{k_1}+\\frac1{k_2}$（越串越软），两侧各一连是并联式的「越连越硬」。判断口诀：位移相同为并联（劲度相加），受力相同为串联（倒数相加）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "简谐振动",
+    "等效劲度系数"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第九章 习题9.2.2",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-9-2-2-p306-2.webp",
+     "alt": "题 9.2.2 图：物块两侧各连一根弹簧"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "双波源干涉的最强与最弱位置",
+  "statement": "如图，两个波源 $S_1$、$S_2$ 发出横波，振动方向与纸面垂直，两波源具有相同的相位，波长 $0.34\\ \\mathrm{m}$。$S_1$ 位于 $P$ 点左侧水平距离 $L$ 处，$S_2$ 位于 $P$ 点正下方距离 $L-x$ 处（$L$ 足够大）。(1) 求出三个 $x$ 的数值使 $P$ 点合振动最强；(2) 求出三个 $x$ 的数值使 $P$ 点合振动最弱。",
+  "mainTag": "振动与波",
+  "tags": [
+   "波的干涉与驻波"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题10.5.2",
+  "hints": [
+   "两波到 $P$ 的程差 $\\Delta=S_2P-S_1P$。",
+   "最强 $\\Delta=k\\lambda$；最弱 $\\Delta=\\left(2k+1\\right)\\lambda/2$。"
+  ],
+  "answer": "x=0,\\ 0.34,\\ 0.68\\ \\mathrm{m}\\ \\text{（最强）};\\qquad x=0.17,\\ 0.51,\\ 0.85\\ \\mathrm{m}\\ \\text{（最弱）}",
+  "solution": "两波源到 $P$ 的距离分别为 $S_1P=L$、$S_2P=L-x$，程差\n$$\\Delta=S_2P-S_1P=-x,\\qquad \\left|\\Delta\\right|=x.$$\n\n（1）合振动最强要求 $\\left|\\Delta\\right|=k\\lambda$：\n$$x=k\\lambda=0.34k\\quad\\Rightarrow\\quad x=0,\\ 0.34,\\ 0.68\\ \\mathrm{m}\\ \\left(k=0,1,2\\right).$$\n\n（2）合振动最弱要求 $\\left|\\Delta\\right|=\\left(2k+1\\right)\\dfrac{\\lambda}{2}$：\n$$x=\\left(2k+1\\right)\\times0.17\\quad\\Rightarrow\\quad x=0.17,\\ 0.51,\\ 0.85\\ \\mathrm{m}\\ \\left(k=0,1,2\\right).$$\n\n注意 $x=0$ 时 $S_2$ 与 $P$ 重合（程差为零），仍满足最强条件——这是几何上的退化情形，物理上对应 $S_2$ 就在 $P$ 点。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "干涉",
+    "程差"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十章 习题10.5.2",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-10-5-2-p346-3.webp",
+     "alt": "题 10.5.2 图：双波源 S1、S2 与 P 点"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "两容器压强差的测量",
+  "statement": "如图，$A$、$B$ 两容器内的压强都很大，现用图示装置测它们之间的压强差。$U$ 形管中装水银，两臂水银面高度差 $\\Delta h=50\\ \\mathrm{cm}$。求 $A$、$B$ 内的压强差（$1\\ \\mathrm{cm}$ 水银柱产生的压强约 $1333\\ \\mathrm{Pa}$）。这个压强计有什么优点？",
+  "mainTag": "力学",
+  "tags": [
+   "流体力学基础"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 4,
+  "calc": 2,
+  "source": "漆安慎《力学》第4版 习题11.2.2",
+  "hints": [
+   "同一段连续静止水银中，等高处压强相等。",
+   "压强差只由两臂水银面高度差决定，与大气压无关。"
+  ],
+  "answer": "6.7\\times10^{4}\\ \\mathrm{Pa}",
+  "solution": "取 $U$ 形管中较低水银面为等压面：左臂该处的压强来自 $A$（经连接管），右臂为 $B$ 的压强加上高度差为 $\\Delta h$ 的水银柱压强。故\n$$\\left|p_A-p_B\\right|=\\rho_{\\mathrm{Hg}}g\\Delta h=1333\\times50=6.665\\times10^{4}\\ \\mathrm{Pa}\\approx6.7\\times10^{4}\\ \\mathrm{Pa}.$$\n\n优点：两端都接被测容器，读数只反映**压强差**，与大气压、温度（通过水银密度）无关；即使两容器压强都远高于大气压（如几十个大气压），也只需一段不长的 U 形管即可测量，不必承受全部压强。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "Pa",
+   "methods": [
+    "压强差",
+    "U 形管"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十一章 习题11.2.2",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-11-2-2-p380-2.webp",
+     "alt": "题 11.2.2 图：A、B 容器与 U 形管"
+    }
+   ]
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "船沿竖直方向振动的周期",
+  "statement": "如图，一船质量为 $m$，由于某种原因发生一初始下沉，然后沿竖直方向振动。设船在吃水线附近的截面积为 $S$，海水密度为 $\\rho$。证明船做简谐振动并求其周期（不计阻力）。",
+  "mainTag": "振动与波",
+  "tags": [
+   "简谐振动"
+  ],
+  "kind": "证明题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题11.2.9",
+  "hints": [
+   "下沉 $x$ 时浮力增加 $\rho gSx$，方向向上。",
+   "与 $F=-kx$ 比较得 $k=\\rho gS$。"
+  ],
+  "answer": "T=2\\pi\\sqrt{\\frac{m}{\\rho gS}}",
+  "solution": "设船从平衡位置再下沉 $x$。平衡时 $mg=\\rho gS d$（$d$ 为吃水深度）。下沉 $x$ 后排水体积增加 $Sx$，浮力增加 $\\rho gSx$，方向向上，与位移反向：\n$$F=-\\rho gSx.$$\n这正是简谐振动的回复力形式 $F=-kx$，等效劲度系数\n$$k=\\rho gS.$$\n故\n$$\\omega=\\sqrt{\\frac{\\rho gS}{m}},\\qquad T=2\\pi\\sqrt{\\frac{m}{\\rho gS}}.$$\n\n量级检验：$m=10^{3}\\ \\mathrm{kg}$、$S=2\\ \\mathrm{m^2}$ 时 $T=2\\pi\\sqrt{1000/(1030\\times9.8\\times2)}=1.4\\ \\mathrm{s}$，与船舶垂荡周期的实测数量级相符。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "浮力",
+    "简谐振动"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十一章 习题11.2.9",
+   "diagrams": [
+    {
+     "src": "assets/diagrams/physics/tb-11-2-9-p381-1.webp",
+     "alt": "题 11.2.9 图：船与吃水线截面积 S"
+    }
+   ]
+  },
+  "subject": "physics"
+ }
+]
