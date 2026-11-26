@@ -4,6 +4,8 @@ data/build-info.json
 data/.ui-db.json
 data/.smoke-db.json
 data/.*-test.json
+# 本地临时库（截图/调试用）一律以点开头，不要进仓库
+data/.*.json
 data/.health-test.json
 data/*.tmp
 data/*.broken-*
