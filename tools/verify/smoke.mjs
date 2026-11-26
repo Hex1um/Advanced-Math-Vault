@@ -695,6 +695,17 @@ try {
   });
   ok('客观题判分（答错并回传正解）', spWrong.status === 200 && spWrong.json.correct === false && spWrong.json.expected === 'A');
 
+  /* 填空题：答案只有几个字也要能自动判，不能退化成「请人工自评」 */
+  const spFill = await req('/api/sprint/packs/hust-c-2026/answer', {
+    method: 'POST', body: JSON.stringify({ questionId: 'qc-104', answer: '2 2.5 2.5 1' })
+  });
+  ok('填空题自动判分（多小问只写数值）', spFill.status === 200 && spFill.json.correct === true && !spFill.json.needsHuman,
+    JSON.stringify({ correct: spFill.json && spFill.json.correct, nh: spFill.json && spFill.json.needsHuman }));
+  const spFillBad = await req('/api/sprint/packs/hust-c-2026/answer', {
+    method: 'POST', body: JSON.stringify({ questionId: 'qc-104', answer: '9 9 9 9' })
+  });
+  ok('填空题答错回传正解', spFillBad.status === 200 && spFillBad.json.correct === false && !!spFillBad.json.expected);
+
   const spSubj = await req('/api/sprint/packs/hust-xigai-2026/answer', {
     method: 'POST', body: JSON.stringify({ questionId: 'q-e1', answer: '随便写几句' })
   });

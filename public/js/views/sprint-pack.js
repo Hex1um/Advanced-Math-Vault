@@ -225,6 +225,15 @@
             const cls = answered && answered.got === v ? (answered.correct ? ' correct' : ' wrong') : '';
             return '<button class="sp-opt' + cls + '" data-ans="' + v + '" data-q="' + esc(q.id) + '">' + v + '</button>';
           }).join('') + '</div>';
+      } else if (q.type === 'fill') {
+        /* 填空题答案常常只有几个字，交给后端按「归一化后比对 + 多空包含」自动判，
+           不强制写满几行，也不用花 AI 的钱 */
+        input = '<textarea class="sp-write sp-write-fill" data-write="' + esc(q.id) + '" rows="2" '
+          + 'placeholder="填几个字就行，写完点「提交答案」自动判分"></textarea>'
+          + '<div class="sp-opts">'
+          + '<button class="btn btn-sm btn-primary" data-act="fillgrade" data-q="' + esc(q.id) + '">提交答案</button>'
+          + '<button class="btn btn-sm btn-ghost" data-act="reveal" data-q="' + esc(q.id) + '">看答案与解析</button>'
+          + '</div>';
       } else {
         input = '<textarea class="sp-write" data-write="' + esc(q.id) + '" rows="3" '
           + 'placeholder="先自己写，再对照答案（写在这儿不会被保存）"></textarea>'
@@ -235,7 +244,10 @@
         ? '<div class="sp-q-res ' + (answered.needsHuman ? '' : (answered.correct ? 'ok' : 'bad')) + '">'
           + (answered.needsHuman
             ? '<b>参考答案 / 得分点</b>'
-            : (answered.correct ? '<b>✓ 正确</b>' : '<b>✗ 不对</b> <span>正确答案 ' + esc(answered.expected || '') + '</span>'))
+            : (answered.correct ? '<b>✓ 正确</b>'
+              : '<b>✗ 不对</b> <span>正确答案 ' + esc(answered.expected || '') + '</span>'
+                + (answered.partial > 0 && answered.partial < 1
+                  ? ' <span class="sp-partial">命中 ' + Math.round(answered.partial * 100) + '%</span>' : '')))
           + (answered.explain ? '<div class="sp-sol">' + window.Md.toHtml(answered.explain) + '</div>' : '')
           + (answered.ai ? '<div class="sp-ai-grade">' + window.Md.toHtml(answered.ai) + '</div>' : '')
           + '</div>'
@@ -621,9 +633,10 @@
         state.answered[qid] = {
           correct: d.correct,
           expected: d.expected,
-          got: d.got || value,
+          got: d.got !== undefined && d.got !== null ? d.got : value,
           explain: d.explain,
           answer: d.answer,
+          partial: typeof d.partial === 'number' ? d.partial : undefined,
           needsHuman: !!d.needsHuman
         };
         renderQuestions();
@@ -647,11 +660,21 @@
       }
     }
 
+    /* 填空题：拿文本框里的内容直接交卷，由后端自动判分 */
+    function fillGrade(qid) {
+      const ta = document.querySelector('[data-write="' + qid + '"]');
+      const text = ta ? String(ta.value || '').trim() : '';
+      if (!text) { UI.toast('先写下答案再提交', 'err'); return; }
+      answer(qid, text);
+    }
+
     async function aiGrade(qid) {
       if (!UI.requireLogin(null, '登录后才能让 AI 批改')) return;
       const ta = document.querySelector('[data-write="' + qid + '"]');
       const text = ta ? String(ta.value || '').trim() : '';
-      if (text.length < 8) { UI.toast('先写几行答案再让 AI 批改', 'err'); return; }
+      /* 不设长度门槛：有的题答案就是几个字（「团结奋斗」「自我革命」），
+         以前要求 ≥8 字，短答案连 AI 批改的入口都进不去 */
+      if (!text) { UI.toast('先写答案再让 AI 批改', 'err'); return; }
       try {
         const d = await API.post('/api/sprint/packs/' + packId + '/answer', {
           questionId: qid,
@@ -783,6 +806,7 @@
       else if (what === 'similar') loadSimilar(false);
       else if (what === 'generate') loadSimilar(true);
       else if (what === 'reveal') reveal(act.getAttribute('data-q'));
+      else if (what === 'fillgrade') fillGrade(act.getAttribute('data-q'));
       else if (what === 'aigrade') aiGrade(act.getAttribute('data-q'));
       else if (what === 'plan') plan();
       else if (what === 'vshow') revealVocab();

@@ -1,0 +1,132 @@
+{
+  "users": [
+    {
+      "id": "ba615968-1ca0-4195-a8b0-f21d866606bc",
+      "name": "menutest2",
+      "salt": "d1e22a4b7071bfc106ef4539cd664b13",
+      "passHash": "f70608da304714d4ca276831f35084b74b1192e1d24e840916fd6c56fbfd6dbe203d6f1e5bd5185afcdf8699b0ad72c947b2342561574331cd831e2389cccfb0",
+      "role": "user",
+      "exp": 0,
+      "solved": {},
+      "activity": [],
+      "createdAt": "2026-11-26T08:05:45.186Z"
+    },
+    {
+      "id": "ea62e3a4-7b83-4abf-8457-66d23d90debd",
+      "name": "menutest3",
+      "salt": "878d5653d5632969a6bf6788a8799800",
+      "passHash": "0f362c471de9e40a26be13ceefe3c1265667330e24063415b4a73ab45be97a50b045fd373956af5dd95f6aed8ac768d36313de8ab23caa419a134280ec0a1c4d",
+      "role": "user",
+      "exp": 0,
+      "solved": {},
+      "activity": [],
+      "createdAt": "2026-11-26T08:06:37.484Z"
+    },
+    {
+      "id": "72d94412-e6a9-4b33-b44e-b36ea3210d3d",
+      "name": "Hex1um",
+      "salt": "bda3ab9dd011697db015d9c68fd0bf37",
+      "passHash": "067abd56731b3fa76238acbbccfce2117c93f5a7d66971c425545a4d8091417be270d4e53957d64b64a10351de04346345294488adc02c2d67433bc1917db388",
+      "role": "user",
+      "exp": 0,
+      "solved": {},
+      "activity": [],
+      "createdAt": "2026-11-26T08:07:17.090Z"
+    },
+    {
+      "id": "03963609-112a-4717-9d8b-074436c54565",
+      "name": "Hex1um2",
+      "salt": "50850f9599e73d365258b5d4f0ab394c",
+      "passHash": "271e4b9f64a278c463aef4abee6c2db84857a7ad6a1052555f595c9f041f2ee0500a23461d524aa84d1b435cc6bae49ff060d5554721045620096e0edeb939b5",
+      "role": "user",
+      "exp": 0,
+      "solved": {},
+      "activity": [],
+      "createdAt": "2026-11-26T08:07:31.714Z"
+    }
+  ],
+  "problems": [],
+  "posts": [],
+  "sessions": {
+    "c0d8f447e4c367b65209dfe995e39a83c1c24a5531adf9ff032c4a5682e31720": {
+      "uid": "ba615968-1ca0-4195-a8b0-f21d866606bc",
+      "exp": 1798272345186
+    },
+    "0e4a286f31354912ca6f8a17eeb524c940429d3e23f637242082136d09cbd969": {
+      "uid": "ea62e3a4-7b83-4abf-8457-66d23d90debd",
+      "exp": 1798272397484
+    },
+    "cba630ed0a4021567696c1cf4ec6d215f8c8f7844fd3e8346ae353e07bd4d603": {
+      "uid": "72d94412-e6a9-4b33-b44e-b36ea3210d3d",
+      "exp": 1798272437090
+    },
+    "725ffe46728c8d83cb7e00e0de04e00431bd9d41e04964de3d650b1d6a78e964": {
+      "uid": "03963609-112a-4717-9d8b-074436c54565",
+      "exp": 1798272451714
+    },
+    "cd7197b712b7b3255819762a0bb6395e9eb01807eb4c02be7727f813f8e63772": {
+      "uid": "72d94412-e6a9-4b33-b44e-b36ea3210d3d",
+      "exp": 1798272465377
+    }
+  },
+  "daily": {},
+  "submissions": [],
+  "feedbacks": [],
+  "emailCodes": {},
+  "settings": {
+    "llm": {
+      "baseUrl": "https://api.deepseek.com/v1",
+      "model": "deepseek-chat",
+      "apiKey": "sk-e6693f21a5da42728a2fa2cecfc7d00b"
+    },
+    "site": "数海晴岸"
+  },
+  "meta": {
+    "seq": 1001,
+    "postSeq": 1,
+    "replySeq": 1,
+    "feedbackSeq": 1
+  },
+  "sprint": {
+    "72d94412-e6a9-4b33-b44e-b36ea3210d3d": {
+      "hust-tuanyuan-2026": {
+        "v": 1,
+        "attempts": [
+          {
+            "qid": "q02",
+            "pid": [
+              "p1-1"
+            ],
+            "ok": true,
+            "at": 1795680443375
+          },
+          {
+            "qid": "q02",
+            "pid": [
+              "p1-1"
+            ],
+            "ok": true,
+            "at": 1795680471614
+          }
+        ],
+        "stats": {
+          "p1-1": {
+            "n": 2,
+            "ok": 2,
+            "lastAt": 1795680471614
+          }
+        },
+        "reveals": {},
+        "asks": [],
+        "plan": "",
+        "planAt": 0,
+        "vocab": {},
+        "vocabAt": 0,
+        "vocabToday": {
+          "date": "",
+          "n": 0
+        }
+      }
+    }
+  }
+}

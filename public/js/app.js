@@ -103,15 +103,22 @@
     window.MV_FEATURES = feats;
   }
 
+  /* 并发去重：applyMeta 的变化会触发 refreshMeta，若不加锁，
+     多路同时到达时可能叠成雪崩式请求（参见 api.js 里 auth:changed 的注释）。 */
+  let metaInflight = null;
   async function refreshMeta() {
-    try {
-      const meta = await window.API.get('/api/meta');
-      St.applyMeta(meta);
-      writeMetaCache(meta);
-      applyFeatureFlags(meta);
-    } catch (e) {
-      console.error('[app] meta 加载失败', e);
-    }
+    if (metaInflight) return metaInflight;
+    metaInflight = (async function () {
+      try {
+        const meta = await window.API.get('/api/meta');
+        St.applyMeta(meta);
+        writeMetaCache(meta);
+        applyFeatureFlags(meta);
+      } catch (e) {
+        console.error('[app] meta 加载失败', e);
+      }
+    })();
+    try { await metaInflight; } finally { metaInflight = null; }
   }
 
   /* 首屏不再 await meta：先渲染当前路由（列表页自己有骨架屏与缓存），

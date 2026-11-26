@@ -201,8 +201,28 @@
 
   /* ---------------------------------------------------------- 头部 */
 
+  /* 右上角菜单的开合状态放在模块级，而不是只存在 DOM 上。
+     页头会因为 meta 到货、登录态变化、路由刷新被反复重建（innerHTML 整体替换），
+     状态只存在 DOM 里的话，重建一次菜单就自己关上了——表现就是「点开瞬间消失」。 */
+  let dropdownOpen = false;
+  function setDropdown(open) {
+    dropdownOpen = !!open;
+    const dd = document.getElementById('userDropdown');
+    if (dd) dd.classList.toggle('open', dropdownOpen);
+  }
+
+  /* 全局只注册一次：以前在 renderHeader 里注册，页头重建 N 次就叠 N 个监听器 */
+  document.addEventListener('click', function (e) {
+    const menu = document.getElementById('userMenu');
+    if (!menu) return;
+    if (!menu.contains(e.target)) { setDropdown(false); return; }
+    /* 点菜单里的链接或按钮：执行完收起；点头像按钮交给它自己的 toggle */
+    if (e.target.closest('.dropdown a, .dropdown button')) setDropdown(false);
+  });
+
   function applyUser(user) {
     St.me = user || null;
+    if (!user) setDropdown(false);
     renderHeader();
   }
 
@@ -241,11 +261,8 @@
 
     const btn = area.querySelector('#userBtn');
     const dd = area.querySelector('#userDropdown');
-    btn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      dd.classList.toggle('open');
-    });
-    document.addEventListener('click', function () { dd.classList.remove('open'); });
+    if (dropdownOpen) dd.classList.add('open');
+    btn.addEventListener('click', function () { setDropdown(!dropdownOpen); });
     area.querySelector('#logoutBtn').addEventListener('click', async function () {
       try { await window.API.post('/api/auth/logout'); } catch (e) {}
       window.API.setToken('');

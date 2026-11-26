@@ -76,6 +76,12 @@
   /** 拉取并广播元信息（登录态、统计、标签树） */
   State.applyMeta = function (meta) {
     if (!meta) return;
+    /* 只有「登录的人真的变了」才广播 auth:changed。
+       以前是「只要 me 存在就广播」，而 app.js 收到 auth:changed 会再拉一次 meta，
+       于是形成 meta → applyMeta → auth:changed → refreshMeta → meta 的死循环：
+       登录状态下每秒打上千次 /api/meta，页头被反复重建，右上角菜单点开就没了。 */
+    const prevKey = (State.me && State.me.id) || '';
+    const nextKey = (meta.me && meta.me.id) || '';
     State.me = meta.me;
     State.stats = meta.stats;
     State.tagTree = meta.tagTree || [];
@@ -85,7 +91,7 @@
     }, []).sort(function (a, b) { return b.count - a.count; });
     State.llm = meta.llm;
     State.emit('meta:updated', { me: State.me, stats: State.stats });
-    if (State.me) State.emit('auth:changed', State.me);
+    if (nextKey !== prevKey) State.emit('auth:changed', State.me || null);
   };
 
   const TOKEN_KEY = 'mv_token';

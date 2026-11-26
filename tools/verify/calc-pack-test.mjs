@@ -90,6 +90,11 @@ if (c) {
   const badChoice = c.questions.filter((q) => q.type === 'single' && !/^[A-D]$/.test(q.answer));
   ok('C 语言选择题答案合法', badChoice.length === 0, badChoice.slice(0, 3).map((q) => q.id).join(','));
   ok('C 语言含编程题', (c.counts.byType.code || 0) >= 8, 'code=' + (c.counts.byType.code || 0));
+  /* 表达式求值是「(1) 2　(2) 2.5…」这种多小问填空，只写数值也应判对 */
+  const cq = c.questionById.get('qc-104');
+  ok('多小问填空：只写数值也判对', spr.grade(cq, '2 2.5 2.5 1').correct === true, JSON.stringify(spr.grade(cq, '2 2.5 2.5 1')));
+  ok('多小问填空：漏一个判错且 partial < 1',
+    spr.grade(cq, '2 2.5 1').correct === false && spr.grade(cq, '2 2.5 1').partial < 1);
 }
 
 const en = spr.get('hust-english-2026');
@@ -140,6 +145,16 @@ if (ty) {
   ok('私有包对匿名取不到', spr.getFor(ty.id, null) === null);
   ok('公开包不受权限影响', !!spr.getFor('hust-xigai-2026', null));
   ok('列表带 private 标记', spr.list({ name: 'Hex1um' }).find((p) => p.id === ty.id).private === true);
+
+  /* 填空自动判分：答案常常只有几个字，不该被「必须写几行」卡住 */
+  const fq = ty.questionById.get('q02');
+  ok('填空：短答案判对', spr.grade(fq, '团结奋斗').correct === true);
+  ok('填空：忽略空白与标点', spr.grade(fq, ' 团结奋斗。 ').correct === true);
+  ok('填空：错答判错', spr.grade(fq, '努力奋斗').correct === false);
+  const mq = ty.questionById.get('q11');
+  ok('填空：多空乱序也能判对', spr.grade(mq, '29；26').correct === true, JSON.stringify(spr.grade(mq, '29；26')));
+  ok('填空：多空只写一半 → 不错但给 partial', spr.grade(mq, '26').correct === false && spr.grade(mq, '26').partial > 0);
+  ok('简答仍不硬判', spr.grade(ty.questionById.get('q13'), '随便写几句').needsHuman === true);
 }
 
 const dupWarn = logs.filter((m) => /重复|不存在/.test(m));

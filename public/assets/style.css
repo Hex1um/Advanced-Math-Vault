@@ -1861,3 +1861,7 @@ textarea.exam-input { resize: vertical; min-height: 78px; font-family: inherit; 
   font-size: 11px; color: var(--purple); background: var(--surface-2);
   border: 1px solid var(--purple); border-radius: 20px; padding: 0 7px; line-height: 1.6;
 }
+
+/* 填空题：答案只有几个字，输入框不用给三行高 */
+.sp-write-fill { min-height: 54px; }
+.sp-partial { color: var(--muted); font-size: 12px; }
