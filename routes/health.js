@@ -87,6 +87,9 @@ module.exports = function registerHealthRoutes(router, ctx) {
       },
       tagTree: tagTree(),
       examTags: examTagCounts(),
+      /* 前端据此决定是否显示「分析 / 题单」入口：
+         旧后端没有这两个接口，隐藏比点了报错更体面。 */
+      features: { analytics: true, collections: true, equivalentJudge: true },
       llm: {
         configured: llmConfigured(),
         model: llmConfigured() ? db.settings.llm.model : '',

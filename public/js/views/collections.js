@@ -74,7 +74,12 @@
             + '<span class="small muted">查看 →</span></div></a>';
         }).join('') + '</div>';
     }).catch(function (e) {
-      el.querySelector('#colList').innerHTML = window.UI.empty('题单加载失败', window.API.describe ? window.API.describe(e) : '稍后再试。');
+      const notReady = e && e.status === 404;
+      el.querySelector('#colList').innerHTML = window.UI.empty(
+        notReady ? '后端还没升级到 v2.0' : '题单加载失败',
+        notReady ? '题单功能需要 v2.0 后端（/api/collections）。部署新版本后刷新即可。'
+          : (window.API.describe ? window.API.describe(e) : '稍后再试。')
+      );
     });
   };
 

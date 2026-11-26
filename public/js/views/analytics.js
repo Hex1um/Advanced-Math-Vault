@@ -61,8 +61,11 @@
         window.MathVaultHeatmap.renderHeatmap(document.getElementById('heatmapBox'), d.heatmap, 26);
       }
     }).catch(function (e) {
+      const notReady = e && e.status === 404;
       el.innerHTML = '<div class="page-head"><div><h1>学习分析</h1></div></div>'
-        + window.UI.empty('统计加载失败', window.API.describe ? window.API.describe(e) : '稍后再试。');
+        + window.UI.empty(notReady ? '后端还没升级到 v2.0' : '统计加载失败',
+          notReady ? '学习分析需要 v2.0 后端（/api/analytics/overview）。部署新版本后刷新即可。'
+            : (window.API.describe ? window.API.describe(e) : '稍后再试。'));
     });
   };
 

@@ -86,11 +86,23 @@
     } catch (e) {}
   }
 
+  /* 能力开关：后端没升级到 v2 时，隐藏「分析 / 题单」入口，避免点进去 404。
+     判断依据是 /api/meta 的 features；旧后端没有该字段，视为不支持。 */
+  function applyFeatureFlags(meta) {
+    const feats = (meta && meta.features) || {};
+    const supported = feats.analytics === true || feats.collections === true;
+    document.querySelectorAll('[data-nav="analytics"], [data-nav="collections"]').forEach(function (a) {
+      a.style.display = supported ? '' : 'none';
+    });
+    window.MV_FEATURES = feats;
+  }
+
   async function refreshMeta() {
     try {
       const meta = await window.API.get('/api/meta');
       St.applyMeta(meta);
       writeMetaCache(meta);
+      applyFeatureFlags(meta);
     } catch (e) {
       console.error('[app] meta 加载失败', e);
     }
@@ -101,7 +113,7 @@
   async function boot() {
     const cached = readMetaCache();
     if (cached) {
-      try { St.applyMeta(cached); } catch (e) {}
+      try { St.applyMeta(cached); applyFeatureFlags(cached); } catch (e) {}
     }
     render();
     window.addEventListener('hashchange', render);
