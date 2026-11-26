@@ -354,6 +354,14 @@ node tools/ops/deploy.mjs --publish
 
 `.env` 不会进 git；`tools/ops/deploy.mjs` 会在发布前检查 `TRUST_PROXY` / `ALLOW_ORIGINS`，没配就先把风险点打出来。其余变量见 `.env.example`。
 
+### Pages 的 Source 必须是「GitHub Actions」
+
+仓库不再提交 `docs/`（已 gitignore），由 `.github/workflows/pages.yml` 从 `public/` 现场构建并发布。
+如果仓库设置里 Pages 的 Source 还是「Deploy from a branch → main /docs」，旧版构建器每次都会失败
+（找不到 docs 目录）并与 Actions 抢发布，表现为「工作流成功但站点看起来没更新」。
+设置路径：Settings → Pages → Build and deployment → Source 选 **GitHub Actions**
+（或用 API `PUT /repos/{owner}/{repo}/pages` 传 `{"build_type":"workflow"}`）。
+
 ### 前端指向哪个后端：`deploy.config.json`
 
 `apiBase` 与 `sharecode` 必须**成对**，所以它们放在仓库内的 `deploy.config.json`，由 `build-pages.mjs` 读取：
