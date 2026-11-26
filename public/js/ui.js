@@ -211,6 +211,10 @@
     if (dd) dd.classList.toggle('open', dropdownOpen);
   }
 
+  /* 换页时收起：返回上一页、点导航、键盘前进后退都可能不经过 click，
+     不收的话菜单会一直悬在内容上（手机上尤其明显） */
+  window.addEventListener('hashchange', function () { setDropdown(false); });
+
   /* 全局只注册一次：以前在 renderHeader 里注册，页头重建 N 次就叠 N 个监听器 */
   document.addEventListener('click', function (e) {
     const menu = document.getElementById('userMenu');
