@@ -28,6 +28,9 @@
 - **`normalizeProgress` 漏掉 `vocab` 字段**：每次读进度都会把 FSRS 卡丢掉，表现为「已学」永远 0、复习永远不出现。
   现在读写都经过 `normalizeCards` 裁剪，并加了「进度往返不丢词卡」的回归断言。
 - 静态资源 `?v=` 从 2.1.0 统一升到 2.4.0（v2.2.0 / v2.3.0 只改了文件没换串，移动端可能吃到旧 JS）。
+- **`sync-live.mjs` 的线上地址硬编码成旧实例**：默认值还停在 `math-vault-10141-52003`，实例换代后
+  `deploy.mjs` 不传 `BASE` 就直接同步到一台不存在的实例（登录 403、或把空库合并回来）。
+  现在改为读 `deploy.config.json` 的 `apiBase`，`.deploy-anchor` 同步改为 `math-vault-10141`。
 
 ### 测试
 

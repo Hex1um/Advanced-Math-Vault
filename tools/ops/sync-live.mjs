@@ -20,7 +20,19 @@ import process from 'node:process';
 
 const ROOT = path.resolve(new URL('../..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
 const DB_FILE = process.env.DB_FILE || path.join(ROOT, 'data', 'db.json');
-const BASE = (process.env.BASE || 'https://math-vault-10141-52003.app.workbuddy.host').replace(/\/$/, '');
+
+/* 线上实例必须以 deploy.config.json 为准：以前这里硬编码了 2026-11-24 的旧实例
+   math-vault-10141-52003，实例换代后同步会登录到一台空库上（403/无数据），
+   deploy.mjs 又是直接 spawn 本脚本、不传 BASE，于是「同步」静默指向错的地方。 */
+function liveBase() {
+  if (process.env.BASE) return String(process.env.BASE);
+  try {
+    const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, 'deploy.config.json'), 'utf8'));
+    if (cfg && cfg.apiBase) return String(cfg.apiBase);
+  } catch (e) { /* 没有配置文件就退回环境变量 */ }
+  return 'https://math-vault-10141.app.workbuddy.host';
+}
+const BASE = liveBase().replace(/\/$/, '');
 function requiredEnv(name) {
   const v = process.env[name];
   if (v === undefined || !String(v).trim()) {
