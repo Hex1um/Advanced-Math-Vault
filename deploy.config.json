@@ -1,6 +1,6 @@
 {
-  "_note": "前端构建用的后端地址与访问码。CI 的 workflow 需要 workflow scope 才能改，所以把这两项放在仓库里作为唯一真相；改后端时改这里并提交，CI 会按它构建。",
-  "apiBase": "https://math-vault-10141-52003.app.workbuddy.host",
-  "sharecode": "YXHMN5BXHA",
+  "_note": "前端构建用的后端地址与访问码。CI 的 workflow 需要 workflow scope 才能改，所以把这两项放在仓库里作为唯一真相；改后端时改这里并提交，CI 会按它构建。v2.1.0 起后端统一在 math-vault-10141（含全部用户数据），math-vault-10141-52003 保留为旧版本备份。",
+  "apiBase": "https://math-vault-10141.app.workbuddy.host",
+  "sharecode": "Q6CZHVVW3K",
   "siteName": "数海晴岸"
 }

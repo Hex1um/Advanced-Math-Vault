@@ -27,6 +27,13 @@
   由 `tools/import/build-calculus-pack.mjs` 从题库按章节/标签生成，题库更新后重跑即可。
   微分方程两个考点题库里没有华科卷，留给「AI 出题」兜底。
 
+### 部署
+
+- 后端统一到 `https://math-vault-10141.app.workbuddy.host`（v2.1.0 + 全量数据），
+  `deploy.config.json` 记录 apiBase / sharecode 这一对配置；`math-vault-10141-52003` 保留为 v2.0.2 备份，前端不再指向它。
+- 上线核验：`/api/health` → `2.1.0 @ 0bed08bae3cf`，6260 → 6214 题（去重后）、7 用户、14 条做题、5 条待审；
+  `/api/sprint/packs` 返回两个科目包。
+
 ### 修复（v1.5.2 遗留）
 
 - **数据分叉**：用旧实例管理员凭据把旧站 7 个账号、14 条做题记录、1 条提交、5 条待审投稿合并进本地库，
