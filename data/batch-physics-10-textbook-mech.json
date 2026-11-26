@@ -433,7 +433,7 @@
       "$\\mathrm{d}v/\\mathrm{d}t=-bv$ 分离变量积分。",
       "位置可由 $\\mathrm{d}x=v\\,\\mathrm{d}t$ 积分得到。"
     ],
-    "answer": "v=v_0\\mathrm{e}^{-bt},\\quad x=\\dfrac{v_0}{b}\\left(1-\\mathrm{e}^{-bt}\right)",
+    "answer": "v=v_0\\mathrm{e}^{-bt},\\quad x=\\dfrac{v_0}{b}\\left(1-\\\\mathrm{e}^{-bt}\\right)",
     "solution": "由 $\\dfrac{\\mathrm{d}v}{v}=-b\\,\\mathrm{d}t$ 积分得 $v=v_0\\mathrm{e}^{-bt}$。\n\n$x=\\displaystyle\\int_0^t v_0\\mathrm{e}^{-b\\tau}\\mathrm{d}\\tau=\\dfrac{v_0}{b}\\left(1-\\mathrm{e}^{-bt}\\right)$。\n\n验算：$t\\to\\infty$ 时 $v\\to0$、$x\\to v_0/b$（有限制动距离），符合「阻力与速度成正比时速度按指数衰减、永远追不上终点」的图像；$b$ 越大制动距离越短。",
     "physicsMeta": {
       "course": "general",
