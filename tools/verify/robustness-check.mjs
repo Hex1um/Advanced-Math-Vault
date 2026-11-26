@@ -15,6 +15,8 @@ const ROOT = path.resolve(new URL('../..', import.meta.url).pathname.replace(/^\
 
 /* db.json 是 gitignore 的运行时库：新克隆 / CI 里没有它，退回仓库内的 batch 题库，
    这样「体检能不能跑」不取决于本机有没有跑过服务。 */
+const tax = require(path.join(ROOT, 'tag-taxonomy.js'));
+
 function loadDb() {
   const file = process.env.DB_FILE || path.join(ROOT, 'data', 'db.json');
   if (fs.existsSync(file)) {
@@ -31,17 +33,26 @@ function loadDb() {
     process.exit(2);
   }
   // batch 文件里没有编号与状态（导入时才分配），体检前补上占位值，
-  // 否则「缺 code/status」会刷出一屏假错误
-  const withMeta = problems.map((p, i) => Object.assign({ status: 'approved' }, p, {
-    code: p.code || 'B' + String(i + 1).padStart(4, '0')
-  }));
+  // 否则「缺 code/status」会刷出一屏假错误。
+  // mainTag 同理：部分批次只写 tags，主标签在入库时由 tag-taxonomy 归一化得出，
+  // 体检若直接判「主标签非法: undefined」，红叉指向的是体检口径而不是题库问题。
+  const withMeta = problems.map((p, i) => {
+    const filled = Object.assign({ status: 'approved' }, p, {
+      code: p.code || 'B' + String(i + 1).padStart(4, '0')
+    });
+    if (!filled.mainTag) {
+      const subject = tax.subjectOf(filled.subject);
+      const hit = tax.resolveTag((filled.tags || [])[0], subject);
+      filled.mainTag = (hit && hit.main) || tax.SUBJECTS[subject].defaultMain;
+    }
+    return filled;
+  });
   console.log('未找到 data/db.json，改用 batch 题库：' + withMeta.length + ' 题（编号为占位）');
   return { db: { problems: withMeta }, source: 'batch' };
 }
 
 const loaded = loadDb();
 const db = loaded.db;
-const tax = require(path.join(ROOT, 'tag-taxonomy.js'));
 /* docs/ 已不再入库（改由 CI 构建），KaTeX 直接从 public/ 取 */
 const katex = require(path.join(ROOT, 'public', 'vendor', 'katex', 'katex.min.js'));
 
