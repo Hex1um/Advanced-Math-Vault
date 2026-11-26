@@ -88,12 +88,13 @@ module.exports = function registerSprintRoutes(router, ctx) {
           };
         }
       }
-      return send(res, 200, { ok: true, packs: spr.list(), mine: mine });
+      return send(res, 200, { ok: true, packs: spr.list(user), mine: mine });
     }
 
     const m = pathname.match(/^\/api\/sprint\/packs\/([A-Za-z0-9_-]+)(?:\/(points|similar|explain|answer|reveal|weak|plan|vocab)(?:\/([A-Za-z0-9_-]+))?)?$/);
     if (!m) return fail(res, 404, '接口不存在');
-    const pack = spr.get(m[1]);
+    /* 带权限取包：白名单包对其他人等同于不存在，避免泄漏包名与考点数 */
+    const pack = spr.getFor(m[1], user);
     if (!pack) return fail(res, 404, '科目包不存在');
     const action = m[2] || '';
     const subId = m[3] || '';
@@ -115,7 +116,8 @@ module.exports = function registerSprintRoutes(router, ctx) {
           updatedAt: pack.updatedAt,
           exam: pack.exam,
           sources: pack.sources,
-          counts: pack.counts
+          counts: pack.counts,
+          private: !!pack.allowUsers.length
         },
         chapters: spr.outline(pack),
         vocab: pack.vocab.length ? { total: pack.vocab.length } : null,

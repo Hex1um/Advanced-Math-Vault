@@ -83,6 +83,7 @@
         + '      <span>' + p.counts.points + ' 考点</span><span class="dot">·</span>'
         + '      <span>' + p.counts.questions + ' 题</span>'
         + (p.counts.past ? '<span class="dot">·</span><span class="sp-past">' + p.counts.past + ' 道真题</span>' : '')
+        + (p.private ? '<span class="sp-priv">仅你可见</span>' : '')
         + '    </div>'
         + '  </div>'
         + '  <div class="sp-blueprint">'

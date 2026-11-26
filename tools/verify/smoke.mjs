@@ -650,6 +650,13 @@ try {
      真题命中情况由 npm run check:calc-pack 用真实库单独校验。 */
   ok('微积分包可加载', !!spCalc && spCalc.counts.points >= 30, spCalc ? 'points=' + spCalc.counts.points : 'spMissing');
 
+  /* 私有科目包：只对 allowUsers 里的账号可见，对其他人（含已登录的非白名单用户）等同 404 */
+  ok('私有科目包不进公开列表', !(spPacks.json.packs || []).some((p) => p.id === 'hust-tuanyuan-2026'));
+  const spPriv = await req('/api/sprint/packs/hust-tuanyuan-2026');
+  ok('私有科目包对非白名单账号 404', spPriv.status === 404, 'status=' + spPriv.status);
+  const spPrivPoint = await req('/api/sprint/packs/hust-tuanyuan-2026/points/p1-1');
+  ok('私有科目包子接口同样 404', spPrivPoint.status === 404, 'status=' + spPrivPoint.status);
+
   const metaSprint = await req('/api/meta');
   ok('meta 声明 sprint 能力', !!(metaSprint.json.features && metaSprint.json.features.sprint === true));
   ok('meta 声明背单词能力', !!(metaSprint.json.features && metaSprint.json.features.vocab === true));

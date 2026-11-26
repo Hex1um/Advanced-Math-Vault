@@ -1855,3 +1855,9 @@ textarea.exam-input { resize: vertical; min-height: 78px; font-family: inherit; 
   color: var(--muted); font-size: 12px; padding: 5px 10px; border-radius: 4px;
 }
 .vc-skip:hover { color: var(--blue); background: var(--blue-weak); }
+
+/* 仅指定账号可见的科目包 */
+.sp-priv {
+  font-size: 11px; color: var(--purple); background: var(--surface-2);
+  border: 1px solid var(--purple); border-radius: 20px; padding: 0 7px; line-height: 1.6;
+}

@@ -118,6 +118,30 @@ for (const [id, label, minPoints] of [['cet4-2026', '四级', 30], ['cet6-2026',
   ok(label + '总分 710', p.exam.totalPoints === 710, 'total=' + p.exam.totalPoints);
 }
 
+/* ---------------------------------------------------------------- 入团培训（私有包） */
+const ty = spr.get('hust-tuanyuan-2026');
+ok('入团培训包存在', !!ty);
+if (ty) {
+  ok('入团包考点数 ≥ 30', ty.points.length >= 30, 'points=' + ty.points.length);
+  ok('入团包题量 ≥ 50', ty.questions.length >= 50, 'questions=' + ty.questions.length);
+  const empty = ty.points.filter((p) => !p.questionIds.length);
+  ok('入团包每个考点至少 1 题', empty.length === 0, empty.map((p) => p.id).join(','));
+  const byType = ty.counts.byType;
+  ok('入团包四种题型齐全', ['single', 'judge', 'fill', 'short'].every((t) => byType[t] > 0), JSON.stringify(byType));
+  const badChoice = ty.questions.filter((q) => q.type === 'single' && !/^[A-D]$/.test(String(q.answer)));
+  ok('入团包选择题答案合法', badChoice.length === 0, badChoice.slice(0, 3).map((q) => q.id).join(','));
+  const noAns = ty.questions.filter((q) => !q.answer);
+  ok('入团包每题都有答案', noAns.length === 0, noAns.slice(0, 3).map((q) => q.id).join(','));
+  /* 访问控制：白名单包只对名单里的账号可见，对其他人等同于不存在 */
+  ok('私有包不进公开列表', !spr.list().some((p) => p.id === ty.id));
+  ok('私有包对白名单账号可见', spr.list({ name: 'Hex1um' }).some((p) => p.id === ty.id));
+  ok('白名单匹配不区分大小写', !!spr.getFor(ty.id, { name: 'hex1um' }));
+  ok('私有包对他人取不到', spr.getFor(ty.id, { name: 'someone' }) === null);
+  ok('私有包对匿名取不到', spr.getFor(ty.id, null) === null);
+  ok('公开包不受权限影响', !!spr.getFor('hust-xigai-2026', null));
+  ok('列表带 private 标记', spr.list({ name: 'Hex1um' }).find((p) => p.id === ty.id).private === true);
+}
+
 const dupWarn = logs.filter((m) => /重复|不存在/.test(m));
 ok('加载日志无重复/缺号告警', dupWarn.length === 0, dupWarn.slice(0, 2).join(' / '));
 

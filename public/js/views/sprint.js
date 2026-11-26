@@ -28,6 +28,7 @@
       + '  <div class="sp-card-top">'
       + '    <span class="sp-school">' + window.Md.esc(pack.schoolShort || pack.school) + '</span>'
       + '    <span class="sp-year">' + window.Md.esc(pack.year) + ' · ' + window.Md.esc(pack.term || '') + '</span>'
+      + (pack.private ? '<span class="sp-priv" title="只有指定账号能看到这个科目包">仅你可见</span>' : '')
       + '  </div>'
       + '  <h3>' + window.Md.esc(pack.subject) + '</h3>'
       + '  <p class="sp-intro">' + window.Md.esc(pack.intro || '') + '</p>'
