@@ -1963,3 +1963,62 @@ textarea.exam-input { resize: vertical; min-height: 78px; font-family: inherit; 
   .exam-constants { break-inside: avoid; page-break-inside: avoid; }
   .diagram { break-inside: avoid; page-break-inside: avoid; }
 }
+
+/* 课程组 Tab（物理三级筛选第一层）：分段式，横向可滚 */
+.course-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 2px 0 10px;
+  border-bottom: 1px dashed var(--line);
+  margin-bottom: 10px;
+  scrollbar-width: thin;
+}
+.course-tab {
+  flex: none;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--text-2);
+  font-size: 12.5px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all .12s;
+  white-space: nowrap;
+}
+.course-tab:hover { color: var(--blue); border-color: var(--blue); }
+.course-tab.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+.course-tab .n { margin-left: 6px; opacity: .7; font-size: 11px; }
+
+/* 前置知识胶囊（跨学科复习跳转） */
+.prereq-bar { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 10px 0 0; font-size: 12px; }
+.prereq-bar .label { color: var(--text-2); }
+.prereq-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  border: 1px solid var(--line); border-radius: 999px;
+  padding: 3px 10px; color: var(--text-2); text-decoration: none;
+  transition: all .12s;
+}
+.prereq-chip:hover { border-color: var(--blue); color: var(--blue); }
+.prereq-chip.subject-math { border-style: dashed; }
+
+/* 三口径常数表（SI / CGS / 天文） */
+.phys-const-block { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; margin: 10px 0; }
+.phys-const-block .pc-title { font-size: 12.5px; font-weight: 600; margin-bottom: 8px; }
+.pc-tabs { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+.pc-tab {
+  border: 1px solid var(--line); background: transparent; color: var(--text-2);
+  font-size: 12px; padding: 4px 10px; border-radius: 999px; cursor: pointer;
+}
+.pc-tab.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+.pc-panel { display: none; }
+.pc-panel.active { display: block; }
+.pc-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.pc-table td { padding: 3px 8px 3px 0; vertical-align: top; }
+.pc-table .c-sym { width: 88px; white-space: nowrap; }
+.pc-table .c-val { width: 46%; }
+.pc-table .c-note { color: var(--text-2); }
+@media print {
+  .phys-const-block { break-inside: avoid; page-break-inside: avoid; }
+  .pc-tab:not(.active) { display: none; }
+}

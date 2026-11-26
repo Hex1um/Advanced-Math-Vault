@@ -1,0 +1,688 @@
+[
+  {
+    "title": "单摆的 Euler-Lagrange 方程",
+    "statement": "一长为 $l$ 的单摆，摆球质量 $m$，在重力场中作平面摆动，取摆角 $\\theta$ 为广义坐标。写出系统的拉格朗日量并导出运动方程。",
+    "mainTag": "理论力学",
+    "tags": [
+      "变分法与 Euler-Lagrange 方程"
+    ],
+    "kind": "推导题",
+    "thinking": 6,
+    "difficulty": 5,
+    "calc": 4,
+    "source": "理论力学精选（自编）",
+    "hints": [
+      "动能用摆球速度 $v=l\\dot\\theta$，势能以最低点为零。",
+      "套 $\\dfrac{\\mathrm{d}}{\\mathrm{d}t}\\dfrac{\\partial L}{\\partial\\dot\\theta}-\\dfrac{\\partial L}{\\partial\\theta}=0$。"
+    ],
+    "answer": "\\ddot{\\theta}+\\dfrac{g}{l}\\sin\\theta=0",
+    "solution": "$T=\\dfrac12ml^2\\dot\\theta^2$，$V=-mgl\\cos\\theta$，故 $L=\\dfrac12ml^2\\dot\\theta^2+mgl\\cos\\theta$。\n\n代入 E-L 方程：$\\dfrac{\\mathrm{d}}{\\mathrm{d}t}(ml^2\\dot\\theta)+mgl\\sin\\theta=0$，即 $\\ddot\\theta+\\dfrac{g}{l}\\sin\\theta=0$。\n\n验算：小角近似 $\\sin\\theta\\approx\\theta$ 得简谐振动 $\\omega=\\sqrt{g/l}$，与牛顿定律结果一致；量纲 $[g/l]=\\mathrm{s^{-2}}$，与 $\\ddot\\theta$ 一致。",
+    "physicsMeta": {
+      "course": "theory",
+      "answerType": "symbolic",
+      "unit": "rad/s^2",
+      "methods": [
+        "变分原理",
+        "拉格朗日量"
+      ],
+      "constants": [],
+      "textbookRef": "Goldstein Ch.1 / 周衍柏《理论力学》"
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "中心力场的圆轨道半径",
+    "statement": "粒子在吸引中心力场 $V(r)=-k/r$（$k>0$）中运动，角动量大小为 $L$，质量 $m$。用有效势方法求圆轨道半径 $r_0$。",
+    "mainTag": "理论力学",
+    "tags": [
+      "中心力场与 Kepler 问题"
+    ],
+    "kind": "推导题",
+    "thinking": 7,
+    "difficulty": 6,
+    "calc": 4,
+    "source": "理论力学精选（自编）",
+    "hints": [
+      "有效势 $U_{\\mathrm{eff}}(r)=\\dfrac{L^2}{2mr^2}-\\dfrac{k}{r}$。",
+      "圆轨道对应 $\\mathrm{d}U_{\\mathrm{eff}}/\\mathrm{d}r=0$。"
+    ],
+    "answer": "r_0=\\dfrac{L^2}{mk}",
+    "solution": "$U_{\\mathrm{eff}}=\\dfrac{L^2}{2mr^2}-\\dfrac{k}{r}$，令导数为零：$-\\dfrac{L^2}{mr^3}+\\dfrac{k}{r^2}=0$，得 $r_0=\\dfrac{L^2}{mk}$。\n\n验算：$r_0$ 处二阶导 $\\dfrac{3L^2}{mr^4}-\\dfrac{2k}{r^3}=\\dfrac{k}{r^3}>0$，确为极小（稳定圆轨道）；$L\\to0$ 时 $r_0\\to0$（无角动量不能维持圆轨道），符合物理直觉。",
+    "physicsMeta": {
+      "course": "theory",
+      "answerType": "symbolic",
+      "unit": "m",
+      "methods": [
+        "有效势",
+        "守恒律"
+      ],
+      "diagrams": [
+        {
+          "id": "ueff",
+          "src": "assets/diagrams/physics/physics-effective-potential.svg",
+          "alt": "有效势曲线与圆轨道对应的极小值",
+          "placement": "statement"
+        }
+      ],
+      "textbookRef": "Goldstein Ch.3"
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "开普勒第三定律的数值验证",
+    "statement": "火星轨道的半长轴为 $a=1.524\\ \\mathrm{AU}$。取地球公转周期 $1.00\\ \\mathrm{yr}$，用开普勒第三定律估算火星公转周期 $T$。",
+    "mainTag": "球面天文与天体力学",
+    "tags": [
+      "二体轨道与轨道根数"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "天体力学基础（自编）",
+    "hints": [
+      "$T^2\\propto a^3$，以地球为单位时 $T=a^{3/2}$（年、AU）。",
+      "先算 $1.524^{3}$ 再开方。"
+    ],
+    "answer": "1.88\\ \\mathrm{yr}",
+    "solution": "以地球为单位的开普勒第三定律：$T^2=a^3$（$T$ 以年、$a$ 以 AU 计）。\n\n$T=1.524^{3/2}=1.88\\ \\mathrm{yr}$。\n\n验算：火星实测周期 1.881 年，与估算一致；$a>1$ 时 $T>1$，符合「越远越慢」；量纲上 $T$ 与 $a^{3/2}$ 都是年的量级（此处以地球单位归一化，等价于量纲一致）。",
+    "physicsMeta": {
+      "course": "astro",
+      "answerType": "numeric_unit",
+      "unit": "yr",
+      "dimension": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 3,
+      "methods": [
+        "开普勒定律"
+      ],
+      "textbookRef": "《天体力学基础》二体问题"
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "傅科摆的进动周期",
+    "statement": "在北纬 $40^\\circ$ 处悬挂一傅科摆。求摆面进动一周所需时间（地球自转周期按 $24\\ \\mathrm{h}$ 计）。",
+    "mainTag": "理论力学",
+    "tags": [
+      "非惯性系与 Coriolis 力"
+    ],
+    "kind": "计算题",
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 2,
+    "source": "理论力学精选（自编）",
+    "hints": [
+      "进动角速度为 $\\Omega\\sin\\varphi$，$\\Omega$ 为地球自转角速度。",
+      "周期 $T=24\\ \\mathrm{h}/\\sin\\varphi$。"
+    ],
+    "answer": "37.3\\ \\mathrm{h}",
+    "solution": "摆面进动角速度 $\\omega_{\\mathrm{p}}=\\Omega\\sin\\varphi$，故进动一周时间 $T=\\dfrac{2\\pi}{\\Omega\\sin\\varphi}=\\dfrac{24\\ \\mathrm{h}}{\\sin40^\\circ}$。\n\n$T=\\dfrac{24}{0.643}=37.3\\ \\mathrm{h}$。\n\n验算：赤道 $\\varphi=0$ 时 $T\\to\\infty$（不进动），极点 $\\varphi=90^\\circ$ 时 $T=24\\ \\mathrm{h}$，与已知结论一致。",
+    "physicsMeta": {
+      "course": "theory",
+      "answerType": "numeric_unit",
+      "unit": "h",
+      "dimension": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 3,
+      "constants": [
+        "Omega=7.292e-5 rad/s"
+      ],
+      "methods": [
+        "非惯性系",
+        "Coriolis 力"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "耦合振子的简正频率",
+    "statement": "两个质量均为 $m$ 的滑块由三个劲度系数均为 $k$ 的弹簧串联（两端固定）。求系统的两个简正角频率。",
+    "mainTag": "理论力学",
+    "tags": [
+      "小振动与简正模"
+    ],
+    "kind": "推导题",
+    "thinking": 7,
+    "difficulty": 6,
+    "calc": 5,
+    "source": "理论力学精选（自编）",
+    "hints": [
+      "写出 $T=\\dfrac12m(\\dot x_1^2+\\dot x_2^2)$，$V=\\dfrac12k[x_1^2+(x_2-x_1)^2+x_2^2]$。",
+      "解久期方程 $|V_{ij}-\\omega^2T_{ij}|=0$。"
+    ],
+    "answer": "\\omega_1=\\sqrt{\\dfrac{k}{m}},\\quad \\omega_2=\\sqrt{\\dfrac{3k}{m}}",
+    "solution": "动能矩阵 $T=\\mathrm{diag}(m,m)$，势能矩阵 $V=k\\begin{pmatrix}2&-1\\\\-1&2\\end{pmatrix}$。\n\n久期方程 $\\det(V-\\omega^2T)=0$ 给出 $(2k-m\\omega^2)^2-k^2=0$，故 $m\\omega^2=k$ 或 $3k$，即 $\\omega_1=\\sqrt{k/m}$、$\\omega_2=\\sqrt{3k/m}$。\n\n验算：对称模（两滑块同向）只压缩两端弹簧，等效单个 $k$；反对称模（反向）中间弹簧也被压缩，等效 $3k$，与结果一致。",
+    "physicsMeta": {
+      "course": "theory",
+      "answerType": "symbolic",
+      "unit": "rad/s",
+      "methods": [
+        "小振动",
+        "简正模"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "齐奥尔科夫斯基火箭方程",
+    "statement": "某单级火箭排气速度 $v_e=3.0\\ \\mathrm{km/s}$，初始质量与末质量之比 $m_0/m=10$，忽略重力与阻力。求速度增量 $\\Delta v$。",
+    "mainTag": "理论力学",
+    "tags": [
+      "变分法与 Euler-Lagrange 方程"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "专业力学精选（自编）",
+    "hints": [
+      "变质量系统的动量方程给出 $\\Delta v=v_e\\ln(m_0/m)$。",
+      "$\\ln 10=2.303$。"
+    ],
+    "answer": "6.9\\ \\mathrm{km/s}",
+    "solution": "由变质量动量方程 $m\\,\\mathrm{d}v=-v_e\\,\\mathrm{d}m$，积分得 $\\Delta v=v_e\\ln\\dfrac{m_0}{m}$。\n\n$\\Delta v=3.0\\times\\ln10=3.0\\times2.303=6.91\\ \\mathrm{km/s}\\approx6.9\\ \\mathrm{km/s}$。\n\n验算：量纲 $[v_e]$ 为速度；$m_0/m\\to1$ 时 $\\Delta v\\to0$，与「不带燃料不加速」一致。",
+    "physicsMeta": {
+      "course": "theory",
+      "answerType": "numeric_unit",
+      "unit": "km/s",
+      "dimension": [
+        0,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "methods": [
+        "变质量系统",
+        "动量定理"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "留数定理计算实积分",
+    "statement": "用留数定理计算 $\\displaystyle\\int_{-\\infty}^{+\\infty}\\frac{\\mathrm{d}x}{1+x^2}$。",
+    "mainTag": "数学物理方法",
+    "tags": [
+      "复变函数与留数定理"
+    ],
+    "kind": "计算题",
+    "thinking": 5,
+    "difficulty": 4,
+    "calc": 3,
+    "source": "数学物理方法精选（自编）",
+    "hints": [
+      "取上半平面大半圆围道。",
+      "被积函数在 $z=i$ 有一阶极点，留数为 $\\dfrac{1}{2i}$。"
+    ],
+    "answer": "3.1416",
+    "solution": "沿上半平面大半圆围道积分，大圆弧上被积函数 $\\sim1/R^2$、弧长 $\\sim\\pi R$，贡献趋于零。\n\n由留数定理：$I=2\\pi i\\cdot\\mathrm{Res}_{z=i}\\dfrac{1}{1+z^2}=2\\pi i\\cdot\\dfrac{1}{2i}=\\pi\\approx3.1416$。\n\n验算：$\\arctan x$ 在 $\\pm\\infty$ 的差为 $\\pi/2-(-\\pi/2)=\\pi$，与留数结果一致。",
+    "physicsMeta": {
+      "course": "mmp",
+      "answerType": "numeric",
+      "unit": "",
+      "dimension": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.01,
+      "sigFigs": 4,
+      "methods": [
+        "留数定理"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "Legendre 多项式的节点值",
+    "statement": "已知 $P_2(x)=\\dfrac12(3x^2-1)$，求 $P_2(0)$ 的值。",
+    "mainTag": "数学物理方法",
+    "tags": [
+      "Legendre 多项式与球谐函数"
+    ],
+    "kind": "计算题",
+    "thinking": 2,
+    "difficulty": 2,
+    "calc": 2,
+    "source": "数学物理方法精选（自编）",
+    "hints": [
+      "直接代入 $x=0$。",
+      "注意 $P_2(0)=-1/2$ 是偶极项在赤道方向的值。"
+    ],
+    "answer": "-0.5",
+    "solution": "$P_2(0)=\\dfrac12(3\\times0-1)=-\\dfrac12=-0.5$。\n\n验算：$P_2(1)=1$、$P_2(-1)=1$（偶函数），$P_2(0)=-1/2$ 位于两者之间，符合 $P_2$ 在 $[-1,1]$ 上的形状。",
+    "physicsMeta": {
+      "course": "mmp",
+      "answerType": "numeric",
+      "unit": "",
+      "dimension": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.01,
+      "sigFigs": 2,
+      "methods": [
+        "特殊函数"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "Bessel 函数零点与圆膜基频",
+    "statement": "半径 $R=0.10\\ \\mathrm{m}$ 的圆形薄膜边缘固定，波速 $v=100\\ \\mathrm{m/s}$。已知 $J_0$ 的第一个零点为 $2.405$，求基频 $f_1$。",
+    "mainTag": "数学物理方法",
+    "tags": [
+      "Bessel 函数"
+    ],
+    "kind": "计算题",
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 3,
+    "source": "数学物理方法精选（自编）",
+    "hints": [
+      "圆膜基频 $f_1=\\dfrac{2.405\\,v}{2\\pi R}$。",
+      "不要漏掉 $2\\pi$。"
+    ],
+    "answer": "383\\ \\mathrm{Hz}",
+    "solution": "圆膜振动解含 $J_0(kr)$，边界 $J_0(kR)=0$ 给出 $kR=2.405$，故 $k=24.05\\ \\mathrm{m^{-1}}$。\n\n$f_1=\\dfrac{\\omega}{2\\pi}=\\dfrac{vk}{2\\pi}=\\dfrac{100\\times24.05}{2\\pi}=383\\ \\mathrm{Hz}$。\n\n验算：量纲 $\\mathrm{(m/s)/m}=\\mathrm{s^{-1}}$；$R$ 减半时 $f_1$ 加倍（$f\\propto1/R$），符合膜振动的标度律。",
+    "physicsMeta": {
+      "course": "mmp",
+      "answerType": "numeric_unit",
+      "unit": "Hz",
+      "dimension": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 3,
+      "methods": [
+        "Bessel 函数",
+        "分离变量"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "导体平面的镜像电荷",
+    "statement": "真空中一无限大接地导体平面，点电荷 $q$ 位于平面上方 $d$ 处。用镜像法求镜像电荷的位置与电量。",
+    "mainTag": "电动力学",
+    "tags": [
+      "静电场边值问题"
+    ],
+    "kind": "推导题",
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 3,
+    "source": "电动力学精选（自编）",
+    "hints": [
+      "导体面为等势面，镜像电荷必须让面上电势为零。",
+      "对称位置放异号电荷即可。"
+    ],
+    "answer": "q'=-q,\\ \\text{位于平面下方 } d \\text{ 处}",
+    "solution": "要求 $z=0$ 平面上电势恒为零，在 $z=-d$ 处放置 $q'=-q$ 即可使面上任意点到 $q$ 与 $q'$ 的距离相等，电势相消。\n\n验算：面上任一点 $V=\\dfrac{1}{4\\pi\\varepsilon_0}\\left(\\dfrac{q}{r}+\\dfrac{-q}{r}\\right)=0$，边界条件满足；由唯一性定理，上半空间解唯一，故镜像法成立。",
+    "physicsMeta": {
+      "course": "theory",
+      "answerType": "symbolic",
+      "unit": "C",
+      "unitSystem": "CGS",
+      "methods": [
+        "镜像法",
+        "唯一性定理"
+      ],
+      "textbookRef": "Jackson Ch.2 / 郭硕鸿《电动力学》"
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "等离子体频率",
+    "statement": "电离层电子数密度 $n=1.0\\times10^{12}\\ \\mathrm{cm^{-3}}$。求等离子体频率 $\\omega_p$（用 SI 结果表示，单位 $\\mathrm{rad/s}$）。",
+    "mainTag": "电动力学",
+    "tags": [
+      "等离子体与色散"
+    ],
+    "kind": "计算题",
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 4,
+    "source": "电动力学精选（自编）",
+    "hints": [
+      "$\\omega_p=\\sqrt{\\dfrac{ne^2}{\\varepsilon_0 m_e}}$。",
+      "$1\\ \\mathrm{cm^{-3}}=10^{6}\\ \\mathrm{m^{-3}}$，先把密度换到 SI。"
+    ],
+    "answer": "5.6\\times10^{7}\\ \\mathrm{rad/s}",
+    "solution": "$n=1.0\\times10^{12}\\ \\mathrm{cm^{-3}}=1.0\\times10^{18}\\ \\mathrm{m^{-3}}$。\n\n$\\omega_p=\\sqrt{\\dfrac{ne^2}{\\varepsilon_0m_e}}=\\sqrt{\\dfrac{1.0\\times10^{18}\\times(1.6\\times10^{-19})^2}{8.85\\times10^{-12}\\times9.11\\times10^{-31}}}=5.6\\times10^{7}\\ \\mathrm{rad/s}$。\n\n验算：常用工程式 $f_p\\approx9\\sqrt{n[\\mathrm{m^{-3}}]}\\ \\mathrm{Hz}=9\\ \\mathrm{MHz}$，对应 $\\omega=2\\pi f\\approx5.7\\times10^{7}$，一致。",
+    "physicsMeta": {
+      "course": "theory",
+      "answerType": "numeric_unit",
+      "unit": "rad/s",
+      "dimension": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.03,
+      "sigFigs": 2,
+      "constants": [
+        "m_e=9.11e-31 kg",
+        "e=1.6e-19 C",
+        "eps0=8.85e-12 F/m"
+      ],
+      "methods": [
+        "色散关系"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "电偶极辐射的 Larmor 公式",
+    "statement": "一带电粒子以加速度 $a$ 运动，在非相对论情形下辐射总功率由 Larmor 公式给出。写出高斯制下的表达式（电荷 $q$、光速 $c$）。",
+    "mainTag": "电动力学",
+    "tags": [
+      "推迟势与辐射"
+    ],
+    "kind": "推导题",
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 3,
+    "source": "电动力学精选（自编）",
+    "hints": [
+      "高斯制下 Larmor 公式不含 $4\\pi\\varepsilon_0$。",
+      "$P=\\dfrac{2q^2a^2}{3c^3}$（CGS）。"
+    ],
+    "answer": "P=\\dfrac{2q^2a^2}{3c^3}",
+    "solution": "非相对论加速电荷的辐射功率在高斯制下为 $P=\\dfrac{2q^2a^2}{3c^3}$。\n\n验算：量纲 $\\left[\\dfrac{q^2a^2}{c^3}\\right]=\\dfrac{(\\mathrm{erg\\cdot cm})^{}\\cdot(\\mathrm{cm/s^2})^2}{(\\mathrm{cm/s})^3}=\\mathrm{erg/s}$，为功率；SI 形式多一个 $\\dfrac{1}{4\\pi\\varepsilon_0}$，两者通过 $q_{\\mathrm{CGS}}=q_{\\mathrm{SI}}/\\sqrt{4\\pi\\varepsilon_0}$ 互换。",
+    "physicsMeta": {
+      "course": "theory",
+      "answerType": "symbolic",
+      "unit": "W",
+      "unitSystem": "CGS",
+      "methods": [
+        "推迟势",
+        "辐射"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "一维无限深势阱的基态能量",
+    "statement": "质量 $m$ 的粒子被限制在宽 $L$ 的一维无限深势阱中。写出基态能量 $E_1$。",
+    "mainTag": "量子力学",
+    "tags": [
+      "一维势垒与谐振子"
+    ],
+    "kind": "推导题",
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 3,
+    "source": "量子力学精选（自编）",
+    "hints": [
+      "$E_n=\\dfrac{n^2\\pi^2\\hbar^2}{2mL^2}$。",
+      "基态 $n=1$。"
+    ],
+    "answer": "E_1=\\dfrac{\\pi^2\\hbar^2}{2mL^2}",
+    "solution": "势阱内定态方程 $-\\dfrac{\\hbar^2}{2m}\\psi''=E\\psi$，边界 $\\psi(0)=\\psi(L)=0$ 给出 $\\psi_n=\\sqrt{2/L}\\sin(n\\pi x/L)$，$E_n=\\dfrac{n^2\\pi^2\\hbar^2}{2mL^2}$。\n\n基态 $E_1=\\dfrac{\\pi^2\\hbar^2}{2mL^2}$。\n\n验算：量纲 $\\dfrac{(\\mathrm{J\\cdot s})^2}{\\mathrm{kg\\cdot m^2}}=\\mathrm{J}$；$L\\to\\infty$ 时 $E_1\\to0$（自由粒子连续谱），$L\\to0$ 时 $E_1\\to\\infty$（零点能发散），符合不确定关系 $\\Delta p\\sim\\hbar/L$。",
+    "physicsMeta": {
+      "course": "theory",
+      "answerType": "symbolic",
+      "unit": "J",
+      "methods": [
+        "定态薛定谔方程",
+        "边界条件"
+      ],
+      "constants": [
+        "hbar=1.055e-34 J*s"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "谐振子的零点能",
+    "statement": "一维谐振子角频率 $\\omega=1.0\\times10^{15}\\ \\mathrm{rad/s}$。求零点能 $E_0=\\dfrac12\\hbar\\omega$，以 $\\mathrm{eV}$ 为单位（$\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$，$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$）。",
+    "mainTag": "量子力学",
+    "tags": [
+      "一维势垒与谐振子"
+    ],
+    "kind": "计算题",
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 3,
+    "source": "量子力学精选（自编）",
+    "hints": [
+      "先算焦耳，再除以 $1.602\\times10^{-19}$。",
+      "$E_0=\\hbar\\omega/2$。"
+    ],
+    "answer": "0.33\\ \\mathrm{eV}",
+    "solution": "$E_0=\\dfrac12\\times1.055\\times10^{-34}\\times1.0\\times10^{15}=5.28\\times10^{-20}\\ \\mathrm{J}$。\n\n换算：$5.28\\times10^{-20}/1.602\\times10^{-19}=0.329\\ \\mathrm{eV}$。\n\n验算：$\\hbar\\omega$ 量纲为能量；典型分子振动 $\\hbar\\omega\\sim0.1\\ \\mathrm{eV}$，本题频率偏高、量级合理。",
+    "physicsMeta": {
+      "course": "theory",
+      "answerType": "numeric_unit",
+      "unit": "eV",
+      "dimension": [
+        1,
+        2,
+        -2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.03,
+      "sigFigs": 2,
+      "constants": [
+        "hbar=1.055e-34 J*s",
+        "1 eV=1.602e-19 J"
+      ],
+      "methods": [
+        "谐振子"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "氢原子 n=2 的能级",
+    "statement": "氢原子能级 $E_n=-\\dfrac{13.6\\ \\mathrm{eV}}{n^2}$。求 $n=2$ 能级的能量。",
+    "mainTag": "量子力学",
+    "tags": [
+      "中心力场与氢原子"
+    ],
+    "kind": "计算题",
+    "thinking": 2,
+    "difficulty": 2,
+    "calc": 1,
+    "source": "量子力学精选（自编）",
+    "hints": [
+      "直接代入 $n=2$。",
+      "注意负号表示束缚态。"
+    ],
+    "answer": "-3.40\\ \\mathrm{eV}",
+    "solution": "$E_2=-\\dfrac{13.6}{2^2}=-3.40\\ \\mathrm{eV}$。\n\n验算：$n\\to\\infty$ 时 $E\\to0$（电离阈值），$E_2-E_1=10.2\\ \\mathrm{eV}$ 对应 Lyman α（121.6 nm），与实验一致。",
+    "physicsMeta": {
+      "course": "theory",
+      "answerType": "numeric_unit",
+      "unit": "eV",
+      "dimension": [
+        1,
+        2,
+        -2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.01,
+      "sigFigs": 3,
+      "constants": [
+        "E_1=-13.6 eV"
+      ],
+      "methods": [
+        "玻尔模型",
+        "库仑势"
+      ],
+      "diagrams": [
+        {
+          "id": "levels",
+          "src": "assets/diagrams/physics/physics-energy-levels.svg",
+          "alt": "氢原子能级与 Lyman/Balmer/Paschen 跃迁",
+          "placement": "statement"
+        }
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "非简并定态微扰的一阶修正",
+    "statement": "系统受微扰 $H'$，未微扰态为 $|n^{(0)}\\rangle$。写出非简并情形下能量一阶修正与波函数一阶修正的表达式。",
+    "mainTag": "量子力学",
+    "tags": [
+      "定态微扰与 Zeeman 效应"
+    ],
+    "kind": "推导题",
+    "thinking": 7,
+    "difficulty": 7,
+    "calc": 4,
+    "source": "量子力学精选（自编）",
+    "hints": [
+      "能量一阶修正是对角元。",
+      "波函数一阶修正需对所有 $k\\ne n$ 求和，分母是能级差。"
+    ],
+    "answer": "E_n^{(1)}=\\langle n|H'|n\\rangle,\\quad |n^{(1)}\\rangle=\\sum_{k\\ne n}\\frac{\\langle k|H'|n\\rangle}{E_n^{(0)}-E_k^{(0)}}|k^{(0)}\\rangle",
+    "solution": "将 $|n\\rangle=|n^{(0)}\\rangle+\\lambda|n^{(1)}\\rangle+\\cdots$、$E_n=E_n^{(0)}+\\lambda E_n^{(1)}+\\cdots$ 代入定态方程，按 $\\lambda$ 逐阶比较。\n\n一阶项给出 $E_n^{(1)}=\\langle n^{(0)}|H'|n^{(0)}\\rangle$；投影到 $|k^{(0)}\\rangle\\ (k\\ne n)$ 得 $c_k=\\dfrac{\\langle k|H'|n\\rangle}{E_n^{(0)}-E_k^{(0)}}$，即波函数一阶修正。\n\n验算：量纲上 $\\langle H'\\rangle$ 为能量；分母为能量差，故 $c_k$ 无量纲，符合波函数展开系数；简并时 $E_n^{(0)}-E_k^{(0)}=0$ 发散，说明必须用简并微扰（这正是不简并前提的原因）。",
+    "physicsMeta": {
+      "course": "theory",
+      "answerType": "symbolic",
+      "unit": "",
+      "methods": [
+        "定态微扰"
+      ],
+      "textbookRef": "Griffiths Ch.6 / 曾谨言《量子力学》"
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "光子气的能量密度",
+    "statement": "太阳表面温度 $T=5772\\ \\mathrm{K}$。把辐射场视为光子气，取 $a=\\dfrac{4\\sigma}{c}=7.566\\times10^{-16}\\ \\mathrm{J/(m^3\\cdot K^4)}$，求能量密度 $u=aT^4$。",
+    "mainTag": "热力学与统计物理",
+    "tags": [
+      "光子气与黑体辐射"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 3,
+    "source": "热统精选（自编）",
+    "hints": [
+      "先算 $T^4$。",
+      "$5772^4\\approx1.11\\times10^{15}$。"
+    ],
+    "answer": "0.84\\ \\mathrm{J/m^3}",
+    "solution": "$T^4=(5.772\\times10^3)^4=1.109\\times10^{15}\\ \\mathrm{K^4}$。\n\n$u=7.566\\times10^{-16}\\times1.109\\times10^{15}=0.839\\ \\mathrm{J/m^3}$。\n\n验算：量纲 $\\mathrm{J/(m^3K^4)\\cdot K^4}=\\mathrm{J/m^3}$；由 $u=aT^4$ 与 $p=u/3$ 得辐射压 $0.28\\ \\mathrm{Pa}$，与太阳光球辐射压量级一致。",
+    "physicsMeta": {
+      "course": "theory",
+      "answerType": "numeric_unit",
+      "unit": "J/m^3",
+      "dimension": [
+        1,
+        -1,
+        -2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.03,
+      "sigFigs": 2,
+      "constants": [
+        "a=7.566e-16 J/(m^3*K^4)"
+      ],
+      "methods": [
+        "黑体辐射",
+        "光子气"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "金属费米能",
+    "statement": "某金属自由电子数密度 $n=1.0\\times10^{29}\\ \\mathrm{m^{-3}}$。求费米能 $E_F=\\dfrac{\\hbar^2}{2m_e}(3\\pi^2n)^{2/3}$，以 $\\mathrm{eV}$ 表示。",
+    "mainTag": "热力学与统计物理",
+    "tags": [
+      "简并电子气"
+    ],
+    "kind": "计算题",
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 4,
+    "source": "热统精选（自编）",
+    "hints": [
+      "先算 $(3\\pi^2n)^{2/3}$。",
+      "算完焦耳后除以 $1.602\\times10^{-19}$ 换成 eV。"
+    ],
+    "answer": "7.9\\ \\mathrm{eV}",
+    "solution": "$3\\pi^2n=29.6\\times10^{29}=2.96\\times10^{30}\\ \\mathrm{m^{-3}}$，$(3\\pi^2n)^{2/3}=2.06\\times10^{20}\\ \\mathrm{m^{-2}}$。\n\n$E_F=\\dfrac{(1.055\\times10^{-34})^2}{2\\times9.11\\times10^{-31}}\\times2.06\\times10^{20}=1.26\\times10^{-18}\\ \\mathrm{J}=7.9\\ \\mathrm{eV}$。\n\n验算：常见金属 $E_F$ 为 2–12 eV，本题落在区间内；量纲 $\\mathrm{kg\\,m^2/s^2}=\\mathrm{J}$。",
+    "physicsMeta": {
+      "course": "theory",
+      "answerType": "numeric_unit",
+      "unit": "eV",
+      "dimension": [
+        1,
+        2,
+        -2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.03,
+      "sigFigs": 2,
+      "constants": [
+        "hbar=1.055e-34 J*s",
+        "m_e=9.11e-31 kg"
+      ],
+      "methods": [
+        "费米分布",
+        "简并电子气"
+      ]
+    },
+    "subject": "physics"
+  }
+]

@@ -25,6 +25,7 @@ module.exports = function registerHealthRoutes(router, ctx) {
     allTags,
     tagTree,
     methodCounts,
+    courseCounts,
     subjectCounts,
     examTagCounts,
     FREE_PROVIDERS,
@@ -100,6 +101,9 @@ module.exports = function registerHealthRoutes(router, ctx) {
       })),
       tagTrees: { math: tagTree('math'), physics: tagTree('physics') },
       methods: { math: [], physics: methodCounts('physics') },
+      /* 课程组：物理三级筛选的第一层（普物 / 数理方法 / 四大力学 / 天文 / 实验） */
+      courses: { math: [], physics: courseCounts('physics') },
+      courseTree: require('../tag-taxonomy').courseTreeOf('physics'),
       examTags: examTagCounts(),
       /* 前端据此决定是否显示「分析 / 题单 / 期末突击」入口：
          旧后端没有这些接口，隐藏比点了报错更体面。 */

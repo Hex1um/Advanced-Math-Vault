@@ -110,8 +110,71 @@
     }
   ];
 
+  /* 专业物理 / 天文分组：四大力学与天体物理的高频符号。
+     这些符号在普物键盘里没有（Dirac 括号、算符、度规、太阳量），
+     手打一次 \langle \psi | \hat{H} | \psi \rangle 要十几秒。 */
+  const PHYS_ADV_TABS = [
+    {
+      name: '分析力学',
+      cols: 8,
+      keys: [
+        B('L', '\\mathcal{L}'), B('H', '\\mathcal{H}'), B('T', 'T'), B('V', 'V'),
+        B('q̇', '\\dot{q}'), B('q̈', '\\ddot{q}'), B('∂L/∂q', '\\frac{\\partial L}{\\partial q}'),
+        B('d/dt', '\\frac{\\mathrm{d}}{\\mathrm{d}t}'),
+        B('δ', '\\delta'), B('δS', '\\delta S=0', '最小作用量原理'),
+        B('{q,p}', '\\{q,p\\}', 'Poisson 括号'),
+        B('ω', '\\omega'), B('Γ', '\\Gamma'), B('θ', '\\theta'), B('φ', '\\varphi'),
+        B('˙', '\\dot{$0}'), B('¨', '\\ddot{$0}'), B('Σ', '\\sum'), B('∫', '\\int'),
+        B('⇒', '\\Rightarrow'), B('≈', '\\approx'), B('→', '\\to'), B('≡', '\\equiv'),
+        B('△', '\\triangle'), B('∮', '\\oint'), B('⋆', '\\star'), B('∗', '^{*}')
+      ]
+    },
+    {
+      name: '量子算符',
+      cols: 8,
+      keys: [
+        B('⟨ψ|', '\\langle \\psi |'), B('|ψ⟩', '| \\psi \\rangle'),
+        B('⟨|⟩', '\\langle $0 \\rangle'),
+        B('⟨A⟩', '\\langle A \\rangle'), B('Ĥ', '\\hat{H}'), B('p̂', '\\hat{p}'), B('x̂', '\\hat{x}'),
+        B('[A,B]', '\\left[\\hat{A},\\hat{B}\\right]', '对易子'),
+        B('{A,B}', '\\left\\{\\hat{A},\\hat{B}\\right\\}', '反对易子'),
+        B('†', '^{\\dagger}'), B('ψ', '\\psi'), B('ϕ', '\\phi'), B('ℓ', '\\ell'), B('m', 'm'),
+        B('Y_l^m', 'Y_{$0}^{m}'), B('|n⟩', '| n \\rangle'),
+        B('δ_ij', '\\delta_{ij}'), B('ε_ijk', '\\varepsilon_{ijk}'),
+        B('ℏ', '\\hbar'), B('∇²', '\\nabla^2'), B('Σ', '\\sum'), B('√', '\\sqrt{$0}'),
+        B('∂', '\\partial'), B('≈', '\\approx'), B('∝', '\\propto'), B('±', '\\pm')
+      ]
+    },
+    {
+      name: '相对论',
+      cols: 8,
+      keys: [
+        B('g_μν', 'g_{\\mu\\nu}'), B('F^μν', 'F^{\\mu\\nu}'), B('∂_μ', '\\partial_{\\mu}'),
+        B('x^μ', 'x^{\\mu}'), B('Λ', '\\Lambda'), B('γ', '\\gamma'), B('β', '\\beta'),
+        B('u^μ', 'u^{\\mu}'), B('T^μν', 'T^{\\mu\\nu}'), B('A^μ', 'A^{\\mu}'),
+        B('η_μν', '\\eta_{\\mu\\nu}'), B('ds²', '\\mathrm{d}s^2'), B('Σ', '\\Sigma'),
+        B('→', '\\to'), B('≈', '\\approx'), B('≪', '\\ll'), B('≫', '\\gg'),
+        B('μ', '\\mu'), B('ν', '\\nu'), B('ρ', '\\rho'), B('α', '\\alpha'),
+        B('c', 'c'), B('ℏ', '\\hbar'), B('G', 'G'), B('√', '\\sqrt{$0}')
+      ]
+    },
+    {
+      name: '天文',
+      cols: 8,
+      keys: [
+        B('M⊙', 'M_{\\odot}'), B('R⊙', 'R_{\\odot}'), B('L⊙', 'L_{\\odot}'),
+        B('AU', '\\ \\mathrm{AU}'), B('pc', '\\ \\mathrm{pc}'), B('Mpc', '\\ \\mathrm{Mpc}'),
+        B('erg', '\\ \\mathrm{erg}'), B('Å', '\\ \\mathrm{\\AA}'), B('Jy', '\\ \\mathrm{Jy}'),
+        B('mag', '\\ \\mathrm{mag}'), B('yr', '\\ \\mathrm{yr}'), B('Gyr', '\\ \\mathrm{Gyr}'),
+        B('α', '\\alpha'), B('δ', '\\delta'), B('λ', '\\lambda'), B('ν', '\\nu'),
+        B('z', 'z'), B('H₀', 'H_0'), B('Ω', '\\Omega'), B('Λ', '\\Lambda'),
+        B('T_eff', 'T_{\\mathrm{eff}}'), B('log g', '\\log g'), B('⊕', '\\oplus'), B('⊙', '\\odot')
+      ]
+    }
+  ];
+
   function tabsFor(subject) {
-    return String(subject || '') === 'physics' ? TABS.concat(PHYS_TABS) : TABS;
+    return String(subject || '') === 'physics' ? TABS.concat(PHYS_TABS, PHYS_ADV_TABS) : TABS;
   }
 
   /* --------------------------------------------------------- 公式环境状态机

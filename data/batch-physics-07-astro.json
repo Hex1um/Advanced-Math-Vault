@@ -1,0 +1,519 @@
+[
+  {
+    "title": "三角视差测距",
+    "statement": "某恒星的周年视差 $p=0.100\\ \\mathrm{arcsec}$。求其距离（以 $\\mathrm{pc}$ 为单位）。",
+    "mainTag": "球面天文与天体力学",
+    "tags": [
+      "视差光行差与岁差"
+    ],
+    "kind": "计算题",
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 1,
+    "source": "天体物理概论（自编）",
+    "hints": [
+      "$d[\\mathrm{pc}]=1/p[\\mathrm{arcsec}]$。",
+      "这是秒差距的定义。"
+    ],
+    "answer": "10.0\\ \\mathrm{pc}",
+    "solution": "$d=\\dfrac{1}{p}=\\dfrac{1}{0.100}=10.0\\ \\mathrm{pc}$。\n\n验算：由 $1\\ \\mathrm{pc}=3.086\\times10^{16}\\ \\mathrm{m}$ 与 $1\\ \\mathrm{AU}=1.496\\times10^{11}\\ \\mathrm{m}$ 可验证 $\\tan p=p=\\mathrm{AU}/d$，即 $0.1^{\\prime\\prime}$ 对应 10 pc，符合秒差距定义。",
+    "physicsMeta": {
+      "course": "astro",
+      "answerType": "numeric_unit",
+      "unit": "pc",
+      "dimension": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.01,
+      "sigFigs": 3,
+      "methods": [
+        "三角视差"
+      ],
+      "prerequisites": [
+        "PH1003"
+      ],
+      "textbookRef": "《天体物理学》第 2 章"
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "距离模数与绝对星等",
+    "statement": "某星团视星等 $m=15.0$，距离 $d=1.0\\ \\mathrm{kpc}$。求其绝对星等 $M$（$m-M=5\\lg d[\\mathrm{pc}]-5$）。",
+    "mainTag": "天体物理基础",
+    "tags": [
+      "星等与色指数"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 3,
+    "source": "天体物理概论（自编）",
+    "hints": [
+      "先把 kpc 换成 pc。",
+      "$\\lg1000=3$，距离模数为 10。"
+    ],
+    "answer": "M=5.0\\ \\mathrm{mag}",
+    "solution": "$d=1.0\\ \\mathrm{kpc}=1000\\ \\mathrm{pc}$，距离模数 $m-M=5\\lg1000-5=5\\times3-5=10$。\n\n故 $M=m-10=15.0-10=5.0\\ \\mathrm{mag}$。\n\n验算：$M=5$ 比太阳（$M_V\\approx4.8$）略暗，对星团整体而言合理；若距离减半，距离模数减 $1.5$，$M$ 相应变亮。",
+    "physicsMeta": {
+      "course": "astro",
+      "answerType": "numeric_unit",
+      "unit": "mag",
+      "dimension": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "methods": [
+        "距离模数"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "哈勃定律估计退行速度",
+    "statement": "某星系距离 $d=100\\ \\mathrm{Mpc}$，取哈勃常数 $H_0=70\\ \\mathrm{km/(s\\cdot Mpc)}$。用哈勃定律估算其退行速度。",
+    "mainTag": "天体物理基础",
+    "tags": [
+      "FRW 度规与 Friedmann 方程"
+    ],
+    "kind": "计算题",
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 1,
+    "source": "天体物理概论（自编）",
+    "hints": [
+      "$v=H_0d$，注意单位相消。",
+      "结果应为 $\\mathrm{km/s}$。"
+    ],
+    "answer": "7.0\\times10^{3}\\ \\mathrm{km/s}",
+    "solution": "$v=H_0d=70\\ \\mathrm{km/(s\\cdot Mpc)}\\times100\\ \\mathrm{Mpc}=7.0\\times10^{3}\\ \\mathrm{km/s}$。\n\n验算：$v/c=0.023\\ll1$，非相对论近似成立；对应红移 $z\\approx v/c=0.023$，与 $100\\ \\mathrm{Mpc}$ 处的典型观测一致。",
+    "physicsMeta": {
+      "course": "astro",
+      "answerType": "numeric_unit",
+      "unit": "km/s",
+      "dimension": [
+        0,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "constants": [
+        "H_0=70 km/(s*Mpc)"
+      ],
+      "methods": [
+        "哈勃定律"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "星团质量的维里估计",
+    "statement": "某球状星团的视向速度弥散 $\\sigma=10\\ \\mathrm{km/s}$，特征半径 $R=1.0\\ \\mathrm{pc}$。用维里定理 $M\\approx\\dfrac{5\\sigma^2R}{G}$ 估算质量（以 $M_\\odot$ 为单位）。",
+    "mainTag": "球面天文与天体力学",
+    "tags": [
+      "Virial 定理"
+    ],
+    "kind": "计算题",
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 4,
+    "source": "天体物理概论（自编）",
+    "hints": [
+      "先把 $\\sigma$ 换成 $\\mathrm{m/s}$、$R$ 换成 $\\mathrm{m}$。",
+      "最后除以 $M_\\odot=1.989\\times10^{30}\\ \\mathrm{kg}$。"
+    ],
+    "answer": "1.2\\times10^{5}\\ M_\\odot",
+    "solution": "$\\sigma=1.0\\times10^4\\ \\mathrm{m/s}$，$R=3.086\\times10^{16}\\ \\mathrm{m}$。\n\n$M=\\dfrac{5\\times(10^4)^2\\times3.086\\times10^{16}}{6.674\\times10^{-11}}=2.31\\times10^{35}\\ \\mathrm{kg}=1.16\\times10^{5}\\ M_\\odot$。\n\n验算：球状星团典型质量 $10^4$–$10^6\\ M_\\odot$，估算落在区间内；量纲 $\\mathrm{(m/s)^2\\cdot m/(m^3\\,kg^{-1}\\,s^{-2})}=\\mathrm{kg}$。",
+    "physicsMeta": {
+      "course": "astro",
+      "answerType": "numeric_unit",
+      "unit": "Msun",
+      "dimension": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.05,
+      "sigFigs": 2,
+      "constants": [
+        "G=6.674e-11 N*m^2/kg^2",
+        "Msun=1.989e30 kg",
+        "1 pc=3.086e16 m"
+      ],
+      "methods": [
+        "Virial 定理"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "恒星主序寿命的量级估算",
+    "statement": "主序恒星寿命近似为 $t\\approx10\\ \\mathrm{Gyr}\\times(M/M_\\odot)^{-2.5}$。估算一颗 $10\\ M_\\odot$ 恒星的主序寿命。",
+    "mainTag": "天体物理基础",
+    "tags": [
+      "核聚变与恒星演化"
+    ],
+    "kind": "计算题",
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 2,
+    "source": "天体物理概论（自编）",
+    "hints": [
+      "$10^{-2.5}=1/10^{2.5}\\approx3.16\\times10^{-3}$。",
+      "结果约 $3\\times10^7\\ \\mathrm{yr}$。"
+    ],
+    "answer": "3.2\\times10^{7}\\ \\mathrm{yr}",
+    "solution": "$t=10\\ \\mathrm{Gyr}\\times10^{-2.5}=10^{10}\\ \\mathrm{yr}\\times3.16\\times10^{-3}=3.2\\times10^{7}\\ \\mathrm{yr}$。\n\n验算：与「大质量星寿命短、约几千万年」的定性结论一致；$M\\to M_\\odot$ 时 $t\\to10\\ \\mathrm{Gyr}$，退化为太阳寿命，边界正确。",
+    "physicsMeta": {
+      "course": "astro",
+      "answerType": "order_of_magnitude",
+      "tolDex": 0.3,
+      "unit": "yr",
+      "dimension": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "sigFigs": 2,
+      "constants": [
+        "t_sun=10 Gyr"
+      ],
+      "methods": [
+        "标度律"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "星系际介质的密度量级",
+    "statement": "估算星系际介质（IGM）的平均重子数密度量级：取宇宙重子密度 $\\Omega_b\\approx0.05$、临界密度 $\\rho_c=9\\times10^{-27}\\ \\mathrm{kg/m^3}$、质子质量 $m_p=1.67\\times10^{-27}\\ \\mathrm{kg}$。结果以 $\\mathrm{m^{-3}}$ 为单位。",
+    "mainTag": "天体物理基础",
+    "tags": [
+      "星系与暗物质"
+    ],
+    "kind": "计算题",
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 3,
+    "source": "天体物理概论（自编）",
+    "hints": [
+      "$n=\\Omega_b\\rho_c/m_p$。",
+      "只要求量级，保留一位有效数字即可。"
+    ],
+    "answer": "3\\times10^{-1}\\ \\mathrm{m^{-3}}",
+    "solution": "$n=\\dfrac{\\Omega_b\\rho_c}{m_p}=\\dfrac{0.05\\times9\\times10^{-27}}{1.67\\times10^{-27}}=0.27\\ \\mathrm{m^{-3}}$，即约 $0.3\\ \\mathrm{m^{-3}}$。\n\n验算：相当于每立方米约 0.3 个质子，比实验室真空还稀薄，与「IGM 极其稀薄」的常识一致；量纲 $\\mathrm{kg/m^3}/\\mathrm{kg}=\\mathrm{m^{-3}}$。",
+    "physicsMeta": {
+      "course": "astro",
+      "answerType": "order_of_magnitude",
+      "tolDex": 0.3,
+      "unit": "m^-3",
+      "dimension": [
+        0,
+        -3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "sigFigs": 1,
+      "constants": [
+        "Omega_b=0.05",
+        "rho_c=9e-27 kg/m^3",
+        "m_p=1.67e-27 kg"
+      ],
+      "methods": [
+        "量纲分析",
+        "标度律"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "上中天高度角",
+    "statement": "观测者位于北纬 $40^\\circ$，某恒星赤纬 $\\delta=+40^\\circ$。求它上中天时的高度角 $h$。",
+    "mainTag": "球面天文与天体力学",
+    "tags": [
+      "天球坐标系转换"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 1,
+    "source": "球面天文学（自编）",
+    "hints": [
+      "上中天高度 $h=90^\\circ-|\\varphi-\\delta|$。",
+      "本题 $\\varphi=\\delta$，天体过天顶。"
+    ],
+    "answer": "90°",
+    "solution": "$h=90^\\circ-|\\varphi-\\delta|=90^\\circ-|40^\\circ-40^\\circ|=90^\\circ$。\n\n验算：赤纬等于当地纬度时天体过天顶（天顶距 $z=0$），与「天顶赤纬等于观测者纬度」的结论一致。",
+    "physicsMeta": {
+      "course": "astro",
+      "answerType": "numeric_unit",
+      "unit": "°",
+      "dimension": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.01,
+      "sigFigs": 2,
+      "methods": [
+        "天球坐标"
+      ],
+      "diagrams": [
+        {
+          "id": "tri",
+          "src": "assets/diagrams/physics/physics-celestial-triangle.svg",
+          "alt": "天极、天顶与天体构成的球面三角形",
+          "placement": "statement"
+        }
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "Schwarzschild 半径",
+    "statement": "求 $10\\ M_\\odot$ 黑洞的 Schwarzschild 半径 $r_s=\\dfrac{2GM}{c^2}$，以 km 为单位。",
+    "mainTag": "天体物理基础",
+    "tags": [
+      "致密星与 Chandrasekhar 极限"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "天体物理概论（自编）",
+    "hints": [
+      "太阳的 $r_s\\approx2.95\\ \\mathrm{km}$，与质量成正比。",
+      "$10\\ M_\\odot$ 即约 29.5 km。"
+    ],
+    "answer": "29.5\\ \\mathrm{km}",
+    "solution": "$r_s=\\dfrac{2\\times6.674\\times10^{-11}\\times10\\times1.989\\times10^{30}}{(3.0\\times10^8)^2}=2.95\\times10^4\\ \\mathrm{m}=29.5\\ \\mathrm{km}$。\n\n验算：太阳的 Schwarzschild 半径约 2.95 km，乘以 10 得 29.5 km，线性标度正确；量纲 $\\mathrm{m^3kg^{-1}s^{-2}\\cdot kg/(m^2/s^2)}=\\mathrm{m}$。",
+    "physicsMeta": {
+      "course": "astro",
+      "answerType": "numeric_unit",
+      "unit": "km",
+      "dimension": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 3,
+      "constants": [
+        "G=6.674e-11 N*m^2/kg^2",
+        "c=3.00e8 m/s",
+        "Msun=1.989e30 kg"
+      ],
+      "methods": [
+        "广义相对论",
+        "量纲分析"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "红移与尺度因子",
+    "statement": "某类星体红移 $z=2.0$。求观测时刻宇宙尺度因子相对现在的比值 $a(t)/a_0$。",
+    "mainTag": "天体物理基础",
+    "tags": [
+      "FRW 度规与 Friedmann 方程"
+    ],
+    "kind": "计算题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 1,
+    "source": "天体物理概论（自编）",
+    "hints": [
+      "$1+z=a_0/a(t)$。",
+      "代入 $z=2$ 得 $a/a_0=1/3$。"
+    ],
+    "answer": "0.33",
+    "solution": "由 $1+z=\\dfrac{a_0}{a(t)}$ 得 $\\dfrac{a(t)}{a_0}=\\dfrac{1}{1+z}=\\dfrac13=0.33$。\n\n验算：$z=0$ 时 $a/a_0=1$（现在）；$z\\to\\infty$ 时 $a\\to0$（大爆炸），单调性正确。",
+    "physicsMeta": {
+      "course": "astro",
+      "answerType": "numeric",
+      "unit": "",
+      "dimension": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.02,
+      "sigFigs": 2,
+      "methods": [
+        "宇宙学红移"
+      ]
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "CCD 测光的信噪比",
+    "statement": "某星在 CCD 上积分得到信号 $S=1.0\\times10^{4}\\ \\mathrm{e^-}$，总噪声（含天光与读出）$N=1.0\\times10^{2}\\ \\mathrm{e^-}$。忽略其他系统误差，求信噪比 $\\mathrm{SNR}=S/N$。",
+    "mainTag": "物理实验与误差分析",
+    "tags": [
+      "测量误差与不确定度合成"
+    ],
+    "kind": "实验题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "实测天体物理实验（自编）",
+    "hints": [
+      "CCD 的 SNR 在噪声以天光为主时近似 $S/\\sqrt{S+\\mathrm{sky}+\\sigma_r^2}$。",
+      "本题已给总噪声，直接相除。"
+    ],
+    "answer": "100",
+    "solution": "$\\mathrm{SNR}=\\dfrac{S}{N}=\\dfrac{1.0\\times10^{4}}{1.0\\times10^{2}}=100$。\n\n验算：SNR=100 对应测光精度约 $1\\%$（$\\sigma_m\\approx1.086/\\mathrm{SNR}$ 星等），与「亮星测光可达百分之一」的经验一致。",
+    "physicsMeta": {
+      "course": "lab",
+      "answerType": "numeric",
+      "unit": "",
+      "dimension": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.01,
+      "sigFigs": 3,
+      "methods": [
+        "误差传播"
+      ],
+      "textbookRef": "《实测天体物理》CCD 测光"
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "望远镜的衍射极限",
+    "statement": "口径 $D=0.10\\ \\mathrm{m}$ 的光学望远镜观测波长 $\\lambda=550\\ \\mathrm{nm}$，求衍射极限角分辨率 $\\theta=1.22\\lambda/D$（单位：角秒）。",
+    "mainTag": "物理实验与误差分析",
+    "tags": [
+      "测量误差与不确定度合成"
+    ],
+    "kind": "实验题",
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 3,
+    "source": "实测天体物理实验（自编）",
+    "hints": [
+      "$\\theta$ 先算成弧度。",
+      "$1\\ \\mathrm{rad}=206265^{\\prime\\prime}$。"
+    ],
+    "answer": "1.4\\ \\mathrm{arcsec}",
+    "solution": "$\\theta=1.22\\times\\dfrac{5.5\\times10^{-7}}{0.10}=6.71\\times10^{-6}\\ \\mathrm{rad}$。\n\n换算：$6.71\\times10^{-6}\\times206265=1.38^{\\prime\\prime}\\approx1.4^{\\prime\\prime}$。\n\n验算：10 cm 望远镜分辨约 1 角秒，与「人眼约 1 角分、口径越大分辨越好（$\\theta\\propto1/D$）」一致；实际受视宁度限制通常更差。",
+    "physicsMeta": {
+      "course": "lab",
+      "answerType": "numeric_unit",
+      "unit": "arcsec",
+      "dimension": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.03,
+      "sigFigs": 2,
+      "methods": [
+        "衍射",
+        "误差传播"
+      ],
+      "textbookRef": "《实测天体物理》望远镜与视宁度"
+    },
+    "subject": "physics"
+  },
+  {
+    "title": "多普勒视向速度",
+    "statement": "某恒星谱线（静止波长 $\\lambda_0=656.3\\ \\mathrm{nm}$）被观测到红移到 $\\lambda=656.6\\ \\mathrm{nm}$。求其视向速度（非相对论近似，单位 $\\mathrm{km/s}$）。",
+    "mainTag": "物理实验与误差分析",
+    "tags": [
+      "测量误差与不确定度合成"
+    ],
+    "kind": "实验题",
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 2,
+    "source": "实测天体物理实验（自编）",
+    "hints": [
+      "$\\Delta\\lambda/\\lambda_0=v/c$。",
+      "$\\Delta\\lambda=0.3\\ \\mathrm{nm}$。"
+    ],
+    "answer": "137\\ \\mathrm{km/s}",
+    "solution": "$\\dfrac{\\Delta\\lambda}{\\lambda_0}=\\dfrac{0.3}{656.3}=4.57\\times10^{-4}$。\n\n$v=c\\times4.57\\times10^{-4}=3.0\\times10^{5}\\times4.57\\times10^{-4}=137\\ \\mathrm{km/s}$（退行）。\n\n验算：$v/c\\ll1$，非相对论近似成立（相对论修正约 $0.01\\%$）；红移表示退行，方向与谱线向长波移动一致。",
+    "physicsMeta": {
+      "course": "lab",
+      "answerType": "numeric_unit",
+      "unit": "km/s",
+      "dimension": [
+        0,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tolRel": 0.03,
+      "sigFigs": 3,
+      "constants": [
+        "c=3.00e8 m/s"
+      ],
+      "methods": [
+        "多普勒效应"
+      ],
+      "diagrams": [
+        {
+          "id": "dop",
+          "src": "assets/diagrams/physics/physics-doppler-shift.svg",
+          "alt": "谱线整体红移对应退行速度",
+          "placement": "solution"
+        }
+      ]
+    },
+    "subject": "physics"
+  }
+]

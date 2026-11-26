@@ -329,7 +329,7 @@
         + '<div class="exam-meta"><span>姓名 ____________</span><span>考生编号 ____________</span><span>得分 ____________</span></div>'
         /* 物理卷自动附常用常数表：物理题「用哪个 g」直接影响数值答案，
            卷头统一给出，避免同一份卷子里 9.8 与 10 混用。 */
-        + (window.API.State.subject === 'physics' ? PHYS_CONSTANTS_BLOCK : '')
+        + (window.API.State.subject === 'physics' ? constantsBlock(sorted) : '')
         + section('选择题', '每小题 5 分，共 ' + g.choice.length * 5 + ' 分。下列每题给出的四个选项中，只有一个选项符合题目要求。', g.choice, false)
         + section('填空题', '每小题 5 分，共 ' + g.fill.length * 5 + ' 分。', g.fill, false)
         + section('解答题', '共 70 分。解答应写出文字说明、证明过程或演算步骤。', g.solution, true)

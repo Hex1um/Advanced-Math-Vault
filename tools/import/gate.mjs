@@ -59,8 +59,33 @@ export function physicsGate(p, opts) {
   }
 
   const type = String(meta.answerType || '');
-  if (type && !['symbolic', 'numeric_unit', 'vector', 'choice', 'proof', 'lab_analysis'].includes(type)) {
+  if (type && !['symbolic', 'numeric', 'numeric_unit', 'vector', 'choice', 'proof', 'lab_analysis', 'order_of_magnitude'].includes(type)) {
     errors.push('answerType 非法：' + type);
+  }
+
+  /* ---- v3.1 新增字段：课程组 / 单位制 / 数量级容差 / 前置题 / 教材索引 ---- */
+  if (meta.course && !tagTax.isValidCourse(meta.course)) {
+    errors.push('course 不是合法课程组：' + meta.course);
+  }
+  const system = String(meta.unitSystem || 'SI');
+  if (['SI', 'CGS', 'astro', 'natural'].indexOf(system) < 0) {
+    errors.push('unitSystem 必须是 SI / CGS / astro / natural：' + system);
+  }
+  if (type === 'order_of_magnitude') {
+    const dex = Number(meta.tolDex);
+    if (!Number.isFinite(dex) || dex <= 0 || dex > 2) {
+      errors.push('order_of_magnitude 题必须给 0 < tolDex <= 2（当前 ' + meta.tolDex + '）');
+    }
+  }
+  if (Array.isArray(meta.prerequisites)) {
+    for (const code of meta.prerequisites) {
+      if (!/^(HS|PH|PE)[0-9]{3,6}$/i.test(String(code))) {
+        errors.push('prerequisites 里的题号格式不对：' + code);
+      }
+    }
+  }
+  if (meta.textbookRef && String(meta.textbookRef).length > 120) {
+    errors.push('textbookRef 过长（>120 字）');
   }
 
   /* 配图：路径必须落在 public/assets/diagrams/physics/ 内，文件真实存在，SVG 安全，且有体积上限 */
@@ -83,7 +108,11 @@ export function physicsGate(p, opts) {
     }
   }
 
-  /* 单位可解析：numeric_unit 题的答案单位必须能被判题引擎认出来，否则学生永远判不对 */
+  /* 单位可解析：只有 numeric_unit 需要单位；无量纲数值（π、信噪比）用 numeric */
+  if (type === 'numeric') {
+    const q = physics.parseQuantity(String(p.answer || ''));
+    if (!q.numeric) errors.push('numeric 题的答案里没有数值');
+  }
   if (type === 'numeric_unit') {
     const unitText = String(meta.unit || '');
     if (!unitText) errors.push('answerType=numeric_unit 但缺少 physicsMeta.unit');

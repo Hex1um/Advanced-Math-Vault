@@ -118,5 +118,9 @@ jobs:
       - name: 极限答案数值验证
         run: python tools/verify/verify_limits.py
 
-      - name: 物理量纲与单位校验（SymPy dimsys_SI）
-        run: python tools/verify/verify_physics.py --file data/batch-physics-01.json
+      - name: 物理量纲与单位校验（SymPy dimsys_SI，覆盖全部物理批次）
+        run: |
+          for f in data/batch-physics*.json; do
+            echo "== $f"
+            python tools/verify/verify_physics.py --file "$f" --strict
+          done

@@ -5,7 +5,7 @@
   const Views = window.Views = window.Views || {};
   const St = window.API.State;
 
-  let filters = { q: '', mainTag: '', examTag: '', tags: [], method: '', level: '', status: 'all', sort: 'code', page: 1, tagsExpanded: false };
+  let filters = { q: '', course: '', mainTag: '', examTag: '', tags: [], method: '', level: '', status: 'all', sort: 'code', page: 1, tagsExpanded: false };
   let cache = null;
 
   /* 防竞态：快速连点筛选会并发出多个请求，先发的后到就会把列表刷成旧结果。
@@ -23,6 +23,7 @@
     const p = new URLSearchParams();
     /* 学科永远显式传：不传时后端按 math 处理，但前端要能表达「我在物理」 */
     p.set('subject', St.subject);
+    if (filters.course) p.set('course', filters.course);
     if (filters.q) p.set('q', filters.q);
     if (filters.method) p.set('method', filters.method);
     if (filters.mainTag) p.set('main', filters.mainTag);
@@ -76,7 +77,13 @@
     const d = document.getElementById('filterBox');
     if (!d) return;
 
-    const tree = St.tagTree || [];
+    const allTree = St.tagTree || [];
+    const tree = filters.course
+      ? allTree.filter(function (m) {
+        const row = (St.courses || []).filter(function (c) { return c.key === filters.course; })[0];
+        return row && row.mainTags && row.mainTags[m.name];
+      })
+      : allTree;
     const flat = St.tags || [];
     const levelChips = ['<button class="chip' + (!filters.level ? ' active' : '') + '" data-level="">全部难度</button>']
       .concat(window.UI.LEVELS.map(function (l) {
@@ -125,8 +132,19 @@
         }).join('') + '</div></div>'
       : '';
 
-    d.innerHTML =
-      '<div class="filter-row"><span class="filter-label">主标签</span><div class="chip-scroll">' + mainChips + '</div></div>'
+    /* 课程组 Tab（物理独有）：普物 / 数理方法 / 四大力学 / 天文 / 实验。
+       先选课程组，下面的主标签只剩该组内的章节，避免 15 个主标签平铺。 */
+    const courseTabs = (St.subject === 'physics' && (St.courses || []).length)
+      ? '<div class="course-tabs">'
+        + '<button class="course-tab' + (!filters.course ? ' active' : '') + '" data-course="">全部课程</button>'
+        + St.courses.filter(function (c) { return c.count > 0; }).map(function (c) {
+          return '<button class="course-tab' + (filters.course === c.key ? ' active' : '') + '" data-course="' + window.Md.esc(c.key) + '">'
+            + window.Md.esc(c.name) + '<span class="n">' + c.count + '</span></button>';
+        }).join('') + '</div>'
+      : '';
+
+    d.innerHTML = courseTabs
+      + '<div class="filter-row"><span class="filter-label">主标签</span><div class="chip-scroll">' + mainChips + '</div></div>'
       + '<div class="filter-row"><span class="filter-label">子标签</span><div class="chip-scroll">' + tagChips + '</div></div>'
       + methodChips
       + examChips
@@ -169,6 +187,15 @@
     d.querySelectorAll('[data-exam]').forEach(function (b) {
       b.addEventListener('click', function () {
         filters.examTag = b.dataset.exam;
+        filters.page = 1;
+        load();
+      });
+    });
+    d.querySelectorAll('[data-course]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        filters.course = b.dataset.course;
+        filters.mainTag = '';
+        filters.tags = [];
         filters.page = 1;
         load();
       });
@@ -318,6 +345,7 @@
       filters.mainTag = '';
       filters.tags = [];
       filters.method = '';
+      filters.course = '';
       filters.page = 1;
       filters.__subject = St.subject;
     }
@@ -363,6 +391,6 @@
   };
 
   Views.library.reset = function () {
-    filters = { q: '', tags: [], method: '', level: '', status: 'all', sort: 'code', page: 1 };
+    filters = { q: '', course: '', tags: [], method: '', level: '', status: 'all', sort: 'code', page: 1 };
   };
 })();

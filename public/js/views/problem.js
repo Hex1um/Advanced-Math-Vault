@@ -542,6 +542,27 @@
           });
           stmtEl.after(box);
         }
+        /* 三口径常数表（SI / CGS 高斯制 / 天文）：默认页签由 unitSystem 与课程组决定，
+           例如电动力学题默认展开 CGS，天体物理题默认展开天文常数。 */
+        if (window.PhysConst) {
+          const tab = window.PhysConst.defaultTabOf([meta]);
+          const wrapC = document.createElement('details');
+          wrapC.className = 'phys-constants';
+          wrapC.innerHTML = '<summary>常用常数速查（' + (meta.unitSystem || 'SI') + ' / 可切换 CGS、天文）</summary>'
+            + window.PhysConst.block(tab, { compact: true });
+          window.PhysConst.bind(wrapC);
+          stmtEl.after(wrapC);
+        }
+        if (Array.isArray(meta.prerequisites) && meta.prerequisites.length) {
+          const bar = document.createElement('div');
+          bar.className = 'prereq-bar';
+          bar.innerHTML = '<span class="label">前置工具</span>' + meta.prerequisites.map(function (code) {
+            const isMath = String(code).indexOf('HS') === 0;
+            return '<a class="prereq-chip' + (isMath ? ' subject-math' : '') + '" href="#/problem/' + window.Md.esc(code) + '"'
+              + ' title="' + (isMath ? '数学前置题' : '物理前置题') + '">' + window.Md.esc(code) + '</a>';
+          }).join('');
+          stmtEl.after(bar);
+        }
         if (meta.unit) {
           const unitBar = document.createElement('div');
           unitBar.className = 'small muted';

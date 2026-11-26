@@ -129,12 +129,15 @@
     /* 学科树优先：后端 v2.7+ 返回 tagTrees.math / tagTrees.physics，
        旧后端只有 tagTree（数学），此时 physics 树为空，前端会提示「还没有物理题」。 */
     const trees = meta.tagTrees || null;
+    State.courses = (meta.courses && meta.courses[State.subject]) || [];
+    State.courseTree = meta.courseTree || [];
     State.tagTree = (trees && trees[State.subject]) || meta.tagTree || [];
     State.examTags = meta.examTags || [];
     State.tags = (State.tagTree || []).reduce(function (arr, m) {
       return arr.concat(m.children || []);
     }, []).sort(function (a, b) { return b.count - a.count; });
     State.methods = (meta.methods && meta.methods[State.subject]) || [];
+    State.courses = (meta.courses && meta.courses[State.subject]) || [];
     State.llm = meta.llm;
     State.emit('meta:updated', { me: State.me, stats: State.stats });
     if (nextKey !== prevKey) State.emit('auth:changed', State.me || null);

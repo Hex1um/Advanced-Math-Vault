@@ -58,7 +58,26 @@ for (const file of files) {
       continue;
     }
     const meta = p.physicsMeta || {};
-    if (String(meta.answerType) === 'numeric_unit') {
+    const atype = String(meta.answerType || '');
+    if (atype === 'order_of_magnitude') {
+      /* 估算题：只要求引擎能识别并给出 dex 结论，不要求精确到 1 位小数 */
+      const self = physics.checkAnswer(p.answer, p.answer, meta);
+      if (!self.ok) {
+        errors++;
+        console.log('  ✗ ' + label + '｜估算自检未通过：' + self.detail);
+        continue;
+      }
+      continue;
+    } else if (atype === 'numeric') {
+      const self = physics.checkAnswer(p.answer, p.answer, meta);
+      if (!self.ok) {
+        errors++;
+        console.log('  ✗ ' + label + '｜无量纲数值自检未通过：' + self.detail);
+        continue;
+      }
+      continue;
+    }
+    if (atype === 'numeric_unit') {
       const self = physics.checkAnswer(p.answer, p.answer, meta);
       if (!self.ok) {
         errors++;
@@ -78,7 +97,7 @@ for (const file of files) {
           continue;
         }
       }
-    } else if (String(meta.answerType) === 'symbolic') {
+    } else if (atype === 'symbolic') {
       const self = physics.checkAnswer(p.answer, p.answer, meta);
       if (!(self.ok || self.deferred)) {
         errors++;

@@ -29,7 +29,7 @@ function createProblemsRoutes(deps) {
     fail, send, readBody, clientIp, store,
     levelOf, levelInfo, visibleProblem, fullProblem, xpForProblem,
     logActivity, saveDb, publicUser, publicFeedback, scheduleFeedbackReview, bumpView,
-    allTags, tagTree, methodCounts, examTagCounts, FEEDBACK_TYPES, judgeMessages, parseJudge,
+    allTags, tagTree, methodCounts, courseCounts, examTagCounts, FEEDBACK_TYPES, judgeMessages, parseJudge,
     fsrs, processMatchesAnswer, callLLM, llmCandidates, userLlmConfig,
     LEVELS, TRUST_PROXY, VISION_MODEL
   } = deps;
@@ -57,6 +57,8 @@ function createProblemsRoutes(deps) {
     const subjectRaw = String(query.subject || '').toLowerCase();
     const subject = subjectRaw === 'all' ? 'all' : tagTax.subjectOf(subjectRaw);
     const method = String(query.method || '').trim();
+    /* 课程组：物理的三级筛选（课程组 → 主标签 → 子标签）第一层 */
+    const course = String(query.course || '').trim();
 
     let list = db.problems.filter((p) => p.status === 'approved'
       && (subject === 'all' || tagTax.subjectOf(p.subject) === subject));
@@ -83,6 +85,12 @@ function createProblemsRoutes(deps) {
     if (method) {
       /* 物理思想筛选（守恒律 / 微元法 / 量纲分析…），数学题没有这个维度 */
       list = list.filter((p) => ((p.physicsMeta && p.physicsMeta.methods) || []).includes(method));
+    }
+    if (course && tagTax.isValidCourse(course)) {
+      list = list.filter((p) => {
+        const ck = (p.physicsMeta && p.physicsMeta.course) || tagTax.courseOfMain(p.mainTag);
+        return ck === course;
+      });
     }
     if (level) list = list.filter((p) => levelOf(p.difficulty).name === level);
     if (status === 'solved') list = list.filter((p) => user && user.solved && user.solved[p.code]);
@@ -114,6 +122,7 @@ function createProblemsRoutes(deps) {
       tags: allTags(subject === 'all' ? 'all' : subject),
       tagTree: tagTree(subject === 'all' ? 'math' : subject),
       methods: subject === 'all' ? [] : methodCounts(subject),
+      courses: subject === 'physics' ? courseCounts('physics') : [],
       examTags: examTagCounts(),
       levels: LEVELS.map((l) => l.name)
     });

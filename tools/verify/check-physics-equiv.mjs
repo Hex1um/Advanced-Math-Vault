@@ -216,6 +216,118 @@ t('带单位的数值答案无 meta 也可自动判', () => {
   eq(pe.canAutoJudge({ answer: '9.8 m/s^2' }), true);
 });
 
+/* ---------------- 9. 天文单位与天文标度 ---------------- */
+const astroCases = [
+  ['1 pc', '3.0857e16 m', {}],
+  ['1 kpc', '3.0857e19 m', {}],
+  ['1 Mpc', '3.0857e22 m', {}],
+  ['1 Gpc', '3.0857e25 m', {}],
+  ['1 ly', '9.4607e15 m', {}],
+  ['1 AU', '1.496e11 m', {}],
+  ['1 Msun', '1.989e30 kg', {}],
+  ['1 M_sun', '1.989e30 kg', {}],
+  ['1 Lsun', '3.828e26 W', {}],
+  ['1 R_sun', '6.957e8 m', {}],
+  ['1 Mearth', '5.972e24 kg', {}],
+  ['1 Myr', '3.156e13 s', {}],
+  ['1 Gyr', '3.156e16 s', {}],
+  ['1.17e10 yr', '11.7 Gyr', {}],
+  ['1 Jy', '1e-26 W/m^2/Hz', {}],
+  ['10 km/s', '1e4 m/s', {}],
+  ['70 km/(s*Mpc)', '2.27e-18 s^-1', { tolRel: 0.05 }],
+  ['8500 K', '8500 K', {}],
+  ['2.725 K', '2.725 K', {}]
+];
+for (const [user, ref, meta] of astroCases) {
+  t('天文 ' + user + ' vs ' + ref, () => {
+    const out = pe.checkAnswer(user, ref, meta);
+    eq(out.verdict, 'correct', out.detail);
+  });
+}
+
+/* ---------------- 10. CGS 高斯制 ---------------- */
+t('esu 与 C 在高斯制下同量纲（不校验电流维）', () => {
+  const out = pe.checkAnswer('1 esu', '3.3356e-10 C', { unitSystem: 'CGS' });
+  eq(out.verdict, 'correct', out.detail);
+});
+t('高斯制下 esu 数值不符仍判错', () => {
+  const out = pe.checkAnswer('1 esu', '1 C', { unitSystem: 'CGS' });
+  eq(out.verdict, 'valueOff');
+});
+t('高斯制 Gs 与 T 换算', () => {
+  const out = pe.checkAnswer('1 Gs', '1e-4 T', { unitSystem: 'CGS' });
+  eq(out.verdict, 'correct', out.detail);
+});
+t('高斯制 Oe 与 A/m', () => {
+  const out = pe.checkAnswer('1 Oe', '79.577 A/m', { unitSystem: 'CGS', tolRel: 0.01 });
+  eq(out.verdict, 'correct', out.detail);
+});
+t('高斯制 Mx 与 Wb', () => {
+  const out = pe.checkAnswer('1 Mx', '1e-8 Wb', { unitSystem: 'CGS' });
+  eq(out.verdict, 'correct', out.detail);
+});
+t('CGS 力学单位 erg', () => {
+  const out = pe.checkAnswer('1 erg', '1e-7 J', { unitSystem: 'CGS' });
+  eq(out.verdict, 'correct');
+});
+t('CGS 力学单位 dyn', () => {
+  const out = pe.checkAnswer('1 dyn', '1e-5 N', { unitSystem: 'CGS' });
+  eq(out.verdict, 'correct');
+});
+t('CGS 单位 Ba 与 Pa', () => {
+  const out = pe.checkAnswer('1 Ba', '0.1 Pa', { unitSystem: 'CGS' });
+  eq(out.verdict, 'correct');
+});
+t('SI 模式下 esu 与 C 仍按电流维比较', () => {
+  const out = pe.checkAnswer('1 esu', '3.3356e-10 C', { unitSystem: 'SI' });
+  eq(out.verdict, 'correct');
+});
+t('natural 单位不卡量纲', () => {
+  const out = pe.checkAnswer('1 GeV', '1 GeV', { unitSystem: 'natural' });
+  eq(out.verdict, 'correct');
+});
+
+/* ---------------- 11. 数量级估算（order_of_magnitude） ---------------- */
+const om = (u, r, tolDex) => pe.checkAnswer(u, r, { answerType: 'order_of_magnitude', tolDex: tolDex === undefined ? 0.3 : tolDex });
+t('量级：2 倍以内判对（边界含等号）', () => { eq(om('1e11 Msun', '2e11 Msun').verdict, 'correct'); });
+t('量级：1.4 倍判对', () => { eq(om('7e10 Msun', '1e11 Msun').verdict, 'correct'); });
+t('量级：10 倍判错', () => { eq(om('1e12 Msun', '1e11 Msun').verdict, 'valueOff'); });
+t('量级：给出 dex 偏差', () => {
+  const out = om('1e12 Msun', '1e11 Msun');
+  near(out.dexErr, 1, 1e-6, 'dexErr');
+});
+t('量级：0.5 dex 容差放行 3 倍', () => { eq(om('3e10 yr', '1e10 yr', 0.5).verdict, 'correct'); });
+t('量级：符号相反直接判错', () => { eq(om('-1e11 Msun', '1e11 Msun').verdict, 'valueOff'); });
+t('量级：跨单位（kg 与 Msun）', () => { eq(om('2e30 kg', '1 Msun').verdict, 'correct'); });
+t('量级：模式写在 detail 里', () => { eq(om('1e11 Msun', '1e11 Msun').mode, 'order_of_magnitude'); });
+t('量级：普通模式不受 tolDex 影响', () => {
+  const out = pe.checkAnswer('2.04 m/s', '2 m/s', { tolRel: 0.02, tolDex: 0 });
+  eq(out.mode, 'numeric_unit');
+});
+t('canAutoJudge 认可 order_of_magnitude', () => {
+  eq(pe.canAutoJudge({ answer: '1e11 Msun', physicsMeta: { answerType: 'order_of_magnitude' } }), true);
+});
+
+/* ---------------- 12. 单位制元数据 ---------------- */
+t('UNIT_SYSTEMS 覆盖四套', () => {
+  eq(pe.UNIT_SYSTEMS.join(','), 'SI,CGS,astro,natural');
+});
+t('未知单位制回退 SI 行为', () => {
+  const out = pe.checkAnswer('1 m', '1 m', { unitSystem: 'MKS' });
+  eq(out.verdict, 'correct');
+});
+t('天文单位串 \odot 写法', () => {
+  const u = pe.parseUnitExpr('M_{\\odot}');
+  near(u.factor, 1.98847e30, 1e-3);
+});
+t('Jy 量纲等于 kg/s^2', () => {
+  const u = pe.parseUnitExpr('Jy');
+  eq(pe.formatDim(u.dim), 'M T^-2');
+});
+t('pc 与 m 量纲一致', () => {
+  eq(pe.describeDim(pe.parseUnitExpr('pc').dim), '长度');
+});
+
 /* ---------------- 汇总 ---------------- */
 const total = pass + fails.length;
 console.log('\n共 ' + total + ' 项：通过 ' + pass + '，失败 ' + fails.length);

@@ -62,6 +62,34 @@ UNITS = {
     'rad': sp.Integer(1),
     'sr': sp.Integer(1),
     'percent': sp.Rational(1, 100),
+    # 天文与 CGS 单位（SymPy 没有内置，直接按等值 SI 量登记）
+    'pc': sp.Rational('3.0856775814913673e16') * meter,
+    'AU': sp.Rational('1.495978707e11') * meter,
+    'au': sp.Rational('1.495978707e11') * meter,
+    'ly': sp.Rational('9.4607304725808e15') * meter,
+    'Msun': sp.Rational('1.98847e30') * kilogram,
+    'Rsun': sp.Rational('6.957e8') * meter,
+    'Lsun': sp.Rational('3.828e26') * watt,
+    'Myr': sp.Rational('3.15576e13') * second,
+    'Gyr': sp.Rational('3.15576e16') * second,
+    'Jy': sp.Rational('1e-26') * (kilogram / second ** 2),
+    'mag': sp.Integer(1),
+    'dyn': sp.Rational('1e-5') * newton,
+    'erg': sp.Rational('1e-7') * joule,
+    'Ba': sp.Rational('0.1') * pascal,
+    'esu': sp.Rational('3.3356409519815204e-10') * coulomb,
+    'statC': sp.Rational('3.3356409519815204e-10') * coulomb,
+    'Gs': sp.Rational('1e-4') * tesla,
+    'Mx': sp.Rational('1e-8') * weber,
+    # 时间与角度：判题引擎认这些写法，验题脚本也必须认得，否则会误报「单位无法解析」
+    'yr': sp.Rational('3.15576e7') * second,
+    'h': sp.Integer(3600) * second,
+    'min': sp.Integer(60) * second,
+    'd': sp.Integer(86400) * second,
+    'arcsec': sp.pi / 648000,
+    'arcmin': sp.pi / 10800,
+    'deg': sp.pi / 180,
+    '°': sp.pi / 180,
 }
 
 PREFIX = {
@@ -103,6 +131,8 @@ def parse_unit(text):
     s = re.sub(r'\\(?:cdot|times)', '*', s)
     s = s.replace('·', '*').replace('⋅', '*').replace(' ', '*').replace('^', '**')
     s = s.replace('%', 'percent')
+    s = s.replace('°', 'deg')
+    s = s.replace('″', 'arcsec')
     s = re.sub(r'\*\*\s*\{?(-?\d+)\}?', r'**\1', s)
     if not s:
         return None
@@ -161,6 +191,21 @@ def check_problem(p):
     meta = p.get('physicsMeta') or {}
     unit_text = str(meta.get('unit') or '')
     declared = meta.get('dimension')
+    system = str(meta.get('unitSystem') or 'SI').upper()
+    atype0 = str(meta.get('answerType') or '')
+    if system not in ('SI', 'CGS', 'ASTRO', 'NATURAL'):
+        problems.append(f'unitSystem 非法：{system}')
+    if atype0 == 'order_of_magnitude':
+        dex = meta.get('tolDex')
+        if dex is None:
+            problems.append('order_of_magnitude 题缺少 tolDex')
+        else:
+            try:
+                v = float(dex)
+                if not (0 < v <= 2):
+                    problems.append(f'tolDex 应在 (0, 2] 之间：{dex}')
+            except Exception:
+                problems.append(f'tolDex 不是数字：{dex}')
 
     unit_expr = parse_unit(unit_text) if unit_text else None
     if unit_text and unit_expr is None:
@@ -171,6 +216,10 @@ def check_problem(p):
 
     if declared and unit_dim:
         want = tuple(int(x) for x in declared)
+        # 高斯制不校验电流维（I 在第 4 位）
+        if system == 'CGS':
+            want = want[:3] + (0,) + want[4:]
+            unit_dim = unit_dim[:3] + (0,) + unit_dim[4:]
         if want != unit_dim:
             problems.append(f'声明量纲 {want} 与单位 {unit_text} 的量纲 {unit_dim} 不一致')
 

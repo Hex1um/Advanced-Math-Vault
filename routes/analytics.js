@@ -74,6 +74,26 @@ module.exports = function registerAnalyticsRoutes(router, ctx) {
         recommend.push({ code: p.code, title: p.title, difficulty: p.difficulty, tag: w.tag });
       }
     }
+    /* 课程组维度（物理）：四大力学 / 天文 / 数理方法各自掌握度。
+       主标签太细（15 个），学生真正想知道的是「我理论力学这块怎么样」。 */
+    const courseAgg = new Map();
+    if (subject === 'physics') {
+      for (const [code, rec] of Object.entries(solvedMap)) {
+        const p = db.problems.find((x) => x.code === code);
+        if (!p || tagTax.subjectOf(p.subject) !== 'physics') continue;
+        const ck = (p.physicsMeta && p.physicsMeta.course) || tagTax.courseOfMain(p.mainTag);
+        const sc = (bestMap[code] && bestMap[code].score) || (rec.done ? 100 : 0);
+        const o = courseAgg.get(ck) || { course: ck, attempts: 0, passed: 0, scoreSum: 0 };
+        o.attempts++; if (rec.done) o.passed++; o.scoreSum += sc;
+        courseAgg.set(ck, o);
+      }
+    }
+    const courses = [...courseAgg.values()].map((o) => ({
+      course: o.course, attempts: o.attempts, passed: o.passed,
+      rate: o.attempts ? Math.round((o.passed / o.attempts) * 100) : 0,
+      avgScore: o.attempts ? Math.round(o.scoreSum / o.attempts) : 0
+    })).sort((a, b) => a.rate - b.rate);
+
     const weakMain = weakMainTags(user, 3);
     const mainRecommend = [];
     for (const tag of weakMain) {
@@ -95,7 +115,7 @@ module.exports = function registerAnalyticsRoutes(router, ctx) {
         avgScore: attempts ? Math.round(scoreSum / attempts) : 0,
         wrong: Object.keys(user.wrong || {}).length
       },
-      tags, mainTags, weakest, recommend, weakMain, mainRecommend,
+      tags, mainTags, weakest, recommend, weakMain, mainRecommend, courses,
       subject: subject
     });
   }
@@ -152,6 +172,38 @@ module.exports = function registerAnalyticsRoutes(router, ctx) {
       })
       .sort((a, b) => a.score - b.score);
 
+    /* 2b. 课程组掌握度（物理）：把主标签折叠成 5 个课程组，
+       避免「量子力学 12 个标签各 1 题」这种噪声。 */
+    const courseStats = new Map();
+    if (subject === 'physics') {
+      for (const [code] of solvedSet) {
+        const p = probMap.get(code);
+        if (!p) continue;
+        const ck = (p.physicsMeta && p.physicsMeta.course) || tagTax.courseOfMain(p.mainTag);
+        const row = courseStats.get(ck) || { course: ck, solved: 0, attemptsList: [] };
+        row.solved++;
+        courseStats.set(ck, row);
+      }
+      for (const s of subs) {
+        const p = probMap.get(s.code || s.problemCode);
+        if (!p || tagTax.subjectOf(p.subject) !== 'physics') continue;
+        const ck = (p.physicsMeta && p.physicsMeta.course) || tagTax.courseOfMain(p.mainTag);
+        const row = courseStats.get(ck) || { course: ck, solved: 0, attemptsList: [] };
+        row.attemptsList.push(s.score || 0);
+        courseStats.set(ck, row);
+      }
+    }
+    const courses = [...courseStats.values()].map((row) => {
+      const list = row.attemptsList;
+      const avg = list.length ? list.reduce((a, b) => a + b, 0) / list.length : 0;
+      return {
+        course: row.course,
+        solved: row.solved,
+        attempts: list.length,
+        avgScore: Math.round(avg * 10) / 10
+      };
+    }).sort((a, b) => b.solved - a.solved);
+
     // 3. 靶向推荐：掌握度最低的两个主考点里，挑没做过的中等难度题
     const weakTags = new Set(mastery.slice(0, 2).map((m) => m.mainTag));
     const recommended = (db.problems || [])
@@ -189,6 +241,7 @@ module.exports = function registerAnalyticsRoutes(router, ctx) {
       totalSolved: solvedSet.size,
       heatmap: Object.fromEntries(dailyMap),
       mastery,
+      courses,
       recommended,
       streak,
       subject: subject,
