@@ -652,6 +652,7 @@ try {
 
   const metaSprint = await req('/api/meta');
   ok('meta 声明 sprint 能力', !!(metaSprint.json.features && metaSprint.json.features.sprint === true));
+  ok('meta 声明背单词能力', !!(metaSprint.json.features && metaSprint.json.features.vocab === true));
 
   const spPack = await req('/api/sprint/packs/hust-xigai-2026');
   ok('科目骨架含章节与考点', spPack.status === 200 && (spPack.json.chapters || []).length >= 15
@@ -703,6 +704,36 @@ try {
 
   const spMissing = await req('/api/sprint/packs/not-a-pack');
   ok('不存在的科目包 404', spMissing.status === 404);
+
+  /* 背单词：词库不依赖题库，冒烟库里也能整条链路跑通 */
+  const spVocab = await req('/api/sprint/packs/cet4-2026/vocab?limit=5');
+  ok('四六级词库可取词', spVocab.status === 200 && (spVocab.json.items || []).length === 5
+    && spVocab.json.stats.total >= 1000, 'total=' + (spVocab.json.stats && spVocab.json.stats.total));
+  ok('词卡带拼写/释义/例句', (spVocab.json.items || []).every((w) => w.w && w.cn));
+
+  const spVocabAnon = await client()('/api/sprint/packs/cet4-2026/vocab', {
+    method: 'POST', body: JSON.stringify({ word: 'abruptly', rating: 'good' })
+  });
+  ok('未登录背词被拒', spVocabAnon.status === 401);
+
+  const spVocabWord = spVocab.json.items[0].w;
+  const spVocabRate = await req('/api/sprint/packs/cet4-2026/vocab', {
+    method: 'POST', body: JSON.stringify({ word: spVocabWord, rating: 'good' })
+  });
+  ok('评价词卡返回下次复习时间', spVocabRate.status === 200 && spVocabRate.json.nextReviewAt > Date.now()
+    && spVocabRate.json.stats.learned === 1, JSON.stringify(spVocabRate.json.stats));
+
+  const spVocabStats = await req('/api/sprint/packs/cet4-2026/vocab/stats');
+  ok('统计记住已学词数', spVocabStats.status === 200 && spVocabStats.json.stats.learned === 1,
+    JSON.stringify(spVocabStats.json.stats));
+
+  const spVocabBad = await req('/api/sprint/packs/cet4-2026/vocab', {
+    method: 'POST', body: JSON.stringify({ word: 'not_in_dict_zzz', rating: 'good' })
+  });
+  ok('词库外的词不入队', spVocabBad.status === 404);
+
+  const spVocabNoDict = await req('/api/sprint/packs/hust-xigai-2026/vocab');
+  ok('无词库的科目 404', spVocabNoDict.status === 404);
 
 } catch (e) {
   fail++;

@@ -91,7 +91,14 @@ module.exports = function registerHealthRoutes(router, ctx) {
       examTags: examTagCounts(),
       /* 前端据此决定是否显示「分析 / 题单 / 期末突击」入口：
          旧后端没有这些接口，隐藏比点了报错更体面。 */
-      features: { analytics: true, collections: true, equivalentJudge: true, sprint: true },
+      features: {
+        analytics: true,
+        collections: true,
+        equivalentJudge: true,
+        sprint: true,
+        /* 背单词依赖科目包里的 vocabFile，没词库时不亮这个能力，前端就不加那个 Tab */
+        vocab: !!(ctx.sprint && ctx.sprint.list().some((p) => p.counts && p.counts.vocab > 0))
+      },
       llm: {
         configured: llmConfigured(),
         model: llmConfigured() ? db.settings.llm.model : '',

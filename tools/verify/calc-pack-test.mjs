@@ -121,5 +121,34 @@ for (const [id, label, minPoints] of [['cet4-2026', '四级', 30], ['cet6-2026',
 const dupWarn = logs.filter((m) => /重复|不存在/.test(m));
 ok('加载日志无重复/缺号告警', dupWarn.length === 0, dupWarn.slice(0, 2).join(' / '));
 
+/* ---------------------------------------------------------------- 背单词（四六级词库） */
+const fsrs = require(path.join(ROOT, 'lib', 'fsrs.js'));
+for (const [id, label, minWords] of [['cet4-2026', '四级', 1000], ['cet6-2026', '六级', 1000]]) {
+  const p = spr.get(id);
+  if (!p) continue;
+  ok(label + '词库 ≥ ' + minWords + ' 词', p.vocab.length >= minWords, 'words=' + p.vocab.length);
+  const bad = p.vocab.filter((v) => !v.w || !v.cn);
+  ok(label + '每个词都有拼写与释义', bad.length === 0, bad.slice(0, 3).map((v) => v.w).join(','));
+  const seen = new Set();
+  const dup = p.vocab.filter((v) => (seen.has(v.w) ? true : (seen.add(v.w), false)));
+  ok(label + '词库无重复词条', dup.length === 0, dup.slice(0, 3).map((v) => v.w).join(','));
+  const withPh = p.vocab.filter((v) => v.ph).length;
+  ok(label + '音标覆盖率 ≥ 80%', withPh / p.vocab.length >= 0.8, (withPh / p.vocab.length * 100).toFixed(1) + '%');
+  const withEx = p.vocab.filter((v) => v.ex).length;
+  ok(label + '例句覆盖率 ≥ 70%', withEx / p.vocab.length >= 0.7, (withEx / p.vocab.length * 100).toFixed(1) + '%');
+
+  const prog = spr.blankProgress();
+  const q = spr.vocabQueue(p, prog, { limit: 20 });
+  ok(label + '默认取 20 张新词', q.items.length === 20 && q.items.every((x) => x.kind === 'new'), 'got=' + q.items.length);
+  const card = spr.recordVocab(prog, p, q.items[0].w, 'good', fsrs);
+  ok(label + '评价后生成下次复习时间', !!card && card.nextReviewAt > Date.now(), JSON.stringify(card && card.nextReviewAt));
+  /* 回归：normalizeProgress 曾漏掉 vocab 字段，导致「已学」永远为 0 */
+  const round = spr.normalizeProgress(JSON.parse(JSON.stringify(prog)));
+  ok(label + '进度往返不丢词卡', Object.keys(round.vocab).length === 1, 'kept=' + Object.keys(round.vocab).length);
+  const st = spr.vocabStats(p, round);
+  ok(label + '统计认得出已学 1 词', st.learned === 1 && st.total === p.vocab.length, JSON.stringify(st));
+  ok(label + '不存在的词不入库', spr.recordVocab(prog, p, '__no_such_word__', 'good', fsrs) === null);
+}
+
 console.log('\n结果: ' + pass + ' 通过 / ' + fail + ' 失败');
 process.exit(fail ? 1 : 0);

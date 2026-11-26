@@ -28,12 +28,17 @@
     return (d.getMonth() + 1) + '月' + d.getDate() + '日';
   }
 
+  /* 背单词：四六级包里的词库用「先猜后看」的卡片流，评价映射到错题本同一套 FSRS：
+     不认识 → again，模糊 → hard，认识 → good。同一轮里评「不认识」的词会插回三张之后，
+     评「模糊」的词放到本轮末尾再过一遍，各自最多重复两次，保证一轮能走完。 */
+  const RATE_KEYS = { '1': 'again', '2': 'hard', '3': 'good' };
+
   Views.sprintPack = function (el, params) {
     const packId = params.id;
     const state = {
       pack: null,
       chapters: [],
-      tab: params.tab === 'weak' ? 'weak' : 'study',
+      tab: params.tab === 'weak' || params.tab === 'vocab' ? params.tab : 'study',
       pointId: params.p || '',
       openChapter: '',
       loggedIn: false,
@@ -45,7 +50,19 @@
       weak: null,
       plan: '',
       answered: {},
-      busy: false
+      busy: false,
+      vocab: {
+        mode: 'mix',
+        queue: [],
+        i: 0,
+        stats: null,
+        revealed: false,
+        quick: false,
+        counts: { again: 0, hard: 0, good: 0 },
+        loading: false,
+        finished: false,
+        err: ''
+      }
     };
 
     el.innerHTML = '<div class="sp-loading">正在加载科目…</div>';
@@ -77,6 +94,9 @@
         + '<div class="sp-tabs">'
         + '  <button class="sp-tab' + (state.tab === 'study' ? ' active' : '') + '" data-tab="study">学习知识点</button>'
         + '  <button class="sp-tab' + (state.tab === 'weak' ? ' active' : '') + '" data-tab="weak">分析薄弱</button>'
+        + (p.counts.vocab
+          ? '  <button class="sp-tab' + (state.tab === 'vocab' ? ' active' : '') + '" data-tab="vocab">背单词</button>'
+          : '')
         + '  <span class="sp-tabs-hint">' + (state.loggedIn && state.mine
           ? '已练 ' + (state.mine.attempts || 0) + ' 题 · 学过 ' + (state.mine.touchedPoints || 0) + ' 个考点'
           : '登录后记录答题与提问') + '</span>'
@@ -311,14 +331,191 @@
     function renderPane() {
       const pane = document.getElementById('spPane');
       if (!pane) return;
-      pane.innerHTML = state.tab === 'weak' ? paneWeakHTML() : paneStudyHTML();
+      const work = el.querySelector('.sp-work');
+      if (work) work.classList.toggle('wide', state.tab === 'vocab');
+      if (state.tab === 'weak') pane.innerHTML = paneWeakHTML();
+      else if (state.tab === 'vocab') pane.innerHTML = paneVocabHTML();
+      else pane.innerHTML = paneStudyHTML();
       if (state.tab === 'weak') {
         renderPlan();
+      } else if (state.tab === 'vocab') {
+        /* 词卡里没有数学公式，不用再跑一遍 KaTeX */
       } else {
         renderAi();
         renderQuestions();
       }
     }
+
+    /* ------------------------------------------------------------ 背单词 */
+
+    function vocabStatsHTML() {
+      const s = state.vocab.stats || {};
+      return ''
+        + '<div class="sp-vocab-stats">'
+        + '  <span><b>' + (s.total || state.pack.counts.vocab || 0) + '</b> 词库</span>'
+        + '  <span><b>' + (s.learned || 0) + '</b> 已学</span>'
+        + '  <span class="due"><b>' + (s.due || 0) + '</b> 待复习</span>'
+        + '  <span><b>' + (s.fresh === undefined ? '—' : s.fresh) + '</b> 未学</span>'
+        + '</div>';
+    }
+
+    function vocabCardHTML(w) {
+      const v = state.vocab;
+      const show = v.revealed || v.quick;
+      const kind = w.kind === 'due'
+        ? '<span class="vc-kind due">复习' + (w.overdueDays ? ' · 逾期 ' + w.overdueDays + ' 天' : '') + '</span>'
+        : '<span class="vc-kind">新词</span>';
+      const mean = show
+        ? '<div class="vc-mean">'
+          + '<div class="vc-cn">' + esc(w.cn || '') + '</div>'
+          + (w.ex ? '<div class="vc-ex">' + esc(w.ex) + (w.exCn ? '<em>' + esc(w.exCn) + '</em>' : '') + '</div>' : '')
+          + ((w.syn || []).length
+            ? '<div class="vc-syn">' + w.syn.map(function (x) { return '<span>' + esc(x) + '</span>'; }).join('') + '</div>'
+            : '')
+          + '</div>'
+        : '<button class="vc-mask" data-act="vshow">点击显示释义<span>或按空格</span></button>';
+      return ''
+        + '<div class="vc-card' + (show ? ' revealed' : '') + '">'
+        + '  <div class="vc-top">' + kind
+        + (w.reps ? '<span class="vc-reps">已复习 ' + w.reps + ' 次</span>' : '')
+        + (w._rep ? '<span class="vc-reps">本轮重来第 ' + w._rep + ' 次</span>' : '')
+        + '  </div>'
+        + '  <div class="vc-word">' + esc(w.w || '') + '</div>'
+        + '  <div class="vc-meta">'
+        + (w.ph ? '<span class="vc-ph">/' + esc(w.ph) + '/</span>' : '')
+        + (w.pos ? '<span class="vc-pos">' + esc(w.pos) + '</span>' : '')
+        + '  </div>'
+        + '  <div class="vc-body">' + mean + '</div>'
+        + '  <div class="vc-rate">'
+        + '    <button class="vc-btn again" data-rate="again"><b>不认识</b><kbd>1</kbd></button>'
+        + '    <button class="vc-btn hard" data-rate="hard"><b>模糊</b><kbd>2</kbd></button>'
+        + '    <button class="vc-btn good" data-rate="good"><b>认识</b><kbd>3</kbd></button>'
+        + '  </div>'
+        + '</div>';
+    }
+
+    function paneVocabHTML() {
+      const v = state.vocab;
+      const head = ''
+        + '<div class="sp-vocab-top">'
+        + vocabStatsHTML()
+        + '  <div class="sp-vocab-modes">'
+        + ['mix', 'due', 'new'].map(function (m) {
+          const label = m === 'mix' ? '混合' : (m === 'due' ? '只复习' : '只背新词');
+          return '<button class="chip' + (v.mode === m ? ' active' : '') + '" data-vmode="' + m + '">' + label + '</button>';
+        }).join('')
+        + '    <button class="chip' + (v.quick ? ' active' : '') + '" data-act="vquick">速览模式' + (v.quick ? ' 开' : ' 关') + '</button>'
+        + '  </div>'
+        + '</div>'
+        + (!state.loggedIn
+          ? '<div class="sp-tip">没登录也能背，但这一轮的进度不会被记住。登录后才会按 FSRS 排下次复习。</div>'
+          : '');
+
+      if (v.loading) return head + '<div class="sp-loading">正在取词…</div>';
+      if (v.err) return head + '<div class="empty">' + esc(v.err) + '</div>';
+
+      if (v.finished || !v.queue.length) {
+        const c = v.counts || {};
+        return head
+          + '<div class="vc-done">'
+          + '  <div class="vc-done-title">' + (v.finished ? '这一轮走完了' : '这个模式下暂时没有词') + '</div>'
+          + '  <div class="vc-done-sub">'
+          + (v.finished
+            ? '认识 ' + (c.good || 0) + ' · 模糊 ' + (c.hard || 0) + ' · 不认识 ' + (c.again || 0)
+            : '「只复习」需要先学过一些词，或者先把模式切回「混合」')
+          + '  </div>'
+          + '  <div class="vc-done-acts">'
+          + '    <button class="btn btn-primary" data-act="vnext">再来一轮（20 个）</button>'
+          + '    <button class="btn" data-act="vdue">只复习到期的</button>'
+          + '  </div>'
+          + '</div>';
+      }
+
+      const w = v.queue[v.i];
+      const total = v.queue.length;
+      const pct = total ? Math.round((v.i / total) * 100) : 0;
+      return head
+        + '<div class="sp-vocab-run">'
+        + '  <div class="vc-progress"><i style="width:' + pct + '%"></i></div>'
+        + '  <div class="vc-progress-txt">本轮第 ' + (v.i + 1) + ' / ' + total + ' 张</div>'
+        + vocabCardHTML(w)
+        + '  <div class="vc-keys"><kbd>空格</kbd> 显示释义 · <kbd>1</kbd> 不认识 · <kbd>2</kbd> 模糊 · <kbd>3</kbd> 认识'
+        + '<em>不认识的词会在三张之后再出现一次，评价会按 FSRS 排下次复习</em></div>'
+        + '</div>';
+    }
+
+    function renderVocab() {
+      const pane = document.getElementById('spPane');
+      if (!pane || state.tab !== 'vocab') return;
+      pane.innerHTML = paneVocabHTML();
+    }
+
+    async function loadVocab(mode) {
+      const v = state.vocab;
+      v.mode = mode || v.mode || 'mix';
+      v.loading = true;
+      v.finished = false;
+      v.err = '';
+      v.revealed = false;
+      v.i = 0;
+      v.queue = [];
+      v.counts = { again: 0, hard: 0, good: 0 };
+      renderVocab();
+      try {
+        const d = await API.get('/api/sprint/packs/' + packId + '/vocab?limit=20&mode=' + encodeURIComponent(v.mode));
+        v.queue = d.items || [];
+        v.stats = d.stats || v.stats;
+        if (v.quick) v.revealed = true;
+      } catch (e) {
+        v.err = e.message || '取词失败';
+      }
+      v.loading = false;
+      renderVocab();
+    }
+
+    function revealVocab() {
+      const v = state.vocab;
+      if (state.tab !== 'vocab' || v.finished || v.loading || !v.queue.length) return;
+      if (v.revealed) return;
+      v.revealed = true;
+      renderVocab();
+    }
+
+    function rateVocab(rating) {
+      const v = state.vocab;
+      if (state.tab !== 'vocab' || v.finished || v.loading) return;
+      const w = v.queue[v.i];
+      if (!w) return;
+      v.counts[rating] = (v.counts[rating] || 0) + 1;
+
+      /* 队列推进：不认识 → 三张之后重来；模糊 → 本轮末尾再过一遍；认识 → 出队。
+         两种重复各自最多两次，避免同一个词把一轮拖成死循环。 */
+      if (rating === 'again' && (w._rep || 0) < 2) {
+        w._rep = (w._rep || 0) + 1;
+        const card = v.queue.splice(v.i, 1)[0];
+        v.queue.splice(Math.min(v.queue.length, v.i + 3), 0, card);
+      } else if (rating === 'hard' && !w._hard) {
+        w._hard = 1;
+        const card = v.queue.splice(v.i, 1)[0];
+        v.queue.push(card);
+      } else {
+        v.queue.splice(v.i, 1);
+      }
+      v.revealed = v.quick;
+      if (v.i >= v.queue.length) v.finished = true;
+      renderVocab();
+
+      if (!state.loggedIn) return;
+      API.post('/api/sprint/packs/' + packId + '/vocab', { word: w.w, rating: rating }).then(function (d) {
+        if (!d.stats) return;
+        state.vocab.stats = d.stats;
+        const box = document.querySelector('.sp-vocab-stats');
+        if (box && state.tab === 'vocab') box.outerHTML = vocabStatsHTML();
+      }).catch(function (e) {
+        UI.toast(e.message || '记录失败', 'err');
+      });
+    }
+
 
     /* ------------------------------------------------------------ 数据动作 */
 
@@ -517,9 +714,18 @@
         state.tab = next;
         document.querySelectorAll('.sp-tab').forEach(function (b) { b.classList.toggle('active', b === tabBtn); });
         if (next === 'weak') loadWeak();
-        else renderPane();
+        else if (next === 'vocab') {
+          renderPane();
+          if (!state.vocab.queue.length && !state.vocab.loading) loadVocab(state.vocab.mode);
+        } else renderPane();
         return;
       }
+
+      const rateBtn = e.target.closest('[data-rate]');
+      if (rateBtn) { rateVocab(rateBtn.getAttribute('data-rate')); return; }
+
+      const vmode = e.target.closest('[data-vmode]');
+      if (vmode) { loadVocab(vmode.getAttribute('data-vmode')); return; }
 
       const chBtn = e.target.closest('[data-chapter]');
       if (chBtn) {
@@ -557,6 +763,31 @@
       else if (what === 'reveal') reveal(act.getAttribute('data-q'));
       else if (what === 'aigrade') aiGrade(act.getAttribute('data-q'));
       else if (what === 'plan') plan();
+      else if (what === 'vshow') revealVocab();
+      else if (what === 'vnext') loadVocab('mix');
+      else if (what === 'vdue') loadVocab('due');
+      else if (what === 'vquick') {
+        state.vocab.quick = !state.vocab.quick;
+        state.vocab.revealed = state.vocab.quick;
+        renderVocab();
+      }
+    }
+
+    /* 背单词的键盘流：空格看释义，1/2/3 评价。输入框里打字时不抢键。 */
+    function onKey(e) {
+      if (state.tab !== 'vocab' || e.ctrlKey || e.metaKey || e.altKey) return;
+      const t = e.target;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+      if (e.key === ' ' || e.key === 'Spacebar') {
+        e.preventDefault();
+        revealVocab();
+        return;
+      }
+      const rating = RATE_KEYS[e.key];
+      if (rating) {
+        e.preventDefault();
+        rateVocab(rating);
+      }
     }
 
     /* ------------------------------------------------------------ 启动 */
@@ -577,10 +808,17 @@
       }
       el.innerHTML = shellHTML();
       el.addEventListener('click', onClick);
+      document.addEventListener('keydown', onKey);
 
       if (state.tab === 'weak') {
         renderChapters();
         loadWeak();
+        return;
+      }
+      if (state.tab === 'vocab') {
+        renderChapters();
+        renderPane();
+        loadVocab(state.vocab.mode);
         return;
       }
       const first = state.pointId || (state.chapters[0] && state.chapters[0].points[0] && state.chapters[0].points[0].id);
@@ -596,6 +834,7 @@
 
     return function cleanup() {
       el.removeEventListener('click', onClick);
+      document.removeEventListener('keydown', onKey);
     };
   };
 })();

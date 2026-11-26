@@ -91,7 +91,7 @@ module.exports = function registerSprintRoutes(router, ctx) {
       return send(res, 200, { ok: true, packs: spr.list(), mine: mine });
     }
 
-    const m = pathname.match(/^\/api\/sprint\/packs\/([A-Za-z0-9_-]+)(?:\/(points|similar|explain|answer|reveal|weak|plan)(?:\/([A-Za-z0-9_-]+))?)?$/);
+    const m = pathname.match(/^\/api\/sprint\/packs\/([A-Za-z0-9_-]+)(?:\/(points|similar|explain|answer|reveal|weak|plan|vocab)(?:\/([A-Za-z0-9_-]+))?)?$/);
     if (!m) return fail(res, 404, '接口不存在');
     const pack = spr.get(m[1]);
     if (!pack) return fail(res, 404, '科目包不存在');
@@ -118,6 +118,7 @@ module.exports = function registerSprintRoutes(router, ctx) {
           counts: pack.counts
         },
         chapters: spr.outline(pack),
+        vocab: pack.vocab.length ? { total: pack.vocab.length } : null,
         me: user ? {
           attempts: prog.attempts.length,
           touchedPoints: Object.keys(prog.stats).length,
@@ -253,6 +254,39 @@ module.exports = function registerSprintRoutes(router, ctx) {
         saveProgress(db, user, pack.id, prog);
       }
       return send(res, 200, { ok: true, answer: q.answer, explain: q.explain, source: q.source });
+    }
+
+    /* ---------------------------------------------------- 背单词：取一组词卡 */
+    if (action === 'vocab' && method === 'GET' && !subId) {
+      if (!pack.vocab.length) return fail(res, 404, '这个科目包没有词库');
+      const prog = progressOf(db, user, pack.id);
+      const q = spr.vocabQueue(pack, prog, { mode: rc.query && rc.query.mode, limit: rc.query && rc.query.limit });
+      return send(res, 200, { ok: true, items: q.items, stats: q.stats, login: !!user });
+    }
+
+    /* ---------------------------------------------------- 背单词：词库统计 */
+    if (action === 'vocab' && method === 'GET' && subId === 'stats') {
+      const prog = progressOf(db, user, pack.id);
+      return send(res, 200, { ok: true, stats: spr.vocabStats(pack, prog), login: !!user });
+    }
+
+    /* ---------------------------------------------------- 背单词：评价一张卡 */
+    if (action === 'vocab' && method === 'POST' && (!subId || subId === 'review')) {
+      if (!user) return fail(res, 401, '登录后才会记录背词进度');
+      if (!pack.vocab.length) return fail(res, 404, '这个科目包没有词库');
+      const body = await readBody(req);
+      const prog = progressOf(db, user, pack.id);
+      const card = spr.recordVocab(prog, pack, body.word, body.rating, ctx.services.fsrs);
+      if (!card) return fail(res, 404, '词库里没有这个单词');
+      saveProgress(db, user, pack.id, prog);
+      return send(res, 200, {
+        ok: true,
+        word: card.word,
+        nextReviewAt: card.nextReviewAt,
+        intervalDays: card.intervalDays,
+        state: card.state,
+        stats: spr.vocabStats(pack, prog)
+      });
     }
 
     /* ---------------------------------------------------- 薄弱分析 */

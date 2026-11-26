@@ -36,6 +36,7 @@
       + '    <span><b>' + pack.counts.points + '</b> 考点</span>'
       + '    <span><b>' + pack.counts.questions + '</b> 题</span>'
       + '    ' + (pack.counts.past ? '<span class="sp-past"><b>' + pack.counts.past + '</b> 真题</span>' : '')
+      + '    ' + (pack.counts.vocab ? '<span class="sp-vocab-tag"><b>' + pack.counts.vocab + '</b> 词</span>' : '')
       + '  </div>'
       + '  <div class="sp-progress"><i style="width:' + p.pct + '%"></i></div>'
       + '  <div class="sp-card-foot">'
@@ -107,10 +108,12 @@
       const hero = document.getElementById('spHeroStats');
       const points = all.reduce(function (s, p) { return s + p.counts.points; }, 0);
       const qs = all.reduce(function (s, p) { return s + p.counts.questions; }, 0);
+      const words = all.reduce(function (s, p) { return s + (p.counts.vocab || 0); }, 0);
       if (hero) {
         hero.innerHTML = '<div class="stat"><div class="k">科目</div><div class="v">' + all.length + '</div></div>'
           + '<div class="stat"><div class="k">考点</div><div class="v">' + points + '</div></div>'
-          + '<div class="stat"><div class="k">题目</div><div class="v">' + qs + '</div></div>';
+          + '<div class="stat"><div class="k">题目</div><div class="v">' + qs + '</div></div>'
+          + (words ? '<div class="stat"><div class="k">单词</div><div class="v">' + words + '</div></div>' : '');
       }
       renderToolbar();
       renderList();

@@ -64,6 +64,7 @@ const createSprint = require('./lib/sprint');
 ctx.sprint = createSprint({
   dir: path.join(DATA_DIR, 'subjects'),
   getDb: () => core.db,
+  fsrs: fsrs,
   log: (m) => console.log(m)
 });
 
