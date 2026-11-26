@@ -39,3 +39,11 @@ data/.smoke-db*
 
 data/recovered.json
 .amv-*.tmp
+
+# GitHub Pages 产物由 CI 现场构建（见 .github/workflows/pages.yml），不再入库。
+# 注意：如果仓库 Pages 的 Source 仍是「分支 /docs」，请先改成「GitHub Actions」再删除
+# 已跟踪的 docs/，否则线上会 404。
+docs/
+
+# 本地临时目录
+.tmp-merge/

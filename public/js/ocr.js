@@ -189,6 +189,14 @@
           px[i] = px[i + 1] = px[i + 2] = v;
           px[i + 3] = 255;
         }
+        /* 笔记本横线/折痕阴影去除：必须在二值化之后、交给 Tesseract 之前做，
+           否则通栏横线会被当成笔画，把分数线与积分号切断。 */
+        if (window.OcrPreprocess && o.deRuled !== false) {
+          try {
+            if (o.shadow !== false) window.OcrPreprocess.reduceShadow(data);
+            window.OcrPreprocess.removeRuledLines(data);
+          } catch (e) { /* 预处理失败不阻塞识别 */ }
+        }
         g.putImageData(data, 0, 0);
         resolve(cv.toDataURL('image/png'));
       };

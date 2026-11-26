@@ -26,6 +26,10 @@
     if (seg[0] === 'paper') return { name: 'paper', params: params, nav: 'paper' };
     if (seg[0] === 'exam') return { name: 'exam', params: params, nav: 'paper' };
     if (seg[0] === 'submit') return { name: 'submit', params: params, nav: 'submit' };
+    if (seg[0] === 'analytics') return { name: 'analytics', params: params, nav: 'analytics' };
+    if (seg[0] === 'collections' && seg[1]) return { name: 'collection', params: Object.assign({ id: seg[1] }, params), nav: 'collections' };
+    if (seg[0] === 'collections') return { name: 'collections', params: params, nav: 'collections' };
+    if (seg[0] === 'practice') return { name: 'practice', params: params, nav: 'analytics' };
     if (seg[0] === 'my') return { name: 'my', params: params, nav: '' };
     if (seg[0] === 'admin') return { name: 'admin', params: params, nav: '' };
     return { name: 'notfound', params: params, nav: '' };
@@ -110,6 +114,8 @@
   });
   St.subscribe('auth:changed', function () {
     try { window.UI.renderHeader(); } catch (e) {}
+    /* 其它标签页登录/退出后，本页重新拉一次 meta，避免页头状态与真实登录态不一致 */
+    refreshMeta();
   });
 
   /* ---------------------------------------------------------- 暗色模式

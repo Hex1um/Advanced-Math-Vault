@@ -106,6 +106,12 @@
       window.MathKey.attach(document.querySelector('textarea[name="statement"]'));
       window.MathKey.attach(document.querySelector('textarea[name="solution"]'));
     }
+    /* 防丢稿：投稿写了半页刷新不再白写 */
+    if (window.DraftStore) {
+      window.DraftStore.bindInput(document.querySelector('input[name="title"]'), 'submit:title');
+      window.DraftStore.bindTextarea(document.querySelector('textarea[name="statement"]'), 'submit:statement');
+      window.DraftStore.bindTextarea(document.querySelector('textarea[name="solution"]'), 'submit:solution');
+    }
 
     document.querySelectorAll('input[type="range"]').forEach(function (r) {
       const out = document.getElementById('v_' + r.name);
@@ -544,6 +550,11 @@
             variant: (ocrMeta && ocrMeta.variant) || '',
             quality: (ocrMeta && ocrMeta.quality) || null
           }).catch(function () {});
+        }
+        if (window.DraftStore) {
+          window.DraftStore.clear('submit:title');
+          window.DraftStore.clear('submit:statement');
+          window.DraftStore.clear('submit:solution');
         }
         el.innerHTML = '<div class="empty" style="padding:80px 20px"><b>已提交，编号 ' + res.code + '</b>'
           + '管理员审核通过后才会进入题库。审核结果在「我的投稿」里可见。'

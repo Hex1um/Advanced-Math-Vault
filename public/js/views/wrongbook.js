@@ -111,10 +111,43 @@
     }
 
     el.innerHTML = '<div class="page-head"><div><h1>错题本</h1>'
-      + '<p class="sub">没过 80 分线自动收录；按间隔重复排期，复习到间隔 8 天自动出本。</p></div></div>'
+      + '<p class="sub">没过 80 分线自动收录；按间隔重复排期，复习到间隔 8 天自动出本。</p></div>'
+      + '<div class="head-actions"><button class="btn btn-sm" id="ankiExport" title="导出为 Anki 可导入的 TSV">导出到 Anki</button></div></div>'
       + '<div id="wrongWrap"><div class="loading-row"><span class="spinner"></span>加载中…</div></div>';
 
     let disposed = false;
+
+    /* 一键导出 Anki：UTF-8 TSV，Delimiter 用制表符，卡片正面题干、背面提示+答案+解析。
+       公式定界符换成 Anki 原生的 \(...\) / \[...\]，导入后手机端也能正常渲染。 */
+    function toAnkiMath(text) {
+      return String(text || '')
+        .replace(/\$\$([\s\S]+?)\$\$/g, function (m, body) { return '\\[' + body.trim() + '\\]'; })
+        .replace(/\$([^$\n]+?)\$/g, function (m, body) { return '\\(' + body.trim() + '\\)'; })
+        .replace(/\r?\n/g, '<br>');
+    }
+
+    function exportAnki() {
+      window.API.get('/api/wrongbook').then(function (d) {
+        const items = (d.items || []);
+        if (!items.length) { window.UI.toast('错题本是空的', 'err'); return; }
+        const rows = [['Code', 'Title', 'Front', 'Back', 'Tags']];
+        items.forEach(function (it) {
+          const front = toAnkiMath(it.excerpt || it.title) ;
+          const back = [it.note ? '错因：' + it.note : '', '答案与解析见原题：' + location.origin + '/#/problem/' + it.code].filter(Boolean).join('<br>');
+          rows.push([it.code, it.title, front, back, (it.tags || []).join(' ')]);
+        });
+        const tsv = rows.map(function (r) {
+          return r.map(function (c) { return String(c).replace(/\t/g, ' ').replace(/\n/g, ' '); }).join('\t');
+        }).join('\n');
+        const blob = new Blob(['\ufeff' + tsv], { type: 'text/tab-separated-values;charset=utf-8' });
+        window.API.download(blob, 'math-vault-wrongbook-' + new Date().toISOString().slice(0, 10) + '.tsv');
+      }).catch(function (e) {
+        window.UI.toast(window.API.describe ? window.API.describe(e) : '导出失败', 'err');
+      });
+    }
+
+    const ankiBtn = document.getElementById('ankiExport');
+    if (ankiBtn) ankiBtn.addEventListener('click', exportAnki);
 
     function load() {
       const wrap = document.getElementById('wrongWrap');

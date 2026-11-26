@@ -61,6 +61,11 @@
 
     const m = window.UI.modal({ title: '发一个新帖', sub: '发帖后 AI 助教会先给一版思路；帖子里 @AI助教 可以再追问', body: el, wide: true });
     if (window.MathKey) window.MathKey.attachAll(el);
+    /* 防丢稿：正文/标题自动存本地，发布成功后清除 */
+    if (window.DraftStore) {
+      window.DraftStore.bindInput(el.querySelector('[name="title"]'), 'forum:title');
+      window.DraftStore.bindTextarea(el.querySelector('[name="body"]'), 'forum:body');
+    }
     const form = el.querySelector('#postForm');
     const picked = [];   // 已选图片的 dataURL
 
@@ -127,6 +132,7 @@
           images: picked
         });
         m.close();
+        if (window.DraftStore) { window.DraftStore.clear('forum:title'); window.DraftStore.clear('forum:body'); }
         window.UI.toast('已发布，AI 助教正在看你的问题', 'ok');
         location.hash = '#/forum/' + res.id;
       } catch (err2) {

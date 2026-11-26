@@ -2718,11 +2718,11 @@
     "calc": 8,
     "source": "数学笔记截图 #023",
     "hints": [
-      "化为区域 \\le y\\le2x,\\ 0\\le x\\le1$ 上的二重积分",
-      "先对 $ 积分得对数之差"
+      "化为区域 $x\\le y\\le2x,\\ 0\\le x\\le1$ 上的二重积分",
+      "先对 $y$ 积分得对数之差"
     ],
     "answer": "$\\frac83\\ln 2-\\frac32\\ln 3$",
-    "solution": "**步骤1**：令 =\\frac in,y=\\frac jn$，化为 =\\int_0^1\\mathrm{d}x\\int_x^{2x}\\frac{\\mathrm{d}y}{1+x+y}$。\n\n**步骤2**：内层积分 $=\\ln(1+3x)-\\ln(1+2x)$，故 =\\int_0^1\\ln\\frac{1+3x}{1+2x}\\,\\mathrm{d}x$。\n\n**步骤3**：利用 $\\int_0^1\\ln(1+ax)\\,\\mathrm{d}x=\\frac{(1+a)\\ln(1+a)-a}{a}$，得 =\\frac{4\\ln4-3}{3}-\\frac{3\\ln3-2}{2}=\\frac83\\ln2-\\frac32\\ln3$。",
+    "solution": "**步骤1**：令 $x=\\frac in,y=\\frac jn$，区域为 $x\\le y\\le2x,\\ 0\\le x\\le1$，化为 $I=\\int_0^1\\mathrm{d}x\\int_x^{2x}\\frac{\\mathrm{d}y}{1+x+y}$。\n\n**步骤2**：内层积分 $=\\ln(1+3x)-\\ln(1+2x)$，故 $I=\\int_0^1\\ln\\frac{1+3x}{1+2x}\\,\\mathrm{d}x$。\n\n**步骤3**：利用 $\\int_0^1\\ln(1+ax)\\,\\mathrm{d}x=\\frac{(1+a)\\ln(1+a)-a}{a}$，得 $I=\\frac{4\\ln4-3}{3}-\\frac{3\\ln3-2}{2}=\\frac83\\ln2-\\frac32\\ln3$。",
     "authorName": "题库组",
     "mainTag": "积分"
   },
@@ -2779,7 +2779,7 @@
       "交换积分次序更简便"
     ],
     "answer": "$\\frac12-\\cos 1+\\frac{\\sin 1+\\cos 1}{2e}$",
-    "solution": "**步骤1**：化为 =\\int_0^1\\mathrm{d}x\\int_x^1 e^{-x}\\sin y\\,\\mathrm{d}y=\\int_0^1 e^{-x}(\\cos x-\\cos1)\\,\\mathrm{d}x$。\n\n**步骤2**：$\\int_0^1 e^{-x}\\cos x\\,\\mathrm{d}x=\\left[\\frac{e^{-x}(\\sin x-\\cos x)}{2}\\right]_0^1=\\frac{\\sin1-\\cos1}{2e}+\\frac12$，且 $\\int_0^1e^{-x}\\,\\mathrm{d}x=1-\\frac1e$。\n\n**步骤3**：=\\frac12+\\frac{\\sin1-\\cos1}{2e}-\\cos1\\left(1-\\frac1e\\right)=\\frac12-\\cos1+\\frac{\\sin1+\\cos1}{2e}$。",
+    "solution": "**步骤1**：化为 $I=\\int_0^1\\mathrm{d}x\\int_x^1 e^{-x}\\sin y\\,\\mathrm{d}y=\\int_0^1 e^{-x}(\\cos x-\\cos1)\\,\\mathrm{d}x$。\n\n**步骤2**：$\\int_0^1 e^{-x}\\cos x\\,\\mathrm{d}x=\\left[\\frac{e^{-x}(\\sin x-\\cos x)}{2}\\right]_0^1=\\frac{\\sin1-\\cos1}{2e}+\\frac12$，且 $\\int_0^1e^{-x}\\,\\mathrm{d}x=1-\\frac1e$。\n\n**步骤3**：$I=\\frac12+\\frac{\\sin1-\\cos1}{2e}-\\cos1\\left(1-\\frac1e\\right)=\\frac12-\\cos1+\\frac{\\sin1+\\cos1}{2e}$。",
     "authorName": "题库组",
     "mainTag": "积分"
   },

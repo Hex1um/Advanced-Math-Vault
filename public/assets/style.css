@@ -1464,3 +1464,37 @@ textarea.exam-input { resize: vertical; min-height: 78px; font-family: inherit; 
 .exam-score small { font-size: 14px; font-weight: 400; color: var(--muted); }
 .sm-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 12px; }
 .sm-tags .chip { cursor: pointer; }
+
+/* ---------------------------------------------------------------- 打印版
+   场景：把题面打印成 A4 纸做手算练习，或把错题/试卷打出来带走。
+   规则：
+   - 隐藏导航、页脚、按钮、讨论区等一切交互元素；
+   - 每道题作为一个不可分割的块（break-inside: avoid），避免题干与公式被撕成两页；
+   - body.print-questions 模式只留题面并留出草稿空白，body.print-full 追加答案解析。 */
+@media print {
+  @page { size: A4; margin: 14mm 12mm; }
+
+  .topbar, .site-footer, .nav, .head-actions, .judge-actions, .rate-btns,
+  .wrong-note, .toast-root, .modal-mask, #overlay-root, .fab, .chat-panel,
+  .exam-bar, .seg, button, .chip, .toolbar, .pager { display: none !important; }
+
+  body { background: #fff !important; color: #000 !important; }
+  .card, .exam-item, .problem-card, .post, .judge-result {
+    border: 1px solid #999 !important; box-shadow: none !important;
+    background: #fff !important; break-inside: avoid; page-break-inside: avoid;
+  }
+  a { color: #000 !important; text-decoration: none !important; }
+  .katex { font-size: 1.02em; }
+
+  /* 只打印题面：留白给手算，解析在末尾单独起页 */
+  body.print-questions .solution-block,
+  body.print-questions .answer-block,
+  body.print-questions .post-replies { display: none !important; }
+  body.print-questions .problem-card { padding-bottom: 28mm !important; }
+
+  body.print-full .solution-block { break-before: auto; }
+  .print-title { display: block !important; font-size: 15pt; font-weight: 600; margin: 0 0 8mm; }
+}
+
+/* 屏幕上不显示打印专用标题 */
+.print-title { display: none; }

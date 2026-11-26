@@ -156,11 +156,19 @@ LLM_BASE_URL=https://api.deepseek.com/v1 LLM_MODEL=deepseek-chat LLM_API_KEY=sk-
 ## 目录
 
 ```
-server.js                 后端（路由 / 鉴权 / 审核 / 论坛 / AI 代理 / 静态服务）
-tag-taxonomy.js           主标签 / 子标签定义与历史标签归并规则
+server.js                 组合根：配置 / 存储 / 上下文 / 路由挂载 / 生命周期（约 230 行）
+lib/core.js               业务核心：数据层、判题、AI 装配、上传、答疑与反馈
+lib/context.js            统一上下文（ctx.db 实时 getter、ctx.saveDb、ctx.services）
+lib/router.js             零依赖路由器（:param / 通配 / 洋葱中间件 / POST 限流）
+lib/migrations.js         SQLite 版本化迁移（schema_meta.version 驱动，逐步事务）
+lib/math-equiv.js         数学表达式数值等价判定（判题兜底，不用 eval）
+lib/circuit-breaker.js    AI 通道三态熔断 + EMA 延迟排序
 lib/store.js              存储层：JSON 全量写 / SQLite 行级增量写，双引擎可切
 lib/mail.js               邮件通道：SMTP / Resend / 自建 HTTP / 日志降级
 lib/env.js                部署目录 .env 加载（不覆盖平台环境变量）
+routes/*.js               按域拆分的接口：health / auth / practice / wrongbook / analytics /
+                          forum / paper / me / ai / admin / collections / problems
+tag-taxonomy.js           主标签 / 子标签定义与历史标签归并规则
 .env.example              全部环境变量与含义（含 TRUST_PROXY、ALLOW_ORIGINS、邮件、存储）
 data/batch-*.json          分批题库（约 2470 道）
 data/problems.seed.sample.json  示例题库（默认不加载）
@@ -172,7 +180,11 @@ public/js/api.js          fetch 封装
 public/js/md.js           Markdown + LaTeX 渲染
 public/js/ui.js           头部 / Toast / 模态框 / 分页 / 评分条
 public/js/app.js          路由
-public/js/views/*.js      题库 / 题目 / 每日一题 / 答疑区 / 投稿 / 我的 / 审核 / AI 对话
+public/js/views/*.js      题库 / 题目 / 每日一题 / 答疑区 / 投稿 / 我的 / 审核 / AI 对话 / 分析 / 题单
+public/js/heatmap.js      刷题热力图（纯 SVG，无图表库）
+public/js/draft-store.js  防丢稿草稿箱（7 天 TTL）
+public/js/ocr-preprocess.js 笔记本横线擦除与阴影抬升（OCR 预处理）
+Dockerfile                零依赖容器镜像（node:22-alpine + 数据卷 + HEALTHCHECK）
 public/vendor/katex/      本地 KaTeX（离线可用）
 tools/README.md           脚本分层说明与新增脚本的规矩
 tools/ops/                部署 / 同步 / 备份 / 回流 / 迁移
@@ -251,7 +263,9 @@ npm run check:md                     # Markdown 渲染、XSS 链接白名单、�
 npm run check:mathkey                # 公式键盘的光标环境状态机
 npm run check:components             # 前端公共组件（题目行 / 标签 / 统计条 / 自评）
 npm run check:fsrs                   # 错题本 FSRS 调度器（单调性 / 边界 / 旧数据兼容）
-npm run check:pages                  # docs/ 产物自检（入口、本地资源、config.js）
+npm run check:pages                  # Pages 产物自检（入口、本地资源、config.js）
+npm run check:equiv                  # 数学等价判题引擎（半角公式 / 对数合并 / 不定积分差常数）
+npm run check:delims                 # 公式定界符与环境闭合门禁（CI 严格模式）
 npm run check:dedup                  # 查重工具自检
 npm run check:katex                  # 公式可渲染性，必须 0 失败（--strict-unclosed 连未闭合分隔符一起卡）
 ```
@@ -265,7 +279,9 @@ node tools/verify/dedup-problems.mjs --strict             # 有疑似重复就�
 node tools/import/migrate-tags.mjs                        # 只报告标签迁移结果；加 --write 才写盘
 ```
 
-CI 见 `.github/workflows/smoke.yml`：push / PR 到 `main` 自动跑上面这串（外加 sympy 符号校验 job），不需要装任何 npm 依赖；`.github/workflows/pages.yml` 负责用 Actions 重建并发布 `docs/`。
+CI 见 `.github/workflows/smoke.yml`：push / PR 到 `main` 自动跑上面这串（外加 sympy 符号校验 job），不需要装任何 npm 依赖。
+`.github/workflows/pages.yml` 在 CI 内从 `public/` 现场构建并直接发布产物——`docs/` 不再提交进 `main`，
+所以改前端只会 diff `public/`。
 
 > 录题纪律：每道积分的答案都先用 sympy 求导验证再入库，`verify_integrals.py` 里保留了对应用例，新增题目时追加即可。
 

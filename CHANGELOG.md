@@ -1,5 +1,99 @@
 # CHANGELOG
 
+## v2.0.0 — 2026-11-26
+
+一次结构性大版本：把 3522 行的 `server.js` 拆成「组合根 + 9 个域路由 + 业务核心」，
+同时补上判题、分析、离线、安全与工程化五条线。**仍然零第三方依赖**，Node ≥ 22.5 即可跑。
+
+### 架构：解除「28 依赖地狱」
+
+- 新增 `lib/context.js`：统一应用上下文，`ctx.db` 用 getter 始终指向最新内存库，
+  `ctx.saveDb()` 屏蔽 JSON/SQLite 差异；路由不再需要 `getDb()` 样板。
+- 新增 `lib/router.js`：零依赖路由器，支持 `:param`、`*` 前缀与洋葱中间件
+  （`requireAuth` / `requireAdmin` / `withRateLimit` / POST 限流规则）。
+- `server.js` 从 3522 行降到 **约 230 行**，只做组装；业务核心进 `lib/core.js`，
+  接口按域拆成 `routes/{health,auth,practice,wrongbook,analytics,forum,paper,me,ai,admin,collections}.js`。
+- 拆分是「整段搬运 + 套统一签名」，没有重写业务语句；冒烟 143 项（JSON / SQLite 双引擎）全绿。
+
+### 数据：版本化迁移 + 跨实例合并
+
+- 新增 `lib/migrations.js`：`schema_meta.version` 驱动的声明式迁移（v2 题单表 + 索引、
+  v3 热力图用提交时间索引、v4 OCR 坏例表），每步独立事务，失败整步回滚。
+- `lib/store.js` 的 `SCHEMA_VERSION` 改为跟随迁移最新版本，老库启动自动升级。
+- 新增 `tools/ops/merge-instances.mjs`：按用户邮箱/用户名、提交（uid+code+at+内容哈希）、
+  待审题（题干哈希）、帖子/反馈（时间+内容哈希）做**幂等**合并，默认 dry-run，
+  `--apply` 前强制备份目标库，写入走临时文件 + rename。
+
+### 判题：数值等价兜底
+
+- 新增 `lib/math-equiv.js`：递归下降解析 + 多采样点数值比对，**不使用 eval/new Function**。
+  支持隐式乘法、`\frac`/`\sqrt`/`\sin^2` 等写法，不定积分按「差值恒定」判等。
+- 接入 `/api/problems/:code/answer` 与 `/api/exam/grade`：字符串快路径判不出来时自动回退，
+  `\sin x\cos x` 与 `\frac12\sin 2x`、`\ln|\sec x+\tan x|` 与
+  `\ln|\tan(\frac{x}{2}+\frac{\pi}{4})|` 现在都能判对。
+- 自测 19 项（`npm run check:equiv`）：真等价必须过，差一个因子 / 把极限值当恒等式必须不过。
+
+### 学习分析：热力图 + 掌握度 + 靶向推荐
+
+- 新增 `/api/analytics/overview`：近 180 天每日刷题量、九大主考点掌握度
+  （正确率 70% + 覆盖度 30%）、薄弱考点未做推荐、连续打卡天数。
+- 新增 `public/js/heatmap.js`（纯 SVG，深浅主题自适应）与「分析」页 `#/analytics`。
+
+### 题单 / 冲刺包
+
+- 新增 `routes/collections.js` 与 `#/collections` 页面：公开/私有题单、完成进度、
+  增删题目；普通用户只能建私有题单，公开题单限管理员（防止内容失控）。
+
+### 离线与防丢稿
+
+- 新增 `public/js/draft-store.js`：答题过程、发帖、投稿自动存本地草稿（7 天 TTL），
+  提交成功后清除；刷新/误关不再丢稿。
+- `public/sw.js` 升级：只读接口（`/api/meta`、`/api/daily`、`/api/problems/:code`、
+  `/api/forum`）改网络优先 + 回填缓存（最多 100 条），断网可翻最近看过的题；
+  写接口与登录态仍完全放行不缓存。
+
+### OCR
+
+- 新增 `public/js/ocr-preprocess.js`：通栏横线检测擦除 + 分块阴影抬亮，
+  只在「上下均为白底」时擦像素，避免误伤笔画；接在二值化之后、Tesseract 之前。
+
+### AI 通道韧性
+
+- 新增 `lib/circuit-breaker.js`：三态熔断（连续 3 次失败熔断 3 分钟、半开试探）
+  + EMA 延迟排序；免费通道超时从 22s 收紧到 12s。
+- `lib/ai.js` 的 `llmCandidates` 直接返回健康队列；熔断快照进 `/api/health`（仅管理员见明细）
+  与管理员 AI 面板。失效节点的等待从「每次 22s」变成「直接跳过」。
+
+### 安全
+
+- 会话表只存 token 的 SHA-256（`sessionKey`），老库明文 key 仍可读、过期自然淘汰。
+- 上传落盘前校验文件头（PNG/JPEG/WebP），显式拒绝 SVG/GIF/HTML，防同源 XSS。
+- 全站 CSP（`script-src 'self'`、`frame-ancestors 'self'` 等）+ Permissions-Policy；
+  KaTeX/Tesseract 已本地化，无需放开外网 CDN。
+- 多标签页登录态同步（`storage` → `auth:changed` → 重新拉 meta）。
+
+### 题库数据
+
+- 修复 `batch-12` 两条二重积分题被旧导入脚本吃掉的 `$...$` 片段（2 条提示 + 2 条解析），
+  新增 `tools/ops/repair-missing-delims.mjs`（精确替换表，默认 dry-run）。
+- 新增 `tools/verify/check-unclosed-delims.mjs` 并接入 CI（`npm run check:delims`）：
+  检查 `$` / `$$` 成对、`\left`/`\right` 数量、`\begin`/`\end` 栈平衡；
+  `batch-hust.json` 是整份试卷 LaTeX 转储（未入库），单独豁免并在报告里计数。
+  批次库异常从 2 处降为 **0**（豁免文件另有 188 处，均为整份文档环境）。
+
+### 工程化与运维
+
+- `docs/` 不再入库：`.github/workflows/pages.yml` 在 CI 内构建并直接发布产物，
+  改前端只 diff `public/`。
+- 新增 `Dockerfile` / `.dockerignore`（node:22-alpine，数据卷 + HEALTHCHECK）。
+- 新增 Issue 模板（Bug / 题目纠错 / 功能建议）与 PR 模板，CI 增加公式门禁与等价判题自测。
+- `/api/health` 增加 `problemCount`、`users`、`sqliteWalSizeKB`、`aiChannels`（管理员含明细），
+  外部探针可提前发现磁盘写满与 WAL 膨胀。
+- A4 打印样式：`@media print` 隐藏导航与交互，题目 `break-inside: avoid`；
+  错题本支持一键导出 Anki TSV（`$...$` → `\(...\)`）。
+- 管理员密码已重置并写入本地运维文件（不入库、不提交）。
+
+
 ## v1.5.3 — 2026-11-26
 
 后端统一切到 1.5.x 实例，并把上一版遗留的公式数据缺陷修掉。

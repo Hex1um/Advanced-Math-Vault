@@ -1,0 +1,13 @@
+.git
+.github
+docs
+node_modules
+data/db.json
+data/backups
+data/uploads
+data/ops
+data/*.sqlite*
+*.log
+*.png
+shots
+tmp

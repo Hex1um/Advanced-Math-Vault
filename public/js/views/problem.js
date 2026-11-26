@@ -48,8 +48,16 @@
       + '<span class="small muted">答错可以改完再交，不限次数</span></div>'
       + '<div id="judgeResult"></div>';
 
+    /* 防丢稿：长解答写到一半刷新/误关不再归零（7 天有效，提交成功即清除） */
+    const DRAFT_KEY = 'answer:' + p.code;
+    let unbindDraft = function () {};
     const m = window.UI.modal({ title: '提交解题过程 · ' + p.code, sub: '答案正确 + 写了思路即可满分，跳步不扣分', body: el, wide: true });
     if (window.MathKey) window.MathKey.attachAll(el);
+    if (window.DraftStore) {
+      unbindDraft = window.DraftStore.bindTextarea(el.querySelector('#ansProcess'), DRAFT_KEY, function () {
+        window.UI.toast('已恢复上次未提交的草稿', 'ok');
+      });
+    }
 
     /* 弹窗里回显题干，做题时不用来回切页面 */
     const jpTitle = el.querySelector('#jpTitle');
@@ -179,6 +187,7 @@
           llm: (window.UI.visionConfig ? window.UI.visionConfig() : window.UI.llmConfig())
         });
         renderJudge(res);
+        if (res && res.verdict && res.verdict !== 'unclear' && window.DraftStore) window.DraftStore.clear(DRAFT_KEY);
       } catch (e) {
         resultBox.innerHTML = '<div class="judge-result wrong">提交失败：' + window.Md.esc(e.message) + '</div>';
       } finally {

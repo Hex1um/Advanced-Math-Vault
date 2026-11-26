@@ -1,15 +1,19 @@
 name: pages
 
-# GitHub Pages：从 public/ 重建 docs/ 后发布。
-# 接口地址与 sharecode 沿用仓库里已提交的 docs/js/config.js（两者都是公开信息），
-# 所以这里不需要任何 secret；要换后端就改 site 的 config 并提交。
+# GitHub Pages：CI 里从 public/ 现场构建，直接发布产物，不再把 docs/ 提交进 main。
+# 这样改前端只 diff public/，不会每次多出上百个 docs/ 文件；多人协作也不会因为
+# 「构建产物冲突」互相覆盖。
+#
+# API_BASE / SHARECODE 是托管网关的公开访问信息（本来就随前端下发），不是密钥；
+# 换后端时改这里的环境变量即可，不需要改仓库里的文件。
 on:
   push:
     branches: [main]
     paths:
       - 'public/**'
-      - 'docs/**'
       - 'tools/ops/build-pages.mjs'
+      - 'tools/ops/check-pages.mjs'
+      - 'package.json'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 
@@ -32,7 +36,11 @@ jobs:
         with:
           node-version: '22'
 
-      - name: 构建 docs/
+      - name: 构建静态产物（public/ → docs/，只在 CI 内存在）
+        env:
+          API_BASE: https://math-vault-10141-52003.app.workbuddy.host
+          SHARECODE: Q6CZHVVW3K
+          SITE_NAME: 数海晴岸
         run: node tools/ops/build-pages.mjs
 
       - name: 产物自检（入口文件 / 本地资源 / config.js）

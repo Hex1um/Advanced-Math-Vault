@@ -61,6 +61,12 @@ jobs:
       - name: 公式键盘状态机
         run: npm run check:mathkey
 
+      - name: 数学等价判题引擎（半角公式 / 对数合并 / 不定积分差常数）
+        run: npm run check:equiv
+
+      - name: 公式定界符与环境闭合门禁（未闭合 $ / $$ / \left\right / \begin\end）
+        run: npm run check:delims
+
       - name: 生产模式启动检查（健康检查 + 不给陌生人发管理员）
         env:
           NODE_ENV: production

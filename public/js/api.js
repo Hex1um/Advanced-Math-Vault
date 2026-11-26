@@ -126,6 +126,14 @@
     } catch (e) {}
   }
 
+  /* 多标签页登录态同步：一个标签退出登录，另一个不能还显示已登录的信息。
+     storage 事件只在「其它」标签页触发，因此不会造成本页循环更新。 */
+  if (typeof window !== 'undefined' && window.addEventListener) {
+    window.addEventListener('storage', function (e) {
+      if (e && e.key === TOKEN_KEY) State.emit('auth:changed', null);
+    });
+  }
+
   function authHeaders() {
     const t = token();
     // 同时带两种头：个别托管网关会过滤 Authorization

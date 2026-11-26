@@ -1,16 +1,27 @@
 'use strict';
 /**
- * 题库路由组（P2-1 Step 3）：列表 / 详情 / 判题 / 看答案 / 提示 / 反馈 / 提交记录 / AI 标记。
+ * 题库路由组：列表 / 详情 / 判题 / 看答案 / 提示 / 反馈 / 提交记录 / AI 标记。
  *
- * 从 server.js 整段搬出来，路由代码保持原样；依赖通过 deps 显式注入，
- * 目的是让「题库域」的改动不再牵动 4000 行的主文件，也让这段路由可以被单独审查。
- *
- * 约定：
- *   - 返回 false 表示这条路径不归本模块管（主文件继续往下匹配）；
- *   - 返回 true 表示已接管（要么已经响应，要么在自家前缀下确实没有这个子路径 → 404）。
- *   - db 用 getDb() 取，不能解构：server.js 启动时会重新赋值 db。
+ * v2.0.0：对外签名统一为 `(router, ctx)`，内部沿用拆分时的分支实现，
+ * 依赖改为从 ctx 上取（ctx.db / ctx.services / ctx.http），不再逐个透传 28 个参数。
  */
-module.exports = function createProblemsRoutes(deps) {
+const { isMathEquivalent } = require('../lib/math-equiv');
+
+/**
+ * 数值等价兜底：字符串快路径判不出来时，再用采样判等。
+ * 不定积分（答案里带 +C）允许与原函数相差常数。
+ */
+function mathEquivalentAnswer(userAns, refAns) {
+  if (!userAns || !refAns) return false;
+  const indefinite = /\+\s*C\b/i.test(refAns) || /^\$?\s*\\?int\b/.test(refAns);
+  try {
+    return !!isMathEquivalent(userAns, refAns, { allowConstantOffset: indefinite }).ok;
+  } catch (e) {
+    return false;
+  }
+}
+
+function createProblemsRoutes(deps) {
   const getDb = deps.getDb;
   const {
     fail, send, readBody, clientIp, store,
@@ -237,7 +248,7 @@ module.exports = function createProblemsRoutes(deps) {
       }
 
       if (!judged) {
-        if (processMatchesAnswer(only, p.answer)) {
+        if (processMatchesAnswer(only, p.answer) || mathEquivalentAnswer(only, p.answer)) {
           judged = {
             verdict: 'correct',
             score: answerOnly ? 80 : 100,
@@ -267,7 +278,7 @@ module.exports = function createProblemsRoutes(deps) {
       //   最终答案错误            → 大幅扣分，不过线
       // 模型常因「跳步 / 不够严谨」把 verdict 压到 partial，这里按结论行的最终答案兜底纠正，
       // 避免同一份提交「无模型 80 分过、有模型 79 分挂」。
-      const answerConfirmed = processMatchesAnswer(only, p.answer);
+      const answerConfirmed = processMatchesAnswer(only, p.answer) || mathEquivalentAnswer(only, p.answer);
       // 防抄答案刷分：看过标准答案 / 问过 AI 的提交，即使结论命中也不给「通过」，
       // 否则学生点「看答案」后原样抄回就能拿满分、把题记为做出。
       const peeked = !!(rec && (rec.revealed || rec.askedAI));
@@ -477,4 +488,21 @@ module.exports = function createProblemsRoutes(deps) {
     if (!res.headersSent && !res.writableEnded) fail(res, 404, '接口不存在');
     return true;
   };
+};
+
+/** v2.0.0 统一入口：把 ctx 摊平成旧实现需要的依赖，再挂到路由表上 */
+module.exports = function registerProblemsRoutes(router, ctx) {
+  const handle = createProblemsRoutes(Object.assign({}, ctx.services, {
+    getDb: () => ctx.db,
+    store: ctx.store,
+    fail: ctx.http.fail,
+    send: ctx.http.send,
+    readBody: ctx.http.readBody,
+    clientIp: ctx.http.clientIp,
+  }));
+
+  const run = (rc) => handle(rc.req, rc.res, rc.pathname, rc.query, rc.user);
+  router.all('/api/problems', run);
+  router.all('/api/problems/*', run);
+  return handle;
 };
