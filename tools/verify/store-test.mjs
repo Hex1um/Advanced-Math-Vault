@@ -191,7 +191,12 @@ for (const f of [JSON3, SQLITE3, SQLITE3 + '-wal', SQLITE3 + '-shm']) {
   try { if (fs.existsSync(f)) fs.unlinkSync(f); } catch (e) {}
 }
 fs.mkdirSync(TMP3, { recursive: true });
-const corpus = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'batch-01.json'), 'utf8'))
+const CORPUS_FILE = path.join(ROOT, 'data', 'batch-01.json');
+if (!fs.existsSync(CORPUS_FILE)) {
+  // 部署目录里可能只有运行时库、没有 batch 题库：跳过这一组，不让门禁误报
+  console.log('  ~ 没有 data/batch-01.json，跳过搜索索引等价性测试');
+} else {
+const corpus = JSON.parse(fs.readFileSync(CORPUS_FILE, 'utf8'))
   .map((p, i) => Object.assign({}, p, { code: (p.code || 'S' + i), status: 'approved', tags: p.tags || [] }));
 const fixture3 = {
   problems: corpus, users: [], posts: [], submissions: [], feedbacks: [],
@@ -245,6 +250,7 @@ for (const f of [JSON3, SQLITE3, SQLITE3 + '-wal', SQLITE3 + '-shm']) {
   try { if (fs.existsSync(f)) fs.unlinkSync(f); } catch (e) {}
 }
 try { fs.rmdirSync(TMP3); } catch (e) {}
+}
 
 console.log('\n结果: ' + pass + ' 通过 / ' + fail + ' 失败');
 for (const f of [JSON_FILE, SQLITE_FILE, SQLITE_FILE + '-wal', SQLITE_FILE + '-shm']) {

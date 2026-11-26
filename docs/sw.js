@@ -4,7 +4,7 @@
    - 页面导航：网络优先，断网时回退到缓存的 index.html
    - 其余同源静态资源：stale-while-revalidate（先给缓存，后台更新）
    版本号变了就换缓存名，activate 时清掉旧缓存，避免 old ?v= 资源永久驻留。 */
-const VERSION = 'v1.5.1';
+const VERSION = 'v1.5.3';
 const STATIC_CACHE = 'mv-static-' + VERSION;
 const RUNTIME_CACHE = 'mv-runtime-' + VERSION;
 const PRECACHE = ['./index.html', './assets/style.css', './js/app.js', './manifest.json', './assets/icon.svg'];
