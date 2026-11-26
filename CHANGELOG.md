@@ -39,8 +39,10 @@
   `deploy.mjs` 发布前拒绝脏工作区（`ALLOW_DIRTY=1` 可覆盖）并写入 build-info。
 - **线上事故（已修）**：`.github/workflows/pages.yml` 里 `SHARECODE` 还是旧实例的 `Q6CZHVVW3K`，
   而 `API_BASE` 已指向 1.5.x 实例（其访问码是 `YXHMN5BXHA`）——v2.0.x 发布后 Pages 上每个接口都 403。
-  已在工作流里改回正确访问码；这类「两处配置各自漂移」的问题以后由 `check:pages` 只校验非空是不够的，
-  还需要上线后做一次真实接口探测（本次已手工核验 200）。
+  修复方式：新增仓库内 `deploy.config.json`（apiBase + sharecode 成对），`build-pages.mjs` 以它为唯一真相，
+  只在「显式传入的 API_BASE 与文件不一致（真的换后端）」时才用环境变量；构建前还会真实请求一次
+  `/api/health?sharecode=`，403/401 直接让构建失败——`check:pages` 只能校验非空，拦不住这种成对漂移。
+  （CI 里的 workflow 因令牌缺 `workflow` scope 无法直接改，所以把真相放到仓库文件里。）
 - **题库数据修复**：5 条 `answer` 在导入时被按 600 字符截断（26-27 微积分(B) 上期中），
   按「最长分隔符闭合前缀」裁剪并补一句说明，其中 HS3417/HS3418/HS3419 按标准结论补全；
   另有 104 个字段里存在字面量 `\n`（反斜杠 n，LaTeX 无此命令），一并还原为换行；

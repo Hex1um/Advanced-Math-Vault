@@ -1,0 +1,6 @@
+{
+  "_note": "前端构建用的后端地址与访问码。CI 的 workflow 需要 workflow scope 才能改，所以把这两项放在仓库里作为唯一真相；改后端时改这里并提交，CI 会按它构建。",
+  "apiBase": "https://math-vault-10141-52003.app.workbuddy.host",
+  "sharecode": "YXHMN5BXHA",
+  "siteName": "数海晴岸"
+}

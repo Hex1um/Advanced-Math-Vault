@@ -34,13 +34,47 @@ function prevConfig() {
   }
 }
 const prev = prevConfig();
-const API_BASE = process.env.API_BASE || prev.apiBase || 'https://math-vault-10141-52003.app.workbuddy.host';
-const SITE_NAME = process.env.SITE_NAME || prev.siteName || '数海晴岸';
-const SHARECODE = process.env.SHARECODE || prev.sharecode || '';
+
+/* 仓库内的 deploy.config.json 是「前端该指向哪个后端」的唯一真相。
+   为什么不让 CI 的 env 说了算：apiBase 与 sharecode 必须成对，两处各自漂移过一次
+   （env 指向新实例、分享码还是旧实例的，上线后全站 403）。这里 env 只在
+   API_BASE 与文件不一致时才生效（真正换后端的时候），并强制要求同时给 SHARECODE。 */
+const FILE_CFG = (() => {
+  try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'deploy.config.json'), 'utf8')); }
+  catch (e) { return {}; }
+})();
+
+const envBase = String(process.env.API_BASE || '').trim();
+const switching = !!(envBase && FILE_CFG.apiBase && envBase !== FILE_CFG.apiBase);
+const API_BASE = switching ? envBase : (FILE_CFG.apiBase || envBase || prev.apiBase || 'https://math-vault-10141-52003.app.workbuddy.host');
+const SITE_NAME = process.env.SITE_NAME || FILE_CFG.siteName || prev.siteName || '数海晴岸';
+const SHARECODE = switching ? String(process.env.SHARECODE || '').trim() : (FILE_CFG.sharecode || process.env.SHARECODE || prev.sharecode || '');
 if (!SHARECODE) {
-  console.error('缺少 SHARECODE：既没有显式传入，也没有可沿用的 docs/js/config.js。');
-  console.error('  SHARECODE=xxxx API_BASE=https://your-api.example.com node tools/ops/build-pages.mjs');
+  console.error('缺少 SHARECODE：deploy.config.json 里没有，环境变量也没有。');
+  console.error('  换后端时：API_BASE=... SHARECODE=... node tools/ops/build-pages.mjs');
   process.exit(2);
+}
+if (switching) {
+  console.log('[build-pages] 检测到 API_BASE 与 deploy.config.json 不一致，按环境变量构建；记得把 deploy.config.json 一起改掉。');
+}
+
+/* 上线前校验这对「地址 + 分享码」真的能用：v2.0.x 曾把分享码留成旧实例的，
+   构建成功、Pages 也发布成功，但打开页面每个接口都 403。
+   403/401 视为确定性错误直接拦；网络不可达只告警（CI 里可能连不上托管域名）。 */
+if (process.env.SKIP_BACKEND_PROBE !== '1') {
+  try {
+    const url = API_BASE.replace(/\/+$/, '') + '/api/health?sharecode=' + encodeURIComponent(SHARECODE);
+    const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+    if (res.status === 401 || res.status === 403) {
+      console.error('✗ 后端拒绝了这对配置（HTTP ' + res.status + '）：' + API_BASE + ' 不认识分享码 ' + SHARECODE.slice(0, 4) + '••••');
+      console.error('  改 deploy.config.json（或同时传 API_BASE / SHARECODE）后重试；确认要跳过校验用 SKIP_BACKEND_PROBE=1。');
+      process.exit(3);
+    }
+    if (!res.ok) console.warn('[build-pages] 后端健康检查返回 ' + res.status + '，继续构建（可能正在部署）');
+    else console.log('[build-pages] 后端连通性校验通过（' + API_BASE + '）');
+  } catch (e) {
+    console.warn('[build-pages] 后端连通性未校验：' + (e && e.message));
+  }
 }
 
 /* 保留文件：构建产物里由脚本自己生成、public/ 里没有的东西 */

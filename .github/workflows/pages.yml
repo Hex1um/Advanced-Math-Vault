@@ -39,7 +39,7 @@ jobs:
       - name: 构建静态产物（public/ → docs/，只在 CI 内存在）
         env:
           API_BASE: https://math-vault-10141-52003.app.workbuddy.host
-          SHARECODE: YXHMN5BXHA
+          SHARECODE: Q6CZHVVW3K
           SITE_NAME: 数海晴岸
         run: node tools/ops/build-pages.mjs
 
