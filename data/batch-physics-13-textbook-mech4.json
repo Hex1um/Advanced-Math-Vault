@@ -1,0 +1,792 @@
+[
+ {
+  "title": "可闻声波的波长范围",
+  "statement": "频率在 $20\\sim20000\\ \\mathrm{Hz}$ 的弹性波能使人耳产生声音的感觉。$0^\\circ\\mathrm{C}$ 时空气中的声速为 $331.5\\ \\mathrm{m/s}$，求这两种频率声波的波长。",
+  "mainTag": "振动与波",
+  "tags": [
+   "平面简谐波"
+  ],
+  "kind": "计算题",
+  "thinking": 2,
+  "difficulty": 2,
+  "calc": 1,
+  "source": "漆安慎《力学》第4版 习题10.2.1",
+  "hints": [
+   "$\\lambda=v/\\nu$。",
+   "低频对应长波长。"
+  ],
+  "answer": "16.6\\ \\mathrm{m}",
+  "solution": "$$\\lambda_{20}=\\frac{v}{\\nu}=\\frac{331.5}{20}=16.6\\ \\mathrm{m},$$\n$$\\lambda_{20000}=\\frac{331.5}{2.0\\times10^{4}}=1.66\\times10^{-2}\\ \\mathrm{m}=16.6\\ \\mathrm{mm}.$$\n\n可闻声的波长跨越三个数量级（$16.6\\ \\mathrm{m}\\sim16.6\\ \\mathrm{mm}$），这也是为什么低频声容易绕射、高频声方向性强。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m",
+   "methods": [
+    "波速与波长"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十章 习题10.2.1"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "两波面上的相位差",
+  "statement": "已知平面简谐波的振幅 $A=0.1\\ \\mathrm{cm}$、波长 $1\\ \\mathrm{m}$、周期 $10^{-2}\\ \\mathrm{s}$。写出波方程（最简形式），并求分别距波源 $9\\ \\mathrm{m}$ 和 $10\\ \\mathrm{m}$ 两波面上的相位差。",
+  "mainTag": "振动与波",
+  "tags": [
+   "平面简谐波"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 4,
+  "calc": 2,
+  "source": "漆安慎《力学》第4版 习题10.2.3",
+  "hints": [
+   "$y=A\\cos2\\pi\\left(\\dfrac{t}{T}-\\dfrac{x}{\\lambda}\\right)$。",
+   "相位差 $\\Delta\\varphi=2\\pi\\dfrac{\\Delta x}{\\lambda}$。"
+  ],
+  "answer": "2\\pi",
+  "solution": "沿 $x$ 正方向传播：\n$$y=1.0\\times10^{-3}\\cos2\\pi\\left(\\frac{t}{0.010}-\\frac{x}{1.0}\\right)\\ \\mathrm{m}.$$\n\n相距 $\\Delta x=1.0\\ \\mathrm{m}=\\lambda$ 的两点，相位差\n$$\\Delta\\varphi=2\\pi\\frac{\\Delta x}{\\lambda}=2\\pi\\frac{1.0}{1.0}=2\\pi.$$\n\n相位差为 $2\\pi$ 的整数倍，两点振动完全同相——相隔一个波长的波面是同相面。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "波方程",
+    "相位差"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十章 习题10.2.3"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "由波方程提取波速与波长",
+  "statement": "已知波源在原点（$x=0$）的平面简谐波方程为 $y=A\\cos\\left(bt-cx\\right)$，$A$、$b$、$c$ 均为常量。(1) 求振幅、频率、波速和波长；(2) 写出在传播方向上距波源 $l$ 处一点的振动方程，此质点振动的初相位如何？",
+  "mainTag": "振动与波",
+  "tags": [
+   "平面简谐波"
+  ],
+  "kind": "推导题",
+  "thinking": 3,
+  "difficulty": 4,
+  "calc": 2,
+  "source": "漆安慎《力学》第4版 习题10.2.5",
+  "hints": [
+   "与标准形式 $y=A\\cos2\\pi\\left(\\nu t-\\dfrac{x}{\\lambda}\\right)$ 对比。",
+   "$x=l$ 处相位落后 $cl$。"
+  ],
+  "answer": "v=\\frac{b}{c},\\qquad \\lambda=\\frac{2\\pi}{c}",
+  "solution": "（1）把 $y=A\\cos\\left(bt-cx\\right)$ 与 $y=A\\cos2\\pi\\left(\\nu t-x/\\lambda\\right)$ 对比：\n$$\\omega=b\\Rightarrow\\nu=\\frac{b}{2\\pi},\\qquad k=c=\\frac{2\\pi}{\\lambda}\\Rightarrow\\lambda=\\frac{2\\pi}{c},$$\n$$v=\\frac{\\omega}{k}=\\frac{b}{c}.$$\n\n（2）$x=l$ 处\n$$y=A\\cos\\left(bt-cl\\right)=A\\cos\\left(bt-cl\\right),$$\n初相位 $\\varphi_0=-cl$（相位比波源落后 $cl$，即落后 $l/\\lambda$ 个周期）。\n\n若 $cl=2n\\pi$，该点与波源同相；若 $cl=\\left(2n+1\\right)\\pi$，反相。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "波方程",
+    "初相位"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十章 习题10.2.5"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "铜丝中纵波与横波的波速",
+  "statement": "有一圆形横截面的铜丝，受张力 $1.0\\ \\mathrm{N}$，横截面积 $1.0\\ \\mathrm{mm^2}$。求其中传播纵波和横波时的波速。铜的密度 $8.9\\times10^{3}\\ \\mathrm{kg/m^3}$，弹性模量 $1.2\\times10^{11}\\ \\mathrm{N/m^2}$。",
+  "mainTag": "振动与波",
+  "tags": [
+   "平面简谐波"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题10.3.1",
+  "hints": [
+   "横波 $v=\\sqrt{T/\\mu}$，$\\mu=\\rho S$ 为线密度。",
+   "纵波 $v=\\sqrt{E/\\rho}$。"
+  ],
+  "answer": "1.06\\times10^{1}\\ \\mathrm{m/s}",
+  "solution": "线密度\n$$\\mu=\\rho S=8.9\\times10^{3}\\times1.0\\times10^{-6}=8.9\\times10^{-3}\\ \\mathrm{kg/m}.$$\n\n横波（弦波）：\n$$v_{\\text{横}}=\\sqrt{\\frac{T}{\\mu}}=\\sqrt{\\frac{1.0}{8.9\\times10^{-3}}}=10.6\\ \\mathrm{m/s}.$$\n\n纵波：\n$$v_{\\text{纵}}=\\sqrt{\\frac{E}{\\rho}}=\\sqrt{\\frac{1.2\\times10^{11}}{8.9\\times10^{3}}}=3.7\\times10^{3}\\ \\mathrm{m/s}.$$\n\n两者相差 350 倍——同一根铜丝，纵波（声波）传播极快，横波（弦振动）很慢，这正是弦乐器能用很短的弦产生低频的原因。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m/s",
+   "methods": [
+    "波速",
+    "弦波"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十章 习题10.3.1"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "水的体积模量",
+  "statement": "已知某种温度下水中声速为 $1.45\\times10^{3}\\ \\mathrm{m/s}$，水的密度 $1.0\\times10^{3}\\ \\mathrm{kg/m^3}$。求水的体积模量。",
+  "mainTag": "振动与波",
+  "tags": [
+   "平面简谐波"
+  ],
+  "kind": "计算题",
+  "thinking": 2,
+  "difficulty": 3,
+  "calc": 2,
+  "source": "漆安慎《力学》第4版 习题10.3.2",
+  "hints": [
+   "液体中声速 $v=\\sqrt{K/\\rho}$。",
+   "$K=\\rho v^2$。"
+  ],
+  "answer": "2.1\\times10^{9}\\ \\mathrm{Pa}",
+  "solution": "液体中纵波（声波）速度\n$$v=\\sqrt{\\frac{K}{\\rho}}\\quad\\Rightarrow\\quad K=\\rho v^2=1.0\\times10^{3}\\times\\left(1.45\\times10^{3}\\right)^2=2.1\\times10^{9}\\ \\mathrm{Pa}.$$\n\n约为大气压的 $2\\times10^{4}$ 倍，说明水几乎不可压缩；这也是水下声呐能远距离传播的物理基础。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "Pa",
+   "methods": [
+    "体积模量",
+    "声速"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十章 习题10.3.2"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "噪声传入窗口的声功率",
+  "statement": "面向街道的窗口面积约 $40\\ \\mathrm{m^2}$，街道上的噪声在窗口的声强级为 $60\\ \\mathrm{dB}$。问有多少声功率传入室内（即单位时间内进入多少声能）？",
+  "mainTag": "振动与波",
+  "tags": [
+   "平面简谐波"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 4,
+  "calc": 2,
+  "source": "漆安慎《力学》第4版 习题10.4.3",
+  "hints": [
+   "声强级 $L=10\\lg\\left(I/I_0\\right)$，$I_0=10^{-12}\\ \\mathrm{W/m^2}$。",
+   "$P=IS$。"
+  ],
+  "answer": "4.0\\times10^{-5}\\ \\mathrm{W}",
+  "solution": "由声强级定义\n$$L=10\\lg\\frac{I}{I_0}\\quad\\Rightarrow\\quad I=I_0\\times10^{L/10}=10^{-12}\\times10^{6}=1.0\\times10^{-6}\\ \\mathrm{W/m^2}.$$\n传入功率\n$$P=IS=1.0\\times10^{-6}\\times40=4.0\\times10^{-5}\\ \\mathrm{W}.$$\n\n只有 $40\\ \\mathrm{\\mu W}$——声强级是对数标度，$60\\ \\mathrm{dB}$ 听上去很吵，能量却极小。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "W",
+   "methods": [
+    "声强级"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十章 习题10.4.3"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "点声源的声强级与听阈距离",
+  "statement": "距一频率为 $1000\\ \\mathrm{Hz}$ 的点声源 $10\\ \\mathrm{m}$ 的地方，声音的声强级为 $20\\ \\mathrm{dB}$。求：(1) 距声源 $5\\ \\mathrm{m}$ 处的声强级；(2) 距声源多远就听不见声音了（取听阈 $10^{-12}\\ \\mathrm{W/m^2}$）？",
+  "mainTag": "振动与波",
+  "tags": [
+   "平面简谐波"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题10.4.4",
+  "hints": [
+   "点声源球面波，$I\\propto1/r^2$。",
+   "距离减半 → 声强增 4 倍 → 声强级增约 $6\\ \\mathrm{dB}$。"
+  ],
+  "answer": "26",
+  "solution": "（1）点声源 $I\\propto1/r^2$，距离由 $10\\ \\mathrm{m}$ 减到 $5\\ \\mathrm{m}$，声强增大 4 倍：\n$$L_5=L_{10}+10\\lg4=20+6.0=26\\ \\mathrm{dB}.$$\n\n（2）$10\\ \\mathrm{m}$ 处 $L=20\\ \\mathrm{dB}$，即 $I_{10}=10^{-10}\\ \\mathrm{W/m^2}$。听阈 $I_0=10^{-12}\\ \\mathrm{W/m^2}$ 小 100 倍，故\n$$\\frac{r}{10}=\\sqrt{\\frac{I_{10}}{I_0}}=\\sqrt{100}=10\\quad\\Rightarrow\\quad r=100\\ \\mathrm{m}.$$\n\n即 $100\\ \\mathrm{m}$ 外就听不见了。注意这是无遮挡、无吸收的理想情况，实际因空气吸收会更近。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "声强级",
+    "球面波"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十章 习题10.4.4"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "声音干涉仪的频率与振幅比",
+  "statement": "声音干涉仪中，薄膜 $S$ 在电磁铁作用下振动，$D$ 为声音检测器，$SBD$ 的长度可变、$SAD$ 固定，管内充满空气。当 $B$ 处于某一位置时，在 $D$ 处听到强度为 $100$ 单位的最小声音；将 $B$ 移动，声音加大，当 $B$ 移动 $1.65\\ \\mathrm{cm}$ 时听到强度为 $900$ 单位的最强音。(1) 求声波频率；(2) 求到达 $D$ 处两列声波的振幅之比。已知声速 $342.4\\ \\mathrm{m/s}$。",
+  "mainTag": "振动与波",
+  "tags": [
+   "波的干涉与驻波"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题10.5.1",
+  "hints": [
+   "$B$ 移动 $\\Delta d$ 使光程差变化 $2\\Delta d$。",
+   "由极小到极大：$2\\Delta d=\\lambda/2$；强度比给振幅比。"
+  ],
+  "answer": "5.2\\times10^{3}\\ \\mathrm{Hz}",
+  "solution": "（1）$B$ 移动 $\\Delta d=1.65\\ \\mathrm{cm}$，两路声程差变化 $2\\Delta d$。由极小到相邻极大，程差变化 $\\lambda/2$：\n$$2\\Delta d=\\frac{\\lambda}{2}\\quad\\Rightarrow\\quad\\lambda=4\\Delta d=4\\times1.65=6.6\\ \\mathrm{cm}.$$\n$$\\nu=\\frac{v}{\\lambda}=\\frac{342.4}{0.066}=5.19\\times10^{3}\\ \\mathrm{Hz}\\approx5.2\\ \\mathrm{kHz}.$$\n\n（2）设两列波振幅 $A_1$、$A_2$，强度正比于振幅平方：\n$$\\left(A_1-A_2\\right)^2:I_{\\min}=100,\\qquad\\left(A_1+A_2\\right)^2:I_{\\max}=900.$$\n取平方根：$A_1-A_2=10$、$A_1+A_2=30$（同一比例单位），解得 $A_1=20$、$A_2=10$，故\n$$\\frac{A_1}{A_2}=2.$$\n\n干涉仪的「可见度」$\\dfrac{I_{\\max}-I_{\\min}}{I_{\\max}+I_{\\min}}=\\dfrac{800}{1000}=0.8$，与振幅比 2 对应。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "Hz",
+   "methods": [
+    "干涉",
+    "声速"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十章 习题10.5.1"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "游泳池侧壁受到的总压力",
+  "statement": "游泳池长 $50\\ \\mathrm{m}$、宽 $25\\ \\mathrm{m}$，各处水深相等且等于 $1.50\\ \\mathrm{m}$。求游泳池各侧壁上的总压力（不考虑大气压，水的密度 $1.0\\times10^{3}\\ \\mathrm{kg/m^3}$）。",
+  "mainTag": "力学",
+  "tags": [
+   "流体力学基础"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题11.2.3",
+  "hints": [
+   "侧壁压强随深度线性增加，平均压强为 $\\frac12\\rho gh$。",
+   "两侧长壁 + 两侧短壁，面积不同。"
+  ],
+  "answer": "1.65\\times10^{6}\\ \\mathrm{N}",
+  "solution": "平均压强（深度 $0\\sim h$ 的线性分布）\n$$\\bar p=\\frac12\\rho gh=\\frac12\\times1.0\\times10^{3}\\times9.8\\times1.50=7.35\\times10^{3}\\ \\mathrm{Pa}.$$\n\n两个长壁（$50\\times1.50$）：\n$$F_1=2\\bar pS_1=2\\times7.35\\times10^{3}\\times75=1.10\\times10^{6}\\ \\mathrm{N}.$$\n两个短壁（$25\\times1.50$）：\n$$F_2=2\\times7.35\\times10^{3}\\times37.5=5.51\\times10^{5}\\ \\mathrm{N}.$$\n总压力\n$$F=F_1+F_2=1.65\\times10^{6}\\ \\mathrm{N}.$$\n\n注意不能用「底面压强 × 侧壁面积」——压强沿深度变化，必须取平均。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "N",
+   "methods": [
+    "液体压强",
+    "总压力"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十一章 习题11.2.3"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "水银真空计的真空度",
+  "statement": "流体内的真空度指该流体内压强与大气压的差。水银真空计中水银柱高度差 $h=50\\ \\mathrm{cm}$，求容器内气体的真空度（$1\\ \\mathrm{cmHg}$ 产生的压强约 $1333\\ \\mathrm{Pa}$）。",
+  "mainTag": "力学",
+  "tags": [
+   "流体力学基础"
+  ],
+  "kind": "计算题",
+  "thinking": 2,
+  "difficulty": 2,
+  "calc": 1,
+  "source": "漆安慎《力学》第4版 习题11.2.4",
+  "hints": [
+   "真空度 $=p_0-p$。",
+   "$p_0-p=\\rho_{\\mathrm{Hg}}gh$。"
+  ],
+  "answer": "6.7\\times10^{4}\\ \\mathrm{Pa}",
+  "solution": "真空度等于水银柱产生的压强差：\n$$\\Delta p=\\rho_{\\mathrm{Hg}}gh=1333\\times50=6.665\\times10^{4}\\ \\mathrm{Pa}\\approx6.7\\times10^{4}\\ \\mathrm{Pa}.$$\n\n约 $0.67$ 个大气压。若 $h=76\\ \\mathrm{cm}$，真空度就接近 $1.01\\times10^{5}\\ \\mathrm{Pa}$，即完全真空。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "Pa",
+   "methods": [
+    "真空度",
+    "液柱压强"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十一章 习题11.2.4"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "海平面以下 300 m 处的压强",
+  "statement": "海水的密度为 $1.03\\times10^{3}\\ \\mathrm{kg/m^3}$。(1) 求海平面以下 $300\\ \\mathrm{m}$ 处的压强；(2) 若海水密度近似均匀，求海平面以上 $10\\ \\mathrm{km}$ 高处的压强（标准大气压 $1.013\\times10^{5}\\ \\mathrm{Pa}$，空气密度取 $1.2\\ \\mathrm{kg/m^3}$）。",
+  "mainTag": "力学",
+  "tags": [
+   "流体力学基础"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题11.2.5",
+  "hints": [
+   "液体：$p=p_0+\\rho gh$。",
+   "大气不能用常密度线性外推，但题目要求近似时可估算并说明偏差。"
+  ],
+  "answer": "3.1\\times10^{6}\\ \\mathrm{Pa}",
+  "solution": "（1）海平面以下 $300\\ \\mathrm{m}$：\n$$p=p_0+\\rho gh=1.013\\times10^{5}+1.03\\times10^{3}\\times9.8\\times300\n=1.01\\times10^{5}+3.03\\times10^{6}=3.13\\times10^{6}\\ \\mathrm{Pa}.$$\n若只算表压则为 $3.03\\times10^{6}\\ \\mathrm{Pa}$。\n\n（2）若按常密度线性外推：\n$$p\\approx p_0-\\rho_{\\text{空气}}gh=1.01\\times10^{5}-1.2\\times9.8\\times10^{4}=1.01\\times10^{5}-1.18\\times10^{5}<0,$$\n显然不合理。大气密度随高度指数衰减，须用\n$$p=p_0\\mathrm{e}^{-Mgh/(RT)}=1.013\\times10^{5}\\times\\mathrm{e}^{-0.02896\\times9.8\\times10^{4}/(8.314\\times288)}\n=1.013\\times10^{5}\\times0.317=3.2\\times10^{4}\\ \\mathrm{Pa}.$$\n\n即 $10\\ \\mathrm{km}$ 高空气压约为地面的 $1/3$。本题(1)的答案取 $3.1\\times10^{6}\\ \\mathrm{Pa}$（含大气压）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "Pa",
+   "methods": [
+    "液体压强",
+    "大气压强"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十一章 习题11.2.5"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "布达拉宫处的大气压强",
+  "statement": "西藏布达拉宫的海拔高度为 $3756.5\\ \\mathrm{m}$。试求该处的大气压强，并问为海平面大气压的几分之几（海平面 $p_0=1.013\\times10^{5}\\ \\mathrm{Pa}$，取标准大气模型）。",
+  "mainTag": "力学",
+  "tags": [
+   "流体力学基础"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题11.2.10",
+  "hints": [
+   "标准大气：$p=p_0\\left(1-2.25577\\times10^{-5}h\\right)^{5.25588}$。",
+   "也可用等温指数模型估算，两者相差约 $5\\%$。"
+  ],
+  "answer": "6.4\\times10^{4}\\ \\mathrm{Pa}",
+  "solution": "用标准大气压公式（$h$ 以 m 计）：\n$$p=p_0\\left(1-2.25577\\times10^{-5}h\\right)^{5.25588}\n=1.013\\times10^{5}\\times\\left(1-0.08473\\right)^{5.25588}.$$\n$$\\left(0.91527\\right)^{5.25588}=0.628,\\qquad p=6.36\\times10^{4}\\ \\mathrm{Pa}\\approx6.4\\times10^{4}\\ \\mathrm{Pa}.$$\n\n为海平面的\n$$\\frac{p}{p_0}=0.628\\approx\\frac{5}{8}.$$\n\n即约为海平面的 $63\\%$。海拔近 $3.8\\ \\mathrm{km}$ 处水的沸点约 $88^\\circ\\mathrm{C}$，这就是高原煮饭夹生的原因。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "Pa",
+   "methods": [
+    "大气压强",
+    "标准大气"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十一章 习题11.2.10"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "小孔出流的水平射程",
+  "statement": "容器内水的高度为 $h_0$，水自离自由表面 $h$ 深处的小孔流出。(1) 求水流达到地面的水平射程；(2) 在水面以下多深的地方另开一孔，可使水流的水平射程与前者相等？",
+  "mainTag": "力学",
+  "tags": [
+   "流体力学基础"
+  ],
+  "kind": "推导题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题11.4.1",
+  "hints": [
+   "托里拆利：$v=\\sqrt{2gh}$。",
+   "孔到地面高度 $h_0-h$，平抛时间 $t=\\sqrt{2\\left(h_0-h\\right)/g}$。"
+  ],
+  "answer": "x=2\\sqrt{h\\left(h_{0}-h\\right)},\\qquad h^{\\prime}=h_{0}-h",
+  "solution": "（1）由伯努利方程（液面与孔口均通大气），孔口流速\n$$v=\\sqrt{2gh}.$$\n孔口到地面高度 $h_0-h$，水做平抛运动，时间\n$$t=\\sqrt{\\frac{2\\left(h_0-h\\right)}{g}},$$\n水平射程\n$$x=vt=\\sqrt{2gh}\\cdot\\sqrt{\\frac{2\\left(h_0-h\\right)}{g}}=2\\sqrt{h\\left(h_0-h\\right)}.$$\n\n（2）射程对 $h$ 与 $h_0-h$ 对称：\n$$x\\left(h\\right)=x\\left(h_0-h\\right),$$\n故在深度 $h'=h_0-h$ 处开孔，射程相同。\n\n$h=h_0/2$ 时射程最大 $x_{\\max}=h_0$（见下一题）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "伯努利方程",
+    "平抛运动"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十一章 习题11.4.1"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "最大水平射程的孔深",
+  "statement": "容器内水的深度为 $h_0$，在侧壁开小孔使水流水平射出。(1) 在多深的地方开孔，可使水流具有最大的水平射程？(2) 最大的水平射程等于多少？",
+  "mainTag": "力学",
+  "tags": [
+   "流体力学基础"
+  ],
+  "kind": "推导题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题11.4.2",
+  "hints": [
+   "射程 $x=2\\sqrt{h\\left(h_0-h\\right)}$。",
+   "被开方式 $h\\left(h_0-h\\right)$ 是开口向下的抛物线，顶点在 $h=h_0/2$。"
+  ],
+  "answer": "h=\\frac{h_{0}}{2},\\qquad x_{\\max}=h_{0}",
+  "solution": "由上一题\n$$x^2=4h\\left(h_0-h\\right)=4\\left(h_0h-h^2\\right).$$\n对 $h$ 求导并令其为零：\n$$\\frac{\\mathrm{d}}{\\mathrm{d}h}\\left(h_0h-h^2\\right)=h_0-2h=0\\quad\\Rightarrow\\quad h=\\frac{h_0}{2}.$$\n此时\n$$x_{\\max}=2\\sqrt{\\frac{h_0}{2}\\cdot\\frac{h_0}{2}}=h_0.$$\n\n即孔开在水深一半处射程最远，且最远射程恰好等于水深。这也解释了为什么消防水带、喷泉的出水口都尽量放在容器（或水塔）高度的一半位置附近。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "伯努利方程",
+    "极值"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十一章 习题11.4.2"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "射流对挡壁的压力",
+  "statement": "研究射流对挡壁的压力。射流流速为 $v$、流量为 $Q$，流体密度为 $\\rho$。(1) 射流垂直射向固定平板；(2) 射流以与板面夹角 $\\theta$ 射向固定斜板。分别求射流作用于挡壁的压力（设流体沿板面流出、不计黏性）。",
+  "mainTag": "力学",
+  "tags": [
+   "流体力学基础"
+  ],
+  "kind": "推导题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题11.5.1",
+  "hints": [
+   "动量定理：单位时间动量变化率等于作用力。",
+   "垂直平板：$F=\rho Qv$；斜板只改变法向分量。"
+  ],
+  "answer": "F_{\\perp}=\\rho Qv,\\qquad F_{\\text{斜}}=\\rho Qv\\sin\\theta",
+  "solution": "（1）垂直平板：射流沿法向的动量由 $\\rho Qv$ 变为零（沿板面流出的流体法向动量为零），单位时间动量变化率\n$$F=\\rho Qv.$$\n由牛顿第三定律，射流对板的压力大小相同、方向沿射流方向。\n\n（2）斜板：设射流与板面夹角 $\\theta$，法向分速度 $v\\sin\\theta$。流体沿板面流出后法向速度为零，法向动量变化率\n$$F_{\\perp}=\\rho Qv\\sin\\theta.$$\n平板受到的压力即此值，沿板面法向。\n\n当 $\\theta=90^\\circ$ 时退化为垂直入射的 $\\rho Qv$；当 $\\theta\\to0$（掠射）时压力趋于零，符合直觉。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "动量定理",
+    "射流"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十一章 习题11.5.1"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "血液流动的湍流临界流速",
+  "statement": "设血液的密度为 $1.05\\times10^{3}\\ \\mathrm{kg/m^3}$，黏度为 $2.7\\times10^{-3}\\ \\mathrm{Pa\\cdot s}$。问当血液流过直径为 $0.2\\ \\mathrm{cm}$ 的动脉时，流速多大则变为湍流？视血管为光滑圆管，取临界雷诺数 $2000$。",
+  "mainTag": "力学",
+  "tags": [
+   "流体力学基础"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题11.6.1",
+  "hints": [
+   "$Re=\\dfrac{\\rho vd}{\\eta}$。",
+   "临界 $Re=2000$，解出 $v$。"
+  ],
+  "answer": "2.6\\ \\mathrm{m/s}",
+  "solution": "由雷诺数定义\n$$Re=\\frac{\\rho vd}{\\eta}\\quad\\Rightarrow\\quad\nv=\\frac{Re\\cdot\\eta}{\\rho d}=\\frac{2000\\times2.7\\times10^{-3}}{1.05\\times10^{3}\\times2.0\\times10^{-3}}=2.57\\ \\mathrm{m/s}.$$\n\n正常主动脉峰值流速约 $1\\ \\mathrm{m/s}$，仍在层流区；剧烈运动或狭窄处流速升高时可能出现湍流，产生可听到的「血管杂音」。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m/s",
+   "methods": [
+    "雷诺数",
+    "黏滞流体"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十一章 习题11.6.1"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "μ 子到达地面所需的高度",
+  "statement": "μ 子静止时的平均寿命 $\\tau_0\\approx2\\times10^{-6}\\ \\mathrm{s}$。宇宙射线产生的 μ 子以 $0.99c$ 向下运动并衰变，剩余粒子数 $N\\left(t\\right)=N\\left(0\\right)\\mathrm{e}^{-t/\\tau}$。(1) 若能到达地面的 μ 子为原来的 $1\\%$，求原来相对于地球的高度；(2) 求在与 μ 子相对静止的参考系中测得的高度。",
+  "mainTag": "近代物理",
+  "tags": [
+   "狭义相对论时空观"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题12.2.2",
+  "hints": [
+   "地面系中寿命被延长：$\\tau=\\gamma\\tau_0$，$\\gamma=1/\\sqrt{1-\\beta^2}$。",
+   "$N/N_0=\\mathrm{e}^{-t/\\tau}=0.01$，解出 $t$。"
+  ],
+  "answer": "1.94\\times10^{4}\\ \\mathrm{m}",
+  "solution": "（1）$\\beta=0.99$，\n$$\\gamma=\\frac{1}{\\sqrt{1-0.99^2}}=\\frac{1}{0.1411}=7.09,$$\n地面系中 μ 子的平均寿命\n$$\\tau=\\gamma\\tau_0=7.09\\times2\\times10^{-6}=1.42\\times10^{-5}\\ \\mathrm{s}.$$\n由 $N/N_0=\\mathrm{e}^{-t/\\tau}=0.01$：\n$$t=\\tau\\ln100=1.42\\times10^{-5}\\times4.605=6.53\\times10^{-5}\\ \\mathrm{s}.$$\n高度\n$$h=vt=0.99\\times3.0\\times10^{8}\\times6.53\\times10^{-5}=1.94\\times10^{4}\\ \\mathrm{m}\\approx19\\ \\mathrm{km}.$$\n\n（2）μ 子静止系中，高度发生长度收缩：\n$$h'=\\frac{h}{\\gamma}=\\frac{1.94\\times10^{4}}{7.09}=2.7\\times10^{3}\\ \\mathrm{m}\\approx2.7\\ \\mathrm{km}.$$\n\n两种描述自洽：地面系说「寿命变长所以能走 19 km」，μ 子系说「只有 2.7 km 要走」。这正是狭义相对论最经典的实验证据（Rossi–Hall 实验）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m",
+   "methods": [
+    "时间膨胀",
+    "长度收缩"
+   ],
+   "constants": [
+    "c=3.0e8 m/s"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十二章 习题12.2.2"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "双生子旅行的年龄比",
+  "statement": "一人留在地球上，另一同龄人到半人马座 α 星旅行。该恒星距地球 $4.3\\ \\mathrm{ly}$，火箭速率 $0.8c$。当他到达该星时，地球上的观察者发现他的年龄增长为自己年龄增长的几分之几？（设出发时二人均 $20$ 岁。）",
+  "mainTag": "近代物理",
+  "tags": [
+   "狭义相对论时空观"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题12.2.4",
+  "hints": [
+   "地球系时间 $t=d/v$。",
+   "飞船固有时 $t_0=t/\\gamma$，$\\gamma=1/\\sqrt{1-0.8^2}=5/3$。"
+  ],
+  "answer": "0.60",
+  "solution": "地球系中旅行时间\n$$t=\\frac{d}{v}=\\frac{4.3}{0.8}=5.375\\ \\mathrm{yr}.$$\n$$\\gamma=\\frac{1}{\\sqrt{1-0.8^2}}=\\frac{1}{0.6}=\\frac53.$$\n飞船上的固有时（旅行者年龄增长）\n$$t_0=\\frac{t}{\\gamma}=5.375\\times\\frac35=3.225\\ \\mathrm{yr}.$$\n比值\n$$\\frac{t_0}{t}=\\frac{1}{\\gamma}=0.60.$$\n\n到达时地球上的人 $25.4$ 岁，旅行者 $23.2$ 岁。若考虑返程，旅行者总共只老 $6.45$ 年，地球上过 $10.75$ 年——这就是「双生子佯谬」的正确结论（加速的一方更年轻）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "时间膨胀",
+    "固有时"
+   ],
+   "constants": [
+    "c=3.0e8 m/s"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十二章 习题12.2.4"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "两枚反向火箭的相对速率",
+  "statement": "处于恒星际站上的观察者测得两枚宇宙火箭以 $0.99c$ 的速率沿相反方向离去。求自一枚火箭测得另一枚火箭的速率。",
+  "mainTag": "近代物理",
+  "tags": [
+   "狭义相对论时空观"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题12.3.3",
+  "hints": [
+   "相对论速度合成：$u^{\\prime}=\\dfrac{u+v}{1+uv/c^2}$。",
+   "同向为减、反向为加，但分母保证结果不超过 $c$。"
+  ],
+  "answer": "0.99995",
+  "solution": "取一枚火箭为 $S'$ 系，站为 $S$ 系。另一枚火箭在 $S$ 系中速度为 $u=0.99c$（沿 $+x$），$S'$ 系相对 $S$ 的速度 $v=-0.99c$。相对论速度合成：\n$$u'=\\frac{u-v}{1-uv/c^2}=\\frac{0.99c-\\left(-0.99c\\right)}{1-0.99\\times\\left(-0.99\\right)}\n=\\frac{1.98c}{1.9801}=0.99995c.$$\n\n经典力学会给 $1.98c$，超过光速；相对论分母把它压回 $0.99995c$，永远小于 $c$。若两火箭同向、速度都是 $0.99c$，则 $u'=0$，符合「同速无相对运动」。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "速度合成",
+    "光速极限"
+   ],
+   "constants": [
+    "c=3.0e8 m/s"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十二章 习题12.3.3"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "光速在速度合成下保持不变",
+  "statement": "试证明：若质点在 $S$ 系中的速度为 $u_x=c\\cos\\theta$、$u_y=c\\sin\\theta$（即速率恒为 $c$），则在相对 $S$ 沿 $x$ 轴以速率 $v$ 运动的 $S^{\\prime}$ 系中，仍有 $u_x^{\\prime 2}+u_y^{\\prime 2}=c^2$。",
+  "mainTag": "近代物理",
+  "tags": [
+   "狭义相对论时空观"
+  ],
+  "kind": "证明题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题12.3.2",
+  "hints": [
+   "洛伦兹速度变换：$u_x^{\\prime}=\\dfrac{u_x-v}{1-u_xv/c^2}$，$u_y^{\\prime}=\\dfrac{u_y}{\\gamma\\left(1-u_xv/c^2\\right)}$。",
+   "把 $u_x^2+u_y^2=c^2$ 代入并化简。"
+  ],
+  "answer": "u_x^{\\prime 2}+u_y^{\\prime 2}=c^{2}",
+  "solution": "洛伦兹速度变换\n$$u_x'=\\frac{u_x-v}{1-u_xv/c^2},\\qquad\nu_y'=\\frac{u_y}{\\gamma\\left(1-u_xv/c^2\\right)},\\qquad\n\\gamma=\\frac{1}{\\sqrt{1-v^2/c^2}}.$$\n记 $D=1-u_xv/c^2$，则\n$$u_x'^2+u_y'^2=\\frac{\\left(u_x-v\\right)^2+\\left(1-v^2/c^2\\right)u_y^2}{D^2}.$$\n展开分子：\n$$u_x^2-2u_xv+v^2+u_y^2-\\frac{v^2}{c^2}u_y^2\n=\\left(u_x^2+u_y^2\\right)-2u_xv+v^2-\\frac{v^2}{c^2}u_y^2.$$\n代入 $u_x^2+u_y^2=c^2$：\n$$=c^2-2u_xv+v^2-\\frac{v^2}{c^2}\\left(c^2-u_x^2\\right)\n=c^2-2u_xv+v^2-v^2+\\frac{v^2u_x^2}{c^2}\n=c^2\\left(1-\\frac{2u_xv}{c^2}+\\frac{u_x^2v^2}{c^4}\\right)=c^2D^2.$$\n故\n$$u_x'^2+u_y'^2=\\frac{c^2D^2}{D^2}=c^2.$$\n\n这正说明「光速不变」与洛伦兹变换自洽：无论换到哪个惯性系，光速都是 $c$。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "proof",
+   "unit": "",
+   "methods": [
+    "洛伦兹变换",
+    "光速不变"
+   ],
+   "constants": [
+    "c=3.0e8 m/s"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十二章 习题12.3.2"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "冥王星与星际火箭的质量比",
+  "statement": "(1) 冥王星绕太阳公转的线速率为 $4.83\\times10^{3}\\ \\mathrm{m/s}$，问其运动质量比静质量大百分之几？(2) 星际火箭以 $0.8c$ 的速率飞行，其运动质量是静质量的多少倍？",
+  "mainTag": "近代物理",
+  "tags": [
+   "相对论动力学"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 4,
+  "calc": 2,
+  "source": "漆安慎《力学》第4版 习题12.4.1",
+  "hints": [
+   "$m=\\gamma m_0$，$\\gamma\\approx1+\\dfrac{v^2}{2c^2}$（$v\\ll c$）。",
+   "$0.8c$ 时 $\\gamma=5/3$。"
+  ],
+  "answer": "1.67",
+  "solution": "（1）$v\\ll c$，展开\n$$\\gamma\\approx1+\\frac{v^2}{2c^2}=1+\\frac{\\left(4.83\\times10^{3}\\right)^2}{2\\times\\left(3.0\\times10^{8}\\right)^2}\n=1+1.30\\times10^{-10}.$$\n质量只增加 $1.3\\times10^{-8}\\%$，完全测不出来——这就是为什么经典力学在日常尺度足够用。\n\n（2）$$\\gamma=\\frac{1}{\\sqrt{1-0.8^2}}=\\frac{1}{0.6}=1.667.$$\n运动质量是静质量的 $1.67$ 倍。\n\n本题答案为 (2) 的 $1.67$ 倍（(1) 的增量在解析中给出）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "质速关系",
+    "洛伦兹因子"
+   ],
+   "constants": [
+    "c=3.0e8 m/s"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十二章 习题12.4.1"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "质子与超子的静质量换算",
+  "statement": "质子、$\\Sigma^+$ 超子和 $\\pi^+$ 介子的静质量分别为 $938.3\\ \\mathrm{MeV}$、$1189\\ \\mathrm{MeV}$ 和 $139.6\\ \\mathrm{MeV}$（以 $m_0c^2$ 计）。各相当于多少千克？（$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$，$c=3.0\\times10^{8}\\ \\mathrm{m/s}$）",
+  "mainTag": "近代物理",
+  "tags": [
+   "相对论动力学"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题12.4.2",
+  "hints": [
+   "$m_0=\\dfrac{E_0}{c^2}$。",
+   "$1\\ \\mathrm{MeV}=1.602\\times10^{-13}\\ \\mathrm{J}$。"
+  ],
+  "answer": "1.67\\times10^{-27}\\ \\mathrm{kg}",
+  "solution": "质子：\n$$m_p=\\frac{938.3\\times10^{6}\\times1.602\\times10^{-19}}{\\left(3.0\\times10^{8}\\right)^2}\n=\\frac{1.503\\times10^{-10}}{9.0\\times10^{16}}=1.670\\times10^{-27}\\ \\mathrm{kg}.$$\n\n$\\Sigma^+$：\n$$m_\\Sigma=\\frac{1189}{938.3}\\times1.670\\times10^{-27}=2.117\\times10^{-27}\\ \\mathrm{kg}.$$\n\n$\\pi^+$：\n$$m_\\pi=\\frac{139.6}{938.3}\\times1.670\\times10^{-27}=2.485\\times10^{-28}\\ \\mathrm{kg}.$$\n\n粒子物理里直接用 $\\mathrm{MeV}/c^2$ 作质量单位，换算成 kg 反而少见；记住 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^2$ 就够了。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "kg",
+   "methods": [
+    "质能关系",
+    "静质量"
+   ],
+   "constants": [
+    "c=3.0e8 m/s"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十二章 习题12.4.2"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "回旋加速器中质子的质量与速率",
+  "statement": "伯克利的回旋加速器可使质子获得 $5.4\\times10^{-11}\\ \\mathrm{J}$ 的动能。质子静质量 $m_0=1.67\\times10^{-27}\\ \\mathrm{kg}$。(1) 其质量可达静质量的多少倍？(2) 质子的速度可达多少？",
+  "mainTag": "近代物理",
+  "tags": [
+   "相对论动力学"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题12.4.3",
+  "hints": [
+   "总能量 $E=m_0c^2+K=\\gamma m_0c^2$。",
+   "$v=c\\sqrt{1-1/\\gamma^2}$。"
+  ],
+  "answer": "1.36",
+  "solution": "（1）质子静能\n$$E_0=m_0c^2=1.67\\times10^{-27}\\times9.0\\times10^{16}=1.503\\times10^{-10}\\ \\mathrm{J}.$$\n$$\\gamma=\\frac{E_0+K}{E_0}=1+\\frac{5.4\\times10^{-11}}{1.503\\times10^{-10}}=1+0.359=1.359.$$\n即质量是静质量的 $1.36$ 倍。\n\n（2）$$\\frac{v}{c}=\\sqrt{1-\\frac{1}{\\gamma^2}}=\\sqrt{1-\\frac{1}{1.847}}=\\sqrt{0.4586}=0.677.$$\n$$v=0.677c=2.03\\times10^{8}\\ \\mathrm{m/s}.$$\n\n动能已接近静能的 $36\\%$，必须用相对论；若用经典 $K=\\frac12m_0v^2$ 会算出 $v=2.5\\times10^{8}\\ \\mathrm{m/s}$，明显偏大。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "相对论动能",
+    "洛伦兹因子"
+   ],
+   "constants": [
+    "c=3.0e8 m/s"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十二章 习题12.4.3"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "原子质量单位的等价能量",
+  "statement": "质量为 $1\\ \\mathrm{u}$ 的粒子的等价能量是多少兆电子伏？（$1\\ \\mathrm{u}=1.66054\\times10^{-27}\\ \\mathrm{kg}$，$c=3.0\\times10^{8}\\ \\mathrm{m/s}$，$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$）",
+  "mainTag": "近代物理",
+  "tags": [
+   "相对论动力学"
+  ],
+  "kind": "计算题",
+  "thinking": 2,
+  "difficulty": 3,
+  "calc": 2,
+  "source": "漆安慎《力学》第4版 习题12.4.4",
+  "hints": [
+   "$E=mc^2$。",
+   "把 J 换算成 MeV：除以 $1.602\\times10^{-13}$。"
+  ],
+  "answer": "9.3\\times10^{2}\\ \\mathrm{MeV}",
+  "solution": "$$E=mc^2=1.66054\\times10^{-27}\\times\\left(3.0\\times10^{8}\\right)^2=1.4945\\times10^{-10}\\ \\mathrm{J}.$$\n$$E=\\frac{1.4945\\times10^{-10}}{1.602\\times10^{-19}}\\ \\mathrm{eV}=9.33\\times10^{8}\\ \\mathrm{eV}=933\\ \\mathrm{MeV}.$$\n\n精确值 $931.494\\ \\mathrm{MeV}$（用 $c=2.998\\times10^{8}$ 与更精确的 $1\\ \\mathrm{u}$）。核物理中常用「$1\\ \\mathrm{u}\\leftrightarrow931.5\\ \\mathrm{MeV}$」估算结合能，例如 $\\mathrm{^{56}Fe}$ 结合能约 $8.8\\ \\mathrm{MeV/核子}$。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "MeV",
+   "methods": [
+    "质能关系",
+    "原子质量单位"
+   ],
+   "constants": [
+    "c=3.0e8 m/s"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十二章 习题12.4.4"
+  },
+  "subject": "physics"
+ }
+]

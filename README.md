@@ -78,7 +78,7 @@ curl -b cookie localhost:8787/api/admin/ai-stats  # 管理员：AI 通道成功�
 | 空间解析几何 | 向量代数、平面与直线、曲面与曲线、坐标变换 |
 | 综合 | 综合应用 |
 
-- **物理三级分类（v3.1）**：课程组（`course`）→ 主标签（15 个）→ 子标签（97 个）。课程组为 普通物理 / 数学物理方法 / 四大力学 / 天体物理与天文 / 物理实验与实测天文 / 综合；`physicsMeta.course` 可显式覆盖，缺省由主标签推导。题库物理模式顶部按课程组切换，`GET /api/problems?subject=physics&course=theory` 只返回四大力学题。
+- **物理三级分类（v3.1）**：课程组（`course`）→ 主标签（15 个）→ 子标签（99 个）。课程组为 普通物理 / 数学物理方法 / 四大力学 / 天体物理与天文 / 物理实验与实测天文 / 综合；`physicsMeta.course` 可显式覆盖，缺省由主标签推导。题库物理模式顶部按课程组切换，`GET /api/problems?subject=physics&course=theory` 只返回四大力学题。
 
 | 课程组 | 主标签 | 规模 |
 |---|---|---|
@@ -89,11 +89,11 @@ curl -b cookie localhost:8787/api/admin/ai-stats  # 管理员：AI 通道成功�
 | 物理实验与实测天文 | 物理实验与误差分析 | 1 章 6 子标签 |
 
 - **物理判题支持多单位制**：`physicsMeta.unitSystem` 取 `SI`（默认）/ `CGS`（高斯制，电磁量不校验电流维）/ `astro` / `natural`；`answerType: "order_of_magnitude"` + `tolDex` 用于天文量级估算（`0.3 dex` ≈ 2 倍以内判对）。常数速查栏可切 SI / CGS / 天文三套口径。
-- **物理是独立命名空间**：题目带 `subject: "physics"`，主标签换成力学 / 振动与波 / 热学 / 电磁学 / 光学 / 近代物理 / 物理实验与误差分析（+ 兜底「综合」），共 47 个子标签。数学与物理的标签表互不重叠，`GET /api/problems?subject=physics` 只返回物理题，不传 `subject` 仍按数学处理。
+- **物理是独立命名空间**：题目带 `subject: "physics"`，主标签换成力学 / 振动与波 / 热学 / 电磁学 / 光学 / 近代物理 / 物理实验与误差分析（+ 兜底「综合」），共 99 个子标签。数学与物理的标签表互不重叠，`GET /api/problems?subject=physics` 只返回物理题，不传 `subject` 仍按数学处理。
 
 | 物理主标签 | 子标签示例 |
 |---|---|
-| 力学 | 质点运动学、牛顿定律与非惯性系、动量与碰撞、功与机械能、万有引力与天体运动、刚体定轴转动、刚体平面平行运动、角动量守恒、流体力学基础 |
+| 力学 | 质点运动学、牛顿定律与非惯性系、动量与碰撞、功与机械能、万有引力与天体运动、刚体定轴转动、刚体平面平行运动、角动量守恒、流体力学基础、弹性体的应力与应变 |
 | 振动与波 | 简谐振动、阻尼与受迫振动、振动合成、平面简谐波、波的干涉与驻波、多普勒效应 |
 | 热学 | 理想气体状态方程、气体动理论、麦克斯韦速率分布、热力学第一定律、循环过程与卡诺循环、热力学第二定律与熵 |
 | 电磁学 | 静电场与高斯定理、电势与电容、静电场中的导体与电介质、恒定磁场与安培环路定理、洛伦兹力与安培力、电磁感应与自感互感、麦克斯韦方程组与电磁波 |
@@ -384,6 +384,12 @@ npm run check:physics-equiv          # 物理判题引擎（单位换算 / 量�
 npm run check:physics-gate           # 物理题内容门禁（标签体系 / 配图安全 / 标准答案自检）
 npm run verify:physics -- --file data/batch-physics-01.json   # SymPy 量纲与单位自洽校验
 npm run check:diagrams               # 专业示意图模板（有效势/天球/能级/多普勒）+ 物理内容门禁
+
+# 教材扫描件录入（需本机装 pymupdf + rapidocr-onnxruntime）
+python _ocr/ingest.py toc            # 打印书签目录，定位各章「习题」页
+python _ocr/ingest.py chapter 7      # OCR 第 7 章习题段
+node tools/verify/check-physics-gate.mjs    # 入库门禁：标签 / 配图 / 标准答案自检
+python tools/verify/verify_physics.py --file data/batch-physics-12-textbook-mech3.json
 node tools/diagrams/make-svg.mjs     # 重新生成 public/assets/diagrams/physics/physics-*.svg
 npm run check:dedup                  # 查重工具自检
 npm run check:katex                  # 公式可渲染性，必须 0 失败（--strict-unclosed 连未闭合分隔符一起卡）

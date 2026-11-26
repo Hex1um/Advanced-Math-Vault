@@ -90,6 +90,8 @@ UNITS = {
     'arcmin': sp.pi / 10800,
     'deg': sp.pi / 180,
     '°': sp.pi / 180,
+    'rpm': sp.pi / 30,
+    'r/min': sp.pi / 30,
 }
 
 PREFIX = {
@@ -133,6 +135,7 @@ def parse_unit(text):
     s = s.replace('%', 'percent')
     s = s.replace('°', 'deg')
     s = s.replace('″', 'arcsec')
+    s = s.replace('r/min', 'rpm')
     s = re.sub(r'\*\*\s*\{?(-?\d+)\}?', r'**\1', s)
     if not s:
         return None

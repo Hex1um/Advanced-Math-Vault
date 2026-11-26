@@ -1,0 +1,859 @@
+[
+ {
+  "title": "地球自转与公转的运动学量",
+  "statement": "设地球绕日做圆周运动，地球半径 $R=6.37\\times10^{6}\\ \\mathrm{m}$，日地距离 $1.49\\times10^{11}\\ \\mathrm{m}$。(1) 求地球自转与公转的角速度；(2) 估算赤道上一点因自转具有的线速度与向心加速度；(3) 估算地心因公转具有的线速度与向心加速度。",
+  "mainTag": "力学",
+  "tags": [
+   "刚体定轴转动"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 3,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题7.1.1",
+  "hints": [
+   "自转周期 $T_1=86400\\ \\mathrm{s}$，公转周期 $T_2=3.156\\times10^{7}\\ \\mathrm{s}$。",
+   "$v=\\omega R$，$a_n=\\omega^2R$。"
+  ],
+  "answer": "4.6\\times10^{2}\\ \\mathrm{m/s}",
+  "solution": "（1）自转\n$$\\omega_1=\\frac{2\\pi}{T_1}=\\frac{2\\pi}{86400}=7.27\\times10^{-5}\\ \\mathrm{rad/s},$$\n公转\n$$\\omega_2=\\frac{2\\pi}{T_2}=\\frac{2\\pi}{3.156\\times10^7}=1.99\\times10^{-7}\\ \\mathrm{rad/s}.$$\n\n（2）赤道线速度与向心加速度\n$$v_1=\\omega_1R=7.27\\times10^{-5}\\times6.37\\times10^6=4.63\\times10^{2}\\ \\mathrm{m/s},$$\n$$a_1=\\omega_1^2R=\\left(7.27\\times10^{-5}\\right)^2\\times6.37\\times10^6=3.37\\times10^{-2}\\ \\mathrm{m/s^2}.$$\n\n（3）地心公转\n$$v_2=\\omega_2r=1.99\\times10^{-7}\\times1.49\\times10^{11}=2.97\\times10^{4}\\ \\mathrm{m/s},$$\n$$a_2=\\omega_2^2r=\\left(1.99\\times10^{-7}\\right)^2\\times1.49\\times10^{11}=5.90\\times10^{-3}\\ \\mathrm{m/s^2}.$$\n\n自转向心加速度只有 $g$ 的 $0.34\\%$，所以赤道与极点的重力加速度差别很小。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m/s",
+   "methods": [
+    "圆周运动"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.1.1"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "发动机的角加速度与转数",
+  "statement": "汽车发动机的转速在 $12\\ \\mathrm{s}$ 内由 $1200\\ \\mathrm{r/min}$ 增加到 $3000\\ \\mathrm{r/min}$。(1) 假设转动是匀加速转动，求角加速度；(2) 在此时间内，发动机转了多少转？",
+  "mainTag": "力学",
+  "tags": [
+   "刚体定轴转动"
+  ],
+  "kind": "计算题",
+  "thinking": 2,
+  "difficulty": 2,
+  "calc": 2,
+  "source": "漆安慎《力学》第4版 习题7.1.2",
+  "hints": [
+   "先把 $\\mathrm{r/min}$ 换成 $\\mathrm{rad/s}$：乘 $2\\pi/60$。",
+   "转数等于平均角速度乘时间（再除以 $2\\pi$）。"
+  ],
+  "answer": "15.7\\ \\mathrm{rad/s^2}",
+  "solution": "（1）角速度增量\n$$\\Delta\\omega=\\left(3000-1200\\right)\\times\\frac{2\\pi}{60}=1800\\times\\frac{2\\pi}{60}=188.5\\ \\mathrm{rad/s},$$\n$$\\alpha=\\frac{\\Delta\\omega}{\\Delta t}=\\frac{188.5}{12}=15.7\\ \\mathrm{rad/s^2}.$$\n\n（2）匀加速转动的平均角速度\n$$\\bar\\omega=\\frac{\\omega_1+\\omega_2}{2}=\\frac{\\left(1200+3000\\right)}{2}\\times\\frac{2\\pi}{60}=219.9\\ \\mathrm{rad/s},$$\n总角位移 $\\theta=\\bar\\omega t=219.9\\times12=2639\\ \\mathrm{rad}$，转数\n$$N=\\frac{\\theta}{2\\pi}=\\frac{2639}{2\\pi}=420\\ \\mathrm{转}.$$\n\n也可用 $N=\\bar n t=\\frac{1200+3000}{2}\\times\\frac{12}{60}=420$ 转，更快。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "rad/s^2",
+   "methods": [
+    "匀角加速转动"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.1.2"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "飞轮的角速度与角加速度",
+  "statement": "某发动机飞轮在时间间隔 $t$ 内的角位移为 $\\theta=at+bt^3-ct^4$（$\\theta$ 的单位为 $\\mathrm{rad}$，$t$ 的单位为 $\\mathrm{s}$，$a$、$b$、$c$ 为常量）。求 $t$ 时刻的角速度和角加速度。",
+  "mainTag": "力学",
+  "tags": [
+   "刚体定轴转动"
+  ],
+  "kind": "计算题",
+  "thinking": 2,
+  "difficulty": 2,
+  "calc": 1,
+  "source": "漆安慎《力学》第4版 习题7.1.3",
+  "hints": [
+   "$\\omega=\\mathrm{d}\\theta/\\mathrm{d}t$。",
+   "$\\alpha=\\mathrm{d}\\omega/\\mathrm{d}t$。"
+  ],
+  "answer": "\\omega=a+3bt^{2}-4ct^{3},\\qquad \\alpha=6bt-12ct^{2}",
+  "solution": "逐次求导：\n$$\\omega=\\frac{\\mathrm{d}\\theta}{\\mathrm{d}t}=a+3bt^2-4ct^3,$$\n$$\\alpha=\\frac{\\mathrm{d}\\omega}{\\mathrm{d}t}=6bt-12ct^2.$$\n\n角加速度随 $t$ 线性变化并会变号（$t=2b/c$ 时 $\\alpha=0$），说明转动先加速后减速。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "角速度",
+    "角加速度"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.1.3"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "圆盘边缘点的速度与加速度分量",
+  "statement": "半径为 $0.1\\ \\mathrm{m}$ 的圆盘在竖直平面内转动，在圆盘平面内建立 $Oxy$ 坐标系，原点在轴上，$x$、$y$ 轴分别沿水平和竖直向上。边缘上一点 $A$ 当 $t=0$ 时恰好在 $x$ 轴上，该点的角坐标满足 $\\theta=1.2t+t^2$（$\\mathrm{rad}$）。求转过 $90^\\circ$ 时 $A$ 点的速度和加速度在 $x$、$y$ 轴上的投影。",
+  "mainTag": "力学",
+  "tags": [
+   "刚体定轴转动"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题7.1.4",
+  "hints": [
+   "先由 $\\theta=\\pi/2$ 解出时刻 $t$。",
+   "法向加速度指向圆心，切向加速度沿速度方向。"
+  ],
+  "answer": "a_x=-0.20\\ \\mathrm{m/s^2},\\quad a_y=-0.77\\ \\mathrm{m/s^2}",
+  "solution": "令 $\\theta=1.2t+t^2=\\pi/2$：\n$$t^2+1.2t-1.5708=0\\quad\\Rightarrow\\quad t=0.789\\ \\mathrm{s}.$$\n$$\\omega=1.2+2t=2.778\\ \\mathrm{rad/s},\\qquad \\alpha=2.0\\ \\mathrm{rad/s^2}.$$\n\n此时 $A$ 在 $+y$ 轴上（转过 $90^\\circ$），逆时针转动，速度沿 $-x$：\n$$v_x=-\\omega R=-2.778\\times0.1=-0.278\\ \\mathrm{m/s},\\qquad v_y=0.$$\n\n加速度分解：切向 $a_t=\\alpha R=0.20\\ \\mathrm{m/s^2}$ 沿 $-x$；法向 $a_n=\\omega^2R=0.772\\ \\mathrm{m/s^2}$ 指向圆心，即沿 $-y$：\n$$a_x=-0.20\\ \\mathrm{m/s^2},\\qquad a_y=-0.77\\ \\mathrm{m/s^2}.$$\n\n若误把法向当成沿速度方向，会得到 $a_y=+0.77$ 的错误符号。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "切向加速度",
+    "法向加速度"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.1.4"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "拨禾轮压板对地的速度",
+  "statement": "收割机前进速率为 $1.2\\ \\mathrm{m/s}$，拨禾轮直径 $1.5\\ \\mathrm{m}$、转速 $22\\ \\mathrm{r/min}$。要求压板运动到最低点时相对于农作物的速度与收割机前进方向相反。求压板运动到最低点时挤压农作物的速度。",
+  "mainTag": "力学",
+  "tags": [
+   "刚体平面平行运动"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题7.1.6",
+  "hints": [
+   "最低点轮缘相对轮心的速度方向与前进方向相反。",
+   "对地速度 = 轮心平动速度 + 相对轮心的转动速度。"
+  ],
+  "answer": "0.53\\ \\mathrm{m/s}\\ \\text{（方向与前进方向相反）}",
+  "solution": "角速度\n$$\\omega=22\\times\\frac{2\\pi}{60}=2.30\\ \\mathrm{rad/s},\\qquad R=0.75\\ \\mathrm{m},$$\n轮缘相对轮心的线速度\n$$v'=\\omega R=2.30\\times0.75=1.73\\ \\mathrm{m/s}.$$\n\n最低点轮缘相对轮心的速度方向与前进方向相反，故对地速度\n$$v=v'-v_{\\text{车}}=1.73-1.20=0.53\\ \\mathrm{m/s},$$\n方向与收割机前进方向相反——正是「把作物压向切割器」所需。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "平面平行运动",
+    "速度合成"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.1.6"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "螺旋桨桨尖的线速度",
+  "statement": "飞机沿水平方向飞行，螺旋桨尖端所在半径为 $150\\ \\mathrm{cm}$，发动机转速为 $2000\\ \\mathrm{r/min}$。(1) 求桨尖相对于飞机的线速率；(2) 若飞机以 $250\\ \\mathrm{km/h}$ 的速率飞行，求桨尖相对地面的最大速率。",
+  "mainTag": "力学",
+  "tags": [
+   "刚体平面平行运动"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题7.1.7",
+  "hints": [
+   "$\\omega=2000\\times2\\pi/60$，$v=\\omega R$。",
+   "对地最大速率 = 转动线速度 + 飞机速度。"
+  ],
+  "answer": "3.1\\times10^{2}\\ \\mathrm{m/s}",
+  "solution": "（1）$\\omega=2000\\times\\dfrac{2\\pi}{60}=209.4\\ \\mathrm{rad/s}$，$R=1.5\\ \\mathrm{m}$：\n$$v'=\\omega R=209.4\\times1.5=3.14\\times10^{2}\\ \\mathrm{m/s}.$$\n\n（2）飞机速率 $v_0=250/3.6=69.4\\ \\mathrm{m/s}$。桨尖对地速度是转动速度与平动速度的矢量和，最大值为\n$$v_{\\max}=v'+v_0=314+69.4=3.84\\times10^{2}\\ \\mathrm{m/s},$$\n最小值 $v_{\\min}=314-69.4=2.45\\times10^{2}\\ \\mathrm{m/s}$。\n\n桨尖相对地面的轨迹是「长幅旋轮线」（余摆线），不是圆。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m/s",
+   "methods": [
+    "平面平行运动",
+    "速度合成"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.1.7"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "汽车发动机转速的换算",
+  "statement": "桑塔纳汽车时速为 $166\\ \\mathrm{km/h}$，车轮滚动半径为 $0.26\\ \\mathrm{m}$。自发动机至驱动轮的转速比为 $0.909$（驱动轮转速与发动机转速之比）。问发动机的转速为每分多少转？",
+  "mainTag": "力学",
+  "tags": [
+   "刚体定轴转动"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题7.1.8",
+  "hints": [
+   "车轮不打滑：$v=\\omega R$。",
+   "发动机转速 = 车轮转速 ÷ 转速比。"
+  ],
+  "answer": "1.86\\times10^{3}\\ \\mathrm{rpm}",
+  "solution": "车速 $v=166/3.6=46.1\\ \\mathrm{m/s}$，车轮角速度\n$$\\omega=\\frac{v}{R}=\\frac{46.1}{0.26}=177.3\\ \\mathrm{rad/s},$$\n车轮转速\n$$n_{\\text{轮}}=\\frac{\\omega}{2\\pi}\\times60=1.693\\times10^{3}\\ \\mathrm{r/min}.$$\n发动机转速\n$$n_{\\text{发}}=\\frac{n_{\\text{轮}}}{0.909}=\\frac{1693}{0.909}=1.86\\times10^{3}\\ \\mathrm{r/min}.$$\n\n若把比值用反，会得到 $1539\\ \\mathrm{r/min}$ 的错误结果；「自发动机至驱动轮」意味着经减速，发动机转得更快。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "rpm",
+   "methods": [
+    "线速度与角速度"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.1.8"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "倒下的均质杆上端点的轨迹",
+  "statement": "一长度为 $l$ 的均质杆竖直立于光滑桌面上，由于不可能绝对竖直，随即倒下。求杆子上端点运动的轨迹（选定坐标系，写出轨迹方程）。",
+  "mainTag": "力学",
+  "tags": [
+   "刚体平面平行运动"
+  ],
+  "kind": "推导题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题7.2.3",
+  "hints": [
+   "水平方向无外力，质心水平坐标不变。",
+   "杆长约束：两端距离恒为 $l$。"
+  ],
+  "answer": "\\frac{\\left(x-x_C\\right)^2}{\\left(l/2\\right)^2}+\\frac{y^2}{l^2}=1",
+  "solution": "设杆与竖直方向夹角为 $\\theta$，下端 $(x_B,0)$、上端 $(x_T,y_T)$。桌面光滑，水平方向无外力，质心水平坐标守恒：\n$$x_C=\\frac{x_B+x_T}{2}=\\text{常量}.$$\n杆长约束\n$$\\left(x_T-x_B\\right)^2+y_T^2=l^2.$$\n由 $x_B=2x_C-x_T$ 得 $x_T-x_B=2\\left(x_T-x_C\\right)$，代入：\n$$4\\left(x_T-x_C\\right)^2+y_T^2=l^2\n\\quad\\Rightarrow\\quad\n\\frac{\\left(x_T-x_C\\right)^2}{\\left(l/2\\right)^2}+\\frac{y_T^2}{l^2}=1.$$\n\n即上端点沿半椭圆运动：水平半轴 $l/2$、竖直半轴 $l$。下端则沿桌面滑动，轨迹为直线。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "质心运动定理",
+    "约束方程"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.2.3"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "复摆对悬点的转动惯量",
+  "statement": "实验用的复摆：长杆部分长 $l=0.92\\ \\mathrm{m}$、质量 $m=4.9\\ \\mathrm{kg}$，末端圆盘半径 $r=0.08\\ \\mathrm{m}$、质量 $m_2=24.5\\ \\mathrm{kg}$（可视为均质圆盘，盘心在杆端）。求对过悬点且与摆面垂直的轴线的转动惯量。",
+  "mainTag": "力学",
+  "tags": [
+   "刚体定轴转动"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题7.3.2",
+  "hints": [
+   "杆对端点：$\\frac13ml^2$。",
+   "盘用平行轴定理：$I=\\frac12m_2r^2+m_2(l+r)^2$。"
+  ],
+  "answer": "26\\ \\mathrm{kg\\cdot m^2}",
+  "solution": "杆对悬点（一端）：\n$$I_1=\\frac13ml^2=\\frac13\\times4.9\\times0.92^2=1.38\\ \\mathrm{kg\\cdot m^2}.$$\n圆盘对自身中心 $\\frac12m_2r^2$，盘心距悬点 $l+r$，由平行轴定理\n$$I_2=\\frac12m'r^2+m'\\left(l+r\\right)^2\n=\\frac12\\times24.5\\times0.08^2+24.5\\times1.00^2=0.078+24.5=24.58\\ \\mathrm{kg\\cdot m^2}.$$\n总转动惯量\n$$I=I_1+I_2=1.38+24.58=25.96\\approx26\\ \\mathrm{kg\\cdot m^2}.$$\n\n盘的质量是杆的 5 倍，所以 $I$ 几乎由盘贡献——复摆设计上正是用重盘压低周期、减小相对误差。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "kg·m^2",
+   "methods": [
+    "转动惯量",
+    "平行轴定理"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.3.2"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "挖孔圆盘的转动惯量",
+  "statement": "在质量为 $m$、半径为 $R$ 的均质圆盘上挖出半径为 $r$ 的两个圆孔，两孔中心分别在半径 $R$ 的中点（对称分布）。求剩余部分对过大圆盘中心且与盘面垂直的轴线的转动惯量。",
+  "mainTag": "力学",
+  "tags": [
+   "刚体定轴转动"
+  ],
+  "kind": "推导题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题7.3.3",
+  "hints": [
+   "用「负质量」叠加：$I=I_{\\text{整}}-2I_{\\text{孔}}$。",
+   "每孔质量 $m_h=m r^2/R^2$，孔心距轴 $R/2$。"
+  ],
+  "answer": "I=m\\left(\\frac{R^{2}}{2}-\\frac{r^{2}}{2}-\\frac{r^{4}}{R^{2}}\\right)",
+  "solution": "每个孔的质量按面积比\n$$m_h=m\\frac{r^2}{R^2}.$$\n整盘 $I_0=\\frac12mR^2$。每个孔对自身中心 $\\frac12m_hr^2$，孔心距大盘中心 $R/2$，由平行轴定理\n$$I_h=\\frac12m_hr^2+m_h\\left(\\frac{R}{2}\\right)^2=m_h\\left(\\frac{r^2}{2}+\\frac{R^2}{4}\\right).$$\n剩余部分\n$$I=I_0-2I_h=\\frac12mR^2-2\\frac{mr^2}{R^2}\\left(\\frac{r^2}{2}+\\frac{R^2}{4}\\right)\n=m\\left(\\frac{R^2}{2}-\\frac{r^2}{2}-\\frac{r^4}{R^2}\\right).$$\n\n检验：$r\\to0$ 时 $I\\to\\frac12mR^2$；$r=R/2$ 时 $I=\\frac12mR^2-\\frac18mR^2-\\frac1{16}mR^2=\\frac{5}{16}mR^2$，比整盘小，合理。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "转动惯量",
+    "平行轴定理",
+    "负质量法"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.3.3"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "闸瓦制动所需的时间",
+  "statement": "一转动系统的转动惯量 $I=8.0\\ \\mathrm{kg\\cdot m^2}$，转速 $\\omega=41.9\\ \\mathrm{rad/s}$。两制动闸瓦对轮的压力均为 $392\\ \\mathrm{N}$，闸瓦与轮缘间摩擦因数 $\\mu=0.4$，轮半径 $r=0.4\\ \\mathrm{m}$。问从开始制动到静止需用多少时间？",
+  "mainTag": "力学",
+  "tags": [
+   "刚体定轴转动"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题7.3.5",
+  "hints": [
+   "两个闸瓦各产生摩擦力 $\\mu N$。",
+   "$M=2\\mu Nr$，$\\alpha=M/I$，$t=\\omega/\\alpha$。"
+  ],
+  "answer": "2.7\\ \\mathrm{s}",
+  "solution": "总摩擦力矩\n$$M=2\\mu Nr=2\\times0.4\\times392\\times0.4=125.4\\ \\mathrm{N\\cdot m},$$\n角加速度\n$$\\alpha=\\frac{M}{I}=\\frac{125.4}{8.0}=15.68\\ \\mathrm{rad/s^2},$$\n制动时间\n$$t=\\frac{\\omega}{\\alpha}=\\frac{41.9}{15.68}=2.67\\ \\mathrm{s}\\approx2.7\\ \\mathrm{s}.$$\n\n注意是两个闸瓦，漏乘 2 会得到 5.3 s。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "s",
+   "methods": [
+    "转动定律",
+    "摩擦力矩"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.3.5"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "均质杆的打击中心",
+  "statement": "均质杆可绕支点 $O$ 转动。当与杆垂直的冲力作用于某点 $A$ 时，支点 $O$ 对杆的作用力并不因该冲力而发生变化，则 $A$ 点称为打击中心。设杆长为 $L$，求打击中心与支点的距离。",
+  "mainTag": "力学",
+  "tags": [
+   "刚体平面平行运动"
+  ],
+  "kind": "推导题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题7.3.6",
+  "hints": [
+   "冲量作用瞬间，质心加速度与角加速度同时产生。",
+   "令支点冲量为零，解出作用点位置。"
+  ],
+  "answer": "\\frac{2L}{3}",
+  "solution": "设杆质量 $m$、支点在一端，冲力 $F$ 作用于距支点 $x$ 处，作用时间 $\\Delta t$。质心（距支点 $L/2$）获得速度 $v_C$，杆获得角速度 $\\omega$。\n\n对质心的动量定理与角动量定理：\n$$F\\Delta t+J_O=mv_C,\\qquad F\\left(x-\\frac{L}{2}\\right)\\Delta t-J_O\\frac{L}{2}=I_C\\omega,$$\n其中 $J_O$ 是支点冲量（向上为正），$I_C=\\frac{1}{12}mL^2$，且 $v_C=\\omega\\frac{L}{2}$。\n\n要求支点冲量 $J_O=0$，代入消去 $F\\Delta t$：\n$$F\\Delta t\\left(x-\\frac{L}{2}\\right)=\\frac{1}{12}mL^2\\omega,\\qquad F\\Delta t=m\\omega\\frac{L}{2}.$$\n$$\\frac{L}{2}\\left(x-\\frac{L}{2}\\right)=\\frac{L^2}{12}\\quad\\Rightarrow\\quad\nx=\\frac{L}{2}+\\frac{L}{6}=\\frac{2L}{3}.$$\n\n即打击中心距支点 $\\frac23L$。棒球棒、斧柄的「甜点」就在这个位置：击中此处手不感到震动。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "打击中心",
+    "冲量",
+    "角动量定理"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.3.6"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "阿特伍德机测滑轮的转动惯量",
+  "statement": "用阿特伍德机测滑轮转动惯量。两端悬挂的重物质量分别为 $m_1=0.46\\ \\mathrm{kg}$、$m_2=0.50\\ \\mathrm{kg}$，滑轮半径 $R=0.05\\ \\mathrm{m}$。自静止释放后测得 $5.0\\ \\mathrm{s}$ 内 $m_2$ 下降 $0.75\\ \\mathrm{m}$。求滑轮的转动惯量。",
+  "mainTag": "力学",
+  "tags": [
+   "刚体定轴转动"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题7.3.7",
+  "hints": [
+   "由 $h=\\frac12at^2$ 求加速度。",
+   "$a=\\dfrac{(m_2-m_1)g}{m_1+m_2+I/R^2}$。"
+  ],
+  "answer": "1.4\\times10^{-2}\\ \\mathrm{kg\\cdot m^2}",
+  "solution": "由 $h=\\frac12at^2$：\n$$a=\\frac{2h}{t^2}=\\frac{2\\times0.75}{25}=0.060\\ \\mathrm{m/s^2}.$$\n\n对两重物与滑轮分别写方程（绳不打滑，$a=\\alpha R$）：\n$$m_2g-T_2=m_2a,\\qquad T_1-m_1g=m_1a,\\qquad \\left(T_2-T_1\\right)R=I\\frac{a}{R}.$$\n消去张力：\n$$\\left(m_2-m_1\\right)g-\\left(m_1+m_2\\right)a=\\frac{I}{R^2}a,$$\n$$I=R^2\\left[\\frac{\\left(m_2-m_1\\right)g}{a}-\\left(m_1+m_2\\right)\\right]\n=0.0025\\times\\left[\\frac{0.04\\times9.8}{0.060}-0.96\\right]=1.39\\times10^{-2}\\ \\mathrm{kg\\cdot m^2}.$$\n\n约 $1.4\\times10^{-2}\\ \\mathrm{kg\\cdot m^2}$。这类「测 $I$」实验的关键是加速度很小（$0.06\\ \\mathrm{m/s^2}$），所以时间要测准。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "kg·m^2",
+   "methods": [
+    "转动定律",
+    "阿特伍德机"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.3.7"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "扇形装置弹出小球后的反冲角速度",
+  "statement": "扇形装置可绕光滑竖直轴线 $O$ 转动，转动惯量为 $I$。装置一端有槽，槽内有弹簧，槽的中心轴线与转轴垂直距离为 $r$。槽内装一质量 $m$ 的小球，开始时用细线固定使弹簧压缩。烧断细线后小球以速度 $v_0$（相对地面）弹出。求装置的反冲角速度。弹射过程中系统动能、总机械能是否守恒？为什么？",
+  "mainTag": "力学",
+  "tags": [
+   "角动量守恒"
+  ],
+  "kind": "推导题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题7.4.1",
+  "hints": [
+   "转轴光滑，系统对轴的角动量守恒。",
+   "弹簧势能转化为动能，机械能守恒但动能不守恒。"
+  ],
+  "answer": "\\omega=\\frac{mv_0r}{I}",
+  "solution": "转轴光滑，外力对轴无力矩，系统对轴的角动量守恒。初始静止：\n$$0=I\\omega-mv_0r\\quad\\Rightarrow\\quad\\omega=\\frac{mv_0r}{I}.$$\n方向与小球出口方向满足右手定则（与小球相对转轴的转动反向）。\n\n能量：弹簧的弹性势能转化为小球与装置的动能，**总机械能守恒**；但**动能不守恒**——弹簧势能变成了动能，弹射后系统动能大于弹射前（为零）。若弹簧质量不可忽略，还需计入弹簧自身的动能。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "角动量守恒",
+    "机械能守恒"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.4.1"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "电梯钢索的直径",
+  "statement": "电梯用不在一条直线上的三根钢索悬挂。电梯质量 $500\\ \\mathrm{kg}$，最大负载极限 $5.5\\ \\mathrm{kN}$。每根钢索都能独立承担总负载，且其应力仅为允许应力的 $70\\%$。若电梯向上的最大加速度为 $g/5$，求钢索的直径。取钢的允许应力 $6.0\\times10^{8}\\ \\mathrm{Pa}$，$g=9.8\\ \\mathrm{m/s^2}$。",
+  "mainTag": "力学",
+  "tags": [
+   "弹性体的应力与应变"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题8.1.4",
+  "hints": [
+   "总负载 = 电梯重力 + 最大负载。",
+   "加速上升时所需拉力还要乘 $(1+a/g)$。"
+  ],
+  "answer": "6.2\\ \\mathrm{mm}",
+  "solution": "总重\n$$W=mg+F=500\\times9.8+5500=1.04\\times10^{4}\\ \\mathrm{N}.$$\n以 $a=g/5$ 加速上升，所需总拉力\n$$T=W\\left(1+\\frac{a}{g}\\right)=1.04\\times10^{4}\\times1.2=1.248\\times10^{4}\\ \\mathrm{N}.$$\n\n「每根都能独立承担总负载」是最不利工况，故单根受力取 $T$。允许应力\n$$\\sigma=0.7\\times6.0\\times10^{8}=4.2\\times10^{8}\\ \\mathrm{Pa},$$\n$$A=\\frac{T}{\\sigma}=\\frac{1.248\\times10^{4}}{4.2\\times10^{8}}=2.97\\times10^{-5}\\ \\mathrm{m^2},$$\n$$d=\\sqrt{\\frac{4A}{\\pi}}=\\sqrt{\\frac{4\\times2.97\\times10^{-5}}{\\pi}}=6.15\\times10^{-3}\\ \\mathrm{m}\\approx6.2\\ \\mathrm{mm}.$$\n\n工程上会再取安全系数并选标准规格（如 $8\\ \\mathrm{mm}$）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "mm",
+   "methods": [
+    "应力",
+    "拉伸"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第八章 习题8.1.4"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "拉伸杆件的体积相对变化",
+  "statement": "矩形横截面杆在轴向拉力作用下拉伸应变为 $\\varepsilon$，材料泊松系数为 $\\mu$。(1) 求证体积的相对改变为 $\\dfrac{V-V_0}{V_0}=\\varepsilon\\left(1-2\\mu\\right)$；(2) 低碳钢 $E=19.6\\times10^{10}\\ \\mathrm{Pa}$、$\\mu=0.3$，受到拉应力 $\\sigma=1.37\\times10^{8}\\ \\mathrm{Pa}$，求体积的相对改变。",
+  "mainTag": "力学",
+  "tags": [
+   "弹性体的应力与应变"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题8.1.5",
+  "hints": [
+   "纵向伸长 $\\varepsilon$，横向各缩 $\\mu\\varepsilon$。",
+   "$V=l\\left(1+\\varepsilon\\right)\\left(1-\\mu\\varepsilon\\right)^2$，展开保留一阶。"
+  ],
+  "answer": "2.8\\times10^{-4}",
+  "solution": "（1）设原长 $l$、横截面边长 $a$、$b$。拉伸后\n$$l'=l\\left(1+\\varepsilon\\right),\\quad a'=a\\left(1-\\mu\\varepsilon\\right),\\quad b'=b\\left(1-\\mu\\varepsilon\\right).$$\n$$V'=V_0\\left(1+\\varepsilon\\right)\\left(1-\\mu\\varepsilon\\right)^2\n\\approx V_0\\left(1+\\varepsilon-2\\mu\\varepsilon\\right),$$\n$$\\frac{V'-V_0}{V_0}=\\varepsilon\\left(1-2\\mu\\right).$$\n对压缩同样适用（$\\varepsilon<0$，体积仍减小）。$\\mu=0.5$ 时体积不变（不可压缩）。\n\n（2）$\\varepsilon=\\sigma/E=\\dfrac{1.37\\times10^{8}}{19.6\\times10^{10}}=6.99\\times10^{-4}$，\n$$\\frac{\\Delta V}{V_0}=6.99\\times10^{-4}\\times\\left(1-0.6\\right)=2.80\\times10^{-4}.$$\n\n即体积增大约 $0.028\\%$。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "泊松效应",
+    "体积应变"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第八章 习题8.1.5"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "圆管的扭转角",
+  "statement": "一铝管直径 $4\\ \\mathrm{cm}$、壁厚 $1\\ \\mathrm{mm}$、长 $10\\ \\mathrm{m}$，一端固定，另一端作用力矩 $50\\ \\mathrm{N\\cdot m}$。求铝管的扭转角。对同样尺寸的钢管再计算一遍。已知铝的切变模量 $G_{\\text{铝}}=2.65\\times10^{10}\\ \\mathrm{Pa}$，钢的 $G_{\\text{钢}}=8.0\\times10^{10}\\ \\mathrm{Pa}$。",
+  "mainTag": "力学",
+  "tags": [
+   "弹性体的应力与应变"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题8.3.1",
+  "hints": [
+   "空心圆管极惯性矩 $J=\\frac{\\pi}{32}\\left(D^4-d^4\\right)$。",
+   "$\\theta=\\dfrac{Ml}{GJ}$。"
+  ],
+  "answer": "0.40\\ \\mathrm{rad}",
+  "solution": "外径 $D=0.040\\ \\mathrm{m}$，内径 $d=0.038\\ \\mathrm{m}$：\n$$J=\\frac{\\pi}{32}\\left(D^4-d^4\\right)=\\frac{\\pi}{32}\\left(2.56\\times10^{-6}-2.085\\times10^{-6}\\right)=4.66\\times10^{-8}\\ \\mathrm{m^4}.$$\n\n铝管：\n$$\\theta_{\\text{铝}}=\\frac{Ml}{GJ}=\\frac{50\\times10}{2.65\\times10^{10}\\times4.66\\times10^{-8}}\n=\\frac{500}{1235}=0.405\\ \\mathrm{rad}\\approx23^\\circ.$$\n\n钢管：\n$$\\theta_{\\text{钢}}=\\frac{500}{8.0\\times10^{10}\\times4.66\\times10^{-8}}=\\frac{500}{3728}=0.134\\ \\mathrm{rad}\\approx7.7^\\circ.$$\n\n钢的 $G$ 约为铝的 3 倍，扭转角正好小到 $1/3$——这就是传动轴多用钢的原因。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "rad",
+   "methods": [
+    "扭转",
+    "切变模量"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第八章 习题8.3.1"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "矩形截面梁的曲率半径之比",
+  "statement": "矩形横截面长宽比为 $2:3$ 的梁，在力偶矩作用下发生纯弯曲。分别以横截面的长和宽作为梁的高度，求同样力偶矩作用下曲率半径之比。",
+  "mainTag": "力学",
+  "tags": [
+   "弹性体的应力与应变"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题8.3.2",
+  "hints": [
+   "纯弯曲 $\\dfrac{1}{\\rho}=\\dfrac{M}{EI}$。",
+   "$I=\\dfrac{bh^3}{12}$。"
+  ],
+  "answer": "2.25",
+  "solution": "设截面尺寸 $2\\times3$（单位任意）。\n\n以长边 3 为高、短边 2 为宽：\n$$I_1=\\frac{2\\times3^3}{12}=4.5.$$\n以短边 2 为高、长边 3 为宽：\n$$I_2=\\frac{3\\times2^3}{12}=2.0.$$\n\n同样 $M$、$E$ 下 $\\rho=\\dfrac{EI}{M}\\propto I$：\n$$\\frac{\\rho_1}{\\rho_2}=\\frac{I_1}{I_2}=\\frac{4.5}{2.0}=2.25.$$\n\n所以「把梁竖着放」（高的一边竖直）曲率半径大 2.25 倍，即更难弯曲——这就是工字梁、木梁都竖着用的原因。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "纯弯曲",
+    "截面惯性矩"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第八章 习题8.3.2"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "梁弯曲后的形变势能",
+  "statement": "某梁发生纯弯曲，梁长为 $L$、宽度为 $b$、厚度为 $h$，弯曲后曲率半径为 $R$，材料的弹性模量为 $E$。求总形变势能。",
+  "mainTag": "力学",
+  "tags": [
+   "弹性体的应力与应变"
+  ],
+  "kind": "推导题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题8.3.3",
+  "hints": [
+   "纯弯曲的弯矩 $M=EI/R$。",
+   "形变势能 $U=\\frac12M\\theta$，$\\theta=L/R$。"
+  ],
+  "answer": "U=\\frac{Ebh^{3}L}{24R^{2}}",
+  "solution": "截面惯性矩\n$$I=\\frac{bh^3}{12}.$$\n纯弯曲弯矩\n$$M=\\frac{EI}{R}.$$\n梁两端相对转角 $\\theta=L/R$，力偶做功的一半储存为形变势能：\n$$U=\\frac12M\\theta=\\frac12\\cdot\\frac{EI}{R}\\cdot\\frac{L}{R}=\\frac{EIL}{2R^2}\n=\\frac{Ebh^3L}{24R^2}.$$\n\n也可由应变能密度 $\\frac{\\sigma^2}{2E}$ 沿体积积分得到同一结果。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "弯曲",
+    "形变势能"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第八章 习题8.3.3"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "考虑自重的杆的应力与伸长",
+  "statement": "杆件受轴向拉力 $F$，横截面积为 $S$，材料密度为 $\\rho$。考虑材料自重。(1) 证明横截面内的应力为 $\\sigma\\left(x\\right)=\\dfrac{F}{S}+\\rho gx$（$x$ 为距下端的距离）；(2) 证明杆的总伸长量为 $\\Delta l=\\dfrac{Fl}{SE}+\\dfrac{\\rho gl^2}{2E}$。",
+  "mainTag": "力学",
+  "tags": [
+   "弹性体的应力与应变"
+  ],
+  "kind": "证明题",
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题8.1.6",
+  "hints": [
+   "距下端 $x$ 处的截面要承担「下端拉力 + 该截面以下杆重」。",
+   "$\\mathrm{d}\\left(\\Delta l\\right)=\\dfrac{\\sigma\\left(x\\right)}{E}\\mathrm{d}x$，从 $0$ 积到 $l$。"
+  ],
+  "answer": "\\sigma\\left(x\\right)=\\frac{F}{S}+\\rho gx,\\qquad \\Delta l=\\frac{Fl}{SE}+\\frac{\\rho gl^{2}}{2E}",
+  "solution": "（1）取距下端 $x$ 的横截面，其下方杆重 $\\rho gSx$，还要承担端部拉力 $F$，故轴力\n$$N\\left(x\\right)=F+\\rho gSx,\\qquad \\sigma\\left(x\\right)=\\frac{N}{S}=\\frac{F}{S}+\\rho gx.$$\n\n（2）微段 $\\mathrm{d}x$ 的伸长\n$$\\mathrm{d}\\left(\\Delta l\\right)=\\frac{\\sigma\\left(x\\right)}{E}\\mathrm{d}x\n=\\left(\\frac{F}{SE}+\\frac{\\rho gx}{E}\\right)\\mathrm{d}x.$$\n积分：\n$$\\Delta l=\\int_0^l\\left(\\frac{F}{SE}+\\frac{\\rho gx}{E}\\right)\\mathrm{d}x\n=\\frac{Fl}{SE}+\\frac{\\rho gl^2}{2E}.$$\n\n第一项是端部拉力的贡献，第二项是自重贡献。注意应力在杆内线性增加，上端最危险——所以长杆（如钻井杆、缆绳）的截面常做成上粗下细。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "proof",
+   "unit": "",
+   "methods": [
+    "自重",
+    "应力分布"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第八章 习题8.1.6"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "复摆的固有频率",
+  "statement": "一刚体可绕水平轴 $O$ 摆动。已知刚体质量为 $m$，重心 $C$ 与轴 $O$ 间距离为 $h$，刚体对转轴线的转动惯量为 $I$。问刚体围绕平衡位置的微小摆动是否是简谐振动？如果是，求固有频率（不计阻力）。",
+  "mainTag": "振动与波",
+  "tags": [
+   "简谐振动"
+  ],
+  "kind": "推导题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题9.2.1",
+  "hints": [
+   "偏角 $\\theta$ 时重力矩 $M=-mgh\\sin\\theta$。",
+   "小角近似 $\\sin\\theta\\approx\\theta$，与 $I\\ddot\\theta=M$ 比较。"
+  ],
+  "answer": "\\omega=\\sqrt{\\frac{mgh}{I}},\\qquad T=2\\pi\\sqrt{\\frac{I}{mgh}}",
+  "solution": "偏离平衡位置角 $\\theta$ 时，重力对轴 $O$ 的力矩\n$$M=-mgh\\sin\\theta.$$\n转动定律\n$$I\\ddot\\theta=-mgh\\sin\\theta.$$\n微小摆动 $\\sin\\theta\\approx\\theta$：\n$$\\ddot\\theta+\\frac{mgh}{I}\\theta=0,$$\n是简谐振动，角频率与周期\n$$\\omega=\\sqrt{\\frac{mgh}{I}},\\qquad T=2\\pi\\sqrt{\\frac{I}{mgh}}.$$\n\n把 $I=I_C+mh^2$ 代入即得 $T=2\\pi\\sqrt{\\dfrac{I_C+mh^2}{mgh}}$；当 $h\\to0$（悬点在质心）时 $T\\to\\infty$，摆动失去回复力。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "复摆",
+    "小角近似"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第九章 习题9.2.1"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "串联弹簧后频率减半",
+  "statement": "一竖直悬挂的弹簧振子，振子质量为 $m$，弹簧劲度系数为 $k_1$。若在振子和弹簧 $k_1$ 之间串联另一弹簧，使系统的频率减少一半，问串联上的弹簧劲度系数 $k_2$ 应是 $k_1$ 的多少倍？",
+  "mainTag": "振动与波",
+  "tags": [
+   "简谐振动"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题9.2.3",
+  "hints": [
+   "串联弹簧等效劲度系数 $\\dfrac{1}{k}=\\dfrac{1}{k_1}+\\dfrac{1}{k_2}$。",
+   "$\\omega\\propto\\sqrt{k}$，频率减半意味着 $k$ 变为 $1/4$。"
+  ],
+  "answer": "k_2=\\frac{k_1}{3}",
+  "solution": "串联等效劲度系数\n$$\\frac{1}{k}=\\frac{1}{k_1}+\\frac{1}{k_2}.$$\n频率 $\\nu=\\dfrac{1}{2\\pi}\\sqrt{\\dfrac{k}{m}}\\propto\\sqrt{k}$。频率减半：\n$$\\frac{k}{k_1}=\\frac14\\quad\\Rightarrow\\quad k=\\frac{k_1}{4}.$$\n代入：\n$$\\frac{1}{k_1/4}=\\frac{4}{k_1}=\\frac{1}{k_1}+\\frac{1}{k_2}\n\\quad\\Rightarrow\\quad\\frac{1}{k_2}=\\frac{3}{k_1}\n\\quad\\Rightarrow\\quad k_2=\\frac{k_1}{3}.$$\n\n串联弹簧「越串越软」，要让频率降到一半需要软得多的第二根弹簧（$k_2$ 只有 $k_1$ 的 $1/3$）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "串联弹簧",
+    "固有频率"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第九章 习题9.2.3"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "三种加速情况下单摆的周期",
+  "statement": "单摆摆长为 $l$。求下列三种情况下单摆的周期：(1) 悬挂于以加速度 $a$ 沿水平方向直线行驶的车厢内；(2) 悬挂于以加速度 $a$ 上升的电梯内；(3) 悬挂于以加速度 $a$（$a<g$）下降的电梯内。",
+  "mainTag": "振动与波",
+  "tags": [
+   "简谐振动"
+  ],
+  "kind": "推导题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题9.2.4",
+  "hints": [
+   "等效重力加速度 $g_{\\text{eff}}$ 是重力与惯性力的矢量和的大小。",
+   "$T=2\\pi\\sqrt{l/g_{\\text{eff}}}$。"
+  ],
+  "answer": "T_1=2\\pi\\sqrt{\\frac{l}{\\sqrt{g^{2}+a^{2}}}},\\quad T_2=2\\pi\\sqrt{\\frac{l}{g+a}},\\quad T_3=2\\pi\\sqrt{\\frac{l}{g-a}}",
+  "solution": "在非惯性系中，重力与惯性力合成「等效重力」，$g_{\\text{eff}}=\\left|\\vec g-\\vec a\\right|$，周期 $T=2\\pi\\sqrt{l/g_{\\text{eff}}}$。\n\n（1）水平加速：$\\vec g$ 竖直向下、惯性力水平，二者垂直，\n$$g_{\\text{eff}}=\\sqrt{g^2+a^2},\\qquad T_1=2\\pi\\sqrt{\\frac{l}{\\sqrt{g^2+a^2}}}.$$\n平衡位置也偏离竖直方向 $\\arctan\\left(a/g\\right)$。\n\n（2）电梯加速上升：惯性力向下，\n$$g_{\\text{eff}}=g+a,\\qquad T_2=2\\pi\\sqrt{\\frac{l}{g+a}}.$$\n\n（3）电梯加速下降（$a<g$）：惯性力向上，\n$$g_{\\text{eff}}=g-a,\\qquad T_3=2\\pi\\sqrt{\\frac{l}{g-a}}.$$\n\n三种情况下周期都比静止时长（$g_{\\text{eff}}$ 都变大或不变），只有自由落体 $a=g$ 时 $T\\to\\infty$——摆「不摆了」。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "等效重力",
+    "单摆"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第九章 习题9.2.4"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "一列银原子振动的等效弹簧劲度系数",
+  "statement": "通常温度下固体内原子振动的频率数量级为 $10^{13}\\ \\mathrm{Hz}$。设想各原子间彼此以弹簧连接。$1\\ \\mathrm{mol}$ 银的质量为 $108\\ \\mathrm{g}$，含 $6.02\\times10^{23}$ 个原子。现仅考虑一列原子，且假设只有一个原子以上述频率振动、其他原子皆静止，计算一根弹簧的劲度系数。",
+  "mainTag": "振动与波",
+  "tags": [
+   "简谐振动"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题9.2.5",
+  "hints": [
+   "单个银原子质量 $m=0.108/N_A$。",
+   "$\\omega=2\\pi\\nu$，$k=m\\omega^2$。"
+  ],
+  "answer": "7.1\\times10^{2}\\ \\mathrm{N/m}",
+  "solution": "单个原子质量\n$$m=\\frac{0.108}{6.02\\times10^{23}}=1.794\\times10^{-25}\\ \\mathrm{kg}.$$\n角频率\n$$\\omega=2\\pi\\nu=2\\pi\\times10^{13}=6.283\\times10^{13}\\ \\mathrm{rad/s}.$$\n劲度系数\n$$k=m\\omega^2=1.794\\times10^{-25}\\times\\left(6.283\\times10^{13}\\right)^2\n=1.794\\times10^{-25}\\times3.948\\times10^{27}=7.1\\times10^{2}\\ \\mathrm{N/m}.$$\n\n量级上与固体弹性常数（几十到几百 $\\mathrm{N/m}$）相符，说明「原子间用弹簧连接」的简化模型是合理的。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "N/m",
+   "methods": [
+    "简谐振动",
+    "原子振动"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第九章 习题9.2.5"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "弹簧振子的周期与运动学方程",
+  "statement": "质量为 $1.0\\times10^{3}\\ \\mathrm{g}$ 的物体悬挂在劲度系数为 $10\\ \\mathrm{N/cm}$ 的弹簧下面。(1) 求振动周期；(2) 在 $t=0$ 时物体距平衡位置的位移为 $+0.5\\ \\mathrm{cm}$、速度为 $+15\\ \\mathrm{cm/s}$，求运动学方程（SI 单位）。",
+  "mainTag": "振动与波",
+  "tags": [
+   "简谐振动"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题9.2.7",
+  "hints": [
+   "$k=10\\ \\mathrm{N/cm}=1000\\ \\mathrm{N/m}$，$m=1.0\\ \\mathrm{kg}$。",
+   "$A=\\sqrt{x_0^2+\\left(v_0/\\omega\\right)^2}$，$\\tan\\varphi=-v_0/(\\omega x_0)$。"
+  ],
+  "answer": "0.20\\ \\mathrm{s}",
+  "solution": "（1）$k=1000\\ \\mathrm{N/m}$、$m=1.0\\ \\mathrm{kg}$：\n$$\\omega=\\sqrt{\\frac{k}{m}}=\\sqrt{1000}=31.6\\ \\mathrm{rad/s},\\qquad\nT=\\frac{2\\pi}{\\omega}=0.199\\ \\mathrm{s}\\approx0.20\\ \\mathrm{s}.$$\n\n（2）$x_0=5.0\\times10^{-3}\\ \\mathrm{m}$、$v_0=0.15\\ \\mathrm{m/s}$：\n$$A=\\sqrt{x_0^2+\\left(\\frac{v_0}{\\omega}\\right)^2}\n=\\sqrt{\\left(5.0\\times10^{-3}\\right)^2+\\left(\\frac{0.15}{31.6}\\right)^2}\n=6.9\\times10^{-3}\\ \\mathrm{m}.$$\n由 $x_0=A\\cos\\varphi>0$、$v_0=-A\\omega\\sin\\varphi>0$ 得 $\\sin\\varphi<0$，\n$$\\varphi=-0.76\\ \\mathrm{rad}\\approx-43^\\circ.$$\n运动学方程\n$$x=6.9\\times10^{-3}\\cos\\left(31.6t-0.76\\right)\\ \\mathrm{m}.$$\n\n检验：$t=0$ 时 $x=6.9\\times10^{-3}\\times0.726=5.0\\times10^{-3}\\ \\mathrm{m}$，$v=-A\\omega\\sin\\varphi=+0.15\\ \\mathrm{m/s}$，与初条件一致。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "s",
+   "methods": [
+    "简谐振动",
+    "初相位"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第九章 习题9.2.7"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "圆环在刀口上的摆动周期",
+  "statement": "半径为 $R$ 的薄圆环静止于刀口 $O$ 上，令其在自身平面内做微小摆动。(1) 求振动周期；(2) 求与其振动周期相等的单摆的长度。",
+  "mainTag": "振动与波",
+  "tags": [
+   "简谐振动"
+  ],
+  "kind": "推导题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题9.2.10",
+  "hints": [
+   "圆环对质心的转动惯量 $I_C=mR^2$。",
+   "悬点在环上，$h=R$，$I_O=I_C+mR^2=2mR^2$。"
+  ],
+  "answer": "T=2\\pi\\sqrt{\\frac{2R}{g}},\\qquad l_{\\text{等时}}=2R",
+  "solution": "（1）圆环绕质心的转动惯量 $I_C=mR^2$。刀口在环上，质心到刀口距离 $h=R$，由平行轴定理\n$$I_O=I_C+mR^2=2mR^2.$$\n代入复摆周期\n$$T=2\\pi\\sqrt{\\frac{I_O}{mgh}}=2\\pi\\sqrt{\\frac{2mR^2}{mgR}}=2\\pi\\sqrt{\\frac{2R}{g}}.$$\n\n（2）等时单摆 $T=2\\pi\\sqrt{l/g}$，故\n$$l=2R.$$\n\n要点：圆环挂在刀口上时，接触点在环上，故 $h=R$、$I_O=2mR^2$。若误用 $I_O=mR^2$（质心轴）会得到 $T=2\\pi\\sqrt{R/g}$ 的错误结果——悬挂点不在质心时**必须**用平行轴定理。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "复摆",
+    "等时单摆"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第九章 习题9.2.10"
+  },
+  "subject": "physics"
+ }
+]
