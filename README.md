@@ -354,6 +354,16 @@ node tools/ops/deploy.mjs --publish
 
 `.env` 不会进 git；`tools/ops/deploy.mjs` 会在发布前检查 `TRUST_PROXY` / `ALLOW_ORIGINS`，没配就先把风险点打出来。其余变量见 `.env.example`。
 
+### 前端指向哪个后端：`deploy.config.json`
+
+`apiBase` 与 `sharecode` 必须**成对**，所以它们放在仓库内的 `deploy.config.json`，由 `build-pages.mjs` 读取：
+
+- CI 的 `pages.yml` 里也有这两个值，但工作流文件需要 `workflow` scope 才能改；历史上有一次「env 指到新实例、分享码还是旧实例的」，
+  结果 Pages 上每个接口都 403。现在以仓库文件为准：env 里的 `API_BASE` 只有在**与文件不一致**（确实换后端）时才生效，并要求同时给 `SHARECODE`。
+- 构建前会真实请求一次 `/api/health?sharecode=`，返回 401/403 直接让构建失败（`SKIP_BACKEND_PROBE=1` 可跳过）。
+- 改完 `deploy.config.json` 记得同时动一下 `public/` 里的文件（例如版本串）或手动触发一次 Pages 工作流，
+  因为 `pages.yml` 的 `paths` 没包含这个文件——这是刻意的：避免只改配置就把线上切走。
+
 > 注意：`SHARECODE=... ADMIN_PASS=... node ...` 是 Git Bash / POSIX 写法。PowerShell 里要写成
 > `$env:SHARECODE="..."; $env:ADMIN_PASS="..."; node tools/ops/deploy.mjs --publish`，
 > 否则 PowerShell 会把 `SHARECODE=...` 当成命令名，报 `CommandNotFoundException`。

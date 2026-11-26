@@ -37,25 +37,30 @@ const prev = prevConfig();
 
 /* 仓库内的 deploy.config.json 是「前端该指向哪个后端」的唯一真相。
    为什么不让 CI 的 env 说了算：apiBase 与 sharecode 必须成对，两处各自漂移过一次
-   （env 指向新实例、分享码还是旧实例的，上线后全站 403）。这里 env 只在
-   API_BASE 与文件不一致时才生效（真正换后端的时候），并强制要求同时给 SHARECODE。 */
+   （env 指向新实例、分享码还是旧实例的，上线后全站 403；后来又因为两者不一致，
+   构建时的连通性校验直接让 Pages 构建失败）。所以默认完全以文件为准，
+   确实要临时换后端时用 FORCE_BACKEND_ENV=1 + API_BASE/SHARECODE。
+   改完这个文件记得同时动一下会触发 pages.yml 的路径（如某个 public/ 文件）。 */
 const FILE_CFG = (() => {
   try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'deploy.config.json'), 'utf8')); }
   catch (e) { return {}; }
 })();
 
+const forceEnv = process.env.FORCE_BACKEND_ENV === '1';
 const envBase = String(process.env.API_BASE || '').trim();
-const switching = !!(envBase && FILE_CFG.apiBase && envBase !== FILE_CFG.apiBase);
-const API_BASE = switching ? envBase : (FILE_CFG.apiBase || envBase || prev.apiBase || 'https://math-vault-10141-52003.app.workbuddy.host');
+const envCode = String(process.env.SHARECODE || '').trim();
+const useEnv = forceEnv || (!FILE_CFG.apiBase && !!envBase);
+
+const API_BASE = (useEnv ? (envBase || FILE_CFG.apiBase) : FILE_CFG.apiBase) || prev.apiBase || 'https://math-vault-10141.app.workbuddy.host';
 const SITE_NAME = process.env.SITE_NAME || FILE_CFG.siteName || prev.siteName || '数海晴岸';
-const SHARECODE = switching ? String(process.env.SHARECODE || '').trim() : (FILE_CFG.sharecode || process.env.SHARECODE || prev.sharecode || '');
+const SHARECODE = (useEnv ? (envCode || FILE_CFG.sharecode) : FILE_CFG.sharecode) || prev.sharecode || '';
 if (!SHARECODE) {
-  console.error('缺少 SHARECODE：deploy.config.json 里没有，环境变量也没有。');
-  console.error('  换后端时：API_BASE=... SHARECODE=... node tools/ops/build-pages.mjs');
+  console.error('缺少 SHARECODE：deploy.config.json 里没有，环境变量也没有（FORCE_BACKEND_ENV=1 时才用 env）。');
   process.exit(2);
 }
-if (switching) {
-  console.log('[build-pages] 检测到 API_BASE 与 deploy.config.json 不一致，按环境变量构建；记得把 deploy.config.json 一起改掉。');
+if (!useEnv && envBase && envBase !== API_BASE) {
+  console.log('[build-pages] 忽略环境变量里的 API_BASE（' + envBase + '），按 deploy.config.json 构建。');
+  console.log('[build-pages] 真要换后端：FORCE_BACKEND_ENV=1 API_BASE=... SHARECODE=... node tools/ops/build-pages.mjs');
 }
 
 /* 上线前校验这对「地址 + 分享码」真的能用：v2.0.x 曾把分享码留成旧实例的，
