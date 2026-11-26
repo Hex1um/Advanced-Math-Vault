@@ -3,7 +3,7 @@
 高等数学好题收藏室。
 
 线上地址：**https://hex1um.github.io/Advanced-Math-Vault/** （前端，GitHub Pages）
-接口服务：https://math-vault-10141-52003.app.workbuddy.host （后端，Node 单进程）
+接口服务：https://math-vault-10141.app.workbuddy.host （后端，Node 单进程）
 仓库：https://github.com/Hex1um/Advanced-Math-Vault
 
 > 「数海晴岸」是站点中文名；仓库名与线上域名仍沿用 `Advanced-Math-Vault`，不影响已有链接。

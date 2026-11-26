@@ -8095,7 +8095,7 @@
     "calc": 8,
     "source": "华中科技大学 2023-2024学年微积分（一）（上）期末考试",
     "hints": [],
-    "answer": "\\textbf{Solution}. 方程\n \\[\n \\int_{0}^{f(x)}g(t) \\mathrm{d}t+\\int_{0}^{x}\n f(t) \\mathrm{d}t=x\\mathrm{e}^{x}-\\mathrm{e}^{x}+1\n \\]\n 两边关于$x$求导得$g(f(x))\\cdot f'(x)+f(x)=x\\mathrm{e}^{x}$.\n\n 由反函数的性质，$g(f(x))=x$，所以上式即$xf'(x)+f(x)=x\\mathrm{e}^{x}$.\n\n 当$x=0$时，由题可知$f(0)=0$；当$x\\neq0$时，上式可变形为\n \\[\n f'(x)+\\frac{1}{x}f(x)=\\mathrm{e}^{x}.\n \\]\n 由一阶非齐次线性微分方程的通解公式得\n \\[\n \\begin{aligned}\n y = {} & \\mathrm{e}^{-\\int\\frac{1}{x} \\mathrm{d}x}\\left(C+\\int\\mathrm{e}^{x}\\mathrm{e}^{\\int\\frac{1}{x} \\mathrm{d}x} \\mathrm{d}x\\right) \\\\\n = {} & \\frac{1}{x}\\left(C+\\int x\\mathrm{e}^{x} \\mathrm{d}x\\right) = \\frac{1}{x}\\left(C+x\\ma",
+    "answer": "\\textbf{Solution}. 方程\n \\[\n \\int_{0}^{f(x)}g(t) \\mathrm{d}t+\\int_{0}^{x}\n f(t) \\mathrm{d}t=x\\mathrm{e}^{x}-\\mathrm{e}^{x}+1\n \\]\n 两边关于$x$求导得$g(f(x))\\cdot f'(x)+f(x)=x\\mathrm{e}^{x}$.\n\n 由反函数的性质，$g(f(x))=x$，所以上式即$xf'(x)+f(x)=x\\mathrm{e}^{x}$.\n\n 当$x=0$时，由题可知$f(0)=0$；当$x\\neq0$时，上式可变形为\n \\[\n f'(x)+\\frac{1}{x}f(x)=\\mathrm{e}^{x}.\n \\]",
     "solution": "",
     "mainTag": "极限与连续"
   },
@@ -9067,7 +9067,7 @@
     "calc": 6,
     "source": "华中科技大学 2024-2025学年微积分（B）（上）期末考试",
     "hints": [],
-    "answer": "\\textbf{Solution}. D.\n\n $\\int_{\\mathrm{e}}^{+\\infty}\\frac{\\ln x}{x} \\mathrm{d}x=\\int_{\\mathrm{e}}^{+\\infty}\n \\ln x \\mathrm{d}(\\ln x)=\\frac{1}{2}\\ln^{2} x\\bigg|_{\\mathrm{e}}^{+\\infty}=+\\infty$，\n\n $\\int_{\\mathrm{e}}^{+\\infty}\\frac{1}{x\\ln x} \\mathrm{d}x=\\int_{\\mathrm{e}}^{+\\infty}\n \\frac{\\mathrm{d}(\\ln x)}{\\ln x}=\\ln\\ln x\\bigg|_{\\mathrm{e}}^{+\\infty}=+\\infty$，\n\n $\\int_{\\mathrm{e}}^{+\\infty}\\frac{1}{x\\sqrt{\\ln x}} \\mathrm{d}x=\\int_{\\mathrm{e}}\n ^{+\\infty}\\frac{\\mathrm{d}(\\ln x)}{\\sqrt{\\ln x}}=2\\sqrt{\\ln x}\\bigg|_{\\mathrm{e}}\n ^{+\\infty}=+\\infty$，\n\n $\\int_{\\mathrm{e}}^{+\\infty}\\frac{1}{x\\ln^{2} x}",
+    "answer": "\\textbf{Solution}. D.\n\n$\\int_{\\mathrm{e}}^{+\\infty}\\frac{\\ln x}{x} \\mathrm{d}x=\\int_{\\mathrm{e}}^{+\\infty}\\ln x \\mathrm{d}(\\ln x)=\\frac{1}{2}\\ln^{2} x\\bigg|_{\\mathrm{e}}^{+\\infty}=+\\infty$，\n\n$\\int_{\\mathrm{e}}^{+\\infty}\\frac{1}{x\\ln x} \\mathrm{d}x=\\int_{\\mathrm{e}}^{+\\infty}\\frac{\\mathrm{d}(\\ln x)}{\\ln x}=\\ln\\ln x\\bigg|_{\\mathrm{e}}^{+\\infty}=+\\infty$，\n\n$\\int_{\\mathrm{e}}^{+\\infty}\\frac{1}{x\\sqrt{\\ln x}} \\mathrm{d}x=\\int_{\\mathrm{e}}^{+\\infty}\\frac{\\mathrm{d}(\\ln x)}{\\sqrt{\\ln x}}=2\\sqrt{\\ln x}\\bigg|_{\\mathrm{e}}^{+\\infty}=+\\infty$，\n\n$\\int_{\\mathrm{e}}^{+\\infty}\\frac{1}{x\\ln^{2} x}\\mathrm{d}x=\\int_{\\mathrm{e}}^{+\\infty}\\frac{\\mathrm{d}(\\ln x)}{\\ln^{2} x}=\\left[-\\frac{1}{\\ln x}\\right]_{\\mathrm{e}}^{+\\infty}=1$，收敛。故选 D。",
     "solution": "",
     "mainTag": "积分"
   },
