@@ -1,0 +1,62 @@
+[
+ {
+  "title": "拖车对汽车前后轴载荷的影响",
+  "statement": "汽车在水平路面上匀速行驶，后面牵引旅行拖车。假设拖车仅对汽车施以水平向后的拉力 $F$。汽车重 $G$，其重心与后轴的垂直距离为 $a$，前后轴距离为 $l$，$F$ 作用线离地面的高度为 $h$。问汽车前后轮所受地面支持力与无拖车时有无区别？试计算之。",
+  "mainTag": "力学",
+  "tags": [
+   "刚体平面平行运动"
+  ],
+  "kind": "推导题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题7.6.1",
+  "hints": [
+   "无拖车：对质心取矩，$N_1\\left(l-a\\right)=N_2a$，且 $N_1+N_2=G$。",
+   "有拖车：拉力 $F$ 在高度 $h$ 处产生额外力矩 $Fh$，使后轮减载、前轮增载。"
+  ],
+  "answer": "N_1=\\frac{Ga+Fh}{l},\\qquad N_2=\\frac{G\\left(l-a\\right)-Fh}{l}",
+  "solution": "设前轮支持力 $N_1$、后轮 $N_2$，前轴到质心距离 $l-a$。\n\n**无拖车**：竖直平衡 $N_1+N_2=G$；对质心取矩\n$$N_1\\left(l-a\\right)=N_2a\\quad\\Rightarrow\\quad N_1=\\frac{Ga}{l},\\qquad N_2=\\frac{G\\left(l-a\\right)}{l}.$$\n\n**有拖车**：拉力 $F$ 水平向后、作用线高 $h$，对质心产生顺时针力矩 $Fh$（使车头抬起、后轮减载）。竖直仍平衡，力矩平衡变为\n$$N_1\\left(l-a\\right)-N_2a-Fh=0\\quad\\Rightarrow\\quad N_1\\left(l-a\\right)=N_2a+Fh.$$\n与 $N_1+N_2=G$ 联立：\n$$N_1=\\frac{Ga+Fh}{l},\\qquad N_2=\\frac{G\\left(l-a\\right)-Fh}{l}.$$\n\n**结论：有区别。** 前轮增载 $Fh/l$、后轮减载 $Fh/l$，转移量与 $F$、$h$ 成正比、与轴距 $l$ 成反比。\n\n工程含义：拖挂时后轮减载会降低驱动轮附着力（后驱车尤其明显），所以拖车挂钩高度 $h$ 应尽量低、轴距 $l$ 应尽量大。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第7章 习题7.6.1"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "躺在木板上测人体重心",
+  "statement": "将一块木板的两端置于两个测力计上，即可测出木板的重心；但这样测人的重心比较难，因为很难将头和脚置于测力计上而保持身体挺直。若令人躺在板上，能否测出？若能，给出求重心的方法。",
+  "mainTag": "力学",
+  "tags": [
+   "刚体平面平行运动"
+  ],
+  "kind": "设计题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题7.6.2",
+  "hints": [
+   "把「人 + 板」作为整体，两端测力计读数之和等于总重。",
+   "对一端取矩，可解出整体质心到该端的距离；再减去板的贡献。"
+  ],
+  "answer": "x_C=\\frac{F_2l}{F_1+F_2}\\ \\text{（距 }F_1\\text{ 端的距离）}",
+  "solution": "能测。方法如下：\n\n1. 先单独把空木板两端架在测力计上，读 $f_1$、$f_2$，得板重 $G_b=f_1+f_2$，板重心距 $f_1$ 端\n$$x_b=\\frac{f_2l}{f_1+f_2}.$$\n2. 让人平躺在板上（身体保持与板相对静止，不必挺直），再读两端 $F_1$、$F_2$。\n3. 对 $F_1$ 端取矩：「人 + 板」整体重心\n$$x_{\\text{总}}=\\frac{F_2l}{F_1+F_2}.$$\n4. 由质心定义反解人的重心：\n$$x_{\\text{人}}=\\frac{\\left(F_1+F_2\\right)x_{\\text{总}}-G_bx_b}{F_1+F_2-G_b}\n=\\frac{F_2l-f_2l}{F_1+F_2-f_1-f_2}.$$\n\n即\n$$x_{\\text{人}}=\\frac{\\left(F_2-f_2\\right)l}{\\left(F_1+F_2\\right)-\\left(f_1+f_2\\right)},$$\n距 $F_1$ 端。\n\n要点：两次称量做差，消去木板的重量与重心——这与「双物测转动惯量消去摩擦矩」是同一套差分思想。人只需躺平，不需要保持挺直，所以可操作。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第7章 习题7.6.2"
+  },
+  "subject": "physics"
+ }
+]

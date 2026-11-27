@@ -1,0 +1,269 @@
+[
+ {
+  "title": "改变计时起点化简波方程",
+  "statement": "一平面简谐波沿 $x$ 轴负方向传播，波方程为\n$$y=A\\cos2\\pi\\nu\\left(t+\\frac{x}{v}+3\\right).$$\n试利用改变计时起点的方法，将波方程化成最简形式。",
+  "mainTag": "振动与波",
+  "tags": [
+   "平面简谐波"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题10.2.6",
+  "hints": [
+   "常数 3 对应相位 $2\\pi\\nu\\times3=6\\pi$。",
+   "取新计时起点 $t^{\\prime}=t+3$。"
+  ],
+  "answer": "y=A\\cos2\\pi\\nu\\left(t+\\frac{x}{v}\\right)",
+  "solution": "把括号展开：\n$$y=A\\cos\\left[2\\pi\\nu\\left(t+\\frac{x}{v}\\right)+6\\pi\\right].$$\n$6\\pi=3\\times2\\pi$ 是 $2\\pi$ 的整数倍，对余弦无影响，故\n$$y=A\\cos2\\pi\\nu\\left(t+\\frac{x}{v}\\right).$$\n\n等价说法：取新计时起点 $t'=t+3$（即计时起点提前 $3\\ \\mathrm{s}$），代入原式得\n$$y=A\\cos2\\pi\\nu\\left(t'+\\frac{x}{v}\\right),$$\n常数项消失。\n\n要点：波方程里加减 $2\\pi$ 的整数倍相位不改变波形，只是把「计时零点」平移了 $3\\ \\mathrm{s}$——这正是「改变计时起点」的物理含义。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "波方程",
+    "相位"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第10章 习题10.2.6"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "由波方程求波长波速与传播方向",
+  "statement": "平面简谐波方程为 $y=5\\cos2\\pi\\left(t+\\frac{x}{4}\\right)$（SI 单位）。求振幅、频率、波长、波速与传播方向。",
+  "mainTag": "振动与波",
+  "tags": [
+   "平面简谐波"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 4,
+  "calc": 2,
+  "source": "漆安慎《力学》第4版 习题10.2.7",
+  "hints": [
+   "与 $y=A\\cos2\\pi\\left(\\nu t\\pm x/\\lambda\\right)$ 对比。",
+   "相位中 $+x/\\lambda$ 表示沿 $-x$ 传播。"
+  ],
+  "answer": "v=4\\ \\mathrm{m/s}",
+  "solution": "与标准式 $y=A\\cos2\\pi\\left(\\nu t\\pm\\dfrac{x}{\\lambda}\\right)$ 对比：\n$$A=5\\ \\mathrm{m},\\qquad \\nu=1\\ \\mathrm{Hz},\\qquad \\lambda=4\\ \\mathrm{m}.$$\n$$v=\\nu\\lambda=4\\ \\mathrm{m/s}.$$\n\n相位中 $x$ 前为「$+$」，表示沿 $-x$ 方向（向左）传播。\n\n$t=3/5\\ \\mathrm{s}$ 时的波形：把 $t=0.6$ 代入\n$$y=5\\cos2\\pi\\left(0.6+\\frac{x}{4}\\right)=5\\cos\\left(1.2\\pi+\\frac{\\pi x}{2}\\right),$$\n即振幅 $5\\ \\mathrm{m}$、波长 $4\\ \\mathrm{m}$ 的正弦曲线沿 $x$ 轴平移后的形状。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m/s",
+   "methods": [
+    "波方程",
+    "波长"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第10章 习题10.2.7"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "某处质元的振动方程",
+  "statement": "对于平面简谐波 $S=r\\cos2\\pi\\left(\\dfrac{t}{T}-\\dfrac{x}{\\lambda}\\right)$，其中 $r=0.01\\ \\mathrm{m}$、$T=12\\ \\mathrm{s}$、$\\lambda=0.30\\ \\mathrm{m}$。求 $x=0.20\\ \\mathrm{m}$ 处体元的振动方程。",
+  "mainTag": "振动与波",
+  "tags": [
+   "平面简谐波"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题10.2.8",
+  "hints": [
+   "把 $x=0.20$ 代入相位：$\\dfrac{x}{\\lambda}=\\dfrac{0.20}{0.30}=\\dfrac23$。",
+   "$2\\pi\\cdot\\frac23=\\frac{4\\pi}{3}$。"
+  ],
+  "answer": "S=0.01\\cos\\left(\\frac{\\pi t}{6}-\\frac{4\\pi}{3}\\right)\\ \\mathrm{m}",
+  "solution": "代入 $x=0.20\\ \\mathrm{m}$：\n$$S=0.01\\cos2\\pi\\left(\\frac{t}{12}-\\frac{0.20}{0.30}\\right)\n=0.01\\cos\\left(\\frac{\\pi t}{6}-\\frac{4\\pi}{3}\\right)\\ \\mathrm{m}.$$\n\n即该处体元做振幅 $0.01\\ \\mathrm{m}$、周期 $12\\ \\mathrm{s}$ 的简谐振动，初相位 $-\\dfrac{4\\pi}{3}$（等价于 $+\\dfrac{2\\pi}{3}$）。\n\n相位落后 $\\dfrac{4\\pi}{3}$ 相当于落后 $\\dfrac{2}{3}$ 个周期——因为 $x=0.20\\ \\mathrm{m}$ 距波源 $\\dfrac23\\lambda$。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "波方程",
+    "振动方程"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第10章 习题10.2.8"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "波形图上各质元的位移、速度与相位",
+  "statement": "两图分别表示向右和向左传播的两列平面简谐波在某一瞬时的波形图。说明此时 $x_1$、$x_2$、$x_3$ 以及 $\\xi_1$、$\\xi_2$、$\\xi_3$ 各质元的位移和速度为正还是为负，它们的相位如何？（$x_2$、$\\xi_2$ 只要求说明相位在第几象限。）",
+  "mainTag": "振动与波",
+  "tags": [
+   "平面简谐波"
+  ],
+  "kind": "概念题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题10.2.9",
+  "hints": [
+   "右传波：波形整体右移，某点下一时刻的位移由它**左侧**的点决定。",
+   "左传波相反：由右侧的点决定。"
+  ],
+  "answer": "x_1:\\ y=0,\\ v<0;\\quad x_2:\\ y=+A,\\ v=0;\\quad x_3:\\ y=0,\\ v>0",
+  "solution": "**右传波（左图）**：波形整体向右平移，某质元下一时刻的位移等于它左侧邻点此刻的位移。\n\n- $x_1$：位于平衡位置、其左侧为波谷方向 → 位移 $y=0$，速度 $v<0$（向下）；相位为 $\\pi/2$ 或 $3\\pi/2$，取 $3\\pi/2$（下一时刻向下）。\n- $x_2$：位于波峰 → $y=+A$，$v=0$；相位 $2k\\pi$，在第一象限边界（取 $0$）。\n- $x_3$：位于平衡位置、其左侧为波峰方向 → $y=0$，速度 $v>0$；相位 $\\pi/2$。\n\n**左传波（右图）**：波形整体向左平移，下一时刻位移由**右侧**邻点决定。\n\n- $\\xi_1$：位于平衡位置、其右侧为波峰 → $y=0$，$v>0$；相位 $\\pi/2$。\n- $\\xi_2$：位于波谷 → $y=-A$，$v=0$；相位 $\\pi$（第二、三象限边界）。\n- $\\xi_3$：位于平衡位置、其右侧为波谷 → $y=0$，$v<0$；相位 $3\\pi/2$。\n\n判据一句话：**波向哪边传，就看哪边的邻点**——右传看左、左传看右。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "波形图",
+    "相位"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第10章 习题10.2.9"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "由两时刻波形图写波方程",
+  "statement": "图 (a)、(b) 分别表示 $t=0$ 和 $t=2\\ \\mathrm{s}$ 时的某一平面简谐波的波形图。已知振幅为 $2\\ \\mathrm{m}$、波长为 $2\\ \\mathrm{m}$，试写出此平面简谐波的波方程。",
+  "mainTag": "振动与波",
+  "tags": [
+   "平面简谐波"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题10.2.10",
+  "hints": [
+   "$t=0$ 时 $x=0$ 处为波峰 → 用余弦、初相为零。",
+   "$t=2\\ \\mathrm{s}$ 时波形平移了半个波长，据此定传播方向与周期。"
+  ],
+  "answer": "y=2\\cos\\left(\\frac{\\pi t}{4}+\\pi x\\right)\\ \\mathrm{m}",
+  "solution": "由 (a)：$t=0$ 时 $x=0$ 处为波峰（$y=+2$）、$x=1\\ \\mathrm{m}$ 处为波谷，波长 $\\lambda=2\\ \\mathrm{m}$，故\n$$y=2\\cos\\left(\\varphi_t+\\pi x\\right),$$\n其中 $\\pi x$ 来自 $2\\pi x/\\lambda=\\pi x$，$t=0$ 时 $\\varphi_t=0$。\n\n由 (b)：$t=2\\ \\mathrm{s}$ 时波峰移到 $x=1.5\\ \\mathrm{m}$（$x=0.5$ 为波谷），即波形向左移了 $0.5\\ \\mathrm{m}=\\lambda/4$。向左传播时相位随时间增加：\n$$\\varphi_t=\\omega t,\\qquad \\omega\\times2=\\frac{\\pi}{2}\\quad\\Rightarrow\\quad\\omega=\\frac{\\pi}{4}\\ \\mathrm{rad/s}.$$\n故\n$$y=2\\cos\\left(\\frac{\\pi t}{4}+\\pi x\\right)\\ \\mathrm{m}.$$\n\n检验：$t=2$ 时 $y=2\\cos\\left(\\frac{\\pi}{2}+\\pi x\\right)=-2\\sin\\pi x$，$x=0.5$ 得 $-2$（波谷）、$x=1.5$ 得 $+2$（波峰），与图 (b) 一致。\n\n波速 $v=\\omega/k=\\dfrac{\\pi/4}{\\pi}=0.25\\ \\mathrm{m/s}$，向左；周期 $T=2\\pi/\\omega=8\\ \\mathrm{s}$。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "波形图",
+    "波方程"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第10章 习题10.2.10"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "绝热过程下声压的近似表达式",
+  "statement": "空气中声音传播的过程可视作绝热过程，其过程方程式为 $pV^\\gamma=\\text{常量}$。求证声压 $p=p_1-p_0$ 可表示为\n$$p\\approx-\\gamma p_0\\frac{v_1-v_0}{v_0},$$\n其中 $p_0$、$v_0$ 表示没有声波传播时一定质量空气的压强和体积，$v_1$ 是有声波时空气的体积。",
+  "mainTag": "振动与波",
+  "tags": [
+   "平面简谐波"
+  ],
+  "kind": "证明题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题10.4.2",
+  "hints": [
+   "对 $pV^\\gamma=C$ 两边取微分：$\\mathrm{d}p\\,V^\\gamma+\\gamma pV^{\\gamma-1}\\mathrm{d}V=0$。",
+   "$\\mathrm{d}p=-\\gamma p\\,\\mathrm{d}V/V$，令 $\\mathrm{d}V=v_1-v_0$、$p\\approx p_0$。"
+  ],
+  "answer": "p\\approx-\\gamma p_0\\frac{v_1-v_0}{v_0}",
+  "solution": "对 $pV^\\gamma=C$ 取对数再微分：\n$$\\ln p+\\gamma\\ln V=\\text{常量}\\quad\\Rightarrow\\quad\\frac{\\mathrm{d}p}{p}+\\gamma\\frac{\\mathrm{d}V}{V}=0,$$\n$$\\mathrm{d}p=-\\gamma p\\frac{\\mathrm{d}V}{V}.$$\n\n声波引起的体积变化很小（$|v_1-v_0|\\ll v_0$），故右端可用平衡态的 $p_0$、$v_0$ 近似，且 $\\mathrm{d}p=p_1-p_0=p$、$\\mathrm{d}V=v_1-v_0$：\n$$p\\approx-\\gamma p_0\\frac{v_1-v_0}{v_0}.$$\n\n物理含义：体积被压缩（$v_1<v_0$）时声压为正（压强升高），且比例系数是绝热体积模量 $K=\\gamma p_0$。由此可得声速\n$$u=\\sqrt{\\frac{K}{\\rho}}=\\sqrt{\\frac{\\gamma p_0}{\\rho}},$$\n代入空气数据正是 $331\\ \\mathrm{m/s}$ 量级。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "proof",
+   "unit": "",
+   "methods": [
+    "绝热过程",
+    "声压",
+    "声速"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第10章 习题10.4.2"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "固定端反射的反射波方程",
+  "statement": "入射波 $y=10\\times10^{-4}\\cos\\left[2000\\pi\\left(t-\\dfrac{x}{34}\\right)\\right]$（SI 单位）在固定端反射，坐标原点与固定端相距 $0.51\\ \\mathrm{m}$。写出反射波方程（无振幅损失）。",
+  "mainTag": "振动与波",
+  "tags": [
+   "波的干涉与驻波"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题10.5.4",
+  "hints": [
+   "固定端反射有半波损失，相位差 $\\pi$。",
+   "反射波沿 $-x$ 传播，在 $x=0.51$ 处与入射波反相。"
+  ],
+  "answer": "y_r=-1.0\\times10^{-3}\\cos\\left[2000\\pi\\left(t+\\frac{x}{34}-0.03\\right)\\right]",
+  "solution": "入射波沿 $+x$ 传播，角频率 $\\omega=2000\\pi$、波速 $v=34\\ \\mathrm{m/s}$（由相位 $2000\\pi(t-x/34)$ 读出）。\n\n设反射波沿 $-x$ 传播：\n$$y_r=A\\cos\\left[2000\\pi\\left(t+\\frac{x}{34}\\right)+\\varphi\\right].$$\n固定端在 $x=L=0.51\\ \\mathrm{m}$ 处，反射波与入射波在该点相位差 $\\pi$（半波损失）：\n入射波相位 $2000\\pi\\left(t-\\frac{L}{34}\\right)$；\n反射波相位 $2000\\pi\\left(t+\\frac{L}{34}\\right)+\\varphi$。\n要求两者相差 $\\pi$：\n$$2000\\pi\\cdot\\frac{2L}{34}+\\varphi=\\pi\\quad\\Rightarrow\\quad\n\\varphi=\\pi-2000\\pi\\cdot\\frac{1.02}{34}=\\pi-60\\pi=-59\\pi\\equiv\\pi\\ \\left(\\bmod\\ 2\\pi\\right).$$\n取 $\\varphi=\\pi$：\n$$y_r=1.0\\times10^{-3}\\cos\\left[2000\\pi\\left(t+\\frac{x}{34}\\right)+\\pi\\right]\n=-1.0\\times10^{-3}\\cos\\left[2000\\pi\\left(t+\\frac{x}{34}-\\frac{2L}{34}\\right)\\right].$$\n代入 $2L/34=1.02/34=0.03$：\n$$y_r=-1.0\\times10^{-3}\\cos\\left[2000\\pi\\left(t+\\frac{x}{34}-0.03\\right)\\right]\\ \\mathrm{m}.$$\n\n物理要点：固定端反射必带半波损失（相位突变 $\\pi$），这正是弦上固定端形成波节的原因。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "反射波",
+    "半波损失",
+    "固定端"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第10章 习题10.5.4"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "自由端反射的反射波方程",
+  "statement": "入射波方程为 $y=A\\cos2\\pi\\left(\\dfrac{t}{T}+\\dfrac{x}{\\lambda}\\right)$，在 $x=0$ 处的自由端反射，求反射波的波方程。",
+  "mainTag": "振动与波",
+  "tags": [
+   "波的干涉与驻波"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题10.5.5",
+  "hints": [
+   "入射波相位含 $+x/\\lambda$，说明沿 $-x$ 传播。",
+   "自由端反射无半波损失，反射波沿 $+x$ 传播。"
+  ],
+  "answer": "y_r=A\\cos2\\pi\\left(\\frac{t}{T}-\\frac{x}{\\lambda}\\right)",
+  "solution": "入射波 $y=A\\cos2\\pi\\left(\\dfrac{t}{T}+\\dfrac{x}{\\lambda}\\right)$ 的相位随 $x$ 增大而增大，故沿 $-x$ 方向传播。它在 $x=0$ 处的振动为\n$$y\\left(0,t\\right)=A\\cos\\frac{2\\pi t}{T}.$$\n\n自由端反射**没有半波损失**，反射波沿 $+x$ 方向传播，且在 $x=0$ 处与入射波同相：\n$$y_r=A\\cos2\\pi\\left(\\frac{t}{T}-\\frac{x}{\\lambda}\\right).$$\n\n于是 $x=0$ 处两波叠加为 $2A\\cos\\dfrac{2\\pi t}{T}$，振幅加倍——这就是自由端形成**波腹**的原因；与固定端（波节、半波损失）恰成对照。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "反射波",
+    "自由端",
+    "波腹"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第10章 习题10.5.5"
+  },
+  "subject": "physics"
+ }
+]
