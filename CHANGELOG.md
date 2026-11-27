@@ -1,53 +1,56 @@
 ## v3.13.1 — 2026-11-27
 
 **github.io 自己当后端**：题库打包成静态数据发到 Pages，前端直读，不再依赖服务器实例。
-（在 v3.13.0「线性代数补缺 40 题」基础上叠加，静态包已含这批新题。）
+（在 v3.13.0「线性代数补缺 40 题」基础上叠加；静态包已含这 40 题，共 8601 题。）
 
 ### 一、为什么这么做
 
-一天里后端实例换了两回（52003 → 10141 → 又合并），每次都要迁移用户、对齐题库，
-而前端始终只是「指向谁的接口」。把题库导出成静态包放到 Pages，
-站点与实例彻底解耦：**实例挂了、换域名了、分享码过期了，github.io 照样能刷题**。
+一天里后端实例换了两回，每次都要迁移用户、对齐题库，而前端始终只是「指向谁的接口」。
+把题库导出成静态包放到 Pages，站点与实例彻底解耦：实例挂了、换域名了、分享码过期了，
+github.io 照样能刷题。
 
 ### 二、静态数据包（`public/data/`，12.8 MB）
 
-`tools/ops/export-static.mjs` 从一个只读临时实例抓 `/api/meta` 与全量列表
-（`visibleProblem` 这些投影逻辑照抄一定会漂移，所以直接取服务端输出），
+`tools/ops/export-static.mjs` 从只读临时实例抓 `/api/meta` 与全量列表
+（`visibleProblem` 这类投影逻辑照抄一定会漂移，所以直接取服务端输出），
 再从库里补 `statement / hints / answer / solution`：
 
 | 文件 | 内容 | 体量 |
 | :-- | :-- | :-- |
-| `meta.json` | 站点信息 + 标签树 + 统计（替代 `/api/meta`） | 30 KB |
+| `meta.json` | 站点信息 + 标签树 + 统计 | 30 KB |
 | `list-math.json` / `list-physics.json` | 列表项（不含答案解析） | 2.5 MB / 0.6 MB |
-| `p/bucket-NN.json` | 详情分桶，每桶 250 题，按编号定位 | 共 35 桶 |
+| `p/bucket-NN.json` | 详情分桶，每桶 250 题 | 35 桶 |
 | `manifest.json` | 版本号 + 桶索引 | 2 KB |
-
-含全部 **8601 题**（数学 6602 / 物理 1999）。
 
 ### 三、前端静态适配（`public/js/api.js`）
 
-`MV_CONFIG.staticData = true` 时接管：
+`MV_CONFIG.staticData = true` 时接管 `/api/meta`（含 `?v=` 版本比对，标签实时更新照旧）、
+`/api/problems?...`（参数名与后端一致：subject/main/tags/method/course/level/sort/page/size/q）、
+`/api/problems/:code`、`/daily`、`/leaderboard`、`/sprint/packs`，
+以及 `POST /reveal`（用包里的答案与解析直接展开，不需要账号）。
 
-- `/api/meta`（含 `?v=` 版本比对 —— 标签实时更新在静态模式下照样生效）
-- `/api/problems?...`：参数名与后端完全一致（subject / main / tags / method / course /
-  level / sort / page / size / q），只是把过滤搬到内存里
-- `/api/problems/:code`、`/daily`、`/leaderboard`、`/sprint/packs`
-- `POST /reveal`：用包里的答案与解析直接展开，不需要账号，也不需要联网
+写操作（登录、答疑、AI 出题、判卷、投稿、错题本、组卷、期末突击）隐藏入口并给出
+「需要连服务器」的明确提示；顶栏显示「静态版」。
 
-写操作（登录、答疑、AI 出题、判卷、投稿、错题本、组卷、期末突击）在静态模式下一律
-隐藏入口，调用时给「需要连服务器」的明确提示，而不是白屏或死按钮；顶栏显示「静态版」。
+### 四、构建与自检
 
-### 四、构建自动化
+- `build-pages` 检测到 `public/data/manifest.json` 就切纯静态：apiBase / sharecode 留空、
+  跳过后端联通校验、写入 `staticData: true`；
+- `check-pages` 在静态模式下改为校验静态包（meta / manifest / 两个列表 / 桶数量与版本号），
+  不再要求后端地址；
+- `check-answer-leak` 在没有 `data/db.json` 的克隆/CI 里自动回退 batch 题库，
+  否则「库里有物理题可测」会变成对运行环境的抱怨。
 
-`build-pages.mjs` 检测到 `public/data/manifest.json` 就自动切纯静态：
-`apiBase` / `sharecode` 留空、跳过后端联通性校验、写入 `staticData: true`。
-删掉 `public/data/` 再构建即回到「前端 + 后端实例」的老形态。
+### 五、修一次误覆盖
+
+上一版我把本地较旧的 `lib/math-equiv.js` 等 31 个文件覆盖到了远端（本地副本陈旧所致），
+把深递归/超长输入的护栏弄丢了，CI 的 fuzz 用例直接报红。本版以你最新的 `a24f4931` 为基座
+逐文件恢复，再重新叠加静态模式改动，`check:gates` 全绿（fuzz 30/0、leak 9/0）。
 
 ### 验证
 
-本地 `python -m http.server` 起 `docs/` 实测：首页 8601 题、切物理 1999、按力学筛选 1049、
-详情正常、点「查看答案」直接展开解析（907 字符）、每日一物正常、导航只剩「题库 / 每日一积」。
-`smoke` 184 通过 / 0 失败、`check:leak` 9/9。
+本地 `python -m http.server` 起 `docs/`：首页 8601 题、切物理 1999、力学筛选 1049、
+详情正常、点「查看答案」直接展开解析、每日一物正常、导航只剩「题库 / 每日一积」。
 
 ## v3.13.0 — 2026-11-27
 

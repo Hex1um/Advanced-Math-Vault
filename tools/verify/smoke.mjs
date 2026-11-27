@@ -680,7 +680,25 @@ try {
   ok('正常接口不受脱敏影响', h500.status === 200 && h500.json.ok !== false);
 
   /* ---------------------------------------------------------------- 期末突击（v2.1.0） */
-  console.log('\n[18] 期末突击：科目包 / 判分 / 薄弱分析');
+  console.log('\n[19] 请求体错误映射：脏 JSON / 超限 / 原始类型');
+  /* 用 /api/ai/prompt/chat：登录可选鉴权、限额 64KB、不在限流表里 ——
+     换成登录接口会被「12 次/分钟」挡成 429，测不到想测的分支。 */
+  const BODY_PROBE = '/api/ai/prompt/chat';
+  const dirtyJson = await req(BODY_PROBE, { method: 'POST', body: '{name:"oops"' });
+  ok('脏 JSON 回 400 而不是 500', dirtyJson.status === 400 && /合法 JSON/.test(dirtyJson.text), dirtyJson.status + ' ' + dirtyJson.text.slice(0, 80));
+  ok('4xx 不带 reqId 噪音', !/reqId/.test(dirtyJson.text), dirtyJson.text.slice(0, 80));
+  const primitiveBody = await req(BODY_PROBE, { method: 'POST', body: 'null' });
+  ok('null 请求体回 400', primitiveBody.status === 400 && /JSON 对象/.test(primitiveBody.text), primitiveBody.status + ' ' + primitiveBody.text.slice(0, 80));
+  /* 64KB 上限：给 100KB，应该拿到 413 的响应体（而不是被直接掐断看到 ECONNRESET） */
+  const oversized = await req(BODY_PROBE, { method: 'POST', body: JSON.stringify({ problemCode: 'a'.repeat(100 * 1024) }) });
+  ok('超限回 413 且带上限说明', oversized.status === 413 && /请求体过大/.test(oversized.text), oversized.status + ' ' + oversized.text.slice(0, 80));
+  const noRoute = await req('/api/no-such-endpoint');
+  ok('未命中接口仍回 404', noRoute.status === 404 && noRoute.json && noRoute.json.error === '接口不存在', noRoute.status + ' ' + noRoute.text.slice(0, 80));
+  /* 正常的 JSON 仍然通得过（护栏不能把接口本身拦死） */
+  const okBody = await req(BODY_PROBE, { method: 'POST', body: JSON.stringify({ problemCode: 'HS1001' }) });
+  ok('正常请求体不受影响', okBody.status === 200 && !!okBody.json && okBody.json.ok === true, okBody.status + ' ' + okBody.text.slice(0, 80));
+
+  console.log('\n[20] 期末突击：科目包 / 判分 / 薄弱分析');
   const spPacks = await req('/api/sprint/packs');
   /* 突击包已下线时（data/subjects 为空）整段跳过：接口仍可访问，但没有包可校验。
      数据放回后自动恢复全部用例。 */

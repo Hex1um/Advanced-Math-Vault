@@ -75,7 +75,9 @@
     }
   ];
 
+  /* 与 mathkey.js 同一条约定：优先用 Md.esc，本地兜底只为单独加载时不崩 */
   function esc(s) {
+    if (window.Md && typeof window.Md.esc === 'function') return window.Md.esc(s);
     return String(s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });

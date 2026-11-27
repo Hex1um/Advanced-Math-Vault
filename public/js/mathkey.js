@@ -393,7 +393,10 @@
     return { el: wrap, insert: function (tpl) { insert(ta, tpl); } };
   }
 
+  /* 转义统一走 Md.esc（md.js 先加载），本地留一份等价兜底：
+     两份实现漂移过一次（字符集不同），兜底也只为了脚本被单独引入时不至于崩。 */
   function escapeHtml(s) {
+    if (window.Md && typeof window.Md.esc === 'function') return window.Md.esc(s);
     return String(s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });

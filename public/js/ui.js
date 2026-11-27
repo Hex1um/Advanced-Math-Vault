@@ -107,6 +107,9 @@
       + '<div class="modal-body"></div>'
       + '</div>';
     const body = mask.querySelector('.modal-body');
+    /* 安全契约：opts.body 传字符串时按「已安全的 HTML」直接插入（标题/副标题由 ESC 处理）。
+       调用方必须自己过 Md.esc 转义所有用户内容，或者干脆传 DOM 节点 —— 传节点是更安全的写法。
+       这里不做二次转义，是因为调用方大量传入带标签的模板串，转义会把弹窗结构打坏。 */
     if (typeof opts.body === 'string') body.innerHTML = opts.body;
     else if (opts.body) body.appendChild(opts.body);
     root.appendChild(mask);

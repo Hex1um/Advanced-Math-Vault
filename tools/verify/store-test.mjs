@@ -4,9 +4,16 @@
  *
  *   node tools/verify/store-test.mjs
  *
- * 覆盖的是「Proxy 变更追踪」这套最容易出错的地方：
- * 改字段、push 新行、改嵌套数组、改嵌套对象、改映射表（sessions/emailCodes）、
- * 整体重新赋值数组、改 kv（settings/meta），每种都写盘后重新打开库比对。
+ * 覆盖的是「Proxy 变更追踪」这套最容易出错的地方。
+ * 断言按 lib/store.js 文件头的 8 条不变量分组 —— 读不懂那段注释时，先看这里哪条红了：
+ *
+ *   不变量 #2 wrap 幂等          → [2] 同一对象重复取代理仍是同一个
+ *   不变量 #3 行级定位           → [2] 改字段只写 1 行 / [3] 整体重新赋值
+ *   不变量 #4 数组增删按 key 差集 → [5] push / splice 只动 1 行
+ *   不变量 #5 认不出主键就重建    → [5] delete arr[i] 精确删行
+ *   不变量 #6 映射表带 entryKey   → [5] sessions[token].exp 已落盘
+ *   不变量 #7 kv 粗粒度覆盖       → [2] settings / meta 修改已落盘
+ *   不变量 #1/#8 代理是唯一入口 + 落盘结算 → [1] 全量导入、[4] 行数对账
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -68,7 +75,7 @@ ok('过期会话不重载', !loaded.sessions.dead && !!loaded.sessions.live);
 ok('kv(settings) 重载', loaded.settings.llm.model === 'deepseek-chat');
 ok('kv(meta) 重载', loaded.meta.seq === 1004);
 
-console.log('\n[2] 通过 Proxy 做增量修改');
+console.log('\n[2] 不变量 #2/#3/#7：通过 Proxy 做增量修改（改字段 / 嵌套 / kv）');
 let db = store.attach(loaded);
 db.problems[0].title = '题一（改名）';
 db.problems.push({ code: 'HS4', title: '题四', statement: '新增', mainTag: '级数', tags: ['幂级数'], difficulty: 5, status: 'approved' });
@@ -95,7 +102,7 @@ ok('settings 修改已落盘', re.settings.llm.model === 'deepseek-reasoner');
 ok('meta 修改已落盘', re.meta.seq === 2000);
 ok('feedback 状态已落盘', re.feedbacks[0].status === 'closed');
 
-console.log('\n[3] 整体重新赋值与删除');
+console.log('\n[3] 不变量 #3：整体重新赋值数组（按 key 差集结算）');
 db = store.attach(re);
 db.posts = db.posts.filter((p) => p.id !== 1);
 db.submissions = [];
@@ -103,7 +110,7 @@ store.save(db);
 re = store.load();
 ok('整体重新赋值后行数正确', re.posts.length === 0 && re.submissions.length === 0);
 
-console.log('\n[4] 行数对账与关闭');
+console.log('\n[4] 不变量 #1/#8：行数对账与关闭（漏记会在这里暴露）');
 store.reconcile(re);
 const stats = store.stats();
 ok('对账后行数与内容一致', stats.counts.problems === 4 && stats.counts.posts === 0, JSON.stringify(stats.counts));
@@ -116,7 +123,7 @@ ok('关闭后 sqlite 文件存在', fs.existsSync(SQLITE_FILE));
    2) push 一条新数据不该整表重建（wrote 必须等于 1，不是 6400+）。
    3) 表里有过期会话时，连续保存不能每次对账都误触发全库重建。
    4) 嵌套数组（hints）内元素的增删要能落盘。 */
-console.log('\n[5] P0-2 回归：Map 主键 / 精确增删 / 对账口径');
+console.log('\n[5] 不变量 #4/#5/#6：Map 主键 / 精确增删 / 对账口径');
 const TMP2 = path.join(ROOT, 'data', '.store-test2');
 const JSON2 = path.join(TMP2, 'db.json');
 const SQLITE2 = path.join(TMP2, 'db.sqlite');

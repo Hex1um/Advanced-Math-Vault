@@ -54,11 +54,10 @@ const useEnv = forceEnv || (!FILE_CFG.apiBase && !!envBase);
 const API_BASE = (useEnv ? (envBase || FILE_CFG.apiBase) : FILE_CFG.apiBase) || prev.apiBase || 'https://math-vault-10141.app.workbuddy.host';
 const SITE_NAME = process.env.SITE_NAME || FILE_CFG.siteName || prev.siteName || '数海晴岸';
 
-/* 静态模式：public/data/manifest.json 存在时，GitHub Pages 直接读自带的数据包，
-   不再需要后端地址与分享码（apiBase / sharecode 留空）。
-   想回到「前端 + 后端实例」的老形态，删掉 public/data 再构建即可。 */
+/* 静态模式：public/data/manifest.json 存在时，Pages 直接读自带数据包，
+   不再需要后端地址与分享码。删掉 public/data 再构建即回到「前端 + 实例」形态。 */
 const STATIC_PACK = fs.existsSync(path.join(SRC, 'data', 'manifest.json'));
-const SHARECODE = STATIC_PACK ? '' : ((useEnv ? (envCode || FILE_CFG.sharecode) : FILE_CFG.sharecode) || prev.sharecode || '');
+const SHARECODE = (useEnv ? (envCode || FILE_CFG.sharecode) : FILE_CFG.sharecode) || prev.sharecode || '';
 if (!SHARECODE && !STATIC_PACK) {
   console.error('缺少 SHARECODE：deploy.config.json 里没有，环境变量也没有（FORCE_BACKEND_ENV=1 时才用 env）。');
   process.exit(2);
@@ -175,15 +174,14 @@ copyDir(SRC, OUT);
 /* canonicalBase = 对外的主链接（github.io）。后端域名只用来调接口，
    分享/复制链接一律拼这个，否则用户会拿到带 sharecode 的后端地址。 */
 const CANONICAL = (FILE_CFG && FILE_CFG.canonicalBase) || process.env.CANONICAL_BASE || '';
-const API_BASE_OUT = STATIC_PACK ? '' : API_BASE;
 
 fs.writeFileSync(path.join(OUT, 'js', 'config.js'), `/* 由 tools/ops/build-pages.mjs 生成：GitHub Pages 上指到后端 */
 window.MV_CONFIG = {
-  apiBase: ${JSON.stringify(API_BASE_OUT)},
-  sharecode: ${JSON.stringify(SHARECODE)},
+  apiBase: ${JSON.stringify(STATIC_PACK ? '' : API_BASE)},
+  sharecode: ${JSON.stringify(STATIC_PACK ? '' : SHARECODE)},
   siteName: ${JSON.stringify(SITE_NAME)},
-  canonicalBase: ${JSON.stringify(CANONICAL)},
-  staticData: ${JSON.stringify(STATIC_PACK)}
+  staticData: ${JSON.stringify(STATIC_PACK)},
+  canonicalBase: ${JSON.stringify(CANONICAL)}
 };
 `, 'utf8');
 
