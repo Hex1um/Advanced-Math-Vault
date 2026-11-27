@@ -369,8 +369,12 @@ npm run test:sqlite                                # 全链路冒烟（SQLite �
 ## 测试
 
 ```bash
-npm test                             # 143 项断言（JSON 引擎）：注册/改密/审核/做题/AI/论坛/两级标签/权限与安全
-npm run test:sqlite                  # 同一套断言，跑在 SQLite 引擎上
+npm test                             # 冒烟 190 项断言 + 全部门禁（CI 跑的就是这条；本地要快用 test:quick）
+npm run test:quick                   # 只跑冒烟（JSON 引擎）：注册/改密/审核/做题/AI/论坛/两级标签/权限与安全
+npm run test:sqlite                  # 同一套冒烟断言，跑在 SQLite 引擎上
+npm run check:all                    # 门禁合集：lint + 7 个内容/前端门禁 + 判题 fuzz（一条命令跑完）
+npm run lint                         # 零依赖 lint：no-var / eqeqeq（放行 == null）/ 全量语法检查
+npm run check:fuzz                   # 判题引擎 fuzz：超长、超深括号、控制字符、400 组随机输入
 npm run check:store                  # 存储层：导入、增量落盘、重载一致性（32 项，含 Map 主键/精确增删/对账口径）
 npm run check:mail                   # 邮件通道（本地假 SMTP）
 npm run check:env                    # .env 解析与「不覆盖已有变量」
@@ -426,6 +430,18 @@ CI 见 `.github/workflows/smoke.yml`：push / PR 到 `main` 自动跑上面这�
 | `ALLOW_ORIGINS=https://hex1um.github.io` | 默认 `*`，任何站点都能带凭据调用接口 |
 
 `TRUST_PROXY` 只在「最外层就是自己的代理」时开：`clientIp()` 依赖 `X-Forwarded-For` 首段，代理没覆盖写这个头时，客户端可以伪造它换限流桶。启动日志与 `/api/health` 都会提示当前状态；管理员在「审核后台 → 运行状态」里能看到完整摘要与告警列表。
+
+### 限流的三个已知盲区（多实例部署前务必看）
+
+内置限流是**进程内内存计数**，用途是「挡住手滑和脚本」，不是抗 DDoS：
+
+| 盲区 | 表现 | 应对 |
+|---|---|---|
+| 只管 POST | 刷 `/api/problems` 列表与详情（GET）没有任何配额 | 由反代层按 IP 做粗粒度 QPS 限制 |
+| 计数在进程内存里 | 起两个实例 / 容器横向扩容，配额直接翻倍；重启清零 | 多实例时把限流交给反代或网关（nginx `limit_req`、云 WAF） |
+| 未登录用户按 IP 分桶 | NAT / 校园网出口后面的所有用户共享一份额度 | 部署 `TRUST_PROXY=1` 并让代理透传真实 IP |
+
+接口级的精确额度（登录 12 次/分、AI 40 次/10 分等）写在 `lib/core.js` 的 `RATE_RULES`，改那里即可。
 
 托管平台没有环境变量面板时，用部署目录里的 `.env`（`server.js` 启动会读，且不覆盖平台已有变量）：
 

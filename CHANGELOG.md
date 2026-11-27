@@ -1,3 +1,101 @@
+## v3.11.0 — 2026-11-27
+
+按 2026-11-27 的代码评审（v3.10.7 基线）做的一轮**鲁棒性 + 门禁**整改。
+没有新功能，改的全是「出错时会发生什么」以及「改了代码谁来拦」。
+
+### 一、修掉两个可复现缺陷
+
+**1. 客户端脏 JSON / 超大请求体会变成 500**
+
+`readBody()` 以前 reject 一个裸 `Error`，而 44 处路由调用几乎都没有 try/catch，
+异常一路冒到 `fail500`：用户提交格式错误的 body 得到「服务器内部错误 + reqId」，
+服务端还记一条假 error 日志；请求体过大本该 413，实际也是 500。
+
+现在：
+
+- 新增 `HttpError(status, message)`，`readBody` 抛 400（非法 JSON / 非对象）/ 413（超限）；
+- `server.js` 的 `handleApiError` 统一翻译：4xx 原样回显，其余仍走 `fail500` 脱敏；
+- `readBody` 加 `settled` 一次性结算，`reject` 之后 `end` / `error` 再触发不会重复结算；
+- 超限改成 **先回 413 再断连接**：`req.pause()` 兜住上传，响应 `finish` 之后才 `destroy`，
+  客户端不会再只看到 `ECONNRESET`（以前连「为什么被拒」都拿不到）；
+- 顺手挡掉 `null` / 数字 / 字符串这类「合法 JSON 但不是对象」的 body——
+  它们在路由层取 `body.name` 会变成 TypeError，又是一次 500。
+
+**2. `streamLLM` 静默吞掉 `onDelta` 的异常**
+
+`push(c)` 原来在 `try { JSON.parse(data) }` 里，catch 只重抛「返回异常内容」开头的错误，
+其余异常（包括调用方渲染回调抛的）被无声吞掉，流还继续跑，前端只看到「话说到一半停了」。
+现在只把 `JSON.parse` 包进 try（SSE 分片截断可以丢），`push()` 抛的异常一律向上传播。
+
+### 二、判题引擎加了输入护栏
+
+`lib/math-equiv.js` 是递归下降解析 + 递归求值，`lib/physics-equiv.js` 是一串全局正则替换，
+两者直接吃**用户提交的答案**：几千层 `((((...` 能打爆调用栈，几万字符能让正则跑很久，
+最后都落成 500。
+
+- 输入长度上限 2000（两个引擎共用同一口径），嵌套深度上限 64 层；
+- 超限返回结构化 reason（`too_long` / `too_deep`），与「学生写错」的 `parse_*_failed` 分开——
+  前者不需要 AI 兜底，也不需要重试；
+- 物理判题遇到超长作答降级为 `deferred`，附带「上限多少字符」的提示，而不是判错；
+- 新增 `npm run check:fuzz`：900 层括号、2401 字符、控制字符、孤立代理项、400 组固定种子随机输入，
+  断言「不抛异常 + 不误伤正常答案 + 单组 < 50ms」。实测 400 组共 21ms。
+
+### 三、门禁真正进了 CI
+
+`check:katex` / `check:dedup` / **`check:leak`** / `check:components` / `check:fsrs` /
+`check:sprint` / `check:daily` 这些脚本以前只写在 `package.json` 里，CI 从来没跑过。
+「写了不跑的门禁等于没有」，尤其 `check:leak` 直接关系到标准答案会不会漏给未解锁用户。
+
+- 聚合脚本 `npm run check:gates`（7 个内容/前端门禁 + fuzz），`npm run check:all`（lint + gates）；
+- **挂在 `npm test` 上**：`test` = `test:quick`（原冒烟）+ `check:all`，`test:quick` 保留「只冒烟」的快路径。
+  CI 的 `smoke.yml` 本来就跑 `npm test`，所以这些门禁立刻生效，不需要改工作流文件
+  （改 `.github/workflows/*` 需要带 `workflow` scope 的凭据，当前 push 用的 OAuth App 没有；
+  将来给 CI 单独加一步只是更易读，不是必需）；
+- 新增零依赖 lint（`npm run lint`，`tools/verify/lint.mjs`）：
+  `no-var`、`eqeqeq`（放行 `== null`）、以及**全量 `node --check` 语法检查**
+  （`public/js/*` 以前只有浏览器能发现语法错）。不上 ESLint 是为了保住「clone 即跑、零 npm install」。
+  实现上先做词法过滤（注释/字符串/正则/模板串抹成空格并保留换行），
+  所以 base64 里的 `==`、正则里的引号、注释里的 `var` 都不会误报。
+
+### 四、可读性 / 简洁性
+
+- **魔法数字集中**：`lib/config.js` 新增 `TUNING`（会话时长、落盘防抖、去重表上限、
+  等级曲线、scrypt 长度、LLM 温度），都可用环境变量覆盖，改参数不用再全库搜数字；
+- **补目录 fsync**：`writeDbFile` 之前只 fsync 文件、rename 后就完事，
+  极端断电可能留下「tmp 里有新数据、db.json 还是旧名」。现在 rename 后 fsync 一次目录
+  （Windows 不支持就忽略）；
+- **三份 HTML 转义合并**：`md.js` 的 `esc` 补上单引号转义，`mathkey.js` / `phys-constants.js`
+  改为委托 `Md.esc`，只在单独加载时保留等价兜底；
+- **消除变量遮蔽**：`routes/problems.js` 里 `method`（HTTP 方法）与 `method`（物理思想筛选项）
+  同名，现在分成 `httpMethod` / `methodFilter`；
+- `unhandledRejection` 加计数器：累计到阈值（默认 50）升一级提示，
+  避免「一个漏了 catch 的 await」刷满日志而没人看；
+- 会话 Cookie 加 `Priority=High`；`ui.js` 的 `modal.body` 写清「传字符串即视为已安全 HTML」的契约；
+- `lib/ai.js` 末尾一条悬空的段落注释（下面没有任何代码）删掉。
+
+### 五、README 补了限流的三个盲区
+
+内置限流是进程内内存计数：只管 POST、多实例即失效、未登录按 IP 分桶（NAT 后共享额度）。
+这三条以前只存在于代码里，现在写进「上线配置」章节，并给出「多实例时交给反代/WAF」的处置建议。
+
+### 验证
+
+- `npm test`（JSON 引擎）**190 通过 / 0 失败**，`npm run test:sqlite` **190 通过 / 0 失败**；
+- 新增 [19] 请求体错误映射断言：脏 JSON → 400、`null` → 400、超限 → 413（带响应体）、
+  未命中 → 404、正常请求不受影响；
+- `npm run check:all` 全绿（lint 113 个文件 0 违规 0 语法错误）；
+- `check:physics-equiv` 106 项、`check:fuzz` 30 项、`check:store` 48 项、`check:md` 26 项、
+  `check:components` 20 项、`check:fsrs` 24 项、`check:sprint` 91 项、`check:daily` 12 项全通过。
+
+### 还没做（下一轮）
+
+- `lib/core.js` 仍有 2054 行（`return { ... }` 导出表占 450 行），按 auth / problem-normalize /
+  judge / gamify / lifecycle 拆分是纯机械工作但影响面大，单独一轮做更稳；
+- `lib/store.js` 的 Proxy 脏跟踪建议把「不变量清单」写进文件头，并把 `store-test` 的断言按不变量命名；
+- `tools/archive/` 的 7 个一次性脚本（audit-kaoyan、retitle-hust…）建议 `git rm`，git 历史即归档；
+- 49 个 npm scripts 可收敛成 5 组（`test` / `test:quick` / `lint` / `import` / `ops`），
+  属于破坏性改名，需要同步改 README 与 CI，等一次专门的整理。
+
 ## v3.10.8 — 2026-11-27
 
 两件事：**标签实时更新**、**主链接固定为 github.io**（在 v3.10.7「线上回到 10141」基础上叠加）。

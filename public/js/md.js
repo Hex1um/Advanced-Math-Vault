@@ -11,12 +11,16 @@
 
   const CTRL = /[\u0000-\u001F\u007F]/g;
 
+  /* 全站唯一的 HTML 转义实现（原本 mathkey.js / phys-constants.js 各抄了一份，
+     字符集还不一致 —— 只转 & < > " 的那份用在单引号属性里会漏）。
+     现在两处都委托到这里，见各自文件里的 escapeHtml。 */
   function esc(s) {
     return String(s)
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
   }
 
   /* 反解 esc() 造成的实体，只为判断协议；渲染时仍走 esc/safe 后的值 */
