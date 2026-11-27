@@ -6,11 +6,16 @@
      断网时返回最近看过的题面 —— 教室/地铁里也能翻错题
    - 其余 /api/（登录态、提交、判题）：一律放行不缓存，避免串号与脏数据
    版本号变了就换缓存名，activate 时清掉旧缓存，避免 old ?v= 资源永久驻留。 */
-const VERSION = 'v3.9.1';
+const VERSION = 'v3.9.2';
 const STATIC_CACHE = 'mv-static-' + VERSION;
 const RUNTIME_CACHE = 'mv-runtime-' + VERSION;
-const API_CACHE = 'mv-api-readonly-v1';
+/* 接口缓存也带上版本号：以前固定叫 mv-api-readonly-v1，换后端之后
+   旧的 /api/meta（没有 features.physics）会在断网/请求失败时被回放，
+   表现就是「顶栏永远不出物理入口」。发版即换名，activate 时清掉旧的。 */
+const API_CACHE = 'mv-api-readonly-' + VERSION;
 const API_CACHE_MAX = 100;
+/* 离线兜底永远用这一个键，避免「停在 /#/problem/PH123 时离线打不开」 */
+const INDEX_URL = new URL('./index.html', self.location.href).href;
 const PRECACHE = [
   './index.html', './assets/style.css', './js/app.js', './js/api.js',
   './js/draft-store.js', './js/heatmap.js', './manifest.json', './assets/icon.svg'
@@ -90,12 +95,21 @@ self.addEventListener('fetch', function (event) {
   // 页面导航：网络优先（保证拿到新版本），断网回退缓存
   if (req.mode === 'navigate') {
     event.respondWith(
-      fetch(req).then(function (res) {
-        const copy = res.clone();
-        caches.open(RUNTIME_CACHE).then(function (c) { c.put(req, copy); }).catch(function () {});
+      /* cache:'no-store' 是关键：GitHub Pages 给 HTML 也带分钟级 max-age，
+         普通 fetch 会命中浏览器 HTTP 缓存，于是「发布成功但用户还是旧页面」。
+         这里显式绕过 HTTP 缓存，每次都问服务器要真的最新外壳。 */
+      fetch(req, { cache: 'no-store' }).then(function (res) {
+        const forIndex = res.clone();
+        const forReq = res.clone();
+        caches.open(RUNTIME_CACHE).then(function (c) {
+          /* 统一以 index.html 为键存一份，离线时不用管用户停在哪个地址 */
+          return c.put(INDEX_URL, forIndex).then(function () { return c.put(req, forReq); });
+        }).catch(function () {});
         return res;
       }).catch(function () {
-        return caches.match(req).then(function (hit) { return hit || caches.match('./index.html'); });
+        return caches.match(INDEX_URL).then(function (hit) {
+          return hit || caches.match(req);
+        });
       })
     );
     return;

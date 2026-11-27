@@ -150,6 +150,18 @@ try {
   ok('meta 返回主/子标签树', Array.isArray(tree.json.tagTree) && tree.json.tagTree.length > 0
     && tree.json.tagTree.every((m) => m.name && Array.isArray(m.children)));
 
+  /* 脏分页参数：以前 ?page=abc / ?size=xyz 会算成 NaN，slice(NaN) 返回空列表，
+     用户看到的是「题库空了」；?size 不封顶还能一次拉走整库。 */
+  const dirty = await req('/api/problems?page=abc&size=xyz');
+  ok('脏分页参数回落默认值而不是空列表',
+    dirty.json.ok && dirty.json.page === 1 && dirty.json.size === 20 && dirty.json.items.length > 0,
+    JSON.stringify({ page: dirty.json.page, size: dirty.json.size, n: (dirty.json.items || []).length }));
+  const huge = await req('/api/problems?size=100000');
+  ok('size 被夹到上限', huge.json.size === 50 && huge.json.items.length <= 50, String(huge.json.size));
+  const forumDirty = await req('/api/forum?page=zzz&size=1e9');
+  ok('答疑列表脏参数同样被夹住',
+    forumDirty.json.ok !== false && (forumDirty.json.items || []).length <= 50);
+
   console.log('\n[4] 题目详情 / 看答案 / 标记完成得经验');
   const detail = await req('/api/problems/HS1001');
   ok('详情可打开', detail.json.ok && detail.json.problem.code === 'HS1001');

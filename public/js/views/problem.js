@@ -448,6 +448,13 @@
 
   Views.problem = function (el, params) {
     const code = String(params.code || '').toUpperCase();
+    /* 直达链接（别人分享的 PHxxxx / HSxxxx）可能和本页当前学科不一致：
+       不先对齐，顶栏会一直写「高等数学」，点回「题库」也进的是数学列表。
+       编号前缀是确定的（PH=物理、HS=数学），用它判断比等详情返回更早、更省一次请求。 */
+    const wantSubject = /^PH/.test(code) ? 'physics' : (/^HS/.test(code) ? 'math' : '');
+    if (wantSubject && wantSubject !== window.API.State.subject) {
+      window.API.State.setSubject(wantSubject, { silent: true, noRender: true });
+    }
     el.innerHTML = '<div class="loading-row"><span class="spinner"></span>正在打开题目 ' + window.Md.esc(code) + '…</div>';
 
     window.API.get('/api/problems/' + code).then(function (data) {

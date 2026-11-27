@@ -5,6 +5,17 @@
   const St = window.API.State;
   let cleanup = null;
 
+  /* 自己的版本号直接从 <script src="app.js?v=x.y.z"> 里取，不再手工同步。
+     Service Worker 用同一个值注册，这样每次发版 sw.js 的地址都会变，
+     浏览器才会把它当成新脚本去装，而不是等 24 小时后再检查。 */
+  const BUILD = (function () {
+    try {
+      const src = (document.currentScript && document.currentScript.src) || '';
+      const m = src.match(/[?&]v=([0-9A-Za-z._-]+)/);
+      return m ? m[1] : '';
+    } catch (e) { return ''; }
+  })();
+
   function parseRoute() {
     const raw = (location.hash || '').replace(/^#/, '') || '/problems';
     const qi = raw.indexOf('?');
@@ -128,7 +139,9 @@
     St.subscribe('subject:changed', function (d) {
       paintSubjectChrome();
       try { window.UI.renderHeader(); } catch (e) {}
-      render();
+      /* 视图自己发起的纠正（如题目页按编号前缀对齐学科）不再重渲染，
+         否则会把发起方正在画的那一屏打断 */
+      if (!(d && d.noRender)) render();
       if (!(d && d.silent)) window.UI.toast('已切换到' + d.info.label, 'ok');
     });
     paintSubjectChrome();
@@ -171,9 +184,12 @@
   }
 
   /* 并发去重：applyMeta 的变化会触发 refreshMeta，若不加锁，
-     多路同时到达时可能叠成雪崩式请求（参见 api.js 里 auth:changed 的注释）。 */
+     多路同时到达时可能叠成雪崩式请求（参见 api.js 里 auth:changed 的注释）。
+     失败时退避重试两次：后端冷启动、弱网、切网瞬间都会让第一次请求直接失败，
+     而 meta 拿不到就等于「学科开关不出现、标签树空白」，用户看到的是「物理没了」。 */
   let metaInflight = null;
-  async function refreshMeta() {
+  async function refreshMeta(attempt) {
+    const n = Number(attempt) || 0;
     if (metaInflight) return metaInflight;
     metaInflight = (async function () {
       try {
@@ -183,7 +199,16 @@
         applyFeatureFlags(meta);
         applySubjectAvailability(meta);
       } catch (e) {
-        console.error('[app] meta 加载失败', e);
+        console.error('[app] meta 加载失败（第 ' + (n + 1) + ' 次）', e);
+        if (n < 2) {
+          setTimeout(function () { refreshMeta(n + 1); }, n === 0 ? 1500 : 4000);
+        } else if (!readMetaCache()) {
+          try {
+            if (window.UI && window.UI.toast) {
+              window.UI.toast('题库信息没加载出来：检查网络后刷新页面', 'err');
+            }
+          } catch (_) {}
+        }
       }
     })();
     try { await metaInflight; } finally { metaInflight = null; }
@@ -258,12 +283,26 @@
 
   initTheme();
 
-  /* PWA：只在 https 或 localhost 注册。失败不影响使用（file:// 与内网 http 都会抛）。 */
+  /* PWA：只在 https 或 localhost 注册。失败不影响使用（file:// 与内网 http 都会抛）。
+     注册地址带版本号：发版后 sw.js?v= 变了，浏览器立刻按「新脚本」处理（skipWaiting +
+     clients.claim），旧缓存随之清掉；否则用户可能几天都还停在旧外壳上。 */
   if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+    const hadController = !!navigator.serviceWorker.controller;
     window.addEventListener('load', function () {
-      navigator.serviceWorker.register('./sw.js').catch(function (e) {
+      navigator.serviceWorker.register('./sw.js' + (BUILD ? '?v=' + BUILD : '')).catch(function (e) {
         console.warn('[pwa] Service Worker 注册失败（不影响使用）', e && e.message);
       });
+    });
+    /* 新 SW 接管后自动刷一次页面。GitHub Pages 的 HTML 有分钟级 HTTP 缓存，
+       不做这一步，用户不硬刷就会一直看到旧页面（「顶栏没有物理入口」多由此而来）。
+       只刷一次：60 秒内重复触发直接跳过，首次安装（原本没有 controller）也不刷，避免循环刷新。 */
+    navigator.serviceWorker.addEventListener('controllerchange', function () {
+      if (!hadController) return;
+      let last = 0;
+      try { last = Number(sessionStorage.getItem('mv_sw_reload_at') || 0); } catch (e) {}
+      if (Date.now() - last < 60000) return;
+      try { sessionStorage.setItem('mv_sw_reload_at', String(Date.now())); } catch (e) {}
+      location.reload();
     });
   }
 

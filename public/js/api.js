@@ -88,7 +88,15 @@
       State.tagTree = trees[key] || [];
       State.tags = State.tagTree.reduce(function (arr, m) { return arr.concat(m.children || []); }, []);
     }
-    State.emit('subject:changed', { subject: key, info: SUBJECT_META[key], silent: !!(opts && opts.silent) });
+    State.emit('subject:changed', {
+      subject: key,
+      info: SUBJECT_META[key],
+      silent: !!(opts && opts.silent),
+      /* noRender：只换学科状态、不要重渲染当前视图。
+         题目页按编号前缀纠正学科时必须用它，否则会把自己的这次渲染再打断一次，
+         白白多打一个题目详情请求。 */
+      noRender: !!(opts && opts.noRender)
+    });
   };
 
   /* ------------------------------------------------------------- 事件总线

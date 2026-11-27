@@ -10,7 +10,7 @@
 'use strict';
 
 module.exports = function registerForumRoutes(router, ctx) {
-  const { send, fail, readBody, clientIp, parseCookies, isHttps } = ctx.http;
+  const { send, fail, readBody, clientIp, parseCookies, isHttps, intParam } = ctx.http;
   const {
     saveDb,
     bumpView,
@@ -32,8 +32,9 @@ module.exports = function registerForumRoutes(router, ctx) {
     const db = ctx.db;
   /* ---- 答疑区 ---- */
   if (pathname === '/api/forum' && method === 'GET') {
-    const page = Math.max(1, Number(query.page || 1));
-    const size = Number(query.size || 12);
+    /* size 以前完全没封顶：?size=1e9 会把全站帖子一次性塞进响应 */
+    const page = intParam(query.page, 1, 1, 100000);
+    const size = intParam(query.size, 12, 1, 50);
     const q = String(query.q || '').trim().toLowerCase();
     const codeFilter = String(query.code || '').trim().toUpperCase();
     let list = db.posts.slice();

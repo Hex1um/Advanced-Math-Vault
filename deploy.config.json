@@ -1,5 +1,5 @@
 {
-  "_note": "前端构建用的后端地址与访问码。v3.9.0 起后端迁移到 math-vault-10141-52003（8763 题：数学 6562 + 物理 2201）；v3.9.1 起接口不再下发 refAnswer（标准答案只能在交卷或点「看答案」后拿到）。旧的 math-vault-10141 只读保留。改完这里记得同时动一下会触发 pages.yml 的路径（如 package.json 版本号）。",
+  "_note": "前端构建用的后端地址与访问码。v3.9.0 起后端迁移到 math-vault-10141-52003（8763 题：数学 6562 + 物理 2201）；v3.9.1 起接口不再下发 refAnswer（标准答案只能在交卷或点「看答案」后拿到）；v3.9.2 起前端发版会自更新外壳（SW 带版本注册 + 导航绕过 HTTP 缓存），不再依赖用户硬刷。旧的 math-vault-10141 只读保留。改完这里记得同时动一下会触发 pages.yml 的路径（如 package.json 版本号）。",
   "apiBase": "https://math-vault-10141-52003.app.workbuddy.host",
   "sharecode": "YXHMN5BXHA",
   "siteName": "数海晴岸"

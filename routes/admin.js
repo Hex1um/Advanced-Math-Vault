@@ -10,7 +10,7 @@
 'use strict';
 
 module.exports = function registerAdminRoutes(router, ctx) {
-  const { send, fail, readBody, clientIp, parseCookies, isHttps } = ctx.http;
+  const { send, fail, readBody, clientIp, parseCookies, isHttps, intParam } = ctx.http;
   const {
     store,
     tagTax,
@@ -249,7 +249,7 @@ function deleteProblemCascade(code, adminName) {
     }
 
     if (pathname === '/api/admin/submissions' && method === 'GET') {
-      const limit = Math.min(200, Number(query.limit || 60));
+      const limit = intParam(query.limit, 60, 1, 200);
       const items = db.submissions.slice(-limit).reverse().map((x) => {
         const pr = db.problems.find((pp) => pp.code === x.code);
         return Object.assign({}, x, {

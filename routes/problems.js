@@ -6,6 +6,7 @@
  * 依赖改为从 ctx 上取（ctx.db / ctx.services / ctx.http），不再逐个透传 28 个参数。
  */
 const { isMathEquivalent } = require('../lib/math-equiv');
+const { intParam } = require('../lib/http');
 const tagTax = require('../tag-taxonomy');
 const physics = require('../lib/physics-equiv');
 
@@ -50,8 +51,8 @@ function createProblemsRoutes(deps) {
     const level = String(query.level || '').trim();
     const status = String(query.status || 'all');
     const sort = String(query.sort || 'code');
-    const page = Math.max(1, Number(query.page || 1));
-    const size = Math.max(5, Math.min(50, Number(query.size || 20)));
+    const page = intParam(query.page, 1, 1, 100000);
+    const size = intParam(query.size, 20, 5, 50);
     /* 学科筛选：不传 → math（与 v2.6.0 行为逐字节一致，旧前端不受影响）；
        subject=all 只在管理/组卷场景用，普通前端不传。 */
     const subjectRaw = String(query.subject || '').toLowerCase();

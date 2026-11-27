@@ -12,7 +12,7 @@
 const tagTax = require('../tag-taxonomy');
 
 module.exports = function registerPracticeRoutes(router, ctx) {
-  const { send, fail, readBody, clientIp, parseCookies, isHttps } = ctx.http;
+  const { send, fail, readBody, clientIp, parseCookies, isHttps, intParam } = ctx.http;
   const {
     DIFF_MAX,
     visibleProblem,
@@ -46,8 +46,8 @@ module.exports = function registerPracticeRoutes(router, ctx) {
     const mode = query.mode === 'random' ? 'random' : 'seq';
     const tags = String(query.tags || '').split(',').map((x) => x.trim()).filter(Boolean);
     const mainTag = String(query.main || '').trim();
-    const dmin = Number(query.dmin || 1);
-    const dmax = Number(query.dmax || DIFF_MAX);
+    const dmin = intParam(query.dmin, 1, 1, 5);
+    const dmax = intParam(query.dmax, DIFF_MAX, 1, 5);
     const focus = String(query.focus || '').trim();
     /* 学科：不传按数学；每日一积（/api/daily）保持纯数学不动 */
     const subject = tagTax.subjectOf(query.subject);
