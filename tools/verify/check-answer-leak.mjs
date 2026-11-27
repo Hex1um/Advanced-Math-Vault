@@ -12,9 +12,25 @@
  *
  *   node tools/verify/check-answer-leak.mjs
  */
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import { createRequire } from 'node:module';
+import { fileURLToPath } from 'node:url';
 
 const require = createRequire(import.meta.url);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.join(__dirname, '..', '..');
+
+/* 没有 data/db.json 时 loadDb 会「建空库并落盘」。若让它落在 data/db.json，
+   后面跑 check:sprint / check:daily 的进程就会拿到一个只有 10 道种子题的假库，
+   报出一堆莫名奇妙的失败。改指临时目录，用完删掉。 */
+let TEMP_DB = '';
+if (!process.env.DB_FILE && !fs.existsSync(path.join(ROOT, 'data', 'db.json'))) {
+  TEMP_DB = path.join(os.tmpdir(), 'mv-leak-check-' + process.pid + '.json');
+  process.env.DB_FILE = TEMP_DB;
+}
+
 const createCore = require('../../lib/core.js');
 
 let pass = 0;
@@ -36,9 +52,40 @@ function norm(s) {
 const core = createCore({});
 core.loadDb();          // 读真实题库（只读用途，不做任何写入）
 const db = core.db;
+const isPhysics = (p) => (p.subject || 'math') === 'physics';
 
-const physics = db.problems.filter((p) => (p.subject || 'math') === 'physics' && p.answer);
-const math = db.problems.filter((p) => (p.subject || 'math') !== 'physics' && p.answer);
+let physics = db.problems.filter((p) => isPhysics(p) && p.answer);
+let math = db.problems.filter((p) => !isPhysics(p) && p.answer);
+
+/* CI 上没有 data/db.json（运行时库不进 git），本地新 clone 也没有。
+   这时不能「空跑通过」（等于没检查），也不该直接失败 —— 直接从入库批次文件取样：
+   线上的题本来就来自这些文件，字段结构一致，visibleProblem / fullProblem 只看单个对象。 */
+function loadBatches(wantPhysics, prefix) {
+  const dir = path.join(ROOT, 'data');
+  const out = [];
+  if (!fs.existsSync(dir)) return out;
+  for (const name of fs.readdirSync(dir).sort()) {
+    if (!/^batch-.*\.json$/.test(name)) continue;
+    if (/physics/.test(name) !== wantPhysics) continue;
+    let arr;
+    try { arr = JSON.parse(fs.readFileSync(path.join(dir, name), 'utf8')); } catch (e) { continue; }
+    if (!Array.isArray(arr)) continue;
+    for (const p of arr) {
+      if (!p || !p.answer) continue;
+      const subject = p.subject || (wantPhysics ? 'physics' : 'math');
+      if ((subject === 'physics') !== wantPhysics) continue;
+      out.push(Object.assign({}, p, { code: p.code || prefix + String(out.length + 1).padStart(4, '0') }));
+    }
+  }
+  return out;
+}
+
+if (!physics.length) {
+  physics = loadBatches(true, 'CI-PHY-');
+  console.log('  · 库里没有物理题，改用 data/batch-physics*.json 取样（' + physics.length + ' 题）');
+}
+if (!math.length) math = loadBatches(false, 'CI-MATH-');
+
 ok('库里有物理题可测', physics.length > 0, 'physics=' + physics.length);
 
 if (physics.length) {
@@ -86,4 +133,5 @@ if (math.length) {
 }
 
 console.log('\n  ' + pass + ' pass / ' + fail + ' fail');
+if (TEMP_DB) { try { fs.unlinkSync(TEMP_DB); } catch (e) { /* 已不存在 */ } }
 process.exit(fail ? 1 : 0);
