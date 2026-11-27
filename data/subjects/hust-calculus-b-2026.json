@@ -1,0 +1,2184 @@
+{
+  "id": "hust-calculus-b-2026",
+  "school": "华中科技大学",
+  "schoolShort": "华科",
+  "subject": "微积分（B）",
+  "subjectShort": "微积分B",
+  "year": "2026",
+  "term": "秋季学期",
+  "updatedAt": "2026-11-26",
+  "intro": "按微积分（B）上下册章节拆分考点，题目全部来自题库里的华科历年期中/期末真题（含微积分一与 B 卷），找类似题即命中真题。",
+  "exam": {
+    "durationMin": 120,
+    "totalPoints": 100,
+    "sections": [
+      {
+        "type": "fill",
+        "name": "填空题",
+        "count": 5,
+        "per": 4,
+        "points": 20,
+        "note": "极限、导数、积分各一题"
+      },
+      {
+        "type": "calc",
+        "name": "计算题",
+        "count": 5,
+        "per": 8,
+        "points": 40,
+        "note": "积分、重积分、级数、微分方程"
+      },
+      {
+        "type": "calc",
+        "name": "综合题",
+        "count": 2,
+        "per": 10,
+        "points": 20,
+        "note": "跨章节"
+      },
+      {
+        "type": "proof",
+        "name": "证明题",
+        "count": 2,
+        "per": 10,
+        "points": 20,
+        "note": "中值定理、不等式"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "kind": "真题",
+      "title": "华中科技大学 微积分（一）/（B）历年期中期末卷",
+      "note": "题库内 754 道，含 2024–2026 学年 B 卷"
+    },
+    {
+      "kind": "教材",
+      "title": "《高等数学》（同济版）上下册",
+      "note": "章节顺序与 B 班教学大纲对齐"
+    }
+  ],
+  "chapters": [
+    {
+      "id": "c1",
+      "no": "第一章",
+      "title": "函数、极限与连续",
+      "weight": 5,
+      "summary": "极限计算与连续性判定是整张卷子的地基，期末必考。"
+    },
+    {
+      "id": "c2",
+      "no": "第二章",
+      "title": "导数与微分",
+      "weight": 5,
+      "summary": "求导是送分题，也是后面所有大题的工具，必须零失误。"
+    },
+    {
+      "id": "c3",
+      "no": "第三章",
+      "title": "微分中值定理与导数应用",
+      "weight": 6,
+      "summary": "证明题的主战场：中值定理、泰勒、不等式。"
+    },
+    {
+      "id": "c4",
+      "no": "第四章",
+      "title": "不定积分",
+      "weight": 5,
+      "summary": "换元与分部是两条主线，认出模式比算得快更重要。"
+    },
+    {
+      "id": "c5",
+      "no": "第五章",
+      "title": "定积分及其应用",
+      "weight": 6,
+      "summary": "变限积分求导、对称性、反常积分是期末必考三件套。"
+    },
+    {
+      "id": "c6",
+      "no": "第六章",
+      "title": "向量代数与空间解析几何",
+      "weight": 3,
+      "summary": "公式密集但套路固定，属于必拿分章节。"
+    },
+    {
+      "id": "c7",
+      "no": "第七章",
+      "title": "多元函数微分学",
+      "weight": 5,
+      "summary": "偏导、全微分、复合与隐函数求导，以及条件极值。"
+    },
+    {
+      "id": "c8",
+      "no": "第八章",
+      "title": "重积分",
+      "weight": 5,
+      "summary": "二重积分换序与极坐标是高频计算题。"
+    },
+    {
+      "id": "c9",
+      "no": "第九章",
+      "title": "曲线积分与曲面积分",
+      "weight": 4,
+      "summary": "格林公式把曲线积分变成二重积分，是最大的化简手段。"
+    },
+    {
+      "id": "c10",
+      "no": "第十章",
+      "title": "无穷级数",
+      "weight": 4,
+      "summary": "判敛与幂级数展开，套路化程度高。"
+    },
+    {
+      "id": "c11",
+      "no": "第十一章",
+      "title": "微分方程",
+      "weight": 3,
+      "summary": "认类型选解法，最后别忘代初值。"
+    },
+    {
+      "id": "c12",
+      "no": "综合",
+      "title": "综合与压轴",
+      "weight": 4,
+      "summary": "跨章节综合题，多为证明或含参讨论。"
+    }
+  ],
+  "points": [
+    {
+      "id": "p1-1",
+      "chapter": "c1",
+      "title": "函数极限的计算",
+      "core": "先判型（0/0、∞/∞、1^∞、∞-∞），再选法：等价无穷小、洛必达、泰勒、夹逼。",
+      "detail": "",
+      "keys": [
+        "等价无穷小",
+        "洛必达",
+        "泰勒"
+      ],
+      "examTypes": [
+        "fill",
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p1-2",
+      "chapter": "c1",
+      "title": "数列极限与单调有界",
+      "core": "数列极限优先用单调有界准则与夹逼；递推数列先证有界再证单调。",
+      "detail": "",
+      "keys": [
+        "单调有界",
+        "夹逼",
+        "递推"
+      ],
+      "examTypes": [
+        "calc",
+        "proof"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p1-3",
+      "chapter": "c1",
+      "title": "无穷小的比较",
+      "core": "记住常用等价：sin x~x、1-cos x~x²/2、ln(1+x)~x、e^x-1~x、(1+x)^a-1~ax。",
+      "detail": "",
+      "keys": [
+        "等价无穷小",
+        "阶"
+      ],
+      "examTypes": [
+        "fill"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p1-4",
+      "chapter": "c1",
+      "title": "连续与间断点",
+      "core": "先看左右极限是否相等，再分类：可去、跳跃、无穷、振荡。",
+      "detail": "",
+      "keys": [
+        "左右极限",
+        "间断点分类"
+      ],
+      "examTypes": [
+        "fill",
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p2-1",
+      "chapter": "c2",
+      "title": "导数定义与可导性",
+      "core": "用定义判可导要算左右导数；分段点、绝对值点、含 |x-a| 的点必查。",
+      "detail": "",
+      "keys": [
+        "左右导数",
+        "分段点"
+      ],
+      "examTypes": [
+        "calc",
+        "proof"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p2-2",
+      "chapter": "c2",
+      "title": "复合函数与高阶求导",
+      "core": "链式法则一层层剥；高阶导先找规律或用莱布尼茨公式。",
+      "detail": "",
+      "keys": [
+        "链式法则",
+        "莱布尼茨公式"
+      ],
+      "examTypes": [
+        "fill",
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p2-3",
+      "chapter": "c2",
+      "title": "隐函数与参数方程求导",
+      "core": "隐函数两边对 x 求导后解 y′；参数方程 dy/dx=(dy/dt)/(dx/dt)。",
+      "detail": "",
+      "keys": [
+        "隐函数",
+        "参数方程",
+        "二阶导"
+      ],
+      "examTypes": [
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p2-4",
+      "chapter": "c2",
+      "title": "微分与近似",
+      "core": "dy=f′(x)dx；近似计算 f(x0+Δx)≈f(x0)+f′(x0)Δx。",
+      "detail": "",
+      "keys": [
+        "微分",
+        "线性近似"
+      ],
+      "examTypes": [
+        "fill"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p3-1",
+      "chapter": "c3",
+      "title": "中值定理与辅助函数",
+      "core": "见到「存在 ξ 使 f′(ξ)=…」先想罗尔：把结论变形为 F′(ξ)=0，再构造 F。",
+      "detail": "",
+      "keys": [
+        "罗尔",
+        "拉格朗日",
+        "柯西",
+        "辅助函数"
+      ],
+      "examTypes": [
+        "proof"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p3-2",
+      "chapter": "c3",
+      "title": "泰勒展开与估值",
+      "core": "选展开点（端点、中点、极值点）与阶数，余项用来估界。",
+      "detail": "",
+      "keys": [
+        "泰勒",
+        "拉格朗日余项",
+        "展开点"
+      ],
+      "examTypes": [
+        "proof",
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p3-3",
+      "chapter": "c3",
+      "title": "函数性态与不等式",
+      "core": "证不等式：移项构造函数、求导判单调、找最值；含双变量先固定一个。",
+      "detail": "",
+      "keys": [
+        "单调性",
+        "最值",
+        "构造"
+      ],
+      "examTypes": [
+        "proof",
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p3-4",
+      "chapter": "c3",
+      "title": "洛必达法则的适用条件",
+      "core": "只有 0/0、∞/∞ 才能直接用；用前必须验证分子分母可导且分母导数不为零。",
+      "detail": "",
+      "keys": [
+        "洛必达",
+        "未定式"
+      ],
+      "examTypes": [
+        "fill",
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p4-1",
+      "chapter": "c4",
+      "title": "基本积分与凑微分",
+      "core": "先凑微分把被积式变成 f(u)du，再套基本积分表。",
+      "detail": "",
+      "keys": [
+        "凑微分",
+        "基本积分表"
+      ],
+      "examTypes": [
+        "fill",
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p4-2",
+      "chapter": "c4",
+      "title": "换元与分部",
+      "core": "含根式用三角/根式换元；含 x^n·e^x、x^n·sin x、ln x 用分部。",
+      "detail": "",
+      "keys": [
+        "三角换元",
+        "分部积分"
+      ],
+      "examTypes": [
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p4-3",
+      "chapter": "c4",
+      "title": "有理函数与三角有理式",
+      "core": "有理函数先做部分分式；三角有理式用万能代换或配对技巧。",
+      "detail": "",
+      "keys": [
+        "部分分式",
+        "万能代换"
+      ],
+      "examTypes": [
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p5-1",
+      "chapter": "c5",
+      "title": "定积分的计算与性质",
+      "core": "牛顿-莱布尼茨公式是主干；分段函数、绝对值要拆区间。",
+      "detail": "",
+      "keys": [
+        "牛顿-莱布尼茨",
+        "分段"
+      ],
+      "examTypes": [
+        "fill",
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p5-2",
+      "chapter": "c5",
+      "title": "变限积分求导",
+      "core": "d/dx ∫[a(x),b(x)] f = f(b)b′ - f(a)a′；被积函数含 x 时先把 x 提到积分号外。",
+      "detail": "",
+      "keys": [
+        "变限积分",
+        "求导"
+      ],
+      "examTypes": [
+        "calc",
+        "proof"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p5-3",
+      "chapter": "c5",
+      "title": "对称性与周期性",
+      "core": "奇函数在对称区间积分为 0；周期函数整周期积分相等。",
+      "detail": "",
+      "keys": [
+        "奇偶性",
+        "周期"
+      ],
+      "examTypes": [
+        "fill",
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p5-4",
+      "chapter": "c5",
+      "title": "反常积分敛散性",
+      "core": "与 p 积分比较：∫1/x^p 在无穷区间 p>1 收敛，在 0 附近 p<1 收敛。",
+      "detail": "",
+      "keys": [
+        "p 积分",
+        "比较判别"
+      ],
+      "examTypes": [
+        "fill",
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p5-5",
+      "chapter": "c5",
+      "title": "定积分的应用",
+      "core": "面积、体积、弧长、平均值套公式前先画图定积分限。",
+      "detail": "",
+      "keys": [
+        "面积",
+        "旋转体体积",
+        "平均值"
+      ],
+      "examTypes": [
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p6-1",
+      "chapter": "c6",
+      "title": "向量运算与位置关系",
+      "core": "点积判垂直、叉积判平行与求面积、混合积判共面。",
+      "detail": "",
+      "keys": [
+        "点积",
+        "叉积",
+        "混合积"
+      ],
+      "examTypes": [
+        "fill",
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p6-2",
+      "chapter": "c6",
+      "title": "平面与直线方程",
+      "core": "平面用点法式，直线用点向式；夹角用方向向量与法向量。",
+      "detail": "",
+      "keys": [
+        "点法式",
+        "点向式",
+        "夹角"
+      ],
+      "examTypes": [
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p6-3",
+      "chapter": "c6",
+      "title": "曲面与曲线",
+      "core": "旋转曲面、柱面、锥面的方程要能从图形反推。",
+      "detail": "",
+      "keys": [
+        "旋转曲面",
+        "柱面",
+        "锥面"
+      ],
+      "examTypes": [
+        "fill",
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p7-1",
+      "chapter": "c7",
+      "title": "偏导数与全微分",
+      "core": "可微必连续、偏导存在不一定可微；全微分 dz=f_x dx+f_y dy。",
+      "detail": "",
+      "keys": [
+        "偏导",
+        "全微分",
+        "可微"
+      ],
+      "examTypes": [
+        "fill",
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p7-2",
+      "chapter": "c7",
+      "title": "多元复合与隐函数求导",
+      "core": "画变量依赖树，链式相加；隐函数用 F_x/F_y 公式。",
+      "detail": "",
+      "keys": [
+        "链式法则",
+        "隐函数"
+      ],
+      "examTypes": [
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p7-3",
+      "chapter": "c7",
+      "title": "极值与条件极值",
+      "core": "无条件极值用 AC-B² 判别；条件极值用拉格朗日乘数法。",
+      "detail": "",
+      "keys": [
+        "拉格朗日乘数",
+        "判别式"
+      ],
+      "examTypes": [
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p8-1",
+      "chapter": "c8",
+      "title": "二重积分的计算",
+      "core": "先画区域再定序；圆域、扇形优先极坐标，注意雅可比 r。",
+      "detail": "",
+      "keys": [
+        "换序",
+        "极坐标",
+        "对称性"
+      ],
+      "examTypes": [
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p8-2",
+      "chapter": "c8",
+      "title": "三重积分",
+      "core": "投影法/截面法二选一；柱面、球面对称时用柱坐标、球坐标。",
+      "detail": "",
+      "keys": [
+        "柱坐标",
+        "球坐标",
+        "投影法"
+      ],
+      "examTypes": [
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p9-1",
+      "chapter": "c9",
+      "title": "曲线积分",
+      "core": "第一类看弧长、第二类看方向；封闭曲线优先格林公式。",
+      "detail": "",
+      "keys": [
+        "格林公式",
+        "路径无关"
+      ],
+      "examTypes": [
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p9-2",
+      "chapter": "c9",
+      "title": "曲面积分",
+      "core": "第一类投到坐标面，第二类注意法向；封闭曲面用高斯公式。",
+      "detail": "",
+      "keys": [
+        "高斯公式",
+        "法向"
+      ],
+      "examTypes": [
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p10-1",
+      "chapter": "c10",
+      "title": "数项级数判敛",
+      "core": "先看通项是否趋于 0；正项级数用比值/根值/比较，交错级数用莱布尼茨。",
+      "detail": "",
+      "keys": [
+        "比值判别",
+        "莱布尼茨",
+        "绝对收敛"
+      ],
+      "examTypes": [
+        "fill",
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p10-2",
+      "chapter": "c10",
+      "title": "幂级数与展开",
+      "core": "先求收敛半径，再逐项求导/积分求和函数；展开套 e^x、sin x、1/(1-x) 基本式。",
+      "detail": "",
+      "keys": [
+        "收敛半径",
+        "逐项求导",
+        "和函数"
+      ],
+      "examTypes": [
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p11-1",
+      "chapter": "c11",
+      "title": "一阶微分方程",
+      "core": "可分离先分离；一阶线性用公式 y=e^{-∫P}(∫Qe^{∫P}dx+C)。",
+      "detail": "",
+      "keys": [
+        "可分离",
+        "一阶线性",
+        "常数变易"
+      ],
+      "examTypes": [
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p11-2",
+      "chapter": "c11",
+      "title": "二阶常系数线性方程",
+      "core": "先解特征方程，再按右端项形式设特解；共振时乘 x。",
+      "detail": "",
+      "keys": [
+        "特征方程",
+        "特解",
+        "共振"
+      ],
+      "examTypes": [
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    },
+    {
+      "id": "p12-1",
+      "chapter": "c12",
+      "title": "综合应用与证明",
+      "core": "先把条件翻译成数学语言，再找已证结论作为桥梁。",
+      "detail": "",
+      "keys": [
+        "转化",
+        "构造"
+      ],
+      "examTypes": [
+        "proof",
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [],
+      "related": []
+    }
+  ],
+  "questions": [
+    {
+      "id": "q-HS3268",
+      "type": "calc",
+      "chapter": "c1",
+      "points": [
+        "p1-1"
+      ],
+      "ref": "HS3268",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3269",
+      "type": "calc",
+      "chapter": "c1",
+      "points": [
+        "p1-1"
+      ],
+      "ref": "HS3269",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3270",
+      "type": "calc",
+      "chapter": "c1",
+      "points": [
+        "p1-1"
+      ],
+      "ref": "HS3270",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3271",
+      "type": "calc",
+      "chapter": "c1",
+      "points": [
+        "p1-1",
+        "p1-4"
+      ],
+      "ref": "HS3271",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3278",
+      "type": "calc",
+      "chapter": "c1",
+      "points": [
+        "p1-1",
+        "p1-4"
+      ],
+      "ref": "HS3278",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3280",
+      "type": "calc",
+      "chapter": "c1",
+      "points": [
+        "p1-1",
+        "p1-4"
+      ],
+      "ref": "HS3280",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3282",
+      "type": "calc",
+      "chapter": "c1",
+      "points": [
+        "p1-1",
+        "p1-4"
+      ],
+      "ref": "HS3282",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3285",
+      "type": "calc",
+      "chapter": "c1",
+      "points": [
+        "p1-1"
+      ],
+      "ref": "HS3285",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期末考试",
+      "difficulty": 1
+    },
+    {
+      "id": "q-HS3286",
+      "type": "calc",
+      "chapter": "c1",
+      "points": [
+        "p1-1"
+      ],
+      "ref": "HS3286",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期末考试",
+      "difficulty": 1
+    },
+    {
+      "id": "q-HS3291",
+      "type": "calc",
+      "chapter": "c1",
+      "points": [
+        "p1-1"
+      ],
+      "ref": "HS3291",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS1068",
+      "type": "calc",
+      "chapter": "c1",
+      "points": [
+        "p1-2",
+        "p1-3"
+      ],
+      "ref": "HS1068",
+      "source": "华中科技大学 2022 年数学分析",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3036",
+      "type": "calc",
+      "chapter": "c1",
+      "points": [
+        "p1-2"
+      ],
+      "ref": "HS3036",
+      "source": "华中科技大学 2020-2021学年微积分（一）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3037",
+      "type": "calc",
+      "chapter": "c1",
+      "points": [
+        "p1-2",
+        "p1-3"
+      ],
+      "ref": "HS3037",
+      "source": "华中科技大学 2020-2021学年微积分（一）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3040",
+      "type": "calc",
+      "chapter": "c1",
+      "points": [
+        "p1-2",
+        "p1-3"
+      ],
+      "ref": "HS3040",
+      "source": "华中科技大学 2020-2021学年微积分（一）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3047",
+      "type": "calc",
+      "chapter": "c1",
+      "points": [
+        "p1-2",
+        "p1-3"
+      ],
+      "ref": "HS3047",
+      "source": "华中科技大学 2020-2021学年微积分（一）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3049",
+      "type": "calc",
+      "chapter": "c1",
+      "points": [
+        "p1-3"
+      ],
+      "ref": "HS3049",
+      "source": "华中科技大学 2021-2022学年微积分（一）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2788",
+      "type": "calc",
+      "chapter": "c2",
+      "points": [
+        "p2-1"
+      ],
+      "ref": "HS2788",
+      "source": "华中科技大学 2016-2017学年微积分（一）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2789",
+      "type": "calc",
+      "chapter": "c2",
+      "points": [
+        "p2-1"
+      ],
+      "ref": "HS2789",
+      "source": "华中科技大学 2016-2017学年微积分（一）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2790",
+      "type": "calc",
+      "chapter": "c2",
+      "points": [
+        "p2-1"
+      ],
+      "ref": "HS2790",
+      "source": "华中科技大学 2016-2017学年微积分（一）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2793",
+      "type": "calc",
+      "chapter": "c2",
+      "points": [
+        "p2-1"
+      ],
+      "ref": "HS2793",
+      "source": "华中科技大学 2016-2017学年微积分（一）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3273",
+      "type": "calc",
+      "chapter": "c2",
+      "points": [
+        "p2-2",
+        "p2-4",
+        "p3-4"
+      ],
+      "ref": "HS3273",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3274",
+      "type": "calc",
+      "chapter": "c2",
+      "points": [
+        "p2-2",
+        "p2-4"
+      ],
+      "ref": "HS3274",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3275",
+      "type": "calc",
+      "chapter": "c2",
+      "points": [
+        "p2-2",
+        "p2-4"
+      ],
+      "ref": "HS3275",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3284",
+      "type": "calc",
+      "chapter": "c2",
+      "points": [
+        "p2-2",
+        "p2-4",
+        "p3-3"
+      ],
+      "ref": "HS3284",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3287",
+      "type": "calc",
+      "chapter": "c2",
+      "points": [
+        "p2-2",
+        "p2-4"
+      ],
+      "ref": "HS3287",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期末考试",
+      "difficulty": 1
+    },
+    {
+      "id": "q-HS3288",
+      "type": "calc",
+      "chapter": "c2",
+      "points": [
+        "p2-2",
+        "p2-4"
+      ],
+      "ref": "HS3288",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期末考试",
+      "difficulty": 1
+    },
+    {
+      "id": "q-HS3297",
+      "type": "calc",
+      "chapter": "c2",
+      "points": [
+        "p2-2",
+        "p2-4"
+      ],
+      "ref": "HS3297",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3298",
+      "type": "calc",
+      "chapter": "c2",
+      "points": [
+        "p2-2",
+        "p2-4"
+      ],
+      "ref": "HS3298",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3304",
+      "type": "calc",
+      "chapter": "c2",
+      "points": [
+        "p2-2",
+        "p2-4",
+        "p3-3"
+      ],
+      "ref": "HS3304",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3347",
+      "type": "calc",
+      "chapter": "c2",
+      "points": [
+        "p2-2",
+        "p2-4"
+      ],
+      "ref": "HS3347",
+      "source": "华中科技大学 2025-2026学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS1067",
+      "type": "calc",
+      "chapter": "c2",
+      "points": [
+        "p2-3",
+        "p3-4"
+      ],
+      "ref": "HS1067",
+      "source": "华中科技大学 2022 年数学分析",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2975",
+      "type": "calc",
+      "chapter": "c2",
+      "points": [
+        "p2-3"
+      ],
+      "ref": "HS2975",
+      "source": "华中科技大学 2019-2020学年微积分（一）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2978",
+      "type": "calc",
+      "chapter": "c2",
+      "points": [
+        "p2-3"
+      ],
+      "ref": "HS2978",
+      "source": "华中科技大学 2019-2020学年微积分（一）（上）期末考试",
+      "difficulty": 1
+    },
+    {
+      "id": "q-HS2980",
+      "type": "calc",
+      "chapter": "c2",
+      "points": [
+        "p2-3"
+      ],
+      "ref": "HS2980",
+      "source": "华中科技大学 2019-2020学年微积分（一）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2981",
+      "type": "calc",
+      "chapter": "c2",
+      "points": [
+        "p2-3"
+      ],
+      "ref": "HS2981",
+      "source": "华中科技大学 2019-2020学年微积分（一）（上）期末考试",
+      "difficulty": 1
+    },
+    {
+      "id": "q-HS3321",
+      "type": "calc",
+      "chapter": "c3",
+      "points": [
+        "p3-1"
+      ],
+      "ref": "HS3321",
+      "source": "华中科技大学 2023-2024学年微积分（一）（下）期末考试",
+      "difficulty": 1
+    },
+    {
+      "id": "q-HS3331",
+      "type": "calc",
+      "chapter": "c3",
+      "points": [
+        "p3-1",
+        "p3-2"
+      ],
+      "ref": "HS3331",
+      "source": "华中科技大学 2023-2024学年微积分（一）（下）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3332",
+      "type": "calc",
+      "chapter": "c3",
+      "points": [
+        "p3-1",
+        "p3-2"
+      ],
+      "ref": "HS3332",
+      "source": "华中科技大学 2023-2024学年微积分（一）（下）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3336",
+      "type": "calc",
+      "chapter": "c3",
+      "points": [
+        "p3-1",
+        "p3-2",
+        "p3-4"
+      ],
+      "ref": "HS3336",
+      "source": "华中科技大学 2023-2024学年微积分（一）（下）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3337",
+      "type": "calc",
+      "chapter": "c3",
+      "points": [
+        "p3-2",
+        "p3-4"
+      ],
+      "ref": "HS3337",
+      "source": "华中科技大学 2023-2024学年微积分（一）（下）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3283",
+      "type": "calc",
+      "chapter": "c3",
+      "points": [
+        "p3-3"
+      ],
+      "ref": "HS3283",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3355",
+      "type": "calc",
+      "chapter": "c3",
+      "points": [
+        "p3-3"
+      ],
+      "ref": "HS3355",
+      "source": "华中科技大学 2025-2026学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3356",
+      "type": "calc",
+      "chapter": "c3",
+      "points": [
+        "p3-3"
+      ],
+      "ref": "HS3356",
+      "source": "华中科技大学 2025-2026学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3374",
+      "type": "calc",
+      "chapter": "c3",
+      "points": [
+        "p3-3"
+      ],
+      "ref": "HS3374",
+      "source": "华中科技大学 2025-2026学年微积分（B）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3375",
+      "type": "calc",
+      "chapter": "c3",
+      "points": [
+        "p3-3"
+      ],
+      "ref": "HS3375",
+      "source": "华中科技大学 2025-2026学年微积分（B）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3390",
+      "type": "calc",
+      "chapter": "c3",
+      "points": [
+        "p3-3",
+        "p7-1",
+        "p7-2",
+        "p7-3"
+      ],
+      "ref": "HS3390",
+      "source": "华中科技大学 2024-2025学年微积分（B）（下）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3409",
+      "type": "calc",
+      "chapter": "c3",
+      "points": [
+        "p3-3"
+      ],
+      "ref": "HS3409",
+      "source": "华中科技大学 2024-2025学年微积分（B）（下）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2703",
+      "type": "calc",
+      "chapter": "c3",
+      "points": [
+        "p3-3"
+      ],
+      "ref": "HS2703",
+      "source": "华中科技大学 2011-2012学年微积分（一）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2906",
+      "type": "calc",
+      "chapter": "c4",
+      "points": [
+        "p4-1"
+      ],
+      "ref": "HS2906",
+      "source": "华中科技大学 2018-2019学年微积分（一）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2916",
+      "type": "calc",
+      "chapter": "c4",
+      "points": [
+        "p4-1",
+        "p8-1"
+      ],
+      "ref": "HS2916",
+      "source": "华中科技大学 2018-2019学年微积分（一）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2988",
+      "type": "calc",
+      "chapter": "c4",
+      "points": [
+        "p4-1",
+        "p4-2",
+        "p4-3"
+      ],
+      "ref": "HS2988",
+      "source": "华中科技大学 2019-2020学年微积分（一）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3221",
+      "type": "calc",
+      "chapter": "c4",
+      "points": [
+        "p4-1"
+      ],
+      "ref": "HS3221",
+      "source": "华中科技大学 2023-2024学年微积分（一）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3229",
+      "type": "calc",
+      "chapter": "c4",
+      "points": [
+        "p4-1",
+        "p9-1",
+        "p9-2"
+      ],
+      "ref": "HS3229",
+      "source": "华中科技大学 2023-2024学年微积分（一）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2952",
+      "type": "calc",
+      "chapter": "c4",
+      "points": [
+        "p4-2"
+      ],
+      "ref": "HS2952",
+      "source": "华中科技大学 2017-2018学年微积分（一）（下）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2958",
+      "type": "calc",
+      "chapter": "c4",
+      "points": [
+        "p4-2",
+        "p4-3"
+      ],
+      "ref": "HS2958",
+      "source": "华中科技大学 2017-2018学年微积分（一）（下）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2989",
+      "type": "calc",
+      "chapter": "c4",
+      "points": [
+        "p4-2",
+        "p4-3"
+      ],
+      "ref": "HS2989",
+      "source": "华中科技大学 2019-2020学年微积分（一）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2990",
+      "type": "calc",
+      "chapter": "c4",
+      "points": [
+        "p4-3"
+      ],
+      "ref": "HS2990",
+      "source": "华中科技大学 2019-2020学年微积分（一）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3290",
+      "type": "calc",
+      "chapter": "c5",
+      "points": [
+        "p5-1",
+        "p5-2",
+        "p5-3",
+        "p5-4"
+      ],
+      "ref": "HS3290",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期末考试",
+      "difficulty": 1
+    },
+    {
+      "id": "q-HS3292",
+      "type": "calc",
+      "chapter": "c5",
+      "points": [
+        "p5-1",
+        "p5-2",
+        "p5-3",
+        "p5-4",
+        "p5-5"
+      ],
+      "ref": "HS3292",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3293",
+      "type": "calc",
+      "chapter": "c5",
+      "points": [
+        "p5-1",
+        "p5-3",
+        "p5-4",
+        "p5-5"
+      ],
+      "ref": "HS3293",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3294",
+      "type": "calc",
+      "chapter": "c5",
+      "points": [
+        "p5-1",
+        "p5-4",
+        "p5-5"
+      ],
+      "ref": "HS3294",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3299",
+      "type": "calc",
+      "chapter": "c5",
+      "points": [
+        "p5-1",
+        "p5-5"
+      ],
+      "ref": "HS3299",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3300",
+      "type": "calc",
+      "chapter": "c5",
+      "points": [
+        "p5-1"
+      ],
+      "ref": "HS3300",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3362",
+      "type": "calc",
+      "chapter": "c5",
+      "points": [
+        "p5-1"
+      ],
+      "ref": "HS3362",
+      "source": "华中科技大学 2025-2026学年微积分（B）（上）期末考试",
+      "difficulty": 1
+    },
+    {
+      "id": "q-HS3363",
+      "type": "calc",
+      "chapter": "c5",
+      "points": [
+        "p5-1"
+      ],
+      "ref": "HS3363",
+      "source": "华中科技大学 2025-2026学年微积分（B）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3365",
+      "type": "calc",
+      "chapter": "c5",
+      "points": [
+        "p5-1"
+      ],
+      "ref": "HS3365",
+      "source": "华中科技大学 2025-2026学年微积分（B）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3372",
+      "type": "calc",
+      "chapter": "c5",
+      "points": [
+        "p5-1"
+      ],
+      "ref": "HS3372",
+      "source": "华中科技大学 2025-2026学年微积分（B）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3319",
+      "type": "calc",
+      "chapter": "c5",
+      "points": [
+        "p5-2"
+      ],
+      "ref": "HS3319",
+      "source": "华中科技大学 2023-2024学年微积分（一）（下）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3323",
+      "type": "calc",
+      "chapter": "c5",
+      "points": [
+        "p5-2",
+        "p5-3"
+      ],
+      "ref": "HS3323",
+      "source": "华中科技大学 2023-2024学年微积分（一）（下）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3376",
+      "type": "calc",
+      "chapter": "c6",
+      "points": [
+        "p6-1"
+      ],
+      "ref": "HS3376",
+      "source": "华中科技大学 2024-2025学年微积分（B）（下）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3377",
+      "type": "calc",
+      "chapter": "c6",
+      "points": [
+        "p6-1"
+      ],
+      "ref": "HS3377",
+      "source": "华中科技大学 2024-2025学年微积分（B）（下）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3388",
+      "type": "calc",
+      "chapter": "c6",
+      "points": [
+        "p6-1"
+      ],
+      "ref": "HS3388",
+      "source": "华中科技大学 2024-2025学年微积分（B）（下）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3426",
+      "type": "calc",
+      "chapter": "c6",
+      "points": [
+        "p6-1"
+      ],
+      "ref": "HS3426",
+      "source": "华中科技大学 2025-2026学年微积分（B）（下）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3427",
+      "type": "calc",
+      "chapter": "c6",
+      "points": [
+        "p6-1"
+      ],
+      "ref": "HS3427",
+      "source": "华中科技大学 2025-2026学年微积分（B）（下）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3428",
+      "type": "calc",
+      "chapter": "c6",
+      "points": [
+        "p6-1"
+      ],
+      "ref": "HS3428",
+      "source": "华中科技大学 2025-2026学年微积分（B）（下）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2825",
+      "type": "calc",
+      "chapter": "c6",
+      "points": [
+        "p6-1",
+        "p6-2",
+        "p6-3"
+      ],
+      "ref": "HS2825",
+      "source": "华中科技大学 2015-2016学年微积分（一）（下）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2855",
+      "type": "calc",
+      "chapter": "c6",
+      "points": [
+        "p6-1",
+        "p6-2",
+        "p6-3"
+      ],
+      "ref": "HS2855",
+      "source": "华中科技大学 2016-2017学年微积分（一）（下）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2877",
+      "type": "calc",
+      "chapter": "c6",
+      "points": [
+        "p6-1",
+        "p6-3"
+      ],
+      "ref": "HS2877",
+      "source": "华中科技大学 2016-2017学年微积分（一）（下）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2925",
+      "type": "calc",
+      "chapter": "c6",
+      "points": [
+        "p6-1"
+      ],
+      "ref": "HS2925",
+      "source": "华中科技大学 2017-2018学年微积分（一）（下）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3438",
+      "type": "calc",
+      "chapter": "c6",
+      "points": [
+        "p6-2"
+      ],
+      "ref": "HS3438",
+      "source": "华中科技大学 2025-2026学年微积分（B）（下）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2815",
+      "type": "calc",
+      "chapter": "c6",
+      "points": [
+        "p6-2",
+        "p6-3"
+      ],
+      "ref": "HS2815",
+      "source": "华中科技大学 2015-2016学年微积分（一）（下）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3368",
+      "type": "calc",
+      "chapter": "c7",
+      "points": [
+        "p7-1",
+        "p7-2",
+        "p7-3"
+      ],
+      "ref": "HS3368",
+      "source": "华中科技大学 2025-2026学年微积分（B）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3381",
+      "type": "calc",
+      "chapter": "c7",
+      "points": [
+        "p7-1",
+        "p7-2",
+        "p7-3"
+      ],
+      "ref": "HS3381",
+      "source": "华中科技大学 2024-2025学年微积分（B）（下）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3383",
+      "type": "calc",
+      "chapter": "c7",
+      "points": [
+        "p7-1",
+        "p7-2",
+        "p7-3"
+      ],
+      "ref": "HS3383",
+      "source": "华中科技大学 2024-2025学年微积分（B）（下）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3389",
+      "type": "calc",
+      "chapter": "c7",
+      "points": [
+        "p7-1",
+        "p7-2",
+        "p7-3"
+      ],
+      "ref": "HS3389",
+      "source": "华中科技大学 2024-2025学年微积分（B）（下）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3402",
+      "type": "calc",
+      "chapter": "c7",
+      "points": [
+        "p7-1",
+        "p7-2",
+        "p7-3"
+      ],
+      "ref": "HS3402",
+      "source": "华中科技大学 2024-2025学年微积分（B）（下）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3430",
+      "type": "calc",
+      "chapter": "c7",
+      "points": [
+        "p7-1",
+        "p7-2",
+        "p7-3"
+      ],
+      "ref": "HS3430",
+      "source": "华中科技大学 2025-2026学年微积分（B）（下）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3431",
+      "type": "calc",
+      "chapter": "c7",
+      "points": [
+        "p7-1",
+        "p7-2",
+        "p7-3"
+      ],
+      "ref": "HS3431",
+      "source": "华中科技大学 2025-2026学年微积分（B）（下）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3433",
+      "type": "calc",
+      "chapter": "c7",
+      "points": [
+        "p7-1",
+        "p7-2",
+        "p7-3"
+      ],
+      "ref": "HS3433",
+      "source": "华中科技大学 2025-2026学年微积分（B）（下）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2799",
+      "type": "calc",
+      "chapter": "c7",
+      "points": [
+        "p7-1",
+        "p7-2",
+        "p7-3"
+      ],
+      "ref": "HS2799",
+      "source": "华中科技大学 2016-2017学年微积分（一）（上）期末考试",
+      "difficulty": 1
+    },
+    {
+      "id": "q-HS2917",
+      "type": "calc",
+      "chapter": "c8",
+      "points": [
+        "p8-1",
+        "p8-2"
+      ],
+      "ref": "HS2917",
+      "source": "华中科技大学 2018-2019学年微积分（一）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2918",
+      "type": "calc",
+      "chapter": "c8",
+      "points": [
+        "p8-1",
+        "p8-2"
+      ],
+      "ref": "HS2918",
+      "source": "华中科技大学 2018-2019学年微积分（一）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2923",
+      "type": "calc",
+      "chapter": "c8",
+      "points": [
+        "p8-1",
+        "p8-2"
+      ],
+      "ref": "HS2923",
+      "source": "华中科技大学 2018-2019学年微积分（一）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2927",
+      "type": "calc",
+      "chapter": "c8",
+      "points": [
+        "p8-2"
+      ],
+      "ref": "HS2927",
+      "source": "华中科技大学 2017-2018学年微积分（一）（下）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3227",
+      "type": "calc",
+      "chapter": "c9",
+      "points": [
+        "p9-1"
+      ],
+      "ref": "HS3227",
+      "source": "华中科技大学 2023-2024学年微积分（一）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3231",
+      "type": "calc",
+      "chapter": "c9",
+      "points": [
+        "p9-1",
+        "p9-2"
+      ],
+      "ref": "HS3231",
+      "source": "华中科技大学 2023-2024学年微积分（一）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3240",
+      "type": "calc",
+      "chapter": "c9",
+      "points": [
+        "p9-1",
+        "p9-2"
+      ],
+      "ref": "HS3240",
+      "source": "华中科技大学 2022-2023学年微积分（一）（下）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3317",
+      "type": "calc",
+      "chapter": "c9",
+      "points": [
+        "p9-2"
+      ],
+      "ref": "HS3317",
+      "source": "华中科技大学 2023-2024学年微积分（一）（下）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3354",
+      "type": "calc",
+      "chapter": "c10",
+      "points": [
+        "p10-1",
+        "p10-2"
+      ],
+      "ref": "HS3354",
+      "source": "华中科技大学 2025-2026学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3424",
+      "type": "calc",
+      "chapter": "c10",
+      "points": [
+        "p10-1",
+        "p10-2"
+      ],
+      "ref": "HS3424",
+      "source": "华中科技大学 2026-2027学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2830",
+      "type": "calc",
+      "chapter": "c10",
+      "points": [
+        "p10-1"
+      ],
+      "ref": "HS2830",
+      "source": "华中科技大学 2015-2016学年微积分（一）（下）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2882",
+      "type": "calc",
+      "chapter": "c10",
+      "points": [
+        "p10-1"
+      ],
+      "ref": "HS2882",
+      "source": "华中科技大学 2016-2017学年微积分（一）（下）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2885",
+      "type": "calc",
+      "chapter": "c10",
+      "points": [
+        "p10-1"
+      ],
+      "ref": "HS2885",
+      "source": "华中科技大学 2016-2017学年微积分（一）（下）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2943",
+      "type": "calc",
+      "chapter": "c10",
+      "points": [
+        "p10-1"
+      ],
+      "ref": "HS2943",
+      "source": "华中科技大学 2017-2018学年微积分（一）（下）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2947",
+      "type": "calc",
+      "chapter": "c10",
+      "points": [
+        "p10-1"
+      ],
+      "ref": "HS2947",
+      "source": "华中科技大学 2017-2018学年微积分（一）（下）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS2954",
+      "type": "calc",
+      "chapter": "c10",
+      "points": [
+        "p10-1"
+      ],
+      "ref": "HS2954",
+      "source": "华中科技大学 2017-2018学年微积分（一）（下）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3020",
+      "type": "calc",
+      "chapter": "c10",
+      "points": [
+        "p10-1"
+      ],
+      "ref": "HS3020",
+      "source": "华中科技大学 2018-2019学年微积分（一）（下）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3026",
+      "type": "calc",
+      "chapter": "c10",
+      "points": [
+        "p10-1"
+      ],
+      "ref": "HS3026",
+      "source": "华中科技大学 2018-2019学年微积分（一）（下）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3335",
+      "type": "calc",
+      "chapter": "c10",
+      "points": [
+        "p10-2"
+      ],
+      "ref": "HS3335",
+      "source": "华中科技大学 2023-2024学年微积分（一）（下）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3339",
+      "type": "calc",
+      "chapter": "c10",
+      "points": [
+        "p10-2"
+      ],
+      "ref": "HS3339",
+      "source": "华中科技大学 2023-2024学年微积分（一）（下）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3272",
+      "type": "calc",
+      "chapter": "c12",
+      "points": [
+        "p12-1"
+      ],
+      "ref": "HS3272",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3276",
+      "type": "calc",
+      "chapter": "c12",
+      "points": [
+        "p12-1"
+      ],
+      "ref": "HS3276",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3277",
+      "type": "calc",
+      "chapter": "c12",
+      "points": [
+        "p12-1"
+      ],
+      "ref": "HS3277",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3279",
+      "type": "calc",
+      "chapter": "c12",
+      "points": [
+        "p12-1"
+      ],
+      "ref": "HS3279",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3281",
+      "type": "calc",
+      "chapter": "c12",
+      "points": [
+        "p12-1"
+      ],
+      "ref": "HS3281",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3289",
+      "type": "calc",
+      "chapter": "c12",
+      "points": [
+        "p12-1"
+      ],
+      "ref": "HS3289",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3295",
+      "type": "calc",
+      "chapter": "c12",
+      "points": [
+        "p12-1"
+      ],
+      "ref": "HS3295",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3302",
+      "type": "calc",
+      "chapter": "c12",
+      "points": [
+        "p12-1"
+      ],
+      "ref": "HS3302",
+      "source": "华中科技大学 2024-2025学年微积分（B）（上）期末考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3342",
+      "type": "calc",
+      "chapter": "c12",
+      "points": [
+        "p12-1"
+      ],
+      "ref": "HS3342",
+      "source": "华中科技大学 2025-2026学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    },
+    {
+      "id": "q-HS3343",
+      "type": "calc",
+      "chapter": "c12",
+      "points": [
+        "p12-1"
+      ],
+      "ref": "HS3343",
+      "source": "华中科技大学 2025-2026学年微积分（B）（上）期中考试",
+      "difficulty": 2
+    }
+  ]
+}

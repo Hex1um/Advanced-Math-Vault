@@ -1,0 +1,554 @@
+{
+  "id": "physics-general-2026",
+  "school": "通用",
+  "schoolShort": "通用",
+  "subject": "大学物理（上）",
+  "subjectShort": "大物上",
+  "year": "2026",
+  "term": "秋季",
+  "updatedAt": "2026-11-26",
+  "intro": "通用版大学物理（上）期末突击包：力学、振动与波、热学、电磁学四条主线，按「必背结论 → 高频题型 → 易错陷阱」组织。题目为自编与经典改编，适合期末两周冲刺；带单位的计算题请按题目约定常数作答。",
+  "exam": {
+    "durationMin": 120,
+    "totalPoints": 100,
+    "sections": [
+      {
+        "type": "single",
+        "name": "单项选择题",
+        "count": 8,
+        "per": 3,
+        "points": 24,
+        "note": "概念辨析为主"
+      },
+      {
+        "type": "fill",
+        "name": "填空题",
+        "count": 6,
+        "per": 4,
+        "points": 24,
+        "note": "必须带单位"
+      },
+      {
+        "type": "calc",
+        "name": "计算题",
+        "count": 4,
+        "per": 10,
+        "points": 40,
+        "note": "建模 + 定律 + 求解 + 检验"
+      },
+      {
+        "type": "proof",
+        "name": "证明题",
+        "count": 1,
+        "per": 12,
+        "points": 12,
+        "note": "常考角动量或高斯定理"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "kind": "syllabus",
+      "title": "理工科《大学物理（上）》教学大纲",
+      "note": "力学 35%、振动与波 15%、热学 20%、电磁学 30%"
+    },
+    {
+      "kind": "exam",
+      "title": "历年期末卷题型结构归纳",
+      "note": "选择 8 题、填空 6 题、计算 4 题、证明 1 题"
+    },
+    {
+      "kind": "custom",
+      "title": "自编冲刺题",
+      "note": "按高频失分点设计，覆盖单位与量纲"
+    }
+  ],
+  "chapters": [
+    {
+      "id": "c1",
+      "no": "一",
+      "title": "质点力学与刚体",
+      "weight": 35,
+      "summary": "运动学三类问题、牛顿定律与非惯性系、三大守恒律、刚体定轴转动"
+    },
+    {
+      "id": "c2",
+      "no": "二",
+      "title": "振动与波动",
+      "weight": 15,
+      "summary": "简谐振动方程、能量、波的传播与干涉驻波"
+    },
+    {
+      "id": "c3",
+      "no": "三",
+      "title": "气体动理论与热力学",
+      "weight": 20,
+      "summary": "状态方程、自由度与内能、热一定律在四个等值过程中的应用、循环效率"
+    },
+    {
+      "id": "c4",
+      "no": "四",
+      "title": "静电场与稳恒磁场",
+      "weight": 30,
+      "summary": "高斯定理、电势与电容、安培环路定理、电磁感应"
+    }
+  ],
+  "points": [
+    {
+      "id": "p1",
+      "chapter": "c1",
+      "title": "运动学两类基本问题",
+      "core": "已知 $a(t)$ 求 $v,x$ 用积分，已知 $x(t)$ 求导得 $v,a$；抛体运动分解为水平匀速 + 竖直匀变速。",
+      "detail": "解题先写三个方程：$v=\\mathrm{d}x/\\mathrm{d}t$、$a=\\mathrm{d}v/\\mathrm{d}t$、$a=\\mathrm{d}^2x/\\mathrm{d}t^2$。斜抛射程 $R=v_0^2\\sin2\\theta/g$（落回等高点）。",
+      "keys": [
+        "运动的分解",
+        "微积分关系",
+        "相对运动"
+      ],
+      "examTypes": [
+        "fill",
+        "calc"
+      ],
+      "frequency": 5,
+      "traps": [
+        "斜抛射程公式只在落回等高点时成立",
+        "相对速度是矢量差，不是大小相减"
+      ],
+      "related": [
+        "p2"
+      ]
+    },
+    {
+      "id": "p2",
+      "chapter": "c1",
+      "title": "牛顿定律与圆周运动",
+      "core": "向心力由合外力沿法向的分量提供：$\\sum F_n=\\dfrac{mv^2}{R}$。",
+      "detail": "水平面转弯时静摩擦提供向心力，$v_{\\max}=\\sqrt{\\mu gR}$；竖直圆轨道最高点临界条件 $mg=mv^2/R$。",
+      "keys": [
+        "受力分析",
+        "向心力",
+        "临界条件"
+      ],
+      "examTypes": [
+        "single",
+        "calc"
+      ],
+      "frequency": 5,
+      "traps": [
+        "把「向心力」当成一个新的力画进受力图",
+        "忘记支持力随速度变化"
+      ],
+      "related": [
+        "p1"
+      ]
+    },
+    {
+      "id": "p3",
+      "chapter": "c1",
+      "title": "动量与角动量守恒",
+      "core": "合外力为零则动量守恒；对某轴合外力矩为零则对该轴角动量守恒。",
+      "detail": "碰撞问题先用动量守恒，再用能量关系判断弹性/非弹性。角动量 $L=J\\omega$，转盘落物、人走转台都是 $J_1\\omega_1=(J_1+J_2)\\omega_2$。",
+      "keys": [
+        "守恒律",
+        "碰撞",
+        "转动惯量"
+      ],
+      "examTypes": [
+        "calc",
+        "proof"
+      ],
+      "frequency": 5,
+      "traps": [
+        "角动量守恒而动能不守恒（非弹性落物）",
+        "守恒律用错轴：力矩是对哪条轴算的"
+      ],
+      "related": [
+        "p4"
+      ]
+    },
+    {
+      "id": "p4",
+      "chapter": "c1",
+      "title": "刚体定轴转动",
+      "core": "$M=J\\beta$，$J$ 与转轴位置有关，平行轴定理 $J=J_C+md^2$。",
+      "detail": "常见 $J$：细杆绕端点 $mL^2/3$、绕中心 $mL^2/12$；圆盘绕中心 $mR^2/2$；圆环绕中心 $mR^2$。下摆类问题优先用机械能守恒。",
+      "keys": [
+        "转动惯量",
+        "转动定律",
+        "机械能守恒"
+      ],
+      "examTypes": [
+        "calc",
+        "proof"
+      ],
+      "frequency": 5,
+      "traps": [
+        "把细杆绕端点的 $J$ 写成 $mL^2/12$",
+        "用机械能守恒却漏掉轴的反力做功（光滑轴不做功，可以）"
+      ],
+      "related": [
+        "p3"
+      ]
+    },
+    {
+      "id": "p5",
+      "chapter": "c2",
+      "title": "简谐振动",
+      "core": "$x=A\\cos(\\omega t+\\varphi)$，$\\omega=\\sqrt{k/m}$，$T=2\\pi/\\omega$，能量 $E=\\frac12kA^2$。",
+      "detail": "由初始条件定 $A$ 与 $\\varphi$：$A=\\sqrt{x_0^2+(v_0/\\omega)^2}$。周期与振幅无关。",
+      "keys": [
+        "振动方程",
+        "初相",
+        "能量"
+      ],
+      "examTypes": [
+        "fill",
+        "calc"
+      ],
+      "frequency": 5,
+      "traps": [
+        "初相判断只看 $x_0$ 符号，忽略 $v_0$ 方向",
+        "把角频率 $\\omega$ 与频率 $f$ 混用"
+      ],
+      "related": [
+        "p6"
+      ]
+    },
+    {
+      "id": "p6",
+      "chapter": "c2",
+      "title": "平面简谐波与驻波",
+      "core": "波函数 $y=A\\cos(\\omega t-kx)$，$v=\\omega/k=\\lambda f$；驻波条件 $L=n\\lambda/2$（两端固定）。",
+      "detail": "由波函数直接读 $\\omega$ 与 $k$；传播方向看 $\\omega t$ 与 $kx$ 的符号。驻波相邻波节间距 $\\lambda/2$。",
+      "keys": [
+        "波动方程",
+        "波速",
+        "驻波条件"
+      ],
+      "examTypes": [
+        "fill",
+        "calc"
+      ],
+      "frequency": 4,
+      "traps": [
+        "把 $k$ 当成波速（$k$ 是波数）",
+        "驻波相邻波节间距误写成 $\\lambda$"
+      ],
+      "related": [
+        "p5"
+      ]
+    },
+    {
+      "id": "p7",
+      "chapter": "c3",
+      "title": "理想气体状态方程与内能",
+      "core": "$pV=\\nu RT$；单原子 $i=3$、双原子 $i=5$，$E=\\dfrac{i}{2}\\nu RT$。",
+      "detail": "温度必须用开尔文。$R=8.31\\ \\mathrm{J/(mol\\cdot K)}$。",
+      "keys": [
+        "状态方程",
+        "自由度",
+        "内能"
+      ],
+      "examTypes": [
+        "fill",
+        "single"
+      ],
+      "frequency": 5,
+      "traps": [
+        "用摄氏度直接代入 $pV=\\nu RT$",
+        "把 $C_V$ 与 $C_p$ 混用"
+      ],
+      "related": [
+        "p8"
+      ]
+    },
+    {
+      "id": "p8",
+      "chapter": "c3",
+      "title": "热力学第一定律与循环",
+      "core": "$Q=\\Delta E+W$；等压 $Q=\\nu C_p\\Delta T$，等容 $Q=\\nu C_V\\Delta T$，等温 $\\Delta E=0$，绝热 $Q=0$。",
+      "detail": "循环效率 $\\eta=W/Q_1$，卡诺 $\\eta=1-T_2/T_1$。判断吸放热要看 $Q$ 的符号。",
+      "keys": [
+        "热力学第一定律",
+        "摩尔热容",
+        "循环效率"
+      ],
+      "examTypes": [
+        "calc",
+        "single"
+      ],
+      "frequency": 5,
+      "traps": [
+        "等温过程误以为 $Q=0$（那是绝热）",
+        "循环净功直接用 $pV$ 面积却不判断正负"
+      ],
+      "related": [
+        "p7"
+      ]
+    },
+    {
+      "id": "p9",
+      "chapter": "c4",
+      "title": "高斯定理与电势",
+      "core": "$\\oint\\vec E\\cdot\\mathrm{d}\\vec S=Q_{\\text{内}}/\\varepsilon_0$；点电荷 $V=kQ/r$。",
+      "detail": "球对称、轴对称、面对称三类是唯一能用高斯定理直接求 $E$ 的情形；其余用叠加。电势是标量，直接代数相加。",
+      "keys": [
+        "高斯定理",
+        "对称性",
+        "电势叠加"
+      ],
+      "examTypes": [
+        "proof",
+        "calc"
+      ],
+      "frequency": 5,
+      "traps": [
+        "高斯面内电荷漏算（球壳内部无电荷时 $E=0$）",
+        "电势与场强方向搞反（$E$ 指向电势降低方向）"
+      ],
+      "related": [
+        "p10"
+      ]
+    },
+    {
+      "id": "p10",
+      "chapter": "c4",
+      "title": "稳恒磁场与电磁感应",
+      "core": "$\\oint\\vec B\\cdot\\mathrm{d}\\vec l=\\mu_0I_{\\text{内}}$；$\\varepsilon=N|\\Delta\\Phi/\\Delta t|$。",
+      "detail": "长直导线 $B=\\mu_0I/(2\\pi r)$；螺线管内 $B=\\mu_0nI$；动生电动势 $\\varepsilon=Blv$。方向由右手螺旋与楞次定律定。",
+      "keys": [
+        "安培环路定理",
+        "法拉第定律",
+        "楞次定律"
+      ],
+      "examTypes": [
+        "calc",
+        "single"
+      ],
+      "frequency": 5,
+      "traps": [
+        "安培环路内电流符号（穿过方向）漏判",
+        "感应电动势漏乘匝数 $N$"
+      ],
+      "related": [
+        "p9"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "chapter": "c1",
+      "points": [
+        "p2"
+      ],
+      "difficulty": 2,
+      "stem": "汽车在水平路面上以恒定速率转弯，下列说法正确的是：",
+      "options": [
+        "A. 汽车所受合力为零",
+        "B. 合力方向指向圆心，由静摩擦力提供",
+        "C. 合力方向背离圆心，防止汽车外滑",
+        "D. 车速越大所需静摩擦力越小"
+      ],
+      "answer": "B",
+      "explain": "匀速圆周运动速率不变但方向改变，速度矢量在变，必有指向圆心的向心加速度，合力不为零。该合力由地面对轮胎的静摩擦力提供，$f=mv^2/R$ 随速率增大而增大。",
+      "source": "自编冲刺题"
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "chapter": "c1",
+      "points": [
+        "p3",
+        "p4"
+      ],
+      "difficulty": 3,
+      "stem": "一水平转盘绕竖直轴转动，将一静止圆环轻放到盘上并与之共同转动。在此过程中：",
+      "options": [
+        "A. 系统角动量守恒，动能守恒",
+        "B. 系统角动量守恒，动能减少",
+        "C. 系统角动量不守恒，动能守恒",
+        "D. 两者都不守恒"
+      ],
+      "answer": "B",
+      "explain": "轴光滑 → 对轴无外力矩 → 角动量守恒；圆环与盘之间有相对滑动摩擦，摩擦生热，动能减少。这是「角动量守恒但动能不守恒」的典型情形。",
+      "source": "自编冲刺题"
+    },
+    {
+      "id": "q3",
+      "type": "fill",
+      "chapter": "c1",
+      "points": [
+        "p1"
+      ],
+      "difficulty": 3,
+      "stem": "以 $20\\ \\mathrm{m/s}$、$30^\\circ$ 斜向上抛出小球，忽略空气阻力，取 $g=9.8\\ \\mathrm{m/s^2}$，落回同一水平面的水平射程为 ______ $\\mathrm{m}$（保留三位有效数字）。",
+      "answer": "35.3",
+      "explain": "$R=\\dfrac{v_0^2\\sin2\\theta}{g}=\\dfrac{400\\times0.866}{9.8}=35.3\\ \\mathrm{m}$。注意单位与有效数字。",
+      "source": "自编冲刺题"
+    },
+    {
+      "id": "q4",
+      "type": "fill",
+      "chapter": "c1",
+      "points": [
+        "p4"
+      ],
+      "difficulty": 4,
+      "stem": "长 $L$ 的均质细杆绕一端点在竖直平面内由水平位置静止下摆，到竖直位置时角速度为 ______（用 $g,L$ 表示）。",
+      "answer": "$\\sqrt{3g/L}$",
+      "explain": "机械能守恒：$mg\\dfrac{L}{2}=\\dfrac12\\cdot\\dfrac13mL^2\\omega^2$，得 $\\omega=\\sqrt{3g/L}$。关键在转动惯量取 $mL^2/3$。",
+      "source": "自编冲刺题"
+    },
+    {
+      "id": "q5",
+      "type": "calc",
+      "chapter": "c1",
+      "points": [
+        "p3"
+      ],
+      "difficulty": 4,
+      "stem": "$m_1=2.0\\ \\mathrm{kg}$ 的小球以 $3.0\\ \\mathrm{m/s}$ 撞上静止的 $m_2=1.0\\ \\mathrm{kg}$ 小球并粘在一起。求碰后共同速率，并计算损失的动能。",
+      "answer": "$v=2.0\\ \\mathrm{m/s}$；$\\Delta E_k=3.0\\ \\mathrm{J}$",
+      "explain": "动量守恒 $m_1v_1=(m_1+m_2)v\\Rightarrow v=2.0\\ \\mathrm{m/s}$；碰前 $E_{k1}=9.0\\ \\mathrm{J}$，碰后 $E_{k2}=6.0\\ \\mathrm{J}$，损失 $3.0\\ \\mathrm{J}$ 转为内能。",
+      "source": "自编冲刺题"
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "chapter": "c2",
+      "points": [
+        "p5"
+      ],
+      "difficulty": 2,
+      "stem": "弹簧振子的周期 $T$，下列说法正确的是：",
+      "options": [
+        "A. 随振幅增大而增大",
+        "B. 随振子质量增大而增大",
+        "C. 随弹簧劲度系数增大而增大",
+        "D. 与振幅、质量、劲度系数都无关"
+      ],
+      "answer": "B",
+      "explain": "$T=2\\pi\\sqrt{m/k}$：质量越大周期越长，劲度系数越大周期越短，与振幅无关（等时性）。",
+      "source": "自编冲刺题"
+    },
+    {
+      "id": "q7",
+      "type": "fill",
+      "chapter": "c2",
+      "points": [
+        "p6"
+      ],
+      "difficulty": 3,
+      "stem": "波函数 $y=0.02\\cos(4\\pi t-2\\pi x)$（SI）。该波波长为 ______ $\\mathrm{m}$，波速为 ______ $\\mathrm{m/s}$。",
+      "answer": "$\\lambda=1.0\\ \\mathrm{m}$，$v=2.0\\ \\mathrm{m/s}$",
+      "explain": "对照 $y=A\\cos(\\omega t-kx)$：$\\omega=4\\pi$、$k=2\\pi$。$\\lambda=2\\pi/k=1.0\\ \\mathrm{m}$，$v=\\omega/k=2.0\\ \\mathrm{m/s}$，沿 $+x$ 传播。",
+      "source": "自编冲刺题"
+    },
+    {
+      "id": "q8",
+      "type": "fill",
+      "chapter": "c2",
+      "points": [
+        "p6"
+      ],
+      "difficulty": 3,
+      "stem": "长 $0.60\\ \\mathrm{m}$ 的弦两端固定，基频 $200\\ \\mathrm{Hz}$。弦上横波波速为 ______ $\\mathrm{m/s}$。",
+      "answer": "240",
+      "explain": "基频 $L=\\lambda/2\\Rightarrow\\lambda=1.20\\ \\mathrm{m}$，$v=f\\lambda=200\\times1.20=240\\ \\mathrm{m/s}$。",
+      "source": "自编冲刺题"
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "chapter": "c3",
+      "points": [
+        "p8"
+      ],
+      "difficulty": 3,
+      "stem": "关于理想气体各等值过程，下列说法正确的是：",
+      "options": [
+        "A. 等温过程 $Q=0$",
+        "B. 绝热过程 $\\Delta E=0$",
+        "C. 等容过程 $W=0$，$Q=\\Delta E$",
+        "D. 等压过程 $W=0$"
+      ],
+      "answer": "C",
+      "explain": "等容过程体积不变，气体不做功，$Q=\\Delta E$。等温过程 $\\Delta E=0$ 但 $Q=W\\ne0$；绝热过程 $Q=0$ 而 $\\Delta E=-W$；等压过程 $W=p\\Delta V\\ne0$。",
+      "source": "自编冲刺题"
+    },
+    {
+      "id": "q10",
+      "type": "calc",
+      "chapter": "c3",
+      "points": [
+        "p8"
+      ],
+      "difficulty": 4,
+      "stem": "$1.0\\ \\mathrm{mol}$ 单原子理想气体等压升温 $100\\ \\mathrm{K}$，取 $R=8.31\\ \\mathrm{J/(mol\\cdot K)}$。求吸收的热量、内能增量与对外做功。",
+      "answer": "$Q=2.08\\times10^{3}\\ \\mathrm{J}$，$\\Delta E=1.25\\times10^{3}\\ \\mathrm{J}$，$W=8.3\\times10^{2}\\ \\mathrm{J}$",
+      "explain": "$C_p=\\frac52R$：$Q=\\nu C_p\\Delta T=2.08\\times10^3\\ \\mathrm{J}$；$\\Delta E=\\nu\\frac32R\\Delta T=1.25\\times10^3\\ \\mathrm{J}$；$W=\\nu R\\Delta T=8.3\\times10^2\\ \\mathrm{J}$。三者满足 $Q=\\Delta E+W$。",
+      "source": "自编冲刺题"
+    },
+    {
+      "id": "q11",
+      "type": "calc",
+      "chapter": "c3",
+      "points": [
+        "p7",
+        "p8"
+      ],
+      "difficulty": 4,
+      "stem": "卡诺热机工作于 $500\\ \\mathrm{K}$ 与 $300\\ \\mathrm{K}$ 之间，每循环从高温热源吸热 $800\\ \\mathrm{J}$。求效率与每循环对外做的功。",
+      "answer": "$\\eta=40\\%$，$W=320\\ \\mathrm{J}$",
+      "explain": "$\\eta=1-T_2/T_1=1-300/500=0.40$；$W=\\eta Q_1=0.40\\times800=320\\ \\mathrm{J}$。",
+      "source": "自编冲刺题"
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "chapter": "c4",
+      "points": [
+        "p9"
+      ],
+      "difficulty": 3,
+      "stem": "关于高斯定理，下列说法正确的是：",
+      "options": [
+        "A. 高斯面内电荷为零时，面上各点场强必为零",
+        "B. 高斯面上场强处处为零时，面内必无电荷",
+        "C. 通过高斯面的电通量只由面内电荷决定",
+        "D. 高斯面外的电荷对面上场强没有贡献"
+      ],
+      "answer": "C",
+      "explain": "电通量只取决于面内净电荷（C 正确）。面内无电荷时通量为零但场强可以不为零（如外部点电荷），A 错；面上处处为零则通量为零，面内净电荷为零（不等于无电荷，可能有等量正负电荷），B 过强；面外电荷影响场强但不影响通量，D 错。",
+      "source": "自编冲刺题"
+    },
+    {
+      "id": "q13",
+      "type": "calc",
+      "chapter": "c4",
+      "points": [
+        "p10"
+      ],
+      "difficulty": 4,
+      "stem": "匝数 $N=100$、面积 $0.010\\ \\mathrm{m^2}$ 的线圈置于垂直磁场的均匀磁场中，$0.10\\ \\mathrm{s}$ 内磁感应强度由 $0.10\\ \\mathrm{T}$ 均匀减到零。求感应电动势大小。",
+      "answer": "$1.0\\ \\mathrm{V}$",
+      "explain": "$\\varepsilon=N S\\dfrac{\\Delta B}{\\Delta t}=100\\times0.010\\times\\dfrac{0.10}{0.10}=1.0\\ \\mathrm{V}$。楞次定律：感应电流磁场与原磁场同向，阻碍磁通减小。",
+      "source": "自编冲刺题"
+    },
+    {
+      "id": "q14",
+      "type": "proof",
+      "chapter": "c4",
+      "points": [
+        "p9"
+      ],
+      "difficulty": 4,
+      "stem": "证明：均匀带电球体（半径 $R$、总电荷 $Q$）在球外 $r>R$ 处的电场强度为 $E=\\dfrac{Q}{4\\pi\\varepsilon_0r^2}$。",
+      "answer": "见解析",
+      "explain": "取与球同心、半径 $r>R$ 的高斯球面。由球对称性，$\\vec E$ 沿径向且面上大小相等，故 $\\oint\\vec E\\cdot\\mathrm{d}\\vec S=4\\pi r^2E$；面内包围全部电荷 $Q$。由高斯定理 $4\\pi r^2E=Q/\\varepsilon_0$，得 $E=\\dfrac{Q}{4\\pi\\varepsilon_0r^2}$。结果与点电荷场同形，说明球外场等效于电荷集中于球心。",
+      "source": "自编冲刺题"
+    }
+  ]
+}

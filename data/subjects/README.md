@@ -1,18 +1,25 @@
-# 科目突击包（已下线）
+# 科目突击包
 
-`v3.5.0` 起本科目包内容暂时下线：本目录不再包含任何 `*.json` 包，`/api/sprint/packs` 返回空列表，
-`/api/meta` 的 `features.sprint` 与 `features.vocab` 均为 `false`，前端导航自动隐藏「期末突击」入口。
+本目录存放「期末突击」的科目包（`*.json`）与词库（`vocab/`）。
+服务启动时由 `lib/sprint.js` 只读加载，`/api/meta` 的 `features.sprint`
+按「包数 > 0」动态返回，前端导航据此显示或隐藏入口。
 
-## 为什么保留这个目录与代码
+## 当前状态（v3.10.1）
 
-- `lib/sprint.js`、`routes/sprint.js`、`public/js/views/sprint*.js` 全部保留，只是没有数据可加载。
-- 特性开关改成按包数动态判断（`packs.length > 0`），不是硬编码关闭。
+- 已恢复 **9 个包**：微积分(B)、习近平新时代中国特色社会主义思想概论、C 语言、综合英语、
+  CET-4、CET-6、专业力学、普通物理实验、大学物理(上)；
+- 天文入门包 `bnu-astro-intro-2026.json` **未恢复**——题库里的天文题已按要求下架，
+  包里的 `ref` 会指向不存在的题；
+- 词库在 `vocab/`（CET-4/6 用到），因此 `features.vocab` 也是 `true`。
 
-## 恢复方法
+## 两条硬约定
 
-1. 把包文件放回本目录（原先的 11 个包：`hust-*`、`cet4/cet6`、`physics-general-2026`、
-   `bnu-mechanics/astro-intro/physics-lab-2026`，以及 `vocab/` 词库目录）；
-2. 重启服务。`features.sprint` 会自动变回 `true`，导航与突击页恢复，无需改代码；
-3. `npm run check:sprint`（科目包体检）会从「跳过」恢复为完整校验。
+1. 包里的 `ref` 引用题库编号，**删题/合并题时不能碰被引用的题**。
+   `tools/ops/prune-vault.mjs dedupe` 已把这类编号列为保护项，不会合并掉。
+2. 包文件合计约 1MB，**随仓库一起提交**（`data/subjects/*.json` 与 `vocab/` 都在推送白名单里），
+   这样 clone 下来就能复现线上的「期末突击」，换机器不必另找数据。
 
-数据已在本机归档到 `_archive/subjects/`（工作区根，不入仓库）。
+## 下线 / 恢复
+
+- 下线：把本目录的 `*.json` 移走再重启，`features.sprint` 自动变 `false`，导航隐藏入口。
+- 恢复：放回 json 再重启，入口自动出现。全程不改代码。

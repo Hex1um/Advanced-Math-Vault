@@ -83,7 +83,8 @@ module.exports = function registerHealthRoutes(router, ctx) {
       site: db.settings.site || db.settings.siteName || '',
       stats: {
         problems: approved.length,
-        users: db.users.length,
+        /* 测试账号（hidden）不计入站点人数，榜单上也不出现 */
+        users: db.users.filter((u) => !u.hidden).length,
         posts: db.posts.length,
         solves: solvedTotal,
         pending: db.problems.filter((p) => p.status === 'pending').length,
@@ -137,8 +138,9 @@ module.exports = function registerHealthRoutes(router, ctx) {
 
   /* ---- 排行榜 ---- */
   if (pathname === '/api/leaderboard' && method === 'GET') {
-    // 全站账号都列出来（按经验、做出题数排序），不再只给前 10 名
-    const all = db.users.slice()
+    // 全站账号都列出来（按经验、做出题数排序），不再只给前 10 名；
+    // 标了 hidden 的测试账号一律不露面（数据保留，后台仍可管理）。
+    const all = db.users.filter((u) => !u.hidden)
       .map((u) => publicUser(u))
       .sort((a, b) => (b.exp - a.exp) || (b.solvedCount - a.solvedCount) || String(a.name).localeCompare(String(b.name)))
       .map((u, i) => Object.assign({ rank: i + 1 }, u));

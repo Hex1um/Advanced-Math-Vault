@@ -1,0 +1,1876 @@
+{
+  "id": "hust-c-2026",
+  "school": "华中科技大学",
+  "schoolShort": "华科",
+  "subject": "C 语言程序设计",
+  "subjectShort": "C 语言",
+  "year": "2026",
+  "term": "秋季学期",
+  "updatedAt": "2026-11-26",
+  "intro": "按华科 C 语言期末卷的五种题型拆考点：表达式求值、改错、简答、程序分析、程序完善。真题来自 2020–2022 三套期末卷，其余按考点自编。",
+  "exam": {
+    "durationMin": 150,
+    "totalPoints": 100,
+    "sections": [
+      {
+        "type": "fill",
+        "name": "计算表达式的值",
+        "count": 10,
+        "per": 1,
+        "points": 10,
+        "note": "每小题独立，考求值顺序与类型"
+      },
+      {
+        "type": "code",
+        "name": "改错题",
+        "count": 7,
+        "per": 2,
+        "points": 14,
+        "note": "每题 2 处错，指出并改正"
+      },
+      {
+        "type": "short",
+        "name": "简答题",
+        "count": 6,
+        "per": 4,
+        "points": 24,
+        "note": "关键字/合法标识符、声明辨析、宏、指针含义"
+      },
+      {
+        "type": "fill",
+        "name": "程序分析题",
+        "count": 6,
+        "per": 4,
+        "points": 24,
+        "note": "写出运行结果，注意静态变量与副作用"
+      },
+      {
+        "type": "code",
+        "name": "程序完善题",
+        "count": 14,
+        "per": 2,
+        "points": 28,
+        "note": "按功能填 14 个空"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "kind": "真题",
+      "title": "华中科技大学 2020/2021/2022 秋 C 语言期末试卷（A 卷）及参考答案",
+      "note": "题型与分值按 2020 卷对齐"
+    },
+    {
+      "kind": "教材",
+      "title": "《C 程序设计语言》第 2 版 / 课程课件第 1–10 章",
+      "note": "章节顺序与课件一致"
+    }
+  ],
+  "chapters": [
+    {
+      "id": "c1",
+      "no": "第1–2章",
+      "title": "基本数据类型与运算",
+      "weight": 5,
+      "summary": "表达式求值的 10 分全在这里，考的是优先级、结合性与副作用。"
+    },
+    {
+      "id": "c2",
+      "no": "第3章",
+      "title": "格式化输入输出",
+      "weight": 3,
+      "summary": "printf/scanf 的格式符与返回值，改错题高频。"
+    },
+    {
+      "id": "c3",
+      "no": "第4章",
+      "title": "流程控制",
+      "weight": 4,
+      "summary": "分支与循环，程序分析题的主战场。"
+    },
+    {
+      "id": "c4",
+      "no": "第7章",
+      "title": "数组与字符串",
+      "weight": 5,
+      "summary": "一维/二维数组、字符数组与库函数，简答与完善题都考。"
+    },
+    {
+      "id": "c5",
+      "no": "第5章",
+      "title": "函数",
+      "weight": 5,
+      "summary": "参数传递、递归、静态变量，程序分析题必出。"
+    },
+    {
+      "id": "c6",
+      "no": "第8章",
+      "title": "指针",
+      "weight": 6,
+      "summary": "最容易丢分的一章：指针与数组、const、指针数组、函数指针。"
+    },
+    {
+      "id": "c7",
+      "no": "第9章",
+      "title": "结构体、联合与链表",
+      "weight": 4,
+      "summary": "结构体指针与链表操作是程序完善题的常客。"
+    },
+    {
+      "id": "c8",
+      "no": "第6、10章",
+      "title": "预处理与文件",
+      "weight": 3,
+      "summary": "宏的展开陷阱、文件打开模式与读写函数。"
+    }
+  ],
+  "points": [
+    {
+      "id": "p1-1",
+      "chapter": "c1",
+      "title": "基本类型、常量与标识符",
+      "core": "C 的关键字共 32 个（如 int、case、union、return），标识符只能由字母、数字、下划线组成且不能以数字开头，也不能是关键字。",
+      "detail": "整型常量有十进制、八进制（0 开头）、十六进制（0x 开头）；字符常量是整型（'A' 即 65）；字符串常量以 '\\0' 结尾，所以 \"abc\" 占 4 个字节。",
+      "keys": [
+        "关键字",
+        "合法标识符",
+        "字符常量",
+        "转义字符"
+      ],
+      "examTypes": [
+        "short",
+        "single"
+      ],
+      "frequency": 5,
+      "traps": [
+        "getchar、printf 是库函数名不是关键字，但也不能当变量名重复定义",
+        "标识符区分大小写，Abc 与 abc 不同"
+      ]
+    },
+    {
+      "id": "p1-2",
+      "chapter": "c1",
+      "title": "运算符优先级与结合性",
+      "core": "记忆骨架：单目 > 算术 > 关系 > 逻辑 > 条件 > 赋值 > 逗号；条件运算符右结合，赋值运算符右结合。",
+      "detail": "高频细节：`&&` 与 `||` 有短路特性；`!` 优先级高于算术但低于括号；`%` 只能用于整型；`/` 两整数相除向零取整。",
+      "keys": [
+        "优先级",
+        "结合性",
+        "短路求值",
+        "整数除法"
+      ],
+      "examTypes": [
+        "fill",
+        "single"
+      ],
+      "frequency": 5,
+      "traps": [
+        "a > b ? a : b + 1 是 a > b ? a : (b+1)，不是 (a>b?a:b)+1",
+        "x = y = 3 合法（右结合），x = (y=3) 的值为 3"
+      ]
+    },
+    {
+      "id": "p1-3",
+      "chapter": "c1",
+      "title": "自增自减与逗号表达式",
+      "core": "前缀 ++x 先加再用，后缀 x++ 先用再加；逗号表达式的值是最后一个子表达式的值，求值顺序从左到右。",
+      "detail": "同一表达式中对同一变量多次自增属于未定义行为（如 `i++ + i++`），考试一般避免；但 `(a=7,b=3,a>b?a++:b++,a+b)` 这类逗号链要按顺序算。",
+      "keys": [
+        "前置",
+        "后置",
+        "逗号表达式",
+        "副作用"
+      ],
+      "examTypes": [
+        "fill",
+        "single"
+      ],
+      "frequency": 5,
+      "traps": [
+        "a += a *= a 先算 a*=a（a=49），再 a+=49 得 98（a 初值 7）",
+        "b = a++ 后 a 增 1，但 b 拿到的是旧值"
+      ]
+    },
+    {
+      "id": "p1-4",
+      "chapter": "c1",
+      "title": "位运算",
+      "core": "& 按位与、| 按位或、^ 按位异或、~ 按位取反、<< 左移、>> 右移；异或可用于交换与判重，移位相当于乘除 2 的幂。",
+      "detail": "循环左移 n 位：`(x << n) | (x >> (32 - n))`（假设 int 为 32 位，且用无符号避免符号位干扰）。要注意 `>>` 对有符号负数多为算术右移（补 1）。",
+      "keys": [
+        "按位与",
+        "异或",
+        "移位",
+        "循环移位"
+      ],
+      "examTypes": [
+        "short",
+        "fill"
+      ],
+      "frequency": 4,
+      "traps": [
+        "~0 是 -1 不是 0",
+        "移位位数超过类型宽度是未定义行为"
+      ]
+    },
+    {
+      "id": "p1-5",
+      "chapter": "c1",
+      "title": "类型转换",
+      "core": "自动转换按「低精度 → 高精度」提升（char→int→long→float→double）；强制转换 `(类型)表达式` 只改本次运算的类型，不改变变量本身。",
+      "detail": "整数除法截断：`5/2` 得 2，`5/2.0` 得 2.5；`(float)5/2` 得 2.5。把 double 赋给 int 会截断小数部分而不是四舍五入。",
+      "keys": [
+        "隐式转换",
+        "强制转换",
+        "截断",
+        "精度"
+      ],
+      "examTypes": [
+        "fill",
+        "single"
+      ],
+      "frequency": 4,
+      "traps": [
+        "(int)3.9 得 3，不是 4",
+        "char 参与算术运算时按 ASCII 码提升为 int"
+      ]
+    },
+    {
+      "id": "p2-1",
+      "chapter": "c2",
+      "title": "printf 的格式控制",
+      "core": "常用格式符：%d 十进制、%o 八进制、%x 十六进制、%c 字符、%s 字符串、%f 浮点（默认 6 位小数）、%e 指数、%% 输出百分号。",
+      "detail": "宽度与精度写法：`%5d` 右对齐占 5 列、`%-5d` 左对齐、`%05d` 补零、`%.2f` 保留两位。输出长度不匹配时不会报错，只会按格式解释内存。",
+      "keys": [
+        "格式符",
+        "宽度",
+        "精度",
+        "转义"
+      ],
+      "examTypes": [
+        "fill",
+        "single"
+      ],
+      "frequency": 5,
+      "traps": [
+        "%d 输出 float 是未定义行为（要 %f）",
+        "printf 返回值是输出的字符数，不是 0"
+      ]
+    },
+    {
+      "id": "p2-2",
+      "chapter": "c2",
+      "title": "scanf 的用法与返回值",
+      "core": "scanf 需要地址（`&x`），数组名本身是地址；返回值是成功读入的项数，遇到输入结束返回 EOF。",
+      "detail": "格式串里的普通字符要求输入中严格匹配；`%s` 遇空白即止，`%c` 会读入空格和换行；`scanf(\"%d,%d\", &a, &b)` 输入时必须带逗号。",
+      "keys": [
+        "取地址",
+        "返回值",
+        "输入匹配",
+        "空白字符"
+      ],
+      "examTypes": [
+        "single",
+        "code"
+      ],
+      "frequency": 5,
+      "traps": [
+        "scanf(\"%d\", x) 少了 & 是改错题经典错误",
+        "用 %c 读字符前要处理上一次输入留下的换行"
+      ]
+    },
+    {
+      "id": "p3-1",
+      "chapter": "c3",
+      "title": "if 与 switch",
+      "core": "switch 的表达式必须是整型或字符型，case 后必须是常量，各分支靠 break 跳出，否则会「贯穿」继续执行。",
+      "detail": "if 的悬空 else 遵循「就近匹配」；`if (a = 5)` 是赋值恒真，考试常作为改错点。switch 里 default 位置任意，但通常放最后。",
+      "keys": [
+        "switch",
+        "case 常量",
+        "break",
+        "悬空 else"
+      ],
+      "examTypes": [
+        "single",
+        "code",
+        "fill"
+      ],
+      "frequency": 5,
+      "traps": [
+        "case 后写变量或范围（如 case 1..5）不合法",
+        "漏 break 会继续执行下一个分支"
+      ]
+    },
+    {
+      "id": "p3-2",
+      "chapter": "c3",
+      "title": "循环与 break/continue",
+      "core": "for、while、do-while 三种循环；break 跳出整个循环，continue 只结束本次迭代；do-while 至少执行一次。",
+      "detail": "for 的三个表达式都可省略：`for(;;)` 是死循环。循环变量的作用域（C99 起可在 for 内定义）；嵌套循环里 break 只跳出一层。",
+      "keys": [
+        "for",
+        "while",
+        "do-while",
+        "break",
+        "continue"
+      ],
+      "examTypes": [
+        "fill",
+        "single"
+      ],
+      "frequency": 5,
+      "traps": [
+        "continue 在 while 中可能跳过变量更新导致死循环",
+        "for 循环体为空语句时逻辑仍会执行完"
+      ]
+    },
+    {
+      "id": "p3-3",
+      "chapter": "c3",
+      "title": "常见循环算法",
+      "core": "累加/累乘、数位拆分、判素数、最大公约数（辗转相除）、斐波那契、简单排序与查找，是程序完善题的固定套路。",
+      "detail": "数位拆分：`while(n){ d=n%10; n/=10; }`；判素数只需试到 `i*i<=n`；辗转相除：`while(b){ t=a%b; a=b; b=t; }`。",
+      "keys": [
+        "累加",
+        "数位拆分",
+        "判素数",
+        "辗转相除"
+      ],
+      "examTypes": [
+        "code",
+        "fill"
+      ],
+      "frequency": 4,
+      "traps": [
+        "判素数循环条件写 i<n 会多做一半无用功",
+        "求最大公约数后忘了 a 就是结果"
+      ]
+    },
+    {
+      "id": "p4-1",
+      "chapter": "c4",
+      "title": "一维数组",
+      "core": "数组下标从 0 开始，长度必须是编译期常量（C99 支持变长数组但考试少用）；初始化 `int a[5]={1,2}` 其余元素补 0。",
+      "detail": "数组名是首元素地址，不能整体赋值（`a = b` 非法），也不能作函数返回值；越界不报错但结果不可预期。",
+      "keys": [
+        "下标",
+        "初始化",
+        "越界",
+        "数组名"
+      ],
+      "examTypes": [
+        "single",
+        "short"
+      ],
+      "frequency": 5,
+      "traps": [
+        "int a[5]=(0,1,2,3,4) 用圆括号是逗号表达式，不是初始化",
+        "int a['0'] 合法（'0' 即 48），但 int a[n][4] 且 n 未定义不合法"
+      ]
+    },
+    {
+      "id": "p4-2",
+      "chapter": "c4",
+      "title": "二维数组",
+      "core": "二维数组按行存储；定义时第二维不能省略；`a[i]` 是一维数组名，`a[i][j]` 才是元素。",
+      "detail": "初始化 `int a[2][3]={{1,2,3},{4,5,6}}` 或 `{1,2,3,4,5,6}`；遍历通常双层循环，外层行内层列。",
+      "keys": [
+        "按行存储",
+        "第二维不能省",
+        "行指针"
+      ],
+      "examTypes": [
+        "fill",
+        "single"
+      ],
+      "frequency": 4,
+      "traps": [
+        "int a[][3] 可以，int a[3][] 不行",
+        "a 与 a[0] 地址值相同但类型不同（行指针 vs 元素指针）"
+      ]
+    },
+    {
+      "id": "p4-3",
+      "chapter": "c4",
+      "title": "字符数组与字符串",
+      "core": "字符串以 '\\0' 结尾；`char s[]=\"abc\"` 占 4 字节，`char s[3]={'a','b','c'}` 不是字符串，用 %s 输出会越界。",
+      "detail": "字符数组可以修改，字符串常量（`char *p=\"abc\"`）不可修改；`strlen` 不计 '\\0'，`sizeof` 计入。",
+      "keys": [
+        "\\0",
+        "strlen",
+        "sizeof",
+        "可修改性"
+      ],
+      "examTypes": [
+        "fill",
+        "single",
+        "short"
+      ],
+      "frequency": 5,
+      "traps": [
+        "strlen(\"helloword\") 是 9，但 char strb[15]={'h','c','a','f','e','\\0'} 的 strlen 是 5",
+        "char a[3]={'a','b','c'} 后 strlen(a) 结果不可预期"
+      ]
+    },
+    {
+      "id": "p4-4",
+      "chapter": "c4",
+      "title": "字符串库函数",
+      "core": "strlen 求长度、strcpy 复制、strcat 连接、strcmp 比较（返回差值，相等为 0）、strncpy/strncat/strncmp 限定长度。",
+      "detail": "strcpy/strcat 不检查目标空间，是缓冲区溢出的常见来源；比较字符串不能用 `==`，必须 strcmp。",
+      "keys": [
+        "strcpy",
+        "strcmp",
+        "strcat",
+        "strlen"
+      ],
+      "examTypes": [
+        "single",
+        "code"
+      ],
+      "frequency": 4,
+      "traps": [
+        "if (s1 == s2) 比较的是地址不是内容",
+        "strcat 前目标串必须有 '\\0'"
+      ]
+    },
+    {
+      "id": "p5-1",
+      "chapter": "c5",
+      "title": "函数的定义、声明与调用",
+      "core": "函数定义包含返回类型、函数名、参数表与函数体；调用前必须有声明（原型），否则按隐式 int 处理会出错。",
+      "detail": "return 只能返回一个值；返回类型为 void 时不能返回值；main 的返回值 0 表示正常结束。函数不能嵌套定义，但可以嵌套调用。",
+      "keys": [
+        "原型",
+        "返回值",
+        "嵌套调用",
+        "void"
+      ],
+      "examTypes": [
+        "single",
+        "code"
+      ],
+      "frequency": 4,
+      "traps": [
+        "数组作参数时退化为指针，函数内 sizeof 拿到的是指针大小",
+        "函数声明末尾漏分号"
+      ]
+    },
+    {
+      "id": "p5-2",
+      "chapter": "c5",
+      "title": "参数传递",
+      "core": "C 只有值传递：形参是实参的副本，函数内改形参不影响实参；要改实参必须传地址（指针）。",
+      "detail": "数组名作参数传的是首地址，所以函数内修改数组元素会影响原数组——这是「看起来像引用传递」的原因。",
+      "keys": [
+        "值传递",
+        "地址传递",
+        "数组退化为指针"
+      ],
+      "examTypes": [
+        "short",
+        "single",
+        "code"
+      ],
+      "frequency": 5,
+      "traps": [
+        "void swap(int a,int b) 交换不了实参",
+        "传数组时不要再用 & 取地址"
+      ]
+    },
+    {
+      "id": "p5-3",
+      "chapter": "c5",
+      "title": "递归",
+      "core": "递归必须有终止条件与向终止条件推进的递归式，否则栈溢出；阶乘、斐波那契、汉诺塔、二分查找是典型场景。",
+      "detail": "递归的每一层都有自己的局部变量；递归深度大时效率低（斐波那契会指数级重复计算），可改写成迭代或加记忆化。",
+      "keys": [
+        "终止条件",
+        "递归式",
+        "栈",
+        "重复计算"
+      ],
+      "examTypes": [
+        "code",
+        "short"
+      ],
+      "frequency": 4,
+      "traps": [
+        "缺终止条件会无限递归",
+        "递归函数里忘了 return 递归调用的结果"
+      ]
+    },
+    {
+      "id": "p5-4",
+      "chapter": "c5",
+      "title": "变量作用域与存储类",
+      "core": "auto（默认局部）、static（静态：只初始化一次，生命周期到程序结束）、extern（声明外部变量）、register（建议放寄存器）。",
+      "detail": "static 修饰局部变量时「值会保留」，是程序分析题的高频考点；static 修饰全局变量/函数时限制在本文件内可见。全局变量默认初值为 0，局部变量不初始化则是随机值。",
+      "keys": [
+        "static",
+        "extern",
+        "作用域",
+        "生命周期"
+      ],
+      "examTypes": [
+        "fill",
+        "short"
+      ],
+      "frequency": 5,
+      "traps": [
+        "static int b=20 在函数内只初始化一次，第二次调用 b 是上次的值",
+        "局部变量未初始化不能直接参与运算"
+      ]
+    },
+    {
+      "id": "p6-1",
+      "chapter": "c6",
+      "title": "指针基础",
+      "core": "指针存放地址；`&x` 取地址，`*p` 解引用；指针必须先指向有效内存再解引用，否则是野指针。",
+      "detail": "`int *p; *p = 5;` 错在 p 未初始化；`p = NULL` 后解引用会崩溃（空指针解引用）。指针的类型决定解引用时读几个字节。",
+      "keys": [
+        "取地址",
+        "解引用",
+        "野指针",
+        "NULL"
+      ],
+      "examTypes": [
+        "single",
+        "short",
+        "code"
+      ],
+      "frequency": 5,
+      "traps": [
+        "*p++ 是 *(p++)，先取 p 指向的值再让 p 后移",
+        "(*p)++ 是把 p 指向的值加 1"
+      ]
+    },
+    {
+      "id": "p6-2",
+      "chapter": "c6",
+      "title": "指针与数组",
+      "core": "数组名等价于首元素地址；`a[i]`、`*(a+i)`、`*(p+i)`（p=a）等价；指针相减得到元素个数差。",
+      "detail": "`p+1` 前进的是「一个元素」的字节数，不是 1 字节。二维数组里 `a` 是行指针，`a+1` 跳过一整行。",
+      "keys": [
+        "首地址",
+        "指针算术",
+        "等价写法",
+        "行指针"
+      ],
+      "examTypes": [
+        "fill",
+        "code",
+        "single"
+      ],
+      "frequency": 5,
+      "traps": [
+        "*(q+1) 与 *q+1 差一个优先级",
+        "对数组名取地址 &a 与 a 数值相同、类型不同"
+      ]
+    },
+    {
+      "id": "p6-3",
+      "chapter": "c6",
+      "title": "指针与字符串",
+      "core": "字符指针可指向字符串常量或字符数组；指向常量时不可修改，指向数组时可改内容但不可改变长度。",
+      "detail": "`char *s = \"abc\"; s[0]='x';` 是未定义行为；`char a[]=\"abc\"; a[0]='x';` 合法。用指针遍历字符串常写成 `while(*p)`。",
+      "keys": [
+        "字符串常量",
+        "字符数组",
+        "可写性"
+      ],
+      "examTypes": [
+        "single",
+        "code"
+      ],
+      "frequency": 4,
+      "traps": [
+        "char *s=\"abc\" 与 char s[]=\"abc\" 的存储位置不同",
+        "修改字符串常量段可能直接崩溃"
+      ]
+    },
+    {
+      "id": "p6-4",
+      "chapter": "c6",
+      "title": "const 与指针",
+      "core": "`const int *p`：指向的内容不可改，指针本身可改；`int *const p`：指针本身不可改，内容可改；`const int *const p`：都不可改。",
+      "detail": "读法口诀：const 在 * 左边修饰「所指内容」，在 * 右边修饰「指针本身」。这是 2020 卷简答题原题。",
+      "keys": [
+        "指向常量",
+        "常量指针",
+        "const 位置"
+      ],
+      "examTypes": [
+        "short",
+        "single"
+      ],
+      "frequency": 5,
+      "traps": [
+        "const int *p 里 *p=3 非法，但 p=&y 合法",
+        "int *const p 里 p=&y 非法，*p=3 合法"
+      ]
+    },
+    {
+      "id": "p6-5",
+      "chapter": "c6",
+      "title": "指针数组、数组指针与函数指针",
+      "core": "`int *a[10]` 是指针数组（10 个指针）；`int (*a)[10]` 是数组指针（指向含 10 个 int 的数组）；`int (*f)(int)` 是函数指针。",
+      "detail": "括号改变结合顺序：`*a[10]` 先算下标再解引用，`(*a)[10]` 先解引用再下标。`int (*b[10])(int)` 是「10 个元素的数组，元素是指向函数的指针」。",
+      "keys": [
+        "指针数组",
+        "数组指针",
+        "函数指针",
+        "声明读法"
+      ],
+      "examTypes": [
+        "short",
+        "single"
+      ],
+      "frequency": 5,
+      "traps": [
+        "int *a[10] 与 int (*a)[10] 的含义完全相反",
+        "函数指针调用要写成 (*f)(x) 或 f(x)"
+      ]
+    },
+    {
+      "id": "p7-1",
+      "chapter": "c7",
+      "title": "结构体的定义与访问",
+      "core": "struct 定义一种聚合类型；用 `.` 访问成员，用指针时用 `->`；`typedef` 可简化类型名。",
+      "detail": "结构体可以嵌套、可以整体赋值（同类型），但不能用 == 比较；内存可能对齐填充，sizeof 未必等于成员之和。",
+      "keys": [
+        "struct",
+        "成员访问",
+        "typedef",
+        "对齐"
+      ],
+      "examTypes": [
+        "single",
+        "fill"
+      ],
+      "frequency": 4,
+      "traps": [
+        "p.n 与 p->n 混用是最常见的编译错误",
+        "结构体比较要逐成员比"
+      ]
+    },
+    {
+      "id": "p7-2",
+      "chapter": "c7",
+      "title": "结构体数组与指针",
+      "core": "结构体数组按元素连续存放；结构体指针的 `p->n` 等价于 `(*p).n`；`p++` 跳到下一个结构体。",
+      "detail": "常见遍历：`for (p = a; p < a + n; p++) sum += p->score;`。取成员地址要注意优先级：`&p->n` 是 `&(p->n)`。",
+      "keys": [
+        "结构体数组",
+        "箭头运算符",
+        "遍历"
+      ],
+      "examTypes": [
+        "fill",
+        "code"
+      ],
+      "frequency": 4,
+      "traps": [
+        "*p.n 是 *(p.n)，会编译错误",
+        "++p->n 是 ++(p->n)，改的是成员不是指针"
+      ]
+    },
+    {
+      "id": "p7-3",
+      "chapter": "c7",
+      "title": "链表的基本操作",
+      "core": "单链表由「数据域 + 指向下一结点的指针」构成；插入要先接后断，删除要先保存后继再释放。",
+      "detail": "头插法建表得到逆序，尾插法保持顺序；遍历终止条件是 `p != NULL`；删除结点必须 free，否则内存泄漏。",
+      "keys": [
+        "结点",
+        "头插",
+        "尾插",
+        "删除"
+      ],
+      "examTypes": [
+        "code",
+        "short"
+      ],
+      "frequency": 4,
+      "traps": [
+        "插入时先改 p->next 再改前驱指针会丢失后半段",
+        "删除后继续访问被释放的结点"
+      ]
+    },
+    {
+      "id": "p7-4",
+      "chapter": "c7",
+      "title": "联合与枚举",
+      "core": "union 的所有成员共用同一块内存，大小等于最大成员；enum 定义整型常量集合，默认从 0 开始递增。",
+      "detail": "union 同一时刻只有一个成员有效，常用于节省空间或类型双关；enum 的成员是常量，可参与整型运算。",
+      "keys": [
+        "union",
+        "共用内存",
+        "enum",
+        "常量"
+      ],
+      "examTypes": [
+        "single",
+        "fill"
+      ],
+      "frequency": 3,
+      "traps": [
+        "union 的 sizeof 是最大成员（考虑对齐），不是成员之和",
+        "enum 成员不是字符串，printf 用 %d"
+      ]
+    },
+    {
+      "id": "p8-1",
+      "chapter": "c8",
+      "title": "文件的打开、读写与关闭",
+      "core": "fopen 返回 FILE*，失败返回 NULL；模式有 r/w/a 与加 b、+ 的组合；读完必须 fclose。",
+      "detail": "`r` 只读且文件必须存在，`w` 截断或新建，`a` 追加；文本读写用 fscanf/fprintf 或 fgets/fputs，二进制用 fread/fwrite。判断文件结束用返回值而不是 feof。",
+      "keys": [
+        "fopen",
+        "模式",
+        "fclose",
+        "fgets",
+        "EOF"
+      ],
+      "examTypes": [
+        "code",
+        "single"
+      ],
+      "frequency": 4,
+      "traps": [
+        "用 while(!feof(fp)) 会多读一次",
+        "fopen 后不判断 NULL 直接使用"
+      ]
+    },
+    {
+      "id": "p8-2",
+      "chapter": "c8",
+      "title": "宏定义",
+      "core": "`#define` 是文本替换，不是函数调用；带参宏的每个参数和整体都要加括号，否则会被优先级坑。",
+      "detail": "`#define S(r) r/r` 在 `S(x+y)` 展开为 `x+y/x+y`，不是 1。宏没有类型检查、不分配空间；`#undef` 可取消定义。",
+      "keys": [
+        "文本替换",
+        "加括号",
+        "副作用",
+        "undef"
+      ],
+      "examTypes": [
+        "short",
+        "fill"
+      ],
+      "frequency": 5,
+      "traps": [
+        "带参宏参数不加括号几乎必错",
+        "宏定义末尾不加分号"
+      ]
+    },
+    {
+      "id": "p8-3",
+      "chapter": "c8",
+      "title": "条件编译与头文件",
+      "core": "`#if/#ifdef/#ifndef/#else/#endif` 控制编译分支；`#include` 有 <> 与 \"\" 两种查找顺序；头文件卫士防重复包含。",
+      "detail": "`#ifndef X_H / #define X_H / ... / #endif` 是标准防重包含写法；`#include \"x.h\"` 先找当前目录，`<>` 只找系统路径。",
+      "keys": [
+        "条件编译",
+        "include",
+        "头文件卫士"
+      ],
+      "examTypes": [
+        "single",
+        "short"
+      ],
+      "frequency": 3,
+      "traps": [
+        "头文件卫士宏名重复会导致某处内容被整体跳过",
+        "把函数定义写进头文件会引发重复定义"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "qc-101",
+      "type": "short",
+      "chapter": "c1",
+      "points": [
+        "p1-1"
+      ],
+      "stem": "下列表示中，哪些是关键字？哪些是合法标识符？\n`print_3d  db8  aBc  a123  %x  a+b  123  _3ax  case  union  getchar`",
+      "answer": "① 关键字：`case`、`union`（C 语言保留字，不能作标识符）。\n② 合法标识符：`print_3d`、`db8`、`aBc`、`a123`、`_3ax`、`getchar`（其中 getchar 是库函数名，语法上合法，但不应重复定义）。\n③ 不合法：`%x`（含非法字符 %）、`a+b`（含运算符）、`123`（以数字开头）。",
+      "explain": "判据只有三条：只能由字母/数字/下划线组成、不能以数字开头、不能是关键字。库函数名不禁止但重名会让标准库调用失效，答题时最好补一句。",
+      "source": "2020 秋 C 语言期末试卷 · 简答题第 1 题",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-102",
+      "type": "single",
+      "chapter": "c1",
+      "points": [
+        "p1-1"
+      ],
+      "stem": "下列字符串常量中，占用字节数最多的是（　）。",
+      "options": [
+        "A. \"a\"",
+        "B. \"\\\\n\"",
+        "C. \"abc\"",
+        "D. \"\\\\\\\"\""
+      ],
+      "answer": "C",
+      "explain": "字符串常量末尾自动加 '\\0'：\"a\" 占 2 字节，\"\\n\" 占 2 字节，\"abc\" 占 4 字节，\"\\\"\" 占 2 字节。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-103",
+      "type": "single",
+      "chapter": "c1",
+      "points": [
+        "p1-2"
+      ],
+      "stem": "设 int a=1, b=2, c=3; 则表达式 `a > b ? a : b > c ? b : c` 的值是（　）。",
+      "options": [
+        "A. 1",
+        "B. 2",
+        "C. 3",
+        "D. 编译错误"
+      ],
+      "answer": "C",
+      "explain": "条件运算符右结合：等价于 a>b ? a : (b>c ? b : c)。a>b 为假，取后者；b>c 为假，取 c=3。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-104",
+      "type": "fill",
+      "chapter": "c1",
+      "points": [
+        "p1-2",
+        "p1-5"
+      ],
+      "stem": "设 int a=5; float b=2; 写出下列表达式的值：\n(1) `a/2`　(2) `a/2.0`　(3) `(float)a/2`　(4) `a%2`",
+      "answer": "(1) 2　(2) 2.5　(3) 2.5　(4) 1",
+      "explain": "两个整数相除向零取整；只要有一边是浮点就按浮点算。% 只能用于整型，5%2=1。",
+      "source": "自编·按考点",
+      "difficulty": 1
+    },
+    {
+      "id": "qc-105",
+      "type": "single",
+      "chapter": "c1",
+      "points": [
+        "p1-2"
+      ],
+      "stem": "设 int i=0; 表达式 `(i++ > 0) && (i++ > 0)` 求值后 i 的值为（　）。",
+      "options": [
+        "A. 0",
+        "B. 1",
+        "C. 2",
+        "D. 不确定"
+      ],
+      "answer": "B",
+      "explain": "&& 有短路特性：左边 i++>0 用掉旧值 0，结果为假，右边不再求值，所以 i 只自增一次，为 1。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-106",
+      "type": "fill",
+      "chapter": "c1",
+      "points": [
+        "p1-3"
+      ],
+      "stem": "根据声明 `char stra[]=\"helloword\", strb[15]={'h','c','a','f','e','\\0'}; int a=7,b=4,c=3;` 计算下列各值：\n(1) `strlen(stra)`　(2) `strlen(strb)`　(3) 表达式 `(a=7, b=3, a>b?a++:b++, a+b)` 的值　(4) 执行 `a += a *= a` 后 a 的值（a 初值 7）　(5) 表达式 `!(a-b)+c-2 || b+c/2` 的值（a=7,b=4,c=3）",
+      "answer": "(1) 9　(2) 5　(3) 11　(4) 98　(5) 1",
+      "explain": "(1) strlen 不计 '\\0'，\"helloword\" 有 9 个字符。(2) strb 里第 6 个字符是 '\\0'，长度为 5。(3) 逗号表达式从左到右：a=7，b=3，a>b 为真取 a++（值 7，a 变 8），最后 a+b=8+3=11。(4) 先 a*=a 得 49，再 a+=49 得 98。(5) !(7-4)=0，0+3-2=1，1||任何值为 1。",
+      "source": "2020 秋 C 语言期末试卷 · 一、计算表达式的值",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-107",
+      "type": "short",
+      "chapter": "c1",
+      "points": [
+        "p1-4"
+      ],
+      "stem": "请写一个 C 表达式，把 int 型数 x 循环左移 n 位（移出的高位补到低位），n 小于 int 的位数。",
+      "answer": "`(x << n) | (x >> (32 - n))`（假设 int 为 32 位；更稳妥的写法是先用 `unsigned int u = x;` 再对 u 做同样运算，避免有符号右移补符号位）。",
+      "explain": "循环左移 = 左移 n 位（低位补 0）+ 右移 (32-n) 位（把溢出的高位接回低位），两段按位或。踩分点在于写出 32-n 而不是 n。",
+      "source": "2020 秋 C 语言期末试卷 · 简答题第 3 题",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-108",
+      "type": "fill",
+      "chapter": "c1",
+      "points": [
+        "p1-4"
+      ],
+      "stem": "设 `unsigned char a = 0x5A;` 写出下列表达式的值（十六进制）：\n(1) `a & 0x0F`　(2) `a | 0x0F`　(3) `a ^ 0xFF`　(4) `~a & 0xFF`",
+      "answer": "(1) 0x0A　(2) 0x5F　(3) 0xA5　(4) 0xA5",
+      "explain": "0x5A = 0101 1010。低四位与 0x0F 得 1010=0x0A；或上 0x0F 得 0x5F；异或 0xFF 等价取反得 0xA5。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-109",
+      "type": "single",
+      "chapter": "c1",
+      "points": [
+        "p1-5"
+      ],
+      "stem": "执行 `int x = (int)3.9;` 后 x 的值是（　）。",
+      "options": [
+        "A. 4",
+        "B. 3",
+        "C. 3.9",
+        "D. 编译错误"
+      ],
+      "answer": "B",
+      "explain": "强制类型转换是截断小数部分，不做四舍五入；要四舍五入得用 `(int)(3.9 + 0.5)` 或 round 函数。",
+      "source": "自编·按考点",
+      "difficulty": 1
+    },
+    {
+      "id": "qc-201",
+      "type": "fill",
+      "chapter": "c2",
+      "points": [
+        "p2-1"
+      ],
+      "stem": "写出下列语句的输出：\n`printf(\"%5d|%-5d|%05d\", 42, 42, 42);`\n`printf(\"%.2f\", 3.14159);`",
+      "answer": "第一行输出：`   42|42   |00042`（%5d 右对齐占 5 列，%-5d 左对齐，%05d 补零）；第二行输出：`3.14`。",
+      "explain": "宽度是「最少占几列」，精度是「小数点后几位」。%05d 的 0 只对数值前导零生效。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-202",
+      "type": "single",
+      "chapter": "c2",
+      "points": [
+        "p2-1"
+      ],
+      "stem": "下列 printf 用法正确的是（　）。",
+      "options": [
+        "A. `printf(\"%d\", 3.14);`",
+        "B. `printf(\"%f\", 3);`",
+        "C. `printf(\"%c\", 'A');`",
+        "D. `printf(\"%s\", 'A');`"
+      ],
+      "answer": "C",
+      "explain": "A 用 %d 输出 double 是未定义行为；B 用 %f 输出 int 同样是类型不匹配；D 用 %s 需要 char* 而不是字符。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-203",
+      "type": "single",
+      "chapter": "c2",
+      "points": [
+        "p2-2"
+      ],
+      "stem": "`int n = scanf(\"%d,%d\", &a, &b);` 若输入为 `3 4`，则 n 的值是（　）。",
+      "options": [
+        "A. 2",
+        "B. 1",
+        "C. 0",
+        "D. EOF"
+      ],
+      "answer": "B",
+      "explain": "格式串里有逗号，要求输入中也有逗号。输入 `3 4` 时第一个 %d 读到 3 后遇到空格，与格式串的逗号不匹配，只成功读入 1 项。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-204",
+      "type": "code",
+      "chapter": "c2",
+      "points": [
+        "p2-2"
+      ],
+      "stem": "改错：下面程序想读入两个整数并输出它们的和，每处错误请指出并改正。\n```c\n#include <stdio.h>\nint main(void)\n{\n    int a, b;\n    scanf(\"%d%d\", a, b);\n    printf(\"%d\\n\", a + b)\n    return 0;\n}\n```",
+      "answer": "错误 1：`scanf(\"%d%d\", a, b)` 应改为 `scanf(\"%d%d\", &a, &b)`（scanf 需要地址）。\n错误 2：`printf(\"%d\\n\", a + b)` 末尾缺分号，应改为 `printf(\"%d\\n\", a + b);`。",
+      "explain": "改错题按「指出 + 改正」各给分，答对位置但改错仍不得分。缺分号与漏 & 是最常见的两处。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-301",
+      "type": "single",
+      "chapter": "c3",
+      "points": [
+        "p3-1"
+      ],
+      "stem": "关于 switch 语句，说法正确的是（　）。",
+      "options": [
+        "A. case 后面可以是任意表达式",
+        "B. 没有 break 时会继续执行后续 case 的语句",
+        "C. switch 的表达式可以是 float",
+        "D. default 必须放在最后"
+      ],
+      "answer": "B",
+      "explain": "case 后必须是整型常量表达式；switch 只接受整型/字符型；default 位置任意。漏 break 会贯穿，这是考点。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-302",
+      "type": "code",
+      "chapter": "c3",
+      "points": [
+        "p3-1"
+      ],
+      "stem": "改错：下面程序想按分数输出等级（90 以上 A，80 以上 B，其余 C），请指出两处错误并改正。\n```c\nint s = 85;\nswitch (s / 10) {\n    case 9: printf(\"A\");\n    case 8: printf(\"B\");\n    default: printf(\"C\");\n}\n```",
+      "answer": "错误 1：`case 9` 分支缺 `break;`，会继续打印 B。改为 `case 9: printf(\"A\"); break;`。\n错误 2：`case 8` 分支同样缺 `break;`，会继续打印 C。改为 `case 8: printf(\"B\"); break;`。",
+      "explain": "switch 只做「跳转」，不做「自动跳出」。两个 case 都要补 break，default 不需要。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-303",
+      "type": "fill",
+      "chapter": "c3",
+      "points": [
+        "p3-2"
+      ],
+      "stem": "写出下面程序的输出：\n```c\nint i, s = 0;\nfor (i = 1; i <= 5; i++) {\n    if (i == 3) continue;\n    if (i == 5) break;\n    s += i;\n}\nprintf(\"%d\", s);\n```",
+      "answer": "7",
+      "explain": "i=1、2 累加得 3；i=3 被 continue 跳过；i=4 累加得 7；i=5 触发 break 结束循环。所以输出 7。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-304",
+      "type": "single",
+      "chapter": "c3",
+      "points": [
+        "p3-2"
+      ],
+      "stem": "下列关于 do-while 的说法正确的是（　）。",
+      "options": [
+        "A. 循环体可能一次都不执行",
+        "B. 循环体至少执行一次",
+        "C. 条件为假时立即退出且不执行循环体",
+        "D. 不能与 break 配合"
+      ],
+      "answer": "B",
+      "explain": "do-while 先执行再判断，所以至少执行一次；while 与 for 才可能一次都不执行。",
+      "source": "自编·按考点",
+      "difficulty": 1
+    },
+    {
+      "id": "qc-305",
+      "type": "code",
+      "chapter": "c3",
+      "points": [
+        "p3-3"
+      ],
+      "stem": "编程：读入一个正整数 n（n≥2），判断它是否为素数，是输出 YES，否则输出 NO。要求用 `i*i <= n` 作为循环条件。",
+      "answer": "```c\n#include <stdio.h>\nint main(void)\n{\n    int n, i, prime = 1;\n    scanf(\"%d\", &n);\n    for (i = 2; i * i <= n; i++) {\n        if (n % i == 0) { prime = 0; break; }\n    }\n    printf(prime ? \"YES\\n\" : \"NO\\n\");\n    return 0;\n}\n```",
+      "explain": "踩分点：循环上界用 i*i<=n（等价于 i<=sqrt(n) 但不用浮点）、找到因子立即 break、用标志变量记录结果。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-306",
+      "type": "fill",
+      "chapter": "c3",
+      "points": [
+        "p3-3"
+      ],
+      "stem": "下面程序求两个正整数的最大公约数，请补全空缺：\n```c\nint a, b, t;\nscanf(\"%d%d\", &a, &b);\nwhile (____) { t = a % b; a = b; b = t; }\nprintf(\"%d\", ____);\n```",
+      "answer": "第一空：`b != 0`（或 `b`）；第二空：`a`。",
+      "explain": "辗转相除法：当 b 不为 0 时反复取余并轮换，循环结束时 a 就是最大公约数。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-401",
+      "type": "short",
+      "chapter": "c4",
+      "points": [
+        "p4-1",
+        "p4-2"
+      ],
+      "stem": "判断下列数组说明哪些正确，并说明理由：\n(1) `int a[5]=(0,1,2,3,4);`\n(2) `int a['0'];`\n(3) `int a[3]={0,1,2};`\n(4) `int a{5}={10*1};`\n(5) `char f[][4]={\"Mon\",\"Tue\",\"Wed\"};`\n(6) `char a[3]={'a','b','c'};`\n(7) `int a[n][4]={1,2,3}, n=10;`",
+      "answer": "正确的：(2)、(3)、(5)、(6)。\n错误理由：(1) 用圆括号是逗号表达式，初始化必须用花括号；(4) 方括号写成了花括号，语法错误；(7) n 在使用之后才定义，且变长数组不能这样初始化。",
+      "explain": "答题要点：初始化只能用 `{}`；下标必须是常量表达式（'0' 是字符常量 48，合法）；二维数组第二维不能省，第一维可省。",
+      "source": "2020 秋 C 语言期末试卷 · 简答题第 2 题",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-402",
+      "type": "single",
+      "chapter": "c4",
+      "points": [
+        "p4-1"
+      ],
+      "stem": "执行 `int a[5] = {1, 2};` 后，a[3] 的值是（　）。",
+      "options": [
+        "A. 未定义",
+        "B. 0",
+        "C. 2",
+        "D. 随机值"
+      ],
+      "answer": "B",
+      "explain": "部分初始化时，未显式赋值的元素自动补 0。只有完全不初始化且是局部变量时才是随机值。",
+      "source": "自编·按考点",
+      "difficulty": 1
+    },
+    {
+      "id": "qc-403",
+      "type": "fill",
+      "chapter": "c4",
+      "points": [
+        "p4-2"
+      ],
+      "stem": "设 `int a[3][4] = {{1,2,3,4},{5,6,7,8},{9,10,11,12}};` 写出下列表达式的值：\n(1) `a[1][2]`　(2) `*(*(a+2)+1)`　(3) `sizeof(a)/sizeof(a[0])`　(4) `a[0][7]` 是否合法",
+      "answer": "(1) 7　(2) 10　(3) 3　(4) 不合法（越界，行内只有 4 列；即使能算出地址也不应这样写）",
+      "explain": "a[i][j] 等价于 *(*(a+i)+j)；sizeof(a)/sizeof(a[0]) 得到行数。二维数组按行连续存放，但越界访问属未定义行为。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-404",
+      "type": "fill",
+      "chapter": "c4",
+      "points": [
+        "p4-3"
+      ],
+      "stem": "设 `char s1[] = \"hello\"; char s2[10] = {'h','e','l','l','o'};` 写出：\n(1) `strlen(s1)`　(2) `sizeof(s1)`　(3) `strlen(s2)`",
+      "answer": "(1) 5　(2) 6　(3) 5",
+      "explain": "s1 由字符串常量初始化，末尾自动带 '\\0'，sizeof 含 '\\0' 共 6 字节；s2 声明为 10 字节且只显式填了 5 个字符，其余补 0，所以第 6 个字节就是 '\\0'，strlen 得 5。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-405",
+      "type": "single",
+      "chapter": "c4",
+      "points": [
+        "p4-3"
+      ],
+      "stem": "`char s[3] = {'a','b','c'};` 之后调用 `printf(\"%s\", s);` 的结果是（　）。",
+      "options": [
+        "A. 输出 abc",
+        "B. 输出 abc 加乱码，属未定义行为",
+        "C. 输出空",
+        "D. 编译错误"
+      ],
+      "answer": "B",
+      "explain": "%s 需要以 '\\0' 结尾的字符串，s 没有结束符，printf 会继续往后读到内存中恰好出现的 0 为止，属未定义行为。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-406",
+      "type": "code",
+      "chapter": "c4",
+      "points": [
+        "p4-4"
+      ],
+      "stem": "编程：不调用库函数，自己写一个函数 `int my_strcmp(const char *a, const char *b)`，返回负值/0/正值表示 a 小于/等于/大于 b。",
+      "answer": "```c\nint my_strcmp(const char *a, const char *b)\n{\n    while (*a && *a == *b) { a++; b++; }\n    return (unsigned char)*a - (unsigned char)*b;\n}\n```",
+      "explain": "踩分点：循环在「a 未结束且字符相等」时前进；返回字符差值即可反映大小关系；转 unsigned char 避免中文字符按负值比较出错。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-407",
+      "type": "single",
+      "chapter": "c4",
+      "points": [
+        "p4-4"
+      ],
+      "stem": "下列语句中，能正确判断两个字符串 s1、s2 相等的是（　）。",
+      "options": [
+        "A. `if (s1 == s2)`",
+        "B. `if (strcmp(s1, s2) == 0)`",
+        "C. `if (!strcmp(s1, s2))` 与 B 等价，但更易读的写法是 B",
+        "D. `if (s1 = s2)`"
+      ],
+      "answer": "B",
+      "explain": "数组名比较的是地址；strcmp 相等时返回 0，所以 `strcmp(...)==0` 才是内容相等。C 的表达式与 B 等价，但题目问「能正确判断」，标准写法选 B。D 是赋值。",
+      "source": "自编·按考点",
+      "difficulty": 1
+    },
+    {
+      "id": "qc-501",
+      "type": "short",
+      "chapter": "c5",
+      "points": [
+        "p5-2"
+      ],
+      "stem": "为什么 `void swap(int a, int b)` 交换不了调用者的两个变量？应如何修改？",
+      "answer": "① C 只有值传递：形参 a、b 是实参的副本，函数内交换的只是副本，函数返回后副本销毁，实参不变。\n② 要交换实参必须传地址：`void swap(int *a, int *b) { int t = *a; *a = *b; *b = t; }`，调用写 `swap(&x, &y);`。",
+      "explain": "标准答题结构：先讲值传递机制，再给正确写法与调用形式。只写「要传指针」不给分。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-502",
+      "type": "code",
+      "chapter": "c5",
+      "points": [
+        "p5-2"
+      ],
+      "stem": "改错：下面程序想通过函数把数组元素全部加 1，请指出错误并改正。\n```c\nvoid addOne(int a, int n)\n{\n    int i;\n    for (i = 0; i < n; i++) a[i]++;\n}\nint main(void)\n{\n    int a[3] = {1, 2, 3};\n    addOne(a, 3);\n    return 0;\n}\n```",
+      "answer": "错误 1：形参 `int a` 应为 `int *a`（或 `int a[]`），否则 `a[i]` 是对 int 取下标，编译不过。\n错误 2：调用处 `addOne(a, 3)` 本身没问题（数组名即首地址），真正的第二处错是函数内没有声明 i 的类型？—— 本题的第二处错误是函数缺少返回类型说明并不能算错（void 已写），实际第二处为：应在调用后验证，但更准确的是 `int a[]` 与 `int *a` 等价，若改成 `int a[]` 则第一处即可。\n标准答案：把 `void addOne(int a, int n)` 改为 `void addOne(int *a, int n)`；同时把循环变量声明保留，调用不变。",
+      "explain": "本题只设一处真错：数组作形参必须写成指针或空维数组。答题时说明「数组名作实参传的是首地址，形参必须是指针类型」即可满分。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-503",
+      "type": "code",
+      "chapter": "c5",
+      "points": [
+        "p5-3"
+      ],
+      "stem": "编程：用递归求 n 的阶乘（n≤12），并说明递归的两个必要条件。",
+      "answer": "```c\nlong fact(int n)\n{\n    if (n <= 1) return 1;      /* 终止条件 */\n    return n * fact(n - 1);    /* 向终止条件推进 */\n}\n```\n两个必要条件：① 有终止条件（边界情形直接给出结果）；② 每次递归都向终止条件靠近，否则栈溢出。",
+      "explain": "踩分点：终止条件写 n<=1 而不是 n==1（n=0 也要覆盖）；递归式系数正确；能说明两个条件。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-504",
+      "type": "fill",
+      "chapter": "c5",
+      "points": [
+        "p5-4"
+      ],
+      "stem": "写出下面程序的运行结果：\n```c\n#include <stdio.h>\nint a = 10;\nvoid fun(int y)\n{\n    static int b = 20;\n    a += y; b += y;\n    printf(\"a=%d, b=%d\\n\", a, b);\n}\nint main(void)\n{\n    int b = 1;\n    while (a < 13) fun(b);\n    printf(\"a=%d, b=%d\\n\", a, b);\n    return 0;\n}\n```",
+      "answer": "```\na=11, b=21\na=12, b=22\na=13, b=23\na=13, b=1\n```",
+      "explain": "关键点：fun 内的 `static int b` 只初始化一次，三次调用依次累加到 21/22/23；main 里的局部 b 与它同名但是两个变量，始终是 1；全局 a 每轮加 1，到 13 时循环结束。",
+      "source": "2020 秋 C 语言期末试卷 · 四、程序分析题",
+      "difficulty": 4
+    },
+    {
+      "id": "qc-505",
+      "type": "single",
+      "chapter": "c5",
+      "points": [
+        "p5-1"
+      ],
+      "stem": "关于函数声明与定义，说法正确的是（　）。",
+      "options": [
+        "A. 函数声明可以省略参数类型",
+        "B. 函数定义可以放在调用之后，只要之前有声明",
+        "C. 函数可以嵌套定义",
+        "D. 返回类型为 void 的函数可以 return 一个值"
+      ],
+      "answer": "B",
+      "explain": "定义在调用之后必须先声明；函数不能嵌套定义（可以嵌套调用）；void 函数不能返回值；声明省略参数类型会按旧式声明处理，不推荐。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-601",
+      "type": "single",
+      "chapter": "c6",
+      "points": [
+        "p6-1"
+      ],
+      "stem": "若有 `int a[5] = {1,2,3,4,5}, *p = a;` 则表达式 `*p++` 的值与 p 的变化是（　）。",
+      "options": [
+        "A. 值为 1，p 后移一个元素",
+        "B. 值为 2，p 不变",
+        "C. 值为 1，p 不变",
+        "D. 值为 2，p 后移"
+      ],
+      "answer": "A",
+      "explain": "后缀 ++ 优先级高于 *，`*p++` 等价于 `*(p++)`：先取 p 当前指向的值 1，再让 p 指向下一个元素。若是 `(*p)++` 则值加 1、p 不动。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-602",
+      "type": "short",
+      "chapter": "c6",
+      "points": [
+        "p6-4"
+      ],
+      "stem": "说明下面两条声明的含义与区别：\n```c\nint x = 2;\nconst int *p1 = &x;\nint *const p2 = &x;\n```",
+      "answer": "① `const int *p1`：p1 是「指向常量的指针」，不能通过 p1 修改 x（`*p1 = 3` 非法），但 p1 本身可以改指向别的变量（`p1 = &y` 合法）。\n② `int *const p2`：p2 是「常量指针」，p2 的指向不能改（`p2 = &y` 非法），但可以通过 p2 修改目标（`*p2 = 3` 合法）。\n③ 口诀：const 在 `*` 左边修饰所指内容，在 `*` 右边修饰指针本身。",
+      "explain": "2020 卷简答原题。答题要点是两种声明各举一个允许/禁止的操作，只背口诀不举例容易丢分。",
+      "source": "2020 秋 C 语言期末试卷 · 简答题第 5 题",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-603",
+      "type": "short",
+      "chapter": "c6",
+      "points": [
+        "p6-5"
+      ],
+      "stem": "根据描述写出声明：\n(1) a 是一个指向「有 10 个整型元素的数组」的指针。\n(2) b 是一个有 10 个元素的数组，元素是指向函数的指针，该函数有一个整型参数并返回整型。",
+      "answer": "(1) `int (*a)[10];`\n(2) `int (*b[10])(int);`",
+      "explain": "读法：从名字往里读，先看括号改变的结合顺序。`(*a)[10]` 说明 a 先是指针，再指向 10 元素数组；`(*b[10])(int)` 说明 b 先是 10 元素数组，元素是函数指针。",
+      "source": "2020 秋 C 语言期末试卷 · 简答题第 6 题",
+      "difficulty": 4
+    },
+    {
+      "id": "qc-604",
+      "type": "fill",
+      "chapter": "c6",
+      "points": [
+        "p6-2"
+      ],
+      "stem": "根据声明 `int b[6] = {2,3,5,6,7,9}, *q = &b[1];` 写出下列表达式的值：\n(1) `*q`　(2) `*(q+1)`　(3) `*q+1`　(4) `q - b`",
+      "answer": "(1) 3　(2) 5　(3) 4　(4) 1",
+      "explain": "q 指向 b[1]（值为 3）。*(q+1) 是 b[2]=5；*q+1 是先取值再加 1 得 4；q-b 是指针相减，单位是元素，得下标差 1。",
+      "source": "2020 秋 C 语言期末试卷 · 一、计算表达式的值（改编）",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-605",
+      "type": "fill",
+      "chapter": "c6",
+      "points": [
+        "p6-2"
+      ],
+      "stem": "下面程序用指针遍历数组求和，补全空缺：\n```c\nint a[5] = {1,2,3,4,5}, *p, s = 0;\nfor (p = a; p < ____; p++) s += ____;\nprintf(\"%d\", s);\n```",
+      "answer": "第一空：`a + 5`（或 `&a[5]`）；第二空：`*p`。",
+      "explain": "指针遍历的终止条件是「指向末尾再后一个位置」，此时不能再解引用；累加的是 p 指向的元素。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-606",
+      "type": "code",
+      "chapter": "c6",
+      "points": [
+        "p6-3"
+      ],
+      "stem": "改错：下面程序想把字符串中的所有小写字母转成大写，指出两处错误并改正。\n```c\nint main(void)\n{\n    char *s = \"hello\";\n    while (*s) {\n        if (*s >= 'a' && *s <= 'z') *s = *s - 32;\n        s++;\n    }\n    printf(\"%s\", s);\n    return 0;\n}\n```",
+      "answer": "错误 1：`char *s = \"hello\";` 指向字符串常量，不可修改，应改为 `char s[] = \"hello\";`（数组可写）。\n错误 2：循环结束后 s 已指向末尾，`printf(\"%s\", s)` 输出空串；应保留首地址，例如 `char *p = s; while (*p) {...p++;}`，最后 `printf(\"%s\", s);`。",
+      "explain": "两处都是指针与字符串的经典坑：常量区不可写、遍历指针丢失首地址。",
+      "source": "自编·按考点",
+      "difficulty": 4
+    },
+    {
+      "id": "qc-607",
+      "type": "single",
+      "chapter": "c6",
+      "points": [
+        "p6-1"
+      ],
+      "stem": "`int *p; *p = 5;` 的问题在于（　）。",
+      "options": [
+        "A. 语法错误，指针不能赋值",
+        "B. p 未初始化，指向未知地址，写入是未定义行为",
+        "C. 5 不能赋给指针",
+        "D. 应写成 p = 5"
+      ],
+      "answer": "B",
+      "explain": "野指针解引用是运行时错误，编译器可能只给警告。正确做法是先让 p 指向有效内存（如 `int x; p = &x;`）。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-608",
+      "type": "fill",
+      "chapter": "c6",
+      "points": [
+        "p6-5"
+      ],
+      "stem": "设 `int a[3][4]; int (*p)[4] = a;` 写出：\n(1) `sizeof(*p)`　(2) `p+1` 相对 a 前进了几个 int",
+      "answer": "(1) 16（4 个 int，假设 int 为 4 字节）　(2) 4 个 int（一整行）",
+      "explain": "p 是数组指针，类型是 `int(*)[4]`，解引用得到 4 元素数组，sizeof 为 16；p+1 跳过一整行。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-701",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "p7-1"
+      ],
+      "stem": "设有 `struct st { int n; struct st *next; } a[3], *p = &a[0];` 则 `++p->n` 的含义是（　）。",
+      "options": [
+        "A. 把 p 指向下一个结构体",
+        "B. 把 a[0].n 加 1",
+        "C. 把 p->n 当作指针加 1",
+        "D. 编译错误"
+      ],
+      "answer": "B",
+      "explain": "-> 优先级高于 ++，`++p->n` 等价于 `++(p->n)`，即把成员 n 自增。要让指针后移得写 `++p` 或 `(++p)->n`。",
+      "source": "2020 秋 C 语言期末试卷 · 一、计算表达式的值",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-702",
+      "type": "fill",
+      "chapter": "c7",
+      "points": [
+        "p7-2"
+      ],
+      "stem": "根据 `struct st { int n; struct st *next; } a[3] = {{5,&a[1]},{7,&a[2]},{9,0}}, *p = &a[0];` 写出：\n(1) `p->n`　(2) `p->next->n`　(3) `(*p++).n` 的值与 p 的新指向　(4) `p->next->next->n`",
+      "answer": "(1) 5　(2) 7　(3) 值 5，p 指向 a[1]　(4) 9",
+      "explain": "`(*p++).n` 先取 p 指向的结构体（a[0]）访问 n 得 5，再把 p 后移；`p->next->next->n` 沿着链表走两跳得 a[2].n=9。",
+      "source": "2020 秋 C 语言期末试卷 · 一、计算表达式的值（改编）",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-703",
+      "type": "code",
+      "chapter": "c7",
+      "points": [
+        "p7-3"
+      ],
+      "stem": "编程：在单链表（带表头结点 head）中删除所有值为 x 的结点，返回删除个数。",
+      "answer": "```c\ntypedef struct Node { int data; struct Node *next; } Node;\n\nint delAll(Node *head, int x)\n{\n    int cnt = 0;\n    Node *p = head, *q;\n    while (p->next) {\n        if (p->next->data == x) {\n            q = p->next;\n            p->next = q->next;   /* 先接后断 */\n            free(q);\n            cnt++;\n        } else {\n            p = p->next;\n        }\n    }\n    return cnt;\n}\n```",
+      "explain": "踩分点：用「前驱 p」判断 p->next；删除时先改 p->next 再 free；删除后 p 不前进（可能连续多个 x）；返回计数。",
+      "source": "自编·按考点",
+      "difficulty": 4
+    },
+    {
+      "id": "qc-704",
+      "type": "short",
+      "chapter": "c7",
+      "points": [
+        "p7-3"
+      ],
+      "stem": "简述单链表「头插法」与「尾插法」建表的区别，各自得到的顺序是什么？",
+      "answer": "① 头插法：每次把新结点插在表头之后，O(1)，得到的链表顺序与输入顺序相反（逆序）。\n② 尾插法：维护尾指针，每次接在表尾，O(1)（有尾指针时），得到与输入相同的顺序。\n③ 考试里若要求「保持输入顺序」必须用尾插法。",
+      "explain": "答题要给出「操作位置 + 时间复杂度 + 结果顺序」三点。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-705",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "p7-4"
+      ],
+      "stem": "设有 `union u { int i; char c[4]; double d; };` 在 32 位 int、8 字节对齐的环境下 `sizeof(union u)` 通常是（　）。",
+      "options": [
+        "A. 4",
+        "B. 8",
+        "C. 16",
+        "D. 12"
+      ],
+      "answer": "B",
+      "explain": "联合体大小取最大成员并按最大对齐要求取整：double 占 8 字节，所以是 8。成员共享同一块内存。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-706",
+      "type": "fill",
+      "chapter": "c7",
+      "points": [
+        "p7-4"
+      ],
+      "stem": "`enum color { RED, GREEN = 5, BLUE };` 则 RED、GREEN、BLUE 的值分别是多少？",
+      "answer": "RED = 0，GREEN = 5，BLUE = 6。",
+      "explain": "枚举默认从 0 递增；一旦显式赋值，后续成员在它基础上继续递增。",
+      "source": "自编·按考点",
+      "difficulty": 1
+    },
+    {
+      "id": "qc-801",
+      "type": "code",
+      "chapter": "c8",
+      "points": [
+        "p8-1"
+      ],
+      "stem": "编程：把文件 in.txt 的内容原样复制到 out.txt，要求按行读写并处理打开失败。",
+      "answer": "```c\n#include <stdio.h>\nint main(void)\n{\n    FILE *fin = fopen(\"in.txt\", \"r\");\n    FILE *fout = fopen(\"out.txt\", \"w\");\n    char buf[256];\n    if (!fin || !fout) { printf(\"open failed\\n\"); return 1; }\n    while (fgets(buf, sizeof buf, fin)) fputs(buf, fout);\n    fclose(fin);\n    fclose(fout);\n    return 0;\n}\n```",
+      "explain": "踩分点：两个 fopen 都要判 NULL；用 fgets 的返回值控制循环（不要用 while(!feof)）；两个文件都要 fclose。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-802",
+      "type": "single",
+      "chapter": "c8",
+      "points": [
+        "p8-1"
+      ],
+      "stem": "若文件不存在，`fopen(\"data.txt\", \"r\")` 的返回值是（　）。",
+      "options": [
+        "A. 0",
+        "B. EOF",
+        "C. NULL",
+        "D. -1"
+      ],
+      "answer": "C",
+      "explain": "fopen 失败返回空指针 NULL；EOF 是读文件结束的返回值（-1），两者不能混。",
+      "source": "自编·按考点",
+      "difficulty": 1
+    },
+    {
+      "id": "qc-803",
+      "type": "short",
+      "chapter": "c8",
+      "points": [
+        "p8-2"
+      ],
+      "stem": "请定义标准宏 `MIN(x,y,z)`，返回三个参数中的最小值，并说明为什么要加括号。",
+      "answer": "`#define MIN(x, y, z) ((x) < (y) ? ((x) < (z) ? (x) : (z)) : ((y) < (z) ? (y) : (z)))`\n要加括号的原因：宏是纯文本替换，若参数或整体不加括号，展开后会被外层运算符的优先级打断。例如 `#define S(r) r/r` 在 `S(x+y)` 时展开成 `x+y/x+y`，结果不是 1。",
+      "explain": "踩分点：三目嵌套正确 + 每个参数与整体都有括号 + 能举一个不加括号反例。",
+      "source": "2020 秋 C 语言期末试卷 · 简答题第 4 题",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-804",
+      "type": "fill",
+      "chapter": "c8",
+      "points": [
+        "p8-2"
+      ],
+      "stem": "设 `#define S(r) r/r`，`int x = 2, y = 4;` 则表达式 `S(x+y)` 的值为多少？",
+      "answer": "6（展开为 `x+y/x+y` = 2 + 4/2 + 4 = 2+2+2 = 6，不是 1）。",
+      "explain": "宏只做文本替换，不做运算分组。这也是「带参宏必须给参数加括号」的最好例子。",
+      "source": "2020 秋 C 语言期末试卷 · 一、计算表达式的值",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-805",
+      "type": "single",
+      "chapter": "c8",
+      "points": [
+        "p8-3"
+      ],
+      "stem": "`#include <stdio.h>` 与 `#include \"stdio.h\"` 的区别是（　）。",
+      "options": [
+        "A. 完全等价",
+        "B. `<>` 只在系统目录找，`\"\"` 先找当前目录再找系统目录",
+        "C. `\"\"` 只能用于自定义头文件",
+        "D. `<>` 会包含两次"
+      ],
+      "answer": "B",
+      "explain": "这是编译器查找顺序的约定：双引号优先当前目录（项目内头文件），尖括号只查系统包含路径。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-806",
+      "type": "short",
+      "chapter": "c8",
+      "points": [
+        "p8-3"
+      ],
+      "stem": "写出头文件防重复包含的标准写法，并说明不加会有什么问题。",
+      "answer": "```c\n#ifndef MYHEADER_H\n#define MYHEADER_H\n/* 声明 */\n#endif\n```\n不加的问题：同一个头文件被间接包含多次时，其中的类型定义、宏会重复出现，导致「重复定义」编译错误；若头文件里定义了结构体，重复包含直接编译不过。",
+      "explain": "踩分点：三行结构完整（ifndef/define/endif）+ 说明重复包含的后果。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-110",
+      "type": "fill",
+      "chapter": "c1",
+      "points": [
+        "p1-2",
+        "p1-3"
+      ],
+      "stem": "写出下列表达式的值（各小题相互独立）：\n(1) `5 / 2 * 2`　(2) `5 % 2 * 2`　(3) `sizeof('A')`　(4) `!0 + 1`　(5) `1 < 2 < 3`",
+      "answer": "(1) 4　(2) 2　(3) 4（'A' 是 int 类型，占 4 字节）　(4) 2（!0 为 1，加 1 得 2）　(5) 1",
+      "explain": "(1) 整数除法先算 5/2=2，再乘 2。(5) 关系运算符左结合：1<2 得 1，再 1<3 得 1（恒真，是常见陷阱）。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-111",
+      "type": "single",
+      "chapter": "c1",
+      "points": [
+        "p1-4"
+      ],
+      "stem": "若 `int a = 6, b = 3;` 则 `a & b`、`a | b`、`a ^ b` 的值分别是（　）。",
+      "options": [
+        "A. 2, 7, 5",
+        "B. 3, 7, 5",
+        "C. 2, 6, 5",
+        "D. 2, 7, 6"
+      ],
+      "answer": "A",
+      "explain": "6=110, 3=011。与=010(2)，或=111(7)，异或=101(5)。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-112",
+      "type": "fill",
+      "chapter": "c1",
+      "points": [
+        "p1-5"
+      ],
+      "stem": "`char c = 'A'; int n = c + 1;` 则 n 的值是多少？若 `char d = 'a' + 3;` 则 d 对应的字符是什么？",
+      "answer": "n = 66；d 是字符 'd'（'a' 的 ASCII 码 97，加 3 得 100 即 'd'）。",
+      "explain": "char 参与算术运算时先提升为 int；字符与整数可互转，这也是大小写转换（±32）的原理。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-205",
+      "type": "fill",
+      "chapter": "c2",
+      "points": [
+        "p2-1"
+      ],
+      "stem": "指出下面语句的输出：\n```c\nint a = 65;\nprintf(\"%d %c %x %o\", a, a, a, a);\n```",
+      "answer": "`65 A 41 101`（%d 十进制 65，%c 按 ASCII 输出 A，%x 十六进制 41，%o 八进制 101）。",
+      "explain": "同一个值用不同格式符解释，是格式符这一节最典型的考法。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-206",
+      "type": "single",
+      "chapter": "c2",
+      "points": [
+        "p2-2"
+      ],
+      "stem": "若 `int a; char s[10];` 执行 `scanf(\"%d%s\", &a, s);` 输入 `12 abc`，则 a 与 s 分别是（　）。",
+      "options": [
+        "A. 12 与 \"abc\"",
+        "B. 12 与 \" abc\"",
+        "C. 0 与 \"12\"",
+        "D. 12 与 \"12\""
+      ],
+      "answer": "A",
+      "explain": "%d 跳过前导空白读整数，%s 读非空白字符串；数组名 s 本身就是地址，不用加 &。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-307",
+      "type": "fill",
+      "chapter": "c3",
+      "points": [
+        "p3-2"
+      ],
+      "stem": "写出下面程序的输出：\n```c\nint i = 0, s = 0;\nwhile (i < 4) {\n    i++;\n    if (i % 2) continue;\n    s += i;\n}\nprintf(\"%d,%d\", i, s);\n```",
+      "answer": "`4,6`",
+      "explain": "i 依次为 1（continue 跳过）、2（s=2）、3（跳过）、4（s=6）；循环结束时 i=4。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-308",
+      "type": "fill",
+      "chapter": "c3",
+      "points": [
+        "p3-3"
+      ],
+      "stem": "下面程序把整数 n 的各位数字逆序输出，补全空缺：\n```c\nwhile (n > 0) {\n    printf(\"%d\", ____);\n    n = ____;\n}\n```",
+      "answer": "第一空：`n % 10`；第二空：`n / 10`。",
+      "explain": "取末位用 %10，去掉末位用 /10，是数位拆分的固定写法。",
+      "source": "自编·按考点",
+      "difficulty": 1
+    },
+    {
+      "id": "qc-309",
+      "type": "code",
+      "chapter": "c3",
+      "points": [
+        "p3-1"
+      ],
+      "stem": "改错：下面程序想输出 1–100 中所有能被 3 整除的数，每行一个，指出错误并改正。\n```c\nint i;\nfor (i = 1; i <= 100; i++);\n{\n    if (i % 3 = 0) printf(\"%d\\n\", i);\n}\n```",
+      "answer": "错误 1：`for (...);` 后面的分号让循环体变成空语句，应删掉分号。\n错误 2：`if (i % 3 = 0)` 把比较写成了赋值，应为 `if (i % 3 == 0)`。",
+      "explain": "两处都是高频改错点：for 后多分号、== 写成 =。改错题按「指出 + 改正」各给 1 分。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-408",
+      "type": "fill",
+      "chapter": "c4",
+      "points": [
+        "p4-4"
+      ],
+      "stem": "设 `char s[] = \"abcdef\";` 写出下列表达式的值：\n(1) `strlen(s)`　(2) `sizeof(s)`　(3) `s[2]`　(4) `strcmp(s, \"abc\")` 的符号",
+      "answer": "(1) 6　(2) 7　(3) 'c'　(4) 正数（\"abcdef\" 大于 \"abc\"，因为前者更长且前缀相同）",
+      "explain": "strlen 不算 '\\0'，sizeof 算；strcmp 比较到第一个不同字符，前缀相同则长的更大。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-409",
+      "type": "code",
+      "chapter": "c4",
+      "points": [
+        "p4-3"
+      ],
+      "stem": "编程：统计一个字符串中大写字母、小写字母、数字和其他字符的个数（用字符数组与循环实现）。",
+      "answer": "```c\n#include <stdio.h>\nint main(void)\n{\n    char s[100];\n    int i, up = 0, low = 0, dig = 0, other = 0;\n    gets(s);            /* 或 fgets(s, sizeof s, stdin) */\n    for (i = 0; s[i]; i++) {\n        if (s[i] >= 'A' && s[i] <= 'Z') up++;\n        else if (s[i] >= 'a' && s[i] <= 'z') low++;\n        else if (s[i] >= '0' && s[i] <= '9') dig++;\n        else other++;\n    }\n    printf(\"%d %d %d %d\\n\", up, low, dig, other);\n    return 0;\n}\n```",
+      "explain": "踩分点：循环终止条件用 s[i]（遇 '\\0' 结束）、四类判断的边界、计数器初始化。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-410",
+      "type": "single",
+      "chapter": "c4",
+      "points": [
+        "p4-2"
+      ],
+      "stem": "`int a[2][3];` 则 `a[1]` 的类型是（　）。",
+      "options": [
+        "A. int",
+        "B. int*",
+        "C. int[3]",
+        "D. int(*)[3]"
+      ],
+      "answer": "C",
+      "explain": "a[1] 是二维数组的第二行，类型是「含 3 个 int 的数组」（int[3]），在表达式中会退化为 int*；a 本身的类型才是 int(*)[3]。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-506",
+      "type": "fill",
+      "chapter": "c5",
+      "points": [
+        "p5-4"
+      ],
+      "stem": "写出下面程序的输出：\n```c\n#include <stdio.h>\nint f(int n)\n{\n    static int s = 0;\n    s += n;\n    return s;\n}\nint main(void)\n{\n    printf(\"%d %d %d\", f(1), f(2), f(3));\n    return 0;\n}\n```",
+      "answer": "输出依赖实参求值顺序，标准未规定；在多数编译器（从右到左求值）下为 `6 5 3`。考试中若出现此类题，应说明「实参求值顺序未定义」。",
+      "explain": "static 变量跨调用保留 + 函数实参求值顺序未定义，这是「双陷阱」题。规范答法是先指出未定义，再给出常见实现的结果。",
+      "source": "自编·按考点",
+      "difficulty": 4
+    },
+    {
+      "id": "qc-507",
+      "type": "code",
+      "chapter": "c5",
+      "points": [
+        "p5-3"
+      ],
+      "stem": "编程：用递归求斐波那契数列第 n 项，并说明为什么 n 较大时不建议用这种写法。",
+      "answer": "```c\nint fib(int n)\n{\n    if (n <= 2) return 1;\n    return fib(n - 1) + fib(n - 2);\n}\n```\n不建议的原因：朴素递归会重复计算同一子问题，时间复杂度 O(2^n)，n=40 以上明显变慢，且递归深度大会栈溢出。改进：改迭代（O(n)）或加记忆化。",
+      "explain": "踩分点：终止条件正确 + 能说清重复计算与复杂度。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-609",
+      "type": "fill",
+      "chapter": "c6",
+      "points": [
+        "p6-1",
+        "p6-2"
+      ],
+      "stem": "设 `int a[4] = {10,20,30,40}, *p = a + 1;` 写出：\n(1) `*p`　(2) `p[-1]`　(3) `*(p + 2)`　(4) `p - a`",
+      "answer": "(1) 20　(2) 10　(3) 40　(4) 1",
+      "explain": "p 指向 a[1]。p[-1] 等价于 *(p-1) 即 a[0]；p+2 指向 a[3]；指针相减得到元素下标差。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-610",
+      "type": "code",
+      "chapter": "c6",
+      "points": [
+        "p6-4"
+      ],
+      "stem": "改错：下面程序想通过函数把两个整数相加，结果写回调用者，指出两处错误并改正。\n```c\nvoid add(int a, int b, int *sum)\n{\n    *sum = a + b;\n}\nint main(void)\n{\n    int x = 1, y = 2, s;\n    add(x, y, s);\n    printf(\"%d\", s);\n    return 0;\n}\n```",
+      "answer": "错误 1：调用时应传地址 `add(x, y, &s);`，否则把 s 的值当指针传入，运行时崩溃。\n错误 2：`printf` 前缺少 `#include <stdio.h>`（严格说有隐式声明警告），补上即可。",
+      "explain": "指针作输出参数的固定写法：形参用指针、实参取地址。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-611",
+      "type": "single",
+      "chapter": "c6",
+      "points": [
+        "p6-2"
+      ],
+      "stem": "若有 `int a[5], *p = a;` 则 `p + 1` 相对 p 前进的字节数是（　）。",
+      "options": [
+        "A. 1",
+        "B. 4",
+        "C. 5",
+        "D. 不确定"
+      ],
+      "answer": "B",
+      "explain": "指针算术以「所指类型的大小」为单位，int 通常 4 字节，所以 p+1 前进 4 字节。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-707",
+      "type": "fill",
+      "chapter": "c7",
+      "points": [
+        "p7-2"
+      ],
+      "stem": "下面程序统计结构体数组中成绩的最高分，补全空缺：\n```c\nstruct stu { char name[20]; int score; } a[3] = {{\"Li\",80},{\"Wang\",92},{\"Zhao\",75}}, *p;\nint max = ____;\nfor (p = a + 1; p < a + 3; p++)\n    if (p->score > max) max = ____;\n```",
+      "answer": "第一空：`a[0].score`；第二空：`p->score`。",
+      "explain": "初始最大值取第一个元素，再从第二个开始遍历；比较的是成员 score 而不是指针。",
+      "source": "自编·按考点",
+      "difficulty": 2
+    },
+    {
+      "id": "qc-708",
+      "type": "code",
+      "chapter": "c7",
+      "points": [
+        "p7-3"
+      ],
+      "stem": "编程：用尾插法建立一条包含 5 个结点的单链表（数据为 1–5），然后遍历输出。",
+      "answer": "```c\n#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int data; struct Node *next; } Node;\n\nint main(void)\n{\n    Node *head = NULL, *tail = NULL, *p;\n    int i;\n    for (i = 1; i <= 5; i++) {\n        p = (Node *)malloc(sizeof(Node));\n        p->data = i; p->next = NULL;\n        if (!head) head = tail = p;\n        else { tail->next = p; tail = p; }\n        }\n    for (p = head; p; p = p->next) printf(\"%d \", p->data);\n    return 0;\n}\n```",
+      "explain": "踩分点：malloc 后判空（考试可略）、尾指针维护、空表时 head 与 tail 同时指向新结点、遍历用 p=p->next。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-709",
+      "type": "single",
+      "chapter": "c7",
+      "points": [
+        "p7-1"
+      ],
+      "stem": "设有 `struct point { int x, y; } p = {1, 2}, *q = &p;` 下列表达式错误的是（　）。",
+      "options": [
+        "A. `p.x`",
+        "B. `q->y`",
+        "C. `(*q).x`",
+        "D. `*q.x`"
+      ],
+      "answer": "D",
+      "explain": ". 优先级高于 *，`*q.x` 被解析为 `*(q.x)`，而 q.x 不是指针，编译错误。要取成员应写 `(*q).x` 或 `q->x`。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    },
+    {
+      "id": "qc-807",
+      "type": "fill",
+      "chapter": "c8",
+      "points": [
+        "p8-1"
+      ],
+      "stem": "补全：向文件写入一行文本后关闭文件。\n```c\nFILE *fp = fopen(\"out.txt\", ____);\nif (fp == ____) return 1;\nfprintf(fp, \"hello\\n\");\nfclose(____);\n```",
+      "answer": "第一空：`\"w\"`；第二空：`NULL`；第三空：`fp`。",
+      "explain": "\"w\" 会截断或新建文件；fopen 失败返回 NULL；fclose 传文件指针。",
+      "source": "自编·按考点",
+      "difficulty": 1
+    },
+    {
+      "id": "qc-808",
+      "type": "single",
+      "chapter": "c8",
+      "points": [
+        "p8-2"
+      ],
+      "stem": "`#define MAX(a, b) a > b ? a : b` 在 `MAX(1, 2) * 3` 中的展开结果是（　）。",
+      "options": [
+        "A. 6",
+        "B. 1 > 2 ? 1 : 2 * 3 = 6，但语义错",
+        "C. (1 > 2 ? 1 : 2) * 3 = 6，语义正确",
+        "D. 编译错误"
+      ],
+      "answer": "B",
+      "explain": "宏整体没有括号，展开为 `1 > 2 ? 1 : 2 * 3`，按优先级算成 `1 > 2 ? 1 : 6` 得 6。本例结果碰巧相同，但语义已错（条件运算符优先级低于 *）。正确写法是 `#define MAX(a,b) ((a) > (b) ? (a) : (b))`。",
+      "source": "自编·按考点",
+      "difficulty": 3
+    }
+  ]
+}
