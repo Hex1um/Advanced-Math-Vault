@@ -4,6 +4,10 @@
 
 **主链接（对外分享、发群、写文档都用这个）：<https://hex1um.github.io/Advanced-Math-Vault/>**
 
+> v3.13.1 起 github.io 是**纯静态站点**：题库打包在 `public/data/`（12.8 MB），
+> 前端直接读，不依赖任何后端实例。登录 / 答疑 / AI 判卷这些写操作需要服务器，
+> 静态模式下入口会隐藏。删掉 `public/data/` 再构建即可回到「前端 + 实例」形态。
+
 - 前端（GitHub Pages）：https://hex1um.github.io/Advanced-Math-Vault/
 - 接口服务（仅前端调用，不对外发）：https://math-vault-10141-52003.app.workbuddy.host
 - 题目页右上角「复制链接」会拼上面的主链接，不拼当前域名

@@ -1,0 +1,222 @@
+{
+ "v": "557c15c1-27",
+ "generatedAt": "2026-11-27T08:09:18.207Z",
+ "counts": {
+  "total": 8601,
+  "math": 6602,
+  "physics": 1999
+ },
+ "bucketSize": 250,
+ "buckets": [
+  {
+   "file": "p/bucket-00.json",
+   "from": "HS1001",
+   "to": "HS1250",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-01.json",
+   "from": "HS1251",
+   "to": "HS1500",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-02.json",
+   "from": "HS1501",
+   "to": "HS1750",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-03.json",
+   "from": "HS1751",
+   "to": "HS2000",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-04.json",
+   "from": "HS2001",
+   "to": "HS2250",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-05.json",
+   "from": "HS2251",
+   "to": "HS2500",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-06.json",
+   "from": "HS2501",
+   "to": "HS2750",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-07.json",
+   "from": "HS2751",
+   "to": "HS3000",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-08.json",
+   "from": "HS3001",
+   "to": "HS3250",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-09.json",
+   "from": "HS3251",
+   "to": "HS5701",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-10.json",
+   "from": "HS5702",
+   "to": "HS5951",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-11.json",
+   "from": "HS5952",
+   "to": "HS6201",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-12.json",
+   "from": "HS6202",
+   "to": "HS6451",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-13.json",
+   "from": "HS6452",
+   "to": "HS6701",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-14.json",
+   "from": "HS6702",
+   "to": "HS6951",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-15.json",
+   "from": "HS6952",
+   "to": "HS7201",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-16.json",
+   "from": "HS7202",
+   "to": "HS7451",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-17.json",
+   "from": "HS7452",
+   "to": "HS7701",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-18.json",
+   "from": "HS7702",
+   "to": "HS7951",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-19.json",
+   "from": "HS7952",
+   "to": "HS8201",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-20.json",
+   "from": "HS8202",
+   "to": "HS8451",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-21.json",
+   "from": "HS8452",
+   "to": "HS8701",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-22.json",
+   "from": "HS8702",
+   "to": "HS8951",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-23.json",
+   "from": "HS8952",
+   "to": "HS9201",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-24.json",
+   "from": "HS9202",
+   "to": "HS9451",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-25.json",
+   "from": "HS9452",
+   "to": "HS9701",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-26.json",
+   "from": "HS9702",
+   "to": "PH13751",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-27.json",
+   "from": "PH13752",
+   "to": "PH14132",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-28.json",
+   "from": "PH14133",
+   "to": "PH3518",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-29.json",
+   "from": "PH3519",
+   "to": "PH3778",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-30.json",
+   "from": "PH3779",
+   "to": "PH4327",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-31.json",
+   "from": "PH4333",
+   "to": "PH4701",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-32.json",
+   "from": "PH4702",
+   "to": "PH5228",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-33.json",
+   "from": "PH5229",
+   "to": "PH5660",
+   "count": 250
+  },
+  {
+   "file": "p/bucket-34.json",
+   "from": "PH5662",
+   "to": "PH9995",
+   "count": 101
+  }
+ ]
+}

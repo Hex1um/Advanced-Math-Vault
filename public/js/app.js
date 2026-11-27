@@ -183,6 +183,18 @@
     document.querySelectorAll('[data-nav="sprint"]').forEach(function (a) {
       a.style.display = feats.sprint === true ? '' : 'none';
     });
+    /* 静态模式（github.io 自带数据包）：答疑、AI 出题、错题本、组卷、投稿、分析
+       都要读写服务器，静态包给不了，入口一律收起来，别让用户点进死页。 */
+    if (feats.static === true || (window.MV_CONFIG && window.MV_CONFIG.staticData) === true) {
+      document.querySelectorAll('[data-nav="forum"], [data-nav="generate"], [data-nav="wrong"], '
+        + '[data-nav="paper"], [data-nav="submit"], [data-nav="collections"], '
+        + '[data-nav="analytics"], [data-nav="sprint"]').forEach(function (a) {
+        a.style.display = 'none';
+      });
+      const ua = document.getElementById('userArea');
+      if (ua) ua.innerHTML = '<span class="small muted" title="数据由 GitHub Pages 直接提供">静态版</span>';
+      document.body.classList.add('mv-static');
+    }
     window.MV_FEATURES = feats;
   }
 

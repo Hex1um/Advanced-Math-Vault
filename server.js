@@ -107,32 +107,6 @@ const CSP = [
   "form-action 'self'"
 ].join('; ');
 
-/**
- * API 错误统一出口。
- *
- * 4xx（readBody 的 400/413 等）按原样回显：这类是客户端错误，消息本身就是给用户看的；
- * 其余一律走 fail500 脱敏（只给 reqId，堆栈进日志）。
- *
- * 413 额外处理：请求体还没读完就被拒，直接 destroy 会让客户端只看到 ECONNRESET，
- * 连 413 的响应体都收不到。先把响应写完（res 的 finish 事件），再掐连接。
- */
-function handleApiError(req, res, e, pathname) {
-  const status = Number(e && e.status);
-  if (status >= 400 && status < 500 && e.expose !== false) {
-    if (status === 413) {
-      res.on('finish', () => { try { req.destroy(); } catch (_) { /* 已断开 */ } });
-    }
-    if (!res.headersSent && !res.destroyed) fail(res, status, e.message);
-    else if (!res.writableEnded) res.end();
-    return;
-  }
-  fail500(res, e, {
-    tag: req.method + ' ' + pathname,
-    dev: process.env.NODE_ENV === 'development',
-    log: console.error
-  });
-}
-
 const server = http.createServer(async (req, res) => {
   try {
     const parsed = new URL(req.url, 'http://' + (req.headers.host || 'localhost'));
@@ -155,21 +129,14 @@ const server = http.createServer(async (req, res) => {
       try {
         const user = core.currentUser(req);
         const matched = await router.dispatch(req, res, ctx, { pathname, query, user });
-        if (!res.writableEnded) {
-          if (!matched) {
-            fail(res, 404, '接口不存在');
-          } else {
-            /* 命中了路由却没写响应 —— 这是 handler 的真实 bug，不能回 404 假装「路径不存在」，
-               否则前端只会以为是接口改了名，日志里什么都查不到。 */
-            fail500(res, new Error('handler 未产生响应'), {
-              tag: req.method + ' ' + pathname,
-              dev: process.env.NODE_ENV === 'development',
-              log: console.error
-            });
-          }
-        }
+        if (!matched && !res.writableEnded) fail(res, 404, '接口不存在');
+        else if (!res.writableEnded && !res.headersSent) fail(res, 404, '接口不存在');
       } catch (e) {
-        handleApiError(req, res, e, pathname);
+        fail500(res, e, {
+          tag: req.method + ' ' + pathname,
+          dev: process.env.NODE_ENV === 'development',
+          log: console.error
+        });
       }
       return;
     }
@@ -178,8 +145,8 @@ const server = http.createServer(async (req, res) => {
   } catch (e) {
     console.error('[http] 未捕获异常:', req.method, req.url, (e && e.stack) || e);
     try {
-      if (!res.headersSent && !res.destroyed) fail(res, 500, '服务器内部错误');
-      else if (!res.writableEnded) res.end();
+      if (!res.headersSent) fail(res, 500, '服务器内部错误');
+      else res.end();
     } catch (e2) { /* 响应已经结束 */ }
   }
 });
@@ -200,21 +167,7 @@ process.on('uncaughtException', (e) => {
   }
   process.exit(1);
 });
-/* 只记录不退出是对的，但「只记录」有个副作用：漏了 await 的链路一小时刷几百条警告，
-   淹在日志里就没人看了。这里加计数器，每累计 N 次升一级提示：要么去修，要么说明
-   某个降级路径在稳定地失败。阈值可用 REJECTION_WARN_EVERY 调。 */
-const REJECTION_WARN_EVERY = Math.max(5, Number(process.env.REJECTION_WARN_EVERY || 50));
-let rejectionCount = 0;
-process.on('unhandledRejection', (e) => {
-  rejectionCount += 1;
-  const detail = (e && e.stack) || e;
-  if (rejectionCount % REJECTION_WARN_EVERY === 0) {
-    console.error('[unhandledRejection] 累计 ' + rejectionCount + ' 次未处理的 rejection：'
-      + '多半是某个 await 漏了 catch，或降级分支在稳定失败。最近一次：', detail);
-  } else {
-    console.error('[unhandledRejection] #' + rejectionCount, detail);
-  }
-});
+process.on('unhandledRejection', (e) => { console.error('[unhandledRejection]', (e && e.stack) || e); });
 
 core.loadDb();
 ctx.setDb(core.db);

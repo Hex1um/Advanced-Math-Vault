@@ -39,10 +39,10 @@ function createProblemsRoutes(deps) {
 
   return async function handleProblems(req, res, pathname, query, user) {
     const db = getDb();
-    const httpMethod = req.method;
+    const method = req.method;
     if (!OWNS.test(pathname)) return false;
 
-  if (pathname === '/api/problems' && httpMethod === 'GET') {
+  if (pathname === '/api/problems' && method === 'GET') {
     const codeList = String(query.c || '').split(',').map((x) => x.trim().toUpperCase()).filter(Boolean);
     const q = String(query.q || '').trim().toLowerCase();
     const tags = String(query.tags || '').split(',').filter(Boolean);
@@ -57,7 +57,7 @@ function createProblemsRoutes(deps) {
        subject=all 只在管理/组卷场景用，普通前端不传。 */
     const subjectRaw = String(query.subject || '').toLowerCase();
     const subject = subjectRaw === 'all' ? 'all' : tagTax.subjectOf(subjectRaw);
-    const methodFilter = String(query.method || '').trim();
+    const method = String(query.method || '').trim();
     /* 课程组：物理的三级筛选（课程组 → 主标签 → 子标签）第一层 */
     const course = String(query.course || '').trim();
 
@@ -83,9 +83,9 @@ function createProblemsRoutes(deps) {
     if (mainTag) list = list.filter((p) => p.mainTag === mainTag);
     if (examTag) list = list.filter((p) => (p.examTags || []).includes(examTag));
     if (tags.length) list = list.filter((p) => tags.every((t) => p.tags.includes(t) || p.mainTag === t || String(p.mainTag || '').includes(t)));
-    if (methodFilter) {
+    if (method) {
       /* 物理思想筛选（守恒律 / 微元法 / 量纲分析…），数学题没有这个维度 */
-      list = list.filter((p) => ((p.physicsMeta && p.physicsMeta.methods) || []).includes(methodFilter));
+      list = list.filter((p) => ((p.physicsMeta && p.physicsMeta.methods) || []).includes(method));
     }
     if (course && tagTax.isValidCourse(course)) {
       list = list.filter((p) => {
@@ -140,7 +140,7 @@ function createProblemsRoutes(deps) {
     }
 
     /* 题目反馈：用户提交 → AI 先审阅 → 再转管理员 */
-    if (sub === '/feedback' && httpMethod === 'POST') {
+    if (sub === '/feedback' && method === 'POST') {
       if (!user) return fail(res, 401, '请先登录再提交反馈');
       const body = await readBody(req);
       const content = String(body.content || '').trim();
@@ -169,13 +169,13 @@ function createProblemsRoutes(deps) {
       return send(res, 200, { ok: true, id: fb.id, message: '反馈已提交，AI 审阅后会转给管理员' });
     }
 
-    if (sub === '/feedback' && httpMethod === 'GET') {
+    if (sub === '/feedback' && method === 'GET') {
       if (!user) return fail(res, 401, '请先登录');
       const mine = db.feedbacks.filter((f) => f.code === p.code && f.userId === user.id);
       return send(res, 200, { ok: true, items: mine.map((f) => publicFeedback(f, user)) });
     }
 
-    if (!sub && httpMethod === 'GET') {
+    if (!sub && method === 'GET') {
       if (bumpView('problem', p.code, clientIp(req, { trustProxy: TRUST_PROXY }))) p.views = (p.views || 0) + 1;
       return send(res, 200, {
         ok: true,
@@ -190,7 +190,7 @@ function createProblemsRoutes(deps) {
       });
     }
 
-    if (sub === '/reveal' && httpMethod === 'POST') {
+    if (sub === '/reveal' && method === 'POST') {
       p.attemptCount = (p.attemptCount || 0) + 1;
       if (user) {
         user.solved = user.solved || {};
@@ -210,7 +210,7 @@ function createProblemsRoutes(deps) {
       });
     }
 
-    if (sub === '/answer' && httpMethod === 'POST') {
+    if (sub === '/answer' && method === 'POST') {
       if (!user) return fail(res, 401, '登录后才能提交');      const body = await readBody(req, 8 * 1024 * 1024);
       const process = String(body.process || '').trim().slice(0, 4000);
       const answerOnly = body.mode === 'answer' || (!process && String(body.answer || '').trim());
@@ -520,7 +520,7 @@ function createProblemsRoutes(deps) {
       return send(res, 200, payload);
     }
 
-    if (sub === '/history' && httpMethod === 'GET') {
+    if (sub === '/history' && method === 'GET') {
       if (!user) return send(res, 200, { ok: true, items: [] });
       const items = db.submissions
         .filter((x) => x.uid === user.id && x.code === p.code)
@@ -533,7 +533,7 @@ function createProblemsRoutes(deps) {
       return send(res, 200, { ok: true, items, best: (user.best[p.code] || {}).score || null });
     }
 
-    if (sub === '/solve' && httpMethod === 'POST') {
+    if (sub === '/solve' && method === 'POST') {
       if (!user) return fail(res, 401, '登录后才能记录做题进度');
       // 反刷经验：必须通过判卷（本人该题有 ≥80 分的提交）才能记「做出」。
       // 原来这个接口谁都能直接调，一 POST 就 +经验、把题算作做出，公开后会被刷榜。
@@ -559,7 +559,7 @@ function createProblemsRoutes(deps) {
       return send(res, 200, { ok: true, gained, exp: user.exp, level: levelInfo(user.exp), user: publicUser(user) });
     }
 
-    if (sub === '/ai-flag' && httpMethod === 'POST') {
+    if (sub === '/ai-flag' && method === 'POST') {
       if (user) {
         user.solved = user.solved || {};
         const rec = user.solved[p.code];

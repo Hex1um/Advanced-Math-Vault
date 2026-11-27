@@ -39,13 +39,12 @@ node tools/ops/create-admin.mjs <用户名> <密码>   # 需先停服务
 ## 改代码：提交前必须过这几道
 
 ```bash
-npm test              # 全链路断言 + 全部门禁（CI 跑的就是这条）
-npm run test:quick    # 只跑断言，快
+npm test              # 121 项全链路断言（JSON 引擎）
 npm run test:sqlite   # 同一套断言，跑在 SQLite 引擎上（改存储层必跑）
 npm run check:store   # 存储层增量落盘 / 重载一致性
 npm run check:mail    # 邮件通道（本地假 SMTP，不需要真实凭据）
 npm run check:robust  # 题库体检：重复编号、字段、标签、矩阵环境、悬空引用
-node tools/verify/check-katex.mjs --max-fail=0   # 公式渲染，必须 0 失败
+npm run check:katex   # 公式渲染，必须 0 失败
 ```
 
 CI（`.github/workflows/smoke.yml`）在 push / PR 到 `main` 时自动跑上面这一串，另外有一个 sympy job 跑 `verify_integrals.py` / `verify_limits.py`。本地过了不代表 CI 会过，反过来亦然——两边都看。
@@ -126,7 +125,7 @@ node tools/verify/robustness-check.mjs                # 全库体检
 前端零构建，所以没有编译期兜底；这几步是唯一的防线，按顺序走：
 
 1. `npm test` + `npm run test:sqlite`：两条链路都要绿（存储层改动尤其要跑第二条）。
-2. `npm run check:robust` + `node tools/verify/check-katex.mjs --max-fail=0`：题库层面 0 错误、0 渲染失败。
+2. `npm run check:robust` + `npm run check:katex`：题库层面 0 错误、0 渲染失败。
 3. `SHARECODE=... npm run build:pages`：把 `public/` 同步到 `docs/`（Pages 产物），确认输出的 `apiBase` 与 sharecode 指向正确后端。
 4. **浏览器端到端抽查**（`node tools/verify/cdp-eval.mjs "<url>" "<js>"`，或直接开页面看）：
    - 题库列表与题目页公式渲染正常，没有裸 `$`、`\frac` 文字；
