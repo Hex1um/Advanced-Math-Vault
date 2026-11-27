@@ -6,7 +6,7 @@
      断网时返回最近看过的题面 —— 教室/地铁里也能翻错题
    - 其余 /api/（登录态、提交、判题）：一律放行不缓存，避免串号与脏数据
    版本号变了就换缓存名，activate 时清掉旧缓存，避免 old ?v= 资源永久驻留。 */
-const VERSION = 'v3.10.6';
+const VERSION = 'v3.10.8';
 const STATIC_CACHE = 'mv-static-' + VERSION;
 const RUNTIME_CACHE = 'mv-runtime-' + VERSION;
 /* 接口缓存也带上版本号：以前固定叫 mv-api-readonly-v1，换后端之后
@@ -73,7 +73,9 @@ self.addEventListener('fetch', function (event) {
     if (!readonly) return; // 其余接口完全不拦截
     event.respondWith(
       fetch(req).then(function (res) {
-        if (res && res.status === 200) {
+        /* 带 ?v= 的是「版本比对」请求，成功时通常只回 {unchanged:true}，
+           不能拿它覆盖离线用的完整 meta 缓存。 */
+        if (res && res.status === 200 && !url.searchParams.has('v')) {
           const copy = res.clone();
           caches.open(API_CACHE).then(function (c) {
             return c.put(req, copy).then(function () { return trimApiCache(c); });

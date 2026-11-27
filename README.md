@@ -2,8 +2,11 @@
 
 高等数学好题收藏室。
 
-线上地址：**https://hex1um.github.io/Advanced-Math-Vault/** （前端，GitHub Pages）
-接口服务：https://math-vault-10141-52003.app.workbuddy.host （后端，Node 单进程）
+**主链接（对外分享、发群、写文档都用这个）：<https://hex1um.github.io/Advanced-Math-Vault/>**
+
+- 前端（GitHub Pages）：https://hex1um.github.io/Advanced-Math-Vault/
+- 接口服务（仅前端调用，不对外发）：https://math-vault-10141-52003.app.workbuddy.host
+- 题目页右上角「复制链接」会拼上面的主链接，不拼当前域名
 
 > 旧实例 `https://math-vault-10141.app.workbuddy.host`（v1.2.1）保留为只读备份：上面还有 14 条做题记录与 5 条待审投稿，
 > 因为没有管理员凭据无法迁移，新实例以题库/账号/帖子为准。

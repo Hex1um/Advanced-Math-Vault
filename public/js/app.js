@@ -191,12 +191,28 @@
      失败时退避重试两次：后端冷启动、弱网、切网瞬间都会让第一次请求直接失败，
      而 meta 拿不到就等于「学科开关不出现、标签树空白」，用户看到的是「物理没了」。 */
   let metaInflight = null;
+  let metaVer = '';          // 上次拿到的标签版本号，用于轮询时走「没变化」快路径
+  let lastMetaFingerprint = '';   // 后端不支持 ?v= 时，用内容指纹做兜底去重
+  let lastMetaAt = 0;        // 上次成功刷新的时刻
   async function refreshMeta(attempt) {
     const n = Number(attempt) || 0;
     if (metaInflight) return metaInflight;
     metaInflight = (async function () {
       try {
-        const meta = await window.API.get('/api/meta');
+        const meta = await window.API.get('/api/meta' + (metaVer ? '?v=' + encodeURIComponent(metaVer) : ''));
+        lastMetaAt = Date.now();
+        /* 版本号没变：服务端只回了 {unchanged:true}，标签树与统计保持原样，
+           不重绘、不写缓存——这就是「实时更新」但不重复传输的做法。 */
+        if (meta && meta.unchanged) return;
+        if (meta && meta.v) metaVer = meta.v;
+        /* 后端还没升级（不认 ?v=、也不回 v）时，用内容比对兜底：
+           连续两次取回完全一样的 meta 就不重绘，避免每分钟闪一下统计条。 */
+        const fingerprint = (function () {
+          try { return JSON.stringify([meta && meta.stats, meta && meta.tagTrees, meta && meta.features]); }
+          catch (e) { return ''; }
+        })();
+        if (fingerprint && fingerprint === lastMetaFingerprint) return;
+        lastMetaFingerprint = fingerprint;
         St.applyMeta(meta);
         writeMetaCache(meta);
         applyFeatureFlags(meta);
@@ -276,6 +292,24 @@
     window.addEventListener('hashchange', render);
     refreshMeta();
     staleShellGuard();
+    startMetaPolling();
+  }
+
+  /* 标签实时更新：
+     - 页面可见时每 60 秒比对一次版本号（没变化只有几十字节，几乎零成本）；
+     - 切回标签页时如果距上次刷新超过 15 秒，立刻比对一次；
+     - 视图里改动了题库（交卷、审核等）可以调 window.MV_REFRESH_META() 手动触发。 */
+  function startMetaPolling() {
+    window.MV_REFRESH_META = function (force) {
+      if (force) metaVer = '';
+      return refreshMeta();
+    };
+    setInterval(function () {
+      if (!document.hidden) refreshMeta();
+    }, 60000);
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden && Date.now() - lastMetaAt > 15000) refreshMeta();
+    });
   }
 
   St.subscribe('meta:updated', function () {

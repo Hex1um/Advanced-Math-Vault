@@ -137,6 +137,20 @@ button { font-family: inherit; }
 .subject-btn.active { background: var(--blue); color: #fff; font-weight: 500; }
 .subject-btn[disabled] { opacity: .45; cursor: not-allowed; }
 
+/* 题头的「复制链接」：低调的描边小按钮，不抢题号与难度徽章的注意力 */
+.link-copy {
+  margin-left: auto;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text-2);
+  font-size: 12px;
+  padding: 3px 9px;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.link-copy:hover { color: var(--blue); border-color: var(--blue); }
+
 /* 物理配图：暗色模式下给浅底卡片，避免黑线白底图看不见 */
 .diagram-grid { display: flex; flex-wrap: wrap; gap: 12px; margin: 14px 0; }
 .diagram {

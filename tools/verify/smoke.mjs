@@ -146,6 +146,18 @@ try {
   ok('按主标签筛选生效', filtered.json.items.length > 0 && filtered.json.items.every((p) => p.mainTag === '积分'));
   const subFiltered = await req('/api/problems?tags=' + encodeURIComponent('定积分'));
   ok('按子标签筛选生效', subFiltered.json.items.length > 0 && subFiltered.json.items.every((p) => p.tags.includes('定积分')));
+  /* 标签实时更新：/api/meta 带版本号，同版本只回 {unchanged:true}（几十字节），
+     否则每次轮询都要重传整棵标签树。 */
+  const metaFull = await req('/api/meta');
+  ok('meta 带标签版本号', typeof metaFull.json.v === 'string' && metaFull.json.v.length >= 8,
+    String(metaFull.json.v));
+  const metaSame = await req('/api/meta?v=' + encodeURIComponent(metaFull.json.v));
+  ok('同版本请求走 unchanged 快路径',
+    metaSame.json.unchanged === true && !metaSame.json.stats);
+  const metaDiff = await req('/api/meta?v=stale-version');
+  ok('版本不同返回完整标签树',
+    !metaDiff.json.unchanged && metaDiff.json.stats && Array.isArray(metaDiff.json.tagTree));
+
   const tree = await req('/api/meta');
   ok('meta 返回主/子标签树', Array.isArray(tree.json.tagTree) && tree.json.tagTree.length > 0
     && tree.json.tagTree.every((m) => m.name && Array.isArray(m.children)));

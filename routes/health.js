@@ -76,6 +76,19 @@ module.exports = function registerHealthRoutes(router, ctx) {
   /* ---- 站点信息 ---- */
   if (pathname === '/api/meta' && method === 'GET') {
     const approved = db.problems.filter((p) => p.status === 'approved');
+
+    /* 标签要「实时」：给这份响应算一个轻量版本号，前端轮询时带上 ?v=，
+       没变化就直接回 {unchanged:true}（几十字节），不必每次重传 29 KB 的标签树。
+       版本号 = 已审题数 + 主标签分布，加题/删题/改标签都会变。 */
+    const dist = {};
+    for (const p of approved) dist[p.mainTag] = (dist[p.mainTag] || 0) + 1;
+    const ver = require('crypto').createHash('sha1')
+      .update(approved.length + '|' + (db.meta && db.meta.seq || 0) + '|'
+        + Object.keys(dist).sort().map((k) => k + ':' + dist[k]).join(','))
+      .digest('hex').slice(0, 12);
+    if (String(query.v || '') === ver) {
+      return send(res, 200, { ok: true, unchanged: true, v: ver });
+    }
     /* 做题数必须和「人数」同口径：只统计非 hidden 的账号。
        否则会出现「1 位同学做了 10 题」这种自相矛盾的首页数字
        ——那 10 题其实是压测/冒烟脚本建的测试号做的。 */
@@ -85,6 +98,7 @@ module.exports = function registerHealthRoutes(router, ctx) {
     const counts = subjectCounts();
     return send(res, 200, {
       ok: true,
+      v: ver,
       site: db.settings.site || db.settings.siteName || '',
       stats: {
         problems: approved.length,

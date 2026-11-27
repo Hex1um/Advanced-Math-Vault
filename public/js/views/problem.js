@@ -187,6 +187,8 @@
           llm: (window.UI.visionConfig ? window.UI.visionConfig() : window.UI.llmConfig())
         });
         renderJudge(res);
+        /* 交卷会改变「做题数 / 平均分」等统计，顺手让标签与统计对一次版本号 */
+        if (window.MV_REFRESH_META) window.MV_REFRESH_META();
         if (res && res.verdict && res.verdict !== 'unclear' && window.DraftStore) window.DraftStore.clear(DRAFT_KEY);
       } catch (e) {
         resultBox.innerHTML = '<div class="judge-result wrong">提交失败：' + window.Md.esc(e.message) + '</div>';
@@ -489,7 +491,8 @@
         '<div class="crumbs"><a href="#/problems">题库</a><span class="sep">/</span><span class="mono">' + p.code + '</span></div>'
         + '<div class="detail-grid">'
         + '<div class="card problem-main">'
-        + '  <div class="problem-head"><span class="problem-code-badge">' + p.code + '</span>' + window.UI.levelBadge(p) + '</div>'
+        + '  <div class="problem-head"><span class="problem-code-badge">' + p.code + '</span>' + window.UI.levelBadge(p)
+        + '    <button class="link-copy" type="button" id="copyLinkBtn" title="复制这道题的主链接（github.io）">复制链接</button></div>'
         + '  <div class="meta-line">'
         + '    <span class="m">来源 <b>' + window.Md.esc(p.source || '未标注') + '</b></span>'
         + '    <span class="m">收录 <b>' + window.UI.fmtDate(p.createdAt) + '</b></span>'
@@ -649,6 +652,20 @@
 
       /* 查看答案 */
       const answerSlot = document.getElementById('answerSlot');
+      /* 复制链接：一律拼「主链接」canonicalBase（github.io），
+         不拼当前域名——从后端域名打开时分享出去的也应该是主站地址。 */
+      const copyBtn = document.getElementById('copyLinkBtn');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', function () {
+          const cfg = window.MV_CONFIG || {};
+          const base = (cfg.canonicalBase || (location.origin + location.pathname)).replace(/\/+$/, '');
+          const url = base + '/#/problem/' + p.code;
+          const done = function () { window.UI.toast('已复制链接：' + url, 'ok'); };
+          if (navigator.clipboard) navigator.clipboard.writeText(url).then(done).catch(function () { prompt('复制链接', url); });
+          else prompt('复制链接', url);
+        });
+      }
+
       document.getElementById('answerBtn').addEventListener('click', async function () {
         const btn = this;
         btn.disabled = true;

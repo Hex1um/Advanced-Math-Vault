@@ -1,6 +1,7 @@
 {
-  "_note": "v3.10.5 起前端回到 math-vault-10141（8 个真实账号都在这里）：由本目录发布，题目取 52003 的最新题库（数学 6562 + 物理 1461），用户/帖子/提交取 10141 的原数据。52003 保留为只读备份，不再作为线上前端后端。",
+  "_note": "v3.10.5 起前端回到 math-vault-10141（8 个真实账号都在这里）：由本目录发布，题目取 52003 的最新题库（数学 6562 + 物理 1461），用户/帖子/提交取 10141 的原数据。52003 保留为只读备份，不再作为线上前端后端。 v3.10.8 起 canonicalBase 指定对外主链接：复制/分享题目一律用 github.io。",
   "apiBase": "https://math-vault-10141.app.workbuddy.host",
   "sharecode": "Q6CZHVVW3K",
-  "siteName": "数海晴岸"
+  "siteName": "数海晴岸",
+  "canonicalBase": "https://hex1um.github.io/Advanced-Math-Vault/"
 }

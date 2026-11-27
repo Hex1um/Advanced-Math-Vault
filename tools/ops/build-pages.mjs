@@ -165,11 +165,16 @@ const VERSION = process.env.BUILD_VERSION || PKG.version || '0.0.0';
 syncInto(SRC, OUT);
 copyDir(SRC, OUT);
 
+/* canonicalBase = 对外的主链接（github.io）。后端域名只用来调接口，
+   分享/复制链接一律拼这个，否则用户会拿到带 sharecode 的后端地址。 */
+const CANONICAL = (FILE_CFG && FILE_CFG.canonicalBase) || process.env.CANONICAL_BASE || '';
+
 fs.writeFileSync(path.join(OUT, 'js', 'config.js'), `/* 由 tools/ops/build-pages.mjs 生成：GitHub Pages 上指到后端 */
 window.MV_CONFIG = {
   apiBase: ${JSON.stringify(API_BASE)},
   sharecode: ${JSON.stringify(SHARECODE)},
-  siteName: ${JSON.stringify(SITE_NAME)}
+  siteName: ${JSON.stringify(SITE_NAME)},
+  canonicalBase: ${JSON.stringify(CANONICAL)}
 };
 `, 'utf8');
 
