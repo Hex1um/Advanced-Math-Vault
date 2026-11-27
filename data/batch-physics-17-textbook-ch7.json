@@ -1,0 +1,403 @@
+[
+ {
+  "title": "用积分证明杆与圆盘的转动惯量",
+  "statement": "(1) 用积分法证明：质量为 $m$、长为 $l$ 的均质细杆对通过中心且与杆垂直的轴线的转动惯量为 $\\frac{1}{12}ml^2$。(2) 用积分法证明：质量为 $m$、半径为 $R$ 的均质薄圆盘对通过中心且在盘面内的转动轴线的转动惯量为 $\\frac14mR^2$。",
+  "mainTag": "力学",
+  "tags": [
+   "刚体定轴转动"
+  ],
+  "kind": "证明题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题7.3.1",
+  "hints": [
+   "杆：取长度元 $\\mathrm{d}x$，$\\mathrm{d}m=\\frac{m}{l}\\mathrm{d}x$，积分限 $-l/2$ 到 $l/2$。",
+   "圆盘：取宽 $\\mathrm{d}x$ 的窄条，长 $2\\sqrt{R^2-x^2}$。"
+  ],
+  "answer": "I_{\\text{杆}}=\\frac{1}{12}ml^{2},\\qquad I_{\\text{盘}}=\\frac{1}{4}mR^{2}",
+  "solution": "（1）杆沿 $x$ 轴放置，转轴过中心垂直杆：\n$$I=\\int_{-l/2}^{l/2}x^2\\frac{m}{l}\\mathrm{d}x=\\frac{m}{l}\\left[\\frac{x^3}{3}\\right]_{-l/2}^{l/2}\n=\\frac{m}{l}\\cdot\\frac{2}{3}\\cdot\\frac{l^3}{8}=\\frac{1}{12}ml^2.$$\n\n（2）圆盘在自身平面内，转轴沿直径（取 $x$ 轴）。在 $x$ 处取宽 $\\mathrm{d}x$ 的窄条，长度 $2\\sqrt{R^2-x^2}$，质量\n$$\\mathrm{d}m=\\sigma\\cdot2\\sqrt{R^2-x^2}\\,\\mathrm{d}x,\\qquad \\sigma=\\frac{m}{\\pi R^2}.$$\n窄条对 $x$ 轴的转动惯量为 $\\frac{1}{12}\\mathrm{d}m\\left(2\\sqrt{R^2-x^2}\\right)^2$，故\n$$I=\\int_{-R}^{R}\\frac{1}{12}\\cdot\\frac{m}{\\pi R^2}\\cdot2\\sqrt{R^2-x^2}\\cdot4\\left(R^2-x^2\\right)\\mathrm{d}x\n=\\frac{2m}{3\\pi R^2}\\int_{-R}^{R}\\left(R^2-x^2\\right)^{3/2}\\mathrm{d}x.$$\n令 $x=R\\sin\\theta$，积分得 $\\int_{-R}^{R}\\left(R^2-x^2\\right)^{3/2}\\mathrm{d}x=\\frac{3\\pi}{8}R^4$，于是\n$$I=\\frac{2m}{3\\pi R^2}\\cdot\\frac{3\\pi}{8}R^4=\\frac14mR^2.$$\n\n对比例：绕垂直盘面的中心轴是 $\\frac12mR^2$，绕直径只有其一半——垂直轴定理 $I_z=I_x+I_y$ 且 $I_x=I_y$，正好给出 $\\frac12=2\\times\\frac14$。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "proof",
+   "unit": "",
+   "methods": [
+    "转动惯量",
+    "积分法"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.3.1"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "均质圆锥的质量与质心",
+  "statement": "求均质直圆锥体的总质量和质心位置。设圆锥底面半径为 $R$、高为 $h$、密度为 $\\rho$。",
+  "mainTag": "力学",
+  "tags": [
+   "刚体定轴转动"
+  ],
+  "kind": "推导题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题7.2.2",
+  "hints": [
+   "取距顶点 $y$ 处厚 $\\mathrm{d}y$ 的薄圆盘，半径 $r=R\\frac{y}{h}$。",
+   "$M=\\int\\rho\\pi r^2\\mathrm{d}y$，质心 $y_C=\\frac{1}{M}\\int y\\,\\mathrm{d}m$。"
+  ],
+  "answer": "M=\\frac{1}{3}\\pi R^{2}h\\rho,\\qquad y_C=\\frac{3}{4}h\\ \\text{（自顶点量起）}",
+  "solution": "以顶点为原点、轴向为 $y$ 轴。距顶点 $y$ 处薄圆盘半径\n$$r=R\\frac{y}{h},\\qquad \\mathrm{d}m=\\rho\\pi r^2\\mathrm{d}y=\\rho\\pi R^2\\frac{y^2}{h^2}\\mathrm{d}y.$$\n\n总质量\n$$M=\\int_0^h\\rho\\pi R^2\\frac{y^2}{h^2}\\mathrm{d}y=\\frac{1}{3}\\pi R^2h\\rho.$$\n\n质心\n$$y_C=\\frac{1}{M}\\int_0^h y\\,\\mathrm{d}m\n=\\frac{3}{\\pi R^2h}\\int_0^h\\rho\\pi R^2\\frac{y^3}{h^2}\\mathrm{d}y\n=\\frac{3}{h^3}\\cdot\\frac{h^4}{4}=\\frac34h.$$\n\n即质心在距顶点 $\\frac34h$ 处（距底面 $\\frac14h$），与「圆锥比圆柱更「头重」」的直觉一致：圆柱质心在 $h/2$，圆锥被削尖的部分把质心推向底面一侧。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "质心",
+    "积分法"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.2.2"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "卷扬机牵引斜面上物体的加速度",
+  "statement": "如图，斜面倾角为 $\\theta$，位于斜面顶端的卷扬机鼓轮半径为 $R$、转动惯量为 $I$，受到驱动力矩 $M$，通过绳索牵引斜面上质量为 $m$ 的物体。物体与斜面间的摩擦因数为 $\\mu$。求重物上滑的加速度（绳与斜面平行，不计绳的质量）。",
+  "mainTag": "力学",
+  "tags": [
+   "刚体定轴转动"
+  ],
+  "kind": "推导题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题7.3.8",
+  "hints": [
+   "对物体：$T-mg\\sin\\theta-\\mu mg\\cos\\theta=ma$。",
+   "对鼓轮：$M-TR=I\\alpha$，$a=\\alpha R$。"
+  ],
+  "answer": "a=\\frac{M/R-mg\\left(\\sin\\theta+\\mu\\cos\\theta\\right)}{m+I/R^{2}}",
+  "solution": "物体沿斜面向上加速 $a$：\n$$T-mg\\sin\\theta-\\mu mg\\cos\\theta=ma.$$\n鼓轮：驱动力矩 $M$ 与绳张力矩 $TR$ 之差提供角加速：\n$$M-TR=I\\alpha,\\qquad \\alpha=\\frac{a}{R}.$$\n由第二式解出 $T=\\dfrac{M}{R}-\\dfrac{Ia}{R^2}$，代入第一式：\n$$\\frac{M}{R}-\\frac{Ia}{R^2}-mg\\left(\\sin\\theta+\\mu\\cos\\theta\\right)=ma,$$\n$$a=\\frac{M/R-mg\\left(\\sin\\theta+\\mu\\cos\\theta\\right)}{m+I/R^{2}}.$$\n\n分母 $m+I/R^2$ 是「等效质量」：鼓轮的转动惯量折算到绳端相当于多挂了 $I/R^2$ 的质量。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "转动定律",
+    "牛顿第二定律"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.3.8"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "用两个不同重物测轮盘转动惯量",
+  "statement": "利用图示装置测一轮盘的转动惯量，悬线与轴的垂直距离为 $r$。为减小因不计轴承摩擦力矩而产生的误差，先悬挂质量较小的重物 $m_1$，从距地面高度 $h$ 处由静止开始下落，落地时间为 $t_1$；然后悬挂质量较大的重物 $m_2$，同样自高度 $h$ 下落，所需时间为 $t_2$。近似认为两种情况下摩擦力矩相同，请根据这些数据确定轮盘的转动惯量。",
+  "mainTag": "力学",
+  "tags": [
+   "刚体定轴转动"
+  ],
+  "kind": "推导题",
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "漆安慎《力学》第4版 习题7.3.9",
+  "hints": [
+   "$a_i=\\dfrac{2h}{t_i^2}$。",
+   "每个重物：$m_ig-T_i=m_ia_i$；轮盘：$T_ir-M_f=I a_i/r$。"
+  ],
+  "answer": "I=r^{2}\\frac{g\\left(m_2-m_1\\right)-\\left(m_2a_2-m_1a_1\\right)}{a_2-a_1}",
+  "solution": "两种情况下重物加速度\n$$a_1=\\frac{2h}{t_1^2},\\qquad a_2=\\frac{2h}{t_2^2}.$$\n\n对重物与轮盘分别写方程（$M_f$ 为轴承摩擦力矩，两次相同）：\n$$m_ig-T_i=m_ia_i,\\qquad T_ir-M_f=I\\frac{a_i}{r}.$$\n消去 $T_i$：\n$$m_igr-m_ia_ir-M_f=\\frac{Ia_i}{r}.$$\n对 $i=1,2$ 两式相减，$M_f$ 抵消：\n$$gr\\left(m_2-m_1\\right)-r\\left(m_2a_2-m_1a_1\\right)=\\frac{I}{r}\\left(a_2-a_1\\right),$$\n$$I=r^2\\frac{g\\left(m_2-m_1\\right)-\\left(m_2a_2-m_1a_1\\right)}{a_2-a_1}.$$\n\n用两个不同质量做两次实验，正是为了消去无法直接测量的 $M_f$——这是实验物理里「差分测量」的典型手法。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "转动定律",
+    "差分测量"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.3.9"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "弹片嵌入杆端后杆的最大摆角",
+  "statement": "如图，质量为 $2.97\\ \\mathrm{kg}$、长为 $1.0\\ \\mathrm{m}$ 的均质等截面细杆可绕水平光滑的轴线 $O$ 转动，最初杆静止于竖直方向。一弹片质量为 $10\\ \\mathrm{g}$，以水平速度 $200\\ \\mathrm{m/s}$ 射出并嵌入杆的下端，和杆一起运动。求杆的最大摆角 $\\theta$（$g=9.8\\ \\mathrm{m/s^2}$）。",
+  "mainTag": "力学",
+  "tags": [
+   "角动量守恒",
+   "功与机械能"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题7.4.2",
+  "hints": [
+   "碰撞瞬间对 $O$ 角动量守恒。",
+   "碰后机械能守恒，注意质心位置要按杆 + 弹片合成。"
+  ],
+  "answer": "30",
+  "solution": "碰前只有弹片有角动量（对 $O$）：\n$$L_0=m_bv l=0.010\\times200\\times1.0=2.0\\ \\mathrm{kg\\cdot m^2/s}.$$\n碰后转动惯量\n$$I=\\frac13m_{\\text{杆}}l^2+m_bl^2=\\frac13\\times2.97\\times1^2+0.010\\times1=0.990+0.010=1.00\\ \\mathrm{kg\\cdot m^2}.$$\n角速度\n$$\\omega=\\frac{L_0}{I}=2.0\\ \\mathrm{rad/s}.$$\n\n碰后机械能守恒。合成质心距 $O$\n$$d=\\frac{2.97\\times0.5+0.010\\times1.0}{2.98}=0.5017\\ \\mathrm{m}.$$\n$$\\frac12I\\omega^2=\\left(m_{\\text{杆}}+m_b\\right)g\\,d\\left(1-\\cos\\theta\\right),$$\n$$2.0=2.98\\times9.8\\times0.5017\\times\\left(1-\\cos\\theta\\right)=14.65\\left(1-\\cos\\theta\\right),$$\n$$1-\\cos\\theta=0.1365\\quad\\Rightarrow\\quad\\cos\\theta=0.8635,\\qquad\\theta=30^\\circ.$$\n\n杆的转动惯量占 $99\\%$，所以弹片虽轻，仍能把 $2.97\\ \\mathrm{kg}$ 的杆撞到 $30^\\circ$——因为它的角动量集中在杆端（力臂最长处）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "角动量守恒",
+    "机械能守恒"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.4.2"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "子弹嵌入棒端后的角速度",
+  "statement": "一质量为 $m_1$、速度为 $v$ 的子弹沿水平面击中并嵌入一质量为 $m_2=99m_1$、长度为 $L$ 的棒的端点。速度 $v$ 与棒垂直，棒原来静止于光滑的水平面上，子弹击中棒后共同运动。求棒和子弹绕垂直于平面的轴的角速度。",
+  "mainTag": "力学",
+  "tags": [
+   "角动量守恒"
+  ],
+  "kind": "推导题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题7.4.3",
+  "hints": [
+   "棒可自由平动 + 转动，须对「棒 + 子弹」的质心取角动量。",
+   "碰后 $I=I_{\\text{棒}}+m_1\\left(L/2\\right)^2$（质心在棒中点附近）。"
+  ],
+  "answer": "\\omega=\\frac{v}{17L}",
+  "solution": "棒不受约束，碰撞后整体平动 + 绕质心转动。对系统质心取角动量：碰前子弹的角动量\n$$L_0=m_1v\\cdot\\frac{L}{2}.$$\n\n碰后转动惯量（子弹质量比棒小 99 倍，质心近似在棒中点）\n$$I=\\frac{1}{12}m_2L^2+m_1\\left(\\frac{L}{2}\\right)^2\n=\\frac{99}{12}m_1L^2+\\frac14m_1L^2=\\left(8.25+0.25\\right)m_1L^2=8.5m_1L^2.$$\n\n角动量守恒\n$$m_1v\\frac{L}{2}=8.5m_1L^2\\omega\n\\quad\\Rightarrow\\quad\\omega=\\frac{v}{17L}.$$\n\n例：$v=100\\ \\mathrm{m/s}$、$L=1\\ \\mathrm{m}$ 时 $\\omega=5.9\\ \\mathrm{rad/s}$。注意棒还会整体平动，速度 $v_C=\\dfrac{m_1v}{m_1+m_2}=\\dfrac{v}{100}$。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "角动量守恒",
+    "刚体平面运动"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.4.3"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "脉冲星的转动动能",
+  "statement": "一颗典型的脉冲星，半径为几千米，质量与太阳的大致相等，转动角速率很大。试估算周期为 $50\\ \\mathrm{ms}$ 的脉冲星的转动动能（自己查找太阳质量的数据）。",
+  "mainTag": "力学",
+  "tags": [
+   "刚体定轴转动"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题7.4.4",
+  "hints": [
+   "把脉冲星视为均匀球体：$I=\\frac25MR^2$，取 $R\\approx10\\ \\mathrm{km}$。",
+   "$E_k=\\frac12I\\omega^2$，$\\omega=2\\pi/T$。"
+  ],
+  "answer": "6.3\\times10^{41}\\ \\mathrm{J}",
+  "solution": "取 $M=2.0\\times10^{30}\\ \\mathrm{kg}$、$R=10\\ \\mathrm{km}=1.0\\times10^{4}\\ \\mathrm{m}$：\n$$I=\\frac25MR^2=0.4\\times2.0\\times10^{30}\\times10^{8}=8.0\\times10^{37}\\ \\mathrm{kg\\cdot m^2}.$$\n$$\\omega=\\frac{2\\pi}{T}=\\frac{2\\pi}{0.050}=126\\ \\mathrm{rad/s}.$$\n$$E_k=\\frac12I\\omega^2=\\frac12\\times8.0\\times10^{37}\\times126^2=6.3\\times10^{41}\\ \\mathrm{J}.$$\n\n对比：太阳每秒辐射 $3.8\\times10^{26}\\ \\mathrm{J}$，这颗脉冲星的自转动能相当于太阳辐射约 $5\\times10^{7}$ 年。脉冲星通过磁场辐射不断损失转动能、自转逐渐变慢，正是由此供能。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "转动动能",
+    "量级估算"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.4.4"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "正方形框架摆到水平时质心的速度与支点压力",
+  "statement": "如图，用四根质量均为 $m$、长度均为 $l$ 的均质细杆制成正方形框架，可围绕其中一边的中点在竖直平面内转动，支点 $O$ 光滑。最初框架静止且 $AB$ 边沿竖直方向，释放后向下摆动。求当 $AB$ 边达到水平时，框架质心的线速度 $v_C$ 以及框架作用于支点的压力 $N$。",
+  "mainTag": "力学",
+  "tags": [
+   "刚体定轴转动",
+   "功与机械能"
+  ],
+  "kind": "计算题",
+  "thinking": 7,
+  "difficulty": 8,
+  "calc": 6,
+  "source": "漆安慎《力学》第4版 习题7.5.2",
+  "hints": [
+   "四杆对 $O$ 的转动惯量：$I_O=\\frac{23}{6}ml^2$。",
+   "质心距 $O$ 为 $l/2$，摆到水平时质心下降 $l/2$。"
+  ],
+  "answer": "v_C=\\sqrt{\\frac{3gl}{23}},\\qquad N=\\frac{116}{23}mg",
+  "solution": "四杆对 $O$（$AB$ 边中点，转轴垂直框架平面）的转动惯量：\n- $AB$ 杆：$I_1=\\frac{1}{12}ml^2$；\n- $BC$、$DA$ 两杆：各 $I=\\frac{1}{12}ml^2+m\\left(\\frac54l^2\\right)=\\frac43ml^2$，共 $\\frac83ml^2$；\n- $CD$ 杆：$I=\\frac{1}{12}ml^2+ml^2=\\frac{13}{12}ml^2$。\n\n$$I_O=\\frac{1}{12}+\\frac83+\\frac{13}{12}=\\frac{46}{12}=\\frac{23}{6}ml^2.$$\n\n四杆质心平均在距 $O$ 为 $l/2$ 处。$AB$ 由竖直转到水平，质心下降 $l/2$。机械能守恒：\n$$4mg\\frac{l}{2}=\\frac12I_O\\omega^2\n\\quad\\Rightarrow\\quad 2mgl=\\frac12\\cdot\\frac{23}{6}ml^2\\omega^2\n\\quad\\Rightarrow\\quad\\omega^2=\\frac{12g}{23l}.$$\n$$v_C=\\omega\\frac{l}{2}=\\sqrt{\\frac{12g}{23l}}\\cdot\\frac{l}{2}=\\sqrt{\\frac{3gl}{23}}.$$\n\n质心做半径 $l/2$ 的圆周运动，向心加速度\n$$a_n=\\omega^2\\frac{l}{2}=\\frac{6g}{23}.$$\n支点压力\n$$N-4mg=4m a_n\\quad\\Rightarrow\\quad N=4mg\\left(1+\\frac{6}{23}\\right)=\\frac{116}{23}mg\\approx5.0mg.$$\n\n压力大于总重 $4mg$：质心在最低点附近做圆周运动，需要额外的向心力。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "转动惯量",
+    "机械能守恒",
+    "向心力"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.5.2"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "正方形框架绕角点摆动时 P 点的速度",
+  "statement": "由长为 $l$、质量各为 $m$ 的均质细杆组成正方形框架，其中一角连于光滑水平转轴 $O$，转轴与框架所在平面垂直。最初对角线 $OP$ 处于水平，然后从静止开始向下自由摆动。求 $OP$ 对角线与水平成 $45^\\circ$ 时 $P$ 点的速度。",
+  "mainTag": "力学",
+  "tags": [
+   "刚体定轴转动",
+   "功与机械能"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题7.5.3",
+  "hints": [
+   "四杆对 $O$ 的转动惯量 $I_O=\\frac{10}{3}ml^2$。",
+   "质心距 $O$ 为 $l/\\sqrt2$，转 $45^\\circ$ 后下降 $l/2$。"
+  ],
+  "answer": "v_P=\\sqrt{\\frac{12gl}{5}}",
+  "solution": "四杆对 $O$ 的转动惯量：与 $O$ 相连的两杆各 $\\frac13ml^2$；另两杆质心距 $O$ 为 $\\frac{\\sqrt5}{2}l$，各\n$$\\frac{1}{12}ml^2+m\\cdot\\frac{5}{4}l^2=\\frac43ml^2.$$\n$$I_O=2\\times\\frac13ml^2+2\\times\\frac43ml^2=\\frac{10}{3}ml^2.$$\n\n框架质心在 $OP$ 中点，距 $O$ 为 $\\frac{l}{\\sqrt2}$。$OP$ 由水平转到与水平成 $45^\\circ$，质心下降\n$$\\Delta h=\\frac{l}{\\sqrt2}\\sin45^\\circ=\\frac{l}{2}.$$\n机械能守恒：\n$$4mg\\frac{l}{2}=\\frac12\\cdot\\frac{10}{3}ml^2\\omega^2\n\\quad\\Rightarrow\\quad 2mgl=\\frac53ml^2\\omega^2\n\\quad\\Rightarrow\\quad\\omega^2=\\frac{6g}{5l}.$$\n\n$P$ 点距 $O$ 为 $l\\sqrt2$：\n$$v_P=\\omega\\,l\\sqrt2=\\sqrt{\\frac{6g}{5l}}\\cdot l\\sqrt2=\\sqrt{\\frac{12gl}{5}}.$$\n\n（题目还问此时支点反力，需要把质心加速度分解为切向与法向再合成，计算较繁；本题只取速度一问。）",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "转动惯量",
+    "机械能守恒"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.5.3"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "释放杆端瞬间质心的加速度与端点支持力",
+  "statement": "质量为 $m$、长为 $l$ 的均质杆，其 $B$ 端放在桌上，$A$ 端被手支住，使杆成水平。突然释放 $A$ 端，在此瞬时求：(1) 杆质心的加速度；(2) 杆 $B$ 端所受的力。",
+  "mainTag": "力学",
+  "tags": [
+   "刚体平面平行运动"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题7.5.4",
+  "hints": [
+   "释放瞬间杆绕 $B$ 转动：$mg\\frac{l}{2}=I_B\\alpha$，$I_B=\\frac13ml^2$。",
+   "$a_C=\\alpha\\frac{l}{2}$；再对质心用牛顿第二定律求 $N$。"
+  ],
+  "answer": "a_C=\\frac{3}{4}g,\\qquad N=\\frac{1}{4}mg",
+  "solution": "释放瞬间，杆绕 $B$ 端转动（$B$ 端尚未离开桌面）。对 $B$ 取转动定律：\n$$mg\\frac{l}{2}=I_B\\alpha=\\frac13ml^2\\alpha\n\\quad\\Rightarrow\\quad\\alpha=\\frac{3g}{2l}.$$\n质心加速度\n$$a_C=\\alpha\\frac{l}{2}=\\frac{3}{4}g\\quad\\left(7.35\\ \\mathrm{m/s^2}\\right),\\ \\text{方向向下}.$$\n\n对质心用牛顿第二定律：\n$$mg-N=ma_C=m\\cdot\\frac34g\\quad\\Rightarrow\\quad N=\\frac14mg.$$\n\n即释放瞬间桌面对 $B$ 端的支持力只有重力的四分之一（$0.25mg$），而非 $mg$——因为杆在角加速，质心并未「自由落体」。若 $B$ 端也是光滑的，杆会边转边滑，本题按「$B$ 端不滑动」处理。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "转动定律",
+    "质心运动定理"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.5.4"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "氧分子的转动角速率",
+  "statement": "氧分子的总质量为 $5.30\\times10^{-26}\\ \\mathrm{kg}$，对于通过其质心且与两个原子连线垂直的轴线的转动惯量为 $1.0\\times10^{-45}\\ \\mathrm{kg\\cdot m^2}$。设在气体中某氧分子运动的速率为 $500\\ \\mathrm{m/s}$，且其转动动能为其平动动能的 $\\frac23$，求这个氧分子的角速率。",
+  "mainTag": "力学",
+  "tags": [
+   "刚体定轴转动"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题7.5.8",
+  "hints": [
+   "平动动能 $\\frac12mv^2$。",
+   "转动动能 $\\frac12I\\omega^2=\\frac23\\cdot\\frac12mv^2$。"
+  ],
+  "answer": "3.0\\times10^{12}\\ \\mathrm{rad/s}",
+  "solution": "平动动能\n$$E_{\\text{平}}=\\frac12mv^2=\\frac12\\times5.30\\times10^{-26}\\times500^2=6.63\\times10^{-21}\\ \\mathrm{J}.$$\n转动动能\n$$E_{\\text{转}}=\\frac23E_{\\text{平}}=4.42\\times10^{-21}\\ \\mathrm{J}.$$\n由 $E_{\\text{转}}=\\frac12I\\omega^2$：\n$$\\omega=\\sqrt{\\frac{2E_{\\text{转}}}{I}}\n=\\sqrt{\\frac{2\\times4.42\\times10^{-21}}{1.0\\times10^{-45}}}=2.97\\times10^{12}\\ \\mathrm{rad/s}\\approx3.0\\times10^{12}\\ \\mathrm{rad/s}.$$\n\n这个角速率对应转动周期约 $2\\ \\mathrm{ps}$，与分子振动/转动的典型时间尺度一致；也说明常温下双原子分子的转动自由度确实被充分激发（能量均分定理）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "rad/s",
+   "methods": [
+    "转动动能",
+    "能量均分"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.5.8"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "烟囱倒下时上端的速度",
+  "statement": "$10\\ \\mathrm{m}$ 高的烟囱因底部损坏而倒下来，求其上端到达地面时的线速度。设倾倒时底部未移动，可近似认为烟囱为均质细杆（$g=9.8\\ \\mathrm{m/s^2}$）。",
+  "mainTag": "力学",
+  "tags": [
+   "刚体定轴转动",
+   "功与机械能"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题7.5.11",
+  "hints": [
+   "绕底端转动：$I=\\frac13mL^2$。",
+   "质心下降 $L/2$；上端速度 $v=\\omega L$。"
+  ],
+  "answer": "1.7\\times10^{1}\\ \\mathrm{m/s}",
+  "solution": "烟囱绕底端转动，机械能守恒。质心下降 $L/2$：\n$$mg\\frac{L}{2}=\\frac12I\\omega^2=\\frac12\\cdot\\frac13mL^2\\omega^2\n\\quad\\Rightarrow\\quad\\omega^2=\\frac{3g}{L}.$$\n上端速度\n$$v=\\omega L=\\sqrt{\\frac{3g}{L}}\\cdot L=\\sqrt{3gL}\n=\\sqrt{3\\times9.8\\times10}=17.1\\ \\mathrm{m/s}.$$\n\n约 $62\\ \\mathrm{km/h}$。注意上端速度与 $\\sqrt L$ 成正比而与 $\\sqrt{1/L}$ 无关——烟囱越高，上端落地越快，这也解释了为何高烟囱定向爆破时倒塌范围比高度估计的更大（碎片会向外抛散）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m/s",
+   "methods": [
+    "转动惯量",
+    "机械能守恒"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第七章 习题7.5.11"
+  },
+  "subject": "physics"
+ }
+]

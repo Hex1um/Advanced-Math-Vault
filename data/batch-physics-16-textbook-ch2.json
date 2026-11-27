@@ -1,0 +1,265 @@
+[
+ {
+  "title": "雷达测定飞机的速度",
+  "statement": "雷达站于某瞬时测得飞机位置为 $R_1=4100\\ \\mathrm{m}$、与水平方向夹角 $\\theta_1=33.7^\\circ$；$0.75\\ \\mathrm{s}$ 后测得 $R_2=4240\\ \\mathrm{m}$、$\\theta_2=29.3^\\circ$。$R_1$、$R_2$ 均在竖直平面内。求飞机瞬时速率的近似值和飞行方向。",
+  "mainTag": "力学",
+  "tags": [
+   "质点运动学"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题2.2.1",
+  "hints": [
+   "把两次观测写成直角坐标：$\\left(R\\cos\\theta,R\\sin\\theta\\right)$。",
+   "$\\vec v\\approx\\Delta\\vec r/\\Delta t$。"
+  ],
+  "answer": "4.7\\times10^{2}\\ \\mathrm{m/s}",
+  "solution": "两次位置矢量\n$$\\vec r_1=4100\\left(\\cos33.7^\\circ,\\sin33.7^\\circ\\right)=\\left(3410,\\ 2275\\right)\\ \\mathrm{m},$$\n$$\\vec r_2=4240\\left(\\cos29.3^\\circ,\\sin29.3^\\circ\\right)=\\left(3699,\\ 2072\\right)\\ \\mathrm{m}.$$\n位移\n$$\\Delta\\vec r=\\left(289,\\ -203\\right)\\ \\mathrm{m},\\qquad \\left|\\Delta\\vec r\\right|=352\\ \\mathrm{m}.$$\n$$v\\approx\\frac{352}{0.75}=4.7\\times10^{2}\\ \\mathrm{m/s},$$\n方向与水平方向成\n$$\\alpha=\\arctan\\frac{203}{289}=35^\\circ\\ \\text{（向下，朝雷达方向）}.$$\n\n这是「有限差分近似瞬时速度」：$\\Delta t=0.75\\ \\mathrm{s}$ 内速度方向已有变化，故结果只是近似值。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m/s",
+   "methods": [
+    "位移",
+    "平均速度"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第二章 习题2.2.1"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "估算北京到巴黎的飞行时间",
+  "statement": "你乘波音 747 飞机自北京直飞到巴黎，如果无法咨询航空公司，能否估计大约用多少时间？如果能，试估计一下（自己找所需数据）。",
+  "mainTag": "力学",
+  "tags": [
+   "质点运动学"
+  ],
+  "kind": "计算题",
+  "thinking": 2,
+  "difficulty": 3,
+  "calc": 2,
+  "source": "漆安慎《力学》第4版 习题2.2.4",
+  "hints": [
+   "北京到巴黎的球面距离约 $8200\\ \\mathrm{km}$。",
+   "波音 747 巡航速率约 $900\\ \\mathrm{km/h}$。"
+  ],
+  "answer": "9\\ \\mathrm{h}",
+  "solution": "北京（约 $40^\\circ\\mathrm{N},116^\\circ\\mathrm{E}$）到巴黎（约 $49^\\circ\\mathrm{N},2^\\circ\\mathrm{E}$）的大圆距离约\n$$s\\approx8200\\ \\mathrm{km}.$$\n波音 747 巡航速率约 $900\\ \\mathrm{km/h}$，故\n$$t=\\frac{s}{v}=\\frac{8200}{900}=9.1\\ \\mathrm{h}.$$\n\n实际航班约 $10\\sim11\\ \\mathrm{h}$（西行逆风、起降与绕飞），估算值合理。\n\n这类「费米估算」的关键是**敢用公开常识数据并说明取值**，而不是精确到分钟。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "h",
+   "methods": [
+    "估算",
+    "匀速运动"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第二章 习题2.2.4"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "坡道上两自行车的相遇",
+  "statement": "在 $195\\ \\mathrm{m}$ 长的坡道上，一人骑自行车以 $18\\ \\mathrm{km/h}$ 的速率和 $-20\\ \\mathrm{cm/s^2}$ 的加速度上坡；另一自行车同时从坡顶以 $5.4\\ \\mathrm{km/h}$ 的初速率和 $0.20\\ \\mathrm{m/s^2}$ 的加速度下坡。问：(1) 经过多长时间两人相遇？(2) 相遇时各走过多少路程？",
+  "mainTag": "力学",
+  "tags": [
+   "质点运动学"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题2.4.5",
+  "hints": [
+   "统一单位：$18\\ \\mathrm{km/h}=5.0\\ \\mathrm{m/s}$，$5.4\\ \\mathrm{km/h}=1.5\\ \\mathrm{m/s}$。",
+   "上坡者速率在 $t=25\\ \\mathrm{s}$ 时减为零，之后反向——路程要分段算。"
+  ],
+  "answer": "30\\ \\mathrm{s}",
+  "solution": "取上坡方向为正。上坡者 $v_0=5.0\\ \\mathrm{m/s}$、$a=-0.20\\ \\mathrm{m/s^2}$；下坡者从坡顶出发、$v_0=-1.5\\ \\mathrm{m/s}$、$a=-0.20\\ \\mathrm{m/s^2}$（沿上坡方向看为负向加速）。\n\n两人位移之和等于坡长：\n$$\\left(5t-0.1t^2\\right)+\\left(1.5t+0.1t^2\\right)=195\n\\quad\\Rightarrow\\quad6.5t=195\\quad\\Rightarrow\\quad t=30\\ \\mathrm{s}.$$\n\n（2）上坡者速率为零的时刻 $t_0=5.0/0.2=25\\ \\mathrm{s}$，之后反向。其位移\n$$s_1=5\\times30-0.1\\times30^2=60\\ \\mathrm{m},$$\n但**路程**要分段：前 $25\\ \\mathrm{s}$ 前进\n$$s_{1a}=5\\times25-0.1\\times625=62.5\\ \\mathrm{m},$$\n后 $5\\ \\mathrm{s}$ 后退\n$$s_{1b}=0.1\\times25=2.5\\ \\mathrm{m},$$\n故路程 $=65\\ \\mathrm{m}$。\n\n下坡者一直加速，路程 $=1.5\\times30+0.1\\times900=135\\ \\mathrm{m}$。\n\n位移和 $60+135=195\\ \\mathrm{m}$ 校验通过；路程和 $65+135=200\\ \\mathrm{m}$——这 5 m 的差就是上坡者「折返」多走的部分。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "s",
+   "methods": [
+    "匀变速直线运动",
+    "路程与位移"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第二章 习题2.4.5"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "第七节车厢通过的时间",
+  "statement": "站台上送行的人，在火车开动时站在第一节车厢的最前面。火车开动后经过 $\\Delta t=24\\ \\mathrm{s}$，第一节车厢的末尾从此人面前通过。问第七节车厢驶过他面前需要多长时间？火车做匀加速运动，各节车厢等长。",
+  "mainTag": "力学",
+  "tags": [
+   "质点运动学"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题2.4.6",
+  "hints": [
+   "设每节长 $L$，则 $L=\\frac12a\\Delta t^2$。",
+   "第 $n$ 节末尾通过的时刻 $t_n=\\Delta t\\sqrt{n}$。"
+  ],
+  "answer": "4.7\\ \\mathrm{s}",
+  "solution": "设每节车厢长 $L$、加速度 $a$。第一节末尾通过时\n$$L=\\frac12a\\Delta t^2\\quad\\Rightarrow\\quad \\Delta t=\\sqrt{\\frac{2L}{a}}.$$\n前 $n$ 节末尾通过的时刻\n$$t_n=\\sqrt{\\frac{2nL}{a}}=\\Delta t\\sqrt{n}.$$\n第七节车厢驶过，是从第 6 节末尾到第 7 节末尾：\n$$\\Delta t_7=t_7-t_6=\\Delta t\\left(\\sqrt7-\\sqrt6\\right)=24\\times\\left(2.646-2.449\\right)=4.7\\ \\mathrm{s}.$$\n\n车厢越往后越快通过：第一节 $24\\ \\mathrm{s}$，第七节只要 $4.7\\ \\mathrm{s}$。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "s",
+   "methods": [
+    "匀加速",
+    "比例关系"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第二章 习题2.4.6"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "两石子在竖直线上相遇",
+  "statement": "在同一竖直线上相隔 $h$ 的两点，以同样速率 $v_0$ 上抛两颗石子，但在高处的石子早 $t_0$ 被抛出。求这两颗石子何时何处相遇。",
+  "mainTag": "力学",
+  "tags": [
+   "质点运动学"
+  ],
+  "kind": "推导题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题2.4.7",
+  "hints": [
+   "以低处抛出点为原点、向上为正。",
+   "高处的石子位置 $y_2=h+v_0\\left(t+t_0\\right)-\\frac12g\\left(t+t_0\\right)^2$。"
+  ],
+  "answer": "t=\\frac{2\\left(h+v_0t_0\\right)-gt_0^{2}}{2gt_0}",
+  "solution": "以低处抛出点为原点、向上为正，$t$ 从低处石子抛出时计时。\n\n低处石子：\n$$y_1=v_0t-\\frac12gt^2.$$\n高处石子（早 $t_0$ 抛出，已飞行 $t+t_0$）：\n$$y_2=h+v_0\\left(t+t_0\\right)-\\frac12g\\left(t+t_0\\right)^2.$$\n相遇 $y_1=y_2$：\n$$0=h+v_0t_0-\\frac12g\\left(2tt_0+t_0^2\\right),$$\n$$t=\\frac{2\\left(h+v_0t_0\\right)-gt_0^2}{2gt_0}.$$\n\n相遇高度代入 $y_1$ 即可：\n$$y=v_0t-\\frac12gt^2.$$\n\n要使解有意义需 $t>0$，即 $2\\left(h+v_0t_0\\right)>gt_0^2$——若高处石子抛得太早，它可能已落过低处抛出点，二者不再相遇。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "竖直上抛",
+    "追及相遇"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第二章 习题2.4.7"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "两球在各自最高点相遇",
+  "statement": "在同一竖直面内、同一水平线上的 $A$、$B$ 两点，分别以 $30^\\circ$ 和 $60^\\circ$ 的发射角同时抛出两小球。欲使两小球相遇时都在自己的轨道最高点，求 $A$、$B$ 两点间的距离。已知小球在 $A$ 点的发射速率 $v_{0A}=9.8\\ \\mathrm{m/s}$。",
+  "mainTag": "力学",
+  "tags": [
+   "质点运动学"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题2.5.2",
+  "hints": [
+   "最高点时间 $t=v_0\\sin\\theta/g$，两者必须相等。",
+   "最高点高度也必须相等，由此定 $v_{0B}$。"
+  ],
+  "answer": "5.7\\ \\mathrm{m}",
+  "solution": "$A$ 球到最高点的时间与高度\n$$t_A=\\frac{v_{0A}\\sin30^\\circ}{g}=\\frac{9.8\\times0.5}{9.8}=0.50\\ \\mathrm{s},$$\n$$h_A=\\frac{v_{0A}^2\\sin^230^\\circ}{2g}=\\frac{9.8^2\\times0.25}{2\\times9.8}=1.225\\ \\mathrm{m}.$$\n\n两球同时抛出又在各自最高点相遇，故 $t_B=t_A=0.50\\ \\mathrm{s}$，且 $h_B=h_A$。由 $t_B=v_{0B}\\sin60^\\circ/g$：\n$$v_{0B}=\\frac{g t_B}{\\sin60^\\circ}=\\frac{9.8\\times0.5}{0.866}=5.66\\ \\mathrm{m/s}.$$\n检验高度：\n$$h_B=\\frac{5.66^2\\times0.75}{2\\times9.8}=1.225\\ \\mathrm{m},$$\n与 $h_A$ 一致。\n\n水平距离\n$$d=v_{0A}\\cos30^\\circ t_A+v_{0B}\\cos60^\\circ t_B\n=9.8\\times0.866\\times0.5+5.66\\times0.5\\times0.5=4.24+1.42=5.66\\ \\mathrm{m}\\approx5.7\\ \\mathrm{m}.$$\n\n两球相向抛出（间距为两者水平射程之和）。若同向抛出，间距应为 $4.24-1.42=2.8\\ \\mathrm{m}$——题图显示 $A$、$B$ 分居两侧，取相向。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m",
+   "methods": [
+    "斜抛运动"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第二章 习题2.5.2"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "飞机相对风与相对地面的速度",
+  "statement": "飞机在某高度的水平面上飞行。机身方向是自东北向西南，与正西夹 $15^\\circ$ 角；风以 $100\\ \\mathrm{km/h}$ 的速率自西南向东北方向吹来，与正南夹 $45^\\circ$ 角。结果飞机向正西方向运动。求飞机相对于风的速度及相对于地面的速度。",
+  "mainTag": "力学",
+  "tags": [
+   "质点运动学"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题2.8.1",
+  "hints": [
+   "速度合成：$\\vec v_{\\text{地}}=\\vec v_{\\text{机对风}}+\\vec v_{\\text{风}}$。",
+   "机头方向决定「机对风」的方向，对地方向正西。"
+  ],
+  "answer": "2.7\\times10^{2}\\ \\mathrm{km/h}",
+  "solution": "取正东为 $+x$、正北为 $+y$。\n\n风：自西南向东北，与正南夹 $45^\\circ$，即指向北偏东 $45^\\circ$：\n$$\\vec v_{\\text{风}}=100\\left(\\cos45^\\circ,\\sin45^\\circ\\right)=\\left(70.7,\\ 70.7\\right).$$\n\n机头自东北向西南、与正西夹 $15^\\circ$，即指向西偏南 $15^\\circ$：\n$$\\vec v_{\\text{机对风}}=V\\left(-\\cos15^\\circ,\\ -\\sin15^\\circ\\right)=\\left(-0.966V,\\ -0.259V\\right).$$\n\n对地速度为正西：$\\vec v_{\\text{地}}=\\left(-u,0\\right)$。由 $\\vec v_{\\text{地}}=\\vec v_{\\text{机对风}}+\\vec v_{\\text{风}}$，$y$ 分量：\n$$-0.259V+70.7=0\\quad\\Rightarrow\\quad V=273\\ \\mathrm{km/h}.$$\n$x$ 分量：\n$$u=0.966\\times273-70.7=193\\ \\mathrm{km/h}.$$\n\n即飞机相对风 $2.7\\times10^{2}\\ \\mathrm{km/h}$，相对地面 $1.9\\times10^{2}\\ \\mathrm{km/h}$ 向正西。\n\n机头必须偏向风的上游，才能抵消侧风——这就是「偏流修正角」。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "km/h",
+   "methods": [
+    "速度合成",
+    "相对运动"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第二章 习题2.8.1"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "卡车上抛体落回原处",
+  "statement": "一辆卡车在平直路面上以恒定速率 $30\\ \\mathrm{m/s}$ 行驶，从此车上射出一个抛体。要求在车前进 $60\\ \\mathrm{m}$ 时，抛体仍落回到车上原抛出点，问抛体射出时相对于车的速度如何（大小和方向）？",
+  "mainTag": "力学",
+  "tags": [
+   "质点运动学"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题2.8.3",
+  "hints": [
+   "抛体要落回车上同一点，相对车的水平位移必须为零。",
+   "飞行时间由车速与前进距离决定：$t=60/30$。"
+  ],
+  "answer": "9.8\\ \\mathrm{m/s}",
+  "solution": "车前进 $60\\ \\mathrm{m}$ 用时\n$$t=\\frac{60}{30}=2.0\\ \\mathrm{s}.$$\n抛体落回车上原抛出点，说明它相对车的水平位移为零。车匀速运动，故抛体相对车只需竖直上抛：\n$$2v_{y0}=gt\\quad\\Rightarrow\\quad v_{y0}=\\frac{9.8\\times2.0}{2}=9.8\\ \\mathrm{m/s}.$$\n\n即相对于车以 $9.8\\ \\mathrm{m/s}$ 竖直向上抛出（相对地面则同时具有 $30\\ \\mathrm{m/s}$ 的水平速度）。\n\n若相对车斜抛，落点会偏离原抛出点——因为车与抛体的水平速度不同。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m/s",
+   "methods": [
+    "相对运动",
+    "竖直上抛"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第二章 习题2.8.3"
+  },
+  "subject": "physics"
+ }
+]
