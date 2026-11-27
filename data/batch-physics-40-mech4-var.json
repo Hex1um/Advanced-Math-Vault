@@ -3235,8 +3235,8 @@
    "弹性碰撞：动量、动能同时守恒。",
    "$v_2'=\\frac{2m_1}{m_1+m_2}v_1$，$\\eta=\\frac{4m_1m_2}{(m_1+m_2)^2}$。"
   ],
-  "answer": "75\\ \\mathrm{%}",
-  "solution": "一维完全弹性碰撞联立动量守恒与动能守恒，标准解为\n\n$$v_1^{\\prime}=\\frac{m_1-m_2}{m_1+m_2}v_1,\\qquad v_2^{\\prime}=\\frac{2m_1}{m_1+m_2}v_1.$$\n\n代入 $m_1=8$、$m_2=24$、$v_1=8$：\n\n$$v_1^{\\prime}=-4\\ \\mathrm{m/s},\\qquad v_2^{\\prime}=4\\ \\mathrm{m/s}.$$\n\n动能转移比例\n\n$$\\eta=\\frac{\\frac12m_2v_2^{\\prime 2}}{\\frac12m_1v_1^{2}}=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}=0.75.$$\n\n碰后总动能 $=256\\ \\mathrm{J}$，与碰前 $\\frac12m_1v_1^2=256\\ \\mathrm{J}$ 相等，说明这确实是弹性碰撞。\n\n本题求的是入射球动能传给被撞球的百分比，通式为 $\\eta=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}$，结果为\n\n$$\\eta=75\\ \\mathrm{%}.$$\n\n**易错点**：$\\eta$ 在 $m_1=m_2$ 时最大（100%，两球交换速度）；轻重悬殊时能量几乎传不过去（如同撞墙）。",
+  "answer": "75\\ \\ %",
+  "solution": "一维完全弹性碰撞联立动量守恒与动能守恒，标准解为\n\n$$v_1^{\\prime}=\\frac{m_1-m_2}{m_1+m_2}v_1,\\qquad v_2^{\\prime}=\\frac{2m_1}{m_1+m_2}v_1.$$\n\n代入 $m_1=8$、$m_2=24$、$v_1=8$：\n\n$$v_1^{\\prime}=-4\\ \\mathrm{m/s},\\qquad v_2^{\\prime}=4\\ \\mathrm{m/s}.$$\n\n动能转移比例\n\n$$\\eta=\\frac{\\frac12m_2v_2^{\\prime 2}}{\\frac12m_1v_1^{2}}=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}=0.75.$$\n\n碰后总动能 $=256\\ \\mathrm{J}$，与碰前 $\\frac12m_1v_1^2=256\\ \\mathrm{J}$ 相等，说明这确实是弹性碰撞。\n\n本题求的是入射球动能传给被撞球的百分比，通式为 $\\eta=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}$，结果为\n\n$$\\eta=75\\ \\ %.$$\n\n**易错点**：$\\eta$ 在 $m_1=m_2$ 时最大（100%，两球交换速度）；轻重悬殊时能量几乎传不过去（如同撞墙）。",
   "physicsMeta": {
    "course": "general",
    "answerType": "numeric_unit",
@@ -3267,8 +3267,8 @@
    "弹性碰撞：动量、动能同时守恒。",
    "$v_2'=\\frac{2m_1}{m_1+m_2}v_1$，$\\eta=\\frac{4m_1m_2}{(m_1+m_2)^2}$。"
   ],
-  "answer": "64\\ \\mathrm{%}",
-  "solution": "一维完全弹性碰撞联立动量守恒与动能守恒，标准解为\n\n$$v_1^{\\prime}=\\frac{m_1-m_2}{m_1+m_2}v_1,\\qquad v_2^{\\prime}=\\frac{2m_1}{m_1+m_2}v_1.$$\n\n代入 $m_1=3$、$m_2=0.75$、$v_1=6$：\n\n$$v_1^{\\prime}=3.6\\ \\mathrm{m/s},\\qquad v_2^{\\prime}=9.6\\ \\mathrm{m/s}.$$\n\n动能转移比例\n\n$$\\eta=\\frac{\\frac12m_2v_2^{\\prime 2}}{\\frac12m_1v_1^{2}}=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}=0.64.$$\n\n碰后总动能 $=54\\ \\mathrm{J}$，与碰前 $\\frac12m_1v_1^2=54\\ \\mathrm{J}$ 相等，说明这确实是弹性碰撞。\n\n本题求的是入射球动能传给被撞球的百分比，通式为 $\\eta=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}$，结果为\n\n$$\\eta=64\\ \\mathrm{%}.$$\n\n**易错点**：$\\eta$ 在 $m_1=m_2$ 时最大（100%，两球交换速度）；轻重悬殊时能量几乎传不过去（如同撞墙）。",
+  "answer": "64\\ \\ %",
+  "solution": "一维完全弹性碰撞联立动量守恒与动能守恒，标准解为\n\n$$v_1^{\\prime}=\\frac{m_1-m_2}{m_1+m_2}v_1,\\qquad v_2^{\\prime}=\\frac{2m_1}{m_1+m_2}v_1.$$\n\n代入 $m_1=3$、$m_2=0.75$、$v_1=6$：\n\n$$v_1^{\\prime}=3.6\\ \\mathrm{m/s},\\qquad v_2^{\\prime}=9.6\\ \\mathrm{m/s}.$$\n\n动能转移比例\n\n$$\\eta=\\frac{\\frac12m_2v_2^{\\prime 2}}{\\frac12m_1v_1^{2}}=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}=0.64.$$\n\n碰后总动能 $=54\\ \\mathrm{J}$，与碰前 $\\frac12m_1v_1^2=54\\ \\mathrm{J}$ 相等，说明这确实是弹性碰撞。\n\n本题求的是入射球动能传给被撞球的百分比，通式为 $\\eta=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}$，结果为\n\n$$\\eta=64\\ \\ %.$$\n\n**易错点**：$\\eta$ 在 $m_1=m_2$ 时最大（100%，两球交换速度）；轻重悬殊时能量几乎传不过去（如同撞墙）。",
   "physicsMeta": {
    "course": "general",
    "answerType": "numeric_unit",
@@ -3427,8 +3427,8 @@
    "弹性碰撞：动量、动能同时守恒。",
    "$v_2'=\\frac{2m_1}{m_1+m_2}v_1$，$\\eta=\\frac{4m_1m_2}{(m_1+m_2)^2}$。"
   ],
-  "answer": "75\\ \\mathrm{%}",
-  "solution": "一维完全弹性碰撞联立动量守恒与动能守恒，标准解为\n\n$$v_1^{\\prime}=\\frac{m_1-m_2}{m_1+m_2}v_1,\\qquad v_2^{\\prime}=\\frac{2m_1}{m_1+m_2}v_1.$$\n\n代入 $m_1=10$、$m_2=30$、$v_1=5$：\n\n$$v_1^{\\prime}=-2.5\\ \\mathrm{m/s},\\qquad v_2^{\\prime}=2.5\\ \\mathrm{m/s}.$$\n\n动能转移比例\n\n$$\\eta=\\frac{\\frac12m_2v_2^{\\prime 2}}{\\frac12m_1v_1^{2}}=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}=0.75.$$\n\n碰后总动能 $=125\\ \\mathrm{J}$，与碰前 $\\frac12m_1v_1^2=125\\ \\mathrm{J}$ 相等，说明这确实是弹性碰撞。\n\n本题求的是入射球动能传给被撞球的百分比，通式为 $\\eta=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}$，结果为\n\n$$\\eta=75\\ \\mathrm{%}.$$\n\n**易错点**：$\\eta$ 在 $m_1=m_2$ 时最大（100%，两球交换速度）；轻重悬殊时能量几乎传不过去（如同撞墙）。",
+  "answer": "75\\ \\ %",
+  "solution": "一维完全弹性碰撞联立动量守恒与动能守恒，标准解为\n\n$$v_1^{\\prime}=\\frac{m_1-m_2}{m_1+m_2}v_1,\\qquad v_2^{\\prime}=\\frac{2m_1}{m_1+m_2}v_1.$$\n\n代入 $m_1=10$、$m_2=30$、$v_1=5$：\n\n$$v_1^{\\prime}=-2.5\\ \\mathrm{m/s},\\qquad v_2^{\\prime}=2.5\\ \\mathrm{m/s}.$$\n\n动能转移比例\n\n$$\\eta=\\frac{\\frac12m_2v_2^{\\prime 2}}{\\frac12m_1v_1^{2}}=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}=0.75.$$\n\n碰后总动能 $=125\\ \\mathrm{J}$，与碰前 $\\frac12m_1v_1^2=125\\ \\mathrm{J}$ 相等，说明这确实是弹性碰撞。\n\n本题求的是入射球动能传给被撞球的百分比，通式为 $\\eta=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}$，结果为\n\n$$\\eta=75\\ \\ %.$$\n\n**易错点**：$\\eta$ 在 $m_1=m_2$ 时最大（100%，两球交换速度）；轻重悬殊时能量几乎传不过去（如同撞墙）。",
   "physicsMeta": {
    "course": "general",
    "answerType": "numeric_unit",
@@ -3459,8 +3459,8 @@
    "弹性碰撞：动量、动能同时守恒。",
    "$v_2'=\\frac{2m_1}{m_1+m_2}v_1$，$\\eta=\\frac{4m_1m_2}{(m_1+m_2)^2}$。"
   ],
-  "answer": "100\\ \\mathrm{%}",
-  "solution": "一维完全弹性碰撞联立动量守恒与动能守恒，标准解为\n\n$$v_1^{\\prime}=\\frac{m_1-m_2}{m_1+m_2}v_1,\\qquad v_2^{\\prime}=\\frac{2m_1}{m_1+m_2}v_1.$$\n\n代入 $m_1=8$、$m_2=8$、$v_1=3$：\n\n$$v_1^{\\prime}=0\\ \\mathrm{m/s},\\qquad v_2^{\\prime}=3\\ \\mathrm{m/s}.$$\n\n动能转移比例\n\n$$\\eta=\\frac{\\frac12m_2v_2^{\\prime 2}}{\\frac12m_1v_1^{2}}=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}=1.$$\n\n碰后总动能 $=36\\ \\mathrm{J}$，与碰前 $\\frac12m_1v_1^2=36\\ \\mathrm{J}$ 相等，说明这确实是弹性碰撞。\n\n本题求的是入射球动能传给被撞球的百分比，通式为 $\\eta=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}$，结果为\n\n$$\\eta=100\\ \\mathrm{%}.$$\n\n**易错点**：$\\eta$ 在 $m_1=m_2$ 时最大（100%，两球交换速度）；轻重悬殊时能量几乎传不过去（如同撞墙）。",
+  "answer": "100\\ \\ %",
+  "solution": "一维完全弹性碰撞联立动量守恒与动能守恒，标准解为\n\n$$v_1^{\\prime}=\\frac{m_1-m_2}{m_1+m_2}v_1,\\qquad v_2^{\\prime}=\\frac{2m_1}{m_1+m_2}v_1.$$\n\n代入 $m_1=8$、$m_2=8$、$v_1=3$：\n\n$$v_1^{\\prime}=0\\ \\mathrm{m/s},\\qquad v_2^{\\prime}=3\\ \\mathrm{m/s}.$$\n\n动能转移比例\n\n$$\\eta=\\frac{\\frac12m_2v_2^{\\prime 2}}{\\frac12m_1v_1^{2}}=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}=1.$$\n\n碰后总动能 $=36\\ \\mathrm{J}$，与碰前 $\\frac12m_1v_1^2=36\\ \\mathrm{J}$ 相等，说明这确实是弹性碰撞。\n\n本题求的是入射球动能传给被撞球的百分比，通式为 $\\eta=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}$，结果为\n\n$$\\eta=100\\ \\ %.$$\n\n**易错点**：$\\eta$ 在 $m_1=m_2$ 时最大（100%，两球交换速度）；轻重悬殊时能量几乎传不过去（如同撞墙）。",
   "physicsMeta": {
    "course": "general",
    "answerType": "numeric_unit",
@@ -3523,8 +3523,8 @@
    "弹性碰撞：动量、动能同时守恒。",
    "$v_2'=\\frac{2m_1}{m_1+m_2}v_1$，$\\eta=\\frac{4m_1m_2}{(m_1+m_2)^2}$。"
   ],
-  "answer": "100\\ \\mathrm{%}",
-  "solution": "一维完全弹性碰撞联立动量守恒与动能守恒，标准解为\n\n$$v_1^{\\prime}=\\frac{m_1-m_2}{m_1+m_2}v_1,\\qquad v_2^{\\prime}=\\frac{2m_1}{m_1+m_2}v_1.$$\n\n代入 $m_1=3$、$m_2=3$、$v_1=8$：\n\n$$v_1^{\\prime}=0\\ \\mathrm{m/s},\\qquad v_2^{\\prime}=8\\ \\mathrm{m/s}.$$\n\n动能转移比例\n\n$$\\eta=\\frac{\\frac12m_2v_2^{\\prime 2}}{\\frac12m_1v_1^{2}}=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}=1.$$\n\n碰后总动能 $=96\\ \\mathrm{J}$，与碰前 $\\frac12m_1v_1^2=96\\ \\mathrm{J}$ 相等，说明这确实是弹性碰撞。\n\n本题求的是入射球动能传给被撞球的百分比，通式为 $\\eta=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}$，结果为\n\n$$\\eta=100\\ \\mathrm{%}.$$\n\n**易错点**：$\\eta$ 在 $m_1=m_2$ 时最大（100%，两球交换速度）；轻重悬殊时能量几乎传不过去（如同撞墙）。",
+  "answer": "100\\ \\ %",
+  "solution": "一维完全弹性碰撞联立动量守恒与动能守恒，标准解为\n\n$$v_1^{\\prime}=\\frac{m_1-m_2}{m_1+m_2}v_1,\\qquad v_2^{\\prime}=\\frac{2m_1}{m_1+m_2}v_1.$$\n\n代入 $m_1=3$、$m_2=3$、$v_1=8$：\n\n$$v_1^{\\prime}=0\\ \\mathrm{m/s},\\qquad v_2^{\\prime}=8\\ \\mathrm{m/s}.$$\n\n动能转移比例\n\n$$\\eta=\\frac{\\frac12m_2v_2^{\\prime 2}}{\\frac12m_1v_1^{2}}=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}=1.$$\n\n碰后总动能 $=96\\ \\mathrm{J}$，与碰前 $\\frac12m_1v_1^2=96\\ \\mathrm{J}$ 相等，说明这确实是弹性碰撞。\n\n本题求的是入射球动能传给被撞球的百分比，通式为 $\\eta=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}$，结果为\n\n$$\\eta=100\\ \\ %.$$\n\n**易错点**：$\\eta$ 在 $m_1=m_2$ 时最大（100%，两球交换速度）；轻重悬殊时能量几乎传不过去（如同撞墙）。",
   "physicsMeta": {
    "course": "general",
    "answerType": "numeric_unit",
@@ -3619,8 +3619,8 @@
    "弹性碰撞：动量、动能同时守恒。",
    "$v_2'=\\frac{2m_1}{m_1+m_2}v_1$，$\\eta=\\frac{4m_1m_2}{(m_1+m_2)^2}$。"
   ],
-  "answer": "75\\ \\mathrm{%}",
-  "solution": "一维完全弹性碰撞联立动量守恒与动能守恒，标准解为\n\n$$v_1^{\\prime}=\\frac{m_1-m_2}{m_1+m_2}v_1,\\qquad v_2^{\\prime}=\\frac{2m_1}{m_1+m_2}v_1.$$\n\n代入 $m_1=3$、$m_2=9$、$v_1=2$：\n\n$$v_1^{\\prime}=-1\\ \\mathrm{m/s},\\qquad v_2^{\\prime}=1\\ \\mathrm{m/s}.$$\n\n动能转移比例\n\n$$\\eta=\\frac{\\frac12m_2v_2^{\\prime 2}}{\\frac12m_1v_1^{2}}=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}=0.75.$$\n\n碰后总动能 $=6\\ \\mathrm{J}$，与碰前 $\\frac12m_1v_1^2=6\\ \\mathrm{J}$ 相等，说明这确实是弹性碰撞。\n\n本题求的是入射球动能传给被撞球的百分比，通式为 $\\eta=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}$，结果为\n\n$$\\eta=75\\ \\mathrm{%}.$$\n\n**易错点**：$\\eta$ 在 $m_1=m_2$ 时最大（100%，两球交换速度）；轻重悬殊时能量几乎传不过去（如同撞墙）。",
+  "answer": "75\\ \\ %",
+  "solution": "一维完全弹性碰撞联立动量守恒与动能守恒，标准解为\n\n$$v_1^{\\prime}=\\frac{m_1-m_2}{m_1+m_2}v_1,\\qquad v_2^{\\prime}=\\frac{2m_1}{m_1+m_2}v_1.$$\n\n代入 $m_1=3$、$m_2=9$、$v_1=2$：\n\n$$v_1^{\\prime}=-1\\ \\mathrm{m/s},\\qquad v_2^{\\prime}=1\\ \\mathrm{m/s}.$$\n\n动能转移比例\n\n$$\\eta=\\frac{\\frac12m_2v_2^{\\prime 2}}{\\frac12m_1v_1^{2}}=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}=0.75.$$\n\n碰后总动能 $=6\\ \\mathrm{J}$，与碰前 $\\frac12m_1v_1^2=6\\ \\mathrm{J}$ 相等，说明这确实是弹性碰撞。\n\n本题求的是入射球动能传给被撞球的百分比，通式为 $\\eta=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}$，结果为\n\n$$\\eta=75\\ \\ %.$$\n\n**易错点**：$\\eta$ 在 $m_1=m_2$ 时最大（100%，两球交换速度）；轻重悬殊时能量几乎传不过去（如同撞墙）。",
   "physicsMeta": {
    "course": "general",
    "answerType": "numeric_unit",
@@ -3747,8 +3747,8 @@
    "弹性碰撞：动量、动能同时守恒。",
    "$v_2'=\\frac{2m_1}{m_1+m_2}v_1$，$\\eta=\\frac{4m_1m_2}{(m_1+m_2)^2}$。"
   ],
-  "answer": "64\\ \\mathrm{%}",
-  "solution": "一维完全弹性碰撞联立动量守恒与动能守恒，标准解为\n\n$$v_1^{\\prime}=\\frac{m_1-m_2}{m_1+m_2}v_1,\\qquad v_2^{\\prime}=\\frac{2m_1}{m_1+m_2}v_1.$$\n\n代入 $m_1=8$、$m_2=32$、$v_1=8$：\n\n$$v_1^{\\prime}=-4.8\\ \\mathrm{m/s},\\qquad v_2^{\\prime}=3.2\\ \\mathrm{m/s}.$$\n\n动能转移比例\n\n$$\\eta=\\frac{\\frac12m_2v_2^{\\prime 2}}{\\frac12m_1v_1^{2}}=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}=0.64.$$\n\n碰后总动能 $=256\\ \\mathrm{J}$，与碰前 $\\frac12m_1v_1^2=256\\ \\mathrm{J}$ 相等，说明这确实是弹性碰撞。\n\n本题求的是入射球动能传给被撞球的百分比，通式为 $\\eta=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}$，结果为\n\n$$\\eta=64\\ \\mathrm{%}.$$\n\n**易错点**：$\\eta$ 在 $m_1=m_2$ 时最大（100%，两球交换速度）；轻重悬殊时能量几乎传不过去（如同撞墙）。",
+  "answer": "64\\ \\ %",
+  "solution": "一维完全弹性碰撞联立动量守恒与动能守恒，标准解为\n\n$$v_1^{\\prime}=\\frac{m_1-m_2}{m_1+m_2}v_1,\\qquad v_2^{\\prime}=\\frac{2m_1}{m_1+m_2}v_1.$$\n\n代入 $m_1=8$、$m_2=32$、$v_1=8$：\n\n$$v_1^{\\prime}=-4.8\\ \\mathrm{m/s},\\qquad v_2^{\\prime}=3.2\\ \\mathrm{m/s}.$$\n\n动能转移比例\n\n$$\\eta=\\frac{\\frac12m_2v_2^{\\prime 2}}{\\frac12m_1v_1^{2}}=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}=0.64.$$\n\n碰后总动能 $=256\\ \\mathrm{J}$，与碰前 $\\frac12m_1v_1^2=256\\ \\mathrm{J}$ 相等，说明这确实是弹性碰撞。\n\n本题求的是入射球动能传给被撞球的百分比，通式为 $\\eta=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}$，结果为\n\n$$\\eta=64\\ \\ %.$$\n\n**易错点**：$\\eta$ 在 $m_1=m_2$ 时最大（100%，两球交换速度）；轻重悬殊时能量几乎传不过去（如同撞墙）。",
   "physicsMeta": {
    "course": "general",
    "answerType": "numeric_unit",
@@ -3843,8 +3843,8 @@
    "弹性碰撞：动量、动能同时守恒。",
    "$v_2'=\\frac{2m_1}{m_1+m_2}v_1$，$\\eta=\\frac{4m_1m_2}{(m_1+m_2)^2}$。"
   ],
-  "answer": "64\\ \\mathrm{%}",
-  "solution": "一维完全弹性碰撞联立动量守恒与动能守恒，标准解为\n\n$$v_1^{\\prime}=\\frac{m_1-m_2}{m_1+m_2}v_1,\\qquad v_2^{\\prime}=\\frac{2m_1}{m_1+m_2}v_1.$$\n\n代入 $m_1=2$、$m_2=8$、$v_1=4$：\n\n$$v_1^{\\prime}=-2.4\\ \\mathrm{m/s},\\qquad v_2^{\\prime}=1.6\\ \\mathrm{m/s}.$$\n\n动能转移比例\n\n$$\\eta=\\frac{\\frac12m_2v_2^{\\prime 2}}{\\frac12m_1v_1^{2}}=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}=0.64.$$\n\n碰后总动能 $=16\\ \\mathrm{J}$，与碰前 $\\frac12m_1v_1^2=16\\ \\mathrm{J}$ 相等，说明这确实是弹性碰撞。\n\n本题求的是入射球动能传给被撞球的百分比，通式为 $\\eta=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}$，结果为\n\n$$\\eta=64\\ \\mathrm{%}.$$\n\n**易错点**：$\\eta$ 在 $m_1=m_2$ 时最大（100%，两球交换速度）；轻重悬殊时能量几乎传不过去（如同撞墙）。",
+  "answer": "64\\ \\ %",
+  "solution": "一维完全弹性碰撞联立动量守恒与动能守恒，标准解为\n\n$$v_1^{\\prime}=\\frac{m_1-m_2}{m_1+m_2}v_1,\\qquad v_2^{\\prime}=\\frac{2m_1}{m_1+m_2}v_1.$$\n\n代入 $m_1=2$、$m_2=8$、$v_1=4$：\n\n$$v_1^{\\prime}=-2.4\\ \\mathrm{m/s},\\qquad v_2^{\\prime}=1.6\\ \\mathrm{m/s}.$$\n\n动能转移比例\n\n$$\\eta=\\frac{\\frac12m_2v_2^{\\prime 2}}{\\frac12m_1v_1^{2}}=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}=0.64.$$\n\n碰后总动能 $=16\\ \\mathrm{J}$，与碰前 $\\frac12m_1v_1^2=16\\ \\mathrm{J}$ 相等，说明这确实是弹性碰撞。\n\n本题求的是入射球动能传给被撞球的百分比，通式为 $\\eta=\\frac{4m_1m_2}{\\left(m_1+m_2\\right)^{2}}$，结果为\n\n$$\\eta=64\\ \\ %.$$\n\n**易错点**：$\\eta$ 在 $m_1=m_2$ 时最大（100%，两球交换速度）；轻重悬殊时能量几乎传不过去（如同撞墙）。",
   "physicsMeta": {
    "course": "general",
    "answerType": "numeric_unit",

@@ -6,6 +6,7 @@
  *   node tools/ops/prune-vault.mjs astro            # 删除天文题
  *   node tools/ops/prune-vault.mjs dedupe           # 合并物理相似题（同骨架只留一题）
  *   node tools/ops/prune-vault.mjs hide-test-users  # 隐藏测试账号（保留数据，不参与榜单）
+ *   node tools/ops/prune-vault.mjs purge-refs       # 清掉指向已删除题目的提交/进度引用
  *   node tools/ops/prune-vault.mjs all
  *   任意子命令加 --dry 只报告不写盘
  *
@@ -162,6 +163,30 @@ function doDedupe(db) {
   return db;
 }
 
+function doPurgeRefs(db) {
+  const codes = new Set(db.problems.map((p) => p.code));
+  let subs = 0, users = 0, acts = 0;
+  const before = (db.submissions || []).length;
+  db.submissions = (db.submissions || []).filter((x) => codes.has(x.code));
+  subs = before - db.submissions.length;
+  for (const u of db.users) {
+    for (const k of ['solved', 'wrong', 'best']) {
+      if (!u[k]) continue;
+      for (const c of Object.keys(u[k])) {
+        if (!codes.has(c)) { delete u[k][c]; users++; }
+      }
+    }
+    if (Array.isArray(u.activity)) {
+      const n0 = u.activity.length;
+      u.activity = u.activity.filter((a) => !a.code || codes.has(a.code));
+      acts += n0 - u.activity.length;
+    }
+  }
+  if (!subs && !users && !acts) { console.log('[refs] 没有悬空引用'); return db; }
+  console.log('[refs] 清掉悬空引用：提交 ' + subs + ' 条、用户进度字段 ' + users + ' 个、动态 ' + acts + ' 条');
+  return db;
+}
+
 function doHideUsers(db) {
   const touched = [];
   for (const u of db.users) {
@@ -186,8 +211,10 @@ function doHideUsers(db) {
 
 const db = readDb();
 const before = db.problems.length;
-const run = (name) => ({ astro: doAstro, dedupe: doDedupe, 'hide-test-users': doHideUsers }[name]);
-const list = cmd === 'all' ? ['astro', 'dedupe', 'hide-test-users'] : [cmd];
+const run = (name) => ({
+  astro: doAstro, dedupe: doDedupe, 'hide-test-users': doHideUsers, 'purge-refs': doPurgeRefs
+}[name]);
+const list = cmd === 'all' ? ['astro', 'dedupe', 'hide-test-users', 'purge-refs'] : [cmd];
 for (const name of list) {
   if (!run(name)) {
     console.error('未知子命令：' + name + '（可选 astro / dedupe / hide-test-users / all）');

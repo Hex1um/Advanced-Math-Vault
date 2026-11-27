@@ -12935,8 +12935,8 @@
    "漂浮条件：浮力 = 重力，即 $\\rho_w V_{in}=\\rho V$。",
    "浸入比例就是密度比 $\\rho/\\rho_w$。"
   ],
-  "answer": "10\\ \\mathrm{%}",
-  "solution": "漂浮时浮力等于重力：$\\rho_w gV_{in}=\\rho gV$，于是\n\n$$\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}=\\frac{900}{1000}=0.9,$$\n\n即浸入 90%、露出 10%。\n\n全部浸没时的浮力\n\n$$F=\\rho_w gV=1000\\times 9.8\\times 0.22=2156\\ \\mathrm{N},$$\n\n漂浮时浮力等于自重 $\\rho gV=1940\\ \\mathrm{N}$。\n\n（冰的 $\\rho=917\\ \\mathrm{kg/m^3}$，正是「冰山一角」——约 10% 露出水面；海水密度更大，实际露出的会更多。）\n\n本题求的是浮体露出水面的体积占总体积的百分比，通式为 $\\frac{V_{out}}{V}=1-\\frac{\\rho}{\\rho_w}$，结果为\n\n$$\\frac{V_{out}}{V}=10\\ \\mathrm{%}.$$\n\n**易错点**：$V$ 是物体总体积，$V_{in}$ 是浸入部分；「浮力 = 排开液体的重力」，用排开体积而不是物体体积（除非全浸）。",
+  "answer": "10\\ \\ %",
+  "solution": "漂浮时浮力等于重力：$\\rho_w gV_{in}=\\rho gV$，于是\n\n$$\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}=\\frac{900}{1000}=0.9,$$\n\n即浸入 90%、露出 10%。\n\n全部浸没时的浮力\n\n$$F=\\rho_w gV=1000\\times 9.8\\times 0.22=2156\\ \\mathrm{N},$$\n\n漂浮时浮力等于自重 $\\rho gV=1940\\ \\mathrm{N}$。\n\n（冰的 $\\rho=917\\ \\mathrm{kg/m^3}$，正是「冰山一角」——约 10% 露出水面；海水密度更大，实际露出的会更多。）\n\n本题求的是浮体露出水面的体积占总体积的百分比，通式为 $\\frac{V_{out}}{V}=1-\\frac{\\rho}{\\rho_w}$，结果为\n\n$$\\frac{V_{out}}{V}=10\\ \\ %.$$\n\n**易错点**：$V$ 是物体总体积，$V_{in}$ 是浸入部分；「浮力 = 排开液体的重力」，用排开体积而不是物体体积（除非全浸）。",
   "physicsMeta": {
    "course": "general",
    "answerType": "numeric_unit",
@@ -12967,8 +12967,8 @@
    "漂浮条件：浮力 = 重力，即 $\\rho_w V_{in}=\\rho V$。",
    "浸入比例就是密度比 $\\rho/\\rho_w$。"
   ],
-  "answer": "8.3\\ \\mathrm{%}",
-  "solution": "漂浮时浮力等于重力：$\\rho_w gV_{in}=\\rho gV$，于是\n\n$$\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}=\\frac{917}{1000}=0.917,$$\n\n即浸入 91.7%、露出 8.3%。\n\n全部浸没时的浮力\n\n$$F=\\rho_w gV=1000\\times 9.8\\times 0.58=5684\\ \\mathrm{N},$$\n\n漂浮时浮力等于自重 $\\rho gV=5212\\ \\mathrm{N}$。\n\n（冰的 $\\rho=917\\ \\mathrm{kg/m^3}$，正是「冰山一角」——约 8.3% 露出水面；海水密度更大，实际露出的会更多。）\n\n本题求的是浮体露出水面的体积占总体积的百分比，通式为 $\\frac{V_{out}}{V}=1-\\frac{\\rho}{\\rho_w}$，结果为\n\n$$\\frac{V_{out}}{V}=8.3\\ \\mathrm{%}.$$\n\n**易错点**：$V$ 是物体总体积，$V_{in}$ 是浸入部分；「浮力 = 排开液体的重力」，用排开体积而不是物体体积（除非全浸）。",
+  "answer": "8.3\\ \\ %",
+  "solution": "漂浮时浮力等于重力：$\\rho_w gV_{in}=\\rho gV$，于是\n\n$$\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}=\\frac{917}{1000}=0.917,$$\n\n即浸入 91.7%、露出 8.3%。\n\n全部浸没时的浮力\n\n$$F=\\rho_w gV=1000\\times 9.8\\times 0.58=5684\\ \\mathrm{N},$$\n\n漂浮时浮力等于自重 $\\rho gV=5212\\ \\mathrm{N}$。\n\n（冰的 $\\rho=917\\ \\mathrm{kg/m^3}$，正是「冰山一角」——约 8.3% 露出水面；海水密度更大，实际露出的会更多。）\n\n本题求的是浮体露出水面的体积占总体积的百分比，通式为 $\\frac{V_{out}}{V}=1-\\frac{\\rho}{\\rho_w}$，结果为\n\n$$\\frac{V_{out}}{V}=8.3\\ \\ %.$$\n\n**易错点**：$V$ 是物体总体积，$V_{in}$ 是浸入部分；「浮力 = 排开液体的重力」，用排开体积而不是物体体积（除非全浸）。",
   "physicsMeta": {
    "course": "general",
    "answerType": "numeric_unit",
@@ -13031,8 +13031,8 @@
    "漂浮条件：浮力 = 重力，即 $\\rho_w V_{in}=\\rho V$。",
    "浸入比例就是密度比 $\\rho/\\rho_w$。"
   ],
-  "answer": "90\\ \\mathrm{%}",
-  "solution": "漂浮时浮力等于重力：$\\rho_w gV_{in}=\\rho gV$，于是\n\n$$\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}=\\frac{900}{1000}=0.9,$$\n\n即浸入 90%、露出 10%。\n\n全部浸没时的浮力\n\n$$F=\\rho_w gV=1000\\times 9.8\\times 0.02=196\\ \\mathrm{N},$$\n\n漂浮时浮力等于自重 $\\rho gV=176\\ \\mathrm{N}$。\n\n（冰的 $\\rho=917\\ \\mathrm{kg/m^3}$，正是「冰山一角」——约 10% 露出水面；海水密度更大，实际露出的会更多。）\n\n本题求的是浮体浸入水中的体积占总体积的百分比，通式为 $\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}$，结果为\n\n$$\\frac{V_{in}}{V}=90\\ \\mathrm{%}.$$\n\n**易错点**：$V$ 是物体总体积，$V_{in}$ 是浸入部分；「浮力 = 排开液体的重力」，用排开体积而不是物体体积（除非全浸）。",
+  "answer": "90\\ \\ %",
+  "solution": "漂浮时浮力等于重力：$\\rho_w gV_{in}=\\rho gV$，于是\n\n$$\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}=\\frac{900}{1000}=0.9,$$\n\n即浸入 90%、露出 10%。\n\n全部浸没时的浮力\n\n$$F=\\rho_w gV=1000\\times 9.8\\times 0.02=196\\ \\mathrm{N},$$\n\n漂浮时浮力等于自重 $\\rho gV=176\\ \\mathrm{N}$。\n\n（冰的 $\\rho=917\\ \\mathrm{kg/m^3}$，正是「冰山一角」——约 10% 露出水面；海水密度更大，实际露出的会更多。）\n\n本题求的是浮体浸入水中的体积占总体积的百分比，通式为 $\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}$，结果为\n\n$$\\frac{V_{in}}{V}=90\\ \\ %.$$\n\n**易错点**：$V$ 是物体总体积，$V_{in}$ 是浸入部分；「浮力 = 排开液体的重力」，用排开体积而不是物体体积（除非全浸）。",
   "physicsMeta": {
    "course": "general",
    "answerType": "numeric_unit",
@@ -13095,8 +13095,8 @@
    "漂浮条件：浮力 = 重力，即 $\\rho_w V_{in}=\\rho V$。",
    "浸入比例就是密度比 $\\rho/\\rho_w$。"
   ],
-  "answer": "90\\ \\mathrm{%}",
-  "solution": "漂浮时浮力等于重力：$\\rho_w gV_{in}=\\rho gV$，于是\n\n$$\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}=\\frac{900}{1000}=0.9,$$\n\n即浸入 90%、露出 10%。\n\n全部浸没时的浮力\n\n$$F=\\rho_w gV=1000\\times 9.8\\times 0.63=6174\\ \\mathrm{N},$$\n\n漂浮时浮力等于自重 $\\rho gV=5557\\ \\mathrm{N}$。\n\n（冰的 $\\rho=917\\ \\mathrm{kg/m^3}$，正是「冰山一角」——约 10% 露出水面；海水密度更大，实际露出的会更多。）\n\n本题求的是浮体浸入水中的体积占总体积的百分比，通式为 $\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}$，结果为\n\n$$\\frac{V_{in}}{V}=90\\ \\mathrm{%}.$$\n\n**易错点**：$V$ 是物体总体积，$V_{in}$ 是浸入部分；「浮力 = 排开液体的重力」，用排开体积而不是物体体积（除非全浸）。",
+  "answer": "90\\ \\ %",
+  "solution": "漂浮时浮力等于重力：$\\rho_w gV_{in}=\\rho gV$，于是\n\n$$\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}=\\frac{900}{1000}=0.9,$$\n\n即浸入 90%、露出 10%。\n\n全部浸没时的浮力\n\n$$F=\\rho_w gV=1000\\times 9.8\\times 0.63=6174\\ \\mathrm{N},$$\n\n漂浮时浮力等于自重 $\\rho gV=5557\\ \\mathrm{N}$。\n\n（冰的 $\\rho=917\\ \\mathrm{kg/m^3}$，正是「冰山一角」——约 10% 露出水面；海水密度更大，实际露出的会更多。）\n\n本题求的是浮体浸入水中的体积占总体积的百分比，通式为 $\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}$，结果为\n\n$$\\frac{V_{in}}{V}=90\\ \\ %.$$\n\n**易错点**：$V$ 是物体总体积，$V_{in}$ 是浸入部分；「浮力 = 排开液体的重力」，用排开体积而不是物体体积（除非全浸）。",
   "physicsMeta": {
    "course": "general",
    "answerType": "numeric_unit",
@@ -13127,8 +13127,8 @@
    "漂浮条件：浮力 = 重力，即 $\\rho_w V_{in}=\\rho V$。",
    "浸入比例就是密度比 $\\rho/\\rho_w$。"
   ],
-  "answer": "90\\ \\mathrm{%}",
-  "solution": "漂浮时浮力等于重力：$\\rho_w gV_{in}=\\rho gV$，于是\n\n$$\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}=\\frac{900}{1000}=0.9,$$\n\n即浸入 90%、露出 10%。\n\n全部浸没时的浮力\n\n$$F=\\rho_w gV=1000\\times 9.8\\times 0.88=8624\\ \\mathrm{N},$$\n\n漂浮时浮力等于自重 $\\rho gV=7762\\ \\mathrm{N}$。\n\n（冰的 $\\rho=917\\ \\mathrm{kg/m^3}$，正是「冰山一角」——约 10% 露出水面；海水密度更大，实际露出的会更多。）\n\n本题求的是浮体浸入水中的体积占总体积的百分比，通式为 $\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}$，结果为\n\n$$\\frac{V_{in}}{V}=90\\ \\mathrm{%}.$$\n\n**易错点**：$V$ 是物体总体积，$V_{in}$ 是浸入部分；「浮力 = 排开液体的重力」，用排开体积而不是物体体积（除非全浸）。",
+  "answer": "90\\ \\ %",
+  "solution": "漂浮时浮力等于重力：$\\rho_w gV_{in}=\\rho gV$，于是\n\n$$\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}=\\frac{900}{1000}=0.9,$$\n\n即浸入 90%、露出 10%。\n\n全部浸没时的浮力\n\n$$F=\\rho_w gV=1000\\times 9.8\\times 0.88=8624\\ \\mathrm{N},$$\n\n漂浮时浮力等于自重 $\\rho gV=7762\\ \\mathrm{N}$。\n\n（冰的 $\\rho=917\\ \\mathrm{kg/m^3}$，正是「冰山一角」——约 10% 露出水面；海水密度更大，实际露出的会更多。）\n\n本题求的是浮体浸入水中的体积占总体积的百分比，通式为 $\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}$，结果为\n\n$$\\frac{V_{in}}{V}=90\\ \\ %.$$\n\n**易错点**：$V$ 是物体总体积，$V_{in}$ 是浸入部分；「浮力 = 排开液体的重力」，用排开体积而不是物体体积（除非全浸）。",
   "physicsMeta": {
    "course": "general",
    "answerType": "numeric_unit",
@@ -13159,8 +13159,8 @@
    "漂浮条件：浮力 = 重力，即 $\\rho_w V_{in}=\\rho V$。",
    "浸入比例就是密度比 $\\rho/\\rho_w$。"
   ],
-  "answer": "8.3\\ \\mathrm{%}",
-  "solution": "漂浮时浮力等于重力：$\\rho_w gV_{in}=\\rho gV$，于是\n\n$$\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}=\\frac{917}{1000}=0.917,$$\n\n即浸入 91.7%、露出 8.3%。\n\n全部浸没时的浮力\n\n$$F=\\rho_w gV=1000\\times 9.8\\times 0.3=2940\\ \\mathrm{N},$$\n\n漂浮时浮力等于自重 $\\rho gV=2696\\ \\mathrm{N}$。\n\n（冰的 $\\rho=917\\ \\mathrm{kg/m^3}$，正是「冰山一角」——约 8.3% 露出水面；海水密度更大，实际露出的会更多。）\n\n本题求的是浮体露出水面的体积占总体积的百分比，通式为 $\\frac{V_{out}}{V}=1-\\frac{\\rho}{\\rho_w}$，结果为\n\n$$\\frac{V_{out}}{V}=8.3\\ \\mathrm{%}.$$\n\n**易错点**：$V$ 是物体总体积，$V_{in}$ 是浸入部分；「浮力 = 排开液体的重力」，用排开体积而不是物体体积（除非全浸）。",
+  "answer": "8.3\\ \\ %",
+  "solution": "漂浮时浮力等于重力：$\\rho_w gV_{in}=\\rho gV$，于是\n\n$$\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}=\\frac{917}{1000}=0.917,$$\n\n即浸入 91.7%、露出 8.3%。\n\n全部浸没时的浮力\n\n$$F=\\rho_w gV=1000\\times 9.8\\times 0.3=2940\\ \\mathrm{N},$$\n\n漂浮时浮力等于自重 $\\rho gV=2696\\ \\mathrm{N}$。\n\n（冰的 $\\rho=917\\ \\mathrm{kg/m^3}$，正是「冰山一角」——约 8.3% 露出水面；海水密度更大，实际露出的会更多。）\n\n本题求的是浮体露出水面的体积占总体积的百分比，通式为 $\\frac{V_{out}}{V}=1-\\frac{\\rho}{\\rho_w}$，结果为\n\n$$\\frac{V_{out}}{V}=8.3\\ \\ %.$$\n\n**易错点**：$V$ 是物体总体积，$V_{in}$ 是浸入部分；「浮力 = 排开液体的重力」，用排开体积而不是物体体积（除非全浸）。",
   "physicsMeta": {
    "course": "general",
    "answerType": "numeric_unit",
@@ -13287,8 +13287,8 @@
    "漂浮条件：浮力 = 重力，即 $\\rho_w V_{in}=\\rho V$。",
    "浸入比例就是密度比 $\\rho/\\rho_w$。"
   ],
-  "answer": "50\\ \\mathrm{%}",
-  "solution": "漂浮时浮力等于重力：$\\rho_w gV_{in}=\\rho gV$，于是\n\n$$\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}=\\frac{500}{1000}=0.5,$$\n\n即浸入 50%、露出 50%。\n\n全部浸没时的浮力\n\n$$F=\\rho_w gV=1000\\times 9.8\\times 0.75=7350\\ \\mathrm{N},$$\n\n漂浮时浮力等于自重 $\\rho gV=3675\\ \\mathrm{N}$。\n\n（冰的 $\\rho=917\\ \\mathrm{kg/m^3}$，正是「冰山一角」——约 50% 露出水面；海水密度更大，实际露出的会更多。）\n\n本题求的是浮体露出水面的体积占总体积的百分比，通式为 $\\frac{V_{out}}{V}=1-\\frac{\\rho}{\\rho_w}$，结果为\n\n$$\\frac{V_{out}}{V}=50\\ \\mathrm{%}.$$\n\n**易错点**：$V$ 是物体总体积，$V_{in}$ 是浸入部分；「浮力 = 排开液体的重力」，用排开体积而不是物体体积（除非全浸）。",
+  "answer": "50\\ \\ %",
+  "solution": "漂浮时浮力等于重力：$\\rho_w gV_{in}=\\rho gV$，于是\n\n$$\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}=\\frac{500}{1000}=0.5,$$\n\n即浸入 50%、露出 50%。\n\n全部浸没时的浮力\n\n$$F=\\rho_w gV=1000\\times 9.8\\times 0.75=7350\\ \\mathrm{N},$$\n\n漂浮时浮力等于自重 $\\rho gV=3675\\ \\mathrm{N}$。\n\n（冰的 $\\rho=917\\ \\mathrm{kg/m^3}$，正是「冰山一角」——约 50% 露出水面；海水密度更大，实际露出的会更多。）\n\n本题求的是浮体露出水面的体积占总体积的百分比，通式为 $\\frac{V_{out}}{V}=1-\\frac{\\rho}{\\rho_w}$，结果为\n\n$$\\frac{V_{out}}{V}=50\\ \\ %.$$\n\n**易错点**：$V$ 是物体总体积，$V_{in}$ 是浸入部分；「浮力 = 排开液体的重力」，用排开体积而不是物体体积（除非全浸）。",
   "physicsMeta": {
    "course": "general",
    "answerType": "numeric_unit",
@@ -13351,8 +13351,8 @@
    "漂浮条件：浮力 = 重力，即 $\\rho_w V_{in}=\\rho V$。",
    "浸入比例就是密度比 $\\rho/\\rho_w$。"
   ],
-  "answer": "10\\ \\mathrm{%}",
-  "solution": "漂浮时浮力等于重力：$\\rho_w gV_{in}=\\rho gV$，于是\n\n$$\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}=\\frac{900}{1000}=0.9,$$\n\n即浸入 90%、露出 10%。\n\n全部浸没时的浮力\n\n$$F=\\rho_w gV=1000\\times 9.8\\times 0.58=5684\\ \\mathrm{N},$$\n\n漂浮时浮力等于自重 $\\rho gV=5116\\ \\mathrm{N}$。\n\n（冰的 $\\rho=917\\ \\mathrm{kg/m^3}$，正是「冰山一角」——约 10% 露出水面；海水密度更大，实际露出的会更多。）\n\n本题求的是浮体露出水面的体积占总体积的百分比，通式为 $\\frac{V_{out}}{V}=1-\\frac{\\rho}{\\rho_w}$，结果为\n\n$$\\frac{V_{out}}{V}=10\\ \\mathrm{%}.$$\n\n**易错点**：$V$ 是物体总体积，$V_{in}$ 是浸入部分；「浮力 = 排开液体的重力」，用排开体积而不是物体体积（除非全浸）。",
+  "answer": "10\\ \\ %",
+  "solution": "漂浮时浮力等于重力：$\\rho_w gV_{in}=\\rho gV$，于是\n\n$$\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}=\\frac{900}{1000}=0.9,$$\n\n即浸入 90%、露出 10%。\n\n全部浸没时的浮力\n\n$$F=\\rho_w gV=1000\\times 9.8\\times 0.58=5684\\ \\mathrm{N},$$\n\n漂浮时浮力等于自重 $\\rho gV=5116\\ \\mathrm{N}$。\n\n（冰的 $\\rho=917\\ \\mathrm{kg/m^3}$，正是「冰山一角」——约 10% 露出水面；海水密度更大，实际露出的会更多。）\n\n本题求的是浮体露出水面的体积占总体积的百分比，通式为 $\\frac{V_{out}}{V}=1-\\frac{\\rho}{\\rho_w}$，结果为\n\n$$\\frac{V_{out}}{V}=10\\ \\ %.$$\n\n**易错点**：$V$ 是物体总体积，$V_{in}$ 是浸入部分；「浮力 = 排开液体的重力」，用排开体积而不是物体体积（除非全浸）。",
   "physicsMeta": {
    "course": "general",
    "answerType": "numeric_unit",
@@ -13383,8 +13383,8 @@
    "漂浮条件：浮力 = 重力，即 $\\rho_w V_{in}=\\rho V$。",
    "浸入比例就是密度比 $\\rho/\\rho_w$。"
   ],
-  "answer": "10\\ \\mathrm{%}",
-  "solution": "漂浮时浮力等于重力：$\\rho_w gV_{in}=\\rho gV$，于是\n\n$$\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}=\\frac{900}{1000}=0.9,$$\n\n即浸入 90%、露出 10%。\n\n全部浸没时的浮力\n\n$$F=\\rho_w gV=1000\\times 9.8\\times 0.94=9212\\ \\mathrm{N},$$\n\n漂浮时浮力等于自重 $\\rho gV=8291\\ \\mathrm{N}$。\n\n（冰的 $\\rho=917\\ \\mathrm{kg/m^3}$，正是「冰山一角」——约 10% 露出水面；海水密度更大，实际露出的会更多。）\n\n本题求的是浮体露出水面的体积占总体积的百分比，通式为 $\\frac{V_{out}}{V}=1-\\frac{\\rho}{\\rho_w}$，结果为\n\n$$\\frac{V_{out}}{V}=10\\ \\mathrm{%}.$$\n\n**易错点**：$V$ 是物体总体积，$V_{in}$ 是浸入部分；「浮力 = 排开液体的重力」，用排开体积而不是物体体积（除非全浸）。",
+  "answer": "10\\ \\ %",
+  "solution": "漂浮时浮力等于重力：$\\rho_w gV_{in}=\\rho gV$，于是\n\n$$\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}=\\frac{900}{1000}=0.9,$$\n\n即浸入 90%、露出 10%。\n\n全部浸没时的浮力\n\n$$F=\\rho_w gV=1000\\times 9.8\\times 0.94=9212\\ \\mathrm{N},$$\n\n漂浮时浮力等于自重 $\\rho gV=8291\\ \\mathrm{N}$。\n\n（冰的 $\\rho=917\\ \\mathrm{kg/m^3}$，正是「冰山一角」——约 10% 露出水面；海水密度更大，实际露出的会更多。）\n\n本题求的是浮体露出水面的体积占总体积的百分比，通式为 $\\frac{V_{out}}{V}=1-\\frac{\\rho}{\\rho_w}$，结果为\n\n$$\\frac{V_{out}}{V}=10\\ \\ %.$$\n\n**易错点**：$V$ 是物体总体积，$V_{in}$ 是浸入部分；「浮力 = 排开液体的重力」，用排开体积而不是物体体积（除非全浸）。",
   "physicsMeta": {
    "course": "general",
    "answerType": "numeric_unit",
@@ -13543,8 +13543,8 @@
    "漂浮条件：浮力 = 重力，即 $\\rho_w V_{in}=\\rho V$。",
    "浸入比例就是密度比 $\\rho/\\rho_w$。"
   ],
-  "answer": "10\\ \\mathrm{%}",
-  "solution": "漂浮时浮力等于重力：$\\rho_w gV_{in}=\\rho gV$，于是\n\n$$\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}=\\frac{900}{1000}=0.9,$$\n\n即浸入 90%、露出 10%。\n\n全部浸没时的浮力\n\n$$F=\\rho_w gV=1000\\times 9.8\\times 0.68=6664\\ \\mathrm{N},$$\n\n漂浮时浮力等于自重 $\\rho gV=5998\\ \\mathrm{N}$。\n\n（冰的 $\\rho=917\\ \\mathrm{kg/m^3}$，正是「冰山一角」——约 10% 露出水面；海水密度更大，实际露出的会更多。）\n\n本题求的是浮体露出水面的体积占总体积的百分比，通式为 $\\frac{V_{out}}{V}=1-\\frac{\\rho}{\\rho_w}$，结果为\n\n$$\\frac{V_{out}}{V}=10\\ \\mathrm{%}.$$\n\n**易错点**：$V$ 是物体总体积，$V_{in}$ 是浸入部分；「浮力 = 排开液体的重力」，用排开体积而不是物体体积（除非全浸）。",
+  "answer": "10\\ \\ %",
+  "solution": "漂浮时浮力等于重力：$\\rho_w gV_{in}=\\rho gV$，于是\n\n$$\\frac{V_{in}}{V}=\\frac{\\rho}{\\rho_w}=\\frac{900}{1000}=0.9,$$\n\n即浸入 90%、露出 10%。\n\n全部浸没时的浮力\n\n$$F=\\rho_w gV=1000\\times 9.8\\times 0.68=6664\\ \\mathrm{N},$$\n\n漂浮时浮力等于自重 $\\rho gV=5998\\ \\mathrm{N}$。\n\n（冰的 $\\rho=917\\ \\mathrm{kg/m^3}$，正是「冰山一角」——约 10% 露出水面；海水密度更大，实际露出的会更多。）\n\n本题求的是浮体露出水面的体积占总体积的百分比，通式为 $\\frac{V_{out}}{V}=1-\\frac{\\rho}{\\rho_w}$，结果为\n\n$$\\frac{V_{out}}{V}=10\\ \\ %.$$\n\n**易错点**：$V$ 是物体总体积，$V_{in}$ 是浸入部分；「浮力 = 排开液体的重力」，用排开体积而不是物体体积（除非全浸）。",
   "physicsMeta": {
    "course": "general",
    "answerType": "numeric_unit",

@@ -15,7 +15,7 @@
    "乘除用相对不确定度方和根合成。",
    "幂次 $x^n$ 的贡献是 $n\\,u_x/x$。"
   ],
-  "answer": "4.17\\ \\mathrm{%}",
+  "answer": "4.17\\ \\ %",
   "solution": "不确定度传递的一般公式：若 $y=f\\left(x_1,x_2,\\dots\\right)$，各分量互不相关，则\n$$u_y=\\sqrt{\\sum_i\\left(\\frac{\\partial f}{\\partial x_i}u_{x_i}\\right)^2}.$$\n\n本题圆柱底面半径 $r=0.39\\pm 7\\times10^{-3}$、高 $A=8.5\\pm 0.18$（同一长度单位），由 $S=\\pi r^2A$ 计算体积，于是\n乘除与幂次合成都用相对不确定度：\n$$\\frac{u_S}{S}=\\sqrt{\\left(\\frac{u_A}{A}\\right)^2+\\left(2\\frac{u_r}{r}\\right)^2}=\\sqrt{\\left(\\frac{0.18}{8.5}\\right)^2+\\left(2\\times\\frac{7\\times10^{-3}}{0.39}\\right)^2}=0.0417=4.17\\%.$$\n\n**经验法则**：加减运算看**绝对**不确定度（方和根），乘除与幂次看**相对**不确定度；幂次 $x^n$ 的相对不确定度放大 $n$ 倍。\n\n**易错点**：不确定度不能简单相加（那是最大误差估计，偏保守）；标准做法是方和根合成。",
   "physicsMeta": {
    "course": "lab",
@@ -79,7 +79,7 @@
    "乘除用相对不确定度方和根合成。",
    "幂次 $x^n$ 的贡献是 $n\\,u_x/x$。"
   ],
-  "answer": "2.68\\ \\mathrm{%}",
+  "answer": "2.68\\ \\ %",
   "solution": "不确定度传递的一般公式：若 $y=f\\left(x_1,x_2,\\dots\\right)$，各分量互不相关，则\n$$u_y=\\sqrt{\\sum_i\\left(\\frac{\\partial f}{\\partial x_i}u_{x_i}\\right)^2}.$$\n\n本题直接测量 $a=6\\pm 0.16$、$b=6.5\\pm 0.02$（单位相同），由 $y=ab$ 计算间接量，于是\n乘除运算的相对不确定度按方和根合成：\n$$\\frac{u_y}{y}=\\sqrt{\\left(\\frac{u_a}{a}\\right)^2+\\left(\\frac{u_b}{b}\\right)^2}=\\sqrt{\\left(\\frac{0.16}{6}\\right)^2+\\left(\\frac{0.02}{6.5}\\right)^2}=0.0268=2.68\\%.$$\n\n**经验法则**：加减运算看**绝对**不确定度（方和根），乘除与幂次看**相对**不确定度；幂次 $x^n$ 的相对不确定度放大 $n$ 倍。\n\n**易错点**：不确定度不能简单相加（那是最大误差估计，偏保守）；标准做法是方和根合成。",
   "physicsMeta": {
    "course": "lab",
@@ -111,7 +111,7 @@
    "乘除用相对不确定度方和根合成。",
    "幂次 $x^n$ 的贡献是 $n\\,u_x/x$。"
   ],
-  "answer": "4.92\\ \\mathrm{%}",
+  "answer": "4.92\\ \\ %",
   "solution": "不确定度传递的一般公式：若 $y=f\\left(x_1,x_2,\\dots\\right)$，各分量互不相关，则\n$$u_y=\\sqrt{\\sum_i\\left(\\frac{\\partial f}{\\partial x_i}u_{x_i}\\right)^2}.$$\n\n本题圆柱底面半径 $r=0.41\\pm 8\\times10^{-3}$、高 $A=3\\pm 0.09$（同一长度单位），由 $S=\\pi r^2A$ 计算体积，于是\n乘除与幂次合成都用相对不确定度：\n$$\\frac{u_S}{S}=\\sqrt{\\left(\\frac{u_A}{A}\\right)^2+\\left(2\\frac{u_r}{r}\\right)^2}=\\sqrt{\\left(\\frac{0.09}{3}\\right)^2+\\left(2\\times\\frac{8\\times10^{-3}}{0.41}\\right)^2}=0.0492=4.92\\%.$$\n\n**经验法则**：加减运算看**绝对**不确定度（方和根），乘除与幂次看**相对**不确定度；幂次 $x^n$ 的相对不确定度放大 $n$ 倍。\n\n**易错点**：不确定度不能简单相加（那是最大误差估计，偏保守）；标准做法是方和根合成。",
   "physicsMeta": {
    "course": "lab",
@@ -143,7 +143,7 @@
    "乘除用相对不确定度方和根合成。",
    "幂次 $x^n$ 的贡献是 $n\\,u_x/x$。"
   ],
-  "answer": "1.56\\ \\mathrm{%}",
+  "answer": "1.56\\ \\ %",
   "solution": "不确定度传递的一般公式：若 $y=f\\left(x_1,x_2,\\dots\\right)$，各分量互不相关，则\n$$u_y=\\sqrt{\\sum_i\\left(\\frac{\\partial f}{\\partial x_i}u_{x_i}\\right)^2}.$$\n\n本题圆柱底面半径 $r=0.44\\pm 2\\times10^{-3}$、高 $A=5.5\\pm 0.07$（同一长度单位），由 $S=\\pi r^2A$ 计算体积，于是\n乘除与幂次合成都用相对不确定度：\n$$\\frac{u_S}{S}=\\sqrt{\\left(\\frac{u_A}{A}\\right)^2+\\left(2\\frac{u_r}{r}\\right)^2}=\\sqrt{\\left(\\frac{0.07}{5.5}\\right)^2+\\left(2\\times\\frac{2\\times10^{-3}}{0.44}\\right)^2}=0.0156=1.56\\%.$$\n\n**经验法则**：加减运算看**绝对**不确定度（方和根），乘除与幂次看**相对**不确定度；幂次 $x^n$ 的相对不确定度放大 $n$ 倍。\n\n**易错点**：不确定度不能简单相加（那是最大误差估计，偏保守）；标准做法是方和根合成。",
   "physicsMeta": {
    "course": "lab",
@@ -175,7 +175,7 @@
    "乘除用相对不确定度方和根合成。",
    "幂次 $x^n$ 的贡献是 $n\\,u_x/x$。"
   ],
-  "answer": "6.77\\ \\mathrm{%}",
+  "answer": "6.77\\ \\ %",
   "solution": "不确定度传递的一般公式：若 $y=f\\left(x_1,x_2,\\dots\\right)$，各分量互不相关，则\n$$u_y=\\sqrt{\\sum_i\\left(\\frac{\\partial f}{\\partial x_i}u_{x_i}\\right)^2}.$$\n\n本题直接测量 $a=2\\pm 0.1$、$b=3.5\\pm 0.16$（单位相同），由 $y=ab$ 计算间接量，于是\n乘除运算的相对不确定度按方和根合成：\n$$\\frac{u_y}{y}=\\sqrt{\\left(\\frac{u_a}{a}\\right)^2+\\left(\\frac{u_b}{b}\\right)^2}=\\sqrt{\\left(\\frac{0.1}{2}\\right)^2+\\left(\\frac{0.16}{3.5}\\right)^2}=0.0677=6.77\\%.$$\n\n**经验法则**：加减运算看**绝对**不确定度（方和根），乘除与幂次看**相对**不确定度；幂次 $x^n$ 的相对不确定度放大 $n$ 倍。\n\n**易错点**：不确定度不能简单相加（那是最大误差估计，偏保守）；标准做法是方和根合成。",
   "physicsMeta": {
    "course": "lab",
@@ -207,7 +207,7 @@
    "乘除用相对不确定度方和根合成。",
    "幂次 $x^n$ 的贡献是 $n\\,u_x/x$。"
   ],
-  "answer": "2.53\\ \\mathrm{%}",
+  "answer": "2.53\\ \\ %",
   "solution": "不确定度传递的一般公式：若 $y=f\\left(x_1,x_2,\\dots\\right)$，各分量互不相关，则\n$$u_y=\\sqrt{\\sum_i\\left(\\frac{\\partial f}{\\partial x_i}u_{x_i}\\right)^2}.$$\n\n本题直接测量 $a=9.5\\pm 0.2$、$b=5\\pm 0.07$（单位相同），由 $y=ab$ 计算间接量，于是\n乘除运算的相对不确定度按方和根合成：\n$$\\frac{u_y}{y}=\\sqrt{\\left(\\frac{u_a}{a}\\right)^2+\\left(\\frac{u_b}{b}\\right)^2}=\\sqrt{\\left(\\frac{0.2}{9.5}\\right)^2+\\left(\\frac{0.07}{5}\\right)^2}=0.0253=2.53\\%.$$\n\n**经验法则**：加减运算看**绝对**不确定度（方和根），乘除与幂次看**相对**不确定度；幂次 $x^n$ 的相对不确定度放大 $n$ 倍。\n\n**易错点**：不确定度不能简单相加（那是最大误差估计，偏保守）；标准做法是方和根合成。",
   "physicsMeta": {
    "course": "lab",
@@ -239,7 +239,7 @@
    "乘除用相对不确定度方和根合成。",
    "幂次 $x^n$ 的贡献是 $n\\,u_x/x$。"
   ],
-  "answer": "23.2\\ \\mathrm{%}",
+  "answer": "23.2\\ \\ %",
   "solution": "不确定度传递的一般公式：若 $y=f\\left(x_1,x_2,\\dots\\right)$，各分量互不相关，则\n$$u_y=\\sqrt{\\sum_i\\left(\\frac{\\partial f}{\\partial x_i}u_{x_i}\\right)^2}.$$\n\n本题圆柱底面半径 $r=0.07\\pm 8\\times10^{-3}$、高 $A=4\\pm 0.15$（同一长度单位），由 $S=\\pi r^2A$ 计算体积，于是\n乘除与幂次合成都用相对不确定度：\n$$\\frac{u_S}{S}=\\sqrt{\\left(\\frac{u_A}{A}\\right)^2+\\left(2\\frac{u_r}{r}\\right)^2}=\\sqrt{\\left(\\frac{0.15}{4}\\right)^2+\\left(2\\times\\frac{8\\times10^{-3}}{0.07}\\right)^2}=0.232=23.2\\%.$$\n\n**经验法则**：加减运算看**绝对**不确定度（方和根），乘除与幂次看**相对**不确定度；幂次 $x^n$ 的相对不确定度放大 $n$ 倍。\n\n**易错点**：不确定度不能简单相加（那是最大误差估计，偏保守）；标准做法是方和根合成。",
   "physicsMeta": {
    "course": "lab",
@@ -271,7 +271,7 @@
    "乘除用相对不确定度方和根合成。",
    "幂次 $x^n$ 的贡献是 $n\\,u_x/x$。"
   ],
-  "answer": "1.04\\ \\mathrm{%}",
+  "answer": "1.04\\ \\ %",
   "solution": "不确定度传递的一般公式：若 $y=f\\left(x_1,x_2,\\dots\\right)$，各分量互不相关，则\n$$u_y=\\sqrt{\\sum_i\\left(\\frac{\\partial f}{\\partial x_i}u_{x_i}\\right)^2}.$$\n\n本题直接测量 $a=7.5\\pm 0.06$、$b=3\\pm 0.02$（单位相同），由 $y=ab$ 计算间接量，于是\n乘除运算的相对不确定度按方和根合成：\n$$\\frac{u_y}{y}=\\sqrt{\\left(\\frac{u_a}{a}\\right)^2+\\left(\\frac{u_b}{b}\\right)^2}=\\sqrt{\\left(\\frac{0.06}{7.5}\\right)^2+\\left(\\frac{0.02}{3}\\right)^2}=0.0104=1.04\\%.$$\n\n**经验法则**：加减运算看**绝对**不确定度（方和根），乘除与幂次看**相对**不确定度；幂次 $x^n$ 的相对不确定度放大 $n$ 倍。\n\n**易错点**：不确定度不能简单相加（那是最大误差估计，偏保守）；标准做法是方和根合成。",
   "physicsMeta": {
    "course": "lab",
@@ -303,7 +303,7 @@
    "乘除用相对不确定度方和根合成。",
    "幂次 $x^n$ 的贡献是 $n\\,u_x/x$。"
   ],
-  "answer": "1.89\\ \\mathrm{%}",
+  "answer": "1.89\\ \\ %",
   "solution": "不确定度传递的一般公式：若 $y=f\\left(x_1,x_2,\\dots\\right)$，各分量互不相关，则\n$$u_y=\\sqrt{\\sum_i\\left(\\frac{\\partial f}{\\partial x_i}u_{x_i}\\right)^2}.$$\n\n本题圆柱底面半径 $r=0.35\\pm 3\\times10^{-3}$、高 $A=5\\pm 0.04$（同一长度单位），由 $S=\\pi r^2A$ 计算体积，于是\n乘除与幂次合成都用相对不确定度：\n$$\\frac{u_S}{S}=\\sqrt{\\left(\\frac{u_A}{A}\\right)^2+\\left(2\\frac{u_r}{r}\\right)^2}=\\sqrt{\\left(\\frac{0.04}{5}\\right)^2+\\left(2\\times\\frac{3\\times10^{-3}}{0.35}\\right)^2}=0.0189=1.89\\%.$$\n\n**经验法则**：加减运算看**绝对**不确定度（方和根），乘除与幂次看**相对**不确定度；幂次 $x^n$ 的相对不确定度放大 $n$ 倍。\n\n**易错点**：不确定度不能简单相加（那是最大误差估计，偏保守）；标准做法是方和根合成。",
   "physicsMeta": {
    "course": "lab",
@@ -335,7 +335,7 @@
    "乘除用相对不确定度方和根合成。",
    "幂次 $x^n$ 的贡献是 $n\\,u_x/x$。"
   ],
-  "answer": "7.64\\ \\mathrm{%}",
+  "answer": "7.64\\ \\ %",
   "solution": "不确定度传递的一般公式：若 $y=f\\left(x_1,x_2,\\dots\\right)$，各分量互不相关，则\n$$u_y=\\sqrt{\\sum_i\\left(\\frac{\\partial f}{\\partial x_i}u_{x_i}\\right)^2}.$$\n\n本题直接测量 $a=9.5\\pm 0.29$、$b=1\\pm 0.07$（单位相同），由 $y=ab$ 计算间接量，于是\n乘除运算的相对不确定度按方和根合成：\n$$\\frac{u_y}{y}=\\sqrt{\\left(\\frac{u_a}{a}\\right)^2+\\left(\\frac{u_b}{b}\\right)^2}=\\sqrt{\\left(\\frac{0.29}{9.5}\\right)^2+\\left(\\frac{0.07}{1}\\right)^2}=0.0764=7.64\\%.$$\n\n**经验法则**：加减运算看**绝对**不确定度（方和根），乘除与幂次看**相对**不确定度；幂次 $x^n$ 的相对不确定度放大 $n$ 倍。\n\n**易错点**：不确定度不能简单相加（那是最大误差估计，偏保守）；标准做法是方和根合成。",
   "physicsMeta": {
    "course": "lab",
@@ -399,7 +399,7 @@
    "乘除用相对不确定度方和根合成。",
    "幂次 $x^n$ 的贡献是 $n\\,u_x/x$。"
   ],
-  "answer": "1.8\\ \\mathrm{%}",
+  "answer": "1.8\\ \\ %",
   "solution": "不确定度传递的一般公式：若 $y=f\\left(x_1,x_2,\\dots\\right)$，各分量互不相关，则\n$$u_y=\\sqrt{\\sum_i\\left(\\frac{\\partial f}{\\partial x_i}u_{x_i}\\right)^2}.$$\n\n本题直接测量 $a=5\\pm 0.03$、$b=10\\pm 0.17$（单位相同），由 $y=ab$ 计算间接量，于是\n乘除运算的相对不确定度按方和根合成：\n$$\\frac{u_y}{y}=\\sqrt{\\left(\\frac{u_a}{a}\\right)^2+\\left(\\frac{u_b}{b}\\right)^2}=\\sqrt{\\left(\\frac{0.03}{5}\\right)^2+\\left(\\frac{0.17}{10}\\right)^2}=0.018=1.8\\%.$$\n\n**经验法则**：加减运算看**绝对**不确定度（方和根），乘除与幂次看**相对**不确定度；幂次 $x^n$ 的相对不确定度放大 $n$ 倍。\n\n**易错点**：不确定度不能简单相加（那是最大误差估计，偏保守）；标准做法是方和根合成。",
   "physicsMeta": {
    "course": "lab",
@@ -431,7 +431,7 @@
    "乘除用相对不确定度方和根合成。",
    "幂次 $x^n$ 的贡献是 $n\\,u_x/x$。"
   ],
-  "answer": "2.56\\ \\mathrm{%}",
+  "answer": "2.56\\ \\ %",
   "solution": "不确定度传递的一般公式：若 $y=f\\left(x_1,x_2,\\dots\\right)$，各分量互不相关，则\n$$u_y=\\sqrt{\\sum_i\\left(\\frac{\\partial f}{\\partial x_i}u_{x_i}\\right)^2}.$$\n\n本题直接测量 $a=19.5\\pm 0.24$、$b=4\\pm 0.09$（单位相同），由 $y=ab$ 计算间接量，于是\n乘除运算的相对不确定度按方和根合成：\n$$\\frac{u_y}{y}=\\sqrt{\\left(\\frac{u_a}{a}\\right)^2+\\left(\\frac{u_b}{b}\\right)^2}=\\sqrt{\\left(\\frac{0.24}{19.5}\\right)^2+\\left(\\frac{0.09}{4}\\right)^2}=0.0256=2.56\\%.$$\n\n**经验法则**：加减运算看**绝对**不确定度（方和根），乘除与幂次看**相对**不确定度；幂次 $x^n$ 的相对不确定度放大 $n$ 倍。\n\n**易错点**：不确定度不能简单相加（那是最大误差估计，偏保守）；标准做法是方和根合成。",
   "physicsMeta": {
    "course": "lab",
