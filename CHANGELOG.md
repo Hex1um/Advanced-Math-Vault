@@ -1,3 +1,35 @@
+## v3.9.3 — 2026-11-27
+
+**学科入口默认可见 + 旧外壳自愈按钮**，并把后端真正发布了一次（含 v3.9.1 的答案防泄漏修复）。
+
+### 一、入口不再「一次失败就永久消失」
+
+`#subjectSwitch` 原来在 HTML 里就带 `hidden`，只有 `/api/meta` 明确返回 `features.physics`
+才由 JS 显出来。等于把「能不能看见物理」押在一次请求上：请求失败、命中旧缓存、
+后端是旧版，都会让入口永远出不来，用户毫无自救手段。
+
+现在：HTML 默认可见；`applySubjectAvailability` 只在后端**明确声明没有物理**时才隐藏，
+meta 没到货或没有 `features` 字段时保持现状。
+
+### 二、旧外壳自愈
+
+Service Worker 最坑的一种卡死是「旧 HTML 引旧 app.js、旧 app.js 只预缓存旧资源」，
+用户怎么刷新都停在同一版。新增：开机 6 秒后若学科入口仍不存在，页面底部弹一个
+「更新到最新版」浮层，点击后注销 SW → 清空 Cache Storage → 带新查询串重开，一键解决。
+
+### 三、后端发布（v3.9.0 之后第一次）
+
+- 新后端 `math-vault-10141-52003` 现为 **8763 题（数学 6562 / 物理 2201）**，`features.physics=true`；
+- v3.9.1 的修复随之上线：匿名请求 `/api/problems/:code` 的 `physicsMeta` 里已经没有 `refAnswer`
+  （实测只剩 `answerType / constants / course / diagrams / methods / prerequisites / textbookRef / unit / unitSystem`）；
+- 建立了管理员账号（用户名 `admin`），后续可用 `tools/ops/deploy.mjs` 正常执行
+  「sync-live 合并线上用户 → 再上传覆盖」的安全发布流程。
+
+### 验证
+
+`npm run smoke` 148 通过 / 0 失败；真实浏览器打开后端直连站点：
+`app.js?v=3.9.3`、开关可见、点「物理」得到 **2201 题**、无「旧版本」浮层。
+
 ## v3.9.2 — 2026-11-27
 
 **「顶栏看不到物理入口」的根因是缓存，不是接口。** 这一版让前端自己把这件事治好，

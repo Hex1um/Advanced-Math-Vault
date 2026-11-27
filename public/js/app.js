@@ -106,12 +106,15 @@
   }
 
   function applySubjectAvailability(meta) {
-    const feats = (meta && meta.features) || {};
     const wrap = document.getElementById('subjectSwitch');
     if (!wrap) return;
+    const feats = meta && meta.features;
+    /* 只有后端「明确声明」没有物理时才隐藏。meta 还没到货、或返回的是旧后端
+       （连 features 字段都没有）时保持现状 —— 以前这种情况会直接把入口藏掉，
+       一次请求失败就变成「永远看不到物理」，这是最坑的一种失败方式。 */
+    if (!feats) { paintSubjectChrome(); return; }
     const subjects = (meta && meta.subjects) || [];
     const phys = subjects.filter(function (x) { return x.key === 'physics'; })[0];
-    /* 旧后端没有 features.physics：整块隐藏，保持单学科体验 */
     const supported = feats.physics === true;
     wrap.hidden = !supported;
     const physBtn = wrap.querySelector('[data-subject="physics"]');
@@ -214,9 +217,56 @@
     try { await metaInflight; } finally { metaInflight = null; }
   }
 
+  /* ---- 旧外壳自愈 ----
+     Service Worker 最坑的一种卡死是「旧 HTML 引旧 app.js、旧 app.js 又只预缓存旧资源」，
+     用户怎么刷新都停在同一版，只能靠手动清缓存。开机 6 秒后如果学科入口仍然不存在，
+     就说明外壳没更新上来：直接给一个浮层按钮，注销 SW → 清 Cache Storage →
+     带新查询串重开，一次点击解决。 */
+  function staleShellGuard() {
+    setTimeout(function () {
+      const wrap = document.getElementById('subjectSwitch');
+      if (wrap && !wrap.hasAttribute('hidden')) return;
+      const feats = window.MV_FEATURES;
+      /* 后端明确说没有物理时不算异常，别去打扰用户 */
+      if (feats && feats.physics === false) return;
+      if (document.getElementById('mvStaleBar')) return;
+      const bar = document.createElement('div');
+      bar.id = 'mvStaleBar';
+      bar.style.cssText = 'position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:9999;'
+        + 'display:flex;gap:12px;align-items:center;padding:10px 14px;border-radius:10px;'
+        + 'background:#1f2329;color:#fff;font-size:13px;box-shadow:0 8px 28px rgba(0,0,0,.28)';
+      const tip = document.createElement('span');
+      tip.textContent = '你看到的还是旧版本页面（物理入口没有加载出来）';
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = '更新到最新版';
+      btn.style.cssText = 'border:0;border-radius:7px;padding:6px 12px;background:#2f7cf6;color:#fff;'
+        + 'font-size:13px;cursor:pointer;white-space:nowrap';
+      btn.addEventListener('click', async function () {
+        btn.disabled = true;
+        btn.textContent = '正在更新…';
+        try {
+          if (navigator.serviceWorker && navigator.serviceWorker.getRegistrations) {
+            const regs = await navigator.serviceWorker.getRegistrations();
+            await Promise.all(regs.map(function (r) { return r.unregister(); }));
+          }
+          if (window.caches && caches.keys) {
+            const keys = await caches.keys();
+            await Promise.all(keys.map(function (k) { return caches.delete(k); }));
+          }
+        } catch (e) {}
+        const u = new URL(location.href);
+        u.searchParams.set('_u', String(Date.now()));
+        location.replace(u.toString());
+      });
+      bar.appendChild(tip);
+      bar.appendChild(btn);
+      document.body.appendChild(bar);
+    }, 6000);
+  }
+
   /* 首屏不再 await meta：先渲染当前路由（列表页自己有骨架屏与缓存），
-     meta 到货后通过事件总线通知已挂载的视图局部更新。 */
-  async function boot() {
+     meta 到货后通过事件总线通知已挂载的视图局部更新。 */  async function boot() {
     const cached = readMetaCache();
     if (cached) {
       try { St.applyMeta(cached); applyFeatureFlags(cached); applySubjectAvailability(cached); } catch (e) {}
@@ -225,6 +275,7 @@
     render();
     window.addEventListener('hashchange', render);
     refreshMeta();
+    staleShellGuard();
   }
 
   St.subscribe('meta:updated', function () {
