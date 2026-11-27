@@ -232,7 +232,26 @@ function runSync() {
   }
 }
 
+/* 「目录决定发布到哪个 app」——本目录绑定的是**旧实例**（math-vault-10141）。
+   2026-11-27 起线上后端已经迁到 math-vault-10141-52003，从本目录发布会把
+   前端指回旧实例（数据是 11-26 的快照），所以默认拒绝，必须显式放行。 */
+function guardLegacyInstance() {
+  if (process.env.ALLOW_LEGACY_DEPLOY === '1') {
+    console.log('⚠ ALLOW_LEGACY_DEPLOY=1：正在向「本目录绑定的旧实例」发布，线上会切回旧库');
+    return;
+  }
+  const cfgFile = path.join(ROOT, 'deploy.config.json');
+  let liveBase = '';
+  try { liveBase = String(JSON.parse(fs.readFileSync(cfgFile, 'utf8')).apiBase || ''); } catch (e) {}
+  throw new Error(
+    '拒绝发布：本目录绑定的 app 是旧实例，而线上后端是 ' + (liveBase || '(未配置)') + '。\n'
+    + '  制度上「发布目标由目录决定」，从这里发布不会更新 52003，只会把旧实例再发一遍。\n'
+    + '  真要这么做：ALLOW_LEGACY_DEPLOY=1 node tools/ops/deploy.mjs --publish'
+  );
+}
+
 async function deploy() {
+  guardLegacyInstance();
   const raw = process.env.CODEBUDDY_MCP_CONFIG;
   if (!raw) throw new Error('缺少 CODEBUDDY_MCP_CONFIG，无法调用发布工具');
   const cfg = JSON.parse(raw);
