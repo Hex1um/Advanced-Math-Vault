@@ -54,10 +54,26 @@ if (!fs.existsSync(cfgFile)) {
   try {
     vm.runInNewContext(fs.readFileSync(cfgFile, 'utf8'), sandbox, { timeout: 1000 });
     const cfg = sandbox.window.MV_CONFIG || {};
-    if (!String(cfg.apiBase || '').trim()) bad('config.js 的 apiBase 为空');
-    else good('config.js 可解析，apiBase=' + cfg.apiBase);
-    if (!String(cfg.sharecode || '').trim()) bad('config.js 的 sharecode 为空');
-    else good('config.js sharecode 已写入');
+    if (cfg.staticData === true) {
+      /* 纯静态模式：没有后端，apiBase / sharecode 本来就该是空的，
+         改为校验「静态数据包」是否齐全（meta / 列表 / 桶索引） */
+      good('config.js 为静态模式（staticData=true，不依赖后端）');
+      for (const f of ['data/meta.json', 'data/manifest.json', 'data/list-math.json', 'data/list-physics.json']) {
+        if (fs.existsSync(path.join(DOCS, f))) good('静态包 ' + f + ' 存在');
+        else bad('静态模式下缺少 ' + f);
+      }
+      try {
+        const man = JSON.parse(fs.readFileSync(path.join(DOCS, 'data', 'manifest.json'), 'utf8'));
+        const n = (man.counts && man.counts.total) || 0;
+        if (n > 0 && Array.isArray(man.buckets) && man.buckets.length) good('静态包版本 ' + man.v + '，共 ' + n + ' 题 / ' + man.buckets.length + ' 桶');
+        else bad('manifest.json 内容不完整');
+      } catch (e) { bad('manifest.json 解析失败：' + e.message); }
+    } else {
+      if (!String(cfg.apiBase || '').trim()) bad('config.js 的 apiBase 为空');
+      else good('config.js 可解析，apiBase=' + cfg.apiBase);
+      if (!String(cfg.sharecode || '').trim()) bad('config.js 的 sharecode 为空');
+      else good('config.js sharecode 已写入');
+    }
   } catch (e) {
     bad('config.js 语法错误：' + e.message);
   }
