@@ -51,6 +51,11 @@
   CI 的 `smoke.yml` 本来就跑 `npm test`，所以这些门禁立刻生效，不需要改工作流文件
   （改 `.github/workflows/*` 需要带 `workflow` scope 的凭据，当前 push 用的 OAuth App 没有；
   将来给 CI 单独加一步只是更易读，不是必需）；
+- CI 上没有 `data/db.json`（运行时题库 11MB，不入 git），第一版接进去直接把 CI 判红了。
+  现在：`check:leak` 缺库时改从 `data/batch-physics*.json` 取样（线上的题本就来自这些文件），
+  并把 `loadDb` 的落盘点指到临时目录，避免在仓库里造一个只有 10 道种子题的假库；
+  `check:sprint` / `check:daily` 确实需要真实题库，缺库时打一行「跳过」并 exit 0
+  （本地有库时照常体检）。CI 实测：lint 113 文件 0 违规、check:leak 9 pass、两条跳过、冒烟 190 pass；
 - 新增零依赖 lint（`npm run lint`，`tools/verify/lint.mjs`）：
   `no-var`、`eqeqeq`（放行 `== null`）、以及**全量 `node --check` 语法检查**
   （`public/js/*` 以前只有浏览器能发现语法错）。不上 ESLint 是为了保住「clone 即跑、零 npm install」。
