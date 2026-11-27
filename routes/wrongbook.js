@@ -129,6 +129,40 @@ module.exports = function registerWrongbookRoutes(router, ctx) {
     return send(res, 200, { ok: true, total: out.length, items: out });
   }
 
+  /* ---- 手动加入错题本 / 移除 ----
+     错题本不再自动收录（见 routes/problems.js 的判错分支），
+     这个接口是唯一的入口：题页「加入错题本」按钮调它。 */
+  const addMatch = pathname.match(/^\/api\/wrongbook\/([A-Za-z0-9-]+)$/);
+  if (addMatch && (method === 'POST' || method === 'DELETE')) {
+    if (!user) return fail(res, 401, '请先登录');
+    const code = addMatch[1].toUpperCase();
+    const p = db.problems.find((x) => x.code === code);
+    if (!p || p.status !== 'approved') return fail(res, 404, '题目不存在');
+    user.wrong = user.wrong || {};
+    if (method === 'DELETE') {
+      if (!user.wrong[code]) return fail(res, 404, '这道题不在你的错题本里');
+      delete user.wrong[code];
+      saveDb();
+      return send(res, 200, { ok: true, code: code, removed: true, total: Object.keys(user.wrong).length });
+    }
+    const existed = !!user.wrong[code];
+    if (!existed) {
+      const now = Date.now();
+      const card = fsrs.emptyCard ? fsrs.emptyCard(now) : {};
+      user.wrong[code] = Object.assign({}, card, {
+        at: new Date().toISOString(),
+        score: null,
+        tries: 0,
+        nextReviewAt: now
+      });
+      logActivity(user, '把 ' + code + ' 加入错题本', code);
+      saveDb();
+    }
+    return send(res, 200, {
+      ok: true, code: code, existed: existed, total: Object.keys(user.wrong).length
+    });
+  }
+
   /* ---- 错题个人备注：只改备注，不影响复习排期 ---- */
   const noteMatch = pathname.match(/^\/api\/wrongbook\/([A-Za-z0-9-]+)\/note$/);
   if (noteMatch && method === 'POST') {

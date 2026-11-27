@@ -1,4 +1,4 @@
-/* 错题本：没过 80 分线的题都会在这里，按 FSRS 排复习
+/* 错题本：手动收录的题在这里，按 FSRS 排复习（2026-11-27 起判错不再自动入本）
    - 逾期最久的排在最前；每行可以直接自评（忘了 / 吃力 / 良好 / 简单）
    - 自评会立刻把下次复习时间往后推，达到 8 天自动出本
    - 每行可写一句错因备注，只改备注不动排期 */
@@ -105,13 +105,13 @@
   Views.wrongbook = function (el) {
     if (!window.API.State.me) {
       el.innerHTML = '<div class="page-head"><div><h1>错题本</h1>'
-        + '<p class="sub">登录后，没过 80 分线的题会自动收进来，可以按分数、按考点重刷。</p></div></div>'
-        + '<div class="empty"><b>还没有错题本</b>登录后开始刷题，做错的题会自动记在这里。</div>';
+        + '<p class="sub">登录后，在题目页点「加入错题本」收进来，可以按分数、按考点重刷。</p></div></div>'
+        + '<div class="empty"><b>还没有错题本</b>登录后进题目页，点「加入错题本」就会收进来。</div>';
       return;
     }
 
     el.innerHTML = '<div class="page-head"><div><h1>错题本</h1>'
-      + '<p class="sub">没过 80 分线自动收录；按间隔重复排期，复习到间隔 8 天自动出本。</p></div>'
+      + '<p class="sub">手动收录（题目页点「加入错题本」）；按间隔重复排期，复习到间隔 8 天自动出本。</p></div>'
       + '<div class="head-actions"><button class="btn btn-sm" id="ankiExport" title="导出为 Anki 可导入的 TSV">导出到 Anki</button></div></div>'
       + '<div id="wrongWrap"><div class="loading-row"><span class="spinner"></span>加载中…</div></div>';
 
@@ -211,7 +211,7 @@
 
         if (!d.items.length) {
           wrap.innerHTML = weakCard() + reviewCard()
-            + '<div class="empty"><b>错题本是空的</b>去题库刷几道，没过 80 分的会出现在这里。</div>';
+            + '<div class="empty"><b>错题本是空的</b>去题库打开一道题，点「加入错题本」就会出现在这里。</div>';
           bindWeakDrill();
           bindRowActions(wrap, load);
           return;

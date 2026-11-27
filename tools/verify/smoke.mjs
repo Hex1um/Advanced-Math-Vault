@@ -419,9 +419,20 @@ try {
 
   console.log('\n[12] 静态资源与防缓存头');
   console.log('\n[回归] 学习闭环：复习队列 / 考点统计 / 判分申诉');
-  // 构造一次「只交答案且答案是错的」：会判 wrong、记提交、进错题本
+  // 构造一次「只交答案且答案是错的」：会判 wrong、记提交，但**不再**自动进错题本
   const wrongOnly = await req('/api/problems/HS1003/answer', { method: 'POST', body: JSON.stringify({ mode: 'answer', answer: '-99999' }) });
   ok('只交错误答案判 wrong 且不及格', wrongOnly.json.verdict === 'wrong' && wrongOnly.json.passed === false, JSON.stringify(wrongOnly.json).slice(0, 120));
+
+  const wbAuto = await req('/api/wrongbook');
+  ok('判错不再自动进错题本', !(wbAuto.json.items || []).some((i) => i.code === 'HS1003'),
+    JSON.stringify((wbAuto.json.items || []).map((i) => i.code).slice(0, 6)));
+  const wbAdd = await req('/api/wrongbook/HS1003', { method: 'POST', body: JSON.stringify({}) });
+  ok('可以手动加入错题本', wbAdd.status === 200 && wbAdd.json.ok === true && wbAdd.json.existed === false, JSON.stringify(wbAdd.json).slice(0, 120));
+  const wbDup = await req('/api/wrongbook/HS1003', { method: 'POST', body: JSON.stringify({}) });
+  ok('重复加入不报错且标记 existed', wbDup.json.ok === true && wbDup.json.existed === true, JSON.stringify(wbDup.json).slice(0, 100));
+  const wbGhost = await req('/api/wrongbook/NOSUCH99', { method: 'POST', body: JSON.stringify({}) });
+  ok('不存在的题不能加入错题本', wbGhost.status === 404, String(wbGhost.status));
+
   const rv = await req('/api/my/review-today');
   ok('今日复习队列有到期题', rv.json && rv.json.ok && rv.json.due >= 1 && rv.json.items.length >= 1, JSON.stringify(rv.json && { due: rv.json.due }));
 
@@ -683,6 +694,7 @@ try {
   check('私有科目包子接口同样 404', spPrivPoint.status === 404, 'status=' + spPrivPoint.status);
 
   const metaSprint = await req('/api/meta');
+  ok('meta 声明错题本手动收录', !!(metaSprint.json.features && metaSprint.json.features.wrongbookManual === true));
   if (PACKS_ON) {
     check('meta 声明 sprint 能力', !!(metaSprint.json.features && metaSprint.json.features.sprint === true));
   } else {

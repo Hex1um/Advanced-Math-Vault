@@ -495,7 +495,11 @@ function createProblemsRoutes(deps) {
         }));
       }
 
-      // 没过线：记一次尝试，进错题本
+      // 没过线：只记一次尝试。
+      /* 错题本改成手动收录（2026-11-27）：判错不再自动入本，
+         想收就点题页「加入错题本」（POST /api/wrongbook/:code）。
+         已经在册的卡片仍然按 FSRS 推进——反复错会更快回到队列，
+         只是手滑一次也不会把之前攒的稳定度清零。 */
       user.solved[p.code] = {
         at: (rec && rec.at) || Date.now(),
         done: false,
@@ -503,18 +507,15 @@ function createProblemsRoutes(deps) {
         askedAI: !!(rec && rec.askedAI)
       };
       const prevWrong = user.wrong[p.code];
-      /* 判错按「忘记」排期：稳定度腰斩，但不再无脑重置成 1 天——
-         同一道题反复错会更快回到队列（稳定度低 → 间隔短），而只是手滑的
-         题不会因为一次失误把之前攒的进度全部清零。 */
-      const again = fsrs.schedule(prevWrong, 'again', Date.now());
-      // 首次做错：立刻进「今日复习」，让用户当天就能重做一遍；
-      // 已经复习过的错题则按稳定度排期，不再当天反复轰炸
-      if (!prevWrong || !prevWrong.reps) again.nextReviewAt = Date.now();
-      user.wrong[p.code] = Object.assign({}, prevWrong, again, {
-        at: submission.at,
-        score: score,
-        tries: (prevWrong && prevWrong.tries ? prevWrong.tries : 0) + 1
-      });
+      if (prevWrong) {
+        const again = fsrs.schedule(prevWrong, 'again', Date.now());
+        if (!prevWrong.reps) again.nextReviewAt = Date.now();
+        user.wrong[p.code] = Object.assign({}, prevWrong, again, {
+          at: submission.at,
+          score: score,
+          tries: (prevWrong.tries ? prevWrong.tries : 0) + 1
+        });
+      }
       saveDb();
       return send(res, 200, payload);
     }

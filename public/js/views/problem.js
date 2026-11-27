@@ -245,7 +245,16 @@
           onPassed(res);
         }
       } else if (res.verdict === 'partial' || res.verdict === 'wrong') {
-        html += '<div class="judge-extra">' + (typeof res.score === 'number' && res.score < 80 ? '差一点就到 80 了，改完再交一次。' : '') + '这题已进错题本。</div>';
+        /* 错题本改成手动收录：判错不再自动进本，这里给一个一键入口。
+           旧后端（没有 features.wrongbookManual）仍是自动收录，就照旧提示，
+           避免前后端版本不一致时出现点了没反应的死按钮。 */
+        const manual = !!(window.MV_FEATURES && window.MV_FEATURES.wrongbookManual);
+        html += '<div class="judge-extra">' + (typeof res.score === 'number' && res.score < 80 ? '差一点就到 80 了，改完再交一次。' : '')
+          + (manual
+            ? '<button class="btn btn-sm" id="addWrongBtn" data-code="' + window.Md.esc(p.code) + '">加入错题本</button>'
+              + '<span class="muted" style="margin-left:8px">错题本不再自动收录</span>'
+            : '这题已进错题本。')
+          + '</div>';
         if (res.appealable && res.submissionId) {
           html += '<div class="judge-extra"><button class="btn btn-sm" id="appealBtn" data-sid="' + res.submissionId + '">'
             + '对判分有异议？申请人工复核</button></div>';
@@ -258,6 +267,20 @@
       window.Md.renderMath(resultBox);
       const apBtn = resultBox.querySelector('#appealBtn');
       if (apBtn) apBtn.addEventListener('click', function () { openAppealModal(p, apBtn.dataset.sid); });
+      const awBtn = resultBox.querySelector('#addWrongBtn');
+      if (awBtn) awBtn.addEventListener('click', function () {
+        const code = awBtn.dataset.code;
+        awBtn.disabled = true;
+        awBtn.textContent = '加入中…';
+        window.API.post('/api/wrongbook/' + code, {}).then(function (d) {
+          awBtn.textContent = d && d.existed ? '已在错题本' : '已加入错题本';
+          window.UI.toast(d && d.existed ? '这道题本来就在错题本里' : '已加入错题本', 'ok');
+        }).catch(function (e) {
+          awBtn.disabled = false;
+          awBtn.textContent = '加入错题本';
+          window.UI.toast((e && e.message) || '加入失败', 'err');
+        });
+      });
       if (res.passed && !res.already) {
         setTimeout(function () { window.UI.toast('通过，' + res.score + ' 分，+' + (res.gained || 0) + ' 经验', 'ok'); }, 200);
       }

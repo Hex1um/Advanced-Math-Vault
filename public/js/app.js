@@ -40,8 +40,8 @@
     if (seg[0] === 'exam') return { name: 'exam', params: params, nav: 'paper' };
     if (seg[0] === 'submit') return { name: 'submit', params: params, nav: 'submit' };
     if (seg[0] === 'analytics') return { name: 'analytics', params: params, nav: 'analytics' };
-    if (seg[0] === 'collections' && seg[1]) return { name: 'collection', params: Object.assign({ id: seg[1] }, params), nav: 'collections' };
-    if (seg[0] === 'collections') return { name: 'collections', params: params, nav: 'collections' };
+    /* 题单功能已下线（2026-11-27）：旧链接统一回题库，不留死页 */
+    if (seg[0] === 'collections') return { name: 'library', params: params, nav: 'problems' };
     if (seg[0] === 'practice') return { name: 'practice', params: params, nav: 'analytics' };
     if (seg[0] === 'my') return { name: 'my', params: params, nav: '' };
     if (seg[0] === 'admin') return { name: 'admin', params: params, nav: '' };
@@ -175,8 +175,8 @@
      判断依据是 /api/meta 的 features；旧后端没有该字段，视为不支持。 */
   function applyFeatureFlags(meta) {
     const feats = (meta && meta.features) || {};
-    const supported = feats.analytics === true || feats.collections === true;
-    document.querySelectorAll('[data-nav="analytics"], [data-nav="collections"]').forEach(function (a) {
+    const supported = feats.analytics === true;
+    document.querySelectorAll('[data-nav="analytics"]').forEach(function (a) {
       a.style.display = supported ? '' : 'none';
     });
     /* 期末突击是 v2.1.0 新增：后端没这个字段就说明还是旧实例，先藏起来 */

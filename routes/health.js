@@ -111,6 +111,9 @@ module.exports = function registerHealthRoutes(router, ctx) {
         analytics: true,
         collections: true,
         equivalentJudge: true,
+        /* 错题本改成手动收录（POST/DELETE /api/wrongbook/:code）：
+           前端据此决定题页显不显示「加入错题本」，旧后端不会出现点了没反应的死按钮 */
+        wrongbookManual: true,
         /* 突击包已下线：只有当 data/subjects/ 里真有包时才亮入口，
            没有包时前端隐藏导航，避免点进去是空页面。数据放回即自动恢复。 */
         sprint: !!(ctx.sprint && ctx.sprint.list().length > 0),
