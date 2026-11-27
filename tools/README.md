@@ -34,6 +34,7 @@ tools/import/    录题流水线
   migrate-tags.mjs         自由标签 → 主/子标签体系
   normalize-notation.mjs   记号统一（单位矩阵 I、bmatrix 等）
   fix-latex.mjs            LaTeX 批处理修复
+  build-linear-algebra-pack.py  线代补缺批次 40 题（sympy 逐题算答案并断言性质，需本机装 sympy）
 
 tools/archive/   已于 v3.12.0 整体删除（audit-kaoyan / retitle-hust / rescore…）
                  这些是「一次性历史作业」，留着会让人以为是可复用工具。

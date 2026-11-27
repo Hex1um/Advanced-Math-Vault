@@ -6,7 +6,7 @@
      断网时返回最近看过的题面 —— 教室/地铁里也能翻错题
    - 其余 /api/（登录态、提交、判题）：一律放行不缓存，避免串号与脏数据
    版本号变了就换缓存名，activate 时清掉旧缓存，避免 old ?v= 资源永久驻留。 */
-const VERSION = 'v3.12.0';
+const VERSION = 'v3.13.0';
 const STATIC_CACHE = 'mv-static-' + VERSION;
 const RUNTIME_CACHE = 'mv-runtime-' + VERSION;
 /* 接口缓存也带上版本号：以前固定叫 mv-api-readonly-v1，换后端之后

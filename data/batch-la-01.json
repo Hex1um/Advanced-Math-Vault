@@ -1,0 +1,821 @@
+[
+  {
+    "title": "含参向量组的线性相关性",
+    "statement": "设向量组 $\\alpha_1=(1,1,0)^{\\mathrm T},\\ \\alpha_2=(1,2,1)^{\\mathrm T},\\ \\alpha_3=(0,1,a)^{\\mathrm T}$，问 $a$ 取何值时该向量组线性相关，何值时线性无关。",
+    "tags": [
+      "向量组"
+    ],
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 4,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "三个三维向量线性相关 ⟺ 以它们为列的行列式为 0",
+      "先把行列式算出来，再看参数取什么值使之为零"
+    ],
+    "answer": "$a=1$ 时线性相关；$a\\neq 1$ 时线性无关。",
+    "solution": "**步骤1**：把三个向量按列排成矩阵 $A=(\\alpha_1,\\alpha_2,\\alpha_3)$，则 $|A|=a - 1$。\n**步骤2**：向量组线性相关 $\\iff |A|=0$，即 $a=1$。\n**结论**：$a=1$ 时线性相关（此时 $\\alpha_3=\\alpha_2-\\alpha_1$，可验证），$a\\neq1$ 时线性无关。",
+    "mainTag": "线性代数",
+    "kind": "解答题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "求向量组的秩与极大无关组",
+    "statement": "求向量组 $\\alpha_1=(1,2,3)^{\\mathrm T},\\ \\alpha_2=(2,4,6)^{\\mathrm T},\\ \\alpha_3=(-1,-2,-3)^{\\mathrm T},\\ \\alpha_4=(0,1,1)^{\\mathrm T}$ 的秩，并给出一个极大无关组。",
+    "tags": [
+      "向量组",
+      "逆矩阵与秩"
+    ],
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 4,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "以向量为列作矩阵，做初等行变换化成阶梯形",
+      "主元所在列对应的向量就是极大无关组"
+    ],
+    "answer": "秩为 $2$，$\\{\\alpha_1,\\alpha_4\\}$ 是一个极大无关组（$\\alpha_2=2\\alpha_1,\\ \\alpha_3=-\\alpha_1$）。",
+    "solution": "**步骤1**：以 $\\alpha_1,\\cdots,\\alpha_4$ 为列构造矩阵并化为行最简形，主元列在第 [1, 4] 列。\n**步骤2**：$\\alpha_2=2\\alpha_1$，$\\alpha_3=-\\alpha_1$，都与 $\\alpha_1$ 成比例；$\\alpha_4$ 不与 $\\alpha_1$ 成比例，二者线性无关。\n**结论**：$r=2$，$\\{\\alpha_1,\\alpha_4\\}$ 为极大无关组，且 $\\alpha_2=2\\alpha_1+0\\cdot\\alpha_4,\\ \\alpha_3=-\\alpha_1+0\\cdot\\alpha_4$。",
+    "mainTag": "线性代数",
+    "kind": "解答题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "向量能否由向量组线性表出",
+    "statement": "设 $\\alpha_1=(1,0,1)^{\\mathrm T},\\ \\alpha_2=(2,1,3)^{\\mathrm T},\\ \\alpha_3=(0,1,1)^{\\mathrm T}$，$\\beta=(0,0,1)^{\\mathrm T}$。问 $\\beta$ 能否由 $\\alpha_1,\\alpha_2,\\alpha_3$ 线性表出？",
+    "tags": [
+      "向量组"
+    ],
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 5,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "判断 $r(A)$ 与 $r(A\\mid\\beta)$ 是否相等",
+      "相等才有解；本题要算两个秩"
+    ],
+    "answer": "不能线性表出：$r(A)=2$，而 $r(A\\mid\\beta)=3$。",
+    "solution": "**步骤1**：以 $\\alpha_1,\\alpha_2,\\alpha_3$ 为列作矩阵 $A$，注意到 $\\alpha_3=\\alpha_2-2\\alpha_1$，故 $\\alpha_1,\\alpha_2,\\alpha_3$ 线性相关，$r(A)=2$。\n**步骤2**：把 $\\beta$ 添到最后一列，$r(A\\mid\\beta)=3$。秩不相等，说明 $\\beta$ 不在 $\\alpha_1,\\alpha_2,\\alpha_3$ 的张成空间里。\n**步骤3**（验算）：设 $\\beta=x_1\\alpha_1+x_2\\alpha_2+x_3\\alpha_3$，由第 2 个分量得 $x_2+x_3=0$，由第 3 个分量得 $x_1+3x_2+x_3=1$，由第 1 个分量得 $x_1+2x_2=0$；三式联立矛盾。\n**结论**：$\\beta$ 不能由该向量组线性表出。",
+    "mainTag": "线性代数",
+    "kind": "解答题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "向量组秩的加法不等式",
+    "statement": "设 $A,B$ 均为 $m\\times n$ 矩阵，则下列结论中正确的是（　　）\n\n(A) $r(A+B)=r(A)+r(B)$　　(B) $r(A+B)\\leqslant r(A)+r(B)$\n\n(C) $r(A+B)\\geqslant r(A)+r(B)$　　(D) $r(A+B)$ 与 $r(A),r(B)$ 无确定的大小关系",
+    "tags": [
+      "向量组",
+      "逆矩阵与秩"
+    ],
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 2,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "和的列向量是两组列向量的和，必落在两个列空间之和里",
+      "列空间之和的维数不超过两个维数之和"
+    ],
+    "answer": "(B)。",
+    "solution": "**步骤1**：$A+B$ 的每一列都是 $A$ 的列与 $B$ 的对应列之和，因此 $A+B$ 的列空间包含于 $A$ 的列空间与 $B$ 的列空间之和。\n**步骤2**：$\\dim(C(A)+C(B))\\leqslant \\dim C(A)+\\dim C(B)$，即 $r(A+B)\\leqslant r(A)+r(B)$。\n**结论**：选 (B)。等号成立的条件是两列空间「不重叠」（如 $B=0$ 时）。",
+    "mainTag": "线性代数",
+    "kind": "选择题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "由秩确定参数",
+    "statement": "设矩阵 $A=\\left(\\begin{matrix}1 & 2 & 1\\\\2 & 4 & t\\\\1 & 2 & 1\\end{matrix}\\right)$，已知 $r(A)=2$，求 $t$ 的值。",
+    "tags": [
+      "逆矩阵与秩",
+      "向量组"
+    ],
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 4,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "先做行变换，观察非零行的个数随 $t$ 怎样变化",
+      "秩为 2 说明恰有两行线性无关"
+    ],
+    "answer": "$t\\neq 2$（此时 $r(A)=2$）；$t=2$ 时 $r(A)=1$。",
+    "solution": "**步骤1**：第二行减去第一行的 $2$ 倍得 $(0,0,t-2)$；第三行与第一行相同，可消成零行。\n**步骤2**：$t\\neq 2$ 时阶梯形有两行非零，$r(A)=2$；$t=2$ 时只剩一行非零，$r(A)=1$。\n**结论**：$r(A)=2\\iff t\\neq 2$。",
+    "mainTag": "线性代数",
+    "kind": "填空题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "施密特正交化与单位化",
+    "statement": "将向量组 $a_1=(1,1,0)^{\\mathrm T},\\ a_2=(1,0,1)^{\\mathrm T},\\ a_3=(0,1,1)^{\\mathrm T}$ 用施密特方法正交化、再单位化，求对应的标准正交组 $e_1,e_2,e_3$。",
+    "tags": [
+      "向量组"
+    ],
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 7,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "先取 $b_1=a_1$，再从 $a_2$ 里减去它在 $b_1$ 上的投影",
+      "每一步都要减掉在前面所有 $b_i$ 上的投影，最后各自除以模长"
+    ],
+    "answer": "$e_1=\\frac{1}{\\sqrt2}(1,1,0)^{\\mathrm T},\\ $e_2=\\frac{1}{\\sqrt6}(1,-1,2)^{\\mathrm T},\\ $e_3=\\frac{1}{\\sqrt3}(-1,1,1)^{\\mathrm T}$。",
+    "solution": "**步骤1**：$b_1=a_1=(1,1,0)^{\\mathrm T}$，$\\|b_1\\|=\\sqrt{2}$。\n**步骤2**：$b_2=a_2-\\frac{(a_2,b_1)}{(b_1,b_1)}b_1=(\\frac{1}{2},\\frac{-1}{2},1)^{\\mathrm T}$，$\\|b_2\\|=\\frac{\\sqrt{6}}{2}$。\n**步骤3**：$b_3=a_3-\\frac{(a_3,b_1)}{(b_1,b_1)}b_1-\\frac{(a_3,b_2)}{(b_2,b_2)}b_2=(\\frac{-2}{3},\\frac{2}{3},\\frac{2}{3})^{\\mathrm T}$，$\\|b_3\\|=\\frac{2 \\sqrt{3}}{3}$。\n**结论**：分别单位化即得 $e_1,e_2,e_3$（验算：两两内积为 0，模长均为 1）。",
+    "mainTag": "线性代数",
+    "kind": "解答题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "齐次方程组解空间的维数与基",
+    "statement": "设齐次线性方程组 $Ax=0$ 的系数矩阵 $A=\\left(\\begin{matrix}1 & -1 & 2 & 1\\\\2 & -2 & 4 & 2\\\\1 & -1 & 2 & 3\\end{matrix}\\right)$，求其解空间 $N(A)$ 的维数与一组基。",
+    "tags": [
+      "向量组",
+      "线性方程组"
+    ],
+    "thinking": 4,
+    "difficulty": 5,
+    "calc": 5,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "解空间维数 = 未知量个数 − 秩",
+      "自由变量逐个取 1、其余取 0，得到基础解系"
+    ],
+    "answer": "$\\dim N(A)=2$，一组基为 $(1,1,0,0)^{\\mathrm T},\\ (-2,0,1,0)^{\\mathrm T}$。",
+    "solution": "**步骤1**：$A$ 的第二行是第一行的 $2$ 倍，第三行减第一行得 $(0,0,0,2)$，故 $r(A)=2$，$\\dim N(A)=4-2=2$。\n**步骤2**：化行最简形后 $x_1=x_2-2x_3$，$x_4=0$；取 $(x_2,x_3)=(1,0),(0,1)$ 得基础解系。\n**结论**：解空间维数为 $2$，基为 $\\xi_1=(1,1,0,0)^{\\mathrm T},\\ \\xi_2=(-2,0,1,0)^{\\mathrm T}$。",
+    "mainTag": "线性代数",
+    "kind": "解答题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "向量组等价的判定",
+    "statement": "设向量组 $(\\mathrm{I}):\\alpha_1,\\alpha_2,\\alpha_3$ 与 $(\\mathrm{II}):\\beta_1,\\beta_2$ 都线性无关，且 $(\\mathrm{II})$ 可由 $(\\mathrm{I})$ 线性表出。证明：$(\\mathrm{I})$ 不能由 $(\\mathrm{II})$ 线性表出。",
+    "tags": [
+      "向量组",
+      "线性空间与变换"
+    ],
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 4,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "若可以互相表出，则两个向量组等价，秩相等",
+      "秩相等与「线性无关向量的个数」矛盾"
+    ],
+    "answer": "不能。反设 $(\\mathrm{I})$ 可由 $(\\mathrm{II})$ 表出，则两组向量等价、秩相等；但前者秩为 3、后者为 2，矛盾。",
+    "solution": "**步骤1**：反设 $(\\mathrm{I})$ 可由 $(\\mathrm{II})$ 线性表出。加上已知条件，两组向量可以互相表出，即两个向量组等价。\n**步骤2**：等价的向量组秩相等。而 $(\\mathrm{I})$ 含 3 个线性无关向量，秩为 3；$(\\mathrm{II})$ 含 2 个线性无关向量，秩为 2。$3\\neq 2$，矛盾。\n**结论**：反设不成立，$(\\mathrm{I})$ 不能由 $(\\mathrm{II})$ 线性表出。",
+    "mainTag": "线性代数",
+    "kind": "证明题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "线性无关的判定",
+    "statement": "设向量组 $\\alpha_1,\\alpha_2,\\alpha_3$ 线性无关，则下列向量组中线性无关的是（　　）\n\n(A) $\\alpha_1-\\alpha_2,\\ \\alpha_2-\\alpha_3,\\ \\alpha_3-\\alpha_1$\n\n(B) $\\alpha_1+\\alpha_2,\\ \\alpha_2+\\alpha_3,\\ \\alpha_3+\\alpha_1$\n\n(C) $\\alpha_1+\\alpha_2,\\ \\alpha_2+\\alpha_3,\\ \\alpha_1+2\\alpha_2+\\alpha_3$\n\n(D) $\\alpha_1+\\alpha_2,\\ \\alpha_2-\\alpha_3,\\ \\alpha_1+\\alpha_3$",
+    "tags": [
+      "向量组"
+    ],
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 3,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "把新向量组写成 $(\\alpha_1,\\alpha_2,\\alpha_3)K$",
+      "新向量组线性无关 ⟺ 系数矩阵 $K$ 可逆（行列式非零）"
+    ],
+    "answer": "(B)。",
+    "solution": "**步骤1**：任一组新向量都可以写成 $(\\alpha_1,\\alpha_2,\\alpha_3)K$，由于 $\\alpha_1,\\alpha_2,\\alpha_3$ 线性无关，新向量组线性无关 $\\iff |K|\\neq0$。\n**步骤2**：四个选项的系数行列式依次为 $0,\\ 2,\\ 0,\\ 0$。\n**步骤3**：只有 B 的行列式不为零，故只有它线性无关。（(A) 三向量之和为零；(C) 第三个向量恰是前两个之和；(D) 满足 $v_1-v_2-v_3=0$。）\n**结论**：选 (B)。",
+    "mainTag": "线性代数",
+    "kind": "选择题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "将线性无关组扩充为基",
+    "statement": "在 $\\mathbb{R}^3$ 中，向量 $\\alpha_1=(1,1,0)^{\\mathrm T},\\ \\alpha_2=(1,0,1)^{\\mathrm T}$ 线性无关，把它们扩充为 $\\mathbb{R}^3$ 的一组基。",
+    "tags": [
+      "向量组",
+      "线性空间与变换"
+    ],
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 4,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "取标准基向量的一个，检查加上后是否仍线性无关",
+      "行列式非零即可"
+    ],
+    "answer": "$\\{\\alpha_1,\\alpha_2,(0,0,1)^{\\mathrm T}\\}$ 或 $\\{\\alpha_1,\\alpha_2,(1,0,0)^{\\mathrm T}\\}$ 等都是基。",
+    "solution": "**步骤1**：取 $e_3=(0,0,1)^{\\mathrm T}$，以三者为列作矩阵，$\\begin{vmatrix}1&1&0\\\\1&0&0\\\\0&1&1\\end{vmatrix}=-1\\neq0$，线性无关。\n**步骤2**：$\\mathbb{R}^3$ 中 3 个线性无关的向量即为一组基。\n**结论**：$\\{\\alpha_1,\\alpha_2,e_3\\}$ 是 $\\mathbb{R}^3$ 的一组基（答案不唯一）。",
+    "mainTag": "线性代数",
+    "kind": "解答题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "求特征值与特征向量",
+    "statement": "求矩阵 $A=\\left(\\begin{matrix}2 & 1 & 1\\\\1 & 2 & 1\\\\1 & 1 & 2\\end{matrix}\\right)$ 的全部特征值与对应的特征向量。",
+    "tags": [
+      "特征值与特征向量"
+    ],
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 6,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "解特征方程 $|\\lambda E-A|=0$ 得特征值",
+      "每个特征值代回 $(\\lambda E-A)x=0$ 求基础解系"
+    ],
+    "answer": "特征值为 $\\lambda_1=4$（对应 $(1,1,1)^{\\mathrm T}$），$\\lambda_2=\\lambda_3=1$（对应 $(1,-1,0)^{\\mathrm T}$ 与 $(1,0,-1)^{\\mathrm T}$）。",
+    "solution": "**步骤1**：$|\\lambda E-A|=\\left(l - 4\\right) \\left(l - 1\\right)^{2}$，令其为零得 $\\lambda=4$（单根）与 $\\lambda=1$（二重根）。\n**步骤2**：对 $\\lambda=4$，解 $(4E-A)x=0$，得基础解系 $(1,1,1)^{\\mathrm T}$。\n**步骤3**：对 $\\lambda=1$，$E-A$ 的三行互成比例，方程为 $x_1+x_2+x_3=0$，基础解系 $(1,-1,0)^{\\mathrm T},(1,0,-1)^{\\mathrm T}$。\n**结论**：特征值 $4,1,1$；二重特征值 $1$ 的几何重数为 $2$，等于代数重数，故 $A$ 可对角化。",
+    "mainTag": "线性代数",
+    "kind": "解答题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "含参矩阵可对角化的条件",
+    "statement": "设 $A=\\left(\\begin{matrix}2 & a & 0\\\\0 & 2 & 0\\\\0 & 0 & 3\\end{matrix}\\right)$，问 $a$ 取何值时 $A$ 可相似对角化。",
+    "tags": [
+      "相似与对角化"
+    ],
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 5,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "特征值直接在对角线上：$2,2,3$",
+      "二重特征值 $2$ 的几何重数必须也是 2，即 $r(A-2E)=1$"
+    ],
+    "answer": "$a=0$ 时 $A$ 可对角化；$a\\neq0$ 时不可对角化。",
+    "solution": "**步骤1**：$A$ 是上三角矩阵，特征值为 $2,2,3$（$2$ 为二重根）。\n**步骤2**：$A$ 可对角化 $\\iff$ 二重特征值 $2$ 的几何重数等于 $2$，即 $\\dim N(A-2E)=2$，等价于 $r(A-2E)=3-2=1$。\n**步骤3**：$A-2E=\\begin{pmatrix}0&a&0\\\\0&0&0\\\\0&0&1\\end{pmatrix}$，当 $a\\neq0$ 时第 1、3 行线性无关，秩为 $2$；当 $a=0$ 时秩为 $1$。\n**结论**：$a=0$ 时可对角化；$a\\neq0$ 时 $A$ 不可对角化（只有一个线性无关的特征向量）。",
+    "mainTag": "线性代数",
+    "kind": "解答题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "求可逆矩阵 P 使 P^{-1}AP 为对角阵",
+    "statement": "设 $A=\\left(\\begin{matrix}2 & 1 & 1\\\\1 & 2 & 1\\\\1 & 1 & 2\\end{matrix}\\right)$，求可逆矩阵 $P$，使 $P^{-1}AP$ 为对角矩阵。",
+    "tags": [
+      "相似与对角化",
+      "特征值与特征向量"
+    ],
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 6,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "先求三个线性无关的特征向量",
+      "把特征向量按列排成 P，对角阵上写对应特征值"
+    ],
+    "answer": "$P=\\begin{pmatrix}1&1&1\\\\1&-1&0\\\\1&0&-1\\end{pmatrix}$，$P^{-1}AP=\\operatorname{diag}(4,1,1)$。",
+    "solution": "**步骤1**：由上一类问题的计算，$\\lambda=4$ 对应 $(1,1,1)^{\\mathrm T}$；$\\lambda=1$ 对应 $(1,-1,0)^{\\mathrm T}$ 与 $(1,0,-1)^{\\mathrm T}$，三者线性无关。\n**步骤2**：令 $P=(\\xi_1,\\xi_2,\\xi_3)$，则 $P^{-1}AP=\\operatorname{diag}(4,1,1)$。\n**结论**：$P$ 的取法不唯一（每个特征向量乘非零常数、同一特征值的特征向量可任意换基），只要三列线性无关即可。",
+    "mainTag": "线性代数",
+    "kind": "解答题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "用对角化求矩阵的高次幂",
+    "statement": "设 $A=\\left(\\begin{matrix}1 & 1\\\\0 & 2\\end{matrix}\\right)$，求 $A^{n}$（$n$ 为正整数）。",
+    "tags": [
+      "相似与对角化",
+      "矩阵运算"
+    ],
+    "thinking": 5,
+    "difficulty": 6,
+    "calc": 6,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "$A$ 的特征值为 $1,2$，可对角化",
+      "先写出 $A=P\\Lambda P^{-1}$，再算 $P\\Lambda^{n}P^{-1}$"
+    ],
+    "answer": "$A^{n}=\\begin{pmatrix}1&2^{n}-1\\\\0&2^{n}\\end{pmatrix}$。",
+    "solution": "**步骤1**：$\\lambda=1$ 对应特征向量 $(1,0)^{\\mathrm T}$；$\\lambda=2$ 对应 $(1,1)^{\\mathrm T}$。取 $P=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$，$P^{-1}=\\begin{pmatrix}1&-1\\\\0&1\\end{pmatrix}$。\n**步骤2**：$A^{n}=P\\operatorname{diag}(1,2^{n})P^{-1}=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}\\begin{pmatrix}1&0\\\\0&2^{n}\\end{pmatrix}\\begin{pmatrix}1&-1\\\\0&1\\end{pmatrix}=\\begin{pmatrix}1&2^{n}-1\\\\0&2^{n}\\end{pmatrix}$。\n**结论**：$A^{n}=\\begin{pmatrix}1&2^{n}-1\\\\0&2^{n}\\end{pmatrix}$（$n=1$ 时退化为 $A$，可自检）。",
+    "mainTag": "线性代数",
+    "kind": "解答题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "由特征值求行列式与矩阵多项式",
+    "statement": "设 3 阶矩阵 $A$ 的特征值为 $1,2,-1$，求 $|A|$、$\\operatorname{tr}(A)$ 与 $|A^{2}+E|$。",
+    "tags": [
+      "特征值与特征向量"
+    ],
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 3,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "特征值之积等于行列式，之和等于迹",
+      "$A^{2}+E$ 的特征值是 $\\lambda^{2}+1$，行列式仍是它们的乘积"
+    ],
+    "answer": "$|A|=-2$，$\\operatorname{tr}(A)=2$，$|A^{2}+E|=20$。",
+    "solution": "**步骤1**：$|A|=\\lambda_1\\lambda_2\\lambda_3=1\\cdot2\\cdot(-1)=-2$；$\\operatorname{tr}(A)=1+2-1=2$。\n**步骤2**：$A^{2}+E$ 的特征值为 $\\lambda_i^{2}+1$，即 $2,5,2$。\n**步骤3**：$|A^{2}+E|=2\\cdot5\\cdot2=20$。\n**结论**：$|A|=-2,\\ \\operatorname{tr}(A)=2,\\ |A^{2}+E|=20$。",
+    "mainTag": "线性代数",
+    "kind": "填空题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "相似矩阵的共同性质",
+    "statement": "设 $A$ 与 $B$ 相似，则下列结论中错误的是（　　）\n\n(A) $A,B$ 有相同的特征值　　(B) $|A|=|B|$\n\n(C) $A,B$ 有相同的特征向量　　(D) $r(A)=r(B)$",
+    "tags": [
+      "相似与对角化"
+    ],
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 2,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "相似意味着存在可逆 $P$ 使 $B=P^{-1}AP$",
+      "特征向量会被 $P^{-1}$ 换基，一般不再相同"
+    ],
+    "answer": "(C)。",
+    "solution": "**步骤1**：$B=P^{-1}AP\\Rightarrow |\\lambda E-B|=|P^{-1}||\\lambda E-A||P|=|\\lambda E-A|$，特征多项式相同，故 (A)(B) 正确。\n**步骤2**：乘可逆矩阵不改变秩，故 (D) 正确。\n**步骤3**：$A\\xi=\\lambda\\xi$ 时 $B(P^{-1}\\xi)=\\lambda(P^{-1}\\xi)$，特征向量是 $P^{-1}\\xi$ 而不是 $\\xi$，故 (C) 错误。\n**结论**：选 (C)。",
+    "mainTag": "线性代数",
+    "kind": "选择题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "实对称矩阵的正交相似对角化",
+    "statement": "设 $A=\\left(\\begin{matrix}2 & 1 & 1\\\\1 & 2 & 1\\\\1 & 1 & 2\\end{matrix}\\right)$，求正交矩阵 $Q$，使 $Q^{\\mathrm T}AQ$ 为对角矩阵。",
+    "tags": [
+      "相似与对角化",
+      "二次型"
+    ],
+    "thinking": 6,
+    "difficulty": 7,
+    "calc": 8,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "先求特征值与特征向量",
+      "同一特征值的特征向量用施密特正交化，再全部单位化"
+    ],
+    "answer": "$Q=\\begin{pmatrix}\\frac{1}{\\sqrt3}&\\frac{1}{\\sqrt2}&\\frac{1}{\\sqrt6}\\\\\\frac{1}{\\sqrt3}&-\\frac{1}{\\sqrt2}&\\frac{1}{\\sqrt6}\\\\\\frac{1}{\\sqrt3}&0&-\\frac{2}{\\sqrt6}\\end{pmatrix}$，$Q^{\\mathrm T}AQ=\\operatorname{diag}(4,1,1)$。",
+    "solution": "**步骤1**：特征值 $4,1,1$；$\\lambda=4$ 的特征向量 $(1,1,1)^{\\mathrm T}$ 单位化为 $\\frac{1}{\\sqrt3}(1,1,1)^{\\mathrm T}$。\n**步骤2**：$\\lambda=1$ 的两维特征子空间取 $(1,-1,0)^{\\mathrm T},(1,0,-1)^{\\mathrm T}$，施密特正交化得 $(1,-1,0)^{\\mathrm T}$ 与 $(1,1,-2)^{\\mathrm T}$，再单位化。\n**步骤3**：按列拼成 $Q$（不同特征值的特征向量自动正交，无需再处理）。\n**结论**：$Q^{\\mathrm T}AQ=\\operatorname{diag}(4,1,1)$，且 $Q^{\\mathrm T}Q=E$（可验算）。",
+    "mainTag": "线性代数",
+    "kind": "解答题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "幂等矩阵一定可对角化",
+    "statement": "设 $A$ 为 $n$ 阶矩阵且 $A^{2}=A$（$A\\neq O,\\ A\\neq E$）。证明：$A$ 可对角化，且其特征值只能是 $0$ 或 $1$。",
+    "tags": [
+      "相似与对角化",
+      "线性空间与变换"
+    ],
+    "thinking": 6,
+    "difficulty": 7,
+    "calc": 4,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "设 $\\lambda$ 是特征值，代入 $A^{2}=A$ 得 $\\lambda^{2}=\\lambda$",
+      "证明最小多项式无重根 ⇒ 可对角化；或用 $x=Ax+(x-Ax)$ 做直和分解"
+    ],
+    "answer": "特征值只能取 $0$ 或 $1$；且 $\\mathbb{R}^{n}=\\operatorname{Im}A\\oplus\\ker A$，在两组基下 $A$ 为 $\\operatorname{diag}(1,\\cdots,1,0,\\cdots,0)$。",
+    "solution": "**步骤1**：设 $A\\xi=\\lambda\\xi$（$\\xi\\neq0$），则 $A^{2}\\xi=\\lambda^{2}\\xi$，又 $A^{2}=A$ 得 $\\lambda^{2}=\\lambda$，故 $\\lambda\\in\\{0,1\\}$。\n**步骤2**：对任意 $x\\in\\mathbb{R}^{n}$，写 $x=Ax+(x-Ax)$。前者属于 $\\operatorname{Im}A$，后者满足 $A(x-Ax)=Ax-A^{2}x=0$，属于 $\\ker A$。\n**步骤3**：若 $y\\in\\operatorname{Im}A\\cap\\ker A$，则 $y=Az$ 且 $Ay=0$，于是 $y=Az=A^{2}z=Ay=0$，故 $\\operatorname{Im}A\\cap\\ker A=\\{0\\}$，即 $\\mathbb{R}^{n}=\\operatorname{Im}A\\oplus\\ker A$。\n**步骤4**：取 $\\operatorname{Im}A$ 的基与 $\\ker A$ 的基拼成 $\\mathbb{R}^{n}$ 的基，$A$ 在其上为对角阵，对角元为 $1$（在 $\\operatorname{Im}A$ 上 $Ax=x$）与 $0$。\n**结论**：$A$ 可对角化，特征值只取 $0,1$；且 $r(A)$ 等于特征值 $1$ 的重数。",
+    "mainTag": "线性代数",
+    "kind": "证明题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "满足 A^{2}=E 的矩阵",
+    "statement": "设 $A$ 为 $n$ 阶实矩阵且 $A^{2}=E$。证明：$A$ 的特征值只能是 $\\pm1$，并且 $A$ 可对角化。",
+    "tags": [
+      "相似与对角化",
+      "线性空间与变换"
+    ],
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 4,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "$A\\xi=\\lambda\\xi$ 两边乘 $A$ 得 $\\lambda^{2}=1$",
+      "用 $x=\\frac{x+Ax}{2}+\\frac{x-Ax}{2}$ 做直和分解"
+    ],
+    "answer": "特征值只能是 $\\pm1$；且 $\\mathbb{R}^{n}=\\ker(A-E)\\oplus\\ker(A+E)$，故 $A$ 可对角化。",
+    "solution": "**步骤1**：设 $A\\xi=\\lambda\\xi$，则 $\\xi=A^{2}\\xi=\\lambda^{2}\\xi$，由 $\\xi\\neq0$ 得 $\\lambda^{2}=1$，即 $\\lambda=\\pm1$。\n**步骤2**：对任意 $x$，令 $u=\\frac{x+Ax}{2},\\ v=\\frac{x-Ax}{2}$，则 $x=u+v$，且 $Au=u$（即 $u\\in\\ker(A-E)$），$Av=-v$（即 $v\\in\\ker(A+E)$）。\n**步骤3**：若 $y\\in\\ker(A-E)\\cap\\ker(A+E)$，则 $y=Ay=-y$，故 $y=0$，于是 $\\mathbb{R}^{n}=\\ker(A-E)\\oplus\\ker(A+E)$。\n**结论**：$A$ 在这两组基下为 $\\operatorname{diag}(1,\\cdots,1,-1,\\cdots,-1)$，可对角化。",
+    "mainTag": "线性代数",
+    "kind": "证明题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "可对角化的充要条件",
+    "statement": "设 3 阶矩阵 $A$ 的特征值为 $1,1,2$，则 $A$ 可相似对角化的充要条件是（　　）\n\n(A) $r(A-E)=1$　　(B) $r(A-E)=2$\n\n(C) $r(A-2E)=1$　　(D) $r(A)=2$",
+    "tags": [
+      "相似与对角化",
+      "逆矩阵与秩"
+    ],
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 3,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "二重特征值 $1$ 的几何重数必须是 2",
+      "$\\dim N(A-E)=3-r(A-E)$"
+    ],
+    "answer": "(A)。",
+    "solution": "**步骤1**：$A$ 可对角化 $\\iff$ 每个特征值的几何重数等于代数重数。$\\lambda=2$ 是单根，天然满足；只需 $\\lambda=1$（二重）的几何重数为 $2$。\n**步骤2**：$\\dim N(A-E)=3-r(A-E)$，令其等于 $2$ 得 $r(A-E)=1$。\n**结论**：选 (A)。",
+    "mainTag": "线性代数",
+    "kind": "选择题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "写出二次型的矩阵",
+    "statement": "写出二次型 $f=x_1^{2}+2x_2^{2}+5x_3^{2}+2x_1x_2-2x_1x_3+4x_2x_3$ 的矩阵 $A$，并指出 $f$ 的秩。",
+    "tags": [
+      "二次型"
+    ],
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 4,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "平方项系数放在对角线上",
+      "交叉项 $2a_{ij}x_ix_j$ 的系数要平分到 $a_{ij}$ 与 $a_{ji}$"
+    ],
+    "answer": "$A=\\left(\\begin{matrix}1 & 1 & -1\\\\1 & 2 & 2\\\\-1 & 2 & 5\\end{matrix}\\right)$，$r(f)=3$。",
+    "solution": "**步骤1**：平方项系数 $1,2,5$ 直接放对角线。\n**步骤2**：$2x_1x_2$ 对应 $a_{12}=a_{21}=1$；$-2x_1x_3$ 对应 $a_{13}=a_{31}=-1$；$4x_2x_3$ 对应 $a_{23}=a_{32}=2$。\n**步骤3**：$|A|=1\\neq0$，故 $r(f)=3$。\n**结论**：$A=\\left(\\begin{matrix}1 & 1 & -1\\\\1 & 2 & 2\\\\-1 & 2 & 5\\end{matrix}\\right)$，秩为 $3$（满秩二次型）。",
+    "mainTag": "线性代数",
+    "kind": "填空题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "正交变换化二次型为标准形",
+    "statement": "用正交变换把二次型 $f=x_1^{2}+2x_1x_2+x_2^{2}+2x_3^{2}$ 化为标准形，并写出所用的正交矩阵。",
+    "tags": [
+      "二次型",
+      "相似与对角化"
+    ],
+    "thinking": 6,
+    "difficulty": 6,
+    "calc": 7,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "先写出二次型矩阵，再求特征值与单位特征向量",
+      "标准形的系数就是特征值，正交矩阵由单位特征向量按列拼成"
+    ],
+    "answer": "标准形 $f=2y_1^{2}+2y_2^{2}$（其中 $\\lambda=0,2,2$），可取 $Q=\\begin{pmatrix}\\frac{1}{\\sqrt2}&0&\\frac{1}{\\sqrt2}\\\\\\frac{1}{\\sqrt2}&0&-\\frac{1}{\\sqrt2}\\\\0&1&0\\end{pmatrix}$。",
+    "solution": "**步骤1**：$A=\\left(\\begin{matrix}1 & 1 & 0\\\\1 & 1 & 0\\\\0 & 0 & 2\\end{matrix}\\right)$，$|\\lambda E-A|=\\lambda(\\lambda-2)^{2}$，特征值 $0,2,2$。\n**步骤2**：$\\lambda=0$ 对应 $(1,-1,0)^{\\mathrm T}$；$\\lambda=2$ 的特征子空间为 $x_1+x_2=0$ 之外的两维空间，取 $(1,1,0)^{\\mathrm T}$ 与 $(0,0,1)^{\\mathrm T}$ 并正交化。\n**步骤3**：单位化后按列拼成 $Q$，作正交变换 $x=Qy$，则 $f=2y_1^{2}+2y_2^{2}$（正惯性指数为 $2$）。\n**结论**：标准形与 $Q$ 的取法都不唯一（同一特征值的特征向量可换基），但特征值集合与惯性指数唯一。",
+    "mainTag": "线性代数",
+    "kind": "解答题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "配方法化二次型为标准形",
+    "statement": "用配方法把二次型 $f=x_1^{2}+4x_1x_2+3x_2^{2}+2x_3^{2}$ 化为标准形，并写出所用的可逆线性变换。",
+    "tags": [
+      "二次型"
+    ],
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 5,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "把含 $x_1$ 的项凑成完全平方",
+      "剩余部分对 $x_2$ 再配方，注意变换必须可逆"
+    ],
+    "answer": "$f=y_1^{2}-y_2^{2}+2y_3^{2}$，其中 $y_1=x_1+2x_2,\\ y_2=x_2,\\ y_3=x_3$；正惯性指数 $2$，负惯性指数 $1$。",
+    "solution": "**步骤1**：$f=(x_1^{2}+4x_1x_2+4x_2^{2})-x_2^{2}+2x_3^{2}=(x_1+2x_2)^{2}-x_2^{2}+2x_3^{2}$。\n**步骤2**：令 $y_1=x_1+2x_2,\\ y_2=x_2,\\ y_3=x_3$，该变换的矩阵行列式为 $1\\neq0$，可逆。\n**步骤3**：得标准形 $f=y_1^{2}-y_2^{2}+2y_3^{2}$，正负惯性指数为 $(2,1)$。\n**结论**：标准形 $y_1^{2}-y_2^{2}+2y_3^{2}$，规范形为 $z_1^{2}+z_2^{2}-z_3^{2}$。",
+    "mainTag": "线性代数",
+    "kind": "解答题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "用顺序主子式判定正定",
+    "statement": "判定二次型 $f=2x_1^{2}+2x_2^{2}+2x_3^{2}-2x_1x_2-2x_2x_3$ 是否正定。",
+    "tags": [
+      "二次型"
+    ],
+    "thinking": 3,
+    "difficulty": 4,
+    "calc": 4,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "写出矩阵，算三个顺序主子式",
+      "全部大于零即为正定"
+    ],
+    "answer": "正定。顺序主子式为 $2,\\ 3,\\ 4$，均大于零。",
+    "solution": "**步骤1**：$A=\\left(\\begin{matrix}2 & -1 & 0\\\\-1 & 2 & -1\\\\0 & -1 & 2\\end{matrix}\\right)$。\n**步骤2**：$\\Delta_1=2>0$，$\\Delta_2=\\begin{vmatrix}2&-1\\\\-1&2\\end{vmatrix}=3>0$，$\\Delta_3=|A|=4>0$。\n**结论**：三个顺序主子式全为正，故 $A$ 正定，$f$ 正定（且 $f$ 的规范形为 $z_1^2+z_2^2+z_3^2$）。",
+    "mainTag": "线性代数",
+    "kind": "解答题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "由正定性求参数范围",
+    "statement": "设二次型 $f=x_1^{2}+ax_2^{2}+2x_3^{2}+2x_1x_2$ 正定，求 $a$ 的取值范围。",
+    "tags": [
+      "二次型"
+    ],
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 4,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "写出矩阵，注意交叉项系数要除以 2",
+      "三个顺序主子式都必须大于零"
+    ],
+    "answer": "$a>1$。",
+    "solution": "**步骤1**：$A=\\left(\\begin{matrix}1 & 1 & 0\\\\1 & a & 0\\\\0 & 0 & 2\\end{matrix}\\right)$。\n**步骤2**：$\\Delta_1=1>0$；$\\Delta_2=a-1>0$；$\\Delta_3=2(a-1)>0$。\n**结论**：$\\Delta_2>0$ 已蕴含 $\\Delta_3>0$，故 $a>1$。",
+    "mainTag": "线性代数",
+    "kind": "填空题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "求惯性指数与规范形",
+    "statement": "求二次型 $f=2x_1x_2+2x_1x_3-2x_2x_3$ 的正、负惯性指数，并写出其规范形。",
+    "tags": [
+      "二次型"
+    ],
+    "thinking": 5,
+    "difficulty": 6,
+    "calc": 6,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "先写出矩阵（对角线全为 0）",
+      "求特征值，正负个数就是惯性指数"
+    ],
+    "answer": "正惯性指数 $1$，负惯性指数 $2$，规范形 $z_1^{2}-z_2^{2}-z_3^{2}$。",
+    "solution": "**步骤1**：$A=\\left(\\begin{matrix}0 & 1 & 1\\\\1 & 0 & -1\\\\1 & -1 & 0\\end{matrix}\\right)$，$|\\lambda E-A|=\\left(l - 1\\right)^{2} \\left(l + 2\\right)$，特征值 $2,-1,-1$。\n**步骤2**：正特征值 $1$ 个、负特征值 $2$ 个，故 $p=1,\\ q=2$，$r=3$。\n**结论**：规范形为 $z_1^{2}-z_2^{2}-z_3^{2}$。",
+    "mainTag": "线性代数",
+    "kind": "解答题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "合同但不相似的判定",
+    "statement": "设 $A=\\operatorname{diag}(1,1,-1)$，$B=\\operatorname{diag}(2,2,-1)$，则 $A$ 与 $B$（　　）\n\n(A) 合同但不相似　　(B) 相似但不合同\n\n(C) 既合同又相似　　(D) 既不合同也不相似",
+    "tags": [
+      "二次型",
+      "相似与对角化"
+    ],
+    "thinking": 4,
+    "difficulty": 5,
+    "calc": 3,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "合同看正负惯性指数是否相同",
+      "相似看特征值是否完全相同"
+    ],
+    "answer": "(A)。",
+    "solution": "**步骤1**：$A$ 的正负惯性指数为 $(2,1)$；$B$ 的特征值 $2,2,-1$，正负惯性指数也是 $(2,1)$。两个实对称矩阵惯性指数相同 $\\iff$ 合同，故合同。\n**步骤2**：$A$ 的特征值为 $1,1,-1$，$B$ 为 $2,2,-1$，特征值不全相同，故不相似（相似必特征值相同）。\n**结论**：选 (A)。",
+    "mainTag": "线性代数",
+    "kind": "选择题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "二次型在单位球面上的最值",
+    "statement": "设 $A=\\left(\\begin{matrix}2 & 1 & 1\\\\1 & 2 & 1\\\\1 & 1 & 2\\end{matrix}\\right)$，求二次型 $f(x)=x^{\\mathrm T}Ax$ 在条件 $\\|x\\|=1$ 下的最大值与最小值。",
+    "tags": [
+      "二次型",
+      "特征值与特征向量"
+    ],
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 5,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "单位球面上的极值就是最大、最小特征值",
+      "对应特征向量是取到极值的点"
+    ],
+    "answer": "最大值为 $4$（在 $x=\\pm\\frac{1}{\\sqrt3}(1,1,1)^{\\mathrm T}$ 处取到），最小值为 $1$。",
+    "solution": "**步骤1**：实对称矩阵在 $\\|x\\|=1$ 上的瑞利商 $x^{\\mathrm T}Ax$ 的取值范围是 $[\\lambda_{\\min},\\lambda_{\\max}]$。\n**步骤2**：$A$ 的特征值为 $4,1,1$，故最大值 $4$、最小值 $1$。\n**步骤3**：最大值在属于 $4$ 的单位特征向量处取到，即 $\\pm\\frac{1}{\\sqrt3}(1,1,1)^{\\mathrm T}$；最小值在整个二维特征子空间中取到。\n**结论**：最大 $4$，最小 $1$。",
+    "mainTag": "线性代数",
+    "kind": "填空题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "由二次型的秩求参数",
+    "statement": "已知二次型 $f=x_1^{2}+2x_2^{2}+ax_3^{2}+2x_1x_2$ 的秩为 $2$，求 $a$。",
+    "tags": [
+      "二次型"
+    ],
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 3,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "二次型的秩就是其矩阵的秩",
+      "矩阵是分块对角，$2\\times2$ 块满秩，故只能靠 $a$ 降秩"
+    ],
+    "answer": "$a=0$。",
+    "solution": "**步骤1**：$A=\\left(\\begin{matrix}1 & 1 & 0\\\\1 & 2 & 0\\\\0 & 0 & a\\end{matrix}\\right)$，左上 $2\\times2$ 块行列式为 $1$，已满秩。\n**步骤2**：$r(A)=2\\iff a=0$（此时第三列全零）。\n**结论**：$a=0$。",
+    "mainTag": "线性代数",
+    "kind": "填空题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "正定矩阵的分解刻画",
+    "statement": "设 $A$ 为 $n$ 阶实对称矩阵。证明：$A$ 正定 $\\iff$ 存在可逆矩阵 $C$，使 $A=C^{\\mathrm T}C$。",
+    "tags": [
+      "二次型",
+      "线性空间与变换"
+    ],
+    "thinking": 6,
+    "difficulty": 7,
+    "calc": 4,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "正定 ⇒ 存在正交矩阵 $Q$ 使 $A=Q\\Lambda Q^{\\mathrm T}$，把 $\\sqrt{\\lambda}$ 提出去",
+      "反方向用 $x^{\\mathrm T}C^{\\mathrm T}Cx=\\|Cx\\|^{2}$ 与 $C$ 可逆"
+    ],
+    "answer": "$A$ 正定 $\\iff$ 存在可逆 $C$ 使 $A=C^{\\mathrm T}C$：正向取 $C=\\Lambda^{1/2}Q^{\\mathrm T}$；反之 $\\|Cx\\|^{2}\\geqslant0$ 且等号仅在 $x=0$ 成立。",
+    "solution": "**步骤1**（$\\Rightarrow$）：$A$ 正定 $\\Rightarrow$ 存在正交矩阵 $Q$ 使 $Q^{\\mathrm T}AQ=\\Lambda=\\operatorname{diag}(\\lambda_1,\\cdots,\\lambda_n)$，$\\lambda_i>0$。令 $P=\\Lambda^{1/2}Q^{\\mathrm T}$，则 $P$ 可逆且 $A=P^{\\mathrm T}P$，取 $C=P$ 即可。\n**步骤2**（$\\Leftarrow$）：若 $A=C^{\\mathrm T}C$ 且 $C$ 可逆，则对任意 $x\\neq0$，$x^{\\mathrm T}Ax=\\|Cx\\|^{2}>0$（$Cx\\neq0$），故 $A$ 正定。\n**结论**：正定性等价于「$A$ 是某个可逆矩阵的 Gram 矩阵」；顺带可得 $|A|=|C|^{2}>0$，这也是正定的必要条件之一。",
+    "mainTag": "线性代数",
+    "kind": "证明题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "线性子空间的判定",
+    "statement": "下列 $\\mathbb{R}^{3}$ 的子集中，对加法和数乘封闭（即构成子空间）的是（　　）\n\n(A) $\\{(x,y,z)\\mid x+y+z=1\\}$　　(B) $\\{(x,y,z)\\mid x=y\\}$\n\n(C) $\\{(x,y,z)\\mid x^{2}+y^{2}=1\\}$　　(D) $\\{(x,y,z)\\mid x,y,z\\text{ 均为整数}\\}$",
+    "tags": [
+      "线性空间与变换"
+    ],
+    "thinking": 4,
+    "difficulty": 4,
+    "calc": 3,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "子空间必须含零向量，且对加法与数乘封闭",
+      "整数集合对数乘不封闭（乘 $\\frac12$ 就出界）"
+    ],
+    "answer": "(B)。",
+    "solution": "**步骤1**：(A) 不含零向量（$0+0+0\\neq1$），直接排除。\n**步骤2**：(C) 是圆柱面 $x^{2}+y^{2}=1$，不含零向量，且两点的和一般不在其上，对加法不封闭，排除。\n**步骤3**：(D) 取整数向量 $(1,0,0)$ 乘 $\\frac12$ 得 $(\\frac12,0,0)$，不再是整数向量，对数乘不封闭，排除。\n**步骤4**：(B) 即平面 $x-y=0$，它是齐次线性方程组 $x-y=0$ 的解集，任取两点之和、任一点乘任意实数仍满足该方程，故是子空间（$\\dim=2$）。\n**结论**：选 (B)。",
+    "mainTag": "线性代数",
+    "kind": "选择题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "线性变换在标准基下的矩阵",
+    "statement": "设线性变换 $T:\\mathbb{R}^{3}\\to\\mathbb{R}^{2}$ 定义为 $T(x_1,x_2,x_3)=(2x_1-x_2,\\ x_1+x_3)$，求 $T$ 在标准基下的矩阵。",
+    "tags": [
+      "线性空间与变换",
+      "矩阵运算"
+    ],
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 3,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "求 $T(e_1),T(e_2),T(e_3)$",
+      "把它们的坐标按列排成矩阵"
+    ],
+    "answer": "$T$ 的矩阵为 $\\left(\\begin{matrix}2 & -1 & 0\\\\1 & 0 & 1\\end{matrix}\\right)$。",
+    "solution": "**步骤1**：$T(e_1)=(2,1)^{\\mathrm T}$，$T(e_2)=(-1,0)^{\\mathrm T}$，$T(e_3)=(0,1)^{\\mathrm T}$。\n**步骤2**：按列排成 $2\\times3$ 矩阵即得。\n**结论**：$\\left(\\begin{matrix}2 & -1 & 0\\\\1 & 0 & 1\\end{matrix}\\right)$，即 $T(x)=Ax$。",
+    "mainTag": "线性代数",
+    "kind": "填空题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "求线性变换的核与像",
+    "statement": "设线性变换 $T(x)=Ax$，其中 $A=\\left(\\begin{matrix}1 & 2 & 3\\\\2 & 4 & 6\\\\1 & 0 & 1\\end{matrix}\\right)$。求 $\\ker T$ 与 $\\operatorname{Im}T$ 的维数，并各给出一组基。",
+    "tags": [
+      "线性空间与变换",
+      "向量组"
+    ],
+    "thinking": 5,
+    "difficulty": 5,
+    "calc": 6,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "$\\dim\\ker T=n-r(A)$，$\\dim\\operatorname{Im}T=r(A)$",
+      "核的基就是 $Ax=0$ 的基础解系，像的基是 $A$ 的列向量组的极大无关组"
+    ],
+    "answer": "$\\dim\\ker T=1$，基 $(-1,-1,1)^{\\mathrm T}$；$\\dim\\operatorname{Im}T=2$，基 $(1,2,1)^{\\mathrm T},(3,6,1)^{\\mathrm T}$。",
+    "solution": "**步骤1**：第 2 行是第 1 行的 $2$ 倍，故 $r(A)=2$。\n**步骤2**：$\\dim\\ker T=3-2=1$；解 $Ax=0$ 得基础解系 $(-1,-1,1)^{\\mathrm T}$。\n**步骤3**：$\\dim\\operatorname{Im}T=r(A)=2$，第 1、3 列线性无关，构成像的基。\n**结论**：$\\ker T$ 与 $\\operatorname{Im}T$ 的维数之和为 $3$，符合秩-零度定理。",
+    "mainTag": "线性代数",
+    "kind": "解答题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "判定可逆并求逆变换",
+    "statement": "设 $T:\\mathbb{R}^{2}\\to\\mathbb{R}^{2}$，$T(x_1,x_2)=(x_1+x_2,\\ x_1-x_2)$。判断 $T$ 是否可逆；若可逆，求 $T^{-1}$ 的表达式与矩阵。",
+    "tags": [
+      "线性空间与变换"
+    ],
+    "thinking": 3,
+    "difficulty": 4,
+    "calc": 4,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "看表示矩阵的行列式是否为零",
+      "可逆时逆变换的矩阵就是矩阵的逆"
+    ],
+    "answer": "$T$ 可逆，$T^{-1}(y_1,y_2)=\\left(\\frac{y_1+y_2}{2},\\ \\frac{y_1-y_2}{2}\\right)$，矩阵为 $\\frac12\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}$。",
+    "solution": "**步骤1**：$T$ 的矩阵 $A=\\left(\\begin{matrix}1 & 1\\\\1 & -1\\end{matrix}\\right)$，$|A|=-2\\neq0$，故 $T$ 可逆。\n**步骤2**：$A^{-1}=\\left[\\begin{matrix}\\frac{1}{2} & \\frac{1}{2}\\\\\\frac{1}{2} & - \\frac{1}{2}\\end{matrix}\\right]$。\n**结论**：$T^{-1}(y)=A^{-1}y=\\left(\\frac{y_1+y_2}{2},\\frac{y_1-y_2}{2}\\right)$。可验算 $T(T^{-1}(y))=(y_1,y_2)$。",
+    "mainTag": "线性代数",
+    "kind": "解答题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "线性变换把子空间映成子空间",
+    "statement": "设 $T$ 是线性空间 $V$ 上的线性变换，$W$ 是 $V$ 的子空间。证明：$T(W)=\\{T(w)\\mid w\\in W\\}$ 是 $V$ 的子空间，且 $\\dim T(W)\\leqslant\\dim W$。",
+    "tags": [
+      "线性空间与变换"
+    ],
+    "thinking": 5,
+    "difficulty": 6,
+    "calc": 4,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "子空间三条件：含零、对加法封闭、对数乘封闭",
+      "维数不等式用「把 $W$ 的基映过去，像空间由它们的像张成」"
+    ],
+    "answer": "$T(W)$ 是子空间：含 $T(0)=0$，对加法与数乘封闭；若 $w_1,\\cdots,w_k$ 是 $W$ 的基，则 $T(W)=\\operatorname{span}\\{T(w_i)\\}$，故维数不超过 $k$。",
+    "solution": "**步骤1**：$0\\in W$，故 $T(0)=0\\in T(W)$。\n**步骤2**：设 $u=T(w_1),v=T(w_2)\\in T(W)$，$\\lambda\\in\\mathbb{R}$，则 $u+v=T(w_1+w_2)\\in T(W)$（因 $W$ 对加法封闭），$\\lambda u=T(\\lambda w_1)\\in T(W)$（因 $W$ 对数乘封闭）。\n**步骤3**：设 $\\dim W=k$，取基 $w_1,\\cdots,w_k$，则任意 $w=\\sum a_iw_i$ 的像 $T(w)=\\sum a_iT(w_i)$，即 $T(W)=\\operatorname{span}\\{T(w_1),\\cdots,T(w_k)\\}$，由 $k$ 个向量张成，维数不超过 $k$。\n**结论**：$T(W)$ 是子空间，且 $\\dim T(W)\\leqslant\\dim W$（等号当且仅当 $T$ 在 $W$ 上单射）。",
+    "mainTag": "线性代数",
+    "kind": "证明题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "多项式空间上微分算子的矩阵",
+    "statement": "设 $P_2=\\{a_0+a_1x+a_2x^{2}\\}$，取基 $1,x,x^{2}$。求微分变换 $D(f)=f'$ 在该基下的矩阵，并写出 $D$ 的核与像。",
+    "tags": [
+      "线性空间与变换"
+    ],
+    "thinking": 4,
+    "difficulty": 5,
+    "calc": 5,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "逐个求基向量的像，再写成坐标向量按列排",
+      "核就是导数为零的多项式（常数）"
+    ],
+    "answer": "$D$ 的矩阵为 $\\begin{pmatrix}0&1&0\\\\0&0&2\\\\0&0&0\\end{pmatrix}$；$\\ker D=\\operatorname{span}\\{1\\}$，$\\operatorname{Im}D=\\operatorname{span}\\{1,x\\}$。",
+    "solution": "**步骤1**：$D(1)=0$，$D(x)=1$，$D(x^{2})=2x$。\n**步骤2**：坐标分别为 $(0,0,0)^{\\mathrm T},(1,0,0)^{\\mathrm T},(0,2,0)^{\\mathrm T}$，按列排得矩阵。\n**步骤3**：$\\ker D$ 由 $a_1+2a_2x=0$ 得 $a_1=a_2=0$，即常数；像由 $\\{1,2x\\}$ 张成。\n**结论**：$\\dim\\ker D=1$、$\\dim\\operatorname{Im}D=2$，和为 $3$，符合秩-零度定理。",
+    "mainTag": "线性代数",
+    "kind": "解答题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "基变换与坐标变换",
+    "statement": "在 $\\mathbb{R}^{2}$ 中取两组基：$e_1=(1,0)^{\\mathrm T},e_2=(0,1)^{\\mathrm T}$ 与 $\\alpha_1=(1,1)^{\\mathrm T},\\alpha_2=(1,-1)^{\\mathrm T}$。求从基 $e$ 到基 $\\alpha$ 的过渡矩阵，并求向量 $x=(3,1)^{\\mathrm T}$ 在基 $\\alpha$ 下的坐标。",
+    "tags": [
+      "线性空间与变换"
+    ],
+    "thinking": 4,
+    "difficulty": 5,
+    "calc": 5,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "过渡矩阵 $P$ 满足 $(\\alpha_1,\\alpha_2)=(e_1,e_2)P$",
+      "坐标之间是 $x=P y$，所以 $y=P^{-1}x$"
+    ],
+    "answer": "过渡矩阵 $P=\\left(\\begin{matrix}1 & 1\\\\1 & -1\\end{matrix}\\right)$，$x$ 在基 $\\alpha$ 下的坐标为 $(2,1)^{\\mathrm T}$。",
+    "solution": "**步骤1**：$\\alpha_1=e_1+e_2,\\ \\alpha_2=e_1-e_2$，故 $P=\\left(\\begin{matrix}1 & 1\\\\1 & -1\\end{matrix}\\right)$。\n**步骤2**：$x=(e_1,e_2)x=(\\alpha_1,\\alpha_2)P^{-1}x$，即 $y=P^{-1}x$。\n**步骤3**：$P^{-1}=\\left[\\begin{matrix}\\frac{1}{2} & \\frac{1}{2}\\\\\\frac{1}{2} & - \\frac{1}{2}\\end{matrix}\\right]$，故 $y=P^{-1}(3,1)^{\\mathrm T}=(2,1)^{\\mathrm T}$。\n**结论**：$x=2\\alpha_1+\\alpha_2$（直接验算：$(2,2)+(1,-1)=(3,1)$）。",
+    "mainTag": "线性代数",
+    "kind": "解答题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "复合变换的核维数估计",
+    "statement": "设 $S,T$ 都是 $n$ 维线性空间 $V$ 上的线性变换。证明：$\\dim\\ker(ST)\\leqslant\\dim\\ker S+\\dim\\ker T$。",
+    "tags": [
+      "线性空间与变换"
+    ],
+    "thinking": 6,
+    "difficulty": 7,
+    "calc": 4,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "把 $\\ker(ST)$ 拆成「落在 $\\ker T$ 里的部分」与「$T$ 的像落在 $\\ker S$ 里的部分」",
+      "对 $T$ 在 $\\ker(ST)$ 上的限制用秩-零度定理"
+    ],
+    "answer": "$\\dim\\ker(ST)\\leqslant\\dim\\ker S+\\dim\\ker T$：把 $\\ker(ST)$ 拆成落在 $\\ker T$ 的部分与其余部分，其余部分的像落在 $\\ker S\\cap\\operatorname{Im}T$ 中，维数不超过 $\\dim\\ker S$。",
+    "solution": "**步骤1**：记 $V_1=\\ker(ST)\\cap\\ker T$，$V_2$ 为 $\\ker(ST)$ 中 $V_1$ 的补子空间，则 $\\dim\\ker(ST)=\\dim V_1+\\dim V_2$，且 $\\dim V_1\\leqslant\\dim\\ker T$。\n**步骤2**：对 $x\\in V_2$（$x\\neq0$），$Tx\\neq0$ 且 $S(Tx)=(ST)x=0$，故 $T$ 把 $V_2$ 单射地映入 $\\ker S$，于是 $\\dim V_2\\leqslant\\dim\\ker S$。\n**结论**：两式相加即得 $\\dim\\ker(ST)\\leqslant\\dim\\ker S+\\dim\\ker T$。",
+    "mainTag": "线性代数",
+    "kind": "证明题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "矩阵空间的维数",
+    "statement": "设 $V=\\{A\\in\\mathbb{R}^{2\\times2}\\}$ 为全体二阶实矩阵构成的空间，$V_1$ 为二阶对称矩阵全体，$V_2$ 为二阶反对称矩阵全体。求 $\\dim V,\\ \\dim V_1,\\ \\dim V_2$。",
+    "tags": [
+      "线性空间与变换"
+    ],
+    "thinking": 3,
+    "difficulty": 3,
+    "calc": 3,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "二阶矩阵有 4 个独立元素",
+      "对称矩阵对角元独立、非对角元相同；反对称矩阵对角元必为零"
+    ],
+    "answer": "$\\dim V=4$，$\\dim V_1=3$，$\\dim V_2=1$。",
+    "solution": "**步骤1**：$\\mathbb{R}^{2\\times2}$ 的标准基是 $E_{11},E_{12},E_{21},E_{22}$，故 $\\dim V=4$。\n**步骤2**：对称矩阵由 $a_{11},a_{22},a_{12}(=a_{21})$ 三个参数决定，故 $\\dim V_1=3$。\n**步骤3**：反对称矩阵形如 $\\begin{pmatrix}0&a\\\\-a&0\\end{pmatrix}$，故 $\\dim V_2=1$。\n**结论**：$4=3+1$，且 $V=V_1\\oplus V_2$（任一矩阵可唯一分解为对称部分与反对称部分）。",
+    "mainTag": "线性代数",
+    "kind": "填空题",
+    "authorName": "题库组"
+  },
+  {
+    "title": "子空间维数公式的应用",
+    "statement": "在 $\\mathbb{R}^{3}$ 中，$U=\\operatorname{span}\\{(1,0,1)^{\\mathrm T},(0,1,0)^{\\mathrm T}\\}$，$W=\\operatorname{span}\\{(1,1,1)^{\\mathrm T}\\}$。求 $\\dim(U+W)$ 与 $\\dim(U\\cap W)$。",
+    "tags": [
+      "线性空间与变换",
+      "向量组"
+    ],
+    "thinking": 3,
+    "difficulty": 4,
+    "calc": 3,
+    "source": "考研题型改写 · 数据自拟",
+    "hints": [
+      "先看 $W$ 的生成向量是否已经落在 $U$ 里",
+      "用 $\\dim(U+W)=\\dim U+\\dim W-\\dim(U\\cap W)$ 校验"
+    ],
+    "answer": "$\\dim(U+W)=2$，$\\dim(U\\cap W)=1$。",
+    "solution": "**步骤1**：$U=\\{(a,b,a)^{\\mathrm T}\\}$，而 $(1,1,1)^{\\mathrm T}$ 满足「首末分量相等」，故 $(1,1,1)^{\\mathrm T}\\in U$，即 $W\\subseteq U$。\n**步骤2**：于是 $U+W=U$，$\\dim(U+W)=\\dim U=2$；$U\\cap W=W$，$\\dim(U\\cap W)=1$。\n**结论**：$\\dim(U+W)=2,\\ \\dim(U\\cap W)=1$，代入维数公式 $2+1-1=2$ 校验成立。",
+    "mainTag": "线性代数",
+    "kind": "填空题",
+    "authorName": "题库组"
+  }
+]
