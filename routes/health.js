@@ -76,7 +76,12 @@ module.exports = function registerHealthRoutes(router, ctx) {
   /* ---- 站点信息 ---- */
   if (pathname === '/api/meta' && method === 'GET') {
     const approved = db.problems.filter((p) => p.status === 'approved');
-    const solvedTotal = db.users.reduce((s, u) => s + Object.keys(u.solved || {}).length, 0);
+    /* 做题数必须和「人数」同口径：只统计非 hidden 的账号。
+       否则会出现「1 位同学做了 10 题」这种自相矛盾的首页数字
+       ——那 10 题其实是压测/冒烟脚本建的测试号做的。 */
+    const solvedTotal = db.users
+      .filter((u) => !u.hidden)
+      .reduce((s, u) => s + Object.keys(u.solved || {}).length, 0);
     const counts = subjectCounts();
     return send(res, 200, {
       ok: true,
