@@ -1,0 +1,2562 @@
+[
+ {
+  "title": "耦合振子（m=1 kg，k=20，k_c=10）的简正模频率之比",
+  "statement": "两个质量均为 $m=1\\ \\mathrm{kg}$ 的振子分别用劲度 $k=20\\ \\mathrm{N/m}$ 的弹簧连到固定壁上，两振子之间再用劲度 $k_c=10\\ \\mathrm{N/m}$ 的弹簧相连，只能在一条直线上运动。求高频与低频简正模角频率之比。",
+  "mainTag": "理论力学",
+  "tags": [
+   "小振动与简正模"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 耦合振子的简正模",
+  "hints": [
+   "写出拉格朗日量，用简正坐标 $x_1\\pm x_2$ 解耦。",
+   "耦合弹簧对简正频率贡献 $2k_c$。"
+  ],
+  "answer": "1.41",
+  "solution": "两个相同振子（质量 $m$、各自与墙用劲度 $k$ 的弹簧相连，彼此用劲度 $k_c$ 的弹簧耦合）的拉格朗日量为\n$$L=\\frac12m\\left(\\dot x_1^2+\\dot x_2^2\\right)-\\frac12k\\left(x_1^2+x_2^2\\right)-\\frac12k_c\\left(x_1-x_2\\right)^2.$$\n\n引入简正坐标 $q_\\pm=\\left(x_1\\pm x_2\\right)/\\sqrt2$，方程组解耦：\n$$m\\ddot q_+=kq_+\\ \\Longrightarrow\\ \\omega_+=\\sqrt{\\frac{k}{m}},$$\n$$m\\ddot q_-=\\left(k+2k_c\\right)q_-\\ \\Longrightarrow\\ \\omega_-=\\sqrt{\\frac{k+2k_c}{m}}.$$\n\n代入 $m=1\\ \\mathrm{kg}$、$k=20\\ \\mathrm{N/m}$、$k_c=10\\ \\mathrm{N/m}$：\n$$\\omega_+=4.47\\ \\mathrm{rad/s},\\qquad \\omega_-=6.32\\ \\mathrm{rad/s},\\qquad \\frac{\\omega_-}{\\omega_+}=1.41.$$\n\n**物理图像**：低频模两振子同相（中间弹簧长度不变，等效劲度仍为 $k$）；高频模反相（中间弹簧被压缩/拉伸，附加劲度 $2k_c$）。\n\n**易错点**：耦合项贡献的是 $2k_c$ 而不是 $k_c$——因为相对位移 $x_1-x_2$ 在两个振子上都产生回复力。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "拉格朗日方程",
+    "简正模"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 耦合振子的简正模"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "耦合振子（m=2 kg，k=80，k_c=5）的低频简正模频率",
+  "statement": "两个质量均为 $m=2\\ \\mathrm{kg}$ 的振子分别用劲度 $k=80\\ \\mathrm{N/m}$ 的弹簧连到固定壁上，两振子之间再用劲度 $k_c=5\\ \\mathrm{N/m}$ 的弹簧相连，只能在一条直线上运动。求两个振子同相振动时（低频简正模）的角频率。",
+  "mainTag": "理论力学",
+  "tags": [
+   "小振动与简正模"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 耦合振子的简正模",
+  "hints": [
+   "写出拉格朗日量，用简正坐标 $x_1\\pm x_2$ 解耦。",
+   "耦合弹簧对简正频率贡献 $2k_c$。"
+  ],
+  "answer": "6.32\\ \\mathrm{rad/s}",
+  "solution": "两个相同振子（质量 $m$、各自与墙用劲度 $k$ 的弹簧相连，彼此用劲度 $k_c$ 的弹簧耦合）的拉格朗日量为\n$$L=\\frac12m\\left(\\dot x_1^2+\\dot x_2^2\\right)-\\frac12k\\left(x_1^2+x_2^2\\right)-\\frac12k_c\\left(x_1-x_2\\right)^2.$$\n\n引入简正坐标 $q_\\pm=\\left(x_1\\pm x_2\\right)/\\sqrt2$，方程组解耦：\n$$m\\ddot q_+=kq_+\\ \\Longrightarrow\\ \\omega_+=\\sqrt{\\frac{k}{m}},$$\n$$m\\ddot q_-=\\left(k+2k_c\\right)q_-\\ \\Longrightarrow\\ \\omega_-=\\sqrt{\\frac{k+2k_c}{m}}.$$\n\n代入 $m=2\\ \\mathrm{kg}$、$k=80\\ \\mathrm{N/m}$、$k_c=5\\ \\mathrm{N/m}$：\n$$\\omega_+=6.32\\ \\mathrm{rad/s},\\qquad \\omega_-=6.71\\ \\mathrm{rad/s},\\qquad \\frac{\\omega_-}{\\omega_+}=1.06.$$\n\n**物理图像**：低频模两振子同相（中间弹簧长度不变，等效劲度仍为 $k$）；高频模反相（中间弹簧被压缩/拉伸，附加劲度 $2k_c$）。\n\n**易错点**：耦合项贡献的是 $2k_c$ 而不是 $k_c$——因为相对位移 $x_1-x_2$ 在两个振子上都产生回复力。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "rad/s",
+   "methods": [
+    "拉格朗日方程",
+    "简正模"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 耦合振子的简正模"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "耦合振子（m=2 kg，k=20，k_c=10）的低频简正模频率",
+  "statement": "两个质量均为 $m=2\\ \\mathrm{kg}$ 的振子分别用劲度 $k=20\\ \\mathrm{N/m}$ 的弹簧连到固定壁上，两振子之间再用劲度 $k_c=10\\ \\mathrm{N/m}$ 的弹簧相连，只能在一条直线上运动。求两个振子同相振动时（低频简正模）的角频率。",
+  "mainTag": "理论力学",
+  "tags": [
+   "小振动与简正模"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 耦合振子的简正模",
+  "hints": [
+   "写出拉格朗日量，用简正坐标 $x_1\\pm x_2$ 解耦。",
+   "耦合弹簧对简正频率贡献 $2k_c$。"
+  ],
+  "answer": "3.16\\ \\mathrm{rad/s}",
+  "solution": "两个相同振子（质量 $m$、各自与墙用劲度 $k$ 的弹簧相连，彼此用劲度 $k_c$ 的弹簧耦合）的拉格朗日量为\n$$L=\\frac12m\\left(\\dot x_1^2+\\dot x_2^2\\right)-\\frac12k\\left(x_1^2+x_2^2\\right)-\\frac12k_c\\left(x_1-x_2\\right)^2.$$\n\n引入简正坐标 $q_\\pm=\\left(x_1\\pm x_2\\right)/\\sqrt2$，方程组解耦：\n$$m\\ddot q_+=kq_+\\ \\Longrightarrow\\ \\omega_+=\\sqrt{\\frac{k}{m}},$$\n$$m\\ddot q_-=\\left(k+2k_c\\right)q_-\\ \\Longrightarrow\\ \\omega_-=\\sqrt{\\frac{k+2k_c}{m}}.$$\n\n代入 $m=2\\ \\mathrm{kg}$、$k=20\\ \\mathrm{N/m}$、$k_c=10\\ \\mathrm{N/m}$：\n$$\\omega_+=3.16\\ \\mathrm{rad/s},\\qquad \\omega_-=4.47\\ \\mathrm{rad/s},\\qquad \\frac{\\omega_-}{\\omega_+}=1.41.$$\n\n**物理图像**：低频模两振子同相（中间弹簧长度不变，等效劲度仍为 $k$）；高频模反相（中间弹簧被压缩/拉伸，附加劲度 $2k_c$）。\n\n**易错点**：耦合项贡献的是 $2k_c$ 而不是 $k_c$——因为相对位移 $x_1-x_2$ 在两个振子上都产生回复力。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "rad/s",
+   "methods": [
+    "拉格朗日方程",
+    "简正模"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 耦合振子的简正模"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "耦合振子（m=2 kg，k=10，k_c=20）的简正模频率之比",
+  "statement": "两个质量均为 $m=2\\ \\mathrm{kg}$ 的振子分别用劲度 $k=10\\ \\mathrm{N/m}$ 的弹簧连到固定壁上，两振子之间再用劲度 $k_c=20\\ \\mathrm{N/m}$ 的弹簧相连，只能在一条直线上运动。求高频与低频简正模角频率之比。",
+  "mainTag": "理论力学",
+  "tags": [
+   "小振动与简正模"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 耦合振子的简正模",
+  "hints": [
+   "写出拉格朗日量，用简正坐标 $x_1\\pm x_2$ 解耦。",
+   "耦合弹簧对简正频率贡献 $2k_c$。"
+  ],
+  "answer": "2.24",
+  "solution": "两个相同振子（质量 $m$、各自与墙用劲度 $k$ 的弹簧相连，彼此用劲度 $k_c$ 的弹簧耦合）的拉格朗日量为\n$$L=\\frac12m\\left(\\dot x_1^2+\\dot x_2^2\\right)-\\frac12k\\left(x_1^2+x_2^2\\right)-\\frac12k_c\\left(x_1-x_2\\right)^2.$$\n\n引入简正坐标 $q_\\pm=\\left(x_1\\pm x_2\\right)/\\sqrt2$，方程组解耦：\n$$m\\ddot q_+=kq_+\\ \\Longrightarrow\\ \\omega_+=\\sqrt{\\frac{k}{m}},$$\n$$m\\ddot q_-=\\left(k+2k_c\\right)q_-\\ \\Longrightarrow\\ \\omega_-=\\sqrt{\\frac{k+2k_c}{m}}.$$\n\n代入 $m=2\\ \\mathrm{kg}$、$k=10\\ \\mathrm{N/m}$、$k_c=20\\ \\mathrm{N/m}$：\n$$\\omega_+=2.24\\ \\mathrm{rad/s},\\qquad \\omega_-=5\\ \\mathrm{rad/s},\\qquad \\frac{\\omega_-}{\\omega_+}=2.24.$$\n\n**物理图像**：低频模两振子同相（中间弹簧长度不变，等效劲度仍为 $k$）；高频模反相（中间弹簧被压缩/拉伸，附加劲度 $2k_c$）。\n\n**易错点**：耦合项贡献的是 $2k_c$ 而不是 $k_c$——因为相对位移 $x_1-x_2$ 在两个振子上都产生回复力。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "拉格朗日方程",
+    "简正模"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 耦合振子的简正模"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "耦合振子（m=1 kg，k=50，k_c=20）的低频简正模频率",
+  "statement": "两个质量均为 $m=1\\ \\mathrm{kg}$ 的振子分别用劲度 $k=50\\ \\mathrm{N/m}$ 的弹簧连到固定壁上，两振子之间再用劲度 $k_c=20\\ \\mathrm{N/m}$ 的弹簧相连，只能在一条直线上运动。求两个振子同相振动时（低频简正模）的角频率。",
+  "mainTag": "理论力学",
+  "tags": [
+   "小振动与简正模"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 耦合振子的简正模",
+  "hints": [
+   "写出拉格朗日量，用简正坐标 $x_1\\pm x_2$ 解耦。",
+   "耦合弹簧对简正频率贡献 $2k_c$。"
+  ],
+  "answer": "7.07\\ \\mathrm{rad/s}",
+  "solution": "两个相同振子（质量 $m$、各自与墙用劲度 $k$ 的弹簧相连，彼此用劲度 $k_c$ 的弹簧耦合）的拉格朗日量为\n$$L=\\frac12m\\left(\\dot x_1^2+\\dot x_2^2\\right)-\\frac12k\\left(x_1^2+x_2^2\\right)-\\frac12k_c\\left(x_1-x_2\\right)^2.$$\n\n引入简正坐标 $q_\\pm=\\left(x_1\\pm x_2\\right)/\\sqrt2$，方程组解耦：\n$$m\\ddot q_+=kq_+\\ \\Longrightarrow\\ \\omega_+=\\sqrt{\\frac{k}{m}},$$\n$$m\\ddot q_-=\\left(k+2k_c\\right)q_-\\ \\Longrightarrow\\ \\omega_-=\\sqrt{\\frac{k+2k_c}{m}}.$$\n\n代入 $m=1\\ \\mathrm{kg}$、$k=50\\ \\mathrm{N/m}$、$k_c=20\\ \\mathrm{N/m}$：\n$$\\omega_+=7.07\\ \\mathrm{rad/s},\\qquad \\omega_-=9.49\\ \\mathrm{rad/s},\\qquad \\frac{\\omega_-}{\\omega_+}=1.34.$$\n\n**物理图像**：低频模两振子同相（中间弹簧长度不变，等效劲度仍为 $k$）；高频模反相（中间弹簧被压缩/拉伸，附加劲度 $2k_c$）。\n\n**易错点**：耦合项贡献的是 $2k_c$ 而不是 $k_c$——因为相对位移 $x_1-x_2$ 在两个振子上都产生回复力。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "rad/s",
+   "methods": [
+    "拉格朗日方程",
+    "简正模"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 耦合振子的简正模"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "耦合振子（m=2 kg，k=50，k_c=50）的高频简正模频率",
+  "statement": "两个质量均为 $m=2\\ \\mathrm{kg}$ 的振子分别用劲度 $k=50\\ \\mathrm{N/m}$ 的弹簧连到固定壁上，两振子之间再用劲度 $k_c=50\\ \\mathrm{N/m}$ 的弹簧相连，只能在一条直线上运动。求两个振子反相振动时（高频简正模）的角频率。",
+  "mainTag": "理论力学",
+  "tags": [
+   "小振动与简正模"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 耦合振子的简正模",
+  "hints": [
+   "写出拉格朗日量，用简正坐标 $x_1\\pm x_2$ 解耦。",
+   "耦合弹簧对简正频率贡献 $2k_c$。"
+  ],
+  "answer": "8.66\\ \\mathrm{rad/s}",
+  "solution": "两个相同振子（质量 $m$、各自与墙用劲度 $k$ 的弹簧相连，彼此用劲度 $k_c$ 的弹簧耦合）的拉格朗日量为\n$$L=\\frac12m\\left(\\dot x_1^2+\\dot x_2^2\\right)-\\frac12k\\left(x_1^2+x_2^2\\right)-\\frac12k_c\\left(x_1-x_2\\right)^2.$$\n\n引入简正坐标 $q_\\pm=\\left(x_1\\pm x_2\\right)/\\sqrt2$，方程组解耦：\n$$m\\ddot q_+=kq_+\\ \\Longrightarrow\\ \\omega_+=\\sqrt{\\frac{k}{m}},$$\n$$m\\ddot q_-=\\left(k+2k_c\\right)q_-\\ \\Longrightarrow\\ \\omega_-=\\sqrt{\\frac{k+2k_c}{m}}.$$\n\n代入 $m=2\\ \\mathrm{kg}$、$k=50\\ \\mathrm{N/m}$、$k_c=50\\ \\mathrm{N/m}$：\n$$\\omega_+=5\\ \\mathrm{rad/s},\\qquad \\omega_-=8.66\\ \\mathrm{rad/s},\\qquad \\frac{\\omega_-}{\\omega_+}=1.73.$$\n\n**物理图像**：低频模两振子同相（中间弹簧长度不变，等效劲度仍为 $k$）；高频模反相（中间弹簧被压缩/拉伸，附加劲度 $2k_c$）。\n\n**易错点**：耦合项贡献的是 $2k_c$ 而不是 $k_c$——因为相对位移 $x_1-x_2$ 在两个振子上都产生回复力。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "rad/s",
+   "methods": [
+    "拉格朗日方程",
+    "简正模"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 耦合振子的简正模"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "耦合振子（m=0.1 kg，k=40，k_c=20）的低频简正模频率",
+  "statement": "两个质量均为 $m=0.1\\ \\mathrm{kg}$ 的振子分别用劲度 $k=40\\ \\mathrm{N/m}$ 的弹簧连到固定壁上，两振子之间再用劲度 $k_c=20\\ \\mathrm{N/m}$ 的弹簧相连，只能在一条直线上运动。求两个振子同相振动时（低频简正模）的角频率。",
+  "mainTag": "理论力学",
+  "tags": [
+   "小振动与简正模"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 耦合振子的简正模",
+  "hints": [
+   "写出拉格朗日量，用简正坐标 $x_1\\pm x_2$ 解耦。",
+   "耦合弹簧对简正频率贡献 $2k_c$。"
+  ],
+  "answer": "20\\ \\mathrm{rad/s}",
+  "solution": "两个相同振子（质量 $m$、各自与墙用劲度 $k$ 的弹簧相连，彼此用劲度 $k_c$ 的弹簧耦合）的拉格朗日量为\n$$L=\\frac12m\\left(\\dot x_1^2+\\dot x_2^2\\right)-\\frac12k\\left(x_1^2+x_2^2\\right)-\\frac12k_c\\left(x_1-x_2\\right)^2.$$\n\n引入简正坐标 $q_\\pm=\\left(x_1\\pm x_2\\right)/\\sqrt2$，方程组解耦：\n$$m\\ddot q_+=kq_+\\ \\Longrightarrow\\ \\omega_+=\\sqrt{\\frac{k}{m}},$$\n$$m\\ddot q_-=\\left(k+2k_c\\right)q_-\\ \\Longrightarrow\\ \\omega_-=\\sqrt{\\frac{k+2k_c}{m}}.$$\n\n代入 $m=0.1\\ \\mathrm{kg}$、$k=40\\ \\mathrm{N/m}$、$k_c=20\\ \\mathrm{N/m}$：\n$$\\omega_+=20\\ \\mathrm{rad/s},\\qquad \\omega_-=28.3\\ \\mathrm{rad/s},\\qquad \\frac{\\omega_-}{\\omega_+}=1.41.$$\n\n**物理图像**：低频模两振子同相（中间弹簧长度不变，等效劲度仍为 $k$）；高频模反相（中间弹簧被压缩/拉伸，附加劲度 $2k_c$）。\n\n**易错点**：耦合项贡献的是 $2k_c$ 而不是 $k_c$——因为相对位移 $x_1-x_2$ 在两个振子上都产生回复力。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "rad/s",
+   "methods": [
+    "拉格朗日方程",
+    "简正模"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 耦合振子的简正模"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "耦合振子（m=1 kg，k=100，k_c=2）的高频简正模频率",
+  "statement": "两个质量均为 $m=1\\ \\mathrm{kg}$ 的振子分别用劲度 $k=100\\ \\mathrm{N/m}$ 的弹簧连到固定壁上，两振子之间再用劲度 $k_c=2\\ \\mathrm{N/m}$ 的弹簧相连，只能在一条直线上运动。求两个振子反相振动时（高频简正模）的角频率。",
+  "mainTag": "理论力学",
+  "tags": [
+   "小振动与简正模"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 耦合振子的简正模",
+  "hints": [
+   "写出拉格朗日量，用简正坐标 $x_1\\pm x_2$ 解耦。",
+   "耦合弹簧对简正频率贡献 $2k_c$。"
+  ],
+  "answer": "10.2\\ \\mathrm{rad/s}",
+  "solution": "两个相同振子（质量 $m$、各自与墙用劲度 $k$ 的弹簧相连，彼此用劲度 $k_c$ 的弹簧耦合）的拉格朗日量为\n$$L=\\frac12m\\left(\\dot x_1^2+\\dot x_2^2\\right)-\\frac12k\\left(x_1^2+x_2^2\\right)-\\frac12k_c\\left(x_1-x_2\\right)^2.$$\n\n引入简正坐标 $q_\\pm=\\left(x_1\\pm x_2\\right)/\\sqrt2$，方程组解耦：\n$$m\\ddot q_+=kq_+\\ \\Longrightarrow\\ \\omega_+=\\sqrt{\\frac{k}{m}},$$\n$$m\\ddot q_-=\\left(k+2k_c\\right)q_-\\ \\Longrightarrow\\ \\omega_-=\\sqrt{\\frac{k+2k_c}{m}}.$$\n\n代入 $m=1\\ \\mathrm{kg}$、$k=100\\ \\mathrm{N/m}$、$k_c=2\\ \\mathrm{N/m}$：\n$$\\omega_+=10\\ \\mathrm{rad/s},\\qquad \\omega_-=10.2\\ \\mathrm{rad/s},\\qquad \\frac{\\omega_-}{\\omega_+}=1.02.$$\n\n**物理图像**：低频模两振子同相（中间弹簧长度不变，等效劲度仍为 $k$）；高频模反相（中间弹簧被压缩/拉伸，附加劲度 $2k_c$）。\n\n**易错点**：耦合项贡献的是 $2k_c$ 而不是 $k_c$——因为相对位移 $x_1-x_2$ 在两个振子上都产生回复力。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "rad/s",
+   "methods": [
+    "拉格朗日方程",
+    "简正模"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 耦合振子的简正模"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "耦合振子（m=0.1 kg，k=40，k_c=5）的低频简正模频率",
+  "statement": "两个质量均为 $m=0.1\\ \\mathrm{kg}$ 的振子分别用劲度 $k=40\\ \\mathrm{N/m}$ 的弹簧连到固定壁上，两振子之间再用劲度 $k_c=5\\ \\mathrm{N/m}$ 的弹簧相连，只能在一条直线上运动。求两个振子同相振动时（低频简正模）的角频率。",
+  "mainTag": "理论力学",
+  "tags": [
+   "小振动与简正模"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 耦合振子的简正模",
+  "hints": [
+   "写出拉格朗日量，用简正坐标 $x_1\\pm x_2$ 解耦。",
+   "耦合弹簧对简正频率贡献 $2k_c$。"
+  ],
+  "answer": "20\\ \\mathrm{rad/s}",
+  "solution": "两个相同振子（质量 $m$、各自与墙用劲度 $k$ 的弹簧相连，彼此用劲度 $k_c$ 的弹簧耦合）的拉格朗日量为\n$$L=\\frac12m\\left(\\dot x_1^2+\\dot x_2^2\\right)-\\frac12k\\left(x_1^2+x_2^2\\right)-\\frac12k_c\\left(x_1-x_2\\right)^2.$$\n\n引入简正坐标 $q_\\pm=\\left(x_1\\pm x_2\\right)/\\sqrt2$，方程组解耦：\n$$m\\ddot q_+=kq_+\\ \\Longrightarrow\\ \\omega_+=\\sqrt{\\frac{k}{m}},$$\n$$m\\ddot q_-=\\left(k+2k_c\\right)q_-\\ \\Longrightarrow\\ \\omega_-=\\sqrt{\\frac{k+2k_c}{m}}.$$\n\n代入 $m=0.1\\ \\mathrm{kg}$、$k=40\\ \\mathrm{N/m}$、$k_c=5\\ \\mathrm{N/m}$：\n$$\\omega_+=20\\ \\mathrm{rad/s},\\qquad \\omega_-=22.4\\ \\mathrm{rad/s},\\qquad \\frac{\\omega_-}{\\omega_+}=1.12.$$\n\n**物理图像**：低频模两振子同相（中间弹簧长度不变，等效劲度仍为 $k$）；高频模反相（中间弹簧被压缩/拉伸，附加劲度 $2k_c$）。\n\n**易错点**：耦合项贡献的是 $2k_c$ 而不是 $k_c$——因为相对位移 $x_1-x_2$ 在两个振子上都产生回复力。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "rad/s",
+   "methods": [
+    "拉格朗日方程",
+    "简正模"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 耦合振子的简正模"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "耦合振子（m=2 kg，k=80，k_c=5）的简正模频率之比",
+  "statement": "两个质量均为 $m=2\\ \\mathrm{kg}$ 的振子分别用劲度 $k=80\\ \\mathrm{N/m}$ 的弹簧连到固定壁上，两振子之间再用劲度 $k_c=5\\ \\mathrm{N/m}$ 的弹簧相连，只能在一条直线上运动。求高频与低频简正模角频率之比。",
+  "mainTag": "理论力学",
+  "tags": [
+   "小振动与简正模"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 耦合振子的简正模",
+  "hints": [
+   "写出拉格朗日量，用简正坐标 $x_1\\pm x_2$ 解耦。",
+   "耦合弹簧对简正频率贡献 $2k_c$。"
+  ],
+  "answer": "1.06",
+  "solution": "两个相同振子（质量 $m$、各自与墙用劲度 $k$ 的弹簧相连，彼此用劲度 $k_c$ 的弹簧耦合）的拉格朗日量为\n$$L=\\frac12m\\left(\\dot x_1^2+\\dot x_2^2\\right)-\\frac12k\\left(x_1^2+x_2^2\\right)-\\frac12k_c\\left(x_1-x_2\\right)^2.$$\n\n引入简正坐标 $q_\\pm=\\left(x_1\\pm x_2\\right)/\\sqrt2$，方程组解耦：\n$$m\\ddot q_+=kq_+\\ \\Longrightarrow\\ \\omega_+=\\sqrt{\\frac{k}{m}},$$\n$$m\\ddot q_-=\\left(k+2k_c\\right)q_-\\ \\Longrightarrow\\ \\omega_-=\\sqrt{\\frac{k+2k_c}{m}}.$$\n\n代入 $m=2\\ \\mathrm{kg}$、$k=80\\ \\mathrm{N/m}$、$k_c=5\\ \\mathrm{N/m}$：\n$$\\omega_+=6.32\\ \\mathrm{rad/s},\\qquad \\omega_-=6.71\\ \\mathrm{rad/s},\\qquad \\frac{\\omega_-}{\\omega_+}=1.06.$$\n\n**物理图像**：低频模两振子同相（中间弹簧长度不变，等效劲度仍为 $k$）；高频模反相（中间弹簧被压缩/拉伸，附加劲度 $2k_c$）。\n\n**易错点**：耦合项贡献的是 $2k_c$ 而不是 $k_c$——因为相对位移 $x_1-x_2$ 在两个振子上都产生回复力。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "拉格朗日方程",
+    "简正模"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 耦合振子的简正模"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "有效势圆轨道（L=2，m=0.5 kg，k=10）的圆轨道半径",
+  "statement": "质量为 $m=0.5\\ \\mathrm{kg}$ 的粒子在吸引中心力场 $F=-k/r^2$（$k=10$）中运动，角动量为 $L=2$。求圆轨道的半径。",
+  "mainTag": "理论力学",
+  "tags": [
+   "中心力场与 Kepler 问题"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 有效势与圆轨道",
+  "hints": [
+   "$V_{\\text{eff}}=-k/r+L^2/2mr^2$。",
+   "圆轨道由 $\\mathrm{d}V_{\\text{eff}}/\\mathrm{d}r=0$ 给出。"
+  ],
+  "answer": "0.8\\ \\mathrm{m}",
+  "solution": "中心力场中有效势\n$$V_{\\text{eff}}\\left(r\\right)=-\\frac{k}{r}+\\frac{L^2}{2mr^2}.$$\n\n圆轨道满足 $\\mathrm{d}V_{\\text{eff}}/\\mathrm{d}r=0$：\n$$\\frac{k}{r^2}=\\frac{L^2}{mr^3}\\ \\Longrightarrow\\ r_0=\\frac{L^2}{mk}.$$\n\n代入 $L=2$、$m=0.5\\ \\mathrm{kg}$、$k=GMm=10$：\n$$r_0=0.8\\ \\mathrm{m}.$$\n\n速率 $v=L/\\left(mr_0\\right)=5\\ \\mathrm{m/s}$，总能量 $E=V_{\\text{eff}}\\left(r_0\\right)=-\\dfrac{k}{2r_0}=-6.25\\ \\mathrm{J}$。\n\n**稳定性**：$V_{\\text{eff}}$ 在 $r_0$ 处是极小值（$\\mathrm{d}^2V_{\\text{eff}}/\\mathrm{d}r^2>0$），所以圆轨道稳定，微扰后做径向小振动（这正是「近圆轨道进动」的来源）。\n\n**易错点**：$k$ 在此约定为 $GMm$（含振子质量），若用 $\\mu=GM$ 则分母要多乘 $m$。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "m",
+   "methods": [
+    "有效势",
+    "中心力场"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 有效势与圆轨道"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "有效势圆轨道（L=1，m=2 kg，k=1）的圆轨道半径",
+  "statement": "质量为 $m=2\\ \\mathrm{kg}$ 的粒子在吸引中心力场 $F=-k/r^2$（$k=1$）中运动，角动量为 $L=1$。求圆轨道的半径。",
+  "mainTag": "理论力学",
+  "tags": [
+   "中心力场与 Kepler 问题"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 有效势与圆轨道",
+  "hints": [
+   "$V_{\\text{eff}}=-k/r+L^2/2mr^2$。",
+   "圆轨道由 $\\mathrm{d}V_{\\text{eff}}/\\mathrm{d}r=0$ 给出。"
+  ],
+  "answer": "0.5\\ \\mathrm{m}",
+  "solution": "中心力场中有效势\n$$V_{\\text{eff}}\\left(r\\right)=-\\frac{k}{r}+\\frac{L^2}{2mr^2}.$$\n\n圆轨道满足 $\\mathrm{d}V_{\\text{eff}}/\\mathrm{d}r=0$：\n$$\\frac{k}{r^2}=\\frac{L^2}{mr^3}\\ \\Longrightarrow\\ r_0=\\frac{L^2}{mk}.$$\n\n代入 $L=1$、$m=2\\ \\mathrm{kg}$、$k=GMm=1$：\n$$r_0=0.5\\ \\mathrm{m}.$$\n\n速率 $v=L/\\left(mr_0\\right)=1\\ \\mathrm{m/s}$，总能量 $E=V_{\\text{eff}}\\left(r_0\\right)=-\\dfrac{k}{2r_0}=-1\\ \\mathrm{J}$。\n\n**稳定性**：$V_{\\text{eff}}$ 在 $r_0$ 处是极小值（$\\mathrm{d}^2V_{\\text{eff}}/\\mathrm{d}r^2>0$），所以圆轨道稳定，微扰后做径向小振动（这正是「近圆轨道进动」的来源）。\n\n**易错点**：$k$ 在此约定为 $GMm$（含振子质量），若用 $\\mu=GM$ 则分母要多乘 $m$。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "m",
+   "methods": [
+    "有效势",
+    "中心力场"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 有效势与圆轨道"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "有效势圆轨道（L=2，m=0.5 kg，k=2）的圆轨道半径",
+  "statement": "质量为 $m=0.5\\ \\mathrm{kg}$ 的粒子在吸引中心力场 $F=-k/r^2$（$k=2$）中运动，角动量为 $L=2$。求圆轨道的半径。",
+  "mainTag": "理论力学",
+  "tags": [
+   "中心力场与 Kepler 问题"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 有效势与圆轨道",
+  "hints": [
+   "$V_{\\text{eff}}=-k/r+L^2/2mr^2$。",
+   "圆轨道由 $\\mathrm{d}V_{\\text{eff}}/\\mathrm{d}r=0$ 给出。"
+  ],
+  "answer": "4\\ \\mathrm{m}",
+  "solution": "中心力场中有效势\n$$V_{\\text{eff}}\\left(r\\right)=-\\frac{k}{r}+\\frac{L^2}{2mr^2}.$$\n\n圆轨道满足 $\\mathrm{d}V_{\\text{eff}}/\\mathrm{d}r=0$：\n$$\\frac{k}{r^2}=\\frac{L^2}{mr^3}\\ \\Longrightarrow\\ r_0=\\frac{L^2}{mk}.$$\n\n代入 $L=2$、$m=0.5\\ \\mathrm{kg}$、$k=GMm=2$：\n$$r_0=4\\ \\mathrm{m}.$$\n\n速率 $v=L/\\left(mr_0\\right)=1\\ \\mathrm{m/s}$，总能量 $E=V_{\\text{eff}}\\left(r_0\\right)=-\\dfrac{k}{2r_0}=-0.25\\ \\mathrm{J}$。\n\n**稳定性**：$V_{\\text{eff}}$ 在 $r_0$ 处是极小值（$\\mathrm{d}^2V_{\\text{eff}}/\\mathrm{d}r^2>0$），所以圆轨道稳定，微扰后做径向小振动（这正是「近圆轨道进动」的来源）。\n\n**易错点**：$k$ 在此约定为 $GMm$（含振子质量），若用 $\\mu=GM$ 则分母要多乘 $m$。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "m",
+   "methods": [
+    "有效势",
+    "中心力场"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 有效势与圆轨道"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "有效势圆轨道（L=2，m=0.5 kg，k=1）的圆轨道半径",
+  "statement": "质量为 $m=0.5\\ \\mathrm{kg}$ 的粒子在吸引中心力场 $F=-k/r^2$（$k=1$）中运动，角动量为 $L=2$。求圆轨道的半径。",
+  "mainTag": "理论力学",
+  "tags": [
+   "中心力场与 Kepler 问题"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 有效势与圆轨道",
+  "hints": [
+   "$V_{\\text{eff}}=-k/r+L^2/2mr^2$。",
+   "圆轨道由 $\\mathrm{d}V_{\\text{eff}}/\\mathrm{d}r=0$ 给出。"
+  ],
+  "answer": "8\\ \\mathrm{m}",
+  "solution": "中心力场中有效势\n$$V_{\\text{eff}}\\left(r\\right)=-\\frac{k}{r}+\\frac{L^2}{2mr^2}.$$\n\n圆轨道满足 $\\mathrm{d}V_{\\text{eff}}/\\mathrm{d}r=0$：\n$$\\frac{k}{r^2}=\\frac{L^2}{mr^3}\\ \\Longrightarrow\\ r_0=\\frac{L^2}{mk}.$$\n\n代入 $L=2$、$m=0.5\\ \\mathrm{kg}$、$k=GMm=1$：\n$$r_0=8\\ \\mathrm{m}.$$\n\n速率 $v=L/\\left(mr_0\\right)=0.5\\ \\mathrm{m/s}$，总能量 $E=V_{\\text{eff}}\\left(r_0\\right)=-\\dfrac{k}{2r_0}=-0.0625\\ \\mathrm{J}$。\n\n**稳定性**：$V_{\\text{eff}}$ 在 $r_0$ 处是极小值（$\\mathrm{d}^2V_{\\text{eff}}/\\mathrm{d}r^2>0$），所以圆轨道稳定，微扰后做径向小振动（这正是「近圆轨道进动」的来源）。\n\n**易错点**：$k$ 在此约定为 $GMm$（含振子质量），若用 $\\mu=GM$ 则分母要多乘 $m$。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "m",
+   "methods": [
+    "有效势",
+    "中心力场"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 有效势与圆轨道"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "有效势圆轨道（L=5，m=0.5 kg，k=1）的圆轨道半径",
+  "statement": "质量为 $m=0.5\\ \\mathrm{kg}$ 的粒子在吸引中心力场 $F=-k/r^2$（$k=1$）中运动，角动量为 $L=5$。求圆轨道的半径。",
+  "mainTag": "理论力学",
+  "tags": [
+   "中心力场与 Kepler 问题"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 有效势与圆轨道",
+  "hints": [
+   "$V_{\\text{eff}}=-k/r+L^2/2mr^2$。",
+   "圆轨道由 $\\mathrm{d}V_{\\text{eff}}/\\mathrm{d}r=0$ 给出。"
+  ],
+  "answer": "50\\ \\mathrm{m}",
+  "solution": "中心力场中有效势\n$$V_{\\text{eff}}\\left(r\\right)=-\\frac{k}{r}+\\frac{L^2}{2mr^2}.$$\n\n圆轨道满足 $\\mathrm{d}V_{\\text{eff}}/\\mathrm{d}r=0$：\n$$\\frac{k}{r^2}=\\frac{L^2}{mr^3}\\ \\Longrightarrow\\ r_0=\\frac{L^2}{mk}.$$\n\n代入 $L=5$、$m=0.5\\ \\mathrm{kg}$、$k=GMm=1$：\n$$r_0=50\\ \\mathrm{m}.$$\n\n速率 $v=L/\\left(mr_0\\right)=0.2\\ \\mathrm{m/s}$，总能量 $E=V_{\\text{eff}}\\left(r_0\\right)=-\\dfrac{k}{2r_0}=-0.01\\ \\mathrm{J}$。\n\n**稳定性**：$V_{\\text{eff}}$ 在 $r_0$ 处是极小值（$\\mathrm{d}^2V_{\\text{eff}}/\\mathrm{d}r^2>0$），所以圆轨道稳定，微扰后做径向小振动（这正是「近圆轨道进动」的来源）。\n\n**易错点**：$k$ 在此约定为 $GMm$（含振子质量），若用 $\\mu=GM$ 则分母要多乘 $m$。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "m",
+   "methods": [
+    "有效势",
+    "中心力场"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 有效势与圆轨道"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "有效势圆轨道（L=8，m=1 kg，k=1）的轨道速度",
+  "statement": "质量为 $m=1\\ \\mathrm{kg}$ 的粒子在吸引中心力场 $F=-k/r^2$（$k=1$）中运动，角动量为 $L=8$。求圆轨道上的速率。",
+  "mainTag": "理论力学",
+  "tags": [
+   "中心力场与 Kepler 问题"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 有效势与圆轨道",
+  "hints": [
+   "$V_{\\text{eff}}=-k/r+L^2/2mr^2$。",
+   "圆轨道由 $\\mathrm{d}V_{\\text{eff}}/\\mathrm{d}r=0$ 给出。"
+  ],
+  "answer": "0.125\\ \\mathrm{m/s}",
+  "solution": "中心力场中有效势\n$$V_{\\text{eff}}\\left(r\\right)=-\\frac{k}{r}+\\frac{L^2}{2mr^2}.$$\n\n圆轨道满足 $\\mathrm{d}V_{\\text{eff}}/\\mathrm{d}r=0$：\n$$\\frac{k}{r^2}=\\frac{L^2}{mr^3}\\ \\Longrightarrow\\ r_0=\\frac{L^2}{mk}.$$\n\n代入 $L=8$、$m=1\\ \\mathrm{kg}$、$k=GMm=1$：\n$$r_0=64\\ \\mathrm{m}.$$\n\n速率 $v=L/\\left(mr_0\\right)=0.125\\ \\mathrm{m/s}$，总能量 $E=V_{\\text{eff}}\\left(r_0\\right)=-\\dfrac{k}{2r_0}=-7.81\\times10^{-3}\\ \\mathrm{J}$。\n\n**稳定性**：$V_{\\text{eff}}$ 在 $r_0$ 处是极小值（$\\mathrm{d}^2V_{\\text{eff}}/\\mathrm{d}r^2>0$），所以圆轨道稳定，微扰后做径向小振动（这正是「近圆轨道进动」的来源）。\n\n**易错点**：$k$ 在此约定为 $GMm$（含振子质量），若用 $\\mu=GM$ 则分母要多乘 $m$。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "m/s",
+   "methods": [
+    "有效势",
+    "中心力场"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 有效势与圆轨道"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "有效势圆轨道（L=8，m=0.5 kg，k=5）的轨道能量",
+  "statement": "质量为 $m=0.5\\ \\mathrm{kg}$ 的粒子在吸引中心力场 $F=-k/r^2$（$k=5$）中运动，角动量为 $L=8$。求该圆轨道的总机械能。",
+  "mainTag": "理论力学",
+  "tags": [
+   "中心力场与 Kepler 问题"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 有效势与圆轨道",
+  "hints": [
+   "$V_{\\text{eff}}=-k/r+L^2/2mr^2$。",
+   "圆轨道由 $\\mathrm{d}V_{\\text{eff}}/\\mathrm{d}r=0$ 给出。"
+  ],
+  "answer": "-0.0977\\ \\mathrm{J}",
+  "solution": "中心力场中有效势\n$$V_{\\text{eff}}\\left(r\\right)=-\\frac{k}{r}+\\frac{L^2}{2mr^2}.$$\n\n圆轨道满足 $\\mathrm{d}V_{\\text{eff}}/\\mathrm{d}r=0$：\n$$\\frac{k}{r^2}=\\frac{L^2}{mr^3}\\ \\Longrightarrow\\ r_0=\\frac{L^2}{mk}.$$\n\n代入 $L=8$、$m=0.5\\ \\mathrm{kg}$、$k=GMm=5$：\n$$r_0=25.6\\ \\mathrm{m}.$$\n\n速率 $v=L/\\left(mr_0\\right)=0.625\\ \\mathrm{m/s}$，总能量 $E=V_{\\text{eff}}\\left(r_0\\right)=-\\dfrac{k}{2r_0}=-0.0977\\ \\mathrm{J}$。\n\n**稳定性**：$V_{\\text{eff}}$ 在 $r_0$ 处是极小值（$\\mathrm{d}^2V_{\\text{eff}}/\\mathrm{d}r^2>0$），所以圆轨道稳定，微扰后做径向小振动（这正是「近圆轨道进动」的来源）。\n\n**易错点**：$k$ 在此约定为 $GMm$（含振子质量），若用 $\\mu=GM$ 则分母要多乘 $m$。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "有效势",
+    "中心力场"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 有效势与圆轨道"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "有效势圆轨道（L=2，m=5 kg，k=1）的轨道能量",
+  "statement": "质量为 $m=5\\ \\mathrm{kg}$ 的粒子在吸引中心力场 $F=-k/r^2$（$k=1$）中运动，角动量为 $L=2$。求该圆轨道的总机械能。",
+  "mainTag": "理论力学",
+  "tags": [
+   "中心力场与 Kepler 问题"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 有效势与圆轨道",
+  "hints": [
+   "$V_{\\text{eff}}=-k/r+L^2/2mr^2$。",
+   "圆轨道由 $\\mathrm{d}V_{\\text{eff}}/\\mathrm{d}r=0$ 给出。"
+  ],
+  "answer": "-0.625\\ \\mathrm{J}",
+  "solution": "中心力场中有效势\n$$V_{\\text{eff}}\\left(r\\right)=-\\frac{k}{r}+\\frac{L^2}{2mr^2}.$$\n\n圆轨道满足 $\\mathrm{d}V_{\\text{eff}}/\\mathrm{d}r=0$：\n$$\\frac{k}{r^2}=\\frac{L^2}{mr^3}\\ \\Longrightarrow\\ r_0=\\frac{L^2}{mk}.$$\n\n代入 $L=2$、$m=5\\ \\mathrm{kg}$、$k=GMm=1$：\n$$r_0=0.8\\ \\mathrm{m}.$$\n\n速率 $v=L/\\left(mr_0\\right)=0.5\\ \\mathrm{m/s}$，总能量 $E=V_{\\text{eff}}\\left(r_0\\right)=-\\dfrac{k}{2r_0}=-0.625\\ \\mathrm{J}$。\n\n**稳定性**：$V_{\\text{eff}}$ 在 $r_0$ 处是极小值（$\\mathrm{d}^2V_{\\text{eff}}/\\mathrm{d}r^2>0$），所以圆轨道稳定，微扰后做径向小振动（这正是「近圆轨道进动」的来源）。\n\n**易错点**：$k$ 在此约定为 $GMm$（含振子质量），若用 $\\mu=GM$ 则分母要多乘 $m$。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "有效势",
+    "中心力场"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 有效势与圆轨道"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "有效势圆轨道（L=1，m=1 kg，k=2）的轨道速度",
+  "statement": "质量为 $m=1\\ \\mathrm{kg}$ 的粒子在吸引中心力场 $F=-k/r^2$（$k=2$）中运动，角动量为 $L=1$。求圆轨道上的速率。",
+  "mainTag": "理论力学",
+  "tags": [
+   "中心力场与 Kepler 问题"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 有效势与圆轨道",
+  "hints": [
+   "$V_{\\text{eff}}=-k/r+L^2/2mr^2$。",
+   "圆轨道由 $\\mathrm{d}V_{\\text{eff}}/\\mathrm{d}r=0$ 给出。"
+  ],
+  "answer": "2\\ \\mathrm{m/s}",
+  "solution": "中心力场中有效势\n$$V_{\\text{eff}}\\left(r\\right)=-\\frac{k}{r}+\\frac{L^2}{2mr^2}.$$\n\n圆轨道满足 $\\mathrm{d}V_{\\text{eff}}/\\mathrm{d}r=0$：\n$$\\frac{k}{r^2}=\\frac{L^2}{mr^3}\\ \\Longrightarrow\\ r_0=\\frac{L^2}{mk}.$$\n\n代入 $L=1$、$m=1\\ \\mathrm{kg}$、$k=GMm=2$：\n$$r_0=0.5\\ \\mathrm{m}.$$\n\n速率 $v=L/\\left(mr_0\\right)=2\\ \\mathrm{m/s}$，总能量 $E=V_{\\text{eff}}\\left(r_0\\right)=-\\dfrac{k}{2r_0}=-2\\ \\mathrm{J}$。\n\n**稳定性**：$V_{\\text{eff}}$ 在 $r_0$ 处是极小值（$\\mathrm{d}^2V_{\\text{eff}}/\\mathrm{d}r^2>0$），所以圆轨道稳定，微扰后做径向小振动（这正是「近圆轨道进动」的来源）。\n\n**易错点**：$k$ 在此约定为 $GMm$（含振子质量），若用 $\\mu=GM$ 则分母要多乘 $m$。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "m/s",
+   "methods": [
+    "有效势",
+    "中心力场"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 有效势与圆轨道"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "有效势圆轨道（L=1，m=0.5 kg，k=10）的轨道能量",
+  "statement": "质量为 $m=0.5\\ \\mathrm{kg}$ 的粒子在吸引中心力场 $F=-k/r^2$（$k=10$）中运动，角动量为 $L=1$。求该圆轨道的总机械能。",
+  "mainTag": "理论力学",
+  "tags": [
+   "中心力场与 Kepler 问题"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 有效势与圆轨道",
+  "hints": [
+   "$V_{\\text{eff}}=-k/r+L^2/2mr^2$。",
+   "圆轨道由 $\\mathrm{d}V_{\\text{eff}}/\\mathrm{d}r=0$ 给出。"
+  ],
+  "answer": "-25\\ \\mathrm{J}",
+  "solution": "中心力场中有效势\n$$V_{\\text{eff}}\\left(r\\right)=-\\frac{k}{r}+\\frac{L^2}{2mr^2}.$$\n\n圆轨道满足 $\\mathrm{d}V_{\\text{eff}}/\\mathrm{d}r=0$：\n$$\\frac{k}{r^2}=\\frac{L^2}{mr^3}\\ \\Longrightarrow\\ r_0=\\frac{L^2}{mk}.$$\n\n代入 $L=1$、$m=0.5\\ \\mathrm{kg}$、$k=GMm=10$：\n$$r_0=0.2\\ \\mathrm{m}.$$\n\n速率 $v=L/\\left(mr_0\\right)=10\\ \\mathrm{m/s}$，总能量 $E=V_{\\text{eff}}\\left(r_0\\right)=-\\dfrac{k}{2r_0}=-25\\ \\mathrm{J}$。\n\n**稳定性**：$V_{\\text{eff}}$ 在 $r_0$ 处是极小值（$\\mathrm{d}^2V_{\\text{eff}}/\\mathrm{d}r^2>0$），所以圆轨道稳定，微扰后做径向小振动（这正是「近圆轨道进动」的来源）。\n\n**易错点**：$k$ 在此约定为 $GMm$（含振子质量），若用 $\\mu=GM$ 则分母要多乘 $m$。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "有效势",
+    "中心力场"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 有效势与圆轨道"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "陀螺进动（m=4 kg，R=0.14 m，l=0.3 m，ω=50）的进动角速度",
+  "statement": "一个质量 $m=4\\ \\mathrm{kg}$、半径 $R=0.14\\ \\mathrm{m}$ 的均匀圆盘装在长 $l=0.3\\ \\mathrm{m}$ 的轻杆一端，杆的另一端支于地面，圆盘以 $\\omega=50\\ \\mathrm{rad/s}$ 绕杆高速自转。求陀螺绕竖直轴的进动角速度（取 $g=9.8\\ \\mathrm{m/s^2}$）。",
+  "mainTag": "理论力学",
+  "tags": [
+   "刚体 Euler 方程与 Euler 角"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 陀螺进动",
+  "hints": [
+   "$\\Omega=Mgl/\\left(I\\omega\\right)$。",
+   "圆盘 $I=\\frac12mR^2$。"
+  ],
+  "answer": "6\\ \\mathrm{rad/s}",
+  "solution": "陀螺绕自身对称轴高速自转，重力矩使角动量方向缓慢改变，形成进动：\n$$\\vec\\Omega\\times\\vec L=\\vec M\\ \\Longrightarrow\\ \\Omega=\\frac{M_{\\text{重}}g l}{I\\omega}.$$\n\n圆盘转动惯量 $I=\\frac12MR^2=\\frac12\\times 4\\times 0.14^2=0.0392\\ \\mathrm{kg\\cdot m^2}$，重力矩 $M_{\\text{重}}gl=4\\times9.8\\times 0.3=11.8\\ \\mathrm{N\\cdot m}$：\n$$\\Omega=\\frac{11.8}{0.0392\\times 50}=6\\ \\mathrm{rad/s}.$$\n\n进动周期 $T=2\\pi/\\Omega=1.05\\ \\mathrm{s}$。\n\n**反直觉之处**：自转越快，进动越慢（$\\Omega\\propto1/\\omega$）；陀螺「不倒」正是因为快速自转把重力矩的效果转成了缓慢进动。\n\n**易错点**：公式里的 $l$ 是支点到质心的距离，不是杆全长；用 $I=\\frac12MR^2$ 时假定转轴为圆盘中心轴。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "rad/s",
+   "methods": [
+    "陀螺进动",
+    "角动量定理"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 陀螺进动"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "陀螺进动（m=4.5 kg，R=0.05 m，l=0.15 m，ω=150）的进动角速度",
+  "statement": "一个质量 $m=4.5\\ \\mathrm{kg}$、半径 $R=0.05\\ \\mathrm{m}$ 的均匀圆盘装在长 $l=0.15\\ \\mathrm{m}$ 的轻杆一端，杆的另一端支于地面，圆盘以 $\\omega=150\\ \\mathrm{rad/s}$ 绕杆高速自转。求陀螺绕竖直轴的进动角速度（取 $g=9.8\\ \\mathrm{m/s^2}$）。",
+  "mainTag": "理论力学",
+  "tags": [
+   "刚体 Euler 方程与 Euler 角"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 陀螺进动",
+  "hints": [
+   "$\\Omega=Mgl/\\left(I\\omega\\right)$。",
+   "圆盘 $I=\\frac12mR^2$。"
+  ],
+  "answer": "7.84\\ \\mathrm{rad/s}",
+  "solution": "陀螺绕自身对称轴高速自转，重力矩使角动量方向缓慢改变，形成进动：\n$$\\vec\\Omega\\times\\vec L=\\vec M\\ \\Longrightarrow\\ \\Omega=\\frac{M_{\\text{重}}g l}{I\\omega}.$$\n\n圆盘转动惯量 $I=\\frac12MR^2=\\frac12\\times 4.5\\times 0.05^2=5.63\\times10^{-3}\\ \\mathrm{kg\\cdot m^2}$，重力矩 $M_{\\text{重}}gl=4.5\\times9.8\\times 0.15=6.62\\ \\mathrm{N\\cdot m}$：\n$$\\Omega=\\frac{6.62}{5.63\\times10^{-3}\\times 150}=7.84\\ \\mathrm{rad/s}.$$\n\n进动周期 $T=2\\pi/\\Omega=0.801\\ \\mathrm{s}$。\n\n**反直觉之处**：自转越快，进动越慢（$\\Omega\\propto1/\\omega$）；陀螺「不倒」正是因为快速自转把重力矩的效果转成了缓慢进动。\n\n**易错点**：公式里的 $l$ 是支点到质心的距离，不是杆全长；用 $I=\\frac12MR^2$ 时假定转轴为圆盘中心轴。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "rad/s",
+   "methods": [
+    "陀螺进动",
+    "角动量定理"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 陀螺进动"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "陀螺进动（m=3 kg，R=0.18 m，l=0.17 m，ω=100）的进动角速度",
+  "statement": "一个质量 $m=3\\ \\mathrm{kg}$、半径 $R=0.18\\ \\mathrm{m}$ 的均匀圆盘装在长 $l=0.17\\ \\mathrm{m}$ 的轻杆一端，杆的另一端支于地面，圆盘以 $\\omega=100\\ \\mathrm{rad/s}$ 绕杆高速自转。求陀螺绕竖直轴的进动角速度（取 $g=9.8\\ \\mathrm{m/s^2}$）。",
+  "mainTag": "理论力学",
+  "tags": [
+   "刚体 Euler 方程与 Euler 角"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 陀螺进动",
+  "hints": [
+   "$\\Omega=Mgl/\\left(I\\omega\\right)$。",
+   "圆盘 $I=\\frac12mR^2$。"
+  ],
+  "answer": "1.03\\ \\mathrm{rad/s}",
+  "solution": "陀螺绕自身对称轴高速自转，重力矩使角动量方向缓慢改变，形成进动：\n$$\\vec\\Omega\\times\\vec L=\\vec M\\ \\Longrightarrow\\ \\Omega=\\frac{M_{\\text{重}}g l}{I\\omega}.$$\n\n圆盘转动惯量 $I=\\frac12MR^2=\\frac12\\times 3\\times 0.18^2=0.0486\\ \\mathrm{kg\\cdot m^2}$，重力矩 $M_{\\text{重}}gl=3\\times9.8\\times 0.17=5\\ \\mathrm{N\\cdot m}$：\n$$\\Omega=\\frac{5}{0.0486\\times 100}=1.03\\ \\mathrm{rad/s}.$$\n\n进动周期 $T=2\\pi/\\Omega=6.11\\ \\mathrm{s}$。\n\n**反直觉之处**：自转越快，进动越慢（$\\Omega\\propto1/\\omega$）；陀螺「不倒」正是因为快速自转把重力矩的效果转成了缓慢进动。\n\n**易错点**：公式里的 $l$ 是支点到质心的距离，不是杆全长；用 $I=\\frac12MR^2$ 时假定转轴为圆盘中心轴。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "rad/s",
+   "methods": [
+    "陀螺进动",
+    "角动量定理"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 陀螺进动"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "陀螺进动（m=2.5 kg，R=0.11 m，l=0.16 m，ω=200）的进动周期",
+  "statement": "一个质量 $m=2.5\\ \\mathrm{kg}$、半径 $R=0.11\\ \\mathrm{m}$ 的均匀圆盘装在长 $l=0.16\\ \\mathrm{m}$ 的轻杆一端，杆的另一端支于地面，圆盘以 $\\omega=200\\ \\mathrm{rad/s}$ 绕杆高速自转。求进动的周期（取 $g=9.8\\ \\mathrm{m/s^2}$）。",
+  "mainTag": "理论力学",
+  "tags": [
+   "刚体 Euler 方程与 Euler 角"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 陀螺进动",
+  "hints": [
+   "$\\Omega=Mgl/\\left(I\\omega\\right)$。",
+   "圆盘 $I=\\frac12mR^2$。"
+  ],
+  "answer": "4.85\\ \\mathrm{s}",
+  "solution": "陀螺绕自身对称轴高速自转，重力矩使角动量方向缓慢改变，形成进动：\n$$\\vec\\Omega\\times\\vec L=\\vec M\\ \\Longrightarrow\\ \\Omega=\\frac{M_{\\text{重}}g l}{I\\omega}.$$\n\n圆盘转动惯量 $I=\\frac12MR^2=\\frac12\\times 2.5\\times 0.11^2=0.0151\\ \\mathrm{kg\\cdot m^2}$，重力矩 $M_{\\text{重}}gl=2.5\\times9.8\\times 0.16=3.92\\ \\mathrm{N\\cdot m}$：\n$$\\Omega=\\frac{3.92}{0.0151\\times 200}=1.3\\ \\mathrm{rad/s}.$$\n\n进动周期 $T=2\\pi/\\Omega=4.85\\ \\mathrm{s}$。\n\n**反直觉之处**：自转越快，进动越慢（$\\Omega\\propto1/\\omega$）；陀螺「不倒」正是因为快速自转把重力矩的效果转成了缓慢进动。\n\n**易错点**：公式里的 $l$ 是支点到质心的距离，不是杆全长；用 $I=\\frac12MR^2$ 时假定转轴为圆盘中心轴。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "s",
+   "methods": [
+    "陀螺进动",
+    "角动量定理"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 陀螺进动"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "陀螺进动（m=4.5 kg，R=0.08 m，l=0.24 m，ω=30）的进动周期",
+  "statement": "一个质量 $m=4.5\\ \\mathrm{kg}$、半径 $R=0.08\\ \\mathrm{m}$ 的均匀圆盘装在长 $l=0.24\\ \\mathrm{m}$ 的轻杆一端，杆的另一端支于地面，圆盘以 $\\omega=30\\ \\mathrm{rad/s}$ 绕杆高速自转。求进动的周期（取 $g=9.8\\ \\mathrm{m/s^2}$）。",
+  "mainTag": "理论力学",
+  "tags": [
+   "刚体 Euler 方程与 Euler 角"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 陀螺进动",
+  "hints": [
+   "$\\Omega=Mgl/\\left(I\\omega\\right)$。",
+   "圆盘 $I=\\frac12mR^2$。"
+  ],
+  "answer": "0.256\\ \\mathrm{s}",
+  "solution": "陀螺绕自身对称轴高速自转，重力矩使角动量方向缓慢改变，形成进动：\n$$\\vec\\Omega\\times\\vec L=\\vec M\\ \\Longrightarrow\\ \\Omega=\\frac{M_{\\text{重}}g l}{I\\omega}.$$\n\n圆盘转动惯量 $I=\\frac12MR^2=\\frac12\\times 4.5\\times 0.08^2=0.0144\\ \\mathrm{kg\\cdot m^2}$，重力矩 $M_{\\text{重}}gl=4.5\\times9.8\\times 0.24=10.6\\ \\mathrm{N\\cdot m}$：\n$$\\Omega=\\frac{10.6}{0.0144\\times 30}=24.5\\ \\mathrm{rad/s}.$$\n\n进动周期 $T=2\\pi/\\Omega=0.256\\ \\mathrm{s}$。\n\n**反直觉之处**：自转越快，进动越慢（$\\Omega\\propto1/\\omega$）；陀螺「不倒」正是因为快速自转把重力矩的效果转成了缓慢进动。\n\n**易错点**：公式里的 $l$ 是支点到质心的距离，不是杆全长；用 $I=\\frac12MR^2$ 时假定转轴为圆盘中心轴。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "s",
+   "methods": [
+    "陀螺进动",
+    "角动量定理"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 陀螺进动"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "陀螺进动（m=0.5 kg，R=0.16 m，l=0.11 m，ω=80）的进动角速度",
+  "statement": "一个质量 $m=0.5\\ \\mathrm{kg}$、半径 $R=0.16\\ \\mathrm{m}$ 的均匀圆盘装在长 $l=0.11\\ \\mathrm{m}$ 的轻杆一端，杆的另一端支于地面，圆盘以 $\\omega=80\\ \\mathrm{rad/s}$ 绕杆高速自转。求陀螺绕竖直轴的进动角速度（取 $g=9.8\\ \\mathrm{m/s^2}$）。",
+  "mainTag": "理论力学",
+  "tags": [
+   "刚体 Euler 方程与 Euler 角"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 陀螺进动",
+  "hints": [
+   "$\\Omega=Mgl/\\left(I\\omega\\right)$。",
+   "圆盘 $I=\\frac12mR^2$。"
+  ],
+  "answer": "1.05\\ \\mathrm{rad/s}",
+  "solution": "陀螺绕自身对称轴高速自转，重力矩使角动量方向缓慢改变，形成进动：\n$$\\vec\\Omega\\times\\vec L=\\vec M\\ \\Longrightarrow\\ \\Omega=\\frac{M_{\\text{重}}g l}{I\\omega}.$$\n\n圆盘转动惯量 $I=\\frac12MR^2=\\frac12\\times 0.5\\times 0.16^2=6.4\\times10^{-3}\\ \\mathrm{kg\\cdot m^2}$，重力矩 $M_{\\text{重}}gl=0.5\\times9.8\\times 0.11=0.539\\ \\mathrm{N\\cdot m}$：\n$$\\Omega=\\frac{0.539}{6.4\\times10^{-3}\\times 80}=1.05\\ \\mathrm{rad/s}.$$\n\n进动周期 $T=2\\pi/\\Omega=5.97\\ \\mathrm{s}$。\n\n**反直觉之处**：自转越快，进动越慢（$\\Omega\\propto1/\\omega$）；陀螺「不倒」正是因为快速自转把重力矩的效果转成了缓慢进动。\n\n**易错点**：公式里的 $l$ 是支点到质心的距离，不是杆全长；用 $I=\\frac12MR^2$ 时假定转轴为圆盘中心轴。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "rad/s",
+   "methods": [
+    "陀螺进动",
+    "角动量定理"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 陀螺进动"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "陀螺进动（m=2 kg，R=0.19 m，l=0.16 m，ω=150）的进动角速度",
+  "statement": "一个质量 $m=2\\ \\mathrm{kg}$、半径 $R=0.19\\ \\mathrm{m}$ 的均匀圆盘装在长 $l=0.16\\ \\mathrm{m}$ 的轻杆一端，杆的另一端支于地面，圆盘以 $\\omega=150\\ \\mathrm{rad/s}$ 绕杆高速自转。求陀螺绕竖直轴的进动角速度（取 $g=9.8\\ \\mathrm{m/s^2}$）。",
+  "mainTag": "理论力学",
+  "tags": [
+   "刚体 Euler 方程与 Euler 角"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 陀螺进动",
+  "hints": [
+   "$\\Omega=Mgl/\\left(I\\omega\\right)$。",
+   "圆盘 $I=\\frac12mR^2$。"
+  ],
+  "answer": "0.579\\ \\mathrm{rad/s}",
+  "solution": "陀螺绕自身对称轴高速自转，重力矩使角动量方向缓慢改变，形成进动：\n$$\\vec\\Omega\\times\\vec L=\\vec M\\ \\Longrightarrow\\ \\Omega=\\frac{M_{\\text{重}}g l}{I\\omega}.$$\n\n圆盘转动惯量 $I=\\frac12MR^2=\\frac12\\times 2\\times 0.19^2=0.0361\\ \\mathrm{kg\\cdot m^2}$，重力矩 $M_{\\text{重}}gl=2\\times9.8\\times 0.16=3.14\\ \\mathrm{N\\cdot m}$：\n$$\\Omega=\\frac{3.14}{0.0361\\times 150}=0.579\\ \\mathrm{rad/s}.$$\n\n进动周期 $T=2\\pi/\\Omega=10.8\\ \\mathrm{s}$。\n\n**反直觉之处**：自转越快，进动越慢（$\\Omega\\propto1/\\omega$）；陀螺「不倒」正是因为快速自转把重力矩的效果转成了缓慢进动。\n\n**易错点**：公式里的 $l$ 是支点到质心的距离，不是杆全长；用 $I=\\frac12MR^2$ 时假定转轴为圆盘中心轴。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "rad/s",
+   "methods": [
+    "陀螺进动",
+    "角动量定理"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 陀螺进动"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "陀螺进动（m=5 kg，R=0.14 m，l=0.16 m，ω=30）的进动角速度",
+  "statement": "一个质量 $m=5\\ \\mathrm{kg}$、半径 $R=0.14\\ \\mathrm{m}$ 的均匀圆盘装在长 $l=0.16\\ \\mathrm{m}$ 的轻杆一端，杆的另一端支于地面，圆盘以 $\\omega=30\\ \\mathrm{rad/s}$ 绕杆高速自转。求陀螺绕竖直轴的进动角速度（取 $g=9.8\\ \\mathrm{m/s^2}$）。",
+  "mainTag": "理论力学",
+  "tags": [
+   "刚体 Euler 方程与 Euler 角"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 陀螺进动",
+  "hints": [
+   "$\\Omega=Mgl/\\left(I\\omega\\right)$。",
+   "圆盘 $I=\\frac12mR^2$。"
+  ],
+  "answer": "5.33\\ \\mathrm{rad/s}",
+  "solution": "陀螺绕自身对称轴高速自转，重力矩使角动量方向缓慢改变，形成进动：\n$$\\vec\\Omega\\times\\vec L=\\vec M\\ \\Longrightarrow\\ \\Omega=\\frac{M_{\\text{重}}g l}{I\\omega}.$$\n\n圆盘转动惯量 $I=\\frac12MR^2=\\frac12\\times 5\\times 0.14^2=0.049\\ \\mathrm{kg\\cdot m^2}$，重力矩 $M_{\\text{重}}gl=5\\times9.8\\times 0.16=7.84\\ \\mathrm{N\\cdot m}$：\n$$\\Omega=\\frac{7.84}{0.049\\times 30}=5.33\\ \\mathrm{rad/s}.$$\n\n进动周期 $T=2\\pi/\\Omega=1.18\\ \\mathrm{s}$。\n\n**反直觉之处**：自转越快，进动越慢（$\\Omega\\propto1/\\omega$）；陀螺「不倒」正是因为快速自转把重力矩的效果转成了缓慢进动。\n\n**易错点**：公式里的 $l$ 是支点到质心的距离，不是杆全长；用 $I=\\frac12MR^2$ 时假定转轴为圆盘中心轴。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "rad/s",
+   "methods": [
+    "陀螺进动",
+    "角动量定理"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 陀螺进动"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "陀螺进动（m=4.5 kg，R=0.21 m，l=0.32 m，ω=100）的进动周期",
+  "statement": "一个质量 $m=4.5\\ \\mathrm{kg}$、半径 $R=0.21\\ \\mathrm{m}$ 的均匀圆盘装在长 $l=0.32\\ \\mathrm{m}$ 的轻杆一端，杆的另一端支于地面，圆盘以 $\\omega=100\\ \\mathrm{rad/s}$ 绕杆高速自转。求进动的周期（取 $g=9.8\\ \\mathrm{m/s^2}$）。",
+  "mainTag": "理论力学",
+  "tags": [
+   "刚体 Euler 方程与 Euler 角"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 陀螺进动",
+  "hints": [
+   "$\\Omega=Mgl/\\left(I\\omega\\right)$。",
+   "圆盘 $I=\\frac12mR^2$。"
+  ],
+  "answer": "4.42\\ \\mathrm{s}",
+  "solution": "陀螺绕自身对称轴高速自转，重力矩使角动量方向缓慢改变，形成进动：\n$$\\vec\\Omega\\times\\vec L=\\vec M\\ \\Longrightarrow\\ \\Omega=\\frac{M_{\\text{重}}g l}{I\\omega}.$$\n\n圆盘转动惯量 $I=\\frac12MR^2=\\frac12\\times 4.5\\times 0.21^2=0.0992\\ \\mathrm{kg\\cdot m^2}$，重力矩 $M_{\\text{重}}gl=4.5\\times9.8\\times 0.32=14.1\\ \\mathrm{N\\cdot m}$：\n$$\\Omega=\\frac{14.1}{0.0992\\times 100}=1.42\\ \\mathrm{rad/s}.$$\n\n进动周期 $T=2\\pi/\\Omega=4.42\\ \\mathrm{s}$。\n\n**反直觉之处**：自转越快，进动越慢（$\\Omega\\propto1/\\omega$）；陀螺「不倒」正是因为快速自转把重力矩的效果转成了缓慢进动。\n\n**易错点**：公式里的 $l$ 是支点到质心的距离，不是杆全长；用 $I=\\frac12MR^2$ 时假定转轴为圆盘中心轴。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "s",
+   "methods": [
+    "陀螺进动",
+    "角动量定理"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 陀螺进动"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "陀螺进动（m=3.5 kg，R=0.05 m，l=0.22 m，ω=30）的进动周期",
+  "statement": "一个质量 $m=3.5\\ \\mathrm{kg}$、半径 $R=0.05\\ \\mathrm{m}$ 的均匀圆盘装在长 $l=0.22\\ \\mathrm{m}$ 的轻杆一端，杆的另一端支于地面，圆盘以 $\\omega=30\\ \\mathrm{rad/s}$ 绕杆高速自转。求进动的周期（取 $g=9.8\\ \\mathrm{m/s^2}$）。",
+  "mainTag": "理论力学",
+  "tags": [
+   "刚体 Euler 方程与 Euler 角"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 陀螺进动",
+  "hints": [
+   "$\\Omega=Mgl/\\left(I\\omega\\right)$。",
+   "圆盘 $I=\\frac12mR^2$。"
+  ],
+  "answer": "0.109\\ \\mathrm{s}",
+  "solution": "陀螺绕自身对称轴高速自转，重力矩使角动量方向缓慢改变，形成进动：\n$$\\vec\\Omega\\times\\vec L=\\vec M\\ \\Longrightarrow\\ \\Omega=\\frac{M_{\\text{重}}g l}{I\\omega}.$$\n\n圆盘转动惯量 $I=\\frac12MR^2=\\frac12\\times 3.5\\times 0.05^2=4.38\\times10^{-3}\\ \\mathrm{kg\\cdot m^2}$，重力矩 $M_{\\text{重}}gl=3.5\\times9.8\\times 0.22=7.55\\ \\mathrm{N\\cdot m}$：\n$$\\Omega=\\frac{7.55}{4.38\\times10^{-3}\\times 30}=57.5\\ \\mathrm{rad/s}.$$\n\n进动周期 $T=2\\pi/\\Omega=0.109\\ \\mathrm{s}$。\n\n**反直觉之处**：自转越快，进动越慢（$\\Omega\\propto1/\\omega$）；陀螺「不倒」正是因为快速自转把重力矩的效果转成了缓慢进动。\n\n**易错点**：公式里的 $l$ 是支点到质心的距离，不是杆全长；用 $I=\\frac12MR^2$ 时假定转轴为圆盘中心轴。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "s",
+   "methods": [
+    "陀螺进动",
+    "角动量定理"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 陀螺进动"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "势垒隧穿（V₀=1 eV，E=0.5 eV，a=0.1 nm）的衰减常数",
+  "statement": "电子（$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$）以能量 $E=0.5\\ \\mathrm{eV}$ 入射到高 $V_0=1\\ \\mathrm{eV}$、宽 $a=0.1\\ \\mathrm{nm}$ 的方势垒。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$。求势垒内的衰减常数 $\\kappa$。",
+  "mainTag": "量子力学",
+  "tags": [
+   "一维势垒与谐振子"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 势垒隧穿",
+  "hints": [
+   "$\\kappa=\\sqrt{2m\\left(V_0-E\\right)}/\\hbar$。",
+   "厚势垒 $T\\approx e^{-2\\kappa a}$。"
+  ],
+  "answer": "3.62\\times10^{9}\\ \\mathrm{1/m}",
+  "solution": "方势垒（宽 $a$、高 $V_0$）在 $E<V_0$ 时，势垒内波函数按 $e^{-\\kappa x}$ 衰减：\n$$\\kappa=\\frac{\\sqrt{2m\\left(V_0-E\\right)}}{\\hbar}.$$\n\n代入 $V_0-E=0.5\\ \\mathrm{eV}=8.01\\times10^{-20}\\ \\mathrm{J}$：\n$$\\kappa=\\frac{\\sqrt{2\\times9.11\\times10^{-31}\\times 8.01\\times10^{-20}}}{1.055\\times10^{-34}}=3.62\\times10^{9}\\ \\mathrm{m^{-1}}.$$\n\n厚势垒近似（$\\kappa a\\gg1$）下透射系数\n$$T\\approx e^{-2\\kappa a}=\\exp\\left(-2\\times 3.62\\times10^{9}\\times 1\\times10^{-10}\\right)=0.485.$$\n\n**极强的敏感性**：$T$ 随势垒厚度指数下降，厚度增加 $0.1\\ \\mathrm{nm}$ 就能让 $T$ 变化一个数量级——这正是扫描隧道显微镜（STM）能分辨单个原子的原因。\n\n**易错点**：指数上是 $2\\kappa a$ 而不是 $\\kappa a$（概率幅平方）；上式只在 $T\\ll1$ 时成立，接近 $1$ 时需用完整公式。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "1/m",
+   "methods": [
+    "隧穿效应",
+    "WKB 近似"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 势垒隧穿"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "势垒隧穿（V₀=2 eV，E=1 eV，a=0.5 nm）的衰减常数",
+  "statement": "电子（$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$）以能量 $E=1\\ \\mathrm{eV}$ 入射到高 $V_0=2\\ \\mathrm{eV}$、宽 $a=0.5\\ \\mathrm{nm}$ 的方势垒。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$。求势垒内的衰减常数 $\\kappa$。",
+  "mainTag": "量子力学",
+  "tags": [
+   "一维势垒与谐振子"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 势垒隧穿",
+  "hints": [
+   "$\\kappa=\\sqrt{2m\\left(V_0-E\\right)}/\\hbar$。",
+   "厚势垒 $T\\approx e^{-2\\kappa a}$。"
+  ],
+  "answer": "5.12\\times10^{9}\\ \\mathrm{1/m}",
+  "solution": "方势垒（宽 $a$、高 $V_0$）在 $E<V_0$ 时，势垒内波函数按 $e^{-\\kappa x}$ 衰减：\n$$\\kappa=\\frac{\\sqrt{2m\\left(V_0-E\\right)}}{\\hbar}.$$\n\n代入 $V_0-E=1\\ \\mathrm{eV}=1.6\\times10^{-19}\\ \\mathrm{J}$：\n$$\\kappa=\\frac{\\sqrt{2\\times9.11\\times10^{-31}\\times 1.6\\times10^{-19}}}{1.055\\times10^{-34}}=5.12\\times10^{9}\\ \\mathrm{m^{-1}}.$$\n\n厚势垒近似（$\\kappa a\\gg1$）下透射系数\n$$T\\approx e^{-2\\kappa a}=\\exp\\left(-2\\times 5.12\\times10^{9}\\times 5\\times10^{-10}\\right)=5.97\\times10^{-3}.$$\n\n**极强的敏感性**：$T$ 随势垒厚度指数下降，厚度增加 $0.1\\ \\mathrm{nm}$ 就能让 $T$ 变化一个数量级——这正是扫描隧道显微镜（STM）能分辨单个原子的原因。\n\n**易错点**：指数上是 $2\\kappa a$ 而不是 $\\kappa a$（概率幅平方）；上式只在 $T\\ll1$ 时成立，接近 $1$ 时需用完整公式。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "1/m",
+   "methods": [
+    "隧穿效应",
+    "WKB 近似"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 势垒隧穿"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "势垒隧穿（V₀=1 eV，E=0.8 eV，a=0.5 nm）的透射系数",
+  "statement": "电子（$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$）以能量 $E=0.8\\ \\mathrm{eV}$ 入射到高 $V_0=1\\ \\mathrm{eV}$、宽 $a=0.5\\ \\mathrm{nm}$ 的方势垒。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$。求电子穿透该势垒的概率（透射系数）。",
+  "mainTag": "量子力学",
+  "tags": [
+   "一维势垒与谐振子"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 势垒隧穿",
+  "hints": [
+   "$\\kappa=\\sqrt{2m\\left(V_0-E\\right)}/\\hbar$。",
+   "厚势垒 $T\\approx e^{-2\\kappa a}$。"
+  ],
+  "answer": "0.101",
+  "solution": "方势垒（宽 $a$、高 $V_0$）在 $E<V_0$ 时，势垒内波函数按 $e^{-\\kappa x}$ 衰减：\n$$\\kappa=\\frac{\\sqrt{2m\\left(V_0-E\\right)}}{\\hbar}.$$\n\n代入 $V_0-E=0.2\\ \\mathrm{eV}=3.2\\times10^{-20}\\ \\mathrm{J}$：\n$$\\kappa=\\frac{\\sqrt{2\\times9.11\\times10^{-31}\\times 3.2\\times10^{-20}}}{1.055\\times10^{-34}}=2.29\\times10^{9}\\ \\mathrm{m^{-1}}.$$\n\n厚势垒近似（$\\kappa a\\gg1$）下透射系数\n$$T\\approx e^{-2\\kappa a}=\\exp\\left(-2\\times 2.29\\times10^{9}\\times 5\\times10^{-10}\\right)=0.101.$$\n\n**极强的敏感性**：$T$ 随势垒厚度指数下降，厚度增加 $0.1\\ \\mathrm{nm}$ 就能让 $T$ 变化一个数量级——这正是扫描隧道显微镜（STM）能分辨单个原子的原因。\n\n**易错点**：指数上是 $2\\kappa a$ 而不是 $\\kappa a$（概率幅平方）；上式只在 $T\\ll1$ 时成立，接近 $1$ 时需用完整公式。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "隧穿效应",
+    "WKB 近似"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 势垒隧穿"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "势垒隧穿（V₀=5 eV，E=0.8 eV，a=1 nm）的透射系数",
+  "statement": "电子（$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$）以能量 $E=0.8\\ \\mathrm{eV}$ 入射到高 $V_0=5\\ \\mathrm{eV}$、宽 $a=1\\ \\mathrm{nm}$ 的方势垒。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$。求电子穿透该势垒的概率（透射系数）。",
+  "mainTag": "量子力学",
+  "tags": [
+   "一维势垒与谐振子"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 势垒隧穿",
+  "hints": [
+   "$\\kappa=\\sqrt{2m\\left(V_0-E\\right)}/\\hbar$。",
+   "厚势垒 $T\\approx e^{-2\\kappa a}$。"
+  ],
+  "answer": "7.66\\times10^{-10}",
+  "solution": "方势垒（宽 $a$、高 $V_0$）在 $E<V_0$ 时，势垒内波函数按 $e^{-\\kappa x}$ 衰减：\n$$\\kappa=\\frac{\\sqrt{2m\\left(V_0-E\\right)}}{\\hbar}.$$\n\n代入 $V_0-E=4.2\\ \\mathrm{eV}=6.73\\times10^{-19}\\ \\mathrm{J}$：\n$$\\kappa=\\frac{\\sqrt{2\\times9.11\\times10^{-31}\\times 6.73\\times10^{-19}}}{1.055\\times10^{-34}}=1.05\\times10^{10}\\ \\mathrm{m^{-1}}.$$\n\n厚势垒近似（$\\kappa a\\gg1$）下透射系数\n$$T\\approx e^{-2\\kappa a}=\\exp\\left(-2\\times 1.05\\times10^{10}\\times 1\\times10^{-9}\\right)=7.66\\times10^{-10}.$$\n\n**极强的敏感性**：$T$ 随势垒厚度指数下降，厚度增加 $0.1\\ \\mathrm{nm}$ 就能让 $T$ 变化一个数量级——这正是扫描隧道显微镜（STM）能分辨单个原子的原因。\n\n**易错点**：指数上是 $2\\kappa a$ 而不是 $\\kappa a$（概率幅平方）；上式只在 $T\\ll1$ 时成立，接近 $1$ 时需用完整公式。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "隧穿效应",
+    "WKB 近似"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 势垒隧穿"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "势垒隧穿（V₀=3 eV，E=0.5 eV，a=0.2 nm）的透射系数",
+  "statement": "电子（$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$）以能量 $E=0.5\\ \\mathrm{eV}$ 入射到高 $V_0=3\\ \\mathrm{eV}$、宽 $a=0.2\\ \\mathrm{nm}$ 的方势垒。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$。求电子穿透该势垒的概率（透射系数）。",
+  "mainTag": "量子力学",
+  "tags": [
+   "一维势垒与谐振子"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 势垒隧穿",
+  "hints": [
+   "$\\kappa=\\sqrt{2m\\left(V_0-E\\right)}/\\hbar$。",
+   "厚势垒 $T\\approx e^{-2\\kappa a}$。"
+  ],
+  "answer": "0.0392",
+  "solution": "方势垒（宽 $a$、高 $V_0$）在 $E<V_0$ 时，势垒内波函数按 $e^{-\\kappa x}$ 衰减：\n$$\\kappa=\\frac{\\sqrt{2m\\left(V_0-E\\right)}}{\\hbar}.$$\n\n代入 $V_0-E=2.5\\ \\mathrm{eV}=4\\times10^{-19}\\ \\mathrm{J}$：\n$$\\kappa=\\frac{\\sqrt{2\\times9.11\\times10^{-31}\\times 4\\times10^{-19}}}{1.055\\times10^{-34}}=8.1\\times10^{9}\\ \\mathrm{m^{-1}}.$$\n\n厚势垒近似（$\\kappa a\\gg1$）下透射系数\n$$T\\approx e^{-2\\kappa a}=\\exp\\left(-2\\times 8.1\\times10^{9}\\times 2\\times10^{-10}\\right)=0.0392.$$\n\n**极强的敏感性**：$T$ 随势垒厚度指数下降，厚度增加 $0.1\\ \\mathrm{nm}$ 就能让 $T$ 变化一个数量级——这正是扫描隧道显微镜（STM）能分辨单个原子的原因。\n\n**易错点**：指数上是 $2\\kappa a$ 而不是 $\\kappa a$（概率幅平方）；上式只在 $T\\ll1$ 时成立，接近 $1$ 时需用完整公式。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "隧穿效应",
+    "WKB 近似"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 势垒隧穿"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "势垒隧穿（V₀=2 eV，E=0.5 eV，a=0.2 nm）的透射系数",
+  "statement": "电子（$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$）以能量 $E=0.5\\ \\mathrm{eV}$ 入射到高 $V_0=2\\ \\mathrm{eV}$、宽 $a=0.2\\ \\mathrm{nm}$ 的方势垒。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$。求电子穿透该势垒的概率（透射系数）。",
+  "mainTag": "量子力学",
+  "tags": [
+   "一维势垒与谐振子"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 势垒隧穿",
+  "hints": [
+   "$\\kappa=\\sqrt{2m\\left(V_0-E\\right)}/\\hbar$。",
+   "厚势垒 $T\\approx e^{-2\\kappa a}$。"
+  ],
+  "answer": "0.0814",
+  "solution": "方势垒（宽 $a$、高 $V_0$）在 $E<V_0$ 时，势垒内波函数按 $e^{-\\kappa x}$ 衰减：\n$$\\kappa=\\frac{\\sqrt{2m\\left(V_0-E\\right)}}{\\hbar}.$$\n\n代入 $V_0-E=1.5\\ \\mathrm{eV}=2.4\\times10^{-19}\\ \\mathrm{J}$：\n$$\\kappa=\\frac{\\sqrt{2\\times9.11\\times10^{-31}\\times 2.4\\times10^{-19}}}{1.055\\times10^{-34}}=6.27\\times10^{9}\\ \\mathrm{m^{-1}}.$$\n\n厚势垒近似（$\\kappa a\\gg1$）下透射系数\n$$T\\approx e^{-2\\kappa a}=\\exp\\left(-2\\times 6.27\\times10^{9}\\times 2\\times10^{-10}\\right)=0.0814.$$\n\n**极强的敏感性**：$T$ 随势垒厚度指数下降，厚度增加 $0.1\\ \\mathrm{nm}$ 就能让 $T$ 变化一个数量级——这正是扫描隧道显微镜（STM）能分辨单个原子的原因。\n\n**易错点**：指数上是 $2\\kappa a$ 而不是 $\\kappa a$（概率幅平方）；上式只在 $T\\ll1$ 时成立，接近 $1$ 时需用完整公式。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "隧穿效应",
+    "WKB 近似"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 势垒隧穿"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "势垒隧穿（V₀=3 eV，E=0.2 eV，a=0.2 nm）的透射系数",
+  "statement": "电子（$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$）以能量 $E=0.2\\ \\mathrm{eV}$ 入射到高 $V_0=3\\ \\mathrm{eV}$、宽 $a=0.2\\ \\mathrm{nm}$ 的方势垒。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$。求电子穿透该势垒的概率（透射系数）。",
+  "mainTag": "量子力学",
+  "tags": [
+   "一维势垒与谐振子"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 势垒隧穿",
+  "hints": [
+   "$\\kappa=\\sqrt{2m\\left(V_0-E\\right)}/\\hbar$。",
+   "厚势垒 $T\\approx e^{-2\\kappa a}$。"
+  ],
+  "answer": "0.0325",
+  "solution": "方势垒（宽 $a$、高 $V_0$）在 $E<V_0$ 时，势垒内波函数按 $e^{-\\kappa x}$ 衰减：\n$$\\kappa=\\frac{\\sqrt{2m\\left(V_0-E\\right)}}{\\hbar}.$$\n\n代入 $V_0-E=2.8\\ \\mathrm{eV}=4.49\\times10^{-19}\\ \\mathrm{J}$：\n$$\\kappa=\\frac{\\sqrt{2\\times9.11\\times10^{-31}\\times 4.49\\times10^{-19}}}{1.055\\times10^{-34}}=8.57\\times10^{9}\\ \\mathrm{m^{-1}}.$$\n\n厚势垒近似（$\\kappa a\\gg1$）下透射系数\n$$T\\approx e^{-2\\kappa a}=\\exp\\left(-2\\times 8.57\\times10^{9}\\times 2\\times10^{-10}\\right)=0.0325.$$\n\n**极强的敏感性**：$T$ 随势垒厚度指数下降，厚度增加 $0.1\\ \\mathrm{nm}$ 就能让 $T$ 变化一个数量级——这正是扫描隧道显微镜（STM）能分辨单个原子的原因。\n\n**易错点**：指数上是 $2\\kappa a$ 而不是 $\\kappa a$（概率幅平方）；上式只在 $T\\ll1$ 时成立，接近 $1$ 时需用完整公式。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "隧穿效应",
+    "WKB 近似"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 势垒隧穿"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "势垒隧穿（V₀=3 eV，E=0.8 eV，a=1 nm）的透射系数",
+  "statement": "电子（$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$）以能量 $E=0.8\\ \\mathrm{eV}$ 入射到高 $V_0=3\\ \\mathrm{eV}$、宽 $a=1\\ \\mathrm{nm}$ 的方势垒。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$。求电子穿透该势垒的概率（透射系数）。",
+  "mainTag": "量子力学",
+  "tags": [
+   "一维势垒与谐振子"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 势垒隧穿",
+  "hints": [
+   "$\\kappa=\\sqrt{2m\\left(V_0-E\\right)}/\\hbar$。",
+   "厚势垒 $T\\approx e^{-2\\kappa a}$。"
+  ],
+  "answer": "2.53\\times10^{-7}",
+  "solution": "方势垒（宽 $a$、高 $V_0$）在 $E<V_0$ 时，势垒内波函数按 $e^{-\\kappa x}$ 衰减：\n$$\\kappa=\\frac{\\sqrt{2m\\left(V_0-E\\right)}}{\\hbar}.$$\n\n代入 $V_0-E=2.2\\ \\mathrm{eV}=3.52\\times10^{-19}\\ \\mathrm{J}$：\n$$\\kappa=\\frac{\\sqrt{2\\times9.11\\times10^{-31}\\times 3.52\\times10^{-19}}}{1.055\\times10^{-34}}=7.6\\times10^{9}\\ \\mathrm{m^{-1}}.$$\n\n厚势垒近似（$\\kappa a\\gg1$）下透射系数\n$$T\\approx e^{-2\\kappa a}=\\exp\\left(-2\\times 7.6\\times10^{9}\\times 1\\times10^{-9}\\right)=2.53\\times10^{-7}.$$\n\n**极强的敏感性**：$T$ 随势垒厚度指数下降，厚度增加 $0.1\\ \\mathrm{nm}$ 就能让 $T$ 变化一个数量级——这正是扫描隧道显微镜（STM）能分辨单个原子的原因。\n\n**易错点**：指数上是 $2\\kappa a$ 而不是 $\\kappa a$（概率幅平方）；上式只在 $T\\ll1$ 时成立，接近 $1$ 时需用完整公式。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "隧穿效应",
+    "WKB 近似"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 势垒隧穿"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "势垒隧穿（V₀=5 eV，E=0.8 eV，a=0.3 nm）的透射系数",
+  "statement": "电子（$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$）以能量 $E=0.8\\ \\mathrm{eV}$ 入射到高 $V_0=5\\ \\mathrm{eV}$、宽 $a=0.3\\ \\mathrm{nm}$ 的方势垒。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$。求电子穿透该势垒的概率（透射系数）。",
+  "mainTag": "量子力学",
+  "tags": [
+   "一维势垒与谐振子"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 势垒隧穿",
+  "hints": [
+   "$\\kappa=\\sqrt{2m\\left(V_0-E\\right)}/\\hbar$。",
+   "厚势垒 $T\\approx e^{-2\\kappa a}$。"
+  ],
+  "answer": "1.84\\times10^{-3}",
+  "solution": "方势垒（宽 $a$、高 $V_0$）在 $E<V_0$ 时，势垒内波函数按 $e^{-\\kappa x}$ 衰减：\n$$\\kappa=\\frac{\\sqrt{2m\\left(V_0-E\\right)}}{\\hbar}.$$\n\n代入 $V_0-E=4.2\\ \\mathrm{eV}=6.73\\times10^{-19}\\ \\mathrm{J}$：\n$$\\kappa=\\frac{\\sqrt{2\\times9.11\\times10^{-31}\\times 6.73\\times10^{-19}}}{1.055\\times10^{-34}}=1.05\\times10^{10}\\ \\mathrm{m^{-1}}.$$\n\n厚势垒近似（$\\kappa a\\gg1$）下透射系数\n$$T\\approx e^{-2\\kappa a}=\\exp\\left(-2\\times 1.05\\times10^{10}\\times 3\\times10^{-10}\\right)=1.84\\times10^{-3}.$$\n\n**极强的敏感性**：$T$ 随势垒厚度指数下降，厚度增加 $0.1\\ \\mathrm{nm}$ 就能让 $T$ 变化一个数量级——这正是扫描隧道显微镜（STM）能分辨单个原子的原因。\n\n**易错点**：指数上是 $2\\kappa a$ 而不是 $\\kappa a$（概率幅平方）；上式只在 $T\\ll1$ 时成立，接近 $1$ 时需用完整公式。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "隧穿效应",
+    "WKB 近似"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 势垒隧穿"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "势垒隧穿（V₀=2 eV，E=0.2 eV，a=0.3 nm）的透射系数",
+  "statement": "电子（$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$）以能量 $E=0.2\\ \\mathrm{eV}$ 入射到高 $V_0=2\\ \\mathrm{eV}$、宽 $a=0.3\\ \\mathrm{nm}$ 的方势垒。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$。求电子穿透该势垒的概率（透射系数）。",
+  "mainTag": "量子力学",
+  "tags": [
+   "一维势垒与谐振子"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 势垒隧穿",
+  "hints": [
+   "$\\kappa=\\sqrt{2m\\left(V_0-E\\right)}/\\hbar$。",
+   "厚势垒 $T\\approx e^{-2\\kappa a}$。"
+  ],
+  "answer": "0.0162",
+  "solution": "方势垒（宽 $a$、高 $V_0$）在 $E<V_0$ 时，势垒内波函数按 $e^{-\\kappa x}$ 衰减：\n$$\\kappa=\\frac{\\sqrt{2m\\left(V_0-E\\right)}}{\\hbar}.$$\n\n代入 $V_0-E=1.8\\ \\mathrm{eV}=2.88\\times10^{-19}\\ \\mathrm{J}$：\n$$\\kappa=\\frac{\\sqrt{2\\times9.11\\times10^{-31}\\times 2.88\\times10^{-19}}}{1.055\\times10^{-34}}=6.87\\times10^{9}\\ \\mathrm{m^{-1}}.$$\n\n厚势垒近似（$\\kappa a\\gg1$）下透射系数\n$$T\\approx e^{-2\\kappa a}=\\exp\\left(-2\\times 6.87\\times10^{9}\\times 3\\times10^{-10}\\right)=0.0162.$$\n\n**极强的敏感性**：$T$ 随势垒厚度指数下降，厚度增加 $0.1\\ \\mathrm{nm}$ 就能让 $T$ 变化一个数量级——这正是扫描隧道显微镜（STM）能分辨单个原子的原因。\n\n**易错点**：指数上是 $2\\kappa a$ 而不是 $\\kappa a$（概率幅平方）；上式只在 $T\\ll1$ 时成立，接近 $1$ 时需用完整公式。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "隧穿效应",
+    "WKB 近似"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 势垒隧穿"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "量子谐振子（f=5×10¹³ Hz，n=3）的零点能",
+  "statement": "一维谐振子的振动频率 $\\nu=5\\times10^{13}\\ \\mathrm{Hz}$。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$。求零点能。",
+  "mainTag": "量子力学",
+  "tags": [
+   "一维势垒与谐振子"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "经典教材题型 · 谐振子能级",
+  "hints": [
+   "$E_n=\\left(n+\\frac12\\right)\\hbar\\omega$，$\\omega=2\\pi\\nu$。",
+   "能级等间距，间隔 $\\hbar\\omega=h\\nu$。"
+  ],
+  "answer": "1.66\\times10^{-20}\\ \\mathrm{J}",
+  "solution": "一维谐振子的能级为\n$$E_n=\\left(n+\\frac12\\right)\\hbar\\omega,\\qquad n=0,1,2,\\dots$$\n\n本题 $f=5\\times10^{13}\\ \\mathrm{Hz}$，$\\omega=2\\pi f=3.14\\times10^{14}\\ \\mathrm{rad/s}$：\n$$E_0=\\frac12\\hbar\\omega=\\frac12\\times1.055\\times10^{-34}\\times 3.14\\times10^{14}=1.66\\times10^{-20}\\ \\mathrm{J},$$\n$$E_3=\\left(3+\\frac12\\right)\\hbar\\omega=1.16\\times10^{-19}\\ \\mathrm{J}.$$\n\n能级等间距，间隔 $\\Delta E=\\hbar\\omega=3.31\\times10^{-20}\\ \\mathrm{J}=0.207\\ \\mathrm{eV}$。\n\n**零点能**：$n=0$ 时能量不为零，是不确定关系的直接结果——振子不可能同时静止在平衡位置。\n\n**易错点**：能级从 $\\frac12\\hbar\\omega$ 起，不是从 $0$ 起；用频率 $f$ 时 $E=hf$ 对应的是能级**间隔**，不是能级本身。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "量子谐振子",
+    "零点能"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 谐振子能级"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "量子谐振子（f=1×10¹⁵ Hz，n=10）的零点能",
+  "statement": "一维谐振子的振动频率 $\\nu=1\\times10^{15}\\ \\mathrm{Hz}$。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$。求零点能。",
+  "mainTag": "量子力学",
+  "tags": [
+   "一维势垒与谐振子"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "经典教材题型 · 谐振子能级",
+  "hints": [
+   "$E_n=\\left(n+\\frac12\\right)\\hbar\\omega$，$\\omega=2\\pi\\nu$。",
+   "能级等间距，间隔 $\\hbar\\omega=h\\nu$。"
+  ],
+  "answer": "3.31\\times10^{-19}\\ \\mathrm{J}",
+  "solution": "一维谐振子的能级为\n$$E_n=\\left(n+\\frac12\\right)\\hbar\\omega,\\qquad n=0,1,2,\\dots$$\n\n本题 $f=1\\times10^{15}\\ \\mathrm{Hz}$，$\\omega=2\\pi f=6.28\\times10^{15}\\ \\mathrm{rad/s}$：\n$$E_0=\\frac12\\hbar\\omega=\\frac12\\times1.055\\times10^{-34}\\times 6.28\\times10^{15}=3.31\\times10^{-19}\\ \\mathrm{J},$$\n$$E_10=\\left(10+\\frac12\\right)\\hbar\\omega=6.96\\times10^{-18}\\ \\mathrm{J}.$$\n\n能级等间距，间隔 $\\Delta E=\\hbar\\omega=6.63\\times10^{-19}\\ \\mathrm{J}=4.14\\ \\mathrm{eV}$。\n\n**零点能**：$n=0$ 时能量不为零，是不确定关系的直接结果——振子不可能同时静止在平衡位置。\n\n**易错点**：能级从 $\\frac12\\hbar\\omega$ 起，不是从 $0$ 起；用频率 $f$ 时 $E=hf$ 对应的是能级**间隔**，不是能级本身。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "量子谐振子",
+    "零点能"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 谐振子能级"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "量子谐振子（f=1×10¹³ Hz，n=0）的能级能量",
+  "statement": "一维谐振子的振动频率 $\\nu=1\\times10^{13}\\ \\mathrm{Hz}$。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$。求第 $n=0$ 个能级的能量。",
+  "mainTag": "量子力学",
+  "tags": [
+   "一维势垒与谐振子"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "经典教材题型 · 谐振子能级",
+  "hints": [
+   "$E_n=\\left(n+\\frac12\\right)\\hbar\\omega$，$\\omega=2\\pi\\nu$。",
+   "能级等间距，间隔 $\\hbar\\omega=h\\nu$。"
+  ],
+  "answer": "3.31\\times10^{-21}\\ \\mathrm{J}",
+  "solution": "一维谐振子的能级为\n$$E_n=\\left(n+\\frac12\\right)\\hbar\\omega,\\qquad n=0,1,2,\\dots$$\n\n本题 $f=1\\times10^{13}\\ \\mathrm{Hz}$，$\\omega=2\\pi f=6.28\\times10^{13}\\ \\mathrm{rad/s}$：\n$$E_0=\\frac12\\hbar\\omega=\\frac12\\times1.055\\times10^{-34}\\times 6.28\\times10^{13}=3.31\\times10^{-21}\\ \\mathrm{J},$$\n$$E_0=\\left(0+\\frac12\\right)\\hbar\\omega=3.31\\times10^{-21}\\ \\mathrm{J}.$$\n\n能级等间距，间隔 $\\Delta E=\\hbar\\omega=6.63\\times10^{-21}\\ \\mathrm{J}=0.0414\\ \\mathrm{eV}$。\n\n**零点能**：$n=0$ 时能量不为零，是不确定关系的直接结果——振子不可能同时静止在平衡位置。\n\n**易错点**：能级从 $\\frac12\\hbar\\omega$ 起，不是从 $0$ 起；用频率 $f$ 时 $E=hf$ 对应的是能级**间隔**，不是能级本身。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "量子谐振子",
+    "零点能"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 谐振子能级"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "量子谐振子（f=1×10¹³ Hz，n=1）的零点能",
+  "statement": "一维谐振子的振动频率 $\\nu=1\\times10^{13}\\ \\mathrm{Hz}$。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$。求零点能。",
+  "mainTag": "量子力学",
+  "tags": [
+   "一维势垒与谐振子"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "经典教材题型 · 谐振子能级",
+  "hints": [
+   "$E_n=\\left(n+\\frac12\\right)\\hbar\\omega$，$\\omega=2\\pi\\nu$。",
+   "能级等间距，间隔 $\\hbar\\omega=h\\nu$。"
+  ],
+  "answer": "3.31\\times10^{-21}\\ \\mathrm{J}",
+  "solution": "一维谐振子的能级为\n$$E_n=\\left(n+\\frac12\\right)\\hbar\\omega,\\qquad n=0,1,2,\\dots$$\n\n本题 $f=1\\times10^{13}\\ \\mathrm{Hz}$，$\\omega=2\\pi f=6.28\\times10^{13}\\ \\mathrm{rad/s}$：\n$$E_0=\\frac12\\hbar\\omega=\\frac12\\times1.055\\times10^{-34}\\times 6.28\\times10^{13}=3.31\\times10^{-21}\\ \\mathrm{J},$$\n$$E_1=\\left(1+\\frac12\\right)\\hbar\\omega=9.94\\times10^{-21}\\ \\mathrm{J}.$$\n\n能级等间距，间隔 $\\Delta E=\\hbar\\omega=6.63\\times10^{-21}\\ \\mathrm{J}=0.0414\\ \\mathrm{eV}$。\n\n**零点能**：$n=0$ 时能量不为零，是不确定关系的直接结果——振子不可能同时静止在平衡位置。\n\n**易错点**：能级从 $\\frac12\\hbar\\omega$ 起，不是从 $0$ 起；用频率 $f$ 时 $E=hf$ 对应的是能级**间隔**，不是能级本身。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "量子谐振子",
+    "零点能"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 谐振子能级"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "量子谐振子（f=1×10¹⁴ Hz，n=0）的零点能",
+  "statement": "一维谐振子的振动频率 $\\nu=1\\times10^{14}\\ \\mathrm{Hz}$。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$。求零点能。",
+  "mainTag": "量子力学",
+  "tags": [
+   "一维势垒与谐振子"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "经典教材题型 · 谐振子能级",
+  "hints": [
+   "$E_n=\\left(n+\\frac12\\right)\\hbar\\omega$，$\\omega=2\\pi\\nu$。",
+   "能级等间距，间隔 $\\hbar\\omega=h\\nu$。"
+  ],
+  "answer": "3.31\\times10^{-20}\\ \\mathrm{J}",
+  "solution": "一维谐振子的能级为\n$$E_n=\\left(n+\\frac12\\right)\\hbar\\omega,\\qquad n=0,1,2,\\dots$$\n\n本题 $f=1\\times10^{14}\\ \\mathrm{Hz}$，$\\omega=2\\pi f=6.28\\times10^{14}\\ \\mathrm{rad/s}$：\n$$E_0=\\frac12\\hbar\\omega=\\frac12\\times1.055\\times10^{-34}\\times 6.28\\times10^{14}=3.31\\times10^{-20}\\ \\mathrm{J},$$\n$$E_0=\\left(0+\\frac12\\right)\\hbar\\omega=3.31\\times10^{-20}\\ \\mathrm{J}.$$\n\n能级等间距，间隔 $\\Delta E=\\hbar\\omega=6.63\\times10^{-20}\\ \\mathrm{J}=0.414\\ \\mathrm{eV}$。\n\n**零点能**：$n=0$ 时能量不为零，是不确定关系的直接结果——振子不可能同时静止在平衡位置。\n\n**易错点**：能级从 $\\frac12\\hbar\\omega$ 起，不是从 $0$ 起；用频率 $f$ 时 $E=hf$ 对应的是能级**间隔**，不是能级本身。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "量子谐振子",
+    "零点能"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 谐振子能级"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "量子谐振子（f=1×10¹³ Hz，n=10）的能级间隔",
+  "statement": "一维谐振子的振动频率 $\\nu=1\\times10^{13}\\ \\mathrm{Hz}$。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$。求相邻能级之间的间隔。",
+  "mainTag": "量子力学",
+  "tags": [
+   "一维势垒与谐振子"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "经典教材题型 · 谐振子能级",
+  "hints": [
+   "$E_n=\\left(n+\\frac12\\right)\\hbar\\omega$，$\\omega=2\\pi\\nu$。",
+   "能级等间距，间隔 $\\hbar\\omega=h\\nu$。"
+  ],
+  "answer": "6.63\\times10^{-21}\\ \\mathrm{J}",
+  "solution": "一维谐振子的能级为\n$$E_n=\\left(n+\\frac12\\right)\\hbar\\omega,\\qquad n=0,1,2,\\dots$$\n\n本题 $f=1\\times10^{13}\\ \\mathrm{Hz}$，$\\omega=2\\pi f=6.28\\times10^{13}\\ \\mathrm{rad/s}$：\n$$E_0=\\frac12\\hbar\\omega=\\frac12\\times1.055\\times10^{-34}\\times 6.28\\times10^{13}=3.31\\times10^{-21}\\ \\mathrm{J},$$\n$$E_10=\\left(10+\\frac12\\right)\\hbar\\omega=6.96\\times10^{-20}\\ \\mathrm{J}.$$\n\n能级等间距，间隔 $\\Delta E=\\hbar\\omega=6.63\\times10^{-21}\\ \\mathrm{J}=0.0414\\ \\mathrm{eV}$。\n\n**零点能**：$n=0$ 时能量不为零，是不确定关系的直接结果——振子不可能同时静止在平衡位置。\n\n**易错点**：能级从 $\\frac12\\hbar\\omega$ 起，不是从 $0$ 起；用频率 $f$ 时 $E=hf$ 对应的是能级**间隔**，不是能级本身。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "量子谐振子",
+    "零点能"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 谐振子能级"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "量子谐振子（f=1×10¹³ Hz，n=3）的能级能量",
+  "statement": "一维谐振子的振动频率 $\\nu=1\\times10^{13}\\ \\mathrm{Hz}$。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$。求第 $n=3$ 个能级的能量。",
+  "mainTag": "量子力学",
+  "tags": [
+   "一维势垒与谐振子"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "经典教材题型 · 谐振子能级",
+  "hints": [
+   "$E_n=\\left(n+\\frac12\\right)\\hbar\\omega$，$\\omega=2\\pi\\nu$。",
+   "能级等间距，间隔 $\\hbar\\omega=h\\nu$。"
+  ],
+  "answer": "2.32\\times10^{-20}\\ \\mathrm{J}",
+  "solution": "一维谐振子的能级为\n$$E_n=\\left(n+\\frac12\\right)\\hbar\\omega,\\qquad n=0,1,2,\\dots$$\n\n本题 $f=1\\times10^{13}\\ \\mathrm{Hz}$，$\\omega=2\\pi f=6.28\\times10^{13}\\ \\mathrm{rad/s}$：\n$$E_0=\\frac12\\hbar\\omega=\\frac12\\times1.055\\times10^{-34}\\times 6.28\\times10^{13}=3.31\\times10^{-21}\\ \\mathrm{J},$$\n$$E_3=\\left(3+\\frac12\\right)\\hbar\\omega=2.32\\times10^{-20}\\ \\mathrm{J}.$$\n\n能级等间距，间隔 $\\Delta E=\\hbar\\omega=6.63\\times10^{-21}\\ \\mathrm{J}=0.0414\\ \\mathrm{eV}$。\n\n**零点能**：$n=0$ 时能量不为零，是不确定关系的直接结果——振子不可能同时静止在平衡位置。\n\n**易错点**：能级从 $\\frac12\\hbar\\omega$ 起，不是从 $0$ 起；用频率 $f$ 时 $E=hf$ 对应的是能级**间隔**，不是能级本身。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "量子谐振子",
+    "零点能"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 谐振子能级"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "量子谐振子（f=5×10¹³ Hz，n=3）的能级能量",
+  "statement": "一维谐振子的振动频率 $\\nu=5\\times10^{13}\\ \\mathrm{Hz}$。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$。求第 $n=3$ 个能级的能量。",
+  "mainTag": "量子力学",
+  "tags": [
+   "一维势垒与谐振子"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "经典教材题型 · 谐振子能级",
+  "hints": [
+   "$E_n=\\left(n+\\frac12\\right)\\hbar\\omega$，$\\omega=2\\pi\\nu$。",
+   "能级等间距，间隔 $\\hbar\\omega=h\\nu$。"
+  ],
+  "answer": "1.16\\times10^{-19}\\ \\mathrm{J}",
+  "solution": "一维谐振子的能级为\n$$E_n=\\left(n+\\frac12\\right)\\hbar\\omega,\\qquad n=0,1,2,\\dots$$\n\n本题 $f=5\\times10^{13}\\ \\mathrm{Hz}$，$\\omega=2\\pi f=3.14\\times10^{14}\\ \\mathrm{rad/s}$：\n$$E_0=\\frac12\\hbar\\omega=\\frac12\\times1.055\\times10^{-34}\\times 3.14\\times10^{14}=1.66\\times10^{-20}\\ \\mathrm{J},$$\n$$E_3=\\left(3+\\frac12\\right)\\hbar\\omega=1.16\\times10^{-19}\\ \\mathrm{J}.$$\n\n能级等间距，间隔 $\\Delta E=\\hbar\\omega=3.31\\times10^{-20}\\ \\mathrm{J}=0.207\\ \\mathrm{eV}$。\n\n**零点能**：$n=0$ 时能量不为零，是不确定关系的直接结果——振子不可能同时静止在平衡位置。\n\n**易错点**：能级从 $\\frac12\\hbar\\omega$ 起，不是从 $0$ 起；用频率 $f$ 时 $E=hf$ 对应的是能级**间隔**，不是能级本身。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "量子谐振子",
+    "零点能"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 谐振子能级"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "量子谐振子（f=1×10¹⁵ Hz，n=0）的能级间隔",
+  "statement": "一维谐振子的振动频率 $\\nu=1\\times10^{15}\\ \\mathrm{Hz}$。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$。求相邻能级之间的间隔。",
+  "mainTag": "量子力学",
+  "tags": [
+   "一维势垒与谐振子"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "经典教材题型 · 谐振子能级",
+  "hints": [
+   "$E_n=\\left(n+\\frac12\\right)\\hbar\\omega$，$\\omega=2\\pi\\nu$。",
+   "能级等间距，间隔 $\\hbar\\omega=h\\nu$。"
+  ],
+  "answer": "6.63\\times10^{-19}\\ \\mathrm{J}",
+  "solution": "一维谐振子的能级为\n$$E_n=\\left(n+\\frac12\\right)\\hbar\\omega,\\qquad n=0,1,2,\\dots$$\n\n本题 $f=1\\times10^{15}\\ \\mathrm{Hz}$，$\\omega=2\\pi f=6.28\\times10^{15}\\ \\mathrm{rad/s}$：\n$$E_0=\\frac12\\hbar\\omega=\\frac12\\times1.055\\times10^{-34}\\times 6.28\\times10^{15}=3.31\\times10^{-19}\\ \\mathrm{J},$$\n$$E_0=\\left(0+\\frac12\\right)\\hbar\\omega=3.31\\times10^{-19}\\ \\mathrm{J}.$$\n\n能级等间距，间隔 $\\Delta E=\\hbar\\omega=6.63\\times10^{-19}\\ \\mathrm{J}=4.14\\ \\mathrm{eV}$。\n\n**零点能**：$n=0$ 时能量不为零，是不确定关系的直接结果——振子不可能同时静止在平衡位置。\n\n**易错点**：能级从 $\\frac12\\hbar\\omega$ 起，不是从 $0$ 起；用频率 $f$ 时 $E=hf$ 对应的是能级**间隔**，不是能级本身。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "量子谐振子",
+    "零点能"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 谐振子能级"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "量子谐振子（f=1×10¹⁵ Hz，n=3）的能级能量",
+  "statement": "一维谐振子的振动频率 $\\nu=1\\times10^{15}\\ \\mathrm{Hz}$。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$1\\ \\mathrm{eV}=1.602\\times10^{-19}\\ \\mathrm{J}$。求第 $n=3$ 个能级的能量。",
+  "mainTag": "量子力学",
+  "tags": [
+   "一维势垒与谐振子"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "经典教材题型 · 谐振子能级",
+  "hints": [
+   "$E_n=\\left(n+\\frac12\\right)\\hbar\\omega$，$\\omega=2\\pi\\nu$。",
+   "能级等间距，间隔 $\\hbar\\omega=h\\nu$。"
+  ],
+  "answer": "2.32\\times10^{-18}\\ \\mathrm{J}",
+  "solution": "一维谐振子的能级为\n$$E_n=\\left(n+\\frac12\\right)\\hbar\\omega,\\qquad n=0,1,2,\\dots$$\n\n本题 $f=1\\times10^{15}\\ \\mathrm{Hz}$，$\\omega=2\\pi f=6.28\\times10^{15}\\ \\mathrm{rad/s}$：\n$$E_0=\\frac12\\hbar\\omega=\\frac12\\times1.055\\times10^{-34}\\times 6.28\\times10^{15}=3.31\\times10^{-19}\\ \\mathrm{J},$$\n$$E_3=\\left(3+\\frac12\\right)\\hbar\\omega=2.32\\times10^{-18}\\ \\mathrm{J}.$$\n\n能级等间距，间隔 $\\Delta E=\\hbar\\omega=6.63\\times10^{-19}\\ \\mathrm{J}=4.14\\ \\mathrm{eV}$。\n\n**零点能**：$n=0$ 时能量不为零，是不确定关系的直接结果——振子不可能同时静止在平衡位置。\n\n**易错点**：能级从 $\\frac12\\hbar\\omega$ 起，不是从 $0$ 起；用频率 $f$ 时 $E=hf$ 对应的是能级**间隔**，不是能级本身。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "量子谐振子",
+    "零点能"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 谐振子能级"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "铝的费米能",
+  "statement": "铝的自由电子数密度 $n=1.8\\times10^{29}\\ \\mathrm{m^{-3}}$。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$、$k_B=1.38\\times10^{-23}\\ \\mathrm{J/K}$。求电子的费米能。",
+  "mainTag": "热力学与统计物理",
+  "tags": [
+   "简并电子气"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 费米能",
+  "hints": [
+   "$E_F=\\hbar^2\\left(3\\pi^2n\\right)^{2/3}/2m$。",
+   "$T_F=E_F/k_B$。"
+  ],
+  "answer": "1.86\\times10^{-18}\\ \\mathrm{J}",
+  "solution": "自由电子气的费米能（$T=0$）\n$$E_F=\\frac{\\hbar^2}{2m}\\left(3\\pi^2n\\right)^{2/3}.$$\n\n代入 铝 的电子数密度 $n=1.8\\times10^{29}\\ \\mathrm{m^{-3}}$：\n$$E_F=\\frac{\\left(1.055\\times10^{-34}\\right)^2}{2\\times9.11\\times10^{-31}}\\left(3\\pi^2\\times 1.8\\times10^{29}\\right)^{2/3}=1.86\\times10^{-18}\\ \\mathrm{J}=11.6\\ \\mathrm{eV}.$$\n\n费米温度 $T_F=E_F/k_B=1.35\\times10^{5}\\ \\mathrm{K}$，费米速率 $v_F=\\sqrt{2E_F/m}=2.02\\times10^{6}\\ \\mathrm{m/s}$。\n\n**为什么金属的电子热容很小**：$T_F\\sim10^4\\ \\mathrm{K}$，室温下 $T\\ll T_F$，只有费米面附近约 $T/T_F$ 比例的电子能被激发，热容被压低约两个量级。\n\n**易错点**：$E_F\\propto n^{2/3}$，与温度无关（零温值）；不要把费米能与「电子的平均动能」$\\frac35E_F$ 混为一谈。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "费米气体",
+    "费米温度"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 费米能"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "银的费米速率",
+  "statement": "银的自由电子数密度 $n=5.9\\times10^{28}\\ \\mathrm{m^{-3}}$。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$、$k_B=1.38\\times10^{-23}\\ \\mathrm{J/K}$。求费米速率。",
+  "mainTag": "热力学与统计物理",
+  "tags": [
+   "简并电子气"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 费米能",
+  "hints": [
+   "$E_F=\\hbar^2\\left(3\\pi^2n\\right)^{2/3}/2m$。",
+   "$T_F=E_F/k_B$。"
+  ],
+  "answer": "1.39\\times10^{6}\\ \\mathrm{m/s}",
+  "solution": "自由电子气的费米能（$T=0$）\n$$E_F=\\frac{\\hbar^2}{2m}\\left(3\\pi^2n\\right)^{2/3}.$$\n\n代入 银 的电子数密度 $n=5.9\\times10^{28}\\ \\mathrm{m^{-3}}$：\n$$E_F=\\frac{\\left(1.055\\times10^{-34}\\right)^2}{2\\times9.11\\times10^{-31}}\\left(3\\pi^2\\times 5.9\\times10^{28}\\right)^{2/3}=8.86\\times10^{-19}\\ \\mathrm{J}=5.53\\ \\mathrm{eV}.$$\n\n费米温度 $T_F=E_F/k_B=6.42\\times10^{4}\\ \\mathrm{K}$，费米速率 $v_F=\\sqrt{2E_F/m}=1.39\\times10^{6}\\ \\mathrm{m/s}$。\n\n**为什么金属的电子热容很小**：$T_F\\sim10^4\\ \\mathrm{K}$，室温下 $T\\ll T_F$，只有费米面附近约 $T/T_F$ 比例的电子能被激发，热容被压低约两个量级。\n\n**易错点**：$E_F\\propto n^{2/3}$，与温度无关（零温值）；不要把费米能与「电子的平均动能」$\\frac35E_F$ 混为一谈。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "m/s",
+   "methods": [
+    "费米气体",
+    "费米温度"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 费米能"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "钠的费米速率",
+  "statement": "钠的自由电子数密度 $n=2.65\\times10^{28}\\ \\mathrm{m^{-3}}$。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$、$k_B=1.38\\times10^{-23}\\ \\mathrm{J/K}$。求费米速率。",
+  "mainTag": "热力学与统计物理",
+  "tags": [
+   "简并电子气"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 费米能",
+  "hints": [
+   "$E_F=\\hbar^2\\left(3\\pi^2n\\right)^{2/3}/2m$。",
+   "$T_F=E_F/k_B$。"
+  ],
+  "answer": "1.07\\times10^{6}\\ \\mathrm{m/s}",
+  "solution": "自由电子气的费米能（$T=0$）\n$$E_F=\\frac{\\hbar^2}{2m}\\left(3\\pi^2n\\right)^{2/3}.$$\n\n代入 钠 的电子数密度 $n=2.65\\times10^{28}\\ \\mathrm{m^{-3}}$：\n$$E_F=\\frac{\\left(1.055\\times10^{-34}\\right)^2}{2\\times9.11\\times10^{-31}}\\left(3\\pi^2\\times 2.65\\times10^{28}\\right)^{2/3}=5.2\\times10^{-19}\\ \\mathrm{J}=3.24\\ \\mathrm{eV}.$$\n\n费米温度 $T_F=E_F/k_B=3.77\\times10^{4}\\ \\mathrm{K}$，费米速率 $v_F=\\sqrt{2E_F/m}=1.07\\times10^{6}\\ \\mathrm{m/s}$。\n\n**为什么金属的电子热容很小**：$T_F\\sim10^4\\ \\mathrm{K}$，室温下 $T\\ll T_F$，只有费米面附近约 $T/T_F$ 比例的电子能被激发，热容被压低约两个量级。\n\n**易错点**：$E_F\\propto n^{2/3}$，与温度无关（零温值）；不要把费米能与「电子的平均动能」$\\frac35E_F$ 混为一谈。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "m/s",
+   "methods": [
+    "费米气体",
+    "费米温度"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 费米能"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "铜的费米温度",
+  "statement": "铜的自由电子数密度 $n=8.5\\times10^{28}\\ \\mathrm{m^{-3}}$。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$、$k_B=1.38\\times10^{-23}\\ \\mathrm{J/K}$。求费米温度。",
+  "mainTag": "热力学与统计物理",
+  "tags": [
+   "简并电子气"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 费米能",
+  "hints": [
+   "$E_F=\\hbar^2\\left(3\\pi^2n\\right)^{2/3}/2m$。",
+   "$T_F=E_F/k_B$。"
+  ],
+  "answer": "8.19\\times10^{4}\\ \\mathrm{K}",
+  "solution": "自由电子气的费米能（$T=0$）\n$$E_F=\\frac{\\hbar^2}{2m}\\left(3\\pi^2n\\right)^{2/3}.$$\n\n代入 铜 的电子数密度 $n=8.5\\times10^{28}\\ \\mathrm{m^{-3}}$：\n$$E_F=\\frac{\\left(1.055\\times10^{-34}\\right)^2}{2\\times9.11\\times10^{-31}}\\left(3\\pi^2\\times 8.5\\times10^{28}\\right)^{2/3}=1.13\\times10^{-18}\\ \\mathrm{J}=7.06\\ \\mathrm{eV}.$$\n\n费米温度 $T_F=E_F/k_B=8.19\\times10^{4}\\ \\mathrm{K}$，费米速率 $v_F=\\sqrt{2E_F/m}=1.58\\times10^{6}\\ \\mathrm{m/s}$。\n\n**为什么金属的电子热容很小**：$T_F\\sim10^4\\ \\mathrm{K}$，室温下 $T\\ll T_F$，只有费米面附近约 $T/T_F$ 比例的电子能被激发，热容被压低约两个量级。\n\n**易错点**：$E_F\\propto n^{2/3}$，与温度无关（零温值）；不要把费米能与「电子的平均动能」$\\frac35E_F$ 混为一谈。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "K",
+   "methods": [
+    "费米气体",
+    "费米温度"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 费米能"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "银的费米能",
+  "statement": "银的自由电子数密度 $n=5.9\\times10^{28}\\ \\mathrm{m^{-3}}$。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$、$k_B=1.38\\times10^{-23}\\ \\mathrm{J/K}$。求电子的费米能。",
+  "mainTag": "热力学与统计物理",
+  "tags": [
+   "简并电子气"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 费米能",
+  "hints": [
+   "$E_F=\\hbar^2\\left(3\\pi^2n\\right)^{2/3}/2m$。",
+   "$T_F=E_F/k_B$。"
+  ],
+  "answer": "8.86\\times10^{-19}\\ \\mathrm{J}",
+  "solution": "自由电子气的费米能（$T=0$）\n$$E_F=\\frac{\\hbar^2}{2m}\\left(3\\pi^2n\\right)^{2/3}.$$\n\n代入 银 的电子数密度 $n=5.9\\times10^{28}\\ \\mathrm{m^{-3}}$：\n$$E_F=\\frac{\\left(1.055\\times10^{-34}\\right)^2}{2\\times9.11\\times10^{-31}}\\left(3\\pi^2\\times 5.9\\times10^{28}\\right)^{2/3}=8.86\\times10^{-19}\\ \\mathrm{J}=5.53\\ \\mathrm{eV}.$$\n\n费米温度 $T_F=E_F/k_B=6.42\\times10^{4}\\ \\mathrm{K}$，费米速率 $v_F=\\sqrt{2E_F/m}=1.39\\times10^{6}\\ \\mathrm{m/s}$。\n\n**为什么金属的电子热容很小**：$T_F\\sim10^4\\ \\mathrm{K}$，室温下 $T\\ll T_F$，只有费米面附近约 $T/T_F$ 比例的电子能被激发，热容被压低约两个量级。\n\n**易错点**：$E_F\\propto n^{2/3}$，与温度无关（零温值）；不要把费米能与「电子的平均动能」$\\frac35E_F$ 混为一谈。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "费米气体",
+    "费米温度"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 费米能"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "钠的费米温度",
+  "statement": "钠的自由电子数密度 $n=2.65\\times10^{28}\\ \\mathrm{m^{-3}}$。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$、$k_B=1.38\\times10^{-23}\\ \\mathrm{J/K}$。求费米温度。",
+  "mainTag": "热力学与统计物理",
+  "tags": [
+   "简并电子气"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 费米能",
+  "hints": [
+   "$E_F=\\hbar^2\\left(3\\pi^2n\\right)^{2/3}/2m$。",
+   "$T_F=E_F/k_B$。"
+  ],
+  "answer": "3.77\\times10^{4}\\ \\mathrm{K}",
+  "solution": "自由电子气的费米能（$T=0$）\n$$E_F=\\frac{\\hbar^2}{2m}\\left(3\\pi^2n\\right)^{2/3}.$$\n\n代入 钠 的电子数密度 $n=2.65\\times10^{28}\\ \\mathrm{m^{-3}}$：\n$$E_F=\\frac{\\left(1.055\\times10^{-34}\\right)^2}{2\\times9.11\\times10^{-31}}\\left(3\\pi^2\\times 2.65\\times10^{28}\\right)^{2/3}=5.2\\times10^{-19}\\ \\mathrm{J}=3.24\\ \\mathrm{eV}.$$\n\n费米温度 $T_F=E_F/k_B=3.77\\times10^{4}\\ \\mathrm{K}$，费米速率 $v_F=\\sqrt{2E_F/m}=1.07\\times10^{6}\\ \\mathrm{m/s}$。\n\n**为什么金属的电子热容很小**：$T_F\\sim10^4\\ \\mathrm{K}$，室温下 $T\\ll T_F$，只有费米面附近约 $T/T_F$ 比例的电子能被激发，热容被压低约两个量级。\n\n**易错点**：$E_F\\propto n^{2/3}$，与温度无关（零温值）；不要把费米能与「电子的平均动能」$\\frac35E_F$ 混为一谈。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "K",
+   "methods": [
+    "费米气体",
+    "费米温度"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 费米能"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "钠的费米能",
+  "statement": "钠的自由电子数密度 $n=2.65\\times10^{28}\\ \\mathrm{m^{-3}}$。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$、$k_B=1.38\\times10^{-23}\\ \\mathrm{J/K}$。求电子的费米能。",
+  "mainTag": "热力学与统计物理",
+  "tags": [
+   "简并电子气"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 费米能",
+  "hints": [
+   "$E_F=\\hbar^2\\left(3\\pi^2n\\right)^{2/3}/2m$。",
+   "$T_F=E_F/k_B$。"
+  ],
+  "answer": "5.2\\times10^{-19}\\ \\mathrm{J}",
+  "solution": "自由电子气的费米能（$T=0$）\n$$E_F=\\frac{\\hbar^2}{2m}\\left(3\\pi^2n\\right)^{2/3}.$$\n\n代入 钠 的电子数密度 $n=2.65\\times10^{28}\\ \\mathrm{m^{-3}}$：\n$$E_F=\\frac{\\left(1.055\\times10^{-34}\\right)^2}{2\\times9.11\\times10^{-31}}\\left(3\\pi^2\\times 2.65\\times10^{28}\\right)^{2/3}=5.2\\times10^{-19}\\ \\mathrm{J}=3.24\\ \\mathrm{eV}.$$\n\n费米温度 $T_F=E_F/k_B=3.77\\times10^{4}\\ \\mathrm{K}$，费米速率 $v_F=\\sqrt{2E_F/m}=1.07\\times10^{6}\\ \\mathrm{m/s}$。\n\n**为什么金属的电子热容很小**：$T_F\\sim10^4\\ \\mathrm{K}$，室温下 $T\\ll T_F$，只有费米面附近约 $T/T_F$ 比例的电子能被激发，热容被压低约两个量级。\n\n**易错点**：$E_F\\propto n^{2/3}$，与温度无关（零温值）；不要把费米能与「电子的平均动能」$\\frac35E_F$ 混为一谈。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "费米气体",
+    "费米温度"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 费米能"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "铜的费米能",
+  "statement": "铜的自由电子数密度 $n=8.5\\times10^{28}\\ \\mathrm{m^{-3}}$。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$、$k_B=1.38\\times10^{-23}\\ \\mathrm{J/K}$。求电子的费米能。",
+  "mainTag": "热力学与统计物理",
+  "tags": [
+   "简并电子气"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 费米能",
+  "hints": [
+   "$E_F=\\hbar^2\\left(3\\pi^2n\\right)^{2/3}/2m$。",
+   "$T_F=E_F/k_B$。"
+  ],
+  "answer": "1.13\\times10^{-18}\\ \\mathrm{J}",
+  "solution": "自由电子气的费米能（$T=0$）\n$$E_F=\\frac{\\hbar^2}{2m}\\left(3\\pi^2n\\right)^{2/3}.$$\n\n代入 铜 的电子数密度 $n=8.5\\times10^{28}\\ \\mathrm{m^{-3}}$：\n$$E_F=\\frac{\\left(1.055\\times10^{-34}\\right)^2}{2\\times9.11\\times10^{-31}}\\left(3\\pi^2\\times 8.5\\times10^{28}\\right)^{2/3}=1.13\\times10^{-18}\\ \\mathrm{J}=7.06\\ \\mathrm{eV}.$$\n\n费米温度 $T_F=E_F/k_B=8.19\\times10^{4}\\ \\mathrm{K}$，费米速率 $v_F=\\sqrt{2E_F/m}=1.58\\times10^{6}\\ \\mathrm{m/s}$。\n\n**为什么金属的电子热容很小**：$T_F\\sim10^4\\ \\mathrm{K}$，室温下 $T\\ll T_F$，只有费米面附近约 $T/T_F$ 比例的电子能被激发，热容被压低约两个量级。\n\n**易错点**：$E_F\\propto n^{2/3}$，与温度无关（零温值）；不要把费米能与「电子的平均动能」$\\frac35E_F$ 混为一谈。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "费米气体",
+    "费米温度"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 费米能"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "银的费米温度",
+  "statement": "银的自由电子数密度 $n=5.9\\times10^{28}\\ \\mathrm{m^{-3}}$。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$、$k_B=1.38\\times10^{-23}\\ \\mathrm{J/K}$。求费米温度。",
+  "mainTag": "热力学与统计物理",
+  "tags": [
+   "简并电子气"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 费米能",
+  "hints": [
+   "$E_F=\\hbar^2\\left(3\\pi^2n\\right)^{2/3}/2m$。",
+   "$T_F=E_F/k_B$。"
+  ],
+  "answer": "6.42\\times10^{4}\\ \\mathrm{K}",
+  "solution": "自由电子气的费米能（$T=0$）\n$$E_F=\\frac{\\hbar^2}{2m}\\left(3\\pi^2n\\right)^{2/3}.$$\n\n代入 银 的电子数密度 $n=5.9\\times10^{28}\\ \\mathrm{m^{-3}}$：\n$$E_F=\\frac{\\left(1.055\\times10^{-34}\\right)^2}{2\\times9.11\\times10^{-31}}\\left(3\\pi^2\\times 5.9\\times10^{28}\\right)^{2/3}=8.86\\times10^{-19}\\ \\mathrm{J}=5.53\\ \\mathrm{eV}.$$\n\n费米温度 $T_F=E_F/k_B=6.42\\times10^{4}\\ \\mathrm{K}$，费米速率 $v_F=\\sqrt{2E_F/m}=1.39\\times10^{6}\\ \\mathrm{m/s}$。\n\n**为什么金属的电子热容很小**：$T_F\\sim10^4\\ \\mathrm{K}$，室温下 $T\\ll T_F$，只有费米面附近约 $T/T_F$ 比例的电子能被激发，热容被压低约两个量级。\n\n**易错点**：$E_F\\propto n^{2/3}$，与温度无关（零温值）；不要把费米能与「电子的平均动能」$\\frac35E_F$ 混为一谈。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "K",
+   "methods": [
+    "费米气体",
+    "费米温度"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 费米能"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "铝的费米速率",
+  "statement": "铝的自由电子数密度 $n=1.8\\times10^{29}\\ \\mathrm{m^{-3}}$。取 $\\hbar=1.055\\times10^{-34}\\ \\mathrm{J\\cdot s}$、$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$、$k_B=1.38\\times10^{-23}\\ \\mathrm{J/K}$。求费米速率。",
+  "mainTag": "热力学与统计物理",
+  "tags": [
+   "简并电子气"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "经典教材题型 · 费米能",
+  "hints": [
+   "$E_F=\\hbar^2\\left(3\\pi^2n\\right)^{2/3}/2m$。",
+   "$T_F=E_F/k_B$。"
+  ],
+  "answer": "2.02\\times10^{6}\\ \\mathrm{m/s}",
+  "solution": "自由电子气的费米能（$T=0$）\n$$E_F=\\frac{\\hbar^2}{2m}\\left(3\\pi^2n\\right)^{2/3}.$$\n\n代入 铝 的电子数密度 $n=1.8\\times10^{29}\\ \\mathrm{m^{-3}}$：\n$$E_F=\\frac{\\left(1.055\\times10^{-34}\\right)^2}{2\\times9.11\\times10^{-31}}\\left(3\\pi^2\\times 1.8\\times10^{29}\\right)^{2/3}=1.86\\times10^{-18}\\ \\mathrm{J}=11.6\\ \\mathrm{eV}.$$\n\n费米温度 $T_F=E_F/k_B=1.35\\times10^{5}\\ \\mathrm{K}$，费米速率 $v_F=\\sqrt{2E_F/m}=2.02\\times10^{6}\\ \\mathrm{m/s}$。\n\n**为什么金属的电子热容很小**：$T_F\\sim10^4\\ \\mathrm{K}$，室温下 $T\\ll T_F$，只有费米面附近约 $T/T_F$ 比例的电子能被激发，热容被压低约两个量级。\n\n**易错点**：$E_F\\propto n^{2/3}$，与温度无关（零温值）；不要把费米能与「电子的平均动能」$\\frac35E_F$ 混为一谈。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "m/s",
+   "methods": [
+    "费米气体",
+    "费米温度"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 费米能"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "等离子体频率（n=1×10²⁰ m⁻³）的等离子体频率",
+  "statement": "某等离子体的电子数密度为 $n=1\\times10^{20}\\ \\mathrm{m^{-3}}$。取 $e=1.602\\times10^{-19}\\ \\mathrm{C}$、$\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$、$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$。求等离子体振荡角频率。",
+  "mainTag": "电动力学",
+  "tags": [
+   "等离子体与色散"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 等离子体频率",
+  "hints": [
+   "$\\omega_p=\\sqrt{ne^2/\\varepsilon_0m_e}$。",
+   "$f_p=\\omega_p/2\\pi$。"
+  ],
+  "answer": "5.64\\times10^{11}\\ \\mathrm{rad/s}",
+  "solution": "等离子体中电子集体偏离平衡后受到的回复力给出振荡频率\n$$\\omega_p=\\sqrt{\\frac{ne^2}{\\varepsilon_0m_e}}.$$\n\n代入 $n=1\\times10^{20}\\ \\mathrm{m^{-3}}$：\n$$\\omega_p=\\sqrt{\\frac{1\\times10^{20}\\times\\left(1.602\\times10^{-19}\\right)^2}{8.85\\times10^{-12}\\times9.11\\times10^{-31}}}=5.64\\times10^{11}\\ \\mathrm{rad/s}.$$\n\n对应普通频率 $f_p=\\omega_p/2\\pi=8.98\\times10^{10}\\ \\mathrm{Hz}$，截止波长 $\\lambda_p=2\\pi c/\\omega_p=3.34\\times10^{-3}\\ \\mathrm{m}$。\n\n**物理含义**：频率低于 $\\omega_p$ 的电磁波无法在等离子体中传播，会被全反射——这就是电离层反射短波广播、以及航天器再入时「通信黑障」的原因。\n\n**易错点**：$\\omega_p$ 与电子温度无关（只依赖密度），这是冷等离子体近似的结果；热等离子体还要加色散修正。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "rad/s",
+   "methods": [
+    "等离子体振荡",
+    "色散关系"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 等离子体频率"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "等离子体频率（n=1×10¹⁹ m⁻³）的电子密度对应的振荡频率",
+  "statement": "某等离子体的电子数密度为 $n=1\\times10^{19}\\ \\mathrm{m^{-3}}$。取 $e=1.602\\times10^{-19}\\ \\mathrm{C}$、$\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$、$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$。求等离子体振荡的普通频率 $f_p$。",
+  "mainTag": "电动力学",
+  "tags": [
+   "等离子体与色散"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 等离子体频率",
+  "hints": [
+   "$\\omega_p=\\sqrt{ne^2/\\varepsilon_0m_e}$。",
+   "$f_p=\\omega_p/2\\pi$。"
+  ],
+  "answer": "2.84\\times10^{10}\\ \\mathrm{Hz}",
+  "solution": "等离子体中电子集体偏离平衡后受到的回复力给出振荡频率\n$$\\omega_p=\\sqrt{\\frac{ne^2}{\\varepsilon_0m_e}}.$$\n\n代入 $n=1\\times10^{19}\\ \\mathrm{m^{-3}}$：\n$$\\omega_p=\\sqrt{\\frac{1\\times10^{19}\\times\\left(1.602\\times10^{-19}\\right)^2}{8.85\\times10^{-12}\\times9.11\\times10^{-31}}}=1.78\\times10^{11}\\ \\mathrm{rad/s}.$$\n\n对应普通频率 $f_p=\\omega_p/2\\pi=2.84\\times10^{10}\\ \\mathrm{Hz}$，截止波长 $\\lambda_p=2\\pi c/\\omega_p=0.0106\\ \\mathrm{m}$。\n\n**物理含义**：频率低于 $\\omega_p$ 的电磁波无法在等离子体中传播，会被全反射——这就是电离层反射短波广播、以及航天器再入时「通信黑障」的原因。\n\n**易错点**：$\\omega_p$ 与电子温度无关（只依赖密度），这是冷等离子体近似的结果；热等离子体还要加色散修正。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "Hz",
+   "methods": [
+    "等离子体振荡",
+    "色散关系"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 等离子体频率"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "等离子体频率（n=1×10¹⁹ m⁻³）的截止波长",
+  "statement": "某等离子体的电子数密度为 $n=1\\times10^{19}\\ \\mathrm{m^{-3}}$。取 $e=1.602\\times10^{-19}\\ \\mathrm{C}$、$\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$、$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$。求电磁波能穿透该等离子体的最长波长（截止波长）。",
+  "mainTag": "电动力学",
+  "tags": [
+   "等离子体与色散"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 等离子体频率",
+  "hints": [
+   "$\\omega_p=\\sqrt{ne^2/\\varepsilon_0m_e}$。",
+   "$f_p=\\omega_p/2\\pi$。"
+  ],
+  "answer": "0.0106\\ \\mathrm{m}",
+  "solution": "等离子体中电子集体偏离平衡后受到的回复力给出振荡频率\n$$\\omega_p=\\sqrt{\\frac{ne^2}{\\varepsilon_0m_e}}.$$\n\n代入 $n=1\\times10^{19}\\ \\mathrm{m^{-3}}$：\n$$\\omega_p=\\sqrt{\\frac{1\\times10^{19}\\times\\left(1.602\\times10^{-19}\\right)^2}{8.85\\times10^{-12}\\times9.11\\times10^{-31}}}=1.78\\times10^{11}\\ \\mathrm{rad/s}.$$\n\n对应普通频率 $f_p=\\omega_p/2\\pi=2.84\\times10^{10}\\ \\mathrm{Hz}$，截止波长 $\\lambda_p=2\\pi c/\\omega_p=0.0106\\ \\mathrm{m}$。\n\n**物理含义**：频率低于 $\\omega_p$ 的电磁波无法在等离子体中传播，会被全反射——这就是电离层反射短波广播、以及航天器再入时「通信黑障」的原因。\n\n**易错点**：$\\omega_p$ 与电子温度无关（只依赖密度），这是冷等离子体近似的结果；热等离子体还要加色散修正。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "m",
+   "methods": [
+    "等离子体振荡",
+    "色散关系"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 等离子体频率"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "等离子体频率（n=1×10¹⁷ m⁻³）的等离子体频率",
+  "statement": "某等离子体的电子数密度为 $n=1\\times10^{17}\\ \\mathrm{m^{-3}}$。取 $e=1.602\\times10^{-19}\\ \\mathrm{C}$、$\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$、$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$。求等离子体振荡角频率。",
+  "mainTag": "电动力学",
+  "tags": [
+   "等离子体与色散"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 等离子体频率",
+  "hints": [
+   "$\\omega_p=\\sqrt{ne^2/\\varepsilon_0m_e}$。",
+   "$f_p=\\omega_p/2\\pi$。"
+  ],
+  "answer": "1.78\\times10^{10}\\ \\mathrm{rad/s}",
+  "solution": "等离子体中电子集体偏离平衡后受到的回复力给出振荡频率\n$$\\omega_p=\\sqrt{\\frac{ne^2}{\\varepsilon_0m_e}}.$$\n\n代入 $n=1\\times10^{17}\\ \\mathrm{m^{-3}}$：\n$$\\omega_p=\\sqrt{\\frac{1\\times10^{17}\\times\\left(1.602\\times10^{-19}\\right)^2}{8.85\\times10^{-12}\\times9.11\\times10^{-31}}}=1.78\\times10^{10}\\ \\mathrm{rad/s}.$$\n\n对应普通频率 $f_p=\\omega_p/2\\pi=2.84\\times10^{9}\\ \\mathrm{Hz}$，截止波长 $\\lambda_p=2\\pi c/\\omega_p=0.106\\ \\mathrm{m}$。\n\n**物理含义**：频率低于 $\\omega_p$ 的电磁波无法在等离子体中传播，会被全反射——这就是电离层反射短波广播、以及航天器再入时「通信黑障」的原因。\n\n**易错点**：$\\omega_p$ 与电子温度无关（只依赖密度），这是冷等离子体近似的结果；热等离子体还要加色散修正。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "rad/s",
+   "methods": [
+    "等离子体振荡",
+    "色散关系"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 等离子体频率"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "等离子体频率（n=1×10²¹ m⁻³）的电子密度对应的振荡频率",
+  "statement": "某等离子体的电子数密度为 $n=1\\times10^{21}\\ \\mathrm{m^{-3}}$。取 $e=1.602\\times10^{-19}\\ \\mathrm{C}$、$\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$、$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$。求等离子体振荡的普通频率 $f_p$。",
+  "mainTag": "电动力学",
+  "tags": [
+   "等离子体与色散"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 等离子体频率",
+  "hints": [
+   "$\\omega_p=\\sqrt{ne^2/\\varepsilon_0m_e}$。",
+   "$f_p=\\omega_p/2\\pi$。"
+  ],
+  "answer": "2.84\\times10^{11}\\ \\mathrm{Hz}",
+  "solution": "等离子体中电子集体偏离平衡后受到的回复力给出振荡频率\n$$\\omega_p=\\sqrt{\\frac{ne^2}{\\varepsilon_0m_e}}.$$\n\n代入 $n=1\\times10^{21}\\ \\mathrm{m^{-3}}$：\n$$\\omega_p=\\sqrt{\\frac{1\\times10^{21}\\times\\left(1.602\\times10^{-19}\\right)^2}{8.85\\times10^{-12}\\times9.11\\times10^{-31}}}=1.78\\times10^{12}\\ \\mathrm{rad/s}.$$\n\n对应普通频率 $f_p=\\omega_p/2\\pi=2.84\\times10^{11}\\ \\mathrm{Hz}$，截止波长 $\\lambda_p=2\\pi c/\\omega_p=1.06\\times10^{-3}\\ \\mathrm{m}$。\n\n**物理含义**：频率低于 $\\omega_p$ 的电磁波无法在等离子体中传播，会被全反射——这就是电离层反射短波广播、以及航天器再入时「通信黑障」的原因。\n\n**易错点**：$\\omega_p$ 与电子温度无关（只依赖密度），这是冷等离子体近似的结果；热等离子体还要加色散修正。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "Hz",
+   "methods": [
+    "等离子体振荡",
+    "色散关系"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 等离子体频率"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "等离子体频率（n=1×10¹⁷ m⁻³）的电子密度对应的振荡频率",
+  "statement": "某等离子体的电子数密度为 $n=1\\times10^{17}\\ \\mathrm{m^{-3}}$。取 $e=1.602\\times10^{-19}\\ \\mathrm{C}$、$\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$、$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$。求等离子体振荡的普通频率 $f_p$。",
+  "mainTag": "电动力学",
+  "tags": [
+   "等离子体与色散"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 等离子体频率",
+  "hints": [
+   "$\\omega_p=\\sqrt{ne^2/\\varepsilon_0m_e}$。",
+   "$f_p=\\omega_p/2\\pi$。"
+  ],
+  "answer": "2.84\\times10^{9}\\ \\mathrm{Hz}",
+  "solution": "等离子体中电子集体偏离平衡后受到的回复力给出振荡频率\n$$\\omega_p=\\sqrt{\\frac{ne^2}{\\varepsilon_0m_e}}.$$\n\n代入 $n=1\\times10^{17}\\ \\mathrm{m^{-3}}$：\n$$\\omega_p=\\sqrt{\\frac{1\\times10^{17}\\times\\left(1.602\\times10^{-19}\\right)^2}{8.85\\times10^{-12}\\times9.11\\times10^{-31}}}=1.78\\times10^{10}\\ \\mathrm{rad/s}.$$\n\n对应普通频率 $f_p=\\omega_p/2\\pi=2.84\\times10^{9}\\ \\mathrm{Hz}$，截止波长 $\\lambda_p=2\\pi c/\\omega_p=0.106\\ \\mathrm{m}$。\n\n**物理含义**：频率低于 $\\omega_p$ 的电磁波无法在等离子体中传播，会被全反射——这就是电离层反射短波广播、以及航天器再入时「通信黑障」的原因。\n\n**易错点**：$\\omega_p$ 与电子温度无关（只依赖密度），这是冷等离子体近似的结果；热等离子体还要加色散修正。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "Hz",
+   "methods": [
+    "等离子体振荡",
+    "色散关系"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 等离子体频率"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "等离子体频率（n=1×10²⁰ m⁻³）的电子密度对应的振荡频率",
+  "statement": "某等离子体的电子数密度为 $n=1\\times10^{20}\\ \\mathrm{m^{-3}}$。取 $e=1.602\\times10^{-19}\\ \\mathrm{C}$、$\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$、$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$。求等离子体振荡的普通频率 $f_p$。",
+  "mainTag": "电动力学",
+  "tags": [
+   "等离子体与色散"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 等离子体频率",
+  "hints": [
+   "$\\omega_p=\\sqrt{ne^2/\\varepsilon_0m_e}$。",
+   "$f_p=\\omega_p/2\\pi$。"
+  ],
+  "answer": "8.98\\times10^{10}\\ \\mathrm{Hz}",
+  "solution": "等离子体中电子集体偏离平衡后受到的回复力给出振荡频率\n$$\\omega_p=\\sqrt{\\frac{ne^2}{\\varepsilon_0m_e}}.$$\n\n代入 $n=1\\times10^{20}\\ \\mathrm{m^{-3}}$：\n$$\\omega_p=\\sqrt{\\frac{1\\times10^{20}\\times\\left(1.602\\times10^{-19}\\right)^2}{8.85\\times10^{-12}\\times9.11\\times10^{-31}}}=5.64\\times10^{11}\\ \\mathrm{rad/s}.$$\n\n对应普通频率 $f_p=\\omega_p/2\\pi=8.98\\times10^{10}\\ \\mathrm{Hz}$，截止波长 $\\lambda_p=2\\pi c/\\omega_p=3.34\\times10^{-3}\\ \\mathrm{m}$。\n\n**物理含义**：频率低于 $\\omega_p$ 的电磁波无法在等离子体中传播，会被全反射——这就是电离层反射短波广播、以及航天器再入时「通信黑障」的原因。\n\n**易错点**：$\\omega_p$ 与电子温度无关（只依赖密度），这是冷等离子体近似的结果；热等离子体还要加色散修正。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "Hz",
+   "methods": [
+    "等离子体振荡",
+    "色散关系"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 等离子体频率"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "等离子体频率（n=1×10¹⁹ m⁻³）的等离子体频率",
+  "statement": "某等离子体的电子数密度为 $n=1\\times10^{19}\\ \\mathrm{m^{-3}}$。取 $e=1.602\\times10^{-19}\\ \\mathrm{C}$、$\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$、$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$。求等离子体振荡角频率。",
+  "mainTag": "电动力学",
+  "tags": [
+   "等离子体与色散"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 等离子体频率",
+  "hints": [
+   "$\\omega_p=\\sqrt{ne^2/\\varepsilon_0m_e}$。",
+   "$f_p=\\omega_p/2\\pi$。"
+  ],
+  "answer": "1.78\\times10^{11}\\ \\mathrm{rad/s}",
+  "solution": "等离子体中电子集体偏离平衡后受到的回复力给出振荡频率\n$$\\omega_p=\\sqrt{\\frac{ne^2}{\\varepsilon_0m_e}}.$$\n\n代入 $n=1\\times10^{19}\\ \\mathrm{m^{-3}}$：\n$$\\omega_p=\\sqrt{\\frac{1\\times10^{19}\\times\\left(1.602\\times10^{-19}\\right)^2}{8.85\\times10^{-12}\\times9.11\\times10^{-31}}}=1.78\\times10^{11}\\ \\mathrm{rad/s}.$$\n\n对应普通频率 $f_p=\\omega_p/2\\pi=2.84\\times10^{10}\\ \\mathrm{Hz}$，截止波长 $\\lambda_p=2\\pi c/\\omega_p=0.0106\\ \\mathrm{m}$。\n\n**物理含义**：频率低于 $\\omega_p$ 的电磁波无法在等离子体中传播，会被全反射——这就是电离层反射短波广播、以及航天器再入时「通信黑障」的原因。\n\n**易错点**：$\\omega_p$ 与电子温度无关（只依赖密度），这是冷等离子体近似的结果；热等离子体还要加色散修正。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "rad/s",
+   "methods": [
+    "等离子体振荡",
+    "色散关系"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 等离子体频率"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "等离子体频率（n=1×10¹⁸ m⁻³）的截止波长",
+  "statement": "某等离子体的电子数密度为 $n=1\\times10^{18}\\ \\mathrm{m^{-3}}$。取 $e=1.602\\times10^{-19}\\ \\mathrm{C}$、$\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$、$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$。求电磁波能穿透该等离子体的最长波长（截止波长）。",
+  "mainTag": "电动力学",
+  "tags": [
+   "等离子体与色散"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 等离子体频率",
+  "hints": [
+   "$\\omega_p=\\sqrt{ne^2/\\varepsilon_0m_e}$。",
+   "$f_p=\\omega_p/2\\pi$。"
+  ],
+  "answer": "0.0334\\ \\mathrm{m}",
+  "solution": "等离子体中电子集体偏离平衡后受到的回复力给出振荡频率\n$$\\omega_p=\\sqrt{\\frac{ne^2}{\\varepsilon_0m_e}}.$$\n\n代入 $n=1\\times10^{18}\\ \\mathrm{m^{-3}}$：\n$$\\omega_p=\\sqrt{\\frac{1\\times10^{18}\\times\\left(1.602\\times10^{-19}\\right)^2}{8.85\\times10^{-12}\\times9.11\\times10^{-31}}}=5.64\\times10^{10}\\ \\mathrm{rad/s}.$$\n\n对应普通频率 $f_p=\\omega_p/2\\pi=8.98\\times10^{9}\\ \\mathrm{Hz}$，截止波长 $\\lambda_p=2\\pi c/\\omega_p=0.0334\\ \\mathrm{m}$。\n\n**物理含义**：频率低于 $\\omega_p$ 的电磁波无法在等离子体中传播，会被全反射——这就是电离层反射短波广播、以及航天器再入时「通信黑障」的原因。\n\n**易错点**：$\\omega_p$ 与电子温度无关（只依赖密度），这是冷等离子体近似的结果；热等离子体还要加色散修正。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "m",
+   "methods": [
+    "等离子体振荡",
+    "色散关系"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 等离子体频率"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "等离子体频率（n=1×10¹⁸ m⁻³）的等离子体频率",
+  "statement": "某等离子体的电子数密度为 $n=1\\times10^{18}\\ \\mathrm{m^{-3}}$。取 $e=1.602\\times10^{-19}\\ \\mathrm{C}$、$\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$、$m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$。求等离子体振荡角频率。",
+  "mainTag": "电动力学",
+  "tags": [
+   "等离子体与色散"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "经典教材题型 · 等离子体频率",
+  "hints": [
+   "$\\omega_p=\\sqrt{ne^2/\\varepsilon_0m_e}$。",
+   "$f_p=\\omega_p/2\\pi$。"
+  ],
+  "answer": "5.64\\times10^{10}\\ \\mathrm{rad/s}",
+  "solution": "等离子体中电子集体偏离平衡后受到的回复力给出振荡频率\n$$\\omega_p=\\sqrt{\\frac{ne^2}{\\varepsilon_0m_e}}.$$\n\n代入 $n=1\\times10^{18}\\ \\mathrm{m^{-3}}$：\n$$\\omega_p=\\sqrt{\\frac{1\\times10^{18}\\times\\left(1.602\\times10^{-19}\\right)^2}{8.85\\times10^{-12}\\times9.11\\times10^{-31}}}=5.64\\times10^{10}\\ \\mathrm{rad/s}.$$\n\n对应普通频率 $f_p=\\omega_p/2\\pi=8.98\\times10^{9}\\ \\mathrm{Hz}$，截止波长 $\\lambda_p=2\\pi c/\\omega_p=0.0334\\ \\mathrm{m}$。\n\n**物理含义**：频率低于 $\\omega_p$ 的电磁波无法在等离子体中传播，会被全反射——这就是电离层反射短波广播、以及航天器再入时「通信黑障」的原因。\n\n**易错点**：$\\omega_p$ 与电子温度无关（只依赖密度），这是冷等离子体近似的结果；热等离子体还要加色散修正。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "rad/s",
+   "methods": [
+    "等离子体振荡",
+    "色散关系"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 等离子体频率"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "范德瓦尔斯气体（b=3×10⁻⁵ m³/mol，V=5×10⁻³ m³）的压强对温度的偏导",
+  "statement": "1 mol 范德瓦尔斯气体，排除体积参数 $b=3\\times10^{-5}\\ \\mathrm{m^3/mol}$，体积 $V=5\\times10^{-3}\\ \\mathrm{m^3}$。取 $R=8.31\\ \\mathrm{J/(mol\\cdot K)}$。求$\\left(\\partial p/\\partial T\\right)_V$ 的数值（取 $\\nu=1\\ \\mathrm{mol}$）。",
+  "mainTag": "热力学与统计物理",
+  "tags": [
+   "热力学势与 Maxwell 关系"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 3,
+  "source": "经典教材题型 · 麦克斯韦关系",
+  "hints": [
+   "麦克斯韦关系 $\\left(\\partial S/\\partial V\\right)_T=\\left(\\partial p/\\partial T\\right)_V$。",
+   "范德瓦尔斯方程对 $T$ 求偏导，$a/V^2$ 项消失。"
+  ],
+  "answer": "1672\\ \\mathrm{Pa/K}",
+  "solution": "由热力学基本方程 $\\mathrm{d}F=-S\\,\\mathrm{d}T-p\\,\\mathrm{d}V$ 得麦克斯韦关系\n$$\\left(\\frac{\\partial S}{\\partial V}\\right)_T=\\left(\\frac{\\partial p}{\\partial T}\\right)_V.$$\n\n范德瓦尔斯方程（$\\nu=1\\ \\mathrm{mol}$）\n$$\\left(p+\\frac{a}{V^2}\\right)\\left(V-b\\right)=RT\\ \\Longrightarrow\\ p=\\frac{RT}{V-b}-\\frac{a}{V^2}.$$\n\n求偏导时 $a/V^2$ 项与 $T$ 无关，直接消失：\n$$\\left(\\frac{\\partial p}{\\partial T}\\right)_V=\\frac{R}{V-b}=\\frac{8.31}{5\\times10^{-3}-3\\times10^{-5}}=1672.$$\n\n**物理意义**：$R/(V-b)$ 只由「排除体积」$b$ 修正，而吸引力参数 $a$ 不影响这一项——说明 $a$ 主要影响内能而非熵压关系。\n\n**易错点**：麦克斯韦关系要选对热力学势（这里是 Helmholtz 自由能 $F$）；对 $T$ 求偏导时 $V$ 固定，$a/V^2$ 视为常数。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "Pa/K",
+   "methods": [
+    "Maxwell 关系",
+    "范德瓦尔斯气体"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 麦克斯韦关系"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "范德瓦尔斯气体（b=5×10⁻⁵ m³/mol，V=2×10⁻³ m³）的熵对体积的偏导",
+  "statement": "1 mol 范德瓦尔斯气体，排除体积参数 $b=5\\times10^{-5}\\ \\mathrm{m^3/mol}$，体积 $V=2\\times10^{-3}\\ \\mathrm{m^3}$。取 $R=8.31\\ \\mathrm{J/(mol\\cdot K)}$。求$\\left(\\partial S/\\partial V\\right)_T$ 的数值（取 $\\nu=1\\ \\mathrm{mol}$）。",
+  "mainTag": "热力学与统计物理",
+  "tags": [
+   "热力学势与 Maxwell 关系"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 3,
+  "source": "经典教材题型 · 麦克斯韦关系",
+  "hints": [
+   "麦克斯韦关系 $\\left(\\partial S/\\partial V\\right)_T=\\left(\\partial p/\\partial T\\right)_V$。",
+   "范德瓦尔斯方程对 $T$ 求偏导，$a/V^2$ 项消失。"
+  ],
+  "answer": "4262\\ \\mathrm{J/(m^3*K)}",
+  "solution": "由热力学基本方程 $\\mathrm{d}F=-S\\,\\mathrm{d}T-p\\,\\mathrm{d}V$ 得麦克斯韦关系\n$$\\left(\\frac{\\partial S}{\\partial V}\\right)_T=\\left(\\frac{\\partial p}{\\partial T}\\right)_V.$$\n\n范德瓦尔斯方程（$\\nu=1\\ \\mathrm{mol}$）\n$$\\left(p+\\frac{a}{V^2}\\right)\\left(V-b\\right)=RT\\ \\Longrightarrow\\ p=\\frac{RT}{V-b}-\\frac{a}{V^2}.$$\n\n求偏导时 $a/V^2$ 项与 $T$ 无关，直接消失：\n$$\\left(\\frac{\\partial p}{\\partial T}\\right)_V=\\frac{R}{V-b}=\\frac{8.31}{2\\times10^{-3}-5\\times10^{-5}}=4262.$$\n\n**物理意义**：$R/(V-b)$ 只由「排除体积」$b$ 修正，而吸引力参数 $a$ 不影响这一项——说明 $a$ 主要影响内能而非熵压关系。\n\n**易错点**：麦克斯韦关系要选对热力学势（这里是 Helmholtz 自由能 $F$）；对 $T$ 求偏导时 $V$ 固定，$a/V^2$ 视为常数。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J/(m^3*K)",
+   "methods": [
+    "Maxwell 关系",
+    "范德瓦尔斯气体"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 麦克斯韦关系"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "范德瓦尔斯气体（b=3×10⁻⁵ m³/mol，V=1×10⁻³ m³）的熵对体积的偏导",
+  "statement": "1 mol 范德瓦尔斯气体，排除体积参数 $b=3\\times10^{-5}\\ \\mathrm{m^3/mol}$，体积 $V=1\\times10^{-3}\\ \\mathrm{m^3}$。取 $R=8.31\\ \\mathrm{J/(mol\\cdot K)}$。求$\\left(\\partial S/\\partial V\\right)_T$ 的数值（取 $\\nu=1\\ \\mathrm{mol}$）。",
+  "mainTag": "热力学与统计物理",
+  "tags": [
+   "热力学势与 Maxwell 关系"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 3,
+  "source": "经典教材题型 · 麦克斯韦关系",
+  "hints": [
+   "麦克斯韦关系 $\\left(\\partial S/\\partial V\\right)_T=\\left(\\partial p/\\partial T\\right)_V$。",
+   "范德瓦尔斯方程对 $T$ 求偏导，$a/V^2$ 项消失。"
+  ],
+  "answer": "8567\\ \\mathrm{J/(m^3*K)}",
+  "solution": "由热力学基本方程 $\\mathrm{d}F=-S\\,\\mathrm{d}T-p\\,\\mathrm{d}V$ 得麦克斯韦关系\n$$\\left(\\frac{\\partial S}{\\partial V}\\right)_T=\\left(\\frac{\\partial p}{\\partial T}\\right)_V.$$\n\n范德瓦尔斯方程（$\\nu=1\\ \\mathrm{mol}$）\n$$\\left(p+\\frac{a}{V^2}\\right)\\left(V-b\\right)=RT\\ \\Longrightarrow\\ p=\\frac{RT}{V-b}-\\frac{a}{V^2}.$$\n\n求偏导时 $a/V^2$ 项与 $T$ 无关，直接消失：\n$$\\left(\\frac{\\partial p}{\\partial T}\\right)_V=\\frac{R}{V-b}=\\frac{8.31}{1\\times10^{-3}-3\\times10^{-5}}=8567.$$\n\n**物理意义**：$R/(V-b)$ 只由「排除体积」$b$ 修正，而吸引力参数 $a$ 不影响这一项——说明 $a$ 主要影响内能而非熵压关系。\n\n**易错点**：麦克斯韦关系要选对热力学势（这里是 Helmholtz 自由能 $F$）；对 $T$ 求偏导时 $V$ 固定，$a/V^2$ 视为常数。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J/(m^3*K)",
+   "methods": [
+    "Maxwell 关系",
+    "范德瓦尔斯气体"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 麦克斯韦关系"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "范德瓦尔斯气体（b=5×10⁻⁵ m³/mol，V=5×10⁻³ m³）的熵对体积的偏导",
+  "statement": "1 mol 范德瓦尔斯气体，排除体积参数 $b=5\\times10^{-5}\\ \\mathrm{m^3/mol}$，体积 $V=5\\times10^{-3}\\ \\mathrm{m^3}$。取 $R=8.31\\ \\mathrm{J/(mol\\cdot K)}$。求$\\left(\\partial S/\\partial V\\right)_T$ 的数值（取 $\\nu=1\\ \\mathrm{mol}$）。",
+  "mainTag": "热力学与统计物理",
+  "tags": [
+   "热力学势与 Maxwell 关系"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 3,
+  "source": "经典教材题型 · 麦克斯韦关系",
+  "hints": [
+   "麦克斯韦关系 $\\left(\\partial S/\\partial V\\right)_T=\\left(\\partial p/\\partial T\\right)_V$。",
+   "范德瓦尔斯方程对 $T$ 求偏导，$a/V^2$ 项消失。"
+  ],
+  "answer": "1679\\ \\mathrm{J/(m^3*K)}",
+  "solution": "由热力学基本方程 $\\mathrm{d}F=-S\\,\\mathrm{d}T-p\\,\\mathrm{d}V$ 得麦克斯韦关系\n$$\\left(\\frac{\\partial S}{\\partial V}\\right)_T=\\left(\\frac{\\partial p}{\\partial T}\\right)_V.$$\n\n范德瓦尔斯方程（$\\nu=1\\ \\mathrm{mol}$）\n$$\\left(p+\\frac{a}{V^2}\\right)\\left(V-b\\right)=RT\\ \\Longrightarrow\\ p=\\frac{RT}{V-b}-\\frac{a}{V^2}.$$\n\n求偏导时 $a/V^2$ 项与 $T$ 无关，直接消失：\n$$\\left(\\frac{\\partial p}{\\partial T}\\right)_V=\\frac{R}{V-b}=\\frac{8.31}{5\\times10^{-3}-5\\times10^{-5}}=1679.$$\n\n**物理意义**：$R/(V-b)$ 只由「排除体积」$b$ 修正，而吸引力参数 $a$ 不影响这一项——说明 $a$ 主要影响内能而非熵压关系。\n\n**易错点**：麦克斯韦关系要选对热力学势（这里是 Helmholtz 自由能 $F$）；对 $T$ 求偏导时 $V$ 固定，$a/V^2$ 视为常数。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J/(m^3*K)",
+   "methods": [
+    "Maxwell 关系",
+    "范德瓦尔斯气体"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 麦克斯韦关系"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "范德瓦尔斯气体（b=6×10⁻⁵ m³/mol，V=5×10⁻³ m³）的熵对体积的偏导",
+  "statement": "1 mol 范德瓦尔斯气体，排除体积参数 $b=6\\times10^{-5}\\ \\mathrm{m^3/mol}$，体积 $V=5\\times10^{-3}\\ \\mathrm{m^3}$。取 $R=8.31\\ \\mathrm{J/(mol\\cdot K)}$。求$\\left(\\partial S/\\partial V\\right)_T$ 的数值（取 $\\nu=1\\ \\mathrm{mol}$）。",
+  "mainTag": "热力学与统计物理",
+  "tags": [
+   "热力学势与 Maxwell 关系"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 3,
+  "source": "经典教材题型 · 麦克斯韦关系",
+  "hints": [
+   "麦克斯韦关系 $\\left(\\partial S/\\partial V\\right)_T=\\left(\\partial p/\\partial T\\right)_V$。",
+   "范德瓦尔斯方程对 $T$ 求偏导，$a/V^2$ 项消失。"
+  ],
+  "answer": "1682\\ \\mathrm{J/(m^3*K)}",
+  "solution": "由热力学基本方程 $\\mathrm{d}F=-S\\,\\mathrm{d}T-p\\,\\mathrm{d}V$ 得麦克斯韦关系\n$$\\left(\\frac{\\partial S}{\\partial V}\\right)_T=\\left(\\frac{\\partial p}{\\partial T}\\right)_V.$$\n\n范德瓦尔斯方程（$\\nu=1\\ \\mathrm{mol}$）\n$$\\left(p+\\frac{a}{V^2}\\right)\\left(V-b\\right)=RT\\ \\Longrightarrow\\ p=\\frac{RT}{V-b}-\\frac{a}{V^2}.$$\n\n求偏导时 $a/V^2$ 项与 $T$ 无关，直接消失：\n$$\\left(\\frac{\\partial p}{\\partial T}\\right)_V=\\frac{R}{V-b}=\\frac{8.31}{5\\times10^{-3}-6\\times10^{-5}}=1682.$$\n\n**物理意义**：$R/(V-b)$ 只由「排除体积」$b$ 修正，而吸引力参数 $a$ 不影响这一项——说明 $a$ 主要影响内能而非熵压关系。\n\n**易错点**：麦克斯韦关系要选对热力学势（这里是 Helmholtz 自由能 $F$）；对 $T$ 求偏导时 $V$ 固定，$a/V^2$ 视为常数。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J/(m^3*K)",
+   "methods": [
+    "Maxwell 关系",
+    "范德瓦尔斯气体"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 麦克斯韦关系"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "范德瓦尔斯气体（b=5×10⁻⁵ m³/mol，V=0.01 m³）的熵对体积的偏导",
+  "statement": "1 mol 范德瓦尔斯气体，排除体积参数 $b=5\\times10^{-5}\\ \\mathrm{m^3/mol}$，体积 $V=0.01\\ \\mathrm{m^3}$。取 $R=8.31\\ \\mathrm{J/(mol\\cdot K)}$。求$\\left(\\partial S/\\partial V\\right)_T$ 的数值（取 $\\nu=1\\ \\mathrm{mol}$）。",
+  "mainTag": "热力学与统计物理",
+  "tags": [
+   "热力学势与 Maxwell 关系"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 3,
+  "source": "经典教材题型 · 麦克斯韦关系",
+  "hints": [
+   "麦克斯韦关系 $\\left(\\partial S/\\partial V\\right)_T=\\left(\\partial p/\\partial T\\right)_V$。",
+   "范德瓦尔斯方程对 $T$ 求偏导，$a/V^2$ 项消失。"
+  ],
+  "answer": "835\\ \\mathrm{J/(m^3*K)}",
+  "solution": "由热力学基本方程 $\\mathrm{d}F=-S\\,\\mathrm{d}T-p\\,\\mathrm{d}V$ 得麦克斯韦关系\n$$\\left(\\frac{\\partial S}{\\partial V}\\right)_T=\\left(\\frac{\\partial p}{\\partial T}\\right)_V.$$\n\n范德瓦尔斯方程（$\\nu=1\\ \\mathrm{mol}$）\n$$\\left(p+\\frac{a}{V^2}\\right)\\left(V-b\\right)=RT\\ \\Longrightarrow\\ p=\\frac{RT}{V-b}-\\frac{a}{V^2}.$$\n\n求偏导时 $a/V^2$ 项与 $T$ 无关，直接消失：\n$$\\left(\\frac{\\partial p}{\\partial T}\\right)_V=\\frac{R}{V-b}=\\frac{8.31}{0.01-5\\times10^{-5}}=835.$$\n\n**物理意义**：$R/(V-b)$ 只由「排除体积」$b$ 修正，而吸引力参数 $a$ 不影响这一项——说明 $a$ 主要影响内能而非熵压关系。\n\n**易错点**：麦克斯韦关系要选对热力学势（这里是 Helmholtz 自由能 $F$）；对 $T$ 求偏导时 $V$ 固定，$a/V^2$ 视为常数。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J/(m^3*K)",
+   "methods": [
+    "Maxwell 关系",
+    "范德瓦尔斯气体"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 麦克斯韦关系"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "范德瓦尔斯气体（b=4×10⁻⁵ m³/mol，V=1×10⁻³ m³）的熵对体积的偏导",
+  "statement": "1 mol 范德瓦尔斯气体，排除体积参数 $b=4\\times10^{-5}\\ \\mathrm{m^3/mol}$，体积 $V=1\\times10^{-3}\\ \\mathrm{m^3}$。取 $R=8.31\\ \\mathrm{J/(mol\\cdot K)}$。求$\\left(\\partial S/\\partial V\\right)_T$ 的数值（取 $\\nu=1\\ \\mathrm{mol}$）。",
+  "mainTag": "热力学与统计物理",
+  "tags": [
+   "热力学势与 Maxwell 关系"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 3,
+  "source": "经典教材题型 · 麦克斯韦关系",
+  "hints": [
+   "麦克斯韦关系 $\\left(\\partial S/\\partial V\\right)_T=\\left(\\partial p/\\partial T\\right)_V$。",
+   "范德瓦尔斯方程对 $T$ 求偏导，$a/V^2$ 项消失。"
+  ],
+  "answer": "8656\\ \\mathrm{J/(m^3*K)}",
+  "solution": "由热力学基本方程 $\\mathrm{d}F=-S\\,\\mathrm{d}T-p\\,\\mathrm{d}V$ 得麦克斯韦关系\n$$\\left(\\frac{\\partial S}{\\partial V}\\right)_T=\\left(\\frac{\\partial p}{\\partial T}\\right)_V.$$\n\n范德瓦尔斯方程（$\\nu=1\\ \\mathrm{mol}$）\n$$\\left(p+\\frac{a}{V^2}\\right)\\left(V-b\\right)=RT\\ \\Longrightarrow\\ p=\\frac{RT}{V-b}-\\frac{a}{V^2}.$$\n\n求偏导时 $a/V^2$ 项与 $T$ 无关，直接消失：\n$$\\left(\\frac{\\partial p}{\\partial T}\\right)_V=\\frac{R}{V-b}=\\frac{8.31}{1\\times10^{-3}-4\\times10^{-5}}=8656.$$\n\n**物理意义**：$R/(V-b)$ 只由「排除体积」$b$ 修正，而吸引力参数 $a$ 不影响这一项——说明 $a$ 主要影响内能而非熵压关系。\n\n**易错点**：麦克斯韦关系要选对热力学势（这里是 Helmholtz 自由能 $F$）；对 $T$ 求偏导时 $V$ 固定，$a/V^2$ 视为常数。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J/(m^3*K)",
+   "methods": [
+    "Maxwell 关系",
+    "范德瓦尔斯气体"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 麦克斯韦关系"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "范德瓦尔斯气体（b=5×10⁻⁵ m³/mol，V=0.01 m³）的压强对温度的偏导",
+  "statement": "1 mol 范德瓦尔斯气体，排除体积参数 $b=5\\times10^{-5}\\ \\mathrm{m^3/mol}$，体积 $V=0.01\\ \\mathrm{m^3}$。取 $R=8.31\\ \\mathrm{J/(mol\\cdot K)}$。求$\\left(\\partial p/\\partial T\\right)_V$ 的数值（取 $\\nu=1\\ \\mathrm{mol}$）。",
+  "mainTag": "热力学与统计物理",
+  "tags": [
+   "热力学势与 Maxwell 关系"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 3,
+  "source": "经典教材题型 · 麦克斯韦关系",
+  "hints": [
+   "麦克斯韦关系 $\\left(\\partial S/\\partial V\\right)_T=\\left(\\partial p/\\partial T\\right)_V$。",
+   "范德瓦尔斯方程对 $T$ 求偏导，$a/V^2$ 项消失。"
+  ],
+  "answer": "835\\ \\mathrm{Pa/K}",
+  "solution": "由热力学基本方程 $\\mathrm{d}F=-S\\,\\mathrm{d}T-p\\,\\mathrm{d}V$ 得麦克斯韦关系\n$$\\left(\\frac{\\partial S}{\\partial V}\\right)_T=\\left(\\frac{\\partial p}{\\partial T}\\right)_V.$$\n\n范德瓦尔斯方程（$\\nu=1\\ \\mathrm{mol}$）\n$$\\left(p+\\frac{a}{V^2}\\right)\\left(V-b\\right)=RT\\ \\Longrightarrow\\ p=\\frac{RT}{V-b}-\\frac{a}{V^2}.$$\n\n求偏导时 $a/V^2$ 项与 $T$ 无关，直接消失：\n$$\\left(\\frac{\\partial p}{\\partial T}\\right)_V=\\frac{R}{V-b}=\\frac{8.31}{0.01-5\\times10^{-5}}=835.$$\n\n**物理意义**：$R/(V-b)$ 只由「排除体积」$b$ 修正，而吸引力参数 $a$ 不影响这一项——说明 $a$ 主要影响内能而非熵压关系。\n\n**易错点**：麦克斯韦关系要选对热力学势（这里是 Helmholtz 自由能 $F$）；对 $T$ 求偏导时 $V$ 固定，$a/V^2$ 视为常数。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "Pa/K",
+   "methods": [
+    "Maxwell 关系",
+    "范德瓦尔斯气体"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 麦克斯韦关系"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "范德瓦尔斯气体（b=6×10⁻⁵ m³/mol，V=2×10⁻³ m³）的熵对体积的偏导",
+  "statement": "1 mol 范德瓦尔斯气体，排除体积参数 $b=6\\times10^{-5}\\ \\mathrm{m^3/mol}$，体积 $V=2\\times10^{-3}\\ \\mathrm{m^3}$。取 $R=8.31\\ \\mathrm{J/(mol\\cdot K)}$。求$\\left(\\partial S/\\partial V\\right)_T$ 的数值（取 $\\nu=1\\ \\mathrm{mol}$）。",
+  "mainTag": "热力学与统计物理",
+  "tags": [
+   "热力学势与 Maxwell 关系"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 3,
+  "source": "经典教材题型 · 麦克斯韦关系",
+  "hints": [
+   "麦克斯韦关系 $\\left(\\partial S/\\partial V\\right)_T=\\left(\\partial p/\\partial T\\right)_V$。",
+   "范德瓦尔斯方程对 $T$ 求偏导，$a/V^2$ 项消失。"
+  ],
+  "answer": "4284\\ \\mathrm{J/(m^3*K)}",
+  "solution": "由热力学基本方程 $\\mathrm{d}F=-S\\,\\mathrm{d}T-p\\,\\mathrm{d}V$ 得麦克斯韦关系\n$$\\left(\\frac{\\partial S}{\\partial V}\\right)_T=\\left(\\frac{\\partial p}{\\partial T}\\right)_V.$$\n\n范德瓦尔斯方程（$\\nu=1\\ \\mathrm{mol}$）\n$$\\left(p+\\frac{a}{V^2}\\right)\\left(V-b\\right)=RT\\ \\Longrightarrow\\ p=\\frac{RT}{V-b}-\\frac{a}{V^2}.$$\n\n求偏导时 $a/V^2$ 项与 $T$ 无关，直接消失：\n$$\\left(\\frac{\\partial p}{\\partial T}\\right)_V=\\frac{R}{V-b}=\\frac{8.31}{2\\times10^{-3}-6\\times10^{-5}}=4284.$$\n\n**物理意义**：$R/(V-b)$ 只由「排除体积」$b$ 修正，而吸引力参数 $a$ 不影响这一项——说明 $a$ 主要影响内能而非熵压关系。\n\n**易错点**：麦克斯韦关系要选对热力学势（这里是 Helmholtz 自由能 $F$）；对 $T$ 求偏导时 $V$ 固定，$a/V^2$ 视为常数。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "J/(m^3*K)",
+   "methods": [
+    "Maxwell 关系",
+    "范德瓦尔斯气体"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 麦克斯韦关系"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "范德瓦尔斯气体（b=3×10⁻⁵ m³/mol，V=2×10⁻³ m³）的压强对温度的偏导",
+  "statement": "1 mol 范德瓦尔斯气体，排除体积参数 $b=3\\times10^{-5}\\ \\mathrm{m^3/mol}$，体积 $V=2\\times10^{-3}\\ \\mathrm{m^3}$。取 $R=8.31\\ \\mathrm{J/(mol\\cdot K)}$。求$\\left(\\partial p/\\partial T\\right)_V$ 的数值（取 $\\nu=1\\ \\mathrm{mol}$）。",
+  "mainTag": "热力学与统计物理",
+  "tags": [
+   "热力学势与 Maxwell 关系"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 3,
+  "source": "经典教材题型 · 麦克斯韦关系",
+  "hints": [
+   "麦克斯韦关系 $\\left(\\partial S/\\partial V\\right)_T=\\left(\\partial p/\\partial T\\right)_V$。",
+   "范德瓦尔斯方程对 $T$ 求偏导，$a/V^2$ 项消失。"
+  ],
+  "answer": "4218\\ \\mathrm{Pa/K}",
+  "solution": "由热力学基本方程 $\\mathrm{d}F=-S\\,\\mathrm{d}T-p\\,\\mathrm{d}V$ 得麦克斯韦关系\n$$\\left(\\frac{\\partial S}{\\partial V}\\right)_T=\\left(\\frac{\\partial p}{\\partial T}\\right)_V.$$\n\n范德瓦尔斯方程（$\\nu=1\\ \\mathrm{mol}$）\n$$\\left(p+\\frac{a}{V^2}\\right)\\left(V-b\\right)=RT\\ \\Longrightarrow\\ p=\\frac{RT}{V-b}-\\frac{a}{V^2}.$$\n\n求偏导时 $a/V^2$ 项与 $T$ 无关，直接消失：\n$$\\left(\\frac{\\partial p}{\\partial T}\\right)_V=\\frac{R}{V-b}=\\frac{8.31}{2\\times10^{-3}-3\\times10^{-5}}=4218.$$\n\n**物理意义**：$R/(V-b)$ 只由「排除体积」$b$ 修正，而吸引力参数 $a$ 不影响这一项——说明 $a$ 主要影响内能而非熵压关系。\n\n**易错点**：麦克斯韦关系要选对热力学势（这里是 Helmholtz 自由能 $F$）；对 $T$ 求偏导时 $V$ 固定，$a/V^2$ 视为常数。",
+  "physicsMeta": {
+   "course": "theory",
+   "answerType": "numeric_unit",
+   "unit": "Pa/K",
+   "methods": [
+    "Maxwell 关系",
+    "范德瓦尔斯气体"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "经典教材题型 · 麦克斯韦关系"
+  },
+  "subject": "physics"
+ }
+]
