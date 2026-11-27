@@ -1,6 +1,6 @@
 {
   "name": "math-vault",
-  "version": "3.9.0",
+  "version": "3.9.1",
   "private": true,
   "description": "数海晴岸：高等数学 + 专业物理/天文好题收藏室（教材习题与题图 OCR 录入 / 课程组标签 / 多单位制判题）",
   "main": "server.js",
@@ -44,6 +44,7 @@
     "check:physics-equiv": "node tools/verify/check-physics-equiv.mjs",
     "check:physics-gate": "node tools/verify/check-physics-gate.mjs",
     "check:physics": "node tools/verify/check-physics-equiv.mjs && node tools/verify/check-physics-gate.mjs",
+    "check:leak": "node tools/verify/check-answer-leak.mjs",
     "import:physics": "node tools/import/import-problems.mjs data/batch-physics-01.json --verify",
     "verify:physics": "python tools/verify/verify_physics.py",
     "check:diagrams": "node tools/diagrams/make-svg.mjs --list && node tools/verify/check-physics-gate.mjs"
