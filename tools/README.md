@@ -35,7 +35,9 @@ tools/import/    录题流水线
   normalize-notation.mjs   记号统一（单位矩阵 I、bmatrix 等）
   fix-latex.mjs            LaTeX 批处理修复
 
-tools/archive/   已合并进主流程的一次性历史脚本，只作追溯用，不要再往这里加
+tools/archive/   已于 v3.12.0 整体删除（audit-kaoyan / retitle-hust / rescore…）
+                 这些是「一次性历史作业」，留着会让人以为是可复用工具。
+                 需要时用 `git log -- tools/archive/` 找回，历史即归档。
 ```
 
 ## 加新脚本的规矩
@@ -44,4 +46,9 @@ tools/archive/   已合并进主流程的一次性历史脚本，只作追溯用
 2. **会写库的放 `ops/` 或 `import/`**，并且默认 dry-run，加 `--write` / `--apply` 才落盘。
 3. 脚本自己定位仓库根目录：`path.join(__dirname, '..', '..')`，不要依赖调用者的 cwd。
 4. 凭据一律读环境变量，缺了就直接退出（退出码 2），不要写默认值。
-5. 新增的门禁脚本要在 `package.json` 与 `.github/workflows/smoke.yml` 里挂上。
+5. **不要往 `package.json` 加新命令**：在 `tools/cli.mjs` 的子命令表里加一行，
+   用 `npm run ops <动词>` / `npm run import <动词>` 调。package.json 只保留三类：
+   每天要敲的（`test` / `lint` / `check:all`）、CI 工作流直接调用的 `check:*`（改名需要
+   workflow scope，所以就地冻结）、以及 `deploy` / `build:pages` 这类关键路径。
+6. 新增的**门禁**脚本要进 `check:gates`（npm run check:all 会跑），并且在没有 `data/db.json`
+   的环境里要么自动降级取样、要么明确打一行「跳过」后 exit 0 —— CI 里没有运行时库。

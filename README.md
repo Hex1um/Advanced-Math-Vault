@@ -221,7 +221,6 @@ tools/README.md           脚本分层说明与新增脚本的规矩
 tools/ops/                部署 / 同步 / 备份 / 回流 / 迁移
 tools/verify/             冒烟、体检、公式、存储/邮件/.env 自测、符号校验
 tools/import/             导入、数据规范化与入库门禁（gate.mjs）
-tools/archive/            已合并的历史脚本（只作追溯）
 ```
 
 ## 期末突击（v2.1.0）
@@ -281,7 +280,7 @@ tools/archive/            已合并的历史脚本（只作追溯）
 # 引用题库真题的（数学类）：维护 tools/import/build-calculus-pack.mjs 里的章节映射表后重跑
 node tools/import/build-calculus-pack.mjs --write
 # 体检：考点/题量/答案合法性/引用是否命中
-npm run check:sprint
+node tools/verify/calc-pack-test.mjs
 ```
 
 科目包是只读的，学生的答题与提问记录写在 `db.sprint[uid][packId]`（跟着账号走，换设备不丢）。
@@ -292,7 +291,7 @@ npm run check:sprint
 
 ## 每日一积：伪随机与连排
 
-默认按日期哈希在全库里伪随机选题（`lib/core.js::dailyProblem`），并排除最近 30 天出过的题。
+默认按日期哈希在全库里伪随机选题（`lib/core.js` 的 `dailyProblem()`），并排除最近 30 天出过的题。
 
 需要「这几天按顺序出某几道题」时，改 `lib/daily-plan.js` 就行：
 
@@ -305,7 +304,7 @@ module.exports = {
 
 - 连排优先级高于伪随机、低于管理员在后台指定的单日题目（`db.dailyOverride`）。
 - 排期里写错的题号（不存在/未过审）会被跳过并打日志，当天回落到伪随机，不会出现空白页。
-- `npm run check:daily` 体检：题号是否都在库里、是否过审、是否互不重复、日期换算是否正确（跨月、越界）。
+- `node tools/verify/daily-plan-test.mjs` 体检：题号是否都在库里、是否过审、是否互不重复、日期换算是否正确（跨月、越界）。
 - 出过的题会写进 `db.daily[日期]`，所以首页的「往期」和历史统计照常。
 
 2026-11-26 起的排期是一份 20 道不定积分练习单（19 道新入库 HS7542–HS7560，
@@ -374,8 +373,9 @@ npm run test:quick                   # 只跑冒烟（JSON 引擎）：注册/�
 npm run test:sqlite                  # 同一套冒烟断言，跑在 SQLite 引擎上
 npm run check:all                    # 门禁合集：lint + 7 个内容/前端门禁 + 判题 fuzz（一条命令跑完）
 npm run lint                         # 零依赖 lint：no-var / eqeqeq（放行 == null）/ 全量语法检查
-npm run check:fuzz                   # 判题引擎 fuzz：超长、超深括号、控制字符、400 组随机输入
-npm run check:store                  # 存储层：导入、增量落盘、重载一致性（32 项，含 Map 主键/精确增删/对账口径）
+
+# 单项门禁（CI 的 smoke.yml 直接调用这些名字，所以它们必须保留；其余脚本见下）
+npm run check:store                  # 存储层：导入、增量落盘、重载一致性（含 Map 主键/精确增删/对账口径）
 npm run check:mail                   # 邮件通道（本地假 SMTP）
 npm run check:env                    # .env 解析与「不覆盖已有变量」
 npm run check:robust                 # 题库体检（没有 db.json 时自动读 batch 题库）
@@ -383,15 +383,23 @@ npm run check:ops                    # 管理员一次性重置机制
 npm run check:http                   # 路径穿越 / TRUST_PROXY / 500 脱敏 / 限流桶上限 / CORS 组合
 npm run check:md                     # Markdown 渲染、XSS 链接白名单、行内代码与公式边界
 npm run check:mathkey                # 公式键盘的光标环境状态机
-npm run check:components             # 前端公共组件（题目行 / 标签 / 统计条 / 自评）
-npm run check:fsrs                   # 错题本 FSRS 调度器（单调性 / 边界 / 旧数据兼容）
-npm run check:pages                  # Pages 产物自检（入口、本地资源、config.js）
 npm run check:equiv                  # 数学等价判题引擎（半角公式 / 对数合并 / 不定积分差常数）
 npm run check:delims                 # 公式定界符与环境闭合门禁（CI 严格模式）
-npm run check:physics-equiv          # 物理判题引擎（单位换算 / 量纲 / 容差 / 有效数字，62 项）
+npm run check:physics-equiv          # 物理判题引擎（单位换算 / 量纲 / 容差 / 有效数字）
 npm run check:physics-gate           # 物理题内容门禁（标签体系 / 配图安全 / 标准答案自检）
-npm run verify:physics -- --file data/batch-physics-01.json   # SymPy 量纲与单位自洽校验
-npm run check:diagrams               # 专业示意图模板（有效势/天球/能级/多普勒）+ 物理内容门禁
+
+# 不进 check:all 的病种（需要真实库或产物目录，按需单独跑）
+node tools/verify/check-katex.mjs --max-fail=0                  # 公式可渲染性，必须 0 失败
+node tools/verify/check-answer-leak.mjs                         # 未解锁用户拿不到标准答案
+node tools/verify/components-test.mjs                           # 前端公共组件
+node tools/verify/fsrs-test.mjs                                 # 错题本 FSRS 调度器
+node tools/verify/calc-pack-test.mjs                            # 期末突击科目包（需要 data/db.json）
+node tools/verify/daily-plan-test.mjs                           # 每日一积连排表（需要 data/db.json）
+node tools/verify/fuzz-equiv.mjs                                # 判题引擎 fuzz（长度/深度/随机输入）
+node tools/verify/dedup-problems.mjs --self-test                # 查重工具自检
+npm run ops check-pages                                         # Pages 产物自检（先 build-pages）
+npm run verify:physics -- --file data/batch-physics-01.json     # SymPy 量纲与单位自洽校验
+npm run ops diagrams -- --list                                  # 专业示意图模板 + 物理内容门禁
 
 # 教材扫描件录入（需本机装 pymupdf + rapidocr-onnxruntime）
 python _ocr/ingest.py toc            # 打印书签目录，定位各章「习题」页
@@ -401,9 +409,17 @@ python _ocr/figures.py cut 154 156   # 裁图写入 public/assets/diagrams/physi
 node tools/verify/check-physics-gate.mjs    # 入库门禁：标签 / 配图 / 标准答案自检
 python tools/verify/verify_physics.py --file data/batch-physics-12-textbook-mech3.json
 node tools/diagrams/make-svg.mjs     # 重新生成 public/assets/diagrams/physics/physics-*.svg
-npm run check:dedup                  # 查重工具自检
-npm run check:katex                  # 公式可渲染性，必须 0 失败（--strict-unclosed 连未闭合分隔符一起卡）
 ```
+
+**脚本入口只有三个**（v3.12.0 从 49 条 scripts 收敛到 26 条，其中 14 条是 CI 直接调用的）：
+
+```bash
+npm test          # 冒烟 + 全部门禁
+npm run ops <动词>      # 运维：deploy / backup / admin / build-pages / sync / export-batch / prune …
+npm run import <动词>    # 录题：problems / gate / tags / contest / hust / calc-pack …
+```
+
+`npm run ops`（不带动词）会把子命令表打出来。
 
 ```bash
 python tools/verify/verify_integrals.py [--file x.json]   # 逐题对答案求导，数值双点验证

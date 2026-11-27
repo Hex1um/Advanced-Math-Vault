@@ -1,3 +1,81 @@
+## v3.12.0 — 2026-11-27
+
+上一轮（v3.11.0）修的是「出错时会怎样」，这一轮收拾的是**代码本身**：
+2000 行的 core.js、全库最难读的 Proxy 脏跟踪、一堆一次性脚本、49 条 npm scripts。
+没有新功能，行为与 v3.11.0 完全一致（导出面 137 个键一个不少，只多了个 `fmtDex`）。
+
+### 一、`lib/core.js` 2054 行 → 1356 行，按域拆出四个模块
+
+拆法沿用仓库里已经验证过的「工厂 + 显式依赖注入」（跟 `createSprint` 一致）：
+
+| 新模块 | 内容 | 依赖 |
+|---|---|---|
+| `lib/auth.js` | 口令 scrypt 哈希 / timingSafeEqual 校验 / 会话 token 的 SHA-256 / Cookie 属性 / `currentUser` / `publicUser` | `getDb` / `parseCookies` / `isHttps` / `trustProxy` 注入 |
+| `lib/problem-normalize.js` | `mathify` 定界符整理 / 入库质量门禁 / 查重（bigram Jaccard）/ 物理元数据白名单 / 题号分配 | `getDb` 注入（查重扫全库） |
+| `lib/judge.js` | 结论行比对（`canonAnswer`/`processMatchesAnswer`）、四套判卷 Rubric、`parseJudge` | 无（纯函数 + 标签模块） |
+| `lib/gamify.js` | 难度分级 `LEVELS`/`levelOf`、`clampScore`、等级曲线 `levelInfo`、`xpForProblem` | 无 |
+
+关键点：**导出面完全不变**。四个模块在 `createCore` 里被组合成同一张能力表
+（`context.services.*`），路由层一行都不用改。拆出去需要读库的三个函数走 `getDb()`，
+而不是持有库引用 —— 启动时 `db` 会被整体替换（SQLite attach），拿旧引用就是读到过期数据。
+
+验证方式不是「看着对」：把 HEAD 版 core.js 复制出来直接 `require`，与新版逐键比对导出表，
+确认 137 个键一个都没丢。
+
+### 二、`lib/store.js`：8 条不变量写进文件头，顺手修掉一个丢写隐患
+
+Proxy 脏跟踪是全库最难读的 600 行：`markDirty` 什么时候触发、`wrap` 幂等不幂等、
+`db.x.push()` 与 `db.x[i].y =` 各记什么、脏标记什么时候结算 —— 以前全靠读代码推。
+现在文件头有 8 条编号不变量，`store-test.mjs` 的断言也按不变量分组命名，
+红了直接对号入座。
+
+写这段文档时对出了**一个真 bug**：`save()` 在事务**里面**就清空了脏标记，
+一旦 `COMMIT` 抛错走 `ROLLBACK`，这些标记已经没了 —— 该落盘的行再也不会被重试，
+而内存里改好的数据在下一次 `reconcile` 时还会被当成「表里多出来的行」删掉。
+现在改成「COMMIT 成功之后才结算标记」，失败时标记保留，下次 `save()` 自动重试。
+
+其余不变量都与现有实现一致（数组增删按 key 差集、认不出主键退回整表重建、
+映射表必须带 `entryKey`、kv 粗粒度覆盖……），没有改动行为。
+
+### 三、`tools/archive/` 整体删除
+
+`audit-kaoyan` / `retitle-hust` / `rescore` / `repair-kaoyan` / `triage-kaoyan` /
+`fix-quality-batch` / `patch-manual` / `fix-pending-and-proof` / `verify_batch5.py` ——
+九个一次性历史作业。留在仓库里会让人以为是可复用工具，git 历史就是归档
+（`git log -- tools/archive/` 可取回）。`tools/README.md` 与 README 的目录树同步更新。
+
+### 四、npm scripts 49 条 → 26 条
+
+收敛原则：**天天敲的留名字，偶尔用一次的收进索引，CI 直接调用的冻结**。
+
+```bash
+npm test                 # 冒烟 + 全部门禁（CI 跑的就是这条）
+npm run test:quick       # 只冒烟
+npm run lint / check:all # 门禁
+npm run ops <动词>        # 运维：deploy / backup / admin / build-pages / sync / export-batch / prune …
+npm run import <动词>     # 录题：problems / gate / tags / contest / hust / calc-pack …
+```
+
+- 新增 `tools/cli.mjs` 作为子命令索引（`node tools/cli.mjs` 不传参就把表打出来），
+  参数原样透传：`npm run ops deploy --publish`、`npm run import problems data/x.json --verify`；
+- 删掉纯装饰名与重名：`check:physics`（equiv+gate 的重复组合）、`check:diagrams`、
+  `gate`、`tags:migrate`、`admin`、`backup`、`export:batch`、`migrate:sqlite`、
+  `merge:instances`、`repair:delims`、`repair:problems`、`build:calc-pack`、`import:physics`、
+  `check:pages`、`check:katex`、`check:dedup`、`check:leak`、`check:components`、`check:fsrs`、
+  `check:sprint`、`check:daily`、`check:fuzz`、`smoke`；
+- `check:gates` 改成直接调 `node`，不再嵌套 `npm run`（少一层进程，也少一堆已删的名字）；
+- **剩下的 14 条 `check:*` 是 CI 直接调用的，不能删** —— 改 `.github/workflows/*` 需要
+  `workflow` scope 的凭据，这里不擅自制造红灯。将来给 CI 换名字时一起收。
+
+### 验证
+
+- `npm test`（JSON）**190 通过 / 0 失败**、`test:sqlite` **190 / 0**；
+- `npm run check:all` 全绿（lint 117 文件 0 违规 0 语法错误）；
+- 逐个确认 CI 用到的 12 条 `check:*` 仍可执行（store 48 / http 24 / md 26 / mathkey 24 /
+  equiv 19 / delims / physics-equiv / physics-gate / robust / mail 14 / env 10 / ops 12 全 0 失败）；
+- 导出面比对：HEAD 137 键 vs 新版 138 键（多出的 `fmtDex`），无丢失；
+- 线上冒烟（部署后）：`/api/health` 返回 `version=3.12.0`，脏 JSON → 400、未知接口 → 404。
+
 ## v3.11.0 — 2026-11-27
 
 按 2026-11-27 的代码评审（v3.10.7 基线）做的一轮**鲁棒性 + 门禁**整改。
