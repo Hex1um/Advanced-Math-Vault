@@ -102,6 +102,14 @@ async function main() {
     merged.push(hit.name);
   }
 
+  /* 每日一积的历史记录（db.daily 是「某天出过哪道题」的缓存）：只补缺失的日期，
+     不覆盖新库已有的（新库算过的那天就以它为准）。 */
+  db.daily = db.daily || {};
+  let dailyAdded = 0;
+  for (const [k, v] of Object.entries(old.daily || {})) {
+    if (!db.daily[k] && db.problems.some((p) => p.code === v)) { db.daily[k] = v; dailyAdded++; }
+  }
+
   const postIds = new Set(db.posts.map((p) => p.id));
   let postsAdded = 0;
   for (const p of old.posts || []) if (!postIds.has(p.id)) { db.posts.push(p); postsAdded++; }
@@ -123,7 +131,7 @@ async function main() {
   console.log('本地（前）: ' + JSON.stringify(before));
   console.log('新增用户: ' + (added.join(', ') || '—'));
   console.log('合并用户: ' + (merged.join(', ') || '—'));
-  console.log('新增帖子 ' + postsAdded + ' / 新增提交 ' + subsAdded);
+  console.log('新增帖子 ' + postsAdded + ' / 新增提交 ' + subsAdded + ' / 补齐每日一积 ' + dailyAdded + ' 天');
   console.log('本地（后）: ' + JSON.stringify(after));
 
   if (DRY) { console.log('--dry：未写盘'); return; }
