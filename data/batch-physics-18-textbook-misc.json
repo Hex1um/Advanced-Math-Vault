@@ -1,0 +1,399 @@
+[
+ {
+  "title": "水中的平面简谐声波方程",
+  "statement": "一平面简谐声波的振幅为 $0.001\\ \\mathrm{m}$，频率为 $1483\\ \\mathrm{Hz}$，在 $20^\\circ\\mathrm{C}$ 的水中传播。写出其波方程（$20^\\circ\\mathrm{C}$ 水中声速取 $1483\\ \\mathrm{m/s}$）。",
+  "mainTag": "振动与波",
+  "tags": [
+   "平面简谐波"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 4,
+  "calc": 2,
+  "source": "漆安慎《力学》第4版 习题10.2.2",
+  "hints": [
+   "$\\lambda=v/\\nu$。",
+   "$y=A\\cos2\\pi\\left(\\nu t-x/\\lambda\\right)$。"
+  ],
+  "answer": "y=1.0\\times10^{-3}\\cos2\\pi\\left(1483t-x\\right)\\ \\mathrm{m}",
+  "solution": "波长\n$$\\lambda=\\frac{v}{\\nu}=\\frac{1483}{1483}=1.00\\ \\mathrm{m}.$$\n沿 $x$ 正方向传播的平面简谐波\n$$y=A\\cos2\\pi\\left(\\nu t-\\frac{x}{\\lambda}\\right)\n=1.0\\times10^{-3}\\cos2\\pi\\left(1483t-x\\right)\\ \\mathrm{m}.$$\n\n$20^\\circ\\mathrm{C}$ 水中声速恰好取 $1483\\ \\mathrm{m/s}$，与频率数值相同，所以波长正好 $1\\ \\mathrm{m}$——这是题目特意设计的巧合，便于核对。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "波方程",
+    "波长"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十章 习题10.2.2"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "初相位由初始条件确定",
+  "statement": "写出振幅为 $A$、频率为 $f$、波速为 $c$、沿 $x$ 轴正方向传播的平面简谐波方程 $y\\left(x,t\\right)$。波源在原点 $O$，且当 $t=0$ 时波源处质点处于平衡位置 $y=0$，速度沿 $y$ 轴正方向。",
+  "mainTag": "振动与波",
+  "tags": [
+   "平面简谐波"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题10.2.4",
+  "hints": [
+   "一般式 $y=A\\cos\\left(2\\pi ft-\\frac{2\\pi x}{\\lambda}+\\varphi_0\\right)$。",
+   "$t=0,x=0$：$y=0$、$v_y>0$ → $\\varphi_0=-\\pi/2$。"
+  ],
+  "answer": "y=A\\sin2\\pi\\left(ft-\\frac{fx}{c}\\right)",
+  "solution": "设\n$$y=A\\cos\\left(2\\pi ft-\\frac{2\\pi x}{\\lambda}+\\varphi_0\\right),\\qquad \\lambda=\\frac{c}{f}.$$\n在 $x=0$、$t=0$ 处：\n$$y=A\\cos\\varphi_0=0,\\qquad v_y=-A\\,2\\pi f\\sin\\varphi_0>0.$$\n故 $\\cos\\varphi_0=0$、$\\sin\\varphi_0<0$，得 $\\varphi_0=-\\dfrac{\\pi}{2}$。\n\n于是\n$$y=A\\cos\\left(2\\pi ft-\\frac{2\\pi fx}{c}-\\frac{\\pi}{2}\\right)\n=A\\sin2\\pi\\left(ft-\\frac{fx}{c}\\right).$$\n\n物理含义：波源从平衡位置向上起振，故波形是正弦而非余弦。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "波方程",
+    "初相位"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十章 习题10.2.4"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "声波的能量密度与波面间能量",
+  "statement": "在直径为 $14\\ \\mathrm{cm}$ 的管中传播平面简谐声波，平均能流密度为 $9\\ \\mathrm{erg/(s\\cdot cm^2)}$，频率 $\\nu=300\\ \\mathrm{Hz}$，声速 $u=300\\ \\mathrm{m/s}$。(1) 求最大能量密度和平均能量密度；(2) 求相邻同相位波面间的总能量。",
+  "mainTag": "振动与波",
+  "tags": [
+   "平面简谐波"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题10.4.1",
+  "hints": [
+   "$1\\ \\mathrm{erg/(s\\cdot cm^2)}=10^{-3}\\ \\mathrm{W/m^2}$。",
+   "$\\bar w=I/u$，$w_{\\max}=2\\bar w$；波面间距为 $\\lambda$。"
+  ],
+  "answer": "\\bar w=3.0\\times10^{-5}\\ \\mathrm{J/m^3}",
+  "solution": "单位换算：\n$$9\\ \\mathrm{erg/(s\\cdot cm^2)}=9\\times10^{-7}\\ \\mathrm{W}/10^{-4}\\ \\mathrm{m^2}=9.0\\times10^{-3}\\ \\mathrm{W/m^2}.$$\n\n（1）平均能量密度\n$$\\bar w=\\frac{I}{u}=\\frac{9.0\\times10^{-3}}{300}=3.0\\times10^{-5}\\ \\mathrm{J/m^3}.$$\n简谐波的能量密度随时间按 $\\sin^2$ 变化，最大值为平均值的 2 倍：\n$$w_{\\max}=2\\bar w=6.0\\times10^{-5}\\ \\mathrm{J/m^3}.$$\n\n（2）相邻同相波面间距为一个波长\n$$\\lambda=\\frac{u}{\\nu}=\\frac{300}{300}=1.0\\ \\mathrm{m},$$\n管截面积 $S=\\dfrac{\\pi d^2}{4}=\\dfrac{\\pi\\times0.14^2}{4}=1.54\\times10^{-2}\\ \\mathrm{m^2}$。一个波长内的总能量\n$$E=\\bar w\\,S\\lambda=3.0\\times10^{-5}\\times1.54\\times10^{-2}\\times1.0=4.6\\times10^{-7}\\ \\mathrm{J}.$$\n\n注意 $w_{\\max}$ 是「瞬时最大」，不能直接乘体积当总能；算总能必须用平均值。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "J/m^3",
+   "methods": [
+    "能量密度",
+    "能流密度"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十章 习题10.4.1"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "两列反向波叠加为驻波加行波",
+  "statement": "试证明：两列频率相同、振动方向相同、传播方向相反且振幅大小不同的平面简谐波相叠加，可形成一驻波与一行波的叠加。",
+  "mainTag": "振动与波",
+  "tags": [
+   "波的干涉与驻波"
+  ],
+  "kind": "证明题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题10.5.3",
+  "hints": [
+   "取 $y_1=A_1\\cos\\left(\\omega t-kx\\right)$、$y_2=A_2\\cos\\left(\\omega t+kx\\right)$。",
+   "用和差化积，把 $A_1-A_2$ 与 $A_2$ 分组。"
+  ],
+  "answer": "y=2A_2\\cos kx\\cos\\omega t+\\left(A_1-A_2\\right)\\cos\\left(\\omega t-kx\\right)",
+  "solution": "设\n$$y_1=A_1\\cos\\left(\\omega t-kx\\right),\\qquad y_2=A_2\\cos\\left(\\omega t+kx\\right),\\qquad A_1>A_2.$$\n把 $y_2$ 拆成两部分：\n$$y_2=A_2\\cos\\left(\\omega t+kx\\right)\n=A_2\\cos\\left(\\omega t-kx\\right)+A_2\\left[\\cos\\left(\\omega t+kx\\right)-\\cos\\left(\\omega t-kx\\right)\\right].$$\n按 $A_1-A_2$ 与 $A_2$ 分组：\n$$y=\\underbrace{2A_2\\cos kx\\cos\\omega t}_{\\text{驻波}}\n+\\underbrace{\\left(A_1-A_2\\right)\\cos\\left(\\omega t-kx\\right)}_{\\text{行波}}.$$\n验证：$2A_2\\cos kx\\cos\\omega t=\\dfrac{A_2}{2}\\left[\\cos\\left(\\omega t-kx\\right)+\\cos\\left(\\omega t+kx\\right)\\right]$，加上 $(A_1-A_2)\\cos(\\omega t-kx)$ 得\n$$A_1\\cos\\left(\\omega t-kx\\right)+A_2\\cos\\left(\\omega t+kx\\right)=y_1+y_2.$$\n\n故合成波 = 振幅 $2A_2$ 的驻波 + 振幅 $A_1-A_2$ 的行波。\n\n特例：$A_1=A_2$ 时行波项消失，退化为纯驻波（波节处始终静止）；$A_2\\to0$ 时驻波消失，退化为纯行波。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "proof",
+   "unit": "",
+   "methods": [
+    "驻波",
+    "和差化积"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第十章 习题10.5.3"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "傅科摆的周期与总能量",
+  "statement": "1851 年傅科做证明地球自转的实验，摆长 $69\\ \\mathrm{m}$，下悬重球 $28\\ \\mathrm{kg}$。设其振幅为 $5.0^\\circ$，求其周期和振动的总能量（取重球最低处势能为零，$g=9.8\\ \\mathrm{m/s^2}$）。",
+  "mainTag": "振动与波",
+  "tags": [
+   "简谐振动"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题9.3.1",
+  "hints": [
+   "$T=2\\pi\\sqrt{l/g}$。",
+   "$E=mgl\\left(1-\\cos\\theta_0\\right)$（不能用 $\\frac12mgl\\theta_0^2$ 以外的近似而不说明）。"
+  ],
+  "answer": "17\\ \\mathrm{s}",
+  "solution": "周期（单摆，与质量无关）\n$$T=2\\pi\\sqrt{\\frac{l}{g}}=2\\pi\\sqrt{\\frac{69}{9.8}}=16.7\\ \\mathrm{s}\\approx17\\ \\mathrm{s}.$$\n\n总能量等于把摆球拉到振幅角 $\\theta_0=5.0^\\circ$ 所做的功：\n$$E=mgl\\left(1-\\cos\\theta_0\\right)\n=28\\times9.8\\times69\\times\\left(1-\\cos5^\\circ\\right).$$\n$\\cos5^\\circ=0.99619$，故\n$$E=28\\times9.8\\times69\\times3.81\\times10^{-3}=72.2\\ \\mathrm{J}\\approx72\\ \\mathrm{J}.$$\n\n小角近似 $\\frac12mgl\\theta_0^2$ 给出 $72.1\\ \\mathrm{J}$，两者相差不到 $0.2\\%$——$5^\\circ$ 已足够小。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "s",
+   "methods": [
+    "单摆",
+    "振动能量"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第九章 习题9.3.1"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "弹簧振子的劲度系数与能量",
+  "statement": "弹簧下面悬挂质量为 $50\\ \\mathrm{g}$ 的物体，物体沿竖直方向的运动学方程为 $x=2\\sin10t$（长度单位 $\\mathrm{cm}$，时间单位 $\\mathrm{s}$），以平衡位置为势能零点。(1) 求弹簧的劲度系数；(2) 求最大动能；(3) 求总能量。",
+  "mainTag": "振动与波",
+  "tags": [
+   "简谐振动"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 4,
+  "calc": 2,
+  "source": "漆安慎《力学》第4版 习题9.3.2",
+  "hints": [
+   "由 $x=2\\sin10t$ 读出 $A=0.02\\ \\mathrm{m}$、$\\omega=10\\ \\mathrm{rad/s}$。",
+   "$k=m\\omega^2$，$E=\\frac12kA^2$。"
+  ],
+  "answer": "k=5.0\\ \\mathrm{N/m}",
+  "solution": "由 $x=2\\sin10t\\ \\mathrm{cm}$ 得\n$$A=2.0\\times10^{-2}\\ \\mathrm{m},\\qquad \\omega=10\\ \\mathrm{rad/s}.$$\n\n（1）劲度系数\n$$k=m\\omega^2=0.050\\times100=5.0\\ \\mathrm{N/m}.$$\n\n（2）最大动能（经过平衡位置时）\n$$E_{k,\\max}=\\frac12kA^2=\\frac12\\times5.0\\times\\left(2.0\\times10^{-2}\\right)^2=1.0\\times10^{-3}\\ \\mathrm{J}.$$\n\n（3）总能量守恒，等于最大动能：\n$$E=1.0\\times10^{-3}\\ \\mathrm{J}.$$\n\n注意振幅 $2\\ \\mathrm{cm}$ 要先换成 SI 单位，否则能量会差 $10^4$ 倍。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "N/m",
+   "methods": [
+    "简谐振动",
+    "振动能量"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第九章 习题9.3.2"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "单摆悬线的最大拉力",
+  "statement": "若单摆的振幅为 $\\theta_0$，试证明悬线所受的最大拉力等于 $mg\\left(3-2\\cos\\theta_0\\right)$。",
+  "mainTag": "振动与波",
+  "tags": [
+   "简谐振动"
+  ],
+  "kind": "证明题",
+  "thinking": 5,
+  "difficulty": 6,
+  "calc": 4,
+  "source": "漆安慎《力学》第4版 习题9.3.3",
+  "hints": [
+   "最大拉力在最低点，此时速度最大。",
+   "机械能：$\\frac12mv^2=mgl\\left(\\cos\\theta-\\cos\\theta_0\\right)$；最低点 $T-mg=mv^2/l$。"
+  ],
+  "answer": "T_{\\max}=mg\\left(3-2\\cos\\theta_0\\right)",
+  "solution": "摆球在角 $\\theta$ 处速率 $v$ 满足机械能守恒（最低点为零势能）：\n$$\\frac12mv^2=mgl\\left(\\cos\\theta-\\cos\\theta_0\\right).$$\n在最低点 $\\theta=0$，速率最大：\n$$\\frac12mv_{\\max}^2=mgl\\left(1-\\cos\\theta_0\\right).$$\n最低点沿径向：\n$$T-mg=\\frac{mv_{\\max}^2}{l}=2mg\\left(1-\\cos\\theta_0\\right),$$\n$$T_{\\max}=mg+2mg\\left(1-\\cos\\theta_0\\right)=mg\\left(3-2\\cos\\theta_0\\right).$$\n\n检验：$\\theta_0=0$（静止悬挂）时 $T=mg$；$\\theta_0=90^\\circ$ 时 $T=3mg$。悬线必须按 $3mg$ 设计，而不是按静止时的 $mg$——这是秋千、吊索常被低估的载荷。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "单摆",
+    "向心力",
+    "机械能守恒"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第九章 习题9.3.3"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "同频率互相垂直振动的合成轨迹",
+  "statement": "在电子示波器中，由于互相垂直的电场作用，使电子在荧光屏上的位移为\n$$x=A\\cos\\omega t,\\qquad y=A\\cos\\left(\\omega t+\\alpha\\right).$$\n求 $\\alpha=0$ 时的轨迹方程，并说明轨迹形状。",
+  "mainTag": "振动与波",
+  "tags": [
+   "振动合成"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 4,
+  "calc": 2,
+  "source": "漆安慎《力学》第4版 习题9.4.1",
+  "hints": [
+   "$\\alpha=0$ 时 $y=A\\cos\\omega t$，与 $x$ 完全相同。",
+   "消去 $\\omega t$ 即得轨迹。"
+  ],
+  "answer": "y=x\\ \\text{（直线，与 }x\\text{ 轴成 }45^\\circ\\text{）}",
+  "solution": "$\\alpha=0$ 时\n$$y=A\\cos\\omega t=x,$$\n故轨迹为\n$$y=x,$$\n即过原点、与 $x$ 轴成 $45^\\circ$ 的直线段（$|x|\\le A$）。\n\n电子沿这条直线来回运动，频率为 $\\omega$，看上去是一条 $45^\\circ$ 亮线。\n\n推广：$\\alpha=\\pi$ 时为 $y=-x$（另一条对角线）；$\\alpha=\\pm\\pi/2$ 时合成圆 $x^2+y^2=A^2$；其他 $\\alpha$ 合成椭圆——这就是利萨如图形用于测频率与相位差的原因。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "振动合成",
+    "利萨如图"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第九章 习题9.4.1"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "阻尼振动振幅衰减到 0.3 cm 的时间",
+  "statement": "阻尼振动起初振幅 $A_0=3\\ \\mathrm{cm}$，经过 $t=10\\ \\mathrm{s}$ 后振幅变为 $A_1=1\\ \\mathrm{cm}$。问经过多长时间，振幅将变为 $A_2=0.3\\ \\mathrm{cm}$？（欠阻尼状态）",
+  "mainTag": "振动与波",
+  "tags": [
+   "阻尼与受迫振动"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "漆安慎《力学》第4版 习题9.6.2",
+  "hints": [
+   "$A=A_0\\mathrm{e}^{-\\beta t}$。",
+   "先由 $3\\to1$ 求 $\\beta$，再解 $0.3$。"
+  ],
+  "answer": "21\\ \\mathrm{s}",
+  "solution": "欠阻尼振动的振幅按指数衰减：\n$$A=A_0\\mathrm{e}^{-\\beta t}.$$\n由 $t=10\\ \\mathrm{s}$ 时 $A=1\\ \\mathrm{cm}$：\n$$1=3\\mathrm{e}^{-10\\beta}\\quad\\Rightarrow\\quad\\beta=\\frac{\\ln3}{10}=0.110\\ \\mathrm{s^{-1}}.$$\n再令 $A=0.3\\ \\mathrm{cm}$：\n$$0.3=3\\mathrm{e}^{-\\beta t}\\quad\\Rightarrow\\quad \\mathrm{e}^{-\\beta t}=0.1\n\\quad\\Rightarrow\\quad t=\\frac{\\ln10}{\\beta}=\\frac{2.303}{0.110}=21\\ \\mathrm{s}.$$\n\n即从开始算起约 $21\\ \\mathrm{s}$（从 $t=10\\ \\mathrm{s}$ 起再经过约 $11\\ \\mathrm{s}$）。振幅每经过 $10\\ \\mathrm{s}$ 衰减为 $1/3$，所以 $3\\to1\\to0.33\\to0.11$，$0.3\\ \\mathrm{cm}$ 略早于 $21\\ \\mathrm{s}$，与计算一致。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "s",
+   "methods": [
+    "阻尼振动",
+    "指数衰减"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第九章 习题9.6.2"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "受迫振动与驱动力同相的条件",
+  "statement": "某受迫振动与驱动力同相位，求驱动力的频率。",
+  "mainTag": "振动与波",
+  "tags": [
+   "阻尼与受迫振动"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 4,
+  "calc": 2,
+  "source": "漆安慎《力学》第4版 习题9.7.1",
+  "hints": [
+   "受迫振动位移与驱动力的相位差 $\\varphi$ 满足 $\\tan\\varphi=\\dfrac{2\\beta\\omega}{\\omega_0^2-\\omega^2}$。",
+   "同相要求 $\\varphi=0$。"
+  ],
+  "answer": "\\omega=\\omega_0\\ \\text{（共振）}",
+  "solution": "受迫振动的稳定解 $x=A\\cos\\left(\\omega t-\\varphi\\right)$，位移落后驱动力的相位 $\\varphi$ 满足\n$$\\tan\\varphi=\\frac{2\\beta\\omega}{\\omega_0^2-\\omega^2}.$$\n与驱动力同相即 $\\varphi=0$，要求\n$$\\omega_0^2-\\omega^2=0\\quad\\Rightarrow\\quad\\omega=\\omega_0.$$\n\n即驱动力频率等于系统固有频率，发生**共振**（位移共振频率在欠阻尼下略低于 $\\omega_0$，但相位差为零严格在 $\\omega=\\omega_0$ 处）。\n\n共振时振幅最大、且位移与驱动力同相，此时外力始终做正功，能量输入效率最高。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "受迫振动",
+    "共振"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第九章 习题9.7.1"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "氘核与 α 粒子的弹性碰撞",
+  "statement": "质量为 $m$、速率为 $u$ 的氘核与静止的质量为 $2m$ 的 α 粒子发生完全弹性碰撞，氘核以与原方向成 $90^\\circ$ 角散射。(1) 求 α 粒子的运动方向；(2) 用 $u$ 表示 α 粒子的末速度；(3) 百分之几的能量由氘核传给 α 粒子？",
+  "mainTag": "力学",
+  "tags": [
+   "动量与碰撞"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题4.7.1",
+  "hints": [
+   "动量守恒是矢量的：$m\\vec u=m\\vec v_1+2m\\vec v_2$，且 $\\vec v_1\\perp\\vec u$。",
+   "能量守恒 + 垂直关系，解出 $v_1$、$v_2$。"
+  ],
+  "answer": "v_2=\\frac{u}{\\sqrt3},\\ \\text{与入射方向成 }30^\\circ",
+  "solution": "取入射方向为 $x$。碰后氘核速度 $\\vec v_1$ 沿 $y$（垂直原方向），α 粒子速度 $\\vec v_2$ 与 $x$ 成 $\\theta$。\n\n动量守恒：\n$$mu=2mv_2\\cos\\theta\\quad\\left(x\\right),\\qquad 0=mv_1-2mv_2\\sin\\theta\\quad\\left(y\\right).$$\n能量守恒（完全弹性）：\n$$\\frac12mu^2=\\frac12mv_1^2+\\frac12\\cdot2m v_2^2.$$\n\n由 $x$ 式 $u=2v_2\\cos\\theta$；由 $y$ 式 $v_1=2v_2\\sin\\theta$。代入能量式：\n$$u^2=4v_2^2\\sin^2\\theta+2v_2^2=4v_2^2\\cos^2\\theta.$$\n联立 $u^2=4v_2^2\\cos^2\\theta$ 与上式得\n$$4v_2^2\\sin^2\\theta+2v_2^2=4v_2^2\\cos^2\\theta\n\\Rightarrow 2\\sin^2\\theta+1=2\\cos^2\\theta=2\\left(1-\\sin^2\\theta\\right),$$\n$$4\\sin^2\\theta=1\\quad\\Rightarrow\\quad\\sin\\theta=\\frac12,\\qquad\\theta=30^\\circ.$$\n\n于是\n$$v_2=\\frac{u}{2\\cos30^\\circ}=\\frac{u}{\\sqrt3},\\qquad v_1=2v_2\\sin30^\\circ=\\frac{u}{\\sqrt3}.$$\n\n能量转移比例\n$$\\frac{E_2}{E_0}=\\frac{\\frac12\\cdot2m\\cdot u^2/3}{\\frac12mu^2}=\\frac23=66.7\\%.$$\n\n（题目问「百分之几」，答 $66.7\\%$。）质量比接近 $1:2$ 时能量转移效率最高，这也是核反应堆用轻核（水、石墨）慢化中子的原因。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "symbolic",
+   "unit": "",
+   "methods": [
+    "完全弹性碰撞",
+    "二维动量守恒"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第四章 习题4.7.1"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "两车相撞的责任判定",
+  "statement": "桑塔纳空车质量 $m_1=1.06\\times10^{3}\\ \\mathrm{kg}$，搭载一个 $70\\ \\mathrm{kg}$ 的人向北行驶；另一总质量 $m_2=1.52\\times10^{3}\\ \\mathrm{kg}$ 的切诺基向东行驶。两车相撞后连成一体，沿东偏北 $30^\\circ$ 滑出 $d=16\\ \\mathrm{m}$ 而停止。路面摩擦因数 $\\mu=0.8$。该地段规定车速不得超过 $80\\ \\mathrm{km/h}$，问哪辆车违反了交通法？因相撞损失了多少动能？",
+  "mainTag": "力学",
+  "tags": [
+   "动量与碰撞"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 7,
+  "calc": 5,
+  "source": "漆安慎《力学》第4版 习题4.7.2",
+  "hints": [
+   "碰后共同速度 $v=\\sqrt{2\\mu gd}$。",
+   "碰后动量方向东偏北 $30^\\circ$，把动量分解到东、北两个方向。"
+  ],
+  "answer": "86\\ \\mathrm{km/h}",
+  "solution": "碰后总质量 $M=1060+70+1520=2650\\ \\mathrm{kg}$。滑行距离给出碰后速度\n$$v=\\sqrt{2\\mu gd}=\\sqrt{2\\times0.8\\times9.8\\times16}=\\sqrt{250.9}=15.84\\ \\mathrm{m/s}.$$\n总动量 $p=Mv=2650\\times15.84=4.198\\times10^{4}\\ \\mathrm{kg\\cdot m/s}$，方向东偏北 $30^\\circ$。\n\n分解：\n$$p_{\\text{东}}=p\\cos30^\\circ=3.635\\times10^{4},\\qquad p_{\\text{北}}=p\\sin30^\\circ=2.099\\times10^{4}.$$\n东向只有切诺基有动量：\n$$v_2=\\frac{3.635\\times10^{4}}{1520}=23.9\\ \\mathrm{m/s}=86.1\\ \\mathrm{km/h}>80\\ \\mathrm{km/h}.$$\n北向只有桑塔纳：\n$$v_1=\\frac{2.099\\times10^{4}}{1130}=18.6\\ \\mathrm{m/s}=66.9\\ \\mathrm{km/h}<80\\ \\mathrm{km/h}.$$\n\n**结论：切诺基超速**，桑塔纳未超。\n\n动能损失：\n$$E_{\\text{前}}=\\frac12\\times1130\\times18.6^2+\\frac12\\times1520\\times23.9^2\n=1.96\\times10^{5}+4.34\\times10^{5}=6.29\\times10^{5}\\ \\mathrm{J},$$\n$$E_{\\text{后}}=\\frac12\\times2650\\times15.84^2=3.32\\times10^{5}\\ \\mathrm{J},$$\n$$\\Delta E=2.97\\times10^{5}\\ \\mathrm{J}\\approx3.0\\times10^{5}\\ \\mathrm{J}.$$\n\n近 $3\\times10^{5}\\ \\mathrm{J}$ 在碰撞中变为车体变形与热——相当于 $70\\ \\mathrm{kg}$ 的人从约 $430\\ \\mathrm{m}$ 高处落下的势能，这就是碰撞事故的破坏量级。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "km/h",
+   "methods": [
+    "动量守恒",
+    "动能损失"
+   ],
+   "constants": [
+    "g=9.8 m/s^2"
+   ],
+   "textbookRef": "漆安慎《力学》第4版 第四章 习题4.7.2"
+  },
+  "subject": "physics"
+ }
+]
