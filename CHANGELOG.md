@@ -1,3 +1,33 @@
+## v3.13.2 — 2026-11-27
+
+**功能全保留 / 静态包只做兜底**：github.io 仍是完整站点（登录、答疑、AI 出题、错题本、
+组卷、分析、投稿、期末突击全在），题库静态包退居「断网也能读题」的兜底角色。
+
+### 与 v3.13.1 的差别
+
+上一版把 Pages 切成纯静态，等于砍掉了所有需要服务端的功能。这版按需求改回：
+
+| 项 | v3.13.1 | v3.13.2 |
+| :-- | :-- | :-- |
+| `config.js` | `apiBase: ""`、`staticData: true` | `apiBase` 指向线上实例、`staticData: false`、`staticFallback: true` |
+| 导航入口 | 只剩题库 / 每日一积 | 全部 11 个入口（按各自 features 决定） |
+| 题库来源 | 静态包 | 线上接口；接口不可达时自动切静态包 |
+| 断网表现 | 正常（只读） | 降级为「离线只读」，入口收敛 + 顶栏提示，恢复后自动放回 |
+
+### 机制
+
+- `public/js/api.js`：请求抛网络/超时错误且存在静态包时，改走 `staticRequest()` 兜底，
+  并广播 `api:offline`；下次成功响应广播 `api:online`；
+- `public/js/app.js`：`applyOfflineChrome(on)` 统一收敛/恢复 8 个服务端入口，
+  纯静态构建（`staticData: true`）时行为与上一版一致；
+- `build-pages`：静态包存在时不再切纯静态，只写 `staticFallback: true`；
+- `check-pages`：API 模式下要求 apiBase/sharecode 有值，且静态包文件齐全。
+
+### 注意
+
+后端 `math-vault-10141` 的 CORS 白名单只放行 `https://hex1um.github.io`，
+所以本地 `127.0.0.1` 打开会走兜底（这正是降级路径的验证方式）；线上主域正常。
+
 ## v3.13.1 — 2026-11-27
 
 **github.io 自己当后端**：题库打包成静态数据发到 Pages，前端直读，不再依赖服务器实例。

@@ -212,6 +212,15 @@
      不再依赖任何服务器实例：列表、标签树、详情、每日一积、看答案都能离线用。
      写操作（登录、答疑、AI 判卷、投稿）需要服务器，这里给出明确提示而不是白屏。 */
   const IS_STATIC = !!(window.MV_CONFIG && window.MV_CONFIG.staticData);
+  /* 静态包兜底：apiBase 仍然指向线上实例（功能全保留），
+     一旦接口不可达就切到 public/data/ 的静态包，至少能读题。 */
+  const HAS_PACK = !!(window.MV_CONFIG && window.MV_CONFIG.staticFallback);
+  let offline = false;
+  function setOffline(next) {
+    if (offline === next) return;
+    offline = next;
+    try { State.emit(next ? 'api:offline' : 'api:online', { offline: next }); } catch (e) {}
+  }
   const stCache = { meta: null, manifest: null, list: Object.create(null), bucket: Object.create(null) };
 
   function stUrl(rel) { return new URL('data/' + rel, document.baseURI).href; }
@@ -308,7 +317,7 @@
   }
 
   async function staticRequest(path, opt) {
-    if (!IS_STATIC) return undefined;
+    if (!IS_STATIC && !(opt && opt.staticFallback)) return undefined;
     const method = (opt.method || 'GET').toUpperCase();
     const parts = String(path).split('?');
     const rawPath = parts[0];
@@ -431,6 +440,20 @@
     try {
       res = await fetch(apiUrl(path), opts);
     } catch (e) {
+      /* 接口不可达：有静态包就先顶上（只读），并把「离线」状态广播出去 */
+      if (HAS_PACK || IS_STATIC) {
+        try {
+          const local = await staticRequest(path, Object.assign({}, opt, { staticFallback: true }));
+          if (local !== undefined) {
+            setOffline(true);
+            if (!e.__offlineToasted) {
+              e.__offlineToasted = true;
+              try { if (window.UI && window.UI.toast) window.UI.toast('服务器暂时连不上，已切到离线题库（只读）', 'warn'); } catch (_) {}
+            }
+            return local;
+          }
+        } catch (fallbackErr) { /* 静态包里也没有，走原来的错误处理 */ }
+      }
       if (timedOut) throw apiError('请求超时（' + Math.round(timeoutMs / 1000) + ' 秒），检查网络后重试', 'timeout');
       if (outer && outer.aborted) throw apiError('请求已取消', 'aborted');
       if (typeof navigator !== 'undefined' && navigator.onLine === false) throw apiError('网络已断开', 'offline');
@@ -448,6 +471,7 @@
     let data;
     try { data = await res.json(); }
     catch (e) { throw apiError('服务返回数据损坏', 'server', { status: res.status }); }
+    if (!IS_STATIC) setOffline(false);
     if (data.token) setToken(data.token);
     if (data.ok === false || !res.ok) {
       const kind = res.status === 401 ? 'auth' : (res.status >= 500 ? 'server' : 'client');

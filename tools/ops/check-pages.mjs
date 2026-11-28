@@ -54,7 +54,14 @@ if (!fs.existsSync(cfgFile)) {
   try {
     vm.runInNewContext(fs.readFileSync(cfgFile, 'utf8'), sandbox, { timeout: 1000 });
     const cfg = sandbox.window.MV_CONFIG || {};
-    if (cfg.staticData === true) {
+    if (cfg.staticFallback === true && String(cfg.apiBase || '').trim()) {
+      /* API 模式 + 静态包兜底：接口地址必须有，静态包也要齐 */
+      good('config.js 为 API 模式，静态包作兜底（apiBase=' + cfg.apiBase + '）');
+      for (const f of ['data/meta.json', 'data/manifest.json']) {
+        if (!fs.existsSync(path.join(DOCS, f))) bad('声明了 staticFallback 但缺少 ' + f);
+      }
+      if (!String(cfg.sharecode || '').trim()) bad('config.js 的 sharecode 为空');
+    } else if (cfg.staticData === true) {
       /* 纯静态模式：没有后端，apiBase / sharecode 本来就该是空的，
          改为校验静态数据包是否齐全 */
       good('config.js 为静态模式（staticData=true，不依赖后端）');

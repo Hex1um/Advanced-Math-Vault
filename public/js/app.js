@@ -183,19 +183,34 @@
     document.querySelectorAll('[data-nav="sprint"]').forEach(function (a) {
       a.style.display = feats.sprint === true ? '' : 'none';
     });
-    /* 静态模式（github.io 自带数据包）：答疑、AI 出题、错题本、组卷、投稿、分析
-       都要读写服务器，静态包给不了，入口一律收起来，别让用户点进死页。 */
-    if (feats.static === true || (window.MV_CONFIG && window.MV_CONFIG.staticData) === true) {
-      document.querySelectorAll('[data-nav="forum"], [data-nav="generate"], [data-nav="wrong"], '
-        + '[data-nav="paper"], [data-nav="submit"], [data-nav="collections"], '
-        + '[data-nav="analytics"], [data-nav="sprint"]').forEach(function (a) {
-        a.style.display = 'none';
-      });
-      const ua = document.getElementById('userArea');
-      if (ua) ua.innerHTML = '<span class="small muted" title="数据由 GitHub Pages 直接提供">静态版</span>';
-      document.body.classList.add('mv-static');
-    }
+    /* 离线（接口不可达，只有静态包）时把需要服务端的入口收起来；
+       接口恢复后按 features 重新放开，所以这是可逆的，不是一次性关掉。 */
+    /* 先把 features 落到 window 上，applyOfflineChrome 恢复入口时要用到它 */
     window.MV_FEATURES = feats;
+    applyOfflineChrome(feats.static === true || (window.MV_CONFIG && window.MV_CONFIG.staticData) === true);
+  }
+
+  /* 只在「纯静态构建」或「接口不可达」时收起服务端入口。
+     github.io 正常模式下这些入口全都在——功能没被砍掉，只是断网时降级。 */
+  const SERVER_NAV = ['forum', 'generate', 'wrong', 'paper', 'submit', 'collections', 'analytics', 'sprint'];
+  function applyOfflineChrome(isOffline) {
+    const on = isOffline === true;
+    SERVER_NAV.forEach(function (key) {
+      document.querySelectorAll('[data-nav="' + key + '"]').forEach(function (a) {
+        if (on) a.style.display = 'none';
+        else {
+          /* 恢复时按各自的特性开关决定，不能一律显示（例如期末突击没包时仍要藏） */
+          const f = window.MV_FEATURES || {};
+          if (key === 'analytics') a.style.display = f.analytics === true ? '' : 'none';
+          else if (key === 'sprint') a.style.display = f.sprint === true ? '' : 'none';
+          else if (key === 'collections') a.style.display = f.collections === true ? '' : 'none';
+          else a.style.display = '';
+        }
+      });
+    });
+    const ua = document.getElementById('userArea');
+    if (ua && on) ua.innerHTML = '<span class="small muted" title="服务器连不上，当前使用离线题库">离线只读</span>';
+    document.body.classList.toggle('mv-static', on);
   }
 
   /* 并发去重：applyMeta 的变化会触发 refreshMeta，若不加锁，
@@ -305,6 +320,11 @@
     refreshMeta();
     staleShellGuard();
     startMetaPolling();
+    /* 接口断开的瞬间收敛入口，恢复后自动放开；再顺带重拉一次 meta 把数字刷新 */
+    if (window.API && St.subscribe) {
+      St.subscribe('api:offline', function () { applyOfflineChrome(true); });
+      St.subscribe('api:online', function () { applyOfflineChrome(false); refreshMeta(); });
+    }
   }
 
   /* 标签实时更新：

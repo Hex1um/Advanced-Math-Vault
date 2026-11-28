@@ -70,9 +70,7 @@ if (!useEnv && envBase && envBase !== API_BASE) {
 /* 上线前校验这对「地址 + 分享码」真的能用：v2.0.x 曾把分享码留成旧实例的，
    构建成功、Pages 也发布成功，但打开页面每个接口都 403。
    403/401 视为确定性错误直接拦；网络不可达只告警（CI 里可能连不上托管域名）。 */
-if (STATIC_PACK) {
-  console.log('[build-pages] 检测到静态数据包 public/data → 纯静态构建（apiBase 留空，不校验后端）');
-} else if (process.env.SKIP_BACKEND_PROBE !== '1') {
+if (process.env.SKIP_BACKEND_PROBE !== '1') {
   try {
     const url = API_BASE.replace(/\/+$/, '') + '/api/health?sharecode=' + encodeURIComponent(SHARECODE);
     const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
@@ -177,10 +175,11 @@ const CANONICAL = (FILE_CFG && FILE_CFG.canonicalBase) || process.env.CANONICAL_
 
 fs.writeFileSync(path.join(OUT, 'js', 'config.js'), `/* 由 tools/ops/build-pages.mjs 生成：GitHub Pages 上指到后端 */
 window.MV_CONFIG = {
-  apiBase: ${JSON.stringify(STATIC_PACK ? '' : API_BASE)},
-  sharecode: ${JSON.stringify(STATIC_PACK ? '' : SHARECODE)},
+  apiBase: ${JSON.stringify(API_BASE)},
+  sharecode: ${JSON.stringify(SHARECODE)},
   siteName: ${JSON.stringify(SITE_NAME)},
-  staticData: ${JSON.stringify(STATIC_PACK)},
+  staticData: false,
+  staticFallback: ${JSON.stringify(STATIC_PACK)},
   canonicalBase: ${JSON.stringify(CANONICAL)}
 };
 `, 'utf8');
