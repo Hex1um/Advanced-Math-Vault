@@ -1,7 +1,7 @@
 {
-  "_note": "v3.10.5 起前端回到 math-vault-10141（8 个真实账号都在这里）：由本目录发布，题目取 52003 的最新题库（数学 6562 + 物理 1461），用户/帖子/提交取 10141 的原数据。52003 保留为只读备份，不再作为线上前端后端。 v3.10.8 起 canonicalBase 指定对外主链接：复制/分享题目一律用 github.io。",
-  "apiBase": "https://math-vault-10141.app.workbuddy.host",
-  "sharecode": "Q6CZHVVW3K",
+  "_note": "v3.13.3 起线上接口指回 52003：这是我能直接发布的实例（发布工具按 domainPrefix 前缀匹配，总是命中 -52003，打不到 10141）。该实例已含 10141 的全部 13 个账号 / 3 帖 / 提交记录（tools/ops/merge-users-from.mjs 合并），题库为去重后的 7648 题。要回 10141：改 apiBase/sharecode 两行再 build 即可。",
+  "apiBase": "https://math-vault-10141-52003.app.workbuddy.host",
+  "sharecode": "YXHMN5BXHA",
   "siteName": "数海晴岸",
   "canonicalBase": "https://hex1um.github.io/Advanced-Math-Vault/"
 }

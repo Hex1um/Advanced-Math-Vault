@@ -1,0 +1,3074 @@
+[
+ {
+  "title": "RC 充电（E=24 V，R=2000 Ω，C=2×10⁻⁶ F）的充满后的电量",
+  "statement": "把 $R=2000\\ \\Omega$ 的电阻与 $C=2\\times10^{-6}\\ \\mathrm{F}$ 的电容串联后接到 $E=24\\ \\mathrm{V}$ 的恒压源上，电容原本不带电。求电容充满电时极板上的电量。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电势与电容"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 3,
+  "calc": 3,
+  "source": "程守洙《普通物理学》· RC 电路",
+  "hints": [
+   "时间常数 $\\tau=RC$，充电规律 $q=CE(1-\\mathrm{e}^{-t/\\tau})$。",
+   "初始电流由电阻决定：$I_0=E/R$。"
+  ],
+  "answer": "4.8\\times10^{-5}\\ \\mathrm{C}",
+  "solution": "这是 RC 串联电路接恒压源 $E=24\\ \\mathrm{V}$ 的充电过程。时间常数\n\n$$\\tau=RC=2000\\times 2\\times10^{-6}=4\\times10^{-3}\\ \\mathrm{s}.$$\n\n刚接通时电容相当于短路，电流最大：\n\n$$I_0=\\frac{E}{R}=\\frac{24}{2000}=0.012\\ \\mathrm{A}.$$\n\n充电过程中 $q(t)=CE\\left(1-\\mathrm{e}^{-t/\\tau}\\right)$，充满后\n\n$$Q=CE=2\\times10^{-6}\\times 24=4.8\\times10^{-5}\\ \\mathrm{C}.$$\n\n令 $q=\\frac12CE$：$1-\\mathrm{e}^{-t/\\tau}=\\frac12$，得\n\n$$t=\\tau\\ln 2=4\\times10^{-3}\\times 0.693=2.77\\times10^{-3}\\ \\mathrm{s}.$$\n\n本题求的是电容充满电时极板上的电量，通式为 $Q=CE$，结果为\n\n$$Q=4.8\\times10^{-5}\\ \\mathrm{C}.$$\n\n**易错点**：时间常数只由 $RC$ 决定，与电源电压无关；$\\tau$ 是「充到 63%」的时间，不是充满所需的时间（理论上永远充不满）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "C",
+   "methods": [
+    "RC 充放电",
+    "时间常数"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· RC 电路"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "RC 充电（E=15 V，R=5000 Ω，C=1×10⁻⁵ F）的初始充电电流",
+  "statement": "把 $R=5000\\ \\Omega$ 的电阻与 $C=1\\times10^{-5}\\ \\mathrm{F}$ 的电容串联后接到 $E=15\\ \\mathrm{V}$ 的恒压源上，电容原本不带电。求刚接通瞬间的充电电流。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电势与电容"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 3,
+  "calc": 3,
+  "source": "程守洙《普通物理学》· RC 电路",
+  "hints": [
+   "时间常数 $\\tau=RC$，充电规律 $q=CE(1-\\mathrm{e}^{-t/\\tau})$。",
+   "初始电流由电阻决定：$I_0=E/R$。"
+  ],
+  "answer": "3\\times10^{-3}\\ \\mathrm{A}",
+  "solution": "这是 RC 串联电路接恒压源 $E=15\\ \\mathrm{V}$ 的充电过程。时间常数\n\n$$\\tau=RC=5000\\times 1\\times10^{-5}=0.05\\ \\mathrm{s}.$$\n\n刚接通时电容相当于短路，电流最大：\n\n$$I_0=\\frac{E}{R}=\\frac{15}{5000}=3\\times10^{-3}\\ \\mathrm{A}.$$\n\n充电过程中 $q(t)=CE\\left(1-\\mathrm{e}^{-t/\\tau}\\right)$，充满后\n\n$$Q=CE=1\\times10^{-5}\\times 15=1.5\\times10^{-4}\\ \\mathrm{C}.$$\n\n令 $q=\\frac12CE$：$1-\\mathrm{e}^{-t/\\tau}=\\frac12$，得\n\n$$t=\\tau\\ln 2=0.05\\times 0.693=0.0347\\ \\mathrm{s}.$$\n\n本题求的是刚接通瞬间的充电电流，通式为 $I_0=\\frac{E}{R}$，结果为\n\n$$I_0=3\\times10^{-3}\\ \\mathrm{A}.$$\n\n**易错点**：时间常数只由 $RC$ 决定，与电源电压无关；$\\tau$ 是「充到 63%」的时间，不是充满所需的时间（理论上永远充不满）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "A",
+   "methods": [
+    "RC 充放电",
+    "时间常数"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· RC 电路"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "RC 充电（E=15 V，R=1000 Ω，C=5×10⁻⁶ F）的初始充电电流",
+  "statement": "把 $R=1000\\ \\Omega$ 的电阻与 $C=5\\times10^{-6}\\ \\mathrm{F}$ 的电容串联后接到 $E=15\\ \\mathrm{V}$ 的恒压源上，电容原本不带电。求刚接通瞬间的充电电流。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电势与电容"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 3,
+  "calc": 3,
+  "source": "程守洙《普通物理学》· RC 电路",
+  "hints": [
+   "时间常数 $\\tau=RC$，充电规律 $q=CE(1-\\mathrm{e}^{-t/\\tau})$。",
+   "初始电流由电阻决定：$I_0=E/R$。"
+  ],
+  "answer": "0.015\\ \\mathrm{A}",
+  "solution": "这是 RC 串联电路接恒压源 $E=15\\ \\mathrm{V}$ 的充电过程。时间常数\n\n$$\\tau=RC=1000\\times 5\\times10^{-6}=5\\times10^{-3}\\ \\mathrm{s}.$$\n\n刚接通时电容相当于短路，电流最大：\n\n$$I_0=\\frac{E}{R}=\\frac{15}{1000}=0.015\\ \\mathrm{A}.$$\n\n充电过程中 $q(t)=CE\\left(1-\\mathrm{e}^{-t/\\tau}\\right)$，充满后\n\n$$Q=CE=5\\times10^{-6}\\times 15=7.5\\times10^{-5}\\ \\mathrm{C}.$$\n\n令 $q=\\frac12CE$：$1-\\mathrm{e}^{-t/\\tau}=\\frac12$，得\n\n$$t=\\tau\\ln 2=5\\times10^{-3}\\times 0.693=3.47\\times10^{-3}\\ \\mathrm{s}.$$\n\n本题求的是刚接通瞬间的充电电流，通式为 $I_0=\\frac{E}{R}$，结果为\n\n$$I_0=0.015\\ \\mathrm{A}.$$\n\n**易错点**：时间常数只由 $RC$ 决定，与电源电压无关；$\\tau$ 是「充到 63%」的时间，不是充满所需的时间（理论上永远充不满）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "A",
+   "methods": [
+    "RC 充放电",
+    "时间常数"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· RC 电路"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "RC 充电（E=9 V，R=2000 Ω，C=1×10⁻⁵ F）的时间常数",
+  "statement": "把 $R=2000\\ \\Omega$ 的电阻与 $C=1\\times10^{-5}\\ \\mathrm{F}$ 的电容串联后接到 $E=9\\ \\mathrm{V}$ 的恒压源上，电容原本不带电。求电路的时间常数 $\\tau=RC$。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电势与电容"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 3,
+  "calc": 3,
+  "source": "程守洙《普通物理学》· RC 电路",
+  "hints": [
+   "时间常数 $\\tau=RC$，充电规律 $q=CE(1-\\mathrm{e}^{-t/\\tau})$。",
+   "初始电流由电阻决定：$I_0=E/R$。"
+  ],
+  "answer": "0.02\\ \\mathrm{s}",
+  "solution": "这是 RC 串联电路接恒压源 $E=9\\ \\mathrm{V}$ 的充电过程。时间常数\n\n$$\\tau=RC=2000\\times 1\\times10^{-5}=0.02\\ \\mathrm{s}.$$\n\n刚接通时电容相当于短路，电流最大：\n\n$$I_0=\\frac{E}{R}=\\frac{9}{2000}=4.5\\times10^{-3}\\ \\mathrm{A}.$$\n\n充电过程中 $q(t)=CE\\left(1-\\mathrm{e}^{-t/\\tau}\\right)$，充满后\n\n$$Q=CE=1\\times10^{-5}\\times 9=9\\times10^{-5}\\ \\mathrm{C}.$$\n\n令 $q=\\frac12CE$：$1-\\mathrm{e}^{-t/\\tau}=\\frac12$，得\n\n$$t=\\tau\\ln 2=0.02\\times 0.693=0.0139\\ \\mathrm{s}.$$\n\n本题求的是电路的时间常数 $\\tau=RC$，通式为 $\\tau=RC$，结果为\n\n$$\\tau=0.02\\ \\mathrm{s}.$$\n\n**易错点**：时间常数只由 $RC$ 决定，与电源电压无关；$\\tau$ 是「充到 63%」的时间，不是充满所需的时间（理论上永远充不满）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "s",
+   "methods": [
+    "RC 充放电",
+    "时间常数"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· RC 电路"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "RC 充电（E=12 V，R=1000 Ω，C=5×10⁻⁶ F）的充到一半电量所需时间",
+  "statement": "把 $R=1000\\ \\Omega$ 的电阻与 $C=5\\times10^{-6}\\ \\mathrm{F}$ 的电容串联后接到 $E=12\\ \\mathrm{V}$ 的恒压源上，电容原本不带电。求电量达到最大值一半所需的时间（$\\ln 2\\cdot RC$）。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电势与电容"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 3,
+  "calc": 3,
+  "source": "程守洙《普通物理学》· RC 电路",
+  "hints": [
+   "时间常数 $\\tau=RC$，充电规律 $q=CE(1-\\mathrm{e}^{-t/\\tau})$。",
+   "初始电流由电阻决定：$I_0=E/R$。"
+  ],
+  "answer": "3.47\\times10^{-3}\\ \\mathrm{s}",
+  "solution": "这是 RC 串联电路接恒压源 $E=12\\ \\mathrm{V}$ 的充电过程。时间常数\n\n$$\\tau=RC=1000\\times 5\\times10^{-6}=5\\times10^{-3}\\ \\mathrm{s}.$$\n\n刚接通时电容相当于短路，电流最大：\n\n$$I_0=\\frac{E}{R}=\\frac{12}{1000}=0.012\\ \\mathrm{A}.$$\n\n充电过程中 $q(t)=CE\\left(1-\\mathrm{e}^{-t/\\tau}\\right)$，充满后\n\n$$Q=CE=5\\times10^{-6}\\times 12=6\\times10^{-5}\\ \\mathrm{C}.$$\n\n令 $q=\\frac12CE$：$1-\\mathrm{e}^{-t/\\tau}=\\frac12$，得\n\n$$t=\\tau\\ln 2=5\\times10^{-3}\\times 0.693=3.47\\times10^{-3}\\ \\mathrm{s}.$$\n\n本题求的是电量达到最大值一半所需的时间（$\\ln 2\\cdot RC$），通式为 $t=RC\\ln 2$，结果为\n\n$$t=3.47\\times10^{-3}\\ \\mathrm{s}.$$\n\n**易错点**：时间常数只由 $RC$ 决定，与电源电压无关；$\\tau$ 是「充到 63%」的时间，不是充满所需的时间（理论上永远充不满）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "s",
+   "methods": [
+    "RC 充放电",
+    "时间常数"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· RC 电路"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "RC 充电（E=15 V，R=2000 Ω，C=2×10⁻⁶ F）的初始充电电流",
+  "statement": "把 $R=2000\\ \\Omega$ 的电阻与 $C=2\\times10^{-6}\\ \\mathrm{F}$ 的电容串联后接到 $E=15\\ \\mathrm{V}$ 的恒压源上，电容原本不带电。求刚接通瞬间的充电电流。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电势与电容"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 3,
+  "calc": 3,
+  "source": "程守洙《普通物理学》· RC 电路",
+  "hints": [
+   "时间常数 $\\tau=RC$，充电规律 $q=CE(1-\\mathrm{e}^{-t/\\tau})$。",
+   "初始电流由电阻决定：$I_0=E/R$。"
+  ],
+  "answer": "7.5\\times10^{-3}\\ \\mathrm{A}",
+  "solution": "这是 RC 串联电路接恒压源 $E=15\\ \\mathrm{V}$ 的充电过程。时间常数\n\n$$\\tau=RC=2000\\times 2\\times10^{-6}=4\\times10^{-3}\\ \\mathrm{s}.$$\n\n刚接通时电容相当于短路，电流最大：\n\n$$I_0=\\frac{E}{R}=\\frac{15}{2000}=7.5\\times10^{-3}\\ \\mathrm{A}.$$\n\n充电过程中 $q(t)=CE\\left(1-\\mathrm{e}^{-t/\\tau}\\right)$，充满后\n\n$$Q=CE=2\\times10^{-6}\\times 15=3\\times10^{-5}\\ \\mathrm{C}.$$\n\n令 $q=\\frac12CE$：$1-\\mathrm{e}^{-t/\\tau}=\\frac12$，得\n\n$$t=\\tau\\ln 2=4\\times10^{-3}\\times 0.693=2.77\\times10^{-3}\\ \\mathrm{s}.$$\n\n本题求的是刚接通瞬间的充电电流，通式为 $I_0=\\frac{E}{R}$，结果为\n\n$$I_0=7.5\\times10^{-3}\\ \\mathrm{A}.$$\n\n**易错点**：时间常数只由 $RC$ 决定，与电源电压无关；$\\tau$ 是「充到 63%」的时间，不是充满所需的时间（理论上永远充不满）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "A",
+   "methods": [
+    "RC 充放电",
+    "时间常数"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· RC 电路"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "RC 充电（E=24 V，R=1000 Ω，C=2×10⁻⁶ F）的充到一半电量所需时间",
+  "statement": "把 $R=1000\\ \\Omega$ 的电阻与 $C=2\\times10^{-6}\\ \\mathrm{F}$ 的电容串联后接到 $E=24\\ \\mathrm{V}$ 的恒压源上，电容原本不带电。求电量达到最大值一半所需的时间（$\\ln 2\\cdot RC$）。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电势与电容"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 3,
+  "calc": 3,
+  "source": "程守洙《普通物理学》· RC 电路",
+  "hints": [
+   "时间常数 $\\tau=RC$，充电规律 $q=CE(1-\\mathrm{e}^{-t/\\tau})$。",
+   "初始电流由电阻决定：$I_0=E/R$。"
+  ],
+  "answer": "1.39\\times10^{-3}\\ \\mathrm{s}",
+  "solution": "这是 RC 串联电路接恒压源 $E=24\\ \\mathrm{V}$ 的充电过程。时间常数\n\n$$\\tau=RC=1000\\times 2\\times10^{-6}=2\\times10^{-3}\\ \\mathrm{s}.$$\n\n刚接通时电容相当于短路，电流最大：\n\n$$I_0=\\frac{E}{R}=\\frac{24}{1000}=0.024\\ \\mathrm{A}.$$\n\n充电过程中 $q(t)=CE\\left(1-\\mathrm{e}^{-t/\\tau}\\right)$，充满后\n\n$$Q=CE=2\\times10^{-6}\\times 24=4.8\\times10^{-5}\\ \\mathrm{C}.$$\n\n令 $q=\\frac12CE$：$1-\\mathrm{e}^{-t/\\tau}=\\frac12$，得\n\n$$t=\\tau\\ln 2=2\\times10^{-3}\\times 0.693=1.39\\times10^{-3}\\ \\mathrm{s}.$$\n\n本题求的是电量达到最大值一半所需的时间（$\\ln 2\\cdot RC$），通式为 $t=RC\\ln 2$，结果为\n\n$$t=1.39\\times10^{-3}\\ \\mathrm{s}.$$\n\n**易错点**：时间常数只由 $RC$ 决定，与电源电压无关；$\\tau$ 是「充到 63%」的时间，不是充满所需的时间（理论上永远充不满）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "s",
+   "methods": [
+    "RC 充放电",
+    "时间常数"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· RC 电路"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "RC 充电（E=15 V，R=1000 Ω，C=1×10⁻⁵ F）的时间常数",
+  "statement": "把 $R=1000\\ \\Omega$ 的电阻与 $C=1\\times10^{-5}\\ \\mathrm{F}$ 的电容串联后接到 $E=15\\ \\mathrm{V}$ 的恒压源上，电容原本不带电。求电路的时间常数 $\\tau=RC$。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电势与电容"
+  ],
+  "kind": "计算题",
+  "thinking": 3,
+  "difficulty": 3,
+  "calc": 3,
+  "source": "程守洙《普通物理学》· RC 电路",
+  "hints": [
+   "时间常数 $\\tau=RC$，充电规律 $q=CE(1-\\mathrm{e}^{-t/\\tau})$。",
+   "初始电流由电阻决定：$I_0=E/R$。"
+  ],
+  "answer": "0.01\\ \\mathrm{s}",
+  "solution": "这是 RC 串联电路接恒压源 $E=15\\ \\mathrm{V}$ 的充电过程。时间常数\n\n$$\\tau=RC=1000\\times 1\\times10^{-5}=0.01\\ \\mathrm{s}.$$\n\n刚接通时电容相当于短路，电流最大：\n\n$$I_0=\\frac{E}{R}=\\frac{15}{1000}=0.015\\ \\mathrm{A}.$$\n\n充电过程中 $q(t)=CE\\left(1-\\mathrm{e}^{-t/\\tau}\\right)$，充满后\n\n$$Q=CE=1\\times10^{-5}\\times 15=1.5\\times10^{-4}\\ \\mathrm{C}.$$\n\n令 $q=\\frac12CE$：$1-\\mathrm{e}^{-t/\\tau}=\\frac12$，得\n\n$$t=\\tau\\ln 2=0.01\\times 0.693=6.93\\times10^{-3}\\ \\mathrm{s}.$$\n\n本题求的是电路的时间常数 $\\tau=RC$，通式为 $\\tau=RC$，结果为\n\n$$\\tau=0.01\\ \\mathrm{s}.$$\n\n**易错点**：时间常数只由 $RC$ 决定，与电源电压无关；$\\tau$ 是「充到 63%」的时间，不是充满所需的时间（理论上永远充不满）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "s",
+   "methods": [
+    "RC 充放电",
+    "时间常数"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· RC 电路"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "惠斯通电桥（R1=20，R2=20，R3=100，U=24 V）的电源总电流",
+  "statement": "惠斯通电桥的四个臂为 $R_1=20\\ \\Omega$、$R_2=20\\ \\Omega$、$R_3=100\\ \\Omega$ 与未知电阻 $R_4$，电源电压 $U=24\\ \\mathrm{V}$。调节 $R_4$ 使检流计指示为零。求平衡时电源输出的总电流。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电磁感应与自感互感"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "赵凯华《新概念物理教程·电磁学》· 惠斯通电桥",
+  "hints": [
+   "平衡条件：对角臂乘积相等，$R_1R_4=R_2R_3$。",
+   "平衡时检流计支路可视为断开，按串并联求等效电阻。"
+  ],
+  "answer": "0.72\\ \\mathrm{A}",
+  "solution": "电桥平衡时检流计支路无电流，相当于该支路断开，平衡条件是**对角臂电阻乘积相等**：\n\n$$R_1R_4=R_2R_3\\ \\Longrightarrow\\ R_4=\\frac{R_2R_3}{R_1}=\\frac{20\\times 100}{20}=100\\ \\Omega.$$\n\n平衡时两相邻臂之比相等：$R_2/R_1=R_4/R_3=1$，这就是「比例臂」测未知电阻的原理。\n\n既然检流计支路无电流，可以直接把它拿掉，电路变成两组串联再并联：\n\n$$R=\\frac{\\left(R_1+R_2\\right)\\left(R_3+R_4\\right)}{R_1+R_2+R_3+R_4}=\\frac{40\\times 200}{240}=33.3\\ \\Omega.$$\n\n电源总电流 $I=U/R=24/33.3=0.72\\ \\mathrm{A}$。\n\n本题求的是平衡时电源输出的总电流，通式为 $R=\\left(R_1+R_2\\right)\\parallel\\left(R_3+R_4\\right)$，结果为\n\n$$I=0.72\\ \\mathrm{A}.$$\n\n**易错点**：平衡条件是对角臂乘积相等（$R_1R_4=R_2R_3$），写成相邻臂相等是最常见的错误；平衡时检流计无电流，但四个臂上都有电流。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "A",
+   "methods": [
+    "电桥平衡",
+    "串并联"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· 惠斯通电桥"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "惠斯通电桥（R1=50，R2=200，R3=100，U=12 V）的等效总电阻",
+  "statement": "惠斯通电桥的四个臂为 $R_1=50\\ \\Omega$、$R_2=200\\ \\Omega$、$R_3=100\\ \\Omega$ 与未知电阻 $R_4$，电源电压 $U=12\\ \\mathrm{V}$。调节 $R_4$ 使检流计指示为零。求平衡时从电源看进去的等效电阻。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电磁感应与自感互感"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "赵凯华《新概念物理教程·电磁学》· 惠斯通电桥",
+  "hints": [
+   "平衡条件：对角臂乘积相等，$R_1R_4=R_2R_3$。",
+   "平衡时检流计支路可视为断开，按串并联求等效电阻。"
+  ],
+  "answer": "167\\ \\mathrm{Ω}",
+  "solution": "电桥平衡时检流计支路无电流，相当于该支路断开，平衡条件是**对角臂电阻乘积相等**：\n\n$$R_1R_4=R_2R_3\\ \\Longrightarrow\\ R_4=\\frac{R_2R_3}{R_1}=\\frac{200\\times 100}{50}=400\\ \\Omega.$$\n\n平衡时两相邻臂之比相等：$R_2/R_1=R_4/R_3=4$，这就是「比例臂」测未知电阻的原理。\n\n既然检流计支路无电流，可以直接把它拿掉，电路变成两组串联再并联：\n\n$$R=\\frac{\\left(R_1+R_2\\right)\\left(R_3+R_4\\right)}{R_1+R_2+R_3+R_4}=\\frac{250\\times 500}{750}=167\\ \\Omega.$$\n\n电源总电流 $I=U/R=12/167=0.072\\ \\mathrm{A}$。\n\n本题求的是平衡时从电源看进去的等效电阻，通式为 $R=\\frac{\\left(R_1+R_2\\right)\\left(R_3+R_4\\right)}{R_1+R_2+R_3+R_4}$，结果为\n\n$$R=167\\ \\mathrm{Ω}.$$\n\n**易错点**：平衡条件是对角臂乘积相等（$R_1R_4=R_2R_3$），写成相邻臂相等是最常见的错误；平衡时检流计无电流，但四个臂上都有电流。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "Ω",
+   "methods": [
+    "电桥平衡",
+    "串并联"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· 惠斯通电桥"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "惠斯通电桥（R1=10，R2=20，R3=100，U=6 V）的未知电阻",
+  "statement": "惠斯通电桥的四个臂为 $R_1=10\\ \\Omega$、$R_2=20\\ \\Omega$、$R_3=100\\ \\Omega$ 与未知电阻 $R_4$，电源电压 $U=6\\ \\mathrm{V}$。调节 $R_4$ 使检流计指示为零。求电桥平衡时第四个臂的电阻。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电磁感应与自感互感"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "赵凯华《新概念物理教程·电磁学》· 惠斯通电桥",
+  "hints": [
+   "平衡条件：对角臂乘积相等，$R_1R_4=R_2R_3$。",
+   "平衡时检流计支路可视为断开，按串并联求等效电阻。"
+  ],
+  "answer": "200\\ \\mathrm{Ω}",
+  "solution": "电桥平衡时检流计支路无电流，相当于该支路断开，平衡条件是**对角臂电阻乘积相等**：\n\n$$R_1R_4=R_2R_3\\ \\Longrightarrow\\ R_4=\\frac{R_2R_3}{R_1}=\\frac{20\\times 100}{10}=200\\ \\Omega.$$\n\n平衡时两相邻臂之比相等：$R_2/R_1=R_4/R_3=2$，这就是「比例臂」测未知电阻的原理。\n\n既然检流计支路无电流，可以直接把它拿掉，电路变成两组串联再并联：\n\n$$R=\\frac{\\left(R_1+R_2\\right)\\left(R_3+R_4\\right)}{R_1+R_2+R_3+R_4}=\\frac{30\\times 300}{330}=27.3\\ \\Omega.$$\n\n电源总电流 $I=U/R=6/27.3=0.22\\ \\mathrm{A}$。\n\n本题求的是电桥平衡时第四个臂的电阻，通式为 $\\frac{R_1}{R_2}=\\frac{R_3}{R_4}$，结果为\n\n$$R_4=200\\ \\mathrm{Ω}.$$\n\n**易错点**：平衡条件是对角臂乘积相等（$R_1R_4=R_2R_3$），写成相邻臂相等是最常见的错误；平衡时检流计无电流，但四个臂上都有电流。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "Ω",
+   "methods": [
+    "电桥平衡",
+    "串并联"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· 惠斯通电桥"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "惠斯通电桥（R1=50，R2=100，R3=150，U=24 V）的未知电阻",
+  "statement": "惠斯通电桥的四个臂为 $R_1=50\\ \\Omega$、$R_2=100\\ \\Omega$、$R_3=150\\ \\Omega$ 与未知电阻 $R_4$，电源电压 $U=24\\ \\mathrm{V}$。调节 $R_4$ 使检流计指示为零。求电桥平衡时第四个臂的电阻。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电磁感应与自感互感"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "赵凯华《新概念物理教程·电磁学》· 惠斯通电桥",
+  "hints": [
+   "平衡条件：对角臂乘积相等，$R_1R_4=R_2R_3$。",
+   "平衡时检流计支路可视为断开，按串并联求等效电阻。"
+  ],
+  "answer": "300\\ \\mathrm{Ω}",
+  "solution": "电桥平衡时检流计支路无电流，相当于该支路断开，平衡条件是**对角臂电阻乘积相等**：\n\n$$R_1R_4=R_2R_3\\ \\Longrightarrow\\ R_4=\\frac{R_2R_3}{R_1}=\\frac{100\\times 150}{50}=300\\ \\Omega.$$\n\n平衡时两相邻臂之比相等：$R_2/R_1=R_4/R_3=2$，这就是「比例臂」测未知电阻的原理。\n\n既然检流计支路无电流，可以直接把它拿掉，电路变成两组串联再并联：\n\n$$R=\\frac{\\left(R_1+R_2\\right)\\left(R_3+R_4\\right)}{R_1+R_2+R_3+R_4}=\\frac{150\\times 450}{600}=112\\ \\Omega.$$\n\n电源总电流 $I=U/R=24/112=0.213\\ \\mathrm{A}$。\n\n本题求的是电桥平衡时第四个臂的电阻，通式为 $\\frac{R_1}{R_2}=\\frac{R_3}{R_4}$，结果为\n\n$$R_4=300\\ \\mathrm{Ω}.$$\n\n**易错点**：平衡条件是对角臂乘积相等（$R_1R_4=R_2R_3$），写成相邻臂相等是最常见的错误；平衡时检流计无电流，但四个臂上都有电流。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "Ω",
+   "methods": [
+    "电桥平衡",
+    "串并联"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· 惠斯通电桥"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "惠斯通电桥（R1=20，R2=10，R3=300，U=24 V）的电源总电流",
+  "statement": "惠斯通电桥的四个臂为 $R_1=20\\ \\Omega$、$R_2=10\\ \\Omega$、$R_3=300\\ \\Omega$ 与未知电阻 $R_4$，电源电压 $U=24\\ \\mathrm{V}$。调节 $R_4$ 使检流计指示为零。求平衡时电源输出的总电流。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电磁感应与自感互感"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "赵凯华《新概念物理教程·电磁学》· 惠斯通电桥",
+  "hints": [
+   "平衡条件：对角臂乘积相等，$R_1R_4=R_2R_3$。",
+   "平衡时检流计支路可视为断开，按串并联求等效电阻。"
+  ],
+  "answer": "0.853\\ \\mathrm{A}",
+  "solution": "电桥平衡时检流计支路无电流，相当于该支路断开，平衡条件是**对角臂电阻乘积相等**：\n\n$$R_1R_4=R_2R_3\\ \\Longrightarrow\\ R_4=\\frac{R_2R_3}{R_1}=\\frac{10\\times 300}{20}=150\\ \\Omega.$$\n\n平衡时两相邻臂之比相等：$R_2/R_1=R_4/R_3=0.5$，这就是「比例臂」测未知电阻的原理。\n\n既然检流计支路无电流，可以直接把它拿掉，电路变成两组串联再并联：\n\n$$R=\\frac{\\left(R_1+R_2\\right)\\left(R_3+R_4\\right)}{R_1+R_2+R_3+R_4}=\\frac{30\\times 450}{480}=28.1\\ \\Omega.$$\n\n电源总电流 $I=U/R=24/28.1=0.853\\ \\mathrm{A}$。\n\n本题求的是平衡时电源输出的总电流，通式为 $R=\\left(R_1+R_2\\right)\\parallel\\left(R_3+R_4\\right)$，结果为\n\n$$I=0.853\\ \\mathrm{A}.$$\n\n**易错点**：平衡条件是对角臂乘积相等（$R_1R_4=R_2R_3$），写成相邻臂相等是最常见的错误；平衡时检流计无电流，但四个臂上都有电流。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "A",
+   "methods": [
+    "电桥平衡",
+    "串并联"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· 惠斯通电桥"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "惠斯通电桥（R1=200，R2=200，R3=300，U=6 V）的两臂之比",
+  "statement": "惠斯通电桥的四个臂为 $R_1=200\\ \\Omega$、$R_2=200\\ \\Omega$、$R_3=300\\ \\Omega$ 与未知电阻 $R_4$，电源电压 $U=6\\ \\mathrm{V}$。调节 $R_4$ 使检流计指示为零。求平衡时两相邻臂的电阻比值。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电磁感应与自感互感"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "赵凯华《新概念物理教程·电磁学》· 惠斯通电桥",
+  "hints": [
+   "平衡条件：对角臂乘积相等，$R_1R_4=R_2R_3$。",
+   "平衡时检流计支路可视为断开，按串并联求等效电阻。"
+  ],
+  "answer": "1",
+  "solution": "电桥平衡时检流计支路无电流，相当于该支路断开，平衡条件是**对角臂电阻乘积相等**：\n\n$$R_1R_4=R_2R_3\\ \\Longrightarrow\\ R_4=\\frac{R_2R_3}{R_1}=\\frac{200\\times 300}{200}=300\\ \\Omega.$$\n\n平衡时两相邻臂之比相等：$R_2/R_1=R_4/R_3=1$，这就是「比例臂」测未知电阻的原理。\n\n既然检流计支路无电流，可以直接把它拿掉，电路变成两组串联再并联：\n\n$$R=\\frac{\\left(R_1+R_2\\right)\\left(R_3+R_4\\right)}{R_1+R_2+R_3+R_4}=\\frac{400\\times 600}{1000}=240\\ \\Omega.$$\n\n电源总电流 $I=U/R=6/240=0.025\\ \\mathrm{A}$。\n\n本题求的是平衡时两相邻臂的电阻比值，通式为 $\\frac{R_2}{R_1}=\\frac{R_4}{R_3}$，结果为\n\n$$\\frac{R_2}{R_1}=1.$$\n\n**易错点**：平衡条件是对角臂乘积相等（$R_1R_4=R_2R_3$），写成相邻臂相等是最常见的错误；平衡时检流计无电流，但四个臂上都有电流。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "电桥平衡",
+    "串并联"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· 惠斯通电桥"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "惠斯通电桥（R1=10，R2=20，R3=100，U=6 V）的等效总电阻",
+  "statement": "惠斯通电桥的四个臂为 $R_1=10\\ \\Omega$、$R_2=20\\ \\Omega$、$R_3=100\\ \\Omega$ 与未知电阻 $R_4$，电源电压 $U=6\\ \\mathrm{V}$。调节 $R_4$ 使检流计指示为零。求平衡时从电源看进去的等效电阻。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电磁感应与自感互感"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "赵凯华《新概念物理教程·电磁学》· 惠斯通电桥",
+  "hints": [
+   "平衡条件：对角臂乘积相等，$R_1R_4=R_2R_3$。",
+   "平衡时检流计支路可视为断开，按串并联求等效电阻。"
+  ],
+  "answer": "27.3\\ \\mathrm{Ω}",
+  "solution": "电桥平衡时检流计支路无电流，相当于该支路断开，平衡条件是**对角臂电阻乘积相等**：\n\n$$R_1R_4=R_2R_3\\ \\Longrightarrow\\ R_4=\\frac{R_2R_3}{R_1}=\\frac{20\\times 100}{10}=200\\ \\Omega.$$\n\n平衡时两相邻臂之比相等：$R_2/R_1=R_4/R_3=2$，这就是「比例臂」测未知电阻的原理。\n\n既然检流计支路无电流，可以直接把它拿掉，电路变成两组串联再并联：\n\n$$R=\\frac{\\left(R_1+R_2\\right)\\left(R_3+R_4\\right)}{R_1+R_2+R_3+R_4}=\\frac{30\\times 300}{330}=27.3\\ \\Omega.$$\n\n电源总电流 $I=U/R=6/27.3=0.22\\ \\mathrm{A}$。\n\n本题求的是平衡时从电源看进去的等效电阻，通式为 $R=\\frac{\\left(R_1+R_2\\right)\\left(R_3+R_4\\right)}{R_1+R_2+R_3+R_4}$，结果为\n\n$$R=27.3\\ \\mathrm{Ω}.$$\n\n**易错点**：平衡条件是对角臂乘积相等（$R_1R_4=R_2R_3$），写成相邻臂相等是最常见的错误；平衡时检流计无电流，但四个臂上都有电流。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "Ω",
+   "methods": [
+    "电桥平衡",
+    "串并联"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· 惠斯通电桥"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "惠斯通电桥（R1=10，R2=50，R3=150，U=12 V）的等效总电阻",
+  "statement": "惠斯通电桥的四个臂为 $R_1=10\\ \\Omega$、$R_2=50\\ \\Omega$、$R_3=150\\ \\Omega$ 与未知电阻 $R_4$，电源电压 $U=12\\ \\mathrm{V}$。调节 $R_4$ 使检流计指示为零。求平衡时从电源看进去的等效电阻。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电磁感应与自感互感"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "赵凯华《新概念物理教程·电磁学》· 惠斯通电桥",
+  "hints": [
+   "平衡条件：对角臂乘积相等，$R_1R_4=R_2R_3$。",
+   "平衡时检流计支路可视为断开，按串并联求等效电阻。"
+  ],
+  "answer": "56.2\\ \\mathrm{Ω}",
+  "solution": "电桥平衡时检流计支路无电流，相当于该支路断开，平衡条件是**对角臂电阻乘积相等**：\n\n$$R_1R_4=R_2R_3\\ \\Longrightarrow\\ R_4=\\frac{R_2R_3}{R_1}=\\frac{50\\times 150}{10}=750\\ \\Omega.$$\n\n平衡时两相邻臂之比相等：$R_2/R_1=R_4/R_3=5$，这就是「比例臂」测未知电阻的原理。\n\n既然检流计支路无电流，可以直接把它拿掉，电路变成两组串联再并联：\n\n$$R=\\frac{\\left(R_1+R_2\\right)\\left(R_3+R_4\\right)}{R_1+R_2+R_3+R_4}=\\frac{60\\times 900}{960}=56.2\\ \\Omega.$$\n\n电源总电流 $I=U/R=12/56.2=0.213\\ \\mathrm{A}$。\n\n本题求的是平衡时从电源看进去的等效电阻，通式为 $R=\\frac{\\left(R_1+R_2\\right)\\left(R_3+R_4\\right)}{R_1+R_2+R_3+R_4}$，结果为\n\n$$R=56.2\\ \\mathrm{Ω}.$$\n\n**易错点**：平衡条件是对角臂乘积相等（$R_1R_4=R_2R_3$），写成相邻臂相等是最常见的错误；平衡时检流计无电流，但四个臂上都有电流。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "Ω",
+   "methods": [
+    "电桥平衡",
+    "串并联"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· 惠斯通电桥"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "同轴电缆（a=1.5 mm，b=12 mm，L=7 m，I=3 A）的电容",
+  "statement": "一同轴电缆内导体半径 $a=1.5\\ \\mathrm{mm}$、外导体内半径 $b=12\\ \\mathrm{mm}$，长 $L=7\\ \\mathrm{m}$，两导体间为真空，内导体通电流 $I=3\\ \\mathrm{A}$（外导体回流）。取 $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$、$\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{H/m}$，求这段电缆的电容。",
+  "mainTag": "电磁学",
+  "tags": [
+   "恒定磁场与安培环路定理"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "哈里德《物理学基础》· 同轴电缆",
+  "hints": [
+   "柱形电容：$C=\\frac{2\\pi\\varepsilon_0 L}{\\ln(b/a)}$。",
+   "两导体之间 $B=\\frac{\\mu_0 I}{2\\pi r}$，$r=a$ 处最大。"
+  ],
+  "answer": "1.87\\times10^{-10}\\ \\mathrm{F}",
+  "solution": "同轴电缆可看成圆柱形电容器。设内导体单位长度带电 $\\lambda$，由高斯定理，两导体之间（$a<r<b$）的场强\n\n$$E=\\frac{\\lambda}{2\\pi\\varepsilon_0 r},$$\n\n在内导体表面 $r=a$ 处最大，向外按 $1/r$ 衰减。两导体间电势差\n\n$$U=\\int_a^b E\\,\\mathrm{d}r=\\frac{\\lambda}{2\\pi\\varepsilon_0}\\ln\\frac{b}{a},$$\n\n于是单位长度电容\n\n$$C_0=\\frac{\\lambda}{U}=\\frac{2\\pi\\varepsilon_0}{\\ln\\left(b/a\\right)}=\\frac{2\\pi\\times 8.85\\times10^{-12}}{\\ln\\left(0.012/1.5\\times10^{-3}\\right)}=2.67\\times10^{-11}\\ \\mathrm{F/m},$$\n\n长 $L=7\\ \\mathrm{m}$ 的电容 $C=C_0L=1.87\\times10^{-10}\\ \\mathrm{F}$。\n\n磁场由安培环路定理给出：两导体之间 $B=\\frac{\\mu_0I}{2\\pi r}$，在内导体表面 $r=a$ 处 $B=\\frac{\\mu_0I}{2\\pi a}=4\\times10^{-4}\\ \\mathrm{T}$。\n\n本题求的是这段电缆的电容，通式为 $C=\\frac{2\\pi\\varepsilon_0 L}{\\ln\\left(b/a\\right)}$，结果为\n\n$$C=1.87\\times10^{-10}\\ \\mathrm{F}.$$\n\n**易错点**：电场最大值在**内**导体表面（$r$ 最小），磁场也是；电容公式里是 $\\ln(b/a)$，不是 $\\ln(a/b)$（否则为负）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "F",
+   "methods": [
+    "高斯定理",
+    "安培环路定理"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "哈里德《物理学基础》· 同轴电缆"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "同轴电缆（a=1.5 mm，b=15 mm，L=2.5 m，I=1 A）的两导体间最大场强位置",
+  "statement": "一同轴电缆内导体半径 $a=1.5\\ \\mathrm{mm}$、外导体内半径 $b=15\\ \\mathrm{mm}$，长 $L=2.5\\ \\mathrm{m}$，两导体间为真空，内导体通电流 $I=1\\ \\mathrm{A}$（外导体回流）。取 $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$、$\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{H/m}$，求电场强度最大的位置到轴线的距离。",
+  "mainTag": "电磁学",
+  "tags": [
+   "恒定磁场与安培环路定理"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "哈里德《物理学基础》· 同轴电缆",
+  "hints": [
+   "柱形电容：$C=\\frac{2\\pi\\varepsilon_0 L}{\\ln(b/a)}$。",
+   "两导体之间 $B=\\frac{\\mu_0 I}{2\\pi r}$，$r=a$ 处最大。"
+  ],
+  "answer": "1.5\\times10^{-3}\\ \\mathrm{m}",
+  "solution": "同轴电缆可看成圆柱形电容器。设内导体单位长度带电 $\\lambda$，由高斯定理，两导体之间（$a<r<b$）的场强\n\n$$E=\\frac{\\lambda}{2\\pi\\varepsilon_0 r},$$\n\n在内导体表面 $r=a$ 处最大，向外按 $1/r$ 衰减。两导体间电势差\n\n$$U=\\int_a^b E\\,\\mathrm{d}r=\\frac{\\lambda}{2\\pi\\varepsilon_0}\\ln\\frac{b}{a},$$\n\n于是单位长度电容\n\n$$C_0=\\frac{\\lambda}{U}=\\frac{2\\pi\\varepsilon_0}{\\ln\\left(b/a\\right)}=\\frac{2\\pi\\times 8.85\\times10^{-12}}{\\ln\\left(0.015/1.5\\times10^{-3}\\right)}=2.41\\times10^{-11}\\ \\mathrm{F/m},$$\n\n长 $L=2.5\\ \\mathrm{m}$ 的电容 $C=C_0L=6.04\\times10^{-11}\\ \\mathrm{F}$。\n\n磁场由安培环路定理给出：两导体之间 $B=\\frac{\\mu_0I}{2\\pi r}$，在内导体表面 $r=a$ 处 $B=\\frac{\\mu_0I}{2\\pi a}=1.33\\times10^{-4}\\ \\mathrm{T}$。\n\n本题求的是电场强度最大的位置到轴线的距离，通式为 $E=\\frac{\\lambda}{2\\pi\\varepsilon_0 r}$，结果为\n\n$$r_{max}=1.5\\times10^{-3}\\ \\mathrm{m}.$$\n\n**易错点**：电场最大值在**内**导体表面（$r$ 最小），磁场也是；电容公式里是 $\\ln(b/a)$，不是 $\\ln(a/b)$（否则为负）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m",
+   "methods": [
+    "高斯定理",
+    "安培环路定理"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "哈里德《物理学基础》· 同轴电缆"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "同轴电缆（a=2 mm，b=10 mm，L=2.5 m，I=1 A）的电容",
+  "statement": "一同轴电缆内导体半径 $a=2\\ \\mathrm{mm}$、外导体内半径 $b=10\\ \\mathrm{mm}$，长 $L=2.5\\ \\mathrm{m}$，两导体间为真空，内导体通电流 $I=1\\ \\mathrm{A}$（外导体回流）。取 $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$、$\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{H/m}$，求这段电缆的电容。",
+  "mainTag": "电磁学",
+  "tags": [
+   "恒定磁场与安培环路定理"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "哈里德《物理学基础》· 同轴电缆",
+  "hints": [
+   "柱形电容：$C=\\frac{2\\pi\\varepsilon_0 L}{\\ln(b/a)}$。",
+   "两导体之间 $B=\\frac{\\mu_0 I}{2\\pi r}$，$r=a$ 处最大。"
+  ],
+  "answer": "8.64\\times10^{-11}\\ \\mathrm{F}",
+  "solution": "同轴电缆可看成圆柱形电容器。设内导体单位长度带电 $\\lambda$，由高斯定理，两导体之间（$a<r<b$）的场强\n\n$$E=\\frac{\\lambda}{2\\pi\\varepsilon_0 r},$$\n\n在内导体表面 $r=a$ 处最大，向外按 $1/r$ 衰减。两导体间电势差\n\n$$U=\\int_a^b E\\,\\mathrm{d}r=\\frac{\\lambda}{2\\pi\\varepsilon_0}\\ln\\frac{b}{a},$$\n\n于是单位长度电容\n\n$$C_0=\\frac{\\lambda}{U}=\\frac{2\\pi\\varepsilon_0}{\\ln\\left(b/a\\right)}=\\frac{2\\pi\\times 8.85\\times10^{-12}}{\\ln\\left(0.01/2\\times10^{-3}\\right)}=3.46\\times10^{-11}\\ \\mathrm{F/m},$$\n\n长 $L=2.5\\ \\mathrm{m}$ 的电容 $C=C_0L=8.64\\times10^{-11}\\ \\mathrm{F}$。\n\n磁场由安培环路定理给出：两导体之间 $B=\\frac{\\mu_0I}{2\\pi r}$，在内导体表面 $r=a$ 处 $B=\\frac{\\mu_0I}{2\\pi a}=1\\times10^{-4}\\ \\mathrm{T}$。\n\n本题求的是这段电缆的电容，通式为 $C=\\frac{2\\pi\\varepsilon_0 L}{\\ln\\left(b/a\\right)}$，结果为\n\n$$C=8.64\\times10^{-11}\\ \\mathrm{F}.$$\n\n**易错点**：电场最大值在**内**导体表面（$r$ 最小），磁场也是；电容公式里是 $\\ln(b/a)$，不是 $\\ln(a/b)$（否则为负）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "F",
+   "methods": [
+    "高斯定理",
+    "安培环路定理"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "哈里德《物理学基础》· 同轴电缆"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "同轴电缆（a=5 mm，b=6 mm，L=7 m，I=5 A）的单位长度电容",
+  "statement": "一同轴电缆内导体半径 $a=5\\ \\mathrm{mm}$、外导体内半径 $b=6\\ \\mathrm{mm}$，长 $L=7\\ \\mathrm{m}$，两导体间为真空，内导体通电流 $I=5\\ \\mathrm{A}$（外导体回流）。取 $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$、$\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{H/m}$，求电缆单位长度的电容。",
+  "mainTag": "电磁学",
+  "tags": [
+   "恒定磁场与安培环路定理"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "哈里德《物理学基础》· 同轴电缆",
+  "hints": [
+   "柱形电容：$C=\\frac{2\\pi\\varepsilon_0 L}{\\ln(b/a)}$。",
+   "两导体之间 $B=\\frac{\\mu_0 I}{2\\pi r}$，$r=a$ 处最大。"
+  ],
+  "answer": "3.05\\times10^{-10}\\ \\mathrm{F/m}",
+  "solution": "同轴电缆可看成圆柱形电容器。设内导体单位长度带电 $\\lambda$，由高斯定理，两导体之间（$a<r<b$）的场强\n\n$$E=\\frac{\\lambda}{2\\pi\\varepsilon_0 r},$$\n\n在内导体表面 $r=a$ 处最大，向外按 $1/r$ 衰减。两导体间电势差\n\n$$U=\\int_a^b E\\,\\mathrm{d}r=\\frac{\\lambda}{2\\pi\\varepsilon_0}\\ln\\frac{b}{a},$$\n\n于是单位长度电容\n\n$$C_0=\\frac{\\lambda}{U}=\\frac{2\\pi\\varepsilon_0}{\\ln\\left(b/a\\right)}=\\frac{2\\pi\\times 8.85\\times10^{-12}}{\\ln\\left(6\\times10^{-3}/5\\times10^{-3}\\right)}=3.05\\times10^{-10}\\ \\mathrm{F/m},$$\n\n长 $L=7\\ \\mathrm{m}$ 的电容 $C=C_0L=2.13\\times10^{-9}\\ \\mathrm{F}$。\n\n磁场由安培环路定理给出：两导体之间 $B=\\frac{\\mu_0I}{2\\pi r}$，在内导体表面 $r=a$ 处 $B=\\frac{\\mu_0I}{2\\pi a}=2\\times10^{-4}\\ \\mathrm{T}$。\n\n本题求的是电缆单位长度的电容，通式为 $C_0=\\frac{2\\pi\\varepsilon_0}{\\ln\\left(b/a\\right)}$，结果为\n\n$$C_0=3.05\\times10^{-10}\\ \\mathrm{F/m}.$$\n\n**易错点**：电场最大值在**内**导体表面（$r$ 最小），磁场也是；电容公式里是 $\\ln(b/a)$，不是 $\\ln(a/b)$（否则为负）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "F/m",
+   "methods": [
+    "高斯定理",
+    "安培环路定理"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "哈里德《物理学基础》· 同轴电缆"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "同轴电缆（a=1.5 mm，b=6 mm，L=7 m，I=10 A）的内导体表面磁感应强度",
+  "statement": "一同轴电缆内导体半径 $a=1.5\\ \\mathrm{mm}$、外导体内半径 $b=6\\ \\mathrm{mm}$，长 $L=7\\ \\mathrm{m}$，两导体间为真空，内导体通电流 $I=10\\ \\mathrm{A}$（外导体回流）。取 $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$、$\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{H/m}$，求内导体表面处的磁感应强度。",
+  "mainTag": "电磁学",
+  "tags": [
+   "恒定磁场与安培环路定理"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "哈里德《物理学基础》· 同轴电缆",
+  "hints": [
+   "柱形电容：$C=\\frac{2\\pi\\varepsilon_0 L}{\\ln(b/a)}$。",
+   "两导体之间 $B=\\frac{\\mu_0 I}{2\\pi r}$，$r=a$ 处最大。"
+  ],
+  "answer": "1.33\\times10^{-3}\\ \\mathrm{T}",
+  "solution": "同轴电缆可看成圆柱形电容器。设内导体单位长度带电 $\\lambda$，由高斯定理，两导体之间（$a<r<b$）的场强\n\n$$E=\\frac{\\lambda}{2\\pi\\varepsilon_0 r},$$\n\n在内导体表面 $r=a$ 处最大，向外按 $1/r$ 衰减。两导体间电势差\n\n$$U=\\int_a^b E\\,\\mathrm{d}r=\\frac{\\lambda}{2\\pi\\varepsilon_0}\\ln\\frac{b}{a},$$\n\n于是单位长度电容\n\n$$C_0=\\frac{\\lambda}{U}=\\frac{2\\pi\\varepsilon_0}{\\ln\\left(b/a\\right)}=\\frac{2\\pi\\times 8.85\\times10^{-12}}{\\ln\\left(6\\times10^{-3}/1.5\\times10^{-3}\\right)}=4.01\\times10^{-11}\\ \\mathrm{F/m},$$\n\n长 $L=7\\ \\mathrm{m}$ 的电容 $C=C_0L=2.81\\times10^{-10}\\ \\mathrm{F}$。\n\n磁场由安培环路定理给出：两导体之间 $B=\\frac{\\mu_0I}{2\\pi r}$，在内导体表面 $r=a$ 处 $B=\\frac{\\mu_0I}{2\\pi a}=1.33\\times10^{-3}\\ \\mathrm{T}$。\n\n本题求的是内导体表面处的磁感应强度，通式为 $B=\\frac{\\mu_0I}{2\\pi a}$，结果为\n\n$$B=1.33\\times10^{-3}\\ \\mathrm{T}.$$\n\n**易错点**：电场最大值在**内**导体表面（$r$ 最小），磁场也是；电容公式里是 $\\ln(b/a)$，不是 $\\ln(a/b)$（否则为负）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "T",
+   "methods": [
+    "高斯定理",
+    "安培环路定理"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "哈里德《物理学基础》· 同轴电缆"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "同轴电缆（a=2 mm，b=6 mm，L=7 m，I=1 A）的单位长度电容",
+  "statement": "一同轴电缆内导体半径 $a=2\\ \\mathrm{mm}$、外导体内半径 $b=6\\ \\mathrm{mm}$，长 $L=7\\ \\mathrm{m}$，两导体间为真空，内导体通电流 $I=1\\ \\mathrm{A}$（外导体回流）。取 $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$、$\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{H/m}$，求电缆单位长度的电容。",
+  "mainTag": "电磁学",
+  "tags": [
+   "恒定磁场与安培环路定理"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "哈里德《物理学基础》· 同轴电缆",
+  "hints": [
+   "柱形电容：$C=\\frac{2\\pi\\varepsilon_0 L}{\\ln(b/a)}$。",
+   "两导体之间 $B=\\frac{\\mu_0 I}{2\\pi r}$，$r=a$ 处最大。"
+  ],
+  "answer": "5.06\\times10^{-11}\\ \\mathrm{F/m}",
+  "solution": "同轴电缆可看成圆柱形电容器。设内导体单位长度带电 $\\lambda$，由高斯定理，两导体之间（$a<r<b$）的场强\n\n$$E=\\frac{\\lambda}{2\\pi\\varepsilon_0 r},$$\n\n在内导体表面 $r=a$ 处最大，向外按 $1/r$ 衰减。两导体间电势差\n\n$$U=\\int_a^b E\\,\\mathrm{d}r=\\frac{\\lambda}{2\\pi\\varepsilon_0}\\ln\\frac{b}{a},$$\n\n于是单位长度电容\n\n$$C_0=\\frac{\\lambda}{U}=\\frac{2\\pi\\varepsilon_0}{\\ln\\left(b/a\\right)}=\\frac{2\\pi\\times 8.85\\times10^{-12}}{\\ln\\left(6\\times10^{-3}/2\\times10^{-3}\\right)}=5.06\\times10^{-11}\\ \\mathrm{F/m},$$\n\n长 $L=7\\ \\mathrm{m}$ 的电容 $C=C_0L=3.54\\times10^{-10}\\ \\mathrm{F}$。\n\n磁场由安培环路定理给出：两导体之间 $B=\\frac{\\mu_0I}{2\\pi r}$，在内导体表面 $r=a$ 处 $B=\\frac{\\mu_0I}{2\\pi a}=1\\times10^{-4}\\ \\mathrm{T}$。\n\n本题求的是电缆单位长度的电容，通式为 $C_0=\\frac{2\\pi\\varepsilon_0}{\\ln\\left(b/a\\right)}$，结果为\n\n$$C_0=5.06\\times10^{-11}\\ \\mathrm{F/m}.$$\n\n**易错点**：电场最大值在**内**导体表面（$r$ 最小），磁场也是；电容公式里是 $\\ln(b/a)$，不是 $\\ln(a/b)$（否则为负）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "F/m",
+   "methods": [
+    "高斯定理",
+    "安培环路定理"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "哈里德《物理学基础》· 同轴电缆"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "同轴电缆（a=3 mm，b=6 mm，L=9.5 m，I=3 A）的内导体表面磁感应强度",
+  "statement": "一同轴电缆内导体半径 $a=3\\ \\mathrm{mm}$、外导体内半径 $b=6\\ \\mathrm{mm}$，长 $L=9.5\\ \\mathrm{m}$，两导体间为真空，内导体通电流 $I=3\\ \\mathrm{A}$（外导体回流）。取 $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$、$\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{H/m}$，求内导体表面处的磁感应强度。",
+  "mainTag": "电磁学",
+  "tags": [
+   "恒定磁场与安培环路定理"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "哈里德《物理学基础》· 同轴电缆",
+  "hints": [
+   "柱形电容：$C=\\frac{2\\pi\\varepsilon_0 L}{\\ln(b/a)}$。",
+   "两导体之间 $B=\\frac{\\mu_0 I}{2\\pi r}$，$r=a$ 处最大。"
+  ],
+  "answer": "2\\times10^{-4}\\ \\mathrm{T}",
+  "solution": "同轴电缆可看成圆柱形电容器。设内导体单位长度带电 $\\lambda$，由高斯定理，两导体之间（$a<r<b$）的场强\n\n$$E=\\frac{\\lambda}{2\\pi\\varepsilon_0 r},$$\n\n在内导体表面 $r=a$ 处最大，向外按 $1/r$ 衰减。两导体间电势差\n\n$$U=\\int_a^b E\\,\\mathrm{d}r=\\frac{\\lambda}{2\\pi\\varepsilon_0}\\ln\\frac{b}{a},$$\n\n于是单位长度电容\n\n$$C_0=\\frac{\\lambda}{U}=\\frac{2\\pi\\varepsilon_0}{\\ln\\left(b/a\\right)}=\\frac{2\\pi\\times 8.85\\times10^{-12}}{\\ln\\left(6\\times10^{-3}/3\\times10^{-3}\\right)}=8.02\\times10^{-11}\\ \\mathrm{F/m},$$\n\n长 $L=9.5\\ \\mathrm{m}$ 的电容 $C=C_0L=7.62\\times10^{-10}\\ \\mathrm{F}$。\n\n磁场由安培环路定理给出：两导体之间 $B=\\frac{\\mu_0I}{2\\pi r}$，在内导体表面 $r=a$ 处 $B=\\frac{\\mu_0I}{2\\pi a}=2\\times10^{-4}\\ \\mathrm{T}$。\n\n本题求的是内导体表面处的磁感应强度，通式为 $B=\\frac{\\mu_0I}{2\\pi a}$，结果为\n\n$$B=2\\times10^{-4}\\ \\mathrm{T}.$$\n\n**易错点**：电场最大值在**内**导体表面（$r$ 最小），磁场也是；电容公式里是 $\\ln(b/a)$，不是 $\\ln(a/b)$（否则为负）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "T",
+   "methods": [
+    "高斯定理",
+    "安培环路定理"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "哈里德《物理学基础》· 同轴电缆"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "同轴电缆（a=1 mm，b=12 mm，L=3 m，I=1 A）的内导体表面磁感应强度",
+  "statement": "一同轴电缆内导体半径 $a=1\\ \\mathrm{mm}$、外导体内半径 $b=12\\ \\mathrm{mm}$，长 $L=3\\ \\mathrm{m}$，两导体间为真空，内导体通电流 $I=1\\ \\mathrm{A}$（外导体回流）。取 $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$、$\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{H/m}$，求内导体表面处的磁感应强度。",
+  "mainTag": "电磁学",
+  "tags": [
+   "恒定磁场与安培环路定理"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "哈里德《物理学基础》· 同轴电缆",
+  "hints": [
+   "柱形电容：$C=\\frac{2\\pi\\varepsilon_0 L}{\\ln(b/a)}$。",
+   "两导体之间 $B=\\frac{\\mu_0 I}{2\\pi r}$，$r=a$ 处最大。"
+  ],
+  "answer": "2\\times10^{-4}\\ \\mathrm{T}",
+  "solution": "同轴电缆可看成圆柱形电容器。设内导体单位长度带电 $\\lambda$，由高斯定理，两导体之间（$a<r<b$）的场强\n\n$$E=\\frac{\\lambda}{2\\pi\\varepsilon_0 r},$$\n\n在内导体表面 $r=a$ 处最大，向外按 $1/r$ 衰减。两导体间电势差\n\n$$U=\\int_a^b E\\,\\mathrm{d}r=\\frac{\\lambda}{2\\pi\\varepsilon_0}\\ln\\frac{b}{a},$$\n\n于是单位长度电容\n\n$$C_0=\\frac{\\lambda}{U}=\\frac{2\\pi\\varepsilon_0}{\\ln\\left(b/a\\right)}=\\frac{2\\pi\\times 8.85\\times10^{-12}}{\\ln\\left(0.012/1\\times10^{-3}\\right)}=2.24\\times10^{-11}\\ \\mathrm{F/m},$$\n\n长 $L=3\\ \\mathrm{m}$ 的电容 $C=C_0L=6.71\\times10^{-11}\\ \\mathrm{F}$。\n\n磁场由安培环路定理给出：两导体之间 $B=\\frac{\\mu_0I}{2\\pi r}$，在内导体表面 $r=a$ 处 $B=\\frac{\\mu_0I}{2\\pi a}=2\\times10^{-4}\\ \\mathrm{T}$。\n\n本题求的是内导体表面处的磁感应强度，通式为 $B=\\frac{\\mu_0I}{2\\pi a}$，结果为\n\n$$B=2\\times10^{-4}\\ \\mathrm{T}.$$\n\n**易错点**：电场最大值在**内**导体表面（$r$ 最小），磁场也是；电容公式里是 $\\ln(b/a)$，不是 $\\ln(a/b)$（否则为负）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "T",
+   "methods": [
+    "高斯定理",
+    "安培环路定理"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "哈里德《物理学基础》· 同轴电缆"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "长直螺线管（N=800 匝，l=1 m，S=50 cm²，I=4 A）的磁场能量密度",
+  "statement": "一长直螺线管共 $N=800$ 匝，长 $l=1\\ \\mathrm{m}$，截面积 $S=50\\ \\mathrm{cm^2}$，管内为真空，通电流 $I=4\\ \\mathrm{A}$（可视为无限长，边缘效应忽略）。取 $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{H/m}$，求管内磁场能量密度。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电磁感应与自感互感"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "赵凯华《新概念物理教程·电磁学》· 自感与磁场能量",
+  "hints": [
+   "$n=N/l$，$L=\\mu_0n^2V$，$B=\\mu_0nI$。",
+   "能量 $W=\\frac12LI^2$，能量密度 $w=B^2/(2\\mu_0)$。"
+  ],
+  "answer": "6.43\\ \\mathrm{J/m^3}",
+  "solution": "单位长度匝数 $n=N/l=800/1=800\\ \\mathrm{m^{-1}}$，体积 $V=Sl=5\\times10^{-3}\\ \\mathrm{m^3}$。\n\n长直螺线管的自感\n\n$$L=\\mu_0n^{2}V=4\\pi\\times10^{-7}\\times 800^{2}\\times 5\\times10^{-3}=4.02\\times10^{-3}\\ \\mathrm{H}.$$\n\n管内磁场 $B=\\mu_0nI=4\\pi\\times10^{-7}\\times 800\\times 4=4.02\\times10^{-3}\\ \\mathrm{T}$。\n\n磁场能量\n\n$$W_m=\\tfrac12LI^{2}=\\tfrac12\\times 4.02\\times10^{-3}\\times 4^{2}=0.0322\\ \\mathrm{J},$$\n\n对应能量密度 $w_m=W_m/V=6.43\\ \\mathrm{J/m^3}$（也等于 $B^2/2\\mu_0$）。\n\n本题求的是管内磁场能量密度，通式为 $w_m=\\frac{B^{2}}{2\\mu_0}$，结果为\n\n$$w_m=6.43\\ \\mathrm{J/m^3}.$$\n\n**易错点**：自感公式里是**单位长度匝数** $n=N/l$ 的平方，代入总匝数 $N$ 会差 $l^2$ 倍；能量密度与 $B^2$ 成正比，与电流是平方关系。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "J/m^3",
+   "methods": [
+    "自感",
+    "磁场能量"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· 自感与磁场能量"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "长直螺线管（N=1000 匝，l=0.3 m，S=5 cm²，I=0.5 A）的管内磁感应强度",
+  "statement": "一长直螺线管共 $N=1000$ 匝，长 $l=0.3\\ \\mathrm{m}$，截面积 $S=5\\ \\mathrm{cm^2}$，管内为真空，通电流 $I=0.5\\ \\mathrm{A}$（可视为无限长，边缘效应忽略）。取 $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{H/m}$，求通入该电流时管内的磁感应强度。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电磁感应与自感互感"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "赵凯华《新概念物理教程·电磁学》· 自感与磁场能量",
+  "hints": [
+   "$n=N/l$，$L=\\mu_0n^2V$，$B=\\mu_0nI$。",
+   "能量 $W=\\frac12LI^2$，能量密度 $w=B^2/(2\\mu_0)$。"
+  ],
+  "answer": "2.09\\times10^{-3}\\ \\mathrm{T}",
+  "solution": "单位长度匝数 $n=N/l=1000/0.3=3333\\ \\mathrm{m^{-1}}$，体积 $V=Sl=1.5\\times10^{-4}\\ \\mathrm{m^3}$。\n\n长直螺线管的自感\n\n$$L=\\mu_0n^{2}V=4\\pi\\times10^{-7}\\times 3333^{2}\\times 1.5\\times10^{-4}=2.09\\times10^{-3}\\ \\mathrm{H}.$$\n\n管内磁场 $B=\\mu_0nI=4\\pi\\times10^{-7}\\times 3333\\times 0.5=2.09\\times10^{-3}\\ \\mathrm{T}$。\n\n磁场能量\n\n$$W_m=\\tfrac12LI^{2}=\\tfrac12\\times 2.09\\times10^{-3}\\times 0.5^{2}=2.62\\times10^{-4}\\ \\mathrm{J},$$\n\n对应能量密度 $w_m=W_m/V=1.75\\ \\mathrm{J/m^3}$（也等于 $B^2/2\\mu_0$）。\n\n本题求的是通入该电流时管内的磁感应强度，通式为 $B=\\mu_0nI$，结果为\n\n$$B=2.09\\times10^{-3}\\ \\mathrm{T}.$$\n\n**易错点**：自感公式里是**单位长度匝数** $n=N/l$ 的平方，代入总匝数 $N$ 会差 $l^2$ 倍；能量密度与 $B^2$ 成正比，与电流是平方关系。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "T",
+   "methods": [
+    "自感",
+    "磁场能量"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· 自感与磁场能量"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "长直螺线管（N=2000 匝，l=0.7 m，S=30 cm²，I=1.5 A）的管内磁感应强度",
+  "statement": "一长直螺线管共 $N=2000$ 匝，长 $l=0.7\\ \\mathrm{m}$，截面积 $S=30\\ \\mathrm{cm^2}$，管内为真空，通电流 $I=1.5\\ \\mathrm{A}$（可视为无限长，边缘效应忽略）。取 $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{H/m}$，求通入该电流时管内的磁感应强度。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电磁感应与自感互感"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "赵凯华《新概念物理教程·电磁学》· 自感与磁场能量",
+  "hints": [
+   "$n=N/l$，$L=\\mu_0n^2V$，$B=\\mu_0nI$。",
+   "能量 $W=\\frac12LI^2$，能量密度 $w=B^2/(2\\mu_0)$。"
+  ],
+  "answer": "5.39\\times10^{-3}\\ \\mathrm{T}",
+  "solution": "单位长度匝数 $n=N/l=2000/0.7=2857\\ \\mathrm{m^{-1}}$，体积 $V=Sl=2.1\\times10^{-3}\\ \\mathrm{m^3}$。\n\n长直螺线管的自感\n\n$$L=\\mu_0n^{2}V=4\\pi\\times10^{-7}\\times 2857^{2}\\times 2.1\\times10^{-3}=0.0215\\ \\mathrm{H}.$$\n\n管内磁场 $B=\\mu_0nI=4\\pi\\times10^{-7}\\times 2857\\times 1.5=5.39\\times10^{-3}\\ \\mathrm{T}$。\n\n磁场能量\n\n$$W_m=\\tfrac12LI^{2}=\\tfrac12\\times 0.0215\\times 1.5^{2}=0.0242\\ \\mathrm{J},$$\n\n对应能量密度 $w_m=W_m/V=11.5\\ \\mathrm{J/m^3}$（也等于 $B^2/2\\mu_0$）。\n\n本题求的是通入该电流时管内的磁感应强度，通式为 $B=\\mu_0nI$，结果为\n\n$$B=5.39\\times10^{-3}\\ \\mathrm{T}.$$\n\n**易错点**：自感公式里是**单位长度匝数** $n=N/l$ 的平方，代入总匝数 $N$ 会差 $l^2$ 倍；能量密度与 $B^2$ 成正比，与电流是平方关系。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "T",
+   "methods": [
+    "自感",
+    "磁场能量"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· 自感与磁场能量"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "长直螺线管（N=1000 匝，l=0.4 m，S=50 cm²，I=2 A）的磁场能量密度",
+  "statement": "一长直螺线管共 $N=1000$ 匝，长 $l=0.4\\ \\mathrm{m}$，截面积 $S=50\\ \\mathrm{cm^2}$，管内为真空，通电流 $I=2\\ \\mathrm{A}$（可视为无限长，边缘效应忽略）。取 $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{H/m}$，求管内磁场能量密度。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电磁感应与自感互感"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "赵凯华《新概念物理教程·电磁学》· 自感与磁场能量",
+  "hints": [
+   "$n=N/l$，$L=\\mu_0n^2V$，$B=\\mu_0nI$。",
+   "能量 $W=\\frac12LI^2$，能量密度 $w=B^2/(2\\mu_0)$。"
+  ],
+  "answer": "15.7\\ \\mathrm{J/m^3}",
+  "solution": "单位长度匝数 $n=N/l=1000/0.4=2500\\ \\mathrm{m^{-1}}$，体积 $V=Sl=2\\times10^{-3}\\ \\mathrm{m^3}$。\n\n长直螺线管的自感\n\n$$L=\\mu_0n^{2}V=4\\pi\\times10^{-7}\\times 2500^{2}\\times 2\\times10^{-3}=0.0157\\ \\mathrm{H}.$$\n\n管内磁场 $B=\\mu_0nI=4\\pi\\times10^{-7}\\times 2500\\times 2=6.28\\times10^{-3}\\ \\mathrm{T}$。\n\n磁场能量\n\n$$W_m=\\tfrac12LI^{2}=\\tfrac12\\times 0.0157\\times 2^{2}=0.0314\\ \\mathrm{J},$$\n\n对应能量密度 $w_m=W_m/V=15.7\\ \\mathrm{J/m^3}$（也等于 $B^2/2\\mu_0$）。\n\n本题求的是管内磁场能量密度，通式为 $w_m=\\frac{B^{2}}{2\\mu_0}$，结果为\n\n$$w_m=15.7\\ \\mathrm{J/m^3}.$$\n\n**易错点**：自感公式里是**单位长度匝数** $n=N/l$ 的平方，代入总匝数 $N$ 会差 $l^2$ 倍；能量密度与 $B^2$ 成正比，与电流是平方关系。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "J/m^3",
+   "methods": [
+    "自感",
+    "磁场能量"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· 自感与磁场能量"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "长直螺线管（N=1000 匝，l=0.8 m，S=50 cm²，I=3 A）的磁场能量密度",
+  "statement": "一长直螺线管共 $N=1000$ 匝，长 $l=0.8\\ \\mathrm{m}$，截面积 $S=50\\ \\mathrm{cm^2}$，管内为真空，通电流 $I=3\\ \\mathrm{A}$（可视为无限长，边缘效应忽略）。取 $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{H/m}$，求管内磁场能量密度。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电磁感应与自感互感"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "赵凯华《新概念物理教程·电磁学》· 自感与磁场能量",
+  "hints": [
+   "$n=N/l$，$L=\\mu_0n^2V$，$B=\\mu_0nI$。",
+   "能量 $W=\\frac12LI^2$，能量密度 $w=B^2/(2\\mu_0)$。"
+  ],
+  "answer": "8.84\\ \\mathrm{J/m^3}",
+  "solution": "单位长度匝数 $n=N/l=1000/0.8=1250\\ \\mathrm{m^{-1}}$，体积 $V=Sl=4\\times10^{-3}\\ \\mathrm{m^3}$。\n\n长直螺线管的自感\n\n$$L=\\mu_0n^{2}V=4\\pi\\times10^{-7}\\times 1250^{2}\\times 4\\times10^{-3}=7.85\\times10^{-3}\\ \\mathrm{H}.$$\n\n管内磁场 $B=\\mu_0nI=4\\pi\\times10^{-7}\\times 1250\\times 3=4.71\\times10^{-3}\\ \\mathrm{T}$。\n\n磁场能量\n\n$$W_m=\\tfrac12LI^{2}=\\tfrac12\\times 7.85\\times10^{-3}\\times 3^{2}=0.0353\\ \\mathrm{J},$$\n\n对应能量密度 $w_m=W_m/V=8.84\\ \\mathrm{J/m^3}$（也等于 $B^2/2\\mu_0$）。\n\n本题求的是管内磁场能量密度，通式为 $w_m=\\frac{B^{2}}{2\\mu_0}$，结果为\n\n$$w_m=8.84\\ \\mathrm{J/m^3}.$$\n\n**易错点**：自感公式里是**单位长度匝数** $n=N/l$ 的平方，代入总匝数 $N$ 会差 $l^2$ 倍；能量密度与 $B^2$ 成正比，与电流是平方关系。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "J/m^3",
+   "methods": [
+    "自感",
+    "磁场能量"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· 自感与磁场能量"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "长直螺线管（N=1500 匝，l=0.8 m，S=50 cm²，I=2 A）的磁场能量",
+  "statement": "一长直螺线管共 $N=1500$ 匝，长 $l=0.8\\ \\mathrm{m}$，截面积 $S=50\\ \\mathrm{cm^2}$，管内为真空，通电流 $I=2\\ \\mathrm{A}$（可视为无限长，边缘效应忽略）。取 $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{H/m}$，求管内储存的磁场能量。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电磁感应与自感互感"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "赵凯华《新概念物理教程·电磁学》· 自感与磁场能量",
+  "hints": [
+   "$n=N/l$，$L=\\mu_0n^2V$，$B=\\mu_0nI$。",
+   "能量 $W=\\frac12LI^2$，能量密度 $w=B^2/(2\\mu_0)$。"
+  ],
+  "answer": "0.0353\\ \\mathrm{J}",
+  "solution": "单位长度匝数 $n=N/l=1500/0.8=1875\\ \\mathrm{m^{-1}}$，体积 $V=Sl=4\\times10^{-3}\\ \\mathrm{m^3}$。\n\n长直螺线管的自感\n\n$$L=\\mu_0n^{2}V=4\\pi\\times10^{-7}\\times 1875^{2}\\times 4\\times10^{-3}=0.0177\\ \\mathrm{H}.$$\n\n管内磁场 $B=\\mu_0nI=4\\pi\\times10^{-7}\\times 1875\\times 2=4.71\\times10^{-3}\\ \\mathrm{T}$。\n\n磁场能量\n\n$$W_m=\\tfrac12LI^{2}=\\tfrac12\\times 0.0177\\times 2^{2}=0.0353\\ \\mathrm{J},$$\n\n对应能量密度 $w_m=W_m/V=8.84\\ \\mathrm{J/m^3}$（也等于 $B^2/2\\mu_0$）。\n\n本题求的是管内储存的磁场能量，通式为 $W_m=\\tfrac12LI^{2}$，结果为\n\n$$W_m=0.0353\\ \\mathrm{J}.$$\n\n**易错点**：自感公式里是**单位长度匝数** $n=N/l$ 的平方，代入总匝数 $N$ 会差 $l^2$ 倍；能量密度与 $B^2$ 成正比，与电流是平方关系。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "自感",
+    "磁场能量"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· 自感与磁场能量"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "长直螺线管（N=1500 匝，l=0.3 m，S=5 cm²，I=3 A）的管内磁感应强度",
+  "statement": "一长直螺线管共 $N=1500$ 匝，长 $l=0.3\\ \\mathrm{m}$，截面积 $S=5\\ \\mathrm{cm^2}$，管内为真空，通电流 $I=3\\ \\mathrm{A}$（可视为无限长，边缘效应忽略）。取 $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{H/m}$，求通入该电流时管内的磁感应强度。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电磁感应与自感互感"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "赵凯华《新概念物理教程·电磁学》· 自感与磁场能量",
+  "hints": [
+   "$n=N/l$，$L=\\mu_0n^2V$，$B=\\mu_0nI$。",
+   "能量 $W=\\frac12LI^2$，能量密度 $w=B^2/(2\\mu_0)$。"
+  ],
+  "answer": "0.0188\\ \\mathrm{T}",
+  "solution": "单位长度匝数 $n=N/l=1500/0.3=5000\\ \\mathrm{m^{-1}}$，体积 $V=Sl=1.5\\times10^{-4}\\ \\mathrm{m^3}$。\n\n长直螺线管的自感\n\n$$L=\\mu_0n^{2}V=4\\pi\\times10^{-7}\\times 5000^{2}\\times 1.5\\times10^{-4}=4.71\\times10^{-3}\\ \\mathrm{H}.$$\n\n管内磁场 $B=\\mu_0nI=4\\pi\\times10^{-7}\\times 5000\\times 3=0.0188\\ \\mathrm{T}$。\n\n磁场能量\n\n$$W_m=\\tfrac12LI^{2}=\\tfrac12\\times 4.71\\times10^{-3}\\times 3^{2}=0.0212\\ \\mathrm{J},$$\n\n对应能量密度 $w_m=W_m/V=141\\ \\mathrm{J/m^3}$（也等于 $B^2/2\\mu_0$）。\n\n本题求的是通入该电流时管内的磁感应强度，通式为 $B=\\mu_0nI$，结果为\n\n$$B=0.0188\\ \\mathrm{T}.$$\n\n**易错点**：自感公式里是**单位长度匝数** $n=N/l$ 的平方，代入总匝数 $N$ 会差 $l^2$ 倍；能量密度与 $B^2$ 成正比，与电流是平方关系。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "T",
+   "methods": [
+    "自感",
+    "磁场能量"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· 自感与磁场能量"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "长直螺线管（N=1500 匝，l=0.6 m，S=50 cm²，I=4 A）的管内磁感应强度",
+  "statement": "一长直螺线管共 $N=1500$ 匝，长 $l=0.6\\ \\mathrm{m}$，截面积 $S=50\\ \\mathrm{cm^2}$，管内为真空，通电流 $I=4\\ \\mathrm{A}$（可视为无限长，边缘效应忽略）。取 $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{H/m}$，求通入该电流时管内的磁感应强度。",
+  "mainTag": "电磁学",
+  "tags": [
+   "电磁感应与自感互感"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "赵凯华《新概念物理教程·电磁学》· 自感与磁场能量",
+  "hints": [
+   "$n=N/l$，$L=\\mu_0n^2V$，$B=\\mu_0nI$。",
+   "能量 $W=\\frac12LI^2$，能量密度 $w=B^2/(2\\mu_0)$。"
+  ],
+  "answer": "0.0126\\ \\mathrm{T}",
+  "solution": "单位长度匝数 $n=N/l=1500/0.6=2500\\ \\mathrm{m^{-1}}$，体积 $V=Sl=3\\times10^{-3}\\ \\mathrm{m^3}$。\n\n长直螺线管的自感\n\n$$L=\\mu_0n^{2}V=4\\pi\\times10^{-7}\\times 2500^{2}\\times 3\\times10^{-3}=0.0236\\ \\mathrm{H}.$$\n\n管内磁场 $B=\\mu_0nI=4\\pi\\times10^{-7}\\times 2500\\times 4=0.0126\\ \\mathrm{T}$。\n\n磁场能量\n\n$$W_m=\\tfrac12LI^{2}=\\tfrac12\\times 0.0236\\times 4^{2}=0.188\\ \\mathrm{J},$$\n\n对应能量密度 $w_m=W_m/V=62.8\\ \\mathrm{J/m^3}$（也等于 $B^2/2\\mu_0$）。\n\n本题求的是通入该电流时管内的磁感应强度，通式为 $B=\\mu_0nI$，结果为\n\n$$B=0.0126\\ \\mathrm{T}.$$\n\n**易错点**：自感公式里是**单位长度匝数** $n=N/l$ 的平方，代入总匝数 $N$ 会差 $l^2$ 倍；能量密度与 $B^2$ 成正比，与电流是平方关系。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "T",
+   "methods": [
+    "自感",
+    "磁场能量"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· 自感与磁场能量"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "薄透镜组合（f1=15 cm，f2=8 cm，d=2 cm，u=30 cm）的总放大率",
+  "statement": "两个薄凸透镜焦距分别为 $f_1=15\\ \\mathrm{cm}$ 与 $f_2=8\\ \\mathrm{cm}$，共轴放置、相距 $d=2\\ \\mathrm{cm}$。在第一个透镜前 $u=30\\ \\mathrm{cm}$ 处放一小物。求该物点经两透镜后的总横向放大率。",
+  "mainTag": "光学",
+  "tags": [
+   "几何光学与薄透镜成像"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "姚启钧《光学教程》· 薄透镜组合",
+  "hints": [
+   "等效焦距 $1/f=1/f_1+1/f_2-d/(f_1f_2)$。",
+   "逐次成像：第一透镜的像作为第二透镜的物，物距 $u_2=d-v_1$。"
+  ],
+  "answer": "-0.222",
+  "solution": "两薄透镜共轴放置、间距 $d=2\\ \\mathrm{cm}$ 时，等效焦距满足\n\n$$\\frac{1}{f}=\\frac{1}{f_1}+\\frac{1}{f_2}-\\frac{d}{f_1f_2}=\\frac{1}{15}+\\frac{1}{8}-\\frac{2}{15\\times 8}\\ \\Longrightarrow\\ f=5.71\\ \\mathrm{cm}.$$\n\n逐次成像：物距 $u=30\\ \\mathrm{cm}$，第一透镜\n\n$$v_1=\\frac{uf_1}{u-f_1}=30\\ \\mathrm{cm},$$\n\n它对第二透镜的物距 $u_2=d-v_1=-28\\ \\mathrm{cm}$，再成像\n\n$$v_2=\\frac{u_2f_2}{u_2-f_2}=6.22\\ \\mathrm{cm}.$$\n\n总放大率 $\\beta=\\frac{v_1}{u}\\cdot\\frac{v_2}{u_2}=-0.222$（正号表示正立，负号表示倒立）。\n\n本题求的是该物点经两透镜后的总横向放大率，通式为 $\\beta=\\frac{v_1}{u}\\cdot\\frac{v_2}{u_2}$，结果为\n\n$$\\beta=-0.222.$$\n\n**易错点**：等效焦距公式里的减号项表示「间距削弱光焦度」；当 $d=f_1+f_2$ 时两透镜密接成无焦系统（$f\\to\\infty$），这是望远镜的基本结构。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "成像公式",
+    "组合焦距"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "姚启钧《光学教程》· 薄透镜组合"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "薄透镜组合（f1=15 cm，f2=12 cm，d=10 cm，u=10 cm）的光焦度",
+  "statement": "两个薄凸透镜焦距分别为 $f_1=15\\ \\mathrm{cm}$ 与 $f_2=12\\ \\mathrm{cm}$，共轴放置、相距 $d=10\\ \\mathrm{cm}$。在第一个透镜前 $u=10\\ \\mathrm{cm}$ 处放一小物。求组合透镜的光焦度（以米为单位）。",
+  "mainTag": "光学",
+  "tags": [
+   "几何光学与薄透镜成像"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "姚启钧《光学教程》· 薄透镜组合",
+  "hints": [
+   "等效焦距 $1/f=1/f_1+1/f_2-d/(f_1f_2)$。",
+   "逐次成像：第一透镜的像作为第二透镜的物，物距 $u_2=d-v_1$。"
+  ],
+  "answer": "9.44\\ \\mathrm{1/m}",
+  "solution": "两薄透镜共轴放置、间距 $d=10\\ \\mathrm{cm}$ 时，等效焦距满足\n\n$$\\frac{1}{f}=\\frac{1}{f_1}+\\frac{1}{f_2}-\\frac{d}{f_1f_2}=\\frac{1}{15}+\\frac{1}{12}-\\frac{10}{15\\times 12}\\ \\Longrightarrow\\ f=10.6\\ \\mathrm{cm}.$$\n\n逐次成像：物距 $u=10\\ \\mathrm{cm}$，第一透镜\n\n$$v_1=\\frac{uf_1}{u-f_1}=-30\\ \\mathrm{cm},$$\n\n它对第二透镜的物距 $u_2=d-v_1=40\\ \\mathrm{cm}$，再成像\n\n$$v_2=\\frac{u_2f_2}{u_2-f_2}=17.1\\ \\mathrm{cm}.$$\n\n总放大率 $\\beta=\\frac{v_1}{u}\\cdot\\frac{v_2}{u_2}=-1.29$（正号表示正立，负号表示倒立）。\n\n本题求的是组合透镜的光焦度（以米为单位），通式为 $\\Phi=\\frac{1}{f}$，结果为\n\n$$\\Phi=9.44\\ \\mathrm{1/m}.$$\n\n**易错点**：等效焦距公式里的减号项表示「间距削弱光焦度」；当 $d=f_1+f_2$ 时两透镜密接成无焦系统（$f\\to\\infty$），这是望远镜的基本结构。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "1/m",
+   "methods": [
+    "成像公式",
+    "组合焦距"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "姚启钧《光学教程》· 薄透镜组合"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "薄透镜组合（f1=5 cm，f2=20 cm，d=5 cm，u=30 cm）的总放大率",
+  "statement": "两个薄凸透镜焦距分别为 $f_1=5\\ \\mathrm{cm}$ 与 $f_2=20\\ \\mathrm{cm}$，共轴放置、相距 $d=5\\ \\mathrm{cm}$。在第一个透镜前 $u=30\\ \\mathrm{cm}$ 处放一小物。求该物点经两透镜后的总横向放大率。",
+  "mainTag": "光学",
+  "tags": [
+   "几何光学与薄透镜成像"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "姚启钧《光学教程》· 薄透镜组合",
+  "hints": [
+   "等效焦距 $1/f=1/f_1+1/f_2-d/(f_1f_2)$。",
+   "逐次成像：第一透镜的像作为第二透镜的物，物距 $u_2=d-v_1$。"
+  ],
+  "answer": "-0.19",
+  "solution": "两薄透镜共轴放置、间距 $d=5\\ \\mathrm{cm}$ 时，等效焦距满足\n\n$$\\frac{1}{f}=\\frac{1}{f_1}+\\frac{1}{f_2}-\\frac{d}{f_1f_2}=\\frac{1}{5}+\\frac{1}{20}-\\frac{5}{5\\times 20}\\ \\Longrightarrow\\ f=5\\ \\mathrm{cm}.$$\n\n逐次成像：物距 $u=30\\ \\mathrm{cm}$，第一透镜\n\n$$v_1=\\frac{uf_1}{u-f_1}=6\\ \\mathrm{cm},$$\n\n它对第二透镜的物距 $u_2=d-v_1=-1\\ \\mathrm{cm}$，再成像\n\n$$v_2=\\frac{u_2f_2}{u_2-f_2}=0.952\\ \\mathrm{cm}.$$\n\n总放大率 $\\beta=\\frac{v_1}{u}\\cdot\\frac{v_2}{u_2}=-0.19$（正号表示正立，负号表示倒立）。\n\n本题求的是该物点经两透镜后的总横向放大率，通式为 $\\beta=\\frac{v_1}{u}\\cdot\\frac{v_2}{u_2}$，结果为\n\n$$\\beta=-0.19.$$\n\n**易错点**：等效焦距公式里的减号项表示「间距削弱光焦度」；当 $d=f_1+f_2$ 时两透镜密接成无焦系统（$f\\to\\infty$），这是望远镜的基本结构。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "成像公式",
+    "组合焦距"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "姚启钧《光学教程》· 薄透镜组合"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "薄透镜组合（f1=25 cm，f2=8 cm，d=10 cm，u=30 cm）的总放大率",
+  "statement": "两个薄凸透镜焦距分别为 $f_1=25\\ \\mathrm{cm}$ 与 $f_2=8\\ \\mathrm{cm}$，共轴放置、相距 $d=10\\ \\mathrm{cm}$。在第一个透镜前 $u=30\\ \\mathrm{cm}$ 处放一小物。求该物点经两透镜后的总横向放大率。",
+  "mainTag": "光学",
+  "tags": [
+   "几何光学与薄透镜成像"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "姚启钧《光学教程》· 薄透镜组合",
+  "hints": [
+   "等效焦距 $1/f=1/f_1+1/f_2-d/(f_1f_2)$。",
+   "逐次成像：第一透镜的像作为第二透镜的物，物距 $u_2=d-v_1$。"
+  ],
+  "answer": "-0.27",
+  "solution": "两薄透镜共轴放置、间距 $d=10\\ \\mathrm{cm}$ 时，等效焦距满足\n\n$$\\frac{1}{f}=\\frac{1}{f_1}+\\frac{1}{f_2}-\\frac{d}{f_1f_2}=\\frac{1}{25}+\\frac{1}{8}-\\frac{10}{25\\times 8}\\ \\Longrightarrow\\ f=8.7\\ \\mathrm{cm}.$$\n\n逐次成像：物距 $u=30\\ \\mathrm{cm}$，第一透镜\n\n$$v_1=\\frac{uf_1}{u-f_1}=150\\ \\mathrm{cm},$$\n\n它对第二透镜的物距 $u_2=d-v_1=-140\\ \\mathrm{cm}$，再成像\n\n$$v_2=\\frac{u_2f_2}{u_2-f_2}=7.57\\ \\mathrm{cm}.$$\n\n总放大率 $\\beta=\\frac{v_1}{u}\\cdot\\frac{v_2}{u_2}=-0.27$（正号表示正立，负号表示倒立）。\n\n本题求的是该物点经两透镜后的总横向放大率，通式为 $\\beta=\\frac{v_1}{u}\\cdot\\frac{v_2}{u_2}$，结果为\n\n$$\\beta=-0.27.$$\n\n**易错点**：等效焦距公式里的减号项表示「间距削弱光焦度」；当 $d=f_1+f_2$ 时两透镜密接成无焦系统（$f\\to\\infty$），这是望远镜的基本结构。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "成像公式",
+    "组合焦距"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "姚启钧《光学教程》· 薄透镜组合"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "薄透镜组合（f1=5 cm，f2=20 cm，d=2 cm，u=10 cm）的光焦度",
+  "statement": "两个薄凸透镜焦距分别为 $f_1=5\\ \\mathrm{cm}$ 与 $f_2=20\\ \\mathrm{cm}$，共轴放置、相距 $d=2\\ \\mathrm{cm}$。在第一个透镜前 $u=10\\ \\mathrm{cm}$ 处放一小物。求组合透镜的光焦度（以米为单位）。",
+  "mainTag": "光学",
+  "tags": [
+   "几何光学与薄透镜成像"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "姚启钧《光学教程》· 薄透镜组合",
+  "hints": [
+   "等效焦距 $1/f=1/f_1+1/f_2-d/(f_1f_2)$。",
+   "逐次成像：第一透镜的像作为第二透镜的物，物距 $u_2=d-v_1$。"
+  ],
+  "answer": "23\\ \\mathrm{1/m}",
+  "solution": "两薄透镜共轴放置、间距 $d=2\\ \\mathrm{cm}$ 时，等效焦距满足\n\n$$\\frac{1}{f}=\\frac{1}{f_1}+\\frac{1}{f_2}-\\frac{d}{f_1f_2}=\\frac{1}{5}+\\frac{1}{20}-\\frac{2}{5\\times 20}\\ \\Longrightarrow\\ f=4.35\\ \\mathrm{cm}.$$\n\n逐次成像：物距 $u=10\\ \\mathrm{cm}$，第一透镜\n\n$$v_1=\\frac{uf_1}{u-f_1}=10\\ \\mathrm{cm},$$\n\n它对第二透镜的物距 $u_2=d-v_1=-8\\ \\mathrm{cm}$，再成像\n\n$$v_2=\\frac{u_2f_2}{u_2-f_2}=5.71\\ \\mathrm{cm}.$$\n\n总放大率 $\\beta=\\frac{v_1}{u}\\cdot\\frac{v_2}{u_2}=-0.714$（正号表示正立，负号表示倒立）。\n\n本题求的是组合透镜的光焦度（以米为单位），通式为 $\\Phi=\\frac{1}{f}$，结果为\n\n$$\\Phi=23\\ \\mathrm{1/m}.$$\n\n**易错点**：等效焦距公式里的减号项表示「间距削弱光焦度」；当 $d=f_1+f_2$ 时两透镜密接成无焦系统（$f\\to\\infty$），这是望远镜的基本结构。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "1/m",
+   "methods": [
+    "成像公式",
+    "组合焦距"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "姚启钧《光学教程》· 薄透镜组合"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "薄透镜组合（f1=10 cm，f2=20 cm，d=5 cm，u=40 cm）的光焦度",
+  "statement": "两个薄凸透镜焦距分别为 $f_1=10\\ \\mathrm{cm}$ 与 $f_2=20\\ \\mathrm{cm}$，共轴放置、相距 $d=5\\ \\mathrm{cm}$。在第一个透镜前 $u=40\\ \\mathrm{cm}$ 处放一小物。求组合透镜的光焦度（以米为单位）。",
+  "mainTag": "光学",
+  "tags": [
+   "几何光学与薄透镜成像"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "姚启钧《光学教程》· 薄透镜组合",
+  "hints": [
+   "等效焦距 $1/f=1/f_1+1/f_2-d/(f_1f_2)$。",
+   "逐次成像：第一透镜的像作为第二透镜的物，物距 $u_2=d-v_1$。"
+  ],
+  "answer": "12.5\\ \\mathrm{1/m}",
+  "solution": "两薄透镜共轴放置、间距 $d=5\\ \\mathrm{cm}$ 时，等效焦距满足\n\n$$\\frac{1}{f}=\\frac{1}{f_1}+\\frac{1}{f_2}-\\frac{d}{f_1f_2}=\\frac{1}{10}+\\frac{1}{20}-\\frac{5}{10\\times 20}\\ \\Longrightarrow\\ f=8\\ \\mathrm{cm}.$$\n\n逐次成像：物距 $u=40\\ \\mathrm{cm}$，第一透镜\n\n$$v_1=\\frac{uf_1}{u-f_1}=13.3\\ \\mathrm{cm},$$\n\n它对第二透镜的物距 $u_2=d-v_1=-8.33\\ \\mathrm{cm}$，再成像\n\n$$v_2=\\frac{u_2f_2}{u_2-f_2}=5.88\\ \\mathrm{cm}.$$\n\n总放大率 $\\beta=\\frac{v_1}{u}\\cdot\\frac{v_2}{u_2}=-0.235$（正号表示正立，负号表示倒立）。\n\n本题求的是组合透镜的光焦度（以米为单位），通式为 $\\Phi=\\frac{1}{f}$，结果为\n\n$$\\Phi=12.5\\ \\mathrm{1/m}.$$\n\n**易错点**：等效焦距公式里的减号项表示「间距削弱光焦度」；当 $d=f_1+f_2$ 时两透镜密接成无焦系统（$f\\to\\infty$），这是望远镜的基本结构。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "1/m",
+   "methods": [
+    "成像公式",
+    "组合焦距"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "姚启钧《光学教程》· 薄透镜组合"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "薄透镜组合（f1=25 cm，f2=12 cm，d=8 cm，u=30 cm）的光焦度",
+  "statement": "两个薄凸透镜焦距分别为 $f_1=25\\ \\mathrm{cm}$ 与 $f_2=12\\ \\mathrm{cm}$，共轴放置、相距 $d=8\\ \\mathrm{cm}$。在第一个透镜前 $u=30\\ \\mathrm{cm}$ 处放一小物。求组合透镜的光焦度（以米为单位）。",
+  "mainTag": "光学",
+  "tags": [
+   "几何光学与薄透镜成像"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "姚启钧《光学教程》· 薄透镜组合",
+  "hints": [
+   "等效焦距 $1/f=1/f_1+1/f_2-d/(f_1f_2)$。",
+   "逐次成像：第一透镜的像作为第二透镜的物，物距 $u_2=d-v_1$。"
+  ],
+  "answer": "9.67\\ \\mathrm{1/m}",
+  "solution": "两薄透镜共轴放置、间距 $d=8\\ \\mathrm{cm}$ 时，等效焦距满足\n\n$$\\frac{1}{f}=\\frac{1}{f_1}+\\frac{1}{f_2}-\\frac{d}{f_1f_2}=\\frac{1}{25}+\\frac{1}{12}-\\frac{8}{25\\times 12}\\ \\Longrightarrow\\ f=10.3\\ \\mathrm{cm}.$$\n\n逐次成像：物距 $u=30\\ \\mathrm{cm}$，第一透镜\n\n$$v_1=\\frac{uf_1}{u-f_1}=150\\ \\mathrm{cm},$$\n\n它对第二透镜的物距 $u_2=d-v_1=-142\\ \\mathrm{cm}$，再成像\n\n$$v_2=\\frac{u_2f_2}{u_2-f_2}=11.1\\ \\mathrm{cm}.$$\n\n总放大率 $\\beta=\\frac{v_1}{u}\\cdot\\frac{v_2}{u_2}=-0.39$（正号表示正立，负号表示倒立）。\n\n本题求的是组合透镜的光焦度（以米为单位），通式为 $\\Phi=\\frac{1}{f}$，结果为\n\n$$\\Phi=9.67\\ \\mathrm{1/m}.$$\n\n**易错点**：等效焦距公式里的减号项表示「间距削弱光焦度」；当 $d=f_1+f_2$ 时两透镜密接成无焦系统（$f\\to\\infty$），这是望远镜的基本结构。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "1/m",
+   "methods": [
+    "成像公式",
+    "组合焦距"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "姚启钧《光学教程》· 薄透镜组合"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "薄透镜组合（f1=10 cm，f2=8 cm，d=10 cm，u=20 cm）的第二次成像的像距",
+  "statement": "两个薄凸透镜焦距分别为 $f_1=10\\ \\mathrm{cm}$ 与 $f_2=8\\ \\mathrm{cm}$，共轴放置、相距 $d=10\\ \\mathrm{cm}$。在第一个透镜前 $u=20\\ \\mathrm{cm}$ 处放一小物。求物在 $u$ 处时，第二个透镜所成像的像距。",
+  "mainTag": "光学",
+  "tags": [
+   "几何光学与薄透镜成像"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "姚启钧《光学教程》· 薄透镜组合",
+  "hints": [
+   "等效焦距 $1/f=1/f_1+1/f_2-d/(f_1f_2)$。",
+   "逐次成像：第一透镜的像作为第二透镜的物，物距 $u_2=d-v_1$。"
+  ],
+  "answer": "4.44\\ \\mathrm{cm}",
+  "solution": "两薄透镜共轴放置、间距 $d=10\\ \\mathrm{cm}$ 时，等效焦距满足\n\n$$\\frac{1}{f}=\\frac{1}{f_1}+\\frac{1}{f_2}-\\frac{d}{f_1f_2}=\\frac{1}{10}+\\frac{1}{8}-\\frac{10}{10\\times 8}\\ \\Longrightarrow\\ f=10\\ \\mathrm{cm}.$$\n\n逐次成像：物距 $u=20\\ \\mathrm{cm}$，第一透镜\n\n$$v_1=\\frac{uf_1}{u-f_1}=20\\ \\mathrm{cm},$$\n\n它对第二透镜的物距 $u_2=d-v_1=-10\\ \\mathrm{cm}$，再成像\n\n$$v_2=\\frac{u_2f_2}{u_2-f_2}=4.44\\ \\mathrm{cm}.$$\n\n总放大率 $\\beta=\\frac{v_1}{u}\\cdot\\frac{v_2}{u_2}=-0.444$（正号表示正立，负号表示倒立）。\n\n本题求的是物在 $u$ 处时，第二个透镜所成像的像距，通式为 $\\frac{1}{v_2}=\\frac{1}{u_2}-\\frac{1}{f_2}$，结果为\n\n$$v_2=4.44\\ \\mathrm{cm}.$$\n\n**易错点**：等效焦距公式里的减号项表示「间距削弱光焦度」；当 $d=f_1+f_2$ 时两透镜密接成无焦系统（$f\\to\\infty$），这是望远镜的基本结构。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "cm",
+   "methods": [
+    "成像公式",
+    "组合焦距"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "姚启钧《光学教程》· 薄透镜组合"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "棱镜（A=45°，n=1.52）的最小偏向角",
+  "statement": "一顶角 $A=45^\\circ$ 的三棱镜，材料对某单色光的折射率 $n=1.52$，置于空气中。取 $c=3.0\\times10^{8}\\ \\mathrm{m/s}$，求光线通过棱镜时的最小偏向角。",
+  "mainTag": "光学",
+  "tags": [
+   "几何光学与薄透镜成像"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "姚启钧《光学教程》· 棱镜最小偏向角",
+  "hints": [
+   "最小偏向时 $r_1=r_2=A/2$，$i_1=(\\delta_{min}+A)/2$。",
+   "由 $\\sin i_1=n\\sin(A/2)$ 反解，再算 $\\delta=2i_1-A$。"
+  ],
+  "answer": "26.1\\ \\mathrm{°}",
+  "solution": "最小偏向时，光在棱镜内对称传播，两个折射角都等于 $A/2=22.5^\\circ$。由折射定律求出对应的入射角\n\n$$\\sin i_1=n\\sin\\frac{A}{2}=1.52\\times\\sin 22.5^\\circ=0.582,$$\n\n$$i_1=35.6^\\circ.$$\n\n偏向角 $\\delta=2i_1-A$，于是\n\n$$\\delta_{\\min}=2\\times 35.6^\\circ-45^\\circ=26.1^\\circ.$$\n\n反过来就是测折射率的常用公式\n\n$$n=\\frac{\\sin\\frac{\\delta_{\\min}+A}{2}}{\\sin\\frac{A}{2}}=1.52.$$\n\n棱镜中光速 $v=c/n=1.97\\times10^{8}\\ \\mathrm{m/s}$，临界角 $\\sin C=1/n$ 给出 $C=41.1^\\circ$。\n\n本题求的是光线通过棱镜时的最小偏向角，通式为 $n=\\frac{\\sin\\frac{\\delta_{min}+A}{2}}{\\sin\\frac{A}{2}}$，结果为\n\n$$\\delta_{min}=26.1\\ \\mathrm{°}.$$\n\n**易错点**：最小偏向角公式里的分母是 $\\sin(A/2)$，不是 $\\sin A$；只有「对称通过」时偏向角最小，这也是实验中转动棱镜找最小偏向的依据。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "°",
+   "methods": [
+    "折射定律",
+    "最小偏向角"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "姚启钧《光学教程》· 棱镜最小偏向角"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "棱镜（A=50°，n=1.55）的最小偏向时的入射角",
+  "statement": "一顶角 $A=50^\\circ$ 的三棱镜，材料对某单色光的折射率 $n=1.55$，置于空气中。取 $c=3.0\\times10^{8}\\ \\mathrm{m/s}$，求达到最小偏向时的入射角。",
+  "mainTag": "光学",
+  "tags": [
+   "几何光学与薄透镜成像"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "姚启钧《光学教程》· 棱镜最小偏向角",
+  "hints": [
+   "最小偏向时 $r_1=r_2=A/2$，$i_1=(\\delta_{min}+A)/2$。",
+   "由 $\\sin i_1=n\\sin(A/2)$ 反解，再算 $\\delta=2i_1-A$。"
+  ],
+  "answer": "40.9\\ \\mathrm{°}",
+  "solution": "最小偏向时，光在棱镜内对称传播，两个折射角都等于 $A/2=25^\\circ$。由折射定律求出对应的入射角\n\n$$\\sin i_1=n\\sin\\frac{A}{2}=1.55\\times\\sin 25^\\circ=0.655,$$\n\n$$i_1=40.9^\\circ.$$\n\n偏向角 $\\delta=2i_1-A$，于是\n\n$$\\delta_{\\min}=2\\times 40.9^\\circ-50^\\circ=31.8^\\circ.$$\n\n反过来就是测折射率的常用公式\n\n$$n=\\frac{\\sin\\frac{\\delta_{\\min}+A}{2}}{\\sin\\frac{A}{2}}=1.55.$$\n\n棱镜中光速 $v=c/n=1.94\\times10^{8}\\ \\mathrm{m/s}$，临界角 $\\sin C=1/n$ 给出 $C=40.2^\\circ$。\n\n本题求的是达到最小偏向时的入射角，通式为 $i_1=\\frac{\\delta_{min}+A}{2}$，结果为\n\n$$i_1=40.9\\ \\mathrm{°}.$$\n\n**易错点**：最小偏向角公式里的分母是 $\\sin(A/2)$，不是 $\\sin A$；只有「对称通过」时偏向角最小，这也是实验中转动棱镜找最小偏向的依据。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "°",
+   "methods": [
+    "折射定律",
+    "最小偏向角"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "姚启钧《光学教程》· 棱镜最小偏向角"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "棱镜（A=50°，n=1.55）的棱镜中的光速",
+  "statement": "一顶角 $A=50^\\circ$ 的三棱镜，材料对某单色光的折射率 $n=1.55$，置于空气中。取 $c=3.0\\times10^{8}\\ \\mathrm{m/s}$，求光在该棱镜材料中的传播速度。",
+  "mainTag": "光学",
+  "tags": [
+   "几何光学与薄透镜成像"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "姚启钧《光学教程》· 棱镜最小偏向角",
+  "hints": [
+   "最小偏向时 $r_1=r_2=A/2$，$i_1=(\\delta_{min}+A)/2$。",
+   "由 $\\sin i_1=n\\sin(A/2)$ 反解，再算 $\\delta=2i_1-A$。"
+  ],
+  "answer": "1.94\\times10^{8}\\ \\mathrm{m/s}",
+  "solution": "最小偏向时，光在棱镜内对称传播，两个折射角都等于 $A/2=25^\\circ$。由折射定律求出对应的入射角\n\n$$\\sin i_1=n\\sin\\frac{A}{2}=1.55\\times\\sin 25^\\circ=0.655,$$\n\n$$i_1=40.9^\\circ.$$\n\n偏向角 $\\delta=2i_1-A$，于是\n\n$$\\delta_{\\min}=2\\times 40.9^\\circ-50^\\circ=31.8^\\circ.$$\n\n反过来就是测折射率的常用公式\n\n$$n=\\frac{\\sin\\frac{\\delta_{\\min}+A}{2}}{\\sin\\frac{A}{2}}=1.55.$$\n\n棱镜中光速 $v=c/n=1.94\\times10^{8}\\ \\mathrm{m/s}$，临界角 $\\sin C=1/n$ 给出 $C=40.2^\\circ$。\n\n本题求的是光在该棱镜材料中的传播速度，通式为 $v=\\frac{c}{n}$，结果为\n\n$$v=1.94\\times10^{8}\\ \\mathrm{m/s}.$$\n\n**易错点**：最小偏向角公式里的分母是 $\\sin(A/2)$，不是 $\\sin A$；只有「对称通过」时偏向角最小，这也是实验中转动棱镜找最小偏向的依据。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m/s",
+   "methods": [
+    "折射定律",
+    "最小偏向角"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "姚启钧《光学教程》· 棱镜最小偏向角"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "棱镜（A=40°，n=1.45）的临界角",
+  "statement": "一顶角 $A=40^\\circ$ 的三棱镜，材料对某单色光的折射率 $n=1.45$，置于空气中。取 $c=3.0\\times10^{8}\\ \\mathrm{m/s}$，求光从棱镜射向空气时的全反射临界角。",
+  "mainTag": "光学",
+  "tags": [
+   "几何光学与薄透镜成像"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "姚启钧《光学教程》· 棱镜最小偏向角",
+  "hints": [
+   "最小偏向时 $r_1=r_2=A/2$，$i_1=(\\delta_{min}+A)/2$。",
+   "由 $\\sin i_1=n\\sin(A/2)$ 反解，再算 $\\delta=2i_1-A$。"
+  ],
+  "answer": "43.6\\ \\mathrm{°}",
+  "solution": "最小偏向时，光在棱镜内对称传播，两个折射角都等于 $A/2=20^\\circ$。由折射定律求出对应的入射角\n\n$$\\sin i_1=n\\sin\\frac{A}{2}=1.45\\times\\sin 20^\\circ=0.496,$$\n\n$$i_1=29.7^\\circ.$$\n\n偏向角 $\\delta=2i_1-A$，于是\n\n$$\\delta_{\\min}=2\\times 29.7^\\circ-40^\\circ=19.5^\\circ.$$\n\n反过来就是测折射率的常用公式\n\n$$n=\\frac{\\sin\\frac{\\delta_{\\min}+A}{2}}{\\sin\\frac{A}{2}}=1.45.$$\n\n棱镜中光速 $v=c/n=2.07\\times10^{8}\\ \\mathrm{m/s}$，临界角 $\\sin C=1/n$ 给出 $C=43.6^\\circ$。\n\n本题求的是光从棱镜射向空气时的全反射临界角，通式为 $\\sin C=\\frac{1}{n}$，结果为\n\n$$C=43.6\\ \\mathrm{°}.$$\n\n**易错点**：最小偏向角公式里的分母是 $\\sin(A/2)$，不是 $\\sin A$；只有「对称通过」时偏向角最小，这也是实验中转动棱镜找最小偏向的依据。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "°",
+   "methods": [
+    "折射定律",
+    "最小偏向角"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "姚启钧《光学教程》· 棱镜最小偏向角"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "棱镜（A=50°，n=1.5）的临界角",
+  "statement": "一顶角 $A=50^\\circ$ 的三棱镜，材料对某单色光的折射率 $n=1.5$，置于空气中。取 $c=3.0\\times10^{8}\\ \\mathrm{m/s}$，求光从棱镜射向空气时的全反射临界角。",
+  "mainTag": "光学",
+  "tags": [
+   "几何光学与薄透镜成像"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "姚启钧《光学教程》· 棱镜最小偏向角",
+  "hints": [
+   "最小偏向时 $r_1=r_2=A/2$，$i_1=(\\delta_{min}+A)/2$。",
+   "由 $\\sin i_1=n\\sin(A/2)$ 反解，再算 $\\delta=2i_1-A$。"
+  ],
+  "answer": "41.8\\ \\mathrm{°}",
+  "solution": "最小偏向时，光在棱镜内对称传播，两个折射角都等于 $A/2=25^\\circ$。由折射定律求出对应的入射角\n\n$$\\sin i_1=n\\sin\\frac{A}{2}=1.5\\times\\sin 25^\\circ=0.634,$$\n\n$$i_1=39.3^\\circ.$$\n\n偏向角 $\\delta=2i_1-A$，于是\n\n$$\\delta_{\\min}=2\\times 39.3^\\circ-50^\\circ=28.7^\\circ.$$\n\n反过来就是测折射率的常用公式\n\n$$n=\\frac{\\sin\\frac{\\delta_{\\min}+A}{2}}{\\sin\\frac{A}{2}}=1.5.$$\n\n棱镜中光速 $v=c/n=2\\times10^{8}\\ \\mathrm{m/s}$，临界角 $\\sin C=1/n$ 给出 $C=41.8^\\circ$。\n\n本题求的是光从棱镜射向空气时的全反射临界角，通式为 $\\sin C=\\frac{1}{n}$，结果为\n\n$$C=41.8\\ \\mathrm{°}.$$\n\n**易错点**：最小偏向角公式里的分母是 $\\sin(A/2)$，不是 $\\sin A$；只有「对称通过」时偏向角最小，这也是实验中转动棱镜找最小偏向的依据。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "°",
+   "methods": [
+    "折射定律",
+    "最小偏向角"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "姚启钧《光学教程》· 棱镜最小偏向角"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "棱镜（A=60°，n=1.45）的临界角",
+  "statement": "一顶角 $A=60^\\circ$ 的三棱镜，材料对某单色光的折射率 $n=1.45$，置于空气中。取 $c=3.0\\times10^{8}\\ \\mathrm{m/s}$，求光从棱镜射向空气时的全反射临界角。",
+  "mainTag": "光学",
+  "tags": [
+   "几何光学与薄透镜成像"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "姚启钧《光学教程》· 棱镜最小偏向角",
+  "hints": [
+   "最小偏向时 $r_1=r_2=A/2$，$i_1=(\\delta_{min}+A)/2$。",
+   "由 $\\sin i_1=n\\sin(A/2)$ 反解，再算 $\\delta=2i_1-A$。"
+  ],
+  "answer": "43.6\\ \\mathrm{°}",
+  "solution": "最小偏向时，光在棱镜内对称传播，两个折射角都等于 $A/2=30^\\circ$。由折射定律求出对应的入射角\n\n$$\\sin i_1=n\\sin\\frac{A}{2}=1.45\\times\\sin 30^\\circ=0.725,$$\n\n$$i_1=46.5^\\circ.$$\n\n偏向角 $\\delta=2i_1-A$，于是\n\n$$\\delta_{\\min}=2\\times 46.5^\\circ-60^\\circ=32.9^\\circ.$$\n\n反过来就是测折射率的常用公式\n\n$$n=\\frac{\\sin\\frac{\\delta_{\\min}+A}{2}}{\\sin\\frac{A}{2}}=1.45.$$\n\n棱镜中光速 $v=c/n=2.07\\times10^{8}\\ \\mathrm{m/s}$，临界角 $\\sin C=1/n$ 给出 $C=43.6^\\circ$。\n\n本题求的是光从棱镜射向空气时的全反射临界角，通式为 $\\sin C=\\frac{1}{n}$，结果为\n\n$$C=43.6\\ \\mathrm{°}.$$\n\n**易错点**：最小偏向角公式里的分母是 $\\sin(A/2)$，不是 $\\sin A$；只有「对称通过」时偏向角最小，这也是实验中转动棱镜找最小偏向的依据。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "°",
+   "methods": [
+    "折射定律",
+    "最小偏向角"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "姚启钧《光学教程》· 棱镜最小偏向角"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "棱镜（A=40°，n=1.65）的最小偏向角",
+  "statement": "一顶角 $A=40^\\circ$ 的三棱镜，材料对某单色光的折射率 $n=1.65$，置于空气中。取 $c=3.0\\times10^{8}\\ \\mathrm{m/s}$，求光线通过棱镜时的最小偏向角。",
+  "mainTag": "光学",
+  "tags": [
+   "几何光学与薄透镜成像"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "姚启钧《光学教程》· 棱镜最小偏向角",
+  "hints": [
+   "最小偏向时 $r_1=r_2=A/2$，$i_1=(\\delta_{min}+A)/2$。",
+   "由 $\\sin i_1=n\\sin(A/2)$ 反解，再算 $\\delta=2i_1-A$。"
+  ],
+  "answer": "28.7\\ \\mathrm{°}",
+  "solution": "最小偏向时，光在棱镜内对称传播，两个折射角都等于 $A/2=20^\\circ$。由折射定律求出对应的入射角\n\n$$\\sin i_1=n\\sin\\frac{A}{2}=1.65\\times\\sin 20^\\circ=0.564,$$\n\n$$i_1=34.4^\\circ.$$\n\n偏向角 $\\delta=2i_1-A$，于是\n\n$$\\delta_{\\min}=2\\times 34.4^\\circ-40^\\circ=28.7^\\circ.$$\n\n反过来就是测折射率的常用公式\n\n$$n=\\frac{\\sin\\frac{\\delta_{\\min}+A}{2}}{\\sin\\frac{A}{2}}=1.65.$$\n\n棱镜中光速 $v=c/n=1.82\\times10^{8}\\ \\mathrm{m/s}$，临界角 $\\sin C=1/n$ 给出 $C=37.3^\\circ$。\n\n本题求的是光线通过棱镜时的最小偏向角，通式为 $n=\\frac{\\sin\\frac{\\delta_{min}+A}{2}}{\\sin\\frac{A}{2}}$，结果为\n\n$$\\delta_{min}=28.7\\ \\mathrm{°}.$$\n\n**易错点**：最小偏向角公式里的分母是 $\\sin(A/2)$，不是 $\\sin A$；只有「对称通过」时偏向角最小，这也是实验中转动棱镜找最小偏向的依据。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "°",
+   "methods": [
+    "折射定律",
+    "最小偏向角"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "姚启钧《光学教程》· 棱镜最小偏向角"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "棱镜（A=55°，n=1.55）的最小偏向时的入射角",
+  "statement": "一顶角 $A=55^\\circ$ 的三棱镜，材料对某单色光的折射率 $n=1.55$，置于空气中。取 $c=3.0\\times10^{8}\\ \\mathrm{m/s}$，求达到最小偏向时的入射角。",
+  "mainTag": "光学",
+  "tags": [
+   "几何光学与薄透镜成像"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "姚启钧《光学教程》· 棱镜最小偏向角",
+  "hints": [
+   "最小偏向时 $r_1=r_2=A/2$，$i_1=(\\delta_{min}+A)/2$。",
+   "由 $\\sin i_1=n\\sin(A/2)$ 反解，再算 $\\delta=2i_1-A$。"
+  ],
+  "answer": "45.7\\ \\mathrm{°}",
+  "solution": "最小偏向时，光在棱镜内对称传播，两个折射角都等于 $A/2=27.5^\\circ$。由折射定律求出对应的入射角\n\n$$\\sin i_1=n\\sin\\frac{A}{2}=1.55\\times\\sin 27.5^\\circ=0.716,$$\n\n$$i_1=45.7^\\circ.$$\n\n偏向角 $\\delta=2i_1-A$，于是\n\n$$\\delta_{\\min}=2\\times 45.7^\\circ-55^\\circ=36.4^\\circ.$$\n\n反过来就是测折射率的常用公式\n\n$$n=\\frac{\\sin\\frac{\\delta_{\\min}+A}{2}}{\\sin\\frac{A}{2}}=1.55.$$\n\n棱镜中光速 $v=c/n=1.94\\times10^{8}\\ \\mathrm{m/s}$，临界角 $\\sin C=1/n$ 给出 $C=40.2^\\circ$。\n\n本题求的是达到最小偏向时的入射角，通式为 $i_1=\\frac{\\delta_{min}+A}{2}$，结果为\n\n$$i_1=45.7\\ \\mathrm{°}.$$\n\n**易错点**：最小偏向角公式里的分母是 $\\sin(A/2)$，不是 $\\sin A$；只有「对称通过」时偏向角最小，这也是实验中转动棱镜找最小偏向的依据。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "°",
+   "methods": [
+    "折射定律",
+    "最小偏向角"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "姚启钧《光学教程》· 棱镜最小偏向角"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "劈尖干涉（λ=400 nm，n=1.33，θ=60″）的第 k 级暗纹处的膜厚",
+  "statement": "用波长 $\\lambda=400\\ \\mathrm{nm}$ 的单色光垂直照射空气劈尖（膜折射率 $n=1.33$），测得劈尖角 $\\theta=60$ 角秒。求第 $k$ 级暗纹对应处的膜厚。",
+  "mainTag": "光学",
+  "tags": [
+   "光的干涉"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "程守洙《普通物理学》· 劈尖干涉",
+  "hints": [
+   "暗纹条件 $2nd=k\\lambda$（空气劈尖含半波损失时）。",
+   "条纹间距 $l=\\lambda/(2n\\theta)$，$\\theta$ 要用弧度。"
+  ],
+  "answer": "1.5\\times10^{-6}\\ \\mathrm{m}",
+  "solution": "劈尖上下表面反射光的光程差 $\\Delta=2nd+\\frac{\\lambda}{2}$（下表面反射有半波损失），暗纹条件 $\\Delta=\\left(k+\\frac12\\right)\\lambda$，即\n\n$$2nd=k\\lambda\\ \\Longrightarrow\\ d_k=\\frac{k\\lambda}{2n}.$$\n\n相邻暗纹对应的膜厚差 $\\lambda/(2n)$，除以劈尖角就是条纹间距\n\n$$l=\\frac{\\lambda}{2n\\theta}=\\frac{4\\times10^{-7}}{2\\times 1.33\\times 2.91\\times10^{-4}}=5.17\\times10^{-4}\\ \\mathrm{m},$$\n\n其中 $\\theta=60$ 角秒 $=\\dfrac{60}{3600}\\times\\dfrac{\\pi}{180}=2.91\\times10^{-4}\\ \\mathrm{rad}$。每米长度上的条纹数 $N=1/l=1934\\ \\mathrm{m^{-1}}$。\n\n第 $k=10$ 级暗纹处膜厚 $d_k=\\frac{k\\lambda}{2n}=1.5\\times10^{-6}\\ \\mathrm{m}$。\n\n本题求的是第 $k$ 级暗纹对应处的膜厚，通式为 $d_k=\\frac{k\\lambda}{2n}$，结果为\n\n$$d_k=1.5\\times10^{-6}\\ \\mathrm{m}.$$\n\n**易错点**：空气劈尖的暗纹公式是 $2d=k\\lambda$（有半波损失时），若换成 $n>1$ 的薄膜且上下介质折射率关系改变，半波损失项可能消失，公式要重推。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m",
+   "methods": [
+    "等厚干涉",
+    "劈尖"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· 劈尖干涉"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "劈尖干涉（λ=589 nm，n=1.5，θ=30″）的单位长度条纹数",
+  "statement": "用波长 $\\lambda=589\\ \\mathrm{nm}$ 的单色光垂直照射空气劈尖（膜折射率 $n=1.5$），测得劈尖角 $\\theta=30$ 角秒。求每米长度上出现的暗纹条数。",
+  "mainTag": "光学",
+  "tags": [
+   "光的干涉"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "程守洙《普通物理学》· 劈尖干涉",
+  "hints": [
+   "暗纹条件 $2nd=k\\lambda$（空气劈尖含半波损失时）。",
+   "条纹间距 $l=\\lambda/(2n\\theta)$，$\\theta$ 要用弧度。"
+  ],
+  "answer": "741\\ \\mathrm{1/m}",
+  "solution": "劈尖上下表面反射光的光程差 $\\Delta=2nd+\\frac{\\lambda}{2}$（下表面反射有半波损失），暗纹条件 $\\Delta=\\left(k+\\frac12\\right)\\lambda$，即\n\n$$2nd=k\\lambda\\ \\Longrightarrow\\ d_k=\\frac{k\\lambda}{2n}.$$\n\n相邻暗纹对应的膜厚差 $\\lambda/(2n)$，除以劈尖角就是条纹间距\n\n$$l=\\frac{\\lambda}{2n\\theta}=\\frac{5.89\\times10^{-7}}{2\\times 1.5\\times 1.45\\times10^{-4}}=1.35\\times10^{-3}\\ \\mathrm{m},$$\n\n其中 $\\theta=30$ 角秒 $=\\dfrac{30}{3600}\\times\\dfrac{\\pi}{180}=1.45\\times10^{-4}\\ \\mathrm{rad}$。每米长度上的条纹数 $N=1/l=741\\ \\mathrm{m^{-1}}$。\n\n第 $k=30$ 级暗纹处膜厚 $d_k=\\frac{k\\lambda}{2n}=5.89\\times10^{-6}\\ \\mathrm{m}$。\n\n本题求的是每米长度上出现的暗纹条数，通式为 $N=\\frac{2n\\theta}{\\lambda}$，结果为\n\n$$N=741\\ \\mathrm{1/m}.$$\n\n**易错点**：空气劈尖的暗纹公式是 $2d=k\\lambda$（有半波损失时），若换成 $n>1$ 的薄膜且上下介质折射率关系改变，半波损失项可能消失，公式要重推。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "1/m",
+   "methods": [
+    "等厚干涉",
+    "劈尖"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· 劈尖干涉"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "劈尖干涉（λ=633 nm，n=1.33，θ=30″）的劈尖角",
+  "statement": "用波长 $\\lambda=633\\ \\mathrm{nm}$ 的单色光垂直照射空气劈尖（膜折射率 $n=1.33$），测得劈尖角 $\\theta=30$ 角秒。求由条纹间距反推的劈尖角（以角秒计）。",
+  "mainTag": "光学",
+  "tags": [
+   "光的干涉"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "程守洙《普通物理学》· 劈尖干涉",
+  "hints": [
+   "暗纹条件 $2nd=k\\lambda$（空气劈尖含半波损失时）。",
+   "条纹间距 $l=\\lambda/(2n\\theta)$，$\\theta$ 要用弧度。"
+  ],
+  "answer": "30\\ \\mathrm{°}",
+  "solution": "劈尖上下表面反射光的光程差 $\\Delta=2nd+\\frac{\\lambda}{2}$（下表面反射有半波损失），暗纹条件 $\\Delta=\\left(k+\\frac12\\right)\\lambda$，即\n\n$$2nd=k\\lambda\\ \\Longrightarrow\\ d_k=\\frac{k\\lambda}{2n}.$$\n\n相邻暗纹对应的膜厚差 $\\lambda/(2n)$，除以劈尖角就是条纹间距\n\n$$l=\\frac{\\lambda}{2n\\theta}=\\frac{6.33\\times10^{-7}}{2\\times 1.33\\times 1.45\\times10^{-4}}=1.64\\times10^{-3}\\ \\mathrm{m},$$\n\n其中 $\\theta=30$ 角秒 $=\\dfrac{30}{3600}\\times\\dfrac{\\pi}{180}=1.45\\times10^{-4}\\ \\mathrm{rad}$。每米长度上的条纹数 $N=1/l=611\\ \\mathrm{m^{-1}}$。\n\n第 $k=10$ 级暗纹处膜厚 $d_k=\\frac{k\\lambda}{2n}=2.38\\times10^{-6}\\ \\mathrm{m}$。\n\n本题求的是由条纹间距反推的劈尖角（以角秒计），通式为 $\\theta=\\frac{\\lambda}{2nl}$，结果为\n\n$$\\theta=30\\ \\mathrm{°}.$$\n\n**易错点**：空气劈尖的暗纹公式是 $2d=k\\lambda$（有半波损失时），若换成 $n>1$ 的薄膜且上下介质折射率关系改变，半波损失项可能消失，公式要重推。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "°",
+   "methods": [
+    "等厚干涉",
+    "劈尖"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· 劈尖干涉"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "劈尖干涉（λ=589 nm，n=1，θ=10″）的相邻暗纹间距",
+  "statement": "用波长 $\\lambda=589\\ \\mathrm{nm}$ 的单色光垂直照射空气劈尖（膜折射率 $n=1$），测得劈尖角 $\\theta=10$ 角秒。求相邻两条暗纹之间的距离。",
+  "mainTag": "光学",
+  "tags": [
+   "光的干涉"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "程守洙《普通物理学》· 劈尖干涉",
+  "hints": [
+   "暗纹条件 $2nd=k\\lambda$（空气劈尖含半波损失时）。",
+   "条纹间距 $l=\\lambda/(2n\\theta)$，$\\theta$ 要用弧度。"
+  ],
+  "answer": "6.07\\times10^{-3}\\ \\mathrm{m}",
+  "solution": "劈尖上下表面反射光的光程差 $\\Delta=2nd+\\frac{\\lambda}{2}$（下表面反射有半波损失），暗纹条件 $\\Delta=\\left(k+\\frac12\\right)\\lambda$，即\n\n$$2nd=k\\lambda\\ \\Longrightarrow\\ d_k=\\frac{k\\lambda}{2n}.$$\n\n相邻暗纹对应的膜厚差 $\\lambda/(2n)$，除以劈尖角就是条纹间距\n\n$$l=\\frac{\\lambda}{2n\\theta}=\\frac{5.89\\times10^{-7}}{2\\times 1\\times 4.85\\times10^{-5}}=6.07\\times10^{-3}\\ \\mathrm{m},$$\n\n其中 $\\theta=10$ 角秒 $=\\dfrac{10}{3600}\\times\\dfrac{\\pi}{180}=4.85\\times10^{-5}\\ \\mathrm{rad}$。每米长度上的条纹数 $N=1/l=165\\ \\mathrm{m^{-1}}$。\n\n第 $k=20$ 级暗纹处膜厚 $d_k=\\frac{k\\lambda}{2n}=5.89\\times10^{-6}\\ \\mathrm{m}$。\n\n本题求的是相邻两条暗纹之间的距离，通式为 $l=\\frac{\\lambda}{2n\\theta}$，结果为\n\n$$l=6.07\\times10^{-3}\\ \\mathrm{m}.$$\n\n**易错点**：空气劈尖的暗纹公式是 $2d=k\\lambda$（有半波损失时），若换成 $n>1$ 的薄膜且上下介质折射率关系改变，半波损失项可能消失，公式要重推。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m",
+   "methods": [
+    "等厚干涉",
+    "劈尖"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· 劈尖干涉"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "劈尖干涉（λ=546 nm，n=1，θ=30″）的相邻暗纹间距",
+  "statement": "用波长 $\\lambda=546\\ \\mathrm{nm}$ 的单色光垂直照射空气劈尖（膜折射率 $n=1$），测得劈尖角 $\\theta=30$ 角秒。求相邻两条暗纹之间的距离。",
+  "mainTag": "光学",
+  "tags": [
+   "光的干涉"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "程守洙《普通物理学》· 劈尖干涉",
+  "hints": [
+   "暗纹条件 $2nd=k\\lambda$（空气劈尖含半波损失时）。",
+   "条纹间距 $l=\\lambda/(2n\\theta)$，$\\theta$ 要用弧度。"
+  ],
+  "answer": "1.88\\times10^{-3}\\ \\mathrm{m}",
+  "solution": "劈尖上下表面反射光的光程差 $\\Delta=2nd+\\frac{\\lambda}{2}$（下表面反射有半波损失），暗纹条件 $\\Delta=\\left(k+\\frac12\\right)\\lambda$，即\n\n$$2nd=k\\lambda\\ \\Longrightarrow\\ d_k=\\frac{k\\lambda}{2n}.$$\n\n相邻暗纹对应的膜厚差 $\\lambda/(2n)$，除以劈尖角就是条纹间距\n\n$$l=\\frac{\\lambda}{2n\\theta}=\\frac{5.46\\times10^{-7}}{2\\times 1\\times 1.45\\times10^{-4}}=1.88\\times10^{-3}\\ \\mathrm{m},$$\n\n其中 $\\theta=30$ 角秒 $=\\dfrac{30}{3600}\\times\\dfrac{\\pi}{180}=1.45\\times10^{-4}\\ \\mathrm{rad}$。每米长度上的条纹数 $N=1/l=533\\ \\mathrm{m^{-1}}$。\n\n第 $k=5$ 级暗纹处膜厚 $d_k=\\frac{k\\lambda}{2n}=1.37\\times10^{-6}\\ \\mathrm{m}$。\n\n本题求的是相邻两条暗纹之间的距离，通式为 $l=\\frac{\\lambda}{2n\\theta}$，结果为\n\n$$l=1.88\\times10^{-3}\\ \\mathrm{m}.$$\n\n**易错点**：空气劈尖的暗纹公式是 $2d=k\\lambda$（有半波损失时），若换成 $n>1$ 的薄膜且上下介质折射率关系改变，半波损失项可能消失，公式要重推。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m",
+   "methods": [
+    "等厚干涉",
+    "劈尖"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· 劈尖干涉"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "劈尖干涉（λ=650 nm，n=1.33，θ=20″）的劈尖角",
+  "statement": "用波长 $\\lambda=650\\ \\mathrm{nm}$ 的单色光垂直照射空气劈尖（膜折射率 $n=1.33$），测得劈尖角 $\\theta=20$ 角秒。求由条纹间距反推的劈尖角（以角秒计）。",
+  "mainTag": "光学",
+  "tags": [
+   "光的干涉"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "程守洙《普通物理学》· 劈尖干涉",
+  "hints": [
+   "暗纹条件 $2nd=k\\lambda$（空气劈尖含半波损失时）。",
+   "条纹间距 $l=\\lambda/(2n\\theta)$，$\\theta$ 要用弧度。"
+  ],
+  "answer": "20\\ \\mathrm{°}",
+  "solution": "劈尖上下表面反射光的光程差 $\\Delta=2nd+\\frac{\\lambda}{2}$（下表面反射有半波损失），暗纹条件 $\\Delta=\\left(k+\\frac12\\right)\\lambda$，即\n\n$$2nd=k\\lambda\\ \\Longrightarrow\\ d_k=\\frac{k\\lambda}{2n}.$$\n\n相邻暗纹对应的膜厚差 $\\lambda/(2n)$，除以劈尖角就是条纹间距\n\n$$l=\\frac{\\lambda}{2n\\theta}=\\frac{6.5\\times10^{-7}}{2\\times 1.33\\times 9.7\\times10^{-5}}=2.52\\times10^{-3}\\ \\mathrm{m},$$\n\n其中 $\\theta=20$ 角秒 $=\\dfrac{20}{3600}\\times\\dfrac{\\pi}{180}=9.7\\times10^{-5}\\ \\mathrm{rad}$。每米长度上的条纹数 $N=1/l=397\\ \\mathrm{m^{-1}}$。\n\n第 $k=20$ 级暗纹处膜厚 $d_k=\\frac{k\\lambda}{2n}=4.89\\times10^{-6}\\ \\mathrm{m}$。\n\n本题求的是由条纹间距反推的劈尖角（以角秒计），通式为 $\\theta=\\frac{\\lambda}{2nl}$，结果为\n\n$$\\theta=20\\ \\mathrm{°}.$$\n\n**易错点**：空气劈尖的暗纹公式是 $2d=k\\lambda$（有半波损失时），若换成 $n>1$ 的薄膜且上下介质折射率关系改变，半波损失项可能消失，公式要重推。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "°",
+   "methods": [
+    "等厚干涉",
+    "劈尖"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· 劈尖干涉"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "劈尖干涉（λ=546 nm，n=1，θ=20″）的劈尖角",
+  "statement": "用波长 $\\lambda=546\\ \\mathrm{nm}$ 的单色光垂直照射空气劈尖（膜折射率 $n=1$），测得劈尖角 $\\theta=20$ 角秒。求由条纹间距反推的劈尖角（以角秒计）。",
+  "mainTag": "光学",
+  "tags": [
+   "光的干涉"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "程守洙《普通物理学》· 劈尖干涉",
+  "hints": [
+   "暗纹条件 $2nd=k\\lambda$（空气劈尖含半波损失时）。",
+   "条纹间距 $l=\\lambda/(2n\\theta)$，$\\theta$ 要用弧度。"
+  ],
+  "answer": "20\\ \\mathrm{°}",
+  "solution": "劈尖上下表面反射光的光程差 $\\Delta=2nd+\\frac{\\lambda}{2}$（下表面反射有半波损失），暗纹条件 $\\Delta=\\left(k+\\frac12\\right)\\lambda$，即\n\n$$2nd=k\\lambda\\ \\Longrightarrow\\ d_k=\\frac{k\\lambda}{2n}.$$\n\n相邻暗纹对应的膜厚差 $\\lambda/(2n)$，除以劈尖角就是条纹间距\n\n$$l=\\frac{\\lambda}{2n\\theta}=\\frac{5.46\\times10^{-7}}{2\\times 1\\times 9.7\\times10^{-5}}=2.82\\times10^{-3}\\ \\mathrm{m},$$\n\n其中 $\\theta=20$ 角秒 $=\\dfrac{20}{3600}\\times\\dfrac{\\pi}{180}=9.7\\times10^{-5}\\ \\mathrm{rad}$。每米长度上的条纹数 $N=1/l=355\\ \\mathrm{m^{-1}}$。\n\n第 $k=10$ 级暗纹处膜厚 $d_k=\\frac{k\\lambda}{2n}=2.73\\times10^{-6}\\ \\mathrm{m}$。\n\n本题求的是由条纹间距反推的劈尖角（以角秒计），通式为 $\\theta=\\frac{\\lambda}{2nl}$，结果为\n\n$$\\theta=20\\ \\mathrm{°}.$$\n\n**易错点**：空气劈尖的暗纹公式是 $2d=k\\lambda$（有半波损失时），若换成 $n>1$ 的薄膜且上下介质折射率关系改变，半波损失项可能消失，公式要重推。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "°",
+   "methods": [
+    "等厚干涉",
+    "劈尖"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· 劈尖干涉"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "劈尖干涉（λ=589 nm，n=1.5，θ=10″）的单位长度条纹数",
+  "statement": "用波长 $\\lambda=589\\ \\mathrm{nm}$ 的单色光垂直照射空气劈尖（膜折射率 $n=1.5$），测得劈尖角 $\\theta=10$ 角秒。求每米长度上出现的暗纹条数。",
+  "mainTag": "光学",
+  "tags": [
+   "光的干涉"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 4,
+  "source": "程守洙《普通物理学》· 劈尖干涉",
+  "hints": [
+   "暗纹条件 $2nd=k\\lambda$（空气劈尖含半波损失时）。",
+   "条纹间距 $l=\\lambda/(2n\\theta)$，$\\theta$ 要用弧度。"
+  ],
+  "answer": "247\\ \\mathrm{1/m}",
+  "solution": "劈尖上下表面反射光的光程差 $\\Delta=2nd+\\frac{\\lambda}{2}$（下表面反射有半波损失），暗纹条件 $\\Delta=\\left(k+\\frac12\\right)\\lambda$，即\n\n$$2nd=k\\lambda\\ \\Longrightarrow\\ d_k=\\frac{k\\lambda}{2n}.$$\n\n相邻暗纹对应的膜厚差 $\\lambda/(2n)$，除以劈尖角就是条纹间距\n\n$$l=\\frac{\\lambda}{2n\\theta}=\\frac{5.89\\times10^{-7}}{2\\times 1.5\\times 4.85\\times10^{-5}}=4.05\\times10^{-3}\\ \\mathrm{m},$$\n\n其中 $\\theta=10$ 角秒 $=\\dfrac{10}{3600}\\times\\dfrac{\\pi}{180}=4.85\\times10^{-5}\\ \\mathrm{rad}$。每米长度上的条纹数 $N=1/l=247\\ \\mathrm{m^{-1}}$。\n\n第 $k=5$ 级暗纹处膜厚 $d_k=\\frac{k\\lambda}{2n}=9.82\\times10^{-7}\\ \\mathrm{m}$。\n\n本题求的是每米长度上出现的暗纹条数，通式为 $N=\\frac{2n\\theta}{\\lambda}$，结果为\n\n$$N=247\\ \\mathrm{1/m}.$$\n\n**易错点**：空气劈尖的暗纹公式是 $2d=k\\lambda$（有半波损失时），若换成 $n>1$ 的薄膜且上下介质折射率关系改变，半波损失项可能消失，公式要重推。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "1/m",
+   "methods": [
+    "等厚干涉",
+    "劈尖"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· 劈尖干涉"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "奥托循环（压缩比 r=12，γ=1.35）的温度比",
+  "statement": "某四冲程汽油机按奥托循环工作，压缩比 $r=12$，工作物质可视为理想气体，$\\gamma=1.35$。求绝热压缩后与压缩前的温度比。",
+  "mainTag": "热学",
+  "tags": [
+   "循环过程与卡诺循环"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "秦允豪《热学》· 奥托循环",
+  "hints": [
+   "奥托循环 = 两个绝热 + 两个等容。",
+   "$\\eta=1-1/r^{\\gamma-1}$，与吸热量无关。"
+  ],
+  "answer": "2.39",
+  "solution": "奥托循环由两个绝热过程（压缩、膨胀）和两个等容过程（吸热、放热）组成。等容吸热 $Q_1=C_V\\left(T_3-T_2\\right)$，等容放热 $Q_2=C_V\\left(T_4-T_1\\right)$，于是\n\n$$\\eta=1-\\frac{Q_2}{Q_1}=1-\\frac{T_4-T_1}{T_3-T_2}.$$\n\n两个绝热过程给出 $T_2/T_1=T_3/T_4=r^{\\gamma-1}$，代入化简得\n\n$$\\eta=1-\\frac{1}{r^{\\gamma-1}}=1-\\frac{1}{12^{1.35-1}}=58.1.$$\n\n其中温度比 $T_2/T_1=r^{\\gamma-1}=2.39$，放热与吸热之比 $Q_2/Q_1=1-\\eta=0.419$。\n\n本题求的是绝热压缩后与压缩前的温度比，通式为 $\\frac{T_2}{T_1}=r^{\\gamma-1}$，结果为\n\n$$\\frac{T_2}{T_1}=2.39.$$\n\n**易错点**：奥托循环的效率只与**压缩比**和 $\\gamma$ 有关，与吸热量大小无关；汽油机提高压缩比就能提效率，但受爆震限制（一般 $r\\le 10$）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "循环效率",
+    "绝热过程"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "秦允豪《热学》· 奥托循环"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "奥托循环（压缩比 r=7，γ=1.35）的放热与吸热之比",
+  "statement": "某四冲程汽油机按奥托循环工作，压缩比 $r=7$，工作物质可视为理想气体，$\\gamma=1.35$。求循环中放热与吸热之比。",
+  "mainTag": "热学",
+  "tags": [
+   "循环过程与卡诺循环"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "秦允豪《热学》· 奥托循环",
+  "hints": [
+   "奥托循环 = 两个绝热 + 两个等容。",
+   "$\\eta=1-1/r^{\\gamma-1}$，与吸热量无关。"
+  ],
+  "answer": "0.506",
+  "solution": "奥托循环由两个绝热过程（压缩、膨胀）和两个等容过程（吸热、放热）组成。等容吸热 $Q_1=C_V\\left(T_3-T_2\\right)$，等容放热 $Q_2=C_V\\left(T_4-T_1\\right)$，于是\n\n$$\\eta=1-\\frac{Q_2}{Q_1}=1-\\frac{T_4-T_1}{T_3-T_2}.$$\n\n两个绝热过程给出 $T_2/T_1=T_3/T_4=r^{\\gamma-1}$，代入化简得\n\n$$\\eta=1-\\frac{1}{r^{\\gamma-1}}=1-\\frac{1}{7^{1.35-1}}=49.4.$$\n\n其中温度比 $T_2/T_1=r^{\\gamma-1}=1.98$，放热与吸热之比 $Q_2/Q_1=1-\\eta=0.506$。\n\n本题求的是循环中放热与吸热之比，通式为 $\\frac{Q_2}{Q_1}=1-\\eta$，结果为\n\n$$\\frac{Q_2}{Q_1}=0.506.$$\n\n**易错点**：奥托循环的效率只与**压缩比**和 $\\gamma$ 有关，与吸热量大小无关；汽油机提高压缩比就能提效率，但受爆震限制（一般 $r\\le 10$）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "循环效率",
+    "绝热过程"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "秦允豪《热学》· 奥托循环"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "奥托循环（压缩比 r=10，γ=1.35）的压缩比",
+  "statement": "某四冲程汽油机按奥托循环工作，压缩比 $r=10$，工作物质可视为理想气体，$\\gamma=1.35$。求使效率达到给定值的压缩比。",
+  "mainTag": "热学",
+  "tags": [
+   "循环过程与卡诺循环"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "秦允豪《热学》· 奥托循环",
+  "hints": [
+   "奥托循环 = 两个绝热 + 两个等容。",
+   "$\\eta=1-1/r^{\\gamma-1}$，与吸热量无关。"
+  ],
+  "answer": "10",
+  "solution": "奥托循环由两个绝热过程（压缩、膨胀）和两个等容过程（吸热、放热）组成。等容吸热 $Q_1=C_V\\left(T_3-T_2\\right)$，等容放热 $Q_2=C_V\\left(T_4-T_1\\right)$，于是\n\n$$\\eta=1-\\frac{Q_2}{Q_1}=1-\\frac{T_4-T_1}{T_3-T_2}.$$\n\n两个绝热过程给出 $T_2/T_1=T_3/T_4=r^{\\gamma-1}$，代入化简得\n\n$$\\eta=1-\\frac{1}{r^{\\gamma-1}}=1-\\frac{1}{10^{1.35-1}}=55.3.$$\n\n其中温度比 $T_2/T_1=r^{\\gamma-1}=2.24$，放热与吸热之比 $Q_2/Q_1=1-\\eta=0.447$。\n\n本题求的是使效率达到给定值的压缩比，通式为 $r=\\left(\\frac{1}{1-\\eta}\\right)^{\\frac{1}{\\gamma-1}}$，结果为\n\n$$r=10.$$\n\n**易错点**：奥托循环的效率只与**压缩比**和 $\\gamma$ 有关，与吸热量大小无关；汽油机提高压缩比就能提效率，但受爆震限制（一般 $r\\le 10$）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "循环效率",
+    "绝热过程"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "秦允豪《热学》· 奥托循环"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "奥托循环（压缩比 r=8，γ=1.35）的压缩比",
+  "statement": "某四冲程汽油机按奥托循环工作，压缩比 $r=8$，工作物质可视为理想气体，$\\gamma=1.35$。求使效率达到给定值的压缩比。",
+  "mainTag": "热学",
+  "tags": [
+   "循环过程与卡诺循环"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "秦允豪《热学》· 奥托循环",
+  "hints": [
+   "奥托循环 = 两个绝热 + 两个等容。",
+   "$\\eta=1-1/r^{\\gamma-1}$，与吸热量无关。"
+  ],
+  "answer": "8",
+  "solution": "奥托循环由两个绝热过程（压缩、膨胀）和两个等容过程（吸热、放热）组成。等容吸热 $Q_1=C_V\\left(T_3-T_2\\right)$，等容放热 $Q_2=C_V\\left(T_4-T_1\\right)$，于是\n\n$$\\eta=1-\\frac{Q_2}{Q_1}=1-\\frac{T_4-T_1}{T_3-T_2}.$$\n\n两个绝热过程给出 $T_2/T_1=T_3/T_4=r^{\\gamma-1}$，代入化简得\n\n$$\\eta=1-\\frac{1}{r^{\\gamma-1}}=1-\\frac{1}{8^{1.35-1}}=51.7.$$\n\n其中温度比 $T_2/T_1=r^{\\gamma-1}=2.07$，放热与吸热之比 $Q_2/Q_1=1-\\eta=0.483$。\n\n本题求的是使效率达到给定值的压缩比，通式为 $r=\\left(\\frac{1}{1-\\eta}\\right)^{\\frac{1}{\\gamma-1}}$，结果为\n\n$$r=8.$$\n\n**易错点**：奥托循环的效率只与**压缩比**和 $\\gamma$ 有关，与吸热量大小无关；汽油机提高压缩比就能提效率，但受爆震限制（一般 $r\\le 10$）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "循环效率",
+    "绝热过程"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "秦允豪《热学》· 奥托循环"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "奥托循环（压缩比 r=9，γ=1.33）的放热与吸热之比",
+  "statement": "某四冲程汽油机按奥托循环工作，压缩比 $r=9$，工作物质可视为理想气体，$\\gamma=1.33$。求循环中放热与吸热之比。",
+  "mainTag": "热学",
+  "tags": [
+   "循环过程与卡诺循环"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "秦允豪《热学》· 奥托循环",
+  "hints": [
+   "奥托循环 = 两个绝热 + 两个等容。",
+   "$\\eta=1-1/r^{\\gamma-1}$，与吸热量无关。"
+  ],
+  "answer": "0.484",
+  "solution": "奥托循环由两个绝热过程（压缩、膨胀）和两个等容过程（吸热、放热）组成。等容吸热 $Q_1=C_V\\left(T_3-T_2\\right)$，等容放热 $Q_2=C_V\\left(T_4-T_1\\right)$，于是\n\n$$\\eta=1-\\frac{Q_2}{Q_1}=1-\\frac{T_4-T_1}{T_3-T_2}.$$\n\n两个绝热过程给出 $T_2/T_1=T_3/T_4=r^{\\gamma-1}$，代入化简得\n\n$$\\eta=1-\\frac{1}{r^{\\gamma-1}}=1-\\frac{1}{9^{1.33-1}}=51.6.$$\n\n其中温度比 $T_2/T_1=r^{\\gamma-1}=2.06$，放热与吸热之比 $Q_2/Q_1=1-\\eta=0.484$。\n\n本题求的是循环中放热与吸热之比，通式为 $\\frac{Q_2}{Q_1}=1-\\eta$，结果为\n\n$$\\frac{Q_2}{Q_1}=0.484.$$\n\n**易错点**：奥托循环的效率只与**压缩比**和 $\\gamma$ 有关，与吸热量大小无关；汽油机提高压缩比就能提效率，但受爆震限制（一般 $r\\le 10$）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "循环效率",
+    "绝热过程"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "秦允豪《热学》· 奥托循环"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "奥托循环（压缩比 r=6，γ=1.35）的放热与吸热之比",
+  "statement": "某四冲程汽油机按奥托循环工作，压缩比 $r=6$，工作物质可视为理想气体，$\\gamma=1.35$。求循环中放热与吸热之比。",
+  "mainTag": "热学",
+  "tags": [
+   "循环过程与卡诺循环"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "秦允豪《热学》· 奥托循环",
+  "hints": [
+   "奥托循环 = 两个绝热 + 两个等容。",
+   "$\\eta=1-1/r^{\\gamma-1}$，与吸热量无关。"
+  ],
+  "answer": "0.534",
+  "solution": "奥托循环由两个绝热过程（压缩、膨胀）和两个等容过程（吸热、放热）组成。等容吸热 $Q_1=C_V\\left(T_3-T_2\\right)$，等容放热 $Q_2=C_V\\left(T_4-T_1\\right)$，于是\n\n$$\\eta=1-\\frac{Q_2}{Q_1}=1-\\frac{T_4-T_1}{T_3-T_2}.$$\n\n两个绝热过程给出 $T_2/T_1=T_3/T_4=r^{\\gamma-1}$，代入化简得\n\n$$\\eta=1-\\frac{1}{r^{\\gamma-1}}=1-\\frac{1}{6^{1.35-1}}=46.6.$$\n\n其中温度比 $T_2/T_1=r^{\\gamma-1}=1.87$，放热与吸热之比 $Q_2/Q_1=1-\\eta=0.534$。\n\n本题求的是循环中放热与吸热之比，通式为 $\\frac{Q_2}{Q_1}=1-\\eta$，结果为\n\n$$\\frac{Q_2}{Q_1}=0.534.$$\n\n**易错点**：奥托循环的效率只与**压缩比**和 $\\gamma$ 有关，与吸热量大小无关；汽油机提高压缩比就能提效率，但受爆震限制（一般 $r\\le 10$）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric",
+   "unit": "",
+   "methods": [
+    "循环效率",
+    "绝热过程"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "秦允豪《热学》· 奥托循环"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "奥托循环（压缩比 r=10，γ=1.35）的循环效率",
+  "statement": "某四冲程汽油机按奥托循环工作，压缩比 $r=10$，工作物质可视为理想气体，$\\gamma=1.35$。求该奥托循环的热效率。",
+  "mainTag": "热学",
+  "tags": [
+   "循环过程与卡诺循环"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "秦允豪《热学》· 奥托循环",
+  "hints": [
+   "奥托循环 = 两个绝热 + 两个等容。",
+   "$\\eta=1-1/r^{\\gamma-1}$，与吸热量无关。"
+  ],
+  "answer": "55.3\\ \\%",
+  "solution": "奥托循环由两个绝热过程（压缩、膨胀）和两个等容过程（吸热、放热）组成。等容吸热 $Q_1=C_V\\left(T_3-T_2\\right)$，等容放热 $Q_2=C_V\\left(T_4-T_1\\right)$，于是\n\n$$\\eta=1-\\frac{Q_2}{Q_1}=1-\\frac{T_4-T_1}{T_3-T_2}.$$\n\n两个绝热过程给出 $T_2/T_1=T_3/T_4=r^{\\gamma-1}$，代入化简得\n\n$$\\eta=1-\\frac{1}{r^{\\gamma-1}}=1-\\frac{1}{10^{1.35-1}}=55.3.$$\n\n其中温度比 $T_2/T_1=r^{\\gamma-1}=2.24$，放热与吸热之比 $Q_2/Q_1=1-\\eta=0.447$。\n\n本题求的是该奥托循环的热效率，通式为 $\\eta=1-\\frac{1}{r^{\\gamma-1}}$，结果为\n\n$$\\eta=55.3\\ \\%.$$\n\n**易错点**：奥托循环的效率只与**压缩比**和 $\\gamma$ 有关，与吸热量大小无关；汽油机提高压缩比就能提效率，但受爆震限制（一般 $r\\le 10$）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "%",
+   "methods": [
+    "循环效率",
+    "绝热过程"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "秦允豪《热学》· 奥托循环"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "奥托循环（压缩比 r=6，γ=1.4）的循环效率",
+  "statement": "某四冲程汽油机按奥托循环工作，压缩比 $r=6$，工作物质可视为理想气体，$\\gamma=1.4$。求该奥托循环的热效率。",
+  "mainTag": "热学",
+  "tags": [
+   "循环过程与卡诺循环"
+  ],
+  "kind": "计算题",
+  "thinking": 5,
+  "difficulty": 5,
+  "calc": 3,
+  "source": "秦允豪《热学》· 奥托循环",
+  "hints": [
+   "奥托循环 = 两个绝热 + 两个等容。",
+   "$\\eta=1-1/r^{\\gamma-1}$，与吸热量无关。"
+  ],
+  "answer": "51.2\\ \\%",
+  "solution": "奥托循环由两个绝热过程（压缩、膨胀）和两个等容过程（吸热、放热）组成。等容吸热 $Q_1=C_V\\left(T_3-T_2\\right)$，等容放热 $Q_2=C_V\\left(T_4-T_1\\right)$，于是\n\n$$\\eta=1-\\frac{Q_2}{Q_1}=1-\\frac{T_4-T_1}{T_3-T_2}.$$\n\n两个绝热过程给出 $T_2/T_1=T_3/T_4=r^{\\gamma-1}$，代入化简得\n\n$$\\eta=1-\\frac{1}{r^{\\gamma-1}}=1-\\frac{1}{6^{1.4-1}}=51.2.$$\n\n其中温度比 $T_2/T_1=r^{\\gamma-1}=2.05$，放热与吸热之比 $Q_2/Q_1=1-\\eta=0.488$。\n\n本题求的是该奥托循环的热效率，通式为 $\\eta=1-\\frac{1}{r^{\\gamma-1}}$，结果为\n\n$$\\eta=51.2\\ \\%.$$\n\n**易错点**：奥托循环的效率只与**压缩比**和 $\\gamma$ 有关，与吸热量大小无关；汽油机提高压缩比就能提效率，但受爆震限制（一般 $r\\le 10$）。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "%",
+   "methods": [
+    "循环效率",
+    "绝热过程"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "秦允豪《热学》· 奥托循环"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "多层壁导热（d1=0.1 m，k1=0.8；d2=0.1 m，k2=0.04；ΔT=20 K）的第一层的温差",
+  "statement": "一面墙由两层材料组成：第一层厚 $d_1=0.1\\ \\mathrm{m}$、导热系数 $k_1=0.8\\ \\mathrm{W/(m\\cdot K)}$；第二层厚 $d_2=0.1\\ \\mathrm{m}$、$k_2=0.04$。两侧表面温差 $\\Delta T=20\\ \\mathrm{K}$，达到稳态。求第一层材料两侧的温差。",
+  "mainTag": "热学",
+  "tags": [
+   "热力学第一定律"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "秦允豪《热学》· 多层壁导热",
+  "hints": [
+   "稳态导热按热阻串联：$R=d/k$ 相加。",
+   "$q=\\Delta T/\\sum R$，各层温差 $\\Delta T_i=qR_i$。"
+  ],
+  "answer": "0.952\\ \\mathrm{K}",
+  "solution": "稳态下通过各层的热流密度相同（串联热阻）：\n\n$$q=\\frac{\\Delta T}{\\frac{d_1}{k_1}+\\frac{d_2}{k_2}}.$$\n\n两层的单位面积热阻分别为\n\n$$R_1=\\frac{d_1}{k_1}=\\frac{0.1}{0.8}=0.125,\\qquad R_2=\\frac{d_2}{k_2}=2.5.$$\n\n于是\n\n$$q=\\frac{20}{0.125+2.5}=7.62\\ \\mathrm{W/m^2}.$$\n\n各层温差按热阻分配：$\\Delta T_1=qR_1=0.952\\ \\mathrm{K}$，占总温差的 $4.76$；$\\Delta T_2=qR_2=19\\ \\mathrm{K}$。\n\n本题求的是第一层材料两侧的温差，通式为 $\\Delta T_1=q\\frac{d_1}{k_1}$，结果为\n\n$$\\Delta T_1=0.952\\ \\mathrm{K}.$$\n\n**易错点**：多层壁是**热阻串联**（相加），不是导热系数相加；保温层（$k$ 小）即使很薄也能承担大部分温差，这正是「薄保温层有效」的原因。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "K",
+   "methods": [
+    "傅里叶定律",
+    "稳态导热"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "秦允豪《热学》· 多层壁导热"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "多层壁导热（d1=0.05 m，k1=0.2；d2=0.05 m，k2=0.05；ΔT=20 K）的总热阻",
+  "statement": "一面墙由两层材料组成：第一层厚 $d_1=0.05\\ \\mathrm{m}$、导热系数 $k_1=0.2\\ \\mathrm{W/(m\\cdot K)}$；第二层厚 $d_2=0.05\\ \\mathrm{m}$、$k_2=0.05$。两侧表面温差 $\\Delta T=20\\ \\mathrm{K}$，达到稳态。求两层壁的总热阻（单位面积）。",
+  "mainTag": "热学",
+  "tags": [
+   "热力学第一定律"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "秦允豪《热学》· 多层壁导热",
+  "hints": [
+   "稳态导热按热阻串联：$R=d/k$ 相加。",
+   "$q=\\Delta T/\\sum R$，各层温差 $\\Delta T_i=qR_i$。"
+  ],
+  "answer": "1.25\\ \\mathrm{m^2*K/W}",
+  "solution": "稳态下通过各层的热流密度相同（串联热阻）：\n\n$$q=\\frac{\\Delta T}{\\frac{d_1}{k_1}+\\frac{d_2}{k_2}}.$$\n\n两层的单位面积热阻分别为\n\n$$R_1=\\frac{d_1}{k_1}=\\frac{0.05}{0.2}=0.25,\\qquad R_2=\\frac{d_2}{k_2}=1.$$\n\n于是\n\n$$q=\\frac{20}{0.25+1}=16\\ \\mathrm{W/m^2}.$$\n\n各层温差按热阻分配：$\\Delta T_1=qR_1=4\\ \\mathrm{K}$，占总温差的 $20$；$\\Delta T_2=qR_2=16\\ \\mathrm{K}$。\n\n本题求的是两层壁的总热阻（单位面积），通式为 $R=\\frac{d_1}{k_1}+\\frac{d_2}{k_2}$，结果为\n\n$$R=1.25\\ \\mathrm{m^2*K/W}.$$\n\n**易错点**：多层壁是**热阻串联**（相加），不是导热系数相加；保温层（$k$ 小）即使很薄也能承担大部分温差，这正是「薄保温层有效」的原因。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m^2*K/W",
+   "methods": [
+    "傅里叶定律",
+    "稳态导热"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "秦允豪《热学》· 多层壁导热"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "多层壁导热（d1=0.2 m，k1=0.5；d2=0.05 m，k2=0.04；ΔT=40 K）的第一层的温差",
+  "statement": "一面墙由两层材料组成：第一层厚 $d_1=0.2\\ \\mathrm{m}$、导热系数 $k_1=0.5\\ \\mathrm{W/(m\\cdot K)}$；第二层厚 $d_2=0.05\\ \\mathrm{m}$、$k_2=0.04$。两侧表面温差 $\\Delta T=40\\ \\mathrm{K}$，达到稳态。求第一层材料两侧的温差。",
+  "mainTag": "热学",
+  "tags": [
+   "热力学第一定律"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "秦允豪《热学》· 多层壁导热",
+  "hints": [
+   "稳态导热按热阻串联：$R=d/k$ 相加。",
+   "$q=\\Delta T/\\sum R$，各层温差 $\\Delta T_i=qR_i$。"
+  ],
+  "answer": "9.7\\ \\mathrm{K}",
+  "solution": "稳态下通过各层的热流密度相同（串联热阻）：\n\n$$q=\\frac{\\Delta T}{\\frac{d_1}{k_1}+\\frac{d_2}{k_2}}.$$\n\n两层的单位面积热阻分别为\n\n$$R_1=\\frac{d_1}{k_1}=\\frac{0.2}{0.5}=0.4,\\qquad R_2=\\frac{d_2}{k_2}=1.25.$$\n\n于是\n\n$$q=\\frac{40}{0.4+1.25}=24.2\\ \\mathrm{W/m^2}.$$\n\n各层温差按热阻分配：$\\Delta T_1=qR_1=9.7\\ \\mathrm{K}$，占总温差的 $24.2$；$\\Delta T_2=qR_2=30.3\\ \\mathrm{K}$。\n\n本题求的是第一层材料两侧的温差，通式为 $\\Delta T_1=q\\frac{d_1}{k_1}$，结果为\n\n$$\\Delta T_1=9.7\\ \\mathrm{K}.$$\n\n**易错点**：多层壁是**热阻串联**（相加），不是导热系数相加；保温层（$k$ 小）即使很薄也能承担大部分温差，这正是「薄保温层有效」的原因。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "K",
+   "methods": [
+    "傅里叶定律",
+    "稳态导热"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "秦允豪《热学》· 多层壁导热"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "多层壁导热（d1=0.15 m，k1=0.5；d2=0.15 m，k2=0.05；ΔT=30 K）的热流密度",
+  "statement": "一面墙由两层材料组成：第一层厚 $d_1=0.15\\ \\mathrm{m}$、导热系数 $k_1=0.5\\ \\mathrm{W/(m\\cdot K)}$；第二层厚 $d_2=0.15\\ \\mathrm{m}$、$k_2=0.05$。两侧表面温差 $\\Delta T=30\\ \\mathrm{K}$，达到稳态。求稳态时通过墙壁的热流密度。",
+  "mainTag": "热学",
+  "tags": [
+   "热力学第一定律"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "秦允豪《热学》· 多层壁导热",
+  "hints": [
+   "稳态导热按热阻串联：$R=d/k$ 相加。",
+   "$q=\\Delta T/\\sum R$，各层温差 $\\Delta T_i=qR_i$。"
+  ],
+  "answer": "9.09\\ \\mathrm{W/m^2}",
+  "solution": "稳态下通过各层的热流密度相同（串联热阻）：\n\n$$q=\\frac{\\Delta T}{\\frac{d_1}{k_1}+\\frac{d_2}{k_2}}.$$\n\n两层的单位面积热阻分别为\n\n$$R_1=\\frac{d_1}{k_1}=\\frac{0.15}{0.5}=0.3,\\qquad R_2=\\frac{d_2}{k_2}=3.$$\n\n于是\n\n$$q=\\frac{30}{0.3+3}=9.09\\ \\mathrm{W/m^2}.$$\n\n各层温差按热阻分配：$\\Delta T_1=qR_1=2.73\\ \\mathrm{K}$，占总温差的 $9.09$；$\\Delta T_2=qR_2=27.3\\ \\mathrm{K}$。\n\n本题求的是稳态时通过墙壁的热流密度，通式为 $q=\\frac{\\Delta T}{\\frac{d_1}{k_1}+\\frac{d_2}{k_2}}$，结果为\n\n$$q=9.09\\ \\mathrm{W/m^2}.$$\n\n**易错点**：多层壁是**热阻串联**（相加），不是导热系数相加；保温层（$k$ 小）即使很薄也能承担大部分温差，这正是「薄保温层有效」的原因。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "W/m^2",
+   "methods": [
+    "傅里叶定律",
+    "稳态导热"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "秦允豪《热学》· 多层壁导热"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "多层壁导热（d1=0.2 m，k1=0.8；d2=0.15 m，k2=0.04；ΔT=50 K）的总热阻",
+  "statement": "一面墙由两层材料组成：第一层厚 $d_1=0.2\\ \\mathrm{m}$、导热系数 $k_1=0.8\\ \\mathrm{W/(m\\cdot K)}$；第二层厚 $d_2=0.15\\ \\mathrm{m}$、$k_2=0.04$。两侧表面温差 $\\Delta T=50\\ \\mathrm{K}$，达到稳态。求两层壁的总热阻（单位面积）。",
+  "mainTag": "热学",
+  "tags": [
+   "热力学第一定律"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "秦允豪《热学》· 多层壁导热",
+  "hints": [
+   "稳态导热按热阻串联：$R=d/k$ 相加。",
+   "$q=\\Delta T/\\sum R$，各层温差 $\\Delta T_i=qR_i$。"
+  ],
+  "answer": "4\\ \\mathrm{m^2*K/W}",
+  "solution": "稳态下通过各层的热流密度相同（串联热阻）：\n\n$$q=\\frac{\\Delta T}{\\frac{d_1}{k_1}+\\frac{d_2}{k_2}}.$$\n\n两层的单位面积热阻分别为\n\n$$R_1=\\frac{d_1}{k_1}=\\frac{0.2}{0.8}=0.25,\\qquad R_2=\\frac{d_2}{k_2}=3.75.$$\n\n于是\n\n$$q=\\frac{50}{0.25+3.75}=12.5\\ \\mathrm{W/m^2}.$$\n\n各层温差按热阻分配：$\\Delta T_1=qR_1=3.12\\ \\mathrm{K}$，占总温差的 $6.25$；$\\Delta T_2=qR_2=46.9\\ \\mathrm{K}$。\n\n本题求的是两层壁的总热阻（单位面积），通式为 $R=\\frac{d_1}{k_1}+\\frac{d_2}{k_2}$，结果为\n\n$$R=4\\ \\mathrm{m^2*K/W}.$$\n\n**易错点**：多层壁是**热阻串联**（相加），不是导热系数相加；保温层（$k$ 小）即使很薄也能承担大部分温差，这正是「薄保温层有效」的原因。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m^2*K/W",
+   "methods": [
+    "傅里叶定律",
+    "稳态导热"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "秦允豪《热学》· 多层壁导热"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "多层壁导热（d1=0.1 m，k1=1；d2=0.1 m，k2=0.05；ΔT=30 K）的热流密度",
+  "statement": "一面墙由两层材料组成：第一层厚 $d_1=0.1\\ \\mathrm{m}$、导热系数 $k_1=1\\ \\mathrm{W/(m\\cdot K)}$；第二层厚 $d_2=0.1\\ \\mathrm{m}$、$k_2=0.05$。两侧表面温差 $\\Delta T=30\\ \\mathrm{K}$，达到稳态。求稳态时通过墙壁的热流密度。",
+  "mainTag": "热学",
+  "tags": [
+   "热力学第一定律"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "秦允豪《热学》· 多层壁导热",
+  "hints": [
+   "稳态导热按热阻串联：$R=d/k$ 相加。",
+   "$q=\\Delta T/\\sum R$，各层温差 $\\Delta T_i=qR_i$。"
+  ],
+  "answer": "14.3\\ \\mathrm{W/m^2}",
+  "solution": "稳态下通过各层的热流密度相同（串联热阻）：\n\n$$q=\\frac{\\Delta T}{\\frac{d_1}{k_1}+\\frac{d_2}{k_2}}.$$\n\n两层的单位面积热阻分别为\n\n$$R_1=\\frac{d_1}{k_1}=\\frac{0.1}{1}=0.1,\\qquad R_2=\\frac{d_2}{k_2}=2.$$\n\n于是\n\n$$q=\\frac{30}{0.1+2}=14.3\\ \\mathrm{W/m^2}.$$\n\n各层温差按热阻分配：$\\Delta T_1=qR_1=1.43\\ \\mathrm{K}$，占总温差的 $4.76$；$\\Delta T_2=qR_2=28.6\\ \\mathrm{K}$。\n\n本题求的是稳态时通过墙壁的热流密度，通式为 $q=\\frac{\\Delta T}{\\frac{d_1}{k_1}+\\frac{d_2}{k_2}}$，结果为\n\n$$q=14.3\\ \\mathrm{W/m^2}.$$\n\n**易错点**：多层壁是**热阻串联**（相加），不是导热系数相加；保温层（$k$ 小）即使很薄也能承担大部分温差，这正是「薄保温层有效」的原因。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "W/m^2",
+   "methods": [
+    "傅里叶定律",
+    "稳态导热"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "秦允豪《热学》· 多层壁导热"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "多层壁导热（d1=0.2 m，k1=1；d2=0.15 m，k2=0.15；ΔT=40 K）的总热阻",
+  "statement": "一面墙由两层材料组成：第一层厚 $d_1=0.2\\ \\mathrm{m}$、导热系数 $k_1=1\\ \\mathrm{W/(m\\cdot K)}$；第二层厚 $d_2=0.15\\ \\mathrm{m}$、$k_2=0.15$。两侧表面温差 $\\Delta T=40\\ \\mathrm{K}$，达到稳态。求两层壁的总热阻（单位面积）。",
+  "mainTag": "热学",
+  "tags": [
+   "热力学第一定律"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "秦允豪《热学》· 多层壁导热",
+  "hints": [
+   "稳态导热按热阻串联：$R=d/k$ 相加。",
+   "$q=\\Delta T/\\sum R$，各层温差 $\\Delta T_i=qR_i$。"
+  ],
+  "answer": "1.2\\ \\mathrm{m^2*K/W}",
+  "solution": "稳态下通过各层的热流密度相同（串联热阻）：\n\n$$q=\\frac{\\Delta T}{\\frac{d_1}{k_1}+\\frac{d_2}{k_2}}.$$\n\n两层的单位面积热阻分别为\n\n$$R_1=\\frac{d_1}{k_1}=\\frac{0.2}{1}=0.2,\\qquad R_2=\\frac{d_2}{k_2}=1.$$\n\n于是\n\n$$q=\\frac{40}{0.2+1}=33.3\\ \\mathrm{W/m^2}.$$\n\n各层温差按热阻分配：$\\Delta T_1=qR_1=6.67\\ \\mathrm{K}$，占总温差的 $16.7$；$\\Delta T_2=qR_2=33.3\\ \\mathrm{K}$。\n\n本题求的是两层壁的总热阻（单位面积），通式为 $R=\\frac{d_1}{k_1}+\\frac{d_2}{k_2}$，结果为\n\n$$R=1.2\\ \\mathrm{m^2*K/W}.$$\n\n**易错点**：多层壁是**热阻串联**（相加），不是导热系数相加；保温层（$k$ 小）即使很薄也能承担大部分温差，这正是「薄保温层有效」的原因。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "m^2*K/W",
+   "methods": [
+    "傅里叶定律",
+    "稳态导热"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "秦允豪《热学》· 多层壁导热"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "多层壁导热（d1=0.05 m，k1=0.8；d2=0.2 m，k2=0.05；ΔT=20 K）的界面温度降幅占比",
+  "statement": "一面墙由两层材料组成：第一层厚 $d_1=0.05\\ \\mathrm{m}$、导热系数 $k_1=0.8\\ \\mathrm{W/(m\\cdot K)}$；第二层厚 $d_2=0.2\\ \\mathrm{m}$、$k_2=0.05$。两侧表面温差 $\\Delta T=20\\ \\mathrm{K}$，达到稳态。求第一层承担的温差占总温差的比例。",
+  "mainTag": "热学",
+  "tags": [
+   "热力学第一定律"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "秦允豪《热学》· 多层壁导热",
+  "hints": [
+   "稳态导热按热阻串联：$R=d/k$ 相加。",
+   "$q=\\Delta T/\\sum R$，各层温差 $\\Delta T_i=qR_i$。"
+  ],
+  "answer": "1.54\\ \\%",
+  "solution": "稳态下通过各层的热流密度相同（串联热阻）：\n\n$$q=\\frac{\\Delta T}{\\frac{d_1}{k_1}+\\frac{d_2}{k_2}}.$$\n\n两层的单位面积热阻分别为\n\n$$R_1=\\frac{d_1}{k_1}=\\frac{0.05}{0.8}=0.0625,\\qquad R_2=\\frac{d_2}{k_2}=4.$$\n\n于是\n\n$$q=\\frac{20}{0.0625+4}=4.92\\ \\mathrm{W/m^2}.$$\n\n各层温差按热阻分配：$\\Delta T_1=qR_1=0.308\\ \\mathrm{K}$，占总温差的 $1.54$；$\\Delta T_2=qR_2=19.7\\ \\mathrm{K}$。\n\n本题求的是第一层承担的温差占总温差的比例，通式为 $\\frac{\\Delta T_1}{\\Delta T}=\\frac{R_1}{R_1+R_2}$，结果为\n\n$$\\frac{\\Delta T_1}{\\Delta T}=1.54\\ \\%.$$\n\n**易错点**：多层壁是**热阻串联**（相加），不是导热系数相加；保温层（$k$ 小）即使很薄也能承担大部分温差，这正是「薄保温层有效」的原因。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "%",
+   "methods": [
+    "傅里叶定律",
+    "稳态导热"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "秦允豪《热学》· 多层壁导热"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "冰水混合（m冰=0.3 kg，m水=2.5 kg，t水=50℃）的平衡温度",
+  "statement": "把 $m=0.3\\ \\mathrm{kg}$、$0\\ ^\\circ\\mathrm{C}$ 的冰投入 $2.5\\ \\mathrm{kg}$、$50\\ ^\\circ\\mathrm{C}$ 的水中，容器绝热且热容忽略。取 $c_水=4186\\ \\mathrm{J/(kg\\cdot K)}$、$L_f=3.34\\times10^{5}\\ \\mathrm{J/kg}$，求达到热平衡后的共同温度（热力学温度）。",
+  "mainTag": "热学",
+  "tags": [
+   "热力学第一定律"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "程守洙《普通物理学》· 冰水混合",
+  "hints": [
+   "先算「冰全融所需」与「水降到 0℃ 放出」两份热量，谁大决定末态。",
+   "冰没化完 → 末温 0℃；冰化完 → 余热加热全部水。"
+  ],
+  "answer": "309\\ \\mathrm{K}",
+  "solution": "先比较两份热量：冰全部融化需要 $Q_f=mL_f=0.3\\times 3.34\\times10^{5}=1\\times10^{5}\\ \\mathrm{J}$；水降到 0℃ 能放出\n\n$$Q_w=m_wc\\Delta T=2.5\\times 4186\\times 50=5.23\\times10^{5}\\ \\mathrm{J}.$$\n\n本题 $Q_w>Q_f$，所以冰会全部融化并继续升温。\n\n实际熔化的冰：$m=Q_w/L_f=0.3\\ \\mathrm{kg}$（未全融时 $m<总冰量$）。\n\n冰全融后剩余热量 $Q_w-Q_f=4.23\\times10^{5}\\ \\mathrm{J}$ 用于加热全部水，末温 $t=\\frac{Q_w-Q_f}{\\left(m+m_w\\right)c}=36.1\\ ^\\circ\\mathrm{C}$。\n\n本题求的是达到热平衡后的共同温度（热力学温度），通式为 $m_wc\\Delta T=m L_f+\\left(m+m_w\\right)cΔt$，结果为\n\n$$T=309\\ \\mathrm{K}.$$\n\n**易错点**：必须**先比较热量**再定末态——冰没化完时末温就是 0℃，不能用「混合公式」直接求温度；潜热 $L_f$ 与比热 $c$ 的单位不要混。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "K",
+   "methods": [
+    "相变潜热",
+    "热平衡"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· 冰水混合"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "冰水混合（m冰=0.6 kg，m水=0.5 kg，t水=30℃）的水降到 0℃ 放出的热量",
+  "statement": "把 $m=0.6\\ \\mathrm{kg}$、$0\\ ^\\circ\\mathrm{C}$ 的冰投入 $0.5\\ \\mathrm{kg}$、$30\\ ^\\circ\\mathrm{C}$ 的水中，容器绝热且热容忽略。取 $c_水=4186\\ \\mathrm{J/(kg\\cdot K)}$、$L_f=3.34\\times10^{5}\\ \\mathrm{J/kg}$，求这些水从初温降到 0℃ 放出的热量。",
+  "mainTag": "热学",
+  "tags": [
+   "热力学第一定律"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "程守洙《普通物理学》· 冰水混合",
+  "hints": [
+   "先算「冰全融所需」与「水降到 0℃ 放出」两份热量，谁大决定末态。",
+   "冰没化完 → 末温 0℃；冰化完 → 余热加热全部水。"
+  ],
+  "answer": "6.28\\times10^{4}\\ \\mathrm{J}",
+  "solution": "先比较两份热量：冰全部融化需要 $Q_f=mL_f=0.6\\times 3.34\\times10^{5}=2\\times10^{5}\\ \\mathrm{J}$；水降到 0℃ 能放出\n\n$$Q_w=m_wc\\Delta T=0.5\\times 4186\\times 30=6.28\\times10^{4}\\ \\mathrm{J}.$$\n\n本题 $Q_w<Q_f$，所以只能融化一部分冰，末温保持 0℃。\n\n实际熔化的冰：$m=Q_w/L_f=0.188\\ \\mathrm{kg}$（未全融时 $m<总冰量$）。\n\n冰未全融，末温恒为 $0\\ ^\\circ\\mathrm{C}$，剩余冰 $m_{剩}=0.412\\ \\mathrm{kg}$。\n\n本题求的是这些水从初温降到 0℃ 放出的热量，通式为 $Q_w=m_wc\\Delta T$，结果为\n\n$$Q_w=6.28\\times10^{4}\\ \\mathrm{J}.$$\n\n**易错点**：必须**先比较热量**再定末态——冰没化完时末温就是 0℃，不能用「混合公式」直接求温度；潜热 $L_f$ 与比热 $c$ 的单位不要混。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "相变潜热",
+    "热平衡"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· 冰水混合"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "冰水混合（m冰=1 kg，m水=0.5 kg，t水=80℃）的冰全融所需热量",
+  "statement": "把 $m=1\\ \\mathrm{kg}$、$0\\ ^\\circ\\mathrm{C}$ 的冰投入 $0.5\\ \\mathrm{kg}$、$80\\ ^\\circ\\mathrm{C}$ 的水中，容器绝热且热容忽略。取 $c_水=4186\\ \\mathrm{J/(kg\\cdot K)}$、$L_f=3.34\\times10^{5}\\ \\mathrm{J/kg}$，求使这些冰全部融化成 0℃ 的水所需的热量。",
+  "mainTag": "热学",
+  "tags": [
+   "热力学第一定律"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "程守洙《普通物理学》· 冰水混合",
+  "hints": [
+   "先算「冰全融所需」与「水降到 0℃ 放出」两份热量，谁大决定末态。",
+   "冰没化完 → 末温 0℃；冰化完 → 余热加热全部水。"
+  ],
+  "answer": "3.34\\times10^{5}\\ \\mathrm{J}",
+  "solution": "先比较两份热量：冰全部融化需要 $Q_f=mL_f=1\\times 3.34\\times10^{5}=3.34\\times10^{5}\\ \\mathrm{J}$；水降到 0℃ 能放出\n\n$$Q_w=m_wc\\Delta T=0.5\\times 4186\\times 80=1.67\\times10^{5}\\ \\mathrm{J}.$$\n\n本题 $Q_w<Q_f$，所以只能融化一部分冰，末温保持 0℃。\n\n实际熔化的冰：$m=Q_w/L_f=0.501\\ \\mathrm{kg}$（未全融时 $m<总冰量$）。\n\n冰未全融，末温恒为 $0\\ ^\\circ\\mathrm{C}$，剩余冰 $m_{剩}=0.499\\ \\mathrm{kg}$。\n\n本题求的是使这些冰全部融化成 0℃ 的水所需的热量，通式为 $Q_f=mL_f$，结果为\n\n$$Q_f=3.34\\times10^{5}\\ \\mathrm{J}.$$\n\n**易错点**：必须**先比较热量**再定末态——冰没化完时末温就是 0℃，不能用「混合公式」直接求温度；潜热 $L_f$ 与比热 $c$ 的单位不要混。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "相变潜热",
+    "热平衡"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· 冰水混合"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "冰水混合（m冰=0.5 kg，m水=0.5 kg，t水=40℃）的平衡温度",
+  "statement": "把 $m=0.5\\ \\mathrm{kg}$、$0\\ ^\\circ\\mathrm{C}$ 的冰投入 $0.5\\ \\mathrm{kg}$、$40\\ ^\\circ\\mathrm{C}$ 的水中，容器绝热且热容忽略。取 $c_水=4186\\ \\mathrm{J/(kg\\cdot K)}$、$L_f=3.34\\times10^{5}\\ \\mathrm{J/kg}$，求达到热平衡后的共同温度（热力学温度）。",
+  "mainTag": "热学",
+  "tags": [
+   "热力学第一定律"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "程守洙《普通物理学》· 冰水混合",
+  "hints": [
+   "先算「冰全融所需」与「水降到 0℃ 放出」两份热量，谁大决定末态。",
+   "冰没化完 → 末温 0℃；冰化完 → 余热加热全部水。"
+  ],
+  "answer": "273\\ \\mathrm{K}",
+  "solution": "先比较两份热量：冰全部融化需要 $Q_f=mL_f=0.5\\times 3.34\\times10^{5}=1.67\\times10^{5}\\ \\mathrm{J}$；水降到 0℃ 能放出\n\n$$Q_w=m_wc\\Delta T=0.5\\times 4186\\times 40=8.37\\times10^{4}\\ \\mathrm{J}.$$\n\n本题 $Q_w<Q_f$，所以只能融化一部分冰，末温保持 0℃。\n\n实际熔化的冰：$m=Q_w/L_f=0.251\\ \\mathrm{kg}$（未全融时 $m<总冰量$）。\n\n冰未全融，末温恒为 $0\\ ^\\circ\\mathrm{C}$，剩余冰 $m_{剩}=0.249\\ \\mathrm{kg}$。\n\n本题求的是达到热平衡后的共同温度（热力学温度），通式为 $m_wc\\Delta T=m L_f+\\left(m+m_w\\right)cΔt$，结果为\n\n$$T=273\\ \\mathrm{K}.$$\n\n**易错点**：必须**先比较热量**再定末态——冰没化完时末温就是 0℃，不能用「混合公式」直接求温度；潜热 $L_f$ 与比热 $c$ 的单位不要混。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "K",
+   "methods": [
+    "相变潜热",
+    "热平衡"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· 冰水混合"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "冰水混合（m冰=0.8 kg，m水=0.5 kg，t水=60℃）的熔化的冰",
+  "statement": "把 $m=0.8\\ \\mathrm{kg}$、$0\\ ^\\circ\\mathrm{C}$ 的冰投入 $0.5\\ \\mathrm{kg}$、$60\\ ^\\circ\\mathrm{C}$ 的水中，容器绝热且热容忽略。取 $c_水=4186\\ \\mathrm{J/(kg\\cdot K)}$、$L_f=3.34\\times10^{5}\\ \\mathrm{J/kg}$，求平衡后实际熔化的冰的质量。",
+  "mainTag": "热学",
+  "tags": [
+   "热力学第一定律"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "程守洙《普通物理学》· 冰水混合",
+  "hints": [
+   "先算「冰全融所需」与「水降到 0℃ 放出」两份热量，谁大决定末态。",
+   "冰没化完 → 末温 0℃；冰化完 → 余热加热全部水。"
+  ],
+  "answer": "0.376\\ \\mathrm{kg}",
+  "solution": "先比较两份热量：冰全部融化需要 $Q_f=mL_f=0.8\\times 3.34\\times10^{5}=2.67\\times10^{5}\\ \\mathrm{J}$；水降到 0℃ 能放出\n\n$$Q_w=m_wc\\Delta T=0.5\\times 4186\\times 60=1.26\\times10^{5}\\ \\mathrm{J}.$$\n\n本题 $Q_w<Q_f$，所以只能融化一部分冰，末温保持 0℃。\n\n实际熔化的冰：$m=Q_w/L_f=0.376\\ \\mathrm{kg}$（未全融时 $m<总冰量$）。\n\n冰未全融，末温恒为 $0\\ ^\\circ\\mathrm{C}$，剩余冰 $m_{剩}=0.424\\ \\mathrm{kg}$。\n\n本题求的是平衡后实际熔化的冰的质量，通式为 $m=\\frac{Q_w}{L_f}$，结果为\n\n$$m=0.376\\ \\mathrm{kg}.$$\n\n**易错点**：必须**先比较热量**再定末态——冰没化完时末温就是 0℃，不能用「混合公式」直接求温度；潜热 $L_f$ 与比热 $c$ 的单位不要混。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "kg",
+   "methods": [
+    "相变潜热",
+    "热平衡"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· 冰水混合"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "冰水混合（m冰=0.1 kg，m水=1 kg，t水=50℃）的熔化的冰",
+  "statement": "把 $m=0.1\\ \\mathrm{kg}$、$0\\ ^\\circ\\mathrm{C}$ 的冰投入 $1\\ \\mathrm{kg}$、$50\\ ^\\circ\\mathrm{C}$ 的水中，容器绝热且热容忽略。取 $c_水=4186\\ \\mathrm{J/(kg\\cdot K)}$、$L_f=3.34\\times10^{5}\\ \\mathrm{J/kg}$，求平衡后实际熔化的冰的质量。",
+  "mainTag": "热学",
+  "tags": [
+   "热力学第一定律"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "程守洙《普通物理学》· 冰水混合",
+  "hints": [
+   "先算「冰全融所需」与「水降到 0℃ 放出」两份热量，谁大决定末态。",
+   "冰没化完 → 末温 0℃；冰化完 → 余热加热全部水。"
+  ],
+  "answer": "0.1\\ \\mathrm{kg}",
+  "solution": "先比较两份热量：冰全部融化需要 $Q_f=mL_f=0.1\\times 3.34\\times10^{5}=3.34\\times10^{4}\\ \\mathrm{J}$；水降到 0℃ 能放出\n\n$$Q_w=m_wc\\Delta T=1\\times 4186\\times 50=2.09\\times10^{5}\\ \\mathrm{J}.$$\n\n本题 $Q_w>Q_f$，所以冰会全部融化并继续升温。\n\n实际熔化的冰：$m=Q_w/L_f=0.1\\ \\mathrm{kg}$（未全融时 $m<总冰量$）。\n\n冰全融后剩余热量 $Q_w-Q_f=1.76\\times10^{5}\\ \\mathrm{J}$ 用于加热全部水，末温 $t=\\frac{Q_w-Q_f}{\\left(m+m_w\\right)c}=38.2\\ ^\\circ\\mathrm{C}$。\n\n本题求的是平衡后实际熔化的冰的质量，通式为 $m=\\frac{Q_w}{L_f}$，结果为\n\n$$m=0.1\\ \\mathrm{kg}.$$\n\n**易错点**：必须**先比较热量**再定末态——冰没化完时末温就是 0℃，不能用「混合公式」直接求温度；潜热 $L_f$ 与比热 $c$ 的单位不要混。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "kg",
+   "methods": [
+    "相变潜热",
+    "热平衡"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· 冰水混合"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "冰水混合（m冰=0.8 kg，m水=1.5 kg，t水=60℃）的平衡温度",
+  "statement": "把 $m=0.8\\ \\mathrm{kg}$、$0\\ ^\\circ\\mathrm{C}$ 的冰投入 $1.5\\ \\mathrm{kg}$、$60\\ ^\\circ\\mathrm{C}$ 的水中，容器绝热且热容忽略。取 $c_水=4186\\ \\mathrm{J/(kg\\cdot K)}$、$L_f=3.34\\times10^{5}\\ \\mathrm{J/kg}$，求达到热平衡后的共同温度（热力学温度）。",
+  "mainTag": "热学",
+  "tags": [
+   "热力学第一定律"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "程守洙《普通物理学》· 冰水混合",
+  "hints": [
+   "先算「冰全融所需」与「水降到 0℃ 放出」两份热量，谁大决定末态。",
+   "冰没化完 → 末温 0℃；冰化完 → 余热加热全部水。"
+  ],
+  "answer": "285\\ \\mathrm{K}",
+  "solution": "先比较两份热量：冰全部融化需要 $Q_f=mL_f=0.8\\times 3.34\\times10^{5}=2.67\\times10^{5}\\ \\mathrm{J}$；水降到 0℃ 能放出\n\n$$Q_w=m_wc\\Delta T=1.5\\times 4186\\times 60=3.77\\times10^{5}\\ \\mathrm{J}.$$\n\n本题 $Q_w>Q_f$，所以冰会全部融化并继续升温。\n\n实际熔化的冰：$m=Q_w/L_f=0.8\\ \\mathrm{kg}$（未全融时 $m<总冰量$）。\n\n冰全融后剩余热量 $Q_w-Q_f=1.1\\times10^{5}\\ \\mathrm{J}$ 用于加热全部水，末温 $t=\\frac{Q_w-Q_f}{\\left(m+m_w\\right)c}=11.4\\ ^\\circ\\mathrm{C}$。\n\n本题求的是达到热平衡后的共同温度（热力学温度），通式为 $m_wc\\Delta T=m L_f+\\left(m+m_w\\right)cΔt$，结果为\n\n$$T=285\\ \\mathrm{K}.$$\n\n**易错点**：必须**先比较热量**再定末态——冰没化完时末温就是 0℃，不能用「混合公式」直接求温度；潜热 $L_f$ 与比热 $c$ 的单位不要混。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "K",
+   "methods": [
+    "相变潜热",
+    "热平衡"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· 冰水混合"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "冰水混合（m冰=0.5 kg，m水=2 kg，t水=30℃）的熔化的冰",
+  "statement": "把 $m=0.5\\ \\mathrm{kg}$、$0\\ ^\\circ\\mathrm{C}$ 的冰投入 $2\\ \\mathrm{kg}$、$30\\ ^\\circ\\mathrm{C}$ 的水中，容器绝热且热容忽略。取 $c_水=4186\\ \\mathrm{J/(kg\\cdot K)}$、$L_f=3.34\\times10^{5}\\ \\mathrm{J/kg}$，求平衡后实际熔化的冰的质量。",
+  "mainTag": "热学",
+  "tags": [
+   "热力学第一定律"
+  ],
+  "kind": "计算题",
+  "thinking": 6,
+  "difficulty": 6,
+  "calc": 5,
+  "source": "程守洙《普通物理学》· 冰水混合",
+  "hints": [
+   "先算「冰全融所需」与「水降到 0℃ 放出」两份热量，谁大决定末态。",
+   "冰没化完 → 末温 0℃；冰化完 → 余热加热全部水。"
+  ],
+  "answer": "0.5\\ \\mathrm{kg}",
+  "solution": "先比较两份热量：冰全部融化需要 $Q_f=mL_f=0.5\\times 3.34\\times10^{5}=1.67\\times10^{5}\\ \\mathrm{J}$；水降到 0℃ 能放出\n\n$$Q_w=m_wc\\Delta T=2\\times 4186\\times 30=2.51\\times10^{5}\\ \\mathrm{J}.$$\n\n本题 $Q_w>Q_f$，所以冰会全部融化并继续升温。\n\n实际熔化的冰：$m=Q_w/L_f=0.5\\ \\mathrm{kg}$（未全融时 $m<总冰量$）。\n\n冰全融后剩余热量 $Q_w-Q_f=8.42\\times10^{4}\\ \\mathrm{J}$ 用于加热全部水，末温 $t=\\frac{Q_w-Q_f}{\\left(m+m_w\\right)c}=8.04\\ ^\\circ\\mathrm{C}$。\n\n本题求的是平衡后实际熔化的冰的质量，通式为 $m=\\frac{Q_w}{L_f}$，结果为\n\n$$m=0.5\\ \\mathrm{kg}.$$\n\n**易错点**：必须**先比较热量**再定末态——冰没化完时末温就是 0℃，不能用「混合公式」直接求温度；潜热 $L_f$ 与比热 $c$ 的单位不要混。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "kg",
+   "methods": [
+    "相变潜热",
+    "热平衡"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "程守洙《普通物理学》· 冰水混合"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "核反应能（铍—α 反应，Δm=5.7×10⁻³ u）的反应能（J）",
+  "statement": "某核反应为 $^{9}_{4}\\mathrm{Be}+^{4}_{2}\\mathrm{He}\\to^{12}_{6}\\mathrm{C}+^{1}_{0}\\mathrm{n}$，测得质量亏损 $\\Delta m=5.7\\times10^{-3}\\ \\mathrm{u}$。取 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^{2}$、$c=3.0\\times10^{8}\\ \\mathrm{m/s}$，求该核反应释放的能量（以 J 计）。",
+  "mainTag": "近代物理",
+  "tags": [
+   "原子核与激光基础"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "杨福家《原子物理学》· 核反应能",
+  "hints": [
+   "$Q=\\Delta m c^2$，用 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^2$ 换算最省事。",
+   "换 SI 时 $1\\ \\mathrm{u}=1.66054\\times10^{-27}\\ \\mathrm{kg}$。"
+  ],
+  "answer": "8.52\\times10^{-13}\\ \\mathrm{J}",
+  "solution": "核反应的能量来自质量亏损，用质能关系计算：\n\n$$Q=\\Delta m\\,c^{2}.$$\n\n取 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^{2}$，本题$\\Delta m=5.7\\times10^{-3}\\ \\mathrm{u}$，所以\n\n$$Q=5.7\\times10^{-3}\\times 931.5=5.31\\ \\mathrm{MeV}.$$\n\n换成国际单位：$\\Delta m=9.47\\times10^{-30}\\ \\mathrm{kg}$，$E=\\Delta m c^{2}=8.52\\times10^{-13}\\ \\mathrm{J}$。\n\n按 17 个核子平摊，每核子约 $0.312\\ \\mathrm{MeV}$，与常见核反应「每核子几 MeV」的量级一致。\n\n反应式：$^{9}_{4}\\mathrm{Be}+^{4}_{2}\\mathrm{He}\\to^{12}_{6}\\mathrm{C}+^{1}_{0}\\mathrm{n}$\n\n本题求的是该核反应释放的能量（以 J 计），通式为 $E=\\Delta m c^{2}$，结果为\n\n$$E=8.52\\times10^{-13}\\ \\mathrm{J}.$$\n\n**易错点**：$1\\ \\mathrm{u}$ 对应 $931.5\\ \\mathrm{MeV}$（不是 931.5 keV，也不是 1 MeV）；$Q>0$ 表示放能，$Q<0$ 表示需要入射动能才能发生。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "质能关系",
+    "结合能"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "杨福家《原子物理学》· 核反应能"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "核反应能（氘—氘反应，Δm=4.03×10⁻³ u）的折合每核子能量",
+  "statement": "某核反应为 $^{2}_{1}\\mathrm{H}+^{2}_{1}\\mathrm{H}\\to^{3}_{1}\\mathrm{H}+^{1}_{1}\\mathrm{H}$，测得质量亏损 $\\Delta m=4.03\\times10^{-3}\\ \\mathrm{u}$。取 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^{2}$、$c=3.0\\times10^{8}\\ \\mathrm{m/s}$，求按 17 个核子平摊的每核子能量（量级估算）。",
+  "mainTag": "近代物理",
+  "tags": [
+   "原子核与激光基础"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "杨福家《原子物理学》· 核反应能",
+  "hints": [
+   "$Q=\\Delta m c^2$，用 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^2$ 换算最省事。",
+   "换 SI 时 $1\\ \\mathrm{u}=1.66054\\times10^{-27}\\ \\mathrm{kg}$。"
+  ],
+  "answer": "0.221\\ \\mathrm{MeV}",
+  "solution": "核反应的能量来自质量亏损，用质能关系计算：\n\n$$Q=\\Delta m\\,c^{2}.$$\n\n取 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^{2}$，本题$\\Delta m=4.03\\times10^{-3}\\ \\mathrm{u}$，所以\n\n$$Q=4.03\\times10^{-3}\\times 931.5=3.75\\ \\mathrm{MeV}.$$\n\n换成国际单位：$\\Delta m=6.69\\times10^{-30}\\ \\mathrm{kg}$，$E=\\Delta m c^{2}=6.02\\times10^{-13}\\ \\mathrm{J}$。\n\n按 17 个核子平摊，每核子约 $0.221\\ \\mathrm{MeV}$，与常见核反应「每核子几 MeV」的量级一致。\n\n反应式：$^{2}_{1}\\mathrm{H}+^{2}_{1}\\mathrm{H}\\to^{3}_{1}\\mathrm{H}+^{1}_{1}\\mathrm{H}$\n\n本题求的是按 17 个核子平摊的每核子能量（量级估算），通式为 $\\frac{Q}{A}$，结果为\n\n$$\\frac{Q}{A}=0.221\\ \\mathrm{MeV}.$$\n\n**易错点**：$1\\ \\mathrm{u}$ 对应 $931.5\\ \\mathrm{MeV}$（不是 931.5 keV，也不是 1 MeV）；$Q>0$ 表示放能，$Q<0$ 表示需要入射动能才能发生。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "MeV",
+   "methods": [
+    "质能关系",
+    "结合能"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "杨福家《原子物理学》· 核反应能"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "核反应能（锂—中子反应，Δm=4.78×10⁻³ u）的反应能（MeV）",
+  "statement": "某核反应为 $^{6}_{3}\\mathrm{Li}+^{1}_{0}\\mathrm{n}\\to^{4}_{2}\\mathrm{He}+^{3}_{1}\\mathrm{H}$，测得质量亏损 $\\Delta m=4.78\\times10^{-3}\\ \\mathrm{u}$。取 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^{2}$、$c=3.0\\times10^{8}\\ \\mathrm{m/s}$，求该核反应释放的能量（MeV）。",
+  "mainTag": "近代物理",
+  "tags": [
+   "原子核与激光基础"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "杨福家《原子物理学》· 核反应能",
+  "hints": [
+   "$Q=\\Delta m c^2$，用 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^2$ 换算最省事。",
+   "换 SI 时 $1\\ \\mathrm{u}=1.66054\\times10^{-27}\\ \\mathrm{kg}$。"
+  ],
+  "answer": "4.45\\ \\mathrm{MeV}",
+  "solution": "核反应的能量来自质量亏损，用质能关系计算：\n\n$$Q=\\Delta m\\,c^{2}.$$\n\n取 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^{2}$，本题$\\Delta m=4.78\\times10^{-3}\\ \\mathrm{u}$，所以\n\n$$Q=4.78\\times10^{-3}\\times 931.5=4.45\\ \\mathrm{MeV}.$$\n\n换成国际单位：$\\Delta m=7.94\\times10^{-30}\\ \\mathrm{kg}$，$E=\\Delta m c^{2}=7.14\\times10^{-13}\\ \\mathrm{J}$。\n\n按 17 个核子平摊，每核子约 $0.262\\ \\mathrm{MeV}$，与常见核反应「每核子几 MeV」的量级一致。\n\n反应式：$^{6}_{3}\\mathrm{Li}+^{1}_{0}\\mathrm{n}\\to^{4}_{2}\\mathrm{He}+^{3}_{1}\\mathrm{H}$\n\n本题求的是该核反应释放的能量（MeV），通式为 $Q=\\Delta m c^{2}$，结果为\n\n$$Q=4.45\\ \\mathrm{MeV}.$$\n\n**易错点**：$1\\ \\mathrm{u}$ 对应 $931.5\\ \\mathrm{MeV}$（不是 931.5 keV，也不是 1 MeV）；$Q>0$ 表示放能，$Q<0$ 表示需要入射动能才能发生。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "MeV",
+   "methods": [
+    "质能关系",
+    "结合能"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "杨福家《原子物理学》· 核反应能"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "核反应能（氮—α 反应，Δm=1.19×10⁻³ u）的反应能（MeV）",
+  "statement": "某核反应为 $^{14}_{7}\\mathrm{N}+^{4}_{2}\\mathrm{He}\\to^{17}_{8}\\mathrm{O}+^{1}_{1}\\mathrm{H}$，测得质量亏损 $\\Delta m=1.19\\times10^{-3}\\ \\mathrm{u}$。取 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^{2}$、$c=3.0\\times10^{8}\\ \\mathrm{m/s}$，求该核反应释放的能量（MeV）。",
+  "mainTag": "近代物理",
+  "tags": [
+   "原子核与激光基础"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "杨福家《原子物理学》· 核反应能",
+  "hints": [
+   "$Q=\\Delta m c^2$，用 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^2$ 换算最省事。",
+   "换 SI 时 $1\\ \\mathrm{u}=1.66054\\times10^{-27}\\ \\mathrm{kg}$。"
+  ],
+  "answer": "1.11\\ \\mathrm{MeV}",
+  "solution": "核反应的能量来自质量亏损，用质能关系计算：\n\n$$Q=\\Delta m\\,c^{2}.$$\n\n取 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^{2}$，本题$\\Delta m=1.19\\times10^{-3}\\ \\mathrm{u}$，所以\n\n$$Q=1.19\\times10^{-3}\\times 931.5=1.11\\ \\mathrm{MeV}.$$\n\n换成国际单位：$\\Delta m=1.98\\times10^{-30}\\ \\mathrm{kg}$，$E=\\Delta m c^{2}=1.78\\times10^{-13}\\ \\mathrm{J}$。\n\n按 17 个核子平摊，每核子约 $0.0652\\ \\mathrm{MeV}$，与常见核反应「每核子几 MeV」的量级一致。\n\n反应式：$^{14}_{7}\\mathrm{N}+^{4}_{2}\\mathrm{He}\\to^{17}_{8}\\mathrm{O}+^{1}_{1}\\mathrm{H}$\n\n本题求的是该核反应释放的能量（MeV），通式为 $Q=\\Delta m c^{2}$，结果为\n\n$$Q=1.11\\ \\mathrm{MeV}.$$\n\n**易错点**：$1\\ \\mathrm{u}$ 对应 $931.5\\ \\mathrm{MeV}$（不是 931.5 keV，也不是 1 MeV）；$Q>0$ 表示放能，$Q<0$ 表示需要入射动能才能发生。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "MeV",
+   "methods": [
+    "质能关系",
+    "结合能"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "杨福家《原子物理学》· 核反应能"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "核反应能（氮—α 反应，Δm=1.19×10⁻³ u）的折合每核子能量",
+  "statement": "某核反应为 $^{14}_{7}\\mathrm{N}+^{4}_{2}\\mathrm{He}\\to^{17}_{8}\\mathrm{O}+^{1}_{1}\\mathrm{H}$，测得质量亏损 $\\Delta m=1.19\\times10^{-3}\\ \\mathrm{u}$。取 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^{2}$、$c=3.0\\times10^{8}\\ \\mathrm{m/s}$，求按 17 个核子平摊的每核子能量（量级估算）。",
+  "mainTag": "近代物理",
+  "tags": [
+   "原子核与激光基础"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "杨福家《原子物理学》· 核反应能",
+  "hints": [
+   "$Q=\\Delta m c^2$，用 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^2$ 换算最省事。",
+   "换 SI 时 $1\\ \\mathrm{u}=1.66054\\times10^{-27}\\ \\mathrm{kg}$。"
+  ],
+  "answer": "0.0652\\ \\mathrm{MeV}",
+  "solution": "核反应的能量来自质量亏损，用质能关系计算：\n\n$$Q=\\Delta m\\,c^{2}.$$\n\n取 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^{2}$，本题$\\Delta m=1.19\\times10^{-3}\\ \\mathrm{u}$，所以\n\n$$Q=1.19\\times10^{-3}\\times 931.5=1.11\\ \\mathrm{MeV}.$$\n\n换成国际单位：$\\Delta m=1.98\\times10^{-30}\\ \\mathrm{kg}$，$E=\\Delta m c^{2}=1.78\\times10^{-13}\\ \\mathrm{J}$。\n\n按 17 个核子平摊，每核子约 $0.0652\\ \\mathrm{MeV}$，与常见核反应「每核子几 MeV」的量级一致。\n\n反应式：$^{14}_{7}\\mathrm{N}+^{4}_{2}\\mathrm{He}\\to^{17}_{8}\\mathrm{O}+^{1}_{1}\\mathrm{H}$\n\n本题求的是按 17 个核子平摊的每核子能量（量级估算），通式为 $\\frac{Q}{A}$，结果为\n\n$$\\frac{Q}{A}=0.0652\\ \\mathrm{MeV}.$$\n\n**易错点**：$1\\ \\mathrm{u}$ 对应 $931.5\\ \\mathrm{MeV}$（不是 931.5 keV，也不是 1 MeV）；$Q>0$ 表示放能，$Q<0$ 表示需要入射动能才能发生。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "MeV",
+   "methods": [
+    "质能关系",
+    "结合能"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "杨福家《原子物理学》· 核反应能"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "核反应能（氘—氘反应，Δm=4.03×10⁻³ u）的质量亏损（kg）",
+  "statement": "某核反应为 $^{2}_{1}\\mathrm{H}+^{2}_{1}\\mathrm{H}\\to^{3}_{1}\\mathrm{H}+^{1}_{1}\\mathrm{H}$，测得质量亏损 $\\Delta m=4.03\\times10^{-3}\\ \\mathrm{u}$。取 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^{2}$、$c=3.0\\times10^{8}\\ \\mathrm{m/s}$，求反应中的质量亏损（以 kg 计）。",
+  "mainTag": "近代物理",
+  "tags": [
+   "原子核与激光基础"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "杨福家《原子物理学》· 核反应能",
+  "hints": [
+   "$Q=\\Delta m c^2$，用 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^2$ 换算最省事。",
+   "换 SI 时 $1\\ \\mathrm{u}=1.66054\\times10^{-27}\\ \\mathrm{kg}$。"
+  ],
+  "answer": "6.69\\times10^{-30}\\ \\mathrm{kg}",
+  "solution": "核反应的能量来自质量亏损，用质能关系计算：\n\n$$Q=\\Delta m\\,c^{2}.$$\n\n取 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^{2}$，本题$\\Delta m=4.03\\times10^{-3}\\ \\mathrm{u}$，所以\n\n$$Q=4.03\\times10^{-3}\\times 931.5=3.75\\ \\mathrm{MeV}.$$\n\n换成国际单位：$\\Delta m=6.69\\times10^{-30}\\ \\mathrm{kg}$，$E=\\Delta m c^{2}=6.02\\times10^{-13}\\ \\mathrm{J}$。\n\n按 17 个核子平摊，每核子约 $0.221\\ \\mathrm{MeV}$，与常见核反应「每核子几 MeV」的量级一致。\n\n反应式：$^{2}_{1}\\mathrm{H}+^{2}_{1}\\mathrm{H}\\to^{3}_{1}\\mathrm{H}+^{1}_{1}\\mathrm{H}$\n\n本题求的是反应中的质量亏损（以 kg 计），通式为 $\\Delta m=\\frac{Q}{c^{2}}$，结果为\n\n$$\\Delta m=6.69\\times10^{-30}\\ \\mathrm{kg}.$$\n\n**易错点**：$1\\ \\mathrm{u}$ 对应 $931.5\\ \\mathrm{MeV}$（不是 931.5 keV，也不是 1 MeV）；$Q>0$ 表示放能，$Q<0$ 表示需要入射动能才能发生。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "kg",
+   "methods": [
+    "质能关系",
+    "结合能"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "杨福家《原子物理学》· 核反应能"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "核反应能（锂—中子反应，Δm=4.78×10⁻³ u）的质量亏损（kg）",
+  "statement": "某核反应为 $^{6}_{3}\\mathrm{Li}+^{1}_{0}\\mathrm{n}\\to^{4}_{2}\\mathrm{He}+^{3}_{1}\\mathrm{H}$，测得质量亏损 $\\Delta m=4.78\\times10^{-3}\\ \\mathrm{u}$。取 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^{2}$、$c=3.0\\times10^{8}\\ \\mathrm{m/s}$，求反应中的质量亏损（以 kg 计）。",
+  "mainTag": "近代物理",
+  "tags": [
+   "原子核与激光基础"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "杨福家《原子物理学》· 核反应能",
+  "hints": [
+   "$Q=\\Delta m c^2$，用 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^2$ 换算最省事。",
+   "换 SI 时 $1\\ \\mathrm{u}=1.66054\\times10^{-27}\\ \\mathrm{kg}$。"
+  ],
+  "answer": "7.94\\times10^{-30}\\ \\mathrm{kg}",
+  "solution": "核反应的能量来自质量亏损，用质能关系计算：\n\n$$Q=\\Delta m\\,c^{2}.$$\n\n取 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^{2}$，本题$\\Delta m=4.78\\times10^{-3}\\ \\mathrm{u}$，所以\n\n$$Q=4.78\\times10^{-3}\\times 931.5=4.45\\ \\mathrm{MeV}.$$\n\n换成国际单位：$\\Delta m=7.94\\times10^{-30}\\ \\mathrm{kg}$，$E=\\Delta m c^{2}=7.14\\times10^{-13}\\ \\mathrm{J}$。\n\n按 17 个核子平摊，每核子约 $0.262\\ \\mathrm{MeV}$，与常见核反应「每核子几 MeV」的量级一致。\n\n反应式：$^{6}_{3}\\mathrm{Li}+^{1}_{0}\\mathrm{n}\\to^{4}_{2}\\mathrm{He}+^{3}_{1}\\mathrm{H}$\n\n本题求的是反应中的质量亏损（以 kg 计），通式为 $\\Delta m=\\frac{Q}{c^{2}}$，结果为\n\n$$\\Delta m=7.94\\times10^{-30}\\ \\mathrm{kg}.$$\n\n**易错点**：$1\\ \\mathrm{u}$ 对应 $931.5\\ \\mathrm{MeV}$（不是 931.5 keV，也不是 1 MeV）；$Q>0$ 表示放能，$Q<0$ 表示需要入射动能才能发生。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "kg",
+   "methods": [
+    "质能关系",
+    "结合能"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "杨福家《原子物理学》· 核反应能"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "核反应能（氘—氘反应，Δm=4.03×10⁻³ u）的反应能（J）",
+  "statement": "某核反应为 $^{2}_{1}\\mathrm{H}+^{2}_{1}\\mathrm{H}\\to^{3}_{1}\\mathrm{H}+^{1}_{1}\\mathrm{H}$，测得质量亏损 $\\Delta m=4.03\\times10^{-3}\\ \\mathrm{u}$。取 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^{2}$、$c=3.0\\times10^{8}\\ \\mathrm{m/s}$，求该核反应释放的能量（以 J 计）。",
+  "mainTag": "近代物理",
+  "tags": [
+   "原子核与激光基础"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 3,
+  "source": "杨福家《原子物理学》· 核反应能",
+  "hints": [
+   "$Q=\\Delta m c^2$，用 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^2$ 换算最省事。",
+   "换 SI 时 $1\\ \\mathrm{u}=1.66054\\times10^{-27}\\ \\mathrm{kg}$。"
+  ],
+  "answer": "6.02\\times10^{-13}\\ \\mathrm{J}",
+  "solution": "核反应的能量来自质量亏损，用质能关系计算：\n\n$$Q=\\Delta m\\,c^{2}.$$\n\n取 $1\\ \\mathrm{u}=931.5\\ \\mathrm{MeV}/c^{2}$，本题$\\Delta m=4.03\\times10^{-3}\\ \\mathrm{u}$，所以\n\n$$Q=4.03\\times10^{-3}\\times 931.5=3.75\\ \\mathrm{MeV}.$$\n\n换成国际单位：$\\Delta m=6.69\\times10^{-30}\\ \\mathrm{kg}$，$E=\\Delta m c^{2}=6.02\\times10^{-13}\\ \\mathrm{J}$。\n\n按 17 个核子平摊，每核子约 $0.221\\ \\mathrm{MeV}$，与常见核反应「每核子几 MeV」的量级一致。\n\n反应式：$^{2}_{1}\\mathrm{H}+^{2}_{1}\\mathrm{H}\\to^{3}_{1}\\mathrm{H}+^{1}_{1}\\mathrm{H}$\n\n本题求的是该核反应释放的能量（以 J 计），通式为 $E=\\Delta m c^{2}$，结果为\n\n$$E=6.02\\times10^{-13}\\ \\mathrm{J}.$$\n\n**易错点**：$1\\ \\mathrm{u}$ 对应 $931.5\\ \\mathrm{MeV}$（不是 931.5 keV，也不是 1 MeV）；$Q>0$ 表示放能，$Q<0$ 表示需要入射动能才能发生。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "质能关系",
+    "结合能"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "杨福家《原子物理学》· 核反应能"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "LC 振荡（L=2 mH，C=5 μF，U0=100 V）的振荡频率",
+  "statement": "一个由电感 $L=2\\ \\mathrm{mH}$ 与电容 $C=5\\ \\mu\\mathrm{F}$ 组成的理想 LC 振荡回路，初始时电容充电到 $U_0=100\\ \\mathrm{V}$。求回路的固有振荡频率。",
+  "mainTag": "振动与波",
+  "tags": [
+   "简谐振动"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "赵凯华《新概念物理教程·电磁学》· LC 振荡",
+  "hints": [
+   "$\\omega=1/\\sqrt{LC}$，$T=2\\pi\\sqrt{LC}$。",
+   "能量守恒：$\\frac12CU_0^2=\\frac12LI_{max}^2$。"
+  ],
+  "answer": "1592\\ \\mathrm{Hz}",
+  "solution": "理想 LC 回路的角频率 $\\omega=1/\\sqrt{LC}$，于是\n\n$$f=\\frac{1}{2\\pi\\sqrt{LC}}=\\frac{1}{2\\pi\\sqrt{2\\times10^{-3}\\times 5\\times10^{-6}}}=1592\\ \\mathrm{Hz},\\qquad T=\\frac1f=6.28\\times10^{-4}\\ \\mathrm{s}.$$\n\n能量在电场能与磁场能之间来回转换，总量守恒：\n\n$$\\tfrac12CU_0^{2}=\\tfrac12LI_{\\max}^{2}\\ \\Longrightarrow\\ I_{\\max}=U_0\\sqrt{\\frac{C}{L}}=100\\times\\sqrt{\\frac{5\\times10^{-6}}{2\\times10^{-3}}}=5\\ \\mathrm{A}.$$\n\n最大电场能 $E_{\\max}=\\frac12CU_0^2=0.025\\ \\mathrm{J}$（等于最大磁场能）。\n\n本题求的是回路的固有振荡频率，通式为 $f=\\frac{1}{2\\pi\\sqrt{LC}}$，结果为\n\n$$f=1592\\ \\mathrm{Hz}.$$\n\n**易错点**：LC 振荡的能量在电场能与磁场能之间转换，**总量守恒**但各自的瞬时值都在变；电流最大时电容电压为零，反之亦然。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "Hz",
+   "methods": [
+    "LC 振荡",
+    "能量守恒"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· LC 振荡"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "LC 振荡（L=2 mH，C=5 μF，U0=20 V）的最大电场能",
+  "statement": "一个由电感 $L=2\\ \\mathrm{mH}$ 与电容 $C=5\\ \\mu\\mathrm{F}$ 组成的理想 LC 振荡回路，初始时电容充电到 $U_0=20\\ \\mathrm{V}$。求电容器电压最大时储存的电场能。",
+  "mainTag": "振动与波",
+  "tags": [
+   "简谐振动"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "赵凯华《新概念物理教程·电磁学》· LC 振荡",
+  "hints": [
+   "$\\omega=1/\\sqrt{LC}$，$T=2\\pi\\sqrt{LC}$。",
+   "能量守恒：$\\frac12CU_0^2=\\frac12LI_{max}^2$。"
+  ],
+  "answer": "1\\times10^{-3}\\ \\mathrm{J}",
+  "solution": "理想 LC 回路的角频率 $\\omega=1/\\sqrt{LC}$，于是\n\n$$f=\\frac{1}{2\\pi\\sqrt{LC}}=\\frac{1}{2\\pi\\sqrt{2\\times10^{-3}\\times 5\\times10^{-6}}}=1592\\ \\mathrm{Hz},\\qquad T=\\frac1f=6.28\\times10^{-4}\\ \\mathrm{s}.$$\n\n能量在电场能与磁场能之间来回转换，总量守恒：\n\n$$\\tfrac12CU_0^{2}=\\tfrac12LI_{\\max}^{2}\\ \\Longrightarrow\\ I_{\\max}=U_0\\sqrt{\\frac{C}{L}}=20\\times\\sqrt{\\frac{5\\times10^{-6}}{2\\times10^{-3}}}=1\\ \\mathrm{A}.$$\n\n最大电场能 $E_{\\max}=\\frac12CU_0^2=1\\times10^{-3}\\ \\mathrm{J}$（等于最大磁场能）。\n\n本题求的是电容器电压最大时储存的电场能，通式为 $E_{max}=\\tfrac12CU_0^{2}$，结果为\n\n$$E_{max}=1\\times10^{-3}\\ \\mathrm{J}.$$\n\n**易错点**：LC 振荡的能量在电场能与磁场能之间转换，**总量守恒**但各自的瞬时值都在变；电流最大时电容电压为零，反之亦然。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "J",
+   "methods": [
+    "LC 振荡",
+    "能量守恒"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· LC 振荡"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "LC 振荡（L=10 mH，C=20 μF，U0=10 V）的振荡频率",
+  "statement": "一个由电感 $L=10\\ \\mathrm{mH}$ 与电容 $C=20\\ \\mu\\mathrm{F}$ 组成的理想 LC 振荡回路，初始时电容充电到 $U_0=10\\ \\mathrm{V}$。求回路的固有振荡频率。",
+  "mainTag": "振动与波",
+  "tags": [
+   "简谐振动"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "赵凯华《新概念物理教程·电磁学》· LC 振荡",
+  "hints": [
+   "$\\omega=1/\\sqrt{LC}$，$T=2\\pi\\sqrt{LC}$。",
+   "能量守恒：$\\frac12CU_0^2=\\frac12LI_{max}^2$。"
+  ],
+  "answer": "356\\ \\mathrm{Hz}",
+  "solution": "理想 LC 回路的角频率 $\\omega=1/\\sqrt{LC}$，于是\n\n$$f=\\frac{1}{2\\pi\\sqrt{LC}}=\\frac{1}{2\\pi\\sqrt{0.01\\times 2\\times10^{-5}}}=356\\ \\mathrm{Hz},\\qquad T=\\frac1f=2.81\\times10^{-3}\\ \\mathrm{s}.$$\n\n能量在电场能与磁场能之间来回转换，总量守恒：\n\n$$\\tfrac12CU_0^{2}=\\tfrac12LI_{\\max}^{2}\\ \\Longrightarrow\\ I_{\\max}=U_0\\sqrt{\\frac{C}{L}}=10\\times\\sqrt{\\frac{2\\times10^{-5}}{0.01}}=0.447\\ \\mathrm{A}.$$\n\n最大电场能 $E_{\\max}=\\frac12CU_0^2=1\\times10^{-3}\\ \\mathrm{J}$（等于最大磁场能）。\n\n本题求的是回路的固有振荡频率，通式为 $f=\\frac{1}{2\\pi\\sqrt{LC}}$，结果为\n\n$$f=356\\ \\mathrm{Hz}.$$\n\n**易错点**：LC 振荡的能量在电场能与磁场能之间转换，**总量守恒**但各自的瞬时值都在变；电流最大时电容电压为零，反之亦然。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "Hz",
+   "methods": [
+    "LC 振荡",
+    "能量守恒"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· LC 振荡"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "LC 振荡（L=50 mH，C=1 μF，U0=20 V）的最大电流",
+  "statement": "一个由电感 $L=50\\ \\mathrm{mH}$ 与电容 $C=1\\ \\mu\\mathrm{F}$ 组成的理想 LC 振荡回路，初始时电容充电到 $U_0=20\\ \\mathrm{V}$。求电容放电完毕瞬间回路中的电流。",
+  "mainTag": "振动与波",
+  "tags": [
+   "简谐振动"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "赵凯华《新概念物理教程·电磁学》· LC 振荡",
+  "hints": [
+   "$\\omega=1/\\sqrt{LC}$，$T=2\\pi\\sqrt{LC}$。",
+   "能量守恒：$\\frac12CU_0^2=\\frac12LI_{max}^2$。"
+  ],
+  "answer": "0.0894\\ \\mathrm{A}",
+  "solution": "理想 LC 回路的角频率 $\\omega=1/\\sqrt{LC}$，于是\n\n$$f=\\frac{1}{2\\pi\\sqrt{LC}}=\\frac{1}{2\\pi\\sqrt{0.05\\times 1\\times10^{-6}}}=712\\ \\mathrm{Hz},\\qquad T=\\frac1f=1.4\\times10^{-3}\\ \\mathrm{s}.$$\n\n能量在电场能与磁场能之间来回转换，总量守恒：\n\n$$\\tfrac12CU_0^{2}=\\tfrac12LI_{\\max}^{2}\\ \\Longrightarrow\\ I_{\\max}=U_0\\sqrt{\\frac{C}{L}}=20\\times\\sqrt{\\frac{1\\times10^{-6}}{0.05}}=0.0894\\ \\mathrm{A}.$$\n\n最大电场能 $E_{\\max}=\\frac12CU_0^2=2\\times10^{-4}\\ \\mathrm{J}$（等于最大磁场能）。\n\n本题求的是电容放电完毕瞬间回路中的电流，通式为 $\\tfrac12CU_0^{2}=\\tfrac12LI_{max}^{2}$，结果为\n\n$$I_{max}=0.0894\\ \\mathrm{A}.$$\n\n**易错点**：LC 振荡的能量在电场能与磁场能之间转换，**总量守恒**但各自的瞬时值都在变；电流最大时电容电压为零，反之亦然。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "A",
+   "methods": [
+    "LC 振荡",
+    "能量守恒"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· LC 振荡"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "LC 振荡（L=2 mH，C=20 μF，U0=10 V）的振荡频率",
+  "statement": "一个由电感 $L=2\\ \\mathrm{mH}$ 与电容 $C=20\\ \\mu\\mathrm{F}$ 组成的理想 LC 振荡回路，初始时电容充电到 $U_0=10\\ \\mathrm{V}$。求回路的固有振荡频率。",
+  "mainTag": "振动与波",
+  "tags": [
+   "简谐振动"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "赵凯华《新概念物理教程·电磁学》· LC 振荡",
+  "hints": [
+   "$\\omega=1/\\sqrt{LC}$，$T=2\\pi\\sqrt{LC}$。",
+   "能量守恒：$\\frac12CU_0^2=\\frac12LI_{max}^2$。"
+  ],
+  "answer": "796\\ \\mathrm{Hz}",
+  "solution": "理想 LC 回路的角频率 $\\omega=1/\\sqrt{LC}$，于是\n\n$$f=\\frac{1}{2\\pi\\sqrt{LC}}=\\frac{1}{2\\pi\\sqrt{2\\times10^{-3}\\times 2\\times10^{-5}}}=796\\ \\mathrm{Hz},\\qquad T=\\frac1f=1.26\\times10^{-3}\\ \\mathrm{s}.$$\n\n能量在电场能与磁场能之间来回转换，总量守恒：\n\n$$\\tfrac12CU_0^{2}=\\tfrac12LI_{\\max}^{2}\\ \\Longrightarrow\\ I_{\\max}=U_0\\sqrt{\\frac{C}{L}}=10\\times\\sqrt{\\frac{2\\times10^{-5}}{2\\times10^{-3}}}=1\\ \\mathrm{A}.$$\n\n最大电场能 $E_{\\max}=\\frac12CU_0^2=1\\times10^{-3}\\ \\mathrm{J}$（等于最大磁场能）。\n\n本题求的是回路的固有振荡频率，通式为 $f=\\frac{1}{2\\pi\\sqrt{LC}}$，结果为\n\n$$f=796\\ \\mathrm{Hz}.$$\n\n**易错点**：LC 振荡的能量在电场能与磁场能之间转换，**总量守恒**但各自的瞬时值都在变；电流最大时电容电压为零，反之亦然。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "Hz",
+   "methods": [
+    "LC 振荡",
+    "能量守恒"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· LC 振荡"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "LC 振荡（L=5 mH，C=2 μF，U0=100 V）的振荡频率",
+  "statement": "一个由电感 $L=5\\ \\mathrm{mH}$ 与电容 $C=2\\ \\mu\\mathrm{F}$ 组成的理想 LC 振荡回路，初始时电容充电到 $U_0=100\\ \\mathrm{V}$。求回路的固有振荡频率。",
+  "mainTag": "振动与波",
+  "tags": [
+   "简谐振动"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "赵凯华《新概念物理教程·电磁学》· LC 振荡",
+  "hints": [
+   "$\\omega=1/\\sqrt{LC}$，$T=2\\pi\\sqrt{LC}$。",
+   "能量守恒：$\\frac12CU_0^2=\\frac12LI_{max}^2$。"
+  ],
+  "answer": "1592\\ \\mathrm{Hz}",
+  "solution": "理想 LC 回路的角频率 $\\omega=1/\\sqrt{LC}$，于是\n\n$$f=\\frac{1}{2\\pi\\sqrt{LC}}=\\frac{1}{2\\pi\\sqrt{5\\times10^{-3}\\times 2\\times10^{-6}}}=1592\\ \\mathrm{Hz},\\qquad T=\\frac1f=6.28\\times10^{-4}\\ \\mathrm{s}.$$\n\n能量在电场能与磁场能之间来回转换，总量守恒：\n\n$$\\tfrac12CU_0^{2}=\\tfrac12LI_{\\max}^{2}\\ \\Longrightarrow\\ I_{\\max}=U_0\\sqrt{\\frac{C}{L}}=100\\times\\sqrt{\\frac{2\\times10^{-6}}{5\\times10^{-3}}}=2\\ \\mathrm{A}.$$\n\n最大电场能 $E_{\\max}=\\frac12CU_0^2=0.01\\ \\mathrm{J}$（等于最大磁场能）。\n\n本题求的是回路的固有振荡频率，通式为 $f=\\frac{1}{2\\pi\\sqrt{LC}}$，结果为\n\n$$f=1592\\ \\mathrm{Hz}.$$\n\n**易错点**：LC 振荡的能量在电场能与磁场能之间转换，**总量守恒**但各自的瞬时值都在变；电流最大时电容电压为零，反之亦然。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "Hz",
+   "methods": [
+    "LC 振荡",
+    "能量守恒"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· LC 振荡"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "LC 振荡（L=5 mH，C=50 μF，U0=100 V）的振荡频率",
+  "statement": "一个由电感 $L=5\\ \\mathrm{mH}$ 与电容 $C=50\\ \\mu\\mathrm{F}$ 组成的理想 LC 振荡回路，初始时电容充电到 $U_0=100\\ \\mathrm{V}$。求回路的固有振荡频率。",
+  "mainTag": "振动与波",
+  "tags": [
+   "简谐振动"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "赵凯华《新概念物理教程·电磁学》· LC 振荡",
+  "hints": [
+   "$\\omega=1/\\sqrt{LC}$，$T=2\\pi\\sqrt{LC}$。",
+   "能量守恒：$\\frac12CU_0^2=\\frac12LI_{max}^2$。"
+  ],
+  "answer": "318\\ \\mathrm{Hz}",
+  "solution": "理想 LC 回路的角频率 $\\omega=1/\\sqrt{LC}$，于是\n\n$$f=\\frac{1}{2\\pi\\sqrt{LC}}=\\frac{1}{2\\pi\\sqrt{5\\times10^{-3}\\times 5\\times10^{-5}}}=318\\ \\mathrm{Hz},\\qquad T=\\frac1f=3.14\\times10^{-3}\\ \\mathrm{s}.$$\n\n能量在电场能与磁场能之间来回转换，总量守恒：\n\n$$\\tfrac12CU_0^{2}=\\tfrac12LI_{\\max}^{2}\\ \\Longrightarrow\\ I_{\\max}=U_0\\sqrt{\\frac{C}{L}}=100\\times\\sqrt{\\frac{5\\times10^{-5}}{5\\times10^{-3}}}=10\\ \\mathrm{A}.$$\n\n最大电场能 $E_{\\max}=\\frac12CU_0^2=0.25\\ \\mathrm{J}$（等于最大磁场能）。\n\n本题求的是回路的固有振荡频率，通式为 $f=\\frac{1}{2\\pi\\sqrt{LC}}$，结果为\n\n$$f=318\\ \\mathrm{Hz}.$$\n\n**易错点**：LC 振荡的能量在电场能与磁场能之间转换，**总量守恒**但各自的瞬时值都在变；电流最大时电容电压为零，反之亦然。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "Hz",
+   "methods": [
+    "LC 振荡",
+    "能量守恒"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· LC 振荡"
+  },
+  "subject": "physics"
+ },
+ {
+  "title": "LC 振荡（L=20 mH，C=5 μF，U0=20 V）的振荡周期",
+  "statement": "一个由电感 $L=20\\ \\mathrm{mH}$ 与电容 $C=5\\ \\mu\\mathrm{F}$ 组成的理想 LC 振荡回路，初始时电容充电到 $U_0=20\\ \\mathrm{V}$。求回路的振荡周期。",
+  "mainTag": "振动与波",
+  "tags": [
+   "简谐振动"
+  ],
+  "kind": "计算题",
+  "thinking": 4,
+  "difficulty": 4,
+  "calc": 4,
+  "source": "赵凯华《新概念物理教程·电磁学》· LC 振荡",
+  "hints": [
+   "$\\omega=1/\\sqrt{LC}$，$T=2\\pi\\sqrt{LC}$。",
+   "能量守恒：$\\frac12CU_0^2=\\frac12LI_{max}^2$。"
+  ],
+  "answer": "1.99\\times10^{-3}\\ \\mathrm{s}",
+  "solution": "理想 LC 回路的角频率 $\\omega=1/\\sqrt{LC}$，于是\n\n$$f=\\frac{1}{2\\pi\\sqrt{LC}}=\\frac{1}{2\\pi\\sqrt{0.02\\times 5\\times10^{-6}}}=503\\ \\mathrm{Hz},\\qquad T=\\frac1f=1.99\\times10^{-3}\\ \\mathrm{s}.$$\n\n能量在电场能与磁场能之间来回转换，总量守恒：\n\n$$\\tfrac12CU_0^{2}=\\tfrac12LI_{\\max}^{2}\\ \\Longrightarrow\\ I_{\\max}=U_0\\sqrt{\\frac{C}{L}}=20\\times\\sqrt{\\frac{5\\times10^{-6}}{0.02}}=0.316\\ \\mathrm{A}.$$\n\n最大电场能 $E_{\\max}=\\frac12CU_0^2=1\\times10^{-3}\\ \\mathrm{J}$（等于最大磁场能）。\n\n本题求的是回路的振荡周期，通式为 $T=2\\pi\\sqrt{LC}$，结果为\n\n$$T=1.99\\times10^{-3}\\ \\mathrm{s}.$$\n\n**易错点**：LC 振荡的能量在电场能与磁场能之间转换，**总量守恒**但各自的瞬时值都在变；电流最大时电容电压为零，反之亦然。",
+  "physicsMeta": {
+   "course": "general",
+   "answerType": "numeric_unit",
+   "unit": "s",
+   "methods": [
+    "LC 振荡",
+    "能量守恒"
+   ],
+   "constants": [],
+   "diagrams": [],
+   "textbookRef": "赵凯华《新概念物理教程·电磁学》· LC 振荡"
+  },
+  "subject": "physics"
+ }
+]
